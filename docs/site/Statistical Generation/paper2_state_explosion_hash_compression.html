@@ -3,36 +3,98 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper2 state explosion hash compression</title>
+  <meta name="description" content="The dominant statistical generation methods of the 1980s–2000s—n-gram models, Hidden Markov Models \(HMMs\), and Prediction by Partial Matching \(PPM\)—achieved extraordinary theoretical clarity but were practically constrained to 3–5 token context windows by the exponential…"/>
+  <title>Beyond the state explosion problem: hash-based context compression for long-context statistical language modeling · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\paper2_state_explosion_hash_compression.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Beyond the State Explosion Problem:</strong></p>
-<p><strong>Hash-Based Context Compression for Long-Context Statistical Language Modeling</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction-the-classical-era-and-its-fundamental-limitation">1. Introduction: The Classical Era and Its Fundamental Limitation</a></li>
+        <li class="toc-depth-2"><a href="#11-research-questions">1.1 Research Questions</a></li>
+        <li class="toc-depth-2"><a href="#2-the-state-explosion-problem-a-formal-treatment">2. The State Explosion Problem: A Formal Treatment</a></li>
+        <li class="toc-depth-2"><a href="#21-formal-characterization">2.1 Formal Characterization</a></li>
+        <li class="toc-depth-2"><a href="#22-classical-workarounds-and-their-failures">2.2 Classical Workarounds and Their Failures</a></li>
+        <li class="toc-depth-3"><a href="#221-smoothing-and-backoff">2.2.1 Smoothing and Backoff</a></li>
+        <li class="toc-depth-3"><a href="#222-hidden-markov-models">2.2.2 Hidden Markov Models</a></li>
+        <li class="toc-depth-3"><a href="#223-ppm-and-suffix-trees">2.2.3 PPM and Suffix Trees</a></li>
+        <li class="toc-depth-3"><a href="#224-class-based-models">2.2.4 Class-Based Models</a></li>
+        <li class="toc-depth-2"><a href="#3-hash-based-context-compression-theory-and-analysis">3. Hash-Based Context Compression: Theory and Analysis</a></li>
+        <li class="toc-depth-2"><a href="#31-the-core-idea">3.1 The Core Idea</a></li>
+        <li class="toc-depth-2"><a href="#32-collision-analysis">3.2 Collision Analysis</a></li>
+        <li class="toc-depth-2"><a href="#33-generalization-semantics-of-collisions">3.3 Generalization Semantics of Collisions</a></li>
+        <li class="toc-depth-2"><a href="#34-memory-and-time-complexity">3.4 Memory and Time Complexity</a></li>
+        <li class="toc-depth-2"><a href="#4-method-by-method-comparison">4. Method-by-Method Comparison</a></li>
+        <li class="toc-depth-2"><a href="#41-n-gram-models">4.1 N-Gram Models</a></li>
+        <li class="toc-depth-2"><a href="#42-hidden-markov-models">4.2 Hidden Markov Models</a></li>
+        <li class="toc-depth-2"><a href="#43-prediction-by-partial-matching-ppm">4.3 Prediction by Partial Matching (PPM)</a></li>
+        <li class="toc-depth-2"><a href="#44-paq-compression-family">4.4 PAQ Compression Family</a></li>
+        <li class="toc-depth-2"><a href="#5-comprehensive-property-comparison">5. Comprehensive Property Comparison</a></li>
+        <li class="toc-depth-2"><a href="#6-when-classical-methods-remain-preferable">6. When Classical Methods Remain Preferable</a></li>
+        <li class="toc-depth-2"><a href="#61-ultra-low-resource-environments">6.1 Ultra-Low-Resource Environments</a></li>
+        <li class="toc-depth-2"><a href="#62-structured-parsing-tasks">6.2 Structured Parsing Tasks</a></li>
+        <li class="toc-depth-2"><a href="#63-maximum-compression-ratio">6.3 Maximum Compression Ratio</a></li>
+        <li class="toc-depth-2"><a href="#64-transparent-research-baselines">6.4 Transparent Research Baselines</a></li>
+        <li class="toc-depth-2"><a href="#7-empirical-evaluation-protocol-and-results">7. Empirical Evaluation Protocol and Results</a></li>
+        <li class="toc-depth-2"><a href="#71-datasets">7.1 Datasets</a></li>
+        <li class="toc-depth-2"><a href="#72-perplexity-results">7.2 Perplexity Results</a></li>
+        <li class="toc-depth-2"><a href="#73-context-length-scaling">7.3 Context Length Scaling</a></li>
+        <li class="toc-depth-2"><a href="#8-discussion">8. Discussion</a></li>
+        <li class="toc-depth-2"><a href="#81-the-nature-of-the-improvement">8.1 The Nature of the Improvement</a></li>
+        <li class="toc-depth-2"><a href="#82-the-role-of-hash-collisions">8.2 The Role of Hash Collisions</a></li>
+        <li class="toc-depth-2"><a href="#83-limitations-and-open-problems">8.3 Limitations and Open Problems</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusion">9. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Beyond the state explosion problem: hash-based context compression for long-context statistical language modeling</h1>
+          <p class="doc-meta">Statistical Generation\paper2_state_explosion_hash_compression.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>The dominant statistical generation methods of the 1980s–2000s—n-gram models, Hidden Markov Models (HMMs), and Prediction by Partial Matching (PPM)—achieved extraordinary theoretical clarity but were practically constrained to 3–5 token context windows by the exponential state explosion problem. For vocabulary size V and context length n, the required state space grows as Vn, making n &gt; 5 computationally infeasible. This paper presents a rigorous empirical and theoretical comparison of classical methods against the Universal Statistical Generator (USG) Framework, which resolves state explosion via cryptographic hash-based context compression. We show that by mapping arbitrary-length context histories to a fixed hash table of size M = 232 entries via SHA-256, the USG Framework extends effective context length to 1,000+ tokens with O(M) memory—independent of V or n. We conduct systematic comparisons across five dimensions: (1) context length scaling, (2) memory requirements, (3) mathematical guarantees, (4) composability, and (5) held-out perplexity. Our results show that hash-based compression achieves 200× longer context than classical methods, reduces memory from infeasible Vn to ~4 GB, maintains O(N) training time, and scores within 10% of state-of-the-art neural perplexity while preserving the interpretability and provability of classical approaches. We also characterize when classical methods remain preferable: extremely resource-constrained environments, structured parsing tasks, and maximum compression applications.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Preprint | March 2026</em></p>
-<p>Mathematical AI Research</p>
-<p><strong>Abstract</strong></p>
+<p><em>Mathematical AI Research</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>The dominant statistical generation methods of the 1980s–2000s—n-gram models, Hidden Markov Models (HMMs), and Prediction by Partial Matching (PPM)—achieved extraordinary theoretical clarity but were practically constrained to 3–5 token context windows by the exponential state explosion problem. For vocabulary size V and context length n, the required state space grows as Vn, making n &gt; 5 computationally infeasible. This paper presents a rigorous empirical and theoretical comparison of classical methods against the Universal Statistical Generator (USG) Framework, which resolves state explosion via cryptographic hash-based context compression. We show that by mapping arbitrary-length context histories to a fixed hash table of size M = 232 entries via SHA-256, the USG Framework extends effective context length to 1,000+ tokens with O(M) memory—independent of V or n. We conduct systematic comparisons across five dimensions: (1) context length scaling, (2) memory requirements, (3) mathematical guarantees, (4) composability, and (5) held-out perplexity. Our results show that hash-based compression achieves 200× longer context than classical methods, reduces memory from infeasible Vn to ~4 GB, maintains O(N) training time, and scores within 10% of state-of-the-art neural perplexity while preserving the interpretability and provability of classical approaches. We also characterize when classical methods remain preferable: extremely resource-constrained environments, structured parsing tasks, and maximum compression applications.</p>
-<p>__Keywords: __state explosion problem, n-gram models, HMM, PPM, hash compression, context window, language modeling, statistical NLP history</p>
-<h1 id="1-introduction-the-classical-era-and-its-fundamental-limitation"><strong>1. Introduction: The Classical Era and Its Fundamental Limitation</strong></h1>
+<p><strong>Keywords:</strong> <em>state explosion problem, n-gram models, HMM, PPM, hash compression, context window, language modeling, statistical NLP history</em></p>
+<h2 id="1-introduction-the-classical-era-and-its-fundamental-limitation">1. Introduction: The Classical Era and Its Fundamental Limitation</h2>
 <p>Between 1980 and 2000, statistical natural language processing underwent a golden age of theoretically grounded methods. Shannon (1951) established the n-gram framework: model the probability of the next word as P(xt | xt-n+1,...,xt-1). Baum &amp; Petrie (1966) introduced Hidden Markov Models for structured latent-variable modeling. Cleary &amp; Witten (1984) produced PPM, which achieved compression ratios approaching the Shannon limit. Jelinek et al. (1975, 1991) built statistical machine translation systems using these foundations. These methods were fast, interpretable, and came with formal mathematical guarantees.</p>
 <p>They shared one fatal flaw: the <strong>state explosion problem</strong>. For a vocabulary V and context length n, the number of possible contexts is Vn. English has approximately V = 50,000 common words. A 5-gram model requires up to 50,0005 ≈ 3.1 × 1023 states—greater than the number of atoms in the solar system. In practice, this limited all classical methods to n ≤ 5, making long-range linguistic dependencies—coreference, discourse structure, topical coherence—inaccessible.</p>
 <p>The neural revolution beginning with Bengio et al. (2003) and culminating in transformer architectures (Vaswani et al., 2017) solved the context problem but introduced new costs: billions of parameters with no interpretability, non-deterministic generation, and no formal guarantees. For safety-critical applications, this trade-off is often unacceptable.</p>
 <p>This paper systematically documents the state explosion problem and evaluates hash-based context compression as a principled solution that preserves classical mathematical properties while achieving modern context lengths.</p>
-<h2 id="11-research-questions"><strong>1.1 Research Questions</strong></h2>
+<h2 id="11-research-questions">1.1 Research Questions</h2>
 <p>This paper addresses three primary research questions:</p>
 <ol>
 <li>RQ1: What exactly is the state explosion problem, and what were its practical consequences for each major classical method?</li>
 <li>RQ2: Does hash-based context compression provide a theoretically and empirically sound solution to state explosion while preserving classical mathematical guarantees?</li>
 <li>RQ3: When, if ever, do classical methods remain preferable to hash-compressed statistical modeling?</li>
 </ol>
-<h1 id="2-the-state-explosion-problem-a-formal-treatment"><strong>2. The State Explosion Problem: A Formal Treatment</strong></h1>
-<h2 id="21-formal-characterization"><strong>2.1 Formal Characterization</strong></h2>
+<h2 id="2-the-state-explosion-problem-a-formal-treatment">2. The State Explosion Problem: A Formal Treatment</h2>
+<h2 id="21-formal-characterization">2.1 Formal Characterization</h2>
 <p><strong>Definition 2.1 (State Space).</strong> For a discrete sequence model over vocabulary V conditioned on context of length n, the state space Sn has cardinality |Sn| = |V|n.</p>
 <p><strong>Proposition 2.1 (Storage Lower Bound).</strong> A fully specified n-gram model requires at least |V|n × |V| × 4 bytes of storage (one 32-bit probability per context-successor pair).</p>
 <p>For English text with |V| = 50,000:</p>
@@ -64,28 +126,28 @@
 <p>✗</p>
 <p><em>Table 1: State explosion for English n-gram models (|V| = 50,000). Feasibility threshold is approximately n = 3 in practice; n = 5 with aggressive sparsification.</em></p>
 <p><strong>Corollary 2.1.</strong> In practice, n ≤ 3 is the typical maximum for fully parametric n-gram models with |V| ∼ 50,000. Sparse counting with backoff (Kneser &amp; Ney, 1995) enables n ≤ 5 in corpus-constrained settings but cannot address the fundamental exponential barrier.</p>
-<h2 id="22-classical-workarounds-and-their-failures"><strong>2.2 Classical Workarounds and Their Failures</strong></h2>
-<h3 id="221-smoothing-and-backoff"><strong><em>2.2.1 Smoothing and Backoff</em></strong></h3>
+<h2 id="22-classical-workarounds-and-their-failures">2.2 Classical Workarounds and Their Failures</h2>
+<h3 id="221-smoothing-and-backoff"><em>2.2.1 Smoothing and Backoff</em></h3>
 <p>Jelinek-Mercer interpolation (Jelinek &amp; Mercer, 1980) and Kneser-Ney smoothing (Kneser &amp; Ney, 1995) address the data sparsity component of state explosion by interpolating high-order and low-order estimates. Kneser-Ney remains competitive in perplexity benchmarks (Chen &amp; Goodman, 1999) and is still used in contemporary hybrid systems. However, these methods address <em>data sparsity</em>—the fact that most Vn contexts are unobserved—not <em>memory infeasibility</em>: even if all counts were observed, n &gt; 5 remains impossible to store.</p>
-<h3 id="222-hidden-markov-models"><strong><em>2.2.2 Hidden Markov Models</em></strong></h3>
+<h3 id="222-hidden-markov-models"><em>2.2.2 Hidden Markov Models</em></h3>
 <p>HMMs (Baum &amp; Petrie, 1966) compress context information into k latent states, reducing parameter count to O(k2 + k|V|). This is tractable for k ∼ 500–2,000. However, the mapping from context histories to k states is learned, not exact: an HMM with k &lt; |V|n necessarily collapses distinct context histories into the same latent state. There is no principled criterion for choosing k, and the long-range dependency length is bounded by the Markov order of the latent process, typically 1.</p>
-<h3 id="223-ppm-and-suffix-trees"><strong><em>2.2.3 PPM and Suffix Trees</em></strong></h3>
+<h3 id="223-ppm-and-suffix-trees"><em>2.2.3 PPM and Suffix Trees</em></h3>
 <p>PPM (Cleary &amp; Witten, 1984) achieves near-optimal compression by dynamically constructing a suffix tree of all context patterns observed in the data. Inference proceeds by querying the longest matching suffix and backing off to shorter ones. This avoids materializing the full V^n state space by representing only observed contexts. However, suffix tree storage grows with data size—O(N) nodes for N training tokens—and inference requires tree traversal that grows with context order. PPM remains limited to n ≤ 8 context in practice (Bell et al., 1990).</p>
-<h3 id="224-class-based-models"><strong><em>2.2.4 Class-Based Models</em></strong></h3>
+<h3 id="224-class-based-models"><em>2.2.4 Class-Based Models</em></h3>
 <p>Brown et al. (1992) proposed class-based n-grams, grouping vocabulary into C &lt; |V| classes and modeling P(class_t | class_{t-n+1},...,class_{t-1}). This reduces the state space to C^n but introduces information loss through clustering and still scales exponentially in n. Class-based models were eclipsed by neural embeddings (Bengio et al., 2003), which provide distributed representations without requiring manual class assignment.</p>
-<h1 id="3-hash-based-context-compression-theory-and-analysis"><strong>3. Hash-Based Context Compression: Theory and Analysis</strong></h1>
-<h2 id="31-the-core-idea"><strong>3.1 The Core Idea</strong></h2>
+<h2 id="3-hash-based-context-compression-theory-and-analysis">3. Hash-Based Context Compression: Theory and Analysis</h2>
+<h2 id="31-the-core-idea">3.1 The Core Idea</h2>
 <p>Hash-based context compression resolves state explosion by mapping arbitrary-length context sequences to a fixed-size state table via a deterministic hash function. The key observation is that <strong>hash collisions are not failures but features</strong>: two different contexts that hash to the same state share their probability distribution. This acts as a form of automatic context generalization—similar to k-nearest-neighbor density estimation or locality-sensitive hashing.</p>
 <p><strong>Definition 3.1 (Hash State Function).</strong> Given a context c = (w₁,...,wₙ) ∈ V* and state table size M, define:</p>
 <p>H(c) = SHA-256(encode(c)) mod M</p>
 <p>where encode serializes the context to a canonical byte string. SHA-256 provides near-uniform distribution over {0,...,2256 − 1}, minimizing collision probability for distinct contexts.</p>
-<h2 id="32-collision-analysis"><strong>3.2 Collision Analysis</strong></h2>
+<h2 id="32-collision-analysis">3.2 Collision Analysis</h2>
 <p><strong>Theorem 3.1 (Birthday-Bound Collision Rate).</strong> For N distinct observed contexts and state table size M, the expected number of colliding context pairs is:</p>
 <p>E[collisions] ≈ N² / (2M)</p>
 <p>For M = 232 ≈ 4.3 × 109 and N = 106 (one million distinct contexts), E[collisions] ≈ 116, a collision rate of 0.012%. For N = 107 (ten million), the rate is approximately 1.2%. In both regimes, the vast majority of contexts receive unique hash states, and colliding contexts can be interpreted as soft context generalization rather than error.</p>
-<h2 id="33-generalization-semantics-of-collisions"><strong>3.3 Generalization Semantics of Collisions</strong></h2>
+<h2 id="33-generalization-semantics-of-collisions">3.3 Generalization Semantics of Collisions</h2>
 <p>When two contexts c₁ ≠ c₂ satisfy H(c₁) = H(c₂), their successor distributions are pooled: P(· | state h) = (P(· | c₁) + P(· | c₂)) / 2. This can be analyzed through the lens of the <em>bias-variance trade-off</em> in statistics: collisions introduce bias (mixing distinct distributions) but reduce variance (more observations per state, hence lower estimation error). The optimal M balances these two forces. For typical corpus sizes of N = 107–109 tokens, M = 232 lies in the regime where bias is negligible and variance reduction is substantial.</p>
-<h2 id="34-memory-and-time-complexity"><strong>3.4 Memory and Time Complexity</strong></h2>
+<h2 id="34-memory-and-time-complexity">3.4 Memory and Time Complexity</h2>
 <p><strong>Method</strong></p>
 <p><strong>Training Time</strong></p>
 <p><strong>Inference Time</strong></p>
@@ -111,24 +173,24 @@
 <p>O(1)</p>
 <p>O(M) = O(2³²) ~ 4 GB</p>
 <p><em>Table 2: Complexity comparison. N = training tokens, V = vocab, k = HMM states, T = EM iterations, d = context depth. USG achieves O(N) training and O(1) inference with fixed 4 GB memory.</em></p>
-<h1 id="4-method-by-method-comparison"><strong>4. Method-by-Method Comparison</strong></h1>
-<h2 id="41-n-gram-models"><strong>4.1 N-Gram Models</strong></h2>
+<h2 id="4-method-by-method-comparison">4. Method-by-Method Comparison</h2>
+<h2 id="41-n-gram-models">4.1 N-Gram Models</h2>
 <p>N-gram models (Shannon, 1951; Jelinek et al., 1975) directly estimate P(xt | xt-n+1:t-1) via maximum likelihood on training corpora. With Kneser-Ney smoothing (Kneser &amp; Ney, 1995), they remain competitive with neural models on small-vocabulary tasks (Chen &amp; Goodman, 1999). Their advantages are O(N) training, O(1) inference, and direct interpretability: every probability is traceable to its corpus frequency.</p>
 <p><strong>Fundamental limitation.</strong> State explosion hard-limits context to n ≤ 3–5. This precludes modeling topical coherence, long-range coreference (e.g., pronouns referring to entities introduced 50 words earlier), and structured discourse patterns.</p>
 <p><strong>USG comparison.</strong> Hash-based state lookup preserves the O(N) training and O(1) inference properties of n-grams while removing the context-length hard limit. The primary cost is slight loss of probability precision in collision-affected states (&lt; 1.2% of states for N ≤ 107).</p>
-<h2 id="42-hidden-markov-models"><strong>4.2 Hidden Markov Models</strong></h2>
+<h2 id="42-hidden-markov-models">4.2 Hidden Markov Models</h2>
 <p>HMMs model sequences as observations emitted from a hidden Markov chain with k states, transition matrix A ∈ ℝk×k, and emission matrix B ∈ ℝk×V. Parameters are estimated via the Baum-Welch EM algorithm (Baum et al., 1970). The Viterbi algorithm provides O(kT) inference over sequences of length T. HMMs dominated speech recognition throughout the 1990s (Rabiner, 1989) and achieved strong performance in part-of-speech tagging (Kupiec, 1992).</p>
 <p><strong>Fundamental limitations.</strong> First, there is no principled criterion for selecting k; cross-validation over a discrete search space is required. Second, the Markov assumption limits context to 1 step in the latent space—equivalent to approximately 1–2 observed tokens. Third, the EM algorithm converges to local optima and is non-deterministic under random initialization.</p>
 <p><strong>USG comparison.</strong> The USG Framework is fully deterministic, provides explicit context of arbitrary length, and requires no k-selection hyperparameter. The cost is a less compact parametric representation: HMMs with k = 500 states use ~25 MB, while USG requires ~4 GB.</p>
-<h2 id="43-prediction-by-partial-matching-ppm"><strong>4.3 Prediction by Partial Matching (PPM)</strong></h2>
+<h2 id="43-prediction-by-partial-matching-ppm">4.3 Prediction by Partial Matching (PPM)</h2>
 <p>PPM (Cleary &amp; Witten, 1984) achieves near-Shannon-limit compression by maintaining a suffix tree of all observed n-grams (n = 1,...,d) and predicting the next symbol using the longest matching context, backing off to shorter contexts when the longest is unseen. With variant PPM-D and arithmetic coding, PPM achieved state-of-the-art compression ratios on English text for over 20 years (Bell et al., 1990; Howard &amp; Vitter, 1994). Modern variants (PPMII, PPMZ) remain competitive with learned models on some benchmarks.</p>
 <p><strong>Fundamental limitation.</strong> PPM's suffix tree grows with training data size—O(N) nodes for N tokens—and its effective context depth is empirically limited to 5–8 characters (or 2–3 words) due to memory and inference time growth.</p>
 <p><strong>USG comparison.</strong> USG and PPM share the O(N) training complexity but differ in memory architecture. PPM's O(N) memory grows without bound, while USG's O(M) is fixed. USG also provides strictly longer context (1,000+ tokens vs PPM's 5–8 characters), though PPM's suffix-based context is perfectly exact whereas USG's hash-based context is lossy.</p>
-<h2 id="44-paq-compression-family"><strong>4.4 PAQ Compression Family</strong></h2>
+<h2 id="44-paq-compression-family">4.4 PAQ Compression Family</h2>
 <p>PAQ (Mahoney, 2005) and its descendants achieve top compression ratios on standard benchmarks through context mixing: maintaining hundreds of specialized predictors (character n-grams, word n-grams, sparse models, run-length models) and learning mixing weights online. PAQ8 and zpaq currently achieve the best compression on many standard corpora.</p>
 <p><strong>Fundamental limitation.</strong> PAQ's compression is excellent but it provides no formal guarantees, is extremely slow (O(N²) in some variants due to model mixing overhead), and is a monolithic system resistant to modular analysis or composition.</p>
 <p><strong>USG comparison.</strong> USG sacrifices some compression ratio for mathematical transparency. PAQ remains the recommendation for applications where maximum compression is the sole objective and interpretability is irrelevant.</p>
-<h1 id="5-comprehensive-property-comparison"><strong>5. Comprehensive Property Comparison</strong></h1>
+<h2 id="5-comprehensive-property-comparison">5. Comprehensive Property Comparison</h2>
 <p><strong>Property</strong></p>
 <p><strong>N-gram</strong></p>
 <p><strong>HMM</strong></p>
@@ -196,25 +258,25 @@
 <p>✗</p>
 <p>Limited</p>
 <p><em>Table 3: Comprehensive comparison of classical statistical methods and the USG Framework across ten properties. USG is the only method combining long context, mathematical rigor, determinism, composability, and fixed memory.</em></p>
-<h1 id="6-when-classical-methods-remain-preferable"><strong>6. When Classical Methods Remain Preferable</strong></h1>
+<h2 id="6-when-classical-methods-remain-preferable">6. When Classical Methods Remain Preferable</h2>
 <p>Despite USG's broad advantages, classical methods remain preferable in several specific circumstances:</p>
-<h2 id="61-ultra-low-resource-environments"><strong>6.1 Ultra-Low-Resource Environments</strong></h2>
+<h2 id="61-ultra-low-resource-environments">6.1 Ultra-Low-Resource Environments</h2>
 <p>For embedded systems with &lt; 100 MB RAM (IoT devices, firmware), a 3-gram model with |V| = 10,000 requires approximately 12 GB in fully parametric form but ∼ 10–50 MB in sparse representation with min-count pruning. USG's fixed 4 GB footprint is ill-suited to these environments. Recommendation: 2-gram or 3-gram with Kneser-Ney smoothing.</p>
-<h2 id="62-structured-parsing-tasks"><strong>6.2 Structured Parsing Tasks</strong></h2>
+<h2 id="62-structured-parsing-tasks">6.2 Structured Parsing Tasks</h2>
 <p>PCFGs (Booth, 1969; Lari &amp; Young, 1990) and Chart parsers are architecturally designed for tree-structured output. Applications requiring full parse trees—programming language compilation, formal grammar checking, bioinformatics sequence alignment—benefit from the explicit structural biases of grammar-based models. Recommendation: CYK-based PCFG with Inside-Outside estimation.</p>
-<h2 id="63-maximum-compression-ratio"><strong>6.3 Maximum Compression Ratio</strong></h2>
+<h2 id="63-maximum-compression-ratio">6.3 Maximum Compression Ratio</h2>
 <p>PAQ8 and zpaq currently achieve 0.1–0.2 bits/character on standard English benchmarks, approaching the estimated entropy of English (Shannon, 1951; estimate 1.0–1.3 bits/char). For archival applications where compression ratio is the sole objective and decode time is unconstrained, PAQ remains the recommendation. Recommendation: PAQ8/zpaq.</p>
-<h2 id="64-transparent-research-baselines"><strong>6.4 Transparent Research Baselines</strong></h2>
+<h2 id="64-transparent-research-baselines">6.4 Transparent Research Baselines</h2>
 <p>When establishing research baselines or teaching language modeling, 3-gram models with Kneser-Ney smoothing remain the standard transparent comparison point. They are universally understood, have known theoretical properties, and implementations are widely available. Recommendation: KN-smoothed 3-gram.</p>
-<h1 id="7-empirical-evaluation-protocol-and-results"><strong>7. Empirical Evaluation Protocol and Results</strong></h1>
-<h2 id="71-datasets"><strong>7.1 Datasets</strong></h2>
+<h2 id="7-empirical-evaluation-protocol-and-results">7. Empirical Evaluation Protocol and Results</h2>
+<h2 id="71-datasets">7.1 Datasets</h2>
 <p>Experiments were conducted on three representative corpora:</p>
 <ul>
 <li>PTB (Penn Treebank Wall Street Journal): 1M training tokens, 50k vocabulary — standard language modeling benchmark</li>
 <li>enwiki-10M: 10M training tokens extracted from English Wikipedia — larger scale, broader domain</li>
 <li>Synthetic: Generated from a known 20-gram Markov chain — ground-truth long-range dependency</li>
 </ul>
-<h2 id="72-perplexity-results"><strong>7.2 Perplexity Results</strong></h2>
+<h2 id="72-perplexity-results">7.2 Perplexity Results</h2>
 <p><strong>Method</strong></p>
 <p><strong>PTB (n=3)</strong></p>
 <p><strong>PTB (n=5)</strong></p>
@@ -257,7 +319,7 @@
 <p>6.1</p>
 <p><em>Table 4: Test set perplexity (lower = better). USG with n=100 context achieves comparable perplexity to PPM on standard benchmarks while outperforming all classical methods on the synthetic 20-gram task where long-range context is critical. Transformer LM shown for reference.</em></p>
 <p>The most revealing result is the Synthetic-20g column: all classical methods achieve infinite perplexity because the ground-truth dependency length (20 tokens) exceeds their maximum context. USG with n=20 correctly recovers near-perfect predictions (perplexity 18.4), and with n=100 achieves perplexity 8.7. This is the first demonstration of a non-neural method capturing 20-gram dependencies with tractable memory.</p>
-<h2 id="73-context-length-scaling"><strong>7.3 Context Length Scaling</strong></h2>
+<h2 id="73-context-length-scaling">7.3 Context Length Scaling</h2>
 <p><strong>Context Length n</strong></p>
 <p><strong>USG Perplexity (enwiki)</strong></p>
 <p><strong>USG Memory</strong></p>
@@ -287,12 +349,12 @@
 <p>4 GB</p>
 <p>Not feasible</p>
 <p><em>Table 5: USG perplexity as context length increases. Memory remains fixed at 4 GB regardless of n. Perplexity monotonically decreases as longer context is exploited. Classical methods are infeasible for n &gt; 5.</em></p>
-<h1 id="8-discussion"><strong>8. Discussion</strong></h1>
-<h2 id="81-the-nature-of-the-improvement"><strong>8.1 The Nature of the Improvement</strong></h2>
+<h2 id="8-discussion">8. Discussion</h2>
+<h2 id="81-the-nature-of-the-improvement">8.1 The Nature of the Improvement</h2>
 <p>Hash-based compression is not a fundamentally different statistical principle from n-gram modeling—it is the same maximum-likelihood estimation of conditional distributions, but with a different context representation. The key insight is that the context need not be stored explicitly: a collision-resistant hash provides a sufficient statistic for context identity when collision probability is low. This reframes state explosion from a computational impossibility to a compression problem, which is solvable.</p>
-<h2 id="82-the-role-of-hash-collisions"><strong>8.2 The Role of Hash Collisions</strong></h2>
+<h2 id="82-the-role-of-hash-collisions">8.2 The Role of Hash Collisions</h2>
 <p>As documented in §3.3, hash collisions act as soft context generalization. Two contexts that are semantically similar—e.g., "the king of" and "the queen of"—may hash to nearby or identical states, causing their successor distributions to be pooled. This can be viewed as an implicit form of context clustering or nearest-neighbor smoothing, without requiring explicit cluster definition. Whether collisions improve or harm performance depends on corpus size and M selection; our empirical results (§7) suggest that M = 2³² provides a favorable trade-off for corpora of size 10⁶–10⁹ tokens.</p>
-<h2 id="83-limitations-and-open-problems"><strong>8.3 Limitations and Open Problems</strong></h2>
+<h2 id="83-limitations-and-open-problems">8.3 Limitations and Open Problems</h2>
 <p>Several questions remain open for future investigation:</p>
 <ul>
 <li>Optimal M selection: What is the principled relationship between corpus size N, vocabulary size V, context length n, and optimal state table size M?</li>
@@ -300,12 +362,12 @@
 <li>Hierarchical hashing: Can multi-level hash tables enable hierarchical context representation, combining suffix-tree precision at short context lengths with hash compression at long contexts?</li>
 <li>Information-theoretic analysis: What is the information loss introduced by hash compression as a function of M and N?</li>
 </ul>
-<h1 id="9-conclusion"><strong>9. Conclusion</strong></h1>
+<h2 id="9-conclusion">9. Conclusion</h2>
 <p>The state explosion problem was the principal barrier preventing classical statistical language models from exploiting long-range context. For 40 years, this constrained the field to 3–5 token conditioning windows, precluding the capture of discourse-level dependencies that humans use routinely in language understanding.</p>
 <p>Hash-based context compression resolves this barrier: by mapping arbitrary context histories to a fixed state table via SHA-256, the USG Framework achieves 200× longer conditioning context than classical methods, with fixed 4 GB memory independent of context length, O(N) training time, and O(1) inference. The framework retains all desirable classical properties—determinism, interpretability, composability, and provable convergence—while closing 90% of the perplexity gap to state-of-the-art neural models.</p>
 <p>This is not a replacement for either classical or neural approaches. For applications requiring maximum compression ratio, classical methods (PPM, PAQ) remain optimal. For applications requiring maximum generation quality, neural transformers remain optimal. For applications requiring <em>all of</em> long context, mathematical rigor, interpretability, determinism, composability, and moderate compute budget, the USG Framework provides a principled middle path unavailable before hash-based state compression.</p>
 <p>We stand on the shoulders of the classical NLP community: Shannon's n-gram insight, Baum-Welch's EM algorithm, Cleary-Witten's PPM, and Kneser-Ney's smoothing all contributed foundational ideas that the present work extends rather than replaces.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Baum, L.E. &amp; Petrie, T. (1966). Statistical Inference for Probabilistic Functions of Finite State Markov Chains. Annals of Mathematical Statistics, 37(6), 1554–1563.</p>
 <p>[2] Baum, L.E., Petrie, T., Soules, G. &amp; Weiss, N. (1970). A Maximization Technique Occurring in the Statistical Analysis of Probabilistic Functions of Markov Chains. Annals of Mathematical Statistics, 41(1), 164–171.</p>
 <p>[3] Bell, T.C., Cleary, J.G. &amp; Witten, I.H. (1990). Text Compression. Prentice-Hall.</p>
@@ -326,6 +388,31 @@
 <p>[18] Shannon, C.E. (1951). Prediction and Entropy of Printed English. Bell System Technical Journal, 30(1), 50–64.</p>
 <p>[19] Vaswani, A. et al. (2017). Attention is All You Need. Advances in Neural Information Processing Systems, 30.</p>
 <p>[20] Weinberger, K. et al. (2009). Feature Hashing for Large Scale Multitask Learning. ICML 2009, 1113–1120.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -3,16 +3,73 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Implementation README</title>
+  <meta name="description" content="This implementation demonstrates the novel integration of two powerful techniques: 1. **Hash-based memory** (LSH): Efficient O(N) retrieval from millions of tokens 2. **Hierarchical predictive coding**: Principled Bayesian inference with convergence guarantees The key…"/>
+  <title>Unified Hash-Predictive Memory System · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Long Reasoning and Thinking NN\Implementation_README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="unified-hash-predictive-memory-system">Unified Hash-Predictive Memory System</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-2"><a href="#key-features">Key Features</a></li>
+        <li class="toc-depth-2"><a href="#installation">Installation</a></li>
+        <li class="toc-depth-2"><a href="#quick-start">Quick Start</a></li>
+        <li class="toc-depth-2"><a href="#file-structure">File Structure</a></li>
+        <li class="toc-depth-2"><a href="#demonstrations">Demonstrations</a></li>
+        <li class="toc-depth-3"><a href="#demo-1-dual-feedback-mechanism">Demo 1: Dual Feedback Mechanism</a></li>
+        <li class="toc-depth-3"><a href="#demo-2-hierarchical-retrieval">Demo 2: Hierarchical Retrieval</a></li>
+        <li class="toc-depth-3"><a href="#demo-3-scaling">Demo 3: Scaling</a></li>
+        <li class="toc-depth-2"><a href="#benchmark">Benchmark</a></li>
+        <li class="toc-depth-2"><a href="#core-architecture">Core Architecture</a></li>
+        <li class="toc-depth-3"><a href="#1-hash-memory-system">1. Hash Memory System</a></li>
+        <li class="toc-depth-3"><a href="#2-predictive-coding-system">2. Predictive Coding System</a></li>
+        <li class="toc-depth-3"><a href="#3-unified-system">3. Unified System</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-framework">Mathematical Framework</a></li>
+        <li class="toc-depth-2"><a href="#api-reference">API Reference</a></li>
+        <li class="toc-depth-3"><a href="#unifiedhashpredictivememory">UnifiedHashPredictiveMemory</a></li>
+        <li class="toc-depth-2"><a href="#performance-characteristics">Performance Characteristics</a></li>
+        <li class="toc-depth-3"><a href="#time-complexity">Time Complexity</a></li>
+        <li class="toc-depth-3"><a href="#space-complexity">Space Complexity</a></li>
+        <li class="toc-depth-3"><a href="#quality">Quality</a></li>
+        <li class="toc-depth-2"><a href="#extending-the-implementation">Extending the Implementation</a></li>
+        <li class="toc-depth-3"><a href="#custom-generative-model">Custom Generative Model</a></li>
+        <li class="toc-depth-3"><a href="#learned-hash-functions">Learned Hash Functions</a></li>
+        <li class="toc-depth-3"><a href="#multi-modal-extensions">Multi-Modal Extensions</a></li>
+        <li class="toc-depth-2"><a href="#limitations">Limitations</a></li>
+        <li class="toc-depth-2"><a href="#citation">Citation</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+        <li class="toc-depth-2"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Unified Hash-Predictive Memory System</h1>
+          <p class="doc-meta">Long Reasoning and Thinking NN\Implementation_README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>A complete Python implementation of the unified framework combining locality-sensitive hashing with hierarchical predictive coding through a single free energy functional.</strong></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>A complete Python implementation of the unified framework combining locality-sensitive hashing with hierarchical predictive coding through a single free energy functional.</strong></p>
 <h2 id="overview">Overview</h2>
 <p>This implementation demonstrates the novel integration of two powerful techniques:</p>
@@ -60,8 +117,8 @@ system.build_memory(tokens, embeddings)
 query_embedding = embeddings[5000]  # Any query
 results = system.query(query_embedding, max_iterations=10)
 
-print(f&quot;Converged: {results['converged']}&quot;)
-print(f&quot;Retrieved {len(results['retrieved_memories'][0])} segments&quot;)
+print(f"Converged: {results['converged']}")
+print(f"Retrieved {len(results['retrieved_memories'][0])} segments")
 </code></pre>
 <h2 id="file-structure">File Structure</h2>
 <pre><code>hash_memory.py           - LSH implementation and hash tables
@@ -76,29 +133,29 @@ unified_hash_predictive_framework.md - Full mathematical treatment
 <p>Shows how single free energy creates bidirectional coupling:</p>
 <pre><code class="language-bash">python demo.py
 </code></pre>
-<p><strong>Output:</strong><br />
-- Shows bucket weights evolving (Inference → Hash)<br />
-- Shows state updates from memories (Hash → Inference)<br />
+<p><strong>Output:</strong>
+- Shows bucket weights evolving (Inference → Hash)
+- Shows state updates from memories (Hash → Inference)
 - Visualizes free energy convergence</p>
-<p><img alt="Dual Feedback" src="dual_feedback_demo.png" /></p>
+<p><img alt="Dual Feedback" src="dual_feedback_demo.png"/></p>
 <h3 id="demo-2-hierarchical-retrieval">Demo 2: Hierarchical Retrieval</h3>
 <p>Shows multi-resolution memory access:</p>
 <pre><code class="language-bash">python demo.py  # Runs all demos
 </code></pre>
-<p><strong>Output:</strong><br />
-- Level 0: Fine-grained 100-token segments<br />
-- Level 1: Medium 1000-token segments<br />
+<p><strong>Output:</strong>
+- Level 0: Fine-grained 100-token segments
+- Level 1: Medium 1000-token segments<br/>
 - Level 2: Coarse 10000-token segments</p>
-<p><img alt="Hierarchical" src="hierarchical_retrieval_demo.png" /></p>
+<p><img alt="Hierarchical" src="hierarchical_retrieval_demo.png"/></p>
 <h3 id="demo-3-scaling">Demo 3: Scaling</h3>
 <p>Shows performance up to 500K+ tokens:</p>
 <pre><code class="language-bash">python demo.py
 </code></pre>
-<p><strong>Output:</strong><br />
-- Query time: ~10ms (constant!)<br />
-- Memory: Linear scaling<br />
+<p><strong>Output:</strong>
+- Query time: ~10ms (constant!)
+- Memory: Linear scaling
 - Converges in 5-15 iterations regardless of size</p>
-<p><img alt="Scaling" src="scaling_demo.png" /></p>
+<p><img alt="Scaling" src="scaling_demo.png"/></p>
 <h2 id="benchmark">Benchmark</h2>
 <p>Compare against baselines:</p>
 <pre><code class="language-bash">python benchmark.py
@@ -109,8 +166,8 @@ Unified             8.2ms         22MB
 k-NN                45.1ms        245MB
 Standard Attention  2340ms        1600MB
 </code></pre>
-<p><strong>Improvements:</strong><br />
-- Speed: 5-280× faster<br />
+<p><strong>Improvements:</strong>
+- Speed: 5-280× faster
 - Memory: 10-70× less</p>
 <h2 id="core-architecture">Core Architecture</h2>
 <h3 id="1-hash-memory-system">1. Hash Memory System</h3>
@@ -129,9 +186,9 @@ memory.build_from_sequence(tokens, embeddings)
 # Retrieve
 results = memory.retrieve_hierarchical(query_embedding)
 </code></pre>
-<p><strong>Features:</strong><br />
-- Random hyperplane LSH (64-bit hashes)<br />
-- Centroid compression (128d → 64d)<br />
+<p><strong>Features:</strong>
+- Random hyperplane LSH (64-bit hashes)
+- Centroid compression (128d → 64d)
 - Expected O(1) lookup with hash tables</p>
 <h3 id="2-predictive-coding-system">2. Predictive Coding System</h3>
 <pre><code class="language-python">from predictive_coding import HierarchicalPredictiveCoding
@@ -149,9 +206,9 @@ results = pc.run_inference(
     max_iterations=50
 )
 </code></pre>
-<p><strong>Features:</strong><br />
-- Free energy minimization<br />
-- Bidirectional error propagation<br />
+<p><strong>Features:</strong>
+- Free energy minimization
+- Bidirectional error propagation
 - Exponential convergence</p>
 <h3 id="3-unified-system">3. Unified System</h3>
 <pre><code class="language-python">from unified_system import UnifiedHashPredictiveMemory
@@ -179,10 +236,10 @@ F_total = F_hierarchical + F_coupling + F_sparse
 <li>Complexity analysis</li>
 <li>Worked examples</li>
 </ul>
-<p>Key results:<br />
-- <strong>Theorem 5.2</strong>: Unified free energy creates dual feedback<br />
-- <strong>Theorem 6.1</strong>: Guaranteed convergence to fixed point<br />
-- <strong>Theorem 6.2</strong>: Approximation error bounded by O(σ/√s + 1/√K)<br />
+<p>Key results:
+- <strong>Theorem 5.2</strong>: Unified free energy creates dual feedback
+- <strong>Theorem 6.1</strong>: Guaranteed convergence to fixed point
+- <strong>Theorem 6.2</strong>: Approximation error bounded by O(σ/√s + 1/√K)
 - <strong>Theorem 8.1</strong>: Time complexity O(T·K·d), Space O(N)</p>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="unifiedhashpredictivememory">UnifiedHashPredictiveMemory</h3>
@@ -255,11 +312,11 @@ F_total = F_hierarchical + F_coupling + F_sparse
 </tr>
 </tbody>
 </table>
-<p>Where:<br />
-- N = context size (tokens)<br />
-- d = embedding dimension<br />
-- K = retrieved segments (~100)<br />
-- T = iterations (~10)<br />
+<p>Where:
+- N = context size (tokens)
+- d = embedding dimension
+- K = retrieved segments (~100)
+- T = iterations (~10)
 - L = hierarchy levels (3)</p>
 <h3 id="space-complexity">Space Complexity</h3>
 <table>
@@ -353,20 +410,45 @@ system = UnifiedHashPredictiveMemory(
 }
 </code></pre>
 <h2 id="references">References</h2>
-<p><strong>Locality-Sensitive Hashing:</strong><br />
-- Indyk &amp; Motwani (1998): Approximate Nearest Neighbors<br />
+<p><strong>Locality-Sensitive Hashing:</strong>
+- Indyk &amp; Motwani (1998): Approximate Nearest Neighbors
 - Kitaev et al. (2020): Reformer: Efficient Transformer</p>
-<p><strong>Predictive Coding:</strong><br />
-- Rao &amp; Ballard (1999): Predictive Coding in Visual Cortex<br />
-- Friston (2010): Free-Energy Principle<br />
+<p><strong>Predictive Coding:</strong>
+- Rao &amp; Ballard (1999): Predictive Coding in Visual Cortex
+- Friston (2010): Free-Energy Principle
 - Salvatori et al. (2021): Associative Memories via Predictive Coding</p>
 <h2 id="license">License</h2>
 <p>MIT License - Free to use and modify</p>
 <h2 id="contact">Contact</h2>
 <p>For questions or contributions, see the framework document for detailed mathematical explanations.</p>
-<hr />
+<hr/>
 <p><strong>Built with:</strong> Pure NumPy • No frameworks • Fully transparent implementation</p>
 <p><strong>Performance:</strong> 400-800× compression • 10-300× speedup • 10M+ token capacity</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

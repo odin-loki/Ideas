@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcypha_sqlite3_amalg.a "CMakeFiles/cypha_sqlite3_amalg.dir/_deps/sqlite_amalgamation-src/sqlite3.c.o"
+/usr/bin/ranlib libcypha_sqlite3_amalg.a

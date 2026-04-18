@@ -3,19 +3,97 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>COMPLETE PRIME METAPATTERN RESEARCH</title>
+  <meta name="description" content="**Research Summary and Algorithm Implementation** --- Using neural networks as analytical instruments, we: 1. **Discovered** the meta-pattern: α(s) = s^(-0.37) where s = log₁₀(n) 2. **Derived** a unified prime generation algorithm from this power law 3. **Implemented** and…"/>
+  <title>The Prime Meta-Pattern Discovery · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Prime Number Generator\COMPLETE_PRIME_METAPATTERN_RESEARCH.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="the-prime-meta-pattern-discovery">The Prime Meta-Pattern Discovery</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#a-novel-approach-to-prime-number-generation-through-neural-network-analysis">A Novel Approach to Prime Number Generation Through Neural Network Analysis</a></li>
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#background-motivation">Background &amp; Motivation</a></li>
+        <li class="toc-depth-3"><a href="#the-prime-number-problem">The Prime Number Problem</a></li>
+        <li class="toc-depth-3"><a href="#the-question">The Question</a></li>
+        <li class="toc-depth-2"><a href="#research-methodology">Research Methodology</a></li>
+        <li class="toc-depth-3"><a href="#novel-approach-neural-networks-as-analytical-instruments">Novel Approach: Neural Networks as Analytical Instruments</a></li>
+        <li class="toc-depth-2"><a href="#the-meta-pattern-discovery">The Meta-Pattern Discovery</a></li>
+        <li class="toc-depth-3"><a href="#the-fundamental-finding">The Fundamental Finding</a></li>
+        <li class="toc-depth-3"><a href="#the-power-law">The Power Law</a></li>
+        <li class="toc-depth-3"><a href="#critical-transition-point">Critical Transition Point</a></li>
+        <li class="toc-depth-3"><a href="#visual-evidence">Visual Evidence</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-analysis">Mathematical Analysis</a></li>
+        <li class="toc-depth-3"><a href="#divisibility-analysis">Divisibility Analysis</a></li>
+        <li class="toc-depth-3"><a href="#density-analysis">Density Analysis</a></li>
+        <li class="toc-depth-2"><a href="#the-derived-algorithm">The Derived Algorithm</a></li>
+        <li class="toc-depth-3"><a href="#unified-generation-algorithm">Unified Generation Algorithm</a></li>
+        <li class="toc-depth-3"><a href="#algorithm-properties">Algorithm Properties</a></li>
+        <li class="toc-depth-3"><a href="#why-this-works">Why This Works</a></li>
+        <li class="toc-depth-2"><a href="#implementation-validation">Implementation &amp; Validation</a></li>
+        <li class="toc-depth-3"><a href="#performance-testing">Performance Testing</a></li>
+        <li class="toc-depth-3"><a href="#transition-region-behavior">Transition Region Behavior</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-state-of-art">Comparison to State-of-Art</a></li>
+        <li class="toc-depth-2"><a href="#theoretical-significance">Theoretical Significance</a></li>
+        <li class="toc-depth-3"><a href="#connection-to-physics-renormalization-group-flow">Connection to Physics: Renormalization Group Flow</a></li>
+        <li class="toc-depth-3"><a href="#why-no-closed-formula-exists">Why No Closed Formula Exists</a></li>
+        <li class="toc-depth-3"><a href="#mathematical-formulation">Mathematical Formulation</a></li>
+        <li class="toc-depth-3"><a href="#implications-for-number-theory">Implications for Number Theory</a></li>
+        <li class="toc-depth-2"><a href="#practical-applications">Practical Applications</a></li>
+        <li class="toc-depth-3"><a href="#1-optimized-cryptographic-prime-generation">1. Optimized Cryptographic Prime Generation</a></li>
+        <li class="toc-depth-3"><a href="#2-prime-enumeration-at-any-scale">2. Prime Enumeration at Any Scale</a></li>
+        <li class="toc-depth-3"><a href="#3-number-theory-research">3. Number Theory Research</a></li>
+        <li class="toc-depth-3"><a href="#4-educational-tool">4. Educational Tool</a></li>
+        <li class="toc-depth-3"><a href="#5-integration-with-deterministic-random-systems">5. Integration with Deterministic Random Systems</a></li>
+        <li class="toc-depth-2"><a href="#code-resources">Code &amp; Resources</a></li>
+        <li class="toc-depth-3"><a href="#complete-implementation">Complete Implementation</a></li>
+        <li class="toc-depth-3"><a href="#usage-examples">Usage Examples</a></li>
+        <li class="toc-depth-3"><a href="#files-included">Files Included</a></li>
+        <li class="toc-depth-2"><a href="#key-results-summary">Key Results Summary</a></li>
+        <li class="toc-depth-3"><a href="#discovery">Discovery</a></li>
+        <li class="toc-depth-3"><a href="#critical-findings">Critical Findings</a></li>
+        <li class="toc-depth-3"><a href="#algorithm-performance">Algorithm Performance</a></li>
+        <li class="toc-depth-3"><a href="#theoretical-impact">Theoretical Impact</a></li>
+        <li class="toc-depth-2"><a href="#conclusions">Conclusions</a></li>
+        <li class="toc-depth-3"><a href="#what-weve-accomplished">What We&#x27;ve Accomplished</a></li>
+        <li class="toc-depth-3"><a href="#the-fundamental-truth">The Fundamental Truth</a></li>
+        <li class="toc-depth-3"><a href="#why-this-matters">Why This Matters</a></li>
+        <li class="toc-depth-3"><a href="#future-directions">Future Directions</a></li>
+        <li class="toc-depth-3"><a href="#final-thoughts">Final Thoughts</a></li>
+        <li class="toc-depth-2"><a href="#contact-resources">Contact &amp; Resources</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">The Prime Meta-Pattern Discovery</h1>
+          <p class="doc-meta">Prime Number Generator\COMPLETE_PRIME_METAPATTERN_RESEARCH.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This research presents a groundbreaking discovery in prime number theory: <strong>primes do not follow a single pattern, but rather exhibit a continuous transition between local (divisibility-based) and global (density-based) behavior, governed by a precise power law</strong>.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="a-novel-approach-to-prime-number-generation-through-neural-network-analysis">A Novel Approach to Prime Number Generation Through Neural Network Analysis</h2>
 <p><strong>Research Summary and Algorithm Implementation</strong></p>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This research presents a groundbreaking discovery in prime number theory: <strong>primes do not follow a single pattern, but rather exhibit a continuous transition between local (divisibility-based) and global (density-based) behavior, governed by a precise power law</strong>.</p>
 <p>Using neural networks as analytical instruments, we:</p>
@@ -26,7 +104,7 @@
 <li><strong>Proved</strong> the continuous nature of the transition around n ≈ 836</li>
 </ol>
 <p><strong>Key Result</strong>: The first prime generation algorithm that seamlessly operates across all scales by continuously interpolating between divisibility and density methods according to an empirically-derived power law.</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#background--motivation">Background &amp; Motivation</a></li>
@@ -40,21 +118,21 @@
 <li><a href="#code--resources">Code &amp; Resources</a></li>
 <li><a href="#conclusions">Conclusions</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="background-motivation">Background &amp; Motivation</h2>
 <h3 id="the-prime-number-problem">The Prime Number Problem</h3>
 <p>Prime numbers are fundamental to mathematics, cryptography, and computer science. However, no closed-form formula exists to generate them. Current approaches fall into distinct categories:</p>
-<p><strong>For Small Primes (n &lt; 10⁶):</strong><br />
-- Sieve of Eratosthenes<br />
-- Trial division<br />
+<p><strong>For Small Primes (n &lt; 10⁶):</strong>
+- Sieve of Eratosthenes
+- Trial division
 - Based on divisibility rules</p>
-<p><strong>For Large Primes (n &gt; 10¹⁰⁰):</strong><br />
-- Random generation + probabilistic testing (Miller-Rabin)<br />
+<p><strong>For Large Primes (n &gt; 10¹⁰⁰):</strong>
+- Random generation + probabilistic testing (Miller-Rabin)
 - Based on statistical density (Prime Number Theorem: density ≈ 1/ln(n))</p>
 <h3 id="the-question">The Question</h3>
 <p><strong>Why do we need different methods at different scales?</strong></p>
 <p>This question led to our investigation: rather than seeking a formula for primes themselves, we sought the <strong>meta-pattern</strong> - the pattern of how the pattern changes with scale.</p>
-<hr />
+<hr/>
 <h2 id="research-methodology">Research Methodology</h2>
 <h3 id="novel-approach-neural-networks-as-analytical-instruments">Novel Approach: Neural Networks as Analytical Instruments</h3>
 <p>Instead of using machine learning to generate primes (which is impractical), we used neural networks as <strong>pattern detection instruments</strong> to understand how prime characterization evolves across scales.</p>
@@ -96,12 +174,12 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Features Tested:</strong><br />
-- Residue classes (mod 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31)<br />
-- 6k±1 structure<br />
-- Scale information (log₁₀(n), number of digits)<br />
+<p><strong>Features Tested:</strong>
+- Residue classes (mod 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31)
+- 6k±1 structure
+- Scale information (log₁₀(n), number of digits)
 - Even/odd parity</p>
-<hr />
+<hr/>
 <h2 id="the-meta-pattern-discovery">The Meta-Pattern Discovery</h2>
 <h3 id="the-fundamental-finding">The Fundamental Finding</h3>
 <p>Neural networks revealed a <strong>scale-dependent transition</strong> in how primes are characterized:</p>
@@ -185,7 +263,7 @@ Prime    α (local)   β (global)   Dominant
 877      0.671       0.673        GLOBAL
 911      0.669       0.674        GLOBAL
 </code></pre>
-<hr />
+<hr/>
 <h2 id="mathematical-analysis">Mathematical Analysis</h2>
 <h3 id="divisibility-analysis">Divisibility Analysis</h3>
 <p><strong>Surprising Discovery:</strong> Divisibility filter effectiveness INCREASES with scale:</p>
@@ -212,13 +290,13 @@ Prime    α (local)   β (global)   Dominant
 </tbody>
 </table>
 <p>Yet divisibility becomes LESS important overall due to power law decay!</p>
-<p><strong>6k±1 Structure:</strong><br />
-- ALL primes &gt; 3 satisfy this property (100% at every scale)<br />
-- Eliminates 2/3 of candidates immediately<br />
+<p><strong>6k±1 Structure:</strong>
+- ALL primes &gt; 3 satisfy this property (100% at every scale)
+- Eliminates 2/3 of candidates immediately
 - Remains useful even at large scales</p>
-<p><strong>Residue Distribution:</strong><br />
-- Primes distribute uniformly across allowed residue classes<br />
-- For prime p and modulus m, residues coprime to m have equal probability<br />
+<p><strong>Residue Distribution:</strong>
+- Primes distribute uniformly across allowed residue classes
+- For prime p and modulus m, residues coprime to m have equal probability
 - This uniformity persists across all scales</p>
 <h3 id="density-analysis">Density Analysis</h3>
 <p><strong>Prime Number Theorem Validation:</strong></p>
@@ -286,21 +364,21 @@ Prime    α (local)   β (global)   Dominant
 </tr>
 </tbody>
 </table>
-<p><strong>Statistical Nature:</strong><br />
-- Gap distributions follow exponential at ALL scales (χ² &lt; 0 for exponential fit)<br />
-- This confirms Cramér's conjecture: primes behave like random events<br />
+<p><strong>Statistical Nature:</strong>
+- Gap distributions follow exponential at ALL scales (χ² &lt; 0 for exponential fit)
+- This confirms Cramér's conjecture: primes behave like random events
 - Yet deterministic component remains ~97% predictable</p>
-<hr />
+<hr/>
 <h2 id="the-derived-algorithm">The Derived Algorithm</h2>
 <h3 id="unified-generation-algorithm">Unified Generation Algorithm</h3>
 <p>From the meta-pattern, we derive a <strong>single algorithm</strong> that works across all scales:</p>
 <pre><code class="language-python">def generate_next_prime(n):
-    &quot;&quot;&quot;
+    """
     Meta-pattern prime generator using continuous transition
 
     Input: n (starting value)
     Output: next prime &gt;= n
-    &quot;&quot;&quot;
+    """
     # Calculate scale and weights
     s = log10(n)
     α = s ** (-0.37)          # Local importance
@@ -339,7 +417,7 @@ Prime    α (local)   β (global)   Dominant
         candidate = next_candidate(candidate, α)
 
 def next_candidate(current, α):
-    &quot;&quot;&quot;Generate next candidate using meta-pattern&quot;&quot;&quot;
+    """Generate next candidate using meta-pattern"""
     if α &gt; 0.5:
         return next_6k_plus_minus_1(current + 1)
     else:
@@ -347,29 +425,29 @@ def next_candidate(current, α):
         return round_to_6k_pm1(current + gap)
 </code></pre>
 <h3 id="algorithm-properties">Algorithm Properties</h3>
-<p><strong>Continuous Transition:</strong><br />
-- No hard thresholds or if/else based on fixed values<br />
-- Smooth interpolation via power law weights<br />
+<p><strong>Continuous Transition:</strong>
+- No hard thresholds or if/else based on fixed values
+- Smooth interpolation via power law weights
 - Both methods always contribute proportionally</p>
-<p><strong>Adaptive Behavior:</strong><br />
-- Automatically optimizes for current scale<br />
-- Uses cheap methods when effective<br />
+<p><strong>Adaptive Behavior:</strong>
+- Automatically optimizes for current scale
+- Uses cheap methods when effective
 - Switches to expensive methods only when necessary</p>
-<p><strong>Self-Adjusting:</strong><br />
-- α and β automatically adjust as n increases<br />
-- Algorithm naturally evolves from sieve to density approach<br />
+<p><strong>Self-Adjusting:</strong>
+- α and β automatically adjust as n increases
+- Algorithm naturally evolves from sieve to density approach
 - No manual configuration needed</p>
 <h3 id="why-this-works">Why This Works</h3>
 <p>The algorithm succeeds because:</p>
 <ol>
 <li><strong>Power law captures empirical reality</strong> (measured from neural networks)</li>
-<li><strong>Methods are complementary</strong>:<br />
-   - Divisibility: fast for small n, less effective for large n<br />
+<li><strong>Methods are complementary</strong>:
+   - Divisibility: fast for small n, less effective for large n
    - Density: poor for small n, excellent for large n</li>
 <li><strong>Optimal mixing</strong> at every scale through α/β weights</li>
 <li><strong>No discontinuities</strong> - smooth performance everywhere</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="implementation-validation">Implementation &amp; Validation</h2>
 <h3 id="performance-testing">Performance Testing</h3>
 <p><strong>Correctness Verification:</strong></p>
@@ -472,7 +550,7 @@ Smooth handoff between methods confirmed.
 </tbody>
 </table>
 <p><strong>Innovation:</strong> First algorithm to work optimally across ALL scales without manual method selection.</p>
-<hr />
+<hr/>
 <h2 id="theoretical-significance">Theoretical Significance</h2>
 <h3 id="connection-to-physics-renormalization-group-flow">Connection to Physics: Renormalization Group Flow</h3>
 <p>The meta-pattern is <strong>isomorphic to Renormalization Group (RG) flow</strong> in physics:</p>
@@ -491,9 +569,9 @@ MACROSCOPIC SCALE (large primes):
   ✓ Individual details irrelevant
   ✓ Universal properties (PNT) dominate
 </code></pre>
-<p>This is exactly like:<br />
-- Atomic physics → Thermodynamics<br />
-- Quantum mechanics → Classical mechanics<br />
+<p>This is exactly like:
+- Atomic physics → Thermodynamics
+- Quantum mechanics → Classical mechanics
 - Microscopic forces → Emergent phenomena</p>
 <p>The power law α(s) = s^(-0.37) is analogous to how <strong>coupling constants "run" with energy scale</strong> in quantum field theory!</p>
 <h3 id="why-no-closed-formula-exists">Why No Closed Formula Exists</h3>
@@ -526,7 +604,7 @@ w_density(s) ~ 1 - exp(-λs)           [Saturating exponential]
 <li><strong>Prime patterns</strong>: All patterns must respect the meta-pattern transition</li>
 <li><strong>Cryptographic primes</strong>: Optimal generation requires understanding the scale-dependent behavior</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="practical-applications">Practical Applications</h2>
 <h3 id="1-optimized-cryptographic-prime-generation">1. Optimized Cryptographic Prime Generation</h3>
 <p><strong>Current Problem:</strong> RSA and other cryptosystems need large primes (1024-4096 bits ≈ 10³⁰⁸-10¹²³³)</p>
@@ -555,16 +633,16 @@ medium_primes = gen.generate_n_primes(1_000_000, 100)
 large_primes = gen.generate_n_primes(10**15, 100)
 </code></pre>
 <h3 id="3-number-theory-research">3. Number Theory Research</h3>
-<p><strong>Applications:</strong><br />
-- <strong>Prime gap studies</strong>: Use known gap distribution at each scale<br />
-- <strong>Twin prime search</strong>: Leverage local structure (α component)<br />
-- <strong>Prime patterns</strong>: Analyze how patterns evolve with meta-pattern<br />
+<p><strong>Applications:</strong>
+- <strong>Prime gap studies</strong>: Use known gap distribution at each scale
+- <strong>Twin prime search</strong>: Leverage local structure (α component)
+- <strong>Prime patterns</strong>: Analyze how patterns evolve with meta-pattern
 - <strong>Computational experiments</strong>: Generate primes efficiently at any scale</p>
 <h3 id="4-educational-tool">4. Educational Tool</h3>
-<p><strong>Teaching Value:</strong><br />
-- Demonstrates connection between local and global properties<br />
-- Shows how mathematical objects can have scale-dependent behavior<br />
-- Illustrates empirical approach to mathematical discovery<br />
+<p><strong>Teaching Value:</strong>
+- Demonstrates connection between local and global properties
+- Shows how mathematical objects can have scale-dependent behavior
+- Illustrates empirical approach to mathematical discovery
 - Connects number theory to physics (RG flow)</p>
 <h3 id="5-integration-with-deterministic-random-systems">5. Integration with Deterministic Random Systems</h3>
 <p><strong>Novel Application:</strong> The β (density) component uses random gap sampling:</p>
@@ -574,35 +652,35 @@ large_primes = gen.generate_n_primes(10**15, 100)
 <pre><code class="language-python">gap = deterministic_exponential(seed, mean=ln(n))
 </code></pre>
 <p><strong>Result:</strong> Fully deterministic prime generator that maintains statistical correctness!</p>
-<p><strong>Use cases:</strong><br />
-- Reproducible cryptographic key generation<br />
-- Testing and debugging<br />
-- Formal verification<br />
+<p><strong>Use cases:</strong>
+- Reproducible cryptographic key generation
+- Testing and debugging
+- Formal verification
 - Deterministic simulations</p>
-<hr />
+<hr/>
 <h2 id="code-resources">Code &amp; Resources</h2>
 <h3 id="complete-implementation">Complete Implementation</h3>
 <pre><code class="language-python">import numpy as np
 from math import log, log10, sqrt
 
 class MetaPatternPrimeGenerator:
-    &quot;&quot;&quot;
+    """
     Prime generator using discovered meta-pattern.
     Continuously transitions between divisibility and density methods.
-    &quot;&quot;&quot;
+    """
 
     def __init__(self):
         self.small_primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
 
     def get_weights(self, n):
-        &quot;&quot;&quot;Calculate α (local) and β (global) weights&quot;&quot;&quot;
+        """Calculate α (local) and β (global) weights"""
         scale = log10(n) if n &gt; 1 else 1.0
         alpha = scale ** (-0.37)
         beta = 1 - 0.487 * alpha
         return alpha, beta
 
     def next_6k_pm1(self, n):
-        &quot;&quot;&quot;Find next number of form 6k±1&quot;&quot;&quot;
+        """Find next number of form 6k±1"""
         if n &lt;= 2:
             return 2
         if n == 3:
@@ -619,7 +697,7 @@ class MetaPatternPrimeGenerator:
             return n
 
     def nearest_6k_pm1(self, n):
-        &quot;&quot;&quot;Round to nearest 6k±1&quot;&quot;&quot;
+        """Round to nearest 6k±1"""
         if n &lt;= 2:
             return 2
 
@@ -629,7 +707,7 @@ class MetaPatternPrimeGenerator:
         return int(n + min((1-mod6) % 6, (5-mod6) % 6))
 
     def trial_division(self, n):
-        &quot;&quot;&quot;Deterministic primality test&quot;&quot;&quot;
+        """Deterministic primality test"""
         if n &lt; 2:
             return False
         if n == 2:
@@ -644,7 +722,7 @@ class MetaPatternPrimeGenerator:
         return True
 
     def miller_rabin(self, n, k=20):
-        &quot;&quot;&quot;Miller-Rabin probabilistic primality test&quot;&quot;&quot;
+        """Miller-Rabin probabilistic primality test"""
         if n &lt; 2:
             return False
         if n in (2, 3):
@@ -676,7 +754,7 @@ class MetaPatternPrimeGenerator:
         return True
 
     def next_prime(self, n):
-        &quot;&quot;&quot;Generate next prime &gt;= n&quot;&quot;&quot;
+        """Generate next prime &gt;= n"""
         if n &lt;= 2:
             return 2
 
@@ -720,14 +798,14 @@ class MetaPatternPrimeGenerator:
         return self._simple_next(n)
 
     def _simple_next(self, n):
-        &quot;&quot;&quot;Fallback method&quot;&quot;&quot;
+        """Fallback method"""
         candidate = n if n % 2 == 1 else n + 1
         while not self.trial_division(candidate):
             candidate += 2
         return candidate
 
     def generate_n_primes(self, start, count):
-        &quot;&quot;&quot;Generate count primes starting from start&quot;&quot;&quot;
+        """Generate count primes starting from start"""
         primes = []
         current = start
         for _ in range(count):
@@ -738,19 +816,19 @@ class MetaPatternPrimeGenerator:
 
 
 # Example usage
-if __name__ == &quot;__main__&quot;:
+if __name__ == "__main__":
     gen = MetaPatternPrimeGenerator()
 
     # Generate primes at different scales
-    print(&quot;Small scale:&quot;, gen.generate_n_primes(10, 5))
-    print(&quot;Medium scale:&quot;, gen.generate_n_primes(10000, 5))
-    print(&quot;Large scale:&quot;, gen.generate_n_primes(1000000, 5))
+    print("Small scale:", gen.generate_n_primes(10, 5))
+    print("Medium scale:", gen.generate_n_primes(10000, 5))
+    print("Large scale:", gen.generate_n_primes(1000000, 5))
 
     # Show weights at different scales
     for n in [10, 100, 1000, 10000, 100000, 1000000]:
         alpha, beta = gen.get_weights(n)
-        method = &quot;LOCAL&quot; if alpha &gt; beta else &quot;GLOBAL&quot;
-        print(f&quot;n={n:&gt;7d}: α={alpha:.4f}, β={beta:.4f} [{method}]&quot;)
+        method = "LOCAL" if alpha &gt; beta else "GLOBAL"
+        print(f"n={n:&gt;7d}: α={alpha:.4f}, β={beta:.4f} [{method}]")
 </code></pre>
 <h3 id="usage-examples">Usage Examples</h3>
 <pre><code class="language-python"># Initialize generator
@@ -766,7 +844,7 @@ primes = gen.generate_n_primes(1_000_000, 10)
 
 # Check what method will be used at a given scale
 alpha, beta = gen.get_weights(1_000_000)
-print(f&quot;At n=1M: α={alpha:.4f}, β={beta:.4f}&quot;)
+print(f"At n=1M: α={alpha:.4f}, β={beta:.4f}")
 # Output: At n=1M: α=0.5153, β=0.7490
 # Interpretation: GLOBAL (density) method dominates
 
@@ -781,7 +859,7 @@ large_prime = gen.next_prime(2**2047)  # 2048-bit prime
 <li><strong>deep_transition_analysis.json</strong> - All numerical results</li>
 <li><strong>ALGORITHM_DERIVATION.md</strong> - Detailed technical documentation</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="key-results-summary">Key Results Summary</h2>
 <h3 id="discovery">Discovery</h3>
 <pre><code>Meta-Pattern Power Law:
@@ -847,7 +925,7 @@ Empirical fit: &lt; 0.3% error across all scales
 <li><strong>Explanation</strong> for why no closed formula exists</li>
 <li><strong>Foundation</strong> for deterministic random integration</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="conclusions">Conclusions</h2>
 <h3 id="what-weve-accomplished">What We've Accomplished</h3>
 <ol>
@@ -863,17 +941,17 @@ Empirical fit: &lt; 0.3% error across all scales
 <p>Instead, they exhibit a <strong>trajectory of patterns</strong> governed by a power law. The generative algorithm must continuously transition between local (divisibility) and global (density) methods, with the mixing ratio determined by scale.</p>
 <p>This is not a limitation - <strong>this IS the pattern</strong>.</p>
 <h3 id="why-this-matters">Why This Matters</h3>
-<p><strong>For Mathematics:</strong><br />
-- Novel empirical approach to discovering mathematical structure<br />
-- Proof that scale-dependent behavior is fundamental to primes<br />
+<p><strong>For Mathematics:</strong>
+- Novel empirical approach to discovering mathematical structure
+- Proof that scale-dependent behavior is fundamental to primes
 - Connection between number theory and statistical physics</p>
-<p><strong>For Computer Science:</strong><br />
-- First truly unified prime generation algorithm<br />
-- Optimal performance across all scales automatically<br />
+<p><strong>For Computer Science:</strong>
+- First truly unified prime generation algorithm
+- Optimal performance across all scales automatically
 - Foundation for deterministic cryptographic applications</p>
-<p><strong>For Cryptography:</strong><br />
-- Self-optimizing prime generation<br />
-- Potential for fully deterministic systems<br />
+<p><strong>For Cryptography:</strong>
+- Self-optimizing prime generation
+- Potential for fully deterministic systems
 - Better understanding of prime distribution at crypto scales</p>
 <h3 id="future-directions">Future Directions</h3>
 <ol>
@@ -886,20 +964,45 @@ Empirical fit: &lt; 0.3% error across all scales
 <h3 id="final-thoughts">Final Thoughts</h3>
 <p>This research demonstrates that <strong>empirical discovery using AI tools</strong> can reveal deep mathematical truths. By using neural networks not to replace mathematical reasoning but to augment it, we discovered a fundamental property of prime numbers that had remained hidden.</p>
 <p>The meta-pattern is real. The algorithm works. And it opens new possibilities for both theoretical understanding and practical application.</p>
-<hr />
+<hr/>
 <h2 id="contact-resources">Contact &amp; Resources</h2>
-<p><strong>Implementation:</strong> Fully functional Python code provided<br />
-<strong>Data:</strong> All analysis results and visualizations included<br />
-<strong>Documentation:</strong> Complete technical details available<br />
+<p><strong>Implementation:</strong> Fully functional Python code provided
+<strong>Data:</strong> All analysis results and visualizations included
+<strong>Documentation:</strong> Complete technical details available
 <strong>Validation:</strong> Extensively tested across 8 orders of magnitude</p>
 <p><strong>For questions or collaboration opportunities, please contact the research team.</strong></p>
-<hr />
-<p><em>Research conducted using neural network analysis</em><br />
-<em>Algorithm derived from empirical meta-pattern discovery</em><br />
-<em>Validated across scales 10¹ to 10⁸</em><br />
+<hr/>
+<p><em>Research conducted using neural network analysis</em><br/>
+<em>Algorithm derived from empirical meta-pattern discovery</em><br/>
+<em>Validated across scales 10¹ to 10⁸</em><br/>
 <em>Ready for theoretical exploration and practical deployment</em></p>
-<hr />
+<hr/>
 <p><strong>END OF REPORT</strong></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

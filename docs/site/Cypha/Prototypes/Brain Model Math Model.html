@@ -3,47 +3,120 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Brain Model Math Model</title>
+  <meta name="description" content="The complete brain state at time t consists of: **Ψ(t) = {C(t), A(t), M(t), O(t), G(t)}** Where: - C(t) = Set of cellular states - A(t) = Set of assembly states - M(t) = Set of module states - O(t) = Set of oscillation states - G(t) = Global state The system evolves according…"/>
+  <title>Dynamic Recursive Brain Architecture for Artificial Intelligence · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Prototypes\Brain Model Math Model.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="dynamic-recursive-brain-architecture-for-artificial-intelligence">Dynamic Recursive Brain Architecture for Artificial Intelligence</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-core-mathematical-framework">1. Core Mathematical Framework</a></li>
+        <li class="toc-depth-3"><a href="#11-system-state-definition">1.1 System State Definition</a></li>
+        <li class="toc-depth-3"><a href="#12-dynamics-equation">1.2 Dynamics Equation</a></li>
+        <li class="toc-depth-3"><a href="#13-recursive-feedback-loops">1.3 Recursive Feedback Loops</a></li>
+        <li class="toc-depth-2"><a href="#2-cellular-level-dynamics">2. Cellular Level Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#21-cell-state-equation">2.1 Cell State Equation</a></li>
+        <li class="toc-depth-3"><a href="#22-event-triggered-activation">2.2 Event-Triggered Activation</a></li>
+        <li class="toc-depth-3"><a href="#23-multi-timescale-learning">2.3 Multi-timescale Learning</a></li>
+        <li class="toc-depth-2"><a href="#3-cell-assembly-dynamics">3. Cell Assembly Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#31-assembly-formation">3.1 Assembly Formation</a></li>
+        <li class="toc-depth-3"><a href="#32-attractor-dynamics">3.2 Attractor Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#33-event-triggered-assembly-shifts">3.3 Event-Triggered Assembly Shifts</a></li>
+        <li class="toc-depth-3"><a href="#34-oscillatory-dynamics">3.4 Oscillatory Dynamics</a></li>
+        <li class="toc-depth-2"><a href="#4-functional-module-dynamics">4. Functional Module Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#41-module-activation">4.1 Module Activation</a></li>
+        <li class="toc-depth-3"><a href="#42-recurrent-module-processing">4.2 Recurrent Module Processing</a></li>
+        <li class="toc-depth-3"><a href="#43-species-specific-examples">4.3 Species-Specific Examples</a></li>
+        <li class="toc-depth-4"><a href="#431-insect-navigation-module">4.3.1 Insect Navigation Module</a></li>
+        <li class="toc-depth-4"><a href="#432-mammalian-place-cell-system">4.3.2 Mammalian Place Cell System</a></li>
+        <li class="toc-depth-4"><a href="#433-cephalopod-control-system">4.3.3 Cephalopod Control System</a></li>
+        <li class="toc-depth-3"><a href="#44-multi-modal-learning">4.4 Multi-Modal Learning</a></li>
+        <li class="toc-depth-2"><a href="#5-global-integration">5. Global Integration</a></li>
+        <li class="toc-depth-3"><a href="#51-oscillatory-synchronization">5.1 Oscillatory Synchronization</a></li>
+        <li class="toc-depth-3"><a href="#52-cross-frequency-coupling">5.2 Cross-Frequency Coupling</a></li>
+        <li class="toc-depth-3"><a href="#53-neuromodulatory-system">5.3 Neuromodulatory System</a></li>
+        <li class="toc-depth-3"><a href="#54-global-state-integration">5.4 Global State Integration</a></li>
+        <li class="toc-depth-2"><a href="#6-event-processing-system">6. Event Processing System</a></li>
+        <li class="toc-depth-3"><a href="#61-event-detection">6.1 Event Detection</a></li>
+        <li class="toc-depth-3"><a href="#62-event-classification">6.2 Event Classification</a></li>
+        <li class="toc-depth-3"><a href="#63-event-cascades">6.3 Event Cascades</a></li>
+        <li class="toc-depth-2"><a href="#7-cognitive-functions">7. Cognitive Functions</a></li>
+        <li class="toc-depth-3"><a href="#71-attention-mechanism">7.1 Attention Mechanism</a></li>
+        <li class="toc-depth-3"><a href="#72-working-memory">7.2 Working Memory</a></li>
+        <li class="toc-depth-3"><a href="#73-episodic-memory">7.3 Episodic Memory</a></li>
+        <li class="toc-depth-3"><a href="#74-decision-making">7.4 Decision Making</a></li>
+        <li class="toc-depth-2"><a href="#8-recursive-thinking-processes">8. Recursive Thinking Processes</a></li>
+        <li class="toc-depth-3"><a href="#81-internal-simulation">8.1 Internal Simulation</a></li>
+        <li class="toc-depth-3"><a href="#82-multi-step-prediction">8.2 Multi-step Prediction</a></li>
+        <li class="toc-depth-3"><a href="#83-self-modification">8.3 Self-Modification</a></li>
+        <li class="toc-depth-2"><a href="#9-architecture-diagram">9. Architecture Diagram</a></li>
+        <li class="toc-depth-3"><a href="#key-properties">Key Properties</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Dynamic Recursive Brain Architecture for Artificial Intelligence</h1>
+          <p class="doc-meta">Cypha\Prototypes\Brain Model Math Model.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Where:
+- C(t) = Set of cellular states
+- A(t) = Set of assembly states
+- M(t) = Set of module states
+- O(t) = Set of oscillation states 
+- G(t) = Global state</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="1-core-mathematical-framework">1. Core Mathematical Framework</h2>
 <h3 id="11-system-state-definition">1.1 System State Definition</h3>
 <p>The complete brain state at time t consists of:</p>
 <p><strong>Ψ(t) = {C(t), A(t), M(t), O(t), G(t)}</strong></p>
-<p>Where:<br />
-- C(t) = Set of cellular states<br />
-- A(t) = Set of assembly states<br />
-- M(t) = Set of module states<br />
-- O(t) = Set of oscillation states <br />
+<p>Where:
+- C(t) = Set of cellular states
+- A(t) = Set of assembly states
+- M(t) = Set of module states
+- O(t) = Set of oscillation states 
 - G(t) = Global state</p>
 <h3 id="12-dynamics-equation">1.2 Dynamics Equation</h3>
 <p>The system evolves according to:</p>
 <p><strong>dΨ/dt = F_continuous(Ψ, I, t) + Sum[F_event(Ψ, E, t) × δ(t-t_E)]</strong></p>
-<p>Where:<br />
-- F_continuous = Continuous dynamics function<br />
-- F_event = Event-triggered state changes<br />
-- E = Events (internal and external)<br />
+<p>Where:
+- F_continuous = Continuous dynamics function
+- F_event = Event-triggered state changes
+- E = Events (internal and external)
 - δ(t-t_E) = Dirac delta at event time t_E</p>
 <h3 id="13-recursive-feedback-loops">1.3 Recursive Feedback Loops</h3>
 <p>Three fundamental types of recursion:</p>
 <ol>
 <li>
-<p><strong>Horizontal Recursion (within-level):</strong><br />
+<p><strong>Horizontal Recursion (within-level):</strong>
    X(t+Δt) = f_X(X(t), I_X(t))</p>
 </li>
 <li>
-<p><strong>Vertical Recursion (between-level):</strong><br />
+<p><strong>Vertical Recursion (between-level):</strong>
    X_level(t+Δt) = f_X(X_level(t), X_level-1(t), X_level+1(t))</p>
 </li>
 <li>
-<p><strong>Temporal Recursion (predictive):</strong><br />
+<p><strong>Temporal Recursion (predictive):</strong>
    X(t) = f_X(X(t-Δt), X̂(t+Δt|t))</p>
 </li>
 </ol>
@@ -52,145 +125,145 @@
 <h3 id="21-cell-state-equation">2.1 Cell State Equation</h3>
 <p>For each cell i:</p>
 <p><strong>dc_i/dt = A_i×c_i + B_i×I_i + Sum[W_ij(t)×σ(c_j)] + D_i∇²c_i + R_i(G,c_i) + η_i(t)</strong></p>
-<p>Where:<br />
-- A_i = Internal dynamics matrix<br />
-- B_i = Input sensitivity matrix<br />
-- W_ij(t) = Dynamic cell-cell connections<br />
-- D_i = Diffusion coefficient matrix<br />
-- R_i(G,c_i) = Recursive feedback from global state<br />
+<p>Where:
+- A_i = Internal dynamics matrix
+- B_i = Input sensitivity matrix
+- W_ij(t) = Dynamic cell-cell connections
+- D_i = Diffusion coefficient matrix
+- R_i(G,c_i) = Recursive feedback from global state
 - η_i(t) = Adaptive noise term</p>
 <h3 id="22-event-triggered-activation">2.2 Event-Triggered Activation</h3>
 <p>When event E occurs:</p>
 <p><strong>c_i(t+) = c_i(t) + Δc_i(E,G(t)) × [h_i(E,G(t)) &gt; θ_i(t)]</strong></p>
-<p>Where:<br />
-- Δc_i(E,G(t)) = Event-specific response<br />
-- h_i(E,G(t)) = Event significance function<br />
-- θ_i(t) = Dynamic activation threshold<br />
+<p>Where:
+- Δc_i(E,G(t)) = Event-specific response
+- h_i(E,G(t)) = Event significance function
+- θ_i(t) = Dynamic activation threshold
 - [condition] = Indicator function (1 if true, 0 if false)</p>
 <h3 id="23-multi-timescale-learning">2.3 Multi-timescale Learning</h3>
 <p><strong>dW_ij/dt = Sum[α_n×e^(-t/τ_n) × L_n(c_i,c_j,G)] + β×E(ĉ_i(t+Δt|t) - c_i(t+Δt))</strong></p>
-<p>Where:<br />
-- L_n = Learning rules at different timescales<br />
-- E = Prediction error correction term<br />
+<p>Where:
+- L_n = Learning rules at different timescales
+- E = Prediction error correction term
 - ĉ_i(t+Δt|t) = Predicted future cellular state</p>
 <h2 id="3-cell-assembly-dynamics">3. Cell Assembly Dynamics</h2>
 <h3 id="31-assembly-formation">3.1 Assembly Formation</h3>
 <p><strong>a_k(t) = Sum[w_ki(t)×σ(c_i(t))]</strong></p>
 <p><strong>da_k/dt = F_k(a_k) + Sum[V_ki(t)×σ(c_i)] - φ_k×Sum[C_kl(t)×a_l] + T_k(G,a_k)</strong></p>
-<p>Where:<br />
-- F_k = Internal assembly dynamics<br />
-- V_ki = Cell-to-assembly connections<br />
-- C_kl = Inter-assembly competition<br />
-- T_k = Top-down modulation from global state<br />
+<p>Where:
+- F_k = Internal assembly dynamics
+- V_ki = Cell-to-assembly connections
+- C_kl = Inter-assembly competition
+- T_k = Top-down modulation from global state
 - φ_k = Competition coefficient</p>
 <h3 id="32-attractor-dynamics">3.2 Attractor Dynamics</h3>
 <p>Assembly states move through an energy landscape:</p>
 <p><strong>F_k(a_k) = -∇_a_k E_k(a_k,G)</strong></p>
 <p><strong>E_k(a_k,G) = Sum[1/(2σ_j²) × ||a_k - a_j<em>||² × e^(-||a_k - a_j</em>||²/(2σ_j²))]</strong></p>
-<p>Where:<br />
-- E_k = Energy landscape function<br />
-- a_j* = Attractor states<br />
-- σ_j = Attractor basin width<br />
+<p>Where:
+- E_k = Energy landscape function
+- a_j* = Attractor states
+- σ_j = Attractor basin width
 - ∇_a_k = Gradient with respect to a_k</p>
 <h3 id="33-event-triggered-assembly-shifts">3.3 Event-Triggered Assembly Shifts</h3>
 <p>When event E is detected:</p>
 <p><strong>a_k(t+) = a_k(t) + Δa_k(E) × [h_k(E) &gt; θ_k(t)]</strong></p>
-<p>Where:<br />
-- Δa_k(E) = Event-specific state change<br />
-- h_k(E) = Event relevance function<br />
+<p>Where:
+- Δa_k(E) = Event-specific state change
+- h_k(E) = Event relevance function
 - θ_k(t) = Dynamic threshold</p>
 <h3 id="34-oscillatory-dynamics">3.4 Oscillatory Dynamics</h3>
 <p><strong>do_k/dt = [0, -ω_k(t); ω_k(t), 0] × o_k - γ_k×o_k + H_k(a_k) + Sum[K_kl(t)×o_l]</strong></p>
 <p><strong>dK_kl/dt = η_K × o_k × o_l^T × PAC(o_k,o_l) + β_K × P_K(G)</strong></p>
-<p>Where:<br />
-- o_k = Oscillatory state of assembly k<br />
-- ω_k(t) = Context-dependent frequency<br />
-- γ_k = Damping coefficient<br />
-- H_k = Assembly-oscillation coupling<br />
-- K_kl = Inter-oscillator coupling<br />
-- PAC = Phase-amplitude coupling<br />
+<p>Where:
+- o_k = Oscillatory state of assembly k
+- ω_k(t) = Context-dependent frequency
+- γ_k = Damping coefficient
+- H_k = Assembly-oscillation coupling
+- K_kl = Inter-oscillator coupling
+- PAC = Phase-amplitude coupling
 - P_K = Top-down modulation</p>
 <h2 id="4-functional-module-dynamics">4. Functional Module Dynamics</h2>
 <h3 id="41-module-activation">4.1 Module Activation</h3>
 <p><strong>m_s(t) = W_s×a(t) + b_s</strong></p>
 <p><strong>τ_m×dm_s/dt = -m_s + F_s(m_s) - α×Sum[C_ss'(t)×m_s'] + G_s(O,G)</strong></p>
-<p>Where:<br />
-- F_s = Module-specific processing<br />
-- C_ss' = Inter-module competition<br />
-- G_s = Global state influence<br />
-- α = Competition strength<br />
+<p>Where:
+- F_s = Module-specific processing
+- C_ss' = Inter-module competition
+- G_s = Global state influence
+- α = Competition strength
 - τ_m = Module time constant</p>
 <h3 id="42-recurrent-module-processing">4.2 Recurrent Module Processing</h3>
 <p><strong>F_s(m_s) = tanh(W_s,rec×m_s + b_s,rec) + P_s(m̂_s(t+Δt|t))</strong></p>
-<p>Where:<br />
-- W_s,rec = Recurrent connection weights<br />
-- P_s = Predictive processing function<br />
+<p>Where:
+- W_s,rec = Recurrent connection weights
+- P_s = Predictive processing function
 - m̂_s(t+Δt|t) = Predicted future module state</p>
 <h3 id="43-species-specific-examples">4.3 Species-Specific Examples</h3>
 <h4 id="431-insect-navigation-module">4.3.1 Insect Navigation Module</h4>
 <p><strong>dm_nav/dt = [-λ_1, -ω(t); ω(t), -λ_2] × m_nav + [cos(φ(t)); sin(φ(t))] × v(t) + W_vis×I_vis(t) + R_nav(G)</strong></p>
-<p>With goal updating:<br />
+<p>With goal updating:
 <strong>dg_nav/dt = α_nav×(g_target - m_nav) - β_nav×∇_g E_nav(g)</strong></p>
 <h4 id="432-mammalian-place-cell-system">4.3.2 Mammalian Place Cell System</h4>
 <p><strong>m_place = Sum[w_i(t) × e^(-||p(t)-p_i||²/(2σ_i²)) × e_i]</strong></p>
-<p>With pattern completion:<br />
+<p>With pattern completion:
 <strong>dm_place/dt = -m_place + W_CA3×σ(m_place) + W_EC×I_grid + W_DG×I_context</strong></p>
-<p>And sequence prediction:<br />
+<p>And sequence prediction:
 <strong>m̂_place(t+Δt|t) = W_seq×m_place(t) + W_vel×v(t)</strong></p>
 <h4 id="433-cephalopod-control-system">4.3.3 Cephalopod Control System</h4>
-<p>Central controller:<br />
+<p>Central controller:
 <strong>dm_central/dt = F_central(m_central) + Sum[W_j,central(t)×m_arm,j]</strong></p>
-<p>Arm controllers:<br />
+<p>Arm controllers:
 <strong>dm_arm,j/dt = F_arm(m_arm,j,I_tactile,j) + W_central,j(t)×m_central + R_arm,j(m_arm,j)</strong></p>
 <h3 id="44-multi-modal-learning">4.4 Multi-Modal Learning</h3>
 <p><strong>dW_s/dt = η_1×∇_W_s R(t) + η_2×m_post×m_pre^T + η_3×∇_W_s E_pred(t) + η_4×G_mod(t)</strong></p>
-<p>Where:<br />
-- ∇_W_s R(t) = Reward gradient<br />
-- m_post×m_pre^T = Hebbian term<br />
-- ∇_W_s E_pred(t) = Prediction error gradient<br />
+<p>Where:
+- ∇_W_s R(t) = Reward gradient
+- m_post×m_pre^T = Hebbian term
+- ∇_W_s E_pred(t) = Prediction error gradient
 - G_mod(t) = Global modulation</p>
 <h2 id="5-global-integration">5. Global Integration</h2>
 <h3 id="51-oscillatory-synchronization">5.1 Oscillatory Synchronization</h3>
 <p><strong>O_f(t) = Sum[w_kf(t) × o_k(t)] + J_f(G)</strong></p>
 <p><strong>dw_kf/dt = η_w × Cov(o_k,O_f) × M_mod,f(t)</strong></p>
-<p>Where:<br />
-- O_f = Global oscillation at frequency f<br />
-- w_kf = Weight of assembly k to frequency f<br />
-- Cov = Covariance function<br />
+<p>Where:
+- O_f = Global oscillation at frequency f
+- w_kf = Weight of assembly k to frequency f
+- Cov = Covariance function
 - M_mod,f = Neuromodulator influence</p>
 <h3 id="52-cross-frequency-coupling">5.2 Cross-Frequency Coupling</h3>
 <p><strong>PAC_f1,f2(t) = |O_f2(t)| × cos(φ_f1(t))</strong></p>
 <p><strong>dPAC_matrix/dt = η_PAC × (PAC_target(t) - PAC_matrix(t)) + Z_PAC(G)</strong></p>
-<p>Where:<br />
-- PAC_matrix = Matrix of all cross-frequency couplings<br />
-- PAC_target = Context-dependent target coupling pattern<br />
+<p>Where:
+- PAC_matrix = Matrix of all cross-frequency couplings
+- PAC_target = Context-dependent target coupling pattern
 - Z_PAC = Global state influence</p>
 <h3 id="53-neuromodulatory-system">5.3 Neuromodulatory System</h3>
 <p><strong>dM_mod/dt = -γ_mod × M_mod + H_mod(m,O,I) + D_mod(G)</strong></p>
 <p><strong>D_mod(G) = W_mod,G × σ(G) × (1 - ||M_mod||)</strong></p>
-<p>Where:<br />
-- M_mod = [DA, NE, 5HT, ACh]^T = Neuromodulator levels<br />
-- H_mod = Generation function from module activity<br />
-- D_mod = Top-down influence function<br />
+<p>Where:
+- M_mod = [DA, NE, 5HT, ACh]^T = Neuromodulator levels
+- H_mod = Generation function from module activity
+- D_mod = Top-down influence function
 - γ_mod = Decay rate</p>
 <h3 id="54-global-state-integration">5.4 Global State Integration</h3>
 <p><strong>G(t) = F_G(m(t),O(t),M_mod(t),G(t-Δt))</strong></p>
 <p><strong>dG/dt = -α_G×G + W_G × [m(t); O(t); M_mod(t)] + R_G(G) + P_G(Ĝ(t+Δt|t))</strong></p>
-<p>Where:<br />
-- F_G = Global integration function<br />
-- R_G = Recurrent self-connection function<br />
-- P_G = Predictive component<br />
-- Ĝ(t+Δt|t) = Predicted future global state<br />
+<p>Where:
+- F_G = Global integration function
+- R_G = Recurrent self-connection function
+- P_G = Predictive component
+- Ĝ(t+Δt|t) = Predicted future global state
 - α_G = Decay rate</p>
 <h2 id="6-event-processing-system">6. Event Processing System</h2>
 <h3 id="61-event-detection">6.1 Event Detection</h3>
 <p><strong>E(t) = D(I(t),G(t),ΔI(t),ΔG(t))</strong></p>
 <p><strong>P(E|I,G) = σ(w_E^T × [I; G; ||ΔI||; ||ΔG||])</strong></p>
-<p>Where:<br />
-- D = Event detection function<br />
-- ΔI(t) = I(t) - I(t-Δt) = Input change<br />
-- ΔG(t) = G(t) - G(t-Δt) = State change<br />
-- P(E|I,G) = Event probability given current input and state<br />
+<p>Where:
+- D = Event detection function
+- ΔI(t) = I(t) - I(t-Δt) = Input change
+- ΔG(t) = G(t) - G(t-Δt) = State change
+- P(E|I,G) = Event probability given current input and state
 - σ = Sigmoid function</p>
 <h3 id="62-event-classification">6.2 Event Classification</h3>
 <p><strong>e_type(t) = softmax(W_type × E(t) + b_type)</strong></p>
@@ -198,76 +271,76 @@
 <h3 id="63-event-cascades">6.3 Event Cascades</h3>
 <p>When event E is detected, it triggers cascading updates:</p>
 <p><strong>ΔΨ(E,t) = {ΔC(E,t), ΔA(E,t), ΔM(E,t), ΔO(E,t), ΔG(E,t)}</strong></p>
-<p>With level-specific delays:<br />
-<strong>C(t+τ_C) = C(t) + ΔC(E,t)</strong><br />
-<strong>A(t+τ_A) = A(t) + ΔA(E,t)</strong><br />
-<strong>M(t+τ_M) = M(t) + ΔM(E,t)</strong><br />
-<strong>O(t+τ_O) = O(t) + ΔO(E,t)</strong><br />
+<p>With level-specific delays:
+<strong>C(t+τ_C) = C(t) + ΔC(E,t)</strong>
+<strong>A(t+τ_A) = A(t) + ΔA(E,t)</strong>
+<strong>M(t+τ_M) = M(t) + ΔM(E,t)</strong>
+<strong>O(t+τ_O) = O(t) + ΔO(E,t)</strong>
 <strong>G(t+τ_G) = G(t) + ΔG(E,t)</strong></p>
 <h2 id="7-cognitive-functions">7. Cognitive Functions</h2>
 <h3 id="71-attention-mechanism">7.1 Attention Mechanism</h3>
 <p><strong>a_attn(t) = σ(W_attn × [PAC_θγ(t); G_focus(t); M_NE(t)])</strong></p>
 <p><strong>dW_attn/dt = η_attn × ∇_W_attn R_attn(t) + α_attn × W_attn × (1 - ||W_attn||)</strong></p>
-<p>Where:<br />
-- PAC_θγ = Theta-gamma phase-amplitude coupling<br />
-- G_focus = Goal-directed focus component<br />
-- M_NE = Norepinephrine level<br />
+<p>Where:
+- PAC_θγ = Theta-gamma phase-amplitude coupling
+- G_focus = Goal-directed focus component
+- M_NE = Norepinephrine level
 - R_attn = Attention-related reward function</p>
 <h3 id="72-working-memory">7.2 Working Memory</h3>
 <p><strong>m_WM(t) = Sum[w_i(t) × e_i × g_i(t)]</strong></p>
 <p><strong>dw_i/dt = α_WM × a_attn(t)_i × M_ACh(t) - β_WM × w_i × (1 - a_attn(t)_i)</strong></p>
 <p><strong>dg_i/dt = -λ_g×g_i + W_bind×σ(g_i) + I_update(t) × [i = i_focus(t)]</strong></p>
-<p>Where:<br />
-- e_i = Memory item encoding<br />
-- g_i = Memory item binding<br />
-- M_ACh = Acetylcholine level<br />
-- λ_g = Decay rate<br />
+<p>Where:
+- e_i = Memory item encoding
+- g_i = Memory item binding
+- M_ACh = Acetylcholine level
+- λ_g = Decay rate
 - [i = i_focus(t)] = Indicator function for attended item</p>
 <h3 id="73-episodic-memory">7.3 Episodic Memory</h3>
 <p><strong>M_ep(t+1) = M_ep(t) + η_ep × G(t) × O_θ(t)^T × M_DA(t) × (1 - ||M_ep(t)||)</strong></p>
 <p><strong>r_ep(t) = M_ep^T × c_cue(t) × PAC_θγ(t) + R_ep(G)</strong></p>
-<p>With pattern completion:<br />
+<p>With pattern completion:
 <strong>dr_ep/dt = -λ_ep×r_ep + W_ep,rec×σ(r_ep) - φ_ep×||σ(r_ep)||_1 × σ(r_ep)</strong></p>
-<p>Where:<br />
-- M_ep = Episodic memory matrix<br />
-- c_cue = Retrieval cue<br />
-- r_ep = Retrieved memory<br />
-- M_DA = Dopamine level<br />
-- λ_ep = Memory decay rate<br />
+<p>Where:
+- M_ep = Episodic memory matrix
+- c_cue = Retrieval cue
+- r_ep = Retrieved memory
+- M_DA = Dopamine level
+- λ_ep = Memory decay rate
 - φ_ep = Competition parameter</p>
 <h3 id="74-decision-making">7.4 Decision Making</h3>
 <p><strong>de/dt = -λ_e×e + W_e × I_evidence(t) + B_e × G_bias(t)</strong></p>
 <p><strong>d(t) = softmax(β(t) × e(t) × (1 + κ × M_DA(t)))</strong></p>
-<p>Where:<br />
-- e(t) = Evidence accumulation vector<br />
-- d(t) = Decision vector<br />
-- β(t) = Dynamic decision threshold<br />
-- κ = Dopamine sensitivity parameter<br />
+<p>Where:
+- e(t) = Evidence accumulation vector
+- d(t) = Decision vector
+- β(t) = Dynamic decision threshold
+- κ = Dopamine sensitivity parameter
 - λ_e = Evidence decay rate</p>
 <h2 id="8-recursive-thinking-processes">8. Recursive Thinking Processes</h2>
 <h3 id="81-internal-simulation">8.1 Internal Simulation</h3>
 <p><strong>Î(t+Δt) = S_I(G(t),a_plan(t))</strong></p>
 <p><strong>Ĝ(t+Δt) = S_G(G(t),Î(t+Δt))</strong></p>
 <p><strong>R̂(t+Δt) = S_R(Ĝ(t+Δt))</strong></p>
-<p>Where:<br />
-- S_I = Input prediction function<br />
-- S_G = State transition function<br />
+<p>Where:
+- S_I = Input prediction function
+- S_G = State transition function
 - S_R = Reward prediction function</p>
 <h3 id="82-multi-step-prediction">8.2 Multi-step Prediction</h3>
 <p>The system runs nested simulations:</p>
 <p><strong>Ĝ_option,i(t+n×Δt) = S_G^n(G(t),a_option,i)</strong></p>
 <p><strong>V_option,i = Sum[γ^j × R̂(Ĝ_option,i(t+j×Δt))]</strong></p>
-<p>Where:<br />
-- S_G^n = n-step application of state transition function<br />
-- V_option,i = Predicted value of option i<br />
+<p>Where:
+- S_G^n = n-step application of state transition function
+- V_option,i = Predicted value of option i
 - γ = Temporal discount factor</p>
 <h3 id="83-self-modification">8.3 Self-Modification</h3>
 <p><strong>dθ/dt = η_meta × ∇_θ V_meta(θ)</strong></p>
 <p><strong>V_meta(θ) = E_T[Sum[γ^t × R(t) | θ]]</strong></p>
-<p>Where:<br />
-- θ = System parameters<br />
-- V_meta = Meta-level value function<br />
-- E_T = Expectation over tasks<br />
+<p>Where:
+- θ = System parameters
+- V_meta = Meta-level value function
+- E_T = Expectation over tasks
 - η_meta = Meta-learning rate</p>
 <h2 id="9-architecture-diagram">9. Architecture Diagram</h2>
 <pre><code>┌───────────────────────────────────────────────────────────┐
@@ -311,13 +384,38 @@
 <li><strong>Competitive</strong>: Winner-take-all dynamics with soft competition</li>
 <li><strong>Self-Modifying</strong>: Parameters adapt to optimize performance</li>
 </ol>
-<p>This architecture enables thinking through:<br />
-- Continuous recursive processing loops<br />
-- Event-triggered state transitions<br />
-- Internal simulation for planning<br />
-- Adaptive reconfiguration based on context<br />
-- Multiple simultaneous feedback pathways<br />
+<p>This architecture enables thinking through:
+- Continuous recursive processing loops
+- Event-triggered state transitions
+- Internal simulation for planning
+- Adaptive reconfiguration based on context
+- Multiple simultaneous feedback pathways
 - Emergent cognitive functions from lower-level dynamics</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

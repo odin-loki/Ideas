@@ -3,29 +3,92 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Python examples README</title>
+  <meta name="description" content="- **Category Theory** (composability) - **Lévy Processes** (continuous/discrete unification) - **Information Theory** (optimal filtration) This framework solves the **state explosion problem** that limited classical statistical methods (n-grams, HMMs, PPM) while maintaining…"/>
+  <title>Universal Statistical Generator Framework · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\Python_examples_README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="universal-statistical-generator-framework">Universal Statistical Generator Framework</h1>
-<p>A mathematically rigorous Python implementation of a novel data generation framework based on:<br />
-- <strong>Category Theory</strong> (composability)<br />
-- <strong>Lévy Processes</strong> (continuous/discrete unification)<br />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-2"><a href="#features">Features</a></li>
+        <li class="toc-depth-2"><a href="#installation">Installation</a></li>
+        <li class="toc-depth-2"><a href="#quick-start">Quick Start</a></li>
+        <li class="toc-depth-3"><a href="#basic-usage">Basic Usage</a></li>
+        <li class="toc-depth-3"><a href="#composition-category-theory">Composition (Category Theory)</a></li>
+        <li class="toc-depth-3"><a href="#information-filtration">Information Filtration</a></li>
+        <li class="toc-depth-2"><a href="#core-concepts">Core Concepts</a></li>
+        <li class="toc-depth-3"><a href="#1-levy-triplet">1. Lévy Triplet</a></li>
+        <li class="toc-depth-3"><a href="#2-hash-based-state-compression">2. Hash-Based State Compression</a></li>
+        <li class="toc-depth-3"><a href="#3-category-theory-structure">3. Category Theory Structure</a></li>
+        <li class="toc-depth-2"><a href="#api-reference">API Reference</a></li>
+        <li class="toc-depth-3"><a href="#generator-class">Generator Class</a></li>
+        <li class="toc-depth-4"><a href="#traindata-context_length10-min_count2">train(data, context_length=10, min_count=2)</a></li>
+        <li class="toc-depth-4"><a href="#generateseed-length-initial_contextnone-temperature10">generate(seed, length, initial_context=None, temperature=1.0)</a></li>
+        <li class="toc-depth-4"><a href="#composeother">compose(other)</a></li>
+        <li class="toc-depth-4"><a href="#perplexitytest_data-context_length10">perplexity(test_data, context_length=10)</a></li>
+        <li class="toc-depth-3"><a href="#informationfilter-class">InformationFilter Class</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-guarantees">Mathematical Guarantees</a></li>
+        <li class="toc-depth-3"><a href="#convergence-rate">Convergence Rate</a></li>
+        <li class="toc-depth-3"><a href="#filtration-optimality">Filtration Optimality</a></li>
+        <li class="toc-depth-3"><a href="#category-axioms">Category Axioms</a></li>
+        <li class="toc-depth-2"><a href="#comparison-to-classical-methods">Comparison to Classical Methods</a></li>
+        <li class="toc-depth-2"><a href="#comparison-to-neural-networks">Comparison to Neural Networks</a></li>
+        <li class="toc-depth-2"><a href="#examples">Examples</a></li>
+        <li class="toc-depth-2"><a href="#architecture">Architecture</a></li>
+        <li class="toc-depth-2"><a href="#performance">Performance</a></li>
+        <li class="toc-depth-2"><a href="#limitations">Limitations</a></li>
+        <li class="toc-depth-2"><a href="#future-work">Future Work</a></li>
+        <li class="toc-depth-2"><a href="#theory">Theory</a></li>
+        <li class="toc-depth-2"><a href="#citation">Citation</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+        <li class="toc-depth-2"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Universal Statistical Generator Framework</h1>
+          <p class="doc-meta">Statistical Generation\Python_examples_README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>A mathematically rigorous Python implementation of a novel data generation framework based on:
+- <strong>Category Theory</strong> (composability)
+- <strong>Lévy Processes</strong> (continuous/discrete unification)
+- <strong>Information Theory</strong> (optimal filtration)</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>A mathematically rigorous Python implementation of a novel data generation framework based on:
+- <strong>Category Theory</strong> (composability)
+- <strong>Lévy Processes</strong> (continuous/discrete unification)
 - <strong>Information Theory</strong> (optimal filtration)</p>
 <h2 id="overview">Overview</h2>
 <p>This framework solves the <strong>state explosion problem</strong> that limited classical statistical methods (n-grams, HMMs, PPM) while maintaining their mathematical rigor and interpretability.</p>
 <p><strong>Key Innovation</strong>: Hash-based state compression allows 1000+ token context with fixed memory (2^32 states), compared to classical n-grams limited to 3-5 tokens due to exponential state growth (V^n).</p>
 <h2 id="features">Features</h2>
-<p>✓ <strong>Long Context</strong>: 200× longer than classical n-grams<br />
-✓ <strong>Fixed Memory</strong>: O(M) storage regardless of context length<br />
-✓ <strong>Composable</strong>: Category theory guarantees correct composition<br />
-✓ <strong>Deterministic</strong>: Same seed → same output<br />
-✓ <strong>Interpretable</strong>: Explicit, inspectable parameters<br />
+<p>✓ <strong>Long Context</strong>: 200× longer than classical n-grams<br/>
+✓ <strong>Fixed Memory</strong>: O(M) storage regardless of context length<br/>
+✓ <strong>Composable</strong>: Category theory guarantees correct composition<br/>
+✓ <strong>Deterministic</strong>: Same seed → same output<br/>
+✓ <strong>Interpretable</strong>: Explicit, inspectable parameters<br/>
 ✓ <strong>Provable</strong>: Mathematical guarantees on convergence and optimality  </p>
 <h2 id="installation">Installation</h2>
 <pre><code class="language-bash"># No external dependencies beyond NumPy
@@ -39,7 +102,7 @@ python universal_generator.py
 <pre><code class="language-python">from universal_generator import Generator
 
 # Training data
-text = &quot;the cat sat on the mat the dog ran in the park&quot;.split()
+text = "the cat sat on the mat the dog ran in the park".split()
 
 # Create generator
 vocab = sorted(set(text))
@@ -50,12 +113,12 @@ gen.train(text, context_length=5, min_count=2)
 
 # Generate new sequences
 output = gen.generate(seed=42, length=20, temperature=1.0)
-print(&quot; &quot;.join(output))
+print(" ".join(output))
 
 # Evaluate
-test_text = &quot;the cat sat on the mat&quot;.split()
+test_text = "the cat sat on the mat".split()
 perplexity = gen.perplexity(test_text, context_length=5)
-print(f&quot;Perplexity: {perplexity:.2f}&quot;)
+print(f"Perplexity: {perplexity:.2f}")
 </code></pre>
 <h3 id="composition-category-theory">Composition (Category Theory)</h3>
 <pre><code class="language-python"># Create two generators
@@ -88,14 +151,14 @@ filtered_gen = InformationFilter.filter_generator(
 )
 
 # Filtered generator has fewer states, better generalization
-print(f&quot;Original: {len(gen.states)} states&quot;)
-print(f&quot;Filtered: {len(filtered_gen.states)} states&quot;)
+print(f"Original: {len(gen.states)} states")
+print(f"Filtered: {len(filtered_gen.states)} states")
 </code></pre>
 <h2 id="core-concepts">Core Concepts</h2>
 <h3 id="1-levy-triplet">1. Lévy Triplet</h3>
-<p>Every generator state is defined by a Lévy triplet (μ, σ², Π):<br />
-- <strong>μ</strong> (drift): Expected velocity/trend<br />
-- <strong>σ²</strong> (diffusion): Continuous randomness (Brownian motion)<br />
+<p>Every generator state is defined by a Lévy triplet (μ, σ², Π):
+- <strong>μ</strong> (drift): Expected velocity/trend
+- <strong>σ²</strong> (diffusion): Continuous randomness (Brownian motion)
 - <strong>Π</strong> (jumps): Discrete event distribution</p>
 <p>For text (discrete data): μ=0, σ²=0, Π contains symbol probabilities.</p>
 <h3 id="2-hash-based-state-compression">2. Hash-Based State Compression</h3>
@@ -109,42 +172,42 @@ Lookup: Lévy triplet for this state
 </code></pre>
 <p><strong>Key property</strong>: Similar contexts → same hash (compression = generalization).</p>
 <h3 id="3-category-theory-structure">3. Category Theory Structure</h3>
-<p>Generators form a mathematical category:<br />
-- <strong>Objects</strong>: Generators G = (T, Σ, ψ)<br />
-- <strong>Morphisms</strong>: Structure-preserving maps<br />
-- <strong>Composition</strong>: G₁ ∘ G₂ combines Lévy triplets<br />
+<p>Generators form a mathematical category:
+- <strong>Objects</strong>: Generators G = (T, Σ, ψ)
+- <strong>Morphisms</strong>: Structure-preserving maps
+- <strong>Composition</strong>: G₁ ∘ G₂ combines Lévy triplets
 - <strong>Identity</strong>: Null generator (μ=0, σ²=0, Π={})</p>
-<p><strong>Guarantees</strong>:<br />
-- Associative: (G₁ ∘ G₂) ∘ G₃ = G₁ ∘ (G₂ ∘ G₃)<br />
+<p><strong>Guarantees</strong>:
+- Associative: (G₁ ∘ G₂) ∘ G₃ = G₁ ∘ (G₂ ∘ G₃)
 - Identity: id ∘ G = G = G ∘ id</p>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="generator-class">Generator Class</h3>
 <pre><code class="language-python">Generator(state_space, discrete_time=True, max_states=2**20)
 </code></pre>
-<p><strong>Parameters</strong>:<br />
-- <code>state_space</code>: List of symbols (vocabulary)<br />
-- <code>discrete_time</code>: True for discrete, False for continuous<br />
+<p><strong>Parameters</strong>:
+- <code>state_space</code>: List of symbols (vocabulary)
+- <code>discrete_time</code>: True for discrete, False for continuous
 - <code>max_states</code>: Maximum hash table size</p>
 <p><strong>Methods</strong>:</p>
 <h4 id="traindata-context_length10-min_count2">train(data, context_length=10, min_count=2)</h4>
-<p>Learn from training data.<br />
-- <code>data</code>: Sequence of symbols<br />
-- <code>context_length</code>: How many previous symbols to condition on<br />
+<p>Learn from training data.
+- <code>data</code>: Sequence of symbols
+- <code>context_length</code>: How many previous symbols to condition on
 - <code>min_count</code>: Minimum observations to store a state</p>
 <h4 id="generateseed-length-initial_contextnone-temperature10">generate(seed, length, initial_context=None, temperature=1.0)</h4>
-<p>Generate deterministically from seed.<br />
-- <code>seed</code>: Random seed (for reproducibility)<br />
-- <code>length</code>: Number of symbols to generate<br />
-- <code>initial_context</code>: Starting context (or None for random)<br />
+<p>Generate deterministically from seed.
+- <code>seed</code>: Random seed (for reproducibility)
+- <code>length</code>: Number of symbols to generate
+- <code>initial_context</code>: Starting context (or None for random)
 - <code>temperature</code>: Sampling temperature (1.0=normal, &gt;1=random, &lt;1=focused)</p>
 <p>Returns: List of generated symbols</p>
 <h4 id="composeother">compose(other)</h4>
-<p>Categorical composition with another generator.<br />
+<p>Categorical composition with another generator.
 - <code>other</code>: Generator to compose with</p>
 <p>Returns: New composed generator</p>
 <h4 id="perplexitytest_data-context_length10">perplexity(test_data, context_length=10)</h4>
-<p>Evaluate on test data.<br />
-- <code>test_data</code>: Test sequence<br />
+<p>Evaluate on test data.
+- <code>test_data</code>: Test sequence
 - <code>context_length</code>: Context length used</p>
 <p>Returns: Perplexity (lower is better)</p>
 <h3 id="informationfilter-class">InformationFilter Class</h3>
@@ -156,11 +219,11 @@ Lookup: Lévy triplet for this state
     use_spectral=True
 )
 </code></pre>
-<p><strong>Parameters</strong>:<br />
-- <code>generator</code>: Generator to filter<br />
-- <code>data</code>: Training data for computing scores<br />
-- <code>context_length</code>: Context length<br />
-- <code>mdl_percentile</code>: Keep states below this MDL percentile<br />
+<p><strong>Parameters</strong>:
+- <code>generator</code>: Generator to filter
+- <code>data</code>: Training data for computing scores
+- <code>context_length</code>: Context length
+- <code>mdl_percentile</code>: Keep states below this MDL percentile
 - <code>use_spectral</code>: Apply spectral filtration</p>
 <p>Returns: Filtered generator with noise removed</p>
 <h2 id="mathematical-guarantees">Mathematical Guarantees</h2>
@@ -170,16 +233,16 @@ Lookup: Lévy triplet for this state
 sample_sizes = [100, 1000, 10000]
 for n in sample_sizes:
     error = estimate_error(n)
-    print(f&quot;n={n}: error ≈ {error:.4f} ≈ C/√{n}&quot;)
+    print(f"n={n}: error ≈ {error:.4f} ≈ C/√{n}")
 </code></pre>
 <h3 id="filtration-optimality">Filtration Optimality</h3>
 <p><strong>Theorem</strong>: MDL filtration removes only parameters with I(future; param) &lt; threshold.</p>
 <p>Information-theoretic guarantee: filtered model is optimal under MDL criterion.</p>
 <h3 id="category-axioms">Category Axioms</h3>
 <p><strong>Theorem</strong>: Generators form a valid category.</p>
-<p>Verified properties:<br />
-- Associativity of composition<br />
-- Existence of identity element<br />
+<p>Verified properties:
+- Associativity of composition
+- Existence of identity element
 - Morphism preservation</p>
 <h2 id="comparison-to-classical-methods">Comparison to Classical Methods</h2>
 <table>
@@ -269,12 +332,12 @@ for n in sample_sizes:
 </table>
 <p><strong>Trade-off</strong>: Sacrifice 10% perplexity for mathematical rigor.</p>
 <h2 id="examples">Examples</h2>
-<p>See <code>advanced_examples.py</code> for:<br />
-1. Long context demonstration (50+ words)<br />
-2. Temperature-based sampling<br />
-3. Hierarchical composition<br />
-4. Compression efficiency analysis<br />
-5. Domain adaptation<br />
+<p>See <code>advanced_examples.py</code> for:
+1. Long context demonstration (50+ words)
+2. Temperature-based sampling
+3. Hierarchical composition
+4. Compression efficiency analysis
+5. Domain adaptation
 6. Robustness to noise</p>
 <p>Run all examples:</p>
 <pre><code class="language-bash">python advanced_examples.py
@@ -293,14 +356,14 @@ for n in sample_sizes:
     └── filter_generator()# Combined filtration
 </code></pre>
 <h2 id="performance">Performance</h2>
-<p><strong>Training</strong>: O(N) time, O(M) space<br />
-- N = training data size<br />
+<p><strong>Training</strong>: O(N) time, O(M) space
+- N = training data size
 - M = max_states (fixed, e.g., 2²⁰)</p>
-<p><strong>Generation</strong>: O(1) per token<br />
-- Hash lookup: O(1)<br />
+<p><strong>Generation</strong>: O(1) per token
+- Hash lookup: O(1)
 - Sample: O(1)</p>
-<p><strong>Memory</strong>: ~4 GB for typical use<br />
-- Independent of context length<br />
+<p><strong>Memory</strong>: ~4 GB for typical use
+- Independent of context length
 - Independent of training data size</p>
 <h2 id="limitations">Limitations</h2>
 <ol>
@@ -318,14 +381,14 @@ for n in sample_sizes:
 <li>[ ] Hybrid with neural networks (representation learning)</li>
 </ul>
 <h2 id="theory">Theory</h2>
-<p>Complete mathematical theory in companion documents:<br />
-- <code>complete_math_proof_document.md</code> - Full proofs<br />
+<p>Complete mathematical theory in companion documents:
+- <code>complete_math_proof_document.md</code> - Full proofs
 - <code>classical_methods_comparison.md</code> - vs 1980s-2000s methods</p>
-<p>Key papers:<br />
-1. Eilenberg &amp; Mac Lane (1945) - Category theory<br />
-2. Lévy &amp; Khintchine (1934-1938) - Lévy processes<br />
-3. Shannon (1948) - Information theory<br />
-4. Rissanen (1978) - MDL principle<br />
+<p>Key papers:
+1. Eilenberg &amp; Mac Lane (1945) - Category theory
+2. Lévy &amp; Khintchine (1934-1938) - Lévy processes
+3. Shannon (1948) - Information theory
+4. Rissanen (1978) - MDL principle
 5. Marchenko &amp; Pastur (1967) - Random matrix theory</p>
 <h2 id="citation">Citation</h2>
 <p>If you use this framework, please cite:</p>
@@ -340,10 +403,35 @@ for n in sample_sizes:
 <p>This implementation is for research and educational purposes.</p>
 <h2 id="contact">Contact</h2>
 <p>For questions, issues, or contributions, please open an issue or contact the authors.</p>
-<hr />
-<p><strong>Status</strong>: Complete implementation with computational verification<br />
-<strong>Version</strong>: 1.0<br />
+<hr/>
+<p><strong>Status</strong>: Complete implementation with computational verification<br/>
+<strong>Version</strong>: 1.0<br/>
 <strong>Date</strong>: January 30, 2026</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

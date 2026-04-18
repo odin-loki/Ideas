@@ -3,21 +3,114 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>chaos readme</title>
+  <meta name="description" content="[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Security](https://img.shields.io/badge/security-632--bit-green.svg)](#) [![Platform](https://img.shields.io/badge/platform-embedded-orange.svg)](#) --- SynerChaos v2 is a cryptographic-grade random…"/>
+  <title>SynerChaos RNG v2 · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">RNGS\Chaotic RNG\chaos_readme.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="synerchaos-rng-v2">SynerChaos RNG v2</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-3"><a href="#key-features">Key Features</a></li>
+        <li class="toc-depth-2"><a href="#quick-start">Quick Start</a></li>
+        <li class="toc-depth-2"><a href="#architecture">Architecture</a></li>
+        <li class="toc-depth-3"><a href="#three-layer-synergistic-design">Three-Layer Synergistic Design</a></li>
+        <li class="toc-depth-3"><a href="#state-space-breakdown">State Space Breakdown</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-foundation">Mathematical Foundation</a></li>
+        <li class="toc-depth-3"><a href="#chaotic-dynamics">Chaotic Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#lfsr-decorrelation">LFSR Decorrelation</a></li>
+        <li class="toc-depth-3"><a href="#parameter-evolution">Parameter Evolution</a></li>
+        <li class="toc-depth-3"><a href="#bias-correction">Bias Correction</a></li>
+        <li class="toc-depth-2"><a href="#statistical-properties">Statistical Properties</a></li>
+        <li class="toc-depth-3"><a href="#distribution-quality">Distribution Quality</a></li>
+        <li class="toc-depth-3"><a href="#period-analysis">Period Analysis</a></li>
+        <li class="toc-depth-3"><a href="#entropy-sources">Entropy Sources</a></li>
+        <li class="toc-depth-2"><a href="#security-analysis">Security Analysis</a></li>
+        <li class="toc-depth-3"><a href="#cryptographic-strength">Cryptographic Strength</a></li>
+        <li class="toc-depth-3"><a href="#security-properties">Security Properties</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-standards">Comparison to Standards</a></li>
+        <li class="toc-depth-2"><a href="#performance-characteristics">Performance Characteristics</a></li>
+        <li class="toc-depth-3"><a href="#computational-complexity">Computational Complexity</a></li>
+        <li class="toc-depth-3"><a href="#benchmarks">Benchmarks</a></li>
+        <li class="toc-depth-3"><a href="#performance-vs-v1">Performance vs V1</a></li>
+        <li class="toc-depth-2"><a href="#use-cases">Use Cases</a></li>
+        <li class="toc-depth-3"><a href="#ideal-applications">✅ Ideal Applications</a></li>
+        <li class="toc-depth-3"><a href="#considerations">⚠️ Considerations</a></li>
+        <li class="toc-depth-2"><a href="#implementation-notes">Implementation Notes</a></li>
+        <li class="toc-depth-3"><a href="#initialization">Initialization</a></li>
+        <li class="toc-depth-3"><a href="#warmup-period">Warmup Period</a></li>
+        <li class="toc-depth-3"><a href="#thread-safety">Thread Safety</a></li>
+        <li class="toc-depth-2"><a href="#api-reference">API Reference</a></li>
+        <li class="toc-depth-3"><a href="#core-functions">Core Functions</a></li>
+        <li class="toc-depth-4"><a href="#synerchaos_init">synerchaos_init</a></li>
+        <li class="toc-depth-4"><a href="#synerchaos_next">synerchaos_next</a></li>
+        <li class="toc-depth-4"><a href="#synerchaos_range">synerchaos_range</a></li>
+        <li class="toc-depth-4"><a href="#synerchaos_bytes">synerchaos_bytes</a></li>
+        <li class="toc-depth-4"><a href="#synerchaos_get_state_info">synerchaos_get_state_info</a></li>
+        <li class="toc-depth-2"><a href="#technical-innovations">Technical Innovations</a></li>
+        <li class="toc-depth-3"><a href="#1-lfsr-temporal-decorrelation">1. LFSR Temporal Decorrelation</a></li>
+        <li class="toc-depth-3"><a href="#2-counter-based-parameter-evolution">2. Counter-Based Parameter Evolution</a></li>
+        <li class="toc-depth-3"><a href="#3-dual-mixer-architecture">3. Dual Mixer Architecture</a></li>
+        <li class="toc-depth-3"><a href="#4-8-octant-bias-correction">4. 8-Octant Bias Correction</a></li>
+        <li class="toc-depth-3"><a href="#5-adaptive-state-space">5. Adaptive State Space</a></li>
+        <li class="toc-depth-2"><a href="#building-and-integration">Building and Integration</a></li>
+        <li class="toc-depth-3"><a href="#compilation">Compilation</a></li>
+        <li class="toc-depth-3"><a href="#compiler-flags">Compiler Flags</a></li>
+        <li class="toc-depth-3"><a href="#dependencies">Dependencies</a></li>
+        <li class="toc-depth-2"><a href="#testing-and-validation">Testing and Validation</a></li>
+        <li class="toc-depth-3"><a href="#statistical-test-suite">Statistical Test Suite</a></li>
+        <li class="toc-depth-3"><a href="#nist-statistical-test-suite">NIST Statistical Test Suite</a></li>
+        <li class="toc-depth-3"><a href="#diehard-battery">Diehard Battery</a></li>
+        <li class="toc-depth-2"><a href="#design-philosophy">Design Philosophy</a></li>
+        <li class="toc-depth-3"><a href="#mathematical-synergy">Mathematical Synergy</a></li>
+        <li class="toc-depth-3"><a href="#embedded-first-design">Embedded-First Design</a></li>
+        <li class="toc-depth-2"><a href="#version-history">Version History</a></li>
+        <li class="toc-depth-3"><a href="#v20-current-major-redesign">v2.0 (Current) - Major Redesign</a></li>
+        <li class="toc-depth-3"><a href="#v10-initial-release">v1.0 - Initial Release</a></li>
+        <li class="toc-depth-2"><a href="#future-enhancements">Future Enhancements</a></li>
+        <li class="toc-depth-3"><a href="#planned-features">Planned Features</a></li>
+        <li class="toc-depth-3"><a href="#research-directions">Research Directions</a></li>
+        <li class="toc-depth-2"><a href="#contributing">Contributing</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+        <li class="toc-depth-2"><a href="#citation">Citation</a></li>
+        <li class="toc-depth-2"><a href="#acknowledgments">Acknowledgments</a></li>
+        <li class="toc-depth-2"><a href="#support">Support</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">SynerChaos RNG v2</h1>
+          <p class="doc-meta">RNGS\Chaotic RNG\chaos_readme.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>SynerChaos v2 is a cryptographic-grade random number generator designed specifically for resource-constrained embedded systems. It combines chaotic dynamics, cryptographic mixing, and real-time statistical correction to achieve military-grade security with minimal memory footprint.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>Synergistic Multi-Layer Chaotic Random Number Generator for Embedded Cryptography</strong></p>
-<p><a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a><br />
-<a href=""><img alt="Security" src="https://img.shields.io/badge/security-632--bit-green.svg" /></a><br />
-<a href=""><img alt="Platform" src="https://img.shields.io/badge/platform-embedded-orange.svg" /></a></p>
-<hr />
+<p><a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+<a href="#"><img alt="Security" src="https://img.shields.io/badge/security-632--bit-green.svg"/></a>
+<a href="#"><img alt="Platform" src="https://img.shields.io/badge/platform-embedded-orange.svg"/></a></p>
+<hr/>
 <h2 id="overview">Overview</h2>
 <p>SynerChaos v2 is a cryptographic-grade random number generator designed specifically for resource-constrained embedded systems. It combines chaotic dynamics, cryptographic mixing, and real-time statistical correction to achieve military-grade security with minimal memory footprint.</p>
 <h3 id="key-features">Key Features</h3>
@@ -29,13 +122,13 @@
 <li><strong>🔄 Self-Evolving</strong>: Parameters adapt based on usage history</li>
 <li><strong>🚀 Performance</strong>: ~1M outputs/second (10-15x slower than Math.random)</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="quick-start">Quick Start</h2>
-<pre><code class="language-c">#include &quot;synerchaos.h&quot;
+<pre><code class="language-c">#include "synerchaos.h"
 
 // Initialize with seed
 synerchaos_state_t rng;
-uint8_t seed[] = &quot;my_secret_seed_12345&quot;;
+uint8_t seed[] = "my_secret_seed_12345";
 synerchaos_init(&amp;rng, seed, sizeof(seed)-1);
 
 // Generate random numbers
@@ -46,7 +139,7 @@ uint32_t dice_roll = synerchaos_range(&amp;rng, 6) + 1;
 uint8_t random_bytes[100];
 synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </code></pre>
-<hr />
+<hr/>
 <h2 id="architecture">Architecture</h2>
 <h3 id="three-layer-synergistic-design">Three-Layer Synergistic Design</h3>
 <pre><code>┌─────────────────────────────────────────────────────┐
@@ -117,15 +210,15 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="mathematical-foundation">Mathematical Foundation</h2>
 <h3 id="chaotic-dynamics">Chaotic Dynamics</h3>
 <p>The core uses an enhanced integer-based logistic map:</p>
 <pre><code>x[i] ← EnhancedChaosMap(x[i], param[i], decorr)
 </code></pre>
-<p>Where:<br />
-- <code>EnhancedChaosMap</code> implements a modified logistic-like iteration<br />
-- <code>decorr</code> is the LFSR decorrelation value<br />
+<p>Where:
+- <code>EnhancedChaosMap</code> implements a modified logistic-like iteration
+- <code>decorr</code> is the LFSR decorrelation value
 - Cross-coupling between layers creates complex dynamics</p>
 <h3 id="lfsr-decorrelation">LFSR Decorrelation</h3>
 <p>32-bit maximal Linear Feedback Shift Register with primitive polynomial:</p>
@@ -138,12 +231,12 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </code></pre>
 <p>This creates <strong>path-dependent evolution</strong> where future states depend on entire history.</p>
 <h3 id="bias-correction">Bias Correction</h3>
-<p>8-octant histogram with 256-sample window:<br />
-- Expected count per octant: 32<br />
-- Deviation threshold: 25% (8 counts)<br />
+<p>8-octant histogram with 256-sample window:
+- Expected count per octant: 32
+- Deviation threshold: 25% (8 counts)
 - Correction probability: <code>P = (observed - expected) / 4</code></p>
 <p>Target distribution: <strong>χ² &lt; 14.07</strong> (uniform at α=0.05)</p>
-<hr />
+<hr/>
 <h2 id="statistical-properties">Statistical Properties</h2>
 <h3 id="distribution-quality">Distribution Quality</h3>
 <table>
@@ -196,7 +289,7 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 <li><strong>Parameter evolution</strong>: Periodic bursts</li>
 </ol>
 <p><strong>Total practical entropy</strong>: <strong>31.8 bits per 32-bit output</strong></p>
-<hr />
+<hr/>
 <h2 id="security-analysis">Security Analysis</h2>
 <h3 id="cryptographic-strength">Cryptographic Strength</h3>
 <p><strong>Effective Security Level: 632 bits</strong></p>
@@ -232,10 +325,10 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </tbody>
 </table>
 <h3 id="security-properties">Security Properties</h3>
-<p>✅ <strong>Forward Secrecy</strong>: Parameter evolution is one-way<br />
-✅ <strong>Backward Secrecy</strong>: Future prediction computationally infeasible<br />
-✅ <strong>State Recovery Resistance</strong>: 739-bit state space<br />
-✅ <strong>Temporal Decorrelation</strong>: LFSR + counter prevents patterns<br />
+<p>✅ <strong>Forward Secrecy</strong>: Parameter evolution is one-way<br/>
+✅ <strong>Backward Secrecy</strong>: Future prediction computationally infeasible<br/>
+✅ <strong>State Recovery Resistance</strong>: 739-bit state space<br/>
+✅ <strong>Temporal Decorrelation</strong>: LFSR + counter prevents patterns<br/>
 ✅ <strong>Non-Invertibility</strong>: Cannot reverse to previous states  </p>
 <h3 id="comparison-to-standards">Comparison to Standards</h3>
 <table>
@@ -286,7 +379,7 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="performance-characteristics">Performance Characteristics</h2>
 <h3 id="computational-complexity">Computational Complexity</h3>
 <ul>
@@ -296,13 +389,13 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 <li><strong>Memory access</strong>: Sequential (cache-friendly)</li>
 </ul>
 <h3 id="benchmarks">Benchmarks</h3>
-<p><strong>On ARM Cortex-M4 @ 168MHz:</strong><br />
-- ~1,000,000 outputs/second<br />
-- ~80 CPU cycles per 32-bit output<br />
+<p><strong>On ARM Cortex-M4 @ 168MHz:</strong>
+- ~1,000,000 outputs/second
+- ~80 CPU cycles per 32-bit output
 - ~0.48 mW power consumption (estimated)</p>
-<p><strong>On Modern x86 @ 3.5GHz:</strong><br />
-- ~10,000,000 outputs/second<br />
-- ~350 CPU cycles per 32-bit output<br />
+<p><strong>On Modern x86 @ 3.5GHz:</strong>
+- ~10,000,000 outputs/second
+- ~350 CPU cycles per 32-bit output
 - Competitive with ChaCha20</p>
 <h3 id="performance-vs-v1">Performance vs V1</h3>
 <table>
@@ -341,7 +434,7 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="use-cases">Use Cases</h2>
 <h3 id="ideal-applications">✅ Ideal Applications</h3>
 <ul>
@@ -360,7 +453,7 @@ synerchaos_bytes(&amp;rng, random_bytes, sizeof(random_bytes));
 <li><strong>Monte Carlo Simulation</strong>: Overkill for statistical purposes (use MT19937)</li>
 <li><strong>Real-Time Systems</strong>: ~350 cycles per output may be significant</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="implementation-notes">Implementation Notes</h2>
 <h3 id="initialization">Initialization</h3>
 <pre><code class="language-c">// Requires good seed entropy
@@ -368,14 +461,14 @@ uint8_t seed[32];
 get_true_random_bytes(seed, sizeof(seed)); // From hardware RNG, etc.
 synerchaos_init(&amp;rng, seed, sizeof(seed));
 </code></pre>
-<p><strong>Important</strong>: Seed quality directly impacts security. Use:<br />
-- Hardware random number generator<br />
-- Cryptographic-quality entropy source<br />
+<p><strong>Important</strong>: Seed quality directly impacts security. Use:
+- Hardware random number generator
+- Cryptographic-quality entropy source
 - Never use predictable values (timestamps, etc.)</p>
 <h3 id="warmup-period">Warmup Period</h3>
-<p>The generator includes automatic warmup (200 iterations) to:<br />
-- Establish chaotic behavior<br />
-- Distribute seed entropy throughout state<br />
+<p>The generator includes automatic warmup (200 iterations) to:
+- Establish chaotic behavior
+- Distribute seed entropy throughout state
 - Ensure parameter evolution begins properly</p>
 <h3 id="thread-safety">Thread Safety</h3>
 <p>SynerChaos state is <strong>not thread-safe</strong> by default. For multi-threaded use:</p>
@@ -392,7 +485,7 @@ pthread_mutex_unlock(&amp;rng_mutex);
 synerchaos_init(&amp;rng_thread1, seed1, len1);
 synerchaos_init(&amp;rng_thread2, seed2, len2);
 </code></pre>
-<hr />
+<hr/>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="core-functions">Core Functions</h3>
 <h4 id="synerchaos_init"><code>synerchaos_init</code></h4>
@@ -401,72 +494,72 @@ synerchaos_init(&amp;rng_thread2, seed2, len2);
                      size_t seed_len);
 </code></pre>
 <p>Initialize generator with seed. Includes automatic 200-iteration warmup.</p>
-<p><strong>Parameters:</strong><br />
-- <code>state</code>: Pointer to generator state structure<br />
-- <code>seed</code>: Seed bytes (recommend 16-32 bytes minimum)<br />
+<p><strong>Parameters:</strong>
+- <code>state</code>: Pointer to generator state structure
+- <code>seed</code>: Seed bytes (recommend 16-32 bytes minimum)
 - <code>seed_len</code>: Length of seed in bytes</p>
-<hr />
+<hr/>
 <h4 id="synerchaos_next"><code>synerchaos_next</code></h4>
 <pre><code class="language-c">uint32_t synerchaos_next(synerchaos_state_t* state);
 </code></pre>
 <p>Generate next 32-bit random number.</p>
 <p><strong>Returns:</strong> Random 32-bit unsigned integer [0, 2^32-1]</p>
 <p><strong>Performance:</strong> ~80 cycles on ARM Cortex-M4</p>
-<hr />
+<hr/>
 <h4 id="synerchaos_range"><code>synerchaos_range</code></h4>
 <pre><code class="language-c">uint32_t synerchaos_range(synerchaos_state_t* state, uint32_t max);
 </code></pre>
 <p>Generate random number in range [0, max) with perfect distribution.</p>
-<p><strong>Parameters:</strong><br />
-- <code>state</code>: Pointer to generator state<br />
+<p><strong>Parameters:</strong>
+- <code>state</code>: Pointer to generator state
 - <code>max</code>: Upper bound (exclusive)</p>
 <p><strong>Returns:</strong> Random integer in [0, max-1]</p>
 <p><strong>Note:</strong> Uses rejection sampling to eliminate modulo bias.</p>
-<hr />
+<hr/>
 <h4 id="synerchaos_bytes"><code>synerchaos_bytes</code></h4>
 <pre><code class="language-c">void synerchaos_bytes(synerchaos_state_t* state, 
                       uint8_t* buffer, 
                       size_t length);
 </code></pre>
 <p>Fill buffer with random bytes.</p>
-<p><strong>Parameters:</strong><br />
-- <code>state</code>: Pointer to generator state<br />
-- <code>buffer</code>: Destination buffer<br />
+<p><strong>Parameters:</strong>
+- <code>state</code>: Pointer to generator state
+- <code>buffer</code>: Destination buffer
 - <code>length</code>: Number of bytes to generate</p>
-<hr />
+<hr/>
 <h4 id="synerchaos_get_state_info"><code>synerchaos_get_state_info</code></h4>
 <pre><code class="language-c">void synerchaos_get_state_info(synerchaos_state_t* state, 
                                 char* buffer, 
                                 size_t buffer_size);
 </code></pre>
 <p>Get human-readable state information for debugging.</p>
-<p><strong>Parameters:</strong><br />
-- <code>state</code>: Pointer to generator state<br />
-- <code>buffer</code>: Output buffer for text<br />
+<p><strong>Parameters:</strong>
+- <code>state</code>: Pointer to generator state
+- <code>buffer</code>: Output buffer for text
 - <code>buffer_size</code>: Size of output buffer</p>
-<hr />
+<hr/>
 <h2 id="technical-innovations">Technical Innovations</h2>
 <h3 id="1-lfsr-temporal-decorrelation">1. LFSR Temporal Decorrelation</h3>
-<p><strong>Problem</strong>: Sequential correlation in chaotic systems<br />
-<strong>Solution</strong>: XOR 32-bit maximal LFSR into chaotic evolution every step<br />
+<p><strong>Problem</strong>: Sequential correlation in chaotic systems<br/>
+<strong>Solution</strong>: XOR 32-bit maximal LFSR into chaotic evolution every step<br/>
 <strong>Impact</strong>: Correlation reduced from 500/999 to &lt;10/999 (98% improvement)</p>
 <h3 id="2-counter-based-parameter-evolution">2. Counter-Based Parameter Evolution</h3>
-<p><strong>Problem</strong>: Parameter cycles creating predictable patterns<br />
-<strong>Solution</strong>: Mix output counter into parameter updates<br />
+<p><strong>Problem</strong>: Parameter cycles creating predictable patterns<br/>
+<strong>Solution</strong>: Mix output counter into parameter updates<br/>
 <strong>Impact</strong>: Prevents cycles, creates history-dependent evolution</p>
 <h3 id="3-dual-mixer-architecture">3. Dual Mixer Architecture</h3>
-<p><strong>Problem</strong>: Single mixer creates bottleneck<br />
-<strong>Solution</strong>: Two mixers updated alternately<br />
+<p><strong>Problem</strong>: Single mixer creates bottleneck<br/>
+<strong>Solution</strong>: Two mixers updated alternately<br/>
 <strong>Impact</strong>: 2x throughput potential, better parallelization</p>
 <h3 id="4-8-octant-bias-correction">4. 8-Octant Bias Correction</h3>
-<p><strong>Problem</strong>: Distribution bias in chaotic outputs<br />
-<strong>Solution</strong>: Histogram tracking with 256-sample window, 8 octants<br />
+<p><strong>Problem</strong>: Distribution bias in chaotic outputs<br/>
+<strong>Solution</strong>: Histogram tracking with 256-sample window, 8 octants<br/>
 <strong>Impact</strong>: Guaranteed uniform distribution (χ² &lt; 14.07)</p>
 <h3 id="5-adaptive-state-space">5. Adaptive State Space</h3>
-<p><strong>Problem</strong>: Fixed state space limits security<br />
-<strong>Solution</strong>: Self-evolving parameters expand effective state<br />
+<p><strong>Problem</strong>: Fixed state space limits security<br/>
+<strong>Solution</strong>: Self-evolving parameters expand effective state<br/>
 <strong>Impact</strong>: Effective state grows from 2^739 to 2^1057+ with usage</p>
-<hr />
+<hr/>
 <h2 id="building-and-integration">Building and Integration</h2>
 <h3 id="compilation">Compilation</h3>
 <pre><code class="language-bash"># Standard compilation
@@ -479,20 +572,20 @@ arm-none-eabi-gcc -O2 -mcpu=cortex-m4 -mthumb synerchaos.c
 gcc -g -O0 synerchaos.c your_app.c -o app_debug
 </code></pre>
 <h3 id="compiler-flags">Compiler Flags</h3>
-<p><strong>Recommended:</strong><br />
-- <code>-O2</code> or <code>-O3</code>: Enable optimizations<br />
-- <code>-march=native</code>: Use native CPU features<br />
+<p><strong>Recommended:</strong>
+- <code>-O2</code> or <code>-O3</code>: Enable optimizations
+- <code>-march=native</code>: Use native CPU features
 - <code>-fno-strict-aliasing</code>: Ensure correctness</p>
-<p><strong>For embedded:</strong><br />
-- <code>-Os</code>: Optimize for size<br />
-- <code>-mcpu=</code>: Specify target CPU<br />
+<p><strong>For embedded:</strong>
+- <code>-Os</code>: Optimize for size
+- <code>-mcpu=</code>: Specify target CPU
 - <code>-mthumb</code>: Use Thumb instruction set (ARM)</p>
 <h3 id="dependencies">Dependencies</h3>
-<p><strong>Required:</strong> None (standard C library only)<br />
-- <code>stdint.h</code> - Integer types<br />
-- <code>string.h</code> - Memory operations<br />
+<p><strong>Required:</strong> None (standard C library only)
+- <code>stdint.h</code> - Integer types
+- <code>string.h</code> - Memory operations
 - <code>stdio.h</code> - Debug output (optional)</p>
-<hr />
+<hr/>
 <h2 id="testing-and-validation">Testing and Validation</h2>
 <h3 id="statistical-test-suite">Statistical Test Suite</h3>
 <p>Run the included test suite:</p>
@@ -507,25 +600,25 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
 # ✓ Parameter evolution test
 </code></pre>
 <h3 id="nist-statistical-test-suite">NIST Statistical Test Suite</h3>
-<p>SynerChaos v2 passes all NIST SP 800-22 tests:<br />
-- Frequency test<br />
-- Block frequency test<br />
-- Runs test<br />
-- Longest run test<br />
-- Binary matrix rank test<br />
-- Spectral test (DFT)<br />
-- Non-overlapping template matching<br />
-- Overlapping template matching<br />
-- Universal statistical test<br />
-- Linear complexity test<br />
-- Serial test<br />
-- Approximate entropy test<br />
-- Cumulative sums test<br />
-- Random excursions test<br />
+<p>SynerChaos v2 passes all NIST SP 800-22 tests:
+- Frequency test
+- Block frequency test
+- Runs test
+- Longest run test
+- Binary matrix rank test
+- Spectral test (DFT)
+- Non-overlapping template matching
+- Overlapping template matching
+- Universal statistical test
+- Linear complexity test
+- Serial test
+- Approximate entropy test
+- Cumulative sums test
+- Random excursions test
 - Random excursions variant test</p>
 <h3 id="diehard-battery">Diehard Battery</h3>
 <p>Passes all Diehard tests with flying colors.</p>
-<hr />
+<hr/>
 <h2 id="design-philosophy">Design Philosophy</h2>
 <h3 id="mathematical-synergy">Mathematical Synergy</h3>
 <p>SynerChaos combines three mathematical frameworks:</p>
@@ -534,18 +627,18 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
 <li><strong>Cryptographic Primitives</strong>: One-way functions, mixing</li>
 <li><strong>Statistical Correction</strong>: Real-time bias elimination</li>
 </ol>
-<p><strong>Synergy</strong>: Each framework compensates for weaknesses of others:<br />
-- Chaos provides vast state space<br />
-- Crypto provides non-invertibility<br />
+<p><strong>Synergy</strong>: Each framework compensates for weaknesses of others:
+- Chaos provides vast state space
+- Crypto provides non-invertibility
 - Statistics provides distribution guarantees</p>
 <h3 id="embedded-first-design">Embedded-First Design</h3>
-<p>Every design decision optimized for embedded systems:<br />
-- <strong>No floating point</strong>: Pure integer arithmetic<br />
-- <strong>Minimal memory</strong>: 80 bytes total state<br />
-- <strong>Cache-friendly</strong>: Sequential memory access<br />
-- <strong>No divisions</strong>: Only shifts, XORs, multiplies<br />
+<p>Every design decision optimized for embedded systems:
+- <strong>No floating point</strong>: Pure integer arithmetic
+- <strong>Minimal memory</strong>: 80 bytes total state
+- <strong>Cache-friendly</strong>: Sequential memory access
+- <strong>No divisions</strong>: Only shifts, XORs, multiplies
 - <strong>Predictable timing</strong>: O(1) complexity</p>
-<hr />
+<hr/>
 <h2 id="version-history">Version History</h2>
 <h3 id="v20-current-major-redesign">v2.0 (Current) - Major Redesign</h3>
 <ul>
@@ -569,7 +662,7 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
 <li>✅ Large state space</li>
 <li>✅ Even distribution</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="future-enhancements">Future Enhancements</h2>
 <h3 id="planned-features">Planned Features</h3>
 <ul>
@@ -590,7 +683,7 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
 <li>Optimizations for specific platforms</li>
 <li>Hardware random source integration</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="contributing">Contributing</h2>
 <p>Contributions welcome! Areas of interest:</p>
 <ul>
@@ -600,10 +693,10 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
 <li>Documentation improvements</li>
 <li>Bug reports and fixes</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="license">License</h2>
 <p>MIT License - see LICENSE file for details.</p>
-<hr />
+<hr/>
 <h2 id="citation">Citation</h2>
 <p>If you use SynerChaos in academic work, please cite:</p>
 <pre><code class="language-bibtex">@software{synerchaos2026,
@@ -614,29 +707,54 @@ gcc -g -O0 synerchaos.c your_app.c -o app_debug
   url={https://github.com/username/synerchaos}
 }
 </code></pre>
-<hr />
+<hr/>
 <h2 id="acknowledgments">Acknowledgments</h2>
-<p>Built on mathematical foundations from:<br />
-- Chaos theory (Lorenz, Hénon, Rössler systems)<br />
-- Cryptographic research (ChaCha, AES design principles)<br />
-- Statistical analysis (Marsaglia, L'Ecuyer)<br />
+<p>Built on mathematical foundations from:
+- Chaos theory (Lorenz, Hénon, Rössler systems)
+- Cryptographic research (ChaCha, AES design principles)
+- Statistical analysis (Marsaglia, L'Ecuyer)
 - Embedded systems optimization</p>
-<hr />
+<hr/>
 <h2 id="support">Support</h2>
 <ul>
 <li><strong>Issues</strong>: GitHub issue tracker</li>
 <li><strong>Email</strong>: [your-email]</li>
 <li><strong>Documentation</strong>: [wiki/docs URL]</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="conclusion">Conclusion</h2>
 <p>SynerChaos v2 represents a breakthrough in embedded cryptographic RNG design, achieving <strong>military-grade security (632 bits) with consumer-grade resources (80 bytes)</strong>. Its unique synergistic architecture combining chaos, cryptography, and statistics makes it ideal for the most demanding security applications in resource-constrained environments.</p>
 <p><strong>Key Achievement</strong>: The mathematical synergy concept is <strong>proven viable</strong> with proper temporal decorrelation, transforming an innovative but flawed V1 into a production-ready V2 suitable for real-world cryptographic applications.</p>
-<hr />
-<p><strong>Status</strong>: Production Ready ✅<br />
-<strong>Security Level</strong>: Military-Grade (632-bit) 🔒<br />
-<strong>Platform</strong>: Embedded Systems 🔧<br />
+<hr/>
+<p><strong>Status</strong>: Production Ready ✅<br/>
+<strong>Security Level</strong>: Military-Grade (632-bit) 🔒<br/>
+<strong>Platform</strong>: Embedded Systems 🔧<br/>
 <strong>License</strong>: MIT 📄</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

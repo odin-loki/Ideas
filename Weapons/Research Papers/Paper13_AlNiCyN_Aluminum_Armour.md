@@ -1,44 +1,37 @@
-<!-- Converted from `Paper13_AlNiCyN_Aluminum_Armour.docx` — source was Word (.docx). -->
+# AlNiCyN Aluminium Alloy Family for Military Armour Applications: Novel High-Performance Aluminium Armour Alloy Development Programme
 
-__AlNiCyN Aluminium Alloy Family for Military Armour Applications__
+*Technical Research Paper*
 
-Novel High\-Performance Aluminium Armour Alloy Development Programme
-
-__TECHNICAL RESEARCH PAPER__
-
-Document No\. TRP\-2026\-013 | Version 1\.0
+Document No. TRP-2026-013 | Version 1.0
 
 Prepared for: Australian Department of Defence | March 2026
 
-# __Abstract__
+## Abstract
+This paper presents a technical analysis of the AlNiCyN aluminium alloy family, a novel series of high-performance aluminium alloys developed for military armour applications across three technology readiness levels. The -5000 series \(TRL 7-8\) provides 620 MPa yield strength and 380-420 HB hardness at 1.0× RHA equivalence at $11,830/tonne. The -7000 series \(TRL 4-5\) advances to 780 MPa yield strength and 550-650 HV hardness through scandium addition, at $168,900/tonne \(cost dominated by scandium\). The -X series \(TRL 2-3\) is theoretical, incorporating carbyne, graphene, and quantum dot reinforcement for projected 2,000 GPa modulus at 0.8 g/cm³ density, at $320,000/kg. This paper contextualises the AlNiCyN series within the existing body of aluminium armour alloy research, examines the materials science basis for each series, and discusses programme risks and cost-benefit considerations.
 
-This paper presents a technical analysis of the AlNiCyN aluminium alloy family, a novel series of high\-performance aluminium alloys developed for military armour applications across three technology readiness levels\. The \-5000 series \(TRL 7\-8\) provides 620 MPa yield strength and 380\-420 HB hardness at 1\.0× RHA equivalence at $11,830/tonne\. The \-7000 series \(TRL 4\-5\) advances to 780 MPa yield strength and 550\-650 HV hardness through scandium addition, at $168,900/tonne \(cost dominated by scandium\)\. The \-X series \(TRL 2\-3\) is theoretical, incorporating carbyne, graphene, and quantum dot reinforcement for projected 2,000 GPa modulus at 0\.8 g/cm³ density, at $320,000/kg\. This paper contextualises the AlNiCyN series within the existing body of aluminium armour alloy research, examines the materials science basis for each series, and discusses programme risks and cost\-benefit considerations\.
+## 1. Introduction
 
-# __1\. Introduction__
+Aluminium alloys have been used in military armour applications since the late 1950s, when Aluminium Company of America \(ALCOA\) developed 5083 aluminium for the M113 Armoured Personnel Carrier. The low density of aluminium \(2.7 g/cm³ vs. 7.85 g/cm³ for steel\) enables armour mass reductions of approximately 50-70% compared to equivalent-protection steel armour, with corresponding mobility, air-transport, and logistical benefits. However, aluminium armour is generally inferior to RHA steel on a per-unit-thickness basis, requiring greater thickness—and therefore volume—for equivalent protection.
 
-Aluminium alloys have been used in military armour applications since the late 1950s, when Aluminium Company of America \(ALCOA\) developed 5083 aluminium for the M113 Armoured Personnel Carrier\. The low density of aluminium \(2\.7 g/cm³ vs\. 7\.85 g/cm³ for steel\) enables armour mass reductions of approximately 50\-70% compared to equivalent\-protection steel armour, with corresponding mobility, air\-transport, and logistical benefits\. However, aluminium armour is generally inferior to RHA steel on a per\-unit\-thickness basis, requiring greater thickness—and therefore volume—for equivalent protection\.
+Subsequent aluminium armour developments have targeted improved specific ballistic performance \(protection per unit weight\) through alloying additions and thermomechanical processing. The 7xxx series alloys \(Al-Zn-Mg-Cu\), particularly 7075 in T6 temper, offer higher strength than the 5xxx series with yield strengths of 450-600 MPa, at the cost of lower toughness and stress corrosion cracking susceptibility. Research published by Clinton Aluminum and the National Academies has documented the progressive improvement in aluminium armour performance from 5083 through enhanced 7xxx alloys.
 
-Subsequent aluminium armour developments have targeted improved specific ballistic performance \(protection per unit weight\) through alloying additions and thermomechanical processing\. The 7xxx series alloys \(Al\-Zn\-Mg\-Cu\), particularly 7075 in T6 temper, offer higher strength than the 5xxx series with yield strengths of 450\-600 MPa, at the cost of lower toughness and stress corrosion cracking susceptibility\. Research published by Clinton Aluminum and the National Academies has documented the progressive improvement in aluminium armour performance from 5083 through enhanced 7xxx alloys\.
+## 2. AlNiCyN-5000 Series \(TRL 7-8\)
 
-# __2\. AlNiCyN\-5000 Series \(TRL 7\-8\)__
+### 2.1 Specification
 
-## __2\.1 Specification__
-
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Yield Strength
 
 620 MPa
 
 Hardness
 
-380\-420 HB
+380-420 HB
 
 RHA Equivalence
 
-1\.0× \(equivalent to RHA steel per unit thickness\)
+1.0× \(equivalent to RHA steel per unit thickness\)
 
 Cost
 
@@ -46,37 +39,35 @@ $11,830/tonne
 
 TRL
 
-7\-8 \(near production\-ready\)
+7-8 \(near production-ready\)
 
 Key Alloying Additions
 
-Ni, Cy \(cyanide\-group ligands\), N \(nitrogen\)
+Ni, Cy \(cyanide-group ligands\), N \(nitrogen\)
 
-## __2\.2 Materials Basis__
+### 2.2 Materials Basis
 
-The 620 MPa yield strength of the AlNiCyN\-5000 series represents a significant improvement over standard 7075\-T6 \(503 MPa\) and substantially exceeds 5083\-H116 \(228 MPa used in M113\)\. This is achieved through a combination of nickel intermetallic precipitation strengthening \(nickel aluminide Al₃Ni phases\), nitrogen interstitial hardening, and refined grain structure through thermomechanical processing\. The 380\-420 HB hardness range is consistent with the ballistic performance required for defeat of 7\.62mm armour\-piercing projectiles\.
+The 620 MPa yield strength of the AlNiCyN-5000 series represents a significant improvement over standard 7075-T6 \(503 MPa\) and substantially exceeds 5083-H116 \(228 MPa used in M113\). This is achieved through a combination of nickel intermetallic precipitation strengthening \(nickel aluminide Al₃Ni phases\), nitrogen interstitial hardening, and refined grain structure through thermomechanical processing. The 380-420 HB hardness range is consistent with the ballistic performance required for defeat of 7.62mm armour-piercing projectiles.
 
-Research on scandium and vanadium additions to 7xxx\-series aluminium alloys \(US Patent 8,206,517\) has demonstrated that minor alloying additions in the 0\.1\-0\.3 wt% range can provide significant grain refinement and precipitation strengthening without the cost penalty of higher scandium loadings\. The AlNiCyN\-5000 series concept follows this approach, targeting affordable production costs competitive with advanced steel armour at similar protection levels\.
+Research on scandium and vanadium additions to 7xxx-series aluminium alloys \(US Patent 8,206,517\) has demonstrated that minor alloying additions in the 0.1-0.3 wt% range can provide significant grain refinement and precipitation strengthening without the cost penalty of higher scandium loadings. The AlNiCyN-5000 series concept follows this approach, targeting affordable production costs competitive with advanced steel armour at similar protection levels.
 
-## __2\.3 Ballistic Performance__
+### 2.3 Ballistic Performance
 
-At 1\.0× RHA equivalence, the \-5000 series provides armour protection equal to rolled homogeneous armour steel on a thickness\-for\-thickness basis, at approximately one\-third the weight\. This equates to approximately a 70% weight reduction versus equivalent\-protection RHA, providing a mass saving that directly translates to higher vehicle payload, lower vehicle mass for equivalent protection, or thicker armour for the same mass allowance\. A 2022 Springer publication on 7075\-T651 ballistic evaluation confirmed that optimised 7xxx\-series aluminium alloys can approach RHA equivalence for specific projectile threats\.
+At 1.0× RHA equivalence, the -5000 series provides armour protection equal to rolled homogeneous armour steel on a thickness-for-thickness basis, at approximately one-third the weight. This equates to approximately a 70% weight reduction versus equivalent-protection RHA, providing a mass saving that directly translates to higher vehicle payload, lower vehicle mass for equivalent protection, or thicker armour for the same mass allowance. A 2022 Springer publication on 7075-T651 ballistic evaluation confirmed that optimised 7xxx-series aluminium alloys can approach RHA equivalence for specific projectile threats.
 
-# __3\. AlNiCyN\-7000 Series \(TRL 4\-5\)__
+## 3. AlNiCyN-7000 Series \(TRL 4-5\)
 
-## __3\.1 Specification__
+### 3.1 Specification
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Yield Strength
 
 780 MPa
 
 Hardness
 
-550\-650 HV
+550-650 HV
 
 Cost
 
@@ -84,33 +75,31 @@ $168,900/tonne
 
 TRL
 
-4\-5 \(laboratory/relevant environment demonstrated\)
+4-5 \(laboratory/relevant environment demonstrated\)
 
 Key Alloying Additions
 
 Sc \(scandium\) primary strengthening agent
 
-## __3\.2 Scandium Cost Driver__
+### 3.2 Scandium Cost Driver
 
-The $168,900/tonne cost for the \-7000 series is driven primarily by scandium addition\. Scandium prices have historically been $1,500\-$4,000/kg \(2024 estimates\), and even minor additions of 0\.1\-0\.3 wt% translate to significant alloy cost premiums\. Scandium additions to aluminium alloys suppress recrystallisation during processing \(through Al₃Sc precipitation\), maintain fine grain structure, and improve weldability—properties critical for armour plate manufacturing\. The 780 MPa yield strength and 550\-650 HV hardness represent the improved ballistic performance achievable with scandium\-enhanced alloys versus the \-5000 series\.
+The $168,900/tonne cost for the -7000 series is driven primarily by scandium addition. Scandium prices have historically been $1,500-$4,000/kg \(2024 estimates\), and even minor additions of 0.1-0.3 wt% translate to significant alloy cost premiums. Scandium additions to aluminium alloys suppress recrystallisation during processing \(through Al₃Sc precipitation\), maintain fine grain structure, and improve weldability—properties critical for armour plate manufacturing. The 780 MPa yield strength and 550-650 HV hardness represent the improved ballistic performance achievable with scandium-enhanced alloys versus the -5000 series.
 
-Cost reduction strategies under investigation include alternative scandium sources \(ion adsorption clay deposits in China\), scandium recovery from REE processing tailstreams, and scandium\-free alternative grain refiners \(zirconium, titanium boride additions\) that partially replicate the microstructural effects without the cost premium\.
+Cost reduction strategies under investigation include alternative scandium sources \(ion adsorption clay deposits in China\), scandium recovery from REE processing tailstreams, and scandium-free alternative grain refiners \(zirconium, titanium boride additions\) that partially replicate the microstructural effects without the cost premium.
 
-# __4\. AlNiCyN\-X Series \(TRL 2\-3\)__
+## 4. AlNiCyN-X Series \(TRL 2-3\)
 
-## __4\.1 Specification__
+### 4.1 Specification
 
-__Parameter__
-
-__Theoretical Value__
-
+**Parameter**
+**Theoretical Value**
 Modulus
 
 ~2,000 GPa \(carbyne theoretical\)
 
 Density
 
-~0\.8 g/cm³ \(projected\)
+~0.8 g/cm³ \(projected\)
 
 Cost
 
@@ -118,31 +107,26 @@ Cost
 
 TRL
 
-2\-3 \(concept/component demonstration\)
+2-3 \(concept/component demonstration\)
 
 Key Materials
 
 Carbyne \+ graphene \+ quantum dots in Al matrix
 
-## __4\.2 Theoretical Basis and Programme Risk__
+### 4.2 Theoretical Basis and Programme Risk
 
-The \-X series represents a theoretical concept for a future ultra\-high\-performance composite incorporating carbyne \(a one\-dimensional carbon allotrope with theoretical modulus of approximately 32,000 GPa for individual chains, though bulk properties are substantially lower\), graphene reinforcement, and quantum dot additions in an aluminium matrix\. The projected 2,000 GPa composite modulus is a theoretical extrapolation rather than experimentally demonstrated value—bulk composites cannot achieve the properties of individual carbyne chains due to load transfer limitations and matrix\-reinforcement interface effects\.
+The -X series represents a theoretical concept for a future ultra-high-performance composite incorporating carbyne \(a one-dimensional carbon allotrope with theoretical modulus of approximately 32,000 GPa for individual chains, though bulk properties are substantially lower\), graphene reinforcement, and quantum dot additions in an aluminium matrix. The projected 2,000 GPa composite modulus is a theoretical extrapolation rather than experimentally demonstrated value—bulk composites cannot achieve the properties of individual carbyne chains due to load transfer limitations and matrix-reinforcement interface effects.
 
-The \-X series is included as a forward\-looking research direction rather than a programme deliverable on any near\-term timeline\. TRL 2\-3 indicates concept formulation and analytical studies have been conducted, but no material has been synthesised or tested\. The $320,000/kg cost reflects the extreme expense of carbyne synthesis at current laboratory scale\. Practical military armour application is not projected within the next 20 years without substantial advances in carbyne synthesis and scale\-up\.
+The -X series is included as a forward-looking research direction rather than a programme deliverable on any near-term timeline. TRL 2-3 indicates concept formulation and analytical studies have been conducted, but no material has been synthesised or tested. The $320,000/kg cost reflects the extreme expense of carbyne synthesis at current laboratory scale. Practical military armour application is not projected within the next 20 years without substantial advances in carbyne synthesis and scale-up.
 
-# __5\. Comparative Summary__
+## 5. Comparative Summary
 
-__Series__
-
-__TRL__
-
-__YS \(MPa\)__
-
-__Hardness__
-
-__Cost/t__
-
-5083\-H116 \(Reference\)
+**Series**
+**TRL**
+**YS \(MPa\)**
+**Hardness**
+**Cost/t**
+5083-H116 \(Reference\)
 
 8\+
 
@@ -152,7 +136,7 @@ __Cost/t__
 
 ~$3,500
 
-7075\-T651 \(Reference\)
+7075-T651 \(Reference\)
 
 8\+
 
@@ -162,29 +146,29 @@ __Cost/t__
 
 ~$8,000
 
-AlNiCyN\-5000
+AlNiCyN-5000
 
-7\-8
+7-8
 
 620
 
-380\-420 HB
+380-420 HB
 
 $11,830
 
-AlNiCyN\-7000
+AlNiCyN-7000
 
-4\-5
+4-5
 
 780
 
-550\-650 HV
+550-650 HV
 
 $168,900
 
-AlNiCyN\-X
+AlNiCyN-X
 
-2\-3
+2-3
 
 N/A
 
@@ -192,27 +176,26 @@ N/A
 
 $320K/kg
 
-# __6\. Programme Recommendations__
+## 6. Programme Recommendations
 
-The AlNiCyN\-5000 series at TRL 7\-8 represents the near\-term production candidate\. At $11,830/tonne and 1\.0× RHA equivalence, it is cost\-competitive with advanced armour steel while offering the density advantage of aluminium\. Recommended action: First Article Testing and procurement qualification against ADF vehicle armour specifications\.
+The AlNiCyN-5000 series at TRL 7-8 represents the near-term production candidate. At $11,830/tonne and 1.0× RHA equivalence, it is cost-competitive with advanced armour steel while offering the density advantage of aluminium. Recommended action: First Article Testing and procurement qualification against ADF vehicle armour specifications.
 
-The AlNiCyN\-7000 series warrants continued R&D investment to develop cost reduction strategies for the scandium cost driver\. Government partnership with Australian scandium extraction ventures \(Australia has the largest scandium deposits outside China and Russia\) could provide a strategic materials supply chain advantage\. Recommended action: 3\-year R&D programme with industry partnership\.
+The AlNiCyN-7000 series warrants continued R&D investment to develop cost reduction strategies for the scandium cost driver. Government partnership with Australian scandium extraction ventures \(Australia has the largest scandium deposits outside China and Russia\) could provide a strategic materials supply chain advantage. Recommended action: 3-year R&D programme with industry partnership.
 
-# __7\. Conclusion__
+## 7. Conclusion
 
-The AlNiCyN aluminium alloy family provides a structured development pathway from near\-production\-ready \(\-5000\) through advanced performance \(\-7000\) to theoretical future materials \(\-X\)\. The \-5000 series is the most immediately actionable, offering demonstrated performance improvements over existing 7075\-T6 at cost points competitive with advanced armour steel\. The TRL structure provides clear programme milestones and risk management for the higher series\.
+The AlNiCyN aluminium alloy family provides a structured development pathway from near-production-ready \(-5000\) through advanced performance \(-7000\) to theoretical future materials \(-X\). The -5000 series is the most immediately actionable, offering demonstrated performance improvements over existing 7075-T6 at cost points competitive with advanced armour steel. The TRL structure provides clear programme milestones and risk management for the higher series.
 
-# __8\. References__
+## 8. References
 
-\[1\] Clinton Aluminum\. \(2022\)\. Aluminium Alloys for Armour Applications — Technical Overview\.
+\[1\] Clinton Aluminum. \(2022\). Aluminium Alloys for Armour Applications — Technical Overview.
 
-\[2\] National Academies of Sciences\. \(2012\)\. Application of Lightweighting Technology to Military Vehicles\. National Academies Press\.
+\[2\] National Academies of Sciences. \(2012\). Application of Lightweighting Technology to Military Vehicles. National Academies Press.
 
-\[3\] US Patent 8,206,517\. \(2012\)\. Aluminium Alloy with Sc, V, Cr Additions for Enhanced Ballistic Performance\.
+\[3\] US Patent 8,206,517. \(2012\). Aluminium Alloy with Sc, V, Cr Additions for Enhanced Ballistic Performance.
 
-\[4\] Springer\. \(2022\)\. Ballistic evaluation of 7075\-T651 aluminium alloy\. International Journal of Impact Engineering\.
+\[4\] Springer. \(2022\). Ballistic evaluation of 7075-T651 aluminium alloy. International Journal of Impact Engineering.
 
-\[5\] GlobalSecurity\.org\. \(2021\)\. Aluminium Armour Applications in Military Ground Vehicles\.
+\[5\] GlobalSecurity.org. \(2021\). Aluminium Armour Applications in Military Ground Vehicles.
 
-\[6\] Pramanik, A\. \(2012\)\. Machining and joining of advanced aluminium alloys\. Journal of Materials Processing Technology\.
-
+\[6\] Pramanik, A. \(2012\). Machining and joining of advanced aluminium alloys. Journal of Materials Processing Technology.

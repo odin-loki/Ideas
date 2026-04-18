@@ -3,31 +3,136 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>discrete continuous hybrid components</title>
+  <meta name="description" content="--- **Key Innovation**: Rather than treating discrete and continuous as separate regimes requiring conversion, these components naturally exhibit both characteristics through their underlying physical mechanisms, creating entirely new classes of circuit elements with…"/>
+  <title>Discrete-Continuous Hybrid Electrical Components · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\discrete_continuous_hybrid_components.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="discrete-continuous-hybrid-electrical-components">Discrete-Continuous Hybrid Electrical Components</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#a-comprehensive-framework-for-next-generation-circuit-elements">A Comprehensive Framework for Next-Generation Circuit Elements</a></li>
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#i-foundational-concepts">I. Foundational Concepts</a></li>
+        <li class="toc-depth-3"><a href="#what-are-discrete-continuous-hybrid-components">What Are Discrete-Continuous Hybrid Components?</a></li>
+        <li class="toc-depth-3"><a href="#why-this-matters">Why This Matters</a></li>
+        <li class="toc-depth-3"><a href="#core-principle">Core Principle</a></li>
+        <li class="toc-depth-2"><a href="#ii-taxonomy-of-hybrid-components">II. Taxonomy of Hybrid Components</a></li>
+        <li class="toc-depth-3"><a href="#category-1-quantum-classical-hybrids">CATEGORY 1: Quantum-Classical Hybrids</a></li>
+        <li class="toc-depth-4"><a href="#11-quantum-tunnel-resistor-qtr">1.1 Quantum Tunnel Resistor (QTR)</a></li>
+        <li class="toc-depth-4"><a href="#12-superconducting-phase-components">1.2 Superconducting Phase Components</a></li>
+        <li class="toc-depth-4"><a href="#13-spin-state-components">1.3 Spin-State Components</a></li>
+        <li class="toc-depth-3"><a href="#category-2-phase-transition-material-hybrids">CATEGORY 2: Phase-Transition Material Hybrids</a></li>
+        <li class="toc-depth-4"><a href="#21-phase-change-variable-resistor">2.1 Phase-Change Variable Resistor</a></li>
+        <li class="toc-depth-4"><a href="#22-ferroelectric-domain-capacitor">2.2 Ferroelectric Domain Capacitor</a></li>
+        <li class="toc-depth-4"><a href="#23-magnetic-domain-inductor">2.3 Magnetic Domain Inductor</a></li>
+        <li class="toc-depth-3"><a href="#category-3-time-domain-hybrids">CATEGORY 3: Time-Domain Hybrids</a></li>
+        <li class="toc-depth-4"><a href="#31-clocked-analog-components">3.1 Clocked-Analog Components</a></li>
+        <li class="toc-depth-4"><a href="#32-pulse-width-modulation-components">3.2 Pulse-Width Modulation Components</a></li>
+        <li class="toc-depth-4"><a href="#33-event-driven-components">3.3 Event-Driven Components</a></li>
+        <li class="toc-depth-3"><a href="#category-4-multi-levelmulti-state-components">CATEGORY 4: Multi-Level/Multi-State Components</a></li>
+        <li class="toc-depth-4"><a href="#41-quantum-dot-array-resistor">4.1 Quantum Dot Array Resistor</a></li>
+        <li class="toc-depth-4"><a href="#42-multi-level-ladder-capacitor">4.2 Multi-Level Ladder Capacitor</a></li>
+        <li class="toc-depth-4"><a href="#43-ternaryquaternary-logic-transistors">4.3 Ternary/Quaternary Logic Transistors</a></li>
+        <li class="toc-depth-3"><a href="#category-5-statisticalstochastic-components">CATEGORY 5: Statistical/Stochastic Components</a></li>
+        <li class="toc-depth-4"><a href="#51-brownian-resistor">5.1 Brownian Resistor</a></li>
+        <li class="toc-depth-4"><a href="#52-poisson-capacitor">5.2 Poisson Capacitor</a></li>
+        <li class="toc-depth-4"><a href="#53-markov-chain-components">5.3 Markov Chain Components</a></li>
+        <li class="toc-depth-3"><a href="#category-6-coupled-hybrid-systems">CATEGORY 6: Coupled Hybrid Systems</a></li>
+        <li class="toc-depth-4"><a href="#61-electromechanical-quantum-components">6.1 Electromechanical Quantum Components</a></li>
+        <li class="toc-depth-4"><a href="#62-optomechanical-components">6.2 Optomechanical Components</a></li>
+        <li class="toc-depth-4"><a href="#63-magnetoelectric-components">6.3 Magnetoelectric Components</a></li>
+        <li class="toc-depth-3"><a href="#category-7-memory-coupled-components-memcomponents">CATEGORY 7: Memory-Coupled Components (Memcomponents)</a></li>
+        <li class="toc-depth-4"><a href="#71-extended-memcomponent-family">7.1 Extended Memcomponent Family</a></li>
+        <li class="toc-depth-4"><a href="#72-dual-mode-memristor">7.2 Dual-Mode Memristor</a></li>
+        <li class="toc-depth-4"><a href="#73-path-integral-components">7.3 Path-Integral Components</a></li>
+        <li class="toc-depth-3"><a href="#category-8-information-theoretic-components">CATEGORY 8: Information-Theoretic Components</a></li>
+        <li class="toc-depth-4"><a href="#81-shannon-limit-components">8.1 Shannon-Limit Components</a></li>
+        <li class="toc-depth-4"><a href="#82-compression-components">8.2 Compression Components</a></li>
+        <li class="toc-depth-3"><a href="#category-9-geometrictopological-components">CATEGORY 9: Geometric/Topological Components</a></li>
+        <li class="toc-depth-4"><a href="#91-fractal-components">9.1 Fractal Components</a></li>
+        <li class="toc-depth-4"><a href="#92-topological-components">9.2 Topological Components</a></li>
+        <li class="toc-depth-3"><a href="#category-10-syntheticprogrammable-components">CATEGORY 10: Synthetic/Programmable Components</a></li>
+        <li class="toc-depth-4"><a href="#101-active-circuit-based-synthetic-components">10.1 Active Circuit-Based Synthetic Components</a></li>
+        <li class="toc-depth-4"><a href="#102-field-programmable-elementary-components">10.2 Field-Programmable Elementary Components</a></li>
+        <li class="toc-depth-2"><a href="#iii-mathematical-framework">III. Mathematical Framework</a></li>
+        <li class="toc-depth-3"><a href="#general-state-space-description">General State Space Description</a></li>
+        <li class="toc-depth-3"><a href="#dynamics-equations">Dynamics Equations</a></li>
+        <li class="toc-depth-3"><a href="#component-constitutive-relations">Component Constitutive Relations</a></li>
+        <li class="toc-depth-3"><a href="#energy-storage">Energy Storage</a></li>
+        <li class="toc-depth-3"><a href="#information-content">Information Content</a></li>
+        <li class="toc-depth-2"><a href="#iv-universal-template-design">IV. Universal Template Design</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#control-interfaces">Control Interfaces</a></li>
+        <li class="toc-depth-3"><a href="#operational-modes">Operational Modes</a></li>
+        <li class="toc-depth-3"><a href="#implementation-strategies">Implementation Strategies</a></li>
+        <li class="toc-depth-2"><a href="#v-key-examples-and-specifications">V. Key Examples and Specifications</a></li>
+        <li class="toc-depth-3"><a href="#example-1-quantum-tunnel-resistor-qtr">Example 1: Quantum Tunnel Resistor (QTR)</a></li>
+        <li class="toc-depth-3"><a href="#example-2-phase-change-variable-resistor">Example 2: Phase-Change Variable Resistor</a></li>
+        <li class="toc-depth-3"><a href="#example-3-ferroelectric-domain-capacitor">Example 3: Ferroelectric Domain Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#example-4-memristor-capacitor-hybrid">Example 4: Memristor-Capacitor Hybrid</a></li>
+        <li class="toc-depth-2"><a href="#vi-design-considerations">VI. Design Considerations</a></li>
+        <li class="toc-depth-3"><a href="#trade-offs">Trade-offs</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-challenges">Fabrication Challenges</a></li>
+        <li class="toc-depth-2"><a href="#vii-applications">VII. Applications</a></li>
+        <li class="toc-depth-3"><a href="#neuromorphic-computing">Neuromorphic Computing</a></li>
+        <li class="toc-depth-3"><a href="#in-memory-computing">In-Memory Computing</a></li>
+        <li class="toc-depth-3"><a href="#adaptive-systems">Adaptive Systems</a></li>
+        <li class="toc-depth-3"><a href="#quantum-classical-interfaces">Quantum-Classical Interfaces</a></li>
+        <li class="toc-depth-3"><a href="#stochastic-computing">Stochastic Computing</a></li>
+        <li class="toc-depth-3"><a href="#signal-processing">Signal Processing</a></li>
+        <li class="toc-depth-2"><a href="#viii-future-directions">VIII. Future Directions</a></li>
+        <li class="toc-depth-3"><a href="#emerging-technologies">Emerging Technologies</a></li>
+        <li class="toc-depth-3"><a href="#theoretical-challenges">Theoretical Challenges</a></li>
+        <li class="toc-depth-3"><a href="#engineering-challenges">Engineering Challenges</a></li>
+        <li class="toc-depth-2"><a href="#ix-conclusion">IX. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-comparison-with-traditional-approaches">Appendix A: Comparison with Traditional Approaches</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-key-equations-reference">Appendix B: Key Equations Reference</a></li>
+        <li class="toc-depth-2"><a href="#appendix-c-glossary">Appendix C: Glossary</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Discrete-Continuous Hybrid Electrical Components</h1>
+          <p class="doc-meta">New Classes of Electrical Components\discrete_continuous_hybrid_components.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This document presents a systematic framework for designing electrical components that fundamentally operate in <strong>both discrete and continuous paradigms simultaneously</strong>. Unlike traditional mixed-signal approaches that merely convert between analog and digital domains, these hybrid components embody dual-mode behavior at their physical core.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="a-comprehensive-framework-for-next-generation-circuit-elements">A Comprehensive Framework for Next-Generation Circuit Elements</h2>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This document presents a systematic framework for designing electrical components that fundamentally operate in <strong>both discrete and continuous paradigms simultaneously</strong>. Unlike traditional mixed-signal approaches that merely convert between analog and digital domains, these hybrid components embody dual-mode behavior at their physical core.</p>
 <p><strong>Key Innovation</strong>: Rather than treating discrete and continuous as separate regimes requiring conversion, these components naturally exhibit both characteristics through their underlying physical mechanisms, creating entirely new classes of circuit elements with unprecedented functionality.</p>
-<hr />
+<hr/>
 <h2 id="i-foundational-concepts">I. Foundational Concepts</h2>
 <h3 id="what-are-discrete-continuous-hybrid-components">What Are Discrete-Continuous Hybrid Components?</h3>
-<p><strong>Traditional Components</strong> operate in one paradigm:<br />
-- <strong>Continuous</strong>: Resistors, capacitors, inductors (analog voltage/current relationships)<br />
-- <strong>Discrete</strong>: Digital logic gates, flip-flops (binary states)<br />
+<p><strong>Traditional Components</strong> operate in one paradigm:
+- <strong>Continuous</strong>: Resistors, capacitors, inductors (analog voltage/current relationships)
+- <strong>Discrete</strong>: Digital logic gates, flip-flops (binary states)
 - <strong>Converters</strong>: ADCs/DACs (translate between paradigms)</p>
-<p><strong>Hybrid Components</strong> natively operate in both:<br />
-- <strong>Continuous behavior</strong>: Standard electromagnetic/electrical relationships (V, I, Q, Φ)<br />
-- <strong>Discrete behavior</strong>: Quantized states, discrete transitions, countable events<br />
+<p><strong>Hybrid Components</strong> natively operate in both:
+- <strong>Continuous behavior</strong>: Standard electromagnetic/electrical relationships (V, I, Q, Φ)
+- <strong>Discrete behavior</strong>: Quantized states, discrete transitions, countable events
 - <strong>Simultaneous operation</strong>: Both aspects active at once, not sequential conversion</p>
 <h3 id="why-this-matters">Why This Matters</h3>
 <ol>
@@ -43,7 +148,7 @@
 S_total = {0,1,2,...,N} × ℝⁿ
 </code></pre>
 <p>The component's electrical behavior depends on BOTH aspects simultaneously.</p>
-<hr />
+<hr/>
 <h2 id="ii-taxonomy-of-hybrid-components">II. Taxonomy of Hybrid Components</h2>
 <h3 id="category-1-quantum-classical-hybrids">CATEGORY 1: Quantum-Classical Hybrids</h3>
 <p>Components that exploit quantum discreteness while exhibiting classical continuous behavior.</p>
@@ -56,25 +161,25 @@ S_total = {0,1,2,...,N} × ℝⁿ
 <li><strong>Application</strong>: Natural shot noise generation, quantum sensing</li>
 </ul>
 <h4 id="12-superconducting-phase-components"><strong>1.2 Superconducting Phase Components</strong></h4>
-<p><strong>SC-Capacitor</strong>:<br />
-- Discrete flux quanta (Φ₀ = h/2e)<br />
-- Continuous voltage response<br />
+<p><strong>SC-Capacitor</strong>:
+- Discrete flux quanta (Φ₀ = h/2e)
+- Continuous voltage response
 - Zero-resistance supercurrent flow</p>
-<p><strong>Josephson Junction Inductor</strong>:<br />
-- Continuous phase difference across junction<br />
-- Discrete flux jumps (Josephson effect)<br />
-- Nonlinear inductance with discrete state transitions<br />
+<p><strong>Josephson Junction Inductor</strong>:
+- Continuous phase difference across junction
+- Discrete flux jumps (Josephson effect)
+- Nonlinear inductance with discrete state transitions
 - Formula: V = (ℏ/2e)(dφ/dt), where φ jumps by 2π discretely</p>
 <h4 id="13-spin-state-components"><strong>1.3 Spin-State Components</strong></h4>
-<p><strong>Spin-Resistor</strong>:<br />
-- Discrete spin states (↑, ↓, or multi-level in rare earth elements)<br />
-- Continuous magnetic field from ensemble<br />
-- Resistance depends on discrete spin alignment<br />
+<p><strong>Spin-Resistor</strong>:
+- Discrete spin states (↑, ↓, or multi-level in rare earth elements)
+- Continuous magnetic field from ensemble
+- Resistance depends on discrete spin alignment
 - Giant magnetoresistance (GMR) effect</p>
-<p><strong>Spin-Capacitor</strong>:<br />
-- Charge accumulation (continuous) modulates spin distribution (discrete)<br />
+<p><strong>Spin-Capacitor</strong>:
+- Charge accumulation (continuous) modulates spin distribution (discrete)
 - Spintronics meets charge storage</p>
-<hr />
+<hr/>
 <h3 id="category-2-phase-transition-material-hybrids">CATEGORY 2: Phase-Transition Material Hybrids</h3>
 <p>Components using materials that exist in discrete phases with continuous properties within each phase.</p>
 <h4 id="21-phase-change-variable-resistor"><strong>2.1 Phase-Change Variable Resistor</strong></h4>
@@ -102,41 +207,41 @@ S_total = {0,1,2,...,N} × ℝⁿ
 <li>Discrete jumps with domain nucleation/annihilation</li>
 <li><strong>Hysteresis</strong>: Creates memory effect in both discrete and continuous variables</li>
 </ul>
-<hr />
+<hr/>
 <h3 id="category-3-time-domain-hybrids">CATEGORY 3: Time-Domain Hybrids</h3>
 <p>Components that separate discrete and continuous behavior in the time domain.</p>
 <h4 id="31-clocked-analog-components"><strong>3.1 Clocked-Analog Components</strong></h4>
-<p><strong>Sample-Hold Resistor</strong>:<br />
-- Continuous resistance value R(t)<br />
-- Discrete time sampling of voltage/current<br />
-- Built-in ADC/DAC at terminals<br />
+<p><strong>Sample-Hold Resistor</strong>:
+- Continuous resistance value R(t)
+- Discrete time sampling of voltage/current
+- Built-in ADC/DAC at terminals
 - Updates resistance at clock edges while maintaining analog behavior</p>
-<p><strong>Switched-Capacitor Resistor</strong>:<br />
-- Appears as resistor: R_effective = 1/(f·C)<br />
-- Actually: Discrete charge packets transferred at clock rate f<br />
-- Continuous V-I relationship from outside<br />
+<p><strong>Switched-Capacitor Resistor</strong>:
+- Appears as resistor: R_effective = 1/(f·C)
+- Actually: Discrete charge packets transferred at clock rate f
+- Continuous V-I relationship from outside
 - Discrete charge transfer internally</p>
 <h4 id="32-pulse-width-modulation-components"><strong>3.2 Pulse-Width Modulation Components</strong></h4>
-<p><strong>PWM-Capacitor</strong>:<br />
-- Digital control (discrete pulse timing)<br />
-- Analog storage (continuous voltage integration)<br />
-- Charge accumulation from discrete pulses<br />
+<p><strong>PWM-Capacitor</strong>:
+- Digital control (discrete pulse timing)
+- Analog storage (continuous voltage integration)
+- Charge accumulation from discrete pulses
 - Discharge is continuous</p>
-<p><strong>PWM-Inductor</strong>:<br />
-- Discrete switching of current direction<br />
-- Continuous energy storage in magnetic field<br />
+<p><strong>PWM-Inductor</strong>:
+- Discrete switching of current direction
+- Continuous energy storage in magnetic field
 - Used in switching power supplies, but here as fundamental component</p>
 <h4 id="33-event-driven-components"><strong>3.3 Event-Driven Components</strong></h4>
-<p><strong>Integrate-and-Fire Resistor</strong>:<br />
-- Integrates current continuously<br />
-- Fires (resistance jumps) when threshold reached<br />
-- Resets to baseline, continues integrating<br />
+<p><strong>Integrate-and-Fire Resistor</strong>:
+- Integrates current continuously
+- Fires (resistance jumps) when threshold reached
+- Resets to baseline, continues integrating
 - Like biological neurons but as passive component</p>
-<p><strong>Burst-Mode Capacitor</strong>:<br />
-- Charges continuously<br />
-- Discharges in quantized energy packets<br />
+<p><strong>Burst-Mode Capacitor</strong>:
+- Charges continuously
+- Discharges in quantized energy packets
 - Discrete burst events, continuous charging dynamics</p>
-<hr />
+<hr/>
 <h3 id="category-4-multi-levelmulti-state-components">CATEGORY 4: Multi-Level/Multi-State Components</h3>
 <p>Components with multiple discrete operating modes, each with continuous characteristics.</p>
 <h4 id="41-quantum-dot-array-resistor"><strong>4.1 Quantum Dot Array Resistor</strong></h4>
@@ -165,7 +270,7 @@ S_total = {0,1,2,...,N} × ℝⁿ
 <li>Discrete state machine (N states)</li>
 <li>Continuous amplifier within each state</li>
 </ul>
-<hr />
+<hr/>
 <h3 id="category-5-statisticalstochastic-components">CATEGORY 5: Statistical/Stochastic Components</h3>
 <p>Components incorporating statistical physics and noise as functional elements.</p>
 <h4 id="51-brownian-resistor"><strong>5.1 Brownian Resistor</strong></h4>
@@ -185,60 +290,60 @@ S_total = {0,1,2,...,N} × ℝⁿ
 <li><strong>Statistics</strong>: N_electrons ~ Poisson(λt), Q = e·N (discrete), V = Q/C (continuous)</li>
 </ul>
 <h4 id="53-markov-chain-components"><strong>5.3 Markov Chain Components</strong></h4>
-<p><strong>State-Transition Resistor</strong>:<br />
-- Discrete state space: {S₁, S₂, ..., S_N}<br />
-- Each state has different resistance<br />
-- Transition probabilities: P(S_i → S_j) = f(V, I, temperature)<br />
-- Continuous I-V relationship within each state<br />
+<p><strong>State-Transition Resistor</strong>:
+- Discrete state space: {S₁, S₂, ..., S_N}
+- Each state has different resistance
+- Transition probabilities: P(S_i → S_j) = f(V, I, temperature)
+- Continuous I-V relationship within each state
 - Stochastic state evolution</p>
-<p><strong>Random Walk Inductor</strong>:<br />
-- Inductance performs random walk between discrete values<br />
-- Continuous magnetic field response<br />
+<p><strong>Random Walk Inductor</strong>:
+- Inductance performs random walk between discrete values
+- Continuous magnetic field response
 - Walk statistics depend on current history</p>
-<hr />
+<hr/>
 <h3 id="category-6-coupled-hybrid-systems">CATEGORY 6: Coupled Hybrid Systems</h3>
 <p>Components that couple different physical domains, each with different discrete/continuous character.</p>
 <h4 id="61-electromechanical-quantum-components"><strong>6.1 Electromechanical Quantum Components</strong></h4>
-<p><strong>Piezo-Quantum Capacitor</strong>:<br />
-- Mechanical strain (continuous)<br />
-- Charge transfer (discrete electrons)<br />
-- Piezoelectric coupling links them<br />
+<p><strong>Piezo-Quantum Capacitor</strong>:
+- Mechanical strain (continuous)
+- Charge transfer (discrete electrons)
+- Piezoelectric coupling links them
 - Capacitance = f(strain_continuous, charge_discrete)</p>
-<p><strong>MEMS Variable Components</strong>:<br />
-- Mechanical position (continuous)<br />
-- Electrical contact states (discrete)<br />
+<p><strong>MEMS Variable Components</strong>:
+- Mechanical position (continuous)
+- Electrical contact states (discrete)
 - Hybrid switching with analog tuning</p>
 <h4 id="62-optomechanical-components"><strong>6.2 Optomechanical Components</strong></h4>
-<p><strong>Photo-Capacitor</strong>:<br />
-- Photons absorbed discretely (quantum)<br />
-- Photo-generated charge separation continuous<br />
-- Light intensity (continuous) modulates capacitance<br />
+<p><strong>Photo-Capacitor</strong>:
+- Photons absorbed discretely (quantum)
+- Photo-generated charge separation continuous
+- Light intensity (continuous) modulates capacitance
 - Photon counting (discrete) changes stored charge</p>
 <h4 id="63-magnetoelectric-components"><strong>6.3 Magnetoelectric Components</strong></h4>
-<p><strong>ME-Inductor</strong>:<br />
-- Electric field (continuous) couples to magnetic domains (discrete)<br />
-- Voltage controls discrete magnetic state<br />
-- Magnetic state determines continuous inductance<br />
+<p><strong>ME-Inductor</strong>:
+- Electric field (continuous) couples to magnetic domains (discrete)
+- Voltage controls discrete magnetic state
+- Magnetic state determines continuous inductance
 - Multiferroic materials enable this</p>
-<hr />
+<hr/>
 <h3 id="category-7-memory-coupled-components-memcomponents">CATEGORY 7: Memory-Coupled Components (Memcomponents)</h3>
 <p>Components whose electrical properties depend on their history, extending the memristor concept.</p>
 <h4 id="71-extended-memcomponent-family"><strong>7.1 Extended Memcomponent Family</strong></h4>
-<p><strong>Memristor</strong> (original):<br />
-- R = R(q), resistance depends on charge history<br />
-- Both q and R can be discrete or continuous<br />
+<p><strong>Memristor</strong> (original):
+- R = R(q), resistance depends on charge history
+- Both q and R can be discrete or continuous
 - Non-volatile memory + analog resistance</p>
-<p><strong>Memcapacitor</strong>:<br />
-- C = C(∫V dt), capacitance depends on voltage history<br />
-- Can store discrete states while maintaining analog capacitance<br />
+<p><strong>Memcapacitor</strong>:
+- C = C(∫V dt), capacitance depends on voltage history
+- Can store discrete states while maintaining analog capacitance
 - Potential for multi-level memory</p>
-<p><strong>Meminductor</strong>:<br />
-- L = L(∫I dt), inductance depends on current history<br />
-- Magnetic flux history encoded in discrete domains<br />
+<p><strong>Meminductor</strong>:
+- L = L(∫I dt), inductance depends on current history
+- Magnetic flux history encoded in discrete domains
 - Continuous inductance variation</p>
-<p><strong>Memtransistor</strong>:<br />
-- Gain = G(signal history)<br />
-- Synaptic behavior: strengthens with use<br />
+<p><strong>Memtransistor</strong>:
+- Gain = G(signal history)
+- Synaptic behavior: strengthens with use
 - Discrete weight updates, continuous signal processing</p>
 <h4 id="72-dual-mode-memristor"><strong>7.2 Dual-Mode Memristor</strong></h4>
 <ul>
@@ -250,101 +355,101 @@ S_total = {0,1,2,...,N} × ℝⁿ
 <li>Store discrete data while performing analog computation</li>
 </ul>
 <h4 id="73-path-integral-components"><strong>7.3 Path-Integral Components</strong></h4>
-<p><strong>Integral Capacitor</strong>:<br />
-- C(t) = C₀ + ∫₀ᵗ f(V(τ)) dτ<br />
-- Continuous integral accumulation<br />
-- Discrete jumps when integral crosses thresholds<br />
+<p><strong>Integral Capacitor</strong>:
+- C(t) = C₀ + ∫₀ᵗ f(V(τ)) dτ
+- Continuous integral accumulation
+- Discrete jumps when integral crosses thresholds
 - Implements "charge memory" with hysteresis</p>
-<p><strong>Multi-Hysteresis Component</strong>:<br />
-- R, L, and C all exhibit hysteresis<br />
-- Creates discrete state space from hysteresis loops<br />
-- Continuous paths through complex state space<br />
+<p><strong>Multi-Hysteresis Component</strong>:
+- R, L, and C all exhibit hysteresis
+- Creates discrete state space from hysteresis loops
+- Continuous paths through complex state space
 - Can encode multiple bits of information</p>
-<hr />
+<hr/>
 <h3 id="category-8-information-theoretic-components">CATEGORY 8: Information-Theoretic Components</h3>
 <p>Components designed around information theory principles.</p>
 <h4 id="81-shannon-limit-components"><strong>8.1 Shannon-Limit Components</strong></h4>
-<p><strong>Channel-Coding Resistor</strong>:<br />
-- Encodes discrete information bits in continuous voltage<br />
-- Operates at channel capacity limits<br />
-- Error correction built into component<br />
+<p><strong>Channel-Coding Resistor</strong>:
+- Encodes discrete information bits in continuous voltage
+- Operates at channel capacity limits
+- Error correction built into component
 - Resistance value carries both signal and redundancy</p>
-<p><strong>Maximum Entropy Capacitor</strong>:<br />
-- Charge distribution maximizes entropy<br />
-- Discrete microstates (electron positions)<br />
-- Continuous macrostate (average charge)<br />
+<p><strong>Maximum Entropy Capacitor</strong>:
+- Charge distribution maximizes entropy
+- Discrete microstates (electron positions)
+- Continuous macrostate (average charge)
 - Naturally explores state space, appears continuous macroscopically</p>
 <h4 id="82-compression-components"><strong>8.2 Compression Components</strong></h4>
-<p><strong>Lossy-Capacitor</strong>:<br />
-- Takes continuous input charge<br />
-- Stores in discrete compressed representation<br />
-- Outputs continuous reconstructed charge<br />
+<p><strong>Lossy-Capacitor</strong>:
+- Takes continuous input charge
+- Stores in discrete compressed representation
+- Outputs continuous reconstructed charge
 - Built-in quantization with controlled error</p>
-<p><strong>Algorithmic State Resistor</strong>:<br />
-- Resistance encodes algorithmic information<br />
-- Kolmogorov complexity determines discrete states<br />
+<p><strong>Algorithmic State Resistor</strong>:
+- Resistance encodes algorithmic information
+- Kolmogorov complexity determines discrete states
 - Continuous signal processing uses encoded algorithms</p>
-<hr />
+<hr/>
 <h3 id="category-9-geometrictopological-components">CATEGORY 9: Geometric/Topological Components</h3>
 <p>Components whose behavior arises from geometric or topological properties.</p>
 <h4 id="91-fractal-components"><strong>9.1 Fractal Components</strong></h4>
-<p><strong>Koch Curve Inductor</strong>:<br />
-- Fractal geometry creates discrete self-similar scales<br />
-- Inductance varies discretely at each fractal level<br />
-- Magnetic field distribution is continuous<br />
-- Appears smooth from distance, reveals discrete structure up close<br />
+<p><strong>Koch Curve Inductor</strong>:
+- Fractal geometry creates discrete self-similar scales
+- Inductance varies discretely at each fractal level
+- Magnetic field distribution is continuous
+- Appears smooth from distance, reveals discrete structure up close
 - Multi-frequency operation with discrete resonances</p>
-<p><strong>Sierpiński Capacitor</strong>:<br />
-- Fractal electrode structure<br />
-- Discrete capacitive elements at each iteration level<br />
-- Continuous charge distribution across structure<br />
+<p><strong>Sierpiński Capacitor</strong>:
+- Fractal electrode structure
+- Discrete capacitive elements at each iteration level
+- Continuous charge distribution across structure
 - Capacitance = Σ C_n (discrete sum) + C_smooth (continuous field)</p>
 <h4 id="92-topological-components"><strong>9.2 Topological Components</strong></h4>
-<p><strong>Quantum Hall Resistor</strong>:<br />
-- Resistance quantized: R_xy = h/(ne²), n = integer (discrete)<br />
-- Current flow is continuous<br />
-- Edge states are discrete quantum channels<br />
-- Bulk is insulating (discrete gap), edges conducting (continuous)<br />
+<p><strong>Quantum Hall Resistor</strong>:
+- Resistance quantized: R_xy = h/(ne²), n = integer (discrete)
+- Current flow is continuous
+- Edge states are discrete quantum channels
+- Bulk is insulating (discrete gap), edges conducting (continuous)
 - Extremely precise resistance standard</p>
-<p><strong>Möbius Inductor</strong>:<br />
-- Twisted topology (discrete: 0, 180°, 360° twists)<br />
-- Continuous current flow through twisted path<br />
-- Inductance depends on discrete topology + continuous geometry<br />
+<p><strong>Möbius Inductor</strong>:
+- Twisted topology (discrete: 0, 180°, 360° twists)
+- Continuous current flow through twisted path
+- Inductance depends on discrete topology + continuous geometry
 - Unusual magnetic field configuration</p>
-<p><strong>Topological Insulator Components</strong>:<br />
-- Bulk: Insulating (discrete bandgap)<br />
-- Surface: Conducting (continuous states)<br />
-- Resistance from both contributions<br />
+<p><strong>Topological Insulator Components</strong>:
+- Bulk: Insulating (discrete bandgap)
+- Surface: Conducting (continuous states)
+- Resistance from both contributions
 - Spin-momentum locking creates discrete spin states in continuous current</p>
-<hr />
+<hr/>
 <h3 id="category-10-syntheticprogrammable-components">CATEGORY 10: Synthetic/Programmable Components</h3>
 <p>Components built from active circuits but behaving as fundamental elements.</p>
 <h4 id="101-active-circuit-based-synthetic-components"><strong>10.1 Active Circuit-Based Synthetic Components</strong></h4>
-<p><strong>Programmable Gyrator</strong>:<br />
-- Simulates inductor using capacitors + op-amps<br />
-- Digital control (discrete configuration)<br />
-- Analog response (continuous current/voltage)<br />
+<p><strong>Programmable Gyrator</strong>:
+- Simulates inductor using capacitors + op-amps
+- Digital control (discrete configuration)
+- Analog response (continuous current/voltage)
 - Reconfigurable: switch discrete modes, operate analog within modes</p>
-<p><strong>Digitally-Controlled Analog Resistor</strong>:<br />
-- Digital state machine controls switching matrix<br />
-- Analog resistor network provides continuous values<br />
-- Both integrated: discrete logic + continuous resistance<br />
+<p><strong>Digitally-Controlled Analog Resistor</strong>:
+- Digital state machine controls switching matrix
+- Analog resistor network provides continuous values
+- Both integrated: discrete logic + continuous resistance
 - R_total = R_discrete[state] × (1 + α·V_continuous)</p>
 <h4 id="102-field-programmable-elementary-components"><strong>10.2 Field-Programmable Elementary Components</strong></h4>
-<p><strong>FP-Resistor</strong>:<br />
-- Array of resistors with programmable connections<br />
-- Discrete configuration (which resistors connected)<br />
-- Continuous resistance value (trimming, voltage control)<br />
+<p><strong>FP-Resistor</strong>:
+- Array of resistors with programmable connections
+- Discrete configuration (which resistors connected)
+- Continuous resistance value (trimming, voltage control)
 - Can be reprogrammed in-circuit</p>
-<p><strong>FP-Capacitor</strong>:<br />
-- Switchable capacitor array (discrete selection)<br />
-- Continuous voltage tuning (varactor, ferroelectric)<br />
+<p><strong>FP-Capacitor</strong>:
+- Switchable capacitor array (discrete selection)
+- Continuous voltage tuning (varactor, ferroelectric)
 - Both mechanisms active simultaneously</p>
-<p><strong>FP-Inductor</strong>:<br />
-- Multiple coil taps (discrete inductance selection)<br />
-- Variable core permeability (continuous tuning)<br />
+<p><strong>FP-Inductor</strong>:
+- Multiple coil taps (discrete inductance selection)
+- Variable core permeability (continuous tuning)
 - Reconfigurable for different applications</p>
-<hr />
+<hr/>
 <h2 id="iii-mathematical-framework">III. Mathematical Framework</h2>
 <h3 id="general-state-space-description">General State Space Description</h3>
 <p>For any discrete-continuous hybrid component:</p>
@@ -423,305 +528,305 @@ E_coupling = Σ∫ e_int(s_d, x_c) dx_c    (interaction energy)
 I_discrete = log₂(N)                    (N discrete states)
 I_continuous = -∫ p(x) log₂ p(x) dx    (differential entropy)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="iv-universal-template-design">IV. Universal Template Design</h2>
 <p>A general architecture for implementing discrete-continuous hybrid components.</p>
 <h3 id="physical-structure">Physical Structure</h3>
-<p><strong>Layer 1: Continuous Substrate</strong><br />
-- Provides analog electromagnetic response<br />
-- Examples: Conducting wire, dielectric material, magnetic core<br />
+<p><strong>Layer 1: Continuous Substrate</strong>
+- Provides analog electromagnetic response
+- Examples: Conducting wire, dielectric material, magnetic core
 - Handles continuous voltage, current, charge, flux</p>
-<p><strong>Layer 2: Discrete Modulators</strong><br />
-- Create and control discrete states<br />
-- Examples: <br />
-  - Quantum dots (discrete energy levels)<br />
-  - Magnetic domains (discrete orientations)<br />
-  - Phase-change regions (discrete material phases)<br />
+<p><strong>Layer 2: Discrete Modulators</strong>
+- Create and control discrete states
+- Examples: 
+  - Quantum dots (discrete energy levels)
+  - Magnetic domains (discrete orientations)
+  - Phase-change regions (discrete material phases)
   - Floating gates (discrete charge packets)</p>
-<p><strong>Layer 3: Coupling Mechanism</strong><br />
-- Links discrete and continuous behaviors<br />
-- Mechanisms:<br />
-  - Electric field modulation<br />
-  - Magnetic coupling<br />
-  - Mechanical stress/strain<br />
-  - Optical excitation<br />
+<p><strong>Layer 3: Coupling Mechanism</strong>
+- Links discrete and continuous behaviors
+- Mechanisms:
+  - Electric field modulation
+  - Magnetic coupling
+  - Mechanical stress/strain
+  - Optical excitation
   - Thermal effects</p>
-<p><strong>Layer 4: Feedback Path (Optional)</strong><br />
-- Enables self-modification and adaptation<br />
-- Continuous state affects discrete transitions<br />
+<p><strong>Layer 4: Feedback Path (Optional)</strong>
+- Enables self-modification and adaptation
+- Continuous state affects discrete transitions
 - Discrete state modulates continuous parameters</p>
 <h3 id="control-interfaces">Control Interfaces</h3>
-<p><strong>Analog Terminals</strong>:<br />
-- Standard voltage/current connections<br />
-- Continuous signal I/O<br />
+<p><strong>Analog Terminals</strong>:
+- Standard voltage/current connections
+- Continuous signal I/O
 - Compatible with traditional circuits</p>
-<p><strong>Digital Control Lines</strong>:<br />
-- State selection signals<br />
-- Mode switching<br />
+<p><strong>Digital Control Lines</strong>:
+- State selection signals
+- Mode switching
 - Configuration/programming</p>
-<p><strong>Feedback Monitoring</strong>:<br />
-- Sense continuous variables<br />
-- Trigger discrete transitions<br />
+<p><strong>Feedback Monitoring</strong>:
+- Sense continuous variables
+- Trigger discrete transitions
 - Adaptive threshold detection</p>
 <h3 id="operational-modes">Operational Modes</h3>
-<p><strong>Mode 1: Pure Discrete</strong><br />
-- Component acts as state machine<br />
-- All continuous variables ignored or held constant<br />
+<p><strong>Mode 1: Pure Discrete</strong>
+- Component acts as state machine
+- All continuous variables ignored or held constant
 - Digital-like behavior</p>
-<p><strong>Mode 2: Pure Continuous</strong><br />
-- Component acts as analog element<br />
-- Discrete states locked or averaged<br />
+<p><strong>Mode 2: Pure Continuous</strong>
+- Component acts as analog element
+- Discrete states locked or averaged
 - Traditional R/L/C behavior</p>
-<p><strong>Mode 3: Hybrid Simultaneous</strong><br />
-- Both discrete and continuous active<br />
-- Full hybrid functionality<br />
+<p><strong>Mode 3: Hybrid Simultaneous</strong>
+- Both discrete and continuous active
+- Full hybrid functionality
 - Unique capabilities emerge</p>
-<p><strong>Mode 4: Mode-Switching</strong><br />
-- Alternate between discrete and continuous<br />
-- Time-multiplexed operation<br />
+<p><strong>Mode 4: Mode-Switching</strong>
+- Alternate between discrete and continuous
+- Time-multiplexed operation
 - Coordinated by external clock or internal dynamics</p>
 <h3 id="implementation-strategies">Implementation Strategies</h3>
-<p><strong>Strategy A: Bottom-Up Nanofabrication</strong><br />
-- Start with quantum/atomic-scale discrete elements<br />
-- Build up to macroscopic continuous behavior<br />
+<p><strong>Strategy A: Bottom-Up Nanofabrication</strong>
+- Start with quantum/atomic-scale discrete elements
+- Build up to macroscopic continuous behavior
 - Example: Quantum dot arrays, single-electron transistors</p>
-<p><strong>Strategy B: Top-Down Structuring</strong><br />
-- Start with continuous material<br />
-- Introduce discrete features via patterning<br />
+<p><strong>Strategy B: Top-Down Structuring</strong>
+- Start with continuous material
+- Introduce discrete features via patterning
 - Example: Domain engineering in ferroelectrics/ferromagnets</p>
-<p><strong>Strategy C: Composite Assembly</strong><br />
-- Combine discrete and continuous components<br />
-- Integrate with feedback<br />
+<p><strong>Strategy C: Composite Assembly</strong>
+- Combine discrete and continuous components
+- Integrate with feedback
 - Example: Memristor + conventional capacitor with control circuit</p>
-<p><strong>Strategy D: Material Engineering</strong><br />
-- Design material with inherent discrete-continuous behavior<br />
+<p><strong>Strategy D: Material Engineering</strong>
+- Design material with inherent discrete-continuous behavior
 - Example: Phase-change materials, multiferroics</p>
-<hr />
+<hr/>
 <h2 id="v-key-examples-and-specifications">V. Key Examples and Specifications</h2>
 <h3 id="example-1-quantum-tunnel-resistor-qtr">Example 1: Quantum Tunnel Resistor (QTR)</h3>
-<p><strong>Specifications</strong>:<br />
-- Resistance range: 1 kΩ - 1 MΩ (continuous)<br />
-- Discrete states: 256 levels (8-bit)<br />
-- Switching voltage: ±1V threshold<br />
-- Response time: <br />
-  - Continuous: &lt; 1 ns<br />
-  - Discrete: &lt; 100 ns<br />
+<p><strong>Specifications</strong>:
+- Resistance range: 1 kΩ - 1 MΩ (continuous)
+- Discrete states: 256 levels (8-bit)
+- Switching voltage: ±1V threshold
+- Response time: 
+  - Continuous: &lt; 1 ns
+  - Discrete: &lt; 100 ns
 - Temperature range: 4K - 300K (room temp for some variants)</p>
-<p><strong>Operating Principle</strong>:<br />
-- Thin tunnel barrier between electrodes<br />
-- Continuous current via quantum tunneling<br />
-- Barrier modification creates discrete resistance states<br />
-- Voltage pulses program discrete state<br />
+<p><strong>Operating Principle</strong>:
+- Thin tunnel barrier between electrodes
+- Continuous current via quantum tunneling
+- Barrier modification creates discrete resistance states
+- Voltage pulses program discrete state
 - Analog current flow in each state</p>
-<p><strong>Applications</strong>:<br />
-- Neuromorphic computing (synaptic weights)<br />
-- Analog-digital hybrid memories<br />
+<p><strong>Applications</strong>:
+- Neuromorphic computing (synaptic weights)
+- Analog-digital hybrid memories
 - Random number generation (via shot noise)</p>
 <h3 id="example-2-phase-change-variable-resistor">Example 2: Phase-Change Variable Resistor</h3>
-<p><strong>Specifications</strong>:<br />
-- Resistance ratio: 1000:1 (amorphous:crystalline)<br />
-- Discrete states: 16-32 levels<br />
-- Switching speed: <br />
-  - Set (crystallize): ~100 ns<br />
-  - Reset (amorphize): ~10 ns<br />
-- Continuous tuning: 10-bit within each discrete state<br />
-- Retention: &gt;10 years (non-volatile)<br />
+<p><strong>Specifications</strong>:
+- Resistance ratio: 1000:1 (amorphous:crystalline)
+- Discrete states: 16-32 levels
+- Switching speed: 
+  - Set (crystallize): ~100 ns
+  - Reset (amorphize): ~10 ns
+- Continuous tuning: 10-bit within each discrete state
+- Retention: &gt;10 years (non-volatile)
 - Endurance: &gt;10⁹ cycles</p>
-<p><strong>Operating Principle</strong>:<br />
-- Ge₂Sb₂Te₅ or similar chalcogenide<br />
-- Current pulse heats material<br />
-- Cooling rate determines phase (discrete)<br />
-- Intermediate cooling creates mixed phase (continuous)<br />
+<p><strong>Operating Principle</strong>:
+- Ge₂Sb₂Te₅ or similar chalcogenide
+- Current pulse heats material
+- Cooling rate determines phase (discrete)
+- Intermediate cooling creates mixed phase (continuous)
 - Readout via low-voltage resistance measurement</p>
-<p><strong>Applications</strong>:<br />
-- Storage-class memory<br />
-- In-memory computing<br />
-- Multi-level cell (MLC) memory<br />
+<p><strong>Applications</strong>:
+- Storage-class memory
+- In-memory computing
+- Multi-level cell (MLC) memory
 - Neuromorphic crossbar arrays</p>
 <h3 id="example-3-ferroelectric-domain-capacitor">Example 3: Ferroelectric Domain Capacitor</h3>
-<p><strong>Specifications</strong>:<br />
-- Capacitance: 10 pF - 100 pF (base value)<br />
-- Discrete states: 4-8 polarization states<br />
-- Continuous modulation: ±30% around each discrete state<br />
-- Switching voltage: ±3V coercive field<br />
-- Frequency range: DC - 1 GHz<br />
+<p><strong>Specifications</strong>:
+- Capacitance: 10 pF - 100 pF (base value)
+- Discrete states: 4-8 polarization states
+- Continuous modulation: ±30% around each discrete state
+- Switching voltage: ±3V coercive field
+- Frequency range: DC - 1 GHz
 - Non-volatile: Yes (retains polarization without power)</p>
-<p><strong>Operating Principle</strong>:<br />
-- PZT, BaTiO₃, or HfO₂ ferroelectric<br />
-- Spontaneous polarization creates discrete states<br />
-- Electric field switches polarization domains<br />
-- Domain wall motion provides continuous tuning<br />
+<p><strong>Operating Principle</strong>:
+- PZT, BaTiO₃, or HfO₂ ferroelectric
+- Spontaneous polarization creates discrete states
+- Electric field switches polarization domains
+- Domain wall motion provides continuous tuning
 - Capacitance depends on domain configuration</p>
-<p><strong>Applications</strong>:<br />
-- Non-volatile memory with analog precision<br />
-- Neuromorphic synapses<br />
-- RF tunable components<br />
+<p><strong>Applications</strong>:
+- Non-volatile memory with analog precision
+- Neuromorphic synapses
+- RF tunable components
 - Energy harvesting</p>
 <h3 id="example-4-memristor-capacitor-hybrid">Example 4: Memristor-Capacitor Hybrid</h3>
-<p><strong>Specifications</strong>:<br />
-- Memristive resistance: 100 Ω - 100 kΩ<br />
-- Capacitance: 1 nF<br />
-- Discrete memory states: 1024 (10-bit)<br />
-- Continuous charge storage: 12-bit precision<br />
-- Read/write asymmetry: Read non-destructive<br />
-- Power: <br />
-  - Read: &lt; 1 μW<br />
+<p><strong>Specifications</strong>:
+- Memristive resistance: 100 Ω - 100 kΩ
+- Capacitance: 1 nF
+- Discrete memory states: 1024 (10-bit)
+- Continuous charge storage: 12-bit precision
+- Read/write asymmetry: Read non-destructive
+- Power: 
+  - Read: &lt; 1 μW
   - Write: &lt; 100 μW</p>
-<p><strong>Operating Principle</strong>:<br />
-- Memristor provides discrete state storage<br />
-- Capacitor provides continuous charge storage<br />
-- Feedback: memristor resistance modulates capacitor charging<br />
-- Capacitor voltage influences memristor state transitions<br />
+<p><strong>Operating Principle</strong>:
+- Memristor provides discrete state storage
+- Capacitor provides continuous charge storage
+- Feedback: memristor resistance modulates capacitor charging
+- Capacitor voltage influences memristor state transitions
 - Coupled dynamics create rich behavior</p>
-<p><strong>Applications</strong>:<br />
-- Hybrid neural network weights<br />
-- Adaptive filters<br />
-- Time-series processing<br />
+<p><strong>Applications</strong>:
+- Hybrid neural network weights
+- Adaptive filters
+- Time-series processing
 - Analog computing with memory</p>
-<hr />
+<hr/>
 <h2 id="vi-design-considerations">VI. Design Considerations</h2>
 <h3 id="trade-offs">Trade-offs</h3>
-<p><strong>Discrete State Count vs. Continuous Precision</strong>:<br />
-- More discrete states → more complex control<br />
-- Higher continuous precision → more noise sensitivity<br />
+<p><strong>Discrete State Count vs. Continuous Precision</strong>:
+- More discrete states → more complex control
+- Higher continuous precision → more noise sensitivity
 - Optimization depends on application</p>
-<p><strong>Speed vs. Energy</strong>:<br />
-- Fast discrete switching → high power dissipation<br />
-- Slow continuous drift → low power, slow response<br />
+<p><strong>Speed vs. Energy</strong>:
+- Fast discrete switching → high power dissipation
+- Slow continuous drift → low power, slow response
 - Hybrid operation can optimize both</p>
-<p><strong>Volatility vs. Non-volatility</strong>:<br />
-- Volatile continuous states → high speed, low retention<br />
-- Non-volatile discrete states → slow, permanent storage<br />
+<p><strong>Volatility vs. Non-volatility</strong>:
+- Volatile continuous states → high speed, low retention
+- Non-volatile discrete states → slow, permanent storage
 - Combination provides best of both</p>
-<p><strong>Size vs. Performance</strong>:<br />
-- Smaller → quantum effects stronger (good for discrete)<br />
-- Larger → classical behavior, less noise (good for continuous)<br />
+<p><strong>Size vs. Performance</strong>:
+- Smaller → quantum effects stronger (good for discrete)
+- Larger → classical behavior, less noise (good for continuous)
 - Optimal size depends on desired discrete/continuous balance</p>
 <h3 id="fabrication-challenges">Fabrication Challenges</h3>
-<p><strong>Material Integration</strong>:<br />
-- Combining materials with different properties<br />
-- CMOS compatibility concerns<br />
+<p><strong>Material Integration</strong>:
+- Combining materials with different properties
+- CMOS compatibility concerns
 - Thermal budget constraints</p>
-<p><strong>Nanoscale Variability</strong>:<br />
-- Discrete states must be distinguishable<br />
-- Continuous response must be reproducible<br />
+<p><strong>Nanoscale Variability</strong>:
+- Discrete states must be distinguishable
+- Continuous response must be reproducible
 - Process variation mitigation required</p>
-<p><strong>Interface Engineering</strong>:<br />
-- Electrical contacts to nanoscale discrete elements<br />
-- Minimizing parasitic effects<br />
+<p><strong>Interface Engineering</strong>:
+- Electrical contacts to nanoscale discrete elements
+- Minimizing parasitic effects
 - Ensuring both discrete and continuous interfaces work</p>
-<p><strong>Testing and Characterization</strong>:<br />
-- Need tests for both discrete and continuous behavior<br />
-- Correlation between the two domains<br />
+<p><strong>Testing and Characterization</strong>:
+- Need tests for both discrete and continuous behavior
+- Correlation between the two domains
 - Long-term reliability assessment</p>
-<hr />
+<hr/>
 <h2 id="vii-applications">VII. Applications</h2>
 <h3 id="neuromorphic-computing">Neuromorphic Computing</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Synapses: Discrete weight updates + continuous analog signals<br />
-- Neurons: Threshold (discrete) + integration (continuous)<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Synapses: Discrete weight updates + continuous analog signals
+- Neurons: Threshold (discrete) + integration (continuous)
 - Learning: Discrete state changes (plasticity) + continuous tuning</p>
-<p><strong>Specific Uses</strong>:<br />
-- Memristor crossbars with analog precision<br />
-- Spiking neural networks with analog dendrites<br />
+<p><strong>Specific Uses</strong>:
+- Memristor crossbars with analog precision
+- Spiking neural networks with analog dendrites
 - On-chip learning without external processing</p>
 <h3 id="in-memory-computing">In-Memory Computing</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Store data (discrete) where it's computed (continuous)<br />
-- Eliminate memory-processor data transfer bottleneck<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Store data (discrete) where it's computed (continuous)
+- Eliminate memory-processor data transfer bottleneck
 - Analog matrix operations with digital accuracy</p>
-<p><strong>Specific Uses</strong>:<br />
-- Analog matrix-vector multiplication<br />
-- Multi-bit storage in single cell<br />
+<p><strong>Specific Uses</strong>:
+- Analog matrix-vector multiplication
+- Multi-bit storage in single cell
 - Associative memory with analog retrieval</p>
 <h3 id="adaptive-systems">Adaptive Systems</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Continuous sensing and response<br />
-- Discrete state adaptation to environment<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Continuous sensing and response
+- Discrete state adaptation to environment
 - Self-modifying circuits</p>
-<p><strong>Specific Uses</strong>:<br />
-- Adaptive filters that learn signal characteristics<br />
-- Self-tuning oscillators<br />
+<p><strong>Specific Uses</strong>:
+- Adaptive filters that learn signal characteristics
+- Self-tuning oscillators
 - Environmental sensors with adaptive thresholds</p>
 <h3 id="quantum-classical-interfaces">Quantum-Classical Interfaces</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Bridge quantum (discrete) and classical (continuous) domains<br />
-- Natural coupling between regimes<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Bridge quantum (discrete) and classical (continuous) domains
+- Natural coupling between regimes
 - Reduce decoherence in quantum systems</p>
-<p><strong>Specific Uses</strong>:<br />
-- Qubit readout with analog amplification<br />
-- Quantum state preparation from classical signals<br />
+<p><strong>Specific Uses</strong>:
+- Qubit readout with analog amplification
+- Quantum state preparation from classical signals
 - Hybrid quantum-classical algorithms</p>
 <h3 id="stochastic-computing">Stochastic Computing</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Natural incorporation of noise (discrete events)<br />
-- Continuous probability distributions<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Natural incorporation of noise (discrete events)
+- Continuous probability distributions
 - Low-power probabilistic computation</p>
-<p><strong>Specific Uses</strong>:<br />
-- Random number generation<br />
-- Monte Carlo simulations in hardware<br />
+<p><strong>Specific Uses</strong>:
+- Random number generation
+- Monte Carlo simulations in hardware
 - Bayesian inference circuits</p>
 <h3 id="signal-processing">Signal Processing</h3>
-<p><strong>Why Hybrid Components Are Ideal</strong>:<br />
-- Discrete filtering coefficients + continuous signals<br />
-- Adaptive equalization<br />
+<p><strong>Why Hybrid Components Are Ideal</strong>:
+- Discrete filtering coefficients + continuous signals
+- Adaptive equalization
 - Multi-rate processing</p>
-<p><strong>Specific Uses</strong>:<br />
-- Programmable analog filters<br />
-- Software-defined radio components<br />
+<p><strong>Specific Uses</strong>:
+- Programmable analog filters
+- Software-defined radio components
 - Sensor fusion with adaptive weights</p>
-<hr />
+<hr/>
 <h2 id="viii-future-directions">VIII. Future Directions</h2>
 <h3 id="emerging-technologies">Emerging Technologies</h3>
-<p><strong>2D Materials</strong>:<br />
-- Graphene, transition metal dichalcogenides<br />
-- Atomic-level thickness enables quantum effects<br />
-- Large-area continuous properties<br />
+<p><strong>2D Materials</strong>:
+- Graphene, transition metal dichalcogenides
+- Atomic-level thickness enables quantum effects
+- Large-area continuous properties
 - Natural hybrid behavior</p>
-<p><strong>Topological Materials</strong>:<br />
-- Topological insulators, Weyl semimetals<br />
-- Protected surface/edge states (continuous)<br />
-- Bulk gaps (discrete)<br />
+<p><strong>Topological Materials</strong>:
+- Topological insulators, Weyl semimetals
+- Protected surface/edge states (continuous)
+- Bulk gaps (discrete)
 - Robust against perturbations</p>
-<p><strong>DNA/Biological Components</strong>:<br />
-- Molecular discrete states (conformations)<br />
-- Continuous ionic conduction<br />
-- Self-assembly for fabrication<br />
+<p><strong>DNA/Biological Components</strong>:
+- Molecular discrete states (conformations)
+- Continuous ionic conduction
+- Self-assembly for fabrication
 - Bio-electronic interfaces</p>
-<p><strong>Photonic Components</strong>:<br />
-- Discrete photon statistics<br />
-- Continuous electromagnetic fields<br />
-- Quantum dot emitters<br />
+<p><strong>Photonic Components</strong>:
+- Discrete photon statistics
+- Continuous electromagnetic fields
+- Quantum dot emitters
 - Integrated photonics platforms</p>
 <h3 id="theoretical-challenges">Theoretical Challenges</h3>
-<p><strong>Complete Mathematical Framework</strong>:<br />
-- Unified theory of hybrid dynamics<br />
-- Optimal control of hybrid systems<br />
-- Stability analysis<br />
+<p><strong>Complete Mathematical Framework</strong>:
+- Unified theory of hybrid dynamics
+- Optimal control of hybrid systems
+- Stability analysis
 - Performance bounds</p>
-<p><strong>Information Theory</strong>:<br />
-- Capacity of hybrid channels<br />
-- Optimal encoding schemes<br />
+<p><strong>Information Theory</strong>:
+- Capacity of hybrid channels
+- Optimal encoding schemes
 - Error correction for hybrid systems</p>
-<p><strong>Thermodynamics</strong>:<br />
-- Energy dissipation in hybrid components<br />
-- Fluctuation-dissipation relations<br />
+<p><strong>Thermodynamics</strong>:
+- Energy dissipation in hybrid components
+- Fluctuation-dissipation relations
 - Maximum efficiency limits</p>
 <h3 id="engineering-challenges">Engineering Challenges</h3>
-<p><strong>Standardization</strong>:<br />
-- Defining specifications for hybrid components<br />
-- Measurement standards<br />
+<p><strong>Standardization</strong>:
+- Defining specifications for hybrid components
+- Measurement standards
 - Circuit simulation models (SPICE-like)</p>
-<p><strong>Design Tools</strong>:<br />
-- CAD software for hybrid circuits<br />
-- Co-optimization of discrete and continuous<br />
+<p><strong>Design Tools</strong>:
+- CAD software for hybrid circuits
+- Co-optimization of discrete and continuous
 - Verification and testing methodologies</p>
-<p><strong>Manufacturing</strong>:<br />
-- Scalable fabrication processes<br />
-- Yield improvement<br />
-- Cost reduction<br />
+<p><strong>Manufacturing</strong>:
+- Scalable fabrication processes
+- Yield improvement
+- Cost reduction
 - CMOS integration</p>
-<hr />
+<hr/>
 <h2 id="ix-conclusion">IX. Conclusion</h2>
 <p>Discrete-continuous hybrid electrical components represent a fundamental paradigm shift in how we design electronic systems. By natively embodying both discrete and continuous behavior at the component level, they enable:</p>
 <ol>
@@ -733,7 +838,7 @@ I_continuous = -∫ p(x) log₂ p(x) dx    (differential entropy)
 </ol>
 <p>The taxonomy presented here provides a systematic framework for conceptualizing, designing, and implementing these components across diverse physical mechanisms and application domains.</p>
 <p>As nanofabrication techniques advance and our understanding of quantum, topological, and complex materials deepens, hybrid components will transition from laboratory curiosities to practical circuit elements, potentially revolutionizing electronics as profoundly as the transistor did in the 20th century.</p>
-<hr />
+<hr/>
 <h2 id="appendix-a-comparison-with-traditional-approaches">Appendix A: Comparison with Traditional Approaches</h2>
 <table>
 <thead>
@@ -789,7 +894,7 @@ I_continuous = -∫ p(x) log₂ p(x) dx    (differential entropy)
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="appendix-b-key-equations-reference">Appendix B: Key Equations Reference</h2>
 <p><strong>Discrete-Continuous State Space</strong>:</p>
 <pre><code>S = {0,1,...,N-1} × ℝⁿ
@@ -812,7 +917,7 @@ Memristor: R = R(q), dR/dt = g(R, I, s_d)
 <pre><code>I_total = log₂(N) + H_continuous(x)
 H_continuous = -∫ p(x) log₂ p(x) dx
 </code></pre>
-<hr />
+<hr/>
 <h2 id="appendix-c-glossary">Appendix C: Glossary</h2>
 <p><strong>Continuous</strong>: Taking values from a real interval or manifold; smoothly varying; analog.</p>
 <p><strong>Discrete</strong>: Taking values from a countable set; quantized; digital.</p>
@@ -826,11 +931,36 @@ H_continuous = -∫ p(x) log₂ p(x) dx
 <p><strong>Topological</strong>: Property protected by topology, often creating discrete states or protected edge modes.</p>
 <p><strong>Gyrator</strong>: Circuit element that simulates inductance using capacitance and active components.</p>
 <p><strong>FPAA</strong>: Field-Programmable Analog Array - reconfigurable analog circuitry.</p>
-<hr />
-<p><strong>Document Version</strong>: 1.0<br />
-<strong>Date</strong>: February 2026<br />
-<strong>Status</strong>: Conceptual Framework<br />
+<hr/>
+<p><strong>Document Version</strong>: 1.0<br/>
+<strong>Date</strong>: February 2026<br/>
+<strong>Status</strong>: Conceptual Framework<br/>
 <strong>Next Steps</strong>: Prototype selection, detailed design, fabrication planning</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

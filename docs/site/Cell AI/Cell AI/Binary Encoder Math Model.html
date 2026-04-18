@@ -3,16 +3,57 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Binary Encoder Math Model</title>
+  <meta name="description" content="The goal is to transform $\mathcal{F}$ into a feature vector $\vec{v} \in \mathbb{R}^d$ that captures the essential patterns and structures within the data. We partition $\mathcal{F}$ into chunks $\mathcal{C} = \{C_1, C_2, \ldots, C_M\}$ using content-defined boundaries rather…"/>
+  <title>Mathematical Framework for Cellular Binary Encoding · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cell AI\Cell AI\Binary Encoder Math Model.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="mathematical-framework-for-cellular-binary-encoding">Mathematical Framework for Cellular Binary Encoding</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-core-mathematical-framework">1. Core Mathematical Framework</a></li>
+        <li class="toc-depth-2"><a href="#2-content-defined-chunking">2. Content-Defined Chunking</a></li>
+        <li class="toc-depth-2"><a href="#3-multi-scale-analysis">3. Multi-Scale Analysis</a></li>
+        <li class="toc-depth-2"><a href="#4-wavelet-decomposition">4. Wavelet Decomposition</a></li>
+        <li class="toc-depth-2"><a href="#5-cellular-dynamics">5. Cellular Dynamics</a></li>
+        <li class="toc-depth-2"><a href="#6-dynamic-adaptive-multi-scale-reservoir-damr">6. Dynamic Adaptive Multi-scale Reservoir (DAMR)</a></li>
+        <li class="toc-depth-2"><a href="#7-n-gram-analysis">7. N-gram Analysis</a></li>
+        <li class="toc-depth-2"><a href="#8-spectral-analysis">8. Spectral Analysis</a></li>
+        <li class="toc-depth-2"><a href="#9-adaptive-dictionary-encoding">9. Adaptive Dictionary Encoding</a></li>
+        <li class="toc-depth-2"><a href="#10-lightweight-feature-selective-lfs-mechanism">10. Lightweight Feature-Selective (LFS) Mechanism</a></li>
+        <li class="toc-depth-2"><a href="#11-locality-sensitive-hashing">11. Locality-Sensitive Hashing</a></li>
+        <li class="toc-depth-2"><a href="#12-feature-combination-and-selection">12. Feature Combination and Selection</a></li>
+        <li class="toc-depth-2"><a href="#13-dimensionality-reduction">13. Dimensionality Reduction</a></li>
+        <li class="toc-depth-2"><a href="#14-final-feature-vector">14. Final Feature Vector</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Mathematical Framework for Cellular Binary Encoding</h1>
+          <p class="doc-meta">Cell AI\Cell AI\Binary Encoder Math Model.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Let $\mathcal{F}$ represent a binary file as a sequence of bytes $\mathcal{F} = (b_1, b_2, \ldots, b_N)$ where $b_i \in {0, 1, \ldots, 255}$ and $N$ is the file size in bytes.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="1-core-mathematical-framework">1. Core Mathematical Framework</h2>
 <p>Let $\mathcal{F}$ represent a binary file as a sequence of bytes $\mathcal{F} = (b_1, b_2, \ldots, b_N)$ where $b_i \in {0, 1, \ldots, 255}$ and $N$ is the file size in bytes.</p>
 <p>The goal is to transform $\mathcal{F}$ into a feature vector $\vec{v} \in \mathbb{R}^d$ that captures the essential patterns and structures within the data.</p>
@@ -44,45 +85,45 @@
 <h2 id="5-cellular-dynamics">5. Cellular Dynamics</h2>
 <p>We model cellular memory dynamics based on the differential equation:</p>
 <p>$$\frac{dS}{dt} = f(I, S, t) - \gamma S + D\nabla^2 S + \eta(t)$$</p>
-<p>where:<br />
-- $S$ is the state vector<br />
-- $I$ is the input (byte values)<br />
-- $\gamma$ is the decay rate<br />
-- $D$ is the diffusion coefficient<br />
-- $\nabla^2 S$ is the Laplacian of $S$ (approximated as difference with neighbors)<br />
+<p>where:
+- $S$ is the state vector
+- $I$ is the input (byte values)
+- $\gamma$ is the decay rate
+- $D$ is the diffusion coefficient
+- $\nabla^2 S$ is the Laplacian of $S$ (approximated as difference with neighbors)
 - $\eta(t)$ is a noise term</p>
 <p>In discrete form, for each byte $b_t$ at position $t$:</p>
 <ol>
 <li>We create an input vector $I_t$ with a 1 at position $b_t$ and 0 elsewhere.</li>
-<li>We compute the diffusion term:<br />
+<li>We compute the diffusion term:
    $$(\nabla^2 S)<em i-1="i-1">i = \frac{1}{2}[(S</em> - S_i)]$$} - S_i) + (S_{i+1</li>
-<li>We update the state:<br />
+<li>We update the state:
    $$S_{t+1} = S_t + \Delta t \cdot [I_t + D\nabla^2 S_t - \gamma S_t + \eta_t]$$</li>
 </ol>
 <p>Where $\Delta t$ is the time step, typically set to 0.1.</p>
 <h2 id="6-dynamic-adaptive-multi-scale-reservoir-damr">6. Dynamic Adaptive Multi-scale Reservoir (DAMR)</h2>
-<p>We maintain $R$ reservoirs, each of size 256 (one value per possible byte). For each reservoir $r \in {1, 2, \ldots, R}$, we define:<br />
-- Influence radius $\rho_r$<br />
+<p>We maintain $R$ reservoirs, each of size 256 (one value per possible byte). For each reservoir $r \in {1, 2, \ldots, R}$, we define:
+- Influence radius $\rho_r$
 - Influence strength $\sigma_r$</p>
 <p>For each byte $b_t$ in the chunk, we update reservoir $r$ as follows:</p>
 <ol>
 <li>
-<p>Base increment:<br />
+<p>Base increment:
    $$V_r[b_t] \leftarrow V_r[b_t] + 1$$</p>
 </li>
 <li>
-<p>Neighbor influence with decay:<br />
+<p>Neighbor influence with decay:
    $$V_r[(b_t \pm j) \bmod 256] \leftarrow V_r[(b_t \pm j) \bmod 256] + \frac{\sigma_r}{j} \cdot \beta_t$$</p>
 </li>
 </ol>
 <p>for $j \in {1, 2, \ldots, \rho_r}$, where $\beta_t$ is a contextual boost factor.</p>
 <ol start="3">
-<li>Contextual boost calculation:<br />
+<li>Contextual boost calculation:
    Let $W_t = (b_{t-w+1}, \ldots, b_t)$ be the window of the $w$ most recent bytes.</li>
 </ol>
-<p>Count repetitions of the current byte in the window:<br />
+<p>Count repetitions of the current byte in the window:
    $$c_t = |{b_i \in W_t : b_i = b_t}|$$</p>
-<p>Apply fast sigmoid approximation:<br />
+<p>Apply fast sigmoid approximation:
    $$\beta_t = \frac{c_t - 1.5}{1 + |c_t - 1.5|}$$</p>
 <h2 id="7-n-gram-analysis">7. N-gram Analysis</h2>
 <p>For each n-gram size $n \in {2, 3, 4}$, we extract all n-grams from chunk $C_j$:</p>
@@ -114,7 +155,7 @@
 <ol>
 <li>Compute statistics (mean, standard deviation, entropy) for overlapping windows</li>
 <li>Calculate importance scores based on variation of these statistics</li>
-<li>Identify windows whose importance exceeds the threshold:<br />
+<li>Identify windows whose importance exceeds the threshold:
    $$\tau = \mu_I + \lambda \cdot \sigma_I$$</li>
 </ol>
 <p>where $\mu_I$ and $\sigma_I$ are the mean and standard deviation of importance scores, and $\lambda$ is a scaling factor (typically 0.1).</p>
@@ -134,13 +175,13 @@
 <p>For high-dimensional feature spaces, we apply:</p>
 <ol>
 <li>
-<p>Truncated Singular Value Decomposition (SVD):<br />
-   $$X_{SVD} = U_k \Sigma_k V_k^T$$<br />
+<p>Truncated Singular Value Decomposition (SVD):
+   $$X_{SVD} = U_k \Sigma_k V_k^T$$
    where $k$ is the number of components (typically 64).</p>
 </li>
 <li>
-<p>Random Projection:<br />
-   $$X_{RP} = X \cdot R$$<br />
+<p>Random Projection:
+   $$X_{RP} = X \cdot R$$
    where $R$ is a random matrix with elements drawn from $\mathcal{N}(0, \frac{1}{\sqrt{d}})$.</p>
 </li>
 </ol>
@@ -149,6 +190,31 @@
 <p>$$\vec{v} = [v_1, v_2, \ldots, v_d]$$</p>
 <p>where $d$ is the dimensionality of the feature space (typically bounded by $max_features$).</p>
 <p>This vector serves as a comprehensive statistical fingerprint of the original binary file, capturing patterns at multiple scales and through multiple analytical lenses.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

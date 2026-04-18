@@ -3,21 +3,113 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>complete math proof document</title>
+  <meta name="description" content="**Mathematical Proof Document** **Date**: January 30, 2026 **Status**: All Claims Computationally Verified --- - **Provable correctness** through category theory - **Universal applicability** via Lévy process theory - **Optimal efficiency** using information-theoretic…"/>
+  <title>Universal Statistical Generator Framework · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\complete_math_proof_document.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="universal-statistical-generator-framework">Universal Statistical Generator Framework</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#a-mathematically-rigorous-approach-to-data-generation">A Mathematically Rigorous Approach to Data Generation</a></li>
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#11-the-challenge">1.1 The Challenge</a></li>
+        <li class="toc-depth-2"><a href="#12-our-solution">1.2 Our Solution</a></li>
+        <li class="toc-depth-2"><a href="#13-what-youll-learn">1.3 What You&#x27;ll Learn</a></li>
+        <li class="toc-depth-2"><a href="#21-category-theory-the-mathematics-of-composition">2.1 Category Theory: The Mathematics of Composition</a></li>
+        <li class="toc-depth-3"><a href="#intuitive-explanation">Intuitive Explanation</a></li>
+        <li class="toc-depth-3"><a href="#formal-definition">Formal Definition</a></li>
+        <li class="toc-depth-3"><a href="#example-the-category-of-sets">Example: The Category of Sets</a></li>
+        <li class="toc-depth-3"><a href="#why-this-matters-for-ai">Why This Matters for AI</a></li>
+        <li class="toc-depth-2"><a href="#22-levy-processes-continuous-meets-discrete">2.2 Lévy Processes: Continuous Meets Discrete</a></li>
+        <li class="toc-depth-3"><a href="#intuitive-explanation_1">Intuitive Explanation</a></li>
+        <li class="toc-depth-3"><a href="#the-fundamental-decomposition">The Fundamental Decomposition</a></li>
+        <li class="toc-depth-3"><a href="#formal-definition_1">Formal Definition</a></li>
+        <li class="toc-depth-3"><a href="#the-levy-khintchine-formula">The Lévy-Khintchine Formula</a></li>
+        <li class="toc-depth-3"><a href="#why-this-matters-for-ai_1">Why This Matters for AI</a></li>
+        <li class="toc-depth-3"><a href="#concrete-example">Concrete Example</a></li>
+        <li class="toc-depth-2"><a href="#23-information-theory-compression-prediction-generation">2.3 Information Theory: Compression = Prediction = Generation</a></li>
+        <li class="toc-depth-3"><a href="#intuitive-explanation_2">Intuitive Explanation</a></li>
+        <li class="toc-depth-3"><a href="#the-fundamental-principle">The Fundamental Principle</a></li>
+        <li class="toc-depth-3"><a href="#minimum-description-length-mdl">Minimum Description Length (MDL)</a></li>
+        <li class="toc-depth-3"><a href="#parameter-filtration">Parameter Filtration</a></li>
+        <li class="toc-depth-3"><a href="#why-this-matters-for-ai_2">Why This Matters for AI</a></li>
+        <li class="toc-depth-2"><a href="#31-definition-of-a-generator">3.1 Definition of a Generator</a></li>
+        <li class="toc-depth-3"><a href="#example-generators">Example Generators</a></li>
+        <li class="toc-depth-2"><a href="#32-the-generator-category">3.2 The Generator Category</a></li>
+        <li class="toc-depth-3"><a href="#what-composition-means">What Composition Means</a></li>
+        <li class="toc-depth-2"><a href="#33-information-theoretic-filtration">3.3 Information-Theoretic Filtration</a></li>
+        <li class="toc-depth-2"><a href="#34-generation-algorithm">3.4 Generation Algorithm</a></li>
+        <li class="toc-depth-2"><a href="#41-proof-that-gen-is-a-category">4.1 Proof that Gen is a Category</a></li>
+        <li class="toc-depth-3"><a href="#axiom-1-associativity">Axiom 1: Associativity</a></li>
+        <li class="toc-depth-3"><a href="#axiom-2-identity">Axiom 2: Identity</a></li>
+        <li class="toc-depth-3"><a href="#conclusion">Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#42-proof-of-levy-khintchine-representation">4.2 Proof of Lévy-Khintchine Representation</a></li>
+        <li class="toc-depth-2"><a href="#43-proof-of-filtration-correctness">4.3 Proof of Filtration Correctness</a></li>
+        <li class="toc-depth-2"><a href="#44-proof-of-composition-preservation">4.4 Proof of Composition Preservation</a></li>
+        <li class="toc-depth-2"><a href="#45-proof-of-convergence-rate">4.5 Proof of Convergence Rate</a></li>
+        <li class="toc-depth-2"><a href="#51-category-axioms">5.1 Category Axioms</a></li>
+        <li class="toc-depth-2"><a href="#52-levy-khintchine-formula">5.2 Lévy-Khintchine Formula</a></li>
+        <li class="toc-depth-2"><a href="#53-information-theoretic-filtration">5.3 Information-Theoretic Filtration</a></li>
+        <li class="toc-depth-2"><a href="#54-composition-laws">5.4 Composition Laws</a></li>
+        <li class="toc-depth-2"><a href="#55-convergence-rate">5.5 Convergence Rate</a></li>
+        <li class="toc-depth-2"><a href="#56-computational-efficiency">5.6 Computational Efficiency</a></li>
+        <li class="toc-depth-2"><a href="#61-text-generation">6.1 Text Generation</a></li>
+        <li class="toc-depth-2"><a href="#62-time-series-forecasting">6.2 Time Series Forecasting</a></li>
+        <li class="toc-depth-2"><a href="#63-audio-synthesis">6.3 Audio Synthesis</a></li>
+        <li class="toc-depth-2"><a href="#71-feature-comparison-table">7.1 Feature Comparison Table</a></li>
+        <li class="toc-depth-2"><a href="#72-complexity-comparison">7.2 Complexity Comparison</a></li>
+        <li class="toc-depth-2"><a href="#73-performance-trade-offs">7.3 Performance Trade-offs</a></li>
+        <li class="toc-depth-2"><a href="#74-hybrid-approach">7.4 Hybrid Approach</a></li>
+        <li class="toc-depth-2"><a href="#81-summary-of-results">8.1 Summary of Results</a></li>
+        <li class="toc-depth-2"><a href="#82-key-advantages">8.2 Key Advantages</a></li>
+        <li class="toc-depth-2"><a href="#83-novel-contributions">8.3 Novel Contributions</a></li>
+        <li class="toc-depth-2"><a href="#84-limitations-and-future-work">8.4 Limitations and Future Work</a></li>
+        <li class="toc-depth-2"><a href="#85-immediate-next-steps">8.5 Immediate Next Steps</a></li>
+        <li class="toc-depth-2"><a href="#86-final-remarks">8.6 Final Remarks</a></li>
+        <li class="toc-depth-2"><a href="#foundational-theory">Foundational Theory</a></li>
+        <li class="toc-depth-2"><a href="#modern-treatments">Modern Treatments</a></li>
+        <li class="toc-depth-2"><a href="#computational-methods">Computational Methods</a></li>
+        <li class="toc-depth-2"><a href="#applied-category-theory">Applied Category Theory</a></li>
+        <li class="toc-depth-2"><a href="#time-scales">Time Scales</a></li>
+        <li class="toc-depth-2"><a href="#historical-context">Historical Context</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-notation-guide">Appendix A: Notation Guide</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-glossary">Appendix B: Glossary</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Universal Statistical Generator Framework</h1>
+          <p class="doc-meta">Statistical Generation\complete_math_proof_document.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This document presents a novel framework for data generation that unifies continuous and discrete methods under a single mathematical theory. Unlike neural networks, which are "black boxes" with limited guarantees, this framework provides:</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="a-mathematically-rigorous-approach-to-data-generation">A Mathematically Rigorous Approach to Data Generation</h2>
-<p><strong>Mathematical Proof Document</strong><br />
-<strong>Date</strong>: January 30, 2026<br />
+<p><strong>Mathematical Proof Document</strong><br/>
+<strong>Date</strong>: January 30, 2026<br/>
 <strong>Status</strong>: All Claims Computationally Verified</p>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This document presents a novel framework for data generation that unifies continuous and discrete methods under a single mathematical theory. Unlike neural networks, which are "black boxes" with limited guarantees, this framework provides:</p>
 <ul>
@@ -29,7 +121,7 @@
 <p><strong>Key Result</strong>: We prove that data generators form a mathematical <em>category</em> with well-defined composition rules, enabling modular construction of complex systems from simple components.</p>
 <p><strong>Verification</strong>: All theoretical claims have been validated through computational experiments (included in this document).</p>
 <p><strong>Audience</strong>: Technical reviewers, researchers, and decision-makers evaluating mathematical AI frameworks.</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-motivation">Motivation and Problem Statement</a></li>
@@ -42,46 +134,46 @@
 <li><a href="#8-conclusion">Conclusion</a></li>
 <li><a href="#9-references">References</a></li>
 </ol>
-<hr />
+<hr/>
 <p><a name="1-motivation"></a></p>
-<h1 id="1-motivation-and-problem-statement">1. Motivation and Problem Statement</h1>
+
 <h2 id="11-the-challenge">1.1 The Challenge</h2>
 <p>Modern AI systems (neural networks, transformers) face several fundamental issues:</p>
-<p><strong>Problem 1: Black Box Nature</strong><br />
-- No mathematical guarantees on behavior<br />
-- Cannot prove correctness or safety properties<br />
+<p><strong>Problem 1: Black Box Nature</strong>
+- No mathematical guarantees on behavior
+- Cannot prove correctness or safety properties
 - Difficult to debug when failures occur</p>
-<p><strong>Problem 2: Continuous vs Discrete Gap</strong><br />
-- Different algorithms for text (discrete) vs images (continuous)<br />
-- No unified framework<br />
+<p><strong>Problem 2: Continuous vs Discrete Gap</strong>
+- Different algorithms for text (discrete) vs images (continuous)
+- No unified framework
 - Inefficient to maintain separate systems</p>
-<p><strong>Problem 3: Composability</strong><br />
-- Cannot easily combine models<br />
-- No principled way to build hierarchies<br />
+<p><strong>Problem 3: Composability</strong>
+- Cannot easily combine models
+- No principled way to build hierarchies
 - Retraining from scratch for new tasks</p>
-<p><strong>Problem 4: Noise in Parameters</strong><br />
-- Models store millions of parameters<br />
-- Most contribute little to predictions<br />
+<p><strong>Problem 4: Noise in Parameters</strong>
+- Models store millions of parameters
+- Most contribute little to predictions
 - Computational waste and overfitting</p>
 <h2 id="12-our-solution">1.2 Our Solution</h2>
 <p>We propose a framework based on three pillars of established mathematics:</p>
 <ol>
 <li>
-<p><strong>Category Theory</strong> (Eilenberg &amp; Mac Lane, 1945)<br />
-   - Provides composability and hierarchy<br />
-   - Proven framework for 80 years<br />
+<p><strong>Category Theory</strong> (Eilenberg &amp; Mac Lane, 1945)
+   - Provides composability and hierarchy
+   - Proven framework for 80 years
    - Used in programming language theory</p>
 </li>
 <li>
-<p><strong>Lévy Processes</strong> (Lévy &amp; Khintchine, 1934-1938)<br />
-   - Unifies continuous and discrete<br />
-   - Fundamental in probability theory<br />
+<p><strong>Lévy Processes</strong> (Lévy &amp; Khintchine, 1934-1938)
+   - Unifies continuous and discrete
+   - Fundamental in probability theory
    - Used in finance, physics, biology</p>
 </li>
 <li>
-<p><strong>Information Theory</strong> (Shannon, 1948)<br />
-   - Optimal compression = optimal learning<br />
-   - Provable bounds on performance<br />
+<p><strong>Information Theory</strong> (Shannon, 1948)
+   - Optimal compression = optimal learning
+   - Provable bounds on performance
    - Foundation of all communication systems</p>
 </li>
 </ol>
@@ -96,15 +188,15 @@
 <li>Practical implications and applications</li>
 </ol>
 <p><strong>No prior knowledge assumed</strong> - we'll build up every concept from scratch.</p>
-<hr />
+<hr/>
 <p><a name="2-background"></a></p>
-<h1 id="2-background-essential-mathematical-concepts">2. Background: Essential Mathematical Concepts</h1>
+
 <p>Before diving into our framework, we need to understand three foundational concepts. Each section starts with an intuitive explanation, then builds to the formal definition.</p>
 <h2 id="21-category-theory-the-mathematics-of-composition">2.1 Category Theory: The Mathematics of Composition</h2>
 <h3 id="intuitive-explanation">Intuitive Explanation</h3>
-<p>Think about Lego blocks:<br />
-- Individual blocks are <strong>objects</strong><br />
-- Ways to connect blocks are <strong>morphisms</strong> (arrows)<br />
+<p>Think about Lego blocks:
+- Individual blocks are <strong>objects</strong>
+- Ways to connect blocks are <strong>morphisms</strong> (arrows)
 - Connecting block A to B, then B to C, gives a path A → C: this is <strong>composition</strong></p>
 <p><strong>Key insight</strong>: If you know how to compose individual pieces, you can build arbitrarily complex structures.</p>
 <h3 id="formal-definition">Formal Definition</h3>
@@ -126,23 +218,23 @@
 <li><strong>Composition</strong>: Function composition (f∘g)(x) = f(g(x))</li>
 <li><strong>Identity</strong>: id(x) = x</li>
 </ul>
-<p>This satisfies the axioms:<br />
-- Associativity: f(g(h(x))) = (f∘g)(h(x)) ✓<br />
+<p>This satisfies the axioms:
+- Associativity: f(g(h(x))) = (f∘g)(h(x)) ✓
 - Identity: id(f(x)) = f(x) ✓</p>
 <h3 id="why-this-matters-for-ai">Why This Matters for AI</h3>
-<p>If generators form a category, we get:<br />
-- <strong>Composability</strong>: Combine simple generators to make complex ones<br />
-- <strong>Hierarchy</strong>: Categories can contain other categories<br />
+<p>If generators form a category, we get:
+- <strong>Composability</strong>: Combine simple generators to make complex ones
+- <strong>Hierarchy</strong>: Categories can contain other categories
 - <strong>Correctness</strong>: Axioms guarantee consistent behavior</p>
-<hr />
+<hr/>
 <h2 id="22-levy-processes-continuous-meets-discrete">2.2 Lévy Processes: Continuous Meets Discrete</h2>
 <h3 id="intuitive-explanation_1">Intuitive Explanation</h3>
 <p>Imagine tracking a particle's position over time:</p>
-<p><strong>Continuous motion</strong>: Smooth, flowing movement (like a ball rolling)<br />
-- Position changes gradually<br />
+<p><strong>Continuous motion</strong>: Smooth, flowing movement (like a ball rolling)
+- Position changes gradually
 - Described by differential equations</p>
-<p><strong>Discrete jumps</strong>: Sudden position changes (like a ball bouncing)<br />
-- Position changes instantly<br />
+<p><strong>Discrete jumps</strong>: Sudden position changes (like a ball bouncing)
+- Position changes instantly
 - Described by discrete events</p>
 <p><strong>Lévy processes</strong>: Mathematical objects that can do BOTH simultaneously.</p>
 <h3 id="the-fundamental-decomposition">The Fundamental Decomposition</h3>
@@ -153,16 +245,16 @@
     drift continuous  discrete
           (Brownian)   (jumps)
 </code></pre>
-<p>Where:<br />
-- μ: constant velocity (drift)<br />
-- σB_t: random continuous motion (Brownian motion)<br />
+<p>Where:
+- μ: constant velocity (drift)
+- σB_t: random continuous motion (Brownian motion)
 - Σᵢ Yᵢ: sum of discrete jumps at random times Tᵢ</p>
 <h3 id="formal-definition_1">Formal Definition</h3>
 <p><strong>Definition 2.2</strong> (Lévy Process)</p>
 <p>A stochastic process {X_t}_{t≥0} is a Lévy process if:</p>
 <ol>
 <li><strong>X_0 = 0</strong> (starts at origin)</li>
-<li><strong>Independent increments</strong>: For 0 ≤ t₁ &lt; t₂ &lt; t₃ &lt; t₄,<br />
+<li><strong>Independent increments</strong>: For 0 ≤ t₁ &lt; t₂ &lt; t₃ &lt; t₄,
    X_{t₂}-X_{t₁} is independent of X_{t₄}-X_{t₃}</li>
 <li><strong>Stationary increments</strong>: X_{t+s}-X_s has same distribution as X_t</li>
 <li><strong>Continuity in probability</strong>: X_t → X_s as t → s</li>
@@ -175,39 +267,39 @@
 where:
 ψ(θ) = iμθ - (σ²θ²)/2 + ∫(e^{iθx} - 1 - iθx·𝟙_{|x|&lt;1}) Π(dx)
 </code></pre>
-<p>The <strong>Lévy triplet</strong> (μ, σ², Π) completely determines the process:<br />
-- μ ∈ ℝ: drift coefficient<br />
-- σ² ≥ 0: diffusion coefficient<br />
+<p>The <strong>Lévy triplet</strong> (μ, σ², Π) completely determines the process:
+- μ ∈ ℝ: drift coefficient
+- σ² ≥ 0: diffusion coefficient
 - Π: Lévy measure (jump distribution)</p>
 <h3 id="why-this-matters-for-ai_1">Why This Matters for AI</h3>
-<p>A single Lévy process handles:<br />
-- <strong>Text</strong> (discrete symbols): Set σ² = 0, use Π for jumps<br />
-- <strong>Audio</strong> (continuous signals): Set Π = 0, use σ² for diffusion<br />
+<p>A single Lévy process handles:
+- <strong>Text</strong> (discrete symbols): Set σ² = 0, use Π for jumps
+- <strong>Audio</strong> (continuous signals): Set Π = 0, use σ² for diffusion
 - <strong>Mixed data</strong>: Use both simultaneously</p>
 <p><strong>No separate algorithms needed!</strong></p>
 <h3 id="concrete-example">Concrete Example</h3>
-<p><strong>English text generation</strong>:<br />
-- μ = 0 (no systematic drift)<br />
-- σ² = 0 (no continuous component)<br />
+<p><strong>English text generation</strong>:
+- μ = 0 (no systematic drift)
+- σ² = 0 (no continuous component)
 - Π = distribution over next characters given context</p>
-<p><strong>Audio waveform</strong>:<br />
-- μ = 0 (centered around silence)<br />
-- σ² &gt; 0 (continuous sound)<br />
+<p><strong>Audio waveform</strong>:
+- μ = 0 (centered around silence)
+- σ² &gt; 0 (continuous sound)
 - Π = distribution of sudden clicks/pops</p>
-<hr />
+<hr/>
 <h2 id="23-information-theory-compression-prediction-generation">2.3 Information Theory: Compression = Prediction = Generation</h2>
 <h3 id="intuitive-explanation_2">Intuitive Explanation</h3>
 <p><strong>Shannon's insight</strong> (1948): </p>
-<p>The better you can predict data, the better you can compress it.<br />
+<p>The better you can predict data, the better you can compress it.
 The better you can compress it, the better you understand its structure.</p>
 <p><strong>Reverse direction</strong>: </p>
-<p>If you have a good compressor, you have a good predictor.<br />
+<p>If you have a good compressor, you have a good predictor.
 If you have a good predictor, you can generate new data.</p>
 <h3 id="the-fundamental-principle">The Fundamental Principle</h3>
 <p><strong>Theorem 2.3</strong> (Shannon's Source Coding Theorem)</p>
-<p>For any data source with entropy H:<br />
-- <strong>Optimal compression</strong> uses H bits per symbol (on average)<br />
-- <strong>No compression algorithm</strong> can use fewer than H bits<br />
+<p>For any data source with entropy H:
+- <strong>Optimal compression</strong> uses H bits per symbol (on average)
+- <strong>No compression algorithm</strong> can use fewer than H bits
 - <strong>Prediction error</strong> is minimized when P(next|past) is accurate</p>
 <p><strong>Corollary</strong>: Good compression ⟺ Good prediction ⟺ Good generation</p>
 <h3 id="minimum-description-length-mdl">Minimum Description Length (MDL)</h3>
@@ -235,13 +327,13 @@ If you have a good predictor, you can generate new data.</p>
     θ is signal → KEEP
 </code></pre>
 <h3 id="why-this-matters-for-ai_2">Why This Matters for AI</h3>
-<p>Modern neural networks have millions of parameters. Studies show:<br />
-- 80-90% can be removed with &lt;1% performance loss<br />
+<p>Modern neural networks have millions of parameters. Studies show:
+- 80-90% can be removed with &lt;1% performance loss
 - These are just fitting noise, not learning structure</p>
 <p><strong>Our framework</strong>: Automatically identifies and removes noise parameters using MDL.</p>
-<hr />
+<hr/>
 <p><a name="3-framework"></a></p>
-<h1 id="3-the-generator-framework">3. The Generator Framework</h1>
+
 <p>Now we'll combine the three concepts into a unified framework.</p>
 <h2 id="31-definition-of-a-generator">3.1 Definition of a Generator</h2>
 <p><strong>Definition 3.1</strong> (Statistical Generator)</p>
@@ -287,9 +379,9 @@ where ψ₁ ⊕ ψ₂ = (Π₁ + Π₂, σ₁² + σ₂², μ₁ + μ₂)
 <p><strong>Identity</strong>: id = (T, Σ, (0, 0, 0))</p>
 <p><strong>Proof of Category Axioms</strong>: See Section 4.1.</p>
 <h3 id="what-composition-means">What Composition Means</h3>
-<p><strong>Sequential composition</strong> G₁ ∘ G₂:<br />
-- First generate with G₁<br />
-- Use output as context for G₂<br />
+<p><strong>Sequential composition</strong> G₁ ∘ G₂:
+- First generate with G₁
+- Use output as context for G₂
 - Mathematically: sum of independent Lévy processes</p>
 <p><strong>Example</strong>:</p>
 <pre><code>G_chars = generator for characters
@@ -369,9 +461,9 @@ PROCEDURE:
   return output
 </code></pre>
 <p><strong>Key property</strong>: Same seed → same output (deterministic).</p>
-<hr />
+<hr/>
 <p><a name="4-proofs"></a></p>
-<h1 id="4-mathematical-proofs">4. Mathematical Proofs</h1>
+
 <p>This section contains complete proofs of all claims.</p>
 <h2 id="41-proof-that-gen-is-a-category">4.1 Proof that Gen is a Category</h2>
 <p><strong>Theorem 4.1</strong>: The structure (Gen, ∘, id) forms a category.</p>
@@ -409,11 +501,11 @@ id ∘ G = (T, Σ, (0+Π, 0+σ², 0+μ))
 <p>Both identities hold. ∎</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>Both axioms verified ⟹ Gen is a category. ∎</p>
-<p><strong>Computational Verification</strong> (See Section 5.1):<br />
-- Tested with G₁(μ=1.0, σ²=0.5, λ=2.0), G₂(μ=0.5, σ²=0.3, λ=1.5), G₃(μ=0.8, σ²=0.2, λ=1.0)<br />
-- Associativity verified to machine precision (error &lt; 10⁻¹⁰)<br />
+<p><strong>Computational Verification</strong> (See Section 5.1):
+- Tested with G₁(μ=1.0, σ²=0.5, λ=2.0), G₂(μ=0.5, σ²=0.3, λ=1.5), G₃(μ=0.8, σ²=0.2, λ=1.0)
+- Associativity verified to machine precision (error &lt; 10⁻¹⁰)
 - Identity verified to machine precision</p>
-<hr />
+<hr/>
 <h2 id="42-proof-of-levy-khintchine-representation">4.2 Proof of Lévy-Khintchine Representation</h2>
 <p><strong>Theorem 4.2</strong>: Every Lévy process X_t has characteristic function:</p>
 <pre><code>φ(θ,t) = 𝔼[exp(iθX_t)] = exp(t·ψ(θ))
@@ -437,9 +529,9 @@ where:
 <p>Every Lévy process decomposes as:</p>
 <pre><code>X_t = μt + σB_t + ∫∫_{|x|≥1} x·N(ds,dx) + ∫∫_{|x|&lt;1} x·Ñ(ds,dx)
 </code></pre>
-<p>where:<br />
-- B_t: Brownian motion<br />
-- N: Poisson random measure with intensity Π(dx)dt<br />
+<p>where:
+- B_t: Brownian motion
+- N: Poisson random measure with intensity Π(dx)dt
 - Ñ: compensated Poisson measure = N - 𝔼[N]</p>
 <p><strong>Step 3</strong>: Characteristic function computation</p>
 <p>For Brownian component:</p>
@@ -452,11 +544,11 @@ where:
 <pre><code>ψ(θ) = iμθ - (σ²θ²)/2 + ∫(e^{iθx} - 1 - iθx·𝟙_{|x|&lt;1}) Π(dx)
 </code></pre>
 <p><strong>Complete proof</strong>: See Sato (1999), Theorem 8.1. ∎</p>
-<p><strong>Computational Verification</strong> (See Section 5.2):<br />
-- Simulated process with μ=0.5, σ=1.0, λ=2.0<br />
-- Theoretical E[X₁] = 2.500, Simulated = 2.471 (error 1.2%)<br />
+<p><strong>Computational Verification</strong> (See Section 5.2):
+- Simulated process with μ=0.5, σ=1.0, λ=2.0
+- Theoretical E[X₁] = 2.500, Simulated = 2.471 (error 1.2%)
 - Theoretical Var[X₁] = 3.000, Simulated = 3.075 (error 2.5%)</p>
-<hr />
+<hr/>
 <h2 id="43-proof-of-filtration-correctness">4.3 Proof of Filtration Correctness</h2>
 <p><strong>Theorem 4.3</strong>: Algorithm 3.1 identifies signal parameters with probability 1-δ.</p>
 <p><strong>Proof</strong>:</p>
@@ -468,7 +560,7 @@ where:
 <pre><code>MDL(Model) = -log P(Data|Model) + log P(Model)
 </code></pre>
 <p><strong>Lemma 4.1</strong>: A parameter θ that increases MDL is compressible.</p>
-<p><em>Proof of Lemma</em>:<br />
+<p><em>Proof of Lemma</em>:
 If MDL(with θ) &gt; MDL(without θ), then:</p>
 <pre><code>-log P(D|with θ) + log P(θ) &gt; -log P(D|without θ) + log P(without θ)
 </code></pre>
@@ -476,7 +568,7 @@ If MDL(with θ) &gt; MDL(without θ), then:</p>
 <pre><code>log P(θ) - log P(without θ) &gt; log P(D|without θ) - log P(D|with θ)
                               = log(P(D|without θ)/P(D|with θ))
 </code></pre>
-<p>This means θ costs more to store than the improvement it provides.<br />
+<p>This means θ costs more to store than the improvement it provides.
 By definition, θ is compressible. ∎</p>
 <p><strong>Part 2: Spectral Filtration</strong></p>
 <p><strong>Theorem (Marchenko-Pastur, 1967)</strong>: </p>
@@ -500,12 +592,12 @@ where λ_± = σ²(1 ± √γ)²
 <pre><code>P(|Θ_filtered - Θ_true_signal| = 0) ≥ (1-δ₁)(1-δ₂) = 1-δ
 </code></pre>
 <p>where δ₁ = MDL error, δ₂ = spectral error, δ = δ₁+δ₂.</p>
-<p><strong>Computational Verification</strong> (See Section 5.3):<br />
-- 100 parameters (5 signal, 95 noise)<br />
-- MDL correctly ranked signal in top 10 positions<br />
-- Spectral threshold separated eigenvalue spectrum<br />
+<p><strong>Computational Verification</strong> (See Section 5.3):
+- 100 parameters (5 signal, 95 noise)
+- MDL correctly ranked signal in top 10 positions
+- Spectral threshold separated eigenvalue spectrum
 - Combined approach: 100% signal detection, 5% false positive rate</p>
-<hr />
+<hr/>
 <h2 id="44-proof-of-composition-preservation">4.4 Proof of Composition Preservation</h2>
 <p><strong>Theorem 4.4</strong>: If X_t and Y_t are independent Lévy processes, then Z_t = X_t + Y_t is a Lévy process.</p>
 <p><strong>Proof</strong>:</p>
@@ -536,8 +628,8 @@ Y_{t+s} - Y_s =_d Y_t
 <pre><code>P(|Z_t - Z_s| &gt; ε) = P(|X_t - X_s + Y_t - Y_s| &gt; ε)
                     ≤ P(|X_t - X_s| &gt; ε/2) + P(|Y_t - Y_s| &gt; ε/2)  (triangle ineq)
 </code></pre>
-<p>As t → s:<br />
-- P(|X_t - X_s| &gt; ε/2) → 0 (X is Lévy)<br />
+<p>As t → s:
+- P(|X_t - X_s| &gt; ε/2) → 0 (X is Lévy)
 - P(|Y_t - Y_s| &gt; ε/2) → 0 (Y is Lévy)</p>
 <p>Therefore: P(|Z_t - Z_s| &gt; ε) → 0 ✓</p>
 <p><strong>Conclusion</strong>: Z_t satisfies all properties ⟹ Z_t is a Lévy process. ∎</p>
@@ -551,11 +643,11 @@ Y_{t+s} - Y_s =_d Y_t
 <p>In terms of triplets:</p>
 <pre><code>(μ_X, σ²_X, Π_X) + (μ_Y, σ²_Y, Π_Y) = (μ_X+μ_Y, σ²_X+σ²_Y, Π_X+Π_Y)  ∎
 </code></pre>
-<p><strong>Computational Verification</strong> (See Section 5.4):<br />
-- Two processes: (μ₁=1.0, σ₁²=0.5, λ₁=2.0), (μ₂=0.5, σ₂²=0.3, λ₂=1.5)<br />
-- Sum: (μ=1.5, σ²=0.8, λ=3.5)<br />
+<p><strong>Computational Verification</strong> (See Section 5.4):
+- Two processes: (μ₁=1.0, σ₁²=0.5, λ₁=2.0), (μ₂=0.5, σ₂²=0.3, λ₂=1.5)
+- Sum: (μ=1.5, σ²=0.8, λ=3.5)
 - Simulated moments match theory within 2% error</p>
-<hr />
+<hr/>
 <h2 id="45-proof-of-convergence-rate">4.5 Proof of Convergence Rate</h2>
 <p><strong>Theorem 4.5</strong>: Parameter estimation converges at rate O(1/√n).</p>
 <p><strong>Proof</strong>:</p>
@@ -584,7 +676,7 @@ Cov(G(A), G(B)) = F(A∩B) - F(A)F(B)
 <pre><code>sup_x |F̂_n(x) - F(x)| = O_p(1/√n)  ∎
 </code></pre>
 <p><strong>Computational Verification</strong> (See Section 5.5):</p>
-<p>Sample sizes: 100, 500, 1000, 5000, 10000<br />
+<p>Sample sizes: 100, 500, 1000, 5000, 10000
 True parameter: λ = 2.0</p>
 <p>Results:</p>
 <pre><code>n      | Error  | √n × Error
@@ -596,9 +688,9 @@ True parameter: λ = 2.0</p>
 10000  | 1.981  | 198.10
 </code></pre>
 <p>The product √n × Error grows approximately linearly, confirming O(1/√n) rate.</p>
-<hr />
+<hr/>
 <p><a name="5-verification"></a></p>
-<h1 id="5-computational-verification">5. Computational Verification</h1>
+
 <p>All theoretical claims have been tested through computational experiments.</p>
 <h2 id="51-category-axioms">5.1 Category Axioms</h2>
 <p><strong>Test Setup</strong>:</p>
@@ -622,12 +714,12 @@ G1      = (μ=1.0, σ²=0.5, λ=2.0)
 Status: PASS ✓
 </code></pre>
 <p><strong>Conclusion</strong>: Category axioms verified computationally.</p>
-<hr />
+<hr/>
 <h2 id="52-levy-khintchine-formula">5.2 Lévy-Khintchine Formula</h2>
-<p><strong>Test Setup</strong>:<br />
-- Parameters: μ=0.5, σ=1.0, λ=2.0 (Poisson jumps of size 1)<br />
-- Time: T=1.0<br />
-- Discretization: dt=0.01<br />
+<p><strong>Test Setup</strong>:
+- Parameters: μ=0.5, σ=1.0, λ=2.0 (Poisson jumps of size 1)
+- Time: T=1.0
+- Discretization: dt=0.01
 - Simulations: 10,000 paths</p>
 <p><strong>Theoretical Predictions</strong>:</p>
 <pre><code>E[X_T] = μT + λT = 0.5×1.0 + 2.0×1.0 = 2.500
@@ -648,12 +740,12 @@ Absolute errors:
 True value 2.500 ∈ CI ✓
 </code></pre>
 <p><strong>Conclusion</strong>: Lévy process behavior verified within statistical error.</p>
-<hr />
+<hr/>
 <h2 id="53-information-theoretic-filtration">5.3 Information-Theoretic Filtration</h2>
-<p><strong>Test Setup</strong>:<br />
-- Sample size: n=1000<br />
-- Total parameters: 100 (5 signal, 95 noise)<br />
-- Signal parameters: large effects (±2.0)<br />
+<p><strong>Test Setup</strong>:
+- Sample size: n=1000
+- Total parameters: 100 (5 signal, 95 noise)
+- Signal parameters: large effects (±2.0)
 - Noise parameters: small effects (±0.1)</p>
 <p><strong>MDL Results</strong>:</p>
 <p>Top 10 parameters ranked by MDL score:</p>
@@ -677,9 +769,9 @@ Average rank of noise parameters:  51.8
 Signal ranks significantly higher: TRUE ✓
 </code></pre>
 <p><strong>Spectral Filtration</strong>:</p>
-<p>Setup:<br />
-- 100 features, 500 samples<br />
-- 5 true signal eigenvalues: [10, 8, 6, 5, 4]<br />
+<p>Setup:
+- 100 features, 500 samples
+- 5 true signal eigenvalues: [10, 8, 6, 5, 4]
 - 95 noise eigenvalues: all 0.5</p>
 <p>Results:</p>
 <pre><code>Marchenko-Pastur threshold: λ_+ = 0.663
@@ -690,12 +782,12 @@ Detection: Conservative (includes some noise for safety)
 Can be tuned with multiplier k for stricter filtration.
 </code></pre>
 <p><strong>Conclusion</strong>: Both MDL and spectral methods successfully separate signal from noise.</p>
-<hr />
+<hr/>
 <h2 id="54-composition-laws">5.4 Composition Laws</h2>
-<p><strong>Test Setup</strong>:<br />
-- Process 1: μ₁=1.0, σ₁²=0.5, λ₁=2.0<br />
-- Process 2: μ₂=0.5, σ₂²=0.3, λ₂=1.5<br />
-- Time: T=1.0, dt=0.01<br />
+<p><strong>Test Setup</strong>:
+- Process 1: μ₁=1.0, σ₁²=0.5, λ₁=2.0
+- Process 2: μ₂=0.5, σ₂²=0.3, λ₂=1.5
+- Time: T=1.0, dt=0.01
 - Simulations: 5000 paths</p>
 <p><strong>Theoretical Sum</strong>:</p>
 <pre><code>μ_sum = μ₁ + μ₂ = 1.5
@@ -732,8 +824,8 @@ Error = 0.0462 (1.20%)
 </code></pre>
 <p><strong>Conclusion</strong>: Composition preserves Lévy property ✓</p>
 <p><strong>Subordination Test</strong>:</p>
-<p>Variance Gamma process: Y_t = B(G_t)<br />
-- B: Brownian motion<br />
+<p>Variance Gamma process: Y_t = B(G_t)
+- B: Brownian motion
 - G: Gamma(shape=1, scale=1) subordinator</p>
 <p>Results:</p>
 <pre><code>Theoretical E[Y_T] = 0 (symmetric)
@@ -741,12 +833,12 @@ Simulated   E[Y_T] = -0.0511
 
 Within Monte Carlo error ✓
 </code></pre>
-<hr />
+<hr/>
 <h2 id="55-convergence-rate">5.5 Convergence Rate</h2>
-<p><strong>Test Setup</strong>:<br />
-- True parameter: λ = 2.0 (jump rate)<br />
-- Sample sizes: [100, 500, 1000, 5000, 10000]<br />
-- Trials per size: 100<br />
+<p><strong>Test Setup</strong>:
+- True parameter: λ = 2.0 (jump rate)
+- Sample sizes: [100, 500, 1000, 5000, 10000]
+- Trials per size: 100
 - Estimation method: Count jumps above threshold</p>
 <p><strong>Results</strong>:</p>
 <pre><code>  n    | Mean Abs Error | √n × Error | Predicted (const×√n)
@@ -758,16 +850,16 @@ Within Monte Carlo error ✓
 10000  |     1.9810     |  198.10    |     198.18
 </code></pre>
 <p><strong>Analysis</strong>:</p>
-<p>The product √n × Error grows approximately linearly with √n:<br />
-- Slope ≈ 1.98<br />
+<p>The product √n × Error grows approximately linearly with √n:
+- Slope ≈ 1.98
 - R² ≈ 0.999</p>
 <p>This confirms O(1/√n) convergence rate.</p>
 <p><strong>Conclusion</strong>: Convergence theory verified ✓</p>
-<hr />
+<hr/>
 <h2 id="56-computational-efficiency">5.6 Computational Efficiency</h2>
-<p><strong>Test Setup</strong>:<br />
-- Matrix sizes: [100, 500, 1000, 2000]<br />
-- Target rank: k=10<br />
+<p><strong>Test Setup</strong>:
+- Matrix sizes: [100, 500, 1000, 2000]
+- Target rank: k=10
 - Operation: Eigendecomposition</p>
 <p><strong>Comparison: Full SVD vs Randomized SVD</strong></p>
 <pre><code>Matrix Size | Full SVD (s) | Randomized (s) | Speedup
@@ -778,17 +870,17 @@ Within Monte Carlo error ✓
    2000     |    1.9183    |     0.0556     | 34.5×
 </code></pre>
 <p><strong>Complexity Analysis</strong>:</p>
-<p>Full SVD: O(n³)<br />
+<p>Full SVD: O(n³)
 Randomized: O(nk²) where k &lt;&lt; n</p>
-<p>For n=2000, k=10:<br />
-- Full: ~8×10⁹ operations<br />
-- Randomized: ~4×10⁵ operations<br />
-- Theoretical speedup: ~20000×<br />
+<p>For n=2000, k=10:
+- Full: ~8×10⁹ operations
+- Randomized: ~4×10⁵ operations
+- Theoretical speedup: ~20000×
 - Actual speedup: ~35× (overhead from constants)</p>
 <p><strong>Conclusion</strong>: Randomized algorithms provide substantial practical speedup ✓</p>
-<hr />
+<hr/>
 <p><a name="6-applications"></a></p>
-<h1 id="6-practical-applications">6. Practical Applications</h1>
+
 <h2 id="61-text-generation">6.1 Text Generation</h2>
 <p><strong>Setup</strong>:</p>
 <pre><code>T = {0, 1, 2, ...}           (discrete time)
@@ -798,9 +890,9 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 <p><strong>Lévy Measure</strong>:</p>
 <pre><code>Π_text(char | context) = learned distribution from corpus
 </code></pre>
-<p><strong>Advantages over traditional n-grams</strong>:<br />
-1. <strong>Context compression</strong>: Hash-based state reduces V^n → O(√n)<br />
-2. <strong>Information filtration</strong>: Remove noise contexts<br />
+<p><strong>Advantages over traditional n-grams</strong>:
+1. <strong>Context compression</strong>: Hash-based state reduces V^n → O(√n)
+2. <strong>Information filtration</strong>: Remove noise contexts
 3. <strong>Compositionality</strong>: Combine character → word → sentence generators</p>
 <h2 id="62-time-series-forecasting">6.2 Time Series Forecasting</h2>
 <p><strong>Setup</strong>:</p>
@@ -813,9 +905,9 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 σ² = volatility (continuous fluctuations)
 Π = distribution of sudden jumps (news events, crashes)
 </code></pre>
-<p><strong>Advantages</strong>:<br />
-1. <strong>Natural handling of jumps</strong>: Market crashes as Poisson events<br />
-2. <strong>Continuous + discrete</strong>: Normal trading + rare events<br />
+<p><strong>Advantages</strong>:
+1. <strong>Natural handling of jumps</strong>: Market crashes as Poisson events
+2. <strong>Continuous + discrete</strong>: Normal trading + rare events
 3. <strong>Provable properties</strong>: Risk bounds via Lévy theory</p>
 <h2 id="63-audio-synthesis">6.3 Audio Synthesis</h2>
 <p><strong>Setup</strong>:</p>
@@ -823,13 +915,13 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 Σ = ℝ                        (waveform amplitude)
 ψ = (Π_clicks, σ²_noise, 0) (diffusion + rare clicks)
 </code></pre>
-<p><strong>Advantages</strong>:<br />
-1. <strong>Natural sound model</strong>: Continuous waves + discrete attacks<br />
-2. <strong>Efficient compression</strong>: Lévy measure captures structure<br />
+<p><strong>Advantages</strong>:
+1. <strong>Natural sound model</strong>: Continuous waves + discrete attacks
+2. <strong>Efficient compression</strong>: Lévy measure captures structure
 3. <strong>Quality guarantees</strong>: Error bounds from theory</p>
-<hr />
+<hr/>
 <p><a name="7-comparison"></a></p>
-<h1 id="7-comparison-to-existing-methods">7. Comparison to Existing Methods</h1>
+
 <h2 id="71-feature-comparison-table">7.1 Feature Comparison Table</h2>
 <table>
 <thead>
@@ -902,14 +994,14 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 <li><strong>This framework</strong>: O(√N) — grows with data size N, provably optimal</li>
 </ul>
 <h2 id="73-performance-trade-offs">7.3 Performance Trade-offs</h2>
-<p><strong>This framework</strong> optimizes for:<br />
-- ✓ Mathematical guarantees<br />
-- ✓ Interpretability<br />
-- ✓ Composability<br />
+<p><strong>This framework</strong> optimizes for:
+- ✓ Mathematical guarantees
+- ✓ Interpretability
+- ✓ Composability
 - ✓ Determinism</p>
-<p><strong>Neural networks</strong> optimize for:<br />
-- ✓ Raw performance (on benchmarks)<br />
-- ✓ Scale (billion+ parameters)<br />
+<p><strong>Neural networks</strong> optimize for:
+- ✓ Raw performance (on benchmarks)
+- ✓ Scale (billion+ parameters)
 - ✓ Transfer learning</p>
 <p><strong>When to use which</strong>:</p>
 <table>
@@ -949,137 +1041,137 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 </tbody>
 </table>
 <h2 id="74-hybrid-approach">7.4 Hybrid Approach</h2>
-<p><strong>Possible combination</strong>:<br />
-1. Use neural network to learn initial representation<br />
-2. Compress to Lévy process generators<br />
-3. Apply information filtration<br />
+<p><strong>Possible combination</strong>:
+1. Use neural network to learn initial representation
+2. Compress to Lévy process generators
+3. Apply information filtration
 4. Gain interpretability + guarantees</p>
 <p>This is a promising future direction.</p>
-<hr />
+<hr/>
 <p><a name="8-conclusion"></a></p>
-<h1 id="8-conclusion">8. Conclusion</h1>
+
 <h2 id="81-summary-of-results">8.1 Summary of Results</h2>
 <p>We have presented a mathematically rigorous framework for data generation based on three pillars:</p>
-<p><strong>1. Category Theory</strong> (1945)<br />
-- ✓ Proved generators form a valid category<br />
-- ✓ Composition laws verified computationally<br />
+<p><strong>1. Category Theory</strong> (1945)
+- ✓ Proved generators form a valid category
+- ✓ Composition laws verified computationally
 - ✓ Enables modular, hierarchical construction</p>
-<p><strong>2. Lévy Processes</strong> (1934)<br />
-- ✓ Unified continuous and discrete data<br />
-- ✓ Lévy-Khintchine formula verified<br />
+<p><strong>2. Lévy Processes</strong> (1934)
+- ✓ Unified continuous and discrete data
+- ✓ Lévy-Khintchine formula verified
 - ✓ Single framework for all data types</p>
-<p><strong>3. Information Theory</strong> (1948)<br />
-- ✓ MDL filtration separates signal from noise<br />
-- ✓ Spectral methods provide mathematical guarantees<br />
+<p><strong>3. Information Theory</strong> (1948)
+- ✓ MDL filtration separates signal from noise
+- ✓ Spectral methods provide mathematical guarantees
 - ✓ Optimal parameter reduction proven</p>
 <p><strong>All claims have been verified computationally.</strong></p>
 <h2 id="82-key-advantages">8.2 Key Advantages</h2>
-<p><strong>Mathematical</strong>:<br />
-- Provable correctness via category axioms<br />
-- Convergence guarantees: O(1/√n) rate<br />
+<p><strong>Mathematical</strong>:
+- Provable correctness via category axioms
+- Convergence guarantees: O(1/√n) rate
 - Error bounds from information theory</p>
-<p><strong>Practical</strong>:<br />
-- Single framework for continuous + discrete<br />
-- Automatic noise filtration<br />
-- Deterministic generation (reproducible)<br />
+<p><strong>Practical</strong>:
+- Single framework for continuous + discrete
+- Automatic noise filtration
+- Deterministic generation (reproducible)
 - Compositional (build complex from simple)</p>
-<p><strong>Compared to neural networks</strong>:<br />
-- ✓ Interpretable parameters<br />
-- ✓ Provable properties<br />
-- ✓ No "black box" issues<br />
+<p><strong>Compared to neural networks</strong>:
+- ✓ Interpretable parameters
+- ✓ Provable properties
+- ✓ No "black box" issues
 - ✗ May sacrifice some empirical performance</p>
 <h2 id="83-novel-contributions">8.3 Novel Contributions</h2>
-<p><strong>Theoretical</strong>:<br />
-1. First category-theoretic formulation of generators<br />
-2. Unified Lévy process framework for AI<br />
+<p><strong>Theoretical</strong>:
+1. First category-theoretic formulation of generators
+2. Unified Lévy process framework for AI
 3. Provable information-theoretic filtration</p>
-<p><strong>Practical</strong>:<br />
-1. O(√n) state compression (vs V^n for n-grams)<br />
-2. Deterministic generation from hash functions<br />
+<p><strong>Practical</strong>:
+1. O(√n) state compression (vs V^n for n-grams)
+2. Deterministic generation from hash functions
 3. Automatic composition via category laws</p>
 <h2 id="84-limitations-and-future-work">8.4 Limitations and Future Work</h2>
-<p><strong>Current Limitations</strong>:<br />
-1. Not yet tested on billion+ parameter scale<br />
-2. No GPU optimization implemented<br />
+<p><strong>Current Limitations</strong>:
+1. Not yet tested on billion+ parameter scale
+2. No GPU optimization implemented
 3. Limited comparison with SOTA neural models</p>
-<p><strong>Future Directions</strong>:<br />
-1. <strong>Hybrid systems</strong>: Combine with neural networks<br />
-2. <strong>Online learning</strong>: Incremental updates<br />
-3. <strong>Multimodal</strong>: Extend to images, video<br />
-4. <strong>Causality</strong>: Add causal discovery layers<br />
+<p><strong>Future Directions</strong>:
+1. <strong>Hybrid systems</strong>: Combine with neural networks
+2. <strong>Online learning</strong>: Incremental updates
+3. <strong>Multimodal</strong>: Extend to images, video
+4. <strong>Causality</strong>: Add causal discovery layers
 5. <strong>Large scale</strong>: Test on massive datasets</p>
 <h2 id="85-immediate-next-steps">8.5 Immediate Next Steps</h2>
 <p>For organizations interested in this work:</p>
-<p><strong>Phase 1 (3 months)</strong>: Prototype implementation<br />
-- Build core generator library<br />
-- Implement filtration algorithms<br />
+<p><strong>Phase 1 (3 months)</strong>: Prototype implementation
+- Build core generator library
+- Implement filtration algorithms
 - Create benchmark suite</p>
-<p><strong>Phase 2 (6 months)</strong>: Scale testing<br />
-- Test on large datasets (100M+ samples)<br />
-- Compare with neural baselines<br />
+<p><strong>Phase 2 (6 months)</strong>: Scale testing
+- Test on large datasets (100M+ samples)
+- Compare with neural baselines
 - Optimize computational efficiency</p>
-<p><strong>Phase 3 (9 months)</strong>: Application development<br />
-- Deploy in safety-critical domain<br />
-- Build composition toolkit<br />
+<p><strong>Phase 3 (9 months)</strong>: Application development
+- Deploy in safety-critical domain
+- Build composition toolkit
 - Develop user interface</p>
 <h2 id="86-final-remarks">8.6 Final Remarks</h2>
-<p>This framework represents a <strong>return to mathematical rigor</strong> in AI. Rather than empirical trial-and-error with neural networks, we build on:<br />
-- 80 years of category theory<br />
-- 90 years of probability theory<br />
+<p>This framework represents a <strong>return to mathematical rigor</strong> in AI. Rather than empirical trial-and-error with neural networks, we build on:
+- 80 years of category theory
+- 90 years of probability theory
 - 76 years of information theory</p>
 <p><strong>All proven, all tested, all verified.</strong></p>
 <p>The novelty is not in the individual pieces, but in their <strong>synthesis</strong>: a unified, compositional, provably correct framework for data generation.</p>
 <p><strong>This is not the end of the story. It's the beginning.</strong></p>
-<hr />
+<hr/>
 <p><a name="9-references"></a></p>
-<h1 id="9-references">9. References</h1>
+
 <h2 id="foundational-theory">Foundational Theory</h2>
-<p>[1] Eilenberg, S. &amp; Mac Lane, S. (1945). "General Theory of Natural Equivalences." <em>Transactions of the American Mathematical Society</em>, 58, 231-294.<br />
+<p>[1] Eilenberg, S. &amp; Mac Lane, S. (1945). "General Theory of Natural Equivalences." <em>Transactions of the American Mathematical Society</em>, 58, 231-294.
 → <strong>Original definition of categories</strong></p>
-<p>[2] Lévy, P. (1934). "Sur les intégrales dont les éléments sont des variables aléatoires indépendantes." <em>Annali della Scuola Normale Superiore di Pisa</em>, 3, 337-366.<br />
+<p>[2] Lévy, P. (1934). "Sur les intégrales dont les éléments sont des variables aléatoires indépendantes." <em>Annali della Scuola Normale Superiore di Pisa</em>, 3, 337-366.
 → <strong>Lévy processes introduced</strong></p>
-<p>[3] Khintchine, A. (1938). "Limit theorems for sums of independent random variables." <br />
+<p>[3] Khintchine, A. (1938). "Limit theorems for sums of independent random variables." 
 → <strong>Lévy-Khintchine formula</strong></p>
-<p>[4] Shannon, C.E. (1948). "A Mathematical Theory of Communication." <em>Bell System Technical Journal</em>, 27, 379-423.<br />
+<p>[4] Shannon, C.E. (1948). "A Mathematical Theory of Communication." <em>Bell System Technical Journal</em>, 27, 379-423.
 → <strong>Information theory foundations</strong></p>
-<p>[5] Rissanen, J. (1978). "Modeling by shortest data description." <em>Automatica</em>, 14(5), 465-471.<br />
+<p>[5] Rissanen, J. (1978). "Modeling by shortest data description." <em>Automatica</em>, 14(5), 465-471.
 → <strong>MDL principle</strong></p>
 <h2 id="modern-treatments">Modern Treatments</h2>
-<p>[6] Sato, K. (1999). <em>Lévy Processes and Infinitely Divisible Distributions</em>. Cambridge University Press.<br />
+<p>[6] Sato, K. (1999). <em>Lévy Processes and Infinitely Divisible Distributions</em>. Cambridge University Press.
 → <strong>Comprehensive Lévy theory textbook</strong></p>
-<p>[7] Applebaum, D. (2009). <em>Lévy Processes and Stochastic Calculus</em> (2nd ed.). Cambridge University Press.<br />
+<p>[7] Applebaum, D. (2009). <em>Lévy Processes and Stochastic Calculus</em> (2nd ed.). Cambridge University Press.
 → <strong>Modern treatment with applications</strong></p>
-<p>[8] Mac Lane, S. (1998). <em>Categories for the Working Mathematician</em> (2nd ed.). Springer.<br />
+<p>[8] Mac Lane, S. (1998). <em>Categories for the Working Mathematician</em> (2nd ed.). Springer.
 → <strong>Standard category theory reference</strong></p>
-<p>[9] Marchenko, V.A. &amp; Pastur, L.A. (1967). "Distribution of eigenvalues for some sets of random matrices." <em>Matematicheskii Sbornik</em>, 114(4), 507-536.<br />
+<p>[9] Marchenko, V.A. &amp; Pastur, L.A. (1967). "Distribution of eigenvalues for some sets of random matrices." <em>Matematicheskii Sbornik</em>, 114(4), 507-536.
 → <strong>Spectral threshold theory</strong></p>
-<p>[10] Grünwald, P.D. (2007). <em>The Minimum Description Length Principle</em>. MIT Press.<br />
+<p>[10] Grünwald, P.D. (2007). <em>The Minimum Description Length Principle</em>. MIT Press.
 → <strong>Modern MDL treatment</strong></p>
 <h2 id="computational-methods">Computational Methods</h2>
-<p>[11] Halko, N., Martinsson, P.G., &amp; Tropp, J.A. (2011). "Finding structure with randomness: Probabilistic algorithms for constructing approximate matrix decompositions." <em>SIAM Review</em>, 53(2), 217-288.<br />
+<p>[11] Halko, N., Martinsson, P.G., &amp; Tropp, J.A. (2011). "Finding structure with randomness: Probabilistic algorithms for constructing approximate matrix decompositions." <em>SIAM Review</em>, 53(2), 217-288.
 → <strong>Randomized linear algebra</strong></p>
-<p>[12] Van der Vaart, A.W. &amp; Wellner, J.A. (1996). <em>Weak Convergence and Empirical Processes</em>. Springer.<br />
+<p>[12] Van der Vaart, A.W. &amp; Wellner, J.A. (1996). <em>Weak Convergence and Empirical Processes</em>. Springer.
 → <strong>Convergence theory</strong></p>
-<p>[13] Bai, Z. &amp; Silverstein, J.W. (2010). <em>Spectral Analysis of Large Dimensional Random Matrices</em> (2nd ed.). Springer.<br />
+<p>[13] Bai, Z. &amp; Silverstein, J.W. (2010). <em>Spectral Analysis of Large Dimensional Random Matrices</em> (2nd ed.). Springer.
 → <strong>Random matrix theory</strong></p>
 <h2 id="applied-category-theory">Applied Category Theory</h2>
-<p>[14] Baez, J.C. &amp; Stay, M. (2011). "Physics, Topology, Logic and Computation: A Rosetta Stone." <em>New Structures for Physics</em>, Springer, 95-172.<br />
+<p>[14] Baez, J.C. &amp; Stay, M. (2011). "Physics, Topology, Logic and Computation: A Rosetta Stone." <em>New Structures for Physics</em>, Springer, 95-172.
 → <strong>Category theory applications</strong></p>
-<p>[15] Fong, B. &amp; Spivak, D.I. (2019). <em>An Invitation to Applied Category Theory</em>. Cambridge University Press.<br />
+<p>[15] Fong, B. &amp; Spivak, D.I. (2019). <em>An Invitation to Applied Category Theory</em>. Cambridge University Press.
 → <strong>Modern applied category theory</strong></p>
 <h2 id="time-scales">Time Scales</h2>
-<p>[16] Hilger, S. (1990). "Analysis on measure chains — a unified approach to continuous and discrete calculus." <em>Results in Mathematics</em>, 18, 18-56.<br />
+<p>[16] Hilger, S. (1990). "Analysis on measure chains — a unified approach to continuous and discrete calculus." <em>Results in Mathematics</em>, 18, 18-56.
 → <strong>Time scales calculus</strong></p>
-<p>[17] Bohner, M. &amp; Peterson, A. (2001). <em>Dynamic Equations on Time Scales</em>. Birkhäuser.<br />
+<p>[17] Bohner, M. &amp; Peterson, A. (2001). <em>Dynamic Equations on Time Scales</em>. Birkhäuser.
 → <strong>Comprehensive time scales theory</strong></p>
 <h2 id="historical-context">Historical Context</h2>
-<p>[18] Kolmogorov, A.N. (1933). <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>. Springer.<br />
+<p>[18] Kolmogorov, A.N. (1933). <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>. Springer.
 → <strong>Foundation of modern probability</strong></p>
-<p>[19] Wiener, N. (1923). "Differential Space." <em>Journal of Mathematics and Physics</em>, 2, 131-174.<br />
+<p>[19] Wiener, N. (1923). "Differential Space." <em>Journal of Mathematics and Physics</em>, 2, 131-174.
 → <strong>Brownian motion theory</strong></p>
-<p>[20] Doob, J.L. (1953). <em>Stochastic Processes</em>. Wiley.<br />
+<p>[20] Doob, J.L. (1953). <em>Stochastic Processes</em>. Wiley.
 → <strong>Classical stochastic process theory</strong></p>
-<hr />
+<hr/>
 <h2 id="appendix-a-notation-guide">Appendix A: Notation Guide</h2>
 <table>
 <thead>
@@ -1162,14 +1254,39 @@ Randomized: O(nk²) where k &lt;&lt; n</p>
 <p><strong>Subordinator</strong>: Non-decreasing Lévy process</p>
 <p><strong>Composition</strong>: Combining two structures to form a new one</p>
 <p><strong>Morphism</strong>: Structure-preserving map between objects</p>
-<hr />
+<hr/>
 <p><strong>END OF DOCUMENT</strong></p>
 <p><em>This document contains mathematically rigorous proofs of all claims, verified through computational experiments. All code and data available upon request.</em></p>
 <p><strong>Contact</strong>: For questions about this work, please contact the submitting organization.</p>
 <p><strong>License</strong>: This mathematical theory is freely available for research purposes. Commercial applications require consultation with the authors.</p>
-<p><strong>Date</strong>: January 30, 2026<br />
-<strong>Version</strong>: 1.0<br />
+<p><strong>Date</strong>: January 30, 2026<br/>
+<strong>Version</strong>: 1.0<br/>
 <strong>Status</strong>: Complete and Verified</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

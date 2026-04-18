@@ -1,10 +1,10 @@
 # ACOUSTIC ENERGY CONSERVATION ANALYSIS
 ## Does TACS Cancel Noise "Completely"?
 
-## Question
+### Question
 If TACS generates anti-phase sound waves to cancel noise, where does the acoustic energy go?
 
-## Physics Analysis
+### Physics Analysis
 
 ### Conservation of Energy (First Law of Thermodynamics)
 

@@ -3,34 +3,97 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>ARIA Specification</title>
+  <meta name="description" content="ARIA \(Algebraic Resynchronisation and Integrity Architecture\) is an authenticated encryption scheme designed for high-assurance military communications. Its central innovation is syncable nonce derivation: sender and receiver independently compute identical nonces from a…"/>
+  <title>ARIA specification — Algebraic Resynchronisation and Integrity Architecture · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">ARIA Encryption Algorithm\ARIA_Specification.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>ARIA</strong></p>
-<p>Algebraic Resynchronisation and Integrity Architecture</p>
-<p>Cryptographic Specification</p>
-<p><strong>Classification: CONFIDENTIAL — Research Prototype</strong></p>
-<p><strong>Author</strong></p>
-<p>O. [Redacted]</p>
-<p><strong>Organisation</strong></p>
-<p>Independent Defence Research</p>
-<p><strong>Date</strong></p>
-<p>March 2026</p>
-<p><strong>Status</strong></p>
-<p>Research Prototype — Not for Production</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1.  Introduction</a></li>
+        <li class="toc-depth-3"><a href="#11-the-nonce-synchronisation-problem">1.1  The Nonce Synchronisation Problem</a></li>
+        <li class="toc-depth-3"><a href="#12-design-goals">1.2  Design Goals</a></li>
+        <li class="toc-depth-2"><a href="#2-mathematical-foundation">2.  Mathematical Foundation</a></li>
+        <li class="toc-depth-3"><a href="#21-base-field-f1-gf2256">2.1  Base Field  F₁ = GF(2²⁵⁶)</a></li>
+        <li class="toc-depth-3"><a href="#22-layer-2-l2-f1y-q2y">2.2  Layer 2  L₂ = F₁[y] / Q₂(y)</a></li>
+        <li class="toc-depth-3"><a href="#23-layer-3-l3-l2z-q3z">2.3  Layer 3  L₃ = L₂[z] / Q₃(z)</a></li>
+        <li class="toc-depth-3"><a href="#24-the-nonce-map-linear-algebra-view">2.4  The Nonce Map — Linear Algebra View</a></li>
+        <li class="toc-depth-2"><a href="#3-meta-dag-random-number-generator">3.  Meta-DAG Random Number Generator</a></li>
+        <li class="toc-depth-3"><a href="#31-purpose">3.1  Purpose</a></li>
+        <li class="toc-depth-3"><a href="#32-architecture">3.2  Architecture</a></li>
+        <li class="toc-depth-3"><a href="#33-node-operations">3.3  Node Operations</a></li>
+        <li class="toc-depth-3"><a href="#34-resynchronisation">3.4  Resynchronisation</a></li>
+        <li class="toc-depth-2"><a href="#4-message-encoding">4.  Message Encoding</a></li>
+        <li class="toc-depth-2"><a href="#5-nonce-derivation-modes">5.  Nonce Derivation Modes</a></li>
+        <li class="toc-depth-3"><a href="#51-session-evaluation-points">5.1  Session Evaluation Points</a></li>
+        <li class="toc-depth-3"><a href="#52-collapse">5.2  Collapse</a></li>
+        <li class="toc-depth-3"><a href="#53-mode-1-dag-stream-injection">5.3  Mode 1 — DAG Stream Injection</a></li>
+        <li class="toc-depth-3"><a href="#54-mode-2-random-salt-injection">5.4  Mode 2 — Random Salt Injection</a></li>
+        <li class="toc-depth-3"><a href="#55-mode-3-evaluation-point-drift">5.5  Mode 3 — Evaluation Point Drift</a></li>
+        <li class="toc-depth-2"><a href="#6-authentication-and-encryption">6.  Authentication and Encryption</a></li>
+        <li class="toc-depth-3"><a href="#61-tag-computation">6.1  Tag Computation</a></li>
+        <li class="toc-depth-3"><a href="#62-siv-construction">6.2  SIV Construction</a></li>
+        <li class="toc-depth-3"><a href="#63-encrypt">6.3  Encrypt</a></li>
+        <li class="toc-depth-3"><a href="#64-decrypt-siv-order">6.4  Decrypt (SIV order)</a></li>
+        <li class="toc-depth-3"><a href="#65-wire-format">6.5  Wire Format</a></li>
+        <li class="toc-depth-2"><a href="#7-formal-security-reduction">7.  Formal Security Reduction</a></li>
+        <li class="toc-depth-3"><a href="#71-game-definitions">7.1  Game Definitions</a></li>
+        <li class="toc-depth-3"><a href="#game_coll-aria-nonce-collision">Game_COLL — ARIA Nonce Collision</a></li>
+        <li class="toc-depth-3"><a href="#game_prf-prf-indistinguishability">Game_PRF — PRF Indistinguishability</a></li>
+        <li class="toc-depth-3"><a href="#sdp-syndrome-decoding-problem">SDP — Syndrome Decoding Problem</a></li>
+        <li class="toc-depth-3"><a href="#72-theorem-1-prf-reduction">7.2  Theorem 1 — PRF Reduction</a></li>
+        <li class="toc-depth-3"><a href="#73-theorem-2-sdp-reduction-np-hard">7.3  Theorem 2 — SDP Reduction (NP-hard)</a></li>
+        <li class="toc-depth-3"><a href="#74-numerical-validation">7.4  Numerical Validation</a></li>
+        <li class="toc-depth-2"><a href="#8-performance">8.  Performance</a></li>
+        <li class="toc-depth-3"><a href="#81-python-reference-measured">8.1  Python Reference — Measured</a></li>
+        <li class="toc-depth-3"><a href="#82-production-projections">8.2  Production Projections</a></li>
+        <li class="toc-depth-2"><a href="#9-known-limitations">9.  Known Limitations</a></li>
+        <li class="toc-depth-2"><a href="#10-implementation-notes">10.  Implementation Notes</a></li>
+        <li class="toc-depth-3"><a href="#101-reference-implementation-ariapy">10.1  Reference Implementation (aria.py)</a></li>
+        <li class="toc-depth-3"><a href="#102-production-hardening-order">10.2  Production Hardening Order</a></li>
+        <li class="toc-depth-3"><a href="#103-resynchronisation">10.3  Resynchronisation</a></li>
+        <li class="toc-depth-2"><a href="#11-conclusion">11.  Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">ARIA specification — Algebraic Resynchronisation and Integrity Architecture</h1>
+          <p class="doc-meta">ARIA Encryption Algorithm\ARIA_Specification.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>ARIA (Algebraic Resynchronisation and Integrity Architecture) is an authenticated encryption scheme designed for high-assurance military communications. Its central innovation is syncable nonce derivation: sender and receiver independently compute identical nonces from a shared session key and message content via a three-layer algebraic tower over GF(2²⁵⁶), eliminating counter-state synchronisation requirements while providing stronger collision guarantees than any counter-based scheme.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Cryptographic specification · Classification: CONFIDENTIAL — Research prototype · March 2026</em></p>
+<p>O. [Redacted] · Independent Defence Research · Research prototype — Not for production</p>
+<h2 id="abstract">Abstract</h2>
 <p>ARIA (Algebraic Resynchronisation and Integrity Architecture) is an authenticated encryption scheme designed for high-assurance military communications. Its central innovation is syncable nonce derivation: sender and receiver independently compute identical nonces from a shared session key and message content via a three-layer algebraic tower over GF(2²⁵⁶), eliminating counter-state synchronisation requirements while providing stronger collision guarantees than any counter-based scheme.</p>
 <p>Security is bounded by two independent reductions to named hard problems: (1) any nonce collision-finder implies a SHA-256 PRF distinguisher, giving Adv_COLL ≤ ε_PRF + 7Q²/2²⁵⁷; and (2) finding a collision solves Syndrome Decoding on a [2048, 256] binary linear code (NP-hard), requiring at least 2⁸⁶ classical operations. Both are constructive and numerically validated.</p>
 <p>A complete Python reference implementation with integrated profiler accompanies this document. All 61 test cases pass. Measured throughput on the pure-Python reference is 155–175 encryptions per second. With PCLMULQDQ and AES-NI the projected throughput exceeds 1,000,000 per second.</p>
-<h1 id="table-of-contents"><strong>Table of Contents</strong></h1>
-<h1 id="1-introduction"><strong>1.  Introduction</strong></h1>
-<h2 id="11-the-nonce-synchronisation-problem"><strong>1.1  The Nonce Synchronisation Problem</strong></h2>
+<h2 id="table-of-contents">Table of Contents</h2>
+<h2 id="1-introduction">1.  Introduction</h2>
+<h3 id="11-the-nonce-synchronisation-problem">1.1  The Nonce Synchronisation Problem</h3>
 <p>Every AEAD scheme requires a nonce used at most once per key. Standard approaches each carry operational liabilities in military communications:</p>
 <ul>
 <li>Counter-based nonces (AES-GCM, ChaCha20-Poly1305): catastrophic failure on counter reuse; resynchronisation after packet loss or session restart requires explicit protocol machinery.</li>
@@ -38,7 +101,7 @@
 <li>SIV schemes (AES-GCM-SIV): ciphertext reveals plaintext equality across transmissions; receiver must still track SIV state.</li>
 </ul>
 <p>ARIA eliminates the counter-state problem. Both parties derive identical nonces from (session key, message, per-transmission differentiator) using deterministic algebraic operations. After packet loss, the receiver recomputes the correct nonce from the transmitted sequence number alone.</p>
-<h2 id="12-design-goals"><strong>1.2  Design Goals</strong></h2>
+<h3 id="12-design-goals">1.2  Design Goals</h3>
 <ul>
 <li>Nonce uniqueness: identical plaintexts always produce distinct ciphertexts across all transmissions.</li>
 <li>Syncability: receiver resynchronises from sequence number alone; no persistent counter state.</li>
@@ -46,9 +109,9 @@
 <li>Operational simplicity: three modes cover point-to-point, burst-loss, and multi-path deployments.</li>
 <li>Post-quantum awareness: no group-homomorphism structure exploitable by quantum Fourier transform.</li>
 </ul>
-<h1 id="2-mathematical-foundation"><strong>2.  Mathematical Foundation</strong></h1>
-<h2 id="21-base-field-f1-gf2256"><strong>2.1  Base Field  F₁ = GF(2²⁵⁶)</strong></h2>
-<p>All arithmetic uses the binary extension field GF(2²⁵⁶) = GF(2)[x] / p(x), where p(x) = x²⁵⁶ + x¹° + x⁵ + x² + 1 (pentanomial; verified irreducible). Elements are 256-bit integers. Addition is XOR; multiplication uses shift-and-XOR with polynomial reduction.</p>
+<h2 id="2-mathematical-foundation">2.  Mathematical Foundation</h2>
+<h3 id="21-base-field-f1-gf2256">2.1  Base Field  F₁ = GF(2²⁵⁶)</h3>
+<p>All arithmetic uses the binary extension field GF(2²⁵⁶) = GF(2)[x] / p(x), where p(x) = x²⁵⁶ + x¹⁰ + x⁵ + x² + 1 (pentanomial; verified irreducible). Elements are 256-bit integers. Addition is XOR; multiplication uses shift-and-XOR with polynomial reduction.</p>
 <p><strong>Parameter</strong></p>
 <p><strong>Value</strong></p>
 <p><strong>Notes</strong></p>
@@ -56,7 +119,7 @@
 <p>GF(2²⁵⁶)</p>
 <p>Base field</p>
 <p>Irreducible polynomial</p>
-<p>x²⁵⁶+x¹°+x⁵+x²+1</p>
+<p>x²⁵⁶+x¹⁰+x⁵+x²+1</p>
 <p>Pentanomial; hardware-friendly</p>
 <p>Element size</p>
 <p>256 bits</p>
@@ -67,18 +130,18 @@
 <p>GF mul (Python ref)</p>
 <p>~46 µs</p>
 <p>Reference only</p>
-<h2 id="22-layer-2-l2-f1y-q2y"><strong>2.2  Layer 2  L₂ = F₁[y] / Q₂(y)</strong></h2>
+<h3 id="22-layer-2-l2-f1y-q2y">2.2  Layer 2  L₂ = F₁[y] / Q₂(y)</h3>
 <p>Q₂(y) = y⁸ + y⁴ + y³ + y + 1. L₂ elements are degree &lt; 8 polynomials with F₁ coefficients. Element space 2²⁰⁴⁸. Ring axioms verified in the reference implementation (commutativity, associativity, distributivity). L₂ is the coefficient ring of the message encoding polynomial.</p>
-<h2 id="23-layer-3-l3-l2z-q3z"><strong>2.3  Layer 3  L₃ = L₂[z] / Q₃(z)</strong></h2>
+<h3 id="23-layer-3-l3-l2z-q3z">2.3  Layer 3  L₃ = L₂[z] / Q₃(z)</h3>
 <p>Q₃(z) = z⁴ + z + 1. L₃ elements are degree &lt; 4 polynomials with L₂ coefficients. Element space 2⁸¹⁹². L₃ provides the algebraic hiding space for the message encoding. Ring axioms verified.</p>
-<h2 id="24-the-nonce-map-linear-algebra-view"><strong>2.4  The Nonce Map — Linear Algebra View</strong></h2>
+<h3 id="24-the-nonce-map-linear-algebra-view">2.4  The Nonce Map — Linear Algebra View</h3>
 <p>The nonce is a linear function of the message coefficient matrix, which enables the SDP reduction in Section 6:</p>
 <p>N(M, sk) = C(M, sk) · β_vec   in GF(2²⁵⁶)</p>
 <p>C(M, sk) is the 8×256 binary matrix of coefficient field elements; β_vec = [1, β, β², …, β⁷]ᵀ is the Vandermonde evaluation vector. Linearity: N(M) ⊕ N(M’) = D(β) where D is the difference polynomial. Verified numerically in all three computation forms.</p>
-<h1 id="3-meta-dag-random-number-generator"><strong>3.  Meta-DAG Random Number Generator</strong></h1>
-<h2 id="31-purpose"><strong>3.1  Purpose</strong></h2>
+<h2 id="3-meta-dag-random-number-generator">3.  Meta-DAG Random Number Generator</h2>
+<h3 id="31-purpose">3.1  Purpose</h3>
 <p>The Meta-DAG is the shared deterministic entropy source that makes nonce derivation syncable. Both parties, seeded from the same session key, produce identical GF(2²⁵⁶) output streams. The only coordination required is a sequence number in the packet header.</p>
-<h2 id="32-architecture"><strong>3.2  Architecture</strong></h2>
+<h3 id="32-architecture">3.2  Architecture</h3>
 <p>Eight nodes, each seeded from a transcendental mathematical constant. The constants provide high-entropy seeds not under any party’s control. After each round, node i is cross-mixed with nodes (i+3) mod 8 and (i+5) mod 8, so no node evolves independently.</p>
 <p><strong>Node</strong></p>
 <p><strong>Constant</strong></p>
@@ -107,50 +170,50 @@
 <p>glaisher</p>
 <p>A — Glaisher-Kinkelin</p>
 <p>0xE2F5224C0DE89E2F</p>
-<h2 id="33-node-operations"><strong>3.3  Node Operations</strong></h2>
+<h3 id="33-node-operations">3.3  Node Operations</h3>
 <p>On each tick, meta_state &amp; 0x7 selects one of eight operations: left rotations by 17 and 31, right rotation by 13, XOR with the node’s constant, XOR with a shifted constant, modular addition, modular subtraction, and multiplication by a Fibonacci hashing constant. After each tick: meta_state = (meta_state × 0x6C62272E07BB0142) ⊕ state ⊕ counter. Four rounds produce one 256-bit output. Profiled throughput: 198,740 next_gf256 calls/sec (Python reference).</p>
-<h2 id="34-resynchronisation"><strong>3.4  Resynchronisation</strong></h2>
+<h3 id="34-resynchronisation">3.4  Resynchronisation</h3>
 <p>DAG state is fully determined by (session_key, step_count). A receiver that missed packets fast-forwards to seq × 64 steps from the session key, requiring no stored state. Verified in test suite.</p>
-<h1 id="4-message-encoding"><strong>4.  Message Encoding</strong></h1>
+<h2 id="4-message-encoding">4.  Message Encoding</h2>
 <p>Message M is encoded as 8 L₂-element coefficients forming a degree-7 polynomial P(y):</p>
 <p>α_i[j]  =  DAG.next_gf256()  ×  H(M ‖ (8i+j).to_bytes(2))    i, j ∈ {0..7}</p>
 <p>P(y)  =  α₀ + α₁y + … + α₇y⁷   ∈ L₂[y]</p>
 <p>The DAG factors are session-key-dependent; the hash factors are message-dependent. Their GF product couples both without either dominating. This coupling is the basis of the security proof: decoupling them requires either inverting SHA-256 or breaking the DAG’s PRF property.</p>
 <p>Encoding time (44-byte message): ~2,978 µs Python reference, ~5 µs projected with PCLMULQDQ.</p>
-<h1 id="5-nonce-derivation-modes"><strong>5.  Nonce Derivation Modes</strong></h1>
-<h2 id="51-session-evaluation-points"><strong>5.1  Session Evaluation Points</strong></h2>
+<h2 id="5-nonce-derivation-modes">5.  Nonce Derivation Modes</h2>
+<h3 id="51-session-evaluation-points">5.1  Session Evaluation Points</h3>
 <p>β  =  H("aria:beta:"  ‖ sk)   — primary nonce evaluation point</p>
 <p>δ  =  H("aria:delta:" ‖ sk)   — L₂-to-GF collapse point</p>
 <p>α  =  H("aria:alpha:" ‖ sk)   — tag evaluation point  (independent of β)</p>
 <p>The independence of α from β is critical. Pr[α = β] = 2⁻²⁵⁶. Leaking the nonce reveals nothing about the tag evaluation point.</p>
-<h2 id="52-collapse"><strong>5.2  Collapse</strong></h2>
+<h3 id="52-collapse">5.2  Collapse</h3>
 <p>L₂ polynomial at an L₁ point reduces via double Horner:</p>
 <p>l1_coeffs  =  [L2_Horner(cᵢ, δ)  for cᵢ in poly]</p>
 <p>value      =  L1_Horner(l1_coeffs, pt)</p>
-<h2 id="53-mode-1-dag-stream-injection"><strong>5.3  Mode 1 — DAG Stream Injection</strong></h2>
+<h3 id="53-mode-1-dag-stream-injection">5.3  Mode 1 — DAG Stream Injection</h3>
 <p><strong>OVERHEAD</strong></p>
 <p>4 bytes (sequence number). No secret material transmitted.</p>
 <p>After the 8 encoding coefficients, the DAG produces one additional GF element as a 9th differentiator. The receiver, at the same DAG offset via seq × 64 + encoding steps, produces the identical 9th element. Profiled: ~6,447 µs (155/s) Python reference.</p>
-<h2 id="54-mode-2-random-salt-injection"><strong>5.4  Mode 2 — Random Salt Injection</strong></h2>
+<h3 id="54-mode-2-random-salt-injection">5.4  Mode 2 — Random Salt Injection</h3>
 <p><strong>OVERHEAD</strong></p>
 <p>16 bytes (128-bit salt in header, not secret).</p>
 <p>Sender draws a fresh random salt r per transmission. Injects r into poly[0]: coeff[0][k] ⊕= r × (k+1). Salt transmitted openly. No DAG position agreement required; natural fit for multi-path environments. Profiled: ~5,715 µs (175/s) Python reference.</p>
-<h2 id="55-mode-3-evaluation-point-drift"><strong>5.5  Mode 3 — Evaluation Point Drift</strong></h2>
+<h3 id="55-mode-3-evaluation-point-drift">5.5  Mode 3 — Evaluation Point Drift</h3>
 <p><strong>OVERHEAD</strong></p>
 <p>4 bytes (sequence number). Fastest for repeated-message retransmission.</p>
 <p>P(y) is fixed for given (M, sk). Both the nonce and tag evaluation points drift with seq independently:</p>
 <p>βᵢ  =  H("aria:beta_drift:"  ‖ sk ‖ seq)</p>
 <p>αᵢ  =  H("aria:alpha_drift:" ‖ sk ‖ seq)</p>
 <p>A 1-bit change in β causes ~50% nonce bit change. Measured avalanche: 49.8% of 128 tag bits change per single input bit flip. Profiled: ~7,031 µs (142/s) Python reference.</p>
-<h1 id="6-authentication-and-encryption"><strong>6.  Authentication and Encryption</strong></h1>
-<h2 id="61-tag-computation"><strong>6.1  Tag Computation</strong></h2>
+<h2 id="6-authentication-and-encryption">6.  Authentication and Encryption</h2>
+<h3 id="61-tag-computation">6.1  Tag Computation</h3>
 <p>tag  =  Collapse(P(αᵢ), δ)[:16]</p>
 <p>The authentication tag is the message polynomial evaluated at the tag-specific point αᵢ, collapsed to 16 bytes. Forgery probability: 2⁻¹²⁸ per attempt.</p>
-<h2 id="62-siv-construction"><strong>6.2  SIV Construction</strong></h2>
+<h3 id="62-siv-construction">6.2  SIV Construction</h3>
 <p>The keystream is keyed from the tag (SIV / synthetic IV):</p>
 <p>keystream  =  SHA256_chain("ks:" ‖ tag ‖ counter)</p>
 <p>Using the tag as keystream IV gives plaintext-committed ciphertext. A tag forgery implies plaintext recovery. Production implementations must replace the SHA-256 chain with AES-256-CTR keyed from the tag.</p>
-<h2 id="63-encrypt"><strong>6.3  Encrypt</strong></h2>
+<h3 id="63-encrypt">6.3  Encrypt</h3>
 <ol>
 <li>Build polynomial P from (msg, sk, mode, seq/salt).</li>
 <li>Compute tag = Collapse(P(αᵢ), δ)[:16].</li>
@@ -158,7 +221,7 @@
 <li>Ciphertext = plaintext ⊕ keystream[:len(plaintext)].</li>
 <li>Transmit: (version, mode, meta, ciphertext, tag). The nonce is never transmitted.</li>
 </ol>
-<h2 id="64-decrypt-siv-order"><strong>6.4  Decrypt (SIV order)</strong></h2>
+<h3 id="64-decrypt-siv-order">6.4  Decrypt (SIV order)</h3>
 <ol>
 <li>Tentatively decrypt: pt_candidate = ciphertext ⊕ KS(packet_tag).</li>
 <li>Recompute polynomial P from (pt_candidate, sk, mode, meta).</li>
@@ -167,7 +230,7 @@
 </ol>
 <p><strong>CRITICAL</strong></p>
 <p>Never release decrypted bytes before tag verification. Never indicate which verification step failed.</p>
-<h2 id="65-wire-format"><strong>6.5  Wire Format</strong></h2>
+<h3 id="65-wire-format">6.5  Wire Format</h3>
 <p><strong>Field</strong></p>
 <p><strong>Width</strong></p>
 <p><strong>Description</strong></p>
@@ -210,23 +273,23 @@
 <p>ChaCha20-Poly1305</p>
 <p>28 B</p>
 <p>No — counter reuse catastrophic</p>
-<h1 id="7-formal-security-reduction"><strong>7.  Formal Security Reduction</strong></h1>
+<h2 id="7-formal-security-reduction">7.  Formal Security Reduction</h2>
 <p><strong>MAIN RESULT</strong></p>
 <p>Adv_COLL(A) ≤ min( ε_PRF + 7Q²/2²⁵⁷ ,  2⁻⁸⁶ ). The SDP bound is unconditional. Both reductions are constructive and numerically validated in the reference implementation.</p>
-<h2 id="71-game-definitions"><strong>7.1  Game Definitions</strong></h2>
+<h3 id="71-game-definitions">7.1  Game Definitions</h3>
 <h3 id="game_coll-aria-nonce-collision"><strong>Game_COLL — ARIA Nonce Collision</strong></h3>
 <p>Challenger samples sk, computes β = H("aria:beta:" ‖ sk) and DAG values dag_i(sk). Adversary A receives oracle N(·, sk) and makes Q queries. Wins by finding M ≠ M’ with N(M, sk) = N(M’, sk). Advantage: Adv_COLL(A) = Pr[A wins].</p>
 <h3 id="game_prf-prf-indistinguishability"><strong>Game_PRF — PRF Indistinguishability</strong></h3>
 <p>Challenger samples b ← {0,1}. Oracle O = PRF_K if b=1, truly random if b=0. Adversary B makes Q queries, outputs b’. Advantage: Adv_PRF(B) = |Pr[b’=1|b=1] − Pr[b’=1|b=0]|.</p>
-<h3 id="sdp-syndrome-decoding-problem"><strong>SDP — Syndrome Decoding Problem</strong></h3>
+<h3 id="sdp-syndrome-decoding-problem">SDP — Syndrome Decoding Problem</h3>
 <p>Given H ∈ GF(2)^(r×n) and s = He mod 2, find e’ with He’ = s and wt(e’) ≤ t. NP-complete (Berlekamp 1978, McEliece 1978). Best classical algorithm: ISD at O(2^0.0536n).</p>
-<h2 id="72-theorem-1-prf-reduction"><strong>7.2  Theorem 1 — PRF Reduction</strong></h2>
+<h3 id="72-theorem-1-prf-reduction">7.2  Theorem 1 — PRF Reduction</h3>
 <p><strong>THEOREM 1</strong></p>
 <p>Let A win Game_COLL with advantage ε_A in time t_A, with Q queries. There exists PRF distinguisher B with Adv_PRF(B) ≥ ε_A − 7Q(Q−1)/(2·2²⁵⁶), running in time t_A + O(Q·T_GF).</p>
 <p>Construction: B samples β ← F. When A queries M_i, B queries its oracle O for each DAG position, forms coefficients, evaluates Horner at β, returns nonce to A. When A outputs a collision (i, j): B computes D(y) = Σ(c_k^i ⊕ c_k^j)·y^k. If D(β) = 0, B outputs b’ = 1 (oracle is PRF).</p>
 <p>Analysis: under a truly random oracle, D(β) = 0 with probability ≤ 7/2²⁵⁶ per pair (D has degree ≤ 7, so at most 7 roots). Over Q(Q−1)/2 pairs: Pr[false collision] ≤ 7Q²/2²⁵⁷. Under PRF_K the nonce oracle is identically distributed to real ARIA, so A wins at rate ε_A. ■</p>
 <p>Corollary (Q ≤ 2⁶⁴): Adv_COLL ≤ ε_PRF + 7/2¹²⁹ ≈ ε_PRF + 2⁻¹²⁶.</p>
-<h2 id="73-theorem-2-sdp-reduction-np-hard"><strong>7.3  Theorem 2 — SDP Reduction (NP-hard)</strong></h2>
+<h3 id="73-theorem-2-sdp-reduction-np-hard">7.3  Theorem 2 — SDP Reduction (NP-hard)</h3>
 <p><strong>THEOREM 2</strong></p>
 <p>Finding an ARIA nonce collision is at least as hard as decoding a [2048, 256] binary linear code. This is NP-hard. Best known classical attack: ~2⁸⁶ operations (ISD).</p>
 <p>From the linear algebra view of Section 2.4: a collision N(M) = N(M’) means D · β_vec = 0 in GF(2)^256. Flattening D to a 2048-bit vector e and writing the polynomial multiplication structure as a parity-check matrix Hβ gives: Hβ · e = 0 over GF(2). This is SDP with syndrome s = 0 on a [2048, 256] code. SDP is NP-complete, so any polynomial-time ARIA collision-finder implies P = NP. ■</p>
@@ -251,7 +314,7 @@
 <p>ISD (quantum)</p>
 <p>~2⁴³</p>
 <p>Grover + ISD</p>
-<h2 id="74-numerical-validation"><strong>7.4  Numerical Validation</strong></h2>
+<h3 id="74-numerical-validation">7.4  Numerical Validation</h3>
 <p><strong>Test</strong></p>
 <p><strong>Result</strong></p>
 <p><strong>Notes</strong></p>
@@ -290,8 +353,8 @@
 <p>2¹⁶²</p>
 <p>2⁸¹</p>
 <p>Post-quantum safe</p>
-<h1 id="8-performance"><strong>8.  Performance</strong></h1>
-<h2 id="81-python-reference-measured"><strong>8.1  Python Reference — Measured</strong></h2>
+<h2 id="8-performance">8.  Performance</h2>
+<h3 id="81-python-reference-measured">8.1  Python Reference — Measured</h3>
 <p><strong>NOTE</strong></p>
 <p>Pure Python 3.12 on commodity hardware. Represents algorithmic complexity, not production performance.</p>
 <p><strong>Operation</strong></p>
@@ -342,7 +405,7 @@
 <p>AEAD roundtrip Mode 3</p>
 <p>14,520</p>
 <p>69 /s</p>
-<h2 id="82-production-projections"><strong>8.2  Production Projections</strong></h2>
+<h3 id="82-production-projections">8.2  Production Projections</h3>
 <p><strong>Stage</strong></p>
 <p><strong>GF mul latency</strong></p>
 <p><strong>AEAD throughput</strong></p>
@@ -382,7 +445,7 @@
 <p>Tactical data network</p>
 <p>~10,000,000 /s</p>
 <p>AVX-512</p>
-<h1 id="9-known-limitations"><strong>9.  Known Limitations</strong></h1>
+<h2 id="9-known-limitations">9.  Known Limitations</h2>
 <p><strong>PRODUCTION GATE</strong></p>
 <p>The items below are known gaps between research prototype and production primitive. All must be addressed before operational deployment.</p>
 <ol>
@@ -394,8 +457,8 @@
 <li>No side-channel analysis. Constant-time GF arithmetic is required; timing and power attacks have not been assessed.</li>
 <li>L3 security contribution not formally quantified beyond the NP-hard SDP bound.</li>
 </ol>
-<h1 id="10-implementation-notes"><strong>10.  Implementation Notes</strong></h1>
-<h2 id="101-reference-implementation-ariapy"><strong>10.1  Reference Implementation (aria.py)</strong></h2>
+<h2 id="10-implementation-notes">10.  Implementation Notes</h2>
+<h3 id="101-reference-implementation-ariapy">10.1  Reference Implementation (aria.py)</h3>
 <p><strong>Section</strong></p>
 <p><strong>Content</strong></p>
 <p>1</p>
@@ -418,7 +481,7 @@
 <p>Profiler, run_profiler</p>
 <p>10</p>
 <p>run_tests (61 tests, all pass)</p>
-<h2 id="102-production-hardening-order"><strong>10.2  Production Hardening Order</strong></h2>
+<h3 id="102-production-hardening-order">10.2  Production Hardening Order</h3>
 <ol>
 <li>Replace SHA-256 keystream with AES-256-CTR keyed from tag.</li>
 <li>PCLMULQDQ-based GF(2²⁵⁶) multiplication (~10–20× speedup).</li>
@@ -428,13 +491,38 @@
 <li>External cryptographic audit (minimum 6 months, two independent teams).</li>
 <li>Constant-time GF arithmetic for side-channel resistance.</li>
 </ol>
-<h2 id="103-resynchronisation"><strong>10.3  Resynchronisation</strong></h2>
+<h3 id="103-resynchronisation">10.3  Resynchronisation</h3>
 <p>After packet loss, the receiver uses the sequence number from any received packet to reposition the DAG and recompute the nonce. No stored state beyond the session key is required. Multi-path environments should either assign distinct seq ranges per path or use Mode 2 (random salt), which requires no seq coordination.</p>
-<h1 id="11-conclusion"><strong>11.  Conclusion</strong></h1>
+<h2 id="11-conclusion">11.  Conclusion</h2>
 <p>ARIA provides a solution to the nonce synchronisation problem in military communications through deterministic algebraic nonce derivation. The three-layer tower (GF(2²⁵⁶) → L2 → L3) provides structural depth; the Meta-DAG provides shared deterministic entropy; the three differentiation modes cover the operational range from low-overhead point-to-point links to multi-path channels.</p>
 <p>Collision resistance is bounded by two independent hard problems. The PRF reduction gives Adv_COLL ≤ ε_PRF + 2⁻¹²⁶ for Q ≤ 2⁶⁴. The SDP reduction gives an unconditional 2⁸⁶ classical floor, NP-hard. Both are constructive, implemented as executable Python, and validated by 61 automated tests.</p>
 <p>The path to production requires: EUF-CMA proof for the tag, AES-NI and PCLMULQDQ for throughput, GF(2⁵¹²) for post-quantum security, and external audit. The construction is sound; what remains is engineering and formal verification.</p>
 <p><em>End of ARIA Cryptographic Specification</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

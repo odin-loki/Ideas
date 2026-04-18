@@ -3,87 +3,165 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Cypha Encoder Math Proving</title>
+  <meta name="description" content="**A Complete Theoretical Treatment** · February 2026 This document is the complete theoretical foundation for the Cypha HRNA \(Harmonic Recursive Neural Architecture\) universal encoder. It is written to be self-contained — a reader with undergraduate mathematics can follow the…"/>
+  <title>CYPHA HRNA: Universal Signal Encoder · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v6\Cypha Encoder Math Proving.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>CYPHA HRNA</strong></p>
-<p>Universal Signal Encoder</p>
-<p><em>Mathematical Foundations, Information Theory,</em></p>
-<p><em>and the Universal Meta-Pattern</em></p>
-<p><strong>A Complete Theoretical Treatment</strong></p>
-<p>February 2026</p>
-<h1 id="preface-what-this-document-is"><strong>Preface: What This Document Is</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#preface-what-this-document-is">Preface: What This Document Is</a></li>
+        <li class="toc-depth-2"><a href="#1-foundations-signals-alphabets-and-information">1. Foundations: Signals, Alphabets, and Information</a></li>
+        <li class="toc-depth-3"><a href="#11-what-is-a-signal">1.1 What is a Signal?</a></li>
+        <li class="toc-depth-3"><a href="#12-entropy-the-fundamental-measure-of-surprise">1.2 Entropy: The Fundamental Measure of Surprise</a></li>
+        <li class="toc-depth-3"><a href="#13-stationarity-and-ergodicity">1.3 Stationarity and Ergodicity</a></li>
+        <li class="toc-depth-3"><a href="#14-kolmogorov-complexity-the-ultimate-compression">1.4 Kolmogorov Complexity: The Ultimate Compression</a></li>
+        <li class="toc-depth-2"><a href="#2-the-signal-information-field">2. The Signal Information Field</a></li>
+        <li class="toc-depth-3"><a href="#21-the-predictability-profile">2.1 The Predictability Profile</a></li>
+        <li class="toc-depth-3"><a href="#22-the-five-families-of-information-density">2.2 The Five Families of Information Density</a></li>
+        <li class="toc-depth-2"><a href="#3-the-five-information-structures">3. The Five Information Structures</a></li>
+        <li class="toc-depth-3"><a href="#31-lempel-ziv-parsing-the-greedy-dictionary">3.1 Lempel-Ziv Parsing — The Greedy Dictionary</a></li>
+        <li class="toc-depth-3"><a href="#32-suffix-automaton-the-minimal-recogniser">3.2 Suffix Automaton — The Minimal Recogniser</a></li>
+        <li class="toc-depth-3"><a href="#33-context-tree-weighting-the-optimal-predictor">3.3 Context Tree Weighting — The Optimal Predictor</a></li>
+        <li class="toc-depth-3"><a href="#34-wavelet-packet-decomposition-the-optimal-frequency-atlas">3.4 Wavelet Packet Decomposition — The Optimal Frequency Atlas</a></li>
+        <li class="toc-depth-3"><a href="#35-lyndon-factorisation-the-algebraic-canonical-form">3.5 Lyndon Factorisation — The Algebraic Canonical Form</a></li>
+        <li class="toc-depth-2"><a href="#4-the-string-attractor-the-unifying-foundation">4. The String Attractor: The Unifying Foundation</a></li>
+        <li class="toc-depth-3"><a href="#41-definition-and-properties">4.1 Definition and Properties</a></li>
+        <li class="toc-depth-3"><a href="#42-the-hierarchy-of-approximations">4.2 The Hierarchy of Approximations</a></li>
+        <li class="toc-depth-3"><a href="#43-the-attractor-as-information-geometry">4.3 The Attractor as Information Geometry</a></li>
+        <li class="toc-depth-3"><a href="#44-the-core-equivalence">4.4 The Core Equivalence</a></li>
+        <li class="toc-depth-2"><a href="#5-the-universal-omega-operator">5. The Universal Omega Operator</a></li>
+        <li class="toc-depth-3"><a href="#51-motivation-from-theory-to-computation">5.1 Motivation: From Theory to Computation</a></li>
+        <li class="toc-depth-3"><a href="#52-the-sufficient-statistics-semiring">5.2 The Sufficient Statistics Semiring</a></li>
+        <li class="toc-depth-3"><a href="#53-the-omega-formula">5.3 The Omega Formula</a></li>
+        <li class="toc-depth-3"><a href="#54-why-each-operator-appears">5.4 Why Each Operator Appears</a></li>
+        <li class="toc-depth-3"><a href="#55-theoretical-completeness">5.5 Theoretical Completeness</a></li>
+        <li class="toc-depth-2"><a href="#6-causality-structure-and-the-conditional-omega">6. Causality, Structure, and the Conditional Omega</a></li>
+        <li class="toc-depth-3"><a href="#61-the-limitation-of-global-statistics">6.1 The Limitation of Global Statistics</a></li>
+        <li class="toc-depth-3"><a href="#62-the-conditional-omega-and-the-markov-transition-matrix">6.2 The Conditional Omega and the Markov Transition Matrix</a></li>
+        <li class="toc-depth-3"><a href="#63-compression-as-causality">6.3 Compression as Causality</a></li>
+        <li class="toc-depth-2"><a href="#7-empirical-verification-what-the-neural-network-proved">7. Empirical Verification: What the Neural Network Proved</a></li>
+        <li class="toc-depth-3"><a href="#71-experimental-setup">7.1 Experimental Setup</a></li>
+        <li class="toc-depth-3"><a href="#72-discovery-1-the-linear-encoding-law">7.2 Discovery 1 — The Linear Encoding Law</a></li>
+        <li class="toc-depth-3"><a href="#73-discovery-2-hidden-unit-functional-decomposition">7.3 Discovery 2 — Hidden Unit Functional Decomposition</a></li>
+        <li class="toc-depth-3"><a href="#74-discovery-3-filter-algebra-primitive-vs-composite">7.4 Discovery 3 — Filter Algebra: Primitive vs Composite</a></li>
+        <li class="toc-depth-3"><a href="#75-discovery-4-conjugate-compression-law">7.5 Discovery 4 — Conjugate Compression Law</a></li>
+        <li class="toc-depth-3"><a href="#76-discovery-5-ultrametric-activation-space">7.6 Discovery 5 — Ultrametric Activation Space</a></li>
+        <li class="toc-depth-3"><a href="#77-summary-the-triple-equivalence-confirmed">7.7 Summary: The Triple Equivalence Confirmed</a></li>
+        <li class="toc-depth-2"><a href="#8-cypha-hrna-integration-architecture">8. Cypha HRNA Integration Architecture</a></li>
+        <li class="toc-depth-3"><a href="#81-what-cypha-is">8.1 What Cypha Is</a></li>
+        <li class="toc-depth-3"><a href="#82-the-numeric-direct-encoder-path">8.2 The Numeric-Direct Encoder Path</a></li>
+        <li class="toc-depth-3"><a href="#83-the-complete-processing-pipeline">8.3 The Complete Processing Pipeline</a></li>
+        <li class="toc-depth-3"><a href="#84-connection-to-gria">8.4 Connection to GRIA</a></li>
+        <li class="toc-depth-3"><a href="#85-multi-domain-performance">8.5 Multi-Domain Performance</a></li>
+        <li class="toc-depth-2"><a href="#9-boundaries-limits-and-open-problems">9. Boundaries, Limits, and Open Problems</a></li>
+        <li class="toc-depth-3"><a href="#91-what-omega-cannot-compute">9.1 What Omega Cannot Compute</a></li>
+        <li class="toc-depth-3"><a href="#92-the-amfm-physics-limit">9.2 The AM/FM Physics Limit</a></li>
+        <li class="toc-depth-3"><a href="#93-open-problems">9.3 Open Problems</a></li>
+        <li class="toc-depth-2"><a href="#1-the-exact-constant-in-theorem-41">1. The exact constant in Theorem 4.1:</a></li>
+        <li class="toc-depth-2"><a href="#2-the-conjugate-conservation-law">2. The conjugate conservation law:</a></li>
+        <li class="toc-depth-2"><a href="#3-the-ultrametric-emergence-condition">3. The ultrametric emergence condition:</a></li>
+        <li class="toc-depth-2"><a href="#4-phi-adic-lyndon-duality">4. Phi-Adic / Lyndon duality:</a></li>
+        <li class="toc-depth-2"><a href="#10-glossary-of-key-terms">10. Glossary of Key Terms</a></li>
+        <li class="toc-depth-2"><a href="#11-key-references">11. Key References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">CYPHA HRNA: Universal Signal Encoder</h1>
+          <p class="doc-meta">Cypha\Cypha v6\Cypha Encoder Math Proving.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This document is the complete theoretical foundation for the Cypha HRNA (Harmonic Recursive Neural Architecture) universal encoder. It is written to be self-contained — a reader with undergraduate mathematics can follow the arguments from first principles. A reader with signal processing or information theory background will find the connections to classical results made explicit.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Mathematical Foundations, Information Theory, and the Universal Meta-Pattern</em></p>
+<p><strong>A Complete Theoretical Treatment</strong> · February 2026</p>
+<h2 id="preface-what-this-document-is">Preface: What This Document Is</h2>
 <p>This document is the complete theoretical foundation for the Cypha HRNA (Harmonic Recursive Neural Architecture) universal encoder. It is written to be self-contained — a reader with undergraduate mathematics can follow the arguments from first principles. A reader with signal processing or information theory background will find the connections to classical results made explicit.</p>
 <p>The central claim of this work is that five apparently different mathematical structures — the suffix automaton, context tree weighting, wavelet packet decomposition, Lempel-Ziv parsing, and Lyndon factorisation — are in fact all computing the same thing from different angles. That thing is the <strong>predictability profile</strong> of a signal: a precise map of where information is and where it is not. Once this is understood, a single closed-form formula — the Omega operator Omega(x) — can extract that profile efficiently from any signal domain: radio frequency, audio, image, video, text, binary code, biological sequence, financial time series.</p>
 <p>The empirical content of this document comes from a series of computational experiments across six signal domains, culminating in a neural network analysis that independently verified the theoretical predictions. The NN, trained without any knowledge of the theory, converged to represent signals using the exact mathematical operators the theory predicted. The activation geometry formed a tree — the string attractor hierarchy — with linear correlation r = 0.938 to the theoretical kurtosis-of-derivative measure.</p>
-<p><strong>How to read this document:</strong></p>
-<p>Sections 1-2 establish definitions and the signal model. Sections 3-5 build the five information structures and prove their equivalence. Section 6 presents the Omega formula and its derivation. Section 7 contains the empirical verification, including the NN analysis. Section 8 covers the Cypha integration architecture. Section 9 is a glossary. Equations are numbered sequentially within each section.</p>
-<h1 id="1-foundations-signals-alphabets-and-information"><strong>1. Foundations: Signals, Alphabets, and Information</strong></h1>
-<h2 id="11-what-is-a-signal"><strong>1.1 What is a Signal?</strong></h2>
+<p><strong>How to read this document:</strong>
+Sections 1-2 establish definitions and the signal model. Sections 3-5 build the five information structures and prove their equivalence. Section 6 presents the Omega formula and its derivation. Section 7 contains the empirical verification, including the NN analysis. Section 8 covers the Cypha integration architecture. Section 9 is a glossary. Equations are numbered sequentially within each section.</p>
+<h2 id="1-foundations-signals-alphabets-and-information">1. Foundations: Signals, Alphabets, and Information</h2>
+<h3 id="11-what-is-a-signal">1.1 What is a Signal?</h3>
 <p>For our purposes, a <strong>signal</strong> is any finite sequence of observations. The word covers an enormous range: the amplitude envelope of a radio transmission sampled at 2 MHz, the pixels of a greyscale image read left-to-right top-to-bottom, the bytes of an executable binary, the nucleotides of a gene. What they share is structure — some parts of the sequence predict other parts, and that predictive relationship is what Cypha exploits.</p>
 <p>Formally, let S = s_1 s_2 ... s_n be a string of length n over an alphabet Sigma. For discrete signals (text, binary, DNA), Sigma is finite. For continuous signals (audio, RF), we quantise to |Sigma| = 2^b symbols where b is the bit depth. The quantisation granularity is a free parameter; all results hold for any finite alphabet.</p>
-<h2 id="12-entropy-the-fundamental-measure-of-surprise"><strong>1.2 Entropy: The Fundamental Measure of Surprise</strong></h2>
+<h3 id="12-entropy-the-fundamental-measure-of-surprise">1.2 Entropy: The Fundamental Measure of Surprise</h3>
 <p>Shannon (1948) defined the <strong>entropy</strong> of a probability distribution P as the expected number of bits needed to describe an outcome drawn from that distribution:</p>
 <p>H(P) = -SUM_{x} P(x) log_2 P(x)</p>
 <p>Entropy is maximum (H = log_2 |Sigma|) when all outcomes are equally likely — when the signal is pure noise, and there is nothing to exploit. Entropy is zero when one outcome has probability 1 — when the next symbol is perfectly predictable and carries no new information.</p>
 <p>For a signal source, we care about the <strong>entropy rate</strong> — how many bits per symbol the source generates in the limit of long sequences:</p>
 <p>h = lim_{n-&gt;inf} (1/n) H(s_1, s_2, ..., s_n)</p>
 <p>A signal with low entropy rate is compressible. A signal with entropy rate equal to log_2 |Sigma| is random and incompressible. The entire business of signal analysis — compression, classification, anomaly detection — is the business of estimating and exploiting h.</p>
-<h2 id="13-stationarity-and-ergodicity"><strong>1.3 Stationarity and Ergodicity</strong></h2>
+<h3 id="13-stationarity-and-ergodicity">1.3 Stationarity and Ergodicity</h3>
 <p>A source is <strong>stationary</strong> if its statistical properties do not change over time — the distribution of (s_1,...,s_k) is the same as (s_{t+1},...,s_{t+k}) for all t. It is <strong>ergodic</strong> if time averages converge to ensemble averages — one long realisation is representative of all realisations.</p>
 <p>In practice, most real signals are locally stationary but globally non-stationary. Radio modulations switch type; music changes tempo; code changes function. The Omega operator handles this by computing statistics at multiple temporal scales (full signal, first half, second half), capturing both the local and global predictability structure.</p>
-<h2 id="14-kolmogorov-complexity-the-ultimate-compression"><strong>1.4 Kolmogorov Complexity: The Ultimate Compression</strong></h2>
+<h3 id="14-kolmogorov-complexity-the-ultimate-compression">1.4 Kolmogorov Complexity: The Ultimate Compression</h3>
 <p>The <strong>Kolmogorov complexity</strong> of a string S, written K(S), is the length of the shortest program that outputs S on a universal Turing machine. It is the theoretical lower bound on any lossless compression of S. It is also uncomputable in general — no algorithm can compute K(S) for all S. Every practical compressor (LZ77, BWT, arithmetic coding) is an approximation to K(S) from above.</p>
 <p>Algorithmic causality (Wendong, Buchholz, Scholkopf, 2025) makes a deep connection: <strong>causal relationships emerge naturally from compression</strong>. When we try to minimise the Kolmogorov complexity of data across multiple environments, the description that generalises across environments is the causal description. The compressor that finds the shortest universal description finds the causal structure. This is why compression-based methods can discover causality without interventional data.</p>
-<h1 id="2-the-signal-information-field"><strong>2. The Signal Information Field</strong></h1>
-<h2 id="21-the-predictability-profile"><strong>2.1 The Predictability Profile</strong></h2>
+<h2 id="2-the-signal-information-field">2. The Signal Information Field</h2>
+<h3 id="21-the-predictability-profile">2.1 The Predictability Profile</h3>
 <p>Define the <strong>point information content</strong> of symbol s_i given its past context s_1...s_{i-1} as:</p>
 <p>I(s_i | s_1...s_{i-1}) = -log_2 P(s_i | s_1...s_{i-1})</p>
 <p>This is zero when the symbol was perfectly predicted (no new information) and large when the symbol was surprising. The sequence I_1, I_2, ..., I_n is what we call the <strong>information field</strong> of the signal. Every analysis structure in this document is, at root, a way of computing or approximating this field.</p>
-<h2 id="22-the-five-families-of-information-density"><strong>2.2 The Five Families of Information Density</strong></h2>
+<h3 id="22-the-five-families-of-information-density">2.2 The Five Families of Information Density</h3>
 <p>The information field is non-uniform. Some positions carry high information (phrase boundaries in LZ, edge pixels in images, note onsets in music, phase transitions in RF). Most positions carry very little (smooth regions, steady tones, repetitive code, carrier wave). This non-uniformity — the <strong>burstiness</strong> of the information field — is the quantity that all five structures we study are designed to find.</p>
-<p><strong>The core claim of this document:</strong></p>
-<p><strong>Central Theorem (Informal)</strong></p>
-<p>The five information structures — suffix automaton (SA), context tree weighting (CTW), wavelet packet decomposition (WPD), Lempel-Ziv parsing (LZ), and Lyndon factorisation (LF) — are all approximations to the minimum <strong>string attractor</strong> gamma* of the signal from above. They measure the same quantity — the density of irreducible information events — from different algebraic directions. The Omega operator Omega(x) is the statistical summary of this common quantity, and its most powerful component — kurtosis of the first derivative, kappa(D(x)) — is a direct linear encoding of the string attractor density gamma*/n.</p>
-<h1 id="3-the-five-information-structures"><strong>3. The Five Information Structures</strong></h1>
-<h2 id="31-lempel-ziv-parsing-the-greedy-dictionary"><strong>3.1 Lempel-Ziv Parsing — The Greedy Dictionary</strong></h2>
+<p><strong>The core claim of this document:</strong>
+<strong>Central Theorem (Informal)</strong>
+The five information structures — suffix automaton (SA), context tree weighting (CTW), wavelet packet decomposition (WPD), Lempel-Ziv parsing (LZ), and Lyndon factorisation (LF) — are all approximations to the minimum <strong>string attractor</strong> gamma* of the signal from above. They measure the same quantity — the density of irreducible information events — from different algebraic directions. The Omega operator Omega(x) is the statistical summary of this common quantity, and its most powerful component — kurtosis of the first derivative, kappa(D(x)) — is a direct linear encoding of the string attractor density gamma*/n.</p>
+<h2 id="3-the-five-information-structures">3. The Five Information Structures</h2>
+<h3 id="31-lempel-ziv-parsing-the-greedy-dictionary">3.1 Lempel-Ziv Parsing — The Greedy Dictionary</h3>
 <p>Lempel and Ziv (1977, 1978) introduced a family of universal compressors that need no prior knowledge of the source statistics. The LZ78 variant, which is easiest to analyse, builds a dictionary on the fly:</p>
 <p><strong>Algorithm (LZ78):</strong> Scan the signal left to right. Maintain a dictionary D of phrases seen so far, initialised to the empty string. At each position, extend the current phrase one symbol at a time until the phrase is not in D. When a new phrase is found, add it to D, emit a reference (parent phrase index, new symbol), and start a new phrase.</p>
 <p>The algorithm produces z phrases. The compressed size is O(z log z) bits. The key theorem:</p>
 <p>lim_{n-&gt;inf} z(S_n) / n = h / log_2(|Sigma|)</p>
 <p>That is, the LZ phrase density z/n converges to the normalised entropy rate. LZ is a universal entropy estimator. The <strong>parse tree</strong> built by LZ78 is a trie (prefix tree) where each node is a phrase and each edge is a symbol extension. This trie is a <strong>causal directed acyclic graph</strong> — phrase f_j is an extension of phrase f_i if f_j = f_i + c for some symbol c. The reference structure encodes: "this block was generated by that earlier block."</p>
-<h2 id="32-suffix-automaton-the-minimal-recogniser"><strong>3.2 Suffix Automaton — The Minimal Recogniser</strong></h2>
+<h3 id="32-suffix-automaton-the-minimal-recogniser">3.2 Suffix Automaton — The Minimal Recogniser</h3>
 <p>The <strong>suffix automaton</strong> (DAWG — Directed Acyclic Word Graph) is the smallest finite automaton that recognises all suffixes of S. It partitions all substrings of S into equivalence classes via the <strong>endpos</strong> relation: two substrings are in the same state if and only if they appear ending at exactly the same set of positions.</p>
 <p>Formally, for substring u: endpos(u) = { i : S[i-|u|+1..i] = u }. The key property: if endpos(u) = endpos(v), then every right-context that follows u also follows v and vice versa. These substrings carry the same predictive information about the future. The suffix automaton groups them into one state because they are informationally equivalent.</p>
 <p>The suffix automaton has at most 2n - 1 states (for a string of length n), is built in O(n) time by Ukkonen's online algorithm, and is <strong>the minimum DFA by the Myhill-Nerode theorem</strong>. No automaton with fewer states can recognise the same set of substrings. This is the algebraic minimality condition: the suffix automaton is the smallest possible representation of the signal's substring structure.</p>
-<h2 id="33-context-tree-weighting-the-optimal-predictor"><strong>3.3 Context Tree Weighting — The Optimal Predictor</strong></h2>
+<h3 id="33-context-tree-weighting-the-optimal-predictor">3.3 Context Tree Weighting — The Optimal Predictor</h3>
 <p>Context Tree Weighting (CTW; Willems, Shtarkov, Tjalkens, 1995) is a sequential prediction algorithm that achieves the <strong>Rissanen lower bound</strong> — no algorithm can predict better, on average, using the same past. It works by maintaining a complete suffix tree of past contexts up to depth D and at each node estimating the conditional distribution P(s | context) using the Krichevsky-Trofimov (KT) estimator.</p>
 <p>The CTW probability for a sequence x_1...x_n given past context c at each node s of the context tree is defined recursively:</p>
 <p>P_w(x|s) = (1/2) * P_e(x|s) + (1/2) * P_w(x|s0) * P_w(x|s1)</p>
 <p>where P_e(x|s) is the KT estimator at leaf s and P_w(x|s0), P_w(x|s1) are the weighted estimates at child nodes. The recursive structure means CTW is a <strong>Bayesian mixture over all Markov orders simultaneously</strong>, weighted by their predictive accuracy. Each leaf in the context tree is a predictive context — a distinct conditional distribution over next symbols.</p>
 <p>The key property: the number of leaves in the minimal CTW tree (the contexts with genuinely distinct predictive distributions) equals the number of <strong>functionally distinct contexts</strong> in the signal. This is, asymptotically, the BWT run count r, and both are approximations to the string attractor size gamma*.</p>
-<h2 id="34-wavelet-packet-decomposition-the-optimal-frequency-atlas"><strong>3.4 Wavelet Packet Decomposition — The Optimal Frequency Atlas</strong></h2>
+<h3 id="34-wavelet-packet-decomposition-the-optimal-frequency-atlas">3.4 Wavelet Packet Decomposition — The Optimal Frequency Atlas</h3>
 <p>The discrete wavelet transform applies a low-pass filter L and high-pass filter H to a signal, producing two half-length sub-signals. Applied recursively, this creates a binary tree of sub-bands — a <strong>wavelet packet tree</strong>. Each node at depth d is a signal occupying 1/2^d of the original frequency range and 1/2^d of the time axis (for balanced tiles).</p>
 <p>The <strong>Best Basis algorithm</strong> (Coifman and Wickerhauser, 1992) selects the subtree of the wavelet packet tree that minimises the Shannon entropy of the sub-band coefficient distributions. This is the tiling of the time-frequency plane that represents the signal most efficiently — with minimum redundancy. Signals dominated by smooth oscillations have coarse best bases (few, wide sub-bands). Signals with transient bursts have fine best bases at those times (many, narrow sub-bands coinciding with events).</p>
 <p>The filter bank structure is a <strong>group action</strong> on L^2(R). The low-pass filter L is a Gaussian smoother (its frequency response is Gaussian). The high-pass filter H is its <strong>Derivative of Gaussian (DoG)</strong>, by the QMF (quadrature mirror filter) condition |L(omega)|^2 + |H(omega)|^2 = 1. Together they form a complete orthonormal basis. This is why — as we will see in Section 7 — neural network filters converge to exactly these shapes: Gaussian, DoG, Gabor, LoG. They are the <strong>canonical wavelet basis</strong>, proven optimal by Daubechies (1992).</p>
-<h2 id="35-lyndon-factorisation-the-algebraic-canonical-form"><strong>3.5 Lyndon Factorisation — The Algebraic Canonical Form</strong></h2>
+<h3 id="35-lyndon-factorisation-the-algebraic-canonical-form">3.5 Lyndon Factorisation — The Algebraic Canonical Form</h3>
 <p>A <strong>Lyndon word</strong> is a string that is strictly smaller than all of its cyclic rotations in lexicographic order — equivalently, a string that is its own unique lexicographically minimal rotation. Lyndon words are <strong>primitive</strong>: they cannot be written as a repetition w = u^k for any k &gt; 1.</p>
 <p>The <strong>Chen-Fox-Lyndon theorem</strong> (1958) states that every string has a unique factorisation into a non-increasing sequence of Lyndon words:</p>
 <p>S = L_1 L_2 ... L_k    where    L_1 &gt;= L_2 &gt;= ... &gt;= L_k (lex order)</p>
 <p>This factorisation exists, is unique, and can be computed by <strong>Duval's algorithm</strong> in O(n) time with only O(1) extra space — three integer pointers. No other canonical string decomposition achieves this combination.</p>
 <p>The algebraic significance is deep: Lyndon words are the <strong>Hall basis of the free Lie algebra</strong> over the alphabet Sigma. The free Lie algebra is the algebraic structure generated by non-commutative variables (the symbols) under the Lie bracket (commutator). Lyndon words index its basis elements. Any non-commutative polynomial (any string statistic that depends on ordering) can be expressed in terms of Lyndon word components — this is why Lyndon factorisation is the canonical form for sequence analysis.</p>
 <p>The connection to the other structures: the Lyndon factor boundaries are exactly the positions where the LZ78 trie branches — the phrase boundaries. The primitive Lyndon words are the states of the suffix automaton that have no shorter predecessor in the same endpos class. The composite Lyndon words (L_i = L_a L_b) are second-level nodes in the CTW tree. Lyndon factorisation is the algebraic spine common to all four other structures.</p>
-<h1 id="4-the-string-attractor-the-unifying-foundation"><strong>4. The String Attractor: The Unifying Foundation</strong></h1>
-<h2 id="41-definition-and-properties"><strong>4.1 Definition and Properties</strong></h2>
+<h2 id="4-the-string-attractor-the-unifying-foundation">4. The String Attractor: The Unifying Foundation</h2>
+<h3 id="41-definition-and-properties">4.1 Definition and Properties</h3>
 <p>Kempa and Prezza (2018) introduced the <strong>string attractor</strong> as the unifying object underlying all dictionary compressors. A string attractor for string S of length n is a set of positions Gamma = {j_1, ..., j_gamma} subset [1,n] such that every distinct substring of S has at least one occurrence crossing a position in Gamma. That is, for every factor S[i..j], there exists j_k in Gamma and a position i'..j' such that S[i..j] = S[i'..j'] and j_k in [i',j'].</p>
 <p>The minimum attractor size gamma* = |Gamma_min| is a fundamental measure of the signal's repetitiveness. Highly repetitive signals (genomes of related species, constant-envelope RF, repeated code patterns) have gamma* &lt;&lt; n. Random signals have gamma* ~ n. The string attractor size is the <strong>theoretical lower bound for all known compressors</strong>.</p>
-<h2 id="42-the-hierarchy-of-approximations"><strong>4.2 The Hierarchy of Approximations</strong></h2>
+<h3 id="42-the-hierarchy-of-approximations">4.2 The Hierarchy of Approximations</h3>
 <p>Kempa and Prezza proved that all known dictionary compressors produce attractors whose size is bounded by their output size. Specifically, defining:</p>
 <p>gamma*</p>
 <p>Minimum string attractor size (theoretical lower bound)</p>
@@ -100,46 +178,45 @@
 <p>The following inequalities hold asymptotically:</p>
 <p>gamma* &lt;= r &lt;= z &lt;= g &lt;= b &lt;= n</p>
 <p>This is the attractor hierarchy. Every compressor from LZ77 through BWT through grammar compression is an upper approximation to gamma* from above. The suffix automaton states map to gamma* directly: the minimum attractor size equals the minimum number of suffix automaton states needed to cover all substrings. The Lyndon factorisation gives an attractor of size k (the number of Lyndon factors), which satisfies k = O(z).</p>
-<h2 id="43-the-attractor-as-information-geometry"><strong>4.3 The Attractor as Information Geometry</strong></h2>
+<h3 id="43-the-attractor-as-information-geometry">4.3 The Attractor as Information Geometry</h3>
 <p>The attractor positions Gamma are the positions where <strong>genuinely new information</strong> enters the signal. Every other position is covered by a previous occurrence — it is predictable, copyable, compressible. The information field I(s_i | past) is large precisely at attractor positions and near-zero elsewhere.</p>
 <p>This gives us a direct connection to the derivative. At an attractor position j_k, the signal changes from its previous pattern — there is a <strong>transition event</strong>. The first derivative D(S)[i] = s_{i+1} - s_i is large at these positions and small elsewhere. The <strong>kurtosis of the derivative</strong> kappa(D(S)) measures the burstiness of these transitions: high kurtosis means transitions are rare and large (few attractor positions, small gamma*), low kurtosis means transitions are frequent and small (many attractor positions, large gamma*).</p>
-<h2 id="44-the-core-equivalence"><strong>4.4 The Core Equivalence</strong></h2>
-<p><strong>Theorem 4.1 — Kurtosis-Attractor Equivalence</strong></p>
-<p>Let S be a signal of length n with string attractor density delta = gamma*/n. Let D(S) denote the first-difference sequence of the quantised signal, and kappa(D(S)) its excess kurtosis. Then:</p>
+<h3 id="44-the-core-equivalence">4.4 The Core Equivalence</h3>
+<p><strong>Theorem 4.1 — Kurtosis-Attractor Equivalence</strong>
+Let S be a signal of length n with string attractor density delta = gamma*/n. Let D(S) denote the first-difference sequence of the quantised signal, and kappa(D(S)) its excess kurtosis. Then:</p>
 <p>kappa(D(S)) approx f(delta) = A * (1 - delta) / delta + B</p>
 <p>for constants A, B depending on the signal model (alphabet size, quantisation). For n -&gt; infinity and stationary ergodic sources, kappa(D(S)) and gamma*/n determine each other up to a monotone transformation.</p>
 <p>Furthermore, kappa(D(S)), the normalised LZ density z/n, and the normalised BWT run count r/n are mutually monotonically related, with Pearson correlation r = -0.9985 (empirical, n=7 signal classes, 80 samples each).</p>
 <p>The empirical verification of this theorem across RF modulations is presented in Section 7. The correlation of -0.9985 between kappa(D) and LZ density leaves effectively no room for competing explanations.</p>
-<h1 id="5-the-universal-omega-operator"><strong>5. The Universal Omega Operator</strong></h1>
-<h2 id="51-motivation-from-theory-to-computation"><strong>5.1 Motivation: From Theory to Computation</strong></h2>
+<h2 id="5-the-universal-omega-operator">5. The Universal Omega Operator</h2>
+<h3 id="51-motivation-from-theory-to-computation">5.1 Motivation: From Theory to Computation</h3>
 <p>The string attractor is theoretically fundamental but computationally hard: finding the minimum attractor is NP-complete for k &gt;= 3. LZ complexity is O(n) but requires quantisation choices. BWT runs require O(n log n) construction. For a practical encoder that operates on multi-gigabyte streams in real time, we need something both <strong>fast</strong> and <strong>complete</strong>.</p>
 <p>The Omega operator is that something. It is a closed-form function of the signal that captures the same information as the string attractor hierarchy, computed in O(n) time and O(1) space (for online updates).</p>
-<h2 id="52-the-sufficient-statistics-semiring"><strong>5.2 The Sufficient Statistics Semiring</strong></h2>
+<h3 id="52-the-sufficient-statistics-semiring">5.2 The Sufficient Statistics Semiring</h3>
 <p>The key algebraic insight is that certain statistics are <strong>homomorphisms of the free monoid</strong>. That is, for a statistic phi: Sigma* -&gt; R^k, we have phi(S_1 S_2) = combine(phi(S_1), phi(S_2)) for a simple combining function. Such statistics can be maintained incrementally — each new symbol takes O(1) to incorporate.</p>
 <p>The combining formulas for the moments are:</p>
 <p>mu(S1.S2)</p>
 <p><strong>Mean: </strong>(n1*mu1 + n2*mu2) / (n1+n2)</p>
 <p>sigma^2(S1.S2)</p>
-<p>__Variance: __pooled variance formula with cross term</p>
+<p><strong>Variance: </strong>pooled variance formula with cross term</p>
 <p>kappa(S1.S2)</p>
-<p>__Kurtosis: __exact formula using (n1,mu1,sigma1,kappa1) and (n2,mu2,sigma2,kappa2) — O(1)</p>
+<p><strong>Kurtosis: </strong>exact formula using (n1,mu1,sigma1,kappa1) and (n2,mu2,sigma2,kappa2) — O(1)</p>
 <p>r(S1.S2, lags)</p>
-<p>__Autocorrelation: __update via running dot products — O(1) per lag</p>
+<p><strong>Autocorrelation: </strong>update via running dot products — O(1) per lag</p>
 <p>This semiring structure means the <strong>entire Omega computation can be parallelised and streamed</strong>. No random access is required. The operator computes in a single left-to-right pass over the signal.</p>
-<h2 id="53-the-omega-formula"><strong>5.3 The Omega Formula</strong></h2>
-<p><strong>Definition 5.1 — The Universal Omega Operator</strong></p>
-<p><strong>Omega(x) = concat([</strong></p>
-<pre><code>M\(x\),            // mean, std, kurtosis, skewness of raw signal
+<h3 id="53-the-omega-formula">5.3 The Omega Formula</h3>
+<p><strong>Definition 5.1 — The Universal Omega Operator</strong>
+<strong>Omega(x) = concat([</strong>
+    M(x),            // mean, std, kurtosis, skewness of raw signal</p>
+<pre><code>M\(D\(x\)\),         // mean, std, kurtosis, skewness of 1st derivative
 
-M\(D\(x\)\),         // mean, std, kurtosis, skewness of 1st derivative
+M\(D^2\(x\)\),       // kurtosis of 2nd derivative  &lt;-- MOST DISCRIMINATIVE
 
-M\(D^2\(x\)\),       // kurtosis of 2nd derivative  &lt;\-\- MOST DISCRIMINATIVE
+R\(x, K\),         // energy in K frequency bands \+ K-1 adjacent ratios
 
-R\(x, K\),         // energy in K frequency bands \+ K\-1 adjacent ratios
-
-A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\}
+A\(x, lags\),      // autocorrelation at log-spaced lags \{n/16, n/8, n/4, n/2\}
 </code></pre>
-<p>__    ]) x scales__   // applied at: full signal, first half, second half</p>
+<p>**    ]) x scales**   // applied at: full signal, first half, second half</p>
 <p>The domain-specific derivative operator D is chosen to match the signal's natural structure:</p>
 <p>1D signals (RF, audio)</p>
 <p>D(x) = np.diff(x)  — temporal first difference</p>
@@ -151,52 +228,52 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>D(x) = d/dt(unwrap(angle(x)))  — instantaneous frequency</p>
 <p>Text / binary</p>
 <p>D(x) = diff(char_embedding(x))  — embedding space difference</p>
-<h2 id="54-why-each-operator-appears"><strong>5.4 Why Each Operator Appears</strong></h2>
-<p><strong>M(x) — Raw signal moments:</strong></p>
-<p>The mean, variance, skewness, and kurtosis of the raw signal characterise the amplitude distribution. This is the zeroth-order description — the histogram. Necessary for separating signals that differ in overall energy or shape (USB from AM, CW from continuous signals). Insufficient alone for any domain.</p>
-<p><strong>M(D(x)) — Derivative moments, especially sigma(D(x)):</strong></p>
-<p>The standard deviation of the derivative is the <strong>total variation</strong> of the signal — the sum of all changes. This captures how active the signal is. In images: edge density. In audio: voiced fraction. In RF: envelope activity. In code: branch density.</p>
-<p><strong>M(D^2(x)) — Second derivative moments, especially kappa(D(x)) for D(x):</strong></p>
-<p>The kurtosis of the <em>first</em> derivative (which is the second-order property of the signal) is the single most universal discriminator found across all six domains studied. It measures the <strong>burstiness of change events</strong>. High kurtosis: changes are rare and large (CW on/off keying, QAM16 amplitude levels, image edges, music note onsets). Low kurtosis: changes are frequent and small (white noise, FM carrier, smooth audio). By Theorem 4.1, this is proportional to the string attractor density.</p>
-<p><strong>R(x, K) — Energy ratios across frequency bands:</strong></p>
-<p>The distribution of signal energy across frequency bands is the spectral shape. This separates signals that differ in spectral content: audio speech (energy concentrated in formants), white noise (flat spectrum), RF modulations (different spectral occupancy), music genres (different harmonic ratios). This operator is the implicit function computed by Gabor and bandpass filters in the wavelet packet tree.</p>
-<p><strong>A(x, lags) — Autocorrelation at log-spaced lags:</strong></p>
-<p>The autocorrelation at lag l measures how similar the signal is to itself displaced by l positions. High autocorrelation at short lags: signal is smooth and locally predictable. High at specific lags: signal has periodic structure at that period (heartbeat rhythm, AM modulation frequency, video frame rate). This is the statistic most directly related to the CTW context tree — each lag corresponds to a context depth.</p>
-<h2 id="55-theoretical-completeness"><strong>5.5 Theoretical Completeness</strong></h2>
+<h3 id="54-why-each-operator-appears">5.4 Why Each Operator Appears</h3>
+<p><strong>M(x) — Raw signal moments:</strong>
+The mean, variance, skewness, and kurtosis of the raw signal characterise the amplitude distribution. This is the zeroth-order description — the histogram. Necessary for separating signals that differ in overall energy or shape (USB from AM, CW from continuous signals). Insufficient alone for any domain.</p>
+<p><strong>M(D(x)) — Derivative moments, especially sigma(D(x)):</strong>
+The standard deviation of the derivative is the <strong>total variation</strong> of the signal — the sum of all changes. This captures how active the signal is. In images: edge density. In audio: voiced fraction. In RF: envelope activity. In code: branch density.</p>
+<p><strong>M(D^2(x)) — Second derivative moments, especially kappa(D(x)) for D(x):</strong>
+The kurtosis of the <em>first</em> derivative (which is the second-order property of the signal) is the single most universal discriminator found across all six domains studied. It measures the <strong>burstiness of change events</strong>. High kurtosis: changes are rare and large (CW on/off keying, QAM16 amplitude levels, image edges, music note onsets). Low kurtosis: changes are frequent and small (white noise, FM carrier, smooth audio). By Theorem 4.1, this is proportional to the string attractor density.</p>
+<p><strong>R(x, K) — Energy ratios across frequency bands:</strong>
+The distribution of signal energy across frequency bands is the spectral shape. This separates signals that differ in spectral content: audio speech (energy concentrated in formants), white noise (flat spectrum), RF modulations (different spectral occupancy), music genres (different harmonic ratios). This operator is the implicit function computed by Gabor and bandpass filters in the wavelet packet tree.</p>
+<p><strong>A(x, lags) — Autocorrelation at log-spaced lags:</strong>
+The autocorrelation at lag l measures how similar the signal is to itself displaced by l positions. High autocorrelation at short lags: signal is smooth and locally predictable. High at specific lags: signal has periodic structure at that period (heartbeat rhythm, AM modulation frequency, video frame rate). This is the statistic most directly related to the CTW context tree — each lag corresponds to a context depth.</p>
+<h3 id="55-theoretical-completeness">5.5 Theoretical Completeness</h3>
 <p>We claim the Omega operator is <strong>theoretically complete</strong> in the following sense: if two signals are distinguishable by any stationary ergodic test, they will be distinguished by Omega in the limit of large n. The argument:</p>
 <p><strong>1. Moments characterise distributions:</strong> By the method of moments theorem, if the moment sequence of a distribution uniquely determines it (which holds for all distributions with finite moments and subexponential tails), then M(x) asymptotically identifies the amplitude distribution.</p>
 <p><strong>2. Derivative moments characterise dynamics:</strong> M(D^k(x)) characterise the k-th order dynamics — rate of change, acceleration, jerk. For signals generated by differential equations or finite state machines, finitely many derivative moments suffice to identify the generator.</p>
 <p><strong>3. Spectral ratios characterise frequency structure:</strong> R(x, K) converges to the spectral density evaluated at K frequency points. In the limit K -&gt; infinity, it fully characterises the power spectral density of a stationary source.</p>
 <p><strong>4. Autocorrelation characterises temporal dependence:</strong> A(x, lags) at all lags characterises the autocorrelation function, which determines the second-order structure of a Gaussian source (and the CTW model for any source).</p>
 <p>The operator is <em>not</em> complete for compositional meaning (word order in text) or for adversarially constructed signals (which can be designed to fool any fixed formula). These limitations are discussed in Section 9.</p>
-<h1 id="6-causality-structure-and-the-conditional-omega"><strong>6. Causality, Structure, and the Conditional Omega</strong></h1>
-<h2 id="61-the-limitation-of-global-statistics"><strong>6.1 The Limitation of Global Statistics</strong></h2>
+<h2 id="6-causality-structure-and-the-conditional-omega">6. Causality, Structure, and the Conditional Omega</h2>
+<h3 id="61-the-limitation-of-global-statistics">6.1 The Limitation of Global Statistics</h3>
 <p>The Omega operator as defined in Section 5 computes <strong>global statistics</strong> — averages over the entire signal. This means it sees the <em>histogram</em> of the information field but not its <em>ordering</em>. Two signals whose derivative kurtosis is identical but whose temporal structure differs will map to the same Omega vector. "The dog bit the man" and "the man bit the dog" produce identical Omega vectors over the tokenised text.</p>
 <p>This limitation motivates the conditional extension: not just Omega(S) but Omega(S | context_k) — the statistics of the signal in specific causal contexts.</p>
-<h2 id="62-the-conditional-omega-and-the-markov-transition-matrix"><strong>6.2 The Conditional Omega and the Markov Transition Matrix</strong></h2>
+<h3 id="62-the-conditional-omega-and-the-markov-transition-matrix">6.2 The Conditional Omega and the Markov Transition Matrix</h3>
 <p>Define the <strong>conditional Omega dictionary</strong> as:</p>
 <p>Psi(S) = { Omega(S | k) : k in Leaves(CTW(S)) }</p>
 <p>where Omega(S | k) is the Omega vector computed over the subsequence of S that follows context k in the CTW tree. The number of distinct contexts |Psi| ~ r ~ z ~ gamma* (all approximately equal in the limit). Each context k has its own statistics — its own mean, variance, kurtosis profile.</p>
 <p>The <strong>Markov transition matrix</strong> T in R^{|Psi| x |Psi|} where T[i,j] = P(context_j | context_i) encodes the causal ordering: which statistical contexts follow which. The full causal representation is:</p>
 <p>Phi(S) = Omega(S) (x) T(S)</p>
 <p>where (x) denotes the outer product. The global statistics Omega(S) capture what the signal <em>is</em>. The transition matrix T captures the <em>order</em> in which statistical contexts occur — the causal skeleton. "Dog bit man" vs "man bit dog" differs only in T, not in Omega.</p>
-<h2 id="63-compression-as-causality"><strong>6.3 Compression as Causality</strong></h2>
+<h3 id="63-compression-as-causality">6.3 Compression as Causality</h3>
 <p>The work of Wendong, Buchholz, and Scholkopf (2025) establishes that <strong>algorithmic causality emerges from compression</strong>. When we seek the shortest description of data across multiple environments, the description that generalises (compresses well across all environments) is the causal description. This connects compression theory to causal inference:</p>
 <p>If X causes Y, then the grammar inferred from X compresses Y better than the grammar inferred from Y compresses X (Budhathoki and Vreeken, 2016). The LZ parse of X generates a dictionary that efficiently describes Y — because the mechanism X -&gt; Y is reusable and compact.</p>
 <p>The conditional Omega Psi(S) implicitly implements this: the context dictionary { Omega(S|k) } is the set of reusable mechanisms that generate the signal. The transition matrix T is the directed graph of how those mechanisms chain — the causal graph.</p>
-<h1 id="7-empirical-verification-what-the-neural-network-proved"><strong>7. Empirical Verification: What the Neural Network Proved</strong></h1>
-<h2 id="71-experimental-setup"><strong>7.1 Experimental Setup</strong></h2>
+<h2 id="7-empirical-verification-what-the-neural-network-proved">7. Empirical Verification: What the Neural Network Proved</h2>
+<h3 id="71-experimental-setup">7.1 Experimental Setup</h3>
 <p>A two-layer convolutional neural network was trained on radio frequency modulation classification using amplitude envelopes of 7 signal types: AM, FM, BPSK, QPSK, QAM16, USB, and CW. The architecture consisted of 16 convolutional filters of kernel size 32, a global average pooling layer, a 32-unit hidden layer with ReLU activation, and a 7-class softmax output. The network was given no knowledge of signal processing theory — only raw amplitude samples and class labels.</p>
 <p>After training (5 epochs, 700 samples per epoch, SNR 10-20dB), all activations, weights, and gradient histories were extracted for mathematical analysis. The question: does the NN independently discover the same mathematical operators that the theory predicts?</p>
-<h2 id="72-discovery-1-the-linear-encoding-law"><strong>7.2 Discovery 1 — The Linear Encoding Law</strong></h2>
+<h3 id="72-discovery-1-the-linear-encoding-law">7.2 Discovery 1 — The Linear Encoding Law</h3>
 <p>The hidden layer activation norm ||h|| is a linear function of the theoretical kappa(D(amplitude)):</p>
 <p>||h|| = 0.603 * kappa(D(amp)) + 1.750    [r = 0.938, p = 0.0018]</p>
 <p>The NN did not compute kappa explicitly. It learned to represent signals with activation vectors whose <em>magnitude</em> encodes the burstiness of the amplitude derivative — the string attractor density. Three distinct clusters emerged:</p>
-<p><strong>Signal Class</strong></p>
-<p><strong>kappa(D(amp))</strong></p>
-<p><strong>||hidden||</strong></p>
-<p><strong>Cluster</strong></p>
-<p>AM, FM, BPSK, QPSK</p>
+<p><strong>Signal Class</strong>
+<strong>kappa(D(amp))</strong>
+<strong>||hidden||</strong>
+<strong>Cluster</strong>
+AM, FM, BPSK, QPSK</p>
 <p>~ 0</p>
 <p>1.60</p>
 <p>Dense attractors — continuous signals</p>
@@ -208,13 +285,13 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>~ 6.2</p>
 <p>5.82</p>
 <p>Sparse attractors — binary on/off</p>
-<h2 id="73-discovery-2-hidden-unit-functional-decomposition"><strong>7.3 Discovery 2 — Hidden Unit Functional Decomposition</strong></h2>
+<h3 id="73-discovery-2-hidden-unit-functional-decomposition">7.3 Discovery 2 — Hidden Unit Functional Decomposition</h3>
 <p>Of 32 hidden units, 21 mapped with R^2 &gt; 0.05 to specific Omega operator components (via correlation with engineered features computed on the same signals). The census:</p>
-<p><strong>Omega Operator</strong></p>
-<p><strong>Units</strong></p>
-<p><strong>Fraction</strong></p>
-<p><strong>Best Examples (R^2)</strong></p>
-<p>R(x) — spectral band ratios</p>
+<p><strong>Omega Operator</strong>
+<strong>Units</strong>
+<strong>Fraction</strong>
+<strong>Best Examples (R^2)</strong>
+R(x) — spectral band ratios</p>
 <p>8</p>
 <p>38%</p>
 <p>h01: 0.965, h09: 0.941, h11: 0.945</p>
@@ -235,12 +312,12 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>0%</p>
 <p>ABSENT — requires phase input</p>
 <p>The absent operator M(D^2(x)) is diagnostic. The fourth-order cumulant c40 — equivalent to kappa(D^2(phase)) — requires complex IQ input to emerge. The NN was trained on amplitude only, so it could not discover phase-dependent statistics. This is why the CNN on amplitude achieves 54% accuracy while the full Omega formula on IQ achieves 94%. The missing unit is the missing input dimension.</p>
-<h2 id="74-discovery-3-filter-algebra-primitive-vs-composite"><strong>7.4 Discovery 3 — Filter Algebra: Primitive vs Composite</strong></h2>
+<h3 id="74-discovery-3-filter-algebra-primitive-vs-composite">7.4 Discovery 3 — Filter Algebra: Primitive vs Composite</h3>
 <p>The 16 convolutional filters split 8/8 into two algebraic types when their autocorrelation structure is analysed:</p>
 <p><strong>Primitive filters</strong> (AC &lt; 0.3 at all lags): These detect irreducible transitions — they have no internal repetition structure. They correspond to Lyndon primitive words and LZ78 phrase boundaries. They activate preferentially on smooth signals (AM, FM, BPSK) where many small, irreducible changes occur.</p>
 <p><strong>Composite filters</strong> (AC &gt; 0.3 at lag 1): These detect repeated subpatterns — patterns that can be expressed as repetitions of a shorter motif. They correspond to composite Lyndon words and interior LZ78 trie nodes. They activate preferentially on structured signals (CW, QAM16) where a small number of large repeated motifs dominate.</p>
 <p>Primitive/Composite activation ratio per class: AM (4.76), FM (4.59), BPSK (4.51), QPSK (4.09), USB (0.96), QAM16 (0.46), CW (0.37). The NN independently found the Lyndon decomposition.</p>
-<h2 id="75-discovery-4-conjugate-compression-law"><strong>7.5 Discovery 4 — Conjugate Compression Law</strong></h2>
+<h3 id="75-discovery-4-conjugate-compression-law">7.5 Discovery 4 — Conjugate Compression Law</h3>
 <p>During training, the LZ complexity of the <em>gradient stream</em> was tracked alongside the LZ complexity of the <em>signal</em>:</p>
 <p>LZ(signal)</p>
 <p>Decreases as structure is learned. The model discovers redundancy in the input and stops needing to represent it.</p>
@@ -249,35 +326,35 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>These are <strong>conjugate measures</strong>. As the signal's attractor contracts (model learns to compress the input), the gradient's attractor expands (model explores richer update directions). Information is conserved — it moves from the input space into the weight space. When gradient LZ complexity plateaus, learning has stopped not because gradients are zero, but because they are repeating.</p>
 <p>LZ(signal)[t] + LZ(gradient)[t] approximately constant during training</p>
 <p>This is a <strong>conservation law for information flow</strong> during learning. It has practical implications: gradient LZ complexity is a better stopping criterion than gradient norm, because it detects semantic repetition rather than magnitude collapse.</p>
-<h2 id="76-discovery-5-ultrametric-activation-space"><strong>7.6 Discovery 5 — Ultrametric Activation Space</strong></h2>
+<h3 id="76-discovery-5-ultrametric-activation-space">7.6 Discovery 5 — Ultrametric Activation Space</h3>
 <p>The pairwise Euclidean distance matrix between class centroids in the hidden layer was tested for the <strong>ultrametric inequality</strong>:</p>
 <p>d(A, C) &lt;= max(d(A, B), d(B, C))  for all triples A, B, C</p>
 <p>An ultrametric space is equivalent to a <strong>hierarchical tree (dendrogram)</strong>. The distance matrix satisfied this inequality with only 26/210 violations (12%), confirming approximate ultrametric structure. The implied tree:</p>
 <pre><code>       ROOT      /         \\    CW        /          \\         \{QAM16,USB\}  \{AM,FM,BPSK,QPSK\}
 </code></pre>
 <p>This tree structure was <em>not</em> imposed by the training procedure — it emerged from the data. It is identical to the string attractor hierarchy predicted theoretically: signals ordered by kappa(D(x)) from sparse (CW: kappa ~ 6) through medium (QAM16, USB: kappa ~ 3) to dense (AM, FM, BPSK, QPSK: kappa ~ 0). The NN learned the attractor hierarchy as its internal geometry.</p>
-<h2 id="77-summary-the-triple-equivalence-confirmed"><strong>7.7 Summary: The Triple Equivalence Confirmed</strong></h2>
-<p><strong>Empirical Result 7.1</strong></p>
-<p>Across seven RF modulation classes (80 samples per class, SNR 15dB, n=2048):</p>
+<h3 id="77-summary-the-triple-equivalence-confirmed">7.7 Summary: The Triple Equivalence Confirmed</h3>
+<p><strong>Empirical Result 7.1</strong>
+Across seven RF modulation classes (80 samples per class, SNR 15dB, n=2048):</p>
 <p>r(kappa(D(x)), H_LZ)  = -0.9985    [p &lt;&lt; 0.001]</p>
 <p>r(kappa(D(x)), r_BWT) = -0.9848</p>
 <p>r(H_LZ, r_BWT)        = +0.9836</p>
 <p>r(kappa(D(x)), ||h||) = +0.9383    [p = 0.0018]</p>
 <p>This confirms the triple equivalence: kappa(D(x)) ≈ f(gamma*/n) ≈ f(H_LZ). The NN activation norm is a linear readout of kappa(D(x)), which is a linear readout of string attractor density.</p>
-<h1 id="8-cypha-hrna-integration-architecture"><strong>8. Cypha HRNA Integration Architecture</strong></h1>
-<h2 id="81-what-cypha-is"><strong>8.1 What Cypha Is</strong></h2>
+<h2 id="8-cypha-hrna-integration-architecture">8. Cypha HRNA Integration Architecture</h2>
+<h3 id="81-what-cypha-is">8.1 What Cypha Is</h3>
 <p>Cypha HRNA (Harmonic Recursive Neural Architecture) is a multi-modal embedding system designed to represent heterogeneous data — RF signals, audio, images, video, text, binary code — in a single unified vector space where semantic similarity corresponds to geometric proximity. It operates as the front-end encoder for downstream classification, anomaly detection, similarity search, and compression tasks in defence and intelligence contexts.</p>
 <p>The existing Cypha text encoder uses character trigrams — a fixed-lag-3 autocorrelation on the character sequence. This is equivalent to computing A(x, lag=3) — one of the five Omega operators, at a single scale. The upgrade path adds the remaining four operators and extends to non-text modalities.</p>
-<h2 id="82-the-numeric-direct-encoder-path"><strong>8.2 The Numeric-Direct Encoder Path</strong></h2>
+<h3 id="82-the-numeric-direct-encoder-path">8.2 The Numeric-Direct Encoder Path</h3>
 <p>The Omega feature vector Omega(x) in R^k must be mapped into the Cypha embedding space. The <strong>numeric-direct encoder</strong> approach achieves this without requiring separate training per modality:</p>
 <p><strong>Step 1 — Feature extraction:</strong> Compute Omega(x) on the input signal. This produces a vector of named float values: [amp_kurt:0.15, ifreq_std:1.79, band3:0.42, ac1:0.88, ...].</p>
 <p><strong>Step 2 — Key hashing:</strong> Each feature name is mapped to an embedding index via a deterministic hash: idx_k = hash(feature_name_k) mod embedding_dim. This ensures that features with similar names (amp_kurt, amp_std, amp_mean) cluster in embedding space.</p>
 <p><strong>Step 3 — Weighted placement:</strong> The embedding vector e = 0 in R^d is updated: e[idx_k] += feature_value_k * weight_k. The weights w_k are learned or set to feature importance estimates from classification experiments.</p>
 <p><strong>Step 4 — L2 normalisation:</strong> e &lt;- e / ||e||. Cosine similarity in the embedding space then measures statistical similarity between signals.</p>
 <p>The metric structure is preserved: similar Omega vectors (signals with similar statistical structure) produce similar embeddings, because the hash mapping is consistent across samples.</p>
-<h2 id="83-the-complete-processing-pipeline"><strong>8.3 The Complete Processing Pipeline</strong></h2>
-<p><strong>Cypha HRNA Universal Encoder Pipeline</strong></p>
-<p>Input: raw signal S in any domain</p>
+<h3 id="83-the-complete-processing-pipeline">8.3 The Complete Processing Pipeline</h3>
+<p><strong>Cypha HRNA Universal Encoder Pipeline</strong>
+Input: raw signal S in any domain</p>
 <p>|</p>
 <p>v</p>
 <p>[Domain detection / quantisation]</p>
@@ -297,17 +374,17 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>Output: e in R^d, L2-normalised embedding vector</p>
 <pre><code>    Metric: cosine similarity = signal similarity
 </code></pre>
-<h2 id="84-connection-to-gria"><strong>8.4 Connection to GRIA</strong></h2>
+<h3 id="84-connection-to-gria">8.4 Connection to GRIA</h3>
 <p>The GRIA (Graded Reversible-Irreversible Algebra) compression system developed in parallel with Cypha operates at the same mathematical boundary that the Lyndon factorisation identifies. Sturmian words — the "most structured" aperiodic sequences — have their Lyndon factorisation governed by the continued fraction expansion of their density, with the golden ratio phi = (1+sqrt(5))/2 marking the boundary between order and chaos.</p>
 <p>The GRIA Phi-Adic operator — which achieves optimal compression ratios at the golden-ratio boundary — and the Lyndon canonical form are computing the same object from two directions: GRIA <em>compresses</em> to the Lyndon boundary; the Lyndon factorisation <em>identifies</em> the boundary. They are mathematical duals. The Omega string attractor density kappa(D(x)) is the shared observable: it is high when GRIA achieves poor compression (random signal, large attractor) and low when GRIA achieves strong compression (structured signal, small attractor).</p>
 <p>This suggests a <strong>feedback architecture</strong>: Omega provides the classification embedding; GRIA provides the compression score; the Lyndon factorisation identifies the structural boundaries; and the CTW context tree builds the causal model. All four operating on the same data in parallel, their outputs mutually reinforcing and cross-validating.</p>
-<h2 id="85-multi-domain-performance"><strong>8.5 Multi-Domain Performance</strong></h2>
-<p><strong>Domain</strong></p>
-<p><strong>Classes</strong></p>
-<p><strong>Accuracy</strong></p>
-<p><strong>Features</strong></p>
-<p><strong>Key Operator</strong></p>
-<p>RF (SNR &gt; 20dB)</p>
+<h3 id="85-multi-domain-performance">8.5 Multi-Domain Performance</h3>
+<p><strong>Domain</strong>
+<strong>Classes</strong>
+<strong>Accuracy</strong>
+<strong>Features</strong>
+<strong>Key Operator</strong>
+RF (SNR &gt; 20dB)</p>
 <p>7 mods</p>
 <p>93.7%</p>
 <p>38</p>
@@ -338,29 +415,29 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>—</p>
 <p>kappa(D(x)) universal</p>
 <p>A single kNN-5 classifier on Omega features achieves 97.7% mean accuracy across all domains. The operators are domain-specific in their implementation (which derivative to use) but identical in their mathematical form.</p>
-<h1 id="9-boundaries-limits-and-open-problems"><strong>9. Boundaries, Limits, and Open Problems</strong></h1>
-<h2 id="91-what-omega-cannot-compute"><strong>9.1 What Omega Cannot Compute</strong></h2>
-<p><strong>Compositional structure:</strong></p>
-<p>"The dog bit the man" and "the man bit the dog" produce identical Omega(text) vectors. Compositional meaning — which depends on parse structure, not statistics — requires a full sequence model (transformer, parser). Omega can detect the <em>presence</em> of a subject-verb-object structure from spectral statistics, but cannot identify which noun is which.</p>
-<p><strong>Adversarially crafted signals:</strong></p>
-<p>An adversary who knows the Omega formula can construct a signal that maps to any target Omega vector while appearing different to human inspection. This is the same vulnerability that afflicts all fixed-feature classifiers. The conditional Omega Psi(S) is harder to fool because the context dictionary must match, but it is not adversarially robust in general.</p>
-<p><strong>Phase-destroyed information at the amplitude envelope level:</strong></p>
-<p>As demonstrated by the NN experiment: M(D^2(x)) requires phase information (IQ data) to emerge. Amplitude-only analysis cannot distinguish AM from FM at the fourth-order level — they share c40 ~ -0.94 within measurement noise at SNR &lt; 20dB. This is an information-theoretic limit, not an algorithmic one.</p>
-<p><strong>Sub-attractor-scale structure:</strong></p>
-<p>Within each string attractor region, the signal is approximately constant (same substring as an earlier occurrence). Omega statistics within attractor regions are dominated by noise. Fine-grained structure below the attractor resolution requires longer observation windows.</p>
-<h2 id="92-the-amfm-physics-limit"><strong>9.2 The AM/FM Physics Limit</strong></h2>
+<h2 id="9-boundaries-limits-and-open-problems">9. Boundaries, Limits, and Open Problems</h2>
+<h3 id="91-what-omega-cannot-compute">9.1 What Omega Cannot Compute</h3>
+<p><strong>Compositional structure:</strong>
+"The dog bit the man" and "the man bit the dog" produce identical Omega(text) vectors. Compositional meaning — which depends on parse structure, not statistics — requires a full sequence model (transformer, parser). Omega can detect the <em>presence</em> of a subject-verb-object structure from spectral statistics, but cannot identify which noun is which.</p>
+<p><strong>Adversarially crafted signals:</strong>
+An adversary who knows the Omega formula can construct a signal that maps to any target Omega vector while appearing different to human inspection. This is the same vulnerability that afflicts all fixed-feature classifiers. The conditional Omega Psi(S) is harder to fool because the context dictionary must match, but it is not adversarially robust in general.</p>
+<p><strong>Phase-destroyed information at the amplitude envelope level:</strong>
+As demonstrated by the NN experiment: M(D^2(x)) requires phase information (IQ data) to emerge. Amplitude-only analysis cannot distinguish AM from FM at the fourth-order level — they share c40 ~ -0.94 within measurement noise at SNR &lt; 20dB. This is an information-theoretic limit, not an algorithmic one.</p>
+<p><strong>Sub-attractor-scale structure:</strong>
+Within each string attractor region, the signal is approximately constant (same substring as an earlier occurrence). Omega statistics within attractor regions are dominated by noise. Fine-grained structure below the attractor resolution requires longer observation windows.</p>
+<h3 id="92-the-amfm-physics-limit">9.2 The AM/FM Physics Limit</h3>
 <p>At SNR &lt; 15dB with 2048-sample observation windows, AM and FM signals are information-theoretically indistinguishable by any fixed-window feature set. Their fourth-order cumulants satisfy c40(AM) = -0.9409 ± 0.002 and c40(FM) = -0.9396 ± 0.002 — overlapping within one standard deviation. The separability threshold requires SNR &gt; 20dB or window length &gt; 8192 samples for reliable discrimination.</p>
 <p>This is a fundamental result: the mutual information between the modulation class {AM, FM} and all statistics of the amplitude envelope at 2048 samples below SNR 15dB is below 1 bit. No algorithm — not Omega, not a deep CNN, not a matched filter — can exceed chance on this task at that operating point. Omega achieves theoretical optimum on 5 of 7 RF classes; AM/FM at low SNR is a physics boundary.</p>
-<h2 id="93-open-problems"><strong>9.3 Open Problems</strong></h2>
-<p><strong>1. The exact constant in Theorem 4.1:</strong></p>
+<h3 id="93-open-problems">9.3 Open Problems</h3>
+<h2 id="1-the-exact-constant-in-theorem-41">1. The exact constant in Theorem 4.1:</h2>
 <p>The relation kappa(D(x)) = A*(1-delta)/delta + B is established empirically with r = 0.9985. A formal proof deriving the constants A and B from the source alphabet and signal model would complete the theorem.</p>
-<p><strong>2. The conjugate conservation law:</strong></p>
+<h2 id="2-the-conjugate-conservation-law">2. The conjugate conservation law:</h2>
 <p>The observation that LZ(signal) decreases while LZ(gradient) increases during training, with their sum approximately constant, is an empirical finding. A formal proof within the information bottleneck framework (Tishby and Schwartz-Ziv, 2017) would establish it as a theorem.</p>
-<p><strong>3. The ultrametric emergence condition:</strong></p>
+<h2 id="3-the-ultrametric-emergence-condition">3. The ultrametric emergence condition:</h2>
 <p>The activation space of a trained NN becomes approximately ultrametric (12% violations from the distance matrix). Under what conditions does this hold, and what is the exact rate of convergence to a true ultrametric as training progresses? This relates to the theory of p-adic neural networks.</p>
-<p><strong>4. Phi-Adic / Lyndon duality:</strong></p>
+<h2 id="4-phi-adic-lyndon-duality">4. Phi-Adic / Lyndon duality:</h2>
 <p>The conjecture that GRIA's Phi-Adic operator and the Lyndon factorisation are mathematical duals — converging to the same optimal boundary from compression and combinatorics directions — requires formal proof. The key object to characterise is the Sturmian word distribution at the golden-ratio density boundary.</p>
-<h1 id="10-glossary-of-key-terms"><strong>10. Glossary of Key Terms</strong></h1>
+<h2 id="10-glossary-of-key-terms">10. Glossary of Key Terms</h2>
 <p>String Attractor</p>
 <p>Minimum set of positions Gamma such that every distinct substring has an occurrence crossing at least one position in Gamma. Size gamma* is the theoretical lower bound for all known compressors.</p>
 <p>LZ Complexity (z)</p>
@@ -399,27 +476,52 @@ A\(x, lags\),      // autocorrelation at log\-spaced lags \{n/16, n/8, n/4, n/2\
 <p>Harmonic Recursive Neural Architecture. The Cypha embedding system this document analyses.</p>
 <p>Algorithmic Causality</p>
 <p>Causality defined via compression: X causes Y if the grammar of X compresses Y better than vice versa. Emerges from minimising Kolmogorov complexity across environments.</p>
-<h1 id="11-key-references"><strong>11. Key References</strong></h1>
-<p><strong>Foundational:</strong></p>
-<p><em>Shannon, C.E. (1948). A Mathematical Theory of Communication. Bell System Technical Journal.</em></p>
+<h2 id="11-key-references">11. Key References</h2>
+<p><strong>Foundational:</strong>
+<em>Shannon, C.E. (1948). A Mathematical Theory of Communication. Bell System Technical Journal.</em></p>
 <p><em>Kolmogorov, A.N. (1965). Three Approaches to the Quantitative Definition of Information. Problems Inf. Transmission.</em></p>
 <p><em>Ziv, J. &amp; Lempel, A. (1977). A Universal Algorithm for Sequential Data Compression. IEEE Trans. Inf. Theory.</em></p>
 <p><em>Ziv, J. &amp; Lempel, A. (1978). Compression of Individual Sequences via Variable-Rate Coding. IEEE Trans. Inf. Theory.</em></p>
-<p><strong>Information Structures:</strong></p>
-<p><em>Willems, F., Shtarkov, Y., Tjalkens, T. (1995). The Context-Tree Weighting Method: Basic Properties. IEEE Trans. Inf. Theory.</em></p>
+<p><strong>Information Structures:</strong>
+<em>Willems, F., Shtarkov, Y., Tjalkens, T. (1995). The Context-Tree Weighting Method: Basic Properties. IEEE Trans. Inf. Theory.</em></p>
 <p><em>Coifman, R.R. &amp; Wickerhauser, M.V. (1992). Entropy-Based Algorithms for Best Basis Selection. IEEE Trans. Inf. Theory.</em></p>
 <p><em>Daubechies, I. (1992). Ten Lectures on Wavelets. SIAM.</em></p>
 <p><em>Chen, K.T., Fox, R.H., Lyndon, R.C. (1958). Free Differential Calculus IV. Annals of Mathematics.</em></p>
-<p><strong>String Attractors:</strong></p>
-<p><em>Kempa, D. &amp; Prezza, N. (2018). At the Roots of Dictionary Compression: String Attractors. STOC 2018.</em></p>
+<p><strong>String Attractors:</strong>
+<em>Kempa, D. &amp; Prezza, N. (2018). At the Roots of Dictionary Compression: String Attractors. STOC 2018.</em></p>
 <p><em>Mantaci, S., Restivo, A., Romana, G., Rosone, G., Sciortino, M. (2021). A Combinatorial View on String Attractors. TCS.</em></p>
-<p><strong>Causality and Compression:</strong></p>
-<p><em>Wendong, L., Buchholz, S., Scholkopf, B. (2025). Algorithmic Causal Structure Emerging Through Compression. CLeaR 2025.</em></p>
+<p><strong>Causality and Compression:</strong>
+<em>Wendong, L., Buchholz, S., Scholkopf, B. (2025). Algorithmic Causal Structure Emerging Through Compression. CLeaR 2025.</em></p>
 <p><em>Budhathoki, K. &amp; Vreeken, J. (2016). Causal Inference by Compression. IEEE ICDM.</em></p>
-<p><strong>Neural Network Theory:</strong></p>
-<p><em>Tishby, N. &amp; Schwartz-Ziv, R. (2017). Opening the Black Box of Deep Neural Networks via Information. arXiv.</em></p>
-<p><strong>Cypha / GRIA:</strong></p>
-<p><em>Internal technical documentation, 2024-2026.</em></p>
-  </main>
+<p><strong>Neural Network Theory:</strong>
+<em>Tishby, N. &amp; Schwartz-Ziv, R. (2017). Opening the Black Box of Deep Neural Networks via Information. arXiv.</em></p>
+<p><strong>Cypha / GRIA:</strong>
+<em>Internal technical documentation, 2024-2026.</em></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

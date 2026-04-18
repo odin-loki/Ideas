@@ -3,40 +3,108 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>cypha wasserstein</title>
+  <meta name="description" content="We develop a comprehensive analysis of the CyphaDIF online classifier through the lens of optimal transport theory and Wasserstein geometry. Nine probes are conducted, each addressing a distinct aspect of the Wasserstein structure of the class distributions. Key findings:…"/>
+  <title>Optimal Transport and Wasserstein Geometry of the Differential Information Field Classifier · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v8\cypha_wasserstein.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Optimal Transport and Wasserstein Geometry</strong></p>
-<p><strong>of the Differential Information Field Classifier</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-setup-and-background">2. Setup and Background</a></li>
+        <li class="toc-depth-3"><a href="#21-closed-form-w2-for-diagonal-gaussians">2.1 Closed-Form W2 for Diagonal Gaussians</a></li>
+        <li class="toc-depth-3"><a href="#22-experimental-configuration">2.2 Experimental Configuration</a></li>
+        <li class="toc-depth-2"><a href="#3-analytical-wasserstein-2-distances">3. Analytical Wasserstein-2 Distances</a></li>
+        <li class="toc-depth-3"><a href="#31-model-vs-empirical-w2">3.1 Model vs Empirical W2</a></li>
+        <li class="toc-depth-3"><a href="#32-closest-and-farthest-class-pairs">3.2 Closest and Farthest Class Pairs</a></li>
+        <li class="toc-depth-2"><a href="#4-wasserstein-barycenter">4. Wasserstein Barycenter</a></li>
+        <li class="toc-depth-3"><a href="#41-the-frechet-mean-under-w2">4.1 The Fréchet Mean Under W2</a></li>
+        <li class="toc-depth-3"><a href="#42-barycenter-vs-world-prior">4.2 Barycenter vs World Prior</a></li>
+        <li class="toc-depth-3"><a href="#43-class-distances-to-the-barycenter">4.3 Class Distances to the Barycenter</a></li>
+        <li class="toc-depth-2"><a href="#5-optimal-transport-plan-analysis">5. Optimal Transport Plan Analysis</a></li>
+        <li class="toc-depth-3"><a href="#51-the-ot-plan-for-diagonal-gaussians">5.1 The OT Plan for Diagonal Gaussians</a></li>
+        <li class="toc-depth-3"><a href="#52-ot-plan-for-the-hardest-pair-bin_malware-bin_benign">5.2 OT Plan for the Hardest Pair: bin_malware ↔ bin_benign</a></li>
+        <li class="toc-depth-3"><a href="#53-ot-plan-for-the-easiest-pair-net_scan-bin_malware">5.3 OT Plan for the Easiest Pair: net_scan ↔ bin_malware</a></li>
+        <li class="toc-depth-3"><a href="#54-ot-distortion-vs-w2-distance">5.4 OT Distortion vs W2 Distance</a></li>
+        <li class="toc-depth-2"><a href="#6-sliced-wasserstein-2-distance">6. Sliced Wasserstein-2 Distance</a></li>
+        <li class="toc-depth-3"><a href="#61-method">6.1 Method</a></li>
+        <li class="toc-depth-3"><a href="#62-results">6.2 Results</a></li>
+        <li class="toc-depth-3"><a href="#63-most-discriminant-projection-direction">6.3 Most Discriminant Projection Direction</a></li>
+        <li class="toc-depth-2"><a href="#7-wasserstein-geodesic-interpolation">7. Wasserstein Geodesic Interpolation</a></li>
+        <li class="toc-depth-3"><a href="#71-w2-geodesics-and-decision-boundaries">7.1 W2 Geodesics and Decision Boundaries</a></li>
+        <li class="toc-depth-3"><a href="#72-geodesic-boundary-crossings">7.2 Geodesic Boundary Crossings</a></li>
+        <li class="toc-depth-3"><a href="#73-full-geodesic-trace-bin_malware-bin_benign">7.3 Full Geodesic Trace: bin_malware → bin_benign</a></li>
+        <li class="toc-depth-2"><a href="#8-triangle-inequality-tightness">8. Triangle Inequality Tightness</a></li>
+        <li class="toc-depth-3"><a href="#81-tightest-triangles-best-two-hop-routes">8.1 Tightest Triangles (Best Two-Hop Routes)</a></li>
+        <li class="toc-depth-3"><a href="#82-loosest-triangles-no-good-two-hop-route">8.2 Loosest Triangles (No Good Two-Hop Route)</a></li>
+        <li class="toc-depth-2"><a href="#9-wasserstein-pca">9. Wasserstein PCA</a></li>
+        <li class="toc-depth-3"><a href="#91-tangent-space-pca-at-the-barycenter">9.1 Tangent Space PCA at the Barycenter</a></li>
+        <li class="toc-depth-3"><a href="#92-variance-decomposition-mean-vs-covariance-components">9.2 Variance Decomposition: Mean vs Covariance Components</a></li>
+        <li class="toc-depth-3"><a href="#93-class-positions-in-wasserstein-pc-space">9.3 Class Positions in Wasserstein PC Space</a></li>
+        <li class="toc-depth-2"><a href="#10-gradient-flow-interpretation-of-mdl-decay">10. Gradient Flow Interpretation of MDL Decay</a></li>
+        <li class="toc-depth-3"><a href="#101-the-variational-formulation">10.1 The Variational Formulation</a></li>
+        <li class="toc-depth-3"><a href="#102-energy-functional-values">10.2 Energy Functional Values</a></li>
+        <li class="toc-depth-3"><a href="#103-convergence-to-stationarity">10.3 Convergence to Stationarity</a></li>
+        <li class="toc-depth-2"><a href="#11-model-misspecification-via-w2">11. Model Misspecification via W2</a></li>
+        <li class="toc-depth-3"><a href="#111-w2-between-empirical-and-model-distributions">11.1 W2 Between Empirical and Model Distributions</a></li>
+        <li class="toc-depth-3"><a href="#112-the-misspecification-scale">11.2 The Misspecification Scale</a></li>
+        <li class="toc-depth-3"><a href="#113-implications-for-enhancement">11.3 Implications for Enhancement</a></li>
+        <li class="toc-depth-2"><a href="#12-synthesis">12. Synthesis</a></li>
+        <li class="toc-depth-2"><a href="#13-conclusion">13. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Optimal Transport and Wasserstein Geometry of the Differential Information Field Classifier</h1>
+          <p class="doc-meta">Cypha\Cypha v8\cypha_wasserstein.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>Bures Metric • Wasserstein Barycenters • OT Plans • Sliced W2 • Geodesic Interpolation • Gradient Flow</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Bures Metric • Wasserstein Barycenters • OT Plans • Sliced W2 • Geodesic Interpolation • Gradient Flow</em></p>
 <p>Unpublished Technical Report  —  2026</p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We develop a comprehensive analysis of the CyphaDIF online classifier through the lens of optimal transport theory and Wasserstein geometry. Nine probes are conducted, each addressing a distinct aspect of the Wasserstein structure of the class distributions. Key findings: <strong>(1)</strong> The Wasserstein-2 distance between class distributions equals the Euclidean distance between class means when variances are shared (Bures term zero), but empirical per-class covariance contributes 18% of the total W2. <strong>(2)</strong> The Wasserstein barycenter (Fréchet mean under W2) lies at W2 distance 0.040 from the learned world prior μ₀, establishing that the world prior is an empirically accurate Fréchet mean of the class distributions. <strong>(3)</strong> The optimal transport plan from bin_malware to bin_benign (the hardest pair) requires only neutral scaling (no dimension stretched beyond 2×), while the easiest pair (net_scan ↔ bin_malware) requires 89 dimensions to stretch beyond 2×. <strong>(4)</strong> Sliced Wasserstein-2 correlates at r = 0.533 with full W2, indicating significant non-Euclidean structure in the high-dimensional distribution geometry. <strong>(5)</strong> W2 geodesics from bin_malware to bin_benign cross the decision boundary at t = 0.51, confirming the boundary is located near the midpoint of the shortest transport path. <strong>(6)</strong> The MDL decay operator is exactly the proximal gradient step of a W2-regularised maximum likelihood energy functional, establishing a precise variational interpretation of the training dynamics. <strong>(7)</strong> Model misspecification W2 (empirical distribution vs assumed N(μk, v₀)) averages 1.746, equal to the inter-class W2 of 1.737 — the model is as far from the data as classes are from each other, identifying model misspecification as the primary accuracy ceiling.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Optimal transport (OT) theory provides a family of distances between probability distributions that, unlike KL divergence, are sensitive to the geometry of the underlying space. The Wasserstein-2 metric W2 between two distributions μ, ν on ℝᵈ is the infimum of the expected squared transport cost over all joint distributions with marginals μ and ν [1,2]:</p>
 <p>W2(μ,ν)² = inf_{γ ∈ Γ(μ,ν)} ∫ |x - y|² dγ(x,y)</p>
 <p>For Gaussian distributions, W2 has a closed-form expression via the Bures metric [3,4], making it analytically tractable for the CyphaDIF classifier, whose class models are diagonal Gaussians N(μk, v₀) sharing a world prior variance. This paper systematically applies OT theory to characterise the geometry of the CyphaDIF class configuration, the structure of the optimal transport plans between classes, and the Wasserstein-geometric interpretation of the training dynamics.</p>
-<p>__Why Wasserstein geometry beyond KL? __KL divergence D_KL(μi||μj) and Fisher-Rao distance d_FR(i,j) measure how much one distribution must change to become another, but they are asymmetric (KL) or assume a specific metric structure (Fisher-Rao). The Wasserstein metric is symmetric, satisfies the triangle inequality, and measures the minimum cost of physically transporting mass from one distribution to another — a more operationally meaningful notion of distribution distance for a classifier that must separate classes in latent space. Moreover, W2 induces a Riemannian structure on the space of Gaussians (the Bures-Wasserstein manifold) that is distinct from the Fisher-Rao structure and reveals different geometric properties.</p>
-<p>__Organisation. __Section 2 describes the setup. Sections 3–11 present the nine OT probes. Section 12 synthesises and identifies enhancement directions.</p>
-<h1 id="2-setup-and-background"><strong>2. Setup and Background</strong></h1>
-<h2 id="21-closed-form-w2-for-diagonal-gaussians"><strong>2.1 Closed-Form W2 for Diagonal Gaussians</strong></h2>
+<p><strong>Why Wasserstein geometry beyond KL?</strong> KL divergence D_KL(μi||μj) and Fisher-Rao distance d_FR(i,j) measure how much one distribution must change to become another, but they are asymmetric (KL) or assume a specific metric structure (Fisher-Rao). The Wasserstein metric is symmetric, satisfies the triangle inequality, and measures the minimum cost of physically transporting mass from one distribution to another — a more operationally meaningful notion of distribution distance for a classifier that must separate classes in latent space. Moreover, W2 induces a Riemannian structure on the space of Gaussians (the Bures-Wasserstein manifold) that is distinct from the Fisher-Rao structure and reveals different geometric properties.<strong> Organisation.</strong> Section 2 describes the setup. Sections 3–11 present the nine OT probes. Section 12 synthesises and identifies enhancement directions.</p>
+<h2 id="2-setup-and-background">2. Setup and Background</h2>
+<h3 id="21-closed-form-w2-for-diagonal-gaussians">2.1 Closed-Form W2 for Diagonal Gaussians</h3>
 <p>For Gaussian distributions N(μi, Σi) and N(μj, Σj), the Wasserstein-2 distance has the closed form [3,5]:</p>
 <p>W2²(N(μi,Σi), N(μj,Σj)) = ||μi - μj||² + B²(Σi, Σj)</p>
 <p>Bures term:  B²(Σi, Σj) = tr(Σi) + tr(Σj) - 2 tr[(Σi¹ᐟ² Σj Σi¹ᐟ²)¹ᐟ²]</p>
 <p>For diagonal Σi = diag(ai), Σj = diag(aj):</p>
 <p>B² = Σ_d (√ai_d - √aj_d)²       [pointwise square-root difference]</p>
 <p>When Σi = Σj (shared covariance), the Bures term is zero and W2 reduces exactly to the Euclidean distance between means. CyphaDIF's model-level distributions all share the world prior variance v₀, so model-level W2 is Euclidean. Empirical per-class covariances (measured from the encoded training samples) differ across classes, giving non-zero Bures terms.</p>
-<h2 id="22-experimental-configuration"><strong>2.2 Experimental Configuration</strong></h2>
+<h3 id="22-experimental-configuration">2.2 Experimental Configuration</h3>
 <p>All probes use CyphaDIF trained to convergence on 100 samples/class × 3 epochs across 10 classes. Empirical per-class covariance matrices Ĥk are estimated from the encoded training samples h = Wf. W2 distances use the diagonal approximation Ĥk ≈ diag(var(Hk)) for computational tractability in 128 dimensions.</p>
-<p><strong>Probe</strong></p>
-<p><strong>Topic</strong></p>
-<p>W1</p>
+<p><strong>Probe</strong>
+<strong>Topic</strong>
+W1</p>
 <p>Analytical W2 distances and Bures metric contribution</p>
 <p>W2</p>
 <p>Wasserstein barycenter and world prior proximity</p>
@@ -54,15 +122,15 @@
 <p>Gradient flow interpretation of MDL decay</p>
 <p>W9</p>
 <p>Model misspecification via W2 from empirical to model</p>
-<h1 id="3-analytical-wasserstein-2-distances"><strong>3. Analytical Wasserstein-2 Distances</strong></h1>
-<h2 id="31-model-vs-empirical-w2"><strong>3.1 Model vs Empirical W2</strong></h2>
+<h2 id="3-analytical-wasserstein-2-distances">3. Analytical Wasserstein-2 Distances</h2>
+<h3 id="31-model-vs-empirical-w2">3.1 Model vs Empirical W2</h3>
 <p>We compute W2 at two levels: model-level (class centroids μk with shared v₀) and empirical-level (per-class sample means and diagonal covariances from encoded training data).</p>
-<p><strong>Metric</strong></p>
-<p><strong>Mean</strong></p>
-<p><strong>Std</strong></p>
-<p><strong>Min</strong></p>
-<p><strong>Max</strong></p>
-<p>Model W2 (= Euclidean, shared cov)</p>
+<p><strong>Metric</strong>
+<strong>Mean</strong>
+<strong>Std</strong>
+<strong>Min</strong>
+<strong>Max</strong>
+Model W2 (= Euclidean, shared cov)</p>
 <p>1.700</p>
 <p>0.342</p>
 <p>—</p>
@@ -82,14 +150,13 @@
 <p>3.7%</p>
 <p>—</p>
 <p>—</p>
-<p>__Bures contribution: 18.0% of total W2. __Per-class covariance variability accounts for 18% of the total Wasserstein distance between classes. This is non-trivial: it means the model-level W2 (pure Euclidean) underestimates the actual distributional separation by 18% on average. The Bures term reflects that different classes have different within-class feature variance in the latent space — binary classes (bin_malware, bin_benign) have high variance from random payloads; log classes have very low variance from their templated format. Transport from a high-variance to a low-variance distribution requires covariance compression, which costs extra in W2.</p>
-<p>__Metric correlations. __The model W2 correlates with empirical W2 at r = 0.996 (near-identical ordering). The empirical W2 correlates with √KL at r = 0.967, confirming that the three distance measures rank pairs similarly but not identically. The exceptions are pairs where one class has anomalously high variance — these rank lower in KL (which is variance-insensitive between same-variance models) but higher in empirical W2 (where the Bures term penalises covariance mismatch).</p>
-<h2 id="32-closest-and-farthest-class-pairs"><strong>3.2 Closest and Farthest Class Pairs</strong></h2>
-<p><strong>Rank</strong></p>
-<p><strong>Pair</strong></p>
-<p><strong>Empirical W2</strong></p>
-<p><strong>KL (for comparison)</strong></p>
-<p>1 (closest)</p>
+<p><strong>Bures contribution: 18.0% of total W2.</strong> Per-class covariance variability accounts for 18% of the total Wasserstein distance between classes. This is non-trivial: it means the model-level W2 (pure Euclidean) underestimates the actual distributional separation by 18% on average. The Bures term reflects that different classes have different within-class feature variance in the latent space — binary classes (bin_malware, bin_benign) have high variance from random payloads; log classes have very low variance from their templated format. Transport from a high-variance to a low-variance distribution requires covariance compression, which costs extra in W2.<strong> Metric correlations.</strong> The model W2 correlates with empirical W2 at r = 0.996 (near-identical ordering). The empirical W2 correlates with √KL at r = 0.967, confirming that the three distance measures rank pairs similarly but not identically. The exceptions are pairs where one class has anomalously high variance — these rank lower in KL (which is variance-insensitive between same-variance models) but higher in empirical W2 (where the Bures term penalises covariance mismatch).</p>
+<h3 id="32-closest-and-farthest-class-pairs">3.2 Closest and Farthest Class Pairs</h3>
+<p><strong>Rank</strong>
+<strong>Pair</strong>
+<strong>Empirical W2</strong>
+<strong>KL (for comparison)</strong>
+1 (closest)</p>
 <p>bin_malware ↔ bin_benign</p>
 <p>1.056</p>
 <p>43.97</p>
@@ -121,26 +188,26 @@
 <p>log_error ↔ bin_malware</p>
 <p>2.376</p>
 <p>—</p>
-<p>__bin_malware is the most extreme class in W2 space. __It appears in all 5 farthest pairs — every class is far from bin_malware in W2. This is explained by its high within-class variance (random 16-40 byte payload after a 4-byte header), which generates a large, diffuse latent distribution. The Bures term between bin_malware and any compact-distribution class (net_scan, net_c2, log_*) is large because √σ_malware ≈ several × √σ_other.</p>
-<h1 id="4-wasserstein-barycenter"><strong>4. Wasserstein Barycenter</strong></h1>
-<h2 id="41-the-frechet-mean-under-w2"><strong>4.1 The Fréchet Mean Under W2</strong></h2>
+<p><strong>bin_malware is the most extreme class in W2 space.</strong> It appears in all 5 farthest pairs — every class is far from bin_malware in W2. This is explained by its high within-class variance (random 16-40 byte payload after a 4-byte header), which generates a large, diffuse latent distribution. The Bures term between bin_malware and any compact-distribution class (net_scan, net_c2, log_*) is large because √σ_malware ≈ several × √σ_other.</p>
+<h2 id="4-wasserstein-barycenter">4. Wasserstein Barycenter</h2>
+<h3 id="41-the-frechet-mean-under-w2">4.1 The Fréchet Mean Under W2</h3>
 <p>The Wasserstein barycenter [6] of a set of distributions {μk} with uniform weights is the distribution μ̅ minimising the total squared W2 distance:</p>
 <p>μ̅ = argmin_μ Σ_k W2(μ, μk)²</p>
 <p>For Gaussians N(μk, Σk):</p>
 <p>Mean component:  μ̅ = (1/K) Σ μk     [linear average]</p>
 <p>Cov component:   Σ̅ = fixed point of  S = (1/K) Σ (S¹ᐟ² Σk S¹ᐟ²)¹ᐟ²</p>
 <p>Diagonal case:   σ̅_d = ((1/K) Σ_k √Σk_dd)²   [average of std devs, then square]</p>
-<h2 id="42-barycenter-vs-world-prior"><strong>4.2 Barycenter vs World Prior</strong></h2>
+<h3 id="42-barycenter-vs-world-prior">4.2 Barycenter vs World Prior</h3>
 <p>The central question: does the learned world prior μ₀ coincide with the Wasserstein barycenter of the class distributions? If yes, the MDL decay term is pulling class centroids toward the optimal Fréchet mean of the class configuration — a geometrically principled regulariser.</p>
-<p><strong>Result</strong></p>
-<p>W2(world prior μ₀, barycenter μ̅) = 0.0402. The world prior is within W2 distance 0.04 of the exact Wasserstein barycenter. Given a mean inter-class W2 of 1.737, the prior sits at 2.3% of the inter-class scale from the barycenter.</p>
-<p>__This is a non-trivial structural result. __The world prior is learned online via Welford's algorithm on the mixed-class data stream. There is no explicit barycenter computation anywhere in the CyphaDIF code. Yet the world prior converges to within 2.3% of the exact Wasserstein barycenter. This occurs because the Welford mean update converges to the empirical mean of the data distribution, which — when data is drawn uniformly across classes — is precisely the arithmetic mean of the class means, which equals the barycenter mean component for Gaussian distributions.</p>
+<p><strong>Result</strong>
+W2(world prior μ₀, barycenter μ̅) = 0.0402. The world prior is within W2 distance 0.04 of the exact Wasserstein barycenter. Given a mean inter-class W2 of 1.737, the prior sits at 2.3% of the inter-class scale from the barycenter.</p>
+<p><strong>This is a non-trivial structural result.</strong> The world prior is learned online via Welford's algorithm on the mixed-class data stream. There is no explicit barycenter computation anywhere in the CyphaDIF code. Yet the world prior converges to within 2.3% of the exact Wasserstein barycenter. This occurs because the Welford mean update converges to the empirical mean of the data distribution, which — when data is drawn uniformly across classes — is precisely the arithmetic mean of the class means, which equals the barycenter mean component for Gaussian distributions.</p>
 <p>The world prior's covariance v₀ similarly converges to the mixed-class empirical variance, which is a biased estimate of the barycenter covariance (it includes between-class variance). The small discrepancy W2 = 0.040 reflects this bias.</p>
-<h2 id="43-class-distances-to-the-barycenter"><strong>4.3 Class Distances to the Barycenter</strong></h2>
-<p><strong>Class</strong></p>
-<p><strong>W2 to barycenter</strong></p>
-<p><strong>Relative position</strong></p>
-<p>log_info</p>
+<h3 id="43-class-distances-to-the-barycenter">4.3 Class Distances to the Barycenter</h3>
+<p><strong>Class</strong>
+<strong>W2 to barycenter</strong>
+<strong>Relative position</strong>
+log_info</p>
 <p>0.745</p>
 <p>← closest to barycenter</p>
 <p>net_ddos</p>
@@ -163,8 +230,8 @@
 <p>1.654</p>
 <p>← farthest from barycenter</p>
 <p>The standard deviation of W2-to-barycenter is 0.243, which is <em>uniform spread</em> by the criteria of the OT literature [7]: no class is an extreme outlier in W2 space. The MDL decay term λ·Δμk attracts each centroid back toward the barycenter with strength proportional to its W2 distance from the prior. Since the prior ≈ barycenter, the MDL decay implements a barycenter-centring force, homogenising the centroid configuration around the Fréchet mean. Classes far from the barycenter (bin_malware) face stronger MDL pull, which explains why bin_malware requires the largest ||Δμ|| (Section Probe W8) to maintain its geometric position against the regularisation.</p>
-<h1 id="5-optimal-transport-plan-analysis"><strong>5. Optimal Transport Plan Analysis</strong></h1>
-<h2 id="51-the-ot-plan-for-diagonal-gaussians"><strong>5.1 The OT Plan for Diagonal Gaussians</strong></h2>
+<h2 id="5-optimal-transport-plan-analysis">5. Optimal Transport Plan Analysis</h2>
+<h3 id="51-the-ot-plan-for-diagonal-gaussians">5.1 The OT Plan for Diagonal Gaussians</h3>
 <p>The optimal transport plan between diagonal Gaussians N(μi, diag(vi)) and N(μj, diag(vj)) is the linear map [3,8]:</p>
 <p>T*_{i→j}(x) = S_{ij} ⊙ (x - μi) + μj</p>
 <p>where S_{ij} = diag(√(vj_d / vi_d))   [pointwise std ratio]</p>
@@ -172,29 +239,29 @@
 <p>S_d &gt; 1  → OT stretches dimension d (class j more variable)</p>
 <p>S_d &lt; 1  → OT compresses dimension d (class j less variable)</p>
 <p>S_d = 1  → pure translation (same variance, just shift)</p>
-<h2 id="52-ot-plan-for-the-hardest-pair-bin_malware-bin_benign"><strong>5.2 OT Plan for the Hardest Pair: bin_malware ↔ bin_benign</strong></h2>
-<p><strong>OT Plan Analysis</strong></p>
-<p>W2 = 1.056 (closest pair).<em> All 128 dimensions are in the neutral band (0.5 ≤ S ≤ 2.0). Mean scaling S̅ = 0.971, std = 0.098. OT distortion cost ||S−1||² = 1.348.</em></p>
+<h3 id="52-ot-plan-for-the-hardest-pair-bin_malware-bin_benign">5.2 OT Plan for the Hardest Pair: bin_malware ↔ bin_benign</h3>
+<p><strong>OT Plan Analysis</strong>
+W2 = 1.056 (closest pair).<em> All 128 dimensions are in the neutral band (0.5 ≤ S ≤ 2.0). Mean scaling S̅ = 0.971, std = 0.098. OT distortion cost ||S−1||² = 1.348.</em></p>
 <p>The OT plan from bin_malware to bin_benign is almost a pure translation — no dimension requires stretching beyond 2×. Both classes have similarly high latent variance (random payload generates high-entropy features), so the per-dimension variance ratios are near 1. The W2 distance here is dominated by the mean-shift term, not by covariance mismatch.</p>
-<h2 id="53-ot-plan-for-the-easiest-pair-net_scan-bin_malware"><strong>5.3 OT Plan for the Easiest Pair: net_scan ↔ bin_malware</strong></h2>
-<p><strong>OT Plan Analysis</strong></p>
-<p>W2 = 2.387 (farthest pair). 89 of 128 dimensions require stretching beyond 2×. 0 dimensions require compression. Mean scaling S̅ = 3.20, std = 1.86. OT distortion cost = 1,062.</p>
+<h3 id="53-ot-plan-for-the-easiest-pair-net_scan-bin_malware">5.3 OT Plan for the Easiest Pair: net_scan ↔ bin_malware</h3>
+<p><strong>OT Plan Analysis</strong>
+W2 = 2.387 (farthest pair). 89 of 128 dimensions require stretching beyond 2×. 0 dimensions require compression. Mean scaling S̅ = 3.20, std = 1.86. OT distortion cost = 1,062.</p>
 <p>The OT plan from net_scan to bin_malware is highly non-trivial: the classifier must stretch 69.5% of latent dimensions by more than 2× to map the compact net_scan distribution (consistent packet format → low variance) onto the diffuse bin_malware distribution (random payload → high variance). The 800× difference in distortion cost between the hardest and easiest pairs quantifies how much richer the transport structure is for well-separated classes.</p>
-<h2 id="54-ot-distortion-vs-w2-distance"><strong>5.4 OT Distortion vs W2 Distance</strong></h2>
+<h3 id="54-ot-distortion-vs-w2-distance">5.4 OT Distortion vs W2 Distance</h3>
 <p>The correlation between OT distortion cost and W2 distance is only r = 0.279. This low correlation establishes that W2 distance and OT plan complexity are genuinely different quantities: a pair can be close in W2 (small mean shift + similar variances) while requiring a complex OT plan (many stretched dimensions), or far in W2 while requiring a simple plan (mostly translation).</p>
 <p>The practical implication: the OT plan complexity identifies which class transitions are mechanistically hard for the classifier to interpolate through (e.g. any class ↔ bin_malware), even when W2 distance is not extreme. This is relevant for adversarial inputs — an attacker crafting an input that gradually transitions from net_scan format to binary format would encounter the complex OT plan in the classifier's latent space.</p>
-<h1 id="6-sliced-wasserstein-2-distance"><strong>6. Sliced Wasserstein-2 Distance</strong></h1>
-<h2 id="61-method"><strong>6.1 Method</strong></h2>
+<h2 id="6-sliced-wasserstein-2-distance">6. Sliced Wasserstein-2 Distance</h2>
+<h3 id="61-method">6.1 Method</h3>
 <p>Computing exact W2 in high dimensions requires solving a linear program (the Earth Mover's distance), which is Ο(n³ log n) for empirical distributions. The sliced Wasserstein-2 distance [9,10] avoids this by averaging 1D W2 distances over random projections:</p>
 <p>SW2(μ, ν) = (E_θ[∞Sᵈ⁻¹] W2(θ‣μ, θ‣ν)²)¹ᐟ²</p>
 <p>where θ‣μ is the push-forward (projection) of μ onto direction θ.</p>
 <p>In 1D: W2²(θ‣μ, θ‣ν) = ∫ |F_μ⁻¹(t) - F_ν⁻¹(t)|² dt  [quantile L2]</p>
 <p>We use 500 random projections and 200 empirical samples per class.</p>
-<h2 id="62-results"><strong>6.2 Results</strong></h2>
-<p><strong>Statistic</strong></p>
-<p><strong>SW2</strong></p>
-<p><strong>W2_emp (for comparison)</strong></p>
-<p>Mean (all pairs)</p>
+<h3 id="62-results">6.2 Results</h3>
+<p><strong>Statistic</strong>
+<strong>SW2</strong>
+<strong>W2_emp (for comparison)</strong>
+Mean (all pairs)</p>
 <p>0.161</p>
 <p>1.737</p>
 <p>Std</p>
@@ -206,23 +273,22 @@
 <p>Max</p>
 <p>0.228</p>
 <p>2.387</p>
-<p>__SW2 is 10.8× smaller than W2 on average. __This is expected: slicing projects 128-dimensional distributions onto 1D lines, dramatically reducing the apparent distance. In 1D, even very different distributions overlap substantially unless they are separated along the projection direction. The ratio SW2/W2 ≈ 0.093 is a measure of the ‘concentration’ of the distributional difference: the class separation is concentrated in a few critical directions rather than spread uniformly across all 128 dimensions.</p>
-<p>__Correlation SW2 vs W2: r = 0.533. __This moderate correlation indicates that the class pair ranking differs substantially between full-space and sliced metrics. The pairs that are far apart in full W2 (those involving bin_malware's covariance mismatch) are not necessarily far in SW2, because random projections rarely align with the specific high-variance dimensions of bin_malware. This reveals non-Euclidean structure in the distribution geometry that the sliced metric captures differently than the full metric.</p>
-<h2 id="63-most-discriminant-projection-direction"><strong>6.3 Most Discriminant Projection Direction</strong></h2>
+<p><strong>SW2 is 10.8× smaller than W2 on average.</strong> This is expected: slicing projects 128-dimensional distributions onto 1D lines, dramatically reducing the apparent distance. In 1D, even very different distributions overlap substantially unless they are separated along the projection direction. The ratio SW2/W2 ≈ 0.093 is a measure of the ‘concentration’ of the distributional difference: the class separation is concentrated in a few critical directions rather than spread uniformly across all 128 dimensions.<strong> Correlation SW2 vs W2: r = 0.533.</strong> This moderate correlation indicates that the class pair ranking differs substantially between full-space and sliced metrics. The pairs that are far apart in full W2 (those involving bin_malware's covariance mismatch) are not necessarily far in SW2, because random projections rarely align with the specific high-variance dimensions of bin_malware. This reveals non-Euclidean structure in the distribution geometry that the sliced metric captures differently than the full metric.</p>
+<h3 id="63-most-discriminant-projection-direction">6.3 Most Discriminant Projection Direction</h3>
 <p>Maximising the total pairwise separation over 200 random unit vectors yields a best discriminant direction achieving total pairwise separation 12.07. The projected class means along this direction (bin_malware = -0.58, bin_benign = -0.42, others near 0) reveal that the maximally discriminant direction in 128D primarily separates the binary classes from the network/log classes, consistent with their high latent variance and distinct mean positions.</p>
-<h1 id="7-wasserstein-geodesic-interpolation"><strong>7. Wasserstein Geodesic Interpolation</strong></h1>
-<h2 id="71-w2-geodesics-and-decision-boundaries"><strong>7.1 W2 Geodesics and Decision Boundaries</strong></h2>
+<h2 id="7-wasserstein-geodesic-interpolation">7. Wasserstein Geodesic Interpolation</h2>
+<h3 id="71-w2-geodesics-and-decision-boundaries">7.1 W2 Geodesics and Decision Boundaries</h3>
 <p>The W2 geodesic between N(μi, Σi) and N(μj, Σj) is the constant-speed path of minimal transport cost [2,11]:</p>
 <p>μ(t) = (1-t)μi + tμj          [mean component: linear interpolation]</p>
 <p>σ(t) = (1-t)√Σi + t√Σj       [std component: linear in square roots]</p>
 <p>Σ(t) = σ(t)² = [(1-t)√Σi + t√Σj]²  [diagonal case: pointwise]</p>
 <p>Applying the classifier to the interpolated distribution μ_t identifies where along the geodesic the decision boundary is located. This is the transport-geometric analogue of finding the classifier's decision surface.</p>
-<h2 id="72-geodesic-boundary-crossings"><strong>7.2 Geodesic Boundary Crossings</strong></h2>
-<p><strong>Pair (by W2 proximity)</strong></p>
-<p><strong>t_cross</strong></p>
-<p><strong>Cross to</strong></p>
-<p><strong>Monotone?</strong></p>
-<p>bin_malware ↔ bin_benign</p>
+<h3 id="72-geodesic-boundary-crossings">7.2 Geodesic Boundary Crossings</h3>
+<p><strong>Pair (by W2 proximity)</strong>
+<strong>t_cross</strong>
+<strong>Cross to</strong>
+<strong>Monotone?</strong>
+bin_malware ↔ bin_benign</p>
 <p>0.510</p>
 <p>bin_benign</p>
 <p>YES — single clean crossing</p>
@@ -242,14 +308,14 @@
 <p>0.000</p>
 <p>log_error</p>
 <p>YES — net_ddos not at centroid</p>
-<p>__The bin_malware ↔ bin_benign geodesic crosses at t = 0.510. __The decision boundary between the two binary classes is located at 51% of the Wasserstein geodesic from bin_malware to bin_benign — almost exactly at the geometric midpoint. This is the expected result for a Bayes-optimal classifier with equal priors: the boundary should be at the point equidistant (in W2) from both class distributions. The slight asymmetry (0.510 vs 0.500) reflects the asymmetry in the empirical covariances.</p>
-<h2 id="73-full-geodesic-trace-bin_malware-bin_benign"><strong>7.3 Full Geodesic Trace: bin_malware → bin_benign</strong></h2>
-<p><strong>t</strong></p>
-<p><strong>Prediction</strong></p>
-<p><strong>LLR(bin_malware)</strong></p>
-<p><strong>LLR(bin_benign)</strong></p>
-<p><strong>LLR gap</strong></p>
-<p>0.00</p>
+<p><strong>The bin_malware ↔ bin_benign geodesic crosses at t = 0.510.</strong> The decision boundary between the two binary classes is located at 51% of the Wasserstein geodesic from bin_malware to bin_benign — almost exactly at the geometric midpoint. This is the expected result for a Bayes-optimal classifier with equal priors: the boundary should be at the point equidistant (in W2) from both class distributions. The slight asymmetry (0.510 vs 0.500) reflects the asymmetry in the empirical covariances.</p>
+<h3 id="73-full-geodesic-trace-bin_malware-bin_benign">7.3 Full Geodesic Trace: bin_malware → bin_benign</h3>
+<p><strong>t</strong>
+<strong>Prediction</strong>
+<strong>LLR(bin_malware)</strong>
+<strong>LLR(bin_benign)</strong>
+<strong>LLR gap</strong>
+0.00</p>
 <p>bin_malware</p>
 <p>66.5</p>
 <p>28.6</p>
@@ -280,15 +346,15 @@
 <p>37.7</p>
 <p>−37.9</p>
 <p>The LLR gap decreases linearly from +37.9 at t=0 to -37.9 at t=1, with zero crossing at t=0.51. This linear decay of the LLR gap along the geodesic is exact for Gaussian models with shared variance: the LLR difference along the geodesic is a linear function of t, confirming that the Gaussian model's decision surface intersects the Wasserstein geodesic at a single well-defined crossing point.</p>
-<p>__Multi-hop behaviour for other pairs. __The net_ddos ↔ log_warn geodesic crosses into log_error before reaching log_warn, indicating the path in W2 space passes closer to the log_error centroid than to log_warn at any intermediate t. This multi-hop crossing reveals that the Wasserstein geodesic does not align with the Euclidean line between centroids in cases of covariance mismatch — the varying σ(t) profile changes which class is nearest at each point along the path.</p>
-<h1 id="8-triangle-inequality-tightness"><strong>8. Triangle Inequality Tightness</strong></h1>
+<p><strong>Multi-hop behaviour for other pairs.</strong> The net_ddos ↔ log_warn geodesic crosses into log_error before reaching log_warn, indicating the path in W2 space passes closer to the log_error centroid than to log_warn at any intermediate t. This multi-hop crossing reveals that the Wasserstein geodesic does not align with the Euclidean line between centroids in cases of covariance mismatch — the varying σ(t) profile changes which class is nearest at each point along the path.</p>
+<h2 id="8-triangle-inequality-tightness">8. Triangle Inequality Tightness</h2>
 <p>In a metric space, the triangle inequality W2(A,C) ≤ W2(A,B) + W2(B,C) is always satisfied. The tightness ratio W2(i,j) / min_k [W2(i,k) + W2(k,j)] measures how well the shortest path from class i to class j is approximated by the most direct two-hop route. Ratio near 1.0 means the via-class lies nearly on the direct geodesic; ratio near 0 means no via-class is useful.</p>
-<h2 id="81-tightest-triangles-best-two-hop-routes"><strong>8.1 Tightest Triangles (Best Two-Hop Routes)</strong></h2>
-<p><strong>Direct path</strong></p>
-<p><strong>Best via-class</strong></p>
-<p><strong>Tightness ratio</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>log_error → bin_malware</p>
+<h3 id="81-tightest-triangles-best-two-hop-routes">8.1 Tightest Triangles (Best Two-Hop Routes)</h3>
+<p><strong>Direct path</strong>
+<strong>Best via-class</strong>
+<strong>Tightness ratio</strong>
+<strong>Interpretation</strong>
+log_error → bin_malware</p>
 <p>bin_benign</p>
 <p>0.814</p>
 <p>bin_benign lies on 81% of direct path</p>
@@ -304,13 +370,13 @@
 <p>net_c2 → bin_malware</p>
 <p>bin_benign</p>
 <p>0.774</p>
-<p>__bin_benign is the geodesic hub for routes to bin_malware. __Every tight triangle has bin_benign as the via-class and bin_malware as the destination. This is a topological statement about the W2 metric space: bin_benign lies between all other classes and bin_malware in W2 geometry. Physically, bin_benign has the same ELF header structure as bin_malware (both start with a magic byte sequence) but lower variance payload — it is the ‘nearest neighbour’ of bin_malware in W2, and transport from any other class to bin_malware naturally passes through the bin_benign distribution.</p>
-<h2 id="82-loosest-triangles-no-good-two-hop-route"><strong>8.2 Loosest Triangles (No Good Two-Hop Route)</strong></h2>
-<p><strong>Direct path</strong></p>
-<p><strong>Best via-class</strong></p>
-<p><strong>Tightness ratio</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>bin_malware → bin_benign</p>
+<p><strong>bin_benign is the geodesic hub for routes to bin_malware.</strong> Every tight triangle has bin_benign as the via-class and bin_malware as the destination. This is a topological statement about the W2 metric space: bin_benign lies between all other classes and bin_malware in W2 geometry. Physically, bin_benign has the same ELF header structure as bin_malware (both start with a magic byte sequence) but lower variance payload — it is the ‘nearest neighbour’ of bin_malware in W2, and transport from any other class to bin_malware naturally passes through the bin_benign distribution.</p>
+<h3 id="82-loosest-triangles-no-good-two-hop-route">8.2 Loosest Triangles (No Good Two-Hop Route)</h3>
+<p><strong>Direct path</strong>
+<strong>Best via-class</strong>
+<strong>Tightness ratio</strong>
+<strong>Interpretation</strong>
+bin_malware → bin_benign</p>
 <p>log_info</p>
 <p>0.293</p>
 <p>log_info far off geodesic</p>
@@ -323,18 +389,18 @@
 <p>net_ddos → log_warn</p>
 <p>log_error</p>
 <p>0.498</p>
-<h1 id="9-wasserstein-pca"><strong>9. Wasserstein PCA</strong></h1>
-<h2 id="91-tangent-space-pca-at-the-barycenter"><strong>9.1 Tangent Space PCA at the Barycenter</strong></h2>
+<h2 id="9-wasserstein-pca">9. Wasserstein PCA</h2>
+<h3 id="91-tangent-space-pca-at-the-barycenter">9.1 Tangent Space PCA at the Barycenter</h3>
 <p>Wasserstein PCA [12,13] performs PCA on the tangent vectors at the barycenter μ̅. For Gaussian distributions, the tangent vector from the barycenter toward class k is:</p>
 <p>v_k = (log_{μ̅}(μk), log_{Σ̅}(Σk))</p>
-<pre><code>= \(μk \- μ̅, diag\(√Σk\) \- diag\(√Σ̅\)\)
+<pre><code>= \(μk - μ̅, diag\(√Σk\) - diag\(√Σ̅\)\)
 </code></pre>
 <p>Flattened tangent: v_k ∈ ℝ^{2d}   (d from means, d from covariances)</p>
-<p><strong>PC</strong></p>
-<p><strong>Singular value</strong></p>
-<p><strong>Variance explained</strong></p>
-<p><strong>Cumulative</strong></p>
-<p>1</p>
+<p><strong>PC</strong>
+<strong>Singular value</strong>
+<strong>Variance explained</strong>
+<strong>Cumulative</strong>
+1</p>
 <p>2.204</p>
 <p>34.3%</p>
 <p>34.3%</p>
@@ -366,16 +432,16 @@
 <p>0.736</p>
 <p>3.8%</p>
 <p>98.9%</p>
-<h2 id="92-variance-decomposition-mean-vs-covariance-components"><strong>9.2 Variance Decomposition: Mean vs Covariance Components</strong></h2>
-<p><strong>Key result</strong></p>
-<p>Tangent variance from mean (μk) component: 95.6%. Tangent variance from covariance (Σk) component: 4.4%. The W2 geometry of the class configuration is almost entirely determined by the class mean positions — covariance variation contributes only 4.4% of the total geometric information.</p>
+<h3 id="92-variance-decomposition-mean-vs-covariance-components">9.2 Variance Decomposition: Mean vs Covariance Components</h3>
+<p><strong>Key result</strong>
+Tangent variance from mean (μk) component: 95.6%. Tangent variance from covariance (Σk) component: 4.4%. The W2 geometry of the class configuration is almost entirely determined by the class mean positions — covariance variation contributes only 4.4% of the total geometric information.</p>
 <p>This 95.6/4.4 split has a direct design implication: improving the class mean separation (via better encoder training or larger training sets) would provide 21.7× more geometric benefit than equalising the per-class covariances. The Wasserstein PCA confirms that CyphaDIF's geometry is effectively mean-dominated, with the covariance structure playing a secondary but non-negligible role (the 18% Bures contribution to W2 reported in Section 3).</p>
-<h2 id="93-class-positions-in-wasserstein-pc-space"><strong>9.3 Class Positions in Wasserstein PC Space</strong></h2>
-<p><strong>Class</strong></p>
-<p><strong>WPC1</strong></p>
-<p><strong>WPC2</strong></p>
-<p><strong>Position</strong></p>
-<p>bin_malware</p>
+<h3 id="93-class-positions-in-wasserstein-pc-space">9.3 Class Positions in Wasserstein PC Space</h3>
+<p><strong>Class</strong>
+<strong>WPC1</strong>
+<strong>WPC2</strong>
+<strong>Position</strong>
+bin_malware</p>
 <p>−1.592</p>
 <p>−0.265</p>
 <p>Negative PC1 outlier</p>
@@ -403,21 +469,21 @@
 <p>−0.066</p>
 <p>+0.470</p>
 <p>Near barycenter, positive PC2</p>
-<p>__WPC1 separates binary classes from all others. __The binary classes (bin_malware, bin_benign) have strongly negative WPC1 (−1.59, −1.01) while all network/log classes are positive or near-zero. WPC1 is the binary-vs-other axis. WPC2 separates net_scan (+1.12) from the log classes (−0.4 to −0.6) with network classes in between. The two Wasserstein PCs together explain 52.2% of the class variance, with the remaining 47.8% spread across 8 further PCs — indicating a moderately complex class geometry that requires more than 2 dimensions to describe well.</p>
-<h1 id="10-gradient-flow-interpretation-of-mdl-decay"><strong>10. Gradient Flow Interpretation of MDL Decay</strong></h1>
-<h2 id="101-the-variational-formulation"><strong>10.1 The Variational Formulation</strong></h2>
+<p><strong>WPC1 separates binary classes from all others.</strong> The binary classes (bin_malware, bin_benign) have strongly negative WPC1 (−1.59, −1.01) while all network/log classes are positive or near-zero. WPC1 is the binary-vs-other axis. WPC2 separates net_scan (+1.12) from the log classes (−0.4 to −0.6) with network classes in between. The two Wasserstein PCs together explain 52.2% of the class variance, with the remaining 47.8% spread across 8 further PCs — indicating a moderately complex class geometry that requires more than 2 dimensions to describe well.</p>
+<h2 id="10-gradient-flow-interpretation-of-mdl-decay">10. Gradient Flow Interpretation of MDL Decay</h2>
+<h3 id="101-the-variational-formulation">10.1 The Variational Formulation</h3>
 <p>The MDL decay term Δμk ← (1-λ)Δμk is equivalent to a proximal gradient step on the energy functional:</p>
 <p>E(μk) = -log p(data_k | μk) + (λ/2) · W2(μk, μ₀)²</p>
 <p>Gradient:  ∇_μ E = -∇_μ log p + λ(μk - μ₀) = -∇_μ log p + λΔμk</p>
 <p>Proximal step:  Δμk ← Δμk - η(∇_μ E)_Δμ = Δμk(1 - ηλ) = Δμk(1-0.0016) ≈ (1-λ)Δμk</p>
 <p>This establishes that each MDL decay step is a proximal gradient descent step on the energy E, where the regularisation term is the squared Wasserstein distance to the world prior. The MDL decay is not ad hoc — it is the gradient of a specific variational objective in W2 space.</p>
-<h2 id="102-energy-functional-values"><strong>10.2 Energy Functional Values</strong></h2>
-<p><strong>Class</strong></p>
-<p><strong>W2 to prior</strong></p>
-<p><strong>λ/2·W2² term</strong></p>
-<p><strong>−log p proxy</strong></p>
-<p><strong>Total energy</strong></p>
-<p>log_warn</p>
+<h3 id="102-energy-functional-values">10.2 Energy Functional Values</h3>
+<p><strong>Class</strong>
+<strong>W2 to prior</strong>
+<strong>λ/2·W2² term</strong>
+<strong>−log p proxy</strong>
+<strong>Total energy</strong>
+log_warn</p>
 <p>1.063</p>
 <p>0.0011</p>
 <p>−0.196</p>
@@ -467,15 +533,15 @@
 <p>0.0012</p>
 <p>−20.059</p>
 <p>+20.060</p>
-<p>__The W2 regularisation term (λ/2·W2²) is negligible. __For all classes, the regularisation term contributes 0.001–0.003 to the total energy — less than 0.01% of the likelihood term. The energy is dominated by −log p, which measures how well the class centroid fits its training data. The MDL regularisation term is effectively invisible in the energy — its role is not to significantly constrain the centroid position but to enforce a soft attraction back toward the prior that prevents centroid drift under distribution shift. This is a new interpretation: MDL decay is a Wasserstein proximal term whose regularisation effect is small in magnitude but crucial for online stability.</p>
-<h2 id="103-convergence-to-stationarity"><strong>10.3 Convergence to Stationarity</strong></h2>
+<p><strong>The W2 regularisation term (λ/2·W2²) is negligible.</strong> For all classes, the regularisation term contributes 0.001–0.003 to the total energy — less than 0.01% of the likelihood term. The energy is dominated by −log p, which measures how well the class centroid fits its training data. The MDL regularisation term is effectively invisible in the energy — its role is not to significantly constrain the centroid position but to enforce a soft attraction back toward the prior that prevents centroid drift under distribution shift. This is a new interpretation: MDL decay is a Wasserstein proximal term whose regularisation effect is small in magnitude but crucial for online stability.</p>
+<h3 id="103-convergence-to-stationarity">10.3 Convergence to Stationarity</h3>
 <p>At the stationary point of E, the gradient vanishes: ∂E/∂Δμ = 0 → residual/||Δμ|| = λ/η = 0.025. The empirical ratios:</p>
-<p><strong>Class</strong></p>
-<p><strong>Residual</strong></p>
-<p><strong>||Δμ||</strong></p>
-<p><strong>Actual ratio</strong></p>
-<p><strong>Target λ/η</strong></p>
-<p>log_warn</p>
+<p><strong>Class</strong>
+<strong>Residual</strong>
+<strong>||Δμ||</strong>
+<strong>Actual ratio</strong>
+<strong>Target λ/η</strong>
+log_warn</p>
 <p>0.070</p>
 <p>1.063</p>
 <p>0.066</p>
@@ -510,14 +576,14 @@
 <p>1.099</p>
 <p>0.651</p>
 <p>0.025</p>
-<p>__The system has not reached the variational stationary point. __All classes show ratios 2.6–26× higher than the stationary target λ/η = 0.025, with log classes closest (0.066–0.163) and binary classes farthest (0.442–0.651). This confirms the earlier finding that the convergence basin analysis identified: the system operates in a noise-dominated regime far from the deterministic stationary point. The classifier achieves 1.0000 accuracy despite not being at the variational minimum — the SNR of 9.4σ is sufficient for perfect discrimination long before the energy gradient vanishes.</p>
-<h1 id="11-model-misspecification-via-w2"><strong>11. Model Misspecification via W2</strong></h1>
-<h2 id="111-w2-between-empirical-and-model-distributions"><strong>11.1 W2 Between Empirical and Model Distributions</strong></h2>
+<p><strong>The system has not reached the variational stationary point.</strong> All classes show ratios 2.6–26× higher than the stationary target λ/η = 0.025, with log classes closest (0.066–0.163) and binary classes farthest (0.442–0.651). This confirms the earlier finding that the convergence basin analysis identified: the system operates in a noise-dominated regime far from the deterministic stationary point. The classifier achieves 1.0000 accuracy despite not being at the variational minimum — the SNR of 9.4σ is sufficient for perfect discrimination long before the energy gradient vanishes.</p>
+<h2 id="11-model-misspecification-via-w2">11. Model Misspecification via W2</h2>
+<h3 id="111-w2-between-empirical-and-model-distributions">11.1 W2 Between Empirical and Model Distributions</h3>
 <p>The model assumes class k generates data h ~ N(μk, v₀). The empirical distribution is the actual encoded sample distribution. W2 between these measures model misspecification — how far the assumed model is from the truth:</p>
-<p><strong>Class</strong></p>
-<p><strong>W2(empirical, model)</strong></p>
-<p><strong>Misspecification</strong></p>
-<p>bin_malware</p>
+<p><strong>Class</strong>
+<strong>W2(empirical, model)</strong>
+<strong>Misspecification</strong>
+bin_malware</p>
 <p>0.800</p>
 <p>← best fit</p>
 <p>bin_benign</p>
@@ -547,31 +613,31 @@
 <p>net_c2</p>
 <p>2.258</p>
 <p>← worst fit</p>
-<h2 id="112-the-misspecification-scale"><strong>11.2 The Misspecification Scale</strong></h2>
-<p><strong>Critical finding</strong></p>
-<p>Mean W2 misspecification = 1.746. Mean inter-class W2 = 1.737. The model is as far from the data as classes are from each other.</p>
+<h3 id="112-the-misspecification-scale">11.2 The Misspecification Scale</h3>
+<p><strong>Critical finding</strong>
+Mean W2 misspecification = 1.746. Mean inter-class W2 = 1.737. The model is as far from the data as classes are from each other.</p>
 <p>This near-equality (ratio 1.005) establishes that model misspecification and inter-class separation operate at the same scale. The Gaussian N(μk, v₀) model is fitting the data at a resolution comparable to the inter-class distances. This is the primary reason the classifier achieves 1.0000 accuracy despite substantial misspecification: the misspecification is roughly ‘isotropic’ across all classes (the model is equally wrong about all of them), so the relative ordering of class LLRs is preserved even when the absolute LLR values are inaccurate.</p>
-<p>__Why bin_malware and bin_benign have lower misspecification. __The binary classes are best-fit by the Gaussian model (W2 ≈ 0.8 vs mean 1.75). This is a consequence of their high within-class variance from random payloads: a Gaussian with large variance fits a wide range of samples, and the empirical distribution of high-entropy binary data is in fact approximately Gaussian in the central limit theorem sense (each latent dimension is a linear projection of the raw bytes, so by CLT the distribution approaches Gaussian as payload length increases). The network/log classes have lower variance and more structured distributions — the net_c2 class has deterministic format elements that create non-Gaussian features, resulting in W2 misspecification 2.26.</p>
-<h2 id="113-implications-for-enhancement"><strong>11.3 Implications for Enhancement</strong></h2>
+<p><strong>Why bin_malware and bin_benign have lower misspecification.</strong> The binary classes are best-fit by the Gaussian model (W2 ≈ 0.8 vs mean 1.75). This is a consequence of their high within-class variance from random payloads: a Gaussian with large variance fits a wide range of samples, and the empirical distribution of high-entropy binary data is in fact approximately Gaussian in the central limit theorem sense (each latent dimension is a linear projection of the raw bytes, so by CLT the distribution approaches Gaussian as payload length increases). The network/log classes have lower variance and more structured distributions — the net_c2 class has deterministic format elements that create non-Gaussian features, resulting in W2 misspecification 2.26.</p>
+<h3 id="113-implications-for-enhancement">11.3 Implications for Enhancement</h3>
 <p>The 1.0 misspecification ratio is the single most actionable finding from the Wasserstein analysis. Three architecturally distinct responses:</p>
 <ul>
-<li>__Normalising flows per class. __Replace N(μk, v₀) with a flow-based model f_k(N(μk, v₀)) whose parameters capture non-Gaussian class structure. This directly reduces W2 misspecification toward 0 without changing the inference formula (LLR = log f_k(h) - log f_0(h)).</li>
-<li>__Per-class anisotropic covariance. __Replace v₀ with per-class diagonal Σk learned from class samples. For net_c2 and net_scan (highest misspecification), the empirical covariance differs substantially from v₀ — fitting Σk per class would reduce the Bures term and bring the model within W2 ≈ 0.5 of the data.</li>
-<li>__Kernel density estimation in the latent space. __Replace the Gaussian model with a kernel density estimator on the encoded training samples. KDE has W2 misspecification → 0 as training set size → ∞, making it asymptotically unbiased. The LLR becomes log μ_k(h)/μ_0(h) where μ_k is the kernel density estimate of class k.</li>
+<li><strong>Normalising flows per class.</strong> Replace N(μk, v₀) with a flow-based model f_k(N(μk, v₀)) whose parameters capture non-Gaussian class structure. This directly reduces W2 misspecification toward 0 without changing the inference formula (LLR = log f_k(h) - log f_0(h)).</li>
+<li><strong>Per-class anisotropic covariance.</strong> Replace v₀ with per-class diagonal Σk learned from class samples. For net_c2 and net_scan (highest misspecification), the empirical covariance differs substantially from v₀ — fitting Σk per class would reduce the Bures term and bring the model within W2 ≈ 0.5 of the data.</li>
+<li><strong>Kernel density estimation in the latent space.</strong> Replace the Gaussian model with a kernel density estimator on the encoded training samples. KDE has W2 misspecification → 0 as training set size → ∞, making it asymptotically unbiased. The LLR becomes log μ_k(h)/μ_0(h) where μ_k is the kernel density estimate of class k.</li>
 </ul>
-<h1 id="12-synthesis"><strong>12. Synthesis</strong></h1>
+<h2 id="12-synthesis">12. Synthesis</h2>
 <p>The nine Wasserstein probes converge on several interlocking results:</p>
 <ul>
-<li>__The world prior is the Wasserstein barycenter. __W2(prior, barycenter) = 0.040 ≈ 2.3% of inter-class scale. The online Welford estimator converges to the exact Fréchet mean of the class configuration — a non-trivial geometric property that the MDL decay exploits as a barycenter-centring regulariser.</li>
-<li>__The MDL decay is a W2-proximal step. __Precisely: it is proximal gradient descent on E = -log p + (λ/2)W2² with step size η. The variational interpretation validates the MDL decay architecture from an optimal transport perspective.</li>
-<li>__bin_malware is the W2 outlier. __It is farthest from all other classes and from the barycenter in W2 space, acts as the geodesic hub via bin_benign, and has the most complex OT plans (89 stretched dimensions vs the hardest pair's 0). Its high latent variance from random payload drives all of these properties.</li>
-<li>__Model misspecification W2 = inter-class W2. __The Gaussian model is as far from the empirical data as classes are from each other. Accuracy is maintained because misspecification is isotropic across classes, preserving relative LLR ordering. Any departure from isotropy (e.g., class-specific distribution shift) would break this balance.</li>
-<li>__The W2 geometry is mean-dominated (95.6%). __Wasserstein PCA shows covariance contributes only 4.4% of the geometric variance. Enhancement efforts should prioritise improving class mean separation over equalising covariances.</li>
+<li><strong>The world prior is the Wasserstein barycenter.</strong> W2(prior, barycenter) = 0.040 ≈ 2.3% of inter-class scale. The online Welford estimator converges to the exact Fréchet mean of the class configuration — a non-trivial geometric property that the MDL decay exploits as a barycenter-centring regulariser.</li>
+<li><strong>The MDL decay is a W2-proximal step.</strong> Precisely: it is proximal gradient descent on E = -log p + (λ/2)W2² with step size η. The variational interpretation validates the MDL decay architecture from an optimal transport perspective.</li>
+<li><strong>bin_malware is the W2 outlier.</strong> It is farthest from all other classes and from the barycenter in W2 space, acts as the geodesic hub via bin_benign, and has the most complex OT plans (89 stretched dimensions vs the hardest pair's 0). Its high latent variance from random payload drives all of these properties.</li>
+<li><strong>Model misspecification W2 = inter-class W2.</strong> The Gaussian model is as far from the empirical data as classes are from each other. Accuracy is maintained because misspecification is isotropic across classes, preserving relative LLR ordering. Any departure from isotropy (e.g., class-specific distribution shift) would break this balance.</li>
+<li><strong>The W2 geometry is mean-dominated (95.6%).</strong> Wasserstein PCA shows covariance contributes only 4.4% of the geometric variance. Enhancement efforts should prioritise improving class mean separation over equalising covariances.</li>
 </ul>
-<h1 id="13-conclusion"><strong>13. Conclusion</strong></h1>
+<h2 id="13-conclusion">13. Conclusion</h2>
 <p>We have characterised the CyphaDIF classifier through nine optimal transport probes, revealing a geometry structured around: (1) a learned world prior that is the Wasserstein Fréchet mean of the class configuration; (2) MDL decay as a provably correct proximal gradient step on a W2-regularised energy functional; (3) a W2 metric space in which bin_malware is the dominant outlier and bin_benign is the geodesic hub; (4) a model-to-data misspecification that matches the inter-class scale, explaining why high accuracy is achievable despite non-Gaussian class structure; and (5) a mean-dominated geometry where covariance improvements have limited leverage compared to mean separation.</p>
 <p>Three enhancement directions emerge from the analysis: normalising flows to reduce W2 misspecification, per-class anisotropic covariance to reduce the Bures term, and kernel density estimation as an asymptotically unbiased alternative to the Gaussian model. Each direction has a quantitative target (W2 misspecification from 1.746 toward 0) and a specific architectural realisation described in Section 11.3.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Villani, C. (2003). Topics in Optimal Transportation. American Mathematical Society.</p>
 <p>[2] Villani, C. (2009). Optimal Transport: Old and New. Springer.</p>
 <p>[3] Bhatia, R., Jain, T., &amp; Lim, Y. (2019). On the Bures-Wasserstein distance between positive definite matrices. Expositiones Mathematicae, 37(2), 165-191.</p>
@@ -590,6 +656,31 @@
 <p>[16] Frogner, C., Zhang, C., Mobahi, H., Araya, M., &amp; Poggio, T. A. (2015). Learning with a Wasserstein loss. NeurIPS 2015, 2053-2061.</p>
 <p>[17] Cuturi, M. (2013). Sinkhorn distances: Lightspeed computation of optimal transport distances. NeurIPS 2013, 2292-2300.</p>
 <p>[18] Delalande, A., &amp; Merigot, Q. (2021). Quantitative stability of optimal transport plans under Coulomb interactions. arXiv:2103.04963.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

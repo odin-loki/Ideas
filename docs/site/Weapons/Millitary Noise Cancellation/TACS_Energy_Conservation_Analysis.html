@@ -3,56 +3,112 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>TACS Energy Conservation Analysis</title>
+  <meta name="description" content="Energy cannot be created or destroyed, only transformed or redistributed. For acoustic systems: **Total acoustic power = Source power + TACS emitter power** **Source (Engine):** - Frequency: 400 Hz - Acoustic power: 10 watts - Amplitude: A₁ **TACS Emitter:** - Frequency: 400 Hz…"/>
+  <title>ACOUSTIC ENERGY CONSERVATION ANALYSIS · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Weapons\Millitary Noise Cancellation\TACS_Energy_Conservation_Analysis.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="acoustic-energy-conservation-analysis">ACOUSTIC ENERGY CONSERVATION ANALYSIS</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#does-tacs-cancel-noise-completely">Does TACS Cancel Noise &quot;Completely&quot;?</a></li>
+        <li class="toc-depth-3"><a href="#question">Question</a></li>
+        <li class="toc-depth-3"><a href="#physics-analysis">Physics Analysis</a></li>
+        <li class="toc-depth-3"><a href="#conservation-of-energy-first-law-of-thermodynamics">Conservation of Energy (First Law of Thermodynamics)</a></li>
+        <li class="toc-depth-3"><a href="#scenario-single-frequency-tone">Scenario: Single Frequency Tone</a></li>
+        <li class="toc-depth-3"><a href="#wave-interference-mathematics">Wave Interference Mathematics</a></li>
+        <li class="toc-depth-3"><a href="#case-1-destructive-interference-cancellation-node">Case 1: Destructive Interference (Cancellation Node)</a></li>
+        <li class="toc-depth-3"><a href="#case-2-constructive-interference-anti-node">Case 2: Constructive Interference (Anti-Node)</a></li>
+        <li class="toc-depth-3"><a href="#energy-distribution">Energy Distribution</a></li>
+        <li class="toc-depth-3"><a href="#total-acoustic-power-in-the-field">Total Acoustic Power in the Field</a></li>
+        <li class="toc-depth-2"><a href="#the-critical-insight">The Critical Insight</a></li>
+        <li class="toc-depth-3"><a href="#spatial-distribution-example">Spatial Distribution Example</a></li>
+        <li class="toc-depth-3"><a href="#energy-accounting">Energy Accounting</a></li>
+        <li class="toc-depth-2"><a href="#why-user-experienced-pain">Why User Experienced Pain</a></li>
+        <li class="toc-depth-2"><a href="#implications-for-tacs-design">Implications for TACS Design</a></li>
+        <li class="toc-depth-3"><a href="#problem-anti-nodes-are-hazardous">Problem: Anti-Nodes Are Hazardous</a></li>
+        <li class="toc-depth-3"><a href="#solution-controlled-energy-redistribution">Solution: Controlled Energy Redistribution</a></li>
+        <li class="toc-depth-3"><a href="#example-revised-tacs-personal-design">Example: Revised TACS-Personal Design</a></li>
+        <li class="toc-depth-2"><a href="#the-uncomfortable-truth">The Uncomfortable Truth</a></li>
+        <li class="toc-depth-2"><a href="#recommended-physics-aware-design">Recommended Physics-Aware Design</a></li>
+        <li class="toc-depth-3"><a href="#1-accept-partial-cancellation">1. Accept Partial Cancellation</a></li>
+        <li class="toc-depth-3"><a href="#2-asymmetric-systems">2. Asymmetric Systems</a></li>
+        <li class="toc-depth-3"><a href="#3-predictable-interference-patterns">3. Predictable Interference Patterns</a></li>
+        <li class="toc-depth-3"><a href="#4-active-anti-node-suppression">4. Active Anti-Node Suppression</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">ACOUSTIC ENERGY CONSERVATION ANALYSIS</h1>
+          <p class="doc-meta">Weapons\Millitary Noise Cancellation\TACS_Energy_Conservation_Analysis.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>TACS Emitter:</strong>
+- Frequency: 400 Hz (same)
+- Acoustic power: 10 watts (matching)
+- Amplitude: A₂ = A₁
+- Phase: 180° out of phase with source</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="does-tacs-cancel-noise-completely">Does TACS Cancel Noise "Completely"?</h2>
-<h2 id="question">Question</h2>
+<h3 id="question">Question</h3>
 <p>If TACS generates anti-phase sound waves to cancel noise, where does the acoustic energy go?</p>
-<h2 id="physics-analysis">Physics Analysis</h2>
+<h3 id="physics-analysis">Physics Analysis</h3>
 <h3 id="conservation-of-energy-first-law-of-thermodynamics">Conservation of Energy (First Law of Thermodynamics)</h3>
 <p>Energy cannot be created or destroyed, only transformed or redistributed.</p>
-<p>For acoustic systems:<br />
+<p>For acoustic systems:
 <strong>Total acoustic power = Source power + TACS emitter power</strong></p>
 <h3 id="scenario-single-frequency-tone">Scenario: Single Frequency Tone</h3>
-<p><strong>Source (Engine):</strong><br />
-- Frequency: 400 Hz<br />
-- Acoustic power: 10 watts<br />
+<p><strong>Source (Engine):</strong>
+- Frequency: 400 Hz
+- Acoustic power: 10 watts
 - Amplitude: A₁</p>
-<p><strong>TACS Emitter:</strong><br />
-- Frequency: 400 Hz (same)<br />
-- Acoustic power: 10 watts (matching)<br />
-- Amplitude: A₂ = A₁<br />
+<p><strong>TACS Emitter:</strong>
+- Frequency: 400 Hz (same)
+- Acoustic power: 10 watts (matching)
+- Amplitude: A₂ = A₁
 - Phase: 180° out of phase with source</p>
 <h3 id="wave-interference-mathematics">Wave Interference Mathematics</h3>
-<p>At any point in space, pressure amplitude:<br />
+<p>At any point in space, pressure amplitude:
 <strong>P(x,y,z) = A₁·sin(ωt - φ₁) + A₂·sin(ωt - φ₂)</strong></p>
 <p>Where φ₁ and φ₂ are phase angles that depend on distance from each source.</p>
 <h3 id="case-1-destructive-interference-cancellation-node">Case 1: Destructive Interference (Cancellation Node)</h3>
-<p>When φ₂ - φ₁ = 180° (π radians):<br />
-<strong>P = A₁·sin(ωt) + A₂·sin(ωt + π)</strong><br />
-<strong>P = A₁·sin(ωt) - A₁·sin(ωt)</strong><br />
+<p>When φ₂ - φ₁ = 180° (π radians):
+<strong>P = A₁·sin(ωt) + A₂·sin(ωt + π)</strong>
+<strong>P = A₁·sin(ωt) - A₁·sin(ωt)</strong>
 <strong>P = 0</strong></p>
 <p>Sound is CANCELLED at this location.</p>
 <h3 id="case-2-constructive-interference-anti-node">Case 2: Constructive Interference (Anti-Node)</h3>
-<p>When φ₂ - φ₁ = 0° (sources in phase):<br />
-<strong>P = A₁·sin(ωt) + A₂·sin(ωt)</strong><br />
+<p>When φ₂ - φ₁ = 0° (sources in phase):
+<strong>P = A₁·sin(ωt) + A₂·sin(ωt)</strong>
 <strong>P = 2A₁·sin(ωt)</strong></p>
 <p>Sound amplitude is DOUBLED at this location.</p>
 <h3 id="energy-distribution">Energy Distribution</h3>
 <p><strong>Intensity is proportional to amplitude squared:</strong></p>
-<p>At cancellation node: I = 0² = 0<br />
+<p>At cancellation node: I = 0² = 0
 At anti-node: I = (2A)² = 4A²</p>
 <p>But baseline (single source): I = A²</p>
-<p><strong>This means:</strong><br />
-- Cancellation nodes: 0% of baseline intensity<br />
+<p><strong>This means:</strong>
+- Cancellation nodes: 0% of baseline intensity
 - Anti-nodes: 400% of baseline intensity (4× louder!)</p>
 <h3 id="total-acoustic-power-in-the-field">Total Acoustic Power in the Field</h3>
 <p>Integrating over all space:</p>
@@ -60,112 +116,112 @@ At anti-node: I = (2A)² = 4A²</p>
 <p>For two coherent sources of equal power P₀:</p>
 <p><strong>P_total = P₀ + P₀ = 2P₀</strong></p>
 <p>The total acoustic power is the SUM of both sources.</p>
-<p>Energy is NOT destroyed - it's redistributed:<br />
-- Some locations (nodes): very quiet<br />
+<p>Energy is NOT destroyed - it's redistributed:
+- Some locations (nodes): very quiet
 - Other locations (anti-nodes): much louder than original source</p>
 <h2 id="the-critical-insight">The Critical Insight</h2>
 <p><strong>TACS does NOT reduce total acoustic energy in the environment.</strong></p>
 <p><strong>TACS redistributes acoustic energy spatially.</strong></p>
 <h3 id="spatial-distribution-example">Spatial Distribution Example</h3>
 <p>For TACS-Personal with 3m cancellation zone:</p>
-<p><strong>Volume of cancellation zone:</strong> ~113 m³ (4/3πr³)<br />
+<p><strong>Volume of cancellation zone:</strong> ~113 m³ (4/3πr³)
 <strong>Volume of surrounding space affected:</strong> ~thousands of m³</p>
-<p>If 60% of cancellation zone volume experiences good cancellation (60-80% quiet):<br />
+<p>If 60% of cancellation zone volume experiences good cancellation (60-80% quiet):
 - Cancellation volume: ~68 m³</p>
-<p>The remaining acoustic energy is pushed into:<br />
-- Anti-nodes within the zone (40% of zone volume): ~45 m³ at 2-4× intensity<br />
+<p>The remaining acoustic energy is pushed into:
+- Anti-nodes within the zone (40% of zone volume): ~45 m³ at 2-4× intensity
 - Surrounding space outside zone: Distributed at slightly elevated levels</p>
 <h3 id="energy-accounting">Energy Accounting</h3>
-<p><strong>Original source alone:</strong><br />
-- 100 watts acoustic power<br />
-- Spreads uniformly (roughly) over space<br />
+<p><strong>Original source alone:</strong>
+- 100 watts acoustic power
+- Spreads uniformly (roughly) over space
 - Intensity follows inverse-square law</p>
-<p><strong>With TACS (100W source + 100W emitters = 200W total):</strong><br />
-- 200 watts acoustic power total<br />
-- Concentrated in anti-nodes, absent from nodes<br />
+<p><strong>With TACS (100W source + 100W emitters = 200W total):</strong>
+- 200 watts acoustic power total
+- Concentrated in anti-nodes, absent from nodes
 - Highly non-uniform spatial distribution</p>
-<p><strong>Net result:</strong><br />
-- Quiet zones exist (mission value)<br />
-- But TWICE the acoustic energy is in the environment<br />
+<p><strong>Net result:</strong>
+- Quiet zones exist (mission value)
+- But TWICE the acoustic energy is in the environment
 - That energy concentrates in anti-nodes (danger zones)</p>
 <h2 id="why-user-experienced-pain">Why User Experienced Pain</h2>
 <p><strong>Possible explanations:</strong></p>
 <ol>
 <li>
-<p><strong>Position in anti-node:</strong><br />
-   - User was in constructive interference zone<br />
-   - Amplitude 2-4× higher than source alone<br />
+<p><strong>Position in anti-node:</strong>
+   - User was in constructive interference zone
+   - Amplitude 2-4× higher than source alone
    - Painful exposure (120+ dB if source was 110 dB)</p>
 </li>
 <li>
-<p><strong>Near-field emitter exposure:</strong><br />
-   - Close to TACS emitters before cancellation occurs<br />
-   - Direct exposure to 120-130 dB emitter output<br />
+<p><strong>Near-field emitter exposure:</strong>
+   - Close to TACS emitters before cancellation occurs
+   - Direct exposure to 120-130 dB emitter output
    - Plus reflected/scattered energy from source</p>
 </li>
 <li>
-<p><strong>Multiple sources creating complex interference:</strong><br />
-   - Real TACS has many emitters (not just one)<br />
-   - Creates complex 3D interference pattern<br />
-   - Multiple anti-nodes scattered throughout space<br />
+<p><strong>Multiple sources creating complex interference:</strong>
+   - Real TACS has many emitters (not just one)
+   - Creates complex 3D interference pattern
+   - Multiple anti-nodes scattered throughout space
    - User wandered into high-intensity region</p>
 </li>
 </ol>
 <h2 id="implications-for-tacs-design">Implications for TACS Design</h2>
 <h3 id="problem-anti-nodes-are-hazardous">Problem: Anti-Nodes Are Hazardous</h3>
-<p>Traditional TACS concept assumes:<br />
-- "Cancellation zone = safe zone"<br />
+<p>Traditional TACS concept assumes:
+- "Cancellation zone = safe zone"
 - "Outside cancellation zone = normal ambient"</p>
-<p><strong>Reality:</strong><br />
-- Cancellation zone contains BOTH nodes (quiet) AND anti-nodes (loud)<br />
-- Anti-nodes can be 6-12 dB LOUDER than original source alone<br />
+<p><strong>Reality:</strong>
+- Cancellation zone contains BOTH nodes (quiet) AND anti-nodes (loud)
+- Anti-nodes can be 6-12 dB LOUDER than original source alone
 - Personnel in anti-nodes experience WORSE exposure than without TACS</p>
 <h3 id="solution-controlled-energy-redistribution">Solution: Controlled Energy Redistribution</h3>
 <p><strong>Design principle:</strong> Push anti-nodes into unoccupied space</p>
 <p><strong>Methods:</strong></p>
 <ol>
 <li>
-<p><strong>Directional emitters:</strong><br />
-   - Focus cancellation energy toward target zone<br />
+<p><strong>Directional emitters:</strong>
+   - Focus cancellation energy toward target zone
    - Anti-nodes form in opposite direction (away from operators)</p>
 </li>
 <li>
-<p><strong>Asymmetric power:</strong><br />
-   - Don't match emitter power to source power<br />
-   - Use LESS emitter power (accept partial cancellation)<br />
+<p><strong>Asymmetric power:</strong>
+   - Don't match emitter power to source power
+   - Use LESS emitter power (accept partial cancellation)
    - Reduces anti-node intensity</p>
 </li>
 <li>
-<p><strong>Spatial design:</strong><br />
-   - Map interference pattern (nodes and anti-nodes)<br />
-   - Position operators at guaranteed nodes<br />
+<p><strong>Spatial design:</strong>
+   - Map interference pattern (nodes and anti-nodes)
+   - Position operators at guaranteed nodes
    - Ensure anti-nodes are in exclusion zones</p>
 </li>
 </ol>
 <h3 id="example-revised-tacs-personal-design">Example: Revised TACS-Personal Design</h3>
-<p><strong>Original concept:</strong><br />
-- 100W source, 100W TACS emitters<br />
-- Creates 50 dB cancellation in zone<br />
+<p><strong>Original concept:</strong>
+- 100W source, 100W TACS emitters
+- Creates 50 dB cancellation in zone
 - But also creates +6 dB anti-nodes</p>
-<p><strong>Revised concept:</strong><br />
-- 100W source, 50W TACS emitters (half power)<br />
-- Creates 40 dB cancellation (reduced performance)<br />
-- Anti-nodes only +3 dB (safer)<br />
+<p><strong>Revised concept:</strong>
+- 100W source, 50W TACS emitters (half power)
+- Creates 40 dB cancellation (reduced performance)
+- Anti-nodes only +3 dB (safer)
 - Directional emitters (anti-nodes pushed behind operator)</p>
-<p><strong>Trade-off:</strong><br />
-- 20% less cancellation performance<br />
-- 50% reduction in anti-node hazard<br />
+<p><strong>Trade-off:</strong>
+- 20% less cancellation performance
+- 50% reduction in anti-node hazard
 - Safer for personnel</p>
 <h2 id="the-uncomfortable-truth">The Uncomfortable Truth</h2>
 <p><strong>TACS cannot reduce total acoustic energy in an environment.</strong></p>
-<p><strong>At best, TACS can:</strong><br />
-1. Create localized quiet zones (tactical value)<br />
-2. By concentrating acoustic energy elsewhere (anti-nodes)<br />
+<p><strong>At best, TACS can:</strong>
+1. Create localized quiet zones (tactical value)
+2. By concentrating acoustic energy elsewhere (anti-nodes)
 3. Total energy in environment INCREASES (source + emitters)</p>
-<p><strong>This means:</strong><br />
-- TACS is fundamentally a "robbing Peter to pay Paul" technology<br />
-- It makes some areas quieter by making others louder<br />
-- Poor design = anti-nodes in occupied spaces = hearing damage<br />
+<p><strong>This means:</strong>
+- TACS is fundamentally a "robbing Peter to pay Paul" technology
+- It makes some areas quieter by making others louder
+- Poor design = anti-nodes in occupied spaces = hearing damage
 - Good design = anti-nodes in unoccupied spaces = acceptable</p>
 <h2 id="recommended-physics-aware-design">Recommended Physics-Aware Design</h2>
 <h3 id="1-accept-partial-cancellation">1. Accept Partial Cancellation</h3>
@@ -173,11 +229,11 @@ At anti-node: I = (2A)² = 4A²</p>
 <p>Target 35-45 dB cancellation (requires moderate emitter power, manageable anti-nodes).</p>
 <h3 id="2-asymmetric-systems">2. Asymmetric Systems</h3>
 <p>Use emitter power = 30-50% of source power (not 100%).</p>
-<p><strong>Benefits:</strong><br />
-- Reduced anti-node intensity<br />
-- Lower electrical power consumption<br />
+<p><strong>Benefits:</strong>
+- Reduced anti-node intensity
+- Lower electrical power consumption
 - Safer for personnel</p>
-<p><strong>Cost:</strong><br />
+<p><strong>Cost:</strong>
 - Reduced cancellation depth (but still tactically valuable)</p>
 <h3 id="3-predictable-interference-patterns">3. Predictable Interference Patterns</h3>
 <p>Design for simple, predictable node/anti-node geometry:</p>
@@ -189,17 +245,42 @@ At anti-node: I = (2A)² = 4A²</p>
 <p><strong>Benefit:</strong> Flatten spatial distribution (less extreme nodes/anti-nodes)</p>
 <h2 id="conclusion">Conclusion</h2>
 <p><strong>TACS does NOT cancel noise "completely" or "at the source."</strong></p>
-<p><strong>TACS creates interference patterns with:</strong><br />
-- Quiet zones (nodes): Desired tactical effect<br />
+<p><strong>TACS creates interference patterns with:</strong>
+- Quiet zones (nodes): Desired tactical effect
 - Loud zones (anti-nodes): Unavoidable byproduct, potential hazard</p>
-<p><strong>Design must:</strong><br />
-1. Map interference patterns<br />
-2. Position personnel at nodes<br />
-3. Ensure anti-nodes are in safe/unoccupied areas<br />
-4. Use moderate emitter power (not maximum)<br />
+<p><strong>Design must:</strong>
+1. Map interference patterns
+2. Position personnel at nodes
+3. Ensure anti-nodes are in safe/unoccupied areas
+4. Use moderate emitter power (not maximum)
 5. Accept that total acoustic energy INCREASES with TACS operation</p>
 <p><strong>The user's painful experience was likely exposure to an anti-node or near-field emitter output.</strong></p>
 <p>This is not a malfunction - it's fundamental physics of wave interference.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

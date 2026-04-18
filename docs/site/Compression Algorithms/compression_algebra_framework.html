@@ -3,18 +3,98 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>compression algebra framework</title>
+  <meta name="description" content="--- 1. [The Core Insight](#the-core-insight) 2. [What is a Quotient Structure?](#what-is-a-quotient-structure) 3. [Compression as Quotient](#compression-as-quotient) 4. [The Magic: Computing on Compressed Data](#the-magic-computing-on-compressed-data) 5. [Real-World…"/>
+  <title>The Algebra of Compression: Computing Without Decompression · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Compression Algorithms\compression_algebra_framework.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="the-algebra-of-compression-computing-without-decompression">The Algebra of Compression: Computing Without Decompression</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#the-core-insight">The Core Insight</a></li>
+        <li class="toc-depth-3"><a href="#the-fundamental-principle">The Fundamental Principle</a></li>
+        <li class="toc-depth-2"><a href="#what-is-a-quotient-structure">What is a Quotient Structure?</a></li>
+        <li class="toc-depth-3"><a href="#the-mathematics">The Mathematics</a></li>
+        <li class="toc-depth-3"><a href="#the-pattern">The Pattern</a></li>
+        <li class="toc-depth-2"><a href="#compression-as-quotient">Compression as Quotient</a></li>
+        <li class="toc-depth-3"><a href="#combinadics-compressing-subsets">Combinadics: Compressing Subsets</a></li>
+        <li class="toc-depth-3"><a href="#graph-canonization-compressing-graphs">Graph Canonization: Compressing Graphs</a></li>
+        <li class="toc-depth-3"><a href="#arithmetic-coding-compressing-by-probability">Arithmetic Coding: Compressing by Probability</a></li>
+        <li class="toc-depth-3"><a href="#locality-based-compression-temporal-quotients">Locality-Based Compression: Temporal Quotients</a></li>
+        <li class="toc-depth-2"><a href="#the-magic-computing-on-compressed-data">The Magic: Computing on Compressed Data</a></li>
+        <li class="toc-depth-3"><a href="#the-homomorphism-property">The Homomorphism Property</a></li>
+        <li class="toc-depth-3"><a href="#example-1-binary-decision-diagrams-bdds">Example 1: Binary Decision Diagrams (BDDs)</a></li>
+        <li class="toc-depth-3"><a href="#example-2-tensor-networks">Example 2: Tensor Networks</a></li>
+        <li class="toc-depth-3"><a href="#example-3-perfect-hash-functions">Example 3: Perfect Hash Functions</a></li>
+        <li class="toc-depth-2"><a href="#real-world-examples">Real-World Examples</a></li>
+        <li class="toc-depth-3"><a href="#example-a-model-checking-with-bdds">Example A: Model Checking with BDDs</a></li>
+        <li class="toc-depth-3"><a href="#example-b-quantum-simulation-with-tensor-networks">Example B: Quantum Simulation with Tensor Networks</a></li>
+        <li class="toc-depth-3"><a href="#example-c-combinatorial-enumeration">Example C: Combinatorial Enumeration</a></li>
+        <li class="toc-depth-2"><a href="#the-meta-pattern">The Meta-Pattern</a></li>
+        <li class="toc-depth-3"><a href="#the-compression-trinity">The Compression Trinity</a></li>
+        <li class="toc-depth-3"><a href="#the-algebra-emerges">The Algebra Emerges</a></li>
+        <li class="toc-depth-3"><a href="#universal-examples">Universal Examples</a></li>
+        <li class="toc-depth-2"><a href="#why-this-matters">Why This Matters</a></li>
+        <li class="toc-depth-3"><a href="#reason-1-exponential-speedup">Reason 1: Exponential Speedup</a></li>
+        <li class="toc-depth-3"><a href="#reason-2-new-possibilities">Reason 2: New Possibilities</a></li>
+        <li class="toc-depth-3"><a href="#reason-3-conceptual-clarity">Reason 3: Conceptual Clarity</a></li>
+        <li class="toc-depth-2"><a href="#advanced-applications">Advanced Applications</a></li>
+        <li class="toc-depth-3"><a href="#1-homomorphic-computation">1. Homomorphic Computation</a></li>
+        <li class="toc-depth-3"><a href="#2-symbolic-computation">2. Symbolic Computation</a></li>
+        <li class="toc-depth-3"><a href="#3-generative-models">3. Generative Models</a></li>
+        <li class="toc-depth-3"><a href="#4-database-compression">4. Database Compression</a></li>
+        <li class="toc-depth-3"><a href="#5-neural-network-compression">5. Neural Network Compression</a></li>
+        <li class="toc-depth-2"><a href="#the-philosophical-shift">The Philosophical Shift</a></li>
+        <li class="toc-depth-3"><a href="#old-paradigm-compression-as-storage-trick">Old Paradigm: Compression as Storage Trick</a></li>
+        <li class="toc-depth-3"><a href="#new-paradigm-compression-as-natural-algebra">New Paradigm: Compression as Natural Algebra</a></li>
+        <li class="toc-depth-3"><a href="#the-deep-insight">The Deep Insight</a></li>
+        <li class="toc-depth-2"><a href="#summary-the-unified-framework">Summary: The Unified Framework</a></li>
+        <li class="toc-depth-3"><a href="#the-mathematical-structure">The Mathematical Structure</a></li>
+        <li class="toc-depth-3"><a href="#the-computational-payoff">The Computational Payoff</a></li>
+        <li class="toc-depth-3"><a href="#the-key-questions">The Key Questions</a></li>
+        <li class="toc-depth-2"><a href="#practical-takeaways">Practical Takeaways</a></li>
+        <li class="toc-depth-3"><a href="#for-software-engineers">For Software Engineers</a></li>
+        <li class="toc-depth-3"><a href="#for-mathematicians">For Mathematicians</a></li>
+        <li class="toc-depth-3"><a href="#for-cryptographers">For Cryptographers</a></li>
+        <li class="toc-depth-3"><a href="#for-machine-learning-researchers">For Machine Learning Researchers</a></li>
+        <li class="toc-depth-3"><a href="#for-you-izaac-developer">For You (Izaac Developer)</a></li>
+        <li class="toc-depth-2"><a href="#further-reading">Further Reading</a></li>
+        <li class="toc-depth-3"><a href="#classical-sources">Classical Sources</a></li>
+        <li class="toc-depth-3"><a href="#modern-perspectives">Modern Perspectives</a></li>
+        <li class="toc-depth-3"><a href="#the-meta-view">The Meta-View</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">The Algebra of Compression: Computing Without Decompression</h1>
+          <p class="doc-meta">Compression Algorithms\compression_algebra_framework.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>When you compress, you're not just "making things smaller" - you're identifying <strong>structure</strong> and <strong>symmetry</strong>, then factoring it out.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>A Unified Mathematical Framework for Compressed Representations</strong></p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#the-core-insight">The Core Insight</a></li>
@@ -26,7 +106,7 @@
 <li><a href="#why-this-matters">Why This Matters</a></li>
 <li><a href="#advanced-applications">Advanced Applications</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="the-core-insight">The Core Insight</h2>
 <p><strong>Traditional view of compression:</strong></p>
 <pre><code>Original Data → [Compress] → Smaller Data → [Decompress] → Original Data
@@ -41,19 +121,19 @@ You can compute directly on it without ever decompressing
 <p><strong>Compression = Finding the minimal representative of an equivalence class</strong></p>
 </blockquote>
 <p>When you compress, you're not just "making things smaller" - you're identifying <strong>structure</strong> and <strong>symmetry</strong>, then factoring it out.</p>
-<hr />
+<hr/>
 <h2 id="what-is-a-quotient-structure">What is a Quotient Structure?</h2>
 <h3 id="the-mathematics">The Mathematics</h3>
 <p>Given a set $S$ and an equivalence relation $\sim$, the <strong>quotient</strong> $S/\sim$ is the set of equivalence classes.</p>
-<p><strong>Example 1: Integers Modulo 5</strong><br />
-- Set: $\mathbb{Z}$ (all integers)<br />
-- Equivalence: $a \sim b$ if $a - b$ is divisible by 5<br />
+<p><strong>Example 1: Integers Modulo 5</strong>
+- Set: $\mathbb{Z}$ (all integers)
+- Equivalence: $a \sim b$ if $a - b$ is divisible by 5
 - Quotient: $\mathbb{Z}/5\mathbb{Z} = {0, 1, 2, 3, 4}$</p>
 <p>Representatives: We pick one element from each class (usually the smallest non-negative one).</p>
-<p><strong>Example 2: Subsets</strong><br />
-- Set: All subsets of ${A, B, C, D, E}$<br />
-- Equivalence: Two subsets are equivalent if they contain the same elements<br />
-- Issue: ${B, D, E}$ and ${E, B, D}$ are the same subset!<br />
+<p><strong>Example 2: Subsets</strong>
+- Set: All subsets of ${A, B, C, D, E}$
+- Equivalence: Two subsets are equivalent if they contain the same elements
+- Issue: ${B, D, E}$ and ${E, B, D}$ are the same subset!
 - Quotient: Represent by <strong>sorted order</strong> → canonical form is ${B, D, E}$</p>
 <h3 id="the-pattern">The Pattern</h3>
 <ol>
@@ -62,24 +142,24 @@ You can compute directly on it without ever decompressing
 <li><strong>Choose representative</strong>: "Pick exactly one from each class"</li>
 <li><strong>Store representative</strong>: This is your compressed form</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="compression-as-quotient">Compression as Quotient</h2>
 <p>Every compression method identifies some equivalence relation and stores canonical representatives.</p>
 <h3 id="combinadics-compressing-subsets">Combinadics: Compressing Subsets</h3>
 <p><strong>Problem</strong>: Store which 3 items you selected from 100 items.</p>
-<p><strong>Naive</strong>: Store as 100-bit vector → 100 bits<br />
+<p><strong>Naive</strong>: Store as 100-bit vector → 100 bits
 <strong>Compressed</strong>: Store as single integer → 17 bits</p>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Order doesn't matter - ${5, 23, 67}$ = ${67, 5, 23}$<br />
-- Representative: Sort the subset → ${5, 23, 67}$<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Order doesn't matter - ${5, 23, 67}$ = ${67, 5, 23}$
+- Representative: Sort the subset → ${5, 23, 67}$
 - Encoding: Map to unique integer via:</p>
 <p>$$\text{rank}({s_1, s_2, s_3}) = \binom{s_3}{3} + \binom{s_2}{2} + \binom{s_1}{1}$$</p>
 <p><strong>The magic</strong>: Given rank 1234, you can decode back to the exact subset without storing the original.</p>
 <h3 id="graph-canonization-compressing-graphs">Graph Canonization: Compressing Graphs</h3>
 <p><strong>Problem</strong>: Store a graph with labeled vertices.</p>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Isomorphic graphs (same structure, different labels)<br />
-- Representative: Lexicographically smallest adjacency matrix<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Isomorphic graphs (same structure, different labels)
+- Representative: Lexicographically smallest adjacency matrix
 - Encoding: Compute canonical labeling → unique graph per structure</p>
 <p><strong>Example</strong>:</p>
 <pre><code>Graph 1: A-B-C     Graph 2: X-Y-Z     Graph 3: P-Q-R
@@ -88,18 +168,18 @@ You can compute directly on it without ever decompressing
 </code></pre>
 <p>All three are isomorphic (same structure). Canonical form represents ALL of them.</p>
 <h3 id="arithmetic-coding-compressing-by-probability">Arithmetic Coding: Compressing by Probability</h3>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Sequences with same probability distribution<br />
-- Representative: Single number in $[0,1)$ representing the sequence<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Sequences with same probability distribution
+- Representative: Single number in $[0,1)$ representing the sequence
 - Encoding: Partition $[0,1)$ by symbol probabilities</p>
 <p><strong>Example</strong>: "ABBCAB" → 0.0112013₃ → 10 bits (instead of 48 bits naively)</p>
 <h3 id="locality-based-compression-temporal-quotients">Locality-Based Compression: Temporal Quotients</h3>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: States that differ only in a few variables<br />
-- Representative: First state + sequence of differences<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: States that differ only in a few variables
+- Representative: First state + sequence of differences
 - Encoding: Store only what changes</p>
 <p><strong>Power</strong>: State vectors of 1024 byte-size variables compressed to 20 bits each</p>
-<hr />
+<hr/>
 <h2 id="the-magic-computing-on-compressed-data">The Magic: Computing on Compressed Data</h2>
 <p>Here's where it gets profound: <strong>You can compute directly on the compressed form.</strong></p>
 <h3 id="the-homomorphism-property">The Homomorphism Property</h3>
@@ -108,11 +188,11 @@ You can compute directly on it without ever decompressing
 <p>When this holds, operations on original data have corresponding operations on compressed data.</p>
 <h3 id="example-1-binary-decision-diagrams-bdds">Example 1: Binary Decision Diagrams (BDDs)</h3>
 <p><strong>What they compress</strong>: Boolean functions on n variables</p>
-<p><strong>Naive storage</strong>: Truth table with $2^n$ entries<br />
+<p><strong>Naive storage</strong>: Truth table with $2^n$ entries<br/>
 <strong>BDD storage</strong>: Directed acyclic graph (often polynomial size)</p>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Boolean functions that always give same output<br />
-- Representative: Reduced ordered binary decision diagram<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Boolean functions that always give same output
+- Representative: Reduced ordered binary decision diagram
 - Canonical: For a given variable ordering, exactly ONE BDD per function</p>
 <p><strong>Operations WITHOUT decompression</strong>:</p>
 <ol>
@@ -128,11 +208,11 @@ BDD: Compare two pointers → instant
 </code></pre>
 <h3 id="example-2-tensor-networks">Example 2: Tensor Networks</h3>
 <p><strong>What they compress</strong>: High-dimensional arrays</p>
-<p><strong>Naive storage</strong>: $d^N$ parameters for N-dimensional tensor<br />
+<p><strong>Naive storage</strong>: $d^N$ parameters for N-dimensional tensor<br/>
 <strong>Tensor network</strong>: $O(N \cdot d \cdot r^2)$ parameters (where $r$ is rank)</p>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Tensors with low-rank structure<br />
-- Representative: Factorized form (like matrix product states)<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Tensors with low-rank structure
+- Representative: Factorized form (like matrix product states)
 - Structure: Product of smaller tensors instead of one huge one</p>
 <p><strong>Operations WITHOUT full expansion</strong>:</p>
 <ol>
@@ -144,9 +224,9 @@ BDD: Compare two pointers → instant
 <p><strong>Real impact</strong>: Simulate quantum systems requiring more memory than exists in universe.</p>
 <h3 id="example-3-perfect-hash-functions">Example 3: Perfect Hash Functions</h3>
 <p><strong>What they compress</strong>: Membership in a known set</p>
-<p><strong>The Quotient</strong>:<br />
-- Equivalence: Elements map to same position<br />
-- Representative: Position index<br />
+<p><strong>The Quotient</strong>:
+- Equivalence: Elements map to same position
+- Representative: Position index
 - Storage: ~1.5 bits per element (vs. storing full keys)</p>
 <p><strong>Operations WITHOUT storage</strong>:</p>
 <ol>
@@ -154,7 +234,7 @@ BDD: Compare two pointers → instant
 <li><strong>Lookup</strong>: $O(1)$ - direct access by computed position</li>
 <li><strong>No collisions</strong>: Perfect bijection to $[0, |S|-1]$</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="real-world-examples">Real-World Examples</h2>
 <h3 id="example-a-model-checking-with-bdds">Example A: Model Checking with BDDs</h3>
 <p><strong>Problem</strong>: Verify a digital circuit with 100 state variables.</p>
@@ -179,7 +259,7 @@ Simulate time evolution: Update MPS iteratively
 <p><strong>Naive</strong>: $\binom{1000}{3} \approx 166$ million subsets to store</p>
 <p><strong>With combinadics</strong>:</p>
 <pre><code class="language-python">def unrank(rank, n, k):
-    &quot;&quot;&quot;Convert integer rank to k-subset of {0,...,n-1}&quot;&quot;&quot;
+    """Convert integer rank to k-subset of {0,...,n-1}"""
     subset = []
     for i in range(k-1, -1, -1):
         # Find largest m where C(m,i+1) &lt;= rank
@@ -195,7 +275,7 @@ subset = unrank(1_000_000, 1000, 3)
 # No need to generate first 999,999 subsets!
 </code></pre>
 <p><strong>What you computed</strong>: Random access to combinatorial objects without enumeration.</p>
-<hr />
+<hr/>
 <h2 id="the-meta-pattern">The Meta-Pattern</h2>
 <p>Across all compression techniques, we see a <strong>universal structure</strong>:</p>
 <h3 id="the-compression-trinity">The Compression Trinity</h3>
@@ -206,7 +286,7 @@ subset = unrank(1_000_000, 1000, 3)
 
 2. QUOTIENT BY EQUIVALENCE
    ↓
-   Define when two things are &quot;the same&quot;
+   Define when two things are "the same"
    Choose canonical representatives
 
 3. COMPUTE ON QUOTIENT
@@ -277,16 +357,16 @@ subset = unrank(1_000_000, 1000, 3)
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="why-this-matters">Why This Matters</h2>
 <h3 id="reason-1-exponential-speedup">Reason 1: Exponential Speedup</h3>
-<p>Without compression:<br />
-- State space: $2^{100}$ states<br />
-- Operation: Check equivalence → enumerate both spaces<br />
+<p>Without compression:
+- State space: $2^{100}$ states
+- Operation: Check equivalence → enumerate both spaces
 - Time: Heat death of universe</p>
-<p>With compression:<br />
-- Compressed form: Polynomial nodes<br />
-- Operation: Compare canonical forms → pointer comparison<br />
+<p>With compression:
+- Compressed form: Polynomial nodes
+- Operation: Compare canonical forms → pointer comparison
 - Time: Nanoseconds</p>
 <p><strong>You computed on an exponentially large object in polynomial time.</strong></p>
 <h3 id="reason-2-new-possibilities">Reason 2: New Possibilities</h3>
@@ -306,7 +386,7 @@ subset = unrank(1_000_000, 1000, 3)
 <li><strong>Natural operations</strong> (those preserving structure)</li>
 </ul>
 <p>Compression isn't a trick - it's finding the <strong>right algebra</strong> for the problem.</p>
-<hr />
+<hr/>
 <h2 id="advanced-applications">Advanced Applications</h2>
 <h3 id="1-homomorphic-computation">1. Homomorphic Computation</h3>
 <p><strong>Idea</strong>: Compute on encrypted data without decrypting.</p>
@@ -331,15 +411,15 @@ Plaintext result ← [Decrypt] ← Ciphertext result
 <p>Your <strong>Izaac framework</strong>:</p>
 <pre><code>Seed (256 bits) → [Deterministic expansion] → Gigabytes of structured data
 </code></pre>
-<p>If the generated data has algebraic structure, you can:<br />
-- Query properties without expanding<br />
-- Compose seeds to combine structures<br />
+<p>If the generated data has algebraic structure, you can:
+- Query properties without expanding
+- Compose seeds to combine structures<br/>
 - Prove theorems about generated objects</p>
 <h3 id="4-database-compression">4. Database Compression</h3>
 <p><strong>Idea</strong>: Query compressed databases without decompression.</p>
-<p><strong>Techniques</strong>:<br />
-- Succinct data structures: Support rank/select in compressed form<br />
-- Column stores: Operate on compressed columns directly<br />
+<p><strong>Techniques</strong>:
+- Succinct data structures: Support rank/select in compressed form
+- Column stores: Operate on compressed columns directly
 - Bitmap indices: Boolean operations on compressed bitmaps</p>
 <p><strong>Example</strong>: COUNT, SUM, AVG on compressed data → faster than decompressing!</p>
 <h3 id="5-neural-network-compression">5. Neural Network Compression</h3>
@@ -350,7 +430,7 @@ Parameters: 1,000,000 → 20,000 (50× compression)
 Forward pass: Compute U(Vx) directly (never form W)
 </code></pre>
 <p>Training and inference on compressed form!</p>
-<hr />
+<hr/>
 <h2 id="the-philosophical-shift">The Philosophical Shift</h2>
 <h3 id="old-paradigm-compression-as-storage-trick">Old Paradigm: Compression as Storage Trick</h3>
 <pre><code>Store → Compress → [Storage] → Decompress → Compute
@@ -364,12 +444,12 @@ Forward pass: Compute U(Vx) directly (never form W)
 <blockquote>
 <p><strong>The compressed representation is often easier to compute on than the original.</strong></p>
 </blockquote>
-<p>Examples:<br />
-- BDD equivalence: $O(1)$ vs. $O(2^n)$<br />
-- Tensor contractions: $O(N r^3)$ vs. $O(d^N)$<br />
+<p>Examples:
+- BDD equivalence: $O(1)$ vs. $O(2^n)$
+- Tensor contractions: $O(N r^3)$ vs. $O(d^N)$
 - Modular arithmetic: $O(1)$ vs. $O(\log n)$ for large integers</p>
 <p><strong>The quotient simplifies the algebra.</strong></p>
-<hr />
+<hr/>
 <h2 id="summary-the-unified-framework">Summary: The Unified Framework</h2>
 <h3 id="the-mathematical-structure">The Mathematical Structure</h3>
 <ol>
@@ -397,7 +477,7 @@ Forward pass: Compute U(Vx) directly (never form W)
 <li><strong>What operations preserve structure?</strong> (homomorphisms from $S$ to $S/\sim$)</li>
 <li><strong>Can I compute without decompressing?</strong> (closed operations on quotient)</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="practical-takeaways">Practical Takeaways</h2>
 <h3 id="for-software-engineers">For Software Engineers</h3>
 <ul>
@@ -430,13 +510,13 @@ Forward pass: Compute U(Vx) directly (never form W)
 <p>Your deterministic generation framework is a <strong>generative quotient</strong>:</p>
 <pre><code>Small seed → Algebraic expansion → Massive structured space
 </code></pre>
-<p>If the generated data has:<br />
-- Temporal locality → compress via delta encoding<br />
-- Algebraic structure → compute properties symbolically<br />
-- Combinatorial patterns → use quotient to predict future states<br />
+<p>If the generated data has:
+- Temporal locality → compress via delta encoding
+- Algebraic structure → compute properties symbolically<br/>
+- Combinatorial patterns → use quotient to predict future states
 - Cryptographic properties → operations on encrypted seeds</p>
 <p><strong>You're building computation that works natively in compressed space.</strong></p>
-<hr />
+<hr/>
 <h2 id="further-reading">Further Reading</h2>
 <h3 id="classical-sources">Classical Sources</h3>
 <ul>
@@ -456,27 +536,52 @@ Forward pass: Compute U(Vx) directly (never form W)
 <li>Information theory: Kolmogorov complexity</li>
 <li>Algebraic topology: Homology as quotient</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="conclusion">Conclusion</h2>
 <p><strong>Compression is not about making things smaller.</strong></p>
 <p><strong>Compression is about finding the algebra where computation is natural.</strong></p>
-<p>Every compression technique:<br />
-1. Identifies structure (symmetry, redundancy, patterns)<br />
-2. Quotients by equivalence (factors out what doesn't matter)<br />
-3. Defines operations (that preserve the quotient structure)<br />
+<p>Every compression technique:
+1. Identifies structure (symmetry, redundancy, patterns)
+2. Quotients by equivalence (factors out what doesn't matter)
+3. Defines operations (that preserve the quotient structure)
 4. Enables computation (directly on canonical forms)</p>
 <p>The compressed form isn't a shadow of the original - <strong>it's the essence</strong>.</p>
-<p>When you compress correctly, you discover:<br />
-- What actually matters (the canonical part)<br />
-- What was illusion (quotiented away)<br />
+<p>When you compress correctly, you discover:
+- What actually matters (the canonical part)
+- What was illusion (quotiented away)<br/>
 - How to compute efficiently (algebra on quotient)</p>
-<p>This is why BDDs can verify $10^{30}$ states in seconds.<br />
-This is why tensor networks can simulate quantum computers.<br />
+<p>This is why BDDs can verify $10^{30}$ states in seconds.<br/>
+This is why tensor networks can simulate quantum computers.<br/>
 This is why your Izaac framework can generate structured infinity from finite seeds.</p>
-<p><strong>You're not fighting exponential explosion.</strong><br />
+<p><strong>You're not fighting exponential explosion.</strong><br/>
 <strong>You're working in the space where it never existed.</strong></p>
-<hr />
+<hr/>
 <p><em>The algebra of compression: where less is not just more - it's everything.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

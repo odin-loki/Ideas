@@ -3,31 +3,97 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>veritas research paper</title>
+  <meta name="description" content="We present VERITAS \(Verification-Enabled Reasoning and Integrated Theorem-Acquiring System\), a meta-learning architecture that operates over binary pattern spaces and provides formal, proof-backed guarantees on its own learning behaviour at every training step. Unlike…"/>
+  <title>Veritas · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Veritas\veritas_research_paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>VERITAS</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-3"><a href="#11-contributions">1.1  Contributions</a></li>
+        <li class="toc-depth-3"><a href="#12-notation">1.2  Notation</a></li>
+        <li class="toc-depth-2"><a href="#2-core-spaces-and-metric-structures">2. Core Spaces and Metric Structures</a></li>
+        <li class="toc-depth-3"><a href="#21-foundational-spaces">2.1  Foundational Spaces</a></li>
+        <li class="toc-depth-3"><a href="#22-canonical-metrics">2.2  Canonical Metrics</a></li>
+        <li class="toc-depth-3"><a href="#23-completeness-theorem-1">2.3  Completeness (Theorem 1)</a></li>
+        <li class="toc-depth-2"><a href="#3-pac-learning-framework">3. PAC Learning Framework</a></li>
+        <li class="toc-depth-3"><a href="#31-overview">3.1  Overview</a></li>
+        <li class="toc-depth-3"><a href="#32-pac-bound-theorem-2">3.2  PAC Bound (Theorem 2)</a></li>
+        <li class="toc-depth-3"><a href="#33-sample-complexity-over-h-theorem-3">3.3  Sample Complexity Over H (Theorem 3)</a></li>
+        <li class="toc-depth-3"><a href="#34-practical-implications">3.4  Practical Implications</a></li>
+        <li class="toc-depth-2"><a href="#4-alt-learning-framework">4. ALT Learning Framework</a></li>
+        <li class="toc-depth-3"><a href="#41-overview">4.1  Overview</a></li>
+        <li class="toc-depth-3"><a href="#42-mistake-bound-theorem-4">4.2  Mistake Bound (Theorem 4)</a></li>
+        <li class="toc-depth-3"><a href="#43-query-complexity-theorem-5">4.3  Query Complexity (Theorem 5)</a></li>
+        <li class="toc-depth-3"><a href="#44-relationship-between-bounds-and-runtime-tracking">4.4  Relationship Between Bounds and Runtime Tracking</a></li>
+        <li class="toc-depth-2"><a href="#5-meta-learning-theory">5. Meta-Learning Theory</a></li>
+        <li class="toc-depth-3"><a href="#51-motivation-and-architecture">5.1  Motivation and Architecture</a></li>
+        <li class="toc-depth-3"><a href="#52-meta-pac-bounds-theorem-6">5.2  Meta-PAC Bounds (Theorem 6)</a></li>
+        <li class="toc-depth-3"><a href="#53-meta-alt-bound-theorem-7">5.3  Meta-ALT Bound (Theorem 7)</a></li>
+        <li class="toc-depth-2"><a href="#6-verification-theory">6. Verification Theory</a></li>
+        <li class="toc-depth-3"><a href="#61-architecture">6.1  Architecture</a></li>
+        <li class="toc-depth-3"><a href="#62-verification-completeness-theorem-8">6.2  Verification Completeness (Theorem 8)</a></li>
+        <li class="toc-depth-3"><a href="#63-learning-composition-theorem-9">6.3  Learning Composition (Theorem 9)</a></li>
+        <li class="toc-depth-3"><a href="#64-proof-trace-structure-and-convergence-conditions">6.4  Proof Trace Structure and Convergence Conditions</a></li>
+        <li class="toc-depth-2"><a href="#7-distillation-and-ensemble-theory">7. Distillation and Ensemble Theory</a></li>
+        <li class="toc-depth-3"><a href="#71-knowledge-distillation-in-binary-spaces">7.1  Knowledge Distillation in Binary Spaces</a></li>
+        <li class="toc-depth-3"><a href="#72-ensemble-variance-reduction">7.2  Ensemble Variance Reduction</a></li>
+        <li class="toc-depth-3"><a href="#73-implementation">7.3  Implementation</a></li>
+        <li class="toc-depth-2"><a href="#8-reference-implementation">8. Reference Implementation</a></li>
+        <li class="toc-depth-3"><a href="#81-architecture-overview">8.1  Architecture Overview</a></li>
+        <li class="toc-depth-3"><a href="#82-bug-fixes-relative-to-prior-implementation">8.2  Bug Fixes Relative to Prior Implementation</a></li>
+        <li class="toc-depth-3"><a href="#83-summary-of-theorems">8.3  Summary of Theorems</a></li>
+        <li class="toc-depth-2"><a href="#9-discussion">9. Discussion</a></li>
+        <li class="toc-depth-3"><a href="#91-relationship-to-existing-work">9.1  Relationship to Existing Work</a></li>
+        <li class="toc-depth-3"><a href="#92-practical-interpretation-of-non-verification">9.2  Practical Interpretation of Non-Verification</a></li>
+        <li class="toc-depth-3"><a href="#93-limitations-and-extensions">9.3  Limitations and Extensions</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Veritas</h1>
+          <p class="doc-meta">Veritas\veritas_research_paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>A complete mathematical framework</strong> with formal proofs, PAC/ALT learning bounds, meta-learning theory, and reference implementation</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Verification-Enabled Reasoning and Integrated Theorem-Acquiring System</em></p>
-<p><strong>A Complete Mathematical Framework with Formal Proofs,</strong></p>
-<p><strong>PAC/ALT Learning Bounds, Meta-Learning Theory, and Reference Implementation</strong></p>
+<p><strong>A complete mathematical framework</strong> with formal proofs, PAC/ALT learning bounds, meta-learning theory, and reference implementation</p>
 <p>Technical Report · March 2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+<h2 id="abstract">Abstract</h2>
 <p>We present VERITAS (Verification-Enabled Reasoning and Integrated Theorem-Acquiring System), a meta-learning architecture that operates over binary pattern spaces and provides formal, proof-backed guarantees on its own learning behaviour at every training step. Unlike conventional learning systems whose performance bounds are analysed offline, VERITAS continuously verifies that each learning step satisfies the theoretical conditions imposed by PAC and ALT learning frameworks, and composes those guarantees hierarchically through a meta-learning layer.</p>
 <p>This document establishes the complete mathematical foundation for VERITAS across nine theorems covering metric space completeness, PAC learning bounds, ALT learning bounds, meta-learning theory, verification completeness, and composition guarantees. We further describe a distillation regime for ensemble-to-student knowledge transfer, and present a complete NumPy reference implementation. The central result is Theorem 9, which shows that PAC and ALT learning guarantees compose additively through the meta-learning layer: if the base learner achieves error ε with confidence 1−δ, and the meta-learner achieves meta-error ε_m with confidence 1−δ_m, then the composed system achieves error ε + ε_m with confidence 1−(δ + δ_m). The system imposes a superexponential sample complexity cost (ln|H| = 2^n · ln 2 for hypothesis space H over n-dimensional binary patterns) by design, forcing the accumulation of sufficient evidence before any learning step is certified.</p>
-<p>Keywords: PAC Learning, Algorithmic Learning Theory, Meta-Learning, Online Learning, Mistake Bounds, Binary Hypothesis Spaces, Knowledge Distillation, Formal Verification, Ensemble Methods.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> PAC Learning, Algorithmic Learning Theory, Meta-Learning, Online Learning, Mistake Bounds, Binary Hypothesis Spaces, Knowledge Distillation, Formal Verification, Ensemble Methods.</p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Formal learning theory provides asymptotic and finite-sample bounds that are almost universally treated as background results: derived once, invoked in a paper's analysis section, and never checked again at runtime. VERITAS was designed to break this convention. Its central thesis is that learning bounds should be active constraints, verified at every training step, so that the system can distinguish between learning iterations that provably satisfy convergence criteria and those that do not.</p>
 <p>The PAC (Probably Approximately Correct) learning framework, introduced by Valiant [1], asks how many labelled examples an algorithm needs to output a hypothesis with low generalisation error and high probability. The ALT (Algorithmic Learning Theory) framework asks how many mistakes an online learner makes before converging, and how many queries suffice for exact identification [2]. Both frameworks rest on clean combinatorial arguments — Hoeffding's inequality [3] and the halving argument of Littlestone [4] — and both produce bounds whose constants and exponents depend on the size of the hypothesis space.</p>
 <p>For VERITAS the hypothesis space is H = {h : B → B}, the set of all Boolean functions from n-dimensional binary patterns to binary patterns. This space has cardinality |H| = 2^(2^n), which is superexponential in n. The logarithm of |H| — the key quantity in both PAC and ALT bounds — is ln|H| = 2^n · ln 2, exponential in n. This choice is deliberate: it imposes a substantial sample-complexity cost that forces the system to accumulate large amounts of evidence before any step is certified as verified.</p>
 <p>The meta-learning layer operates one level above H, in the space M = {m : H → H} of all hypothesis transformers. Meta-learning in the sense of 'learning to learn' has a long history [5], and has recently been formalised in gradient-based frameworks such as MAML [6]. VERITAS takes a different approach: it applies the same PAC and ALT frameworks at the meta-level, using H as the new instance space and M as the new hypothesis space, and composes the resulting bounds through Theorem 9.</p>
 <p>The verification architecture maintains four nested proof traces at each training step: a PAC proof, an ALT proof, a meta proof, and a composition proof. Weight updates are applied only when the composition proof verifies. The distillation module allows an ensemble of teacher VERITAS instances to supervise a student model, with temperature-scaled KL divergence as the soft-target objective, following the framework of Hinton, Vinyals, and Dean [7].</p>
-<h2 id="11-contributions"><strong>1.1  Contributions</strong></h2>
+<h3 id="11-contributions">1.1  Contributions</h3>
 <p>This work makes the following contributions:</p>
 <ol>
 <li>A complete mathematical foundation for learning over binary pattern spaces, comprising nine theorems with full proofs.</li>
@@ -35,92 +101,116 @@
 <li>A distillation theory for ensemble-to-student transfer in binary spaces, with connections to the original Hinton et al. temperature-scaling framework.</li>
 <li>A complete, self-contained NumPy reference implementation (veritas_core.py, veritas_verification.py, veritas_distillation.py, veritas_integration.py) with documented bug fixes relative to an earlier PyTorch prototype.</li>
 </ol>
-<h2 id="12-notation"><strong>1.2  Notation</strong></h2>
+<h3 id="12-notation">1.2  Notation</h3>
 <p>The following notation is used consistently throughout this paper.</p>
-<p><strong>Symbol</strong></p>
-<p><strong>Meaning</strong></p>
-<p>B = {0,1}^n</p>
-<p>n-dimensional binary pattern space</p>
-<p>H = {h : B → B}</p>
-<p>Hypothesis space; |H| = 2^(2^n)</p>
-<p>M = {m : H → H}</p>
-<p>Meta-space; |M| = |H|^|H|</p>
-<p>V = {v : H×M → {0,1}}</p>
-<p>Verification space</p>
-<p>err(h)</p>
-<p>True error: P(h(x) ≠ y)</p>
-<p>êrr(h)</p>
-<p>Empirical error over m labelled samples</p>
-<p>ε, δ</p>
-<p>PAC accuracy and confidence parameters</p>
-<p>M(L), Q(L)</p>
-<p>Mistake bound and query complexity of algorithm L</p>
-<h1 id="2-core-spaces-and-metric-structures"><strong>2. Core Spaces and Metric Structures</strong></h1>
-<h2 id="21-foundational-spaces"><strong>2.1  Foundational Spaces</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B = {0,1}^n</td>
+<td>n-dimensional binary pattern space</td>
+</tr>
+<tr>
+<td>H = {h : B → B}</td>
+<td>Hypothesis space; |H| = 2^(2^n)</td>
+</tr>
+<tr>
+<td>M = {m : H → H}</td>
+<td>Meta-space; |M| = |H|^|H|</td>
+</tr>
+<tr>
+<td>V = {v : H×M → {0,1}}</td>
+<td>Verification space</td>
+</tr>
+<tr>
+<td>err(h)</td>
+<td>True error: P(h(x) ≠ y)</td>
+</tr>
+<tr>
+<td>êrr(h)</td>
+<td>Empirical error over m labelled samples</td>
+</tr>
+<tr>
+<td>ε, δ</td>
+<td>PAC accuracy and confidence parameters</td>
+</tr>
+<tr>
+<td>M(L), Q(L)</td>
+<td>Mistake bound and query complexity of algorithm L</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-core-spaces-and-metric-structures">2. Core Spaces and Metric Structures</h2>
+<h3 id="21-foundational-spaces">2.1  Foundational Spaces</h3>
 <p>VERITAS operates over a probabilistic universe (Ω, ℱ, P) where Ω is the sample space of binary patterns, ℱ is a σ-algebra over Ω, and P is a probability measure on (Ω, ℱ). Four nested spaces are constructed above this foundation.</p>
-<p><strong>Definition 2.1 (Core Spaces).  </strong><em>1. Binary Pattern Space: B = {0,1}^n. 2. Hypothesis Space: H = {h : B → B}, |H| = 2^(2^n). 3. Meta-Space: M = {m : H → H}, |M| = |H|^|H|. 4. Verification Space: V = {v : H × M → {0,1}}.</em></p>
+<p><strong>Definition 2.1 (Core Spaces).</strong> <em>1. Binary Pattern Space: B = {0,1}^n. 2. Hypothesis Space: H = {h : B → B}, |H| = 2^(2^n). 3. Meta-Space: M = {m : H → H}, |M| = |H|^|H|. 4. Verification Space: V = {v : H × M → {0,1}}.</em></p>
 <p>The cardinalities follow from elementary combinatorics. There are 2^n distinct binary strings of length n, giving |B| = 2^n. A function B → B is determined by its truth table of 2^n output bits, giving |H| = 2^(2^n). A meta-function H → H is determined by its image on each element of H, giving |M| = |H|^|H| = 2^(2^n · 2^(2^n)). These superexponential sizes are not curiosities — they directly determine sample complexity (Theorem 3) and mistake bounds (Theorem 4), and have concrete runtime consequences for the number of steps required before verification succeeds.</p>
-<h2 id="22-canonical-metrics"><strong>2.2  Canonical Metrics</strong></h2>
-<p><strong>Definition 2.2 (Canonical Metrics).  </strong><em>d_B(x, y) = Σ|x_i − y_i|  (Hamming distance on B)  d_H(h₁, h₂) = sup{ d_B(h₁(x), h₂(x)) | x ∈ B }  d_M(m₁, m₂) = sup{ d_H(m₁(h), m₂(h)) | h ∈ H }  d_V(v₁, v₂) = P(v₁ ≠ v₂)</em></p>
+<h3 id="22-canonical-metrics">2.2  Canonical Metrics</h3>
+<p><strong>Definition 2.2 (Canonical Metrics).</strong> <em>d_B(x, y) = Σ|x_i − y_i|  (Hamming distance on B)  d_H(h₁, h₂) = sup{ d_B(h₁(x), h₂(x)) | x ∈ B }  d_M(m₁, m₂) = sup{ d_H(m₁(h), m₂(h)) | h ∈ H }  d_V(v₁, v₂) = P(v₁ ≠ v₂)</em></p>
 <p>The Hamming metric on B counts differing bit positions. The hypothesis metric d_H is an L∞-type lifting: two hypotheses are close if they agree on every input pattern up to a small Hamming tolerance. The meta-metric repeats this lifting one level higher. The verification metric is a probability metric over the product space H × M.</p>
-<h2 id="23-completeness-theorem-1"><strong>2.3  Completeness (Theorem 1)</strong></h2>
-<p><strong>Theorem 1 (Completeness).  </strong><em>Each metric space (B, d_B), (H, d_H), (M, d_M), and (V, d_V) is a complete metric space.</em></p>
+<h3 id="23-completeness-theorem-1">2.3  Completeness (Theorem 1)</h3>
+<p><strong>Theorem 1 (Completeness).</strong> <em>Each metric space (B, d_B), (H, d_H), (M, d_M), and (V, d_V) is a complete metric space.</em></p>
 <p><em>Proof.  </em>(B, d_B): B is finite for any fixed n. Every Cauchy sequence in a finite metric space is eventually constant and therefore convergent. (H, d_H): Let {h_k} be a Cauchy sequence in H. For any ε &gt; 0, there exists K such that for all j, k ≥ K, d_H(h_j, h_k) &lt; ε. By definition of d_H, for every x ∈ B the sequence {h_k(x)} is Cauchy in the complete space B, and hence converges to some h*(x) ∈ B. The function h* ∈ H satisfies d_H(h_k, h*) &lt; ε for all k ≥ K. (M, d_M): The argument mirrors the H case, replacing B with H. (V, d_V): The probability metric inherits completeness from the underlying probability space (Ω, ℱ, P). ∎</p>
 <p>Completeness is foundational because it guarantees that iterative learning algorithms — which produce Cauchy sequences of hypotheses by successive refinement — converge to well-defined limits inside the space. Without completeness, a sequence of approximate hypotheses could converge toward a function outside H, making the learning target unreachable.</p>
-<h1 id="3-pac-learning-framework"><strong>3. PAC Learning Framework</strong></h1>
-<h2 id="31-overview"><strong>3.1  Overview</strong></h2>
+<h2 id="3-pac-learning-framework">3. PAC Learning Framework</h2>
+<h3 id="31-overview">3.1  Overview</h3>
 <p>Probably Approximately Correct (PAC) learning, introduced by Valiant [1] in 1984, provides a rigorous framework for analysing sample complexity. A learner receives m random examples {(x_i, c(x_i))} drawn i.i.d. from distribution P, where c ∈ H is an unknown target concept. The learner must output a hypothesis h ∈ H whose true error err(h) = P(h(x) ≠ c(x)) is at most ε with probability at least 1−δ over the random draw of training data. The two parameters ε ∈ (0,1) and δ ∈ (0,1) respectively quantify accuracy and confidence.</p>
 <p>The central challenge is the generalisation gap: empirical error on training data systematically underestimates true error when the sample is small. PAC theory quantifies this gap precisely using Hoeffding's inequality [3], which bounds the probability that a sample mean deviates from its expectation.</p>
-<h2 id="32-pac-bound-theorem-2"><strong>3.2  PAC Bound (Theorem 2)</strong></h2>
-<p><strong>Theorem 2 (PAC Learning in Binary Space).  </strong><em>For any h ∈ H, with probability at least 1−δ over a sample of size m: |err(h) − êrr(h)| ≤ ε,  provided  m ≥ (1/2ε²) ln(2/δ).</em></p>
+<h3 id="32-pac-bound-theorem-2">3.2  PAC Bound (Theorem 2)</h3>
+<p><strong>Theorem 2 (PAC Learning in Binary Space).</strong> <em>For any h ∈ H, with probability at least 1−δ over a sample of size m: |err(h) − êrr(h)| ≤ ε,  provided  m ≥ (1/2ε²) ln(2/δ).</em></p>
 <p><em>Proof.  </em>Fix h ∈ H. Define Z_i = 1[h(x_i) ≠ y_i] for i = 1, ..., m drawn i.i.d. from P. Each Z_i ∈ [0,1] with E[Z_i] = err(h) and êrr(h) = (1/m)Σ Z_i. By Hoeffding's inequality for bounded i.i.d. random variables: P(|êrr(h) − err(h)| &gt; ε) ≤ 2 exp(−2mε²). Setting 2 exp(−2mε²) = δ and solving for m yields m ≥ (1/2ε²) ln(2/δ). ∎</p>
-<h2 id="33-sample-complexity-over-h-theorem-3"><strong>3.3  Sample Complexity Over H (Theorem 3)</strong></h2>
+<h3 id="33-sample-complexity-over-h-theorem-3">3.3  Sample Complexity Over H (Theorem 3)</h3>
 <p>Theorem 2 controls the deviation for a single fixed hypothesis h. When the learner selects h from H after seeing the data, the guarantee must hold simultaneously for all h ∈ H. This requires a union bound over the class, adding a factor of ln|H| to the sample requirement.</p>
-<p><strong>Theorem 3 (Sample Complexity).  </strong><em>For the binary hypothesis space H with |H| = 2^(2^n): m ≥ (1/ε²)(ln|H| + ln(1/δ)),  where  ln|H| = 2^n · ln 2.</em></p>
+<p><strong>Theorem 3 (Sample Complexity).</strong> <em>For the binary hypothesis space H with |H| = 2^(2^n): m ≥ (1/ε²)(ln|H| + ln(1/δ)),  where  ln|H| = 2^n · ln 2.</em></p>
 <p><em>Proof.  </em>Applying a union bound over all h ∈ H to Theorem 2: P(∃h ∈ H : |êrr(h) − err(h)| &gt; ε) ≤ |H| · 2 exp(−2mε²). Setting this equal to δ and solving gives m ≥ (1/2ε²)(ln 2 + ln|H| + ln(1/δ)). Absorbing the ln 2 constant into the leading factor (standard in PAC literature) and substituting ln|H| = 2^n · ln 2 yields the stated bound. ∎</p>
 <p>For the default dimension n = 8, ln|H| ≈ 177,000. With ε = δ = 0.01, the required sample count is approximately 1.8 million. This reflects the extraordinary richness of B → B and explains why PAC verification at small dimensions requires either very large datasets or relaxed parameters. If the learner is restricted to a subclass H' ⊂ H, the bound improves to ln|H'|; subclass selection is one practical strategy for making PAC verification achievable.</p>
-<h2 id="34-practical-implications"><strong>3.4  Practical Implications</strong></h2>
+<h3 id="34-practical-implications">3.4  Practical Implications</h3>
 <p>The exponential sample complexity has two concrete runtime consequences. First, for any realistic training run on small binary patterns, the PAC step of the proof trace will return False until sufficient examples have accumulated — this is expected and correct behaviour. Second, the bound is tight in the worst case over the full hypothesis class; any algorithm must inspect at least Ω((1/ε²)(ln|H| + ln(1/δ))) examples to guarantee ε-accuracy with probability 1−δ. The code correctly implements Theorem 3's ln|H| = 2^n · ln 2 formula, fixing a prior bug in which the formula was ln|H| = n · ln 2 (dimension times log two, rather than 2-to-the-n times log two).</p>
-<h1 id="4-alt-learning-framework"><strong>4. ALT Learning Framework</strong></h1>
-<h2 id="41-overview"><strong>4.1  Overview</strong></h2>
+<h2 id="4-alt-learning-framework">4. ALT Learning Framework</h2>
+<h3 id="41-overview">4.1  Overview</h3>
 <p>Algorithmic Learning Theory (ALT) approaches learnability through worst-case combinatorial analysis rather than probabilistic sample complexity. Two central quantities characterise a learning algorithm L on hypothesis class H: the mistake bound M(L) — the maximum number of incorrect predictions before convergence, over all target concepts and all presentation orderings — and the query complexity Q(L) — the minimum number of membership queries needed to exactly identify any target in a single identification round.</p>
 <p>Both quantities are determined by the size of the version space: the set of hypotheses in H consistent with all examples seen so far. Each mistake or query provides information that shrinks the version space, and both bounds follow from the rate of this shrinkage.</p>
-<h2 id="42-mistake-bound-theorem-4"><strong>4.2  Mistake Bound (Theorem 4)</strong></h2>
+<h3 id="42-mistake-bound-theorem-4">4.2  Mistake Bound (Theorem 4)</h3>
 <p>The foundational result in mistake-bounded learning is the Halving Algorithm, due to Littlestone [4]. On each trial, the Halving Algorithm predicts the majority vote over the current version space. Every mistake eliminates at least half the remaining candidates, yielding a logarithmic bound.</p>
-<p><strong>Theorem 4 (Mistake Bound).  </strong><em>For any learning algorithm L on H: M(L) ≤ lg|H| = 2^n, where |H| = 2^(2^n) and lg denotes log base 2.</em></p>
+<p><strong>Theorem 4 (Mistake Bound).</strong> <em>For any learning algorithm L on H: M(L) ≤ lg|H| = 2^n, where |H| = 2^(2^n) and lg denotes log base 2.</em></p>
 <p><em>Proof.  </em>Let V_t denote the version space after t examples, with V_0 = H. On any trial where the algorithm makes a mistake, at least half the remaining consistent hypotheses are eliminated (Littlestone [4], Theorem 2). Formally: |V_{t+1}| ≤ |V_t| / 2. Starting from |V_0| = |H|, after M mistakes we have |V_M| ≤ |H| / 2^M. Since |V_M| ≥ 1 (the target concept remains consistent), 2^M ≤ |H| and hence M ≤ lg|H|. Substituting |H| = 2^(2^n) gives M ≤ lg(2^(2^n)) = 2^n. ∎</p>
-<h2 id="43-query-complexity-theorem-5"><strong>4.3  Query Complexity (Theorem 5)</strong></h2>
+<h3 id="43-query-complexity-theorem-5">4.3  Query Complexity (Theorem 5)</h3>
 <p>In the active learning model, the learner may choose which patterns to query rather than receiving random examples. This is the model of Angluin [8], who showed that membership queries can exponentially reduce the number of examples required for exact identification.</p>
-<p><strong>Theorem 5 (Query Complexity).  </strong><em>For exact identification of any target in H: Q(L) ≤ n, where Q(L) is the number of membership queries required per identification round.</em></p>
+<p><strong>Theorem 5 (Query Complexity).</strong> <em>For exact identification of any target in H: Q(L) ≤ n, where Q(L) is the number of membership queries required per identification round.</em></p>
 <p><em>Proof.  </em>A membership query asks 'Is x labelled 1 by target c?' and receives a single bit. The target pattern x* ∈ B is an n-bit string. Querying each canonical basis pattern e_i = (0,...,0,1,0,...,0) (the i-th standard basis vector for i = 1,...,n) reveals c(e_i) ∈ {0,1}, recovering one bit of the truth table per query. After n queries the full labelling of B is determined. Hence Q(L) ≤ n. The bound is information-theoretically tight: the target is one of |B| = 2^n patterns, requiring at least n bits, and each query yields exactly one bit. ∎</p>
-<h2 id="44-relationship-between-bounds-and-runtime-tracking"><strong>4.4  Relationship Between Bounds and Runtime Tracking</strong></h2>
+<h3 id="44-relationship-between-bounds-and-runtime-tracking">4.4  Relationship Between Bounds and Runtime Tracking</h3>
 <p>The mistake bound and query complexity are complementary, not comparable. Mistake bounds apply to online adversarial learning where the presentation sequence is chosen by nature; query bounds apply to active learning where the learner selects queries. In VERITAS, both are tracked simultaneously. The mistake counter increments when the rule network's prediction error exceeds ε; the query counter increments on every forward pass. The ALT proof verifier checks mistakes ≤ 2^n and (per-round) queries ≤ n.</p>
 <p>The query bound Q ≤ n is a per-round quantity governing a single exact-identification episode, not a cumulative budget. The implementation correctly distinguishes these semantics: cumulative query count will exceed n after the first n training steps, but per-round verification uses the round-local count.</p>
-<h1 id="5-meta-learning-theory"><strong>5. Meta-Learning Theory</strong></h1>
-<h2 id="51-motivation-and-architecture"><strong>5.1  Motivation and Architecture</strong></h2>
+<h2 id="5-meta-learning-theory">5. Meta-Learning Theory</h2>
+<h3 id="51-motivation-and-architecture">5.1  Motivation and Architecture</h3>
 <p>The meta-learning layer of VERITAS operates over the hypothesis space H, not over the pattern space B. Its purpose is to learn a transformation m : H → H that maps base hypotheses to improved hypotheses — learning how to learn, in the sense of Thrun and Pratt [5]. In the implementation, hypotheses are encoded as flattened parameter vectors of the rule network, so m operates on parameter-space representations of functions.</p>
 <p>This is a second-order optimisation problem. Rather than minimising error on B, the meta-learner minimises error on H. Standard PAC and ALT frameworks must be reinterpreted: H is now the instance space and M is the hypothesis class. Because M has cardinality |H|^|H| — doubly exponential in n — the meta-level bounds are orders of magnitude larger than the base-level bounds, but they remain finite and mathematically well-posed.</p>
 <p>This approach connects to MAML [6] and related gradient-based meta-learning frameworks [5], with the key distinction that VERITAS derives explicit combinatorial bounds from the structure of M rather than relying on gradient-based fine-tuning. The meta-network in the implementation is a two-layer MLP operating on rule-network parameter vectors, with theorem discovery triggered when binary-thresholded meta-outputs satisfy both PAC and ALT proof traces simultaneously.</p>
-<h2 id="52-meta-pac-bounds-theorem-6"><strong>5.2  Meta-PAC Bounds (Theorem 6)</strong></h2>
-<p><strong>Theorem 6 (Meta-Learning PAC Bound).  </strong><em>For any meta-learner m ∈ M, with probability at least 1−δ_m: |err_m(m) − êrr_m(m)| ≤ ε_m, where err_m(m) is the true meta-error and êrr_m(m) is the empirical meta-error.</em></p>
+<h3 id="52-meta-pac-bounds-theorem-6">5.2  Meta-PAC Bounds (Theorem 6)</h3>
+<p><strong>Theorem 6 (Meta-Learning PAC Bound).</strong> <em>For any meta-learner m ∈ M, with probability at least 1−δ_m: |err_m(m) − êrr_m(m)| ≤ ε_m, where err_m(m) is the true meta-error and êrr_m(m) is the empirical meta-error.</em></p>
 <p><em>Proof.  </em>Apply the PAC framework of Theorem 2 to the meta-space: instance space H, hypothesis class M, error function err_m. Meta-errors are bounded in [0,1], so Hoeffding's inequality applies. The required number of meta-examples for the uniform bound to hold is m_M ≥ (1/ε_m²)(ln|M| + ln(1/δ_m)). Since |M| = |H|^|H| = 2^(2^n · 2^(2^n)), the meta-sample complexity is doubly exponential in n, but finite for any fixed n. In practice the parametric restriction of M to the meta-network's parameter space gives a far smaller effective size. ∎</p>
-<h2 id="53-meta-alt-bound-theorem-7"><strong>5.3  Meta-ALT Bound (Theorem 7)</strong></h2>
-<p><strong>Theorem 7 (Meta-Learning Mistake Bound).  </strong><em>For any meta-learning algorithm operating on M: M(m) ≤ lg|M| = 2^n · 2^(2^n).</em></p>
+<h3 id="53-meta-alt-bound-theorem-7">5.3  Meta-ALT Bound (Theorem 7)</h3>
+<p><strong>Theorem 7 (Meta-Learning Mistake Bound).</strong> <em>For any meta-learning algorithm operating on M: M(m) ≤ lg|M| = 2^n · 2^(2^n).</em></p>
 <p><em>Proof.  </em>Apply the halving argument of Theorem 4 to the meta-version space with size |M| = |H|^|H|. Each mistake halves the meta-version space: |V_{t+1}^M| ≤ |V_t^M| / 2. Starting from |V_0^M| = |M| and noting |V_M^M| ≥ 1, we obtain M(m) ≤ lg|M|. Substituting |M| = 2^(2^n · 2^(2^n)) gives lg|M| = 2^n · 2^(2^n). ∎</p>
 <p>This bound is doubly exponential and is best understood as a theoretical ceiling over the full meta-space. For practical systems where the meta-learner is restricted to a parametric subspace (as in VERITAS), the effective bound is determined by the VC dimension or Rademacher complexity of that subspace, which scales polynomially in the number of network parameters.</p>
-<h1 id="6-verification-theory"><strong>6. Verification Theory</strong></h1>
-<h2 id="61-architecture"><strong>6.1  Architecture</strong></h2>
+<h2 id="6-verification-theory">6. Verification Theory</h2>
+<h3 id="61-architecture">6.1  Architecture</h3>
 <p>The verification layer distinguishes VERITAS from a conventional learning system. At each training step, the system constructs four sequential proofs: a PAC proof (Theorems 2 and 3), an ALT proof (Theorems 4 and 5), a meta proof (Theorem 6), and a composition proof (Theorem 9). Weight updates are applied only when the composition proof verifies. This creates a feedback loop where learning is conditioned on provable progress.</p>
 <p>Each proof is represented as a TheoremProof dataclass containing a list of ProofStep objects. Each ProofStep records its statement, justification, assumptions, conclusion (a boolean), and a verification trace (a list of boolean sub-checks). A proof is verified if and only if all its steps conclude True. A VerificationTrace aggregates the four proofs, computes per-type step-pass-rates, and assigns an overall confidence equal to the fraction of proofs that fully verify.</p>
-<h2 id="62-verification-completeness-theorem-8"><strong>6.2  Verification Completeness (Theorem 8)</strong></h2>
-<p><strong>Theorem 8 (Verification Completeness).  </strong><em>For verifier v ∈ V: v is complete ⟺ ∀h, m: v(h, m) = 1 ⟹ all required properties hold.</em></p>
+<h3 id="62-verification-completeness-theorem-8">6.2  Verification Completeness (Theorem 8)</h3>
+<p><strong>Theorem 8 (Verification Completeness).</strong> <em>For verifier v ∈ V: v is complete ⟺ ∀h, m: v(h, m) = 1 ⟹ all required properties hold.</em></p>
 <p><em>Proof.  </em>The verifier v is the conjunction v(h, m) = ⋀_{i=1}^k P_i(h, m) of decidable property predicates P_1, ..., P_k (PAC error bound, ALT mistake bound, ALT query bound, meta-error bound, composition validity). Soundness: if v = 1 then each P_i = 1 and each property holds. Completeness: if all P_i = 1 then v = 1. The predicates are computable from observable statistics (empirical error, sample count, mistake count, query count), so v is effectively decidable. ∎</p>
-<h2 id="63-learning-composition-theorem-9"><strong>6.3  Learning Composition (Theorem 9)</strong></h2>
+<h3 id="63-learning-composition-theorem-9">6.3  Learning Composition (Theorem 9)</h3>
 <p>The deepest result in the framework is the composition theorem. It establishes that PAC and ALT guarantees compose additively through the meta-learning layer, providing the theoretical underpinning for why verifying the base learner and the meta-learner separately is sufficient to certify the end-to-end system.</p>
-<p><strong>Theorem 9 (Learning Composition).  </strong><em>For h ∈ H, m ∈ M: if P(err(h) &gt; ε) ≤ δ  and  P(err_m(m) &gt; ε_m) ≤ δ_m, then  P(err(m ∘ h) &gt; ε + ε_m) ≤ δ + δ_m.</em></p>
+<p><strong>Theorem 9 (Learning Composition).</strong> <em>For h ∈ H, m ∈ M: if P(err(h) &gt; ε) ≤ δ  and  P(err_m(m) &gt; ε_m) ≤ δ_m, then  P(err(m ∘ h) &gt; ε + ε_m) ≤ δ + δ_m.</em></p>
 <p><em>Proof.  </em>Let A = {err(h) &gt; ε} and B = {err_m(m) &gt; ε_m}, with P(A) ≤ δ and P(B) ≤ δ_m. Step 1 (Triangle inequality): For any x, err(m ∘ h)(x) ≤ err(h)(x) + err_m(m)(h(x)). Taking expectations: err(m ∘ h) ≤ err(h) + err_m(m). Therefore on the event A^c ∩ B^c (neither error bound violated), err(m ∘ h) ≤ ε + ε_m. Step 2 (Union bound): The event {err(m ∘ h) &gt; ε + ε_m} ⊆ A ∪ B. By the union bound: P(err(m ∘ h) &gt; ε + ε_m) ≤ P(A ∪ B) ≤ P(A) + P(B) ≤ δ + δ_m. ∎</p>
 <p>The additive error and additive failure probability mean that if the base learner and meta-learner are each well-calibrated, the composed system degrades gracefully. In particular, setting ε = ε_m = ε_total/2 and δ = δ_m = δ_total/2 achieves the target (ε_total, δ_total) guarantee at the composition level.</p>
-<h2 id="64-proof-trace-structure-and-convergence-conditions"><strong>6.4  Proof Trace Structure and Convergence Conditions</strong></h2>
+<h3 id="64-proof-trace-structure-and-convergence-conditions">6.4  Proof Trace Structure and Convergence Conditions</h3>
 <p>For the composition proof to verify, all of the following conditions must hold simultaneously at a given training step:</p>
 <ul>
 <li>PAC sample condition: n_samples ≥ (1/ε²)(2^n ln 2 + ln(1/δ))</li>
@@ -131,92 +221,132 @@
 <li>Composition: both PAC and ALT proofs verified (Theorem 9 applies)</li>
 </ul>
 <p>The PAC sample complexity condition is typically the binding constraint for small n, because the required sample count grows as 2^n. Once sufficient data has been accumulated, the other conditions are satisfied within their bounds in the vast majority of cases. Early in training the proof trace will show False across most steps; this is correct and expected behaviour — the system is reporting that insufficient evidence exists to certify learning.</p>
-<h1 id="7-distillation-and-ensemble-theory"><strong>7. Distillation and Ensemble Theory</strong></h1>
-<h2 id="71-knowledge-distillation-in-binary-spaces"><strong>7.1  Knowledge Distillation in Binary Spaces</strong></h2>
+<h2 id="7-distillation-and-ensemble-theory">7. Distillation and Ensemble Theory</h2>
+<h3 id="71-knowledge-distillation-in-binary-spaces">7.1  Knowledge Distillation in Binary Spaces</h3>
 <p>VERITAS supports an ensemble distillation training regime inspired by the framework of Hinton, Vinyals, and Dean [7]. An ensemble of T teacher VERITAS instances — each independently trained — supervises the training of a smaller student model. The student learns to match both the rule-network outputs and the meta-network outputs of the ensemble, using temperature-scaled KL divergence as the soft-target objective and MSE as the hard-target objective.</p>
 <p>Temperature scaling follows the prescription of [7]: the teacher's output is passed through a softmax at temperature T_τ &gt; 1 to produce a softer probability distribution over patterns, providing richer gradient signal in regions where the teacher is uncertain. The student is trained with the same temperature T_τ during distillation. After training, T_τ is set to 1. As Hinton et al. prove, the T_τ² factor in the gradient magnitude must be accounted for when combining soft-target and hard-target loss terms to maintain correct relative weighting.</p>
 <p>The theoretical basis for distillation in the PAC framework follows from Jensen's inequality applied to the squared error. Let h_θ denote the student hypothesis and h_T = (1/T)Σ_t h_t the ensemble average. Then:</p>
 <p><em>err(h_θ) ≤ (1 − α) · D_KL(h_θ || h_T) + α · êrr(h_θ)</em></p>
 <p>where α ∈ [0,1] is the balance parameter and D_KL is the temperature-scaled KL divergence. This bound shows that minimising the distillation objective controls the true error of the student through a combination of ensemble alignment and empirical accuracy.</p>
-<h2 id="72-ensemble-variance-reduction"><strong>7.2  Ensemble Variance Reduction</strong></h2>
+<h3 id="72-ensemble-variance-reduction">7.2  Ensemble Variance Reduction</h3>
 <p>The ensemble output h_T = (1/T)Σ_t h_t is the arithmetic mean of T teacher rule-network outputs. By the law of large numbers, as T → ∞ the ensemble mean converges to the expected hypothesis under the distribution over teacher initialisations. For finite T, the variance of the ensemble error is reduced by a factor of T relative to any single teacher:</p>
 <p><em>Var[êrr_T] = (1/T) · Var[êrr]</em></p>
 <p>This variance reduction is the principal benefit of ensemble distillation: the student learns from a lower-variance target, which translates into a tighter generalisation bound through the Hoeffding inequality. Specifically, replacing individual teacher error with ensemble error in Theorem 3 reduces the effective noise term by √T.</p>
-<h2 id="73-implementation"><strong>7.3  Implementation</strong></h2>
+<h3 id="73-implementation">7.3  Implementation</h3>
 <p>The VERITASDistiller class initialises an ensemble of VERITAS teacher instances and a student VERITAS instance. At each training step, it computes the ensemble rule-network and meta-network outputs by averaging over teachers, computes the distillation loss as a weighted combination of KL divergence (soft) and MSE (hard) components, and performs an SGD step on the student's rule network. The teacher models are frozen — only the student is updated. The distillation loss function correctly applies the T² gradient scaling required by the Hinton et al. framework.</p>
-<h1 id="8-reference-implementation"><strong>8. Reference Implementation</strong></h1>
-<h2 id="81-architecture-overview"><strong>8.1  Architecture Overview</strong></h2>
+<h2 id="8-reference-implementation">8. Reference Implementation</h2>
+<h3 id="81-architecture-overview">8.1  Architecture Overview</h3>
 <p>The NumPy reference implementation consists of four modules. veritas_core.py provides the core mathematical machinery: BinarySpace, PACLearner, ALTLearner, MetaLearner, RuleNetwork, MetaNetwork, and the top-level VERITAS class. veritas_verification.py provides the proof construction and verification system: ProofVerifier, VerifiedLearningSystem, and the associated dataclasses. veritas_distillation.py provides the ensemble distillation system: VERITASDistiller and DistillationConfig. veritas_integration.py ties everything together in IntegratedVERITAS with end-to-end verified training.</p>
 <p>All neural components are implemented from scratch using NumPy, without PyTorch or any autograd framework. The MLP class implements a two-layer fully-connected network with He initialisation, ReLU activations, and manual forward/backward passes. The sgd_step method applies stochastic gradient descent directly to parameter arrays. This makes the implementation fully inspectable and eliminates hidden abstractions.</p>
-<h2 id="82-bug-fixes-relative-to-prior-implementation"><strong>8.2  Bug Fixes Relative to Prior Implementation</strong></h2>
+<h3 id="82-bug-fixes-relative-to-prior-implementation">8.2  Bug Fixes Relative to Prior Implementation</h3>
 <p>Three significant bugs were identified and corrected relative to the earlier PyTorch prototype:</p>
-<p><strong>Module</strong></p>
-<p><strong>Bug</strong></p>
-<p><strong>Fix</strong></p>
-<p>veritas_core.py</p>
-<p>Sample complexity used ln|H| = n·ln2 (dimension times ln2)</p>
-<p>Corrected to ln|H| = 2^n·ln2, consistent with Theorem 3 and |H| = 2^(2^n)</p>
-<p>veritas_core.py</p>
-<p>log(0) division error in ALTLearner.computation_bound when dimension = 1</p>
-<p>Guard added: log(max(dimension, 2)) ensures domain safety</p>
-<p>veritas_verification.py</p>
-<p>Meta error bound compared float against 2*bool (2*True=2, 2*False=0), giving nonsensical results</p>
-<p>Fixed to compare against computed float epsilon_meta = 2.0 * base_epsilon extracted from PAC proof assumptions</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Bug</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>veritas_core.py</td>
+<td>Sample complexity used ln|H| = n·ln2 (dimension times ln2)</td>
+<td>Corrected to ln|H| = 2^n·ln2, consistent with Theorem 3 and |H| = 2^(2^n)</td>
+</tr>
+<tr>
+<td>veritas_core.py</td>
+<td>log(0) division error in ALTLearner.computation_bound when dimension = 1</td>
+<td>Guard added: log(max(dimension, 2)) ensures domain safety</td>
+</tr>
+<tr>
+<td>veritas_verification.py</td>
+<td>Meta error bound compared float against 2×bool (2×True=2, 2×False=0), giving nonsensical results</td>
+<td>Fixed to compare against computed float epsilon_meta = 2.0 × base_epsilon extracted from PAC proof assumptions</td>
+</tr>
+</tbody>
+</table>
 <p>Additional fixes included: replacing gradient-free parameter mutation in _update_networks with a proper SGD backward-forward cycle; replacing the torch DataLoader with a NumPy batch iterator in VERITASDistiller.train; replacing min() over boolean proof-step fields with meaningful float pass-rate aggregation in create_verification_trace; and adding missing imports (from typing import Any in veritas_integration.py).</p>
-<h2 id="83-summary-of-theorems"><strong>8.3  Summary of Theorems</strong></h2>
-<p><strong>Thm.</strong></p>
-<p><strong>Name</strong></p>
-<p><strong>Space</strong></p>
-<p><strong>Key Result</strong></p>
-<p>1</p>
-<p>Completeness</p>
-<p>B, H, M, V</p>
-<p>All four spaces are complete metric spaces</p>
-<p>2</p>
-<p>PAC Bound</p>
-<p>H</p>
-<p>|err − êrr| ≤ ε w.p. 1−δ given m ≥ (1/2ε²)ln(2/δ)</p>
-<p>3</p>
-<p>Sample Complexity</p>
-<p>H</p>
-<p>m ≥ (1/ε²)(2^n ln2 + ln(1/δ))</p>
-<p>4</p>
-<p>Mistake Bound</p>
-<p>H</p>
-<p>M(L) ≤ lg|H| = 2^n</p>
-<p>5</p>
-<p>Query Complexity</p>
-<p>H</p>
-<p>Q(L) ≤ n queries per identification round</p>
-<p>6</p>
-<p>Meta-PAC</p>
-<p>M</p>
-<p>PAC bound lifts to meta-space: |err_m − êrr_m| ≤ ε_m</p>
-<p>7</p>
-<p>Meta-ALT</p>
-<p>M</p>
-<p>M(m) ≤ lg|M| = 2^n · 2^(2^n)</p>
-<p>8</p>
-<p>Verification Completeness</p>
-<p>V</p>
-<p>v(h,m) = 1 ⟺ all checked properties hold</p>
-<p>9</p>
-<p>Composition</p>
-<p>H × M</p>
-<p>err(m∘h) ≤ ε + ε_m w.p. ≥ 1 − (δ + δ_m)</p>
-<h1 id="9-discussion"><strong>9. Discussion</strong></h1>
-<h2 id="91-relationship-to-existing-work"><strong>9.1  Relationship to Existing Work</strong></h2>
+<h3 id="83-summary-of-theorems">8.3  Summary of Theorems</h3>
+<table>
+<thead>
+<tr>
+<th>Thm</th>
+<th>Name</th>
+<th>Space</th>
+<th>Key result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Completeness</td>
+<td>B, H, M, V</td>
+<td>All four spaces are complete metric spaces</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PAC Bound</td>
+<td>H</td>
+<td>(|err − êrr| ≤ ε) w.p. (≥ 1−δ) when (m ≥ (1/2ε²)\ln(2/δ))</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sample Complexity</td>
+<td>H</td>
+<td>(m ≥ (1/ε²)(2^n \ln 2 + \ln(1/δ)))</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Mistake Bound</td>
+<td>H</td>
+<td>(M(L) ≤ \lg|H| = 2^n)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Query Complexity</td>
+<td>H</td>
+<td>(Q(L) ≤ n) queries per identification round</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Meta-PAC</td>
+<td>M</td>
+<td>PAC bound lifts to meta-space: (|err_m − êrr_m| ≤ ε_m)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Meta-ALT</td>
+<td>M</td>
+<td>(M(m) ≤ \lg|M| = 2^n · 2^{2^n})</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Verification Completeness</td>
+<td>V</td>
+<td>(v(h,m) = 1 ⟺) all checked properties hold</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Composition</td>
+<td>H × M</td>
+<td>(err(m∘h) ≤ ε + ε_m) w.p. (≥ 1 − (δ + δ_m))</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-discussion">9. Discussion</h2>
+<h3 id="91-relationship-to-existing-work">9.1  Relationship to Existing Work</h3>
 <p>VERITAS occupies an unusual position in the learning theory landscape. PAC learning theory since Valiant [1] has been primarily concerned with efficient learnability (polynomial sample and time complexity), and the binary function class B → B is well-known to be not efficiently PAC learnable under cryptographic hardness assumptions [9]. The super-polynomial sample complexity of Theorem 3 is therefore expected.</p>
 <p>The ALT mistake-bound framework connects to Littlestone's work [4] on the halving algorithm and its relationship to VC dimension. The query complexity bound of Theorem 5 connects to Angluin's [8] membership query model. The composition theorem (Theorem 9) is a specialisation of standard union-bound and triangle-inequality arguments, but its instantiation at the meta-learning level — where the 'learner' is itself a learning algorithm — is non-standard.</p>
 <p>The meta-learning component connects conceptually to MAML [6] and related gradient-based frameworks, but differs in that VERITAS derives explicit combinatorial bounds from the structure of M rather than relying on gradient sensitivity. The distillation component directly implements the Hinton-Vinyals-Dean [7] temperature-scaling framework, with the T² gradient correction and the weighted combination of soft-target KL divergence and hard-target MSE losses.</p>
-<h2 id="92-practical-interpretation-of-non-verification"><strong>9.2  Practical Interpretation of Non-Verification</strong></h2>
+<h3 id="92-practical-interpretation-of-non-verification">9.2  Practical Interpretation of Non-Verification</h3>
 <p>A frequent misinterpretation of verification-conditioned learning is that training steps with failed proofs are wasted. This is incorrect. When the composition proof fails, it is because the learning bounds have not been satisfied — the system genuinely does not have sufficient evidence to certify the step. Non-verified steps still contribute to the accumulation of evidence (incrementing sample counts), and they provide diagnostic information about which bounds are currently violated. In particular, the confidence output of each VerificationTrace (fraction of four proofs that fully verify) provides a continuous signal tracking progress toward full certification.</p>
 <p>The PAC sample complexity condition is almost always the first to bind for small binary dimensions. The ALT mistake and query conditions are usually satisfied early in training, since the mistake bound 2^n is large relative to actual mistake counts for well-initialised networks. The meta-error condition requires that the meta-network's RMS output magnitude stays below 2ε, which is a mild constraint on representational magnitude rather than a learning accuracy constraint per se.</p>
-<h2 id="93-limitations-and-extensions"><strong>9.3  Limitations and Extensions</strong></h2>
+<h3 id="93-limitations-and-extensions">9.3  Limitations and Extensions</h3>
 <p>Several limitations of the current framework are worth noting. First, the hypothesis class B → B is extremely large and not efficiently PAC learnable, which means full PAC verification will require unrealistically large datasets for any non-trivial dimension. For defence and intelligence applications with restricted function subclasses, the effective complexity is much smaller and the bounds tighten accordingly.</p>
 <p>Second, the current composition theorem (Theorem 9) is linear in errors and probabilities. Tighter composition results using information-theoretic tools (e.g., mutual information bounds or chaining arguments from Talagrand's generic chaining [10]) could reduce the composed error to O(max(ε, ε_m)) under additional assumptions. This is a natural direction for future work.</p>
 <p>Third, the meta-network is currently parameterised as a fixed-architecture two-layer MLP, which is a parametric restriction of M. A principled treatment of the effective meta-complexity — using, for instance, the PAC-Bayes framework or the Rademacher complexity of the meta-network's function class — would provide sharper meta-level bounds than the combinatorial bound of Theorem 7.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1]  Valiant, L.G. (1984). A theory of the learnable. Communications of the ACM, 27(11), 1134–1142. https://doi.org/10.1145/1968.1972</p>
 <p>[2]  Kearns, M.J., and Vazirani, U.V. (1994). An Introduction to Computational Learning Theory. MIT Press.</p>
 <p>[3]  Hoeffding, W. (1963). Probability inequalities for sums of bounded random variables. Journal of the American Statistical Association, 58(301), 13–30.</p>
@@ -229,6 +359,31 @@
 <p>[10] Talagrand, M. (2014). Upper and Lower Bounds for Stochastic Processes. Springer.</p>
 <p>[11] Blumer, A., Ehrenfeucht, A., Haussler, D., and Warmuth, M.K. (1989). Learnability and the Vapnik-Chervonenkis dimension. Journal of the ACM, 36(4), 929–965.</p>
 <p>[12] Shalev-Shwartz, S., and Ben-David, S. (2014). Understanding Machine Learning: From Theory to Algorithms. Cambridge University Press.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

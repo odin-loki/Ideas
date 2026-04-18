@@ -3,8 +3,8 @@
 **Synergistic Multi-Layer Chaotic Random Number Generator for Embedded Cryptography**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Security](https://img.shields.io/badge/security-632--bit-green.svg)]()
-[![Platform](https://img.shields.io/badge/platform-embedded-orange.svg)]()
+[![Security](https://img.shields.io/badge/security-632--bit-green.svg)](#)
+[![Platform](https://img.shields.io/badge/platform-embedded-orange.svg)](#)
 
 ---
 

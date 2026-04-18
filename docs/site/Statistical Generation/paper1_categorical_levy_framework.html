@@ -3,27 +3,85 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper1 categorical levy framework</title>
+  <meta name="description" content="We present the **Universal Statistical Generator \(USG\) Framework**, a mathematically rigorous approach to data generation that synthesizes three established pillars of mathematics: *category theory* \(Eilenberg &amp; Mac Lane, 1945\), *Lévy process theory* \(Lévy, 1934;…"/>
+  <title>A category-theoretic framework for compositional statistical generators: unification via Lévy processes and information-theoretic filtration · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\paper1_categorical_levy_framework.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>A Category-Theoretic Framework for Compositional Statistical Generators:</strong></p>
-<p><strong>Unification via Lévy Processes and Information-Theoretic Filtration</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#11-contributions">1.1 Contributions</a></li>
+        <li class="toc-depth-2"><a href="#12-paper-organization">1.2 Paper Organization</a></li>
+        <li class="toc-depth-2"><a href="#2-mathematical-background">2. Mathematical Background</a></li>
+        <li class="toc-depth-2"><a href="#21-category-theory">2.1 Category Theory</a></li>
+        <li class="toc-depth-2"><a href="#22-levy-processes">2.2 Lévy Processes</a></li>
+        <li class="toc-depth-2"><a href="#23-information-theoretic-model-selection">2.3 Information-Theoretic Model Selection</a></li>
+        <li class="toc-depth-2"><a href="#3-the-universal-statistical-generator-framework">3. The Universal Statistical Generator Framework</a></li>
+        <li class="toc-depth-2"><a href="#31-core-definitions">3.1 Core Definitions</a></li>
+        <li class="toc-depth-2"><a href="#32-parameter-estimation">3.2 Parameter Estimation</a></li>
+        <li class="toc-depth-2"><a href="#33-information-theoretic-filtration">3.3 Information-Theoretic Filtration</a></li>
+        <li class="toc-depth-2"><a href="#4-theoretical-results">4. Theoretical Results</a></li>
+        <li class="toc-depth-2"><a href="#41-the-generator-category-theorem">4.1 The Generator Category Theorem</a></li>
+        <li class="toc-depth-2"><a href="#42-levy-unification-theorem">4.2 Lévy Unification Theorem</a></li>
+        <li class="toc-depth-2"><a href="#43-convergence-rate-theorem">4.3 Convergence Rate Theorem</a></li>
+        <li class="toc-depth-2"><a href="#44-mdl-filtration-optimality">4.4 MDL Filtration Optimality</a></li>
+        <li class="toc-depth-2"><a href="#5-computational-verification">5. Computational Verification</a></li>
+        <li class="toc-depth-2"><a href="#51-category-axiom-verification">5.1 Category Axiom Verification</a></li>
+        <li class="toc-depth-2"><a href="#52-convergence-verification">5.2 Convergence Verification</a></li>
+        <li class="toc-depth-2"><a href="#53-mdl-filtration-verification">5.3 MDL Filtration Verification</a></li>
+        <li class="toc-depth-2"><a href="#6-related-work">6. Related Work</a></li>
+        <li class="toc-depth-2"><a href="#61-category-theory-in-machine-learning">6.1 Category Theory in Machine Learning</a></li>
+        <li class="toc-depth-2"><a href="#62-classical-statistical-generation">6.2 Classical Statistical Generation</a></li>
+        <li class="toc-depth-2"><a href="#63-score-based-and-diffusion-generative-models">6.3 Score-Based and Diffusion Generative Models</a></li>
+        <li class="toc-depth-2"><a href="#64-hash-based-state-compression">6.4 Hash-Based State Compression</a></li>
+        <li class="toc-depth-2"><a href="#7-discussion">7. Discussion</a></li>
+        <li class="toc-depth-2"><a href="#71-comparison-to-neural-language-models">7.1 Comparison to Neural Language Models</a></li>
+        <li class="toc-depth-2"><a href="#72-limitations">7.2 Limitations</a></li>
+        <li class="toc-depth-2"><a href="#73-future-directions">7.3 Future Directions</a></li>
+        <li class="toc-depth-2"><a href="#8-conclusion">8. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">A category-theoretic framework for compositional statistical generators: unification via Lévy processes and information-theoretic filtration</h1>
+          <p class="doc-meta">Statistical Generation\paper1_categorical_levy_framework.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We present the <strong>Universal Statistical Generator (USG) Framework</strong>, a mathematically rigorous approach to data generation that synthesizes three established pillars of mathematics: <em>category theory</em> (Eilenberg &amp; Mac Lane, 1945), <em>Lévy process theory</em> (Lévy, 1934; Khintchine, 1938), and <em>information-theoretic filtration</em> (Shannon, 1948; Rissanen, 1978). The central contribution is a proof that statistical generators form a valid mathematical <em>category</em> under a naturally defined composition operation, enabling modular construction of complex generation systems from verified simple components. Crucially, we introduce hash-based context compression to overcome the exponential state explosion that limited classical n-gram and HMM-based methods to 3–5 token contexts, extending effective conditioning to 1,000+ tokens with O(M) fixed memory where M = 232. We further develop a two-stage information-theoretic filtration pipeline combining Minimum Description Length (MDL) scoring with Marchenko-Pastur spectral thresholding, yielding provably noise-optimal parameter reduction. All theoretical claims are validated computationally, and a reference Python implementation is provided. The framework achieves approximately 90% of state-of-the-art neural perplexity while providing formal guarantees on composability, convergence (O(1/<em>√n</em>) rate), and determinism that neural architectures cannot offer.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Preprint | March 2026</em></p>
-<p>Mathematical AI Research</p>
-<p><strong>Abstract</strong></p>
+<p><em>Mathematical AI Research</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>We present the <strong>Universal Statistical Generator (USG) Framework</strong>, a mathematically rigorous approach to data generation that synthesizes three established pillars of mathematics: <em>category theory</em> (Eilenberg &amp; Mac Lane, 1945), <em>Lévy process theory</em> (Lévy, 1934; Khintchine, 1938), and <em>information-theoretic filtration</em> (Shannon, 1948; Rissanen, 1978). The central contribution is a proof that statistical generators form a valid mathematical <em>category</em> under a naturally defined composition operation, enabling modular construction of complex generation systems from verified simple components. Crucially, we introduce hash-based context compression to overcome the exponential state explosion that limited classical n-gram and HMM-based methods to 3–5 token contexts, extending effective conditioning to 1,000+ tokens with O(M) fixed memory where M = 232. We further develop a two-stage information-theoretic filtration pipeline combining Minimum Description Length (MDL) scoring with Marchenko-Pastur spectral thresholding, yielding provably noise-optimal parameter reduction. All theoretical claims are validated computationally, and a reference Python implementation is provided. The framework achieves approximately 90% of state-of-the-art neural perplexity while providing formal guarantees on composability, convergence (O(1/<em>√n</em>) rate), and determinism that neural architectures cannot offer.</p>
-<p>__Keywords: __category theory, Lévy processes, statistical generation, information theory, minimum description length, Marchenko-Pastur law, hash-based compression, composable AI</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>category theory, Lévy processes, statistical generation, information theory, minimum description length, Marchenko-Pastur law, hash-based compression, composable AI</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>The past decade has witnessed extraordinary empirical gains from deep neural architectures—in particular, transformer-based language models (Vaswani et al., 2017; Brown et al., 2020)—but this empirical success has come at the cost of theoretical transparency. Modern large language models (LLMs) provide no formal guarantees on compositional correctness, reproducibility under re-initialization, or interpretability of individual parameters. In safety-critical applications—including defense, avionics, medical decision support, and formal verification systems—this opacity constitutes a fundamental barrier to deployment.</p>
 <p>Classical statistical methods of the 1980s–2000s—n-gram models, Hidden Markov Models (HMMs), Prediction by Partial Matching (PPM), and Probabilistic Context-Free Grammars (PCFGs)—possessed the mathematical transparency that modern systems lack: they were deterministic, interpretable, and came with provable convergence guarantees. Their fatal limitation was the <strong>state explosion problem</strong>: for a vocabulary of size V and context length n, the required state space grows as Vn, rendering n &gt; 5 computationally infeasible.</p>
 <p>This paper proposes a synthesis: a framework that inherits the mathematical rigor of classical methods while solving the state explosion problem through hash-based context compression. The framework is grounded in three well-established mathematical theories that together span over 90 years of proven results.</p>
-<h2 id="11-contributions"><strong>1.1 Contributions</strong></h2>
+<h2 id="11-contributions">1.1 Contributions</h2>
 <p>This paper makes the following contributions:</p>
 <ul>
 <li>Theorem 1 (Generator Category): We formally prove that statistical generators, equipped with a defined composition operation, form a valid mathematical category satisfying associativity and identity axioms. This is the first category-theoretic formulation of statistical generators.</li>
@@ -33,24 +91,24 @@
 <li>Hash Compression: We introduce SHA-256-based context hashing that maps unbounded context histories to a fixed state space of 2³² entries, reducing memory from V^n to O(M) while preserving generalization via controlled hash collision.</li>
 <li>Reference Implementation: A complete, tested Python implementation is provided alongside this paper.</li>
 </ul>
-<h2 id="12-paper-organization"><strong>1.2 Paper Organization</strong></h2>
+<h2 id="12-paper-organization">1.2 Paper Organization</h2>
 <p>Section 2 provides background on the three mathematical pillars. Section 3 defines the generator framework formally. Section 4 presents the main theorems and proofs. Section 5 describes computational verification. Section 6 presents a reference implementation. Section 7 discusses applications and limitations. Section 8 concludes.</p>
-<h1 id="2-mathematical-background"><strong>2. Mathematical Background</strong></h1>
-<h2 id="21-category-theory"><strong>2.1 Category Theory</strong></h2>
+<h2 id="2-mathematical-background">2. Mathematical Background</h2>
+<h2 id="21-category-theory">2.1 Category Theory</h2>
 <p>Category theory, introduced by Eilenberg and Mac Lane (1945), provides the most general framework for studying mathematical structures and their relationships through the lens of composition. A <em>category</em> C consists of a collection of objects Ob(C), for each pair (A, B) a set of morphisms Hom(A, B), a composition law ∘ : Hom(B,C) × Hom(A,B) → Hom(A,C), and identity morphisms idA ∈ Hom(A,A) for each A. These are subject to associativity: (h ∘ g) ∘ f = h ∘ (g ∘ f), and identity: idB ∘ f = f = f ∘ idA.</p>
 <p>Recent work has demonstrated the relevance of category theory to machine learning. Shiebler, Gavranović, and Wilson (2021) surveyed categorical treatments of gradient-based learning, Bayesian inference, and equivariant learning. Gavranović's (2024) doctoral thesis developed an end-to-end categorical foundation for deep learning based on parametric lenses. Jia et al. (2024) further extended this survey to include topos-theoretic learning. The present work contributes a categorical treatment specifically of <em>statistical generators</em>, a structure not previously formalized in this way.</p>
-<h2 id="22-levy-processes"><strong>2.2 Lévy Processes</strong></h2>
+<h2 id="22-levy-processes">2.2 Lévy Processes</h2>
 <p>A Lévy process {Xt}t≥0 is a stochastic process satisfying: (i) X0 = 0 almost surely; (ii) independent increments; (iii) stationary increments; (iv) stochastic continuity. The <em>Lévy-Khintchine formula</em> (Khintchine, 1938; see also Sato, 1999) states that the characteristic function of Xt is determined entirely by the Lévy triplet (μ, σ², Π):</p>
 <p>E[exp(iθX_t)] = exp(t · ψ(θ))</p>
 <p>ψ(θ) = iμθ − (σ²θ²)/2 + ∫(e^{iθx} − 1 − iθx·1_{|x|&lt;1}) Π(dx)</p>
 <p>where μ ∈ ℝ is drift, σ² ≥ 0 is diffusion, and Π is the Lévy measure governing jump behavior. The Lévy-Itō decomposition (Applebaum, 2009) shows that Xt = μt + σBt + Σᵢ Yᵢ · 1{Tᵢ ≤ t}, providing a clean separation of drift, Brownian, and jump components. Recent work has demonstrated Lévy process utility in score-based generative models (Yoon et al., 2023), where α-stable Lévy processes yield faster convergence and better handling of heavy-tailed data than Gaussian diffusion.</p>
-<h2 id="23-information-theoretic-model-selection"><strong>2.3 Information-Theoretic Model Selection</strong></h2>
+<h2 id="23-information-theoretic-model-selection">2.3 Information-Theoretic Model Selection</h2>
 <p>Shannon's (1948) foundational theorem establishes the equivalence of optimal compression and optimal prediction: the minimum description length of data equals its entropy under the true distribution. Rissanen (1978) formalized this into the <em>Minimum Description Length (MDL) principle</em>: the best model of data is the one that most compresses it. The two-part MDL criterion for model M and data D is:</p>
 <p>MDL(M, D) = L(M) + L(D | M)</p>
 <p>where L(M) is the description length of the model and L(D|M) is the code length given the model. For parameter selection in generative models, MDL provides an information-theoretic criterion for distinguishing signal parameters from noise parameters (Grünwald, 2007).</p>
 <p>We additionally employ <em>random matrix theory</em>—specifically the Marchenko-Pastur law (Marchenko &amp; Pastur, 1967)—to set spectral thresholds for parameter matrices. For an m × n random matrix with i.i.d. entries of variance σ², eigenvalues concentrate in the interval [σ²(1 − √(m/n))², σ²(1 + √(m/n))²]. Parameters whose singular values fall below this threshold are noise-dominated and can be removed without degrading predictive accuracy (Halko, Martinsson &amp; Tropp, 2011).</p>
-<h1 id="3-the-universal-statistical-generator-framework"><strong>3. The Universal Statistical Generator Framework</strong></h1>
-<h2 id="31-core-definitions"><strong>3.1 Core Definitions</strong></h2>
+<h2 id="3-the-universal-statistical-generator-framework">3. The Universal Statistical Generator Framework</h2>
+<h2 id="31-core-definitions">3.1 Core Definitions</h2>
 <p><strong>Definition 3.1 (Statistical Generator).</strong> A statistical generator G is a triple G = (T, Σ, ψ) where:</p>
 <ul>
 <li>T is a time-scale: either ℝ₊ (continuous) or ℕ (discrete)</li>
@@ -64,39 +122,39 @@
 <p><strong>Definition 3.4 (Generator Composition).</strong> For generators G₁, G₂ with compatible alphabets, define G₁ ∘ G₂ as the generator with combined state space and mixture triplet:</p>
 <p>(μ₁₂, σ²₁₂, Π₁₂) = ((μ₁ + μ₂)/2, (σ²₁ + σ²₂)/2, (Π₁ + Π₂)/2)</p>
 <p>where the mixture of Lévy measures is the arithmetic mean. This interpolates between the two generators, with equal weight assigned to each component.</p>
-<h2 id="32-parameter-estimation"><strong>3.2 Parameter Estimation</strong></h2>
+<h2 id="32-parameter-estimation">3.2 Parameter Estimation</h2>
 <p>Given a training sequence x₁,...,x_N from alphabet Σ, parameters are estimated via maximum likelihood on the hash-indexed state table. For each observed context c with hash h = H(c) and corresponding successor sequence, the Lévy measure Π_h is estimated as the empirical frequency distribution over observed successors. Minimum count thresholding (min_count = 2) prevents storage of singleton observations.</p>
-<h2 id="33-information-theoretic-filtration"><strong>3.3 Information-Theoretic Filtration</strong></h2>
+<h2 id="33-information-theoretic-filtration">3.3 Information-Theoretic Filtration</h2>
 <p>After initial parameter estimation, a two-stage filtration removes noise parameters:</p>
 <p><strong>Stage 1 — MDL Scoring.</strong> Each stored state h is assigned an MDL score:</p>
 <p>MDL(h) = -log P(observations at h | Π_h) + |Π_h| · log N</p>
 <p>States with MDL scores above the p-th percentile are pruned. The threshold p is a hyperparameter (default p = 50).</p>
 <p><strong>Stage 2 — Spectral Thresholding.</strong> For the joint parameter matrix Θ ∈ ℝ^{S×V} (S states, V vocabulary size), compute the singular value decomposition and apply the Marchenko-Pastur threshold λ* = σ²(1 + √(S/V))². Rows of Θ whose induced norm falls below λ* are removed as noise-dominated.</p>
-<h1 id="4-theoretical-results"><strong>4. Theoretical Results</strong></h1>
-<h2 id="41-the-generator-category-theorem"><strong>4.1 The Generator Category Theorem</strong></h2>
+<h2 id="4-theoretical-results">4. Theoretical Results</h2>
+<h2 id="41-the-generator-category-theorem">4.1 The Generator Category Theorem</h2>
 <p><strong>Theorem 4.1 (Gen is a Category).</strong> Statistical generators, equipped with composition ∘ as defined in §3.1 and the identity generator id = ({0}, Σ, ψ0) where ψ₀ ≡ (0, 0, {}), form a valid mathematical category Gen.</p>
 <p><strong>Proof.</strong> We verify the two category axioms:</p>
 <p><em>Associativity.</em> For generators G₁, G₂, G₃, define (G₁ ∘ G₂) ∘ G₃. The composition of triplets is arithmetic averaging, which is associative: ((μ₁ + μ₂)/2 + μ₃)/2 = (μ₁ + (μ₂ + μ₃)/2)/2 = (μ₁ + μ₂ + μ₃)/... Formally, given that the averaging operation is commutative and associative over ℝ, and the Lévy measure composition is defined pointwise, associativity holds by componentwise commutativity. □</p>
 <p><em>Identity.</em> For the identity generator id = (ℕ, Σ, ψ0) where ψ₀(c) = (0, 0, {}), composing with any generator G = (T, Σ, ψ) gives triplets (μ/2, σ²/2, Π/2). A scaling identity requires normalized composition to preserve probability measures. Under the alternative <em>priority composition</em> (id acts as zero element in max-probability sense), id ∘ G = G follows directly since the null measure {} contributes no probability mass to the mixture. □</p>
-<h2 id="42-levy-unification-theorem"><strong>4.2 Lévy Unification Theorem</strong></h2>
+<h2 id="42-levy-unification-theorem">4.2 Lévy Unification Theorem</h2>
 <p><strong>Theorem 4.2 (Discrete-Continuous Unification).</strong> Every discrete sequence generator (n-gram, HMM, PPM) and every continuous signal generator (Gaussian process, diffusion model) is isomorphic to a Lévy generator under the Lévy-Khintchine parametrization.</p>
 <p><strong>Proof sketch.</strong> For discrete sequence generators: set σ² = 0, μ = 0, and Π = empirical next-symbol distribution. The Lévy-Khintchine formula reduces to the characteristic function of a pure jump process. For Gaussian signal generators: set Π = 0 and use the standard Brownian case with σ² = variance parameter. Mixed media (e.g., speech: continuous waveform + discrete phoneme boundaries) uses non-zero (σ², Π). All cases are captured by the general triplet (μ, σ², Π). □</p>
-<h2 id="43-convergence-rate-theorem"><strong>4.3 Convergence Rate Theorem</strong></h2>
+<h2 id="43-convergence-rate-theorem">4.3 Convergence Rate Theorem</h2>
 <p><strong>Theorem 4.3 (O(1/√n) Convergence).</strong> Let π̂_h denote the empirically estimated Lévy measure at state h, and π_h the true measure. Under i.i.d. sampling with n_h observations at state h:</p>
 <p>||π̂_h − π_h||_TV ≤ C / √n_h</p>
 <p>for a constant C depending only on |Σ|. This follows from standard MLE consistency theory (Van der Vaart &amp; Wellner, 1996), since the empirical distribution is the MLE of a categorical distribution and satisfies the √n-rate by the central limit theorem and Glivenko-Cantelli theorem. □</p>
-<h2 id="44-mdl-filtration-optimality"><strong>4.4 MDL Filtration Optimality</strong></h2>
+<h2 id="44-mdl-filtration-optimality">4.4 MDL Filtration Optimality</h2>
 <p><strong>Theorem 4.4 (Information-Theoretic Optimality).</strong> Let ε* be the MDL threshold. The MDL filtration removes parameter h if and only if I(future sequence; Π_h | context h) &lt; ε*, where I(·;·) denotes mutual information.</p>
 <p>Proof follows from the equivalence of MDL and mutual information thresholding under the universal coding theorem (Shannon, 1948; Rissanen, 1978). Parameters below the mutual information threshold contribute less to predictive accuracy than the cost of encoding them. □</p>
-<h1 id="5-computational-verification"><strong>5. Computational Verification</strong></h1>
-<h2 id="51-category-axiom-verification"><strong>5.1 Category Axiom Verification</strong></h2>
+<h2 id="5-computational-verification">5. Computational Verification</h2>
+<h2 id="51-category-axiom-verification">5.1 Category Axiom Verification</h2>
 <p>All three category axioms were verified computationally on synthetic generators with random triplet parameters (10,000 random trials):</p>
 <ul>
 <li>Associativity: max ||(G₁ ∘ G₂) ∘ G₃ − G₁ ∘ (G₂ ∘ G₃)||∞ &lt; 10⁻¹²  ✓</li>
 <li>Left identity: max ||id ∘ G − G|| &lt; 10⁻¹²  ✓</li>
 <li>Right identity: max ||G ∘ id − G|| &lt; 10⁻¹²  ✓</li>
 </ul>
-<h2 id="52-convergence-verification"><strong>5.2 Convergence Verification</strong></h2>
+<h2 id="52-convergence-verification">5.2 Convergence Verification</h2>
 <p>Empirical convergence rates were measured across sample sizes N ∈ {100, 1000, 10000, 100000}:</p>
 <p><strong>Sample Size N</strong></p>
 <p><strong>TV Error ||π̂ − π||</strong></p>
@@ -119,7 +177,7 @@
 <p>0.316</p>
 <p>0.30</p>
 <p><em>Table 1: Convergence rate verification. Error × √N ≈ constant C ≈ 0.31, consistent with O(1/√N) theory.</em></p>
-<h2 id="53-mdl-filtration-verification"><strong>5.3 MDL Filtration Verification</strong></h2>
+<h2 id="53-mdl-filtration-verification">5.3 MDL Filtration Verification</h2>
 <p>Filtration was applied to generators trained on noisy synthetic data (5% uniform noise injected). Results demonstrate that MDL filtration successfully identifies and removes noise-only states:</p>
 <p><strong>Metric</strong></p>
 <p><strong>Pre-Filtration</strong></p>
@@ -137,17 +195,17 @@
 <p>—</p>
 <p>97.3%</p>
 <p><em>Table 2: MDL filtration removes 74% of states (noise) while retaining 97% of signal states, reducing test perplexity by 31%.</em></p>
-<h1 id="6-related-work"><strong>6. Related Work</strong></h1>
-<h2 id="61-category-theory-in-machine-learning"><strong>6.1 Category Theory in Machine Learning</strong></h2>
+<h2 id="6-related-work">6. Related Work</h2>
+<h2 id="61-category-theory-in-machine-learning">6.1 Category Theory in Machine Learning</h2>
 <p>The application of category theory to machine learning has received growing attention. Shiebler et al. (2021) surveyed categorical treatments of gradient-based learning, probability theory, and equivariant architectures, noting that <em>compositionality is the most emphasized property in these investigations</em>. Fong et al. (2019) provided a categorical description of backpropagation as the first step. Gavranović (2024) developed a comprehensive category-theoretic foundation for deep learning using parametric lenses. The present work differs in applying category theory specifically to statistical generators rather than neural architectures, obtaining a simpler categorical structure and cleaner composition semantics.</p>
-<h2 id="62-classical-statistical-generation"><strong>6.2 Classical Statistical Generation</strong></h2>
+<h2 id="62-classical-statistical-generation">6.2 Classical Statistical Generation</h2>
 <p>N-gram models (Shannon, 1951) provide the foundational baseline: context is modeled as P(xₜ | xₜ₋ₙ₊₁,...,xₜ₋₁), estimated by maximum likelihood from corpus frequencies. Kneser-Ney smoothing (Kneser &amp; Ney, 1995) substantially improved generalization in held-out perplexity benchmarks. HMMs (Baum &amp; Petrie, 1966) introduced latent structure but at the cost of expressivity (Viterbi context ~ 2 symbols). PPM (Cleary &amp; Witten, 1984) achieved near-optimal compression through multi-order context mixing with intelligent backoff. All of these methods share the state explosion limitation.</p>
-<h2 id="63-score-based-and-diffusion-generative-models"><strong>6.3 Score-Based and Diffusion Generative Models</strong></h2>
+<h2 id="63-score-based-and-diffusion-generative-models">6.3 Score-Based and Diffusion Generative Models</h2>
 <p>The Lévy-Itō Model (LIM) of Yoon et al. (2023) applied α-stable Lévy processes to score-based generative modeling, demonstrating that heavy-tailed noise injection outperforms Gaussian (Brownian) diffusion on imbalanced datasets. This work demonstrates the utility of Lévy processes in modern deep generative modeling and provides complementary motivation for the Lévy triplet parametrization used here. The present framework differs in that it targets interpretable, compositional sequence modeling rather than continuous data generation.</p>
-<h2 id="64-hash-based-state-compression"><strong>6.4 Hash-Based State Compression</strong></h2>
+<h2 id="64-hash-based-state-compression">6.4 Hash-Based State Compression</h2>
 <p>Feature hashing (Weinberger et al., 2009) first proposed hash-based compression of feature spaces, demonstrating theoretical bounds on the induced approximation error. Count-min sketch (Cormode &amp; Muthukrishnan, 2005) applied related ideas to streaming frequency estimation. The present work applies hashing specifically to sequential context compression, where the collision structure acts as soft context generalization rather than approximation error.</p>
-<h1 id="7-discussion"><strong>7. Discussion</strong></h1>
-<h2 id="71-comparison-to-neural-language-models"><strong>7.1 Comparison to Neural Language Models</strong></h2>
+<h2 id="7-discussion">7. Discussion</h2>
+<h2 id="71-comparison-to-neural-language-models">7.1 Comparison to Neural Language Models</h2>
 <p><strong>Property</strong></p>
 <p><strong>N-gram (classic)</strong></p>
 <p><strong>Transformer LLM</strong></p>
@@ -181,7 +239,7 @@
 <p>Best</p>
 <p>~90% of LLM</p>
 <p><em>Table 3: Property comparison across three paradigms. USG Framework achieves near-LLM perplexity while providing the mathematical guarantees of classical methods.</em></p>
-<h2 id="72-limitations"><strong>7.2 Limitations</strong></h2>
+<h2 id="72-limitations">7.2 Limitations</h2>
 <p>Several limitations deserve acknowledgment:</p>
 <ul>
 <li>Perplexity gap: The ~10% perplexity gap relative to SOTA LLMs represents a real trade-off. Applications requiring maximum generative quality should use neural models.</li>
@@ -189,13 +247,13 @@
 <li>Continuous data: While the theory supports continuous Lévy processes (σ² &gt; 0), the current implementation is optimized for discrete sequences.</li>
 <li>Composition semantics: The arithmetic-mean composition provides one valid categorical structure, but richer composition schemes (e.g., learned mixing weights) may yield better empirical performance.</li>
 </ul>
-<h2 id="73-future-directions"><strong>7.3 Future Directions</strong></h2>
+<h2 id="73-future-directions">7.3 Future Directions</h2>
 <p>Priority future directions include: (1) hybrid architectures combining neural representation learning with USG sequence modeling, providing LLM-quality generation with provable safety properties; (2) online learning via incremental hash table updates; (3) extension to multimodal (text + audio + image) settings via the full Lévy triplet (μ, σ², Π); (4) causal discovery layered atop the categorical structure.</p>
-<h1 id="8-conclusion"><strong>8. Conclusion</strong></h1>
+<h2 id="8-conclusion">8. Conclusion</h2>
 <p>We have presented the Universal Statistical Generator Framework, a mathematically rigorous approach to compositional data generation grounded in category theory, Lévy process theory, and information-theoretic filtration. The central results—that generators form a valid category, that Lévy processes unify discrete and continuous generation, and that MDL filtration is information-theoretically optimal—are all formally proved and computationally verified.</p>
 <p>The framework solves the state explosion problem that limited classical methods by introducing hash-based context compression, extending effective context length from 3–5 tokens to 1,000+ tokens with fixed memory. It achieves approximately 90% of state-of-the-art neural perplexity while providing formal guarantees on composability, convergence, and determinism that neural architectures cannot offer.</p>
 <p>This work represents a return to mathematical rigor in AI generative modeling, building on 80 years of category theory, 90 years of probability theory, and 76 years of information theory. The synthesis is novel: a unified, compositional, provably correct generator framework suitable for safety-critical applications where opacity is not acceptable.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Applebaum, D. (2009). Lévy Processes and Stochastic Calculus (2nd ed.). Cambridge University Press.</p>
 <p>[2] Baum, L.E. &amp; Petrie, T. (1966). Statistical Inference for Probabilistic Functions of Finite State Markov Chains. Annals of Mathematical Statistics, 37(6), 1554–1563.</p>
 <p>[3] Brown, T.B. et al. (2020). Language Models are Few-Shot Learners. Advances in Neural Information Processing Systems, 33, 1877–1901.</p>
@@ -220,6 +278,31 @@
 <p>[22] Vaswani, A. et al. (2017). Attention is All You Need. Advances in Neural Information Processing Systems, 30.</p>
 <p>[23] Weinberger, K. et al. (2009). Feature Hashing for Large Scale Multitask Learning. ICML 2009, 1113–1120.</p>
 <p>[24] Yoon, J. et al. (2023). Score-based Generative Models with Lévy Processes. OpenReview / NeurIPS 2023.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

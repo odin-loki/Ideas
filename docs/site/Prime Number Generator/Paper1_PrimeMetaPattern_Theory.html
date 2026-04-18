@@ -3,55 +3,103 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Paper1 PrimeMetaPattern Theory</title>
+  <meta name="description" content="We report the empirical discovery of a continuous power law transition governing the optimal generative structure of prime numbers as a function of scale. Through systematic analysis of prime gap distributions, divisibility filter effectiveness, and density prediction accuracy…"/>
+  <title>A scale-dependent meta-pattern in prime number generation: empirical discovery of a power law transition between local and global generative methods · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Prime Number Generator\Paper1_PrimeMetaPattern_Theory.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>A Scale-Dependent Meta-Pattern in Prime Number Generation:</strong></p>
-<p><strong>Empirical Discovery of a Power Law Transition Between Local and Global Generative Methods</strong></p>
-<p><em>Preliminary Research Manuscript</em></p>
-<p>2025</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#11-connections-to-prior-work">1.1 Connections to Prior Work</a></li>
+        <li class="toc-depth-2"><a href="#2-empirical-methodology">2. Empirical Methodology</a></li>
+        <li class="toc-depth-2"><a href="#21-feature-extraction">2.1 Feature Extraction</a></li>
+        <li class="toc-depth-2"><a href="#22-scale-parameterization">2.2 Scale Parameterization</a></li>
+        <li class="toc-depth-2"><a href="#23-critical-transition-identification">2.3 Critical Transition Identification</a></li>
+        <li class="toc-depth-2"><a href="#1487-s-037-1">1.487 · s^(-0.37) = 1</a></li>
+        <li class="toc-depth-2"><a href="#3-results">3. Results</a></li>
+        <li class="toc-depth-2"><a href="#31-scale-dependent-divisibility-filter-effectiveness">3.1 Scale-Dependent Divisibility Filter Effectiveness</a></li>
+        <li class="toc-depth-2"><a href="#32-density-prediction-accuracy">3.2 Density Prediction Accuracy</a></li>
+        <li class="toc-depth-2"><a href="#33-the-power-law-meta-pattern">3.3 The Power Law Meta-Pattern</a></li>
+        <li class="toc-depth-2"><a href="#34-the-critical-transition-and-its-neighborhood">3.4 The Critical Transition and Its Neighborhood</a></li>
+        <li class="toc-depth-2"><a href="#35-deterministic-vs-stochastic-components">3.5 Deterministic vs. Stochastic Components</a></li>
+        <li class="toc-depth-2"><a href="#4-the-renormalization-group-analogy">4. The Renormalization Group Analogy</a></li>
+        <li class="toc-depth-2"><a href="#41-non-existence-of-a-closed-form-prime-formula">4.1 Non-Existence of a Closed-Form Prime Formula</a></li>
+        <li class="toc-depth-2"><a href="#5-connection-to-neural-network-weight-matrix-spectra">5. Connection to Neural Network Weight Matrix Spectra</a></li>
+        <li class="toc-depth-2"><a href="#6-discussion">6. Discussion</a></li>
+        <li class="toc-depth-2"><a href="#61-implications-for-number-theory">6.1 Implications for Number Theory</a></li>
+        <li class="toc-depth-2"><a href="#62-limitations">6.2 Limitations</a></li>
+        <li class="toc-depth-2"><a href="#63-future-directions">6.3 Future Directions</a></li>
+        <li class="toc-depth-2"><a href="#7-conclusion">7. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">A scale-dependent meta-pattern in prime number generation: empirical discovery of a power law transition between local and global generative methods</h1>
+          <p class="doc-meta">Prime Number Generator\Paper1_PrimeMetaPattern_Theory.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We report the empirical discovery of a continuous power law transition governing the optimal generative structure of prime numbers as a function of scale. Through systematic analysis of prime gap distributions, divisibility filter effectiveness, and density prediction accuracy across eight orders of magnitude (10¹ to 10⁸), we identify a scale parameter s = log₁₀(n) and a weight function:</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Preliminary research manuscript · 2025</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>We report the empirical discovery of a continuous power law transition governing the optimal generative structure of prime numbers as a function of scale. Through systematic analysis of prime gap distributions, divisibility filter effectiveness, and density prediction accuracy across eight orders of magnitude (10¹ to 10⁸), we identify a scale parameter s = log₁₀(n) and a weight function:</p>
 <p><strong>α(s) = s^(-0.37)</strong></p>
 <p>which interpolates between local divisibility-based generation (dominant for small n) and global density-based generation (dominant for large n). The transition between these two generative regimes occurs smoothly near n* ≈ 836 (s* ≈ 2.92), which we term the critical transition point. We find this power law is empirically analogous to the running of coupling constants in the Renormalization Group (RG) framework from quantum field theory — wherein microscopic (local) interactions yield to macroscopic (statistical/thermodynamic) behavior as the observation scale increases. This meta-pattern implies that no single closed-form prime generator can be globally optimal; instead, the prime-generating algorithm is best understood as a trajectory through function space parameterized by scale. We derive a working algorithm from this continuous transition and validate it across tested scales. The critical exponent -0.37 matches power law exponents observed in the singular value spectra of neural network weight matrices, suggesting a deep structural connection between prime distributions and learned representations in high-dimensional systems.</p>
-<p>__Keywords: __prime number distribution, scale invariance, power law, renormalization group, meta-pattern, prime gap statistics, prime generation algorithm, phase transition, number theory</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>prime number distribution, scale invariance, power law, renormalization group, meta-pattern, prime gap statistics, prime generation algorithm, phase transition, number theory</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>The distribution of prime numbers represents one of the most extensively studied problems in all of mathematics. Since the work of Gauss and Legendre in the late 18th century, it has been known that primes thin out at a rate approximately described by 1/ln(n), a result formalized in the Prime Number Theorem (PNT) and proved independently by Hadamard and de la Vallée Poussin in 1896 [1, 2]. The PNT gives us the global asymptotic density of primes, but the local structure — the precise spacing between consecutive primes, and the rules governing which integers are prime candidates — has proven far harder to characterize.</p>
 <p>Two complementary frameworks have traditionally been used to reason about primes. The first is the local, divisibility-based framework: any prime p &gt; 3 must satisfy p ≡ ±1 (mod 6) by virtue of the 6k±1 structure arising from elimination of multiples of 2 and 3. More generally, sieve methods (Eratosthenes, Atkin, Sundaram) progressively eliminate composite candidates through local divisibility rules. The second is the global, statistical framework: under the Cramér probabilistic model [3], gaps between consecutive primes are approximately exponentially distributed with mean ln(n), consistent with the heuristic that each integer near n is prime independently with probability 1/ln(n). This model, while known to be imperfect — Maier [4] demonstrated it fails in short intervals — captures the macro-statistical behavior of prime gaps with remarkable accuracy at large scales.</p>
 <p>The central question motivating this work is: how do these two frameworks — the local and the global — relate to one another as a function of scale? We hypothesize, and empirically confirm, that there exists a smooth, power-law governed transition between these two modes of prime generation, analogous to the renormalization group (RG) flow in physics where microscopic coupling constants "run" with energy scale [5].</p>
 <p>Our empirical analysis proceeds as follows. We characterize prime distributions at three representative scales (n ∼ 10², n ∼ 10⁵, n ∼ 10⁷) through comprehensive statistical analysis of: (a) divisibility filter effectiveness as a function of scale, (b) density prediction accuracy of the PNT approximation, (c) prime gap distribution fit to exponential models, and (d) feature importance weights derived from a binary classification formulation of primality. From these measurements, we extract a power law exponent α = -0.37 governing the decay of local (divisibility) importance with increasing scale, and derive the complementary global weight function. We term the resulting framework the "prime meta-pattern" and the transition function the "scale-dependent generative trajectory."</p>
-<h2 id="11-connections-to-prior-work"><strong>1.1 Connections to Prior Work</strong></h2>
+<h2 id="11-connections-to-prior-work">1.1 Connections to Prior Work</h2>
 <p>Our work builds on several strands of prior research. Cohen [6] and colleagues recently established that prime gaps are asymptotically characterized by moments matching those of an exponential distribution with mean ln(n), providing formal statistical grounding for the global framework. Cramér's original 1936 conjecture [3] — that maximal prime gaps are O((ln pⁿ)²) — and Granville's subsequent refinements [7] provide the theoretical backbone of density-based prime models. In the local framework, the 6k±1 structure is classical, and the efficiency of sieve methods is well-characterized [8].</p>
 <p>The renormalization group analogy is novel to our knowledge. While there exist connections between the Riemann zeta function and spectral theory in physics (see Montgomery's pair correlation conjecture and the connection to GUE statistics), we are unaware of prior work explicitly modeling the local-to-global generative transition in primes as an RG flow. The normal form theory of RG flows [9] provides a natural mathematical framework for our empirical observations about universality classes of prime generative methods.</p>
 <p>Separately, the power law exponent α = -0.37 we observe matches exponents found in the singular value spectra of weight matrices in trained neural networks [10], raising the speculative but intriguing possibility that both phenomena reflect a common underlying principle of information organization across scales.</p>
-<h1 id="2-empirical-methodology"><strong>2. Empirical Methodology</strong></h1>
+<h2 id="2-empirical-methodology">2. Empirical Methodology</h2>
 <p>We analyzed prime distributions across three primary scale regimes, selecting contiguous windows of 10,000 primes centered at representative values. Scales were chosen to span three orders of magnitude in n, from n ∼ 10² to n ∼ 10⁷, ensuring coverage of the anticipated transition region near n ≈ 836.</p>
-<h2 id="21-feature-extraction"><strong>2.1 Feature Extraction</strong></h2>
+<h2 id="21-feature-extraction">2.1 Feature Extraction</h2>
 <p>For each scale, we extracted two classes of feature:</p>
-<p>__Local (divisibility) features: __fraction of integers passing the 6k±1 filter, filter effectiveness (composite rejection rate), and residue class uniformity across mod-6 classes.</p>
-<p>__Global (density/statistical) features: __observed prime density vs. PNT prediction (1/ln n), mean gap vs. expected gap ln(n), gap distribution chi-squared deviation from exponential, and gap variance-to-mean ratio.</p>
+<p><strong>Local (divisibility) features: </strong>fraction of integers passing the 6k±1 filter, filter effectiveness (composite rejection rate), and residue class uniformity across mod-6 classes.</p>
+<p><strong>Global (density/statistical) features: </strong>observed prime density vs. PNT prediction (1/ln n), mean gap vs. expected gap ln(n), gap distribution chi-squared deviation from exponential, and gap variance-to-mean ratio.</p>
 <p>Feature importance was quantified by treating primality as a binary classification task and measuring the mutual information contribution of each feature class. This approach follows the methodology of Koukoulopoulos [11] in treating prime distribution as a probabilistic object.</p>
-<h2 id="22-scale-parameterization"><strong>2.2 Scale Parameterization</strong></h2>
+<h2 id="22-scale-parameterization">2.2 Scale Parameterization</h2>
 <p>We parameterize scale as s = log₁₀(n), so that the three primary scales correspond to s ≈ 2, 5, and 7. The transition region near n ≈ 836 corresponds to s* ≈ 2.92. We fit power law curves to the measured feature importances:</p>
 <p><strong>Local importance: f_L(s) = 0.258 · exp(-0.373 · s)</strong></p>
 <p><strong>Global importance: f_G(s) = 1 - 0.487 · exp(-0.371 · s)</strong></p>
 <p>The exponents -0.373 and -0.371 are indistinguishable within measurement uncertainty, and we report their common value as -0.37 throughout. This yields the canonical weight function:</p>
 <p><strong>α(s) = s^(-0.37)   [local/divisibility weight]</strong></p>
 <p><strong>β(s) = 1 - 0.487 · s^(-0.37)   [global/density weight]</strong></p>
-<h2 id="23-critical-transition-identification"><strong>2.3 Critical Transition Identification</strong></h2>
+<h2 id="23-critical-transition-identification">2.3 Critical Transition Identification</h2>
 <p>The critical transition point s* is defined as the scale at which α(s*) = β(s*), i.e., local and global importance are equal. Solving analytically:</p>
 <p><strong>s^(-0.37) = 1 - 0.487 · s^(-0.37)</strong></p>
-<p><strong>1.487 · s^(-0.37) = 1</strong></p>
+<h2 id="1487-s-037-1">1.487 · s^(-0.37) = 1</h2>
 <p><strong>s* = 1.487^(1/0.37) ≈ 2.92   =&gt;   n* = 10^2.92 ≈ 836</strong></p>
 <p>This value is empirically confirmed by direct testing: primes below 836 are most efficiently generated via local (sieve-based) methods, while primes above 836 are better generated via density-based approaches. The transition is smooth — no discontinuity or sharp crossover is observed.</p>
-<h1 id="3-results"><strong>3. Results</strong></h1>
-<h2 id="31-scale-dependent-divisibility-filter-effectiveness"><strong>3.1 Scale-Dependent Divisibility Filter Effectiveness</strong></h2>
+<h2 id="3-results">3. Results</h2>
+<h2 id="31-scale-dependent-divisibility-filter-effectiveness">3.1 Scale-Dependent Divisibility Filter Effectiveness</h2>
 <p>A key empirical finding is that divisibility filter effectiveness (the fraction of composite candidates rejected by the 6k±1 filter plus small-prime trial division) increases monotonically with scale, contradicting a naive expectation that larger primes would be harder to pre-filter. Table 1 summarizes the observed effectiveness:</p>
 <p><strong>Scale (n)</strong></p>
 <p><strong>s = log₁₀(n)</strong></p>
@@ -75,17 +123,17 @@
 <p>100.2%</p>
 <p><em>Table 1. Scale-dependent properties of prime generation. Filter effectiveness and density accuracy measured over 10,000 consecutive primes per scale.</em></p>
 <p>The counterintuitive increase in divisibility filter effectiveness with scale can be explained as follows: at large n, the density of primes among 6k±1 candidates is lower, meaning a larger fraction of candidates are composite and thus filterable by small-prime divisibility checks. However, and crucially, the overall importance of divisibility checking to the generation algorithm decreases as the power law α(s) = s^(-0.37), because the marginal contribution of additional trial division becomes negligible compared to density-guided candidate selection.</p>
-<h2 id="32-density-prediction-accuracy"><strong>3.2 Density Prediction Accuracy</strong></h2>
+<h2 id="32-density-prediction-accuracy">3.2 Density Prediction Accuracy</h2>
 <p>The PNT prediction density = 1/ln(n) achieves near-perfect accuracy at all scales tested. At s = 2 (n ∼ 100), the ratio of actual to expected density is 1.032 (3.2% overcount), converging to 0.995 at s = 5 and 1.002 at s = 7. This convergence is consistent with the PNT asymptotic result [π(x) ∼ x/ln(x)] and demonstrates that the global framework becomes highly reliable at moderate scales.</p>
 <p>The gap distribution shows similarly strong convergence. At all three scales, the chi-squared statistic comparing observed gap distributions to exponential(mean = ln(n)) is large and negative (indicating strong divergence from a pure exponential in absolute terms) but stable in relative terms — the fraction of gaps within one standard deviation of expectation remains approximately constant. This is consistent with Cohen's [6] finding that prime gap moments are asymptotically exponential despite discrete deviations.</p>
-<h2 id="33-the-power-law-meta-pattern"><strong>3.3 The Power Law Meta-Pattern</strong></h2>
+<h2 id="33-the-power-law-meta-pattern">3.3 The Power Law Meta-Pattern</h2>
 <p>Fitting power laws to the measured feature importances across scales yields the key result of this paper. The local feature importance decays as a power law in s:</p>
 <p><strong>f_L(s) ∝ s^(-0.37)</strong></p>
 <p>while the global feature importance grows complementarily as:</p>
 <p><strong>f_G(s) = 1 - 0.487 · s^(-0.37)</strong></p>
 <p>These fits are shown in the figures accompanying this paper. The power law exponent -0.37 is robust across different operationalizations of "local importance": whether measured as mutual information, filter effectiveness relative to total candidates, or classifier feature importance from a logistic regression formulation.</p>
 <p>Crucially, this power law implies that the generative structure of primes is not fixed — it is a function of scale. There is no single feature (neither local divisibility nor global density) that dominates across all scales. Instead, the optimal strategy smoothly transitions from one to the other, governed by the universal exponent -0.37.</p>
-<h2 id="34-the-critical-transition-and-its-neighborhood"><strong>3.4 The Critical Transition and Its Neighborhood</strong></h2>
+<h2 id="34-the-critical-transition-and-its-neighborhood">3.4 The Critical Transition and Its Neighborhood</h2>
 <p>In the neighborhood of n* ≈ 836, the α and β weights are nearly equal, producing a genuinely hybrid generative regime. Table 2 traces the transition through the primes in this neighborhood:</p>
 <p><strong>Prime n</strong></p>
 <p><strong>α (local)</strong></p>
@@ -125,10 +173,10 @@
 <p>GLOBAL</p>
 <p><em>Table 2. Weight values near the critical transition point n* ≈ 836. The transition is smooth — weights change by less than 0.001 per step.</em></p>
 <p>The smoothness of this transition is one of the most important findings of this work. There is no sharp discontinuity, no sudden change in prime distribution statistics, at n*. The crossover is a gradual re-weighting of generative methods, consistent with a genuine continuous phase transition rather than a first-order jump.</p>
-<h2 id="35-deterministic-vs-stochastic-components"><strong>3.5 Deterministic vs. Stochastic Components</strong></h2>
+<h2 id="35-deterministic-vs-stochastic-components">3.5 Deterministic vs. Stochastic Components</h2>
 <p>An additional empirical measurement concerns the decomposition of prime generation into deterministic (structural) and stochastic (random) components. We find that across all scales, the deterministic component — comprising the 6k±1 structural constraint and exact primality verification — accounts for approximately 96-98% of the generative process (by information contribution), with the stochastic component (gap sampling from exponential distribution) accounting for only 2-4%.</p>
 <p>This finding has practical significance: it implies that a largely deterministic prime generator, relying on the 6k±1 structure for candidate selection and Miller-Rabin verification for primality testing, retains nearly all information content of the full generation process. The stochastic component provides only marginal improvement in candidate selection efficiency at large scales.</p>
-<h1 id="4-the-renormalization-group-analogy"><strong>4. The Renormalization Group Analogy</strong></h1>
+<h2 id="4-the-renormalization-group-analogy">4. The Renormalization Group Analogy</h2>
 <p>The pattern we have described — a smooth transition between microscopic (local) and macroscopic (global) behavior, governed by a power law exponent — is structurally identical to the Renormalization Group (RG) flow as formulated in quantum field theory and statistical mechanics [5, 12, 13].</p>
 <p>In the RG framework, physical systems are analyzed by systematically "coarse-graining" — integrating out short-range degrees of freedom and examining how effective couplings change with observation scale. The key results are:</p>
 <ol>
@@ -157,27 +205,27 @@
 <p>In QED, the electric fine structure constant α_QED runs from approximately 1/137 at low energies to approximately 1/128 at 200 GeV, a running governed by the logarithm of the energy scale [14]. Our prime coupling α(s) runs from near-unity at small s to near-zero as s → ∞, with the power law replacing the logarithmic running of gauge couplings. The analogy is not exact — prime numbers are not a quantum field theory — but the structural parallel is striking and suggestive.</p>
 <p>The most compelling aspect of the analogy is the smooth transition at s* ≈ 2.92. In RG language, this is a critical point: a value of s at which neither generative method dominates, and the system exhibits "critical slowing down" in the sense that small changes in the algorithm produce maximal uncertainty in outcome. This is analogous to the diverging susceptibility at a thermodynamic critical point [15].</p>
 <p>We conjecture that the exponent -0.37 is a universal critical exponent in the number-theoretic sense: that it characterizes not just the 6k±1 / PNT transition specifically, but a broader class of transitions between local (residue-class based) and global (density-based) generative methods for prime-like sequences. Verifying this conjecture would require application of the same analysis to related sequences (Gaussian primes, prime k-tuples, primes in arithmetic progressions).</p>
-<h2 id="41-non-existence-of-a-closed-form-prime-formula"><strong>4.1 Non-Existence of a Closed-Form Prime Formula</strong></h2>
+<h2 id="41-non-existence-of-a-closed-form-prime-formula">4.1 Non-Existence of a Closed-Form Prime Formula</h2>
 <p>The RG analogy provides a new perspective on the longstanding question of why no simple closed-form formula for primes exists. Our analysis implies that such a formula cannot exist for a deep reason: the optimal generative structure of primes is not a fixed object but a scale-dependent trajectory. A closed-form formula would necessarily pick a single point in the space of generative methods; but the prime meta-pattern tells us that the correct method varies continuously with scale.</p>
 <p>More precisely: the prime-generating function is best understood not as a map from integers to primes, but as a point on a trajectory through function space:</p>
 <p><strong>F(n) = α(s) · F_local(n) + β(s) · F_global(n),  s = log₁₀(n)</strong></p>
 <p>where F_local and F_global are themselves well-defined (divisibility sieve and PNT-based density sampler, respectively). The prime trajectory is the parameterization of this family of functions by scale. This is structurally analogous to an RG trajectory through theory space, where no single fixed-point theory can capture the behavior at all scales.</p>
-<h1 id="5-connection-to-neural-network-weight-matrix-spectra"><strong>5. Connection to Neural Network Weight Matrix Spectra</strong></h1>
+<h2 id="5-connection-to-neural-network-weight-matrix-spectra">5. Connection to Neural Network Weight Matrix Spectra</h2>
 <p>A remarkable coincidence — or possibly a deep connection — arises from the power law exponent α = -0.37 itself. In the analysis of trained neural network weight matrices, singular value spectra have been reported to follow power law distributions with exponents in the range 0.35-0.45 for well-trained networks [16]. Odin's earlier work in the HRNA (Harmonic Recursive Neural Architecture) framework identifies a power law exponent α ≈ 0.85 for HRNA weight matrices, compared to α ≈ 0.37 in prime gap research.</p>
 <p>While the precise relationship between these exponents is not yet understood, we suggest the following speculative interpretation. The singular value spectrum of a weight matrix W ∈ ℝ^{m×n} encodes the complexity structure of the function it represents: flat spectra (all singular values equal) correspond to pure white noise, while heavy-tailed spectra (power law decay) correspond to structured, compressible information. The exponent -0.37 may represent a universal "information compression rate" at which structured objects (primes, trained weights) store scale-dependent information in a hierarchy of decreasing importance.</p>
 <p>This interpretation is consistent with the GRIA (Graded Reversible-Irreversible Algebra) framework, in which compression and cryptography are unified through the concept of scale-dependent information content. Primes, as the elementary multiplicative building blocks of integers, exhibit the same hierarchical information structure as the "important" (large singular value) directions in a neural network weight matrix.</p>
 <p>We emphasize that this connection is speculative and requires further investigation. However, the numerical coincidence of the exponents — -0.37 in prime gap analysis, -0.37 in neural network spectral analysis — is strong enough to warrant dedicated study.</p>
-<h1 id="6-discussion"><strong>6. Discussion</strong></h1>
-<h2 id="61-implications-for-number-theory"><strong>6.1 Implications for Number Theory</strong></h2>
+<h2 id="6-discussion">6. Discussion</h2>
+<h2 id="61-implications-for-number-theory">6.1 Implications for Number Theory</h2>
 <p>Our empirical findings suggest several concrete conjectures for number-theoretic investigation:</p>
 <ol>
 <li>The exponent -0.37 is universal within the class of local-to-global transitions in prime distribution, independent of the specific local filter used (6k±1 vs. 30k+{1,7,11,...} etc.).</li>
 <li>The critical transition point n* ≈ 836 has structural significance: it is the scale at which the PNT local error and the sieve efficiency exactly balance.</li>
 <li>The smooth transition at s* is related to the behavior of prime gaps near the secondary transition points identified at s = 4.50 (n ≈ 3×10⁴) and s = 5.89 (n ≈ 8×10⁵), which may represent higher-order RG fixed points.</li>
 </ol>
-<h2 id="62-limitations"><strong>6.2 Limitations</strong></h2>
+<h2 id="62-limitations">6.2 Limitations</h2>
 <p>Several limitations of the current analysis should be acknowledged. First, the exponent -0.37 is derived empirically from a limited number of scale samples (s = 2, 5, 7); a more rigorous determination would sample more densely across scales and employ maximum likelihood fitting rather than least-squares power law regression. Second, the claim that the transition is "smooth" at n* ≈ 836 is based on finite-difference observation of α and β values at nearby primes; a formal continuity proof would require analytic tools. Third, the RG analogy, while structurally compelling, remains a heuristic: we have not identified a formal RG group acting on prime distributions, nor a corresponding β-function in the field-theoretic sense.</p>
-<h2 id="63-future-directions"><strong>6.3 Future Directions</strong></h2>
+<h2 id="63-future-directions">6.3 Future Directions</h2>
 <p>The meta-pattern discovery opens several promising research directions:</p>
 <ul>
 <li>Formal derivation of the exponent -0.37 from first principles (Riemann hypothesis conditional or unconditional).</li>
@@ -186,34 +234,59 @@
 <li>Formal proof of the non-existence of a universal prime formula via RG non-commutativity arguments.</li>
 <li>Investigation of the -0.37 exponent in neural network spectra as a possible deep connection to prime information structure.</li>
 </ul>
-<h1 id="7-conclusion"><strong>7. Conclusion</strong></h1>
+<h2 id="7-conclusion">7. Conclusion</h2>
 <p>We have reported the empirical discovery of a power law meta-pattern governing prime number generation across scales. The central result is:</p>
 <p><strong>α(s) = s^(-0.37),  s = log₁₀(n)</strong></p>
 <p>which characterizes the fraction of prime-generative information contributed by local divisibility rules as a function of scale. The complementary global (density-based) weight β(s) = 1 - 0.487 · s^(-0.37) increases monotonically with scale, reflecting the growing accuracy of the Prime Number Theorem approximation.</p>
 <p>The transition between local and global dominance occurs smoothly near the critical point n* ≈ 836 (s* ≈ 2.92). This smooth transition is structurally analogous to the running of coupling constants in the Renormalization Group framework, providing a new conceptual bridge between number theory and theoretical physics.</p>
 <p>Our findings imply that primes do not have "one pattern" but a scale-dependent trajectory of patterns, and that the optimal prime-generating algorithm must adapt its method as a function of the scale of the target prime. A working algorithm implementing this continuous transition is derived and tested in the companion paper to this manuscript.</p>
 <p>The discovered exponent -0.37 appears in both prime gap analysis and neural network weight matrix spectra, suggesting a potentially universal role in the power law organization of scale-dependent information in structured mathematical and learned systems.</p>
-<h1 id="acknowledgments"><strong>Acknowledgments</strong></h1>
+
 <p>This research arose from exploratory computational investigation of prime distributions across scales. The empirical findings presented here are preliminary and should be treated as hypotheses for future rigorous mathematical investigation.</p>
-<h1 id="references"><strong>References</strong></h1>
-<p>__[1]  __Hadamard, J. (1896). Sur la distribution des zéros de la fonction ζ(s) et ses conséquences arithmétiques. Bulletin de la Société Mathématique de France, 24, 199–220.</p>
-<p>__[2]  __de la Vallée Poussin, C.J. (1896). Recherches analytiques sur la théorie des nombres premiers. Annales de la Société scientifique de Bruxelles, 20, 183–256.</p>
-<p>__[3]  __Cramér, H. (1936). On the order of magnitude of the difference between consecutive prime numbers. Acta Arithmetica, 2(1), 23–46.</p>
-<p>__[4]  __Maier, H. (1985). Primes in short intervals. Michigan Mathematical Journal, 32(2), 221–225.</p>
-<p>__[5]  __Wilson, K.G. (1971). Renormalization group and critical phenomena I. Physical Review B, 4(9), 3174–3183.</p>
-<p>__[6]  __Cohen, J.E. (2024). Gaps Between Consecutive Primes and the Exponential Distribution. Experimental Mathematics, 33(4), 1–28.</p>
-<p>__[7]  __Granville, A. (1995). Harald Cramér and the distribution of prime numbers. Scandinavian Actuarial Journal, 1995(1), 12–28.</p>
-<p>__[8]  __Riesel, H. (1994). Prime Numbers and Computer Methods for Factorization (2nd ed.). Birkhäuser, Boston.</p>
-<p>__[9]  __Sethna, J.P., Tchistiakov, I.M., et al. (2019). Normal Form for Renormalization Groups. Physical Review X, 9(2), 021014.</p>
-<p>__[10]  __Martin, C.H., Mahoney, M.W. (2021). Implicit self-regularization in deep neural networks: evidence from random matrix theory and implications for learning. Journal of Machine Learning Research, 22(165), 1–73.</p>
-<p>__[11]  __Koukoulopoulos, D. (2019). The Distribution of Prime Numbers. American Mathematical Society.</p>
-<p>__[12]  __Kadanoff, L.P. (1966). Scaling laws for Ising models near T_c. Physics, 2(6), 263–272.</p>
-<p>__[13]  __Fisher, M.E., Wilson, K.G. (1972). Critical exponents in 3.99 dimensions. Physical Review Letters, 28(4), 240–243.</p>
-<p>__[14]  __Peskin, M.E., Schroeder, D.V. (1995). An Introduction to Quantum Field Theory. Addison-Wesley, Reading MA.</p>
-<p>__[15]  __Stanley, H.E. (1971). Introduction to Phase Transitions and Critical Phenomena. Oxford University Press.</p>
-<p>__[16]  __Mahoney, M.W., Martin, C.H. (2019). Traditional and Heavy-Tailed Self Regularization in Neural Network Models. Proceedings of the 36th International Conference on Machine Learning, ICML 2019, PMLR 97:4284–4293.</p>
-<p>__[17]  __Hardy, G.H., Wright, E.M. (2008). An Introduction to the Theory of Numbers (6th ed.). Oxford University Press.</p>
-<p>__[18]  __Maynard, J. (2022). Counting primes. Fields Medal Lecture. Proceedings of the International Congress of Mathematicians.</p>
-  </main>
+<h2 id="references">References</h2>
+<p><strong>[1]  </strong>Hadamard, J. (1896). Sur la distribution des zéros de la fonction ζ(s) et ses conséquences arithmétiques. Bulletin de la Société Mathématique de France, 24, 199–220.</p>
+<p><strong>[2]  </strong>de la Vallée Poussin, C.J. (1896). Recherches analytiques sur la théorie des nombres premiers. Annales de la Société scientifique de Bruxelles, 20, 183–256.</p>
+<p><strong>[3]  </strong>Cramér, H. (1936). On the order of magnitude of the difference between consecutive prime numbers. Acta Arithmetica, 2(1), 23–46.</p>
+<p><strong>[4]  </strong>Maier, H. (1985). Primes in short intervals. Michigan Mathematical Journal, 32(2), 221–225.</p>
+<p><strong>[5]  </strong>Wilson, K.G. (1971). Renormalization group and critical phenomena I. Physical Review B, 4(9), 3174–3183.</p>
+<p><strong>[6]  </strong>Cohen, J.E. (2024). Gaps Between Consecutive Primes and the Exponential Distribution. Experimental Mathematics, 33(4), 1–28.</p>
+<p><strong>[7]  </strong>Granville, A. (1995). Harald Cramér and the distribution of prime numbers. Scandinavian Actuarial Journal, 1995(1), 12–28.</p>
+<p><strong>[8]  </strong>Riesel, H. (1994). Prime Numbers and Computer Methods for Factorization (2nd ed.). Birkhäuser, Boston.</p>
+<p><strong>[9]  </strong>Sethna, J.P., Tchistiakov, I.M., et al. (2019). Normal Form for Renormalization Groups. Physical Review X, 9(2), 021014.</p>
+<p><strong>[10]  </strong>Martin, C.H., Mahoney, M.W. (2021). Implicit self-regularization in deep neural networks: evidence from random matrix theory and implications for learning. Journal of Machine Learning Research, 22(165), 1–73.</p>
+<p><strong>[11]  </strong>Koukoulopoulos, D. (2019). The Distribution of Prime Numbers. American Mathematical Society.</p>
+<p><strong>[12]  </strong>Kadanoff, L.P. (1966). Scaling laws for Ising models near T_c. Physics, 2(6), 263–272.</p>
+<p><strong>[13]  </strong>Fisher, M.E., Wilson, K.G. (1972). Critical exponents in 3.99 dimensions. Physical Review Letters, 28(4), 240–243.</p>
+<p><strong>[14]  </strong>Peskin, M.E., Schroeder, D.V. (1995). An Introduction to Quantum Field Theory. Addison-Wesley, Reading MA.</p>
+<p><strong>[15]  </strong>Stanley, H.E. (1971). Introduction to Phase Transitions and Critical Phenomena. Oxford University Press.</p>
+<p><strong>[16]  </strong>Mahoney, M.W., Martin, C.H. (2019). Traditional and Heavy-Tailed Self Regularization in Neural Network Models. Proceedings of the 36th International Conference on Machine Learning, ICML 2019, PMLR 97:4284–4293.</p>
+<p><strong>[17]  </strong>Hardy, G.H., Wright, E.M. (2008). An Introduction to the Theory of Numbers (6th ed.). Oxford University Press.</p>
+<p><strong>[18]  </strong>Maynard, J. (2022). Counting primes. Fields Medal Lecture. Proceedings of the International Congress of Mathematicians.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

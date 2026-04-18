@@ -3,18 +3,106 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README</title>
+  <meta name="description" content="--- 1. [System Purpose](#system-purpose) 3. [Architecture Overview](#architecture-overview) 4. [Mathematical Framework](#mathematical-framework) 5. [Components](#components) 6. [Processing Pipeline](#processing-pipeline) 7. [Learning and Memory](#learning-and-memory) 8.…"/>
+  <title>Combined Chain of Thought and Cell AI System · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../../index.html">Index</a>
-    <span class="path">Cell AI\Cell AI\Thinking CoT\README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../../index.html">Library</a>
+        <a href="../../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="combined-chain-of-thought-and-cell-ai-system">Combined Chain of Thought and Cell AI System</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#technical-reference">Technical Reference</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#system-purpose">System Purpose</a></li>
+        <li class="toc-depth-2"><a href="#core-design-principles">Core Design Principles</a></li>
+        <li class="toc-depth-3"><a href="#bounded-operation">Bounded Operation</a></li>
+        <li class="toc-depth-3"><a href="#noise-as-creative-resource">Noise as Creative Resource</a></li>
+        <li class="toc-depth-3"><a href="#self-reflective-internal-dialogue">Self-Reflective Internal Dialogue</a></li>
+        <li class="toc-depth-3"><a href="#learning-from-experience">Learning From Experience</a></li>
+        <li class="toc-depth-2"><a href="#architecture-overview">Architecture Overview</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-framework">Mathematical Framework</a></li>
+        <li class="toc-depth-3"><a href="#system-bounds">System Bounds</a></li>
+        <li class="toc-depth-3"><a href="#thought-space-and-quality-metrics">Thought Space and Quality Metrics</a></li>
+        <li class="toc-depth-3"><a href="#pattern-evolution">Pattern Evolution</a></li>
+        <li class="toc-depth-3"><a href="#confidence-scoring-and-the-dialogue-threshold">Confidence Scoring and the Dialogue Threshold</a></li>
+        <li class="toc-depth-3"><a href="#bayesian-belief-updates">Bayesian Belief Updates</a></li>
+        <li class="toc-depth-3"><a href="#creative-generation">Creative Generation</a></li>
+        <li class="toc-depth-3"><a href="#cell-ai-spatial-dynamics">Cell AI Spatial Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#temporal-memory-integration">Temporal Memory Integration</a></li>
+        <li class="toc-depth-3"><a href="#partition-cost-minimisation">Partition Cost Minimisation</a></li>
+        <li class="toc-depth-3"><a href="#system-operating-states">System Operating States</a></li>
+        <li class="toc-depth-2"><a href="#components">Components</a></li>
+        <li class="toc-depth-3"><a href="#thoughtchain">ThoughtChain</a></li>
+        <li class="toc-depth-3"><a href="#patternprocessor">PatternProcessor</a></li>
+        <li class="toc-depth-3"><a href="#memoryformation">MemoryFormation</a></li>
+        <li class="toc-depth-3"><a href="#parallelstateevolution">ParallelStateEvolution</a></li>
+        <li class="toc-depth-3"><a href="#connectionoptimizer">ConnectionOptimizer</a></li>
+        <li class="toc-depth-3"><a href="#partitionmanager">PartitionManager</a></li>
+        <li class="toc-depth-3"><a href="#spatialorganizer">SpatialOrganizer</a></li>
+        <li class="toc-depth-3"><a href="#reactionoptimizer">ReactionOptimizer</a></li>
+        <li class="toc-depth-3"><a href="#patternevolution">PatternEvolution</a></li>
+        <li class="toc-depth-3"><a href="#thoughtcache">ThoughtCache</a></li>
+        <li class="toc-depth-3"><a href="#queuemanager">QueueManager</a></li>
+        <li class="toc-depth-2"><a href="#processing-pipeline">Processing Pipeline</a></li>
+        <li class="toc-depth-3"><a href="#single-thought-end-to-end">Single Thought, End to End</a></li>
+        <li class="toc-depth-3"><a href="#question-generation">Question Generation</a></li>
+        <li class="toc-depth-2"><a href="#learning-and-memory">Learning and Memory</a></li>
+        <li class="toc-depth-3"><a href="#what-the-system-learns">What the System Learns</a></li>
+        <li class="toc-depth-3"><a href="#memory-growth-profile">Memory Growth Profile</a></li>
+        <li class="toc-depth-3"><a href="#failure-learning">Failure Learning</a></li>
+        <li class="toc-depth-2"><a href="#distributed-processing">Distributed Processing</a></li>
+        <li class="toc-depth-3"><a href="#routing-decision">Routing Decision</a></li>
+        <li class="toc-depth-3"><a href="#splitting-and-merging">Splitting and Merging</a></li>
+        <li class="toc-depth-3"><a href="#ray-integration-and-breakeven">Ray Integration and Breakeven</a></li>
+        <li class="toc-depth-2"><a href="#profiling-infrastructure">Profiling Infrastructure</a></li>
+        <li class="toc-depth-3"><a href="#profile_call-decorator">@profile_call Decorator</a></li>
+        <li class="toc-depth-3"><a href="#cprofilecontext">CProfileContext</a></li>
+        <li class="toc-depth-3"><a href="#benchmark-utility">benchmark() Utility</a></li>
+        <li class="toc-depth-3"><a href="#full-profiled-run">Full Profiled Run</a></li>
+        <li class="toc-depth-2"><a href="#performance-summary">Performance Summary</a></li>
+        <li class="toc-depth-3"><a href="#estimated-throughput-cpu-default-config-n1m">Estimated Throughput (CPU, default config, n=1M)</a></li>
+        <li class="toc-depth-3"><a href="#key-profiling-findings">Key Profiling Findings</a></li>
+        <li class="toc-depth-3"><a href="#gpu-ceiling">GPU Ceiling</a></li>
+        <li class="toc-depth-2"><a href="#configuration-and-usage">Configuration and Usage</a></li>
+        <li class="toc-depth-3"><a href="#minimal-usage">Minimal Usage</a></li>
+        <li class="toc-depth-3"><a href="#direct-thoughtchain-usage-with-context">Direct ThoughtChain Usage with Context</a></li>
+        <li class="toc-depth-3"><a href="#batch-processing">Batch Processing</a></li>
+        <li class="toc-depth-3"><a href="#profiled-run">Profiled Run</a></li>
+        <li class="toc-depth-3"><a href="#adjusting-bounds">Adjusting Bounds</a></li>
+        <li class="toc-depth-3"><a href="#command-line">Command Line</a></li>
+        <li class="toc-depth-3"><a href="#dependencies">Dependencies</a></li>
+        <li class="toc-depth-2"><a href="#system-limitations">System Limitations</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Combined Chain of Thought and Cell AI System</h1>
+          <p class="doc-meta">Cell AI\Cell AI\Thinking CoT\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This system is a cognitive processing architecture designed for complex, open-ended input where a single forward pass is insufficient. It processes problems the way a careful analyst works through a hard question: by generating targeted sub-questions, answering them, checking for logical gaps, and iterating until confident in the result.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="technical-reference">Technical Reference</h2>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#system-purpose">System Purpose</a></li>
@@ -30,12 +118,12 @@
 <li><a href="#configuration-and-usage">Configuration and Usage</a></li>
 <li><a href="#system-limitations">System Limitations</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="system-purpose">System Purpose</h2>
 <p>This system is a cognitive processing architecture designed for complex, open-ended input where a single forward pass is insufficient. It processes problems the way a careful analyst works through a hard question: by generating targeted sub-questions, answering them, checking for logical gaps, and iterating until confident in the result.</p>
 <p>The system merges two paradigms. The <strong>Chain of Thought engine</strong> provides bounded recursive reasoning with structured internal dialogue. The <strong>Cell AI layer</strong> provides biologically-inspired pattern storage, spatial memory organisation via diffusion-reaction dynamics, and learned inter-pattern associations. Together they form a pipeline capable of pattern recognition, creative generation, and iterative self-improvement, all within strict computational bounds.</p>
 <p>Intended applications include complex data analysis, anomaly detection in signal data, pattern discovery across multi-scale time series, and any domain where single-pass inference leaves too much confidence on the table.</p>
-<hr />
+<hr/>
 <h2 id="core-design-principles">Core Design Principles</h2>
 <h3 id="bounded-operation">Bounded Operation</h3>
 <p>Every recursive and iterative process has a hard mathematical ceiling derived from the problem size <code>n</code>. The system cannot enter infinite loops, exhaust memory unboundedly, or produce outputs below a configurable quality floor. These bounds are not soft limits enforced by timeouts — they are structural constraints baked into the initialisation of every component. At the default <code>n=1,000,000</code>: maximum recursion depth is 20 levels, queue capacity is 1,000 thoughts, and the minimum information gain threshold is 10⁻⁶.</p>
@@ -45,7 +133,7 @@
 <p>When processing confidence is below threshold, the system does not fail or return a low-quality result. Instead it generates its own sub-questions about the input, processes those questions as child thoughts, integrates their results, and re-evaluates. This internal dialogue loop is the primary mechanism for closing information gaps before they propagate into the final output.</p>
 <h3 id="learning-from-experience">Learning From Experience</h3>
 <p>The system accumulates knowledge across calls within a session. Successful processing approaches are stored and preferentially selected for similar future inputs. Pattern families evolve as new members are incorporated. Connection graphs between patterns grow denser as co-occurrence is observed. Failure modes are recorded and used to generate alternative approaches rather than simply being discarded.</p>
-<hr />
+<hr/>
 <h2 id="architecture-overview">Architecture Overview</h2>
 <pre><code>┌──────────────────────────────────────────────────────────────┐
 │                      IntegratedSystem                         │
@@ -83,7 +171,7 @@ Supporting infrastructure (always active):
   QueueManager         — priority scheduling with success-rate weighting
   ProfilerRegistry     — per-method timing and memory instrumentation
 </code></pre>
-<hr />
+<hr/>
 <h2 id="mathematical-framework">Mathematical Framework</h2>
 <h3 id="system-bounds">System Bounds</h3>
 <p>All resource limits are derived from the problem size parameter <code>n</code>:</p>
@@ -286,18 +374,18 @@ K(t) = exp(−t/2τ) · (1 + 0.1 · sin(2πt/τ))
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="components">Components</h2>
 <h3 id="thoughtchain">ThoughtChain</h3>
 <p>The central reasoning engine. Implements the full self-reflective pipeline: cache check → depth guard → pattern processing → internal dialogue → learning → result.</p>
-<p><strong>Parameters:</strong><br />
-- <code>n</code> — Problem size. All bounds derived from this value.<br />
+<p><strong>Parameters:</strong>
+- <code>n</code> — Problem size. All bounds derived from this value.
 - <code>device</code> — PyTorch device string (<code>'cuda'</code>, <code>'cpu'</code>, <code>'cuda:0'</code>).</p>
-<p><strong>Processing logic:</strong><br />
+<p><strong>Processing logic:</strong>
 A thought arriving at <code>process_thought()</code> is first checked against the cache by hash. On a miss, depth is checked against <code>max_depth</code>. If within bounds, the thought is sent to <code>PatternProcessor</code>. If the returned confidence is below 0.8, the internal dialogue loop fires: sub-questions are generated, each processed as a child thought, and their results integrated back. The result is cached if confidence exceeds 0.8, and the learning system is updated regardless.</p>
 <p><strong>Approach selection:</strong> When a thought exceeds the depth limit, the system queries <code>approach_history</code> for approaches that succeeded on similar thoughts, selects the highest-scoring untried one, and reprocesses. If no untried successful approach exists, <code>_generate_novel_approach</code> analyses the current thought's complexity and structure to select from: <code>decomposition</code> (split tensor into even/odd components), <code>frequency_analysis</code> (process FFT of tensor), or <code>pattern_based</code> (shift context focus to known patterns).</p>
 <p><strong>Performance note:</strong> Cache hit time is ~0.5 μs (dict lookup); full processing time is ~26 μs. The 52× ratio between miss and hit cost makes cache warm-up the single highest-leverage performance variable. A 90% cache hit rate produces an 8.5× throughput multiplier.</p>
-<hr />
+<hr/>
 <h3 id="patternprocessor">PatternProcessor</h3>
 <p>Multi-scale pattern detection, family organisation, and connection graph maintenance.</p>
 <p><strong>Pattern detection</strong> runs <code>F.conv1d</code> across four scales {3, 5, 7, 11} using sinusoid-modulated kernels. The 2σ peak detection threshold corresponds to the upper 2.28th percentile, producing an expected ~11.7 raw peaks per scale per 512-element signal, or ~47 raw detections across all four scales before redundancy removal.</p>
@@ -306,50 +394,50 @@ A thought arriving at <code>process_thought()</code> is first checked against th
 <p><strong>Quality score</strong> is the mean of three sub-scores — variation, symmetry, and simplicity — with a threshold of 0.5. For random Gaussian input, expected quality is 0.15–0.25, meaning most patterns are filtered out. For periodic or structured signals, expected quality is 0.4–0.8.</p>
 <p><strong>Family organisation</strong> clusters patterns by prototype similarity. The 0.7 similarity threshold is effectively unreachable between random patterns (for random unit vectors in R^d, P(cosine_sim &gt; 0.7) &lt; 1% for d ≥ 11), so high-dimensional patterns from varied inputs each create new families. Short-scale (d=3) patterns have ~11% chance of joining an existing family.</p>
 <p><strong>Connection graph</strong> tracks which patterns co-occur above structural similarity 0.8. Well-connected nodes are surfaced in insights.</p>
-<hr />
+<hr/>
 <h3 id="memoryformation">MemoryFormation</h3>
 <p>Temporal integral memory bank implementing the dual-kernel convolution memory model.</p>
 <p>Maintains two circular buffers of length τ=100: one for input signals, one for state signals. On each <code>integrate()</code> call, buffers are updated at <code>time_index % τ</code>, both weighted integrals are computed, and the combined memory state is returned. Pattern extraction runs at scales {3, 5, 7} to detect recurring sub-structures.</p>
 <p><strong>Bandwidth profile:</strong> The dominant cost is the temporal integral gather at 204,800 bytes (100×512×float32), taking ~10.24 μs at 20 GB/s memory bandwidth. Buffer update itself is trivial at 0.2 μs.</p>
 <p><strong>Pattern validity</strong> requires: length ≥ 3, std &gt; 0.1 (not flat), dominant FFT power at least 2× mean power (structured, not white noise), and cosine+frequency similarity &lt; 0.95 with all existing stored patterns (not a duplicate). The 0.1 std filter provides an important upstream guard: it prevents near-zero-std patterns from reaching the approximate entropy computation where a near-zero tolerance <code>r = 0.2σ</code> could cause numerical issues.</p>
-<hr />
+<hr/>
 <h3 id="parallelstateevolution">ParallelStateEvolution</h3>
 <p>Numerical integrator for the Cell AI PDE. Operates over partitioned state tensors using explicit Euler with at most <code>√(partition_size) ≈ 11</code> steps.</p>
 <p><strong>Per-step operations:</strong> signal integration (P×P tanh-weighted activations), 1D diffusion via Laplacian convolution, reaction term (P² forward/reverse reactions per partition), state-amplitude-scaled Gaussian noise, boundary averaging at partition interfaces, and error + convergence check.</p>
 <p><strong>Convergence conditions (triple-checked):</strong> Absolute error &lt; threshold; relative improvement &lt; threshold; oscillation amplitude over last 4 errors &lt; threshold. The third condition is critical — it detects and terminates integrations that are stable but oscillating, which a simple absolute-error check would miss indefinitely.</p>
 <p><strong>Stability:</strong> The explicit Euler integrator violates the CFL stability condition for <code>partition_size &gt; 16</code> with D=0.1, dt=0.01. The CFL number at the default partition_size=128 is 16.13 — 32× above the stability limit. In practice, the system does not diverge due to the decay term and convergence checks, but this is a known design risk for extreme inputs.</p>
-<hr />
+<hr/>
 <h3 id="connectionoptimizer">ConnectionOptimizer</h3>
 <p>Maintains and optimises the topology of pattern connections.</p>
 <p><strong>Cost function:</strong> <code>E(π) = computational_load + communication_cost</code>. Communication cost uses a normalised index-distance matrix so long-range connections are penalised relative to local ones.</p>
 <p><strong>Pruning:</strong> Connections with cost exceeding mean + 1σ are zeroed.</p>
 <p><strong>Strengthening:</strong> Critical paths (top quartile by out-degree) are amplified by 1.2×.</p>
 <p><strong>Performance note:</strong> The distance matrix construction (512×512 outer subtraction) takes ~52 μs due to memory bandwidth. This is the dominant cost of <code>optimize()</code>. Since this runs on the connection graph rather than on every thought, the impact is amortised.</p>
-<hr />
+<hr/>
 <h3 id="partitionmanager">PartitionManager</h3>
 <p>Manages load-balanced partitioning for distributed processing. Partition sizes are allocated proportionally to measured load, bounded by <code>2 × (total_size / num_partitions)</code> to prevent degenerate allocations. Boundary regions of 4 elements per boundary are maintained for cross-partition communication.</p>
-<hr />
+<hr/>
 <h3 id="spatialorganizer">SpatialOrganizer</h3>
 <p>Implements the diffusion portion of the Cell AI PDE across spatial partitions independently. Each partition maintains its own concentration vector updated by the PDE step-forward at each <code>evolve_space()</code> call.</p>
-<hr />
+<hr/>
 <h3 id="reactionoptimizer">ReactionOptimizer</h3>
 <p>Dynamically tunes reaction rate constants <code>k⁺</code> and <code>k⁻</code> across the network. Efficiency = forward_rate / reverse_rate. Reactions with efficiency &gt; 1 have their forward rate amplified; efficiency &lt; 1 amplifies reverse rate. Both tensors are L2-normalised after update. Reaction orders are updated toward kinetically optimal values <code>−log(forward_rate) / log(concentration)</code>, clamped to [0.5, 3.0].</p>
-<hr />
+<hr/>
 <h3 id="patternevolution">PatternEvolution</h3>
 <p>Tracks pattern family lineage and generates controlled mutations. Mutation is applied stochastically with probability 0.1. Mutations are Gaussian noise scaled by mutation_rate, clamped to [−0.2, 0.2].</p>
 <p>Family assignment uses the same cosine + frequency-domain similarity average as other components, with a 0.7 threshold. Prototypes are updated as the running mean of all member tensors.</p>
-<hr />
+<hr/>
 <h3 id="thoughtcache">ThoughtCache</h3>
 <p>Intelligent result cache with multi-factor eviction scoring.</p>
 <p><strong>Eviction score:</strong> <code>(access_frequency / (age + 1)) × (1 + 0.1 × relationship_count)</code></p>
 <p>This implements three-factor importance weighting: recency-weighted access rate (LRU-Frequency hybrid), plus a relationship bonus equivalent in structure to PageRank influence. Entries at the centre of the pattern graph resist eviction even when accessed infrequently.</p>
 <p><strong>Impact on throughput:</strong> Cache hit time (~0.5 μs) vs. miss time (~26 μs) gives a 52× cost ratio. At 90% hit rate, effective throughput is 8.5× the cold-start rate.</p>
-<hr />
+<hr/>
 <h3 id="queuemanager">QueueManager</h3>
 <p>Three-tier priority queue (high / normal / low) with intelligent scheduling.</p>
 <p><strong>Priority assignment</strong> scores each thought on four factors: depth (shallower = higher priority), historical success rate, average processing time, and number of previous attempts. Score thresholds of 0.7 (high) and 0.3 (normal) determine tier placement.</p>
 <p><strong>Success rate tracking</strong> uses EMA (momentum = 0.9) per thought hash, enabling the queue to learn which types of thoughts tend to succeed. Within each tier, thoughts are ordered by combined score via insertion sort. <code>get_next()</code> selects the best thought from the highest non-empty tier.</p>
-<hr />
+<hr/>
 <h2 id="processing-pipeline">Processing Pipeline</h2>
 <h3 id="single-thought-end-to-end">Single Thought, End to End</h3>
 <pre><code>Input
@@ -413,7 +501,7 @@ return result dict
 <p><strong>Pattern questions</strong> fire for every pattern with quality &gt; 0.5. They ask why the pattern appears, how it has evolved (if history exists), and how connected patterns influence it (if connections exist).</p>
 <p><strong>Structure questions</strong> fire when thought complexity exceeds 0.5. They ask about the cause of detected periodicity and whether the structure can be simplified if complexity exceeds 0.7.</p>
 <p><strong>Learning questions</strong> fire when overall confidence is below 0.5. They ask why confidence is low and how processing could be improved. These are the most general and serve as a fallback when specific questions cannot be formulated.</p>
-<hr />
+<hr/>
 <h2 id="learning-and-memory">Learning and Memory</h2>
 <h3 id="what-the-system-learns">What the System Learns</h3>
 <p>The system accumulates four types of knowledge across calls within a session:</p>
@@ -473,7 +561,7 @@ return result dict
 <p>Memory growth plateaus after ~1,000 calls because pattern families stabilise. Cache growth continues until the 10,000 entry cap. The dominant memory consumer is pattern context storage (200 observations × 512 floats × 4 bytes per pattern = 400 KB/pattern).</p>
 <h3 id="failure-learning">Failure Learning</h3>
 <p>Failed approaches are not discarded. <code>_generate_new_approach</code> reads the full approach history for the current thought and explicitly excludes previously attempted approaches. Repeated failure on the same approach type cannot occur within a single thought's processing chain.</p>
-<hr />
+<hr/>
 <h2 id="distributed-processing">Distributed Processing</h2>
 <h3 id="routing-decision">Routing Decision</h3>
 <p><code>IntegratedSystem</code> routes based on input size. Inputs with fewer than 1,000 elements are processed locally by a <code>ThoughtChain</code> instance. Larger inputs are split across available <code>DistributedProcessor</code> instances.</p>
@@ -485,17 +573,17 @@ return result dict
            ≈ 2ms / (0.026ms × 0.5) ≈ 154 thoughts per GPU
 </code></pre>
 <p>For batches smaller than this, local processing is faster despite being single-threaded.</p>
-<hr />
+<hr/>
 <h2 id="profiling-infrastructure">Profiling Infrastructure</h2>
 <p>Three complementary profiling mechanisms are included, each suited to a different level of analysis.</p>
 <h3 id="profile_call-decorator">@profile_call Decorator</h3>
 <p>Applied to all performance-sensitive methods throughout the codebase. Each decorated call records: wall-clock time (via <code>time.perf_counter</code>), peak traced-memory delta (via <code>tracemalloc</code>), and error count. Results accumulate in <code>ProfilerRegistry</code>.</p>
 <pre><code class="language-python">from Thinking_CoT_fixed import ProfilerRegistry
 
-print(ProfilerRegistry.report(top_n=20, sort_by=&quot;total_time&quot;))
+print(ProfilerRegistry.report(top_n=20, sort_by="total_time"))
 ProfilerRegistry.reset()  # clear between benchmark runs
 </code></pre>
-<p><strong>Output columns:</strong> Method | Calls | AvgMs | TotalS | PeakKB | Errors<br />
+<p><strong>Output columns:</strong> Method | Calls | AvgMs | TotalS | PeakKB | Errors<br/>
 <strong>Sort options:</strong> <code>total_time</code>, <code>avg_time</code>, <code>calls</code>, <code>peak_memory_bytes</code>, <code>errors</code></p>
 <p><strong>Instrumented methods:</strong></p>
 <table>
@@ -553,7 +641,7 @@ ProfilerRegistry.reset()  # clear between benchmark runs
 <pre><code class="language-python">from Thinking_CoT_fixed import CProfileContext
 import asyncio
 
-with CProfileContext(sort=&quot;cumulative&quot;, top=30) as prof:
+with CProfileContext(sort="cumulative", top=30) as prof:
     results = asyncio.run(system.process(data))
 print(prof.report)
 </code></pre>
@@ -564,13 +652,13 @@ import asyncio
 
 stats = benchmark(lambda: asyncio.run(system.process(batch)), n=20)
 # Returns: {'min', 'max', 'mean', 'std', 'total', 'n'}
-print(f&quot;mean={stats['mean']*1000:.1f}ms  ±{stats['std']*1000:.1f}ms&quot;)
+print(f"mean={stats['mean']*1000:.1f}ms  ±{stats['std']*1000:.1f}ms")
 </code></pre>
 <h3 id="full-profiled-run">Full Profiled Run</h3>
 <pre><code class="language-bash">python Thinking_CoT_fixed.py --profile
 </code></pre>
 <p>Activates all three mechanisms simultaneously. Prints per-batch progress, cProfile top functions, decorator timing table, and system performance metrics.</p>
-<hr />
+<hr/>
 <h2 id="performance-summary">Performance Summary</h2>
 <h3 id="estimated-throughput-cpu-default-config-n1m">Estimated Throughput (CPU, default config, n=1M)</h3>
 <table>
@@ -619,7 +707,7 @@ print(f&quot;mean={stats['mean']*1000:.1f}ms  ±{stats['std']*1000:.1f}ms&quot;)
 <pre><code>Max GPU speedup = 1 / (1 − 0.75) = 4×  for single-thought latency
 </code></pre>
 <p>For large batches where GPU parallelism spans the batch dimension, effective speedup is 10–50×. The GPU benefit is greatest for large <code>memory_size</code> and large <code>p</code> (patterns detected), and negligible for Python-dominated paths like cache lookup and approach selection.</p>
-<hr />
+<hr/>
 <h2 id="configuration-and-usage">Configuration and Usage</h2>
 <h3 id="minimal-usage">Minimal Usage</h3>
 <pre><code class="language-python">import asyncio
@@ -631,11 +719,11 @@ data = np.random.randn(500).astype(np.float32)
 
 result = asyncio.run(system.process(data))
 
-print(f&quot;Confidence: {result['confidence']:.3f}&quot;)
-print(f&quot;Patterns:   {len(result['patterns'])}&quot;)
+print(f"Confidence: {result['confidence']:.3f}")
+print(f"Patterns:   {len(result['patterns'])}")
 for insight in result['insights'][:3]:
-    print(f&quot;  {insight['pattern_type']} | family={insight['family']} | &quot;
-          f&quot;connections={insight['connections']}&quot;)
+    print(f"  {insight['pattern_type']} | family={insight['family']} | "
+          f"connections={insight['connections']}")
 </code></pre>
 <h3 id="direct-thoughtchain-usage-with-context">Direct ThoughtChain Usage with Context</h3>
 <pre><code class="language-python">from Thinking_CoT_fixed import ThoughtChain, Thought
@@ -667,7 +755,7 @@ import asyncio, numpy as np
 
 ProfilerRegistry.reset()
 results = asyncio.run(run_profiled(np.random.randn(5000).astype(np.float32), batch_size=500))
-print(ProfilerRegistry.report(top_n=10, sort_by=&quot;avg_time&quot;))
+print(ProfilerRegistry.report(top_n=10, sort_by="avg_time"))
 </code></pre>
 <h3 id="adjusting-bounds">Adjusting Bounds</h3>
 <pre><code class="language-python"># Smaller n — shallower search (depth 10), smaller queue (32), faster
@@ -725,7 +813,7 @@ python Thinking_CoT_fixed.py --profile # full profiled run
 <pre><code class="language-bash">pip install torch numpy
 pip install ray  # optional, for multi-GPU
 </code></pre>
-<hr />
+<hr/>
 <h2 id="system-limitations">System Limitations</h2>
 <p><strong>No cross-session persistence.</strong> All learned state — approach histories, pattern families, connection graphs, cache contents — is in-memory only. Lost on process exit.</p>
 <p><strong>No true thread parallelism on CPU.</strong> The GIL prevents genuine parallel execution. Sub-questions within the dialogue loop are processed serially. Real throughput scaling from <code>DistributedProcessor</code> only materialises with multiple GPUs via Ray.</p>
@@ -735,6 +823,31 @@ pip install ray  # optional, for multi-GPU
 <p><strong>Thought hashing is not collision-resistant for non-tensor input.</strong> Python's built-in <code>hash(str(content))</code> is used for non-tensor thoughts. Collision probability is negligible for session-scale k (2.71×10⁻¹⁴ at k=1,000), but not cryptographically safe.</p>
 <p><strong>Sub-question branching is unbounded in width.</strong> The depth guard prevents infinite recursion but a thought with many high-quality patterns can generate up to 46 sub-questions. A <code>max_questions_per_thought</code> cap (recommended: 5) would make worst-case latency predictable.</p>
 <p><strong>_compute_complexity is called redundantly.</strong> Approximate entropy is computed three times per pattern across the analysis pipeline. Memoising the result after the first call eliminates 67% of this work with no loss of accuracy.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -3,33 +3,96 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>universal drug depot guide</title>
+  <meta name="description" content="**Primary Release Controls:** - **Dissolution-controlled**: Rate-limiting polymer coatings or matrices - **Diffusion-controlled**: Drug migration through polymer networks - **Degradation-controlled**: Biodegradable polymer breakdown - **Osmotic-controlled**: Pressure-driven…"/>
+  <title>Universal Drug Depot System Design Framework · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Drugs\universal_drug_depot_guide.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="universal-drug-depot-system-design-framework">Universal Drug Depot System Design Framework</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#core-design-principles">Core Design Principles</a></li>
+        <li class="toc-depth-3"><a href="#1-multi-mechanism-release-architecture">1. Multi-Mechanism Release Architecture</a></li>
+        <li class="toc-depth-3"><a href="#2-universal-formulation-components">2. Universal Formulation Components</a></li>
+        <li class="toc-depth-2"><a href="#duration-specific-formulation-strategies">Duration-Specific Formulation Strategies</a></li>
+        <li class="toc-depth-3"><a href="#hours-duration-release-2-24-hours">Hours-Duration Release (2-24 hours)</a></li>
+        <li class="toc-depth-3"><a href="#days-duration-release-1-14-days">Days-Duration Release (1-14 days)</a></li>
+        <li class="toc-depth-3"><a href="#months-duration-release-1-12-months">Months-Duration Release (1-12 months)</a></li>
+        <li class="toc-depth-2"><a href="#universal-drug-compatibility-matrix">Universal Drug Compatibility Matrix</a></li>
+        <li class="toc-depth-3"><a href="#high-solubility-drugs-1-mgml">High Solubility Drugs (&gt;1 mg/mL)</a></li>
+        <li class="toc-depth-3"><a href="#low-solubility-drugs-1-mgml">Low Solubility Drugs (&lt;1 mg/mL)</a></li>
+        <li class="toc-depth-3"><a href="#large-molecules-proteinspeptides">Large Molecules (Proteins/Peptides)</a></li>
+        <li class="toc-depth-3"><a href="#small-molecules">Small Molecules</a></li>
+        <li class="toc-depth-2"><a href="#dosage-scaling-methodology">Dosage Scaling Methodology</a></li>
+        <li class="toc-depth-3"><a href="#low-dose-drugs-1-mg">Low Dose Drugs (&lt;1 mg)</a></li>
+        <li class="toc-depth-3"><a href="#medium-dose-drugs-1-100-mg">Medium Dose Drugs (1-100 mg)</a></li>
+        <li class="toc-depth-3"><a href="#high-dose-drugs-100-mg">High Dose Drugs (&gt;100 mg)</a></li>
+        <li class="toc-depth-2"><a href="#advanced-tuning-parameters">Advanced Tuning Parameters</a></li>
+        <li class="toc-depth-3"><a href="#release-rate-modification">Release Rate Modification</a></li>
+        <li class="toc-depth-3"><a href="#burst-release-minimization">Burst Release Minimization</a></li>
+        <li class="toc-depth-2"><a href="#quality-control-optimization">Quality Control &amp; Optimization</a></li>
+        <li class="toc-depth-3"><a href="#in-vitro-testing-protocol">In Vitro Testing Protocol</a></li>
+        <li class="toc-depth-3"><a href="#biocompatibility-verification">Biocompatibility Verification</a></li>
+        <li class="toc-depth-2"><a href="#clinical-translation-considerations">Clinical Translation Considerations</a></li>
+        <li class="toc-depth-3"><a href="#regulatory-pathway">Regulatory Pathway</a></li>
+        <li class="toc-depth-3"><a href="#manufacturing-scalability">Manufacturing Scalability</a></li>
+        <li class="toc-depth-2"><a href="#future-proofing-strategies">Future-Proofing Strategies</a></li>
+        <li class="toc-depth-3"><a href="#emerging-technologies-integration">Emerging Technologies Integration</a></li>
+        <li class="toc-depth-3"><a href="#personalized-medicine-adaptation">Personalized Medicine Adaptation</a></li>
+        <li class="toc-depth-2"><a href="#implementation-workflow">Implementation Workflow</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-drug-characterization">Phase 1: Drug Characterization</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-formulation-development">Phase 2: Formulation Development</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-preclinical-validation">Phase 3: Preclinical Validation</a></li>
+        <li class="toc-depth-3"><a href="#phase-4-clinical-development">Phase 4: Clinical Development</a></li>
+        <li class="toc-depth-2"><a href="#troubleshooting-guide">Troubleshooting Guide</a></li>
+        <li class="toc-depth-3"><a href="#common-issues-and-solutions">Common Issues and Solutions</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Universal Drug Depot System Design Framework</h1>
+          <p class="doc-meta">Drugs\universal_drug_depot_guide.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This framework provides a systematic approach to designing controlled-release drug depot systems capable of sustained delivery from hours to months using any therapeutic compound. The system leverages multiple release mechanisms that can be tuned based on drug properties, dosage requirements, and desired duration.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This framework provides a systematic approach to designing controlled-release drug depot systems capable of sustained delivery from hours to months using any therapeutic compound. The system leverages multiple release mechanisms that can be tuned based on drug properties, dosage requirements, and desired duration.</p>
 <h2 id="core-design-principles">Core Design Principles</h2>
 <h3 id="1-multi-mechanism-release-architecture">1. Multi-Mechanism Release Architecture</h3>
-<p><strong>Primary Release Controls:</strong><br />
-- <strong>Dissolution-controlled</strong>: Rate-limiting polymer coatings or matrices<br />
-- <strong>Diffusion-controlled</strong>: Drug migration through polymer networks<br />
-- <strong>Degradation-controlled</strong>: Biodegradable polymer breakdown<br />
+<p><strong>Primary Release Controls:</strong>
+- <strong>Dissolution-controlled</strong>: Rate-limiting polymer coatings or matrices
+- <strong>Diffusion-controlled</strong>: Drug migration through polymer networks
+- <strong>Degradation-controlled</strong>: Biodegradable polymer breakdown
 - <strong>Osmotic-controlled</strong>: Pressure-driven release through semi-permeable membranes</p>
 <h3 id="2-universal-formulation-components">2. Universal Formulation Components</h3>
-<p><strong>Base Polymer System:</strong><br />
-- Primary matrix: PLGA (poly(lactic-co-glycolic acid)) - FDA approved, tunable degradation<br />
-- Secondary modifier: PEG, chitosan, or alginate for release modulation<br />
+<p><strong>Base Polymer System:</strong>
+- Primary matrix: PLGA (poly(lactic-co-glycolic acid)) - FDA approved, tunable degradation
+- Secondary modifier: PEG, chitosan, or alginate for release modulation
 - Lipophilic enhancer: Palmitate salts or docusate for improved loading</p>
-<p><strong>Solvent System:</strong><br />
-- Primary solvent: N-methyl-2-pyrrolidone (NMP) for phase inversion<br />
-- Co-solvent options: Benzyl benzoate, propylene glycol, or ethyl oleate<br />
+<p><strong>Solvent System:</strong>
+- Primary solvent: N-methyl-2-pyrrolidone (NMP) for phase inversion
+- Co-solvent options: Benzyl benzoate, propylene glycol, or ethyl oleate
 - Rate modifiers: Fatty acids (palmitic, stearic) or ionic liquids</p>
 <h2 id="duration-specific-formulation-strategies">Duration-Specific Formulation Strategies</h2>
 <h3 id="hours-duration-release-2-24-hours">Hours-Duration Release (2-24 hours)</h3>
@@ -39,7 +102,7 @@ Polymer: Fast-degrading PLGA (50:50 ratio, low MW 10-20 kDa)
 Solvent: 60-80% NMP with 20-40% benzyl benzoate
 Additives: 2-5% PEG 400 for porosity enhancement
 </code></pre>
-<p><strong>Release Mechanism:</strong> Rapid phase inversion + fast polymer swelling<br />
+<p><strong>Release Mechanism:</strong> Rapid phase inversion + fast polymer swelling
 <strong>Applications:</strong> Post-surgical analgesia, acute infection treatment</p>
 <h3 id="days-duration-release-1-14-days">Days-Duration Release (1-14 days)</h3>
 <p><strong>Formulation Approach:</strong></p>
@@ -49,7 +112,7 @@ Solvent: 50-70% NMP with rate-controlling co-solvent
 Additives: 5-10% chitosan palmitate for sustained matrix
 Salt Form: Convert drug to lipophilic salt (docusate or palmitate)
 </code></pre>
-<p><strong>Release Mechanism:</strong> Controlled diffusion + moderate degradation<br />
+<p><strong>Release Mechanism:</strong> Controlled diffusion + moderate degradation
 <strong>Applications:</strong> Antibiotic therapy, hormone replacement, contraception</p>
 <h3 id="months-duration-release-1-12-months">Months-Duration Release (1-12 months)</h3>
 <p><strong>Formulation Approach:</strong></p>
@@ -59,7 +122,7 @@ Solvent: 30-50% NMP with viscosity enhancers
 Additives: 10-20% alginate-palmitate composite matrix
 Crystal Engineering: Micronized drug crystals in lipophilic carrier
 </code></pre>
-<p><strong>Release Mechanism:</strong> Polymer degradation-controlled + crystal dissolution<br />
+<p><strong>Release Mechanism:</strong> Polymer degradation-controlled + crystal dissolution
 <strong>Applications:</strong> Long-acting contraceptives, HIV prophylaxis, psychiatric medications</p>
 <h2 id="universal-drug-compatibility-matrix">Universal Drug Compatibility Matrix</h2>
 <h3 id="high-solubility-drugs-1-mgml">High Solubility Drugs (&gt;1 mg/mL)</h3>
@@ -103,21 +166,21 @@ Delivery Method: Large bore needle or surgical implantation
 </code></pre>
 <h2 id="advanced-tuning-parameters">Advanced Tuning Parameters</h2>
 <h3 id="release-rate-modification">Release Rate Modification</h3>
-<p><strong>To Accelerate Release:</strong><br />
-- Increase PEG content (enhance porosity)<br />
-- Use faster-degrading PLGA ratios<br />
-- Add hydrophilic excipients<br />
+<p><strong>To Accelerate Release:</strong>
+- Increase PEG content (enhance porosity)
+- Use faster-degrading PLGA ratios
+- Add hydrophilic excipients
 - Reduce polymer molecular weight</p>
-<p><strong>To Slow Release:</strong><br />
-- Add lipophilic components (palmitate salts)<br />
-- Increase polymer molecular weight<br />
-- Use hydrophobic co-solvents<br />
+<p><strong>To Slow Release:</strong>
+- Add lipophilic components (palmitate salts)
+- Increase polymer molecular weight
+- Use hydrophobic co-solvents
 - Implement multi-layer coating systems</p>
 <h3 id="burst-release-minimization">Burst Release Minimization</h3>
-<p><strong>Strategies:</strong><br />
-- Pre-equilibration of polymer matrix<br />
-- Core-shell microsphere design<br />
-- Gradient drug loading<br />
+<p><strong>Strategies:</strong>
+- Pre-equilibration of polymer matrix
+- Core-shell microsphere design
+- Gradient drug loading
 - Surface modification with rate-controlling membrane</p>
 <h2 id="quality-control-optimization">Quality Control &amp; Optimization</h2>
 <h3 id="in-vitro-testing-protocol">In Vitro Testing Protocol</h3>
@@ -194,17 +257,42 @@ Delivery Method: Large bore needle or surgical implantation
 </ol>
 <h2 id="troubleshooting-guide">Troubleshooting Guide</h2>
 <h3 id="common-issues-and-solutions">Common Issues and Solutions</h3>
-<p><strong>Excessive Burst Release:</strong><br />
+<p><strong>Excessive Burst Release:</strong>
 - Solution: Increase polymer MW or add rate-controlling membrane</p>
-<p><strong>Poor Injectability:</strong><br />
+<p><strong>Poor Injectability:</strong>
 - Solution: Optimize solvent ratio or use co-solvents</p>
-<p><strong>Incomplete Release:</strong><br />
+<p><strong>Incomplete Release:</strong>
 - Solution: Add porosity enhancers or reduce drug crystallinity</p>
-<p><strong>Short Duration:</strong><br />
+<p><strong>Short Duration:</strong>
 - Solution: Increase polymer content or use slower-degrading materials</p>
-<p><strong>Variable Release:</strong><br />
+<p><strong>Variable Release:</strong>
 - Solution: Improve manufacturing controls and formulation homogeneity</p>
 <p>This framework provides a systematic approach to developing depot formulations that can be adapted for virtually any drug compound while achieving predictable, tunable release kinetics across multiple time scales.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

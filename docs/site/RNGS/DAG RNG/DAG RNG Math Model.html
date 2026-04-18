@@ -3,171 +3,226 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>DAG RNG Math Model</title>
+  <meta name="description" content="Let M be a Meta-DAG system with: - N = {n₁, n₂, ..., n₈} set of 8 nodes - S = {s₁, s₂, ..., s₆} set of transcendental sequences - O = {o₁, o₂, ..., o₈} set of meta-operations - P = {p₁, p₂, ..., p₂₄} set of directed edges (paths) For each node nᵢ: - State space Σᵢ = {0, 1}⁶⁴ -…"/>
+  <title>Meta-DAG RNG — mathematical model · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">RNGS\DAG RNG\DAG RNG Math Model.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="mathematical-analysis-and-proof-of-meta-dag-random-number-generator">Mathematical Analysis and Proof of Meta-DAG Random Number Generator</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-system-definition">1. System Definition</a></li>
+        <li class="toc-depth-3"><a href="#11-core-components">1.1 Core Components</a></li>
+        <li class="toc-depth-3"><a href="#12-state-space-definition">1.2 State Space Definition</a></li>
+        <li class="toc-depth-2"><a href="#2-theoretical-analysis">2. Theoretical Analysis</a></li>
+        <li class="toc-depth-3"><a href="#21-state-space-size">2.1 State Space Size</a></li>
+        <li class="toc-depth-3"><a href="#22-period-analysis">2.2 Period Analysis</a></li>
+        <li class="toc-depth-3"><a href="#23-entropy-generation">2.3 Entropy Generation</a></li>
+        <li class="toc-depth-2"><a href="#3-statistical-properties">3. Statistical Properties</a></li>
+        <li class="toc-depth-3"><a href="#31-distribution-analysis">3.1 Distribution Analysis</a></li>
+        <li class="toc-depth-3"><a href="#32-correlation-analysis">3.2 Correlation Analysis</a></li>
+        <li class="toc-depth-2"><a href="#4-computational-complexity">4. Computational Complexity</a></li>
+        <li class="toc-depth-3"><a href="#41-time-complexity">4.1 Time Complexity</a></li>
+        <li class="toc-depth-3"><a href="#42-space-complexity">4.2 Space Complexity</a></li>
+        <li class="toc-depth-2"><a href="#5-security-properties">5. Security Properties</a></li>
+        <li class="toc-depth-3"><a href="#51-pattern-resistance">5.1 Pattern Resistance</a></li>
+        <li class="toc-depth-3"><a href="#52-state-recovery-resistance">5.2 State Recovery Resistance</a></li>
+        <li class="toc-depth-2"><a href="#6-implementation-considerations">6. Implementation Considerations</a></li>
+        <li class="toc-depth-3"><a href="#61-parallelization">6.1 Parallelization</a></li>
+        <li class="toc-depth-3"><a href="#62-hardware-efficiency">6.2 Hardware Efficiency</a></li>
+        <li class="toc-depth-2"><a href="#7-proofs-of-correctness">7. Proofs of Correctness</a></li>
+        <li class="toc-depth-3"><a href="#71-initialization">7.1 Initialization</a></li>
+        <li class="toc-depth-3"><a href="#72-operation-soundness">7.2 Operation Soundness</a></li>
+        <li class="toc-depth-2"><a href="#8-statistical-test-predictions">8. Statistical Test Predictions</a></li>
+        <li class="toc-depth-3"><a href="#81-nist-test-suite">8.1 NIST Test Suite</a></li>
+        <li class="toc-depth-3"><a href="#82-diehard-tests">8.2 Diehard Tests</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusions">9. Conclusions</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Meta-DAG RNG — mathematical model</h1>
+          <p class="doc-meta">RNGS\DAG RNG\DAG RNG Math Model.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>State-space size, period and entropy claims, complexity, and test predictions for the Meta-DAG construction</strong></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>State-space size, period and entropy claims, complexity, and test predictions for the Meta-DAG construction</strong></p>
 <h2 id="1-system-definition">1. System Definition</h2>
 <h3 id="11-core-components">1.1 Core Components</h3>
-<p>Let M be a Meta-DAG system with:<br />
-- N = {n₁, n₂, ..., n₈} set of 8 nodes<br />
-- S = {s₁, s₂, ..., s₆} set of transcendental sequences<br />
-- O = {o₁, o₂, ..., o₈} set of meta-operations<br />
+<p>Let M be a Meta-DAG system with:
+- N = {n₁, n₂, ..., n₈} set of 8 nodes
+- S = {s₁, s₂, ..., s₆} set of transcendental sequences
+- O = {o₁, o₂, ..., o₈} set of meta-operations
 - P = {p₁, p₂, ..., p₂₄} set of directed edges (paths)</p>
 <h3 id="12-state-space-definition">1.2 State Space Definition</h3>
-<p>For each node nᵢ:<br />
-- State space Σᵢ = {0, 1}⁶⁴<br />
-- Meta-state space Mᵢ = {0, 1}⁶⁴<br />
+<p>For each node nᵢ:
+- State space Σᵢ = {0, 1}⁶⁴
+- Meta-state space Mᵢ = {0, 1}⁶⁴
 - Counter space Cᵢ = {0, 1}⁶⁴</p>
-<p>Total state space for single node:<br />
+<p>Total state space for single node:
 T(nᵢ) = |Σᵢ| × |Mᵢ| × |Cᵢ| = 2¹⁹²</p>
 <h2 id="2-theoretical-analysis">2. Theoretical Analysis</h2>
 <h3 id="21-state-space-size">2.1 State Space Size</h3>
 <p>Theorem 1: Total system state space |S| = (2¹⁹²)⁸ × |P|</p>
-<p>Proof:<br />
-1. Each node has 2¹⁹² possible states<br />
-2. 8 independent nodes = (2¹⁹²)⁸<br />
-3. Dynamic path configurations add factor |P|<br />
-4. |P| = 8! possible path arrangements<br />
+<p>Proof:
+1. Each node has 2¹⁹² possible states
+2. 8 independent nodes = (2¹⁹²)⁸
+3. Dynamic path configurations add factor |P|
+4. |P| = 8! possible path arrangements
 ∴ |S| = 2¹⁵³⁶ × 40320</p>
 <h3 id="22-period-analysis">2.2 Period Analysis</h3>
 <p>Theorem 2: Minimum period length P_min ≥ 2⁶⁴</p>
-<p>Proof:<br />
-1. Counter increments ensure minimum cycle of 2⁶⁴<br />
-2. Meta-state evolution extends this further<br />
-3. For any state s₁, s₂:<br />
+<p>Proof:
+1. Counter increments ensure minimum cycle of 2⁶⁴
+2. Meta-state evolution extends this further
+3. For any state s₁, s₂:
    P(s₁ = s₂) ≤ 2⁻¹⁹² due to counter</p>
 <h3 id="23-entropy-generation">2.3 Entropy Generation</h3>
 <p>Theorem 3: Entropy generation rate H ≥ 63.9 bits per output</p>
-<p>Proof by components:<br />
-1. Natural sequence entropy:<br />
-   H_seq = Σ(-p_i log₂ p_i) where p_i is digit probability<br />
+<p>Proof by components:
+1. Natural sequence entropy:
+   H_seq = Σ(-p_i log₂ p_i) where p_i is digit probability
    For transcendental sequences: H_seq ≈ 64 bits</p>
 <ol start="2">
 <li>
-<p>Meta-operation entropy:<br />
-   H_op = log₂(|O|) = 3 bits per operation<br />
+<p>Meta-operation entropy:
+   H_op = log₂(|O|) = 3 bits per operation
    With k operations: H_op_total = 3k bits</p>
 </li>
 <li>
-<p>Combined entropy:<br />
-   H_total = H_seq + H_op - ε<br />
+<p>Combined entropy:
+   H_total = H_seq + H_op - ε
    Where ε ≤ 0.1 bits due to slight correlations</p>
 </li>
 </ol>
 <h2 id="3-statistical-properties">3. Statistical Properties</h2>
 <h3 id="31-distribution-analysis">3.1 Distribution Analysis</h3>
 <p>Theorem 4: Output distribution D approaches uniform</p>
-<p>Proof:<br />
-1. Let X be output random variable<br />
-2. For any x ∈ {0,1}⁶⁴:<br />
-   |P(X = x) - 2⁻⁶⁴| ≤ ε<br />
-   Where ε ≤ 2⁻³² due to:<br />
-   a) Transcendental mixing<br />
-   b) Meta-operation diversity<br />
+<p>Proof:
+1. Let X be output random variable
+2. For any x ∈ {0,1}⁶⁴:
+   |P(X = x) - 2⁻⁶⁴| ≤ ε
+   Where ε ≤ 2⁻³² due to:
+   a) Transcendental mixing
+   b) Meta-operation diversity
    c) Counter incorporation</p>
 <h3 id="32-correlation-analysis">3.2 Correlation Analysis</h3>
 <p>Theorem 5: Serial correlation ρ approaches 0</p>
-<p>Proof:<br />
-For output sequence {Xₙ}:<br />
-1. ρ = Cov(Xₙ, Xₙ₊₁) / σ²<br />
-2. Meta-operations ensure:<br />
+<p>Proof:
+For output sequence {Xₙ}:
+1. ρ = Cov(Xₙ, Xₙ₊₁) / σ²
+2. Meta-operations ensure:
    |ρ| ≤ 2⁻⁶⁴ for any lag k</p>
 <h2 id="4-computational-complexity">4. Computational Complexity</h2>
 <h3 id="41-time-complexity">4.1 Time Complexity</h3>
-<p>Per node operation:<br />
-- O(1) for each meta-operation<br />
-- O(k) for k sequence evaluations<br />
+<p>Per node operation:
+- O(1) for each meta-operation
+- O(k) for k sequence evaluations
 - O(m) for m feedback paths</p>
-<p>Total complexity per output:<br />
+<p>Total complexity per output:
 T(n) = O(8 × (k + m)) = O(1)</p>
 <h3 id="42-space-complexity">4.2 Space Complexity</h3>
-<p>Memory requirements:<br />
-- States: 8 × 64 bits<br />
-- Counters: 8 × 64 bits<br />
-- Meta-states: 8 × 64 bits<br />
+<p>Memory requirements:
+- States: 8 × 64 bits
+- Counters: 8 × 64 bits
+- Meta-states: 8 × 64 bits
 Total: O(1) fixed memory</p>
 <h2 id="5-security-properties">5. Security Properties</h2>
 <h3 id="51-pattern-resistance">5.1 Pattern Resistance</h3>
 <p>Theorem 6: Pattern detection complexity is NP-hard</p>
-<p>Proof:<br />
-1. Let A be any algorithm predicting next output<br />
-2. Reduction from SAT:<br />
-   - Construct circuit C from meta-operations<br />
-   - Show predicting output ≡ solving SAT<br />
+<p>Proof:
+1. Let A be any algorithm predicting next output
+2. Reduction from SAT:
+   - Construct circuit C from meta-operations
+   - Show predicting output ≡ solving SAT
 3. Therefore pattern detection ∈ NP-hard</p>
 <h3 id="52-state-recovery-resistance">5.2 State Recovery Resistance</h3>
 <p>Theorem 7: State recovery requires O(2⁹⁶) operations</p>
-<p>Proof:<br />
-1. Best attack requires:<br />
-   - Guessing meta-state: 2⁶⁴ possibilities<br />
-   - Matching sequence phase: 2³² trials<br />
+<p>Proof:
+1. Best attack requires:
+   - Guessing meta-state: 2⁶⁴ possibilities
+   - Matching sequence phase: 2³² trials
 2. No better algorithm exists (reduction proof)</p>
 <h2 id="6-implementation-considerations">6. Implementation Considerations</h2>
 <h3 id="61-parallelization">6.1 Parallelization</h3>
 <p>Theorem 8: Parallelization speedup S(p) = O(p) for p ≤ 8</p>
-<p>Proof:<br />
-1. Node operations are independent<br />
-2. Communication overhead O(1)<br />
-3. Perfect scaling until p = 8<br />
+<p>Proof:
+1. Node operations are independent
+2. Communication overhead O(1)
+3. Perfect scaling until p = 8
 4. Beyond 8: Amdahl's law limits</p>
 <h3 id="62-hardware-efficiency">6.2 Hardware Efficiency</h3>
-<p>Memory access pattern:<br />
-- Cache-friendly: O(1) cache lines<br />
-- Predictable access: &gt;95% L1 hits<br />
+<p>Memory access pattern:
+- Cache-friendly: O(1) cache lines
+- Predictable access: &gt;95% L1 hits
 - Branch prediction: &gt;90% accuracy</p>
 <h2 id="7-proofs-of-correctness">7. Proofs of Correctness</h2>
 <h3 id="71-initialization">7.1 Initialization</h3>
 <p>Theorem 9: Any initialization state produces valid sequences</p>
-<p>Proof by induction:<br />
-1. Base case: Single node initialization<br />
-   - Counter ensures state evolution<br />
+<p>Proof by induction:
+1. Base case: Single node initialization
+   - Counter ensures state evolution
    - Meta-state ensures operation diversity</p>
 <ol start="2">
-<li>Inductive step: For n nodes<br />
-   - Show n+1 nodes maintain properties<br />
+<li>Inductive step: For n nodes
+   - Show n+1 nodes maintain properties
    - Path evolution preserves connectivity</li>
 </ol>
 <h3 id="72-operation-soundness">7.2 Operation Soundness</h3>
 <p>Theorem 10: All operations preserve state space properties</p>
-<p>Proof:<br />
-For any operation o ∈ O:<br />
-1. Bijectivity: o: Σ → Σ is bijective<br />
-2. Reversibility: ∃o⁻¹ ∈ O<br />
+<p>Proof:
+For any operation o ∈ O:
+1. Bijectivity: o: Σ → Σ is bijective
+2. Reversibility: ∃o⁻¹ ∈ O
 3. Preservation: o(Σ) = Σ</p>
 <h2 id="8-statistical-test-predictions">8. Statistical Test Predictions</h2>
 <h3 id="81-nist-test-suite">8.1 NIST Test Suite</h3>
-<p>Expected results:<br />
-1. Frequency test: p &gt; 0.01<br />
-2. Runs test: p &gt; 0.01<br />
-3. Serial test: p &gt; 0.01<br />
+<p>Expected results:
+1. Frequency test: p &gt; 0.01
+2. Runs test: p &gt; 0.01
+3. Serial test: p &gt; 0.01
 4. Entropy test: H &gt; 0.999 per bit</p>
 <h3 id="82-diehard-tests">8.2 Diehard Tests</h3>
-<p>Expected results:<br />
-1. Birthday spacings: p &gt; 0.01<br />
-2. Overlapping permutations: p &gt; 0.01<br />
-3. Ranks of matrices: p &gt; 0.01<br />
+<p>Expected results:
+1. Birthday spacings: p &gt; 0.01
+2. Overlapping permutations: p &gt; 0.01
+3. Ranks of matrices: p &gt; 0.01
 4. Monkey tests: p &gt; 0.01</p>
 <h2 id="9-conclusions">9. Conclusions</h2>
-<p>The Meta-DAG system provides:<br />
-1. Provable security properties<br />
-2. Vast state space: 2¹⁵³⁶ × 40320<br />
-3. High entropy generation: ≥63.9 bits/output<br />
-4. Efficient computation: O(1) per output<br />
-5. Strong statistical properties<br />
-6. Pattern resistance<br />
+<p>The Meta-DAG system provides:
+1. Provable security properties
+2. Vast state space: 2¹⁵³⁶ × 40320
+3. High entropy generation: ≥63.9 bits/output
+4. Efficient computation: O(1) per output
+5. Strong statistical properties
+6. Pattern resistance
 7. Parallelization capability</p>
-<p>These properties make it suitable for:<br />
-- Cryptographic applications<br />
-- Simulation systems<br />
-- Statistical sampling<br />
-- Gaming applications<br />
+<p>These properties make it suitable for:
+- Cryptographic applications
+- Simulation systems
+- Statistical sampling
+- Gaming applications
 - Scientific computing</p>
 <p>The combination of natural sequences, meta-operations, and dynamic graph structure creates a system that is both theoretically sound and practically efficient.</p>
 <p>End of Proof.</p>
@@ -181,6 +236,31 @@ For any operation o ∈ O:<br />
 <li>Statistical testing methodologies</li>
 <li>Hardware optimization techniques</li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

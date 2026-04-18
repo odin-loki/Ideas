@@ -3,18 +3,85 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README</title>
+  <meta name="description" content="--- 1. [Architecture Overview](#architecture-overview) 2. [Scheduling Pipeline](#scheduling-pipeline) 3. [Core Components — Scheduler](#core-components--scheduler) 4. [Core Components — Monitoring](#core-components--monitoring) 5. [Mathematical…"/>
+  <title>Neural-Heuristic Distributed Task Scheduler · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Scheduler\README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="neural-heuristic-distributed-task-scheduler">Neural-Heuristic Distributed Task Scheduler</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#architecture-overview">Architecture Overview</a></li>
+        <li class="toc-depth-2"><a href="#scheduling-pipeline">Scheduling Pipeline</a></li>
+        <li class="toc-depth-2"><a href="#core-components-scheduler">Core Components — Scheduler</a></li>
+        <li class="toc-depth-3"><a href="#task">Task</a></li>
+        <li class="toc-depth-3"><a href="#nodestate">NodeState</a></li>
+        <li class="toc-depth-3"><a href="#cfsstatisticalmodel">CFSStatisticalModel</a></li>
+        <li class="toc-depth-3"><a href="#linearthompsonsampling">LinearThompsonSampling</a></li>
+        <li class="toc-depth-3"><a href="#pidcontroller">PIDController</a></li>
+        <li class="toc-depth-3"><a href="#batchoptimiser">BatchOptimiser</a></li>
+        <li class="toc-depth-3"><a href="#resourceoptimiser">ResourceOptimiser</a></li>
+        <li class="toc-depth-3"><a href="#adaptivescheduler">AdaptiveScheduler</a></li>
+        <li class="toc-depth-2"><a href="#core-components-monitoring">Core Components — Monitoring</a></li>
+        <li class="toc-depth-3"><a href="#holtwinters">HoltWinters</a></li>
+        <li class="toc-depth-3"><a href="#cusumdetector">CUSUMDetector</a></li>
+        <li class="toc-depth-3"><a href="#zscoreanomaly">ZScoreAnomaly</a></li>
+        <li class="toc-depth-3"><a href="#periodestimator">PeriodEstimator</a></li>
+        <li class="toc-depth-3"><a href="#patterndetector">PatternDetector</a></li>
+        <li class="toc-depth-3"><a href="#metricsmanager">MetricsManager</a></li>
+        <li class="toc-depth-3"><a href="#recoverysystem">RecoverySystem</a></li>
+        <li class="toc-depth-3"><a href="#realtimemonitor">RealTimeMonitor</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-foundations">Mathematical Foundations</a></li>
+        <li class="toc-depth-3"><a href="#cfs-fairness-invariant">CFS Fairness Invariant</a></li>
+        <li class="toc-depth-3"><a href="#pid-discrete-stability">PID Discrete Stability</a></li>
+        <li class="toc-depth-3"><a href="#lints-psd-guarantee">LinTS PSD Guarantee</a></li>
+        <li class="toc-depth-3"><a href="#holtwinters-pi-coverage">HoltWinters PI Coverage</a></li>
+        <li class="toc-depth-3"><a href="#cusum-arl0">CUSUM ARL₀</a></li>
+        <li class="toc-depth-2"><a href="#configuration-reference">Configuration Reference</a></li>
+        <li class="toc-depth-3"><a href="#scheduler">Scheduler</a></li>
+        <li class="toc-depth-3"><a href="#monitoring">Monitoring</a></li>
+        <li class="toc-depth-2"><a href="#api-reference">API Reference</a></li>
+        <li class="toc-depth-3"><a href="#scheduler_core">scheduler_core</a></li>
+        <li class="toc-depth-3"><a href="#monitoring_system">monitoring_system</a></li>
+        <li class="toc-depth-2"><a href="#usage-examples">Usage Examples</a></li>
+        <li class="toc-depth-3"><a href="#basic-cluster-setup">Basic cluster setup</a></li>
+        <li class="toc-depth-3"><a href="#affinity-and-anti-affinity">Affinity and anti-affinity</a></li>
+        <li class="toc-depth-3"><a href="#dependency-gated-tasks">Dependency-gated tasks</a></li>
+        <li class="toc-depth-3"><a href="#monitoring-integration">Monitoring integration</a></li>
+        <li class="toc-depth-3"><a href="#standalone-pattern-analysis">Standalone pattern analysis</a></li>
+        <li class="toc-depth-2"><a href="#known-limitations">Known Limitations</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Neural-Heuristic Distributed Task Scheduler</h1>
+          <p class="doc-meta">Statistical Scheduler\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>A production-ready async Python scheduler combining Completely Fair Scheduling (CFS), Linear Thompson Sampling (LinTS), PID control, and a full real-time monitoring stack. Designed for heterogeneous compute clusters where placement quality, fairness, and load balance must all be maintained simultaneously without a central coordinator.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>A production-ready async Python scheduler combining Completely Fair Scheduling (CFS), Linear Thompson Sampling (LinTS), PID control, and a full real-time monitoring stack. Designed for heterogeneous compute clusters where placement quality, fairness, and load balance must all be maintained simultaneously without a central coordinator.</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -27,7 +94,7 @@
 <li><a href="#usage-examples">Usage Examples</a></li>
 <li><a href="#known-limitations">Known Limitations</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="architecture-overview">Architecture Overview</h2>
 <p>The system is split across two modules:</p>
 <p><strong><code>scheduler_core.py</code></strong> — Placement decisions. Accepts tasks, maintains cluster state, runs the CFS/LinTS/PID decision pipeline, and returns node assignments.</p>
@@ -51,7 +118,7 @@
              │  RecoverySystem (strategy dispatch)      │
              └──────────────────────────────────────────┘
 </code></pre>
-<hr />
+<hr/>
 <h2 id="scheduling-pipeline">Scheduling Pipeline</h2>
 <p>Each call to <code>AdaptiveScheduler.schedule(task)</code> executes the following stages in order.</p>
 <p><strong>1. Dependency gate.</strong> If <code>task.dep_count &gt; 0</code> the task is not yet eligible and <code>None</code> is returned immediately.</p>
@@ -62,7 +129,7 @@
 <p><strong>6. PID override.</strong> If the top-ranked node's utilisation deviates from target by more than 0.15 on any resource, the second-ranked candidate is used instead. This prevents piling tasks onto a node trending toward saturation even when LinTS prefers it.</p>
 <p><strong>7. Commit.</strong> Resources are deducted from the chosen node under a per-node <code>asyncio.Lock</code> to prevent double-booking under concurrent <code>asyncio.gather()</code> scheduling.</p>
 <p><strong>8. Async reward update.</strong> An <code>asyncio.create_task()</code> fires after the lock releases to compute the reward signal and update the LinTS posterior without blocking the caller.</p>
-<hr />
+<hr/>
 <h2 id="core-components-scheduler">Core Components — Scheduler</h2>
 <h3 id="task">Task</h3>
 <pre><code class="language-python">@dataclass
@@ -78,7 +145,7 @@ class Task:
 <p><code>resource_requirements</code> uses fractions of node capacity rather than absolute units, so a task with <code>cpu: 0.25</code> requires 25% of a node's CPU regardless of its physical core count. This makes placement logic hardware-independent.</p>
 <p><code>priority</code> affects CFS task weight: lower numbers yield a higher weight, causing those tasks to accumulate vruntime more slowly and stay at the front of the scheduling queue longer.</p>
 <p><code>dep_count</code> is a gate the caller decrements as upstream tasks complete. The scheduler makes no attempt to track dependency graphs internally.</p>
-<hr />
+<hr/>
 <h3 id="nodestate">NodeState</h3>
 <pre><code class="language-python">@dataclass
 class NodeState:
@@ -90,7 +157,7 @@ class NodeState:
 </code></pre>
 <p><code>available</code> is the live free-capacity dict, decremented by <code>_commit()</code> and restored by <code>mark_complete()</code>. Both <code>available</code> and <code>labels</code> are deep-copied on construction so that external mutation of the caller's dicts after <code>register_node()</code> cannot corrupt node state.</p>
 <p><code>health</code> acts as a continuous multiplicative penalty on the CFS score. At health = 0.0 the node is hard-excluded from all candidate sets regardless of available resources.</p>
-<hr />
+<hr/>
 <h3 id="cfsstatisticalmodel">CFSStatisticalModel</h3>
 <p>A statistical analogue of the Linux Completely Fair Scheduler — without a red-black tree. Maintains per-task virtual runtime history and uses it as a fairness signal in the composite placement score.</p>
 <p><strong>Virtual runtime update</strong> (mirrors <code>sched_update_curr</code>):</p>
@@ -137,7 +204,7 @@ min_vruntime  = min over all tracked tasks
 </table>
 <p>Anti-affinity is a hard constraint: if <code>task.anti_affinity_groups ∩ node.labels ≠ ∅</code>, <code>score()</code> returns <code>float('-inf')</code>.</p>
 <p><strong>Default weights:</strong> <code>W_vrt = 0.30</code>, <code>W_fit = 0.35</code>, <code>W_dl = 0.25</code>, <code>W_aff = 0.10</code>. <code>NICE_0_LOAD = 1024</code>.</p>
-<hr />
+<hr/>
 <h3 id="linearthompsonsampling">LinearThompsonSampling</h3>
 <p>A contextual bandit that learns which (task, node) feature combinations lead to good utilisation outcomes. Posterior inference is exact under a Bayesian linear regression model with Gaussian prior.</p>
 <p><strong>Model.</strong> The reward for placing a task with features φ is modelled as <code>r = wᵀφ + ε</code>, where <code>ε ~ N(0,1)</code> and the prior is <code>p(w) = N(0, λ⁻¹I)</code> with <code>λ = LAMBDA_PRIOR = 1.0</code>.</p>
@@ -207,7 +274,7 @@ dl_reward   = 1 / (1 + ln(1 + slack))
 reward      = 0.5·util_reward + 0.5·dl_reward
 </code></pre>
 <p>Utilisation is computed over the task's own resource keys only (not the full node resource dict). Rewards are clamped to <code>[−R_MAX, +R_MAX]</code> where <code>R_MAX = 10.0</code> before the posterior update, preventing outliers from dominating the posterior mean.</p>
-<hr />
+<hr/>
 <h3 id="pidcontroller">PIDController</h3>
 <p>A discrete-time PID controller. Detects when a node's utilisation is trending away from its configured target, triggering the step-6 pipeline override.</p>
 <p><strong>Control law:</strong></p>
@@ -215,17 +282,17 @@ reward      = 0.5·util_reward + 0.5·dl_reward
 </code></pre>
 <p><strong>Parameters (defaults):</strong> <code>Kp = 0.5</code>, <code>Ki = 0.1</code>, <code>Kd = 0.2</code>, <code>windup_limit = 10.0</code>, <code>D_MAX = 10.0</code>.</p>
 <p>The integral uses per-step <code>e·Δt</code> accumulation with variable time deltas and is hard-clamped to <code>±windup_limit</code>. The derivative is clamped to <code>±D_MAX</code> to handle near-zero-dt cases — without clamping, a microsecond-scale tick gap produces corrections four orders of magnitude larger than normal. Each metric tracked by the controller maintains independent integral and last-error state.</p>
-<hr />
+<hr/>
 <h3 id="batchoptimiser">BatchOptimiser</h3>
 <p>Groups tasks into batches by resource profile similarity using cosine similarity on a normalised fingerprint vector. Tasks within the same batch are co-schedulable.</p>
 <p><strong>Algorithm:</strong> compute a unit-normalised fingerprint over <code>['cpu','memory','network','disk','gpu','io']</code> for each task; sort by L2 norm (O(n log n)); greedily assign each task to the first batch whose centroid cosine similarity ≥ <code>THRESHOLD = 0.90</code>, or start a new batch; cap batches at <code>MAX_BATCH_SIZE = 32</code>. Zero-norm vectors (tasks with no resource requirements) are handled without division.</p>
 <p>This replaces an O(n²) pairwise comparison with an O(n log n) sort + linear sweep.</p>
-<hr />
+<hr/>
 <h3 id="resourceoptimiser">ResourceOptimiser</h3>
 <p>Best-Fit Decreasing (BFD) bin packing. Assigns a batch of tasks to nodes maximising packing density.</p>
 <p>Sort tasks descending by total resource demand; for each task, select the node with the least remaining capacity that still fits all requirements (best-fit). If no single node fits the whole batch, fall back to per-task individual best-fit to avoid silently dropping tasks.</p>
 <p><strong>Competitive ratio:</strong> ≤ 11/9·OPT + 6/9 in 1D (Coffman et al.). Competitive in multi-dimensional workloads with the decreasing sort.</p>
-<hr />
+<hr/>
 <h3 id="adaptivescheduler">AdaptiveScheduler</h3>
 <p>The top-level orchestrator. Owns the node registry, all sub-components, and per-node async locks.</p>
 <table>
@@ -263,7 +330,7 @@ reward      = 0.5·util_reward + 0.5·dl_reward
 </tbody>
 </table>
 <p>If <code>node_id</code> is not in the registry when <code>mark_complete</code> is called (node deregistered between placement and completion), the call is silently ignored. CFS vruntime is always updated regardless.</p>
-<hr />
+<hr/>
 <h2 id="core-components-monitoring">Core Components — Monitoring</h2>
 <h3 id="holtwinters">HoltWinters</h3>
 <p>Additive Holt-Winters exponential smoothing. Decomposes a univariate series into level, trend, and seasonal components and produces multi-step forecasts with approximate prediction intervals.</p>
@@ -283,7 +350,7 @@ s[t] = γ·(y[t] − l[t])   + (1−γ)·s[t−m]
 <p><strong>Initialisation.</strong> Requires <code>m</code> observations before activating. During burn-in, <code>forecast()</code> returns <code>(NaN, NaN)</code>. Bootstrap: level = mean of first m samples; trend = OLS slope; seasonal indices = deviations from the level.</p>
 <p><strong>NaN/Inf guard.</strong> Non-finite inputs are silently dropped. A single bad sensor reading cannot corrupt the model state.</p>
 <p><strong>Parameters (defaults):</strong> <code>period = 60</code>, <code>alpha = 0.3</code>, <code>beta = 0.1</code>, <code>gamma = 0.2</code>.</p>
-<hr />
+<hr/>
 <h3 id="cusumdetector">CUSUMDetector</h3>
 <p>Online Page-Hinkley CUSUM change-point detector.</p>
 <p><strong>Algorithm.</strong> Baseline μ₀, σ₀ estimated from <code>burnin</code> samples. After burn-in:</p>
@@ -296,7 +363,7 @@ detect if S⁺[t] &gt; h or S⁻[t] &gt; h
 <p><strong>ARL₀.</strong> Defaults <code>k=1.0, h=5.0</code> give theoretical ARL₀ ≈ 22,000 steps (standard normal null). Empirical ARL₀ with burn-in and cooldown is ≈ 500–2000, adequate for 1 Hz monitoring.</p>
 <p><strong><code>reset_baseline(new_mu, new_sig)</code>.</strong> Resets both accumulators and the cooldown counter so the detector can immediately fire on the first genuine change in the new regime.</p>
 <p><strong>Parameters (defaults):</strong> <code>burnin = 30</code>, <code>k = 1.0</code>, <code>h = 5.0</code>, <code>cooldown = 50</code>.</p>
-<hr />
+<hr/>
 <h3 id="zscoreanomaly">ZScoreAnomaly</h3>
 <p>Online EWMA-based anomaly detector.</p>
 <pre><code>μ[t]  = α·x[t] + (1−α)·μ[t−1]
@@ -305,12 +372,12 @@ z[t]  = (x[t] − μ[t]) / max(σ[t], ε)
 </code></pre>
 <p>Flag when <code>|z[t]| &gt; k</code>. Default <code>k=3.0</code> gives 0.3% false-positive rate under Gaussian assumptions; Chebyshev bound is 1/k² = 11% distribution-free. The variance denominator is floored at ε — after long exposure to a constant signal, any deviation correctly produces a very large z-score.</p>
 <p><strong>Parameters (defaults):</strong> <code>k = 3.0</code>, <code>ewma_alpha = 0.05</code>.</p>
-<hr />
+<hr/>
 <h3 id="periodestimator">PeriodEstimator</h3>
 <p>ACF-based period estimation. Computes autocorrelation from lag <code>min_lag</code> to <code>max_lag</code>, identifies local maxima, and returns the smallest lag exceeding the mean ACF value — the fundamental period, not a harmonic. Returns <code>strength</code> as the ACF value at the dominant lag.</p>
 <p>Run every 60 samples inside PatternDetector to amortise O(n²) cost.</p>
 <p><strong>Parameters (defaults):</strong> <code>max_lag = 120</code>, <code>min_lag = 4</code>.</p>
-<hr />
+<hr/>
 <h3 id="patterndetector">PatternDetector</h3>
 <p>Composable per-metric analyser. Wraps HoltWinters, CUSUMDetector, ZScoreAnomaly, and PeriodEstimator into a single call. Each metric gets its own independent instances, lazily initialised on first observation.</p>
 <p><strong><code>analyse(metric, value)</code> output:</strong></p>
@@ -371,7 +438,7 @@ z[t]  = (x[t] − μ[t]) / max(σ[t], ε)
 </tbody>
 </table>
 <p><code>forecast</code> is <code>NaN</code> during HoltWinters burn-in. Callers must not treat the warm-up period as a genuine model prediction.</p>
-<hr />
+<hr/>
 <h3 id="metricsmanager">MetricsManager</h3>
 <p>Ingests metric samples into rolling deques, computes adaptive EWMA thresholds, and dispatches <code>Alert</code> objects to registered handlers.</p>
 <p><strong>Threshold model:</strong></p>
@@ -438,7 +505,7 @@ critical threshold: τ_c = μ[t] + 3·σ[t]
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h3 id="recoverysystem">RecoverySystem</h3>
 <p>Async strategy dispatcher. Maps failure type strings to recovery coroutines, records outcomes, and exposes per-strategy success rates.</p>
 <table>
@@ -473,11 +540,11 @@ critical threshold: τ_c = μ[t] + 3·σ[t]
 </table>
 <p>Every execution is recorded to <code>history[failure_type]</code> with UUID, start timestamp, duration, and outcome. <code>success_rate(failure_type)</code> returns the empirical success proportion across all recorded attempts. Unknown failure types record as failed with zero duration.</p>
 <p>The strategy coroutines are stubs; replace each body with real system calls before production deployment.</p>
-<hr />
+<hr/>
 <h3 id="realtimemonitor">RealTimeMonitor</h3>
 <p>1 Hz async orchestration loop. Polls registered metric sources, feeds data into MetricsManager and PatternDetector, and triggers RecoverySystem actions on change-points and critical alerts.</p>
-<p><strong>Automatic actions:</strong><br />
-- Change-point detected by PatternDetector → <code>RecoverySystem.execute('reduce_load', ...)</code><br />
+<p><strong>Automatic actions:</strong>
+- Change-point detected by PatternDetector → <code>RecoverySystem.execute('reduce_load', ...)</code>
 - Critical alert from MetricsManager → <code>RecoverySystem.execute('circuit_break', ...)</code></p>
 <p>Source errors are caught per-source without stopping the loop. <code>TICK_S = 1.0</code> is a class constant; set before instantiation to change cadence.</p>
 <pre><code class="language-python">monitor = RealTimeMonitor()
@@ -485,7 +552,7 @@ monitor.register_source('app', my_async_metric_fn)
 await monitor.run()     # cancel to stop
 </code></pre>
 <p>The source coroutine must return <code>Dict[str, float]</code>. Multiple sources are all polled every tick.</p>
-<hr />
+<hr/>
 <h2 id="mathematical-foundations">Mathematical Foundations</h2>
 <h3 id="cfs-fairness-invariant">CFS Fairness Invariant</h3>
 <p><code>V(t) = 1 / (1 + vrt[t] − min_vruntime)</code> is maximum (= 1.0) for the task with the smallest vruntime, strictly decreasing as the lag grows, continuous, and bounded in (0, 1]. New tasks start at <code>min_vruntime − one_tick</code>, guaranteeing they always score higher than any veteran whose gap has decayed to zero.</p>
@@ -497,7 +564,7 @@ await monitor.run()     # cancel to stop
 <p>With default smoothing parameters on sinusoidal signals with additive Gaussian noise, the approximate 95% prediction interval achieves ≥ 90% empirical coverage on held-out test points. The Hyndman (2008) variance inflation <code>σ²_h = σ²_ε·(1 + (h−1)·(α + β·h)²)</code> correctly widens intervals with forecast horizon.</p>
 <h3 id="cusum-arl0">CUSUM ARL₀</h3>
 <p>Default <code>k=1.0, h=5.0</code> gives theoretical ARL₀ ≈ 22,000 (standard normal null). Empirical ARL₀ with burn-in and cooldown is ≈ 500–2000 — adequate for 1 Hz monitoring where false positives incur unnecessary recovery overhead.</p>
-<hr />
+<hr/>
 <h2 id="configuration-reference">Configuration Reference</h2>
 <h3 id="scheduler">Scheduler</h3>
 <table>
@@ -675,7 +742,7 @@ await monitor.run()     # cancel to stop
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="scheduler_core">scheduler_core</h3>
 <pre><code class="language-python"># Cluster management
@@ -749,7 +816,7 @@ is_anomaly, z_score = zs.update(x)
 pe = PeriodEstimator(max_lag=120, min_lag=4)
 result = pe.estimate(series)    # {'period': 24.0, 'strength': 0.87}
 </code></pre>
-<hr />
+<hr/>
 <h2 id="usage-examples">Usage Examples</h2>
 <h3 id="basic-cluster-setup">Basic cluster setup</h3>
 <pre><code class="language-python">import asyncio, time
@@ -823,13 +890,13 @@ detector = PatternDetector(hw_period=24)
 for t, value in enumerate(metric_stream):
     result = detector.analyse('request_rate', value)
     if not math.isnan(result['forecast']):
-        print(f't={t}: {result[&quot;forecast&quot;]:.3f} [{result[&quot;forecast_lo&quot;]:.3f}, {result[&quot;forecast_hi&quot;]:.3f}]')
+        print(f't={t}: {result["forecast"]:.3f} [{result["forecast_lo"]:.3f}, {result["forecast_hi"]:.3f}]')
     if result['change_point']:
         print(f't={t}: regime shift')
     if result['is_anomaly']:
-        print(f't={t}: anomaly z={result[&quot;z_score&quot;]:.2f}')
+        print(f't={t}: anomaly z={result["z_score"]:.2f}')
 </code></pre>
-<hr />
+<hr/>
 <h2 id="known-limitations">Known Limitations</h2>
 <p><strong>No distributed coordination.</strong> The per-node <code>asyncio.Lock</code> prevents double-booking within a single event loop. Multiple <code>AdaptiveScheduler</code> instances targeting the same physical cluster will over-allocate resources without an external coordinator or distributed lock.</p>
 <p><strong>Recovery strategy stubs.</strong> The five recovery coroutines (<code>_reduce_load</code>, <code>_clear_cache</code>, <code>_circuit_break</code>, <code>_network_retry</code>, <code>_cascade_isolate</code>) sleep and return <code>True</code>. They must be replaced with real system calls (Kubernetes API, cgroup adjustments, load balancer reconfiguration, etc.) before production use. Outcome tracking and success rates function correctly regardless.</p>
@@ -837,6 +904,31 @@ for t, value in enumerate(metric_stream):
 <p><strong>HoltWinters on non-seasonal signals.</strong> The additive HW model assumes a periodic component. On purely linear or random-walk signals, the seasonal indices introduce systematic forecast error. Use the <code>trend</code> component directly and treat <code>forecast</code> as unreliable when the signal is known to be non-seasonal.</p>
 <p><strong>LinTS feature space is fixed.</strong> The feature vector has 5 reserved zero-padding dimensions for minor extensions. Substantive extensions beyond those 5 dimensions require restarting from a cold posterior, since <code>A</code> and <code>b</code> are fixed-shape matrices allocated at construction.</p>
 <p><strong>Single-event-loop throughput.</strong> Per-node locks serialise commits per node but do not parallelise candidate scoring. Under very high concurrency (thousands of tasks per second across hundreds of nodes), scoring may become a bottleneck. Partitioning the node pool into independently scheduled shards is the recommended scaling path.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

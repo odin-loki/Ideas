@@ -123,4 +123,3 @@ Let S = (B, P, L, E, O, C) be a Linear Congruent system.
 3. Learning process adapts to system requirements
 4. Training mechanism supports various learning approaches
 5. System maintains flexibility while ensuring valid learning
-

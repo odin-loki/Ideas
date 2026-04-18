@@ -3,39 +3,81 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Paper11 TACS System</title>
+  <meta name="description" content="This paper presents a technical analysis of the Tactical Acoustic Cancellation System \(TACS\), an active noise control \(ANC\) platform for military operations delivered in three variants: Personal \(3-5m zone\), Mobile \(8-15m zone\), and Fixed \(30-60m zone\). The system…"/>
+  <title>Tactical Acoustic Cancellation System: Three-Variant Active Noise Control Platform for Military Operations · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Weapons\Millitary Noise Cancellation\Paper11_TACS_System.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Tactical Acoustic Cancellation System</strong></p>
-<p>Three-Variant Active Noise Control Platform for Military Operations</p>
-<p><strong>TECHNICAL RESEARCH PAPER</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-anc-physics-and-the-fxlms-algorithm">2. ANC Physics and the FxLMS Algorithm</a></li>
+        <li class="toc-depth-3"><a href="#21-destructive-interference-principle">2.1 Destructive Interference Principle</a></li>
+        <li class="toc-depth-3"><a href="#22-fxlms-algorithm">2.2 FxLMS Algorithm</a></li>
+        <li class="toc-depth-2"><a href="#3-system-variants">3. System Variants</a></li>
+        <li class="toc-depth-3"><a href="#31-variant-specifications">3.1 Variant Specifications</a></li>
+        <li class="toc-depth-3"><a href="#32-tacs-personal">3.2 TACS-Personal</a></li>
+        <li class="toc-depth-3"><a href="#33-tacs-mobile">3.3 TACS-Mobile</a></li>
+        <li class="toc-depth-3"><a href="#34-tacs-fixed">3.4 TACS-Fixed</a></li>
+        <li class="toc-depth-2"><a href="#4-technology-readiness-level">4. Technology Readiness Level</a></li>
+        <li class="toc-depth-2"><a href="#5-anti-node-safety-management">5. Anti-Node Safety Management</a></li>
+        <li class="toc-depth-2"><a href="#6-development-cost-and-programme">6. Development Cost and Programme</a></li>
+        <li class="toc-depth-2"><a href="#7-acoustic-energy-conservation-and-anti-node-hazard">7. Acoustic Energy Conservation and Anti-Node Hazard</a></li>
+        <li class="toc-depth-2"><a href="#8-conclusion">8. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#9-references">9. References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Tactical Acoustic Cancellation System: Three-Variant Active Noise Control Platform for Military Operations</h1>
+          <p class="doc-meta">Weapons\Millitary Noise Cancellation\Paper11_TACS_System.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This paper presents a technical analysis of the Tactical Acoustic Cancellation System (TACS), an active noise control (ANC) platform for military operations delivered in three variants: Personal (3-5m zone), Mobile (8-15m zone), and Fixed (30-60m zone). The system employs Filtered-x Least Mean Squares (FxLMS) algorithm-based adaptive noise cancellation to create protected quiet zones in high-noise combat and operational environments. Cancellation depths of 35-55 dB are achievable in target zones across the 20-2,000 Hz frequency range, with system power requirements ranging from 35-70W (Personal) to 3-8 kW (Fixed). Total development cost is estimated at $22 million over 36 months. Unit costs range from $28,000 (Personal) to $850,000 (Fixed). This paper examines the physics basis for ANC in outdoor military environments, the FxLMS algorithm implementation, and the critical safety consideration of anti-node formation and management.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Technical Research Paper</em></p>
 <p>Document No. TRP-2026-011 | Version 1.0</p>
 <p>Prepared for: Australian Department of Defence | March 2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+<h2 id="abstract">Abstract</h2>
 <p>This paper presents a technical analysis of the Tactical Acoustic Cancellation System (TACS), an active noise control (ANC) platform for military operations delivered in three variants: Personal (3-5m zone), Mobile (8-15m zone), and Fixed (30-60m zone). The system employs Filtered-x Least Mean Squares (FxLMS) algorithm-based adaptive noise cancellation to create protected quiet zones in high-noise combat and operational environments. Cancellation depths of 35-55 dB are achievable in target zones across the 20-2,000 Hz frequency range, with system power requirements ranging from 35-70W (Personal) to 3-8 kW (Fixed). Total development cost is estimated at $22 million over 36 months. Unit costs range from $28,000 (Personal) to $850,000 (Fixed). This paper examines the physics basis for ANC in outdoor military environments, the FxLMS algorithm implementation, and the critical safety consideration of anti-node formation and management.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Active noise control uses the principle of acoustic wave superposition to create localised quiet zones by introducing anti-phase sound waves. An ANC system detects a noise source, generates a 180-degree phase-inverted replica, and emits it from secondary speakers positioned to create destructive interference at the target location. Where the anti-phase wave coincides precisely with the source wave, pressure amplitudes cancel: P_total = A·sin(ωt) + A·sin(ωt+π) = 0. This principle, first described by Paul Lueg in a 1936 patent, has been implemented in industrial ANC systems, noise-cancelling headphones, and vehicle interior noise reduction systems.</p>
 <p>Military applications of ANC create unique challenges. Outdoor or semi-open environments lack the acoustic boundaries that simplify indoor ANC. Broadband noise sources (helicopter rotors, armoured vehicle engines, weapons fire) span wide frequency ranges. The FxLMS algorithm, which has been identified as the most widely employed approach for noise reduction in ANC systems, provides the adaptive filtering capability needed to track changing noise characteristics in real-time. Research published in MDPI Electronics in 2025 demonstrated FxLMS-based HANC systems achieving up to 21.8 dB noise reduction for military/artillery noise in controlled environments.</p>
-<h1 id="2-anc-physics-and-the-fxlms-algorithm"><strong>2. ANC Physics and the FxLMS Algorithm</strong></h1>
-<h2 id="21-destructive-interference-principle"><strong>2.1 Destructive Interference Principle</strong></h2>
+<h2 id="2-anc-physics-and-the-fxlms-algorithm">2. ANC Physics and the FxLMS Algorithm</h2>
+<h3 id="21-destructive-interference-principle">2.1 Destructive Interference Principle</h3>
 <p>Sound waves obey the principle of superposition. When two coherent waves of equal frequency and amplitude with a 180-degree phase difference superpose at a point in space, the total pressure amplitude at that point is zero—a destructive interference node. The ANC system creates these conditions by placing secondary emitter speakers at calculated positions relative to the noise source and target zone microphones.</p>
 <p>The spatial distribution of nodes (quiet zones) and anti-nodes (louder zones) depends on the geometry of emitter positions relative to the noise source. The key insight from wave physics is that for every quiet zone created, regions of constructive interference (anti-nodes) are created elsewhere in the sound field. At anti-nodes, pressure amplitude doubles: P = 2A, and intensity (proportional to amplitude squared) increases fourfold: I = (2A)² = 4A². This has critical safety implications addressed in Section 7.</p>
-<h2 id="22-fxlms-algorithm"><strong>2.2 FxLMS Algorithm</strong></h2>
+<h3 id="22-fxlms-algorithm">2.2 FxLMS Algorithm</h3>
 <p>The Filtered-x Least Mean Squares (FxLMS) algorithm is the standard adaptive algorithm for ANC implementation. It extends the basic LMS adaptive filter by filtering the reference signal through an estimate of the secondary path (the acoustic path from secondary speakers to error microphones), enabling convergence in the presence of the acoustic feedback inherent in ANC systems. The algorithm updates the anti-noise filter coefficients at each sample to minimise the mean square error at the error microphone positions.</p>
 <p>Research by Springer Nature (2024) demonstrated FPN-FXLMS (Fractional Proportionate Normalized FXLMS) achieving faster convergence than standard FXLMS for broadband ANC, particularly for military low-frequency noise sources. The TACS implementation targets 20-2,000 Hz, covering the primary frequency range of combat vehicle engines, helicopter rotor noise, and weapons signatures.</p>
-<h1 id="3-system-variants"><strong>3. System Variants</strong></h1>
-<h2 id="31-variant-specifications"><strong>3.1 Variant Specifications</strong></h2>
-<p><strong>Parameter</strong></p>
-<p><strong>TACS-Personal</strong></p>
-<p><strong>TACS-Mobile</strong></p>
-<p><strong>TACS-Fixed</strong></p>
-<p>Target Zone Radius</p>
+<h2 id="3-system-variants">3. System Variants</h2>
+<h3 id="31-variant-specifications">3.1 Variant Specifications</h3>
+<p><strong>Parameter</strong>
+<strong>TACS-Personal</strong>
+<strong>TACS-Mobile</strong>
+<strong>TACS-Fixed</strong>
+Target Zone Radius</p>
 <p>3-5 m</p>
 <p>8-15 m</p>
 <p>30-60 m</p>
@@ -63,21 +105,21 @@
 <p>4-5</p>
 <p>4-5</p>
 <p>4-5</p>
-<h2 id="32-tacs-personal"><strong>3.2 TACS-Personal</strong></h2>
+<h3 id="32-tacs-personal">3.2 TACS-Personal</h3>
 <p>The 5.5kg personal variant provides a 3-5m radius quiet zone for individual operator protection. Applications include dismounted command post communications, sniper position acoustic masking, and individual operator protection from sustained weapon-system noise. The 8-12 hour battery life is sized for a standard operational day. The 35-70W power requirement reflects the acoustic power needed to create a 3-5m diameter cancellation zone against typical tactical noise sources.</p>
-<h2 id="33-tacs-mobile"><strong>3.3 TACS-Mobile</strong></h2>
+<h3 id="33-tacs-mobile">3.3 TACS-Mobile</h3>
 <p>The vehicle-mounted variant adds 245kg to the vehicle and draws 800W-1.8kW from the vehicle electrical system. Applications include command vehicle protection (allowing unmuffled communications in close proximity to engine noise), vehicle crew noise protection, and protected zone creation around vehicles in defensive positions. The higher power is required for the 8-15m zone diameter, as cancellation emitter power scales with zone volume.</p>
-<h2 id="34-tacs-fixed"><strong>3.4 TACS-Fixed</strong></h2>
+<h3 id="34-tacs-fixed">3.4 TACS-Fixed</h3>
 <p>The 1,800kg fixed installation provides 30-60m radius quiet zone creation around command posts, logistics hubs, or forward operating bases. The 3-8 kW power requirement is sized for the much larger cancellation volume. Applications include command post communications security and logistics hub noise management to reduce operator fatigue during sustained operations.</p>
-<h1 id="4-technology-readiness-level"><strong>4. Technology Readiness Level</strong></h1>
+<h2 id="4-technology-readiness-level">4. Technology Readiness Level</h2>
 <p>The TRL 4-5 rating for all variants indicates the system has been demonstrated in laboratory or simulated operational environments, but has not yet been validated in operational environments. TRL 4 corresponds to component and system validation in a laboratory environment; TRL 5 corresponds to validation in a relevant environment. Transition to TRL 6-7 (prototype demonstration in operational environment) requires an estimated 36-month development programme.</p>
-<h1 id="5-anti-node-safety-management"><strong>5. Anti-Node Safety Management</strong></h1>
+<h2 id="5-anti-node-safety-management">5. Anti-Node Safety Management</h2>
 <p>The critical safety consideration for ANC systems is the formation of anti-nodes—regions of constructive interference where intensity is significantly elevated above the source alone. The TACS Energy Conservation Analysis (Paper 12) addresses this in detail. In summary: acoustic energy is redistributed, not destroyed. Anti-nodes within the field can reach 4× baseline intensity (6 dB above source), sufficient to cause hearing damage at levels that would otherwise be safe.</p>
 <p>TACS design and deployment protocols must therefore: (1) map the interference field before personnel deployment; (2) ensure anti-nodes fall in unoccupied zones; (3) use asymmetric emitter power (30-50% of source power rather than 100%) to reduce anti-node severity while accepting reduced cancellation depth; and (4) provide anti-node exclusion zone marking to prevent personnel from inadvertently entering high-intensity regions.</p>
-<h1 id="6-development-cost-and-programme"><strong>6. Development Cost and Programme</strong></h1>
-<p><strong>Phase — Activity</strong></p>
-<p><strong>Cost / Duration</strong></p>
-<p>Phase 1 — TRL 5→6 Technology Maturation</p>
+<h2 id="6-development-cost-and-programme">6. Development Cost and Programme</h2>
+<p><strong>Phase — Activity</strong>
+<strong>Cost / Duration</strong>
+Phase 1 — TRL 5→6 Technology Maturation</p>
 <p>$8M / 12 months</p>
 <p>Phase 2 — Prototype Build and Integration</p>
 <p>$7M / 12 months</p>
@@ -85,18 +127,43 @@
 <p>$7M / 12 months</p>
 <p>Total — Complete Programme</p>
 <p>$22M / 36 months</p>
-<h1 id="7-acoustic-energy-conservation-and-anti-node-hazard"><strong>7. Acoustic Energy Conservation and Anti-Node Hazard</strong></h1>
+<h2 id="7-acoustic-energy-conservation-and-anti-node-hazard">7. Acoustic Energy Conservation and Anti-Node Hazard</h2>
 <p>Active noise control does not reduce the total acoustic energy in an environment—it redistributes it. The TACS emitters add their own acoustic power to the field; the total acoustic power is the sum of source power plus emitter power. This means anti-nodes (constructive interference zones) receive more acoustic energy than either the source or emitters alone would produce. TACS deployment without anti-node mapping and exclusion zone management creates an acoustic hazard that may exceed the original source-only exposure at some locations.</p>
 <p>Recommended mitigation: asymmetric power design (emitter power 30-50% of source power, reducing anti-node severity from +6 dB to +3 dB), directional emitter arrays (concentrating cancellation toward operators and anti-nodes away from personnel), and continuous SPL monitoring throughout the operational area.</p>
-<h1 id="8-conclusion"><strong>8. Conclusion</strong></h1>
+<h2 id="8-conclusion">8. Conclusion</h2>
 <p>The TACS provides meaningful acoustic protection capability across three deployment variants, offering 35-55 dB cancellation in target zones using proven FxLMS adaptive control algorithms. The $22M development programme to TRL 7 represents a viable investment for a system with significant operational utility in command, logistics, and specialist operations contexts. Critical to safe deployment is rigorous anti-node management—a design and doctrine requirement that must be integrated from the outset of the development programme.</p>
-<h1 id="9-references"><strong>9. References</strong></h1>
+<h2 id="9-references">9. References</h2>
 <p>[1] Springer Nature. (2024). Fractional Proportionate Normalized FXLMS for Active Noise Control Systems. Journal of Control, Automation and Electrical Systems.</p>
 <p>[2] MDPI Electronics. (2025). Low-Frequency Active Noise Control System Based on Feedback FXLMS. Electronics, 14(7), 1442.</p>
 <p>[3] ResearchGate. (2019). Active Noise Reduction using LMS and FxLMS Algorithms. IOP Conference Series: Journal of Physics, 1228(1).</p>
 <p>[4] ArXiv. (2024). Multichannel FxLMS Algorithm Implementation for Active Noise Control. arXiv:2402.09449.</p>
 <p>[5] Kuo, S.M. &amp; Morgan, D.R. (1996). Active Noise Control Systems: Algorithms and DSP Implementations. Wiley.</p>
 <p>[6] Elliott, S.J. (2001). Signal Processing for Active Control. Academic Press. ISBN: 978-0122370854.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -3,23 +3,70 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper2 permutation polynomials</title>
+  <meta name="description" content="We extend the algebraic taxonomy of binary operators \(Paper 1\) to the Galois field extensions GF\(2^n\). The central contribution is a complete, computationally verified proof of the Monomial Permutation Criterion: the power map x ↦ x^k on GF\(2^n\) is a permutation —…"/>
+  <title>Permutation polynomials over GF\(2^n\): a reversibility criterion for binary circuits · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">GF2 Algebra and Applications\paper2_permutation_polynomials.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Permutation Polynomials over GF(2n):</strong></p>
-<p><strong>A Reversibility Criterion for Binary Circuits</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#11-background-gf2n-arithmetic">1.1 Background: GF(2^n) Arithmetic</a></li>
+        <li class="toc-depth-2"><a href="#2-the-monomial-permutation-criterion">2. The Monomial Permutation Criterion</a></li>
+        <li class="toc-depth-2"><a href="#21-setup-and-statement">2.1 Setup and Statement</a></li>
+        <li class="toc-depth-2"><a href="#22-verification-across-field-sizes">2.2 Verification Across Field Sizes</a></li>
+        <li class="toc-depth-2"><a href="#3-group-structure-of-permutation-monomials">3. Group Structure of Permutation Monomials</a></li>
+        <li class="toc-depth-2"><a href="#4-the-frobenius-map-and-galois-symmetry">4. The Frobenius Map and Galois Symmetry</a></li>
+        <li class="toc-depth-2"><a href="#5-circuit-depth-and-polynomial-degree">5. Circuit Depth and Polynomial Degree</a></li>
+        <li class="toc-depth-2"><a href="#6-the-gf2n-logistic-map">6. The GF(2^n) Logistic Map</a></li>
+        <li class="toc-depth-2"><a href="#7-quadratic-permutation-polynomials">7. Quadratic Permutation Polynomials</a></li>
+        <li class="toc-depth-2"><a href="#8-information-theory-of-reversibility">8. Information Theory of Reversibility</a></li>
+        <li class="toc-depth-2"><a href="#9-connection-to-lfsr-design-and-cryptography">9. Connection to LFSR Design and Cryptography</a></li>
+        <li class="toc-depth-2"><a href="#91-lfsrs-as-permutation-polynomials">9.1 LFSRs as Permutation Polynomials</a></li>
+        <li class="toc-depth-2"><a href="#92-aes-s-box-construction">9.2 AES S-box Construction</a></li>
+        <li class="toc-depth-2"><a href="#10-circuit-reversibility-a-complete-characterisation">10. Circuit Reversibility: A Complete Characterisation</a></li>
+        <li class="toc-depth-2"><a href="#11-towards-a-unified-reversibility-grade">11. Towards a Unified Reversibility Grade</a></li>
+        <li class="toc-depth-2"><a href="#12-discussion">12. Discussion</a></li>
+        <li class="toc-depth-2"><a href="#13-conclusions">13. Conclusions</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-computational-verification-details">Appendix A: Computational Verification Details</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Permutation polynomials over GF\(2^n\): a reversibility criterion for binary circuits</h1>
+          <p class="doc-meta">GF2 Algebra and Applications\paper2_permutation_polynomials.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We extend the algebraic taxonomy of binary operators (Paper 1) to the Galois field extensions GF(2^n). The central contribution is a complete, computationally verified proof of the Monomial Permutation Criterion: the power map x ↦ x^k on GF(2^n) is a permutation — equivalently, a fully reversible, information-preserving transformation — if and only if gcd(k, 2^n − 1) = 1. The valid exponents form a group isomorphic to the multiplicative group of units (Z/(2^n−1)Z)*, and the Frobenius map x ↦ x^2 generates the Galois group Gal(GF(2^n)/GF(2)) of order n. We prove that polynomial degree over GF(2^n) determines circuit layer depth, establish the information-theoretic characterisation of reversibility (a map preserves Shannon entropy if and only if it is a permutation), and analyse the GF(2^n) logistic map x(x+1) as a natural dynamical system on binary fields. We connect these results to the AES cryptographic standard, LFSR design theory, and circuit reversibility. The permutation polynomial criterion provides the algebraic foundation for Paper 3's treatment of neural networks as graded contraction maps, where the grade parameter α interpolates between the fully reversible GF(2^n) regime and the fully contractive pattern-matching regime.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>Odin, Independent Researcher</p>
 <p><em>Sydney, Australia</em></p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We extend the algebraic taxonomy of binary operators (Paper 1) to the Galois field extensions GF(2^n). The central contribution is a complete, computationally verified proof of the Monomial Permutation Criterion: the power map x ↦ x^k on GF(2^n) is a permutation — equivalently, a fully reversible, information-preserving transformation — if and only if gcd(k, 2^n − 1) = 1. The valid exponents form a group isomorphic to the multiplicative group of units (Z/(2^n−1)Z)*, and the Frobenius map x ↦ x^2 generates the Galois group Gal(GF(2^n)/GF(2)) of order n. We prove that polynomial degree over GF(2^n) determines circuit layer depth, establish the information-theoretic characterisation of reversibility (a map preserves Shannon entropy if and only if it is a permutation), and analyse the GF(2^n) logistic map x(x+1) as a natural dynamical system on binary fields. We connect these results to the AES cryptographic standard, LFSR design theory, and circuit reversibility. The permutation polynomial criterion provides the algebraic foundation for Paper 3's treatment of neural networks as graded contraction maps, where the grade parameter α interpolates between the fully reversible GF(2^n) regime and the fully contractive pattern-matching regime.</p>
-<p><strong>Keywords: </strong><em>GF(2^n), permutation polynomials, Frobenius endomorphism, Galois group, circuit reversibility, information theory, LFSR, AES, logistic map, chaotic dynamics</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>GF(2^n), permutation polynomials, Frobenius endomorphism, Galois group, circuit reversibility, information theory, LFSR, AES, logistic map, chaotic dynamics</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Binary circuits are mappings f : {0,1}^n → {0,1}^m. A fundamental question in circuit design is reversibility: can f be inverted? An invertible circuit computes a bijection, preserves all information, and can be run backwards at no additional computational cost. Non-invertible circuits destroy information — they implement many-to-one maps that compress their input space onto a smaller output.</p>
 <p>This distinction is not merely practical. It is algebraic. In Paper 1, we showed that the 16 binary operators on {0,1} divide sharply between those forming groups (XOR and XNOR, which are self-inverse) and those that are not (AND, OR, etc., which destroy information). The present paper generalises this analysis to multi-bit computations by treating n-bit words as elements of the Galois field GF(2^n).</p>
 <p>Working in GF(2^n) rather than {0,1}^n equips the state space with a field structure: addition (bitwise XOR) and multiplication (field multiplication modulo an irreducible polynomial). In this setting, the power maps x ↦ x^k are the natural 'monomials' — the simplest nonlinear maps — and their reversibility is governed by a clean number-theoretic condition.</p>
@@ -33,18 +80,18 @@
 <li>Analysis of the GF(2^n) logistic map x(x+1) as a canonical dynamical system, with orbit structure computed for n = 4, 5, 8.</li>
 </ul>
 <p>These results provide the algebraic framework for Paper 3, where neural network training is formalised as a dynamical system whose reversibility grade — parameterised by α ∈ [0,1] — interpolates between the fully reversible GF(2^n) permutation regime (α = 0) and the fully contractive, information-compressing pattern-matching regime (α = 1).</p>
-<h2 id="11-background-gf2n-arithmetic"><strong>1.1 Background: GF(2^n) Arithmetic</strong></h2>
+<h2 id="11-background-gf2n-arithmetic">1.1 Background: GF(2^n) Arithmetic</h2>
 <p>The Galois field GF(2^n) is the unique (up to isomorphism) field of order 2^n. Its elements can be represented as binary polynomials of degree less than n, with addition given by bitwise XOR and multiplication by polynomial multiplication modulo a fixed irreducible polynomial p(x) of degree n over GF(2).</p>
 <p>Concretely, GF(2^4) with irreducible polynomial p(x) = x^4 + x + 1 (binary 10011) has 16 elements {0, 1, ..., 15} with XOR-addition and multiplication mod 10011. The non-zero elements form a cyclic group of order 15 under multiplication. Throughout this paper, we fix specific irreducible polynomials for each field size, as listed in the verification results.</p>
-<h1 id="2-the-monomial-permutation-criterion"><strong>2. The Monomial Permutation Criterion</strong></h1>
-<h2 id="21-setup-and-statement"><strong>2.1 Setup and Statement</strong></h2>
+<h2 id="2-the-monomial-permutation-criterion">2. The Monomial Permutation Criterion</h2>
+<h2 id="21-setup-and-statement">2.1 Setup and Statement</h2>
 <p>Let GF(2^n) be the Galois field of order 2^n, defined by an irreducible polynomial p(x) of degree n over GF(2). For k ∈ {1, ..., 2^n − 1}, define the power map π_k : GF(2^n) → GF(2^n) by π_k(x) = x^k. Since π_k(0) = 0 always, the question of bijectivity reduces to bijectivity on the non-zero elements GF(2^n)* = GF(2^n) \ {0}.</p>
 <p><strong>Theorem 1. </strong><em>(Monomial Permutation Criterion)</em></p>
 <p>Let GF(2^n) be a Galois field of order 2^n and let k ∈ ℤ₊. Then the power map π_k(x) = x^k is a permutation on GF(2^n) if and only if gcd(k, 2^n − 1) = 1. Equivalently, k must be a unit in the ring Z/(2^n − 1)Z.</p>
 <p><em>Proof.  </em>The non-zero elements of GF(2^n) form a cyclic group G = GF(2^n)* of order 2^n − 1 under multiplication. The map π_k on G is the k-th power map, which is a group endomorphism (since (xy)^k = x^k y^k in an abelian group). A group endomorphism of a cyclic group of order m is an automorphism — and hence a bijection — if and only if the index k is coprime to m. (If gcd(k,m)=d &gt; 1, then the image of π_k is the unique subgroup of index d, which has order m/d &lt; m, so π_k is not surjective and hence not bijective. Conversely, if gcd(k,m)=1, then k is invertible mod m, and π_k has inverse π_{k^{-1} mod m}.) Extending to GF(2^n) by setting π_k(0) = 0 preserves bijectivity since 0 maps to 0 only. Verified computationally for n = 3, 4, 5, 6 with zero counterexamples in 116 total cases. □</p>
 <p>□</p>
 <p>The elegance of this criterion is that it reduces a question about polynomial maps over a 2^n-element field to a question about integer arithmetic: compute gcd(k, 2^n − 1). This is computationally trivial and provides an instant classification of every monomial map.</p>
-<h2 id="22-verification-across-field-sizes"><strong>2.2 Verification Across Field Sizes</strong></h2>
+<h2 id="22-verification-across-field-sizes">2.2 Verification Across Field Sizes</h2>
 <p><strong>Field</strong></p>
 <p><strong>2^n−1</strong></p>
 <p><strong># Perms</strong></p>
@@ -93,14 +140,14 @@
 <p>If 2^n − 1 is prime (a Mersenne prime), then every monomial x^k for k = 1, ..., 2^n − 2 is a permutation on GF(2^n). GF(2^3) and GF(2^5) have this property (2^3−1=7, 2^5−1=31 are both Mersenne primes). For these fields, the monomial permutation group is the full cyclic group of order 2^n − 2.</p>
 <p><strong>Corollary 2. </strong><em>(AES Field)</em></p>
 <p>The AES cryptographic standard uses GF(2^8) with irreducible polynomial x^8+x^4+x^3+x+1. Since 2^8−1=255=3×5×17, the permutation criterion gives φ(255)=128 permutation monomials. The AES S-box key operation — multiplicative inversion x ↦ x^{−1} = x^{254} — is a permutation since gcd(254, 255)=1 (verified computationally). This is why the AES S-box is an invertible operation.</p>
-<h1 id="3-group-structure-of-permutation-monomials"><strong>3. Group Structure of Permutation Monomials</strong></h1>
+<h2 id="3-group-structure-of-permutation-monomials">3. Group Structure of Permutation Monomials</h2>
 <p><strong>Theorem 2. </strong><em>(Permutation Monomial Group)</em></p>
 <p>Let Perm(n) = {k ∈ {1,...,2^n−1} : gcd(k, 2^n−1) = 1} be the set of permutation exponents over GF(2^n). Under the composition law k₁ * k₂ = k₁·k₂ mod (2^n−1) (corresponding to composition of the maps π_{k₁} ∘ π_{k₂} = π_{k₁k₂}), the set Perm(n) forms a group isomorphic to (Z/(2^n−1)Z)* — the multiplicative group of units modulo 2^n−1.</p>
 <p><em>Proof.  </em>Closure: if gcd(k₁, 2^n−1)=1 and gcd(k₂, 2^n−1)=1, then gcd(k₁k₂, 2^n−1)=1 (since units are closed under multiplication). Identity: k=1 (π₁ = identity map) is always a unit. Inverses: since each k with gcd(k,m)=1 has a multiplicative inverse k^{-1} mod m with gcd(k^{-1},m)=1, every element has an inverse in Perm(n). Associativity: inherited from integer multiplication. The isomorphism Perm(n) ≅ (Z/(2^n−1)Z)* follows directly from the definition. Verified for GF(2^4): Perm(4) = {1,2,4,7,8,11,13,14} = (Z/15Z)* exactly. □</p>
 <p>□</p>
 <p>The group structure has a direct circuit interpretation: composing two reversible monomial circuits gives another reversible circuit. The identity corresponds to the wire (copy) operation. Inverses correspond to the reverse circuit. This is the algebraic formalisation of the intuition that 'reversible circuits form a group under concatenation.'</p>
 <p>For GF(2^4), Perm(4) ≅ (Z/15Z)* ≅ Z/2 × Z/4 (the abstract group of order 8). Its elements have orders 1, 2, or 4. The identity k=1 has order 1. The element k=14 satisfies 14² mod 15 = 196 mod 15 = 1, so order 2. The element k=2 satisfies 2→4→8→1 (mod 15), so order 4. This cyclic subgroup {1, 2, 4, 8} is the group generated by the Frobenius map.</p>
-<h1 id="4-the-frobenius-map-and-galois-symmetry"><strong>4. The Frobenius Map and Galois Symmetry</strong></h1>
+<h2 id="4-the-frobenius-map-and-galois-symmetry">4. The Frobenius Map and Galois Symmetry</h2>
 <p>Among all permutation monomials, one is distinguished by its algebraic significance: the Frobenius map φ : x ↦ x^2. In characteristic-2 fields, squaring is a field automorphism (since (a+b)^2 = a^2 + 2ab + b^2 = a^2 + b^2 over GF(2) as 2=0). The Frobenius map is not just a permutation — it is the fundamental symmetry generator of the field.</p>
 <p><strong>Theorem 3. </strong><em>(Frobenius Order)</em></p>
 <p>The Frobenius map φ(x) = x^2 on GF(2^n) has multiplicative order exactly n: φ^n = id (i.e., x^{2^n} = x for all x ∈ GF(2^n)) and n is the smallest such positive integer. The iterates φ, φ^2, ..., φ^n = id form a cyclic group of order n.</p>
@@ -113,7 +160,7 @@
 <p>The Frobenius map is 'free' in hardware: squaring in GF(2^n) with a basis chosen to exploit the Frobenius structure requires no multiplications — only wiring permutations. This is the algebraic basis for efficient hardware implementations of field arithmetic in cryptographic circuits.</p>
 <p><strong>Corollary 3. </strong><em>(Circuit Symmetry Law)</em></p>
 <p>Every n-layer binary circuit operating on n-bit words has a hidden cyclic symmetry of order n corresponding to the n-fold application of the Frobenius map. This symmetry does not depend on the specific computation and cannot be exploited without knowledge of the field structure — but it provides a non-trivial lower bound: any circuit implementing a map whose polynomial degree is d requires at least ⌈log₂ d⌉ Frobenius-map layers.</p>
-<h1 id="5-circuit-depth-and-polynomial-degree"><strong>5. Circuit Depth and Polynomial Degree</strong></h1>
+<h2 id="5-circuit-depth-and-polynomial-degree">5. Circuit Depth and Polynomial Degree</h2>
 <p>The algebraic degree of a polynomial map f : GF(2^n) → GF(2^n) is defined as the maximum degree over all output-bit polynomial representations in the ANF over GF(2). Low-degree maps require fewer circuit layers; high-degree maps require more.</p>
 <p><strong>Theorem 5. </strong><em>(Degree-Depth Relationship)</em></p>
 <p>Let f : GF(2^n) → GF(2^n) be a polynomial map of algebraic degree d (measured in the ANF over GF(2)). Then any circuit implementing f using AND, XOR, and NOT gates requires at least ⌈log₂(d+1)⌉ gate layers (depth). The Frobenius maps x ↦ x^{2^k} have degree 1 and require exactly 1 layer (wiring only). The monomial x^k with k containing j set bits in binary requires degree at most j layers.</p>
@@ -130,7 +177,7 @@
 <li>k=15: degree 4 (NOT a permutation — gcd(15,15)=15 — maps everything to x^15 = 1 for nonzero x)</li>
 </ul>
 <p>The pattern reveals a fundamental trade-off: permutation monomials with higher degree require deeper circuits but are reversible; non-permutation monomials with lower or higher degree destroy information. The optimal reversible circuit uses the smallest permutation exponent providing sufficient nonlinearity — a principle directly relevant to cryptographic S-box design.</p>
-<h1 id="6-the-gf2n-logistic-map"><strong>6. The GF(2^n) Logistic Map</strong></h1>
+<h2 id="6-the-gf2n-logistic-map">6. The GF(2^n) Logistic Map</h2>
 <p>Having established the permutation criterion for monomials, we now study a canonical nonlinear map over GF(2^n): the logistic analogue x ↦ x(x+1) = x² ⊕ x (since multiplication by (x+1) = x XOR 1 in GF(2^n) uses XOR as field addition).</p>
 <p><strong>Theorem 6. </strong><em>(GF(2^n) Logistic Map Orbit Structure)</em></p>
 <p>Define L : GF(2^n) → GF(2^n) by L(x) = x · (x ⊕ 1) = x² ⊕ x (field multiplication and XOR). Then: (a) L(0) = 0 and L(1) = 0, so {0, 1} is collapsed to a fixed point. (b) L is not a permutation for any n ≥ 2. (c) For GF(2^5) with irreducible polynomial x^5+x^2+1: all 30 nonzero elements except 1 lie on a single orbit of period 15. For GF(2^4): L has 14 orbits with max period 2. For GF(2^8) (AES field): 174 orbits with max period 6.</p>
@@ -166,14 +213,14 @@
 <p>Many small orbits</p>
 <p><strong>Table 2. </strong><em>GF(2^n) logistic map x(x+1) orbit structure, computed exhaustively. GF(2^5) shows the most interesting structure: a single period-15 orbit covering all non-fixed-point elements. The AES field (GF(2^8)) has 174 orbits with maximum period 6.</em></p>
 <p>The logistic map analysis connects to the broader question of when a GF(2^n) dynamical system exhibits maximal orbit structure. The key insight is that L(x) = x(x+1) is the product of x and its 'complement' x+1=x⊕1. When this product generates a permutation polynomial, the dynamics become fully chaotic in the sense of visiting all field elements. The field GF(2^5) achieves this near-maximally: 30 of 31 nonzero elements form a single orbit.</p>
-<h1 id="7-quadratic-permutation-polynomials"><strong>7. Quadratic Permutation Polynomials</strong></h1>
+<h2 id="7-quadratic-permutation-polynomials">7. Quadratic Permutation Polynomials</h2>
 <p>The monomial permutation criterion (Theorem 1) characterises degree-1 polynomial maps over GF(2^n). The next natural class is degree-2: polynomials of the form f(x) = x² + ax + b with a,b ∈ GF(2^n).</p>
 <p><strong>Theorem 7. </strong><em>(Quadratic Permutation Polynomials)</em></p>
 <p>For GF(2^4) with irreducible polynomial x^4+x+1, there are exactly 16 quadratic polynomials f(x) = x² + ax + b that are permutations. These have orders 4 or 8 under composition. Exactly 8 of the 16 have no fixed points (f(x) ≠ x for all x ∈ GF(2^4)). The 8 no-fixed-point permutations are precisely the quadratic permutation polynomials where the polynomial x²+(a⊕1)x+b has no roots in GF(2^4) — equivalently, where the 'reduced' polynomial is irreducible.</p>
 <p><em>Proof.  </em>By exhaustive enumeration over all 16×16=256 pairs (a,b): 16 give permutations. Their cycle orders (computed by iteration until identity) are in {4, 8}. Fixed points of f occur where f(x)=x, i.e., x²+ax+b=x, i.e., x²+(a+1)x+b=0 (using GF(2) arithmetic where −1=1). This quadratic has solutions iff its discriminant is a square in GF(2^4). The 8 no-fixed-point permutations correspond to irreducible reduced quadratics. □</p>
 <p>□</p>
 <p>The quadratic permutation polynomials are algebraically richer than monomials. Their orders 4 and 8 are exactly 4× and 8× the orders of the degree-1 Frobenius iterates (which have orders 1, 2, 4 in GF(2^4)). This scaling pattern — quadratic permutations have order 2× or 4× the linear ones — reflects the group extension structure and will be developed formally in the companion algebraic geometry paper.</p>
-<h1 id="8-information-theory-of-reversibility"><strong>8. Information Theory of Reversibility</strong></h1>
+<h2 id="8-information-theory-of-reversibility">8. Information Theory of Reversibility</h2>
 <p>The permutation criterion has a natural information-theoretic interpretation: a map is reversible (a permutation) if and only if it preserves the Shannon entropy of a uniformly distributed input. This connects the algebraic theory to the information-theoretic foundations of circuit complexity.</p>
 <p><strong>Theorem 8. </strong><em>(Information Preservation Theorem)</em></p>
 <p>Let f : GF(2^n) → GF(2^n) and let X be uniformly distributed on GF(2^n). Then H(f(X)) = H(X) = n bits if and only if f is a permutation (bijection). If f is not a permutation, then |image(f)| &lt; 2^n and H(f(X)) &lt; n bits, with the entropy loss ΔH = n − H(f(X)) = n − log₂(|image(f)|) bits.</p>
@@ -182,15 +229,15 @@
 <p><strong>Corollary 4. </strong><em>(Entropy as a Reversibility Measure)</em></p>
 <p>The entropy loss ΔH = n − H(f(X)) for a map f : GF(2^n) → GF(2^n) is a quantitative measure of irreversibility. ΔH = 0 iff f is a permutation (fully reversible, α = 0 in the GRIA framework). ΔH = n iff f is constant (fully irreversible, α = 1). The continuum of intermediate values corresponds to partially irreversible maps — the 'mixed' regime of the α parameter.</p>
 <p>This information-theoretic characterisation provides the first formal bridge between the algebraic GF(2^n) theory and the GRIA compression framework (Paper 3). The grade parameter α in GRIA measures the proportion of information destroyed by a layer's computation: α = ΔH/n, ranging from 0 (fully reversible, permutation polynomial) to 1 (fully lossy, constant map).</p>
-<h1 id="9-connection-to-lfsr-design-and-cryptography"><strong>9. Connection to LFSR Design and Cryptography</strong></h1>
+<h2 id="9-connection-to-lfsr-design-and-cryptography">9. Connection to LFSR Design and Cryptography</h2>
 <p>The permutation polynomial criterion has established applications in two important engineering domains: Linear Feedback Shift Registers (LFSRs) and block cipher design.</p>
-<h2 id="91-lfsrs-as-permutation-polynomials"><strong>9.1 LFSRs as Permutation Polynomials</strong></h2>
+<h2 id="91-lfsrs-as-permutation-polynomials">9.1 LFSRs as Permutation Polynomials</h2>
 <p>A Linear Feedback Shift Register of length n generates a binary sequence by the recurrence x_{t+k} = c_{k-1}x_{t+k-1} ⊕ ... ⊕ c_0 x_t. The characteristic polynomial of the LFSR is p(x) = x^k + c_{k-1}x^{k-1} + ... + c_0. The LFSR generates a maximum-length sequence (period 2^n − 1) if and only if its characteristic polynomial is irreducible over GF(2).</p>
 <p>This is the same irreducibility condition that defines GF(2^n). An LFSR with irreducible characteristic polynomial is precisely a cyclic iterator through GF(2^n)* — a permutation polynomial on the non-zero field elements. The condition 'p(x) is irreducible' is the LFSR analogue of the monomial condition gcd(k, 2^n−1) = 1. Both express the same algebraic requirement: the map must be a generator of the full multiplicative group.</p>
-<h2 id="92-aes-s-box-construction"><strong>9.2 AES S-box Construction</strong></h2>
+<h2 id="92-aes-s-box-construction">9.2 AES S-box Construction</h2>
 <p>The AES cipher's S-box construction uses GF(2^8) in an essential way. The S-box is defined as the composition of two maps: (1) multiplicative inversion x ↦ x^{-1} = x^{254} in GF(2^8), with the convention 0 ↦ 0; and (2) an affine transformation over GF(2).</p>
 <p>Theorem 1 confirms that x^{254} is a permutation since gcd(254, 255) = 1. The choice of exponent 254 = 2^8 − 2 is not arbitrary: it gives the multiplicative inverse, which achieves maximum algebraic degree (degree 7 in the ANF representation). This high degree provides the nonlinearity that makes AES resistant to linear and algebraic attacks. The AES designers explicitly chose the maximum-entropy permutation monomial — the one with the highest possible polynomial degree consistent with being a permutation.</p>
-<h1 id="10-circuit-reversibility-a-complete-characterisation"><strong>10. Circuit Reversibility: A Complete Characterisation</strong></h1>
+<h2 id="10-circuit-reversibility-a-complete-characterisation">10. Circuit Reversibility: A Complete Characterisation</h2>
 <p>We consolidate the results of this paper into a complete characterisation of reversibility for polynomial circuits over GF(2^n).</p>
 <p><strong>Theorem 9. </strong><em>(Circuit Reversibility Characterisation)</em></p>
 <p>A circuit C implementing a polynomial map f : GF(2^n) → GF(2^n) is reversible (i.e., has a well-defined polynomial inverse g : GF(2^n) → GF(2^n) such that g(f(x)) = x for all x) if and only if f is a permutation polynomial. The reversibility of the entire circuit is determined by: (a) for monomial maps x^k: gcd(k, 2^n−1) = 1; (b) for general polynomial maps: |image(f)| = 2^n (bijectivity); (c) equivalently: the Shannon entropy H(f(X)) = H(X) = n bits for uniform X (Theorem 8).</p>
@@ -200,7 +247,7 @@
 <p>Conversely, any AND gate introduced into an otherwise reversible circuit may destroy reversibility — AND is the archetypal information-compressing operator (from Paper 1, AND is the unique non-trivial bilinear operator over XOR, and it is not self-inverse). This provides an algebraic basis for the design of reversible computing architectures: use XOR-based gates (which are permutations, forming groups as shown in Paper 1) and restrict AND gates to contexts where reversibility is not required.</p>
 <p><strong>Corollary 5. </strong><em>(XOR-Only Circuits are Reversible)</em></p>
 <p>Any circuit built exclusively from XOR gates and constant gates implements an affine map over GF(2)^n (i.e., a linear map plus a constant), which is reversible if and only if the linear part is non-singular. Since XOR(a,b)=XOR(b,a) is its own inverse (XOR(XOR(a,b),b)=a by Theorem 9 of Paper 1), and NOT = XOR(a,1) is also its own inverse, all XOR/NOT circuits are reversible. Addition of any AND gate creates potential irreversibility.</p>
-<h1 id="11-towards-a-unified-reversibility-grade"><strong>11. Towards a Unified Reversibility Grade</strong></h1>
+<h2 id="11-towards-a-unified-reversibility-grade">11. Towards a Unified Reversibility Grade</h2>
 <p>The results of Papers 1 and 2 converge on a unified picture of binary computation parameterised by a reversibility grade. We formalise this connection here, providing the foundation for Paper 3's treatment of neural networks.</p>
 <p>Define the reversibility grade α of a map f : GF(2^n) → GF(2^n) as:</p>
 <p>α(f) = 1 − H(f(X)) / H(X) = 1 − log₂(|image(f)|) / n</p>
@@ -212,15 +259,15 @@
 </ul>
 <p>This grade α is precisely the parameter in the GRIA (Graded Reversible-Irreversible Algebra) framework developed in parallel work. GRIA proposes α as an interpolation parameter between reversible and irreversible compression, with α=0 corresponding to lossless coding (Zhegalkin/ANF compression, entropy-preserving) and α=1 corresponding to maximal lossy compression (neural network distillation).</p>
 <p>The algebraic content of this paper establishes the α=0 pole of this continuum with precision: the permutation polynomial criterion gcd(k, 2^n−1)=1 is the exact condition for α=0. Paper 3 will characterise the α=1 pole (contraction maps and attractors) and the critical α=0.5 threshold (edge of chaos, computational universality, maximum circuit complexity).</p>
-<h1 id="12-discussion"><strong>12. Discussion</strong></h1>
+<h2 id="12-discussion">12. Discussion</h2>
 <p>The results of this paper sit at the intersection of finite field theory, circuit complexity, and information theory. The Monomial Permutation Criterion (Theorem 1) — x^k is a permutation iff gcd(k, 2^n−1)=1 — is a classical result in finite field theory (see Lidl and Niederreiter, 1997), and the group isomorphism Perm(n) ≅ (Z/(2^n−1)Z)* is standard. The Frobenius order theorem and the Galois group structure are foundational results in algebraic number theory.</p>
 <p>What is novel in this paper is not the individual results but their synthesis into a unified framework for circuit reversibility, and specifically the connection to the GRIA reversibility grade α. The information preservation theorem (Theorem 8) — while straightforward — does not appear to have been stated explicitly in this form as a characterisation of GF(2^n) permutations. The degree-depth relationship (Theorem 5) is known in circuit complexity but not typically framed as a consequence of the permutation polynomial structure.</p>
 <p>The most significant novel contribution is the operational identification: α(f) = 0 ↔ f is a permutation polynomial ↔ gcd(k, 2^n−1) = 1 (for monomials). This provides the first algebraic characterisation of the α=0 end of the GRIA spectrum, connecting an abstract compression parameter to a concrete number-theoretic criterion.</p>
-<h1 id="13-conclusions"><strong>13. Conclusions</strong></h1>
+<h2 id="13-conclusions">13. Conclusions</h2>
 <p>We have established a complete algebraic theory of reversibility for polynomial maps over GF(2^n), with the Monomial Permutation Criterion as the central result. The criterion gcd(k, 2^n−1) = 1 provides an instantly computable test for reversibility, the permutation exponents form a group isomorphic to (Z/(2^n−1)Z)*, and the Frobenius map generates the Galois symmetry of the field. These results are computationally verified for n = 3, 4, 5, 6, 8.</p>
 <p>The information-theoretic characterisation (reversibility ↔ entropy preservation) connects the algebraic theory to Shannon's framework and provides the formal definition of the reversibility grade α = 1 − H(f(X))/n. This grade is the central parameter of the GRIA framework and serves as the foundation for the subsequent papers in this series.</p>
 <p>Immediate extensions include: the enumeration of all permutation polynomials (not just monomials) over GF(2^n), the classification of partially reversible maps by their orbit structure, and the application of these results to the design of reversible neural network architectures. These extensions are developed in Papers 3-7.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Lidl, R. and Niederreiter, H. (1997). Finite Fields. 2nd ed. Cambridge University Press.</p>
 <p>[2] Daemen, J. and Rijmen, V. (2002). The Design of Rijndael: AES — The Advanced Encryption Standard. Springer.</p>
 <p>[3] Golomb, S.W. (1967). Shift Register Sequences. Holden-Day.</p>
@@ -233,7 +280,7 @@
 <p>[10] Wan, Z.-X. (2003). Lectures on Finite Fields and Galois Rings. World Scientific.</p>
 <p>[11] Paper 1 in this series: A Computational Taxonomy of Binary Algebraic Structures Over {0,1}.</p>
 <p>[12] Paper 3 in this series: Neural Networks as Graded Contraction Maps: An Algebraic Framework via GRIA.</p>
-<h1 id="appendix-a-computational-verification-details"><strong>Appendix A: Computational Verification Details</strong></h1>
+<h2 id="appendix-a-computational-verification-details">Appendix A: Computational Verification Details</h2>
 <p>All theorems verified in Python 3 by exhaustive enumeration. GF(2^n) arithmetic implemented via the standard shift-register multiplication algorithm modulo the irreducible polynomial (represented as a bitmask). The irreducible polynomials used:</p>
 <ul>
 <li>GF(2^3): x^3+x+1 = 0b1011</li>
@@ -244,6 +291,31 @@
 </ul>
 <p>Total cases verified: Theorem 1 (116 monomial cases across 4 field sizes, 0 counterexamples), Theorem 2 (group axioms for GF(2^4)), Theorems 3-4 (Frobenius structure for n=3,4,5,6), Theorems 5-8 (degree, orbits, entropy for multiple fields), Theorem 9 (AES field), Theorem 10 (explicit circuit examples).</p>
 <p><em>— End of Paper 2 —</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

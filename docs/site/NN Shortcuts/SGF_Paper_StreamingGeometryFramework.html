@@ -3,29 +3,117 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>SGF Paper StreamingGeometryFramework</title>
+  <meta name="description" content="We survey sixteen canonical techniques spanning memory-efficient training, numerical stability, kernel fusion, adaptive optimisation, loss landscape dynamics, inference acceleration, and data curation. Through systematic analysis we identify three deep meta-patterns that recur…"/>
+  <title>The Streaming Geometry Framework: meta-patterns in modern neural network optimization and a unified foundation for efficient AI systems · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">NN Shortcuts\SGF_Paper_StreamingGeometryFramework.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>The Streaming Geometry Framework</strong></p>
-<p><em>Meta-Patterns in Modern Neural Network Optimization</em></p>
-<p><em>and a Unified Foundation for Efficient AI Systems</em></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#11-scope-and-motivation">1.1 Scope and Motivation</a></li>
+        <li class="toc-depth-2"><a href="#12-contributions">1.2 Contributions</a></li>
+        <li class="toc-depth-2"><a href="#2-survey-of-core-techniques">2. Survey of Core Techniques</a></li>
+        <li class="toc-depth-2"><a href="#21-memory-efficient-backpropagation">2.1 Memory-Efficient Backpropagation</a></li>
+        <li class="toc-depth-3"><a href="#211-gradient-checkpointing">2.1.1 Gradient Checkpointing</a></li>
+        <li class="toc-depth-2"><a href="#22-numerical-stability-and-online-statistics">2.2 Numerical Stability and Online Statistics</a></li>
+        <li class="toc-depth-3"><a href="#221-online-softmax">2.2.1 Online Softmax</a></li>
+        <li class="toc-depth-3"><a href="#222-welfords-algorithm">2.2.2 Welford&#x27;s Algorithm</a></li>
+        <li class="toc-depth-2"><a href="#23-kernel-fusion-and-system-throughput">2.3 Kernel Fusion and System Throughput</a></li>
+        <li class="toc-depth-3"><a href="#231-fused-triton-kernels">2.3.1 Fused Triton Kernels</a></li>
+        <li class="toc-depth-2"><a href="#24-optimisation-on-the-riemannian-weight-manifold">2.4 Optimisation on the Riemannian Weight Manifold</a></li>
+        <li class="toc-depth-3"><a href="#241-natural-gradient-and-k-fac">2.4.1 Natural Gradient and K-FAC</a></li>
+        <li class="toc-depth-3"><a href="#242-muon-gradient-orthogonalisation">2.4.2 Muon: Gradient Orthogonalisation</a></li>
+        <li class="toc-depth-2"><a href="#25-loss-landscape-dynamics-and-implicit-regularisation">2.5 Loss Landscape Dynamics and Implicit Regularisation</a></li>
+        <li class="toc-depth-3"><a href="#251-edge-of-stability">2.5.1 Edge of Stability</a></li>
+        <li class="toc-depth-3"><a href="#252-adaptive-gradient-clipping-agcadagczclip">2.5.2 Adaptive Gradient Clipping (AGC/AdaGC/ZClip)</a></li>
+        <li class="toc-depth-2"><a href="#26-learning-rate-scheduling">2.6 Learning Rate Scheduling</a></li>
+        <li class="toc-depth-3"><a href="#261-warmup-stable-decay">2.6.1 Warmup-Stable-Decay</a></li>
+        <li class="toc-depth-2"><a href="#27-inference-acceleration">2.7 Inference Acceleration</a></li>
+        <li class="toc-depth-3"><a href="#271-speculative-decoding">2.7.1 Speculative Decoding</a></li>
+        <li class="toc-depth-3"><a href="#272-mixture-of-experts">2.7.2 Mixture of Experts</a></li>
+        <li class="toc-depth-2"><a href="#28-data-efficiency-and-scaling-laws">2.8 Data Efficiency and Scaling Laws</a></li>
+        <li class="toc-depth-2"><a href="#3-meta-pattern-analysis">3. Meta-Pattern Analysis</a></li>
+        <li class="toc-depth-2"><a href="#31-meta-pattern-i-streaming-sufficiency">3.1 Meta-Pattern I: Streaming Sufficiency</a></li>
+        <li class="toc-depth-2"><a href="#32-meta-pattern-ii-spectral-geometry">3.2 Meta-Pattern II: Spectral Geometry</a></li>
+        <li class="toc-depth-2"><a href="#33-meta-pattern-iii-datacompute-duality">3.3 Meta-Pattern III: Data–Compute Duality</a></li>
+        <li class="toc-depth-2"><a href="#4-incremental-riemannian-estimation-ire">4. Incremental Riemannian Estimation (IRE)</a></li>
+        <li class="toc-depth-2"><a href="#41-the-ire-primitive">4.1 The IRE Primitive</a></li>
+        <li class="toc-depth-2"><a href="#42-why-riemannian-structure-matters">4.2 Why Riemannian Structure Matters</a></li>
+        <li class="toc-depth-2"><a href="#43-the-unified-ire-update">4.3 The Unified IRE Update</a></li>
+        <li class="toc-depth-2"><a href="#5-the-streaming-geometry-framework-sgf">5. The Streaming Geometry Framework (SGF)</a></li>
+        <li class="toc-depth-2"><a href="#51-architecture-overview">5.1 Architecture Overview</a></li>
+        <li class="toc-depth-2"><a href="#52-component-specifications">5.2 Component Specifications</a></li>
+        <li class="toc-depth-3"><a href="#521-the-sgf-optimizer">5.2.1 The SGF Optimizer</a></li>
+        <li class="toc-depth-3"><a href="#522-the-sgf-memory-manager">5.2.2 The SGF Memory Manager</a></li>
+        <li class="toc-depth-3"><a href="#523-the-sgf-normaliser">5.2.3 The SGF Normaliser</a></li>
+        <li class="toc-depth-3"><a href="#524-the-sgf-inference-engine">5.2.4 The SGF Inference Engine</a></li>
+        <li class="toc-depth-2"><a href="#53-theoretical-properties">5.3 Theoretical Properties</a></li>
+        <li class="toc-depth-3"><a href="#531-convergence">5.3.1 Convergence</a></li>
+        <li class="toc-depth-3"><a href="#532-memory-complexity">5.3.2 Memory Complexity</a></li>
+        <li class="toc-depth-3"><a href="#533-communication-complexity">5.3.3 Communication Complexity</a></li>
+        <li class="toc-depth-2"><a href="#6-predictions-and-experimental-validation">6. Predictions and Experimental Validation</a></li>
+        <li class="toc-depth-2"><a href="#61-novel-predictions">6.1 Novel Predictions</a></li>
+        <li class="toc-depth-3"><a href="#prediction-1-muon-k-fac-synergy">Prediction 1: Muon + K-FAC Synergy</a></li>
+        <li class="toc-depth-3"><a href="#prediction-2-welford-zclip-wsd-integration">Prediction 2: Welford ZClip + WSD Integration</a></li>
+        <li class="toc-depth-3"><a href="#prediction-3-eos-aware-checkpointing">Prediction 3: EoS-Aware Checkpointing</a></li>
+        <li class="toc-depth-3"><a href="#prediction-4-data-qqt-scaling-law-universality">Prediction 4: Data QQT Scaling Law Universality</a></li>
+        <li class="toc-depth-3"><a href="#prediction-5-moe-expert-count-as-ire-granularity">Prediction 5: MoE Expert Count as IRE Granularity</a></li>
+        <li class="toc-depth-2"><a href="#62-proposed-experimental-programme">6.2 Proposed Experimental Programme</a></li>
+        <li class="toc-depth-2"><a href="#7-open-problems">7. Open Problems</a></li>
+        <li class="toc-depth-3"><a href="#open-problem-1-the-optimal-riemannian-metric-for-transformers">Open Problem 1: The Optimal Riemannian Metric for Transformers</a></li>
+        <li class="toc-depth-3"><a href="#open-problem-2-welford-for-non-gaussian-distributions">Open Problem 2: Welford for Non-Gaussian Distributions</a></li>
+        <li class="toc-depth-3"><a href="#open-problem-3-ire-across-training-phases">Open Problem 3: IRE Across Training Phases</a></li>
+        <li class="toc-depth-3"><a href="#open-problem-4-the-data-manifold-geometry">Open Problem 4: The Data Manifold Geometry</a></li>
+        <li class="toc-depth-3"><a href="#open-problem-5-sgf-on-non-euclidean-hardware">Open Problem 5: SGF on Non-Euclidean Hardware</a></li>
+        <li class="toc-depth-2"><a href="#8-discussion">8. Discussion</a></li>
+        <li class="toc-depth-2"><a href="#81-relationship-to-existing-frameworks">8.1 Relationship to Existing Frameworks</a></li>
+        <li class="toc-depth-2"><a href="#82-limitations">8.2 Limitations</a></li>
+        <li class="toc-depth-2"><a href="#83-broader-implications">8.3 Broader Implications</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusion">9. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">The Streaming Geometry Framework: meta-patterns in modern neural network optimization and a unified foundation for efficient AI systems</h1>
+          <p class="doc-meta">NN Shortcuts\SGF_Paper_StreamingGeometryFramework.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We survey sixteen canonical techniques spanning memory-efficient training, numerical stability, kernel fusion, adaptive optimisation, loss landscape dynamics, inference acceleration, and data curation. Through systematic analysis we identify three deep meta-patterns that recur across all levels of the neural network stack: (I) Streaming Sufficiency — any algorithm that accumulates global batch state can be reformulated as a streaming algorithm that maintains a compact sufficient statistic; (II) Spectral Geometry — the natural language for weight updates, normalisation, routing, and attention is the singular value spectrum of the relevant operator; and (III) Data–Compute Duality — every design choice exists on a joint Pareto frontier of data quality, compute budget, and model capacity that must be co-optimised rather than sequentially tuned. We show that these three meta-patterns are not independent: they are projections of a single underlying principle we term Incremental Riemannian Estimation (IRE). From IRE we derive the Streaming Geometry Framework (SGF), a modular AI system architecture in which every component — optimiser, normaliser, router, scheduler, memory manager, and inference engine — is an instance of the same algebraic primitive: an online sufficient statistic on a curved parameter manifold. We derive theoretical predictions of SGF, propose concrete implementations, and outline a research programme for validating the framework experimentally.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>Odin</strong></p>
 <p><em>2026 — Working Draft</em></p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
-<p><em>We survey sixteen canonical techniques spanning memory-efficient training, numerical stability, kernel fusion, adaptive optimisation, loss landscape dynamics, inference acceleration, and data curation. Through systematic analysis we identify three deep meta-patterns that recur across all levels of the neural network stack: (I) Streaming Sufficiency — any algorithm that accumulates global batch state can be reformulated as a streaming algorithm that maintains a compact sufficient statistic; (II) Spectral Geometry — the natural language for weight updates, normalisation, routing, and attention is the singular value spectrum of the relevant operator; and (III) Data–Compute Duality — every design choice exists on a joint Pareto frontier of data quality, compute budget, and model capacity that must be co-optimised rather than sequentially tuned. We show that these three meta-patterns are not independent: they are projections of a single underlying principle we term Incremental Riemannian Estimation (IRE). From IRE we derive the Streaming Geometry Framework (SGF), a modular AI system architecture in which every component — optimiser, normaliser, router, scheduler, memory manager, and inference engine — is an instance of the same algebraic primitive: an online sufficient statistic on a curved parameter manifold. We derive theoretical predictions of SGF, propose concrete implementations, and outline a research programme for validating the framework experimentally.</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="abstract">Abstract</h2>
+<p>We survey sixteen canonical techniques spanning memory-efficient training, numerical stability, kernel fusion, adaptive optimisation, loss landscape dynamics, inference acceleration, and data curation. Through systematic analysis we identify three deep meta-patterns that recur across all levels of the neural network stack: (I) Streaming Sufficiency — any algorithm that accumulates global batch state can be reformulated as a streaming algorithm that maintains a compact sufficient statistic; (II) Spectral Geometry — the natural language for weight updates, normalisation, routing, and attention is the singular value spectrum of the relevant operator; and (III) Data–Compute Duality — every design choice exists on a joint Pareto frontier of data quality, compute budget, and model capacity that must be co-optimised rather than sequentially tuned. We show that these three meta-patterns are not independent: they are projections of a single underlying principle we term Incremental Riemannian Estimation (IRE). From IRE we derive the Streaming Geometry Framework (SGF), a modular AI system architecture in which every component — optimiser, normaliser, router, scheduler, memory manager, and inference engine — is an instance of the same algebraic primitive: an online sufficient statistic on a curved parameter manifold. We derive theoretical predictions of SGF, propose concrete implementations, and outline a research programme for validating the framework experimentally.</p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>The history of practical deep learning is a history of discovering, rediscovering, and slowly unifying a set of algorithmic primitives that make large-scale optimisation tractable on finite hardware. Gradient checkpointing, online softmax, fused kernels, adaptive clipping, cosine scheduling, second-order optimisers, speculative decoding, mixture-of-experts routing, and compute-aware data filtering were each developed independently, motivated by different immediate problems. Yet, looked at carefully, they share a structure.</p>
 <p>This paper makes three claims. First, all effective acceleration techniques in modern deep learning reduce to a single principle: replace a two-pass batch algorithm with a one-pass streaming algorithm that maintains a compact sufficient statistic. Second, the geometry that makes this possible is Riemannian: the natural metric on parameter space is the Fisher information matrix, and effective optimisers are those that approximate steepest descent under this metric with O(1) per-step overhead. Third, the parameter space of neural networks is not just a Riemannian manifold in the abstract — it is a space with a known coarse structure (the singular value spectrum of weight matrices) that every efficient technique exploits.</p>
 <p>From these three claims we derive the Streaming Geometry Framework (SGF), which unifies the sixteen surveyed techniques under a single algebraic roof and generates novel predictions about which combinations of techniques should interact synergistically, and which should be redundant.</p>
-<h2 id="11-scope-and-motivation"><strong>1.1 Scope and Motivation</strong></h2>
+<h2 id="11-scope-and-motivation">1.1 Scope and Motivation</h2>
 <p>The techniques surveyed were selected to span the full training and inference pipeline: memory (checkpointing), numerical stability (online softmax, Welford), system throughput (kernel fusion, speculative decoding), optimisation geometry (Muon, K-FAC, natural gradient), loss landscape dynamics (edge-of-stability, progressive sharpening), scheduling (WSD, cosine annealing), regularisation (AGC/AdaGC), sparse computation (MoE), and data efficiency (compute-aware filtering, scaling laws). We claim that all sixteen are instances of the same abstract template.</p>
-<h2 id="12-contributions"><strong>1.2 Contributions</strong></h2>
+<h2 id="12-contributions">1.2 Contributions</h2>
 <ul>
 <li>We identify and formally state three meta-patterns (Streaming Sufficiency, Spectral Geometry, Data–Compute Duality) that subsume all sixteen surveyed techniques.</li>
 <li>We introduce the concept of Incremental Riemannian Estimation (IRE) as the algebraic primitive common to all three meta-patterns.</li>
@@ -33,21 +121,21 @@
 <li>We derive theoretical predictions about component interactions and propose experiments to validate them.</li>
 <li>We identify five open problems whose resolution would complete the framework.</li>
 </ul>
-<h1 id="2-survey-of-core-techniques"><strong>2. Survey of Core Techniques</strong></h1>
+<h2 id="2-survey-of-core-techniques">2. Survey of Core Techniques</h2>
 <p>We survey sixteen techniques, grouped into six thematic clusters. For each we state the problem addressed, the key algorithmic insight, the state-of-the-art performance, and the sufficient statistic maintained.</p>
-<h2 id="21-memory-efficient-backpropagation"><strong>2.1 Memory-Efficient Backpropagation</strong></h2>
-<h3 id="211-gradient-checkpointing"><strong>2.1.1 Gradient Checkpointing</strong></h3>
+<h2 id="21-memory-efficient-backpropagation">2.1 Memory-Efficient Backpropagation</h2>
+<h3 id="211-gradient-checkpointing">2.1.1 Gradient Checkpointing</h3>
 <p>Standard backpropagation stores all intermediate activations, requiring O(n) memory for an n-layer network. Activation checkpointing stores only a subset, recomputing discarded activations from the nearest preceding checkpoint during the backward pass. Optimal checkpoint placement every sqrt(n) layers reduces memory to O(sqrt(n)) at the cost of one additional forward pass — an O(sqrt(n)) compute overhead.</p>
 <p>Modern implementations extend this in two directions. Selective checkpointing (PyTorch 2.1+) exposes a per-operation policy: MUST_SAVE for large matmul outputs (cheap to store, expensive to recompute), MUST_RECOMPUTE for elementwise activations (cheap to recompute, expensive to store). Self-attention recomputation is the canonical target because the softmax and QKV attention intermediate activations have O(L^2) memory in sequence length L — the most expensive thing to store and among the cheapest to recompute. Memory-mapped checkpointing (2025) extends the technique to on-device fine-tuning, combining activation quantisation and lazy decompression to enable full-gradient fine-tuning of multi-billion-parameter models on less than 1 GB.</p>
-<p>__Sufficient statistic maintained: __The set of checkpoint activations — an O(sqrt(n)) subset of the O(n) activation buffer.</p>
-<h2 id="22-numerical-stability-and-online-statistics"><strong>2.2 Numerical Stability and Online Statistics</strong></h2>
-<h3 id="221-online-softmax"><strong>2.2.1 Online Softmax</strong></h3>
+<p><strong>Sufficient statistic maintained: </strong>The set of checkpoint activations — an O(sqrt(n)) subset of the O(n) activation buffer.</p>
+<h2 id="22-numerical-stability-and-online-statistics">2.2 Numerical Stability and Online Statistics</h2>
+<h3 id="221-online-softmax">2.2.1 Online Softmax</h3>
 <p>Standard softmax requires finding the maximum of the input sequence before exponentiation to prevent overflow, forcing two passes. The online normaliser algorithm maintains a running pair (m_j, d_j) — current maximum and re-normalised exponential sum — updated as new elements arrive:</p>
 <p>m_j = max(m_{j-1}, x_j)</p>
 <p>d_j = d_{j-1} * exp(m_{j-1} - m_j) + exp(x_j - m_j)</p>
 <p>When a new maximum is encountered, the previous sum is rescaled by exp(old_max - new_max). This is algebraically identical to two-pass safe softmax but computable in a single pass with two scalars of state. FlashAttention builds directly on this: its warp-level specialisation maintains (m, d) per tile, and FlashAttention 4 further replaces the hardware Special Function Unit path for exponentials with a cubic polynomial on CUDA Cores, exploiting the fact that far fewer SFUs than CUDA Cores exist on current GPUs.</p>
 <p><strong>Sufficient statistic: </strong>(running_max, running_sum) — two scalars, O(1) state regardless of sequence length.</p>
-<h3 id="222-welfords-algorithm"><strong>2.2.2 Welford's Algorithm</strong></h3>
+<h3 id="222-welfords-algorithm">2.2.2 Welford's Algorithm</h3>
 <p>The naive variance estimator var = E[x^2] - E[x]^2 suffers catastrophic cancellation when the mean is large relative to the standard deviation. Welford's algorithm maintains the sum of squared deviations from the running mean M2, updated as:</p>
 <p>delta   = x_new - mean_old</p>
 <p>mean    = mean_old + delta / n</p>
@@ -55,54 +143,54 @@
 <p>var     = M2 / (n - 1)</p>
 <p>Both terms in the M2 update are of similar magnitude by construction, eliminating catastrophic cancellation. The parallel (Chan) extension allows two (n, mean, M2) tuples to be merged exactly, enabling distributed batch normalisation across GPUs without raw data exchange. ZClip (2025) applies the same algorithm to gradient norm tracking: the clipping threshold is a running z-score computed by Welford over historical gradient norms, making it parameter-free and adaptive.</p>
 <p><strong>Sufficient statistic: </strong>(n, running_mean, M2) — three scalars for O(1) online mean and variance of any stream.</p>
-<h2 id="23-kernel-fusion-and-system-throughput"><strong>2.3 Kernel Fusion and System Throughput</strong></h2>
-<h3 id="231-fused-triton-kernels"><strong>2.3.1 Fused Triton Kernels</strong></h3>
+<h2 id="23-kernel-fusion-and-system-throughput">2.3 Kernel Fusion and System Throughput</h2>
+<h3 id="231-fused-triton-kernels">2.3.1 Fused Triton Kernels</h3>
 <p>The GPU memory hierarchy has a large gap between on-chip registers/shared memory (fast, small) and HBM global memory (slow, large). Operations like LayerNorm, RMSNorm, RoPE, GELU, and CrossEntropy are all elementwise or reduction operations that write intermediate tensors to HBM between steps, incurring redundant round-trips. Kernel fusion eliminates these by computing the entire compound operation in a single tile pass.</p>
 <p>The Liger-Kernel library (2024) demonstrates: RMSNorm achieves ~3x speedup and ~3x memory reduction; RoPE achieves ~3x speedup and ~3x memory reduction; CrossEntropy achieves &gt;2x speedup and &gt;4x memory reduction; FusedLinearCrossEntropy drops peak activation memory from O(N * V) to O(chunk_size * V) for vocabulary V and batch-sequence tokens N, yielding &gt;80% memory reduction at vocab size 128k. The bandwidth utilisation improvement is dramatic: from 11% to 88% of peak HBM bandwidth for standard operations.</p>
 <p>The roofline model gives the decision rule: any operation with arithmetic intensity below the ridge point (approximately 100 FLOP/byte on H100) is memory-bound and will benefit from fusion. Large matrix multiplications are compute-bound (&gt;4096 FLOP/byte at practical sizes) and fusion helps less.</p>
-<p>__Sufficient statistic: __For each fused kernel: the minimal set of intermediate results cached in on-chip registers (e.g., for RMSNorm: the inverse RMS norm; for online cross-entropy: (running_max, running_sum, gradient)). No HBM writes until the final output.</p>
-<h2 id="24-optimisation-on-the-riemannian-weight-manifold"><strong>2.4 Optimisation on the Riemannian Weight Manifold</strong></h2>
-<h3 id="241-natural-gradient-and-k-fac"><strong>2.4.1 Natural Gradient and K-FAC</strong></h3>
+<p><strong>Sufficient statistic: </strong>For each fused kernel: the minimal set of intermediate results cached in on-chip registers (e.g., for RMSNorm: the inverse RMS norm; for online cross-entropy: (running_max, running_sum, gradient)). No HBM writes until the final output.</p>
+<h2 id="24-optimisation-on-the-riemannian-weight-manifold">2.4 Optimisation on the Riemannian Weight Manifold</h2>
+<h3 id="241-natural-gradient-and-k-fac">2.4.1 Natural Gradient and K-FAC</h3>
 <p>The parameter space of a neural network is a Riemannian manifold where the metric is the Fisher information matrix F. Standard gradient descent performs steepest descent under the Euclidean metric, which is coordinate-dependent and leads to slow convergence in ill-conditioned problems. Natural gradient descent uses the metric-corrected direction F^{-1} * g, which is invariant under reparameterisation and can converge orders of magnitude faster.</p>
 <p>The practical obstacle is that F is an (n x n) matrix for n parameters — intractable to invert. K-FAC (Kronecker-Factored Approximate Curvature) exploits the layer-wise block structure: for a linear layer with input activations a and output pre-activations s, the Fisher block is approximately F_l = E[a a^T] ⊗ E[ds ds^T], where ⊗ is the Kronecker product. This allows the inverse to be computed as the inverse of two small matrices.</p>
 <p>FAdam (2024) establishes rigorously that Adam's second moment buffer is computing a diagonal empirical Fisher estimate, making Adam an implicit natural gradient method. This explains why Adam generalises better than SGD on ill-conditioned problems like transformer training: it is implicitly pre-conditioning by the loss curvature.</p>
-<p>__Sufficient statistic: __The Kronecker factors A_l = EMA(a a^T) and G_l = EMA(ds ds^T) per layer — O(d_in^2 + d_out^2) state instead of O(d_in^2 * d_out^2) for the full Fisher block.</p>
-<h3 id="242-muon-gradient-orthogonalisation"><strong>2.4.2 Muon: Gradient Orthogonalisation</strong></h3>
+<p><strong>Sufficient statistic: </strong>The Kronecker factors A_l = EMA(a a^T) and G_l = EMA(ds ds^T) per layer — O(d_in^2 + d_out^2) state instead of O(d_in^2 * d_out^2) for the full Fisher block.</p>
+<h3 id="242-muon-gradient-orthogonalisation">2.4.2 Muon: Gradient Orthogonalisation</h3>
 <p>Muon (2024) observes that gradient updates for transformer weight matrices are typically nearly low-rank — the update direction is dominated by a few singular vectors, wasting capacity on directions that are already well-represented. The fix: orthogonalise the gradient matrix (specifically its EMA momentum) before applying it, replacing each singular value sigma_i with 1 (the update UΣ^0 V^T = UV^T).</p>
 <p>This is the p=0 endpoint of the spectral transform family UΣ^p V^T: Adam corresponds to p=1 (coordinate-wise rescaling); Shampoo/K-FAC corresponds to p=1/2 (Kronecker pre-conditioning); Muon corresponds to p=0 (full whitening/orthogonalisation). The orthogonalisation is computed via Newton-Schulz iteration — a polynomial iteration on singular values that converges to {-1, +1} in a handful of steps, runnable in bfloat16, with total overhead below 1% for LLaMA-scale models. Muon is theoretically an instantaneous accumulation-free Shampoo.</p>
-<p>__Sufficient statistic: __The EMA momentum matrix M — same size as the weight matrix. No second-moment buffer required (unlike Adam), saving 33% of optimiser state.</p>
-<h2 id="25-loss-landscape-dynamics-and-implicit-regularisation"><strong>2.5 Loss Landscape Dynamics and Implicit Regularisation</strong></h2>
-<h3 id="251-edge-of-stability"><strong>2.5.1 Edge of Stability</strong></h3>
+<p><strong>Sufficient statistic: </strong>The EMA momentum matrix M — same size as the weight matrix. No second-moment buffer required (unlike Adam), saving 33% of optimiser state.</p>
+<h2 id="25-loss-landscape-dynamics-and-implicit-regularisation">2.5 Loss Landscape Dynamics and Implicit Regularisation</h2>
+<h3 id="251-edge-of-stability">2.5.1 Edge of Stability</h3>
 <p>Cohen et al. (2021) documented a universal phenomenon: when training neural networks with full-batch gradient descent, the maximum eigenvalue of the loss Hessian (the sharpness) rises steadily (progressive sharpening) until it reaches approximately 2/eta, where eta is the learning rate. At this edge of stability the training loss oscillates non-monotonically yet still trends downward — a regime completely outside the assumptions of classical optimisation theory, which requires sharpness &lt; 2/eta for convergence.</p>
 <p>The theoretical resolution (Arora et al., 2022): at EoS the gradient updates are large enough to bounce the iterates off valley walls. This bouncing is not random — it is a deterministic flow along the manifold of minimum loss. The implicit regularisation it provides is sharpness reduction: by operating at the stability boundary, GD seeks iterates where the sharpness is bounded by 2/eta, favouring flatter minima that generalise better.</p>
 <p>For SGD, the picture is more complex. Small batches create conservative sharpening: the stochastic nature of mini-batch Hessians means sharpness stabilises below 2/eta, not at it. The stochastic edge of stability (S-EOS) is controlled by batch size B and learning rate eta jointly, governed by a quantity related to the trace of the Gauss-Newton approximation to the Hessian.</p>
-<p>__Sufficient statistic: __The current sharpness (max Hessian eigenvalue) — one scalar sufficient to determine whether training is in the progressive sharpening, EoS, or converged regime.</p>
-<h3 id="252-adaptive-gradient-clipping-agcadagczclip"><strong>2.5.2 Adaptive Gradient Clipping (AGC/AdaGC/ZClip)</strong></h3>
+<p><strong>Sufficient statistic: </strong>The current sharpness (max Hessian eigenvalue) — one scalar sufficient to determine whether training is in the progressive sharpening, EoS, or converged regime.</p>
+<h3 id="252-adaptive-gradient-clipping-agcadagczclip">2.5.2 Adaptive Gradient Clipping (AGC/AdaGC/ZClip)</h3>
 <p>Standard global gradient norm clipping applies a scalar threshold — penalising all layers identically when any one layer's gradients spike. AGC (Brock et al., 2021) clips each weight matrix row-wise with threshold lambda * ||W_row||, making the clipping window proportional to the weight's current norm. This eliminates the cross-layer spill-over effect.</p>
 <p>AdaGC (2025) extends to per-parameter EMA-adaptive thresholds, eliminating all manual hyperparameters and completely eliminating loss spikes on LLaMA-2 7B/13B while reducing validation perplexity by 3.5%/1.47%. ZClip (2025) uses a Welford z-score on historical gradient norms to set the threshold dynamically: clip when ||g_t|| &gt; mu + k*sigma, where mu and sigma are the Welford running mean and standard deviation of past gradient norms. The critical practical rule: never apply AGC to the final linear (embedding) layer — embedding rows have inflated norms from rarely-seen tokens due to momentum accumulation.</p>
-<p>__Sufficient statistic: __Per-layer EMA of gradient norm (AdaGC) or Welford (n, mean, M2) of global gradient norm (ZClip).</p>
-<h2 id="26-learning-rate-scheduling"><strong>2.6 Learning Rate Scheduling</strong></h2>
-<h3 id="261-warmup-stable-decay"><strong>2.6.1 Warmup-Stable-Decay</strong></h3>
+<p><strong>Sufficient statistic: </strong>Per-layer EMA of gradient norm (AdaGC) or Welford (n, mean, M2) of global gradient norm (ZClip).</p>
+<h2 id="26-learning-rate-scheduling">2.6 Learning Rate Scheduling</h2>
+<h3 id="261-warmup-stable-decay">2.6.1 Warmup-Stable-Decay</h3>
 <p>Standard cosine scheduling requires knowing the total training budget in advance. Warmup-Stable-Decay (WSD) decouples the learning phases: a brief linear warmup to prevent early instability; a long constant-LR stable phase for the bulk of learning; a rapid cosine or linear decay at the end. The key insight is that the decay is a cheap post-processing step: any checkpoint from the stable phase can be used as a starting point for an independent cooldown run of approximately 1% of total training tokens, producing a fully-converged model. This makes continual training natural — fork from any checkpoint and run cooldown on demand.</p>
 <p>The warmup phase has a specific function: learning rate warmup prevents deeper layers from creating training instability. Early in training, deep layers have poorly-calibrated statistics and produce unstable activations. The warmup period lets normalisation layers equilibrate before the learning rate is large enough for these instabilities to propagate into divergence.</p>
-<p>__Sufficient statistic: __Current training step count and phase indicator — all three phases have closed-form LR schedules.</p>
-<h2 id="27-inference-acceleration"><strong>2.7 Inference Acceleration</strong></h2>
-<h3 id="271-speculative-decoding"><strong>2.7.1 Speculative Decoding</strong></h3>
+<p><strong>Sufficient statistic: </strong>Current training step count and phase indicator — all three phases have closed-form LR schedules.</p>
+<h2 id="27-inference-acceleration">2.7 Inference Acceleration</h2>
+<h3 id="271-speculative-decoding">2.7.1 Speculative Decoding</h3>
 <p>Autoregressive LLM decoding is memory-bandwidth-bound: each token generation requires loading all model weights once. Speculative decoding uses a small fast draft model to generate k candidate tokens in sequence, then verifies all k in parallel with the target model (at cost similar to a single target-model forward pass). Accepted tokens are kept; the first rejected token triggers a correction from the target model's distribution.</p>
 <p>The acceptance probability for token i is min(1, p_target(x_i) / p_draft(x_i)). When draft and target distributions are well-aligned, most tokens are accepted and the effective throughput multiplier approaches k+1. Real-world speedups: 2-5x for well-aligned draft models; up to 5.5x for domain-specific configurations. Tree-structured speculative decoding extends this to a tree of candidate sequences, with parallel verification via tree attention, achieving higher acceptance lengths by exploiting prefix overlap.</p>
-<p>__Sufficient statistic: __The draft model's predictive distribution over the draft sequence — used to compute acceptance probabilities without additional forward passes through the target model.</p>
-<h3 id="272-mixture-of-experts"><strong>2.7.2 Mixture of Experts</strong></h3>
+<p><strong>Sufficient statistic: </strong>The draft model's predictive distribution over the draft sequence — used to compute acceptance probabilities without additional forward passes through the target model.</p>
+<h3 id="272-mixture-of-experts">2.7.2 Mixture of Experts</h3>
 <p>MoE architectures replace dense FFN layers with N expert networks, selecting the top-k experts per token via a learned gating function. This decouples total parameter count from per-token FLOPs: a model with N experts of width d is equivalent in inference cost to a dense model of width d, but has N times the representational capacity. DeepSeek-V3 pushes this to 256 fine-grained experts with shared attention, achieving frontier performance at dramatically reduced inference cost.</p>
 <p>The critical engineering challenge is load balancing: without intervention, the gating network collapses to routing all tokens to a few popular experts (the rich-get-richer dynamic). Auxiliary losses encourage equal expert utilisation; noisy top-k gating adds learnable noise to break symmetry during training. Expert Choice routing (Google, 2022) inverts the assignment: each expert selects its top-k tokens, guaranteeing perfect load balance by construction.</p>
-<p>__Sufficient statistic: __Expert selection probabilities from the gating network — O(N) scalars per token, sufficient to route computation without loading inactive expert parameters.</p>
-<h2 id="28-data-efficiency-and-scaling-laws"><strong>2.8 Data Efficiency and Scaling Laws</strong></h2>
+<p><strong>Sufficient statistic: </strong>Expert selection probabilities from the gating network — O(N) scalars per token, sufficient to route computation without loading inactive expert parameters.</p>
+<h2 id="28-data-efficiency-and-scaling-laws">2.8 Data Efficiency and Scaling Laws</h2>
 <p>Classical Chinchilla scaling laws (Hoffmann et al., 2022) characterise the optimal model-size / training-token trade-off under homogeneous data quality. This assumption is violated in practice: real web corpora have highly heterogeneous quality, and the utility of any data point decays with each repetition.</p>
 <p>Goyal et al. (2024) introduce compute-aware data filtering: high-quality data loses its utility when repeated — eventually falling below the utility of unseen lower-quality data. The optimal filtering threshold is therefore compute-budget-dependent. At low compute budgets, aggressive filtering (retaining only top-10% quality) is optimal; at high compute budgets, the broader pool should be used. This creates a quality-quantity tradeoff (QQT) curve that is a function of the training compute, not just the data distribution.</p>
 <p>Isik et al. (2024) generalise this to a dimensionless quality parameter Q in (0,1], where the loss scales as B / (D^beta * Q^gamma). Higher-quality data allows smaller models to reach the same loss, with a sublinear (not linear) relationship between effective data and quality — moderate data corruption is robust, but severe corruption is disproportionately harmful.</p>
-<p>__Sufficient statistic: __Per-sample quality score and repetition count — two scalars that together predict marginal utility of including a data point in the next training epoch.</p>
-<h1 id="3-meta-pattern-analysis"><strong>3. Meta-Pattern Analysis</strong></h1>
+<p><strong>Sufficient statistic: </strong>Per-sample quality score and repetition count — two scalars that together predict marginal utility of including a data point in the next training epoch.</p>
+<h2 id="3-meta-pattern-analysis">3. Meta-Pattern Analysis</h2>
 <p>Having surveyed sixteen techniques, we now observe that they share a deep structure. We identify three meta-patterns, each a distinct projection of an underlying algebraic principle.</p>
-<h2 id="31-meta-pattern-i-streaming-sufficiency"><strong>3.1 Meta-Pattern I: Streaming Sufficiency</strong></h2>
+<h2 id="31-meta-pattern-i-streaming-sufficiency">3.1 Meta-Pattern I: Streaming Sufficiency</h2>
 <p>Every technique in the survey replaces a batch computation over a large set with a streaming computation that maintains a compact sufficient statistic. The formal statement:</p>
 <p>Theorem (Streaming Sufficiency Principle): For any neural network computation C(X) that requires reading a dataset X of size n, there exists a sufficient statistic S of size o(n) such that C(X) = f(S(X)) for some function f, and S can be maintained by processing each element of X exactly once with O(1) update cost.</p>
 <p>This is not trivially true for arbitrary C — it holds specifically because neural network computation is either (a) a reduction (mean, variance, max, sum) in which case Welford-type algorithms apply, or (b) a normalised ratio (softmax, attention weights) in which case the online normaliser applies, or (c) a linear algebra operation on a matrix of bounded rank in which case Kronecker factoring applies.</p>
@@ -143,7 +231,7 @@
 <p>Full covariance matrix</p>
 <p>EMA momentum matrix M</p>
 <p>O(d_out * d_in)</p>
-<h2 id="32-meta-pattern-ii-spectral-geometry"><strong>3.2 Meta-Pattern II: Spectral Geometry</strong></h2>
+<h2 id="32-meta-pattern-ii-spectral-geometry">3.2 Meta-Pattern II: Spectral Geometry</h2>
 <p>The natural language for every operation in neural network training is the singular value decomposition of the relevant matrix. Weight matrices, gradient matrices, Fisher blocks, attention matrices, and routing matrices all have a natural geometry defined by their singular value spectra, and every efficient algorithm exploits this structure.</p>
 <p>The spectral transform family UΣ^p V^T, for a matrix G = UΣV^T, unifies the optimizer landscape:</p>
 <p><strong>p Value</strong></p>
@@ -177,14 +265,14 @@
 <p>The same spectral structure appears outside the optimizer. Attention is a softmax-normalised matrix product whose effective rank is controlled by the temperature of the softmax (FlashAttention's online max tracks the dominant singular direction of the QK^T matrix). MoE routing is a sparse projection onto the top-k eigenvectors of the expert activation space. Layer normalisation constrains the spectrum of the activation tensor. AGC constrains the ratio of the gradient spectrum to the weight spectrum.</p>
 <p>Spectral Geometry Principle: Every efficient operation in a neural network training or inference pipeline is a structured operation on the singular value spectrum of a matrix. The choice of structure (whitening, projection, thresholding, normalisation) determines the implicit regularisation provided by the operation.</p>
 <p>The edge-of-stability phenomenon provides the sharpest illustration: the maximum Hessian eigenvalue (the dominant singular value of the loss Hessian) is the sufficient statistic that determines the training regime. When it exceeds 2/eta, training enters the non-monotonic EoS regime where implicit sharpness regularisation operates. The learning rate eta is therefore not an arbitrary scalar — it is a constraint on the spectral radius of the permissible Hessian.</p>
-<h2 id="33-meta-pattern-iii-datacompute-duality"><strong>3.3 Meta-Pattern III: Data–Compute Duality</strong></h2>
+<h2 id="33-meta-pattern-iii-datacompute-duality">3.3 Meta-Pattern III: Data–Compute Duality</h2>
 <p>Every design choice in model training — data quality, data quantity, model size, training tokens, compute budget, filtering threshold — exists on a joint Pareto frontier. Optimising any one dimension while holding others fixed is generically suboptimal.</p>
 <p>The classical Chinchilla scaling law L(N, D) = A/N^alpha + B/D^beta + L_inf gives the compute-optimal frontier in (N, D) space. Adding data quality Q gives L(N, D, Q) = A/N^alpha + B/(D^beta * Q^gamma) + L_inf. Adding data repetition k and mixing weights w_i for source i gives a multi-dimensional quality-quantity-compute frontier that cannot be navigated by optimising any single variable.</p>
 <p>This extends to inference. Speculative decoding is a data-compute trade-off: the draft model's quality (acceptance rate alpha) and latency determine the effective throughput. MoE is a parameter-compute trade-off: total parameters decouple from per-token FLOPs. WSD scheduling is a tokens-quality trade-off: the cooldown phase converts stable-phase compute into final loss reduction at high marginal efficiency.</p>
 <p>Data-Compute Duality Principle: The optimal configuration of any AI system is a joint optimum over data quality, data quantity, model capacity, compute budget, and inference cost. Every component that appears to have a single-variable optimum is implicitly holding other variables at non-optimal values.</p>
-<h1 id="4-incremental-riemannian-estimation-ire"><strong>4. Incremental Riemannian Estimation (IRE)</strong></h1>
+<h2 id="4-incremental-riemannian-estimation-ire">4. Incremental Riemannian Estimation (IRE)</h2>
 <p>The three meta-patterns are not independent. They are projections of a single underlying principle that we formalise as Incremental Riemannian Estimation.</p>
-<h2 id="41-the-ire-primitive"><strong>4.1 The IRE Primitive</strong></h2>
+<h2 id="41-the-ire-primitive">4.1 The IRE Primitive</h2>
 <p>An IRE instance is a tuple (M, S, T, phi) where:</p>
 <ul>
 <li>M is a Riemannian manifold — the parameter space, weight space, or data space of interest;</li>
@@ -248,20 +336,20 @@
 <p>(quality_score, rep_count)</p>
 <p>Update on each training step</p>
 <p>Marginal utility estimate</p>
-<h2 id="42-why-riemannian-structure-matters"><strong>4.2 Why Riemannian Structure Matters</strong></h2>
+<h2 id="42-why-riemannian-structure-matters">4.2 Why Riemannian Structure Matters</h2>
 <p>The key insight is that M is not flat Euclidean space. The weight space of a neural network has curvature determined by the data distribution via the Fisher information matrix. An algorithm that ignores this curvature — like vanilla SGD or naive global gradient clipping — will be inefficient because it uses Euclidean distances to measure steps in a curved space.</p>
 <p>IRE requires that S be a sufficient statistic not just for the distribution on M, but for the distribution on M equipped with its Riemannian metric. This is why the Kronecker factors in K-FAC are sufficient: they capture the block-diagonal structure of the Fisher metric. This is why the Welford (mean, M2) pair is sufficient for normalisation: it captures the sufficient statistics of a Gaussian approximation to the activation distribution — which is what BatchNorm's normalisation step implicitly assumes.</p>
 <p>The EoS phenomenon is an IRE phenomenon: the Hessian eigenspectrum is the sufficient statistic for the curvature of the loss landscape, and the sharpness (max eigenvalue) is the single scalar sufficient to determine whether the IRE update rule (gradient descent) is in the stable, edge-of-stability, or divergent regime.</p>
-<h2 id="43-the-unified-ire-update"><strong>4.3 The Unified IRE Update</strong></h2>
+<h2 id="43-the-unified-ire-update">4.3 The Unified IRE Update</h2>
 <p>All IRE instances share the same computational template:</p>
 <p>S_{t+1} = T(S_t, x_{t+1})          [Online update — O(1) cost]</p>
 <p>theta_{t+1} = phi(S_{t+1})           [Read-out — O(1) or O(small) cost]</p>
 <p>g_tilde = F(S_{t+1})^{-1} * g_t      [Riemannian gradient correction]</p>
 <p>theta_{t+1} = theta_t - eta * g_tilde [Parameter update]</p>
 <p>Where F(S) is the Riemannian metric estimated from the sufficient statistic S. The key insight: the metric F(S) need not be computed exactly — only its action on the gradient vector g_t is needed, and this action can be approximated using the Kronecker structure of the Fisher, the orthogonal polar factor (Muon), or the diagonal approximation (Adam).</p>
-<h1 id="5-the-streaming-geometry-framework-sgf"><strong>5. The Streaming Geometry Framework (SGF)</strong></h1>
+<h2 id="5-the-streaming-geometry-framework-sgf">5. The Streaming Geometry Framework (SGF)</h2>
 <p>The Streaming Geometry Framework is a modular AI system architecture in which every component is an IRE instance. SGF has four layers: the Physical Layer (hardware primitives), the Metric Layer (Riemannian metric estimation), the Dynamics Layer (parameter update), and the Control Layer (scheduling and resource allocation).</p>
-<h2 id="51-architecture-overview"><strong>5.1 Architecture Overview</strong></h2>
+<h2 id="51-architecture-overview">5.1 Architecture Overview</h2>
 <p><strong>SGF Layer</strong></p>
 <p><strong>Components</strong></p>
 <p><strong>IRE Instance</strong></p>
@@ -283,8 +371,8 @@
 <p>Gating distribution + acceptance model + QQT scores</p>
 <p>Top-k logits, draft distribution q, (quality, rep_count)</p>
 <p>The crucial property of SGF: every layer communicates with adjacent layers by passing sufficient statistics, never raw tensors. The Physical Layer passes (max, sum) tuples to the Metric Layer. The Metric Layer passes metric estimates F(S) to the Dynamics Layer. The Dynamics Layer passes the update direction to the Control Layer. The Control Layer returns routing decisions, scheduling parameters, and data selections to the Dynamics Layer.</p>
-<h2 id="52-component-specifications"><strong>5.2 Component Specifications</strong></h2>
-<h3 id="521-the-sgf-optimizer"><strong>5.2.1 The SGF Optimizer</strong></h3>
+<h2 id="52-component-specifications">5.2 Component Specifications</h2>
+<h3 id="521-the-sgf-optimizer">5.2.1 The SGF Optimizer</h3>
 <p>The SGF optimizer is a hybrid that applies spectral transforms at different granularities:</p>
 <ul>
 <li>For weight matrices: Muon (p=0) — full spectral whitening via Newton-Schulz iterations</li>
@@ -293,13 +381,13 @@
 <li>Gradient clipping: ZClip — Welford z-score on gradient norms, fully adaptive and parameter-free</li>
 <li>Learning rate schedule: WSD — warmup + stable + compute-budget-adaptive cooldown</li>
 </ul>
-<h3 id="522-the-sgf-memory-manager"><strong>5.2.2 The SGF Memory Manager</strong></h3>
+<h3 id="522-the-sgf-memory-manager">5.2.2 The SGF Memory Manager</h3>
 <p>The SGF memory manager applies IRE to the problem of deciding which activations to checkpoint. The decision rule is derived from the roofline model: for each layer l, compute the arithmetic intensity I_l = FLOPs_l / bytes_l. If I_l &lt; ridge_point, the layer is memory-bound and recomputation is preferred. If I_l &gt; ridge_point, the layer is compute-bound and storing the activation is preferred.</p>
 <p>The sufficient statistic is the per-layer (I_l, size_l) pair — two scalars per layer sufficient to determine the optimal checkpointing policy without empirical profiling.</p>
-<h3 id="523-the-sgf-normaliser"><strong>5.2.3 The SGF Normaliser</strong></h3>
+<h3 id="523-the-sgf-normaliser">5.2.3 The SGF Normaliser</h3>
 <p>All normalisation operations in SGF are Welford instances. For training-time normalisation (BatchNorm, LayerNorm, RMSNorm), the Welford statistic maintains the sufficient statistics for the activation distribution, updated online. For gradient statistics (ZClip), the Welford statistic maintains the sufficient statistics for the gradient norm distribution. For data quality estimation, the Welford statistic maintains the sufficient statistics for the quality score distribution across the corpus.</p>
 <p>Critically, all these Welford instances share the same algebraic structure and can be implemented with the same primitive: the parallel Welford merge T(S_A, S_B) -&gt; S_{A+B}. This makes SGF natively distributed: shards maintain local Welford states and merge at communication boundaries.</p>
-<h3 id="524-the-sgf-inference-engine"><strong>5.2.4 The SGF Inference Engine</strong></h3>
+<h3 id="524-the-sgf-inference-engine">5.2.4 The SGF Inference Engine</h3>
 <p>The SGF inference engine combines speculative decoding with MoE routing as a two-level IRE system:</p>
 <ul>
 <li>Level 1 (Token level): The draft model's predictive distribution q is the IRE sufficient statistic for the acceptance decision. Acceptance probability = min(1, p_target / q_draft).</li>
@@ -307,11 +395,11 @@
 <li>The two levels interact: draft model quality (acceptance rate alpha) determines the throughput multiplier; expert utilisation balance determines the hardware efficiency.</li>
 </ul>
 <p>The SGF prediction: combining MoE with speculative decoding should yield super-additive speedups because the draft model for a MoE target can itself be a low-expert-count version of the same architecture (self-speculative decoding at the expert level). This is consistent with the MoSE architecture (2025) which enables slimmable experts as implicit draft models.</p>
-<h2 id="53-theoretical-properties"><strong>5.3 Theoretical Properties</strong></h2>
-<h3 id="531-convergence"><strong>5.3.1 Convergence</strong></h3>
+<h2 id="53-theoretical-properties">5.3 Theoretical Properties</h2>
+<h3 id="531-convergence">5.3.1 Convergence</h3>
 <p>SGF inherits the convergence guarantees of its component IRE instances. The Muon optimizer is a Shampoo variant with convergence rate O(1/sqrt(T)) in the non-convex setting. The K-FAC metric estimator converges to the true Fisher metric as the EMA window grows. The ZClip threshold converges to the true gradient norm distribution mean and variance via Welford.</p>
 <p>The interaction between the Dynamics Layer and the EoS phenomenon creates a natural stability certificate: the sharpness monitor in the Metric Layer tracks lambda_max and signals the Control Layer when 2/eta is approached. The WSD scheduler can then respond by beginning the cooldown phase — turning the edge-of-stability detection into a principled training termination condition.</p>
-<h3 id="532-memory-complexity"><strong>5.3.2 Memory Complexity</strong></h3>
+<h3 id="532-memory-complexity">5.3.2 Memory Complexity</h3>
 <p>SGF maintains the following total state beyond model parameters:</p>
 <ul>
 <li>Metric Layer: O(d_in^2 + d_out^2) per layer for Kronecker factors (same as K-FAC)</li>
@@ -320,22 +408,22 @@
 <li>Inference Engine: O(V) for draft model distribution (V = vocabulary size); O(N_experts) for load-balancing tracker</li>
 </ul>
 <p>Total additional state is dominated by the Kronecker factors, approximately O(d^2) per layer where d is the layer width. For typical transformer layers d = 4096, this is 16M parameters per layer — manageable at the scales where K-FAC has been demonstrated to outperform Adam. For very wide models, diagonal approximations can reduce this to O(d).</p>
-<h3 id="533-communication-complexity"><strong>5.3.3 Communication Complexity</strong></h3>
+<h3 id="533-communication-complexity">5.3.3 Communication Complexity</h3>
 <p>In distributed settings, SGF communicates sufficient statistics rather than raw gradients. The Welford merge operation T(S_A, S_B) requires transmitting three scalars per normalisation dimension — a factor of O(n) reduction in communication compared to transmitting the raw data. The Kronecker factor merge requires transmitting two small matrices (d_in^2 + d_out^2 scalars) rather than the full gradient matrix (d_in * d_out scalars per parameter). For wide layers d_out &gt;&gt; d_in, this is approximately a d_out/d_in reduction in communication.</p>
-<h1 id="6-predictions-and-experimental-validation"><strong>6. Predictions and Experimental Validation</strong></h1>
-<h2 id="61-novel-predictions"><strong>6.1 Novel Predictions</strong></h2>
+<h2 id="6-predictions-and-experimental-validation">6. Predictions and Experimental Validation</h2>
+<h2 id="61-novel-predictions">6.1 Novel Predictions</h2>
 <p>SGF generates the following testable predictions:</p>
-<h3 id="prediction-1-muon-k-fac-synergy"><strong>Prediction 1: Muon + K-FAC Synergy</strong></h3>
+<h3 id="prediction-1-muon-k-fac-synergy">Prediction 1: Muon + K-FAC Synergy</h3>
 <p>Muon (spectral whitening of momentum) and K-FAC (spectral whitening via Kronecker Fisher estimate) address complementary aspects of the curvature problem. Muon normalises the update direction; K-FAC normalises the update magnitude. Combined, they should achieve convergence rates closer to second-order methods while maintaining the memory overhead of first-order methods. Predicted speedup: 1.5-2x over Adam in iterations-to-convergence, comparable to SOAP but without the eigenbasis computation overhead.</p>
-<h3 id="prediction-2-welford-zclip-wsd-integration"><strong>Prediction 2: Welford ZClip + WSD Integration</strong></h3>
+<h3 id="prediction-2-welford-zclip-wsd-integration">Prediction 2: Welford ZClip + WSD Integration</h3>
 <p>ZClip's Welford statistic for gradient norms provides a natural signal for WSD phase transitions: when the gradient norm distribution enters a low-variance, stable regime (ZClip seldom triggers), this is a reliable indicator that the stable phase is ending and the cooldown phase should begin. This eliminates the remaining manual hyperparameter in WSD (when to start cooldown), replacing it with a fully automatic IRE-based trigger.</p>
-<h3 id="prediction-3-eos-aware-checkpointing"><strong>Prediction 3: EoS-Aware Checkpointing</strong></h3>
+<h3 id="prediction-3-eos-aware-checkpointing">Prediction 3: EoS-Aware Checkpointing</h3>
 <p>The optimal checkpoint placement changes with the training phase. During progressive sharpening, the activation distribution changes rapidly — checkpoint spacing should be denser. At the edge of stability, the distribution is quasi-stationary — checkpoint spacing can be wider. Tracking lambda_max via power iteration (O(d) per step) and adapting the checkpoint schedule to the training phase should reduce unnecessary recomputation by 20-40%.</p>
-<h3 id="prediction-4-data-qqt-scaling-law-universality"><strong>Prediction 4: Data QQT Scaling Law Universality</strong></h3>
+<h3 id="prediction-4-data-qqt-scaling-law-universality">Prediction 4: Data QQT Scaling Law Universality</h3>
 <p>The quality-quantity tradeoff scaling law L(N, D, Q) = A/N^alpha + B/(D^beta * Q^gamma) should hold not just for VLMs but for any modality where data quality is measurable. The exponent gamma characterises how much quality substitutes for quantity: gamma &gt; 1 means quality and quantity are more than linearly interchangeable; gamma &lt; 1 means there are diminishing returns to quality. The SGF prediction: gamma is related to the intrinsic dimensionality of the task manifold — high-dimensional tasks (code, math) should have gamma close to 1; low-dimensional tasks (simple classification) should have gamma &gt;&gt; 1.</p>
-<h3 id="prediction-5-moe-expert-count-as-ire-granularity"><strong>Prediction 5: MoE Expert Count as IRE Granularity</strong></h3>
+<h3 id="prediction-5-moe-expert-count-as-ire-granularity">Prediction 5: MoE Expert Count as IRE Granularity</h3>
 <p>In the SGF framework, MoE routing is an IRE instance over the expert activation manifold. The number of experts N determines the granularity of the IRE partition. The optimal N should therefore scale with the intrinsic dimension of the task distribution: more diverse tasks require finer expert partitions (more experts). The 2025 trend toward fine-grained experts (DeepSeek-V3: 256 experts) over coarse-grained (Mixtral: 8 experts) is consistent with this prediction, as larger models are trained on more diverse data.</p>
-<h2 id="62-proposed-experimental-programme"><strong>6.2 Proposed Experimental Programme</strong></h2>
+<h2 id="62-proposed-experimental-programme">6.2 Proposed Experimental Programme</h2>
 <p><strong>Experiment</strong></p>
 <p><strong>What it tests</strong></p>
 <p><strong>Key metric</strong></p>
@@ -364,34 +452,34 @@
 <p>Inference synergy prediction</p>
 <p>Throughput vs. separate spec-decode + MoE</p>
 <p>Multiplicative speedup from shared architecture</p>
-<h1 id="7-open-problems"><strong>7. Open Problems</strong></h1>
+<h2 id="7-open-problems">7. Open Problems</h2>
 <p>Five open problems would, if resolved, complete the SGF framework:</p>
-<h3 id="open-problem-1-the-optimal-riemannian-metric-for-transformers"><strong>Open Problem 1: The Optimal Riemannian Metric for Transformers</strong></h3>
+<h3 id="open-problem-1-the-optimal-riemannian-metric-for-transformers">Open Problem 1: The Optimal Riemannian Metric for Transformers</h3>
 <p>The Fisher information matrix is the theoretically justified metric for probabilistic models. But transformers are not purely probabilistic models — they are deterministic functions with a probabilistic output layer. The correct metric for the deterministic components (attention, MLP layers) may differ from the Fisher metric. Empirically, Muon (which uses the spectral norm metric) outperforms Adam (which uses the diagonal Fisher) for these components. The open problem: what is the optimal Riemannian metric for each component type, and is there a unified metric that works for all?</p>
-<h3 id="open-problem-2-welford-for-non-gaussian-distributions"><strong>Open Problem 2: Welford for Non-Gaussian Distributions</strong></h3>
+<h3 id="open-problem-2-welford-for-non-gaussian-distributions">Open Problem 2: Welford for Non-Gaussian Distributions</h3>
 <p>Welford's algorithm provides exact sufficient statistics for Gaussian distributions. Activation distributions in deep transformers are not Gaussian — they have heavy tails (gradient spike distributions) and multi-modality (MoE routing concentrations). The open problem: what are the correct sufficient statistics for these distributions, and can they be maintained online with O(1) state? Recent work on online quantile estimation (P^2 algorithm, count-min sketches) suggests this is tractable.</p>
-<h3 id="open-problem-3-ire-across-training-phases"><strong>Open Problem 3: IRE Across Training Phases</strong></h3>
+<h3 id="open-problem-3-ire-across-training-phases">Open Problem 3: IRE Across Training Phases</h3>
 <p>WSD identifies three training phases (warmup, stable, cooldown) with distinct dynamics. The edge-of-stability analysis identifies three dynamical regimes (progressive sharpening, EoS, convergence). These phase structures should be unified. The open problem: is there a single IRE sufficient statistic that identifies the current training phase and prescribes the optimal algorithm for that phase, creating a fully adaptive training algorithm?</p>
-<h3 id="open-problem-4-the-data-manifold-geometry"><strong>Open Problem 4: The Data Manifold Geometry</strong></h3>
+<h3 id="open-problem-4-the-data-manifold-geometry">Open Problem 4: The Data Manifold Geometry</h3>
 <p>The QQT scaling law treats data quality as a scalar Q. But data quality is multi-dimensional: coverage, correctness, diversity, and format are all independent quality axes. The open problem: what is the correct Riemannian metric on the data manifold, and how does the intrinsic geometry of the data distribution interact with the intrinsic geometry of the parameter manifold via the Fisher information?</p>
-<h3 id="open-problem-5-sgf-on-non-euclidean-hardware"><strong>Open Problem 5: SGF on Non-Euclidean Hardware</strong></h3>
+<h3 id="open-problem-5-sgf-on-non-euclidean-hardware">Open Problem 5: SGF on Non-Euclidean Hardware</h3>
 <p>Current GPU/TPU architectures are designed for dense tensor contractions — Euclidean operations. IRE instances that exploit Riemannian geometry (K-FAC, Muon, natural gradient) involve matrix square roots, polar decompositions, and Kronecker inversions that are expensive on current hardware. The open problem: can hardware be designed (or existing hardware repurposed) to natively accelerate the core operations of IRE — specifically, online symmetric positive definite matrix inversions and Newton-Schulz polynomial iterations — to make SGF practical at all scales without overhead?</p>
-<h1 id="8-discussion"><strong>8. Discussion</strong></h1>
-<h2 id="81-relationship-to-existing-frameworks"><strong>8.1 Relationship to Existing Frameworks</strong></h2>
+<h2 id="8-discussion">8. Discussion</h2>
+<h2 id="81-relationship-to-existing-frameworks">8.1 Relationship to Existing Frameworks</h2>
 <p>The SGF framework is most closely related to three lines of prior work:</p>
 <p>Information geometry (Amari, 1998) provides the theoretical foundation. Amari showed that the parameter space of a statistical model is a Riemannian manifold with the Fisher information metric, and that natural gradient descent is the geometrically correct optimisation algorithm. SGF extends this by: (a) arguing that the streaming sufficient statistic structure is not just a computational convenience but a deep property of the manifold; (b) showing that the same structure extends to data space, activation space, and routing space, not just parameter space; and (c) building the full system architecture from IRE primitives rather than just the optimizer.</p>
 <p>Free Energy Principle (Friston, 2010) proposes that adaptive systems minimise a single scalar — variational free energy — across all levels of a hierarchical model. SGF can be interpreted as a computational implementation of the FEP: the sufficient statistics S at each layer are the model's beliefs about the current state of the layer above; the IRE update T is belief updating; and the read-out phi is action selection. The Riemannian metric F(S) plays the role of precision in the FEP formulation.</p>
 <p>Algorithmic information theory provides the language for the data–compute duality meta-pattern. The quality parameter Q in the QQT scaling law is related to the algorithmic complexity of the data relative to the task: high-quality data is data that is close to the Kolmogorov minimum description of the task, while low-quality data has high redundancy or irrelevant information. The scaling law L = A/N^alpha + B/(D^beta * Q^gamma) is then a statement about the information-theoretic relationship between model capacity, data volume, and data quality.</p>
-<h2 id="82-limitations"><strong>8.2 Limitations</strong></h2>
+<h2 id="82-limitations">8.2 Limitations</h2>
 <p>Several limitations should be noted. First, SGF is primarily a framework for supervised and self-supervised learning — its extension to reinforcement learning, where the data distribution changes with the policy, requires additional work on the data manifold geometry. Second, the theoretical predictions are derived under the assumption that sufficient statistics are exactly maintained; in practice, EMA decay introduces a forgetting effect that can bias the metric estimate in non-stationary settings. Third, the experimental programme proposed in Section 6 requires significant compute to validate at scale.</p>
-<h2 id="83-broader-implications"><strong>8.3 Broader Implications</strong></h2>
+<h2 id="83-broader-implications">8.3 Broader Implications</h2>
 <p>If the SGF framework is correct, it has implications beyond algorithm design. It suggests that the architecture of an AI system should be designed around its sufficient statistics — the minimal information needed at each interface — rather than around raw tensors. This is the opposite of current practice, where large intermediate tensors are the primary currency of computation and sufficient statistics are computed only locally within components.</p>
 <p>More speculatively: if all effective AI algorithms are IRE instances on Riemannian manifolds, then the design space of AI systems is the space of (manifold, statistic, update, readout) tuples — a well-defined mathematical object. The systematic exploration of this space via the toolkit of differential geometry, information theory, and algebraic statistics may be more productive than the current empirical trial-and-error approach to algorithm design.</p>
-<h1 id="9-conclusion"><strong>9. Conclusion</strong></h1>
+<h2 id="9-conclusion">9. Conclusion</h2>
 <p>We have surveyed sixteen canonical techniques in modern neural network training and inference, identified three deep meta-patterns (Streaming Sufficiency, Spectral Geometry, Data–Compute Duality), formalised their common structure as Incremental Riemannian Estimation, and derived the Streaming Geometry Framework — a modular AI system architecture in which every component is an IRE instance.</p>
 <p>The central claim of this paper: the apparently disparate techniques of gradient checkpointing, online softmax, Welford normalisation, Muon optimisation, K-FAC preconditioning, ZClip adaptive clipping, WSD scheduling, edge-of-stability dynamics, speculative decoding, MoE routing, and compute-aware data filtering are all the same algorithm applied to different manifolds with different sufficient statistics. They are all streaming estimators of the Riemannian geometry of their respective problem spaces.</p>
 <p>The practical import: a new technique that exploits a previously unknown sufficient statistic on a previously ignored manifold will automatically integrate with all existing SGF components. The framework provides a search strategy: look for Riemannian structure in the problem space, find the sufficient statistic for that geometry, and build an online estimator. The surprising implication of the last decade of deep learning research is that this search always succeeds.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>Amari, S. (1998). Natural gradient works efficiently in learning. Neural Computation, 10(2), 251-276.</p>
 <p>Arora, S., Li, Z., Liu, H. (2022). Understanding gradient descent on edge of stability in deep learning. ICML 2022.</p>
 <p>Bernstein, J., Newhouse, L. (2024). Old optimizer, new norm. arXiv:2409.20325.</p>
@@ -424,6 +512,31 @@
 <p>Wang, G., et al. (2025). AdaGC: Improving training stability for large language model pretraining. arXiv:2502.11034.</p>
 <p>Welford, B.P. (1962). Note on a method for calculating corrected sums of squares and products. Technometrics, 4(3), 419-420.</p>
 <p>Hao, H., Zhao, R., et al. (2024). Liger-Kernel: Efficient triton kernels for LLM training. arXiv:2410.10989.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

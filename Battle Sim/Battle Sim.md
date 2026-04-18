@@ -1,4 +1,10 @@
-# Modern Mathematical Battle Calculation Systems
+# Modern mathematical battle calculation systems
+
+Survey note — Lanchester roots through Markov-style combat models; citations and numeric parameters should be verified against primary sources before operational use.
+
+## Abstract
+
+This note surveys modern mathematical combat models—from Hughes-style discrete salvos and extended Lanchester formulations to Markov-state battle models—and lists typical equations, features, and caveats. It is a reading map, not an operational manual.
 
 ## Overview
 Modern battle calculation systems have evolved from the foundational Lanchester equations (1915-1916) into sophisticated mathematical frameworks that model contemporary warfare's complexity, including missile combat, information warfare, and asymmetric conflicts.

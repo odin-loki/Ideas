@@ -1,0 +1,12 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=url
+command=/usr/bin/cmake;-P;/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-accel-test/_deps/sqlite_amalgamation-subbuild/sqlite_amalgamation-populate-prefix/src/sqlite_amalgamation-populate-stamp/download-sqlite_amalgamation-populate.cmake;COMMAND;/usr/bin/cmake;-P;/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-accel-test/_deps/sqlite_amalgamation-subbuild/sqlite_amalgamation-populate-prefix/src/sqlite_amalgamation-populate-stamp/verify-sqlite_amalgamation-populate.cmake;COMMAND;/usr/bin/cmake;-P;/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-accel-test/_deps/sqlite_amalgamation-subbuild/sqlite_amalgamation-populate-prefix/src/sqlite_amalgamation-populate-stamp/extract-sqlite_amalgamation-populate.cmake
+source_dir=/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-accel-test/_deps/sqlite_amalgamation-src
+work_dir=/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-accel-test/_deps
+url(s)=https://sqlite.org/2024/sqlite-amalgamation-3470200.zip
+hash=SHA256=aa73d8748095808471deaa8e6f34aa700e37f2f787f4425744f53fdd15a89c40
+no_extract=
+

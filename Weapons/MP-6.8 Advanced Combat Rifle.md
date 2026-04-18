@@ -41,7 +41,7 @@
 
 ## SECTION 2: AMMUNITION SPECIFICATIONS
 
-### 2.1 6.8×51mm Advanced Combat Round
+### 6. 8×51mm Advanced Combat Round
 - Cartridge Dimensions:
   * Overall Length: 71mm
   * Case Length: 51mm

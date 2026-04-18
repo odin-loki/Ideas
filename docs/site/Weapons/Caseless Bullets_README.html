@@ -3,18 +3,134 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Caseless Bullets README</title>
+  <meta name="description" content="--- 2. [Why Caseless Ammunition?](#2-why-caseless-ammunition) 3. [The Problem With Every Caseless Design Before This One](#3-the-problem-with-every-caseless-design-before-this-one) 4. [BPC System Overview — How It All Fits…"/>
+  <title>Biopolymere Caseless (BPC) System · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Weapons\Caseless Bullets_README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="biopolymere-caseless-bpc-system">Biopolymere Caseless (BPC) System</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-3"><a href="#a-next-generation-fully-consumable-small-arms-cartridge-built-from-engineered-proteins">A next-generation fully consumable small arms cartridge built from engineered proteins</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#1-what-is-the-bpc-system">1. What is the BPC System?</a></li>
+        <li class="toc-depth-2"><a href="#2-why-caseless-ammunition">2. Why Caseless Ammunition?</a></li>
+        <li class="toc-depth-3"><a href="#the-weight-problem">The Weight Problem</a></li>
+        <li class="toc-depth-3"><a href="#the-mechanical-simplification">The Mechanical Simplification</a></li>
+        <li class="toc-depth-3"><a href="#combat-load-example">Combat Load Example</a></li>
+        <li class="toc-depth-2"><a href="#3-the-problem-with-every-caseless-design-before-this-one">3. The Problem With Every Caseless Design Before This One</a></li>
+        <li class="toc-depth-3"><a href="#problem-1-cook-off">Problem 1: Cook-Off</a></li>
+        <li class="toc-depth-3"><a href="#problem-2-fragility">Problem 2: Fragility</a></li>
+        <li class="toc-depth-3"><a href="#problem-3-moisture">Problem 3: Moisture</a></li>
+        <li class="toc-depth-3"><a href="#problem-4-chamber-sealing">Problem 4: Chamber Sealing</a></li>
+        <li class="toc-depth-3"><a href="#why-all-prior-solutions-were-compromises">Why All Prior Solutions Were Compromises</a></li>
+        <li class="toc-depth-2"><a href="#4-bpc-system-overview-how-it-all-fits-together">4. BPC System Overview — How It All Fits Together</a></li>
+        <li class="toc-depth-2"><a href="#5-component-1-the-protein-casing">5. Component 1: The Protein Casing</a></li>
+        <li class="toc-depth-3"><a href="#what-it-is">What It Is</a></li>
+        <li class="toc-depth-3"><a href="#why-spider-silk">Why Spider Silk?</a></li>
+        <li class="toc-depth-3"><a href="#the-engineering-disulfide-cross-linking">The Engineering: Disulfide Cross-Linking</a></li>
+        <li class="toc-depth-3"><a href="#the-engineering-hydrophobic-surface-layer">The Engineering: Hydrophobic Surface Layer</a></li>
+        <li class="toc-depth-3"><a href="#specs">Specs</a></li>
+        <li class="toc-depth-2"><a href="#6-component-2-the-propellant">6. Component 2: The Propellant</a></li>
+        <li class="toc-depth-3"><a href="#what-it-is_1">What It Is</a></li>
+        <li class="toc-depth-3"><a href="#background-how-conventional-propellants-work">Background: How Conventional Propellants Work</a></li>
+        <li class="toc-depth-3"><a href="#the-bpc-approach-nitrated-poly-amino-acid">The BPC Approach: Nitrated Poly-Amino Acid</a></li>
+        <li class="toc-depth-3"><a href="#oxygen-balance">Oxygen Balance</a></li>
+        <li class="toc-depth-3"><a href="#why-a-solid-block">Why a Solid Block?</a></li>
+        <li class="toc-depth-3"><a href="#combustion-products">Combustion Products</a></li>
+        <li class="toc-depth-3"><a href="#specs_1">Specs</a></li>
+        <li class="toc-depth-2"><a href="#7-component-3-thermal-management">7. Component 3: Thermal Management</a></li>
+        <li class="toc-depth-3"><a href="#the-cook-off-problem-in-detail">The Cook-Off Problem in Detail</a></li>
+        <li class="toc-depth-3"><a href="#layer-1-intrinsically-high-ignition-temperature">Layer 1: Intrinsically High Ignition Temperature</a></li>
+        <li class="toc-depth-3"><a href="#layer-2-endothermic-disulfide-cleavage">Layer 2: Endothermic Disulfide Cleavage</a></li>
+        <li class="toc-depth-3"><a href="#layer-3-ablative-hydrophobic-outer-layer">Layer 3: Ablative Hydrophobic Outer Layer</a></li>
+        <li class="toc-depth-3"><a href="#layer-4-weapon-level-controls">Layer 4: Weapon-Level Controls</a></li>
+        <li class="toc-depth-2"><a href="#8-component-4-the-ignition-system">8. Component 4: The Ignition System</a></li>
+        <li class="toc-depth-3"><a href="#overview-dual-mode">Overview: Dual-Mode</a></li>
+        <li class="toc-depth-3"><a href="#primary-ignition-mechanical-percussion">Primary Ignition: Mechanical Percussion</a></li>
+        <li class="toc-depth-4"><a href="#how-a-conventional-primer-works">How a Conventional Primer Works</a></li>
+        <li class="toc-depth-4"><a href="#how-the-bpc-primer-works">How the BPC Primer Works</a></li>
+        <li class="toc-depth-4"><a href="#the-firing-pin-geometry">The Firing Pin Geometry</a></li>
+        <li class="toc-depth-4"><a href="#primer-compound-options">Primer Compound Options</a></li>
+        <li class="toc-depth-3"><a href="#secondary-ignition-carbon-nanotube-electrothermal">Secondary Ignition: Carbon Nanotube Electrothermal</a></li>
+        <li class="toc-depth-4"><a href="#what-carbon-nanotubes-are">What Carbon Nanotubes Are</a></li>
+        <li class="toc-depth-4"><a href="#how-the-cnt-ignition-works">How the CNT Ignition Works</a></li>
+        <li class="toc-depth-4"><a href="#electronic-ignition-advantages">Electronic Ignition Advantages</a></li>
+        <li class="toc-depth-4"><a href="#battery-and-power-requirements">Battery and Power Requirements</a></li>
+        <li class="toc-depth-2"><a href="#9-chamber-sealing-the-hardest-part">9. Chamber Sealing — The Hardest Part</a></li>
+        <li class="toc-depth-3"><a href="#why-this-is-hard">Why This Is Hard</a></li>
+        <li class="toc-depth-3"><a href="#the-bpc-solution">The BPC Solution</a></li>
+        <li class="toc-depth-3"><a href="#forward-seal">Forward Seal</a></li>
+        <li class="toc-depth-3"><a href="#dimensional-requirements">Dimensional Requirements</a></li>
+        <li class="toc-depth-2"><a href="#10-full-round-specifications">10. Full Round Specifications</a></li>
+        <li class="toc-depth-3"><a href="#round-dimensions">Round Dimensions</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-performance-targets">Ballistic Performance Targets</a></li>
+        <li class="toc-depth-3"><a href="#environmental-performance-targets">Environmental Performance Targets</a></li>
+        <li class="toc-depth-3"><a href="#weight-comparison-combat-load">Weight Comparison (Combat Load)</a></li>
+        <li class="toc-depth-2"><a href="#11-the-weapon-system">11. The Weapon System</a></li>
+        <li class="toc-depth-3"><a href="#what-changes-in-the-weapon">What Changes in the Weapon</a></li>
+        <li class="toc-depth-3"><a href="#what-stays-the-same">What Stays the Same</a></li>
+        <li class="toc-depth-3"><a href="#magazine">Magazine</a></li>
+        <li class="toc-depth-3"><a href="#maintenance">Maintenance</a></li>
+        <li class="toc-depth-2"><a href="#12-how-its-made-manufacturing-process">12. How It&#x27;s Made — Manufacturing Process</a></li>
+        <li class="toc-depth-3"><a href="#step-1-protein-synthesis-bioreactor">Step 1: Protein Synthesis (Bioreactor)</a></li>
+        <li class="toc-depth-3"><a href="#step-2-propellant-synthesis">Step 2: Propellant Synthesis</a></li>
+        <li class="toc-depth-3"><a href="#step-3-casing-moulding">Step 3: Casing Moulding</a></li>
+        <li class="toc-depth-3"><a href="#step-4-propellant-block-casting">Step 4: Propellant Block Casting</a></li>
+        <li class="toc-depth-3"><a href="#step-5-projectile-seating">Step 5: Projectile Seating</a></li>
+        <li class="toc-depth-3"><a href="#step-6-quality-control">Step 6: Quality Control</a></li>
+        <li class="toc-depth-2"><a href="#13-scale-up-from-lab-to-factory">13. Scale-Up: From Lab to Factory</a></li>
+        <li class="toc-depth-3"><a href="#the-challenge-in-numbers">The Challenge in Numbers</a></li>
+        <li class="toc-depth-3"><a href="#precedents-for-radical-scale-up">Precedents for Radical Scale-Up</a></li>
+        <li class="toc-depth-3"><a href="#current-production-landscape-20242025">Current Production Landscape (2024–2025)</a></li>
+        <li class="toc-depth-3"><a href="#scale-up-strategy">Scale-Up Strategy</a></li>
+        <li class="toc-depth-2"><a href="#14-cost-breakdown">14. Cost Breakdown</a></li>
+        <li class="toc-depth-3"><a href="#per-round-cost-at-mature-production">Per-Round Cost at Mature Production</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-current-military-ammunition">Comparison to Current Military Ammunition</a></li>
+        <li class="toc-depth-3"><a href="#cost-trajectory">Cost Trajectory</a></li>
+        <li class="toc-depth-2"><a href="#15-development-roadmap">15. Development Roadmap</a></li>
+        <li class="toc-depth-3"><a href="#trl-12-basic-research">TRL 1–2: Basic Research</a></li>
+        <li class="toc-depth-3"><a href="#trl-34-proof-of-concept">TRL 3–4: Proof of Concept</a></li>
+        <li class="toc-depth-3"><a href="#trl-56-component-and-system-validation">TRL 5–6: Component and System Validation</a></li>
+        <li class="toc-depth-3"><a href="#trl-79-system-demonstration-and-production">TRL 7–9: System Demonstration and Production</a></li>
+        <li class="toc-depth-2"><a href="#16-funding-strategy">16. Funding Strategy</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-targets-trl-14">Phase 1 Targets (TRL 1–4)</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-targets-trl-57">Phase 2 Targets (TRL 5–7)</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-targets-trl-79">Phase 3 Targets (TRL 7–9)</a></li>
+        <li class="toc-depth-3"><a href="#intellectual-property-notes">Intellectual Property Notes</a></li>
+        <li class="toc-depth-2"><a href="#17-frequently-asked-questions">17. Frequently Asked Questions</a></li>
+        <li class="toc-depth-2"><a href="#18-glossary">18. Glossary</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Biopolymere Caseless (BPC) System</h1>
+          <p class="doc-meta">Weapons\Caseless Bullets_README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>The <strong>Biopolymere Caseless (BPC) system</strong> is a theoretical design for a new type of small arms ammunition that has no metal case and no ejectable residue — every part of the round except the bullet is consumed when it fires.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h3 id="a-next-generation-fully-consumable-small-arms-cartridge-built-from-engineered-proteins">A next-generation fully consumable small arms cartridge built from engineered proteins</h3>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-what-is-the-bpc-system">What is the BPC System?</a></li>
@@ -36,24 +152,24 @@
 <li><a href="#17-frequently-asked-questions">Frequently Asked Questions</a></li>
 <li><a href="#18-glossary">Glossary</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="1-what-is-the-bpc-system">1. What is the BPC System?</h2>
 <p>The <strong>Biopolymere Caseless (BPC) system</strong> is a theoretical design for a new type of small arms ammunition that has no metal case and no ejectable residue — every part of the round except the bullet is consumed when it fires.</p>
-<p>Traditional bullets work like this:<br />
-- A brass cup (the <strong>case</strong>) holds everything together<br />
-- Inside the case sits gunpowder (the <strong>propellant</strong>)<br />
-- At the base of the case is a small percussion cap (the <strong>primer</strong>)<br />
+<p>Traditional bullets work like this:
+- A brass cup (the <strong>case</strong>) holds everything together
+- Inside the case sits gunpowder (the <strong>propellant</strong>)
+- At the base of the case is a small percussion cap (the <strong>primer</strong>)
 - A bullet sits in the mouth of the case</p>
 <p>When you fire, the firing pin strikes the primer, which ignites the propellant, which pushes the bullet down the barrel. The empty brass case ejects out the side of the gun.</p>
-<p><strong>The BPC round has no brass case.</strong> Instead:<br />
-- The structural body of the round is made from an <strong>engineered protein</strong> — essentially a synthetic spider silk<br />
-- The propellant is a <strong>protein that has been chemically modified to be explosive</strong><br />
-- The primer is <strong>built directly into the rear face</strong> of the round<br />
+<p><strong>The BPC round has no brass case.</strong> Instead:
+- The structural body of the round is made from an <strong>engineered protein</strong> — essentially a synthetic spider silk
+- The propellant is a <strong>protein that has been chemically modified to be explosive</strong>
+- The primer is <strong>built directly into the rear face</strong> of the round
 - Everything except the bullet <strong>burns completely</strong> when fired</p>
 <blockquote>
 <p><strong>In plain terms:</strong> imagine a self-contained block that is made of material that functions as both the bullet's container AND the gunpowder, burns away entirely, and leaves nothing behind.</p>
 </blockquote>
-<hr />
+<hr/>
 <h2 id="2-why-caseless-ammunition">2. Why Caseless Ammunition?</h2>
 <h3 id="the-weight-problem">The Weight Problem</h3>
 <p>A soldier carrying 300 rounds of standard 5.56mm NATO ammunition is carrying roughly <strong>half that weight in brass</strong> — the cases. The brass does its job and gets thrown on the ground. It contributes nothing to the mission after it leaves the gun.</p>
@@ -85,14 +201,14 @@
 </table>
 <p>Eliminate the case, and a soldier can carry roughly <strong>twice as many rounds for the same weight</strong>, or carry the same number of rounds and free up weight for other equipment.</p>
 <h3 id="the-mechanical-simplification">The Mechanical Simplification</h3>
-<p>A caseless weapon has no extraction cycle — there is no empty case to pull out and eject. This means:<br />
-- No extractor claw<br />
-- No ejection port (a significant weak point for dirt and debris entry)<br />
-- Fewer moving parts<br />
+<p>A caseless weapon has no extraction cycle — there is no empty case to pull out and eject. This means:
+- No extractor claw
+- No ejection port (a significant weak point for dirt and debris entry)
+- Fewer moving parts
 - Potentially higher cyclic rates</p>
 <h3 id="combat-load-example">Combat Load Example</h3>
 <p>The Heckler &amp; Koch G11 caseless rifle, the most advanced caseless weapon ever developed, demonstrated that 600 rounds of its 4.73mm caseless ammunition weighed the same as <strong>270 rounds</strong> of standard 5.56mm NATO. A soldier with a G11 and a full combat load of ammo had more than twice the firepower per kilogram of ammunition carried.</p>
-<hr />
+<hr/>
 <h2 id="3-the-problem-with-every-caseless-design-before-this-one">3. The Problem With Every Caseless Design Before This One</h2>
 <p>Every caseless design in history ran into the same four problems:</p>
 <h3 id="problem-1-cook-off">Problem 1: Cook-Off</h3>
@@ -105,13 +221,13 @@
 <h3 id="problem-4-chamber-sealing">Problem 4: Chamber Sealing</h3>
 <p>The brass case expands when fired and seals the chamber, preventing hot combustion gases from venting backwards into the mechanism. Without a case, you need another way to seal the chamber. The G11 used a rotating cylindrical chamber — an extraordinarily complex mechanism described by critics as "the inside of a clock." That complexity made the G11 difficult to maintain and expensive to produce.</p>
 <h3 id="why-all-prior-solutions-were-compromises">Why All Prior Solutions Were Compromises</h3>
-<p>Prior caseless designs tried to solve all four problems with one material — the propellant block itself. The block had to be:<br />
-- Mechanically strong (fragility problem)<br />
-- Moisture-resistant (weatherproofing problem)<br />
-- Heat-resistant up to a point (cook-off problem)<br />
+<p>Prior caseless designs tried to solve all four problems with one material — the propellant block itself. The block had to be:
+- Mechanically strong (fragility problem)
+- Moisture-resistant (weatherproofing problem)
+- Heat-resistant up to a point (cook-off problem)
 - Yet also burn completely and reliably on ignition</p>
 <p>These requirements fight each other. Making the propellant harder makes it more brittle. Making it moisture-resistant changes its burn chemistry. The BPC design solves this by <strong>separating the functions across different materials</strong>, each optimised for its specific job.</p>
-<hr />
+<hr/>
 <h2 id="4-bpc-system-overview-how-it-all-fits-together">4. BPC System Overview — How It All Fits Together</h2>
 <p>The BPC round has four distinct functional layers:</p>
 <pre><code>┌─────────────────────────────────────────────────┐
@@ -119,7 +235,7 @@
 │  Standard copper-jacketed or solid copper bullet│
 ├─────────────────────────────────────────────────┤
 │  PROPELLANT BLOCK                               │
-│  Nitrated poly-amino acid — the &quot;fuel&quot;          │
+│  Nitrated poly-amino acid — the "fuel"          │
 │  Cast as a high-density monolithic solid        │
 ├─────────────────────────────────────────────────┤
 │  STRUCTURAL CASING (wraps the propellant block) │
@@ -132,14 +248,14 @@
 │  ignition) — fully consumable, no brass cup    │
 └─────────────────────────────────────────────────┘
 </code></pre>
-<p>When fired:<br />
-1. The firing pin strikes the aft face<br />
-2. The percussion primer initiates<br />
-3. The flame jet ignites the propellant block<br />
-4. The propellant block burns completely<br />
-5. The casing burns with it<br />
+<p>When fired:
+1. The firing pin strikes the aft face
+2. The percussion primer initiates
+3. The flame jet ignites the propellant block
+4. The propellant block burns completely
+5. The casing burns with it
 6. The only thing that leaves the barrel is the bullet</p>
-<hr />
+<hr/>
 <h2 id="5-component-1-the-protein-casing">5. Component 1: The Protein Casing</h2>
 <h3 id="what-it-is">What It Is</h3>
 <p>The casing is made from a <strong>recombinant spider silk protein</strong> that has been engineered beyond natural spider silk. It is not woven or spun — it is moulded into shape like a plastic part.</p>
@@ -171,9 +287,9 @@
 <h3 id="the-engineering-disulfide-cross-linking">The Engineering: Disulfide Cross-Linking</h3>
 <p>Natural spider silk proteins do not form a rigid solid on their own — they form fibres. For the BPC casing we need a rigid moulded shape, like a plastic part. This is achieved by engineering the protein to include many <strong>cysteine</strong> amino acid residues throughout its structure.</p>
 <p>Cysteine residues form <strong>disulfide bonds</strong> between protein chains — chemical bridges written as R–S–S–R. When these form throughout the protein matrix during the curing process, they create a three-dimensional web of covalent connections, converting the protein from a flexible fibre-forming material into a rigid cross-linked solid. This is the same basic principle as rubber vulcanisation, but in protein chemistry.</p>
-<p>The result:<br />
-- Mechanically rigid — resists deformation under handling loads<br />
-- Dimensionally stable — holds its moulded shape<br />
+<p>The result:
+- Mechanically rigid — resists deformation under handling loads
+- Dimensionally stable — holds its moulded shape
 - Thermally resistant — the disulfide network requires significant heat energy to break</p>
 <h3 id="the-engineering-hydrophobic-surface-layer">The Engineering: Hydrophobic Surface Layer</h3>
 <p>The outermost surface of the casing is designed with a high concentration of <strong>hydrophobic amino acids</strong>: leucine, phenylalanine, isoleucine, and valine. These residues have side chains that repel water. When they are concentrated at the surface, they create a self-assembling water-repellent layer — similar to how a lotus leaf sheds water, but built into the molecular structure of the protein itself.</p>
@@ -221,7 +337,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="6-component-2-the-propellant">6. Component 2: The Propellant</h2>
 <h3 id="what-it-is_1">What It Is</h3>
 <p>The propellant is a <strong>solid block of modified protein</strong> that has been chemically treated to make it explosive. Think of it as a biological analogue of nitrocellulose (smokeless powder) — but the backbone is an amino acid chain instead of a cellulose chain.</p>
@@ -241,10 +357,10 @@
 <p>The formula is:</p>
 <pre><code>Ω% = 1600 × (δ − 2α − β/2) / MW
 </code></pre>
-<p>Where:<br />
-- α = number of carbon atoms in the molecule<br />
-- β = number of hydrogen atoms<br />
-- δ = number of oxygen atoms<br />
+<p>Where:
+- α = number of carbon atoms in the molecule
+- β = number of hydrogen atoms
+- δ = number of oxygen atoms
 - MW = molecular weight</p>
 <table>
 <thead>
@@ -350,12 +466,12 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="7-component-3-thermal-management">7. Component 3: Thermal Management</h2>
 <h3 id="the-cook-off-problem-in-detail">The Cook-Off Problem in Detail</h3>
-<p>When a gun fires, the propellant combustion releases heat. Some of this heat goes into the barrel, some into the bolt, and in a conventional system some is carried away by the ejected brass case. When firing rapidly:<br />
-- Each round leaves the hot barrel still slightly cooler than the previous one<br />
-- But the chamber is getting progressively hotter<br />
+<p>When a gun fires, the propellant combustion releases heat. Some of this heat goes into the barrel, some into the bolt, and in a conventional system some is carried away by the ejected brass case. When firing rapidly:
+- Each round leaves the hot barrel still slightly cooler than the previous one
+- But the chamber is getting progressively hotter
 - If the chamber reaches the propellant's spontaneous ignition temperature, the next round fires without a trigger pull</p>
 <p>Standard NC propellant ignites spontaneously at around <strong>170°C</strong>. High-Ignition-Temperature Propellant (HITP), developed by Dynamit Nobel for the G11, raised this to approximately <strong>270°C</strong> — buying 100°C of thermal margin. The BPC system uses a layered approach to achieve similar or better thermal protection.</p>
 <h3 id="layer-1-intrinsically-high-ignition-temperature">Layer 1: Intrinsically High Ignition Temperature</h3>
@@ -367,12 +483,12 @@
 <h3 id="layer-3-ablative-hydrophobic-outer-layer">Layer 3: Ablative Hydrophobic Outer Layer</h3>
 <p>The hydrophobic surface proteins — leucine, phenylalanine — are thermally more stable under oxidative conditions than polar residues. The outer surface of the casing therefore presents a slightly higher effective ignition barrier to radiant heat from the chamber walls than the propellant core, creating a useful temperature gradient.</p>
 <h3 id="layer-4-weapon-level-controls">Layer 4: Weapon-Level Controls</h3>
-<p>No ammunition-based thermal management strategy is sufficient for indefinitely sustained high-rate fire. The BPC weapon system includes:<br />
-- <strong>Ceramic or zirconia-coated chamber walls</strong> to reduce heat transfer from the barrel to the chambered round<br />
-- <strong>Lightweight barrel liner</strong> with low thermal mass<br />
+<p>No ammunition-based thermal management strategy is sufficient for indefinitely sustained high-rate fire. The BPC weapon system includes:
+- <strong>Ceramic or zirconia-coated chamber walls</strong> to reduce heat transfer from the barrel to the chambered round
+- <strong>Lightweight barrel liner</strong> with low thermal mass
 - <strong>Barrel temperature sensor and cyclic rate governor</strong> that enforces a firing pause when the barrel approaches a preset temperature threshold</p>
 <p>The BPC system's higher spontaneous ignition temperature relative to standard NC provides extra engineering margin that makes the weapon-level thermal controls less demanding than they would be for a conventional NC-based caseless design.</p>
-<hr />
+<hr/>
 <h2 id="8-component-4-the-ignition-system">8. Component 4: The Ignition System</h2>
 <h3 id="overview-dual-mode">Overview: Dual-Mode</h3>
 <p>The BPC ignition system has <strong>two independent pathways</strong>:</p>
@@ -398,17 +514,17 @@
 </tbody>
 </table>
 <p>The system works in mechanical-only mode in any standard weapon. The electronic pathway is an optional upgrade. If the electronics fail, the mechanical system still fires normally. This redundancy directly addresses the failure mode of both the Remington EtronX and the Voere VEC-91 — both of which lost all firing capability when their battery systems failed.</p>
-<hr />
+<hr/>
 <h3 id="primary-ignition-mechanical-percussion">Primary Ignition: Mechanical Percussion</h3>
 <h4 id="how-a-conventional-primer-works">How a Conventional Primer Works</h4>
 <p>In a normal cartridge, the primer is a small brass cup filled with a percussion-sensitive compound (typically lead styphnate) pressed between a cup and an anvil. When the firing pin hits the cup, the compound is crushed between cup and anvil and explodes. The resulting hot gas and flame pass through a flash hole into the main propellant charge and ignite it.</p>
 <h4 id="how-the-bpc-primer-works">How the BPC Primer Works</h4>
 <p>The BPC round has no separate primer cup — there is no brass base to mount one in. Instead, the <strong>aft face of the propellant block</strong> is impregnated during moulding with a percussion-sensitive compound at the surface.</p>
-<p>The process:<br />
-1. During moulding of the propellant block, the rear ~2mm of the mould cavity contains a suspension of percussion-sensitive compound in the protein matrix slurry<br />
-2. When cured, the percussion-sensitive material is embedded within the protein matrix at the aft face — like raisins in a dough, but distributed as a thin surface layer<br />
-3. A thin (50–100 μm) protein seal layer covers the primer surface to protect it during handling and feeding<br />
-4. When the firing pin strikes, it punches through this thin protective layer and impacts the percussion surface, initiating the primer compound<br />
+<p>The process:
+1. During moulding of the propellant block, the rear ~2mm of the mould cavity contains a suspension of percussion-sensitive compound in the protein matrix slurry
+2. When cured, the percussion-sensitive material is embedded within the protein matrix at the aft face — like raisins in a dough, but distributed as a thin surface layer
+3. A thin (50–100 μm) protein seal layer covers the primer surface to protect it during handling and feeding
+4. When the firing pin strikes, it punches through this thin protective layer and impacts the percussion surface, initiating the primer compound
 5. The flame jet propagates through the propellant block, initiating combustion</p>
 <h4 id="the-firing-pin-geometry">The Firing Pin Geometry</h4>
 <table>
@@ -462,7 +578,7 @@
 </tbody>
 </table>
 <p>For a lead-free BPC system, a diazonium or tetrazene priming compound is the target. This is consistent with the overall design goal of clean combustion products.</p>
-<hr />
+<hr/>
 <h3 id="secondary-ignition-carbon-nanotube-electrothermal">Secondary Ignition: Carbon Nanotube Electrothermal</h3>
 <h4 id="what-carbon-nanotubes-are">What Carbon Nanotubes Are</h4>
 <p>Carbon nanotubes (CNTs) are cylinders of carbon atoms arranged in a hexagonal lattice, with diameters in the nanometre range. Single-walled carbon nanotubes (SWCNTs) are among the best electrical and thermal conductors known:</p>
@@ -492,12 +608,12 @@
 <h4 id="how-the-cnt-ignition-works">How the CNT Ignition Works</h4>
 <p>A network of SWCNTs is embedded within the aft 1–2 mm of the propellant block, co-located with the percussion primer surface. The network is configured to present a resistance of approximately <strong>5–10 Ω</strong> to the firing circuit.</p>
 <p>The weapon's bolt face has two small electrode contacts (insulated from each other and from the casing body) that press against corresponding contact points on the aft face of the BPC round when the bolt is in battery.</p>
-<p>When the trigger is pulled electronically:<br />
-1. A battery and capacitor in the weapon discharge through the electrode contacts<br />
-2. Current flows through the CNT network<br />
-3. Joule heating raises the temperature of the network rapidly: <strong>Q = I²Rt</strong><br />
-   - At I = 10 A, R = 7 Ω, t = 2 ms: Q = (10)² × 7 × 0.002 = <strong>1.4 J</strong><br />
-4. This is sufficient to raise the primer surface temperature above initiation threshold in under 1 ms<br />
+<p>When the trigger is pulled electronically:
+1. A battery and capacitor in the weapon discharge through the electrode contacts
+2. Current flows through the CNT network
+3. Joule heating raises the temperature of the network rapidly: <strong>Q = I²Rt</strong>
+   - At I = 10 A, R = 7 Ω, t = 2 ms: Q = (10)² × 7 × 0.002 = <strong>1.4 J</strong>
+4. This is sufficient to raise the primer surface temperature above initiation threshold in under 1 ms
 5. The primer initiates and the propellant ignites normally</p>
 <p>The CNT network is completely consumed during firing — no residue.</p>
 <h4 id="electronic-ignition-advantages">Electronic Ignition Advantages</h4>
@@ -533,17 +649,17 @@
 </table>
 <h4 id="battery-and-power-requirements">Battery and Power Requirements</h4>
 <p>A basic implementation uses a <strong>9V alkaline battery</strong> feeding a <strong>small capacitor</strong> — essentially the same architecture as the Remington EtronX. A single 9V battery provides approximately 3–5 Wh of energy. At ~1.4 J per shot, this gives roughly <strong>7,000–12,000 shots per battery</strong>. In a combat scenario, battery replacement is a manageable logistics requirement and can be integrated with existing weapon battery systems (optics, suppressors).</p>
-<hr />
+<hr/>
 <h2 id="9-chamber-sealing-the-hardest-part">9. Chamber Sealing — The Hardest Part</h2>
 <h3 id="why-this-is-hard">Why This Is Hard</h3>
 <p>When a conventional round fires, the brass case expands under pressure and presses against the chamber walls, sealing combustion gases from venting back into the bolt face and mechanism. This is called <strong>obturation</strong>. Without a brass case, nothing automatically expands to provide this seal.</p>
 <p>The G11 solved this with an extraordinarily complex rotating cylindrical chamber mechanism — the round was enclosed on all sides within the chamber before firing. It worked, but required a weapon described as "the inside of a compact clock."</p>
 <h3 id="the-bpc-solution">The BPC Solution</h3>
 <p>The BPC approach leverages the <strong>elastic compliance of the protein matrix</strong> to achieve obturation at the bolt face, without requiring a rotating chamber.</p>
-<p>The bolt face has a recessed cavity that matches the profile of the BPC round's aft face. When the bolt closes and locks:<br />
-1. The annular rim of the bolt face seats against the outer edge of the BPC round's aft face<br />
-2. The bolt closure force (typically 200–500 N in a standard rifle bolt) compresses the protein matrix surface slightly — it deforms elastically, like a soft polymer O-ring<br />
-3. This elastic deformation creates a gas-tight seal around the perimeter of the contact surface<br />
+<p>The bolt face has a recessed cavity that matches the profile of the BPC round's aft face. When the bolt closes and locks:
+1. The annular rim of the bolt face seats against the outer edge of the BPC round's aft face
+2. The bolt closure force (typically 200–500 N in a standard rifle bolt) compresses the protein matrix surface slightly — it deforms elastically, like a soft polymer O-ring
+3. This elastic deformation creates a gas-tight seal around the perimeter of the contact surface
 4. At the centre, the bolt face is recessed; only the rim contacts the round</p>
 <p>This is conceptually similar to how polymer-cased telescoped ammunition (Textron CT) achieves gas sealing — the polymer case base provides a compliant seal against the bolt face rather than expanding like brass.</p>
 <h3 id="forward-seal">Forward Seal</h3>
@@ -573,7 +689,7 @@
 </tbody>
 </table>
 <p>Injection moulding from a precision steel tool can achieve all of these. This is the same level of dimensional precision as quality polymer optical components — achievable but not trivial.</p>
-<hr />
+<hr/>
 <h2 id="10-full-round-specifications">10. Full Round Specifications</h2>
 <p>The following specifications are for a <strong>BPC 5.56mm-class round</strong> (conceptual equivalent of the M855A1 Enhanced Performance Round), used as the primary design reference throughout this document.</p>
 <h3 id="round-dimensions">Round Dimensions</h3>
@@ -704,7 +820,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="11-the-weapon-system">11. The Weapon System</h2>
 <h3 id="what-changes-in-the-weapon">What Changes in the Weapon</h3>
 <p>A BPC weapon is adapted from a conventional gas-operated rotating bolt design. The key mechanical differences:</p>
@@ -759,19 +875,19 @@
 <h3 id="magazine">Magazine</h3>
 <p>BPC rounds stack in a conventional box magazine with appropriate geometry for the shorter overall length. Because the rounds have no extractor groove and no brass case, the magazine's feed lips and follower geometry differ from a standard STANAG magazine. The sealed receiver means the magazine well must seal when a magazine is inserted — a simple rubber gasket accomplishes this.</p>
 <h3 id="maintenance">Maintenance</h3>
-<p>Because there is no ejection port, the receiver interior is largely protected from environmental contamination. The main maintenance requirements are:<br />
-- <strong>Barrel cleaning</strong>: reduced fouling vs. standard NC, but still required<br />
-- <strong>Electrode contact cleaning</strong>: CNT residue on bolt face contacts may accumulate over ~500 rounds — wipe clean with a solvent cloth<br />
-- <strong>Barrel temperature sensor calibration</strong>: annual or per manufacturer specification<br />
+<p>Because there is no ejection port, the receiver interior is largely protected from environmental contamination. The main maintenance requirements are:
+- <strong>Barrel cleaning</strong>: reduced fouling vs. standard NC, but still required
+- <strong>Electrode contact cleaning</strong>: CNT residue on bolt face contacts may accumulate over ~500 rounds — wipe clean with a solvent cloth
+- <strong>Barrel temperature sensor calibration</strong>: annual or per manufacturer specification
 - <strong>Battery replacement</strong>: approximately every 7,000–12,000 rounds</p>
-<hr />
+<hr/>
 <h2 id="12-how-its-made-manufacturing-process">12. How It's Made — Manufacturing Process</h2>
 <h3 id="step-1-protein-synthesis-bioreactor">Step 1: Protein Synthesis (Bioreactor)</h3>
 <p>Recombinant spidroin proteins are produced in <strong>E. coli bacteria</strong> in large fermentation tanks (bioreactors). The bacteria are genetically engineered to carry the spidroin gene sequence, which includes the elevated cysteine content and hydrophobic surface domain designed for the BPC casing.</p>
-<p>The bacteria are fed a nutrient broth and grown to high density. When protein expression is induced, they produce and accumulate the spider silk protein. After fermentation:<br />
-- Bacteria are lysed (broken open)<br />
-- Protein is extracted from the cell debris<br />
-- Purified to the required structural grade (no biomedical purity needed — simpler than pharmaceutical production)<br />
+<p>The bacteria are fed a nutrient broth and grown to high density. When protein expression is induced, they produce and accumulate the spider silk protein. After fermentation:
+- Bacteria are lysed (broken open)
+- Protein is extracted from the cell debris
+- Purified to the required structural grade (no biomedical purity needed — simpler than pharmaceutical production)
 - Concentrated into a gel or slurry</p>
 <p>Current best-in-class E. coli yields: <strong>14–20 g of purified protein per litre of fermentation broth</strong> (after downstream processing).</p>
 <p>Alternatively, <strong>transgenic silkworms</strong> (Kraig Biocraft platform) produce the protein as part of their silk filament, which is then processed. This platform currently achieves production costs below USD 300/kg — approximately 10× cheaper than fermentation.</p>
@@ -786,26 +902,26 @@
 </ol>
 <p>This step requires <strong>explosion-proof infrastructure</strong> and regulatory compliance (ATF licence in the U.S., equivalent in other jurisdictions). It is chemically analogous to industrial nitrocellulose production.</p>
 <h3 id="step-3-casing-moulding">Step 3: Casing Moulding</h3>
-<p>The purified casing protein slurry is:<br />
-1. Loaded into an <strong>injection moulding machine</strong><br />
-2. Injected under pressure into a precision steel mould cavity shaped to the BPC round geometry<br />
-3. UV light or a chemical catalyst triggers the disulfide crosslinking reaction, curing the protein into a rigid solid<br />
+<p>The purified casing protein slurry is:
+1. Loaded into an <strong>injection moulding machine</strong>
+2. Injected under pressure into a precision steel mould cavity shaped to the BPC round geometry
+3. UV light or a chemical catalyst triggers the disulfide crosslinking reaction, curing the protein into a rigid solid
 4. The mould is opened and the casing is ejected — dimensionally precise and ready for assembly</p>
 <h3 id="step-4-propellant-block-casting">Step 4: Propellant Block Casting</h3>
-<p>The nitrated propellant compound is:<br />
-1. Dissolved or plasticised into a castable consistency<br />
-2. Poured or injected into the interior cavity of the casing<br />
+<p>The nitrated propellant compound is:
+1. Dissolved or plasticised into a castable consistency
+2. Poured or injected into the interior cavity of the casing
 3. A second moulding step forms the aft face of the round, incorporating the percussion-sensitive primer compound and the CNT ignition network in the final 2mm</p>
 <p>This is analogous to how composite solid rocket propellant is cast into a motor case.</p>
 <h3 id="step-5-projectile-seating">Step 5: Projectile Seating</h3>
 <p>A standard copper-jacketed or solid copper bullet is pressed into the mouth of the completed propellant-in-casing assembly. This is mechanically similar to conventional bullet seating in a case neck, adapted for the protein matrix interface.</p>
 <h3 id="step-6-quality-control">Step 6: Quality Control</h3>
-<p>Each round is:<br />
-- Dimensionally inspected (laser or CMM measurement)<br />
-- Weight-checked<br />
-- Sampled for burn rate and pressure testing (destructive, statistical sampling)<br />
+<p>Each round is:
+- Dimensionally inspected (laser or CMM measurement)
+- Weight-checked
+- Sampled for burn rate and pressure testing (destructive, statistical sampling)
 - Subjected to environmental conditioning per applicable military specifications before batch release</p>
-<hr />
+<hr/>
 <h2 id="13-scale-up-from-lab-to-factory">13. Scale-Up: From Lab to Factory</h2>
 <h3 id="the-challenge-in-numbers">The Challenge in Numbers</h3>
 <p>Consider supplying a single military force with 100 million rounds per year (a moderate procurement quantity for a mid-size NATO army):</p>
@@ -887,16 +1003,16 @@
 <p>Kraig Biocraft's transgenic silkworm platform is the most cost-competitive by approximately one order of magnitude relative to fermentation competitors. The company has U.S. Army funding for ballistic materials, directly adjacent to the BPC use case, and is actively expanding mulberry cultivation and rearing centre infrastructure in Southeast Asia.</p>
 <h3 id="scale-up-strategy">Scale-Up Strategy</h3>
 <p>A BPC programme would pursue a parallel-track scale-up:</p>
-<p><strong>Track A — Silkworm farming expansion</strong> (Kraig Biocraft model)<br />
-- Scale mulberry cultivation area and silkworm rearing centres in Southeast Asia<br />
-- Achieve 1,000+ tonne/year capacity within 10–15 years<br />
+<p><strong>Track A — Silkworm farming expansion</strong> (Kraig Biocraft model)
+- Scale mulberry cultivation area and silkworm rearing centres in Southeast Asia
+- Achieve 1,000+ tonne/year capacity within 10–15 years
 - Cost projection: &lt;$100/kg at 1,000-tonne scale (experience curve extrapolation)</p>
-<p><strong>Track B — Fermentation optimisation</strong> (E. coli or yeast)<br />
-- Target &gt;50 g/L fermentation titre (current best is 14–20 g/L)<br />
-- Reduce downstream processing steps using industrial-grade (not pharmaceutical-grade) protocols<br />
+<p><strong>Track B — Fermentation optimisation</strong> (E. coli or yeast)
+- Target &gt;50 g/L fermentation titre (current best is 14–20 g/L)
+- Reduce downstream processing steps using industrial-grade (not pharmaceutical-grade) protocols
 - Build 150 m³ bioreactor facilities modelled on Spiber's Thai plant architecture</p>
 <p>At $100/kg casing protein cost, the protein input per 5.56mm-class BPC round is approximately $0.04 — below the material cost of the equivalent brass case.</p>
-<hr />
+<hr/>
 <h2 id="14-cost-breakdown">14. Cost Breakdown</h2>
 <h3 id="per-round-cost-at-mature-production">Per-Round Cost at Mature Production</h3>
 <table>
@@ -1002,11 +1118,11 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="15-development-roadmap">15. Development Roadmap</h2>
 <p>The BPC system is currently at <strong>TRL 1</strong> (basic principles conceptually described). The following roadmap defines the path to a fielded system.</p>
 <h3 id="trl-12-basic-research">TRL 1–2: Basic Research</h3>
-<p><strong>Duration:</strong> 12–18 months<br />
+<p><strong>Duration:</strong> 12–18 months<br/>
 <strong>Budget:</strong> ~$500K–1.5M</p>
 <table>
 <thead>
@@ -1039,7 +1155,7 @@
 </tbody>
 </table>
 <h3 id="trl-34-proof-of-concept">TRL 3–4: Proof of Concept</h3>
-<p><strong>Duration:</strong> 24 months<br />
+<p><strong>Duration:</strong> 24 months<br/>
 <strong>Budget:</strong> ~$3–8M</p>
 <table>
 <thead>
@@ -1072,7 +1188,7 @@
 </tbody>
 </table>
 <h3 id="trl-56-component-and-system-validation">TRL 5–6: Component and System Validation</h3>
-<p><strong>Duration:</strong> 36 months<br />
+<p><strong>Duration:</strong> 36 months<br/>
 <strong>Budget:</strong> ~$15–40M</p>
 <table>
 <thead>
@@ -1105,7 +1221,7 @@
 </tbody>
 </table>
 <h3 id="trl-79-system-demonstration-and-production">TRL 7–9: System Demonstration and Production</h3>
-<p><strong>Duration:</strong> 60+ months<br />
+<p><strong>Duration:</strong> 60+ months<br/>
 <strong>Budget:</strong> ~$50–200M</p>
 <table>
 <thead>
@@ -1137,7 +1253,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="16-funding-strategy">16. Funding Strategy</h2>
 <h3 id="phase-1-targets-trl-14">Phase 1 Targets (TRL 1–4)</h3>
 <table>
@@ -1222,32 +1338,32 @@
 <h3 id="phase-3-targets-trl-79">Phase 3 Targets (TRL 7–9)</h3>
 <p>At TRL 7, the programme becomes attractive to prime defence contractors (Textron, General Dynamics, BAE Systems, Thales) as a licensing or joint venture opportunity. A programme of record at this stage typically involves Congressional appropriations and multi-year procurement contracts in the $50M–$1B+ range for initial production.</p>
 <h3 id="intellectual-property-notes">Intellectual Property Notes</h3>
-<p>Before any government contract submission, provisional patent applications should be filed covering:<br />
-1. The cross-linked spidroin protein matrix as an ammunition structural element<br />
-2. The nitrated poly-amino acid propellant formulation methodology<br />
-3. The dual mechanical/CNT ignition system for a consumable round<br />
-4. The sealing striker bolt face geometry for caseless rounds<br />
+<p>Before any government contract submission, provisional patent applications should be filed covering:
+1. The cross-linked spidroin protein matrix as an ammunition structural element
+2. The nitrated poly-amino acid propellant formulation methodology
+3. The dual mechanical/CNT ignition system for a consumable round
+4. The sealing striker bolt face geometry for caseless rounds
 5. The manufacturing process (injection moulding + UV crosslinking for protein ammunition)</p>
 <p>A strong patent portfolio is mandatory for negotiating licensing terms with prime contractors and for attracting private co-investment. The dual-use commercialisation story — the same silk protein infrastructure also serves ballistic body armour, high-performance textiles, and biomedical scaffolds — provides multiple investor exit pathways beyond the core defence programme.</p>
-<hr />
+<hr/>
 <h2 id="17-frequently-asked-questions">17. Frequently Asked Questions</h2>
-<p><strong>Q: Does this exist yet?</strong><br />
+<p><strong>Q: Does this exist yet?</strong><br/>
 No. The BPC system is a theoretical framework supported by published science in each of its component domains (spider silk production, energetic polymers, electronic ignition, caseless weapon design), but it has not been built or tested in any form. It is currently at TRL 1.</p>
-<p><strong>Q: Is this just a version of the G11?</strong><br />
+<p><strong>Q: Is this just a version of the G11?</strong><br/>
 No. The G11 used a solid block of synthetic nitramine propellant as both the case and the propellant — one material doing everything. The BPC system uses a separate structural protein casing and a separate energetic propellant, each independently optimised. It also uses a standard bolt-face sealing approach rather than the G11's rotating chamber. The result should be a simpler weapon and a more robust round.</p>
-<p><strong>Q: What stops the round from going off when you drop it?</strong><br />
+<p><strong>Q: What stops the round from going off when you drop it?</strong><br/>
 The percussion primer on the BPC round's aft face requires a concentrated impact energy of 8–12 J from a pointed striker probe. A drop impact distributes force across the full aft face surface — much lower pressure per unit area than a striker. Additionally, the protective protein seal layer adds a threshold to mechanical initiation. The CNT network has an electrostatic discharge safety threshold set well above any ESD likely from handling. Normal drops, impacts, and even moderate crushing forces should not initiate the round.</p>
-<p><strong>Q: What happens if the battery dies in the weapon?</strong><br />
+<p><strong>Q: What happens if the battery dies in the weapon?</strong><br/>
 The mechanical ignition system works independently of the electronic system. A dead battery means no electronic firing capability, but the weapon fires normally via mechanical striker. This is the critical operational advantage over the Remington EtronX and Voere VEC-91.</p>
-<p><strong>Q: Can a BPC weapon fire conventional cased ammunition?</strong><br />
+<p><strong>Q: Can a BPC weapon fire conventional cased ammunition?</strong><br/>
 No, and this is a real interoperability challenge. A BPC weapon is designed around a fundamentally different round geometry and sealing mechanism. This means that any military transitioning to BPC would need to manage a mixed inventory during the transition period. This is not unprecedented — the transition from .30-06 to 7.62mm NATO and then to 5.56mm also required weapon and ammunition fleet management — but it is a significant logistics and procurement consideration.</p>
-<p><strong>Q: Is the spider silk protein food-grade or toxic?</strong><br />
+<p><strong>Q: Is the spider silk protein food-grade or toxic?</strong><br/>
 Spider silk proteins are biocompatible — they are used in biomedical implants and sutures. The casing protein is not toxic. The nitrated propellant compound, however, is an energetic material and must be handled with appropriate explosive safety procedures, the same as any propellant or explosive material.</p>
-<p><strong>Q: Why hasn't anyone done this before?</strong><br />
+<p><strong>Q: Why hasn't anyone done this before?</strong><br/>
 Two reasons: (1) recombinant spider silk production at any meaningful scale did not exist until the last 5–10 years; and (2) the combination of using a protein matrix as both a structural casing and a thermal management element is a novel design concept that has not previously been proposed in the published caseless ammunition literature. The enabling technology (scalable recombinant silk production) is only now becoming commercially available.</p>
-<p><strong>Q: How does this compare to Textron's cased telescoped ammunition?</strong><br />
+<p><strong>Q: How does this compare to Textron's cased telescoped ammunition?</strong><br/>
 Textron's CT ammunition still has a case — a polymer/composite case — so it is not caseless. CT significantly reduces case weight (polymer vs. brass) but retains an ejection cycle. The BPC round is fully caseless with no ejection. Ballistically and operationally they address similar goals (weight reduction, modernised small arms), but through different architectures. CT is further along the TRL scale and is in active procurement evaluation; BPC is an earlier-stage concept with greater potential performance benefits and greater development risk.</p>
-<hr />
+<hr/>
 <h2 id="18-glossary">18. Glossary</h2>
 <p><strong>Ablative:</strong> A material that protects against heat by slowly burning, melting, or evaporating — carrying heat away with it rather than conducting it inward.</p>
 <p><strong>Azide group (–N₃):</strong> A functional group containing three nitrogen atoms. When added to a polymer backbone, it increases the polymer's nitrogen content and energy density. Used in GAP and related energetic binders.</p>
@@ -1277,11 +1393,36 @@ Textron's CT ammunition still has a case — a polymer/composite case — so it 
 <p><strong>TRL (Technology Readiness Level):</strong> A nine-level scale used by DARPA and the U.S. military to measure the maturity of a technology, from TRL 1 (basic principles observed) to TRL 9 (system proven in operational environment).</p>
 <p><strong>Transgenic silkworm:</strong> A silkworm (Bombyx mori) that has been genetically modified to produce spider silk proteins instead of (or in addition to) its own silk proteins. Used by Kraig Biocraft Laboratories for low-cost spider silk production.</p>
 <p><strong>Volumetric energy density:</strong> Energy content per unit volume. Measured in MJ/L. Higher values mean more energy in a smaller space — useful for ammunition design where round dimensions are constrained.</p>
-<hr />
-<p><em>BPC System — Technical Reference Document</em><br />
-<em>Classification: Conceptual / Pre-prototype</em><br />
-<em>Current TRL: 1</em><br />
+<hr/>
+<p><em>BPC System — Technical Reference Document</em><br/>
+<em>Classification: Conceptual / Pre-prototype</em><br/>
+<em>Current TRL: 1</em><br/>
 <em>Version: 1.0</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

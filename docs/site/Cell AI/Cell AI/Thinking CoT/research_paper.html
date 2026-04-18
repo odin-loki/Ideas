@@ -3,28 +3,106 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>research paper</title>
+  <meta name="description" content="We present a unified cognitive processing architecture that integrates bounded recursive Chain of Thought \(CoT\) reasoning with a biologically-inspired Cell AI memory substrate governed by reaction-diffusion partial differential equations. The system addresses a fundamental…"/>
+  <title>Bounded recursive cognition with reaction-diffusion memory · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../../index.html">Index</a>
-    <span class="path">Cell AI\Cell AI\Thinking CoT\research_paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../../index.html">Library</a>
+        <a href="../../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>BOUNDED RECURSIVE COGNITION WITH REACTION-DIFFUSION MEMORY:</strong></p>
-<p><strong>A UNIFIED ARCHITECTURE FOR SELF-REFLECTIVE PATTERN REASONING</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-background-and-related-work">2. Background and Related Work</a></li>
+        <li class="toc-depth-3"><a href="#21-chain-of-thought-reasoning">2.1 Chain of Thought Reasoning</a></li>
+        <li class="toc-depth-3"><a href="#22-reaction-diffusion-systems-in-neural-contexts">2.2 Reaction-Diffusion Systems in Neural Contexts</a></li>
+        <li class="toc-depth-3"><a href="#23-temporal-memory-integration">2.3 Temporal Memory Integration</a></li>
+        <li class="toc-depth-3"><a href="#24-entropy-based-complexity-measures-in-signal-processing">2.4 Entropy-Based Complexity Measures in Signal Processing</a></li>
+        <li class="toc-depth-3"><a href="#25-information-theoretic-question-generation">2.5 Information-Theoretic Question Generation</a></li>
+        <li class="toc-depth-2"><a href="#3-system-architecture">3. System Architecture</a></li>
+        <li class="toc-depth-3"><a href="#31-system-overview">3.1 System Overview</a></li>
+        <li class="toc-depth-3"><a href="#32-the-thoughtchain-bounded-recursive-reasoning">3.2 The ThoughtChain: Bounded Recursive Reasoning</a></li>
+        <li class="toc-depth-3"><a href="#33-internal-dialogue-loop">3.3 Internal Dialogue Loop</a></li>
+        <li class="toc-depth-3"><a href="#34-cell-ai-reaction-diffusion-memory-layer">3.4 Cell AI: Reaction-Diffusion Memory Layer</a></li>
+        <li class="toc-depth-2"><a href="#4-mathematical-framework">4. Mathematical Framework</a></li>
+        <li class="toc-depth-3"><a href="#41-thought-space-partition">4.1 Thought Space Partition</a></li>
+        <li class="toc-depth-3"><a href="#42-creative-generation-model">4.2 Creative Generation Model</a></li>
+        <li class="toc-depth-3"><a href="#43-pattern-evolution-dynamics">4.3 Pattern Evolution Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#44-confidence-and-the-dialogue-trigger">4.4 Confidence and the Dialogue Trigger</a></li>
+        <li class="toc-depth-3"><a href="#45-information-theoretic-question-selection">4.5 Information-Theoretic Question Selection</a></li>
+        <li class="toc-depth-3"><a href="#46-system-convergence-guarantees">4.6 System Convergence Guarantees</a></li>
+        <li class="toc-depth-2"><a href="#5-analytical-performance-profile">5. Analytical Performance Profile</a></li>
+        <li class="toc-depth-3"><a href="#51-computational-complexity">5.1 Computational Complexity</a></li>
+        <li class="toc-depth-3"><a href="#52-numerical-stability-of-the-pde-integrator">5.2 Numerical Stability of the PDE Integrator</a></li>
+        <li class="toc-depth-3"><a href="#53-statistical-behaviour-of-pattern-detection">5.3 Statistical Behaviour of Pattern Detection</a></li>
+        <li class="toc-depth-3"><a href="#54-memory-footprint">5.4 Memory Footprint</a></li>
+        <li class="toc-depth-3"><a href="#55-cache-efficiency-and-throughput-impact">5.5 Cache Efficiency and Throughput Impact</a></li>
+        <li class="toc-depth-2"><a href="#6-implementation">6. Implementation</a></li>
+        <li class="toc-depth-3"><a href="#61-core-processing-pipeline">6.1 Core Processing Pipeline</a></li>
+        <li class="toc-depth-3"><a href="#62-concurrency-model">6.2 Concurrency Model</a></li>
+        <li class="toc-depth-3"><a href="#63-distributed-processing">6.3 Distributed Processing</a></li>
+        <li class="toc-depth-2"><a href="#7-identified-bottlenecks-and-optimisation-roadmap">7. Identified Bottlenecks and Optimisation Roadmap</a></li>
+        <li class="toc-depth-3"><a href="#71-priority-1-high-impact-low-implementation-complexity">7.1 Priority 1: High Impact, Low Implementation Complexity</a></li>
+        <li class="toc-depth-3"><a href="#711-concurrent-sub-question-processing">7.1.1 Concurrent Sub-Question Processing</a></li>
+        <li class="toc-depth-3"><a href="#712-memoised-approxent-per-pattern">7.1.2 Memoised ApproxEnt per Pattern</a></li>
+        <li class="toc-depth-3"><a href="#713-precomputed-distance-matrix">7.1.3 Precomputed Distance Matrix</a></li>
+        <li class="toc-depth-3"><a href="#714-cfl-stable-timestep-enforcement">7.1.4 CFL-Stable Timestep Enforcement</a></li>
+        <li class="toc-depth-3"><a href="#72-priority-2-moderate-impact-moderate-complexity">7.2 Priority 2: Moderate Impact, Moderate Complexity</a></li>
+        <li class="toc-depth-3"><a href="#721-batched-multi-scale-convolution">7.2.1 Batched Multi-Scale Convolution</a></li>
+        <li class="toc-depth-3"><a href="#722-sub-question-branching-cap">7.2.2 Sub-Question Branching Cap</a></li>
+        <li class="toc-depth-3"><a href="#723-pattern-context-delta-compression">7.2.3 Pattern Context Delta Compression</a></li>
+        <li class="toc-depth-3"><a href="#73-priority-3-high-impact-high-complexity">7.3 Priority 3: High Impact, High Complexity</a></li>
+        <li class="toc-depth-3"><a href="#731-cranknicolson-implicit-integrator">7.3.1 Crank–Nicolson Implicit Integrator</a></li>
+        <li class="toc-depth-3"><a href="#732-approximate-nearest-neighbour-for-redundancy-removal">7.3.2 Approximate Nearest-Neighbour for Redundancy Removal</a></li>
+        <li class="toc-depth-3"><a href="#733-persistent-session-state">7.3.3 Persistent Session State</a></li>
+        <li class="toc-depth-2"><a href="#8-discussion">8. Discussion</a></li>
+        <li class="toc-depth-3"><a href="#81-the-structural-conservatism-finding">8.1 The Structural Conservatism Finding</a></li>
+        <li class="toc-depth-3"><a href="#82-relationship-to-the-active-learning-framework">8.2 Relationship to the Active Learning Framework</a></li>
+        <li class="toc-depth-3"><a href="#83-biological-analogues">8.3 Biological Analogues</a></li>
+        <li class="toc-depth-3"><a href="#84-limitations">8.4 Limitations</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusions">9. Conclusions</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Bounded recursive cognition with reaction-diffusion memory</h1>
+          <p class="doc-meta">Cell AI\Cell AI\Thinking CoT\research_paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We present a unified cognitive processing architecture that integrates bounded recursive Chain of Thought (CoT) reasoning with a biologically-inspired Cell AI memory substrate governed by reaction-diffusion partial differential equations. The system addresses a fundamental limitation of single-pass inference: the inability to close information gaps through self-directed questioning. Our architecture introduces three novel contributions. First, a mathematically grounded recursion scheme in which all resource limits — maximum depth, queue capacity, and minimum information gain — are derived from a single problem-size parameter n, yielding bounds of O(log₂ n), O(√n), and O(1/n) respectively. Second, an internal dialogue loop that generates information-theoretically motivated sub-questions when processing confidence falls below threshold, with question value scored as mutual information per unit cognitive cost. Third, a Cell AI memory layer that models pattern concentrations as solutions to the PDE ∂Cᵢ/∂t = D∇²Cᵢ + Rᵢ(Cᵢ) − λᵢCᵢ, enabling spatially organised pattern storage, biologically-plausible forgetting, and emergent inter-pattern association through diffusion. We provide a full analytical profile of all computational components, characterise the system's statistical behaviour on structured versus random inputs, derive numerical stability conditions for the PDE integrator, and quantify the conditions under which the internal dialogue loop fires. A critical analytical finding is that the confidence formula C(p) = SR × (1 − entropy(p)) cannot exceed the 0.8 dialogue threshold for any pattern with entropy ≥ 0.2, meaning the system is structurally conservative: it self-questions on every call for moderately complex inputs regardless of accumulated experience. We discuss implications for cognitive AI system design, present optimisation pathways addressing the five identified performance bottlenecks, and situate the work within current literature on CoT reasoning, reaction-diffusion neural systems, temporal memory integration, and entropy-based signal complexity.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>A unified architecture for self-reflective pattern reasoning</strong></p>
 <p>Technical Report TR-2025-CoTCell-001</p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We present a unified cognitive processing architecture that integrates bounded recursive Chain of Thought (CoT) reasoning with a biologically-inspired Cell AI memory substrate governed by reaction-diffusion partial differential equations. The system addresses a fundamental limitation of single-pass inference: the inability to close information gaps through self-directed questioning. Our architecture introduces three novel contributions. First, a mathematically grounded recursion scheme in which all resource limits — maximum depth, queue capacity, and minimum information gain — are derived from a single problem-size parameter n, yielding bounds of O(log₂ n), O(√n), and O(1/n) respectively. Second, an internal dialogue loop that generates information-theoretically motivated sub-questions when processing confidence falls below threshold, with question value scored as mutual information per unit cognitive cost. Third, a Cell AI memory layer that models pattern concentrations as solutions to the PDE ∂Cᵢ/∂t = D∇²Cᵢ + Rᵢ(Cᵢ) − λᵢCᵢ, enabling spatially organised pattern storage, biologically-plausible forgetting, and emergent inter-pattern association through diffusion. We provide a full analytical profile of all computational components, characterise the system's statistical behaviour on structured versus random inputs, derive numerical stability conditions for the PDE integrator, and quantify the conditions under which the internal dialogue loop fires. A critical analytical finding is that the confidence formula C(p) = SR × (1 − entropy(p)) cannot exceed the 0.8 dialogue threshold for any pattern with entropy ≥ 0.2, meaning the system is structurally conservative: it self-questions on every call for moderately complex inputs regardless of accumulated experience. We discuss implications for cognitive AI system design, present optimisation pathways addressing the five identified performance bottlenecks, and situate the work within current literature on CoT reasoning, reaction-diffusion neural systems, temporal memory integration, and entropy-based signal complexity.</p>
-<p><strong>Keywords: </strong><em>chain of thought reasoning · reaction-diffusion systems · bounded recursion · temporal memory integration · approximate entropy · internal dialogue · pattern recognition</em></p>
+<p><strong>Keywords:</strong> <em>chain of thought reasoning · reaction-diffusion systems · bounded recursion · temporal memory integration · approximate entropy · internal dialogue · pattern recognition</em></p>
 <p>Submitted for review — March 2026</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>The capacity of a reasoning system to identify what it does not know — and to pursue that knowledge before committing to an answer — is a hallmark of deliberate cognition. Contemporary machine learning architectures are largely feedforward: given an input, they produce an output in a single pass. This architecture is appropriate for tasks where sufficient statistical regularity exists in training data to generalise reliably to novel inputs. It fails systematically when inputs are novel, compositionally complex, or lie outside the training distribution.</p>
-<p>Chain of Thought (CoT) reasoning, formalised by Wei et al. (2022) <a id="footnote-ref-1"></a><a href="#footnote-1">[1]</a>, proposed that articulating intermediate reasoning steps substantially improves performance on arithmetic, commonsense, and symbolic tasks. The mechanism was subsequently extended through zero-shot CoT (Kojima et al., 2022) <a id="footnote-ref-2"></a><a href="#footnote-2">[2]</a>, self-consistency sampling, and reinforcement-learning-trained reasoning models such as OpenAI o1, where the model iteratively evaluates each reasoning step and redirects its search in solution space <a id="footnote-ref-3"></a><a href="#footnote-3">[3]</a>. However, a persistent limitation of existing CoT implementations is the absence of principled resource bounds: the reasoning trace can grow arbitrarily long, branching factor is unconstrained, and there is no formal mechanism by which the system assesses whether a sub-question has sufficient expected information value to justify the compute cost of pursuing it.</p>
-<p>Concurrently, neuroscience has refined our understanding of biological memory as a dynamic spatial process rather than a static store. The Segregation-to-Integration Transformation (SIT) model (Bavassi &amp; Fuentemilla, 2024) <a id="footnote-ref-4"></a><a href="#footnote-4">[4]</a> demonstrates that memories initially adopt a modular network structure functioning as an optimal storage buffer, and transform over time into an integrated form that facilitates generalisation through repeated neural reactivation. Separately, synaptic consolidation research (Goldman &amp; Colleagues, PNAS 2024) <a id="footnote-ref-5"></a><a href="#footnote-5">[5]</a> demonstrates that memory consolidation is best understood as a temporal integration process, where transient changes in activity are accumulated into persistent synaptic changes — a principle directly instantiated in our memory formation architecture.</p>
-<p>Reaction-diffusion systems, introduced by Turing (1952) to explain biological morphogenesis <a id="footnote-ref-6"></a><a href="#footnote-6">[6]</a>, have seen renewed research interest as frameworks for understanding self-organised pattern formation in both biological and artificial neural systems. Nature Communications (2024) demonstrated that Turing patterns can arise from widespread biochemical binding-based reactions without explicit feedback loops <a id="footnote-ref-7"></a><a href="#footnote-7">[7]</a>, considerably expanding the class of systems exhibiting diffusion-driven instability. Neural network variants of reaction-diffusion equations have been studied for pattern formation in structured networks (PMC review, 2014) <a id="footnote-ref-8"></a><a href="#footnote-8">[8]</a>, and machine learning approaches have recently been applied to invert and discover reaction-diffusion systems from spatiotemporal data (Abubaker-Sharif et al., 2024) <a id="footnote-ref-9"></a><a href="#footnote-9">[9]</a>.</p>
-<p>Signal complexity measures — particularly approximate entropy (ApEn), introduced by Pincus <a id="footnote-ref-10"></a><a href="#footnote-10">[10]</a> — have found wide application as feature extractors for time-series classification <a id="footnote-ref-11"></a><a href="#footnote-11">[11]</a>. The relationship between entropy and signal regularity is well-established: high entropy values correspond to high degrees of unpredictability and structural complexity, while low entropy values indicate periodicity and predictability <a id="footnote-ref-12"></a><a href="#footnote-12">[12]</a>. The use of entropy as a confidence signal — rather than merely a feature — is a distinguishing aspect of our architecture.</p>
+<p>Chain of Thought (CoT) reasoning, formalised by Wei et al. (2022) <a href="#footnote-1">[1]</a>, proposed that articulating intermediate reasoning steps substantially improves performance on arithmetic, commonsense, and symbolic tasks. The mechanism was subsequently extended through zero-shot CoT (Kojima et al., 2022) <a href="#footnote-2">[2]</a>, self-consistency sampling, and reinforcement-learning-trained reasoning models such as OpenAI o1, where the model iteratively evaluates each reasoning step and redirects its search in solution space <a href="#footnote-3">[3]</a>. However, a persistent limitation of existing CoT implementations is the absence of principled resource bounds: the reasoning trace can grow arbitrarily long, branching factor is unconstrained, and there is no formal mechanism by which the system assesses whether a sub-question has sufficient expected information value to justify the compute cost of pursuing it.</p>
+<p>Concurrently, neuroscience has refined our understanding of biological memory as a dynamic spatial process rather than a static store. The Segregation-to-Integration Transformation (SIT) model (Bavassi &amp; Fuentemilla, 2024) <a href="#footnote-4">[4]</a> demonstrates that memories initially adopt a modular network structure functioning as an optimal storage buffer, and transform over time into an integrated form that facilitates generalisation through repeated neural reactivation. Separately, synaptic consolidation research (Goldman &amp; Colleagues, PNAS 2024) <a href="#footnote-5">[5]</a> demonstrates that memory consolidation is best understood as a temporal integration process, where transient changes in activity are accumulated into persistent synaptic changes — a principle directly instantiated in our memory formation architecture.</p>
+<p>Reaction-diffusion systems, introduced by Turing (1952) to explain biological morphogenesis <a href="#footnote-6">[6]</a>, have seen renewed research interest as frameworks for understanding self-organised pattern formation in both biological and artificial neural systems. Nature Communications (2024) demonstrated that Turing patterns can arise from widespread biochemical binding-based reactions without explicit feedback loops <a href="#footnote-7">[7]</a>, considerably expanding the class of systems exhibiting diffusion-driven instability. Neural network variants of reaction-diffusion equations have been studied for pattern formation in structured networks (PMC review, 2014) <a href="#footnote-8">[8]</a>, and machine learning approaches have recently been applied to invert and discover reaction-diffusion systems from spatiotemporal data (Abubaker-Sharif et al., 2024) <a href="#footnote-9">[9]</a>.</p>
+<p>Signal complexity measures — particularly approximate entropy (ApEn), introduced by Pincus <a href="#footnote-10">[10]</a> — have found wide application as feature extractors for time-series classification <a href="#footnote-11">[11]</a>. The relationship between entropy and signal regularity is well-established: high entropy values correspond to high degrees of unpredictability and structural complexity, while low entropy values indicate periodicity and predictability <a href="#footnote-12">[12]</a>. The use of entropy as a confidence signal — rather than merely a feature — is a distinguishing aspect of our architecture.</p>
 <p>In this paper we make the following contributions:</p>
 <ol>
 <li>A formally bounded recursive reasoning architecture where depth, queue capacity, and information gain threshold are all derived from a single problem-size parameter n, with guaranteed finite termination and minimum quality output.</li>
@@ -33,33 +111,33 @@
 <li>A complete analytical profile covering complexity, memory footprint, timing model, numerical stability, statistical behaviour of pattern detection, confidence propagation, and cache efficiency.</li>
 <li>Identification of five priority performance bottlenecks with quantified impact and concrete optimisation pathways.</li>
 </ol>
-<h1 id="2-background-and-related-work"><strong>2. Background and Related Work</strong></h1>
-<h2 id="21-chain-of-thought-reasoning"><strong>2.1 Chain of Thought Reasoning</strong></h2>
+<h2 id="2-background-and-related-work">2. Background and Related Work</h2>
+<h3 id="21-chain-of-thought-reasoning">2.1 Chain of Thought Reasoning</h3>
 <p>Wei et al. (2022) established that providing language models with exemplars demonstrating intermediate reasoning steps substantially improves performance on complex multi-step tasks. The mechanism — termed chain-of-thought prompting — enables models to distribute computation across a sequence of explicit intermediate states rather than computing the answer directly. Subsequent work by Kojima et al. (2022) showed that CoT can be elicited zero-shot through instruction alone, and Auto-CoT (Zhang et al., 2022) eliminated the need for hand-crafted exemplars through automatic reasoning chain generation.</p>
-<p>The 2024 reasoning model generation — represented by OpenAI o1, Anthropic Claude, and Google Gemini — extended CoT through reinforcement learning on reasoning traces, producing systems that iteratively evaluate and redirect reasoning steps rather than generating a single linear chain. A key finding from this generation is the role of <em>wait tokens</em> and linguistic pivots (<em>'actually', 'hold on', 'let me reconsider'</em>) in enabling genuine reasoning redirection <a id="footnote-ref-13"></a><a href="#footnote-13">[13]</a>. This aligns with our internal dialogue architecture, where sub-questions function as structured pivots that redirect processing toward unexplored aspects of the input.</p>
-<p>A significant challenge identified by ICLR 2024 is that large language models cannot reliably self-correct reasoning intrinsically without external verification signals <a id="footnote-ref-14"></a><a href="#footnote-14">[14]</a>. Our architecture addresses this by externalising the verification signal: the confidence score C(p) = SR × (1 − entropy(p)) is computed from observable system state rather than inferred from the output's internal consistency.</p>
-<h2 id="22-reaction-diffusion-systems-in-neural-contexts"><strong>2.2 Reaction-Diffusion Systems in Neural Contexts</strong></h2>
-<p>The reaction-diffusion framework has a rich history in biological modelling since Turing's foundational paper. Applied to neural systems, reaction-diffusion dynamics provide a natural model for spatially-distributed pattern formation guided by network topology. A 2014 PMC review <a id="footnote-ref-15"></a><a href="#footnote-15">[15]</a> demonstrated that hierarchical networks possess particular versatility in supporting diverse self-organised collective modes, making them especially relevant as substrates for multi-scale memory organisation.</p>
-<p>In artificial learning systems, reaction-diffusion dynamics have been applied to predict concentration distributions in simulated chemical systems (Scientific Reports, 2020) <a id="footnote-ref-16"></a><a href="#footnote-16">[16]</a>, and machine learning has been applied inversely to recover governing PDE models from spatiotemporal observations (ScienceDirect, 2024) <a id="footnote-ref-17"></a><a href="#footnote-17">[17]</a>. Most recently, Abubaker-Sharif et al. (2024) introduced data-driven approaches to learn sparse reaction-diffusion models from stochastic dynamics, establishing that biologically realistic PDE models can be discovered from experimental data without prior specification of model structure.</p>
-<h2 id="23-temporal-memory-integration"><strong>2.3 Temporal Memory Integration</strong></h2>
+<p>The 2024 reasoning model generation — represented by OpenAI o1, Anthropic Claude, and Google Gemini — extended CoT through reinforcement learning on reasoning traces, producing systems that iteratively evaluate and redirect reasoning steps rather than generating a single linear chain. A key finding from this generation is the role of <em>wait tokens</em> and linguistic pivots (<em>'actually', 'hold on', 'let me reconsider'</em>) in enabling genuine reasoning redirection <a href="#footnote-13">[13]</a>. This aligns with our internal dialogue architecture, where sub-questions function as structured pivots that redirect processing toward unexplored aspects of the input.</p>
+<p>A significant challenge identified by ICLR 2024 is that large language models cannot reliably self-correct reasoning intrinsically without external verification signals <a href="#footnote-14">[14]</a>. Our architecture addresses this by externalising the verification signal: the confidence score C(p) = SR × (1 − entropy(p)) is computed from observable system state rather than inferred from the output's internal consistency.</p>
+<h3 id="22-reaction-diffusion-systems-in-neural-contexts">2.2 Reaction-Diffusion Systems in Neural Contexts</h3>
+<p>The reaction-diffusion framework has a rich history in biological modelling since Turing's foundational paper. Applied to neural systems, reaction-diffusion dynamics provide a natural model for spatially-distributed pattern formation guided by network topology. A 2014 PMC review <a href="#footnote-15">[15]</a> demonstrated that hierarchical networks possess particular versatility in supporting diverse self-organised collective modes, making them especially relevant as substrates for multi-scale memory organisation.</p>
+<p>In artificial learning systems, reaction-diffusion dynamics have been applied to predict concentration distributions in simulated chemical systems (Scientific Reports, 2020) <a href="#footnote-16">[16]</a>, and machine learning has been applied inversely to recover governing PDE models from spatiotemporal observations (ScienceDirect, 2024) <a href="#footnote-17">[17]</a>. Most recently, Abubaker-Sharif et al. (2024) introduced data-driven approaches to learn sparse reaction-diffusion models from stochastic dynamics, establishing that biologically realistic PDE models can be discovered from experimental data without prior specification of model structure.</p>
+<h3 id="23-temporal-memory-integration">2.3 Temporal Memory Integration</h3>
 <p>The computational theory of memory consolidation has converged on a temporal integration framing. Goldman et al. (PNAS 2024) demonstrate that systems consolidation — the transfer of memories from an early to a late storage site — can be understood as a temporal integration process where transient activity changes are accumulated into persistent synaptic weights. This provides a formal computational rationale for the dual-kernel integral memory model in our MemoryFormation component:</p>
-<p><strong>M(t) = ∫ w(t−s)·I(s)ds + ∫ K(t−s)·S(s)ds</strong></p>
-<p>The SIT model (Bavassi &amp; Fuentemilla, 2024) provides a network formalisation in which memories initially adopt a modular structure optimal for storage, then transform through repeated reactivation into an integrated form optimal for generalisation. This structural transformation maps onto the evolution of our pattern families: new patterns initially found independent families (high modularity, low similarity to existing prototypes), and over many calls, family prototypes drift toward cluster centres as more members are incorporated (integration increasing, modularity decreasing).</p>
-<h2 id="24-entropy-based-complexity-measures-in-signal-processing"><strong>2.4 Entropy-Based Complexity Measures in Signal Processing</strong></h2>
-<p>Approximate entropy (ApEn), introduced by Pincus, quantifies the probability that a time series generates a new pattern when the embedding dimension m increases: higher ApEn values indicate higher complexity and unpredictability. A comprehensive review <a id="footnote-ref-18"></a><a href="#footnote-18">[18]</a> confirms that ApEn and its improved variant sample entropy (SampEn) — which avoids self-similar pattern bias and length dependence — are among the most informative complexity features for time-series classification across domains from biomedical signal analysis to fault detection.</p>
-<p>A 2023 study applying entropy measures to evaluate deep neural network reliability <a id="footnote-ref-19"></a><a href="#footnote-19">[19]</a> demonstrated that certainty of model prediction is related to how effectively the network captures information-rich signal regions — precisely the relationship our confidence formula formalises. Our use of ApEn as a pattern quality signal and as an inverse confidence modifier is grounded in this established correspondence between signal entropy and system reliability.</p>
-<h2 id="25-information-theoretic-question-generation"><strong>2.5 Information-Theoretic Question Generation</strong></h2>
-<p>Active learning frameworks formalise question value as mutual information gain per unit cost. Settles (2009) and subsequent work established that the expected information gain formulation — selecting queries that maximally reduce model uncertainty — is both theoretically justified and empirically effective across a wide range of supervised learning tasks. A 2024 survey on neural question generation <a id="footnote-ref-20"></a><a href="#footnote-20">[20]</a> identifies mutual information between model state and potential query response as the core metric underlying the most effective question generation approaches. Our architecture implements this via the question value formula:</p>
+<p><strong>M(t) = ∫ w(t−s)·I(s)ds + ∫ K(t−s)·S(s)ds</strong>
+The SIT model (Bavassi &amp; Fuentemilla, 2024) provides a network formalisation in which memories initially adopt a modular structure optimal for storage, then transform through repeated reactivation into an integrated form optimal for generalisation. This structural transformation maps onto the evolution of our pattern families: new patterns initially found independent families (high modularity, low similarity to existing prototypes), and over many calls, family prototypes drift toward cluster centres as more members are incorporated (integration increasing, modularity decreasing).</p>
+<h3 id="24-entropy-based-complexity-measures-in-signal-processing">2.4 Entropy-Based Complexity Measures in Signal Processing</h3>
+<p>Approximate entropy (ApEn), introduced by Pincus, quantifies the probability that a time series generates a new pattern when the embedding dimension m increases: higher ApEn values indicate higher complexity and unpredictability. A comprehensive review <a href="#footnote-18">[18]</a> confirms that ApEn and its improved variant sample entropy (SampEn) — which avoids self-similar pattern bias and length dependence — are among the most informative complexity features for time-series classification across domains from biomedical signal analysis to fault detection.</p>
+<p>A 2023 study applying entropy measures to evaluate deep neural network reliability <a href="#footnote-19">[19]</a> demonstrated that certainty of model prediction is related to how effectively the network captures information-rich signal regions — precisely the relationship our confidence formula formalises. Our use of ApEn as a pattern quality signal and as an inverse confidence modifier is grounded in this established correspondence between signal entropy and system reliability.</p>
+<h3 id="25-information-theoretic-question-generation">2.5 Information-Theoretic Question Generation</h3>
+<p>Active learning frameworks formalise question value as mutual information gain per unit cost. Settles (2009) and subsequent work established that the expected information gain formulation — selecting queries that maximally reduce model uncertainty — is both theoretically justified and empirically effective across a wide range of supervised learning tasks. A 2024 survey on neural question generation <a href="#footnote-20">[20]</a> identifies mutual information between model state and potential query response as the core metric underlying the most effective question generation approaches. Our architecture implements this via the question value formula:</p>
 <p><strong>Value(Q) = I(X;Y) / Cost(Q) = [H(X) − H(X|Y)] / [cognitive_load + time_to_answer]</strong></p>
-<h1 id="3-system-architecture"><strong>3. System Architecture</strong></h1>
+<h2 id="3-system-architecture">3. System Architecture</h2>
 <p>The architecture consists of two primary subsystems — the Chain of Thought reasoning engine and the Cell AI memory layer — with four supporting infrastructure modules. Figure 1 shows the high-level component topology.</p>
-<h2 id="31-system-overview"><strong>3.1 System Overview</strong></h2>
+<h3 id="31-system-overview">3.1 System Overview</h3>
 <p>The IntegratedSystem entry point routes processing based on input size. Inputs with fewer than 1,000 elements are processed locally by a ThoughtChain instance. Larger inputs are distributed across Ray-based DistributedProcessor actors, each pinned to a single GPU. Both paths converge on the same PatternProcessor → ParallelStateEvolution pipeline, ensuring output consistency regardless of processing mode.</p>
-<p><strong>Table 1. Component summary and primary functions.</strong></p>
-<p><strong>Component</strong></p>
-<p><strong>Primary Function</strong></p>
-<p><strong>Resource Bound</strong></p>
-<p>ThoughtChain</p>
+<p><strong>Table 1. Component summary and primary functions.</strong>
+<strong>Component</strong>
+<strong>Primary Function</strong>
+<strong>Resource Bound</strong>
+ThoughtChain</p>
 <p>Bounded recursive reasoning, cache, dialogue</p>
 <p>O(log₂ n) depth, O(√n) queue</p>
 <p>PatternProcessor</p>
@@ -83,19 +161,19 @@
 <p>ProfilerRegistry</p>
 <p>Per-method timing and memory tracking</p>
 <p>Zero-overhead when inactive</p>
-<h2 id="32-the-thoughtchain-bounded-recursive-reasoning"><strong>3.2 The ThoughtChain: Bounded Recursive Reasoning</strong></h2>
+<h3 id="32-the-thoughtchain-bounded-recursive-reasoning">3.2 The ThoughtChain: Bounded Recursive Reasoning</h3>
 <p>The ThoughtChain implements a recursive thought processor with hard computational bounds derived from a single problem-size parameter n. All limits are set at initialisation and cannot be exceeded during execution:</p>
-<p><strong>max_depth = ⌊log₂(n)⌋,    queue_size = ⌊√n⌋,    min_gain = 1/n</strong></p>
-<p>For the default n = 10⁶: max_depth = 19, queue_size = 1,000, min_gain = 10⁻⁶. A thought arriving at process_thought() is first looked up in the ThoughtCache by hash (O(1)). On a miss, depth is checked against max_depth. If within bounds, the thought passes to PatternProcessor. If the returned confidence is below 0.8, the internal dialogue loop generates sub-questions, each of which is processed as a child thought at depth+1. The result is cached if confidence exceeds 0.8, and the learning system is updated unconditionally.</p>
+<p><strong>max_depth = ⌊log₂(n)⌋,    queue_size = ⌊√n⌋,    min_gain = 1/n</strong>
+For the default n = 10⁶: max_depth = 19, queue_size = 1,000, min_gain = 10⁻⁶. A thought arriving at process_thought() is first looked up in the ThoughtCache by hash (O(1)). On a miss, depth is checked against max_depth. If within bounds, the thought passes to PatternProcessor. If the returned confidence is below 0.8, the internal dialogue loop generates sub-questions, each of which is processed as a child thought at depth+1. The result is cached if confidence exceeds 0.8, and the learning system is updated unconditionally.</p>
 <p>When depth exceeds max_depth, handle_recursion() queries approach_history for previously successful approaches on similar thought hashes, selects the highest-scoring untried approach, and reprocesses. If no untried approach exists, the thought is simplified and re-submitted. If simplification fails, the best partial result in cache is returned. This three-level fallback ensures a result is always produced within finite computation.</p>
-<h2 id="33-internal-dialogue-loop"><strong>3.3 Internal Dialogue Loop</strong></h2>
+<h3 id="33-internal-dialogue-loop">3.3 Internal Dialogue Loop</h3>
 <p>The internal dialogue loop is the primary mechanism for closing information gaps. It fires when:</p>
-<p><strong>C(p) = SR(p) × (1 − H(p)) &lt; θ_dialogue = 0.8</strong></p>
-<p>where SR(p) is the exponential moving average success rate (β = 0.9) and H(p) is the normalised ApEn of the pattern. Three classes of sub-questions are generated:</p>
-<p><strong>Question class</strong></p>
-<p><strong>Trigger</strong></p>
-<p><strong>Content</strong></p>
-<p>Pattern questions</p>
+<p><strong>C(p) = SR(p) × (1 − H(p)) &lt; θ_dialogue = 0.8</strong>
+where SR(p) is the exponential moving average success rate (β = 0.9) and H(p) is the normalised ApEn of the pattern. Three classes of sub-questions are generated:</p>
+<p><strong>Question class</strong>
+<strong>Trigger</strong>
+<strong>Content</strong>
+Pattern questions</p>
 <p>quality(pattern) &gt; 0.5</p>
 <p>1–3 per pattern; ask why it appears, how it evolved, and what connected patterns imply</p>
 <p>Structure questions</p>
@@ -105,19 +183,19 @@
 <p>C(p) &lt; 0.5</p>
 <p>2; ask why confidence is low and how processing could be improved</p>
 <p>Sub-questions are scored by expected mutual information gain and cost. In the current implementation they are processed serially; Section 7.1 discusses the concurrent processing optimisation that would reduce dialogue-loop wall time by (B−1)/B where B is the branching factor.</p>
-<h2 id="34-cell-ai-reaction-diffusion-memory-layer"><strong>3.4 Cell AI: Reaction-Diffusion Memory Layer</strong></h2>
+<h3 id="34-cell-ai-reaction-diffusion-memory-layer">3.4 Cell AI: Reaction-Diffusion Memory Layer</h3>
 <p>The Cell AI layer models pattern memory as a system of concentration fields Cᵢ evolving under the reaction-diffusion PDE:</p>
-<p><strong>∂Cᵢ/∂t = D∇²Cᵢ + Rᵢ(Cᵢ) − λᵢCᵢ</strong></p>
-<p>Each term realises a distinct memory mechanism. The diffusion term D∇²Cᵢ implements pattern spreading: when a concentration peak forms (a pattern is strongly activated), it diffuses into spatially adjacent memory regions via a 3×3 discrete Laplacian kernel, making related memory locations more accessible. This mirrors the hippocampal replay mechanism identified in consolidation neuroscience, where activity in one memory trace propagates to associated traces during rest.</p>
+<p><strong>∂Cᵢ/∂t = D∇²Cᵢ + Rᵢ(Cᵢ) − λᵢCᵢ</strong>
+Each term realises a distinct memory mechanism. The diffusion term D∇²Cᵢ implements pattern spreading: when a concentration peak forms (a pattern is strongly activated), it diffuses into spatially adjacent memory regions via a 3×3 discrete Laplacian kernel, making related memory locations more accessible. This mirrors the hippocampal replay mechanism identified in consolidation neuroscience, where activity in one memory trace propagates to associated traces during rest.</p>
 <p>The reaction term Rᵢ(Cᵢ) implements inter-pattern interaction: forward reactions (rate k⁺) reinforce co-activated patterns, reverse reactions (rate k⁻) suppress competing patterns. Both rate tensors are initialised from Uniform(0,1). The decay term λᵢCᵢ implements principled forgetting: unused patterns fade with rate λ = 0.1, preventing stale knowledge from corrupting future processing.</p>
 <p>The PDE is numerically integrated using explicit Euler with step dt = 0.01, bounded to ⌊√(partition_size)⌋ ≈ 11 steps. Three convergence conditions are checked: absolute error below threshold, relative improvement below threshold, and oscillation amplitude over the last four steps below threshold. Section 5.2 analyses the numerical stability of this integrator in detail.</p>
-<h1 id="4-mathematical-framework"><strong>4. Mathematical Framework</strong></h1>
-<h2 id="41-thought-space-partition"><strong>4.1 Thought Space Partition</strong></h2>
+<h2 id="4-mathematical-framework">4. Mathematical Framework</h2>
+<h3 id="41-thought-space-partition">4.1 Thought Space Partition</h3>
 <p>Let Ω denote the space of all possible thoughts. This space is partitioned into the pattern space P ⊆ Ω (thoughts matching known structures), the noise space N ⊆ Ω (thoughts arising from structured randomness), and the creative space C = P ∪ N. For any thought t ∈ Ω, three quality metrics are computed:</p>
-<p><strong>Metric</strong></p>
-<p><strong>Formula</strong></p>
-<p><strong>Role</strong></p>
-<p>Quality</p>
+<p><strong>Metric</strong>
+<strong>Formula</strong>
+<strong>Role</strong>
+Quality</p>
 <p>Q(t) = success_rate(t) × confidence_score(t)</p>
 <p>Drives routing decisions</p>
 <p>Creativity</p>
@@ -126,20 +204,20 @@
 <p>Efficiency</p>
 <p>E(t) = Q(t) / processing_time(t)</p>
 <p>Drives queue prioritisation</p>
-<h2 id="42-creative-generation-model"><strong>4.2 Creative Generation Model</strong></h2>
+<h3 id="42-creative-generation-model">4.2 Creative Generation Model</h3>
 <p>The output C(x) for any input x is a convex combination of pattern-derived and noise-derived components:</p>
-<p><strong>C(x) = α · P(x) + (1 − α) · N(x),    N(x) = x + ε,    ε ~ N(0, σ²)</strong></p>
-<p>The creativity factor α ∈ [0, 1] is adjusted dynamically. High pattern quality and confidence push α toward 1 (pure pattern matching); low confidence and high input chaos push α toward 0 (noise-dominated, exploratory). This is a key departure from pure pattern-matching systems: noise is not an error to be filtered but a resource to be calibrated.</p>
-<h2 id="43-pattern-evolution-dynamics"><strong>4.3 Pattern Evolution Dynamics</strong></h2>
+<p><strong>C(x) = α · P(x) + (1 − α) · N(x),    N(x) = x + ε,    ε ~ N(0, σ²)</strong>
+The creativity factor α ∈ [0, 1] is adjusted dynamically. High pattern quality and confidence push α toward 1 (pure pattern matching); low confidence and high input chaos push α toward 0 (noise-dominated, exploratory). This is a key departure from pure pattern-matching systems: noise is not an error to be filtered but a resource to be calibrated.</p>
+<h3 id="43-pattern-evolution-dynamics">4.3 Pattern Evolution Dynamics</h3>
 <p>Patterns improve over time via gradient ascent on the quality function:</p>
-<p><strong>p(t+1) = p(t) + η · ∇Q(p(t))</strong></p>
-<p>implemented as an exponential moving average of success rate:</p>
-<p><strong>SR(t+1) = β · SR(t) + (1 − β) · current_success,    β = 0.9</strong></p>
-<p>Under all-success inputs, the EMA converges as follows:</p>
-<p><strong>Calls</strong></p>
-<p><strong>Success rate</strong></p>
-<p><strong>State</strong></p>
-<p>0</p>
+<p><strong>p(t+1) = p(t) + η · ∇Q(p(t))</strong>
+implemented as an exponential moving average of success rate:</p>
+<p><strong>SR(t+1) = β · SR(t) + (1 − β) · current_success,    β = 0.9</strong>
+Under all-success inputs, the EMA converges as follows:</p>
+<p><strong>Calls</strong>
+<strong>Success rate</strong>
+<strong>State</strong>
+0</p>
 <p>0.500</p>
 <p>Cold start</p>
 <p>10</p>
@@ -154,22 +232,22 @@
 <p>∞</p>
 <p>1.000</p>
 <p>Asymptote</p>
-<h2 id="44-confidence-and-the-dialogue-trigger"><strong>4.4 Confidence and the Dialogue Trigger</strong></h2>
+<h3 id="44-confidence-and-the-dialogue-trigger">4.4 Confidence and the Dialogue Trigger</h3>
 <p>The confidence formula combines success history with inverse pattern entropy:</p>
-<p><strong>C(p) = (successful_uses / total_uses) × (1 − entropy(p))</strong></p>
-<p>A critical analytical result follows directly from this formula. Since SR ∈ [0, 1] and entropy ∈ [0, 1], the condition C(p) ≥ 0.8 requires SR ≥ 0.8 / (1 − entropy(p)). For entropy ≥ 0.2, this denominator is ≤ 0.8, forcing the required SR to ≥ 1.0 — which is unreachable. Consequently:</p>
-<p><strong><em>For any pattern with entropy ≥ 0.2, the internal dialogue loop fires on every call, regardless of accumulated success history.</em></strong></p>
-<p>This has a profound implication for system behaviour. The system is structurally conservative: it always questions on moderately complex inputs. For highly regular patterns (entropy &lt; 0.1), the threshold is achievable after approximately 12 successful calls. For all other inputs — including the vast majority of real-world signals — the dialogue loop is a permanent feature of processing, not an occasional fallback.</p>
-<h2 id="45-information-theoretic-question-selection"><strong>4.5 Information-Theoretic Question Selection</strong></h2>
+<p><strong>C(p) = (successful_uses / total_uses) × (1 − entropy(p))</strong>
+A critical analytical result follows directly from this formula. Since SR ∈ [0, 1] and entropy ∈ [0, 1], the condition C(p) ≥ 0.8 requires SR ≥ 0.8 / (1 − entropy(p)). For entropy ≥ 0.2, this denominator is ≤ 0.8, forcing the required SR to ≥ 1.0 — which is unreachable. Consequently:</p>
+<p><strong><em>For any pattern with entropy ≥ 0.2, the internal dialogue loop fires on every call, regardless of accumulated success history.</em></strong>
+This has a profound implication for system behaviour. The system is structurally conservative: it always questions on moderately complex inputs. For highly regular patterns (entropy &lt; 0.1), the threshold is achievable after approximately 12 successful calls. For all other inputs — including the vast majority of real-world signals — the dialogue loop is a permanent feature of processing, not an occasional fallback.</p>
+<h3 id="45-information-theoretic-question-selection">4.5 Information-Theoretic Question Selection</h3>
 <p>Sub-questions are generated and ordered by estimated information gain:</p>
-<p><strong>Value(Q) = I(X;Y) / Cost(Q) = [H(X) − H(X|Y)] / [cognitive_load + time_to_answer]</strong></p>
-<p>Questions with high mutual information — those that would most reduce uncertainty about the current state — are prioritised. Questions that barely move the needle are deferred. This is a formal implementation of the active learning principle that query selection should be guided by expected information gain (Settles, 2009; Kirsch et al., 2019).</p>
-<h2 id="46-system-convergence-guarantees"><strong>4.6 System Convergence Guarantees</strong></h2>
+<p><strong>Value(Q) = I(X;Y) / Cost(Q) = [H(X) − H(X|Y)] / [cognitive_load + time_to_answer]</strong>
+Questions with high mutual information — those that would most reduce uncertainty about the current state — are prioritised. Questions that barely move the needle are deferred. This is a formal implementation of the active learning principle that query selection should be guided by expected information gain (Settles, 2009; Kirsch et al., 2019).</p>
+<h3 id="46-system-convergence-guarantees">4.6 System Convergence Guarantees</h3>
 <p>For any input sequence {xₙ}, the following bounds hold:</p>
-<p><strong>Property</strong></p>
-<p><strong>Bound</strong></p>
-<p><strong>Mechanism</strong></p>
-<p>Finite processing time</p>
+<p><strong>Property</strong>
+<strong>Bound</strong>
+<strong>Mechanism</strong>
+Finite processing time</p>
 <p>T &lt; O(log₂ n)</p>
 <p>Depth bound ensures termination</p>
 <p>Bounded resource usage</p>
@@ -181,15 +259,15 @@
 <p>Maximum entropy</p>
 <p>H &lt; H_max</p>
 <p>Quality gate filters degenerate patterns</p>
-<h1 id="5-analytical-performance-profile"><strong>5. Analytical Performance Profile</strong></h1>
+<h2 id="5-analytical-performance-profile">5. Analytical Performance Profile</h2>
 <p>This section presents a complete analytical profile of the system, derived from full code inspection and computational modelling. Hardware baseline: 50 GFLOP/s single-threaded CPU (float32), 20 GB/s memory bandwidth (DDR4-3200), 19.5 TFLOP/s GPU (A100 reference). Default configuration: n = 10⁶, memory_size = 512, time_window = 100, num_partitions = 4.</p>
-<h2 id="51-computational-complexity"><strong>5.1 Computational Complexity</strong></h2>
-<p><strong>Table 2. Per-component complexity with dominant operations (n = 10⁶ default).</strong></p>
-<p><strong>Component</strong></p>
-<p><strong>Best case</strong></p>
-<p><strong>Worst case</strong></p>
-<p><strong>Dominant operation</strong></p>
-<p>ThoughtChain.process_thought</p>
+<h3 id="51-computational-complexity">5.1 Computational Complexity</h3>
+<p><strong>Table 2. Per-component complexity with dominant operations (n = 10⁶ default).</strong>
+<strong>Component</strong>
+<strong>Best case</strong>
+<strong>Worst case</strong>
+<strong>Dominant operation</strong>
+ThoughtChain.process_thought</p>
 <p>O(1) cache hit</p>
 <p>O(log n × B)</p>
 <p>Dialogue branching, B = sub-questions</p>
@@ -222,15 +300,15 @@
 <p>O(l²)</p>
 <p>torch.cdist over embedding vectors</p>
 <p>Legend: m = memory_size, l = pattern_length (3–11), p = patterns detected, τ = time_window, ps = partition_size, P = num_partitions, s = connection_size, B = dialogue branching factor.</p>
-<h2 id="52-numerical-stability-of-the-pde-integrator"><strong>5.2 Numerical Stability of the PDE Integrator</strong></h2>
+<h3 id="52-numerical-stability-of-the-pde-integrator">5.2 Numerical Stability of the PDE Integrator</h3>
 <p>The explicit Euler method applied to the diffusion equation ∂C/∂t = D∇²C is conditionally stable, requiring the Courant–Friedrichs–Lewy (CFL) condition:</p>
-<p><strong>r = D·dt/h² ≤ 0.5,    where h = 1/(partition_size − 1)</strong></p>
-<p><strong>Table 3. CFL stability analysis across partition sizes (D = 0.1, dt = 0.01).</strong></p>
-<p><strong>Partition size</strong></p>
-<p><strong>h</strong></p>
-<p><strong>r = D·dt/h²</strong></p>
-<p><strong>CFL stable?</strong></p>
-<p>16</p>
+<p><strong>r = D·dt/h² ≤ 0.5,    where h = 1/(partition_size − 1)</strong>
+<strong>Table 3. CFL stability analysis across partition sizes (D = 0.1, dt = 0.01).</strong>
+<strong>Partition size</strong>
+<strong>h</strong>
+<strong>r = D·dt/h²</strong>
+<strong>CFL stable?</strong>
+16</p>
 <p>0.0667</p>
 <p>0.225</p>
 <p>✓ Stable</p>
@@ -255,16 +333,16 @@
 <p>261.12</p>
 <p>✗ Unstable</p>
 <p>The default partition_size = 128 yields a CFL number of 16.13, placing the integrator 32× outside the formal stability boundary. In practice, the system does not diverge under typical inputs due to: (a) the decay term −λC providing damping, (b) the convergence oscillation check terminating unstable evolutions early, and (c) forward rate constants being initialised from Uniform(0,1) with mean 0.5, providing partial cancellation. However, for high-magnitude inputs, adversarial rate constants, or extended integration windows, divergence is possible. The correct remedy is to enforce dt = 0.5h²/D = 0.000310 at partition_size = 128, or to implement a Crank–Nicolson implicit integrator, which is unconditionally stable for the diffusion equation.</p>
-<h2 id="53-statistical-behaviour-of-pattern-detection"><strong>5.3 Statistical Behaviour of Pattern Detection</strong></h2>
+<h3 id="53-statistical-behaviour-of-pattern-detection">5.3 Statistical Behaviour of Pattern Detection</h3>
 <p>The 2σ peak detection threshold applied to convolution output captures the upper 2.28th percentile of a Gaussian distribution, yielding approximately 11.7 peaks per scale per 512-element signal. After four scales {3, 5, 7, 11}, up to 47 raw detections are produced, of which approximately 14 survive redundancy removal (cosine similarity threshold 0.9).</p>
 <p>The quality gate (threshold 0.5) produces strongly different outcomes depending on input type:</p>
-<p><strong>Input type</strong></p>
-<p><strong>Variation</strong></p>
-<p><strong>Symmetry</strong></p>
-<p><strong>Simplicity</strong></p>
-<p><strong>Mean quality</strong></p>
-<p><strong>Passes gate?</strong></p>
-<p>Random Gaussian</p>
+<p><strong>Input type</strong>
+<strong>Variation</strong>
+<strong>Symmetry</strong>
+<strong>Simplicity</strong>
+<strong>Mean quality</strong>
+<strong>Passes gate?</strong>
+Random Gaussian</p>
 <p>High</p>
 <p>0.1–0.3</p>
 <p>~0.0</p>
@@ -295,14 +373,14 @@
 <p>0.10–0.15</p>
 <p>No — filtered</p>
 <p>This result establishes that the system is primarily sensitive to structured signals. Random and noise-dominated inputs are filtered at the quality gate; only periodic, step, and pulse-like structures consistently produce patterns that survive to deeper processing.</p>
-<h2 id="54-memory-footprint"><strong>5.4 Memory Footprint</strong></h2>
+<h3 id="54-memory-footprint">5.4 Memory Footprint</h3>
 <p>Static allocations at initialisation total approximately 1.44 MB, dominated by the ConnectionOptimizer.connections matrix (512×512 float32 = 1 MB). Dynamic allocations grow with session length:</p>
-<p><strong>Calls</strong></p>
-<p><strong>Families (est.)</strong></p>
-<p><strong>Cache entries</strong></p>
-<p><strong>Context storage</strong></p>
-<p><strong>Total session memory</strong></p>
-<p>100</p>
+<p><strong>Calls</strong>
+<strong>Families (est.)</strong>
+<strong>Cache entries</strong>
+<strong>Context storage</strong>
+<strong>Total session memory</strong>
+100</p>
 <p>30</p>
 <p>80</p>
 <p>11.7 MB</p>
@@ -328,13 +406,13 @@
 <p>78.1 MB</p>
 <p>~114 MB</p>
 <p>The dominant dynamic memory consumer is pattern context storage in MemoryFormation: 200 observations × 512 floats × 4 bytes = 400 KB per pattern. At 200 distinct patterns (the typical plateau), this contributes 78.1 MB. Memory growth plateaus because pattern family count saturates at approximately 200 families for varied inputs, a consequence of the O(1/√d) expected cosine similarity between random high-dimensional vectors making family assignment increasingly selective as dimensionality grows.</p>
-<h2 id="55-cache-efficiency-and-throughput-impact"><strong>5.5 Cache Efficiency and Throughput Impact</strong></h2>
+<h3 id="55-cache-efficiency-and-throughput-impact">5.5 Cache Efficiency and Throughput Impact</h3>
 <p>The ThoughtCache uses a three-factor eviction scoring formula: score(k) = (frequency / (age + 1)) × (1 + 0.1 × relationships). This implements an implicit PageRank-style importance weighting: well-connected entries resist eviction even at low access frequency.</p>
 <p>The throughput leverage of cache warm-up is substantial. Cache hit time ≈ 0.5 μs (dict lookup); full processing time ≈ 26 μs. The 52× cost ratio creates the following multipliers:</p>
-<p><strong>Cache hit rate</strong></p>
-<p><strong>Throughput multiplier</strong></p>
-<p><strong>Session phase</strong></p>
-<p>0%</p>
+<p><strong>Cache hit rate</strong>
+<strong>Throughput multiplier</strong>
+<strong>Session phase</strong>
+0%</p>
 <p>1.0×</p>
 <p>Cold start</p>
 <p>50%</p>
@@ -349,121 +427,139 @@
 <p>95%</p>
 <p>14.6×</p>
 <p>Highly repetitive input</p>
-<h1 id="6-implementation"><strong>6. Implementation</strong></h1>
-<h2 id="61-core-processing-pipeline"><strong>6.1 Core Processing Pipeline</strong></h2>
+<h2 id="6-implementation">6. Implementation</h2>
+<h3 id="61-core-processing-pipeline">6.1 Core Processing Pipeline</h3>
 <p>A single thought traverses the following sequential pipeline. Components are labelled with their estimated CPU time at default configuration, no cache, no questions:</p>
-<p><strong>Step</strong></p>
-<p><strong>Component</strong></p>
-<p><strong>CPU time</strong></p>
-<p><strong>Complexity</strong></p>
-<p><strong>Notes</strong></p>
-<p>1. Cache lookup</p>
+<p><strong>Step</strong>
+<strong>Component</strong>
+<strong>CPU time</strong>
+<strong>Complexity</strong>
+<strong>Notes</strong>
+1. Cache lookup</p>
 <p>ThoughtChain</p>
 <p>~0.5 μs</p>
 <p>O(1)</p>
 <p>If hit, return immediately</p>
-<p>2. Depth check</p>
+<ol start="2">
+<li>Depth check</li>
+</ol>
 <p>ThoughtChain</p>
 <p>~0.1 μs</p>
 <p>O(1)</p>
 <p>Recurse or handle fallback</p>
-<p>3. Buffer update</p>
+<ol start="3">
+<li>Buffer update</li>
+</ol>
 <p>MemoryFormation</p>
 <p>~0.2 μs</p>
 <p>O(1)</p>
 <p>Circular buffer write</p>
-<p>4. Temporal integral</p>
+<ol start="4">
+<li>Temporal integral</li>
+</ol>
 <p>MemoryFormation</p>
 <p>~10.2 μs</p>
 <p>O(τ×m)</p>
 <p>Memory bandwidth bound</p>
-<p>5. Multi-scale conv (×4)</p>
+<ol start="5">
+<li>Multi-scale conv (×4)</li>
+</ol>
 <p>PatternProcessor</p>
 <p>~0.5 μs</p>
 <p>O(m×Σscales)</p>
 <p>4 × F.conv1d</p>
-<p>6. Redundancy removal</p>
+<ol start="6">
+<li>Redundancy removal</li>
+</ol>
 <p>PatternProcessor</p>
 <p>~0.03 μs</p>
 <p>O(p²)</p>
 <p>Cosine similarity matrix</p>
-<p>7. Pattern analysis (×14)</p>
+<ol start="7">
+<li>Pattern analysis (×14)</li>
+</ol>
 <p>PatternProcessor</p>
 <p>~0.4 μs</p>
 <p>O(p×l²)</p>
 <p>ApEn called 3× each</p>
-<p>8. Family clustering</p>
+<ol start="8">
+<li>Family clustering</li>
+</ol>
 <p>PatternProcessor</p>
 <p>~0.2 μs</p>
 <p>O(p×f)</p>
 <p>Prototype similarity</p>
-<p>9. PDE evolution</p>
+<ol start="9">
+<li>PDE evolution</li>
+</ol>
 <p>ParallelStateEvolution</p>
 <p>~2.0 μs</p>
 <p>O(√ps×P²)</p>
 <p>11 Euler steps</p>
-<p>10. Cache store + learn</p>
+<ol start="10">
+<li>Cache store + learn</li>
+</ol>
 <p>ThoughtChain</p>
 <p>~0.5 μs</p>
 <p>O(1)</p>
 <p>If confidence &gt; 0.8</p>
 <p>The temporal integral gather dominates the critical path at 10.2 μs — 52% of the 19.6 μs compute total (excluding Python/asyncio overhead). This is a memory bandwidth-bound operation (204,800 bytes at 20 GB/s) and cannot be reduced without either increasing memory bandwidth (e.g., moving buffers to HBM on GPU) or reducing τ or memory_size.</p>
-<h2 id="62-concurrency-model"><strong>6.2 Concurrency Model</strong></h2>
+<h3 id="62-concurrency-model">6.2 Concurrency Model</h3>
 <p>The system uses Python asyncio cooperative multitasking. The key architectural consequence is that sub-questions in the internal dialogue loop are processed serially — the for-loop over questions awaits each child thought in sequence. This is a missed parallelism opportunity: all sub-questions at the same depth are independent and their awaits could be gathered concurrently:</p>
 <p><em># Current: serial — total time = Σ time_per_question</em></p>
 <p><em>for question in questions: result = await process_thought(question)</em></p>
 <p><em># Proposed: concurrent — total time = max(time_per_question)</em></p>
 <p><em>results = await asyncio.gather(*[process_thought(q) for q in questions])</em></p>
 <p>The concurrent implementation would reduce dialogue-loop wall time by (B−1)/B, where B is the branching factor. For B=5, this is a 4× reduction in dialogue wall time at no additional compute cost. The GIL prevents true parallel Python execution, but asyncio.gather allows coroutines to interleave I/O and yield points, which is beneficial whenever compute is not the sole bottleneck.</p>
-<h2 id="63-distributed-processing"><strong>6.3 Distributed Processing</strong></h2>
+<h3 id="63-distributed-processing">6.3 Distributed Processing</h3>
 <p>For large inputs, IntegratedSystem splits the input tensor into equal chunks via torch.chunk (one chunk per processor), dispatches each chunk to a Ray remote actor on a distinct GPU, and merges results by concatenating pattern lists, averaging confidence scores, deduplicating insights, and averaging performance metrics.</p>
 <p>The breakeven batch size — the number of thoughts below which local processing is faster than Ray distribution — follows from the communication overhead model. With 1–4 ms per-chunk overhead and 26 μs local processing time:</p>
-<p><strong>Breakeven = overhead / (local_time × (1 − 1/num_GPUs)) ≈ 2ms / (0.026ms × 0.5) ≈ 154 thoughts/GPU</strong></p>
-<p>For batches smaller than ≈ 150 thoughts per GPU, local processing is faster despite being single-threaded. For large batches on GPU hardware, effective throughput scales nearly linearly with GPU count up to the point where result merging overhead dominates (typically &gt; 8 GPUs for this architecture).</p>
-<h1 id="7-identified-bottlenecks-and-optimisation-roadmap"><strong>7. Identified Bottlenecks and Optimisation Roadmap</strong></h1>
-<h2 id="71-priority-1-high-impact-low-implementation-complexity"><strong>7.1 Priority 1: High Impact, Low Implementation Complexity</strong></h2>
-<h3 id="711-concurrent-sub-question-processing"><strong>7.1.1 Concurrent Sub-Question Processing</strong></h3>
+<p><strong>Breakeven = overhead / (local_time × (1 − 1/num_GPUs)) ≈ 2ms / (0.026ms × 0.5) ≈ 154 thoughts/GPU</strong>
+For batches smaller than ≈ 150 thoughts per GPU, local processing is faster despite being single-threaded. For large batches on GPU hardware, effective throughput scales nearly linearly with GPU count up to the point where result merging overhead dominates (typically &gt; 8 GPUs for this architecture).</p>
+<h2 id="7-identified-bottlenecks-and-optimisation-roadmap">7. Identified Bottlenecks and Optimisation Roadmap</h2>
+<h3 id="71-priority-1-high-impact-low-implementation-complexity">7.1 Priority 1: High Impact, Low Implementation Complexity</h3>
+<h3 id="711-concurrent-sub-question-processing">7.1.1 Concurrent Sub-Question Processing</h3>
 <p>Replacing the serial question loop with asyncio.gather eliminates the per-question sequential latency from the dialogue wall time. Impact: (B−1)/B reduction in dialogue latency for branching factor B. At B=5, this is 4× reduction. Implementation complexity: 2-line change. No correctness risk — sub-questions are fully independent.</p>
-<h3 id="712-memoised-approxent-per-pattern"><strong>7.1.2 Memoised ApproxEnt per Pattern</strong></h3>
+<h3 id="712-memoised-approxent-per-pattern">7.1.2 Memoised ApproxEnt per Pattern</h3>
 <p>_compute_complexity (ApproxEnt) is called three times per pattern within a single process_pattern call — once for complexity, once inside _analyze_structure, and once inside _assess_quality. The first call for a given pattern data tensor produces the identical result as the subsequent two. Memoising by tensor hash after the first call eliminates 67% of ApproxEnt computations with no loss of accuracy.</p>
-<h3 id="713-precomputed-distance-matrix"><strong>7.1.3 Precomputed Distance Matrix</strong></h3>
+<h3 id="713-precomputed-distance-matrix">7.1.3 Precomputed Distance Matrix</h3>
 <p>ConnectionOptimizer._distance_matrix constructs a 512×512 outer-difference matrix on every optimize() call, consuming 52 μs of memory bandwidth. Since the matrix depends only on the size parameter — which is fixed at initialisation — it can be precomputed once at __init__ time and cached as a class attribute. This eliminates 52 μs from every optimization call at the cost of 1 MB static allocation.</p>
-<h3 id="714-cfl-stable-timestep-enforcement"><strong>7.1.4 CFL-Stable Timestep Enforcement</strong></h3>
+<h3 id="714-cfl-stable-timestep-enforcement">7.1.4 CFL-Stable Timestep Enforcement</h3>
 <p>The explicit Euler integrator should enforce the CFL stability condition at initialisation: dt_stable = 0.5 × h² / D = 0.000310 for partition_size = 128. This changes dt from 0.01 to 0.000310 — a 32× reduction in step size, offset by the fact that convergence now occurs within 2–3 steps rather than 11, for equal or better total accuracy. Additionally, this eliminates the class of numerical divergence events possible under the current configuration.</p>
-<h2 id="72-priority-2-moderate-impact-moderate-complexity"><strong>7.2 Priority 2: Moderate Impact, Moderate Complexity</strong></h2>
-<h3 id="721-batched-multi-scale-convolution"><strong>7.2.1 Batched Multi-Scale Convolution</strong></h3>
+<h3 id="72-priority-2-moderate-impact-moderate-complexity">7.2 Priority 2: Moderate Impact, Moderate Complexity</h3>
+<h3 id="721-batched-multi-scale-convolution">7.2.1 Batched Multi-Scale Convolution</h3>
 <p>Four sequential F.conv1d calls at scales {3, 5, 7, 11} can be replaced by a single grouped convolution with zero-padded kernels, reducing four kernel launches to one. Each kernel launch on CPU has ~5–10 μs overhead; on GPU this is proportionally larger relative to compute time. The grouped approach also enables GPU parallelism across scales. Estimated improvement: 20–40% reduction in pattern detection time.</p>
-<h3 id="722-sub-question-branching-cap"><strong>7.2.2 Sub-Question Branching Cap</strong></h3>
+<h3 id="722-sub-question-branching-cap">7.2.2 Sub-Question Branching Cap</h3>
 <p>A max_questions_per_thought parameter (recommended default: 5) prevents wide branching on inputs with many high-quality patterns. Worst-case branching is currently 46 questions per thought (14 patterns × 3 + 2 structure + 2 learning). Capping at 5 makes worst-case dialogue latency predictable at 5 × child_thought_time rather than 46 ×, at the cost of not pursuing lower-value questions.</p>
-<h3 id="723-pattern-context-delta-compression"><strong>7.2.3 Pattern Context Delta Compression</strong></h3>
+<h3 id="723-pattern-context-delta-compression">7.2.3 Pattern Context Delta Compression</h3>
 <p>MemoryFormation stores full memory state snapshots (memory_size = 512 floats = 2 KB) per observation per pattern, capped at 200 observations. For smooth signals, consecutive memory snapshots differ by ~5% of full state (deltas are small). Switching to delta storage M(t) − M(t−1) with one full-state anchor reduces storage by 10–20× for typical inputs, lowering the 78 MB context storage plateau to approximately 4–8 MB.</p>
-<h2 id="73-priority-3-high-impact-high-complexity"><strong>7.3 Priority 3: High Impact, High Complexity</strong></h2>
-<h3 id="731-cranknicolson-implicit-integrator"><strong>7.3.1 Crank–Nicolson Implicit Integrator</strong></h3>
+<h3 id="73-priority-3-high-impact-high-complexity">7.3 Priority 3: High Impact, High Complexity</h3>
+<h3 id="731-cranknicolson-implicit-integrator">7.3.1 Crank–Nicolson Implicit Integrator</h3>
 <p>Replacing explicit Euler with the Crank–Nicolson method for the diffusion equation produces an unconditionally stable integrator. At each step, a tridiagonal linear system is solved via the Thomas algorithm (O(partition_size) per partition), eliminating the CFL constraint entirely. For partition_size = 128, the Thomas algorithm costs approximately 128 × 6 operations ≈ 768 FLOP per partition, comparable to the current Euler step. The key benefit is not speed but correctness: the integrator cannot diverge regardless of dt or D values.</p>
-<h3 id="732-approximate-nearest-neighbour-for-redundancy-removal"><strong>7.3.2 Approximate Nearest-Neighbour for Redundancy Removal</strong></h3>
+<h3 id="732-approximate-nearest-neighbour-for-redundancy-removal">7.3.2 Approximate Nearest-Neighbour for Redundancy Removal</h3>
 <p>The O(p²) full cosine similarity matrix in _remove_redundant can be replaced with locality-sensitive hashing for candidate pair generation followed by exact verification. For p = 47 patterns this is negligible; for large inputs with p &gt; 200, the reduction from O(p²) to O(p log p) becomes significant. Implementation requires an LSH library (e.g., FAISS) and changes to the candidate selection logic.</p>
-<h3 id="733-persistent-session-state"><strong>7.3.3 Persistent Session State</strong></h3>
+<h3 id="733-persistent-session-state">7.3.3 Persistent Session State</h3>
 <p>Serialising ThoughtChain state (cache, approach_history, pattern_combinations) and PatternProcessor state (families, connections) to disk enables cross-session reuse, eliminating the cold-start penalty and EMA warmup period for repeated operation on the same input domain. This is especially valuable in deployment scenarios where the system processes semantically consistent data streams across process restarts.</p>
-<h1 id="8-discussion"><strong>8. Discussion</strong></h1>
-<h2 id="81-the-structural-conservatism-finding"><strong>8.1 The Structural Conservatism Finding</strong></h2>
+<h2 id="8-discussion">8. Discussion</h2>
+<h3 id="81-the-structural-conservatism-finding">8.1 The Structural Conservatism Finding</h3>
 <p>The analytical finding that C(p) = SR × (1 − entropy) cannot reach 0.8 for entropy ≥ 0.2 is perhaps the most practically significant result of this study. It means the dialogue loop is not an exception handler for unusual inputs — it is a permanent feature of operation for all but the most regular structured signals. This is not a design flaw; it is a design choice. The system is explicitly conservative: it always demands additional evidence before committing to a result.</p>
 <p>The implication for system design is that throughput estimates based on the no-questions case (≈38,800 thoughts/second) are optimistic for real-world inputs. Practical throughput for mixed-entropy inputs is 2,600–5,500 thoughts/second, and the ratio between cold-start and warm-cache throughput (1× to 8.5×) means that session behaviour is strongly path-dependent: the first few hundred calls through a domain establish cache entries that dramatically accelerate all subsequent calls on similar inputs.</p>
-<h2 id="82-relationship-to-the-active-learning-framework"><strong>8.2 Relationship to the Active Learning Framework</strong></h2>
+<h3 id="82-relationship-to-the-active-learning-framework">8.2 Relationship to the Active Learning Framework</h3>
 <p>The internal dialogue loop implements a bounded form of active learning within a single processing call. The question generation mechanism is analogous to acquisition functions in Bayesian active learning: both select the next query to maximise expected information gain. The key differences are: (a) our queries are generated from the current thought rather than drawn from a candidate pool, (b) the query budget is enforced by the max_depth bound rather than an annotation cost constraint, and (c) query responses are generated by the same system that asked the question (self-questioning), whereas active learning typically involves external labelling.</p>
 <p>This self-questioning character distinguishes the architecture from existing CoT implementations. Most CoT systems generate reasoning steps sequentially without explicitly evaluating whether each step has resolved the core uncertainty. Our architecture evaluates uncertainty continuously via the confidence formula and generates targeted questions specifically calibrated to the nature of the uncertainty — pattern-based, structural, or epistemic.</p>
-<h2 id="83-biological-analogues"><strong>8.3 Biological Analogues</strong></h2>
+<h3 id="83-biological-analogues">8.3 Biological Analogues</h3>
 <p>The Cell AI layer deliberately parallels several well-characterised biological memory mechanisms. The diffusion term D∇²Cᵢ parallels synaptic spreading during hippocampal replay, where activation of one memory trace propagates to associated traces. The decay term −λCᵢ parallels active forgetting mechanisms, which neuroscience now recognises as adaptive rather than pathological (Hardt, Nader &amp; Nadel, 2013). The reaction term Rᵢ(Cᵢ) parallels Hebbian co-activation: patterns that fire together strengthen their mutual connections, and competing patterns suppress each other.</p>
 <p>The SIT model's observation that memories begin modular and become integrated maps directly onto our pattern family dynamics: early in a session, each new input class founds a new family (high modularity, isolated). Over many calls, prototype drift, connection graph growth, and cache co-occurrence tracking build an integrated network of associations (low modularity, well-connected). This parallel was not intentionally designed but emerged from the choice of biologically-inspired dynamics.</p>
-<h2 id="84-limitations"><strong>8.4 Limitations</strong></h2>
+<h3 id="84-limitations">8.4 Limitations</h3>
 <p>Several limitations require acknowledgement. The Euler integrator is formally unstable at the default configuration; while empirical divergence has not been observed, this represents a correctness risk for adversarial or extreme inputs. Pattern family count grows monotonically within a session; for very long sessions on diverse inputs, this will eventually become a performance concern. The asyncio concurrency model prevents true CPU parallelism; the system's throughput on CPU is bounded by single-core performance. Finally, the absence of cross-session persistence means all accumulated knowledge is lost on process exit, preventing the multi-session learning curves that biological systems exhibit.</p>
-<h1 id="9-conclusions"><strong>9. Conclusions</strong></h1>
+<h2 id="9-conclusions">9. Conclusions</h2>
 <p>We have presented a unified architecture for self-reflective pattern reasoning that integrates bounded recursive Chain of Thought reasoning with a reaction-diffusion memory layer. The system makes several contributions to the design space of cognitive AI systems.</p>
 <p>The derivation of all resource bounds from a single problem-size parameter n provides a principled and deployable approach to bounded computation. Unlike timeout-based or heuristic depth limits, the O(log₂ n) depth and O(√n) queue bounds are guaranteed by construction and scale naturally with problem complexity. The quality floor guarantee ensures that every query produces a result above a minimum utility threshold.</p>
 <p>The information-theoretic confidence formula C(p) = SR × (1 − entropy(p)) reveals a fundamental property of the architecture: the system is structurally conservative for all non-trivial inputs. This conservatism is appropriate for applications where incorrect confident answers are more costly than slower thorough ones — a design requirement common in defence, medical, and security applications.</p>
 <p>The reaction-diffusion memory layer provides a compact and biologically-grounded model of pattern persistence, spatial association, and principled forgetting. The PDE formulation enables analysis of stability conditions that purely heuristic memory systems cannot support, and provides a natural substrate for future extensions including continuous-time learning and multi-agent memory sharing.</p>
 <p>The five identified bottlenecks — serial sub-question processing, redundant ApproxEnt computation, unreused distance matrix, CFL-violating timestep, and delta-compressible context storage — collectively represent a 10–30× throughput improvement opportunity through engineering improvements that do not require architectural changes. The concurrent sub-question optimisation alone reduces dialogue wall time by (B−1)/B with a two-line code change.</p>
 <p>Future work will address three open problems: implementing a Crank–Nicolson integrator for unconditional PDE stability, adding cross-session persistence to support multi-session learning curves, and developing a formal convergence proof for the pattern family clustering dynamics under stationary input distributions.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Wei J., Wang X., Schuurmans D., Bosma M., Ichter B., Xia F., Chi E., Le Q., Zhou D. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. arXiv:2201.11903.</p>
 <p>[2] Kojima T., Gu S.S., Reid M., Matsuo Y., Iwasawa Y. (2022). Large Language Models are Zero-Shot Reasoners. NeurIPS 2022.</p>
 <p>[3] OpenAI (2024). Learning to Reason with LLMs. Technical Blog. September 2024.</p>
@@ -486,66 +582,91 @@
 <p>[20] ICLR 2024 Research on LLM Self-Correction. Referenced in: Galileo AI (2025). Self-Evaluation in AI Agents With Chain of Thought. https://galileo.ai/blog/self-evaluation-ai-agents-performance-reasoning-reflection</p>
 <ol>
 <li>
-<p><a id="footnote-1"></a>Wei J., Wang X., Schuurmans D., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. arXiv:2201.11903. <a href="#footnote-ref-1">↑</a></p>
+<p>Wei J., Wang X., Schuurmans D., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. arXiv:2201.11903. <a href="#footnote-ref-1">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-2"></a>Kojima T. et al. (2022). Large Language Models are Zero-Shot Reasoners. NeurIPS 2022. <a href="#footnote-ref-2">↑</a></p>
+<p>Kojima T. et al. (2022). Large Language Models are Zero-Shot Reasoners. NeurIPS 2022. <a href="#footnote-ref-2">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-3"></a>OpenAI (2024). Learning to Reason with LLMs. Blog post. September 2024. <a href="#footnote-ref-3">↑</a></p>
+<p>OpenAI (2024). Learning to Reason with LLMs. Blog post. September 2024. <a href="#footnote-ref-3">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-4"></a>Bavassi L., Fuentemilla L. (2024). Segregation-to-integration transformation model of memory evolution. Network Neuroscience, 8(4): 1529–1544. https://doi.org/10.1162/netn_a_00415 <a href="#footnote-ref-4">↑</a></p>
+<p>Bavassi L., Fuentemilla L. (2024). Segregation-to-integration transformation model of memory evolution. Network Neuroscience, 8(4): 1529–1544. https://doi.org/10.1162/netn_a_00415 <a href="#footnote-ref-4">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-5"></a>Goldman M.S. et al. (2024). Synaptic weight dynamics underlying memory consolidation. Proc. Natl. Acad. Sci. USA, 121(41): e2406010121. https://doi.org/10.1073/pnas.2406010121 <a href="#footnote-ref-5">↑</a></p>
+<p>Goldman M.S. et al. (2024). Synaptic weight dynamics underlying memory consolidation. Proc. Natl. Acad. Sci. USA, 121(41): e2406010121. https://doi.org/10.1073/pnas.2406010121 <a href="#footnote-ref-5">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-6"></a>Turing A.M. (1952). The Chemical Basis of Morphogenesis. Philosophical Transactions of the Royal Society B, 237(641): 37–72. <a href="#footnote-ref-6">↑</a></p>
+<p>Turing A.M. (1952). The Chemical Basis of Morphogenesis. Philosophical Transactions of the Royal Society B, 237(641): 37–72. <a href="#footnote-ref-6">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-7"></a>Nature Communications (2024). Widespread biochemical reaction networks enable Turing patterns without imposed feedback. https://doi.org/10.1038/s41467-024-52591-0 <a href="#footnote-ref-7">↑</a></p>
+<p>Nature Communications (2024). Widespread biochemical reaction networks enable Turing patterns without imposed feedback. https://doi.org/10.1038/s41467-024-52591-0 <a href="#footnote-ref-7">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-8"></a>Müller-Linow M. et al. (2014). Perspective: network-guided pattern formation of neural dynamics. PMC4150299. <a href="#footnote-ref-8">↑</a></p>
+<p>Müller-Linow M. et al. (2014). Perspective: network-guided pattern formation of neural dynamics. PMC4150299. <a href="#footnote-ref-8">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-9"></a>Abubaker-Sharif B., Devreotes P.N., Iglesias P.A. (2024). Machine learning sparse reaction-diffusion models from stochastic dynamics and spatiotemporal patterns. bioRxiv 2024.10.02.616367. <a href="#footnote-ref-9">↑</a></p>
+<p>Abubaker-Sharif B., Devreotes P.N., Iglesias P.A. (2024). Machine learning sparse reaction-diffusion models from stochastic dynamics and spatiotemporal patterns. bioRxiv 2024.10.02.616367. <a href="#footnote-ref-9">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-10"></a>Pincus S.M. (1991). Approximate entropy as a measure of system complexity. Proc. Natl. Acad. Sci. USA, 88(6): 2297–2301. <a href="#footnote-ref-10">↑</a></p>
+<p>Pincus S.M. (1991). Approximate entropy as a measure of system complexity. Proc. Natl. Acad. Sci. USA, 88(6): 2297–2301. <a href="#footnote-ref-10">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-11"></a>Bandt C., Pompe B. et al. Review: Combining Measures of Signal Complexity and Machine Learning for Time Series Analysis. Entropy, 23(12): 1672. https://pmc.ncbi.nlm.nih.gov/articles/PMC8700684/ <a href="#footnote-ref-11">↑</a></p>
+<p>Bandt C., Pompe B. et al. Review: Combining Measures of Signal Complexity and Machine Learning for Time Series Analysis. Entropy, 23(12): 1672. https://pmc.ncbi.nlm.nih.gov/articles/PMC8700684/ <a href="#footnote-ref-11">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-12"></a>Applications of Entropy in Data Analysis and Machine Learning: A Review. PMC. Entropy 2024, 26(12): 1126. https://pmc.ncbi.nlm.nih.gov/articles/PMC11675792/ <a href="#footnote-ref-12">↑</a></p>
+<p>Applications of Entropy in Data Analysis and Machine Learning: A Review. PMC. Entropy 2024, 26(12): 1126. https://pmc.ncbi.nlm.nih.gov/articles/PMC11675792/ <a href="#footnote-ref-12">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-13"></a>Goedecke S. (2024). Is chain-of-thought AI reasoning a mirage? Blog analysis. https://www.seangoedecke.com/real-reasoning/ <a href="#footnote-ref-13">↑</a></p>
+<p>Goedecke S. (2024). Is chain-of-thought AI reasoning a mirage? Blog analysis. https://www.seangoedecke.com/real-reasoning/ <a href="#footnote-ref-13">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-14"></a>ICLR 2024 findings on self-correction in LLMs, as referenced in Galileo AI technical review. December 2025. https://galileo.ai/blog/self-evaluation-ai-agents-performance-reasoning-reflection <a href="#footnote-ref-14">↑</a></p>
+<p>ICLR 2024 findings on self-correction in LLMs, as referenced in Galileo AI technical review. December 2025. https://galileo.ai/blog/self-evaluation-ai-agents-performance-reasoning-reflection <a href="#footnote-ref-14">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-15"></a>Müller-Linow M. et al. (2014). Network-guided pattern formation of neural dynamics. PMC4150299. <a href="#footnote-ref-15">↑</a></p>
+<p>Müller-Linow M. et al. (2014). Network-guided pattern formation of neural dynamics. PMC4150299. <a href="#footnote-ref-15">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-16"></a>Reaction diffusion system prediction based on convolutional neural network. Scientific Reports, 2020. https://www.nature.com/articles/s41598-020-60853-2 <a href="#footnote-ref-16">↑</a></p>
+<p>Reaction diffusion system prediction based on convolutional neural network. Scientific Reports, 2020. https://www.nature.com/articles/s41598-020-60853-2 <a href="#footnote-ref-16">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-17"></a>Unraveling biochemical spatial patterns: Machine learning approaches to the inverse problem of stationary Turing patterns. ScienceDirect 2024. https://www.sciencedirect.com/science/article/pii/S2589004224010447 <a href="#footnote-ref-17">↑</a></p>
+<p>Unraveling biochemical spatial patterns: Machine learning approaches to the inverse problem of stationary Turing patterns. ScienceDirect 2024. https://www.sciencedirect.com/science/article/pii/S2589004224010447 <a href="#footnote-ref-17">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-18"></a>Bandt et al. Review: Combining Measures of Signal Complexity and Machine Learning for Time Series Analysis. MDPI Entropy, 23(12): 1672. 2021. <a href="#footnote-ref-18">↑</a></p>
+<p>Bandt et al. Review: Combining Measures of Signal Complexity and Machine Learning for Time Series Analysis. MDPI Entropy, 23(12): 1672. 2021. <a href="#footnote-ref-18">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-19"></a>Information Entropy Measures for Evaluation of Reliability of Deep Neural Network Results. PMC. Entropy 2023, 25(4): 573. https://pmc.ncbi.nlm.nih.gov/articles/PMC10137523/ <a href="#footnote-ref-19">↑</a></p>
+<p>Information Entropy Measures for Evaluation of Reliability of Deep Neural Network Results. PMC. Entropy 2023, 25(4): 573. https://pmc.ncbi.nlm.nih.gov/articles/PMC10137523/ <a href="#footnote-ref-19">↑</a></p>
 </li>
 <li>
-<p><a id="footnote-20"></a>Guo S. et al. (2024). A Survey on Neural Question Generation: Methods, Applications, and Prospects. arXiv:2402.18267. <a href="#footnote-ref-20">↑</a></p>
+<p>Guo S. et al. (2024). A Survey on Neural Question Generation: Methods, Applications, and Prospects. arXiv:2402.18267. <a href="#footnote-ref-20">↑</a></p>
 </li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

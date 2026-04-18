@@ -1,1 +1,0 @@
-python CellAIv2_Binary.py train --data ../wikidata/wikidata_processed/wikidata_training.jsonl --epochs 1 --output ./cellai_model

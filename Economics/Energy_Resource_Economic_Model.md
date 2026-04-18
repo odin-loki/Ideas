@@ -1,5 +1,6 @@
 # THE ENERGY-RESOURCE ECONOMIC MODEL (EREM)
-## A Physics-Based Framework for Real Economic Measurement
+
+**A Physics-Based Framework for Real Economic Measurement**
 
 ---
 
@@ -22,6 +23,16 @@ Not all energy is equal. We need quality weighting:
 **Q = (Energy Density) × (Transportability) × (Controllability) × (Waste Factor)**
 
 ### Energy Type Q-Factors:
+
+| Energy type | Q | Summary |
+| --- | --- | --- |
+| Nuclear | 1.00 | Reference; density 8.2×10^13 J/kg (U-235); transport 0.95; control 0.98; waste 0.92 |
+| Coal | 0.42 | Density 2.4×10^7 J/kg; transport 0.85; control 0.70; waste 0.45 |
+| Natural gas | 0.68 | Density 5.5×10^7 J/kg; transport 0.90; control 0.95; waste 0.65 |
+| Petroleum | 0.75 | Density 4.6×10^7 J/kg; transport 0.98; control 0.90; waste 0.60 |
+| Solar (installed) | 0.58 | Fixed location +0.85 transport adj.; control 0.30; waste 1.00; CF ~0.25 |
+| Hydroelectric | 0.82 | Fixed +0.90 transmittable adj.; control 0.95; waste 1.00; CF ~0.50 |
+| Wind | 0.65 | Fixed +0.85 transmittable adj.; control 0.35; waste 1.00; CF ~0.35 |
 
 **Nuclear Energy:**
 ```

@@ -3,27 +3,80 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>cypha persistent homology</title>
+  <meta name="description" content="We apply persistent homology — specifically the Vietoris–Rips filtration — to the 128-dimensional latent space of the CyphaDIF classifier, computing persistence diagrams for H₀ and H₁ at both the centroid level \(K=10 class means\) and the full point-cloud level \(300 samples,…"/>
+  <title>Persistent Homology Analysis of the Differential Information Field Classifier · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v8\cypha_persistent_homology.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Persistent Homology Analysis of the</strong></p>
-<p><strong>Differential Information Field Classifier</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-background-persistent-homology">2. Background: Persistent Homology</a></li>
+        <li class="toc-depth-3"><a href="#21-the-vietorisrips-filtration">2.1 The Vietoris–Rips Filtration</a></li>
+        <li class="toc-depth-3"><a href="#22-stability-and-distances">2.2 Stability and Distances</a></li>
+        <li class="toc-depth-2"><a href="#3-h0-persistence-the-centroid-cloud">3. H₀ Persistence: The Centroid Cloud</a></li>
+        <li class="toc-depth-3"><a href="#31-persistence-diagram">3.1 Persistence Diagram</a></li>
+        <li class="toc-depth-3"><a href="#32-single-linkage-dendrogram">3.2 Single-Linkage Dendrogram</a></li>
+        <li class="toc-depth-2"><a href="#4-h0-persistence-full-point-cloud">4. H₀ Persistence: Full Point Cloud</a></li>
+        <li class="toc-depth-3"><a href="#41-diagram-summary">4.1 Diagram Summary</a></li>
+        <li class="toc-depth-3"><a href="#42-the-0-10-plateau">4.2 The β0 = 10 Plateau</a></li>
+        <li class="toc-depth-2"><a href="#5-h1-persistence-loops-and-cycles">5. H₁ Persistence: Loops and Cycles</a></li>
+        <li class="toc-depth-3"><a href="#51-centroid-cloud-no-h1-bars">5.1 Centroid Cloud: No H₁ Bars</a></li>
+        <li class="toc-depth-3"><a href="#52-full-point-cloud-minimal-h1">5.2 Full Point Cloud: Minimal H₁</a></li>
+        <li class="toc-depth-2"><a href="#6-per-class-h0-topology">6. Per-Class H₀ Topology</a></li>
+        <li class="toc-depth-3"><a href="#61-within-class-persistence">6.1 Within-Class Persistence</a></li>
+        <li class="toc-depth-2"><a href="#7-bottleneck-distances-between-per-class-diagrams">7. Bottleneck Distances Between Per-Class Diagrams</a></li>
+        <li class="toc-depth-3"><a href="#71-results">7.1 Results</a></li>
+        <li class="toc-depth-2"><a href="#8-persistence-entropy">8. Persistence Entropy</a></li>
+        <li class="toc-depth-2"><a href="#9-decision-boundary-topology">9. Decision Boundary Topology</a></li>
+        <li class="toc-depth-3"><a href="#91-geodesic-boundary-probes">9.1 Geodesic Boundary Probes</a></li>
+        <li class="toc-depth-3"><a href="#92-results-near-midpoint-boundaries">9.2 Results: Near-Midpoint Boundaries</a></li>
+        <li class="toc-depth-2"><a href="#10-wasserstein-1-distances-between-persistence-diagrams">10. Wasserstein-1 Distances Between Persistence Diagrams</a></li>
+        <li class="toc-depth-3"><a href="#101-results">10.1 Results</a></li>
+        <li class="toc-depth-2"><a href="#11-synthesis">11. Synthesis</a></li>
+        <li class="toc-depth-2"><a href="#12-conclusion">12. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Persistent Homology Analysis of the Differential Information Field Classifier</h1>
+          <p class="doc-meta">Cypha\Cypha v8\cypha_persistent_homology.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>Vietoris–Rips Filtration • β0/β1 Curves • Persistence Diagrams • Bottleneck • Wasserstein • Decision Boundary Topology</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Vietoris–Rips Filtration • β0/β1 Curves • Persistence Diagrams • Bottleneck • Wasserstein • Decision Boundary Topology</em></p>
 <p>Unpublished Technical Report — 2026</p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We apply persistent homology — specifically the Vietoris–Rips filtration — to the 128-dimensional latent space of the CyphaDIF classifier, computing persistence diagrams for H₀ and H₁ at both the centroid level (K=10 class means) and the full point-cloud level (300 samples, 30 per class). Ten probes are conducted spanning H₀ merge sequences, H₁ loop detection, per-class topology, bottleneck and Wasserstein distances between diagrams, Betti number filtration curves, and decision boundary topology along centroid geodesics. Key findings: <strong>(1)</strong> The H₀ persistence diagram of the centroid cloud contains 9 finite bars with lifetimes in [1.062, 1.674]. The single-linkage dendrogram reveals two tight sub-clusters — {bin_malware, bin_benign} merging first at ε=1.062, and {log_info, log_error, log_warn} merging next at ε≈1.115–1.128 — before the network-traffic cluster integrates the full configuration at ε=1.674. <strong>(2)</strong> The centroid cloud has zero H₁ bars: the 10 centroids form a tree-like (acyclic) arrangement in 128-dimensional space, with no topological loops at any scale. <strong>(3)</strong> The full point cloud exhibits a striking two-regime β0 filtration: rapid early merging within classes, then a plateau at β0=10 persisting from ε≈0.79 to ε≈0.96 before inter-class merging begins — confirming 10 well-separated topological clusters. <strong>(4)</strong> The inter-class minimum distance (0.944) exceeds 59.2% of the intra-class maximum (1.595), but the 5th/95th percentile overlap ratio is 1.07 — indicating that class distributions slightly overlap in the tails, a consequence of high within-class variance in net_exfil and bin_malware. <strong>(5)</strong> Decision boundaries are located near the geodesic midpoint (mean tₐ=0.491±0.028) for all 45 class pairs, with mean width 0.029 — consistent with near-Bayes-optimal linear boundaries in a shared-covariance Gaussian model. <strong>(6)</strong> Bottleneck distances between per-class H₀ diagrams cluster the log classes as topologically near-identical (d_B≈0.017–0.020), and the binary classes as a second cluster (d_B=0.080), with correlation r=0.46 with Euclidean centroid distance — topological similarity partially but not fully tracks geometric similarity.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Persistent homology provides a multi-scale summary of the shape of a point cloud that is invariant to isometry and stable under perturbations [1,2]. Applied to the latent representations of a classifier, it reveals the topological structure of how the classifier organises its learned features: whether class representations form tight clusters, whether they are arranged in loops or voids, and at what scale the boundary between classes becomes topologically significant.</p>
 <p>For the CyphaDIF classifier, the latent space is 128-dimensional. Each of the K=10 classes is represented by a distribution of 128-dimensional encoder outputs h=Wφ(x), governed by the class mean μ_k and shared prior variance v₀. The topological structure of these distributions — whether they are unimodal, multimodal, or topologically complex — determines the classifier’s geometric separability and robustness.</p>
-<p>__Scope. __We compute the Vietoris–Rips (VR) persistence of the latent point cloud at two levels: the centroid cloud (K=10 points, the class means μ_k) and the full point cloud (300 points, 30 per class). H₀ (connected components) is computed exactly via union-find. H₁ (loops) is approximated via the spanning-tree construction. Bottleneck and Wasserstein-1 distances between per-class diagrams are computed via optimal assignment. All computations are in the Euclidean metric on ℝ^{128}.</p>
-<h1 id="2-background-persistent-homology"><strong>2. Background: Persistent Homology</strong></h1>
-<h2 id="21-the-vietorisrips-filtration"><strong>2.1 The Vietoris–Rips Filtration</strong></h2>
+<p><strong>Scope.</strong> We compute the Vietoris–Rips (VR) persistence of the latent point cloud at two levels: the centroid cloud (K=10 points, the class means μ_k) and the full point cloud (300 points, 30 per class). H₀ (connected components) is computed exactly via union-find. H₁ (loops) is approximated via the spanning-tree construction. Bottleneck and Wasserstein-1 distances between per-class diagrams are computed via optimal assignment. All computations are in the Euclidean metric on ℝ^{128}.</p>
+<h2 id="2-background-persistent-homology">2. Background: Persistent Homology</h2>
+<h3 id="21-the-vietorisrips-filtration">2.1 The Vietoris–Rips Filtration</h3>
 <p>Given a finite point cloud 𝑋 = {x_1, …, x_n} ⊂ ℝ^d and a scale parameter ε ≥ 0, the Vietoris–Rips complex VR(𝑋, ε) is the abstract simplicial complex containing every finite subset σ ⊂ 𝑋 for which the pairwise distances satisfy diam(σ) ≤ ε. As ε increases from 0 to ∞, VR(𝑋, ε) grows monotonically, forming a filtration. Topological features (connected components, loops, voids) are born at some ε_birth and die at some ε_death &gt; ε_birth. The persistence of a feature is ε_death − ε_birth.</p>
 <p>VR(Ξ, ε) = {σ ⊂ Ξ : diam(σ) ≤ ε}</p>
 <p>H_k filtration:  ... → VR(Ξ, ε) → VR(Ξ, ε') → ... → Δ^{n-1}  (ε &lt; ε')</p>
@@ -31,7 +84,7 @@
 <p>H₀: connected components (bars end when two components merge)</p>
 <p>H₁: independent loops  (bars end when loop is filled by a triangle)</p>
 <p>H₂: enclosed voids     (not computed here)</p>
-<h2 id="22-stability-and-distances"><strong>2.2 Stability and Distances</strong></h2>
+<h3 id="22-stability-and-distances">2.2 Stability and Distances</h3>
 <p>The key stability theorem [2] states that the bottleneck distance between persistence diagrams is bounded by the perturbation in the point cloud:</p>
 <p>d_B(PD(Ξ), PD(Ξ')) ≤ d_{GH}(Ξ, Ξ')</p>
 <p>where d_{GH} is the Gromov–Hausdorff distance.</p>
@@ -39,15 +92,15 @@
 <p>Wasserstein-q distance: W_q(D, D') = inf_{γ} (Σ_{p} ||p - γ(p)||_∞^q)^{1/q}</p>
 <p>(Both include diagonal projections for unmatched points)</p>
 <p>Stability guarantees that small perturbations of the classifier’s learned means μ_k produce correspondingly small changes in the persistence diagrams. For the CyphaDIF classifier, this means the topological summary is robust to retraining noise.</p>
-<h1 id="3-h0-persistence-the-centroid-cloud"><strong>3. H₀ Persistence: The Centroid Cloud</strong></h1>
-<h2 id="31-persistence-diagram"><strong>3.1 Persistence Diagram</strong></h2>
+<h2 id="3-h0-persistence-the-centroid-cloud">3. H₀ Persistence: The Centroid Cloud</h2>
+<h3 id="31-persistence-diagram">3.1 Persistence Diagram</h3>
 <p>The K=10 class centroids μ_k ∈ ℝ^{128} form a point cloud of 10 points. The VR filtration on this cloud generates exactly K−1=9 finite H₀ bars (one connected component is essential and lives to ε=∞). Each bar (0, ε_death) records when two components merge; ε_death equals the Euclidean distance between the two closest points in the merging components (single-linkage).</p>
-<p><strong>Rank</strong></p>
-<p><strong>Birth</strong></p>
-<p><strong>Death (merge scale ε)</strong></p>
-<p><strong>Lifetime</strong></p>
-<p><strong>Significance</strong></p>
-<p>1 (most persistent)</p>
+<p><strong>Rank</strong>
+<strong>Birth</strong>
+<strong>Death (merge scale ε)</strong>
+<strong>Lifetime</strong>
+<strong>Significance</strong>
+1 (most persistent)</p>
 <p>0.000</p>
 <p>1.674</p>
 <p>1.674</p>
@@ -85,29 +138,20 @@
 <p>1.062</p>
 <p>1.062</p>
 <p>First merge: two nearest centroids</p>
-<p>__All 9 bars have substantial lifetime ≥ 1.06. __The persistence diagram is far from the diagonal (which would indicate noise with near-zero lifetime). The minimum lifetime of 1.062 and maximum of 1.674 confirm that all 10 class centroids are well-separated in 128-dimensional space, with no pair being topologically negligible relative to any other. The ratio max/min = 1.674/1.062 = 1.58 indicates moderate but not extreme variation in inter-centroid distances.</p>
+<p><strong>All 9 bars have substantial lifetime ≥ 1.06.</strong> The persistence diagram is far from the diagonal (which would indicate noise with near-zero lifetime). The minimum lifetime of 1.062 and maximum of 1.674 confirm that all 10 class centroids are well-separated in 128-dimensional space, with no pair being topologically negligible relative to any other. The ratio max/min = 1.674/1.062 = 1.58 indicates moderate but not extreme variation in inter-centroid distances.</p>
 <p>The total H₀ persistence (L1 norm of the diagram) is 11.74, with mean bar lifetime 1.30. This is the topological signature of the centroid configuration: it captures the multi-scale cluster structure in a single summary.</p>
-<h2 id="32-single-linkage-dendrogram"><strong>3.2 Single-Linkage Dendrogram</strong></h2>
+<h3 id="32-single-linkage-dendrogram">3.2 Single-Linkage Dendrogram</h3>
 <p>The merge sequence of the H₀ filtration is equivalent to the single-linkage hierarchical clustering dendrogram:</p>
-<p><strong>Merge sequence</strong></p>
-<p>__ε = 1.062: __bin_malware ↔ bin_benign merge. The two binary classes form the tightest centroid pair in the entire configuration. This is the topological confirmation of the W2 analysis result: bin_malware and bin_benign have the smallest inter-centroid Euclidean distance among all class pairs.</p>
-<p>__ε = 1.115: __log_info ↔ log_error merge. The two most similar log classes form a pair.</p>
-<p>__ε = 1.128: __log_warn joins the {log_info, log_error} cluster. The three log classes are now a unified topological component.</p>
-<p>__ε = 1.237: __net_normal ↔ net_c2 merge. The closest network-traffic pair.</p>
-<p>__ε = 1.259: __net_c2 cluster absorbs the log cluster — the network and log super-clusters merge.</p>
-<p>__ε = 1.320: __net_scan joins the network/log cluster.</p>
-<p>__ε = 1.420: __net_exfil joins.</p>
-<p>__ε = 1.524: __net_ddos joins.</p>
-<p>__ε = 1.674: __The binary cluster {bin_malware, bin_benign} finally merges with the network/log cluster. The full configuration is connected. This is the longest H₀ bar: the binary cluster is the most topologically isolated group of centroids.</p>
-<p><strong>Key structural insight</strong></p>
-<p>The dendrogram reveals a natural two-super-cluster structure: {binary} vs {network+log}, with the binary cluster isolated by a gap of Δε = 1.674 − 1.524 = 0.150 from the next merge. Within the network+log super-cluster, the log classes form a tight sub-cluster (ε≈1.115–1.128) and the network classes span a wider range (ε≈1.237–1.524). This matches exactly the domain taxonomy: binary artefacts occupy a fundamentally different region of feature space than text-based traffic.</p>
-<h1 id="4-h0-persistence-full-point-cloud"><strong>4. H₀ Persistence: Full Point Cloud</strong></h1>
-<h2 id="41-diagram-summary"><strong>4.1 Diagram Summary</strong></h2>
+<p><strong>Merge sequence</strong>
+<strong>ε = 1.062:</strong> bin_malware ↔ bin_benign merge. The two binary classes form the tightest centroid pair in the entire configuration. This is the topological confirmation of the W2 analysis result: bin_malware and bin_benign have the smallest inter-centroid Euclidean distance among all class pairs.<strong>ε = 1.115:</strong> log_info ↔ log_error merge. The two most similar log classes form a pair.<strong>ε = 1.128:</strong> log_warn joins the {log_info, log_error} cluster. The three log classes are now a unified topological component.<strong>ε = 1.237:</strong> net_normal ↔ net_c2 merge. The closest network-traffic pair.<strong>ε = 1.259:</strong> net_c2 cluster absorbs the log cluster — the network and log super-clusters merge.<strong>ε = 1.320:</strong> net_scan joins the network/log cluster.<strong>ε = 1.420:</strong> net_exfil joins.<strong>ε = 1.524:</strong> net_ddos joins.<strong>ε = 1.674:</strong> The binary cluster {bin_malware, bin_benign} finally merges with the network/log cluster. The full configuration is connected. This is the longest H₀ bar: the binary cluster is the most topologically isolated group of centroids.<strong> Key structural insight</strong>
+The dendrogram reveals a natural two-super-cluster structure: {binary} vs {network+log}, with the binary cluster isolated by a gap of Δε = 1.674 − 1.524 = 0.150 from the next merge. Within the network+log super-cluster, the log classes form a tight sub-cluster (ε≈1.115–1.128) and the network classes span a wider range (ε≈1.237–1.524). This matches exactly the domain taxonomy: binary artefacts occupy a fundamentally different region of feature space than text-based traffic.</p>
+<h2 id="4-h0-persistence-full-point-cloud">4. H₀ Persistence: Full Point Cloud</h2>
+<h3 id="41-diagram-summary">4.1 Diagram Summary</h3>
 <p>The full 300-point cloud (30 samples per class) generates 299 finite H₀ bars. The distribution of bar lifetimes reveals the multi-scale structure of the within-class and between-class point cloud:</p>
-<p><strong>Lifetime range</strong></p>
-<p><strong>Bar count</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>[0.00, 0.05)</p>
+<p><strong>Lifetime range</strong>
+<strong>Bar count</strong>
+<strong>Interpretation</strong>
+[0.00, 0.05)</p>
 <p>167 bars (55.9%)</p>
 <p>Within-class fine-scale noise (nearest-neighbour merges)</p>
 <p>[0.05, 0.10)</p>
@@ -122,15 +166,13 @@
 <p>[0.50, ∞)</p>
 <p>71 bars (23.7%)</p>
 <p>Well-separated inter-class and cross-class bars</p>
-<p>__71 bars with lifetime ≥ 0.50 confirm strong cluster separation. __Nearly a quarter of all H₀ bars are long-lived, indicating that the 10 class clouds form well-separated topological clusters that persist over a wide range of scales. The top 15 most persistent bars have lifetimes 0.717–1.353, all representing inter-class separations.</p>
-<p>__Gap ratio top1/top2 = 1.011 (near unity). __Unlike the centroid-cloud diagram where bar lifetimes span a 1.58× range, the full-cloud diagram has near-equal top-two bars. This reflects the fact that at the level of individual samples, multiple class pairs are nearly equidistant — the point cloud’s topology is more ‘uniform’ than the centroid topology. The persistence entropy of 4.84 nats (out of a maximum of ln(299) = 5.70 nats) confirms that the bar lifetimes are broadly distributed rather than concentrated in a few dominant features.</p>
-<h2 id="42-the-0-10-plateau"><strong>4.2 The β0 = 10 Plateau</strong></h2>
-<p><strong>Key result</strong></p>
-<p>__The Betti number β0(ε) holds exactly at 10 for ε ∈ [0.788, 0.960]. __This is a topological certificate of the 10-class cluster structure: at these scales, each class has collapsed to a single connected component and no inter-class merging has yet occurred. The plateau begins at ε = 0.788 (when all intra-class merging is complete) and ends at ε = 0.961 (when the first inter-class merge occurs). The plateau width Δε = 0.173 is the topological separation gap between within-class and between-class scales.</p>
-<p><strong>Scale ε</strong></p>
-<p><strong>β0 (components)</strong></p>
-<p><strong>Event</strong></p>
-<p>0.000</p>
+<p><strong>71 bars with lifetime ≥ 0.50 confirm strong cluster separation.</strong> Nearly a quarter of all H₀ bars are long-lived, indicating that the 10 class clouds form well-separated topological clusters that persist over a wide range of scales. The top 15 most persistent bars have lifetimes 0.717–1.353, all representing inter-class separations.<strong> Gap ratio top1/top2 = 1.011 (near unity).</strong> Unlike the centroid-cloud diagram where bar lifetimes span a 1.58× range, the full-cloud diagram has near-equal top-two bars. This reflects the fact that at the level of individual samples, multiple class pairs are nearly equidistant — the point cloud’s topology is more ‘uniform’ than the centroid topology. The persistence entropy of 4.84 nats (out of a maximum of ln(299) = 5.70 nats) confirms that the bar lifetimes are broadly distributed rather than concentrated in a few dominant features.</p>
+<h3 id="42-the-0-10-plateau">4.2 The β0 = 10 Plateau</h3>
+<p><strong>Key result</strong>
+<strong>The Betti number β0(ε) holds exactly at 10 for ε ∈ [0.788, 0.960].</strong> This is a topological certificate of the 10-class cluster structure: at these scales, each class has collapsed to a single connected component and no inter-class merging has yet occurred. The plateau begins at ε = 0.788 (when all intra-class merging is complete) and ends at ε = 0.961 (when the first inter-class merge occurs). The plateau width Δε = 0.173 is the topological separation gap between within-class and between-class scales.<strong> Scale ε</strong>
+<strong>β0 (components)</strong>
+<strong>Event</strong>
+0.000</p>
 <p>300</p>
 <p>All points isolated</p>
 <p>0.025</p>
@@ -157,18 +199,17 @@
 <p>1</p>
 <p>All 300 points in one component</p>
 <p>The filtration reveals a clear separation of scales: the intra-class merging regime (ε &lt; 0.788) is dominated by within-class Euclidean distances (mean 0.402, max 1.595), while the inter-class merging regime (ε &gt; 0.961) is governed by between-class distances (mean 1.843, min 0.944). The two regimes are separated by the plateau at exactly β0 = K = 10.</p>
-<h1 id="5-h1-persistence-loops-and-cycles"><strong>5. H₁ Persistence: Loops and Cycles</strong></h1>
-<h2 id="51-centroid-cloud-no-h1-bars"><strong>5.1 Centroid Cloud: No H₁ Bars</strong></h2>
-<p><strong>Result</strong></p>
-<p>__The centroid cloud has zero H₁ bars at any scale. __The 10 class centroids form a tree-like (acyclic) topological structure in ℝ^{128}. There are no loops, cycles, or circular arrangements among the class means at any filtration scale. This is geometrically significant: the centroids do not form any closed chains, and the decision boundaries between classes have no topological ‘circling’ structure. The Vietoris–Rips complex on the centroid cloud is homotopy equivalent to a tree at all scales below the full simplex.</p>
-<p>__Why no H₁? __In the single-linkage filtration, an H₁ bar would require a triple of points (i,j,k) such that the non-tree edge (i,k) creates a loop before the triangle (i,j,k) fills it. In 128 dimensions, the curse of dimensionality makes all inter-point distances nearly equal, so the ratio of the non-tree edge length to the triangle-filling edge length is close to 1. The absence of H₁ means that every potential loop in the centroid cloud is immediately filled by its enclosing triangle, producing zero-lifetime bars that do not survive in the persistence diagram.</p>
-<h2 id="52-full-point-cloud-minimal-h1"><strong>5.2 Full Point Cloud: Minimal H₁</strong></h2>
+<h2 id="5-h1-persistence-loops-and-cycles">5. H₁ Persistence: Loops and Cycles</h2>
+<h3 id="51-centroid-cloud-no-h1-bars">5.1 Centroid Cloud: No H₁ Bars</h3>
+<p><strong>Result</strong>
+<strong>The centroid cloud has zero H₁ bars at any scale.</strong> The 10 class centroids form a tree-like (acyclic) topological structure in ℝ^{128}. There are no loops, cycles, or circular arrangements among the class means at any filtration scale. This is geometrically significant: the centroids do not form any closed chains, and the decision boundaries between classes have no topological ‘circling’ structure. The Vietoris–Rips complex on the centroid cloud is homotopy equivalent to a tree at all scales below the full simplex.<strong> Why no H₁?</strong> In the single-linkage filtration, an H₁ bar would require a triple of points (i,j,k) such that the non-tree edge (i,k) creates a loop before the triangle (i,j,k) fills it. In 128 dimensions, the curse of dimensionality makes all inter-point distances nearly equal, so the ratio of the non-tree edge length to the triangle-filling edge length is close to 1. The absence of H₁ means that every potential loop in the centroid cloud is immediately filled by its enclosing triangle, producing zero-lifetime bars that do not survive in the persistence diagram.</p>
+<h3 id="52-full-point-cloud-minimal-h1">5.2 Full Point Cloud: Minimal H₁</h3>
 <p>On an 80-point subsample of the full cloud, three H₁ bars are detected:</p>
-<p><strong>Birth ε</strong></p>
-<p><strong>Death ε</strong></p>
-<p><strong>Lifetime</strong></p>
-<p><strong>Significance</strong></p>
-<p>1.164</p>
+<p><strong>Birth ε</strong>
+<strong>Death ε</strong>
+<strong>Lifetime</strong>
+<strong>Significance</strong>
+1.164</p>
 <p>1.215</p>
 <p>0.051</p>
 <p>Moderate — inter-class loop between adjacent clusters</p>
@@ -180,19 +221,19 @@
 <p>0.435</p>
 <p>0.001</p>
 <p>Noise — effectively zero</p>
-<p>__One significant H₁ bar (lifetime 0.051) at the inter-class scale. __The single non-trivial loop is born at ε = 1.164 (in the inter-class merging regime) and dies at ε = 1.215. This loop arises from a triangular arrangement of points from three different classes whose pairwise distances are nearly equal — the typical ‘equilateral triangle’ configuration that appears in high-dimensional spaces between well-separated clusters. Its short lifetime (0.051, compared to H₀ bars of 1.0+) confirms it is a geometric artefact rather than a meaningful topological feature.</p>
+<p><strong>One significant H₁ bar (lifetime 0.051) at the inter-class scale.</strong> The single non-trivial loop is born at ε = 1.164 (in the inter-class merging regime) and dies at ε = 1.215. This loop arises from a triangular arrangement of points from three different classes whose pairwise distances are nearly equal — the typical ‘equilateral triangle’ configuration that appears in high-dimensional spaces between well-separated clusters. Its short lifetime (0.051, compared to H₀ bars of 1.0+) confirms it is a geometric artefact rather than a meaningful topological feature.</p>
 <p>The near-absence of H₁ in the full cloud confirms what the centroid analysis suggested: the latent space has the topology of a union of 10 blobs (contractible sets), with no circular or toroidal structure. The Betti numbers are β0 = K = 10, β1 ≈ 0, β2 = 0 across the classification-relevant scale range.</p>
-<h1 id="6-per-class-h0-topology"><strong>6. Per-Class H₀ Topology</strong></h1>
-<h2 id="61-within-class-persistence"><strong>6.1 Within-Class Persistence</strong></h2>
+<h2 id="6-per-class-h0-topology">6. Per-Class H₀ Topology</h2>
+<h3 id="61-within-class-persistence">6.1 Within-Class Persistence</h3>
 <p>Computing the H₀ persistence for each class individually (100 points per class) reveals the within-class topological structure:</p>
-<p><strong>Class</strong></p>
-<p><strong>Bars</strong></p>
-<p><strong>Max lifetime</strong></p>
-<p><strong>Total pers.</strong></p>
-<p><strong>Gap ratio</strong></p>
-<p><strong>Pers. entropy</strong></p>
-<p><strong>Structure</strong></p>
-<p>net_normal</p>
+<p><strong>Class</strong>
+<strong>Bars</strong>
+<strong>Max lifetime</strong>
+<strong>Total pers.</strong>
+<strong>Gap ratio</strong>
+<strong>Pers. entropy</strong>
+<strong>Structure</strong>
+net_normal</p>
 <p>99</p>
 <p>0.606</p>
 <p>5.499</p>
@@ -262,19 +303,16 @@
 <p>1.035</p>
 <p>4.590</p>
 <p>Highly diffuse</p>
-<p><strong>Three distinct within-class regimes</strong></p>
-<p>__Tight log classes (log_info, log_warn, log_error): __Maximum lifetime 0.019–0.040, total persistence 0.896–1.970. These classes have extremely small within-class spread. The structured format [TYPE] HH:MM:SS ... produces nearly identical 128-dim representations, with only timestamp digits and PID values varying. The class distribution is a tight, nearly point-like cluster in latent space.</p>
-<p>__Moderate network classes (net_normal, net_scan, net_ddos, net_c2): __Maximum lifetime 0.241–0.749, total persistence 1.645–5.499. These classes have intermediate spread, consistent with moderate lexical variation (URL paths, port numbers, IP addresses) that produces moderate diversity in the encoder output.</p>
-<p>__Diffuse binary classes (bin_malware, bin_benign) and net_exfil: __Total persistence 14.37, 54.92, 54.82. The binary classes have by far the largest within-class persistence, reflecting the random payload bytes in MZ/ELF binary samples. The StructuralParser encodes the random payload directly into the 128-dim feature vector, producing a near-uniform distribution in the binary-class region of latent space. net_exfil is also diffuse due to the random hex string in the DNS query.</p>
-<p>__Persistence entropy reveals the full picture. __The persistence entropy H_pers = −Σ (l_i/L) log(l_i/L) measures how uniformly the persistence is distributed across bars. log_warn and log_error have H_pers ≈ 4.55 nats (very uniform: all 99 bars have nearly equal lifetime, consistent with a tight spherical cluster). net_c2 has H_pers = 1.97 nats (one bar strongly dominates), suggesting a multi-scale cluster structure. The binary classes have H_pers ≈ 4.59 (extremely uniform, consistent with a near-uniform distribution in a high-dimensional ball).</p>
-<h1 id="7-bottleneck-distances-between-per-class-diagrams"><strong>7. Bottleneck Distances Between Per-Class Diagrams</strong></h1>
-<h2 id="71-results"><strong>7.1 Results</strong></h2>
+<p><strong>Three distinct within-class regimes</strong>
+<strong>Tight log classes (log_info, log_warn, log_error):</strong> Maximum lifetime 0.019–0.040, total persistence 0.896–1.970. These classes have extremely small within-class spread. The structured format [TYPE] HH:MM:SS ... produces nearly identical 128-dim representations, with only timestamp digits and PID values varying. The class distribution is a tight, nearly point-like cluster in latent space.<strong> Moderate network classes (net_normal, net_scan, net_ddos, net_c2):</strong> Maximum lifetime 0.241–0.749, total persistence 1.645–5.499. These classes have intermediate spread, consistent with moderate lexical variation (URL paths, port numbers, IP addresses) that produces moderate diversity in the encoder output.<strong> Diffuse binary classes (bin_malware, bin_benign) and net_exfil:</strong> Total persistence 14.37, 54.92, 54.82. The binary classes have by far the largest within-class persistence, reflecting the random payload bytes in MZ/ELF binary samples. The StructuralParser encodes the random payload directly into the 128-dim feature vector, producing a near-uniform distribution in the binary-class region of latent space. net_exfil is also diffuse due to the random hex string in the DNS query.<strong> Persistence entropy reveals the full picture.</strong> The persistence entropy H_pers = −Σ (l_i/L) log(l_i/L) measures how uniformly the persistence is distributed across bars. log_warn and log_error have H_pers ≈ 4.55 nats (very uniform: all 99 bars have nearly equal lifetime, consistent with a tight spherical cluster). net_c2 has H_pers = 1.97 nats (one bar strongly dominates), suggesting a multi-scale cluster structure. The binary classes have H_pers ≈ 4.59 (extremely uniform, consistent with a near-uniform distribution in a high-dimensional ball).</p>
+<h2 id="7-bottleneck-distances-between-per-class-diagrams">7. Bottleneck Distances Between Per-Class Diagrams</h2>
+<h3 id="71-results">7.1 Results</h3>
 <p>The bottleneck distance d_B(D_i, D_j) between the H₀ persistence diagrams of classes i and j measures how topologically similar the two within-class point clouds are:</p>
-<p><strong>Pair</strong></p>
-<p><strong>d_B</strong></p>
-<p><strong>Euclidean centroid dist.</strong></p>
-<p><strong>Topological relationship</strong></p>
-<p>log_info ↔ log_warn</p>
+<p><strong>Pair</strong>
+<strong>d_B</strong>
+<strong>Euclidean centroid dist.</strong>
+<strong>Topological relationship</strong>
+log_info ↔ log_warn</p>
 <p>0.017</p>
 <p>1.128</p>
 <p>Topologically near-identical</p>
@@ -307,17 +345,15 @@
 <p>net_scan ↔ net_exfil</p>
 <p>0.374</p>
 <p>1.649</p>
-<p><strong>Key result</strong></p>
-<p>__The three log classes are topologically identical to within 0.020. __The bottleneck distances d_B(log_info, log_warn) = 0.017, d_B(log_info, log_error) = 0.020, d_B(log_warn, log_error) = 0.020 are near zero. Topologically, the within-class structure of all three log classes is identical: each forms a tight cluster with the same persistence diagram (99 bars of approximately equal and very small lifetime). Their topological similarity is far greater than their Euclidean centroid separation (1.115–1.186) would suggest.</p>
-<p>__net_scan is topologically farthest from every class it is paired with. __All five instances of maximum bottleneck distance (d_B = 0.374) involve net_scan. The net_scan within-class diagram has one long bar (lifetime 0.749) that does not appear in other classes, making it topologically unique. This long bar arises from the discrete structure of the port-number feature: the random port choice (1–65535 vs the fixed target ports 22/80/443/3389) creates a bimodal distribution in certain encoder dimensions, producing a substantial H₀ bar.</p>
-<p>__Correlation d_B vs Euclidean: r = 0.462. __Topological similarity (bottleneck distance) is moderately correlated with geometric similarity (Euclidean centroid distance) but explains only 21% of the variance. The remaining 79% reflects that topological shape — the persistence diagram — captures different information than centroid proximity. Two classes can be geometrically far apart but topologically similar (e.g., net_ddos and log_error, both diffuse spherical clouds) or geometrically close but topologically distinct (net_c2 and log_warn).</p>
-<h1 id="8-persistence-entropy"><strong>8. Persistence Entropy</strong></h1>
+<p><strong>Key result</strong>
+<strong>The three log classes are topologically identical to within 0.020.</strong> The bottleneck distances d_B(log_info, log_warn) = 0.017, d_B(log_info, log_error) = 0.020, d_B(log_warn, log_error) = 0.020 are near zero. Topologically, the within-class structure of all three log classes is identical: each forms a tight cluster with the same persistence diagram (99 bars of approximately equal and very small lifetime). Their topological similarity is far greater than their Euclidean centroid separation (1.115–1.186) would suggest.<strong> net_scan is topologically farthest from every class it is paired with.</strong> All five instances of maximum bottleneck distance (d_B = 0.374) involve net_scan. The net_scan within-class diagram has one long bar (lifetime 0.749) that does not appear in other classes, making it topologically unique. This long bar arises from the discrete structure of the port-number feature: the random port choice (1–65535 vs the fixed target ports 22/80/443/3389) creates a bimodal distribution in certain encoder dimensions, producing a substantial H₀ bar.<strong> Correlation d_B vs Euclidean: r = 0.462.</strong> Topological similarity (bottleneck distance) is moderately correlated with geometric similarity (Euclidean centroid distance) but explains only 21% of the variance. The remaining 79% reflects that topological shape — the persistence diagram — captures different information than centroid proximity. Two classes can be geometrically far apart but topologically similar (e.g., net_ddos and log_error, both diffuse spherical clouds) or geometrically close but topologically distinct (net_c2 and log_warn).</p>
+<h2 id="8-persistence-entropy">8. Persistence Entropy</h2>
 <p>The persistence entropy H_pers(D) = −Σ_i (l_i / L) log(l_i / L) quantifies the complexity of a persistence diagram, where l_i = death_i − birth_i and L = Σ l_i. A diagram with a single dominant bar has low entropy (one feature explains all persistence). A diagram with many equal-lifetime bars has high entropy (no single topological scale dominates).</p>
-<p><strong>Class</strong></p>
-<p><strong>H_pers</strong></p>
-<p><strong>Dominant bar fraction</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>net_c2</p>
+<p><strong>Class</strong>
+<strong>H_pers</strong>
+<strong>Dominant bar fraction</strong>
+<strong>Interpretation</strong>
+net_c2</p>
 <p>1.970</p>
 <p>0.390</p>
 <p>Single dominant feature (multi-scale cluster)</p>
@@ -357,18 +393,16 @@
 <p>4.571</p>
 <p>0.021</p>
 <p>Near-maximal entropy (random hex string)</p>
-<p>__net_c2 has the lowest persistence entropy (1.97), meaning its H₀ diagram is dominated by a single bar. __The net_c2 POST /beacon pattern has consistent structure across samples (fixed URL, consistent Content-Length format), producing a within-class distribution with one scale that dominates: a well-defined ‘core cluster’ surrounded by a smaller number of outliers. The dominant bar fraction of 0.39 means that one topological feature accounts for 39% of the total persistence.</p>
-<p>__The binary and random-content classes approach maximum possible entropy. __bin_malware, bin_benign, and net_exfil all have H_pers ≈ 4.59 nats, approaching the maximum ln(99) ≈ 4.60 nats. This is the topological signature of near-uniform distributions in high-dimensional space: all 99 bars have nearly equal lifetime, and no single scale dominates. The random payload bytes produce a near-isotropic cloud in the latent space, yielding maximal persistence entropy.</p>
-<h1 id="9-decision-boundary-topology"><strong>9. Decision Boundary Topology</strong></h1>
-<h2 id="91-geodesic-boundary-probes"><strong>9.1 Geodesic Boundary Probes</strong></h2>
+<p><strong>net_c2 has the lowest persistence entropy (1.97), meaning its H₀ diagram is dominated by a single bar.</strong> The net_c2 POST /beacon pattern has consistent structure across samples (fixed URL, consistent Content-Length format), producing a within-class distribution with one scale that dominates: a well-defined ‘core cluster’ surrounded by a smaller number of outliers. The dominant bar fraction of 0.39 means that one topological feature accounts for 39% of the total persistence.<strong> The binary and random-content classes approach maximum possible entropy.</strong> bin_malware, bin_benign, and net_exfil all have H_pers ≈ 4.59 nats, approaching the maximum ln(99) ≈ 4.60 nats. This is the topological signature of near-uniform distributions in high-dimensional space: all 99 bars have nearly equal lifetime, and no single scale dominates. The random payload bytes produce a near-isotropic cloud in the latent space, yielding maximal persistence entropy.</p>
+<h2 id="9-decision-boundary-topology">9. Decision Boundary Topology</h2>
+<h3 id="91-geodesic-boundary-probes">9.1 Geodesic Boundary Probes</h3>
 <p>We probe the decision boundary between each class pair by linearly interpolating between centroid pairs and recording where the predicted class changes. For each pair (i,j), we sample 50 equally-spaced points along the geodesic γ(t) = (1-t)μ_i + tμ_j, t ∈ [0,1], and record the boundary crossing location t_c (where the prediction first changes from class i) and width w (the t-interval over which the prediction is neither purely i nor purely j).</p>
-<h2 id="92-results-near-midpoint-boundaries"><strong>9.2 Results: Near-Midpoint Boundaries</strong></h2>
-<p><strong>Key result</strong></p>
-<p>__All 45 of 45 class-pair boundaries are found, with mean crossing t_c = 0.491 ± 0.028. __The boundaries are located near the geometric midpoint of each centroid pair, consistent with a shared-covariance Gaussian model (where the Bayes-optimal boundary is exactly at the midpoint). The standard deviation of 0.028 across all 45 pairs is small, indicating the boundaries are uniformly near-midpoint regardless of which class pair is considered.</p>
-<p><strong>Statistic</strong></p>
-<p><strong>Value</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>Mean crossing t_c</p>
+<h3 id="92-results-near-midpoint-boundaries">9.2 Results: Near-Midpoint Boundaries</h3>
+<p><strong>Key result</strong>
+<strong>All 45 of 45 class-pair boundaries are found, with mean crossing t_c = 0.491 ± 0.028.</strong> The boundaries are located near the geometric midpoint of each centroid pair, consistent with a shared-covariance Gaussian model (where the Bayes-optimal boundary is exactly at the midpoint). The standard deviation of 0.028 across all 45 pairs is small, indicating the boundaries are uniformly near-midpoint regardless of which class pair is considered.<strong> Statistic</strong>
+<strong>Value</strong>
+<strong>Interpretation</strong>
+Mean crossing t_c</p>
 <p>0.491</p>
 <p>Near midpoint (0.5 = exact midpoint)</p>
 <p>Std of t_c</p>
@@ -386,17 +420,15 @@
 <p>Boundaries found</p>
 <p>45/45</p>
 <p>All class pairs have detectable boundaries</p>
-<p>__Mean boundary width = 0.029 corresponds to ~1.4 grid steps out of 50. __The decision boundaries are very sharp in the geodesic parametrisation: the prediction transitions from class i to class j over approximately 1–2 steps along the interpolating geodesic. This is consistent with the large LLR gaps found in the statistical analysis: the Gaussian model’s LLR changes rapidly as h crosses the boundary hyperplane, producing a sharp topological boundary.</p>
-<p>__bin_malware ↔ bin_benign: latest crossing (t_c = 0.571). __The boundary between the two binary classes is displaced toward bin_benign (the ‘j’ class), consistent with bin_malware having a higher internal variance (random payload bytes produce a more dispersed latent distribution than the ELF structure). The bin_malware centroid is at the ‘edge’ of its distribution, so the boundary is shifted outward.</p>
-<p>__Topological interpretation. __The 45 detected boundaries, each located near t = 0.5 with width ~0.03, correspond to 45 nearly-linear hyperplanes in ℝ^{128} that partition the space into 10 decision regions. The near-midpoint location confirms that the decision regions are approximately Voronoi cells with respect to the Euclidean metric on the centroids, with small corrections for the class-specific variance structure.</p>
-<h1 id="10-wasserstein-1-distances-between-persistence-diagrams"><strong>10. Wasserstein-1 Distances Between Persistence Diagrams</strong></h1>
-<h2 id="101-results"><strong>10.1 Results</strong></h2>
+<p><strong>Mean boundary width = 0.029 corresponds to ~1.4 grid steps out of 50.</strong> The decision boundaries are very sharp in the geodesic parametrisation: the prediction transitions from class i to class j over approximately 1–2 steps along the interpolating geodesic. This is consistent with the large LLR gaps found in the statistical analysis: the Gaussian model’s LLR changes rapidly as h crosses the boundary hyperplane, producing a sharp topological boundary.<strong> bin_malware ↔ bin_benign: latest crossing (t_c = 0.571).</strong> The boundary between the two binary classes is displaced toward bin_benign (the ‘j’ class), consistent with bin_malware having a higher internal variance (random payload bytes produce a more dispersed latent distribution than the ELF structure). The bin_malware centroid is at the ‘edge’ of its distribution, so the boundary is shifted outward.<strong> Topological interpretation.</strong> The 45 detected boundaries, each located near t = 0.5 with width ~0.03, correspond to 45 nearly-linear hyperplanes in ℝ^{128} that partition the space into 10 decision regions. The near-midpoint location confirms that the decision regions are approximately Voronoi cells with respect to the Euclidean metric on the centroids, with small corrections for the class-specific variance structure.</p>
+<h2 id="10-wasserstein-1-distances-between-persistence-diagrams">10. Wasserstein-1 Distances Between Persistence Diagrams</h2>
+<h3 id="101-results">10.1 Results</h3>
 <p>The Wasserstein-1 distance W_1(D_i, D_j) between per-class H₀ diagrams provides a softer measure of topological dissimilarity than the bottleneck distance, penalising all matched pairs rather than only the worst match:</p>
-<p><strong>Pair</strong></p>
-<p><strong>W_1</strong></p>
-<p><strong>d_B</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>log_info ↔ log_warn</p>
+<p><strong>Pair</strong>
+<strong>W_1</strong>
+<strong>d_B</strong>
+<strong>Interpretation</strong>
+log_info ↔ log_warn</p>
 <p>0.214</p>
 <p>0.017</p>
 <p>Topologically near-identical</p>
@@ -429,22 +461,20 @@
 <p>net_ddos ↔ bin_benign</p>
 <p>14.11</p>
 <p>0.353</p>
-<p>__W_1 and d_B rankings are largely consistent but differ for log_warn ↔ log_error. __The bottleneck distance d_B = 0.020 (low: diagrams are similar) but W_1 = 0.688 (moderate: the total mass-transport cost is higher). This discrepancy arises because both classes have 99 bars, and the Wasserstein distance sums the transport over all bar pairs, amplifying small per-bar differences into a larger aggregate cost. The bottleneck distance only sees the worst match, which happens to be small.</p>
-<p>__Highest W_1 distances involve net_exfil and binary classes. __net_exfil has the largest total persistence (14.37) due to the high within-class variation in the random hex DNS string, while bin_malware and bin_benign have even larger total persistence (54.9 each) from the random payload bytes. The Wasserstein distance is sensitive to the total persistence L = Σ l_i, so pairs involving high-persistence classes have large W_1 regardless of the bottleneck distance.</p>
-<p>__Correlation W_1 vs Euclidean: r = 0.687. __Wasserstein diagram distance is more strongly correlated with geometric centroid distance (r=0.687) than bottleneck distance (r=0.462). This makes sense: W_1 is a global measure that scales with the total persistence, which is related to the within-class variance, which in turn correlates with geometric spread. Bottleneck distance captures only the most extreme topological feature difference, which may not align with geometric distance.</p>
-<h1 id="11-synthesis"><strong>11. Synthesis</strong></h1>
+<p><strong>W_1 and d_B rankings are largely consistent but differ for log_warn ↔ log_error.</strong> The bottleneck distance d_B = 0.020 (low: diagrams are similar) but W_1 = 0.688 (moderate: the total mass-transport cost is higher). This discrepancy arises because both classes have 99 bars, and the Wasserstein distance sums the transport over all bar pairs, amplifying small per-bar differences into a larger aggregate cost. The bottleneck distance only sees the worst match, which happens to be small.<strong> Highest W_1 distances involve net_exfil and binary classes.</strong> net_exfil has the largest total persistence (14.37) due to the high within-class variation in the random hex DNS string, while bin_malware and bin_benign have even larger total persistence (54.9 each) from the random payload bytes. The Wasserstein distance is sensitive to the total persistence L = Σ l_i, so pairs involving high-persistence classes have large W_1 regardless of the bottleneck distance.<strong> Correlation W_1 vs Euclidean: r = 0.687.</strong> Wasserstein diagram distance is more strongly correlated with geometric centroid distance (r=0.687) than bottleneck distance (r=0.462). This makes sense: W_1 is a global measure that scales with the total persistence, which is related to the within-class variance, which in turn correlates with geometric spread. Bottleneck distance captures only the most extreme topological feature difference, which may not align with geometric distance.</p>
+<h2 id="11-synthesis">11. Synthesis</h2>
 <ul>
-<li>__Tree-like centroid topology, spherical within-class topology. __The 10 centroids form an acyclic tree structure (zero H₁), and each class cloud is approximately a ball in ℝ^{128} (near-uniform persistence diagrams). The latent space has no topological loops, voids, or complex manifold structure at any relevant scale.</li>
-<li>__Two super-clusters: {binary} vs {network+log}. __The single-linkage dendrogram reveals a natural two-super-cluster structure emerging from the H₀ merge sequence. The binary cluster is topologically isolated by the longest H₀ bar (lifetime 1.674 vs the within-super-cluster bars 1.062–1.524).</li>
-<li>__The β0 = 10 plateau from ε = 0.788 to 0.961 is the topological guarantee of 10-class separability. __This plateau width (Δε = 0.173) is the topological separation gap: no scale exists at which fewer than 10 but more than 1 component exist, below the inter-class threshold. The 10 topological clusters are maximally well-separated.</li>
-<li>__Log classes are topologically identical (d_B ≈ 0.017–0.020). __The three log classes share the same within-class topology: tight, nearly uniform H₀ diagrams with near-maximal persistence entropy. Their topological indistinguishability reflects the rigid format of log messages.</li>
-<li>__Binary classes are topologically diffuse (total persistence ~55). __The random payload of binary samples produces near-uniform latent distributions, giving the largest within-class persistence among all classes. Topologically, the binary class clouds are the ‘largest’ and most spread-out in the latent space.</li>
-<li>__All 45 decision boundaries are sharp and near-midpoint. __Mean crossing t_c = 0.491 ± 0.028, mean width = 0.029. The decision regions are approximately Voronoi cells in the centroid space, confirming that the shared-covariance Gaussian model is a good approximation to the optimal Bayes boundary for this classifier.</li>
+<li><strong>Tree-like centroid topology, spherical within-class topology.</strong> The 10 centroids form an acyclic tree structure (zero H₁), and each class cloud is approximately a ball in ℝ^{128} (near-uniform persistence diagrams). The latent space has no topological loops, voids, or complex manifold structure at any relevant scale.</li>
+<li><strong>Two super-clusters: {binary} vs {network+log}.</strong> The single-linkage dendrogram reveals a natural two-super-cluster structure emerging from the H₀ merge sequence. The binary cluster is topologically isolated by the longest H₀ bar (lifetime 1.674 vs the within-super-cluster bars 1.062–1.524).</li>
+<li><strong>The β0 = 10 plateau from ε = 0.788 to 0.961 is the topological guarantee of 10-class separability.</strong> This plateau width (Δε = 0.173) is the topological separation gap: no scale exists at which fewer than 10 but more than 1 component exist, below the inter-class threshold. The 10 topological clusters are maximally well-separated.</li>
+<li><strong>Log classes are topologically identical (d_B ≈ 0.017–0.020).</strong> The three log classes share the same within-class topology: tight, nearly uniform H₀ diagrams with near-maximal persistence entropy. Their topological indistinguishability reflects the rigid format of log messages.</li>
+<li><strong>Binary classes are topologically diffuse (total persistence ~55).</strong> The random payload of binary samples produces near-uniform latent distributions, giving the largest within-class persistence among all classes. Topologically, the binary class clouds are the ‘largest’ and most spread-out in the latent space.</li>
+<li><strong>All 45 decision boundaries are sharp and near-midpoint.</strong> Mean crossing t_c = 0.491 ± 0.028, mean width = 0.029. The decision regions are approximately Voronoi cells in the centroid space, confirming that the shared-covariance Gaussian model is a good approximation to the optimal Bayes boundary for this classifier.</li>
 </ul>
-<h1 id="12-conclusion"><strong>12. Conclusion</strong></h1>
+<h2 id="12-conclusion">12. Conclusion</h2>
 <p>The persistent homology analysis of CyphaDIF’s latent space confirms a clean, tree-like topological structure: 10 well-separated clusters (confirmed by the β0 = 10 plateau from ε = 0.788 to 0.961), no topological loops or voids (zero significant H₁ bars), and a natural two-super-cluster hierarchy ({binary} vs {network+log}). The within-class topologies span three distinct regimes — tight log clouds, moderate network clouds, and diffuse binary/random clouds — consistent with the lexical structure of each traffic type.</p>
 <p>Decision boundaries are uniformly sharp and near-midpoint (t_c = 0.491 ± 0.028), confirming Bayes-near-optimality of the linear boundary. The bottleneck distance matrix reveals that topological similarity (r = 0.46 with Euclidean distance) captures different information from geometric proximity, with log classes forming a topologically identical triple despite being geometrically distinct. These results collectively establish that the CyphaDIF latent space has the ideal topological structure for classification: 10 contractible blobs, maximally separated, with no topological pathologies.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Edelsbrunner, H., Letscher, D., &amp; Zomorodian, A. (2002). Topological persistence and simplification. Discrete &amp; Computational Geometry, 28(4), 511–533.</p>
 <p>[2] Cohen-Steiner, D., Edelsbrunner, H., &amp; Harer, J. (2007). Stability of persistence diagrams. Discrete &amp; Computational Geometry, 37(1), 103–120.</p>
 <p>[3] Zomorodian, A., &amp; Carlsson, G. (2005). Computing persistent homology. Discrete &amp; Computational Geometry, 33(2), 249–274.</p>
@@ -465,6 +495,31 @@
 <p>[18] Munkres, J. R. (1984). Elements of Algebraic Topology. Addison-Wesley.</p>
 <p>[19] Niyogi, P., Smale, S., &amp; Weinberger, S. (2008). Finding the homology of submanifolds with high confidence from random samples. Discrete &amp; Computational Geometry, 39(1), 419–441.</p>
 <p>[20] Bauer, U. (2021). Ripser: efficient computation of Vietoris-Rips persistence barcodes. Journal of Applied and Computational Topology, 5(3), 391–423.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

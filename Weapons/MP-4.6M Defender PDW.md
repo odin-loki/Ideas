@@ -235,7 +235,7 @@
 
 ## SECTION 10: AMMUNITION SPECIFICATIONS
 
-### 10.1 4.6×22mm Round
+### 4. 6×22mm Round
 - Projectile:
   * Weight: 2.8g (43 grains)
   * Core: Tungsten carbide

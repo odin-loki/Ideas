@@ -3,23 +3,111 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README</title>
+  <meta name="description" content="This document specifies a 100 W, 1 Hz–14 GHz wideband RF noise source built around a Chua chaotic oscillator, a multi-stage class-AB RF chain, and a synthesisable FPGA control core (sequencing, protection, matching, and power control)."/>
+  <title>100W Wideband Noise Generator · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">100W Wideband Noise Generator\README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="100w-wideband-noise-generator">100W Wideband Noise Generator</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#fpga-control-system-technical-reference-and-research-documentation">FPGA Control System — Technical Reference and Research Documentation</a></li>
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#1-project-overview">1. Project Overview</a></li>
+        <li class="toc-depth-2"><a href="#2-system-architecture">2. System Architecture</a></li>
+        <li class="toc-depth-3"><a href="#key-sub-systems">Key sub-systems</a></li>
+        <li class="toc-depth-2"><a href="#3-chua-circuit-theory">3. Chua Circuit Theory</a></li>
+        <li class="toc-depth-3"><a href="#31-mathematical-model">3.1 Mathematical Model</a></li>
+        <li class="toc-depth-3"><a href="#32-chaotic-attractor-conditions">3.2 Chaotic Attractor Conditions</a></li>
+        <li class="toc-depth-3"><a href="#33-physical-parameter-mapping-from-digital-control-words">3.3 Physical Parameter Mapping from Digital Control Words</a></li>
+        <li class="toc-depth-3"><a href="#34-noise-power-spectral-density">3.4 Noise Power Spectral Density</a></li>
+        <li class="toc-depth-3"><a href="#35-sensitivity-to-initial-conditions-and-the-butterfly-effect">3.5 Sensitivity to Initial Conditions and the Butterfly Effect</a></li>
+        <li class="toc-depth-2"><a href="#4-rf-chain-design">4. RF Chain Design</a></li>
+        <li class="toc-depth-3"><a href="#41-band-architecture">4.1 Band Architecture</a></li>
+        <li class="toc-depth-3"><a href="#42-power-amplifier-operating-class">4.2 Power Amplifier Operating Class</a></li>
+        <li class="toc-depth-3"><a href="#43-driver-stage">4.3 Driver Stage</a></li>
+        <li class="toc-depth-3"><a href="#44-output-filtering-and-harmonic-suppression">4.4 Output Filtering and Harmonic Suppression</a></li>
+        <li class="toc-depth-3"><a href="#45-vswr-considerations-at-100-w">4.5 VSWR Considerations at 100 W</a></li>
+        <li class="toc-depth-2"><a href="#5-digital-control-system">5. Digital Control System</a></li>
+        <li class="toc-depth-3"><a href="#51-state-machine">5.1 State Machine</a></li>
+        <li class="toc-depth-3"><a href="#52-dac-interface">5.2 DAC Interface</a></li>
+        <li class="toc-depth-3"><a href="#53-adc-interface">5.3 ADC Interface</a></li>
+        <li class="toc-depth-3"><a href="#54-lcd-interface">5.4 LCD Interface</a></li>
+        <li class="toc-depth-2"><a href="#6-protection-architecture">6. Protection Architecture</a></li>
+        <li class="toc-depth-3"><a href="#61-two-level-protection-philosophy">6.1 Two-Level Protection Philosophy</a></li>
+        <li class="toc-depth-3"><a href="#62-fault-code-register">6.2 Fault Code Register</a></li>
+        <li class="toc-depth-3"><a href="#63-crowbar-operation">6.3 Crowbar Operation</a></li>
+        <li class="toc-depth-3"><a href="#64-current-fold-back">6.4 Current Fold-Back</a></li>
+        <li class="toc-depth-2"><a href="#7-mathematical-analysis-and-proofs">7. Mathematical Analysis and Proofs</a></li>
+        <li class="toc-depth-3"><a href="#71-chua-circuit-stability">7.1 Chua Circuit Stability</a></li>
+        <li class="toc-depth-3"><a href="#72-pa-stability-rollett-conditions">7.2 PA Stability — Rollett Conditions</a></li>
+        <li class="toc-depth-3"><a href="#73-vswr-protection-thresholds">7.3 VSWR Protection Thresholds</a></li>
+        <li class="toc-depth-3"><a href="#74-thermal-protection">7.4 Thermal Protection</a></li>
+        <li class="toc-depth-3"><a href="#75-power-control-loop-convergence">7.5 Power Control Loop Convergence</a></li>
+        <li class="toc-depth-3"><a href="#76-impedance-matching-convergence">7.6 Impedance Matching Convergence</a></li>
+        <li class="toc-depth-3"><a href="#77-current-power-measurement-width">7.7 Current Power Measurement Width</a></li>
+        <li class="toc-depth-2"><a href="#8-thermal-management">8. Thermal Management</a></li>
+        <li class="toc-depth-3"><a href="#81-sensor-array">8.1 Sensor Array</a></li>
+        <li class="toc-depth-3"><a href="#82-thermal-margins">8.2 Thermal Margins</a></li>
+        <li class="toc-depth-3"><a href="#83-rate-of-rise-monitoring">8.3 Rate-of-Rise Monitoring</a></li>
+        <li class="toc-depth-2"><a href="#9-power-control-loop">9. Power Control Loop</a></li>
+        <li class="toc-depth-3"><a href="#91-power-measurement">9.1 Power Measurement</a></li>
+        <li class="toc-depth-3"><a href="#92-8-sample-moving-average">9.2 8-Sample Moving Average</a></li>
+        <li class="toc-depth-2"><a href="#10-impedance-matching">10. Impedance Matching</a></li>
+        <li class="toc-depth-3"><a href="#101-matching-network-topology">10.1 Matching Network Topology</a></li>
+        <li class="toc-depth-3"><a href="#102-soft-vs-hard-vswr-thresholds">10.2 Soft vs Hard VSWR Thresholds</a></li>
+        <li class="toc-depth-2"><a href="#11-startup-and-shutdown-sequencing">11. Startup and Shutdown Sequencing</a></li>
+        <li class="toc-depth-3"><a href="#111-startup-sequence">11.1 Startup Sequence</a></li>
+        <li class="toc-depth-3"><a href="#112-shutdown-sequence">11.2 Shutdown Sequence</a></li>
+        <li class="toc-depth-2"><a href="#12-timing-analysis">12. Timing Analysis</a></li>
+        <li class="toc-depth-3"><a href="#121-critical-path-latencies">12.1 Critical Path Latencies</a></li>
+        <li class="toc-depth-3"><a href="#122-minimum-clock-frequency">12.2 Minimum Clock Frequency</a></li>
+        <li class="toc-depth-3"><a href="#123-startup-minimum-time">12.3 Startup Minimum Time</a></li>
+        <li class="toc-depth-2"><a href="#13-safety-and-operational-notes">13. Safety and Operational Notes</a></li>
+        <li class="toc-depth-2"><a href="#14-references">14. References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">100W Wideband Noise Generator</h1>
+          <p class="doc-meta">100W Wideband Noise Generator\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Project:</strong> Wideband-White-Noise-Generator<br/>
+<strong>Architecture:</strong> Chua-circuit chaotic oscillator + Class AB RF power chain<br/>
+<strong>Target output:</strong> 100 W, 1 Hz – 14 GHz<br/>
+<strong>Control platform:</strong> FPGA (Verilog RTL, synthesis-ready)<br/>
+<strong>Author:</strong> Odin  </p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="fpga-control-system-technical-reference-and-research-documentation">FPGA Control System — Technical Reference and Research Documentation</h2>
-<p><strong>Project:</strong> Wideband-White-Noise-Generator<br />
-<strong>Architecture:</strong> Chua-circuit chaotic oscillator + Class AB RF power chain<br />
-<strong>Target output:</strong> 100 W, 1 Hz – 14 GHz<br />
-<strong>Control platform:</strong> FPGA (Verilog RTL, synthesis-ready)<br />
+<p><strong>Project:</strong> Wideband-White-Noise-Generator<br/>
+<strong>Architecture:</strong> Chua-circuit chaotic oscillator + Class AB RF power chain<br/>
+<strong>Target output:</strong> 100 W, 1 Hz – 14 GHz<br/>
+<strong>Control platform:</strong> FPGA (Verilog RTL, synthesis-ready)<br/>
 <strong>Author:</strong> Odin  </p>
-<hr />
+<h2 id="abstract">Abstract</h2>
+<p>This document specifies a 100 W, 1 Hz–14 GHz wideband RF noise source built around a Chua chaotic oscillator, a multi-stage class-AB RF chain, and a synthesisable FPGA control core (sequencing, protection, matching, and power control).</p>
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-project-overview">Project Overview</a></li>
@@ -37,13 +125,13 @@
 <li><a href="#13-safety-and-operational-notes">Safety and Operational Notes</a></li>
 <li><a href="#14-references">References</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="1-project-overview">1. Project Overview</h2>
 <p>This project implements a 100-watt wideband RF noise generator spanning 1 Hz to 14 GHz, controlled by a synthesisable Verilog state machine targeting FPGA deployment. The noise source is a Chua circuit — the canonical minimal chaotic electronic oscillator — whose broadband, continuous-spectrum chaotic output is conditioned and amplified through a multi-stage RF chain to the rated power level.</p>
 <p>Wideband noise sources at this power level have direct applications in RF conducted and radiated susceptibility testing, electromagnetic compatibility (EMC) pre-compliance screening, jamming system characterization, antenna range calibration, and receiver blocking/desensitisation evaluation in defense and telecommunications contexts.</p>
 <p>The Chua circuit was selected over avalanche-diode or zener-based noise sources for two reasons. First, its power spectral density is tunable via the LC component values — allowing the spectral shaping of the noise floor across sub-bands without external filters. Second, its chaotic output exhibits sensitivity to initial conditions that makes it cryptographically unpredictable in a way that resistor thermal noise (Johnson-Nyquist) is not, which is advantageous in some ECM and test-signal applications.</p>
 <p>The digital controller manages the complete system lifecycle: power supply sequencing, RF chain bias, real-time power control, automatic impedance matching, multi-sensor thermal management, and a comprehensive protection system covering overcurrent, VSWR, arc detection, over-temperature, airflow failure, and door interlock.</p>
-<hr />
+<hr/>
 <h2 id="2-system-architecture">2. System Architecture</h2>
 <pre><code>┌─────────────────────────────────────────────────────────────────┐
 │                    FPGA Control Domain                           │
@@ -81,7 +169,7 @@
 <p><strong>RF Amplifier Chain:</strong> Two-stage architecture. A linear driver stage conditions the chaotic signal to a consistent drive level. The power amplifier stage is technology-specific per band: LDMOS for sub-GHz, bipolar / GaAs MESFET for L through C-band, GaN HEMT or InGaP HBT for X-band and above.</p>
 <p><strong>Digital Control (this RTL):</strong> Verilog state machine running on FPGA. Interfaces to all DACs, ADCs, digital I/O, and LCD via parallel buses. Implements closed-loop power control, automatic impedance matching, multi-sensor thermal monitoring, and a two-level protection system (soft + hard).</p>
 <p><strong>Power Supply System:</strong> Sequenced multi-rail architecture. Auxiliary supplies (bias rails) precede the main high-current SMPS. Voltage is ramped to full level under digital control. An SCR crowbar provides sub-microsecond overvoltage / arc protection.</p>
-<hr />
+<hr/>
 <h2 id="3-chua-circuit-theory">3. Chua Circuit Theory</h2>
 <h3 id="31-mathematical-model">3.1 Mathematical Model</h3>
 <p>The Chua circuit is the minimal autonomous electronic circuit satisfying the three necessary conditions for chaos: one or more nonlinear elements, one or more locally active resistors, and three or more energy storage elements. It was first described by Leon O. Chua in 1983 and has since become the canonical experimental platform for chaos research.</p>
@@ -122,7 +210,7 @@ m₁ =  2/7  (positive resistance outer segments)
 <pre><code>|δx(t)| ≈ |δx(0)| · e^(λt)
 </code></pre>
 <p>For the Chua double-scroll, the largest Lyapunov exponent is approximately λ ≈ 0.16 in normalised time units at α = 9.4, β = 14.3. This exponential divergence means that after a characteristic time τ ≈ 1/λ ≈ 6 time constants, the output is effectively unpredictable from knowledge of the initial state, making the source suitable for applications requiring non-repeating, uncorrelated noise.</p>
-<hr />
+<hr/>
 <h2 id="4-rf-chain-design">4. RF Chain Design</h2>
 <h3 id="41-band-architecture">4.1 Band Architecture</h3>
 <p>The 1 Hz–14 GHz range cannot be served by a single transistor technology. The system uses a switched-matrix output architecture with four PA stages, each optimised for a sub-band:</p>
@@ -180,7 +268,7 @@ m₁ =  2/7  (positive resistance outer segments)
 <pre><code>V_peak = √(2 · P · R) = √(2 × 100 × 50) = 100 V
 </code></pre>
 <p>Under an open-circuit fault (VSWR = ∞), the standing-wave voltage peak doubles to 200 V. Under a short-circuit fault, the peak current doubles to 4 A peak (2 A RMS at 50 Ω). Both conditions are immediately destructive to GaAs and GaN transistors. The protection system must respond within a fraction of a microsecond — which is why the arc_detect and vswr_trip paths bypass the digital state machine and drive fast_shutdown and ps_crowbar directly via the hardware comparator inputs.</p>
-<hr />
+<hr/>
 <h2 id="5-digital-control-system">5. Digital Control System</h2>
 <h3 id="51-state-machine">5.1 State Machine</h3>
 <p>The top-level controller implements a seven-state Moore machine:</p>
@@ -198,8 +286,8 @@ STATE_SHUTDOWN ──(shutdown_complete)───────▶ STATE_OFF
 <h3 id="53-adc-interface">5.3 ADC Interface</h3>
 <p>All analogue monitoring inputs are presented as 12-bit unsigned integers. The ADC sampling rate must be sufficient to support the protection latency requirements (§12). A minimum ADC rate of 1 MSPS is recommended for the protection-critical channels (fwd_power, ref_power, pa_current, temp_sense).</p>
 <h3 id="54-lcd-interface">5.4 LCD Interface</h3>
-<p>The HD44780-compatible LCD interface uses 8-bit parallel mode. The format_display task drives a 16-state sequence that writes "Freq: NNNNNN kz" to line 1 of the display. Line 2 carries power level and fault status, updated on alternating display refresh cycles. The enable strobe is explicitly toggled (high then low) within each state to ensure the HD44780 controller latches the data correctly — the data is latched on the falling edge of E according to the HD44780 datasheet.</p>
-<hr />
+<p>The HD44780-compatible LCD interface uses 8-bit parallel mode. The format_display task drives a 16-state sequence that writes "Freq: NNNNNN kHz" to line 1 of the display. Line 2 carries power level and fault status, updated on alternating display refresh cycles. The enable strobe is explicitly toggled (high then low) within each state to ensure the HD44780 controller latches the data correctly — the data is latched on the falling edge of E according to the HD44780 datasheet.</p>
+<hr/>
 <h2 id="6-protection-architecture">6. Protection Architecture</h2>
 <h3 id="61-two-level-protection-philosophy">6.1 Two-Level Protection Philosophy</h3>
 <p>The protection system operates at two levels with different response speeds and actions:</p>
@@ -223,7 +311,7 @@ Priority 7 (lowest):  Airflow / EMC       — controlled shutdown
 foldback_limit = 0xFFF                      (otherwise)
 </code></pre>
 <p>The pa_drive is then clamped to min(pa_drive, foldback_limit), preventing the control loop from commanding a drive level that would push the transistor into current-limit. This provides a graceful power reduction under marginal load conditions without a hard trip.</p>
-<hr />
+<hr/>
 <h2 id="7-mathematical-analysis-and-proofs">7. Mathematical Analysis and Proofs</h2>
 <h3 id="71-chua-circuit-stability">7.1 Chua Circuit Stability</h3>
 <p><strong>Theorem 7.1 (Double-scroll existence):</strong> The Chua circuit exhibits a double-scroll chaotic attractor for all (α, β, m₀, m₁) satisfying the Shil'nikov conditions, which for the canonical parameters (m₀ = -1/7, m₁ = 2/7) reduce to 8.5 &lt; α &lt; 10.5, 14 &lt; β &lt; 18.</p>
@@ -294,8 +382,8 @@ step_up   = 0x001 = 1
 <p><strong>Theorem 7.8 (Convergence bound):</strong> The steady-state error satisfies:</p>
 <pre><code>lim(t→∞) |e(t)| ≤ step_down + step_up = 0x011 = 17
 </code></pre>
-<p><strong>Proof:</strong> In steady state, the loop either:<br />
-1. Has converged to within step_up of target (monotone case, plant gain G is large enough to resolve individual step_up increments): |e_ss| ≤ step_up = 1.<br />
+<p><strong>Proof:</strong> In steady state, the loop either:
+1. Has converged to within step_up of target (monotone case, plant gain G is large enough to resolve individual step_up increments): |e_ss| ≤ step_up = 1.
 2. Hunts between two consecutive decision points when the plant response to a single step_down places current_power below target, requiring one step_down followed by up to 16 step_up increments before crossing target again. The peak error in this hunt is bounded by step_down + step_up = 17 ADC counts.</p>
 <p>The asymmetric step ratio (16:1) is an intentional design choice: over-power is far more dangerous than under-power in a 100 W system, so large corrective steps downward are applied immediately, while power is increased slowly to prevent overshoot. ∎</p>
 <p><strong>Remark:</strong> current_power uses an 8-sample ring-buffer average, which reduces high-frequency noise in the power measurement and prevents limit cycling caused by ADC quantisation noise at the decision threshold.</p>
@@ -318,7 +406,7 @@ max(fwd_power² &gt;&gt; 4) = 1,048,064       requires ceil(log₂(1,048,064)) =
 <pre><code>(2048² &gt;&gt; 4) mod 4096 = 1,048,576 &gt;&gt; 4 mod 4096 = 65,536 mod 4096 = 0
 </code></pre>
 <p>The power measurement would read zero, completely disabling the control loop. The register must be ≥ 20 bits wide. ∎</p>
-<hr />
+<hr/>
 <h2 id="8-thermal-management">8. Thermal Management</h2>
 <h3 id="81-sensor-array">8.1 Sensor Array</h3>
 <p>Eight 12-bit temperature ADC channels are monitored:</p>
@@ -376,7 +464,7 @@ Emergency range:  77 to 85 °C → fan_speed 0xFF
 <p>The 8 °C margin was chosen to be larger than the expected thermal step response of the heatsink over one fan ramp time, ensuring that the temperature does not coast through the trip point while waiting for the fan to reach full speed.</p>
 <h3 id="83-rate-of-rise-monitoring">8.3 Rate-of-Rise Monitoring</h3>
 <p>The digital controller records prev_max_temp each cycle. Systems operating near their thermal limit may be protected by rate-of-rise detection (dT/dt &gt; threshold → preemptive shutdown) in addition to absolute temperature limits. The framework is present in monitor_system; the threshold comparison can be added as needed for specific hardware.</p>
-<hr />
+<hr/>
 <h2 id="9-power-control-loop">9. Power Control Loop</h2>
 <h3 id="91-power-measurement">9.1 Power Measurement</h3>
 <p>Power is estimated from the forward power ADC via a squared-voltage proxy:</p>
@@ -389,7 +477,7 @@ Emergency range:  77 to 85 °C → fan_speed 0xFF
 <h3 id="92-8-sample-moving-average">9.2 8-Sample Moving Average</h3>
 <p>The instantaneous power measurement is noisy due to ADC quantisation and RF envelope fluctuations. An 8-sample ring-buffer average smooths this noise by a factor of √8 ≈ 2.8 in RMS noise amplitude, reducing the threshold for resolving the step_up = 1 count minimum increment.</p>
 <p>The averaging introduces a latency of up to 8 clock cycles between a physical power change and its full effect on the control decision. This is acceptable given that the slowest changing target (power_pot, set by a mechanical potentiometer) has a time constant orders of magnitude longer than 8 clock cycles.</p>
-<hr />
+<hr/>
 <h2 id="10-impedance-matching">10. Impedance Matching</h2>
 <h3 id="101-matching-network-topology">10.1 Matching Network Topology</h3>
 <p>The match_ctrl output drives a 4-bit (16-state) digitally controlled matching network. Common implementations for wideband use include:</p>
@@ -405,7 +493,7 @@ Emergency range:  77 to 85 °C → fan_speed 0xFF
 Hard threshold (fault):   vswr_trip input   →   |Γ| &gt; 0.50   →   VSWR &gt; 3.0:1
 </code></pre>
 <p>This gap gives the matching algorithm 15 steps and several microseconds to correct a developing impedance mismatch (e.g., due to cable movement or antenna de-tuning) before it escalates to a destructive level. The design follows industry practice for high-power amplifier protection as described by Analog Devices (log-amp VSWR detection, 2017) and Empower RF Systems.</p>
-<hr />
+<hr/>
 <h2 id="11-startup-and-shutdown-sequencing">11. Startup and Shutdown Sequencing</h2>
 <h3 id="111-startup-sequence">11.1 Startup Sequence</h3>
 <p>The six-phase startup sequence is designed around a monotone partial order on system safety states:</p>
@@ -462,7 +550,7 @@ Hard threshold (fault):   vswr_trip input   →   |Γ| &gt; 0.50   →   VSWR &g
 <p><strong>Voltage ramp design:</strong> The ramp increments ps_voltage by RAMP_STEP = 0x010 each cycle until RAMP_TOP = 0xFF0 is reached. The ceiling is set at 0xFF0 (not 0xFFF) to prevent 12-bit arithmetic wrap-around (0xFF0 + 0x010 = 12'h1000 truncates to 0x000, restarting the ramp indefinitely). At 0xFF0 = 4080 out of 4095 full scale (99.6%), the supply is at rated voltage within measurement precision.</p>
 <h3 id="112-shutdown-sequence">11.2 Shutdown Sequence</h3>
 <p>The shutdown sequence reverses the startup order in four phases: RF disable → voltage ramp-down → supply disable → final de-energisation. The crowbar is de-asserted after the supply has ramped to zero (the SCR latches off once current falls below holding current as the supply discharges).</p>
-<hr />
+<hr/>
 <h2 id="12-timing-analysis">12. Timing Analysis</h2>
 <h3 id="121-critical-path-latencies">12.1 Critical Path Latencies</h3>
 <table>
@@ -515,21 +603,21 @@ Hard threshold (fault):   vswr_trip input   →   |Γ| &gt; 0.50   →   VSWR &g
 <pre><code>≥ 2814 cycles × 100 ns = 281.4 µs minimum startup time
 </code></pre>
 <p>This is dominated by T_DRV_SETTLE (1024 cycles = 102.4 µs). For slower clocks (e.g., 1 MHz), startup time scales proportionally to ≈ 2.8 ms, which remains within all practical limits for a 100 W system.</p>
-<hr />
+<hr/>
 <h2 id="13-safety-and-operational-notes">13. Safety and Operational Notes</h2>
-<p><strong>Before operation:</strong><br />
-- Verify all eight temperature sensors are connected and reading valid values.<br />
-- Confirm door interlock and airflow sensor wiring before any power-on.<br />
-- Do not defeat the VSWR protection for any reason; at 100 W, a reflected-power event lasts only microseconds before causing permanent transistor damage.<br />
+<p><strong>Before operation:</strong>
+- Verify all eight temperature sensors are connected and reading valid values.
+- Confirm door interlock and airflow sensor wiring before any power-on.
+- Do not defeat the VSWR protection for any reason; at 100 W, a reflected-power event lasts only microseconds before causing permanent transistor damage.
 - The SCR crowbar is a one-shot protection device that requires manual inspection before recommissioning after a crowbar event.</p>
-<p><strong>During operation:</strong><br />
-- Monitor the VSWR log register (vswr_log) during initial load connection.<br />
-- The soft VSWR threshold will cause match_ctrl adjustments during normal operation; this is expected.<br />
-- If fault_latch asserts, the fault_code register captures the cause. Fault_latch requires a manual reset (power cycle or explicit rst_n pulse) to clear.<br />
+<p><strong>During operation:</strong>
+- Monitor the VSWR log register (vswr_log) during initial load connection.
+- The soft VSWR threshold will cause match_ctrl adjustments during normal operation; this is expected.
+- If fault_latch asserts, the fault_code register captures the cause. Fault_latch requires a manual reset (power cycle or explicit rst_n pulse) to clear.
 - Maintain minimum fan speed (MIN_FAN = 0x20) at all times; setting fan_speed to zero risks bearing failure.</p>
-<p><strong>EMC:</strong><br />
+<p><strong>EMC:</strong>
 - The emc_filter_ok input must be asserted for the system to enter run state. Do not bypass this interlock — the mains EMC filter is mandatory for regulatory compliance and for protecting the control electronics from RF conducted emissions from the 100 W output stage.</p>
-<hr />
+<hr/>
 <h2 id="14-references">14. References</h2>
 <ol>
 <li>
@@ -578,8 +666,33 @@ Hard threshold (fault):   vswr_trip input   →   |Γ| &gt; 0.50   →   VSWR &g
 <p>HD44780 Datasheet. Hitachi Semiconductor. Rev. 0.0, 1998. (LCD controller interface specification.)</p>
 </li>
 </ol>
-<hr />
+<hr/>
 <p><em>Document generated from verified RTL and mathematical analysis. All proofs are original derivations from cited foundations.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

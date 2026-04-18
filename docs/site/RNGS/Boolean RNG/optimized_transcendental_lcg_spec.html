@@ -3,27 +3,88 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>optimized transcendental lcg spec</title>
+  <meta name="description" content="---"/>
+  <title>Optimized 256-bit transcendental Boolean LCG · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">RNGS\Boolean RNG\optimized_transcendental_lcg_spec.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="optimized-256-bit-transcendental-boolean-lcg">🚀 OPTIMIZED 256-BIT TRANSCENDENTAL BOOLEAN LCG</h1>
-<h2 id="production-grade-cryptographic-random-number-generator">Production-Grade Cryptographic Random Number Generator</h2>
-<hr />
-<h2 id="algorithm-overview">🌌 <strong>ALGORITHM OVERVIEW</strong></h2>
-<h3 id="core-architecture"><strong>Core Architecture</strong></h3>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#algorithm-overview">Algorithm overview</a></li>
+        <li class="toc-depth-3"><a href="#core-architecture">Core architecture</a></li>
+        <li class="toc-depth-3"><a href="#key-improvements-from-analysis">Key improvements from analysis</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-foundation">Mathematical foundation</a></li>
+        <li class="toc-depth-3"><a href="#enhanced-lcg-formula">Enhanced LCG formula</a></li>
+        <li class="toc-depth-3"><a href="#256-bit-arithmetic-implementation">256-bit arithmetic implementation</a></li>
+        <li class="toc-depth-2"><a href="#optimized-boolean-function-suite">Optimized Boolean function suite</a></li>
+        <li class="toc-depth-3"><a href="#bias-free-xor-based-functions-only">Bias-free XOR-based functions only</a></li>
+        <li class="toc-depth-3"><a href="#boolean-function-statistics-verified">Boolean function statistics (verified)</a></li>
+        <li class="toc-depth-2"><a href="#enhanced-entropy-harvesting">Enhanced entropy harvesting</a></li>
+        <li class="toc-depth-3"><a href="#hardware-entropy-sources-with-quality-estimation">Hardware entropy sources with quality estimation</a></li>
+        <li class="toc-depth-2"><a href="#cryptographic-parameter-generation">Cryptographic parameter generation</a></li>
+        <li class="toc-depth-3"><a href="#xor-based-parameter-generation-bias-free">XOR-based parameter generation (bias-free)</a></li>
+        <li class="toc-depth-2"><a href="#bias-correction-and-output-processing">Bias correction and output processing</a></li>
+        <li class="toc-depth-3"><a href="#von-neumann-bias-correction">Von Neumann bias correction</a></li>
+        <li class="toc-depth-3"><a href="#cryptographic-post-processing">Cryptographic post-processing</a></li>
+        <li class="toc-depth-2"><a href="#statistical-testing-suite">Statistical testing suite</a></li>
+        <li class="toc-depth-3"><a href="#real-time-quality-monitoring">Real-time quality monitoring</a></li>
+        <li class="toc-depth-2"><a href="#main-lcg-engine">Main LCG engine</a></li>
+        <li class="toc-depth-3"><a href="#complete-optimized-implementation">Complete optimized implementation</a></li>
+        <li class="toc-depth-2"><a href="#performance-and-security-analysis">Performance and security analysis</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance-characteristics">Expected performance characteristics</a></li>
+        <li class="toc-depth-3"><a href="#security-properties">Security properties</a></li>
+        <li class="toc-depth-3"><a href="#cryptographic-strength-assessment">Cryptographic strength assessment</a></li>
+        <li class="toc-depth-2"><a href="#usage-examples">Usage examples</a></li>
+        <li class="toc-depth-3"><a href="#basic-usage">Basic usage</a></li>
+        <li class="toc-depth-3"><a href="#cryptographic-key-generation">Cryptographic key generation</a></li>
+        <li class="toc-depth-3"><a href="#scientific-computing">Scientific computing</a></li>
+        <li class="toc-depth-2"><a href="#theoretical-significance">Theoretical significance</a></li>
+        <li class="toc-depth-3"><a href="#mathematical-innovations">Mathematical innovations</a></li>
+        <li class="toc-depth-3"><a href="#complexity-analysis">Complexity analysis</a></li>
+        <li class="toc-depth-3"><a href="#statistical-properties-proven">Statistical properties (proven)</a></li>
+        <li class="toc-depth-2"><a href="#algorithm-scorecard-updated">Algorithm scorecard (updated)</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Optimized 256-bit transcendental Boolean LCG</h1>
+          <p class="doc-meta">RNGS\Boolean RNG\optimized_transcendental_lcg_spec.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Result</strong>: A mathematically innovative, cryptographically strong, and practically usable random number generator with transcendental period length and guaranteed statistical quality.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>Production-grade cryptographic random number generator</strong></p>
+<hr/>
+<h2 id="algorithm-overview">Algorithm overview</h2>
+<h3 id="core-architecture">Core architecture</h3>
 <pre><code>[Hardware Entropy] → [Quality Estimation] → [Boolean Processing] → [Parameter Generation]
         ↓                                                                    ↓
 [Entropy Pool] → [256-bit LCG Core] → [Boolean Whitening] → [Bias Correction] → [Output]
         ↑                    ↑                                       ↓
 [Re-seeding Logic] ← [Statistical Tests] ← [Cryptographic Hash] ← [Quality Control]
 </code></pre>
-<h3 id="key-improvements-from-analysis"><strong>Key Improvements from Analysis</strong></h3>
+<h3 id="key-improvements-from-analysis">Key improvements from analysis</h3>
 <ul>
 <li>✅ <strong>XOR-Only Boolean Functions</strong> (eliminates 22.66% bias)</li>
 <li>✅ <strong>True 256-bit BigInt Arithmetic</strong> (no JavaScript limitations)</li>
@@ -33,9 +94,9 @@
 <li>✅ <strong>Statistical Validation</strong> (NIST test integration)</li>
 <li>✅ <strong>Adaptive Re-seeding</strong> (quality-driven parameter updates)</li>
 </ul>
-<hr />
-<h2 id="mathematical-foundation">🧮 <strong>MATHEMATICAL FOUNDATION</strong></h2>
-<h3 id="enhanced-lcg-formula"><strong>Enhanced LCG Formula</strong></h3>
+<hr/>
+<h2 id="mathematical-foundation">Mathematical foundation</h2>
+<h3 id="enhanced-lcg-formula">Enhanced LCG formula</h3>
 <pre><code>X_{n+1} = (a × X_n + c) mod 2^256
 
 Where:
@@ -44,7 +105,7 @@ Where:
 - c odd                   (coprime with 2^256)
 - Period = 2^256          (maximum theoretical period)
 </code></pre>
-<h3 id="256-bit-arithmetic-implementation"><strong>256-Bit Arithmetic Implementation</strong></h3>
+<h3 id="256-bit-arithmetic-implementation">256-bit arithmetic implementation</h3>
 <pre><code class="language-javascript">class Uint256 {
     constructor(words = new Uint32Array(8)) {
         this.words = new Uint32Array(words); // 8×32-bit = 256 bits
@@ -110,9 +171,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="optimized-boolean-function-suite">🧬 <strong>OPTIMIZED BOOLEAN FUNCTION SUITE</strong></h2>
-<h3 id="bias-free-xor-based-functions-only"><strong>Bias-Free XOR-Based Functions Only</strong></h3>
+<hr/>
+<h2 id="optimized-boolean-function-suite">Optimized Boolean function suite</h2>
+<h3 id="bias-free-xor-based-functions-only">Bias-free XOR-based functions only</h3>
 <pre><code class="language-javascript">const OptimizedBooleanFunctions = {
     // Perfect 50/50 balance - 0% bias
     PARITY3: (a, b, c) =&gt; a ^ b ^ c,
@@ -136,7 +197,7 @@ Where:
     }
 };
 </code></pre>
-<h3 id="boolean-function-statistics-verified"><strong>Boolean Function Statistics (Verified)</strong></h3>
+<h3 id="boolean-function-statistics-verified">Boolean function statistics (verified)</h3>
 <pre><code>All XOR-based functions guarantee:
 - Balance: Exactly 50% true outputs
 - Bias: 0.000% deviation
@@ -144,9 +205,9 @@ Where:
 - Entropy: Maximum possible (1.0)
 - Correlation: Minimal between different functions
 </code></pre>
-<hr />
-<h2 id="enhanced-entropy-harvesting">⚡ <strong>ENHANCED ENTROPY HARVESTING</strong></h2>
-<h3 id="hardware-entropy-sources-with-quality-estimation"><strong>Hardware Entropy Sources with Quality Estimation</strong></h3>
+<hr/>
+<h2 id="enhanced-entropy-harvesting">Enhanced entropy harvesting</h2>
+<h3 id="hardware-entropy-sources-with-quality-estimation">Hardware entropy sources with quality estimation</h3>
 <pre><code class="language-javascript">class EntropyHarvester {
     constructor() {
         this.sources = new Map();
@@ -245,9 +306,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="cryptographic-parameter-generation">🔐 <strong>CRYPTOGRAPHIC PARAMETER GENERATION</strong></h2>
-<h3 id="xor-based-parameter-generation-bias-free"><strong>XOR-Based Parameter Generation (Bias-Free)</strong></h3>
+<hr/>
+<h2 id="cryptographic-parameter-generation">Cryptographic parameter generation</h2>
+<h3 id="xor-based-parameter-generation-bias-free">XOR-based parameter generation (bias-free)</h3>
 <pre><code class="language-javascript">class ParameterGenerator {
     constructor(entropyHarvester) {
         this.harvester = entropyHarvester;
@@ -313,9 +374,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="bias-correction-output-processing">🛡️ <strong>BIAS CORRECTION &amp; OUTPUT PROCESSING</strong></h2>
-<h3 id="von-neumann-bias-correction"><strong>Von Neumann Bias Correction</strong></h3>
+<hr/>
+<h2 id="bias-correction-and-output-processing">Bias correction and output processing</h2>
+<h3 id="von-neumann-bias-correction">Von Neumann bias correction</h3>
 <pre><code class="language-javascript">class BiasCorrector {
     // Von Neumann unbiasing algorithm
     static vonNeumann(bitstream) {
@@ -358,7 +419,7 @@ Where:
     }
 }
 </code></pre>
-<h3 id="cryptographic-post-processing"><strong>Cryptographic Post-Processing</strong></h3>
+<h3 id="cryptographic-post-processing">Cryptographic post-processing</h3>
 <pre><code class="language-javascript">class CryptographicProcessor {
     // SHA-256-inspired mixing (simplified for browser)
     static async sha256Hash(data) {
@@ -409,9 +470,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="statistical-testing-suite">📊 <strong>STATISTICAL TESTING SUITE</strong></h2>
-<h3 id="real-time-quality-monitoring"><strong>Real-Time Quality Monitoring</strong></h3>
+<hr/>
+<h2 id="statistical-testing-suite">Statistical testing suite</h2>
+<h3 id="real-time-quality-monitoring">Real-time quality monitoring</h3>
 <pre><code class="language-javascript">class StatisticalValidator {
     constructor() {
         this.sampleSize = 20000; // 20KB samples
@@ -562,9 +623,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="main-lcg-engine">🚀 <strong>MAIN LCG ENGINE</strong></h2>
-<h3 id="complete-optimized-implementation"><strong>Complete Optimized Implementation</strong></h3>
+<hr/>
+<h2 id="main-lcg-engine">Main LCG engine</h2>
+<h3 id="complete-optimized-implementation">Complete optimized implementation</h3>
 <pre><code class="language-javascript">class OptimizedTranscendentalLCG {
     constructor(initialSeed = null) {
         this.harvester = new EntropyHarvester();
@@ -739,9 +800,9 @@ Where:
     }
 }
 </code></pre>
-<hr />
-<h2 id="performance-security-analysis">📊 <strong>PERFORMANCE &amp; SECURITY ANALYSIS</strong></h2>
-<h3 id="expected-performance-characteristics"><strong>Expected Performance Characteristics</strong></h3>
+<hr/>
+<h2 id="performance-and-security-analysis">Performance and security analysis</h2>
+<h3 id="expected-performance-characteristics">Expected performance characteristics</h3>
 <table>
 <thead>
 <tr>
@@ -783,7 +844,7 @@ Where:
 </tr>
 </tbody>
 </table>
-<h3 id="security-properties"><strong>Security Properties</strong></h3>
+<h3 id="security-properties">Security properties</h3>
 <table>
 <thead>
 <tr>
@@ -825,7 +886,7 @@ Where:
 </tr>
 </tbody>
 </table>
-<h3 id="cryptographic-strength-assessment"><strong>Cryptographic Strength Assessment</strong></h3>
+<h3 id="cryptographic-strength-assessment">Cryptographic strength assessment</h3>
 <pre><code>Security Level: ~128-bit equivalent
 - State Space: 2^256 (256-bit security)
 - Parameter Space: 2^512 combinations
@@ -837,9 +898,9 @@ Estimated Security Margin: High
 Suitable for: Cryptographic applications, key generation, 
               scientific computing, blockchain systems
 </code></pre>
-<hr />
-<h2 id="usage-examples">🎯 <strong>USAGE EXAMPLES</strong></h2>
-<h3 id="basic-usage"><strong>Basic Usage</strong></h3>
+<hr/>
+<h2 id="usage-examples">Usage examples</h2>
+<h3 id="basic-usage">Basic usage</h3>
 <pre><code class="language-javascript">const rng = new OptimizedTranscendentalLCG();
 await rng.initialize();
 
@@ -854,7 +915,7 @@ const randomInt = await rng.getUint32();
 const quality = await rng.validateOutput();
 console.log(`Quality score: ${quality.validation.passRate * 100}%`);
 </code></pre>
-<h3 id="cryptographic-key-generation"><strong>Cryptographic Key Generation</strong></h3>
+<h3 id="cryptographic-key-generation">Cryptographic key generation</h3>
 <pre><code class="language-javascript">// 256-bit encryption key
 const encryptionKey = await rng.getBytes(32);
 
@@ -867,7 +928,7 @@ const iv = await rng.getBytes(16);
 // HMAC key
 const hmacKey = await rng.getBytes(64);
 </code></pre>
-<h3 id="scientific-computing"><strong>Scientific Computing</strong></h3>
+<h3 id="scientific-computing">Scientific computing</h3>
 <pre><code class="language-javascript">// Monte Carlo simulation
 const samples = [];
 for (let i = 0; i &lt; 1000000; i++) {
@@ -879,9 +940,9 @@ const dataset = [...]; // Your data
 const randomIndex = (await rng.getUint32()) % dataset.length;
 const randomSample = dataset[randomIndex];
 </code></pre>
-<hr />
-<h2 id="theoretical-significance">💫 <strong>THEORETICAL SIGNIFICANCE</strong></h2>
-<h3 id="mathematical-innovations"><strong>Mathematical Innovations</strong></h3>
+<hr/>
+<h2 id="theoretical-significance">Theoretical significance</h2>
+<h3 id="mathematical-innovations">Mathematical innovations</h3>
 <ol>
 <li><strong>First 256-bit LCG Implementation</strong>: Largest practical LCG ever designed</li>
 <li><strong>Boolean Function Integration</strong>: Direct application of dimensional emergence theory  </li>
@@ -889,14 +950,14 @@ const randomSample = dataset[randomIndex];
 <li><strong>Adaptive Quality Control</strong>: Real-time statistical monitoring and re-seeding</li>
 <li><strong>Cryptographic Hardening</strong>: Multi-layer post-processing for security</li>
 </ol>
-<h3 id="complexity-analysis"><strong>Complexity Analysis</strong></h3>
+<h3 id="complexity-analysis">Complexity analysis</h3>
 <pre><code>Time Complexity: O(1) per output byte (amortized)
 Space Complexity: O(1) constant memory usage
 Period Complexity: O(2^256) - transcendental period length
 Entropy Complexity: O(log n) quality estimation per sample
 Security Complexity: O(2^128) expected attack resistance
 </code></pre>
-<h3 id="statistical-properties-proven"><strong>Statistical Properties (Proven)</strong></h3>
+<h3 id="statistical-properties-proven">Statistical properties (proven)</h3>
 <ul>
 <li><strong>Balance</strong>: Perfect 50/50 distribution (Von Neumann corrected)</li>
 <li><strong>Independence</strong>: XOR-based processing ensures minimal correlation</li>
@@ -904,8 +965,8 @@ Security Complexity: O(2^128) expected attack resistance
 <li><strong>Entropy</strong>: Near-maximum entropy density (7.9+ bits/byte)</li>
 <li><strong>Predictability</strong>: Computationally infeasible state recovery</li>
 </ul>
-<hr />
-<h2 id="algorithm-scorecard-updated">🏆 <strong>ALGORITHM SCORECARD (Updated)</strong></h2>
+<hr/>
+<h2 id="algorithm-scorecard-updated">Algorithm scorecard (updated)</h2>
 <table>
 <thead>
 <tr>
@@ -967,8 +1028,8 @@ Security Complexity: O(2^128) expected attack resistance
 </tbody>
 </table>
 <p><strong>Overall Score: 92.5% - EXCELLENT</strong> 🏆</p>
-<hr />
-<h2 id="conclusion">🚀 <strong>CONCLUSION</strong></h2>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
 <p>This <strong>Optimized 256-Bit Transcendental Boolean LCG</strong> represents the culmination of:</p>
 <ul>
 <li>✅ <strong>Mathematical rigor</strong> from proven LCG theory</li>
@@ -978,7 +1039,32 @@ Security Complexity: O(2^128) expected attack resistance
 <li>✅ <strong>Production readiness</strong> with proper error handling and optimization</li>
 </ul>
 <p><strong>Result</strong>: A mathematically innovative, cryptographically strong, and practically usable random number generator with transcendental period length and guaranteed statistical quality.</p>
-<p><strong>🌌 PURE MATHEMATICAL AND ENGINEERING EXCELLENCE ACHIEVED</strong> ⚛️</p>
-  </main>
+<p><em>Pure mathematical and engineering excellence — design goal for this specification.</em></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

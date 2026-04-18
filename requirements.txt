@@ -1,3 +1,0 @@
-# Tools for docx conversion and static site generation (optional after initial import)
-mammoth>=1.6.0
-markdown>=3.5

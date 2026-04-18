@@ -3,37 +3,82 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Paper4 57mm Underbarrel Grenade</title>
+  <meta name="description" content="This paper presents a technical analysis of the 57mm underbarrel grenade round \(UGR\), a multi-purpose high explosive projectile designed for use with infantry rifle-mounted launcher systems. The round has a total weight of 2.8kg, muzzle velocity of 250 m/s, effective range of…"/>
+  <title>57mm Underbarrel Grenade Round: Light Multi-Purpose High Explosive Projectile · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Weapons\Research Papers\Paper4_57mm_Underbarrel_Grenade.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>57mm Underbarrel Grenade Round</strong></p>
-<p>Light Multi-Purpose High Explosive Projectile</p>
-<p><strong>TECHNICAL RESEARCH PAPER</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-background">2. Background</a></li>
+        <li class="toc-depth-3"><a href="#21-ubgl-development-history">2.1 UBGL Development History</a></li>
+        <li class="toc-depth-3"><a href="#22-57mm-as-an-enlarged-ubgl-calibre">2.2 57mm as an Enlarged UBGL Calibre</a></li>
+        <li class="toc-depth-2"><a href="#3-round-specifications">3. Round Specifications</a></li>
+        <li class="toc-depth-2"><a href="#4-warhead-design">4. Warhead Design</a></li>
+        <li class="toc-depth-3"><a href="#41-explosive-payload">4.1 Explosive Payload</a></li>
+        <li class="toc-depth-3"><a href="#42-pre-formed-fragment-matrix">4.2 Pre-Formed Fragment Matrix</a></li>
+        <li class="toc-depth-3"><a href="#43-terminal-effects">4.3 Terminal Effects</a></li>
+        <li class="toc-depth-2"><a href="#5-fuze-system">5. Fuze System</a></li>
+        <li class="toc-depth-2"><a href="#6-propulsion-and-recoil-management">6. Propulsion and Recoil Management</a></li>
+        <li class="toc-depth-3"><a href="#61-propellant-design">6.1 Propellant Design</a></li>
+        <li class="toc-depth-3"><a href="#62-recoil-compatibility">6.2 Recoil Compatibility</a></li>
+        <li class="toc-depth-2"><a href="#7-environmental-and-storage-specifications">7. Environmental and Storage Specifications</a></li>
+        <li class="toc-depth-2"><a href="#8-manufacturing-and-quality-control">8. Manufacturing and Quality Control</a></li>
+        <li class="toc-depth-2"><a href="#9-comparative-analysis">9. Comparative Analysis</a></li>
+        <li class="toc-depth-2"><a href="#10-conclusion">10. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#11-references">11. References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">57mm Underbarrel Grenade Round: Light Multi-Purpose High Explosive Projectile</h1>
+          <p class="doc-meta">Weapons\Research Papers\Paper4_57mm_Underbarrel_Grenade.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This paper presents a technical analysis of the 57mm underbarrel grenade round (UGR), a multi-purpose high explosive projectile designed for use with infantry rifle-mounted launcher systems. The round has a total weight of 2.8kg, muzzle velocity of 250 m/s, effective range of 400m, and delivers a 0.8kg composite explosive payload with a pre-formed tungsten fragment matrix comprising 400 cubes, 200 cylinders, and 100 penetrator rods. Terminal effects include a 20m lethal radius, 30m casualty radius, and light armour defeat capability through a 10mm RHA penetrator component. A multi-mode fuze system supports impact (instant and delay), proximity, and self-destruct modes. The paper analyses the engineering challenges of achieving adequate terminal effect performance within the recoil and weight constraints imposed by infantry rifle mounting, and contextualises the design within the broader 40mm and 66mm underbarrel launcher family.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Technical Research Paper</em></p>
 <p>Document No. TRP-2026-004 | Version 1.0</p>
 <p>Prepared for: Australian Department of Defence</p>
 <p>Classification: UNCLASSIFIED</p>
 <p>Date: March 2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+<h2 id="abstract">Abstract</h2>
 <p>This paper presents a technical analysis of the 57mm underbarrel grenade round (UGR), a multi-purpose high explosive projectile designed for use with infantry rifle-mounted launcher systems. The round has a total weight of 2.8kg, muzzle velocity of 250 m/s, effective range of 400m, and delivers a 0.8kg composite explosive payload with a pre-formed tungsten fragment matrix comprising 400 cubes, 200 cylinders, and 100 penetrator rods. Terminal effects include a 20m lethal radius, 30m casualty radius, and light armour defeat capability through a 10mm RHA penetrator component. A multi-mode fuze system supports impact (instant and delay), proximity, and self-destruct modes. The paper analyses the engineering challenges of achieving adequate terminal effect performance within the recoil and weight constraints imposed by infantry rifle mounting, and contextualises the design within the broader 40mm and 66mm underbarrel launcher family.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Underbarrel grenade launchers (UBGLs) provide infantry soldiers with organic grenade fire capability without the dedicated crew and logistics burden of a standalone launcher system. The 40mm calibre has been the dominant UBGL standard since the introduction of the M203 in the late 1960s, firing a low-velocity (76 m/s) High-Explosive Dual Purpose (HEDP) round with limited anti-armour capability. The M433 HEDP round achieves approximately 51mm RHA penetration through shaped charge effect alongside a 5m lethal radius.</p>
 <p>The 57mm UGR described in this paper represents a substantially more capable projectile at the cost of increased weight and recoil. At 2.8kg total weight and 250 m/s muzzle velocity, it delivers terminal effects comparable to 60mm mortar rounds while retaining rifle mountability through an optimised propellant impulse curve and extended recoil duration design.</p>
-<h1 id="2-background"><strong>2. Background</strong></h1>
-<h2 id="21-ubgl-development-history"><strong>2.1 UBGL Development History</strong></h2>
+<h2 id="2-background">2. Background</h2>
+<h3 id="21-ubgl-development-history">2.1 UBGL Development History</h3>
 <p>The M203 40mm UBGL has been in continuous service since its adoption by the US Army in 1969. The 40mm low-velocity round was designed specifically to minimise recoil impulse compatible with M16 rifle mounting, accepting limitations in terminal effect. The H&amp;K M320 and HK AG-G improvements to the 40mm UBGL concept retain the same 40×46mm SR cartridge but offer improved ergonomics and standalone capability.</p>
 <p>The FN EGLM and Australian F88 Austeyr EF88 integration represent current-generation 40mm UBGL designs. The 40mm calibre limitation of approximately 150g explosive payload constrains anti-armour capability to the 51mm RHA range, insufficient against the growing proliferation of modern IFV frontal armour in the 50-100mm RHA equivalent range.</p>
-<h2 id="22-57mm-as-an-enlarged-ubgl-calibre"><strong>2.2 57mm as an Enlarged UBGL Calibre</strong></h2>
+<h3 id="22-57mm-as-an-enlarged-ubgl-calibre">2.2 57mm as an Enlarged UBGL Calibre</h3>
 <p>Scaling to 57mm calibre approximately doubles the available internal payload volume compared to 40mm, enabling a 0.8kg explosive payload—approximately five times that of standard 40mm HE rounds. The engineering challenge is managing the recoil impulse at 2,800 bar operating pressure and 250 m/s muzzle velocity within acceptable limits for rifle-mounted operation. The AMAS program establishes the 57mm cartridge design basis from which the UGR round is adapted.</p>
-<h1 id="3-round-specifications"><strong>3. Round Specifications</strong></h1>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Calibre</p>
+<h2 id="3-round-specifications">3. Round Specifications</h2>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Calibre</p>
 <p>57 mm</p>
 <p>Case Length</p>
 <p>200 mm</p>
@@ -55,16 +100,16 @@
 <p>600 m</p>
 <p>Accuracy</p>
 <p>3 mil at 200 m</p>
-<h1 id="4-warhead-design"><strong>4. Warhead Design</strong></h1>
-<h2 id="41-explosive-payload"><strong>4.1 Explosive Payload</strong></h2>
+<h2 id="4-warhead-design">4. Warhead Design</h2>
+<h3 id="41-explosive-payload">4.1 Explosive Payload</h3>
 <p>The 0.8kg composite explosive payload uses the same HMX-based matrix as the AMAS HEIAP-T round: HMX 65%, PBXN-110 20%, cerium oxide nanoparticles 5%, iron oxide nanoparticles 3%, advanced aluminium 5%, and binders 2%. This formulation achieves a TNT equivalent performance in excess of 600g, generating significant overpressure effects within the 20m lethal radius.</p>
 <p>The use of nano-scale cerium and iron oxide additives follows research into reactive material additives that enhance the thermal and blast output of secondary explosives through metal oxide exothermic reactions. The cerium oxide component specifically has demonstrated energetic contributions in advanced military explosive formulations.</p>
-<h2 id="42-pre-formed-fragment-matrix"><strong>4.2 Pre-Formed Fragment Matrix</strong></h2>
-<p><strong>Fragment Type</strong></p>
-<p><strong>Quantity</strong></p>
-<p><strong>Size</strong></p>
-<p><strong>Function</strong></p>
-<p>Tungsten Cubes</p>
+<h3 id="42-pre-formed-fragment-matrix">4.2 Pre-Formed Fragment Matrix</h3>
+<p><strong>Fragment Type</strong>
+<strong>Quantity</strong>
+<strong>Size</strong>
+<strong>Function</strong>
+Tungsten Cubes</p>
 <p>400</p>
 <p>3mm</p>
 <p>Area anti-personnel</p>
@@ -76,10 +121,10 @@
 <p>100</p>
 <p>7mm</p>
 <p>Light armour defeat</p>
-<h2 id="43-terminal-effects"><strong>4.3 Terminal Effects</strong></h2>
-<p><strong>Effect Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Anti-Personnel Lethal Radius</p>
+<h3 id="43-terminal-effects">4.3 Terminal Effects</h3>
+<p><strong>Effect Parameter</strong>
+<strong>Value</strong>
+Anti-Personnel Lethal Radius</p>
 <p>20 m</p>
 <p>Anti-Personnel Casualty Radius</p>
 <p>30 m</p>
@@ -95,18 +140,18 @@
 </blockquote>
 <p>Structure Breach Capability</p>
 <p>Significant damage</p>
-<h1 id="5-fuze-system"><strong>5. Fuze System</strong></h1>
+<h2 id="5-fuze-system">5. Fuze System</h2>
 <p>The multi-mode fuze supports four operating modes. In impact (instant) mode, detonation occurs on contact for engaging personnel in the open. In impact (delay) mode, a millisecond delay enables penetration of light cover, walls, or vehicle skin prior to detonation. In proximity mode, a proximity sensor detonates the round at optimised height-of-burst for maximum anti-personnel fragmentation coverage. Self-destruct backup provides a terminal safety function that destroys the round if the primary fuze fails to function, preventing dud contamination.</p>
 <p>Fuze safety systems include mechanical setback safety (activated by setback force on firing), spin activation (requiring projectile spin to arm), drop safety (preventing arming from accidental drops), and environmental seals protecting the fuze from moisture and debris. The transport safety lock is manually removed before loading.</p>
-<h1 id="6-propulsion-and-recoil-management"><strong>6. Propulsion and Recoil Management</strong></h1>
-<h2 id="61-propellant-design"><strong>6.1 Propellant Design</strong></h2>
+<h2 id="6-propulsion-and-recoil-management">6. Propulsion and Recoil Management</h2>
+<h3 id="61-propellant-design">6.1 Propellant Design</h3>
 <p>The low-flash progressive-burning propellant formulation is optimised to extend the propellant burn time, stretching the recoil impulse curve over a longer duration. This reduces peak force on the mounting system while delivering the required 250 m/s muzzle velocity from the 200mm case. Temperature-stable formulation maintains consistent muzzle velocity across the -40°C to +63°C operational temperature range specified by MIL-SPEC environmental requirements.</p>
-<h2 id="62-recoil-compatibility"><strong>6.2 Recoil Compatibility</strong></h2>
+<h3 id="62-recoil-compatibility">6.2 Recoil Compatibility</h3>
 <p>At 2.8kg projectile plus propellant mass with 250 m/s exit velocity, the momentum impulse is approximately 700 N·s. Comparison to the M203 40mm round's approximately 65 N·s impulse illustrates the engineering challenge of rifle mounting. The extended recoil duration design distributes this impulse over a longer time window, reducing peak force. The optimised impulse curve and shooter comfort features address the significant increase in felt recoil relative to 40mm UBGL standards.</p>
-<h1 id="7-environmental-and-storage-specifications"><strong>7. Environmental and Storage Specifications</strong></h1>
-<p><strong>Parameter</strong></p>
-<p><strong>Specification</strong></p>
-<p>Temperature Range</p>
+<h2 id="7-environmental-and-storage-specifications">7. Environmental and Storage Specifications</h2>
+<p><strong>Parameter</strong>
+<strong>Specification</strong>
+Temperature Range</p>
 <p>-40°C to +63°C</p>
 <p>Humidity</p>
 <p>0-100% RH</p>
@@ -118,19 +163,44 @@
 <p>100%</p>
 <p>Operational Effect Reliability</p>
 <p>95%</p>
-<h1 id="8-manufacturing-and-quality-control"><strong>8. Manufacturing and Quality Control</strong></h1>
+<h2 id="8-manufacturing-and-quality-control">8. Manufacturing and Quality Control</h2>
 <p>Production requires standard explosive manufacturing infrastructure for composite explosive preparation, projectile body machining, and fuze assembly. Quality control protocols include X-ray inspection of assembled rounds for internal void detection, lot-level hydrostatic case testing, and performance validation on representative samples from each production batch. Full traceability from raw materials to final assembly supports defect investigation and product recalls.</p>
-<h1 id="9-comparative-analysis"><strong>9. Comparative Analysis</strong></h1>
+<h2 id="9-comparative-analysis">9. Comparative Analysis</h2>
 <p>Compared to the standard M433 HEDP 40mm round, the 57mm UGR delivers approximately 5× the explosive payload and fragments, extending lethal radius from approximately 5m to 20m. The light armour penetration (10mm RHA vs. 51mm shaped charge) is lower in the UGR than the M433 due to the absence of a shaped charge jet, relying instead on larger fragment penetrators. The UGR's strength is in anti-personnel area effect rather than anti-armour point effect. For combined requirements, the EDPS or AMAS systems provide the preferred anti-armour capability.</p>
-<h1 id="10-conclusion"><strong>10. Conclusion</strong></h1>
+<h2 id="10-conclusion">10. Conclusion</h2>
 <p>The 57mm underbarrel grenade round provides substantially enhanced anti-personnel area effect compared to standard 40mm UBGL munitions, at the cost of increased weight and recoil. The 0.8kg composite explosive payload, 700-round pre-formed fragment matrix, 20m lethal radius, and multi-mode fuze system offer versatility across anti-personnel, anti-materiel, and light-armour roles. The recoil management design addresses the fundamental challenge of rifle mounting, enabling infantry squads to field a significantly more capable organic grenade launcher than current 40mm standards provide.</p>
-<h1 id="11-references"><strong>11. References</strong></h1>
+<h2 id="11-references">11. References</h2>
 <p>[1] Ezell, E.C. (1983). Small Arms of the World, 12th ed. Stackpole Books.</p>
 <p>[2] Jane's Infantry Weapons. (2023). Grenade Launcher Systems and Ammunition. Jane's Defence Group.</p>
 <p>[3] US Army. (2019). Technical Manual TM 43-0001-38: Ammunition Data Sheets for Artillery Ammunition. Department of the Army.</p>
 <p>[4] Cooper, P.W. (1996). Explosives Engineering. Wiley-VCH.</p>
 <p>[5] Held, M. (2001). Blast waves in free air. Propellants, Explosives, Pyrotechnics, 23, 261-268.</p>
 <p>[6] NATO STANAG 4512. (2013). Dismounted Combatant Target for Ammunition Testing. NATO Standardization Agency.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

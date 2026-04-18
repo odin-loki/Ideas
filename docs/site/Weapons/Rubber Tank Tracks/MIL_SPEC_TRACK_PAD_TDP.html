@@ -3,26 +3,122 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>MIL SPEC TRACK PAD TDP</title>
+  <meta name="description" content="**Document Number:** TDP-TRACK-PAD-001-A **Revision:** A **Date:** February 2026 **Classification:** UNCLASSIFIED **Distribution:** Approved for public release **Prepared for:** U.S. Department of Defense Ground Vehicle Systems Center ---"/>
+  <title>TECHNICAL DATA PACKAGE (TDP) · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Weapons\Rubber Tank Tracks\MIL_SPEC_TRACK_PAD_TDP.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="technical-data-package-tdp">TECHNICAL DATA PACKAGE (TDP)</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#rubber-track-pad-system-for-military-tracked-vehicles">RUBBER TRACK PAD SYSTEM FOR MILITARY TRACKED VEHICLES</a></li>
+        <li class="toc-depth-2"><a href="#document-control">DOCUMENT CONTROL</a></li>
+        <li class="toc-depth-3"><a href="#revision-history">Revision History</a></li>
+        <li class="toc-depth-3"><a href="#applicable-documents">Applicable Documents</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">TABLE OF CONTENTS</a></li>
+        <li class="toc-depth-2"><a href="#1-scope">1. SCOPE</a></li>
+        <li class="toc-depth-3"><a href="#11-purpose">1.1 Purpose</a></li>
+        <li class="toc-depth-3"><a href="#12-application">1.2 Application</a></li>
+        <li class="toc-depth-3"><a href="#13-system-description">1.3 System Description</a></li>
+        <li class="toc-depth-2"><a href="#2-applicable-documents">2. APPLICABLE DOCUMENTS</a></li>
+        <li class="toc-depth-3"><a href="#21-government-documents">2.1 Government Documents</a></li>
+        <li class="toc-depth-3"><a href="#22-industry-standards">2.2 Industry Standards</a></li>
+        <li class="toc-depth-2"><a href="#3-requirements">3. REQUIREMENTS</a></li>
+        <li class="toc-depth-3"><a href="#31-material-specifications">3.1 MATERIAL SPECIFICATIONS</a></li>
+        <li class="toc-depth-4"><a href="#311-base-polymer-composition">3.1.1 Base Polymer Composition</a></li>
+        <li class="toc-depth-4"><a href="#312-metal-insert-specifications">3.1.2 Metal Insert Specifications</a></li>
+        <li class="toc-depth-4"><a href="#313-mounting-hardware">3.1.3 Mounting Hardware</a></li>
+        <li class="toc-depth-3"><a href="#32-physical-properties">3.2 PHYSICAL PROPERTIES</a></li>
+        <li class="toc-depth-4"><a href="#321-mechanical-properties-astm-d2000-classification-4bg-720-a14-b13-c12-ea14-f17">3.2.1 Mechanical Properties (ASTM D2000 Classification: 4BG 720 A14 B13 C12 EA14 F17)</a></li>
+        <li class="toc-depth-4"><a href="#322-temperature-properties">3.2.2 Temperature Properties</a></li>
+        <li class="toc-depth-4"><a href="#323-chemical-resistance">3.2.3 Chemical Resistance</a></li>
+        <li class="toc-depth-4"><a href="#324-environmental-resistance">3.2.4 Environmental Resistance</a></li>
+        <li class="toc-depth-3"><a href="#33-performance-requirements">3.3 PERFORMANCE REQUIREMENTS</a></li>
+        <li class="toc-depth-4"><a href="#331-dimensional-requirements">3.3.1 Dimensional Requirements</a></li>
+        <li class="toc-depth-4"><a href="#332-tread-pattern-specifications">3.3.2 Tread Pattern Specifications</a></li>
+        <li class="toc-depth-4"><a href="#333-durability-requirements">3.3.3 Durability Requirements</a></li>
+        <li class="toc-depth-4"><a href="#334-flammability-requirements">3.3.4 Flammability Requirements</a></li>
+        <li class="toc-depth-4"><a href="#335-acoustic-performance">3.3.5 Acoustic Performance</a></li>
+        <li class="toc-depth-3"><a href="#34-manufacturing-requirements">3.4 MANUFACTURING REQUIREMENTS</a></li>
+        <li class="toc-depth-4"><a href="#341-vulcanization-parameters">3.4.1 Vulcanization Parameters</a></li>
+        <li class="toc-depth-4"><a href="#342-quality-control-during-manufacturing">3.4.2 Quality Control During Manufacturing</a></li>
+        <li class="toc-depth-2"><a href="#4-quality-assurance">4. QUALITY ASSURANCE</a></li>
+        <li class="toc-depth-3"><a href="#41-responsibility-for-inspection">4.1 Responsibility for Inspection</a></li>
+        <li class="toc-depth-3"><a href="#42-inspection-requirements">4.2 Inspection Requirements</a></li>
+        <li class="toc-depth-4"><a href="#421-first-article-inspection">4.2.1 First Article Inspection</a></li>
+        <li class="toc-depth-4"><a href="#422-production-inspection">4.2.2 Production Inspection</a></li>
+        <li class="toc-depth-3"><a href="#43-acceptance-criteria">4.3 Acceptance Criteria</a></li>
+        <li class="toc-depth-3"><a href="#44-quality-records">4.4 Quality Records</a></li>
+        <li class="toc-depth-2"><a href="#5-preparation-for-delivery">5. PREPARATION FOR DELIVERY</a></li>
+        <li class="toc-depth-3"><a href="#51-preservation-and-packaging">5.1 Preservation and Packaging</a></li>
+        <li class="toc-depth-3"><a href="#52-marking">5.2 Marking</a></li>
+        <li class="toc-depth-3"><a href="#53-storage">5.3 Storage</a></li>
+        <li class="toc-depth-2"><a href="#6-notes">6. NOTES</a></li>
+        <li class="toc-depth-3"><a href="#61-intended-use">6.1 Intended Use</a></li>
+        <li class="toc-depth-3"><a href="#62-ordering-data">6.2 Ordering Data</a></li>
+        <li class="toc-depth-3"><a href="#63-subject-term-key-word-listing">6.3 Subject Term (Key Word) Listing</a></li>
+        <li class="toc-depth-3"><a href="#64-changes-from-previous-issue">6.4 Changes from Previous Issue</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-test-procedures">APPENDIX A: TEST PROCEDURES</a></li>
+        <li class="toc-depth-3"><a href="#a1-tensile-testing-astm-d412">A.1 Tensile Testing (ASTM D412)</a></li>
+        <li class="toc-depth-3"><a href="#a2-hardness-testing-astm-d2240">A.2 Hardness Testing (ASTM D2240)</a></li>
+        <li class="toc-depth-3"><a href="#a3-insert-pull-out-test">A.3 Insert Pull-Out Test</a></li>
+        <li class="toc-depth-3"><a href="#a4-cyclic-durability-test">A.4 Cyclic Durability Test</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-drawings">APPENDIX B: DRAWINGS</a></li>
+        <li class="toc-depth-3"><a href="#b1-drawing-list">B.1 Drawing List</a></li>
+        <li class="toc-depth-2"><a href="#appendix-c-material-certifications">APPENDIX C: MATERIAL CERTIFICATIONS</a></li>
+        <li class="toc-depth-3"><a href="#c1-required-certifications">C.1 Required Certifications</a></li>
+        <li class="toc-depth-3"><a href="#c2-traceability">C.2 Traceability</a></li>
+        <li class="toc-depth-2"><a href="#appendix-d-environmental-compliance">APPENDIX D: ENVIRONMENTAL COMPLIANCE</a></li>
+        <li class="toc-depth-3"><a href="#d1-restricted-substances">D.1 Restricted Substances</a></li>
+        <li class="toc-depth-3"><a href="#d2-disposal">D.2 Disposal</a></li>
+        <li class="toc-depth-2"><a href="#appendix-e-installation-instructions">APPENDIX E: INSTALLATION INSTRUCTIONS</a></li>
+        <li class="toc-depth-3"><a href="#e1-pre-installation-inspection">E.1 Pre-Installation Inspection</a></li>
+        <li class="toc-depth-3"><a href="#e2-installation-procedure">E.2 Installation Procedure</a></li>
+        <li class="toc-depth-3"><a href="#e3-removal-procedure">E.3 Removal Procedure</a></li>
+        <li class="toc-depth-2"><a href="#document-approval">DOCUMENT APPROVAL</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">TECHNICAL DATA PACKAGE (TDP)</h1>
+          <p class="doc-meta">Weapons\Rubber Tank Tracks\MIL_SPEC_TRACK_PAD_TDP.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Document Number:</strong> TDP-TRACK-PAD-001-A<br/>
+<strong>Revision:</strong> A<br/>
+<strong>Date:</strong> February 2026<br/>
+<strong>Classification:</strong> UNCLASSIFIED<br/>
+<strong>Distribution:</strong> Approved for public release  </p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="rubber-track-pad-system-for-military-tracked-vehicles">RUBBER TRACK PAD SYSTEM FOR MILITARY TRACKED VEHICLES</h2>
-<p><strong>Document Number:</strong> TDP-TRACK-PAD-001-A<br />
-<strong>Revision:</strong> A<br />
-<strong>Date:</strong> February 2026<br />
-<strong>Classification:</strong> UNCLASSIFIED<br />
+<p><strong>Document Number:</strong> TDP-TRACK-PAD-001-A<br/>
+<strong>Revision:</strong> A<br/>
+<strong>Date:</strong> February 2026<br/>
+<strong>Classification:</strong> UNCLASSIFIED<br/>
 <strong>Distribution:</strong> Approved for public release  </p>
-<p><strong>Prepared for:</strong><br />
-U.S. Department of Defense<br />
+<p><strong>Prepared for:</strong><br/>
+U.S. Department of Defense<br/>
 Ground Vehicle Systems Center  </p>
-<hr />
+<hr/>
 <h2 id="document-control">DOCUMENT CONTROL</h2>
 <h3 id="revision-history">Revision History</h3>
 <table>
@@ -52,33 +148,33 @@ Ground Vehicle Systems Center  </p>
 <li>MIL-STD-129: Military Marking</li>
 <li>MIL-STD-2073: DOD Packaging Standard</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="table-of-contents">TABLE OF CONTENTS</h2>
 <ol>
 <li>SCOPE</li>
 <li>APPLICABLE DOCUMENTS</li>
-<li>REQUIREMENTS<br />
-   3.1 Material Specifications<br />
-   3.2 Physical Properties<br />
-   3.3 Performance Requirements<br />
+<li>REQUIREMENTS
+   3.1 Material Specifications
+   3.2 Physical Properties
+   3.3 Performance Requirements
    3.4 Dimensional Requirements</li>
 <li>QUALITY ASSURANCE</li>
 <li>PREPARATION FOR DELIVERY</li>
 <li>NOTES</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="1-scope">1. SCOPE</h2>
 <h3 id="11-purpose">1.1 Purpose</h3>
 <p>This Technical Data Package (TDP) establishes the performance, material, and quality requirements for rubber track pads designed for installation on military tracked vehicle track shoes.</p>
 <h3 id="12-application">1.2 Application</h3>
 <p>These track pads are intended for use on main battle tanks, armored fighting vehicles, and other tracked military vehicles operating in diverse environmental conditions ranging from -40°C to +60°C ambient.</p>
 <h3 id="13-system-description">1.3 System Description</h3>
-<p>The track pad system consists of:<br />
-- Vulcanized rubber pad with molded tread pattern<br />
-- Embedded stainless steel mounting inserts (4 per pad)<br />
-- Mounting hardware (T-bolts, washers)<br />
+<p>The track pad system consists of:
+- Vulcanized rubber pad with molded tread pattern
+- Embedded stainless steel mounting inserts (4 per pad)
+- Mounting hardware (T-bolts, washers)
 - Steel mounting plate (welded to track shoe)</p>
-<hr />
+<hr/>
 <h2 id="2-applicable-documents">2. APPLICABLE DOCUMENTS</h2>
 <h3 id="21-government-documents">2.1 Government Documents</h3>
 <ul>
@@ -101,61 +197,61 @@ Ground Vehicle Systems Center  </p>
 <li>SAE J200: Classification System for Rubber Materials Used in Automotive Applications</li>
 <li>ISO 37: Rubber, vulcanized or thermoplastic—Determination of tensile stress-strain properties</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="3-requirements">3. REQUIREMENTS</h2>
 <h3 id="31-material-specifications">3.1 MATERIAL SPECIFICATIONS</h3>
 <h4 id="311-base-polymer-composition">3.1.1 Base Polymer Composition</h4>
 <p>The rubber compound shall consist of the following polymer blend (parts per hundred rubber, phr):</p>
-<p><strong>Polymer Base:</strong><br />
-- Hydrogenated Nitrile Rubber (HNBR, 35% ACN content): 40 phr<br />
-- Nitrile Rubber (NBR, 28% ACN content): 30 phr<br />
-- Natural Rubber (NR, SMR CV60 grade): 25 phr<br />
+<p><strong>Polymer Base:</strong>
+- Hydrogenated Nitrile Rubber (HNBR, 35% ACN content): 40 phr
+- Nitrile Rubber (NBR, 28% ACN content): 30 phr
+- Natural Rubber (NR, SMR CV60 grade): 25 phr
 - Polychloroprene (Neoprene GRT grade): 5 phr</p>
-<p><strong>Reinforcement Fillers:</strong><br />
-- Carbon Black (ASTM N550 grade): 55 phr<br />
-- Precipitated Silica (BET surface area 160-200 m²/g): 20 phr<br />
-- Aramid Fiber (pulp form, 3mm average length): 3 phr<br />
-- Graphene Oxide (surface area &gt;500 m²/g): 0.5 phr<br />
-- Zinc Oxide (Grade II, 99.5% purity): 5 phr<br />
+<p><strong>Reinforcement Fillers:</strong>
+- Carbon Black (ASTM N550 grade): 55 phr
+- Precipitated Silica (BET surface area 160-200 m²/g): 20 phr
+- Aramid Fiber (pulp form, 3mm average length): 3 phr
+- Graphene Oxide (surface area &gt;500 m²/g): 0.5 phr
+- Zinc Oxide (Grade II, 99.5% purity): 5 phr
 - Magnesium Oxide (light grade): 2 phr</p>
-<p><strong>Vulcanization System:</strong><br />
-- Polymeric Sulfur: 1.5 phr<br />
-- N-cyclohexyl-2-benzothiazole sulfenamide (CBS): 1.2 phr<br />
-- N-tert-butyl-2-benzothiazole sulfenamide (TBBS): 0.6 phr<br />
-- Tetramethylthiuram disulfide (TMTD): 0.4 phr<br />
+<p><strong>Vulcanization System:</strong>
+- Polymeric Sulfur: 1.5 phr
+- N-cyclohexyl-2-benzothiazole sulfenamide (CBS): 1.2 phr
+- N-tert-butyl-2-benzothiazole sulfenamide (TBBS): 0.6 phr
+- Tetramethylthiuram disulfide (TMTD): 0.4 phr
 - Stearic Acid: 2 phr</p>
-<p><strong>Functional Additives:</strong><br />
-- Aromatic Ester Plasticizer: 8 phr<br />
-- Tackifier Resin: 4 phr<br />
-- Antiozonant (6PPD): 2 phr<br />
-- Antimony Trioxide (flame retardant): 8 phr<br />
+<p><strong>Functional Additives:</strong>
+- Aromatic Ester Plasticizer: 8 phr
+- Tackifier Resin: 4 phr
+- Antiozonant (6PPD): 2 phr
+- Antimony Trioxide (flame retardant): 8 phr
 - Butyl Rubber (acoustic damping): 5 phr</p>
 <h4 id="312-metal-insert-specifications">3.1.2 Metal Insert Specifications</h4>
-<p><strong>Material:</strong> Stainless Steel Type 316 per ASTM A276<br />
-<strong>Configuration:</strong> Knurled T-nut with hex socket<br />
-<strong>Thread:</strong> M10 × 1.5 ISO metric coarse thread<br />
-<strong>Surface Treatment:</strong> <br />
-- Brass plating: 5-10 μm thickness per ASTM B633<br />
-- Rubber bonding primer: Chemlok 205 or equivalent<br />
-<strong>Knurl Specifications:</strong><br />
-- Pattern: Diamond knurl, 96 DP<br />
-- Depth: 2.0 ± 0.2 mm<br />
+<p><strong>Material:</strong> Stainless Steel Type 316 per ASTM A276
+<strong>Configuration:</strong> Knurled T-nut with hex socket
+<strong>Thread:</strong> M10 × 1.5 ISO metric coarse thread
+<strong>Surface Treatment:</strong> 
+- Brass plating: 5-10 μm thickness per ASTM B633
+- Rubber bonding primer: Chemlok 205 or equivalent
+<strong>Knurl Specifications:</strong>
+- Pattern: Diamond knurl, 96 DP
+- Depth: 2.0 ± 0.2 mm
 - Coverage: Full circumference</p>
 <h4 id="313-mounting-hardware">3.1.3 Mounting Hardware</h4>
-<p><strong>T-Bolt Specifications:</strong><br />
-- Material: Alloy steel, Grade 10.9 per ISO 898-1<br />
-- Thread: M10 × 1.5 × 40mm length<br />
-- Head: T-head design, 12mm × 6mm<br />
-- Surface Treatment: Zinc-nickel coating, 8-12 μm<br />
+<p><strong>T-Bolt Specifications:</strong>
+- Material: Alloy steel, Grade 10.9 per ISO 898-1
+- Thread: M10 × 1.5 × 40mm length
+- Head: T-head design, 12mm × 6mm
+- Surface Treatment: Zinc-nickel coating, 8-12 μm
 - Thread Locking: Nylon patch on threads</p>
-<p><strong>Washer Specifications:</strong><br />
-- Material: Hardened steel, HRC 38-45<br />
-- Type: Captive design, 18mm OD × 2mm thick<br />
+<p><strong>Washer Specifications:</strong>
+- Material: Hardened steel, HRC 38-45
+- Type: Captive design, 18mm OD × 2mm thick
 - Surface Treatment: Zinc plating per ASTM B633</p>
-<p><strong>Mounting Plate:</strong><br />
-- Material: Alloy steel plate, ASTM A572 Grade 50<br />
-- Thickness: 8.0 ± 0.5mm<br />
-- Surface Treatment: Black oxide coating<br />
+<p><strong>Mounting Plate:</strong>
+- Material: Alloy steel plate, ASTM A572 Grade 50
+- Thickness: 8.0 ± 0.5mm
+- Surface Treatment: Black oxide coating
 - Hardness: HRB 85-95</p>
 <h3 id="32-physical-properties">3.2 PHYSICAL PROPERTIES</h3>
 <h4 id="321-mechanical-properties-astm-d2000-classification-4bg-720-a14-b13-c12-ea14-f17">3.2.1 Mechanical Properties (ASTM D2000 Classification: 4BG 720 A14 B13 C12 EA14 F17)</h4>
@@ -317,27 +413,27 @@ Ground Vehicle Systems Center  </p>
 </table>
 <h3 id="33-performance-requirements">3.3 PERFORMANCE REQUIREMENTS</h3>
 <h4 id="331-dimensional-requirements">3.3.1 Dimensional Requirements</h4>
-<p><strong>Overall Dimensions:</strong><br />
-- Length: 250 ± 2 mm<br />
-- Width: 150 ± 2 mm<br />
-- Thickness (nominal): 25 ± 1 mm<br />
+<p><strong>Overall Dimensions:</strong>
+- Length: 250 ± 2 mm
+- Width: 150 ± 2 mm
+- Thickness (nominal): 25 ± 1 mm
 - Tread Depth: 8 ± 0.5 mm (new), 6 mm minimum (wear limit)</p>
-<p><strong>Mounting Hole Specifications:</strong><br />
-- Quantity: 4 per pad<br />
-- Pattern: Rectangular, 30mm from each corner<br />
-- Insert Depth: 20 ± 1 mm from pad bottom<br />
+<p><strong>Mounting Hole Specifications:</strong>
+- Quantity: 4 per pad
+- Pattern: Rectangular, 30mm from each corner
+- Insert Depth: 20 ± 1 mm from pad bottom
 - Insert Pull-Out Force: 5000 N minimum</p>
-<p><strong>Flatness:</strong><br />
-- Maximum deviation from plane: 2 mm across any 100 mm span<br />
+<p><strong>Flatness:</strong>
+- Maximum deviation from plane: 2 mm across any 100 mm span
 - No warping or distortion after cure</p>
-<p><strong>Weight:</strong><br />
+<p><strong>Weight:</strong>
 - 950 ± 50 grams per pad</p>
 <h4 id="332-tread-pattern-specifications">3.3.2 Tread Pattern Specifications</h4>
 <p><strong>Pattern Type:</strong> Hybrid Military Design (per Drawing TDP-001-PAD-TREAD)</p>
-<p><strong>Features:</strong><br />
-- Central Chevron Bars: 3 pairs at 45° angle<br />
-  - Width: 30 ± 1 mm<br />
-  - Depth: 8 ± 0.5 mm<br />
+<p><strong>Features:</strong>
+- Central Chevron Bars: 3 pairs at 45° angle
+  - Width: 30 ± 1 mm
+  - Depth: 8 ± 0.5 mm
   - Spacing: 70 ± 2 mm center-to-center</p>
 <ul>
 <li>Center Drainage Blocks: 6 units</li>
@@ -357,159 +453,159 @@ Ground Vehicle Systems Center  </p>
 </li>
 <li>Dimensions: 15 × 15 × 6 mm (±1 mm)</li>
 </ul>
-<p><strong>Contact Ratio:</strong> 66 ± 3%<br />
+<p><strong>Contact Ratio:</strong> 66 ± 3%
 <strong>Void Ratio:</strong> 34 ± 3%</p>
 <h4 id="333-durability-requirements">3.3.3 Durability Requirements</h4>
-<p><strong>Cyclic Loading:</strong><br />
-- Test Method: MIL-STD-810H Method 514.7 (Vibration)<br />
+<p><strong>Cyclic Loading:</strong>
+- Test Method: MIL-STD-810H Method 514.7 (Vibration)
 - Requirement: No cracking, tearing, or delamination after 50,000 cycles at 80% rated load</p>
-<p><strong>Tear Propagation:</strong><br />
-- Test Method: ASTM D624 (Trouser tear)<br />
+<p><strong>Tear Propagation:</strong>
+- Test Method: ASTM D624 (Trouser tear)
 - Requirement: Tear shall not propagate across pad width</p>
-<p><strong>Impact Resistance:</strong><br />
-- Drop Test: 2 meter drop onto concrete surface<br />
+<p><strong>Impact Resistance:</strong>
+- Drop Test: 2 meter drop onto concrete surface
 - Requirement: No chunking or separation of tread elements</p>
-<p><strong>Insert Pull-Out:</strong><br />
-- Test Method: Axial tensile pull at 50 mm/min<br />
+<p><strong>Insert Pull-Out:</strong>
+- Test Method: Axial tensile pull at 50 mm/min
 - Requirement: 5000 N minimum before pull-out or rubber failure</p>
-<p><strong>Fatigue Life:</strong><br />
-- Simulated track operation: 800 km minimum before replacement criteria<br />
+<p><strong>Fatigue Life:</strong>
+- Simulated track operation: 800 km minimum before replacement criteria
 - Replacement Criteria: Tread depth &lt;6 mm OR visible cracking</p>
 <h4 id="334-flammability-requirements">3.3.4 Flammability Requirements</h4>
-<p><strong>Flame Resistance:</strong><br />
-- Test Method: FMVSS 302 (Horizontal Burn Test)<br />
-- Requirement: Self-extinguishing within 5 seconds<br />
+<p><strong>Flame Resistance:</strong>
+- Test Method: FMVSS 302 (Horizontal Burn Test)
+- Requirement: Self-extinguishing within 5 seconds
 - Burn Rate: &lt;100 mm/min</p>
 <h4 id="335-acoustic-performance">3.3.5 Acoustic Performance</h4>
-<p><strong>Noise Reduction:</strong><br />
-- Test Method: SAE J57 (exterior sound level)<br />
+<p><strong>Noise Reduction:</strong>
+- Test Method: SAE J57 (exterior sound level)
 - Requirement: ≥15 dB reduction compared to bare metal track at 10 km/h</p>
-<p><strong>Vibration Damping:</strong><br />
-- Frequency Range: 1-100 Hz<br />
+<p><strong>Vibration Damping:</strong>
+- Frequency Range: 1-100 Hz
 - Damping Coefficient: ≥0.15</p>
 <h3 id="34-manufacturing-requirements">3.4 MANUFACTURING REQUIREMENTS</h3>
 <h4 id="341-vulcanization-parameters">3.4.1 Vulcanization Parameters</h4>
-<p><strong>Cure Cycle:</strong><br />
-- Temperature: 165 ± 5°C<br />
-- Pressure: 150 ± 10 bar (15 ± 1 MPa)<br />
-- Time: 15 ± 1 minutes<br />
+<p><strong>Cure Cycle:</strong>
+- Temperature: 165 ± 5°C
+- Pressure: 150 ± 10 bar (15 ± 1 MPa)
+- Time: 15 ± 1 minutes
 - Flash Cure: 180°C × 2 minutes (surface hardening)</p>
-<p><strong>Mold Requirements:</strong><br />
-- Material: Tool steel, hardened to HRC 48-52<br />
-- Surface Finish: Ra 1.6 μm or better<br />
+<p><strong>Mold Requirements:</strong>
+- Material: Tool steel, hardened to HRC 48-52
+- Surface Finish: Ra 1.6 μm or better
 - Temperature Control: ±2°C across mold surface</p>
-<p><strong>Insert Installation:</strong><br />
-- Method: Molded-in during vulcanization<br />
-- Positioning Tolerance: ±0.5 mm from nominal<br />
+<p><strong>Insert Installation:</strong>
+- Method: Molded-in during vulcanization
+- Positioning Tolerance: ±0.5 mm from nominal
 - Bonding: Chemical bond + mechanical interlock (knurling)</p>
 <h4 id="342-quality-control-during-manufacturing">3.4.2 Quality Control During Manufacturing</h4>
-<p><strong>In-Process Testing (Every 10th Pad):</strong><br />
-- Shore A hardness<br />
-- Dimensional verification (go/no-go gauges)<br />
-- Visual inspection for voids, flash, contamination<br />
+<p><strong>In-Process Testing (Every 10th Pad):</strong>
+- Shore A hardness
+- Dimensional verification (go/no-go gauges)
+- Visual inspection for voids, flash, contamination
 - Metal insert seating depth</p>
-<p><strong>Batch Testing (Per Production Run):</strong><br />
-- Cure state measurement (Monsanto ODR)<br />
-- Compound viscosity (Mooney viscometer)<br />
+<p><strong>Batch Testing (Per Production Run):</strong>
+- Cure state measurement (Monsanto ODR)
+- Compound viscosity (Mooney viscometer)
 - First article physical property verification</p>
-<hr />
+<hr/>
 <h2 id="4-quality-assurance">4. QUALITY ASSURANCE</h2>
 <h3 id="41-responsibility-for-inspection">4.1 Responsibility for Inspection</h3>
 <p>The contractor is responsible for performing all inspections required prior to submission to the Government. Except as otherwise specified, the contractor may use their own or any other inspection facilities and services acceptable to the Government.</p>
 <h3 id="42-inspection-requirements">4.2 Inspection Requirements</h3>
 <h4 id="421-first-article-inspection">4.2.1 First Article Inspection</h4>
-<p>Prior to production, the contractor shall submit samples for First Article Testing (FAT) consisting of:<br />
-- 20 track pads with mounting hardware<br />
-- 5 pads for destructive testing<br />
-- Complete manufacturing process documentation<br />
+<p>Prior to production, the contractor shall submit samples for First Article Testing (FAT) consisting of:
+- 20 track pads with mounting hardware
+- 5 pads for destructive testing
+- Complete manufacturing process documentation
 - Material certifications</p>
-<p><strong>First Article Testing shall include:</strong><br />
-- All physical property tests per Section 3.2<br />
-- All performance tests per Section 3.3<br />
-- Environmental testing per MIL-STD-810H<br />
+<p><strong>First Article Testing shall include:</strong>
+- All physical property tests per Section 3.2
+- All performance tests per Section 3.3
+- Environmental testing per MIL-STD-810H
 - Accelerated aging (1000 hours @ 70°C)</p>
 <h4 id="422-production-inspection">4.2.2 Production Inspection</h4>
-<p><strong>100% Inspection:</strong><br />
-- Visual inspection for defects<br />
-- Dimensional verification (critical dimensions)<br />
-- Hardness testing<br />
+<p><strong>100% Inspection:</strong>
+- Visual inspection for defects
+- Dimensional verification (critical dimensions)
+- Hardness testing
 - Weight verification</p>
-<p><strong>Sampling Inspection (MIL-STD-105E, Level II, AQL 1.0):</strong><br />
-- Tensile properties: 1 specimen per 500 pads<br />
-- Tear strength: 1 specimen per 500 pads<br />
-- Compression set: 1 specimen per 1000 pads<br />
+<p><strong>Sampling Inspection (MIL-STD-105E, Level II, AQL 1.0):</strong>
+- Tensile properties: 1 specimen per 500 pads
+- Tear strength: 1 specimen per 500 pads
+- Compression set: 1 specimen per 1000 pads
 - Insert pull-out: 1 specimen per 200 pads</p>
 <h3 id="43-acceptance-criteria">4.3 Acceptance Criteria</h3>
-<p><strong>Individual Pad Acceptance:</strong><br />
-- All dimensional requirements met<br />
-- No visual defects (cracks, voids, contamination, flash)<br />
-- Hardness within specification<br />
+<p><strong>Individual Pad Acceptance:</strong>
+- All dimensional requirements met
+- No visual defects (cracks, voids, contamination, flash)
+- Hardness within specification
 - Metal inserts properly seated and bonded</p>
-<p><strong>Lot Acceptance:</strong><br />
-- All sampled specimens meet physical property requirements<br />
-- No failures in performance testing<br />
+<p><strong>Lot Acceptance:</strong>
+- All sampled specimens meet physical property requirements
+- No failures in performance testing
 - Material certifications on file</p>
-<p><strong>Lot Rejection:</strong><br />
-- Any sampled specimen fails physical properties by &gt;10%<br />
-- Any insert pull-out failure<br />
+<p><strong>Lot Rejection:</strong>
+- Any sampled specimen fails physical properties by &gt;10%
+- Any insert pull-out failure
 - Evidence of process deviation or contamination</p>
 <h3 id="44-quality-records">4.4 Quality Records</h3>
-<p>The contractor shall maintain records for minimum 10 years:<br />
-- Material lot certifications<br />
-- Cure records (time, temperature, pressure)<br />
-- Inspection results<br />
-- Non-conformance reports<br />
+<p>The contractor shall maintain records for minimum 10 years:
+- Material lot certifications
+- Cure records (time, temperature, pressure)
+- Inspection results
+- Non-conformance reports
 - Corrective actions</p>
-<hr />
+<hr/>
 <h2 id="5-preparation-for-delivery">5. PREPARATION FOR DELIVERY</h2>
 <h3 id="51-preservation-and-packaging">5.1 Preservation and Packaging</h3>
-<p><strong>Individual Pad Protection:</strong><br />
-- Clean surface with isopropyl alcohol<br />
-- Apply protective film or shrink wrap<br />
+<p><strong>Individual Pad Protection:</strong>
+- Clean surface with isopropyl alcohol
+- Apply protective film or shrink wrap
 - Pair pads back-to-back with cardboard separator</p>
-<p><strong>Packaging Configuration:</strong><br />
-- 20 pads per wooden crate<br />
-- Include desiccant pack (MIL-D-3464, Type II)<br />
-- Interior: corrugated cardboard dividers<br />
+<p><strong>Packaging Configuration:</strong>
+- 20 pads per wooden crate
+- Include desiccant pack (MIL-D-3464, Type II)
+- Interior: corrugated cardboard dividers
 - Hardware: Separately bagged and labeled</p>
-<p><strong>Crate Specifications:</strong><br />
-- Material: Wood per ASTM D6198 (ISPM-15 compliant)<br />
-- Construction: Nailed or screwed assembly<br />
+<p><strong>Crate Specifications:</strong>
+- Material: Wood per ASTM D6198 (ISPM-15 compliant)
+- Construction: Nailed or screwed assembly
 - Gross Weight Limit: 50 kg per crate</p>
 <h3 id="52-marking">5.2 Marking</h3>
-<p><strong>Individual Pad Marking (molded-in):</strong><br />
-- NSN (National Stock Number)<br />
-- Lot Number<br />
-- Date Code (YYMM format)<br />
+<p><strong>Individual Pad Marking (molded-in):</strong>
+- NSN (National Stock Number)
+- Lot Number
+- Date Code (YYMM format)
 - Contractor Identification</p>
-<p><strong>Crate Marking (stenciled per MIL-STD-129):</strong><br />
-- Contract Number<br />
-- NSN<br />
-- Quantity<br />
-- Gross Weight<br />
-- Cube Dimensions<br />
-- "THIS SIDE UP" arrows<br />
+<p><strong>Crate Marking (stenciled per MIL-STD-129):</strong>
+- Contract Number
+- NSN
+- Quantity
+- Gross Weight
+- Cube Dimensions
+- "THIS SIDE UP" arrows
 - "KEEP DRY" symbol</p>
 <h3 id="53-storage">5.3 Storage</h3>
-<p><strong>Storage Conditions:</strong><br />
-- Temperature: 15-30°C<br />
-- Humidity: 30-70% RH<br />
-- Environment: Cool, dark, dry<br />
-- Position: Horizontal stacking, maximum 4 crates high<br />
+<p><strong>Storage Conditions:</strong>
+- Temperature: 15-30°C
+- Humidity: 30-70% RH
+- Environment: Cool, dark, dry
+- Position: Horizontal stacking, maximum 4 crates high
 - Protection: Away from ozone sources, UV light, petroleum products</p>
-<p><strong>Shelf Life:</strong><br />
-- 7 years from date of manufacture (unopened packaging)<br />
+<p><strong>Shelf Life:</strong>
+- 7 years from date of manufacture (unopened packaging)
 - 3 years extension possible with re-inspection</p>
-<hr />
+<hr/>
 <h2 id="6-notes">6. NOTES</h2>
 <h3 id="61-intended-use">6.1 Intended Use</h3>
 <p>These rubber track pads are designed to reduce noise, vibration, and road damage during military tracked vehicle operations on paved surfaces while maintaining all-terrain capability.</p>
 <h3 id="62-ordering-data">6.2 Ordering Data</h3>
-<p>Procurement documents should specify:<br />
-- NSN: TBD (to be assigned)<br />
-- Quantity required<br />
-- Delivery schedule<br />
-- Destination<br />
+<p>Procurement documents should specify:
+- NSN: TBD (to be assigned)
+- Quantity required
+- Delivery schedule
+- Destination
 - Contract number reference</p>
 <h3 id="63-subject-term-key-word-listing">6.3 Subject Term (Key Word) Listing</h3>
 <ul>
@@ -522,49 +618,49 @@ Ground Vehicle Systems Center  </p>
 </ul>
 <h3 id="64-changes-from-previous-issue">6.4 Changes from Previous Issue</h3>
 <p>This is the initial release (Revision A).</p>
-<hr />
+<hr/>
 <h2 id="appendix-a-test-procedures">APPENDIX A: TEST PROCEDURES</h2>
 <h3 id="a1-tensile-testing-astm-d412">A.1 Tensile Testing (ASTM D412)</h3>
-<p><strong>Specimen Preparation:</strong><br />
-- Die C dumbbell specimens<br />
-- Minimum 5 specimens per test<br />
+<p><strong>Specimen Preparation:</strong>
+- Die C dumbbell specimens
+- Minimum 5 specimens per test
 - Condition at 23 ± 2°C for 24 hours</p>
-<p><strong>Test Conditions:</strong><br />
-- Temperature: 23 ± 2°C<br />
-- Crosshead Speed: 500 ± 50 mm/min<br />
+<p><strong>Test Conditions:</strong>
+- Temperature: 23 ± 2°C
+- Crosshead Speed: 500 ± 50 mm/min
 - Report: Tensile strength, elongation at break, 100% modulus, 300% modulus</p>
 <h3 id="a2-hardness-testing-astm-d2240">A.2 Hardness Testing (ASTM D2240)</h3>
-<p><strong>Specimen:</strong><br />
-- Finished pad or stack of sheets to 6mm minimum thickness<br />
+<p><strong>Specimen:</strong>
+- Finished pad or stack of sheets to 6mm minimum thickness
 - Flat, smooth surface</p>
-<p><strong>Procedure:</strong><br />
-- Shore A durometer<br />
-- 5 readings minimum, &gt;12mm apart<br />
-- Hold 15 seconds per reading<br />
+<p><strong>Procedure:</strong>
+- Shore A durometer
+- 5 readings minimum, &gt;12mm apart
+- Hold 15 seconds per reading
 - Report average of 5 readings</p>
 <h3 id="a3-insert-pull-out-test">A.3 Insert Pull-Out Test</h3>
-<p><strong>Specimen Preparation:</strong><br />
-- Cut pad to isolate single insert with minimum 40mm surrounding rubber<br />
+<p><strong>Specimen Preparation:</strong>
+- Cut pad to isolate single insert with minimum 40mm surrounding rubber
 - Drill hole through rubber to access insert hex socket</p>
-<p><strong>Test Fixture:</strong><br />
-- Universal testing machine with custom grips<br />
-- Pad clamped at base<br />
+<p><strong>Test Fixture:</strong>
+- Universal testing machine with custom grips
+- Pad clamped at base
 - M10 threaded rod engaged with insert</p>
-<p><strong>Procedure:</strong><br />
-- Crosshead speed: 50 mm/min<br />
-- Pull until insert failure or rubber failure<br />
+<p><strong>Procedure:</strong>
+- Crosshead speed: 50 mm/min
+- Pull until insert failure or rubber failure
 - Report peak load and failure mode</p>
 <h3 id="a4-cyclic-durability-test">A.4 Cyclic Durability Test</h3>
-<p><strong>Test Setup:</strong><br />
-- Mount pad to steel plate using production hardware<br />
-- Torque bolts to 45 Nm<br />
-- Apply cyclic compression load: 0 to 40 kN at 2 Hz<br />
+<p><strong>Test Setup:</strong>
+- Mount pad to steel plate using production hardware
+- Torque bolts to 45 Nm
+- Apply cyclic compression load: 0 to 40 kN at 2 Hz
 - Test duration: 50,000 cycles</p>
-<p><strong>Inspection:</strong><br />
-- Visual inspection every 10,000 cycles<br />
-- Final dimensional check<br />
+<p><strong>Inspection:</strong>
+- Visual inspection every 10,000 cycles
+- Final dimensional check
 - Destructive tear-down to check insert bonding</p>
-<hr />
+<hr/>
 <h2 id="appendix-b-drawings">APPENDIX B: DRAWINGS</h2>
 <h3 id="b1-drawing-list">B.1 Drawing List</h3>
 <table>
@@ -609,37 +705,37 @@ Ground Vehicle Systems Center  </p>
 </tbody>
 </table>
 <p><em>Note: Full engineering drawings available in separate CAD package</em></p>
-<hr />
+<hr/>
 <h2 id="appendix-c-material-certifications">APPENDIX C: MATERIAL CERTIFICATIONS</h2>
 <h3 id="c1-required-certifications">C.1 Required Certifications</h3>
-<p>Supplier shall provide with each delivery:<br />
-- HNBR: Polymer certification (ACN content, Mooney viscosity)<br />
-- NBR: Polymer certification (ACN content, Mooney viscosity)<br />
-- Natural Rubber: Grade certification (SMR CV60)<br />
-- Carbon Black: Grade certification (ASTM N550)<br />
-- Stainless Steel Inserts: Material certification (Type 316)<br />
+<p>Supplier shall provide with each delivery:
+- HNBR: Polymer certification (ACN content, Mooney viscosity)
+- NBR: Polymer certification (ACN content, Mooney viscosity)
+- Natural Rubber: Grade certification (SMR CV60)
+- Carbon Black: Grade certification (ASTM N550)
+- Stainless Steel Inserts: Material certification (Type 316)
 - Fastener Hardware: Material certification (Grade 10.9)</p>
 <h3 id="c2-traceability">C.2 Traceability</h3>
-<p>All materials shall be traceable to:<br />
-- Raw material lot number<br />
-- Manufacturer<br />
-- Date of manufacture<br />
+<p>All materials shall be traceable to:
+- Raw material lot number
+- Manufacturer
+- Date of manufacture
 - Specification conformance</p>
-<hr />
+<hr/>
 <h2 id="appendix-d-environmental-compliance">APPENDIX D: ENVIRONMENTAL COMPLIANCE</h2>
 <h3 id="d1-restricted-substances">D.1 Restricted Substances</h3>
-<p>This product shall comply with:<br />
-- RoHS Directive (2011/65/EU): Lead, mercury, cadmium limits<br />
-- REACH Regulation (EC 1907/2006): SVHC substances<br />
+<p>This product shall comply with:
+- RoHS Directive (2011/65/EU): Lead, mercury, cadmium limits
+- REACH Regulation (EC 1907/2006): SVHC substances
 - California Proposition 65: Carcinogen disclosure</p>
 <p><strong>Note:</strong> Antimony trioxide used as flame retardant is present at &lt;1% by weight</p>
 <h3 id="d2-disposal">D.2 Disposal</h3>
-<p>End-of-life disposal shall follow:<br />
-- Tire and rubber recycling protocols<br />
-- Metal components separated for scrap recycling<br />
-- Incineration with energy recovery (if applicable)<br />
+<p>End-of-life disposal shall follow:
+- Tire and rubber recycling protocols
+- Metal components separated for scrap recycling
+- Incineration with energy recovery (if applicable)
 - No landfill disposal of whole pads recommended</p>
-<hr />
+<hr/>
 <h2 id="appendix-e-installation-instructions">APPENDIX E: INSTALLATION INSTRUCTIONS</h2>
 <h3 id="e1-pre-installation-inspection">E.1 Pre-Installation Inspection</h3>
 <ol>
@@ -649,25 +745,25 @@ Ground Vehicle Systems Center  </p>
 <li>Verify hardware kit is complete (4 T-bolts, 4 washers per pad)</li>
 </ol>
 <h3 id="e2-installation-procedure">E.2 Installation Procedure</h3>
-<p><strong>Step 1: Surface Preparation</strong><br />
-- Wire brush mounting plate to remove rust/debris<br />
-- Clean with solvent (isopropyl alcohol)<br />
+<p><strong>Step 1: Surface Preparation</strong>
+- Wire brush mounting plate to remove rust/debris
+- Clean with solvent (isopropyl alcohol)
 - Allow to dry completely</p>
-<p><strong>Step 2: Pad Positioning</strong><br />
-- Align pad center hole with mounting plate guide pin<br />
+<p><strong>Step 2: Pad Positioning</strong>
+- Align pad center hole with mounting plate guide pin
 - Ensure pad is seated flat against plate</p>
-<p><strong>Step 3: Fastener Installation</strong><br />
-- Insert T-bolt #1 (front-left) into T-slot<br />
-- Slide T-head into position<br />
-- Hand-tighten into pad insert<br />
+<p><strong>Step 3: Fastener Installation</strong>
+- Insert T-bolt #1 (front-left) into T-slot
+- Slide T-head into position
+- Hand-tighten into pad insert
 - Repeat for bolts #2, #3, #4</p>
-<p><strong>Step 4: Torquing</strong><br />
-- Using calibrated torque wrench and 8mm hex key<br />
-- Torque all 4 bolts in star pattern to 45 ± 3 Nm<br />
+<p><strong>Step 4: Torquing</strong>
+- Using calibrated torque wrench and 8mm hex key
+- Torque all 4 bolts in star pattern to 45 ± 3 Nm
 - Re-check torque after 5 minutes</p>
-<p><strong>Step 5: Final Inspection</strong><br />
-- Visual check: Pad seated flush, no gaps<br />
-- Tactile check: No movement when pressed<br />
+<p><strong>Step 5: Final Inspection</strong>
+- Visual check: Pad seated flush, no gaps
+- Tactile check: No movement when pressed
 - Mark installation date on maintenance log</p>
 <p><strong>Installation Time:</strong> 12 minutes per pad (trained crew)</p>
 <h3 id="e3-removal-procedure">E.3 Removal Procedure</h3>
@@ -680,23 +776,45 @@ Ground Vehicle Systems Center  </p>
 <li>Clean and prepare for new pad installation</li>
 </ol>
 <p><strong>Removal Time:</strong> 5 minutes per pad</p>
-<hr />
+<hr/>
 <h2 id="document-approval">DOCUMENT APPROVAL</h2>
-<p><strong>Prepared by:</strong></p>
-<hr />
-<p>Senior Engineer<br />
-Date: <strong><em>_</em></strong>____</p>
-<p><strong>Reviewed by:</strong></p>
-<hr />
-<p>Quality Assurance Manager<br />
-Date: <strong><em>_</em></strong>____</p>
-<p><strong>Approved by:</strong></p>
-<hr />
-<p>Program Manager<br />
-Date: <strong><em>_</em></strong>____</p>
-<hr />
+<p><strong>Prepared by:</strong>
+<strong><em>*_</em></strong><em>_</em><strong><em>_</em></strong><em>_</em><em>_</em><em>Senior Engineer<br/>
+Date: </em><em>_</em><strong>*_</strong>_</p>
+<p><strong>Reviewed by:</strong>
+<strong><em>*_</em></strong><em>_</em><strong><em>_</em></strong><em>_</em><em>_</em><em>Quality Assurance Manager<br/>
+Date: </em><em>_</em><strong>*_</strong>_</p>
+<p><strong>Approved by:</strong>
+<strong><em>*_</em></strong><em>_</em><strong><em>_</em></strong><em>_</em><em>_</em><em>Program Manager<br/>
+Date: </em><em>_</em><strong>*_</strong>_</p>
+<hr/>
 <p><strong>END OF TECHNICAL DATA PACKAGE</strong></p>
 <p><em>This document contains 24 pages</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

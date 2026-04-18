@@ -3,30 +3,97 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>cypha statpaper</title>
+  <meta name="description" content="We report a comprehensive statistical analysis of CyphaDIF, an online byte-stream classifier built on the Differential Information Field \(DIF\) architecture. Thirteen analyses are conducted, spanning inferential statistics, distribution theory, generalisation theory,…"/>
+  <title>Statistical Analysis of the Differential Information Field Classifier: Inference, Generalisation, and Robustness · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v8\cypha_statpaper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Statistical Analysis of the Differential Information</strong></p>
-<p><strong>Field Classifier: Inference, Generalisation, and Robustness</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-experimental-setup">2. Experimental Setup</a></li>
+        <li class="toc-depth-2"><a href="#3-bootstrap-confidence-intervals-on-macro-accuracy">3. Bootstrap Confidence Intervals on Macro Accuracy</a></li>
+        <li class="toc-depth-3"><a href="#31-method">3.1 Method</a></li>
+        <li class="toc-depth-3"><a href="#32-results">3.2 Results</a></li>
+        <li class="toc-depth-2"><a href="#4-calibration-analysis">4. Calibration Analysis</a></li>
+        <li class="toc-depth-3"><a href="#41-background">4.1 Background</a></li>
+        <li class="toc-depth-3"><a href="#42-results">4.2 Results</a></li>
+        <li class="toc-depth-3"><a href="#43-mechanistic-explanation">4.3 Mechanistic Explanation</a></li>
+        <li class="toc-depth-2"><a href="#5-log-likelihood-ratio-distribution-analysis">5. Log-Likelihood Ratio Distribution Analysis</a></li>
+        <li class="toc-depth-3"><a href="#51-normality-tests">5.1 Normality Tests</a></li>
+        <li class="toc-depth-3"><a href="#52-interpretation">5.2 Interpretation</a></li>
+        <li class="toc-depth-2"><a href="#6-concentration-inequalities-and-tail-analysis">6. Concentration Inequalities and Tail Analysis</a></li>
+        <li class="toc-depth-2"><a href="#7-effect-size-analysis-cohens-d">7. Effect Size Analysis: Cohen&#x27;s d</a></li>
+        <li class="toc-depth-2"><a href="#8-roc-auc-analysis">8. ROC-AUC Analysis</a></li>
+        <li class="toc-depth-3"><a href="#81-one-vs-rest-auc">8.1 One-vs-Rest AUC</a></li>
+        <li class="toc-depth-3"><a href="#82-interpretation">8.2 Interpretation</a></li>
+        <li class="toc-depth-2"><a href="#9-learning-curve-and-sample-complexity">9. Learning Curve and Sample Complexity</a></li>
+        <li class="toc-depth-3"><a href="#91-empirical-learning-curve">9.1 Empirical Learning Curve</a></li>
+        <li class="toc-depth-3"><a href="#92-fitted-model-and-sample-complexity">9.2 Fitted Model and Sample Complexity</a></li>
+        <li class="toc-depth-3"><a href="#93-the-n12-variance-anomaly">9.3 The n=12 Variance Anomaly</a></li>
+        <li class="toc-depth-2"><a href="#10-bias-variance-decomposition">10. Bias-Variance Decomposition</a></li>
+        <li class="toc-depth-2"><a href="#11-permutation-test-for-class-separability">11. Permutation Test for Class Separability</a></li>
+        <li class="toc-depth-2"><a href="#12-concept-drift-sensitivity">12. Concept Drift Sensitivity</a></li>
+        <li class="toc-depth-3"><a href="#121-additive-gaussian-drift">12.1 Additive Gaussian Drift</a></li>
+        <li class="toc-depth-3"><a href="#122-drift-profile-analysis">12.2 Drift Profile Analysis</a></li>
+        <li class="toc-depth-3"><a href="#123-drift-robust-classes">12.3 Drift-Robust Classes</a></li>
+        <li class="toc-depth-2"><a href="#13-inter-model-reliability">13. Inter-Model Reliability</a></li>
+        <li class="toc-depth-2"><a href="#14-rademacher-complexity-and-generalisation-bounds">14. Rademacher Complexity and Generalisation Bounds</a></li>
+        <li class="toc-depth-3"><a href="#141-rademacher-complexity">14.1 Rademacher Complexity</a></li>
+        <li class="toc-depth-3"><a href="#142-why-the-bound-is-loose">14.2 Why the Bound is Loose</a></li>
+        <li class="toc-depth-2"><a href="#15-hypothesis-tests-on-llr-separation">15. Hypothesis Tests on LLR Separation</a></li>
+        <li class="toc-depth-2"><a href="#16-synthesis-and-enhancement-directions">16. Synthesis and Enhancement Directions</a></li>
+        <li class="toc-depth-3"><a href="#161-summary-of-findings">16.1 Summary of Findings</a></li>
+        <li class="toc-depth-3"><a href="#162-enhancement-direction-1-calibration-via-temperature-scaling">16.2 Enhancement Direction 1: Calibration via Temperature Scaling</a></li>
+        <li class="toc-depth-3"><a href="#163-enhancement-direction-2-non-gaussian-class-models-for-platykurtic-classes">16.3 Enhancement Direction 2: Non-Gaussian Class Models for Platykurtic Classes</a></li>
+        <li class="toc-depth-3"><a href="#164-enhancement-direction-3-warm-up-protocol-for-the-n12-phase-transition">16.4 Enhancement Direction 3: Warm-Up Protocol for the n=12 Phase Transition</a></li>
+        <li class="toc-depth-3"><a href="#165-enhancement-direction-4-confidence-inversion-detection-for-ood">16.5 Enhancement Direction 4: Confidence Inversion Detection for OOD</a></li>
+        <li class="toc-depth-2"><a href="#17-conclusion">17. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Statistical Analysis of the Differential Information Field Classifier: Inference, Generalisation, and Robustness</h1>
+          <p class="doc-meta">Cypha\Cypha v8\cypha_statpaper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>Bootstrap Estimation • Calibration • Effect Sizes • Sample Complexity • Hypothesis Tests • Drift Sensitivity</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Bootstrap Estimation • Calibration • Effect Sizes • Sample Complexity • Hypothesis Tests • Drift Sensitivity</em></p>
 <p>Unpublished Technical Report  —  2026</p>
-<p><strong>Abstract</strong></p>
-<p>We report a comprehensive statistical analysis of CyphaDIF, an online byte-stream classifier built on the Differential Information Field (DIF) architecture. Thirteen analyses are conducted, spanning inferential statistics, distribution theory, generalisation theory, bias-variance analysis, and robustness profiling. Key findings: <strong>(1)</strong> Bootstrap estimation over 5,000 resamples yields 95% CI [1.0000, 1.0000] with zero SE on the 500-sample test set, establishing that macro accuracy 1.0000 is not a statistical artefact. <strong>(2)</strong> The classifier is systematically underconfident: ECE = 0.191, all 5 populated confidence bins show positive accuracy-confidence gaps (accuracy &gt; confidence), with the worst gap 0.451 in the [0.5, 0.6) bin. <strong>(3)</strong> LLR distributions are non-Gaussian for 4/10 classes (Shapiro-Wilk p &lt; 0.05), with pooled LLR departing significantly from Gaussian (KS D = 0.155, p &lt; 10⁻¹⁰). <strong>(4)</strong> Mean Cohen's d = 142.5 across all class pairs; minimum d = 2.39 (bin_benign vs bin_malware), classifying every pair as 'huge' by Cohen's conventions. <strong>(5)</strong> One-vs-rest AUC is ≥0.972 for all classes; macro AUC = 0.9952. <strong>(6)</strong> The learning curve is accurately modelled as 1 − 0.173·exp(−0.0092n), requiring 135 samples/class for 95% accuracy and 309 for 99%. <strong>(7)</strong> Bias²/(bias²+variance) = 0.155: the classifier is variance-dominated at 50 samples/class. <strong>(8)</strong> Permutation test: z = 68σ, p ≈ 0, rejecting label exchangeability. <strong>(9)</strong> Accuracy degrades below 95% at drift σ = 0.5. <strong>(10)</strong> Inter-model Fleiss κ = 0.898 (almost perfect). <strong>(11)</strong> All 45 class pairs are significantly separated after Bonferroni correction (α = 0.0011). The Rademacher complexity bound is loose (22.0 above training error), indicating the theoretical complexity class over-contains the actual solution.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="abstract">Abstract</h2>
+<p>We report a comprehensive statistical analysis of CyphaDIF, an online byte-stream classifier built on the Differential Information Field (DIF) architecture. Thirteen analyses are conducted, spanning inferential statistics, distribution theory, generalisation theory, bias-variance analysis, and robustness profiling. Key findings: <strong>(1)</strong> Bootstrap estimation over 5,000 resamples yields 95% CI [1.0000, 1.0000] with zero SE on the 500-sample test set, establishing that macro accuracy 1.0000 is not a statistical artefact. <strong>(2)</strong> The classifier is systematically underconfident: ECE = 0.191, all 5 populated confidence bins show positive accuracy-confidence gaps (accuracy &gt; confidence), with the worst gap 0.451 in the [0.5, 0.6) bin. <strong>(3)</strong> LLR distributions are non-Gaussian for 4/10 classes (Shapiro-Wilk p &lt; 0.05), with pooled LLR departing significantly from Gaussian (KS D = 0.155, p &lt; 10⁻¹⁰). <strong>(4)</strong> Mean Cohen's d = 142.5 across all class pairs; minimum d = 2.39 (bin_benign vs bin_malware), classifying every pair as 'huge' by Cohen's conventions. <strong>(5)</strong> One-vs-rest AUC is ≥0.972 for all classes; macro AUC = 0.9952. <strong>(6)</strong> The learning curve is accurately modelled as 1 − 0.173·exp(−0.0092n), requiring 135 samples/class for 95% accuracy and 309 for 99%. <strong>(7)</strong> Bias²/(bias²+variance) = 0.155: the classifier is variance-dominated at 50 samples/class. <strong>(8)</strong> Permutation test: z = 68σ, p ≈ 0, rejecting label exchangeability. <strong>(9)</strong> Accuracy degrades below 95% at drift σ = 0.5.<strong>(10)</strong> Inter-model Fleiss κ = 0.898 (almost perfect).<strong>(11)</strong> All 45 class pairs are significantly separated after Bonferroni correction (α = 0.0011). The Rademacher complexity bound is loose (22.0 above training error), indicating the theoretical complexity class over-contains the actual solution.</p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Statistical analysis of machine learning classifiers is traditionally concerned with a set of questions distinct from algorithmic analysis: How reliable is the observed performance estimate? What is the sample complexity of the learning problem? Are the outputs well-calibrated? How does performance degrade under distributional shift? What fraction of error is reducible (bias) versus irreducible (variance)?</p>
 <p>This paper addresses all of these questions for CyphaDIF [1], an online byte-stream classifier built on the Differential Information Field architecture. CyphaDIF achieves macro accuracy 1.0000 on a 10-class network/log/binary classification task, raising the question of whether this performance is statistically robust or an artefact of the specific 500-sample test set. Beyond point estimation, we characterise the classifier's calibration, class separability, generalisation bounds, bias-variance tradeoff, concept drift sensitivity, and the distributional structure of its log-likelihood ratio outputs.</p>
-<p>__Structure. __Section 2 describes the experimental setup. Sections 3–15 report the thirteen statistical analyses. Section 16 synthesises the findings and identifies actionable improvement directions.</p>
-<h1 id="2-experimental-setup"><strong>2. Experimental Setup</strong></h1>
+<p><strong>Structure.</strong> Section 2 describes the experimental setup. Sections 3–15 report the thirteen statistical analyses. Section 16 synthesises the findings and identifies actionable improvement directions.</p>
+<h2 id="2-experimental-setup">2. Experimental Setup</h2>
 <p>All experiments use CyphaDIF trained for 3 epochs on 100 samples per class across 10 classes: net_normal, net_scan, net_ddos, net_exfil, net_c2, log_info, log_warn, log_error, bin_malware, bin_benign. The primary test set contains 500 samples (50 per class). Random seeds are fixed for reproducibility. The classifier operates in a 128-dimensional latent space with world prior N(μ₀, v₀) and class offsets Δμk updated via natural gradient with MDL decay.</p>
-<p><strong>Component</strong></p>
-<p><strong>Description</strong></p>
-<p>Classifier</p>
+<p><strong>Component</strong>
+<strong>Description</strong>
+Classifier</p>
 <p>CyphaDIF (DIF architecture, online learning)</p>
 <p>Classes (K)</p>
 <p>10 — net, log, binary subtypes</p>
@@ -42,24 +109,24 @@
 <p>0.002</p>
 <p>T (temperature)</p>
 <p>2.5 (fixed)</p>
-<h1 id="3-bootstrap-confidence-intervals-on-macro-accuracy"><strong>3. Bootstrap Confidence Intervals on Macro Accuracy</strong></h1>
-<h2 id="31-method"><strong>3.1 Method</strong></h2>
+<h2 id="3-bootstrap-confidence-intervals-on-macro-accuracy">3. Bootstrap Confidence Intervals on Macro Accuracy</h2>
+<h3 id="31-method">3.1 Method</h3>
 <p>Naively reporting macro accuracy 1.0000 on 500 samples raises concerns about overfitting to the test distribution. We address this via the non-parametric bootstrap [2,3]. For B = 5,000 bootstrap resamples of the 500 test predictions, we compute the macro accuracy of each resample, obtaining the bootstrap distribution <em>T*_1, ..., T*_B</em>.</p>
-<h2 id="32-results"><strong>3.2 Results</strong></h2>
-<p><strong>Result</strong></p>
-<p>Observed macro accuracy: 1.0000. Bootstrap mean: 1.0000. Bootstrap standard error: 0.0000. 95% percentile CI: [1.0000, 1.0000]. All 5,000 bootstrap resamples achieved macro accuracy 1.0000. Bootstrap bias: 0.0000.</p>
+<h3 id="32-results">3.2 Results</h3>
+<p><strong>Result</strong>
+Observed macro accuracy: 1.0000. Bootstrap mean: 1.0000. Bootstrap standard error: 0.0000. 95% percentile CI: [1.0000, 1.0000]. All 5,000 bootstrap resamples achieved macro accuracy 1.0000. Bootstrap bias: 0.0000.</p>
 <p>The zero standard error is not a degenerate result — it is a consequence of the classifier making zero errors on all 500 test samples, in all classes. Any bootstrap resample of a zero-error set is also zero-error. This establishes that the 1.0000 accuracy is not a probabilistic artefact of the specific 500 test items; the classifier correctly classified every sample drawn from the test distribution.</p>
-<p>__Statistical interpretation. __The 95% CI [1.0000, 1.0000] is degenerate in the frequentist sense — it communicates that the observed performance is fixed at the boundary of the parameter space. The correct question is not 'what is the confidence interval on 1.0000?' but rather 'what is the minimum true accuracy consistent with observing 0 errors in 500 trials?' By the Clopper-Pearson exact binomial method [4], P(acc ≥ 1 - ε | 0 errors in 500) ≥ 0.95 for ε = 0.0059. The true per-sample accuracy is at least 0.994 with 95% confidence.</p>
-<h1 id="4-calibration-analysis"><strong>4. Calibration Analysis</strong></h1>
-<h2 id="41-background"><strong>4.1 Background</strong></h2>
+<p><strong>Statistical interpretation.</strong> The 95% CI [1.0000, 1.0000] is degenerate in the frequentist sense — it communicates that the observed performance is fixed at the boundary of the parameter space. The correct question is not 'what is the confidence interval on 1.0000?' but rather 'what is the minimum true accuracy consistent with observing 0 errors in 500 trials?' By the Clopper-Pearson exact binomial method [4], P(acc ≥ 1 - ε | 0 errors in 500) ≥ 0.95 for ε = 0.0059. The true per-sample accuracy is at least 0.994 with 95% confidence.</p>
+<h2 id="4-calibration-analysis">4. Calibration Analysis</h2>
+<h3 id="41-background">4.1 Background</h3>
 <p>A classifier is well-calibrated if P(Y = y | conf = c) = c for all confidence levels c [5,6]. Calibration is orthogonal to accuracy — a classifier can be perfectly accurate yet poorly calibrated if its confidence scores do not reflect the empirical probability of correctness. The Expected Calibration Error (ECE) [5] measures the weighted average gap between accuracy and confidence across bins:</p>
 <p>ECE = Σ_b (n_b / N) |acc(b) - conf(b)|</p>
-<h2 id="42-results"><strong>4.2 Results</strong></h2>
+<h3 id="42-results">4.2 Results</h3>
 <p>Calibration metrics across 500 test samples:</p>
-<p><strong>Metric</strong></p>
-<p><strong>Value</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>ECE</p>
+<p><strong>Metric</strong>
+<strong>Value</strong>
+<strong>Interpretation</strong>
+ECE</p>
 <p>0.1905</p>
 <p>Moderate miscalibration</p>
 <p>MCE</p>
@@ -75,12 +142,12 @@
 <p>5/10</p>
 <p>Accuracy always exceeds confidence</p>
 <p>The reliability diagram reveals a consistent pattern: in every populated confidence bin, accuracy equals 1.0000 but confidence is systematically below 1.0. The classifier is universally underconfident — it predicts correctly while assigning lower probability than warranted.</p>
-<p><strong>Confidence bin</strong></p>
-<p><strong>Accuracy</strong></p>
-<p><strong>Confidence</strong></p>
-<p><strong>n</strong></p>
-<p><strong>Gap</strong></p>
-<p>[0.5, 0.6)</p>
+<p><strong>Confidence bin</strong>
+<strong>Accuracy</strong>
+<strong>Confidence</strong>
+<strong>n</strong>
+<strong>Gap</strong>
+[0.5, 0.6)</p>
 <p>1.0000</p>
 <p>0.5486</p>
 <p>17</p>
@@ -105,20 +172,19 @@
 <p>0.9370</p>
 <p>56</p>
 <p>+0.0630 ← best</p>
-<h2 id="43-mechanistic-explanation"><strong>4.3 Mechanistic Explanation</strong></h2>
-<p>__Temperature T = 2.5. __The LLR softmax is computed with temperature T = 2.5, which flattens the output distribution relative to T = 1.0. This directly explains the underconfidence: at T = 2.5, the maximum confidence is 1/(1 + (K-1)exp(-LLR_max/T)), which is always below the T = 1.0 equivalent. The underconfidence is a deliberate architectural choice to increase entropy in the confidence output, reducing overconfidence on near-boundary cases — at the cost of systematic underconfidence on clear cases.</p>
-<p>__Implication. __The Brier score 0.0438 is low despite ECE 0.191, because Brier score measures calibration and accuracy jointly. Since accuracy is perfect, the Brier score measures only the calibration penalty from underconfidence. The MCE of 0.451 in the lowest-confidence bin represents 17 correctly-classified samples that the model assigned confidence ~0.55; post-calibration (e.g. via Platt scaling [7] or isotonic regression [8]) would resolve this.</p>
-<h1 id="5-log-likelihood-ratio-distribution-analysis"><strong>5. Log-Likelihood Ratio Distribution Analysis</strong></h1>
-<h2 id="51-normality-tests"><strong>5.1 Normality Tests</strong></h2>
+<h3 id="43-mechanistic-explanation">4.3 Mechanistic Explanation</h3>
+<p><strong>Temperature T = 2.5.</strong> The LLR softmax is computed with temperature T = 2.5, which flattens the output distribution relative to T = 1.0. This directly explains the underconfidence: at T = 2.5, the maximum confidence is 1/(1 + (K-1)exp(-LLR_max/T)), which is always below the T = 1.0 equivalent. The underconfidence is a deliberate architectural choice to increase entropy in the confidence output, reducing overconfidence on near-boundary cases — at the cost of systematic underconfidence on clear cases.<strong> Implication.</strong> The Brier score 0.0438 is low despite ECE 0.191, because Brier score measures calibration and accuracy jointly. Since accuracy is perfect, the Brier score measures only the calibration penalty from underconfidence. The MCE of 0.451 in the lowest-confidence bin represents 17 correctly-classified samples that the model assigned confidence ~0.55; post-calibration (e.g. via Platt scaling [7] or isotonic regression [8]) would resolve this.</p>
+<h2 id="5-log-likelihood-ratio-distribution-analysis">5. Log-Likelihood Ratio Distribution Analysis</h2>
+<h3 id="51-normality-tests">5.1 Normality Tests</h3>
 <p>The log-likelihood ratio LLR_k(h) = log p(h|θ_k) - log p(h|θ₀) is the classifier's primary discriminant. We test whether the true-class LLR distribution follows a Gaussian, using the Shapiro-Wilk test [9] (exact for n ≤ 50, asymptotic otherwise) at α = 0.05:</p>
-<p><strong>Class</strong></p>
-<p><strong>LLR Mean</strong></p>
-<p><strong>LLR Std</strong></p>
-<p><strong>Skewness</strong></p>
-<p><strong>Ex. Kurtosis</strong></p>
-<p><strong>SW p-value</strong></p>
-<p><strong>Normal?</strong></p>
-<p>net_normal</p>
+<p><strong>Class</strong>
+<strong>LLR Mean</strong>
+<strong>LLR Std</strong>
+<strong>Skewness</strong>
+<strong>Ex. Kurtosis</strong>
+<strong>SW p-value</strong>
+<strong>Normal?</strong>
+net_normal</p>
 <p>16.44</p>
 <p>8.36</p>
 <p>+0.112</p>
@@ -188,21 +254,21 @@
 <p>−0.196</p>
 <p>0.9264</p>
 <p>YES</p>
-<h2 id="52-interpretation"><strong>5.2 Interpretation</strong></h2>
+<h3 id="52-interpretation">5.2 Interpretation</h3>
 <p>Six classes (net_scan, log_*, bin_malware, bin_benign) have Gaussian LLR distributions; four do not (net_normal, net_ddos, net_exfil, net_c2). The distinguishing feature is negative excess kurtosis, ranging from -1.88 (net_ddos) to -1.24 (net_c2). Negative excess kurtosis indicates a platykurtic distribution — lighter tails than Gaussian, and a flatter peak.</p>
-<p>__Mechanism. __Platykurtic LLR distributions arise when the within-class feature variation is bounded. The net_ddos generator, for instance, always produces 'UDP flood ...' with a numerical PPS field — the LLR is anchored by the consistent prefix, but the PPS value introduces bounded numerical variation. This creates a uniform-like distribution on LLR, which is platykurtic. The log_* classes have extremely low LLR variance (std 0.13–0.30) and Gaussian distributions because their features (timestamp structure, prefix keyword) are highly regular across samples.</p>
-<p>__Pooled LLR. __The pooled distribution across all true-class LLRs (n=500) has μ=45.71, σ=17.91, skewness=+0.63, excess kurtosis=+1.35. KS test vs Normal: D=0.155, p&lt;10⁻¹⁰. The pooled distribution is significantly non-Gaussian due to the multi-modal structure (10 class-specific LLR distributions with very different means being pooled). This is expected and not a defect.</p>
-<h1 id="6-concentration-inequalities-and-tail-analysis"><strong>6. Concentration Inequalities and Tail Analysis</strong></h1>
+<p><strong>Mechanism.</strong> Platykurtic LLR distributions arise when the within-class feature variation is bounded. The net_ddos generator, for instance, always produces 'UDP flood ...' with a numerical PPS field — the LLR is anchored by the consistent prefix, but the PPS value introduces bounded numerical variation. This creates a uniform-like distribution on LLR, which is platykurtic. The log_* classes have extremely low LLR variance (std 0.13–0.30) and Gaussian distributions because their features (timestamp structure, prefix keyword) are highly regular across samples.</p>
+<p><strong>Pooled LLR.</strong> The pooled distribution across all true-class LLRs (n=500) has μ=45.71, σ=17.91, skewness=+0.63, excess kurtosis=+1.35. KS test vs Normal: D=0.155, p&lt;10⁻¹⁰. The pooled distribution is significantly non-Gaussian due to the multi-modal structure (10 class-specific LLR distributions with very different means being pooled). This is expected and not a defect.</p>
+<h2 id="6-concentration-inequalities-and-tail-analysis">6. Concentration Inequalities and Tail Analysis</h2>
 <p>We compare the empirical tail probabilities of the pooled true-class LLR distribution against three theoretical bounds: Chebyshev's inequality [10], the sub-Gaussian bound [11], and the Gaussian quantile:</p>
 <p>Chebyshev:  P(|X - μ| &gt; tσ) ≤ 1/t²</p>
 <p>sub-Gauss:  P(|X - μ| &gt; tσ) ≤ 2 exp(-t²/2)    (if X is sub-Gaussian)</p>
 <p>Gaussian:   P(X &lt; μ - tσ) = Φ(-t)</p>
-<p><strong>t</strong></p>
-<p><strong>Chebyshev</strong></p>
-<p><strong>sub-Gaussian</strong></p>
-<p><strong>Gaussian</strong></p>
-<p><strong>Empirical</strong></p>
-<p>1.0</p>
+<p><strong>t</strong>
+<strong>Chebyshev</strong>
+<strong>sub-Gaussian</strong>
+<strong>Gaussian</strong>
+<strong>Empirical</strong>
+1.0</p>
 <p>1.000000</p>
 <p>1.000000</p>
 <p>0.158655</p>
@@ -229,13 +295,13 @@
 <p>0.000000</p>
 <p>The empirical tails are lighter than Gaussian beyond t = 2.0, consistent with the negative excess kurtosis identified in Section 5. At t = 2.5 and t = 3.0, zero samples fall below the lower tail threshold — in a sample of 500, this is consistent with probability &lt; 0.002.</p>
 <p>The empirical tail at t = 1.0 (9.4%) is lighter than the Gaussian prediction (15.9%). This is the signature of the platykurtic classes dominating the tails: the net_ddos and net_exfil distributions, which are most platykurtic, have few samples far from their class means. The LLR distribution is more concentrated than Gaussian in the lower tail, which is beneficial for classification — lower-tail LLR events correspond to weak evidence for the true class, and their rarity means weak-evidence misclassification is suppressed.</p>
-<h1 id="7-effect-size-analysis-cohens-d"><strong>7. Effect Size Analysis: Cohen's d</strong></h1>
+<h2 id="7-effect-size-analysis-cohens-d">7. Effect Size Analysis: Cohen's d</h2>
 <p>Cohen's d [12] is a standardised effect size measuring the separation between two distributions in units of the pooled standard deviation: <em>d = |μ₁ - μ₂| / σ_pooled</em>. It is sample-size independent, making it a pure measure of discriminability.</p>
 <p>We computed d between the true-class LLR distribution and each off-class LLR distribution (for the same test samples), covering all K(K-1) = 90 ordered pairs:</p>
-<p><strong>Interpretation</strong></p>
-<p><strong>d range</strong></p>
-<p><strong>CyphaDIF pairs</strong></p>
-<p>Negligible</p>
+<p><strong>Interpretation</strong>
+<strong>d range</strong>
+<strong>CyphaDIF pairs</strong>
+Negligible</p>
 <p>&lt; 0.2</p>
 <p>0/90 (0%)</p>
 <p>Small</p>
@@ -252,15 +318,14 @@
 <p>2.0</p>
 </blockquote>
 <p>90/90 (100%)</p>
-<p>__Mean Cohen's d: 142.5. __This is an exceptional effect size by any standard. Cohen's original conventions [12] defined 'large' as d = 0.8; CyphaDIF's minimum pairwise d of 2.39 (bin_benign vs bin_malware) is three times the 'large' threshold. The mean d of 142.5 is driven by class pairs with very different LLR means (e.g. net_normal mean=16.44 vs bin_malware mean=77.72) and low variances.</p>
-<p>__The hardest pair: bin_benign vs bin_malware, d = 2.39. __Both binary classes are generated with random payloads after a 4-byte magic header (0x4D5A for malware, 0x7F454C46 for benign). The random payload means that beyond the header, both distributions overlap substantially. The classifier separates them via the first 4 bytes — any consistent parsing of the header into structural features would achieve this. The d = 2.39 confirms the separation is real and large despite the random payload overlap.</p>
-<h1 id="8-roc-auc-analysis"><strong>8. ROC-AUC Analysis</strong></h1>
-<h2 id="81-one-vs-rest-auc"><strong>8.1 One-vs-Rest AUC</strong></h2>
+<p><strong>Mean Cohen's d: 142.5.</strong> This is an exceptional effect size by any standard. Cohen's original conventions [12] defined 'large' as d = 0.8; CyphaDIF's minimum pairwise d of 2.39 (bin_benign vs bin_malware) is three times the 'large' threshold. The mean d of 142.5 is driven by class pairs with very different LLR means (e.g. net_normal mean=16.44 vs bin_malware mean=77.72) and low variances.<strong> The hardest pair: bin_benign vs bin_malware, d = 2.39.</strong> Both binary classes are generated with random payloads after a 4-byte magic header (0x4D5A for malware, 0x7F454C46 for benign). The random payload means that beyond the header, both distributions overlap substantially. The classifier separates them via the first 4 bytes — any consistent parsing of the header into structural features would achieve this. The d = 2.39 confirms the separation is real and large despite the random payload overlap.</p>
+<h2 id="8-roc-auc-analysis">8. ROC-AUC Analysis</h2>
+<h3 id="81-one-vs-rest-auc">8.1 One-vs-Rest AUC</h3>
 <p>The Area Under the ROC Curve (AUC) [13] measures the probability that the classifier ranks a positive instance above a random negative one. AUC = 1.0 indicates perfect ranking; AUC = 0.5 is chance. We compute one-vs-rest AUC for each class using the true-class LLR as the ranking score:</p>
-<p><strong>Class</strong></p>
-<p><strong>AUC</strong></p>
-<p><strong>Difficulty</strong></p>
-<p>bin_benign</p>
+<p><strong>Class</strong>
+<strong>AUC</strong>
+<strong>Difficulty</strong>
+bin_benign</p>
 <p>0.972400</p>
 <p>← lowest (hardest to rank)</p>
 <p>bin_malware</p>
@@ -284,17 +349,16 @@
 <p>Macro AUC</p>
 <p>0.995187</p>
 <p>Outstanding</p>
-<h2 id="82-interpretation"><strong>8.2 Interpretation</strong></h2>
-<p>__Macro AUC 0.9952. __The macro AUC is 0.9952, placing the classifier in the 'outstanding' range [14]. Every class has AUC &gt; 0.97, meaning the LLR ranking almost perfectly separates each class from the nine others.</p>
-<p>__bin_benign AUC = 0.972 vs all others at 0.998. __The bin_benign AUC gap of 0.025 is consistent with the d = 2.39 finding — this is the hardest class pair, and the AUC captures the same underlying discriminability. The AUC of 0.972 is still exceptional in absolute terms; it means that in 97.2% of random (bin_benign, non-bin_benign) pairs, the LLR correctly ranks the bin_benign sample higher. The remaining 2.8% of pairs arise when the random payload in a bin_benign sample happens to more closely resemble the malware header region than the ELF header.</p>
-<h1 id="9-learning-curve-and-sample-complexity"><strong>9. Learning Curve and Sample Complexity</strong></h1>
-<h2 id="91-empirical-learning-curve"><strong>9.1 Empirical Learning Curve</strong></h2>
+<h3 id="82-interpretation">8.2 Interpretation</h3>
+<p><strong>Macro AUC 0.9952.</strong> The macro AUC is 0.9952, placing the classifier in the 'outstanding' range [14]. Every class has AUC &gt; 0.97, meaning the LLR ranking almost perfectly separates each class from the nine others.<strong> bin_benign AUC = 0.972 vs all others at 0.998.</strong> The bin_benign AUC gap of 0.025 is consistent with the d = 2.39 finding — this is the hardest class pair, and the AUC captures the same underlying discriminability. The AUC of 0.972 is still exceptional in absolute terms; it means that in 97.2% of random (bin_benign, non-bin_benign) pairs, the LLR correctly ranks the bin_benign sample higher. The remaining 2.8% of pairs arise when the random payload in a bin_benign sample happens to more closely resemble the malware header region than the ELF header.</p>
+<h2 id="9-learning-curve-and-sample-complexity">9. Learning Curve and Sample Complexity</h2>
+<h3 id="91-empirical-learning-curve">9.1 Empirical Learning Curve</h3>
 <p>We trained CyphaDIF on n ∈ {1, 2, 3, 5, 8, 12, 18, 25, 40, 60, 100} samples per class (4 random seeds each) and evaluated macro accuracy on a fresh 150-sample test set. The learning curve:</p>
-<p><strong>n/class</strong></p>
-<p><strong>Mean acc</strong></p>
-<p><strong>Std</strong></p>
-<p><strong>Model fit</strong></p>
-<p>1</p>
+<p><strong>n/class</strong>
+<strong>Mean acc</strong>
+<strong>Std</strong>
+<strong>Model fit</strong>
+1</p>
 <p>0.8817</p>
 <p>0.0237</p>
 <p>0.8288</p>
@@ -326,13 +390,13 @@
 <p>0.9600</p>
 <p>0.0356</p>
 <p>0.9315</p>
-<h2 id="92-fitted-model-and-sample-complexity"><strong>9.2 Fitted Model and Sample Complexity</strong></h2>
+<h3 id="92-fitted-model-and-sample-complexity">9.2 Fitted Model and Sample Complexity</h3>
 <p>We fit the parametric model from Mukherjee et al. [15]:</p>
 <p>E[acc](n) = 1 - A·exp(-B·n)  ≈  1 - 0.173·exp(-0.0092·n)</p>
-<p><strong>Target accuracy</strong></p>
-<p><strong>Samples/class required</strong></p>
-<p><strong>Total samples</strong></p>
-<p>95%</p>
+<p><strong>Target accuracy</strong>
+<strong>Samples/class required</strong>
+<strong>Total samples</strong>
+95%</p>
 <p>135</p>
 <p>1,350</p>
 <p>99%</p>
@@ -341,15 +405,15 @@
 <p>99.9%</p>
 <p>558</p>
 <p>5,580</p>
-<h2 id="93-the-n12-variance-anomaly"><strong>9.3 The n=12 Variance Anomaly</strong></h2>
-<p>__High variance at n = 12, std = 0.303. __This is a striking anomaly — the standard deviation at n = 12 (0.303) is six times that at n = 25 (0.0255). Investigation reveals a phase transition: at 12 samples per class, the classifier sometimes fails to see all structure variants in low-entropy classes (particularly log_* classes where the template is very regular), causing occasional catastrophic miss-rates on those classes in certain seeds. Below ~10 samples, the classifier has enough regularity in each sample to build a rough centroid. Above ~15 samples, it has enough diversity to learn the variation. At 10-14 samples, it is in a regime where the centroid is sensitive to whether the random draw happened to include an atypical sample — a phase-transition in the information landscape.</p>
-<h1 id="10-bias-variance-decomposition"><strong>10. Bias-Variance Decomposition</strong></h1>
+<h3 id="93-the-n12-variance-anomaly">9.3 The n=12 Variance Anomaly</h3>
+<p><strong>High variance at n = 12, std = 0.303.</strong> This is a striking anomaly — the standard deviation at n = 12 (0.303) is six times that at n = 25 (0.0255). Investigation reveals a phase transition: at 12 samples per class, the classifier sometimes fails to see all structure variants in low-entropy classes (particularly log_* classes where the template is very regular), causing occasional catastrophic miss-rates on those classes in certain seeds. Below ~10 samples, the classifier has enough regularity in each sample to build a rough centroid. Above ~15 samples, it has enough diversity to learn the variation. At 10-14 samples, it is in a regime where the centroid is sensitive to whether the random draw happened to include an atypical sample — a phase-transition in the information landscape.</p>
+<h2 id="10-bias-variance-decomposition">10. Bias-Variance Decomposition</h2>
 <p>The bias-variance decomposition [16] partitions expected error into bias² (systematic error from model assumptions) and variance (sensitivity to training data). For a 0-1 loss classifier, the decomposition follows Domingos [17]: <em>E[err] ≈ bias² + variance</em></p>
 <p>We trained 20 models on independent 50-samples/class datasets and evaluated on 150 shared test points:</p>
-<p><strong>Component</strong></p>
-<p><strong>Value</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>Bias²</p>
+<p><strong>Component</strong>
+<strong>Value</strong>
+<strong>Interpretation</strong>
+Bias²</p>
 <p>0.0161</p>
 <p>Systematic error from model assumptions</p>
 <p>Variance</p>
@@ -364,13 +428,12 @@
 <p>Variance fraction</p>
 <p>84.5%</p>
 <p>Reducible by more data</p>
-<p>__Variance-dominated regime. __At 50 samples/class, 84.5% of the error is variance — reducible by adding more training data. This is consistent with the learning curve: at 50 samples, we are on the steep part of the learning curve (fitted model predicts accuracy ~0.91 at n=50), far from the asymptote. The bias² of 0.0161 represents the irreducible error from the model's Gaussian assumption applied to non-Gaussian data classes (particularly the platykurtic network classes).</p>
-<p>__Implication. __In a deployment context where training data is cheap to collect, variance should be the priority target — more samples per class directly reduces the dominant error component. The bias component is addressable only through architectural changes (e.g. non-Gaussian class models, mixture models, or kernel density estimation in place of the diagonal Gaussian world prior).</p>
-<h1 id="11-permutation-test-for-class-separability"><strong>11. Permutation Test for Class Separability</strong></h1>
+<p><strong>Variance-dominated regime.</strong> At 50 samples/class, 84.5% of the error is variance — reducible by adding more training data. This is consistent with the learning curve: at 50 samples, we are on the steep part of the learning curve (fitted model predicts accuracy ~0.91 at n=50), far from the asymptote. The bias² of 0.0161 represents the irreducible error from the model's Gaussian assumption applied to non-Gaussian data classes (particularly the platykurtic network classes).<strong> Implication.</strong> In a deployment context where training data is cheap to collect, variance should be the priority target — more samples per class directly reduces the dominant error component. The bias component is addressable only through architectural changes (e.g. non-Gaussian class models, mixture models, or kernel density estimation in place of the diagonal Gaussian world prior).</p>
+<h2 id="11-permutation-test-for-class-separability">11. Permutation Test for Class Separability</h2>
 <p>The permutation test [18] tests the null hypothesis H₀: class labels are exchangeable (the classifier is no better than chance). We permute the true labels of the 500 test samples 2,000 times, computing macro accuracy under each permutation.</p>
-<p><strong>Statistic</strong></p>
-<p><strong>Value</strong></p>
-<p>Observed macro accuracy</p>
+<p><strong>Statistic</strong>
+<strong>Value</strong>
+Observed macro accuracy</p>
 <p>1.000000</p>
 <p>Null distribution mean</p>
 <p>0.099746</p>
@@ -382,16 +445,16 @@
 <p>0.000000 (&lt; 1/2000)</p>
 <p>Z-score</p>
 <p>68.06σ</p>
-<p>__z = 68σ above the permutation null. __No permutation of 2,000 achieved macro accuracy anywhere near 1.0. The maximum permuted accuracy was 0.148, consistent with the 0.100 chance level. The z-score of 68.06 is an extremely strong rejection of H₀. For reference, a z-score of 5 is considered 'discovery-level' significance in particle physics [19]. The class structure captured by CyphaDIF is indisputably real.</p>
+<p><strong>z = 68σ above the permutation null.</strong> No permutation of 2,000 achieved macro accuracy anywhere near 1.0. The maximum permuted accuracy was 0.148, consistent with the 0.100 chance level. The z-score of 68.06 is an extremely strong rejection of H₀. For reference, a z-score of 5 is considered 'discovery-level' significance in particle physics [19]. The class structure captured by CyphaDIF is indisputably real.</p>
 <p>The null mean of 0.0997 ≈ 1/K = 0.100 is the expected accuracy under random labelling with balanced classes, confirming the permutation null is correctly calibrated.</p>
-<h1 id="12-concept-drift-sensitivity"><strong>12. Concept Drift Sensitivity</strong></h1>
-<h2 id="121-additive-gaussian-drift"><strong>12.1 Additive Gaussian Drift</strong></h2>
+<h2 id="12-concept-drift-sensitivity">12. Concept Drift Sensitivity</h2>
+<h3 id="121-additive-gaussian-drift">12.1 Additive Gaussian Drift</h3>
 <p>We simulate concept drift by adding isotropic Gaussian noise ε ~ N(0, σ²I) to the parsed feature vector f before encoding. This represents a uniform degradation of all structural features simultaneously — a worst-case drift scenario:</p>
-<p><strong>Drift σ</strong></p>
-<p><strong>Accuracy</strong></p>
-<p><strong>Mean confidence</strong></p>
-<p><strong>Status</strong></p>
-<p>0.000</p>
+<p><strong>Drift σ</strong>
+<strong>Accuracy</strong>
+<strong>Mean confidence</strong>
+<strong>Status</strong>
+0.000</p>
 <p>1.0000</p>
 <p>0.8124</p>
 <p>Nominal</p>
@@ -419,17 +482,17 @@
 <p>0.2640</p>
 <p>0.9646</p>
 <p>Near-random</p>
-<h2 id="122-drift-profile-analysis"><strong>12.2 Drift Profile Analysis</strong></h2>
-<p>__Threshold at σ = 0.5. __Accuracy remains ≥0.98 for σ ≤ 0.1, then drops to 0.976 at σ = 0.2 and 0.724 at σ = 0.5. The transition from 0.2 to 0.5 is steep — this is the region where the noise magnitude is comparable to the within-class feature variance for the tightest classes (log_* classes have LLR std 0.13–0.30, meaning their LLR is disrupted as soon as the noise standard deviation exceeds ~0.3 in feature space).</p>
-<p>__Confidence inversion at high drift. __The mean confidence increases from 0.78 at σ = 0.5 to 0.96 at σ = 2.0, while accuracy falls to 0.26. This is confidence inversion: at very high drift, the noisy feature vector lies far from all class centroids, and the softmax output concentrates on whichever class is closest — producing high confidence for an incorrect prediction. This is the classic overconfidence failure mode under distributional shift [20]. Operationally, an OOD detector monitoring world-prior distance would catch this regime before it manifests in downstream decisions.</p>
-<h2 id="123-drift-robust-classes"><strong>12.3 Drift-Robust Classes</strong></h2>
+<h3 id="122-drift-profile-analysis">12.2 Drift Profile Analysis</h3>
+<p><strong>Threshold at σ = 0.5.</strong> Accuracy remains ≥0.98 for σ ≤ 0.1, then drops to 0.976 at σ = 0.2 and 0.724 at σ = 0.5. The transition from 0.2 to 0.5 is steep — this is the region where the noise magnitude is comparable to the within-class feature variance for the tightest classes (log_* classes have LLR std 0.13–0.30, meaning their LLR is disrupted as soon as the noise standard deviation exceeds ~0.3 in feature space).</p>
+<p><strong>Confidence inversion at high drift.</strong> The mean confidence increases from 0.78 at σ = 0.5 to 0.96 at σ = 2.0, while accuracy falls to 0.26. This is confidence inversion: at very high drift, the noisy feature vector lies far from all class centroids, and the softmax output concentrates on whichever class is closest — producing high confidence for an incorrect prediction. This is the classic overconfidence failure mode under distributional shift [20]. Operationally, an OOD detector monitoring world-prior distance would catch this regime before it manifests in downstream decisions.</p>
+<h3 id="123-drift-robust-classes">12.3 Drift-Robust Classes</h3>
 <p>Net-family classes (net_scan, net_ddos, net_c2) are most robust to drift because they have high LLR means (38.6–61.2) relative to the noise — the signal-to-noise ratio remains adequate at σ = 0.5. Log-family classes are most fragile due to their low LLR variance (0.13–0.30 std), which makes even small feature perturbations cross the decision boundary.</p>
-<h1 id="13-inter-model-reliability"><strong>13. Inter-Model Reliability</strong></h1>
+<h2 id="13-inter-model-reliability">13. Inter-Model Reliability</h2>
 <p>We treat 20 independently-trained models (each on 50 samples/class) as 'raters' classifying 150 shared test items. Inter-rater reliability is measured via Fleiss' κ [21], which corrects for chance agreement:<em>  κ = (p₀ - p_e) / (1 - p_e)</em></p>
-<p><strong>Statistic</strong></p>
-<p><strong>Value</strong></p>
-<p><strong>Interpretation</strong></p>
-<p>Observed agreement p₀</p>
+<p><strong>Statistic</strong>
+<strong>Value</strong>
+<strong>Interpretation</strong>
+Observed agreement p₀</p>
 <p>0.9082</p>
 <p>90.8% of model pairs agree on any given item</p>
 <p>Expected agreement p_e</p>
@@ -438,27 +501,26 @@
 <p>Fleiss κ</p>
 <p>0.8979</p>
 <p>Almost perfect agreement [22]</p>
-<p>__κ = 0.898: almost perfect. __Landis and Koch [22] classify κ &gt; 0.80 as 'almost perfect'. The 20 independently-trained models agree with each other on 90.8% of test items — 80.8 percentage points above chance agreement. This high reliability means the learning algorithm consistently converges to the same classification function regardless of the random training sample (within the 50-sample regime). The 9.2% disagreement rate corresponds to test items near decision boundaries, primarily in the n=50 variance-dominated regime identified in Section 10.</p>
-<h1 id="14-rademacher-complexity-and-generalisation-bounds"><strong>14. Rademacher Complexity and Generalisation Bounds</strong></h1>
-<h2 id="141-rademacher-complexity"><strong>14.1 Rademacher Complexity</strong></h2>
+<p><strong>κ = 0.898: almost perfect.</strong> Landis and Koch [22] classify κ &gt; 0.80 as 'almost perfect'. The 20 independently-trained models agree with each other on 90.8% of test items — 80.8 percentage points above chance agreement. This high reliability means the learning algorithm consistently converges to the same classification function regardless of the random training sample (within the 50-sample regime). The 9.2% disagreement rate corresponds to test items near decision boundaries, primarily in the n=50 variance-dominated regime identified in Section 10.</p>
+<h2 id="14-rademacher-complexity-and-generalisation-bounds">14. Rademacher Complexity and Generalisation Bounds</h2>
+<h3 id="141-rademacher-complexity">14.1 Rademacher Complexity</h3>
 <p>Empirical Rademacher complexity [23,24] R̂_n provides a data-dependent bound on generalisation error. For function class F and n training points, it measures how well hypotheses in F can fit random sign patterns (σ_1, ..., σ_n) ∈ {√1, +1}ⁿ:</p>
 <p>Ĉ_n(F) = E_σ [ sup_{f∈F} (1/n) Σ_i σ_i f(x_i) ]</p>
 <p>We estimate R̂_n via 2,000 random sign draws on the training latent representations, using the LLR weight vectors W_k = μ_k/v₀ as the hypothesis class:</p>
-<p><strong>Result</strong></p>
-<p>Empirical R̂_n = 10.987. Generalisation bound (δ=0.05): training error + 22.013. The bound is loose by approximately 22 units of error above the observed training error.</p>
-<h2 id="142-why-the-bound-is-loose"><strong>14.2 Why the Bound is Loose</strong></h2>
+<p><strong>Result</strong>
+Empirical R̂_n = 10.987. Generalisation bound (δ=0.05): training error + 22.013. The bound is loose by approximately 22 units of error above the observed training error.</p>
+<h3 id="142-why-the-bound-is-loose">14.2 Why the Bound is Loose</h3>
 <p>The Rademacher bound is a worst-case complexity measure for the hypothesis class. Its looseness here has two sources:</p>
 <ul>
-<li>__The hypothesis class is over-specified. __The W_k vectors span the full centroid space, which includes all possible configurations of 10 class means in 128 dimensions. The actual solution uses only 10 specific W_k vectors. The Rademacher complexity of the realised classifier is far smaller than the complexity of the class from which it is selected.</li>
-<li>__The norm bound is loose. __The sup over f∈F includes all linear classifiers with centroid-norm weights, not just the specific W_k learned. Sharper bounds would use the margin-normalised Rademacher complexity [23], which accounts for the large LLR margins observed (Cohen's d ≥ 2.39 for the hardest pair).</li>
+<li><strong>The hypothesis class is over-specified.</strong> The W_k vectors span the full centroid space, which includes all possible configurations of 10 class means in 128 dimensions. The actual solution uses only 10 specific W_k vectors. The Rademacher complexity of the realised classifier is far smaller than the complexity of the class from which it is selected.</li>
+<li><strong>The norm bound is loose.</strong> The sup over f∈F includes all linear classifiers with centroid-norm weights, not just the specific W_k learned. Sharper bounds would use the margin-normalised Rademacher complexity [23], which accounts for the large LLR margins observed (Cohen's d ≥ 2.39 for the hardest pair).<strong> Practical generalisation.</strong> Despite the loose theoretical bound, empirical generalisation is strong. The 20-model inter-rater analysis (Section 13) provides a direct empirical estimate: models trained on 50 samples/class agree on 90.8% of unseen items, and the full-data model achieves 1.0000 on 500 unseen items. The learning curve (Section 9) provides additional empirical evidence of the learning trajectory. These empirical characterisations are more informative than the Rademacher bound for this setting.</li>
 </ul>
-<p>__Practical generalisation. __Despite the loose theoretical bound, empirical generalisation is strong. The 20-model inter-rater analysis (Section 13) provides a direct empirical estimate: models trained on 50 samples/class agree on 90.8% of unseen items, and the full-data model achieves 1.0000 on 500 unseen items. The learning curve (Section 9) provides additional empirical evidence of the learning trajectory. These empirical characterisations are more informative than the Rademacher bound for this setting.</p>
-<h1 id="15-hypothesis-tests-on-llr-separation"><strong>15. Hypothesis Tests on LLR Separation</strong></h1>
+<h2 id="15-hypothesis-tests-on-llr-separation">15. Hypothesis Tests on LLR Separation</h2>
 <p>We test whether each pair of classes has significantly different LLR distributions, using the Mann-Whitney U test [25] and the two-sample Kolmogorov-Smirnov test [26], with Bonferroni correction for 45 pairs (α_corrected = 0.05/45 = 0.00111):</p>
-<p><strong>Test</strong></p>
-<p><strong>Null hypothesis</strong></p>
-<p><strong>Rejected pairs (Bonferroni)</strong></p>
-<p>Mann-Whitney U</p>
+<p><strong>Test</strong>
+<strong>Null hypothesis</strong>
+<strong>Rejected pairs (Bonferroni)</strong>
+Mann-Whitney U</p>
 <p>Identical LLR location</p>
 <p>45/45 (100%)</p>
 <p>Kolmogorov-Smirnov</p>
@@ -467,16 +529,16 @@
 <p>All 45 class pairs are statistically significantly separated after Bonferroni correction. This is the strongest possible result: even after applying the most conservative multiple-testing correction, every pairwise comparison rejects the null of no difference.</p>
 <p>The two pairs with the smallest effect sizes exhibit interesting behaviour under the tests:</p>
 <ul>
-<li>__net_ddos ↔ net_c2 (Mann-Whitney p = 0.087). __This pair has U p = 0.087, which does not survive Bonferroni but would survive an uncorrected test. The KS test (p = 0.012) provides stronger evidence. Their LLR distributions partially overlap (net_ddos mean 57.72, net_c2 mean 61.23, with net_c2 std 7.71), but classification remains perfect because the decision boundary uses all LLR values simultaneously, not just the true-class LLR.</li>
-<li>__log_warn ↔ log_error (Mann-Whitney p = 0.213). __This is the weakest pairwise separation by Mann-Whitney, yet KS D = 0.38 (p = 0.001) is significant. The Mann-Whitney test is less powerful here because the LLR distributions have similar location (35.68 vs 35.76) but different shape — the KS test detects the distributional difference that the rank-based U test misses. The classifier separates these classes by structural features (WARN/ERROR keywords), not by LLR magnitude.</li>
+<li><strong>net_ddos ↔ net_c2 (Mann-Whitney p = 0.087).</strong> This pair has U p = 0.087, which does not survive Bonferroni but would survive an uncorrected test. The KS test (p = 0.012) provides stronger evidence. Their LLR distributions partially overlap (net_ddos mean 57.72, net_c2 mean 61.23, with net_c2 std 7.71), but classification remains perfect because the decision boundary uses all LLR values simultaneously, not just the true-class LLR.</li>
+<li><strong>log_warn ↔ log_error (Mann-Whitney p = 0.213).</strong> This is the weakest pairwise separation by Mann-Whitney, yet KS D = 0.38 (p = 0.001) is significant. The Mann-Whitney test is less powerful here because the LLR distributions have similar location (35.68 vs 35.76) but different shape — the KS test detects the distributional difference that the rank-based U test misses. The classifier separates these classes by structural features (WARN/ERROR keywords), not by LLR magnitude.</li>
 </ul>
-<h1 id="16-synthesis-and-enhancement-directions"><strong>16. Synthesis and Enhancement Directions</strong></h1>
-<h2 id="161-summary-of-findings"><strong>16.1 Summary of Findings</strong></h2>
+<h2 id="16-synthesis-and-enhancement-directions">16. Synthesis and Enhancement Directions</h2>
+<h3 id="161-summary-of-findings">16.1 Summary of Findings</h3>
 <p>The thirteen statistical analyses converge on a coherent picture:</p>
-<p><strong>Analysis</strong></p>
-<p><strong>Key Finding</strong></p>
-<p><strong>Actionable?</strong></p>
-<p>Bootstrap CI</p>
+<p><strong>Analysis</strong>
+<strong>Key Finding</strong>
+<strong>Actionable?</strong>
+Bootstrap CI</p>
 <p>CI=[1.0,1.0], zero SE: accuracy is robust</p>
 <p>No — already at ceiling</p>
 <p>Calibration</p>
@@ -515,19 +577,19 @@
 <p>Hypothesis tests</p>
 <p>45/45 pairs significant after Bonferroni</p>
 <p>No — validates separation</p>
-<h2 id="162-enhancement-direction-1-calibration-via-temperature-scaling"><strong>16.2 Enhancement Direction 1: Calibration via Temperature Scaling</strong></h2>
+<h3 id="162-enhancement-direction-1-calibration-via-temperature-scaling">16.2 Enhancement Direction 1: Calibration via Temperature Scaling</h3>
 <p>The systematic underconfidence (ECE 0.191, all-bins underfilling) is directly attributable to T = 2.5. Post-hoc calibration via Platt scaling [7] or temperature scaling [27] on a validation set would eliminate this without retraining. Temperature scaling finds T* minimising the Negative Log-Likelihood on validation logits: <em>T* = argmin NLL(logits/T, labels)</em>. Preliminary analysis suggests T* ≈ 1.5–1.8 for this classifier, which would reduce ECE from 0.191 to &lt; 0.05 while preserving accuracy.</p>
-<h2 id="163-enhancement-direction-2-non-gaussian-class-models-for-platykurtic-classes"><strong>16.3 Enhancement Direction 2: Non-Gaussian Class Models for Platykurtic Classes</strong></h2>
+<h3 id="163-enhancement-direction-2-non-gaussian-class-models-for-platykurtic-classes">16.3 Enhancement Direction 2: Non-Gaussian Class Models for Platykurtic Classes</h3>
 <p>Four classes (net_normal, net_ddos, net_exfil, net_c2) have platykurtic LLR distributions with excess kurtosis between -1.24 and -1.88. The underlying cause is bounded feature variation — these classes have deterministic structural components (fixed keywords, consistent formats) that constrain the feature range. A bounded-support class model (e.g. Beta distribution in the normalised feature space, or a truncated Gaussian) would better match the empirical distribution, improving calibration and reducing the Brier score.</p>
-<h2 id="164-enhancement-direction-3-warm-up-protocol-for-the-n12-phase-transition"><strong>16.4 Enhancement Direction 3: Warm-Up Protocol for the n=12 Phase Transition</strong></h2>
+<h3 id="164-enhancement-direction-3-warm-up-protocol-for-the-n12-phase-transition">16.4 Enhancement Direction 3: Warm-Up Protocol for the n=12 Phase Transition</h3>
 <p>The learning curve anomaly at n = 12 (std = 0.303) identifies a phase transition in the information landscape. A warm-up protocol with controlled diversity sampling — ensuring the first 15 samples per class span all structural templates — would smooth this transition. Practically: seed the classifier with one sample each from the canonical template variants before online learning begins. This converts the stochastic phase transition into a deterministic convergence path.</p>
-<h2 id="165-enhancement-direction-4-confidence-inversion-detection-for-ood"><strong>16.5 Enhancement Direction 4: Confidence Inversion Detection for OOD</strong></h2>
+<h3 id="165-enhancement-direction-4-confidence-inversion-detection-for-ood">16.5 Enhancement Direction 4: Confidence Inversion Detection for OOD</h3>
 <p>The confidence inversion at high drift (σ &gt; 1.0: accuracy &lt; 0.41 but confidence &gt; 0.89) is a deployment risk. A simple mitigation: monitor the world-prior NLL of incoming samples. At σ = 1.0, the feature vector h is 1σ outside the world prior's support — detectable as an OOD signal before the confidence score is trusted. Adding a world-prior NLL threshold gate to the inference pipeline would catch high-drift inputs before they produce high-confidence incorrect predictions.</p>
-<h1 id="17-conclusion"><strong>17. Conclusion</strong></h1>
+<h2 id="17-conclusion">17. Conclusion</h2>
 <p>Thirteen statistical analyses of CyphaDIF establish a comprehensive performance characterisation. The classifier achieves statistically robust accuracy of 1.0000 (95% CI via Clopper-Pearson: true accuracy ≥ 0.994), with macro AUC 0.9952, Fleiss κ = 0.898, and all 45 class pairs significantly separated after Bonferroni correction.</p>
 <p>The identified weaknesses are all mechanistically understood and addressable: underconfidence from T = 2.5 (temperature calibration), platykurtic LLR distributions from bounded feature variation (non-Gaussian class models), a phase-transition variance spike at n = 12 samples per class (warm-up protocol), and confidence inversion under high drift (world-prior NLL gating). None of these weaknesses affect the classifier's discriminative performance on the standard test distribution.</p>
 <p>The bias-variance analysis confirms the classifier is variance-dominated at 50 samples/class, with the bias component attributable to the Gaussian model applied to platykurtic data. The learning curve sample complexity estimates (135/class for 95%, 309/class for 99%) provide actionable targets for deployment planning. The permutation test at z = 68σ conclusively validates that the class structure the classifier has learned is statistically real and not a sample artefact.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] [CyphaDIF internal technical documentation, 2026. Author withheld for review.]</p>
 <p>[2] Efron, B. (1979). Bootstrap methods: another look at the jackknife. The Annals of Statistics, 7(1), 1-26.</p>
 <p>[3] Efron, B., &amp; Tibshirani, R. J. (1993). An Introduction to the Bootstrap. Chapman &amp; Hall.</p>
@@ -555,6 +617,31 @@
 <p>[25] Mann, H. B., &amp; Whitney, D. R. (1947). On a test of whether one of two random variables is stochastically larger than the other. Annals of Mathematical Statistics, 18(1), 50-60.</p>
 <p>[26] Kolmogorov, A. N. (1933). Sulla determinazione empirica di una legge di distribuzione. Giornale dell'Istituto Italiano degli Attuari, 4, 83-91.</p>
 <p>[27] Guo, C., Pleiss, G., Sun, Y., &amp; Weinberger, K. Q. (2017). On calibration of modern neural networks. ICML 2017, 1321-1330.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

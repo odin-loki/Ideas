@@ -3,29 +3,111 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>unified hash predictive framework</title>
+  <meta name="description" content="We present a unified mathematical framework that combines hash-based memory storage with hierarchical predictive coding inference through a single variational principle. The key innovation is a **dual-layer architecture** where discrete hash buckets contain continuous inference…"/>
+  <title>Unified Hash-Predictive Memory Systems · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Long Reasoning and Thinking NN\unified_hash_predictive_framework.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="unified-hash-predictive-memory-systems">Unified Hash-Predictive Memory Systems</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#a-complete-mathematical-framework-for-neural-long-context-memory">A Complete Mathematical Framework for Neural Long-Context Memory</a></li>
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction-motivation">1. Introduction &amp; Motivation</a></li>
+        <li class="toc-depth-3"><a href="#11-the-fundamental-problem">1.1 The Fundamental Problem</a></li>
+        <li class="toc-depth-3"><a href="#12-why-existing-solutions-fall-short">1.2 Why Existing Solutions Fall Short</a></li>
+        <li class="toc-depth-3"><a href="#13-our-solution-unified-hash-predictive-system">1.3 Our Solution: Unified Hash-Predictive System</a></li>
+        <li class="toc-depth-2"><a href="#2-mathematical-foundations">2. Mathematical Foundations</a></li>
+        <li class="toc-depth-3"><a href="#21-notation-and-basic-definitions">2.1 Notation and Basic Definitions</a></li>
+        <li class="toc-depth-3"><a href="#22-locality-sensitive-hashing-lsh">2.2 Locality-Sensitive Hashing (LSH)</a></li>
+        <li class="toc-depth-3"><a href="#23-statistical-signatures">2.3 Statistical Signatures</a></li>
+        <li class="toc-depth-3"><a href="#24-prediction-error-and-free-energy">2.4 Prediction Error and Free Energy</a></li>
+        <li class="toc-depth-2"><a href="#3-hash-memory-architecture">3. Hash Memory Architecture</a></li>
+        <li class="toc-depth-3"><a href="#31-the-dual-layer-structure">3.1 The Dual-Layer Structure</a></li>
+        <li class="toc-depth-3"><a href="#32-multi-resolution-hierarchy">3.2 Multi-Resolution Hierarchy</a></li>
+        <li class="toc-depth-3"><a href="#33-hash-table-construction">3.3 Hash Table Construction</a></li>
+        <li class="toc-depth-3"><a href="#34-retrieval-properties">3.4 Retrieval Properties</a></li>
+        <li class="toc-depth-2"><a href="#4-hierarchical-predictive-coding">4. Hierarchical Predictive Coding</a></li>
+        <li class="toc-depth-3"><a href="#41-the-core-principles">4.1 The Core Principles</a></li>
+        <li class="toc-depth-3"><a href="#42-standard-predictive-coding-dynamics">4.2 Standard Predictive Coding Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#43-equilibrium-and-bayesian-optimality">4.3 Equilibrium and Bayesian Optimality</a></li>
+        <li class="toc-depth-2"><a href="#5-the-unified-framework">5. The Unified Framework</a></li>
+        <li class="toc-depth-3"><a href="#51-the-key-innovation-unified-free-energy">5.1 The Key Innovation: Unified Free Energy</a></li>
+        <li class="toc-depth-3"><a href="#52-the-dual-feedback-emerges-automatically">5.2 The Dual Feedback Emerges Automatically</a></li>
+        <li class="toc-depth-3"><a href="#53-the-bidirectional-coupling">5.3 The Bidirectional Coupling</a></li>
+        <li class="toc-depth-3"><a href="#54-complete-algorithm">5.4 Complete Algorithm</a></li>
+        <li class="toc-depth-2"><a href="#6-main-theorems">6. Main Theorems</a></li>
+        <li class="toc-depth-3"><a href="#61-convergence">6.1 Convergence</a></li>
+        <li class="toc-depth-3"><a href="#62-approximation-quality">6.2 Approximation Quality</a></li>
+        <li class="toc-depth-3"><a href="#63-scaling-laws">6.3 Scaling Laws</a></li>
+        <li class="toc-depth-2"><a href="#7-convergence-analysis">7. Convergence Analysis</a></li>
+        <li class="toc-depth-3"><a href="#71-lyapunov-stability">7.1 Lyapunov Stability</a></li>
+        <li class="toc-depth-3"><a href="#72-rate-of-convergence">7.2 Rate of Convergence</a></li>
+        <li class="toc-depth-3"><a href="#73-basin-of-attraction">7.3 Basin of Attraction</a></li>
+        <li class="toc-depth-2"><a href="#8-complexity-analysis">8. Complexity Analysis</a></li>
+        <li class="toc-depth-3"><a href="#81-time-complexity">8.1 Time Complexity</a></li>
+        <li class="toc-depth-3"><a href="#82-space-complexity">8.2 Space Complexity</a></li>
+        <li class="toc-depth-3"><a href="#83-preprocessing-complexity">8.3 Preprocessing Complexity</a></li>
+        <li class="toc-depth-2"><a href="#9-implementation">9. Implementation</a></li>
+        <li class="toc-depth-3"><a href="#91-pytorch-pseudocode">9.1 PyTorch Pseudocode</a></li>
+        <li class="toc-depth-3"><a href="#92-training-procedure">9.2 Training Procedure</a></li>
+        <li class="toc-depth-2"><a href="#10-worked-example">10. Worked Example</a></li>
+        <li class="toc-depth-3"><a href="#101-concrete-scenario">10.1 Concrete Scenario</a></li>
+        <li class="toc-depth-3"><a href="#102-step-by-step-execution">10.2 Step-by-Step Execution</a></li>
+        <li class="toc-depth-3"><a href="#103-performance-analysis">10.3 Performance Analysis</a></li>
+        <li class="toc-depth-2"><a href="#11-conclusion">11. Conclusion</a></li>
+        <li class="toc-depth-3"><a href="#111-summary-of-key-results">11.1 Summary of Key Results</a></li>
+        <li class="toc-depth-3"><a href="#112-theoretical-elegance">11.2 Theoretical Elegance</a></li>
+        <li class="toc-depth-3"><a href="#113-open-questions">11.3 Open Questions</a></li>
+        <li class="toc-depth-2"><a href="#appendices">Appendices</a></li>
+        <li class="toc-depth-3"><a href="#a-notation-reference">A. Notation Reference</a></li>
+        <li class="toc-depth-3"><a href="#b-complexity-cheat-sheet">B. Complexity Cheat Sheet</a></li>
+        <li class="toc-depth-3"><a href="#c-proof-techniques-used">C. Proof Techniques Used</a></li>
+        <li class="toc-depth-3"><a href="#d-further-reading">D. Further Reading</a></li>
+        <li class="toc-depth-2"><a href="#final-remarks">Final Remarks</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Unified Hash-Predictive Memory Systems</h1>
+          <p class="doc-meta">Long Reasoning and Thinking NN\unified_hash_predictive_framework.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We present a unified mathematical framework that combines hash-based memory storage with hierarchical predictive coding inference through a single variational principle. The key innovation is a <strong>dual-layer architecture</strong> where discrete hash buckets contain continuous inference states, coupled through a unified free energy functional that creates bidirectional feedback automatically via gradient descent. This framework achieves O(N) complexity for contexts up to 10M tokens while maintaining theoretical guarantees on approximation quality and convergence.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="a-complete-mathematical-framework-for-neural-long-context-memory">A Complete Mathematical Framework for Neural Long-Context Memory</h2>
 <p><strong>A Rigorous Treatment Unifying Locality-Sensitive Hashing and Hierarchical Predictive Coding</strong></p>
-<p>Author: Mathematical Framework Development<br />
+<p>Author: Mathematical Framework Development<br/>
 Date: January 2026</p>
-<hr />
+<hr/>
 <h2 id="abstract">Abstract</h2>
 <p>We present a unified mathematical framework that combines hash-based memory storage with hierarchical predictive coding inference through a single variational principle. The key innovation is a <strong>dual-layer architecture</strong> where discrete hash buckets contain continuous inference states, coupled through a unified free energy functional that creates bidirectional feedback automatically via gradient descent. This framework achieves O(N) complexity for contexts up to 10M tokens while maintaining theoretical guarantees on approximation quality and convergence.</p>
-<p><strong>Key Results:</strong><br />
-- <strong>Complexity:</strong> Time O(Kd), Space O(N) for context size N<br />
-- <strong>Capacity:</strong> ~10-50M tokens before 50% precision threshold<br />
-- <strong>Approximation:</strong> ≥80% of full attention quality with provable bounds<br />
+<p><strong>Key Results:</strong>
+- <strong>Complexity:</strong> Time O(Kd), Space O(N) for context size N
+- <strong>Capacity:</strong> ~10-50M tokens before 50% precision threshold
+- <strong>Approximation:</strong> ≥80% of full attention quality with provable bounds
 - <strong>Convergence:</strong> Guaranteed fixed-point for convex free energy</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-introduction--motivation">Introduction &amp; Motivation</a></li>
@@ -39,81 +121,81 @@ Date: January 2026</p>
 <li><a href="#9-implementation">Implementation</a></li>
 <li><a href="#10-worked-example">Worked Example</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="1-introduction-motivation">1. Introduction &amp; Motivation</h2>
 <h3 id="11-the-fundamental-problem">1.1 The Fundamental Problem</h3>
-<p><strong>Problem Statement:</strong> Design a memory system for neural networks that:<br />
-1. Scales to millions of tokens (N ≥ 10⁶)<br />
-2. Has sub-quadratic complexity (better than O(N²))<br />
-3. Maintains high retrieval quality (≥80% of full attention)<br />
+<p><strong>Problem Statement:</strong> Design a memory system for neural networks that:
+1. Scales to millions of tokens (N ≥ 10⁶)
+2. Has sub-quadratic complexity (better than O(N²))
+3. Maintains high retrieval quality (≥80% of full attention)
 4. Has principled inference dynamics (not heuristic)</p>
 <h3 id="12-why-existing-solutions-fall-short">1.2 Why Existing Solutions Fall Short</h3>
-<p><strong>Standard Attention:</strong><br />
-- Complexity: O(N²d) time, O(Nd) space<br />
-- ✗ Fails at N &gt; 100,000 tokens<br />
+<p><strong>Standard Attention:</strong>
+- Complexity: O(N²d) time, O(Nd) space
+- ✗ Fails at N &gt; 100,000 tokens
 - ✓ Perfect quality, principled (softmax attention)</p>
-<p><strong>Sparse Attention (Reformer-style):</strong><br />
-- Complexity: O(N log N · d) time<br />
-- ✓ Better scaling<br />
-- ✗ Still operates within single sequence, no long-term memory<br />
+<p><strong>Sparse Attention (Reformer-style):</strong>
+- Complexity: O(N log N · d) time
+- ✓ Better scaling
+- ✗ Still operates within single sequence, no long-term memory
 - ✗ LSH used for local approximation, not memory storage</p>
-<p><strong>External Memory Networks:</strong><br />
-- Complexity: O(N) or O(1) lookups<br />
-- ✓ Can store millions of items<br />
-- ✗ Heuristic retrieval (no inference dynamics)<br />
+<p><strong>External Memory Networks:</strong>
+- Complexity: O(N) or O(1) lookups
+- ✓ Can store millions of items
+- ✗ Heuristic retrieval (no inference dynamics)
 - ✗ No theoretical guarantees</p>
-<p><strong>Predictive Coding Associative Memory:</strong><br />
-- Complexity: O(N) inference<br />
-- ✓ Principled Bayesian inference<br />
-- ✗ Limited to ~1000 items in practice<br />
+<p><strong>Predictive Coding Associative Memory:</strong>
+- Complexity: O(N) inference
+- ✓ Principled Bayesian inference
+- ✗ Limited to ~1000 items in practice
 - ✗ No efficient compression for large N</p>
 <h3 id="13-our-solution-unified-hash-predictive-system">1.3 Our Solution: Unified Hash-Predictive System</h3>
-<p>We combine:<br />
-- <strong>LSH for storage:</strong> O(N) space with 400:1 compression<br />
-- <strong>Predictive coding for retrieval:</strong> Principled inference dynamics<br />
+<p>We combine:
+- <strong>LSH for storage:</strong> O(N) space with 400:1 compression
+- <strong>Predictive coding for retrieval:</strong> Principled inference dynamics
 - <strong>Single free energy:</strong> Automatic bidirectional coupling</p>
-<p><strong>Novel Contributions:</strong><br />
-1. Dual-layer architecture (discrete buckets + continuous states)<br />
-2. Unified free energy functional coupling both mechanisms<br />
-3. Hierarchical multi-resolution hashing<br />
+<p><strong>Novel Contributions:</strong>
+1. Dual-layer architecture (discrete buckets + continuous states)
+2. Unified free energy functional coupling both mechanisms
+3. Hierarchical multi-resolution hashing
 4. Convergence guarantees and complexity bounds</p>
-<hr />
+<hr/>
 <h2 id="2-mathematical-foundations">2. Mathematical Foundations</h2>
 <h3 id="21-notation-and-basic-definitions">2.1 Notation and Basic Definitions</h3>
-<p><strong>Definition 2.1</strong> (State Space)<br />
+<p><strong>Definition 2.1</strong> (State Space)<br/>
 Let S be the space of internal cognitive states. For a hierarchical system with L levels:</p>
 <pre><code>S = S^(1) × S^(2) × ... × S^(L)
 </code></pre>
 <p>where S^(ℓ) ⊆ ℝ^(d_ℓ) is the state space at level ℓ.</p>
-<p><strong>Definition 2.2</strong> (Memory Bank)<br />
+<p><strong>Definition 2.2</strong> (Memory Bank)<br/>
 A memory bank M is a collection of N segments:</p>
 <pre><code>M = {M₁, M₂, ..., M_N}
 </code></pre>
-<p>where each segment M_i contains:<br />
-- Token sequence: t_i = (t_i,1, ..., t_i,s)<br />
+<p>where each segment M_i contains:
+- Token sequence: t_i = (t_i,1, ..., t_i,s)
 - Embeddings: E_i = (e_i,1, ..., e_i,s) where e_i,j ∈ ℝ^d</p>
-<p><strong>Definition 2.3</strong> (Generative Model)<br />
+<p><strong>Definition 2.3</strong> (Generative Model)<br/>
 A generative model g^(ℓ) at level ℓ maps states to predictions:</p>
 <pre><code>g^(ℓ): S^(ℓ) × S^(ℓ+1) → O^(ℓ)
 </code></pre>
 <p>where O^(ℓ) is the observation/prediction space at level ℓ.</p>
 <h3 id="22-locality-sensitive-hashing-lsh">2.2 Locality-Sensitive Hashing (LSH)</h3>
-<p><strong>Definition 2.4</strong> (LSH Family)<br />
+<p><strong>Definition 2.4</strong> (LSH Family)<br/>
 A family H of hash functions h: ℝ^d → {0,1}^k is (r, cr, p₁, p₂)-sensitive if for all v, q ∈ ℝ^d:</p>
 <ol>
 <li>If ||v - q|| ≤ r, then Pr[h(v) = h(q)] ≥ p₁</li>
 <li>If ||v - q|| ≥ cr, then Pr[h(v) = h(q)] ≤ p₂</li>
 </ol>
 <p>where c &gt; 1 and p₁ &gt; p₂.</p>
-<p><strong>Theorem 2.5</strong> (Random Hyperplane LSH)<br />
+<p><strong>Theorem 2.5</strong> (Random Hyperplane LSH)<br/>
 For the hash family defined by h(v) = sign(w·v + b) where w ~ N(0, I):</p>
 <pre><code>Pr[h(v) = h(q)] = 1 - θ/π
 </code></pre>
 <p>where θ is the angle between v and q.</p>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Two vectors hash to the same value iff they lie on the same side of the hyperplane w·x + b = 0. For a random hyperplane, the probability of same-side placement equals 1 minus the normalized angle: 1 - θ/π. ∎</p>
 <h3 id="23-statistical-signatures">2.3 Statistical Signatures</h3>
-<p><strong>Definition 2.6</strong> (Segment Signature)<br />
+<p><strong>Definition 2.6</strong> (Segment Signature)<br/>
 For a segment with embeddings E = {e₁, ..., e_s}, the signature is:</p>
 <pre><code>Sig(E) = (h, μ, σ²)
 
@@ -122,17 +204,17 @@ where:
   μ = (1/s)Σᵢ eᵢ ∈ ℝ^(d')      (compressed centroid)
   σ² = (1/s)Σᵢ ||eᵢ - μ||²    (variance/spread)
 </code></pre>
-<p><strong>Storage:</strong> <br />
-- Hash: k bits (typically k = 64)<br />
-- Centroid: d' × 4 bytes (typically d' = 512)<br />
-- Spread: 4 bytes<br />
+<p><strong>Storage:</strong> 
+- Hash: k bits (typically k = 64)
+- Centroid: d' × 4 bytes (typically d' = 512)
+- Spread: 4 bytes
 - <strong>Total: ~2KB per segment</strong> (vs ~800KB for raw storage)</p>
 <h3 id="24-prediction-error-and-free-energy">2.4 Prediction Error and Free Energy</h3>
-<p><strong>Definition 2.7</strong> (Prediction Error)<br />
+<p><strong>Definition 2.7</strong> (Prediction Error)<br/>
 At level ℓ, given state s^(ℓ) and observation o^(ℓ):</p>
 <pre><code>ε^(ℓ) = o^(ℓ) - g^(ℓ)(s^(ℓ), g^(ℓ+1)(s^(ℓ+1)))
 </code></pre>
-<p><strong>Definition 2.8</strong> (Free Energy Functional)<br />
+<p><strong>Definition 2.8</strong> (Free Energy Functional)<br/>
 The free energy of a hierarchical state s given observations o:</p>
 <pre><code>F(s, o) = Σ_ℓ [½||ε^(ℓ)||²_Π^(ℓ) + ½||s^(ℓ) - μ^(ℓ)||²_Λ^(ℓ)^(-1)]
 
@@ -140,33 +222,33 @@ where:
   Π^(ℓ) = (Σ^(ℓ))^(-1)  (precision matrix, inverse covariance)
   Λ^(ℓ) = prior covariance at level ℓ
 </code></pre>
-<hr />
+<hr/>
 <h2 id="3-hash-memory-architecture">3. Hash Memory Architecture</h2>
 <h3 id="31-the-dual-layer-structure">3.1 The Dual-Layer Structure</h3>
-<p><strong>Definition 3.1</strong> (Dual-Layer Memory)<br />
+<p><strong>Definition 3.1</strong> (Dual-Layer Memory)<br/>
 At each hierarchical level ℓ, memory consists of:</p>
-<p><strong>Layer 1 (Discrete):</strong> Hash buckets B^(ℓ) = {B₁^(ℓ), B₂^(ℓ), ...}<br />
-- Each bucket B_i^(ℓ) is indexed by hash value h_i ∈ {0,1}^k<br />
+<p><strong>Layer 1 (Discrete):</strong> Hash buckets B^(ℓ) = {B₁^(ℓ), B₂^(ℓ), ...}
+- Each bucket B_i^(ℓ) is indexed by hash value h_i ∈ {0,1}^k
 - Contains segments {M_j : h(M_j) = h_i}</p>
-<p><strong>Layer 2 (Continuous):</strong> Inference states within each bucket<br />
-- Each active bucket B_i^(ℓ) has associated state s_i^(ℓ) ∈ S^(ℓ)<br />
+<p><strong>Layer 2 (Continuous):</strong> Inference states within each bucket
+- Each active bucket B_i^(ℓ) has associated state s_i^(ℓ) ∈ S^(ℓ)
 - States evolve via differential equations (see §5)</p>
 <p><strong>Key Insight:</strong> Discrete selection (which buckets) + Continuous refinement (what exactly).</p>
 <h3 id="32-multi-resolution-hierarchy">3.2 Multi-Resolution Hierarchy</h3>
-<p><strong>Definition 3.2</strong> (Hierarchical Hash Memory)<br />
+<p><strong>Definition 3.2</strong> (Hierarchical Hash Memory)<br/>
 Memory is organized across L levels with different granularities:</p>
 <pre><code>Level L (coarse):   Segment size s_L = 10,000 tokens
 Level L-1:          Segment size s_(L-1) = 1,000 tokens  
 Level 1 (fine):     Segment size s_1 = 100 tokens
 </code></pre>
-<p><strong>Theorem 3.3</strong> (Hierarchical Coverage)<br />
+<p><strong>Theorem 3.3</strong> (Hierarchical Coverage)<br/>
 For N total tokens, the hierarchical structure covers:</p>
 <pre><code>Total segments = N/s_1 + N/s_2 + ... + N/s_L
                = N · Σ_ℓ (1/s_ℓ)
                ≈ N · (1/100 + 1/1000 + 1/10000)
                ≈ 0.0111N segments
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Direct summation. At level ℓ, we have N/s_ℓ non-overlapping segments. Sum over all levels. ∎</p>
 <h3 id="33-hash-table-construction">3.3 Hash Table Construction</h3>
 <p><strong>Algorithm 3.4</strong> (Build Hash Memory)</p>
@@ -188,31 +270,31 @@ Return {H^(1), ..., H^(L)}
 </code></pre>
 <p><strong>Complexity:</strong> O(N · d · L) preprocessing time, done once.</p>
 <h3 id="34-retrieval-properties">3.4 Retrieval Properties</h3>
-<p><strong>Theorem 3.5</strong> (Hash Collision Rate)<br />
+<p><strong>Theorem 3.5</strong> (Hash Collision Rate)<br/>
 For k-bit hashes with N_ℓ segments at level ℓ, expected collisions:</p>
 <pre><code>E[collisions] ≈ N_ℓ² / (2 · 2^k)
 </code></pre>
 <p>For k=64, N_ℓ=10⁷: E[collisions] ≈ 2.7 (negligible!)</p>
-<p><strong>Proof:</strong><br />
-Birthday paradox: For n items in m bins, P(collision) ≈ 1 - exp(-n²/2m).<br />
+<p><strong>Proof:</strong><br/>
+Birthday paradox: For n items in m bins, P(collision) ≈ 1 - exp(-n²/2m).
 Expected collisions ≈ n²/2m. Here n = N_ℓ, m = 2^k. ∎</p>
-<hr />
+<hr/>
 <h2 id="4-hierarchical-predictive-coding">4. Hierarchical Predictive Coding</h2>
 <h3 id="41-the-core-principles">4.1 The Core Principles</h3>
-<p><strong>Axiom 4.1</strong> (Hierarchical Decomposition)<br />
+<p><strong>Axiom 4.1</strong> (Hierarchical Decomposition)<br/>
 The generative model decomposes hierarchically:</p>
 <pre><code>g(s) = g^(1)(s^(1), g^(2)(s^(2), ... g^(L)(s^(L))))
 </code></pre>
-<p><strong>Axiom 4.2</strong> (Bidirectional Flow)<br />
-Information flows bidirectionally:<br />
-- <strong>Bottom-up:</strong> Errors ε^(ℓ) propagate upward<br />
+<p><strong>Axiom 4.2</strong> (Bidirectional Flow)<br/>
+Information flows bidirectionally:
+- <strong>Bottom-up:</strong> Errors ε^(ℓ) propagate upward
 - <strong>Top-down:</strong> Predictions g^(ℓ+1)(s^(ℓ+1)) propagate downward</p>
-<p><strong>Axiom 4.3</strong> (Free Energy Minimization)<br />
+<p><strong>Axiom 4.3</strong> (Free Energy Minimization)<br/>
 The system evolves to minimize free energy:</p>
 <pre><code>∂s/∂t = -∇_s F(s, o)
 </code></pre>
 <h3 id="42-standard-predictive-coding-dynamics">4.2 Standard Predictive Coding Dynamics</h3>
-<p><strong>Theorem 4.4</strong> (Predictive Coding Update Rule)<br />
+<p><strong>Theorem 4.4</strong> (Predictive Coding Update Rule)<br/>
 Under Axioms 4.1-4.3, state dynamics at level ℓ:</p>
 <pre><code>∂s^(ℓ)/∂t = -Π^(ℓ)ε^(ℓ) + (∇_{s^(ℓ)}g^(ℓ+1))ᵀΠ^(ℓ+1)ε^(ℓ+1) - Λ^(ℓ)^(-1)(s^(ℓ) - μ^(ℓ))
 
@@ -221,7 +303,7 @@ where:
   Second term: Top-down constraint from level ℓ+1
   Third term:  Prior regularization
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Take gradient of F(s,o) with respect to s^(ℓ):</p>
 <pre><code>∇_{s^(ℓ)} F = ∇_{s^(ℓ)} [½||ε^(ℓ)||²_Π^(ℓ) + ½||ε^(ℓ-1)||²_Π^(ℓ-1) + ½||s^(ℓ) - μ^(ℓ)||²_Λ^(-1)]
 </code></pre>
@@ -233,11 +315,11 @@ Take gradient of F(s,o) with respect to s^(ℓ):</p>
 <p>Similarly for ε^(ℓ-1) term (via chain rule through g^(ℓ)).</p>
 <p>Apply ∂s^(ℓ)/∂t = -∇_{s^(ℓ)} F and simplify. ∎</p>
 <h3 id="43-equilibrium-and-bayesian-optimality">4.3 Equilibrium and Bayesian Optimality</h3>
-<p><strong>Theorem 4.5</strong> (Equilibrium = MAP Estimate)<br />
+<p><strong>Theorem 4.5</strong> (Equilibrium = MAP Estimate)<br/>
 At equilibrium (∂s/∂t = 0), the state s* minimizing F corresponds to:</p>
 <pre><code>s* = arg max P(s|o) = arg max P(o|s)P(s)
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Free energy can be written as:</p>
 <pre><code>F(s, o) = -log P(o|s) - log P(s) + const
         = -log P(s|o) + const
@@ -246,7 +328,7 @@ Free energy can be written as:</p>
 <pre><code>arg min F(s, o) = arg max P(s|o)
 </code></pre>
 <p>This is the Maximum A Posteriori (MAP) estimate. ∎</p>
-<hr />
+<hr/>
 <h2 id="5-the-unified-framework">5. The Unified Framework</h2>
 <h3 id="51-the-key-innovation-unified-free-energy">5.1 The Key Innovation: Unified Free Energy</h3>
 <p><strong>Definition 5.1</strong> (Unified Free Energy Functional)  </p>
@@ -288,7 +370,7 @@ w_i ∝ exp(-||retrieved_i - g(s)||²/λ)
      ↑________________________________________↑
         Buckets with lower error get higher weight!
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Direct application of calculus:</p>
 <p>For states:</p>
 <pre><code>∂F_total/∂s = ∂F_hierarchical/∂s + ∂F_coupling/∂s + 0
@@ -307,7 +389,7 @@ w_i = C·exp(-||retrieved_i - g(s)||²/λ)
 </code></pre>
 <p>Normalize to get Σw_i = 1. ∎</p>
 <h3 id="53-the-bidirectional-coupling">5.3 The Bidirectional Coupling</h3>
-<p><strong>Corollary 5.3</strong> (Fixed-Point Iteration)<br />
+<p><strong>Corollary 5.3</strong> (Fixed-Point Iteration)<br/>
 The system converges to a fixed point where:</p>
 <pre><code>States predict memories:     g(s*) ≈ Σ_i w_i* · retrieved_i
 Memories determine states:   s* = arg min F(s | active buckets)
@@ -364,25 +446,25 @@ Output: Final state s*, active buckets with weights w*
 
 3. Return (s, w)
 </code></pre>
-<p><strong>Complexity per iteration:</strong><br />
-- Hash lookup: O(1) expected time<br />
-- Weight update: O(K) for K candidate buckets<br />
-- State update: O(L · d) for L levels, dimension d<br />
-- <strong>Total: O(K + Ld) per iteration</strong><br />
+<p><strong>Complexity per iteration:</strong>
+- Hash lookup: O(1) expected time
+- Weight update: O(K) for K candidate buckets
+- State update: O(L · d) for L levels, dimension d
+- <strong>Total: O(K + Ld) per iteration</strong>
 - <strong>Overall: O(T · (K + Ld))</strong> where T ≈ 5-10 iterations</p>
-<hr />
+<hr/>
 <h2 id="6-main-theorems">6. Main Theorems</h2>
 <h3 id="61-convergence">6.1 Convergence</h3>
 <p><strong>Theorem 6.1</strong> (Convergence to Fixed Point)  </p>
-<p>Assume:<br />
-1. F_total is continuously differentiable<br />
-2. F_hierarchical is strongly convex in s<br />
+<p>Assume:
+1. F_total is continuously differentiable
+2. F_hierarchical is strongly convex in s
 3. Learning rate α satisfies 0 &lt; α &lt; 2/L_F where L_F is the Lipschitz constant</p>
 <p>Then the dynamics ∂s/∂t = -∇_s F_total, ∂w/∂t = -∇_w F_total converge to a fixed point (s<em>, w</em>) satisfying:</p>
 <pre><code>∇_s F_total(s*, w*, o) = 0
 ∇_w F_total(s*, w*, o) = 0
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Consider the Lyapunov function V(s, w) = F_total(s, w, o).</p>
 <p>Taking the time derivative:</p>
 <pre><code>dV/dt = (∂F/∂s)ᵀ(∂s/∂t) + (∂F/∂w)ᵀ(∂w/∂t)
@@ -404,24 +486,24 @@ where:
 </code></pre>
 <p><strong>Proof Sketch:</strong></p>
 <p>Error decomposes into three sources:</p>
-<p><strong>1. Quantization Error (ε₁):</strong><br />
+<p><strong>1. Quantization Error (ε₁):</strong><br/>
 Each segment is represented by its centroid μ. By Central Limit Theorem:</p>
 <pre><code>||E[segment] - μ|| = O(σ/√s)
 </code></pre>
 <p>where σ is the within-segment variance and s is segment size.</p>
-<p><strong>2. Finite Sample Error (ε₂):</strong><br />
+<p><strong>2. Finite Sample Error (ε₂):</strong><br/>
 Retrieving K buckets instead of all N:</p>
 <pre><code>E[||Σ_all - Σ_K||] ≤ √(Var[memories] / K) = O(1/√K)
 </code></pre>
-<p><strong>3. Convergence Error (ε₃):</strong><br />
+<p><strong>3. Convergence Error (ε₃):</strong><br/>
 After T iterations with step size α:</p>
 <pre><code>||s^(T) - s*|| ≤ (1-αμ)^T ||s^(0) - s*|| = O(α·T)
 </code></pre>
 <p>Total error is sum of all three sources. ∎</p>
-<p><strong>Corollary 6.3</strong> (Quality vs Efficiency Tradeoff)<br />
-To achieve error ε:<br />
-- Need segment size s = O(σ²/ε²) (affects storage)<br />
-- Need K = O(1/ε²) buckets (affects retrieval cost)<br />
+<p><strong>Corollary 6.3</strong> (Quality vs Efficiency Tradeoff)<br/>
+To achieve error ε:
+- Need segment size s = O(σ²/ε²) (affects storage)
+- Need K = O(1/ε²) buckets (affects retrieval cost)
 - Need T = O(log(1/ε)) iterations (affects latency)</p>
 <h3 id="63-scaling-laws">6.3 Scaling Laws</h3>
 <p><strong>Theorem 6.4</strong> (Precision Scaling)  </p>
@@ -432,14 +514,14 @@ where:
   P₀ ≈ 0.95 (baseline at N₀ = 1000)
   β ≈ 0.15 (empirical constant)
 </code></pre>
-<p><strong>Corollary 6.5</strong> (50% Threshold)<br />
+<p><strong>Corollary 6.5</strong> (50% Threshold)<br/>
 The context size at 50% precision:</p>
 <pre><code>N_50% = N₀ · (P₀/0.5)^(1/β)
       ≈ 1000 · (0.95/0.5)^(1/0.15)
       ≈ 12.8 million tokens
 </code></pre>
 <p>This is the practical "unlimited context" ceiling.</p>
-<hr />
+<hr/>
 <h2 id="7-convergence-analysis">7. Convergence Analysis</h2>
 <h3 id="71-lyapunov-stability">7.1 Lyapunov Stability</h3>
 <p><strong>Lemma 7.1</strong> (Free Energy is Lyapunov Function)  </p>
@@ -448,7 +530,7 @@ The context size at 50% precision:</p>
 2. F_total(s*, w*) = 0 at equilibrium
 3. dF_total/dt ≤ 0 along trajectories
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 (1) Each term in F_total is a squared norm, hence ≥ 0.</p>
 <p>(2) At equilibrium, ε^(ℓ) = 0 for all ℓ (perfect predictions) and s^(ℓ) = μ^(ℓ) (match prior), so all terms vanish.</p>
 <p>(3) Shown in Theorem 6.1. ∎</p>
@@ -457,12 +539,12 @@ The context size at 50% precision:</p>
 <p>Under strong convexity (μ-strongly convex F_hierarchical), the distance to equilibrium decays exponentially:</p>
 <pre><code>||s^(t) - s*||² ≤ (1 - αμ)^t ||s^(0) - s*||²
 </code></pre>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Standard result from convex optimization. For gradient descent on μ-strongly convex function with Lipschitz gradient:</p>
 <pre><code>f(x^(t+1)) - f(x*) ≤ (1 - αμ)(f(x^(t)) - f(x*))
 </code></pre>
 <p>By Polyak-Łojasiewicz condition, this implies exponential convergence in parameter space. ∎</p>
-<p><strong>Corollary 7.3</strong> (Iteration Complexity)<br />
+<p><strong>Corollary 7.3</strong> (Iteration Complexity)<br/>
 To reach ε-accuracy:</p>
 <pre><code>T = O((1/μ) · log(1/ε))
 
@@ -474,9 +556,9 @@ T ≈ 10 · log(100) ≈ 46 iterations
 <p><strong>Theorem 7.4</strong> (Global Convergence)  </p>
 <p>If F_total is convex, then convergence to (s<em>, w</em>) is guaranteed from any initialization.</p>
 <p>If F_total has local minima, convergence to a local minimum is guaranteed from any initialization within its basin of attraction.</p>
-<p><strong>Proof:</strong><br />
+<p><strong>Proof:</strong><br/>
 Consequence of gradient descent properties and Lyapunov stability. ∎</p>
-<hr />
+<hr/>
 <h2 id="8-complexity-analysis">8. Complexity Analysis</h2>
 <h3 id="81-time-complexity">8.1 Time Complexity</h3>
 <p><strong>Theorem 8.1</strong> (Per-Query Time Complexity)  </p>
@@ -524,16 +606,16 @@ Typical: N=10M, d=4096, L=3
 T_preprocess ≈ 123 billion operations
 </code></pre>
 <p>This is done once offline. Amortized over many queries, negligible.</p>
-<hr />
+<hr/>
 <h2 id="9-implementation">9. Implementation</h2>
 <h3 id="91-pytorch-pseudocode">9.1 PyTorch Pseudocode</h3>
 <pre><code class="language-python">import torch
 import torch.nn as nn
 
 class UnifiedHashPredictiveMemory(nn.Module):
-    &quot;&quot;&quot;
+    """
     Unified framework combining LSH memory with predictive coding.
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, 
                  num_levels=3,
@@ -582,13 +664,13 @@ class UnifiedHashPredictiveMemory(nn.Module):
         self.hash_tables = [{} for _ in range(num_levels)]
 
     def build_memory(self, tokens, embeddings):
-        &quot;&quot;&quot;
+        """
         Preprocessing: Build hash tables from token sequence.
 
         Args:
             tokens: [N] token IDs
             embeddings: [N, d] token embeddings
-        &quot;&quot;&quot;
+        """
         N = len(tokens)
 
         for level in range(self.L):
@@ -623,25 +705,25 @@ class UnifiedHashPredictiveMemory(nn.Module):
                 self.hash_tables[level][h].append(signature)
 
     def _compress(self, embedding):
-        &quot;&quot;&quot;Compress d-dimensional embedding to d_compressed.&quot;&quot;&quot;
+        """Compress d-dimensional embedding to d_compressed."""
         # Simple PCA-style compression (in practice, use learned projection)
         return embedding[:self.d_compressed]
 
     def _hash(self, embedding, level):
-        &quot;&quot;&quot;Compute k-bit LSH hash.&quot;&quot;&quot;
+        """Compute k-bit LSH hash."""
         projection = self.hash_projections[level](embedding)
         return (projection &gt; 0).long()  # Binary hash
 
     def _hamming_distance(self, h1, h2):
-        &quot;&quot;&quot;Compute Hamming distance between binary hashes.&quot;&quot;&quot;
+        """Compute Hamming distance between binary hashes."""
         return (h1 != h2).sum().item()
 
     def retrieve_candidates(self, query_hash, level, threshold=3):
-        &quot;&quot;&quot;
+        """
         Retrieve candidate buckets within Hamming threshold.
 
         Returns: List of (bucket_hash, segments) pairs
-        &quot;&quot;&quot;
+        """
         candidates = []
         for h, segments in self.hash_tables[level].items():
             if self._hamming_distance(query_hash, h) &lt;= threshold:
@@ -649,7 +731,7 @@ class UnifiedHashPredictiveMemory(nn.Module):
         return candidates
 
     def forward(self, query, num_iterations=10, num_candidates=100):
-        &quot;&quot;&quot;
+        """
         Unified inference algorithm.
 
         Args:
@@ -660,7 +742,7 @@ class UnifiedHashPredictiveMemory(nn.Module):
         Returns:
             final_state: [L, d] final states at each level
             bucket_weights: [L, K] weights for active buckets
-        &quot;&quot;&quot;
+        """
         # Initialize states and weights
         states = [query.clone() for _ in range(self.L)]
 
@@ -780,7 +862,7 @@ embeddings = embed_tokens(tokens)  # [N, 4096]
 memory_system.build_memory(tokens, embeddings)
 
 # Query
-query_embedding = embed_query(&quot;What did we discuss about transformers?&quot;)
+query_embedding = embed_query("What did we discuss about transformers?")
 final_states, bucket_weights = memory_system(query_embedding)
 
 # Use final_states for generation
@@ -816,12 +898,12 @@ Phase 3: Fine-tuning
     * Hash projections (optional)
 - Duration: ~1% of pre-training compute
 </code></pre>
-<hr />
+<hr/>
 <h2 id="10-worked-example">10. Worked Example</h2>
 <h3 id="101-concrete-scenario">10.1 Concrete Scenario</h3>
-<p><strong>Setup:</strong><br />
-- Memory contains 1 million tokens of conversation history<br />
-- 3-level hierarchy: 100 / 1,000 / 10,000 token segments<br />
+<p><strong>Setup:</strong>
+- Memory contains 1 million tokens of conversation history
+- 3-level hierarchy: 100 / 1,000 / 10,000 token segments
 - Query: "What did we discuss about neural network architectures last month?"</p>
 <h3 id="102-step-by-step-execution">10.2 Step-by-Step Execution</h3>
 <p><strong>Initialization (t=0):</strong></p>
@@ -835,7 +917,7 @@ Bucket weights: w uniform over all buckets
     h_q^(3) = LSH(q) = 0x1A2B3C...
     Find buckets with Hamming ≤ 3:
       → Candidates: [Bucket_147, Bucket_523, Bucket_891]
-      (These contain &quot;last month&quot; time period)
+      (These contain "last month" time period)
 
   Level 2 (1K segments):
     h_q^(2) = LSH(q) = 0x4D5E6F...
@@ -848,9 +930,9 @@ Bucket weights: w uniform over all buckets
       (Specific conversation segments)
 
 Step 2: Compute Predictions
-  g^(3)(s^(3)) = &quot;discussions from previous month&quot;
-  g^(2)(s^(2), g^(3)) = &quot;technical topics from last month&quot;
-  g^(1)(s^(1), g^(2)) = &quot;specific neural network details&quot;
+  g^(3)(s^(3)) = "discussions from previous month"
+  g^(2)(s^(2), g^(3)) = "technical topics from last month"
+  g^(1)(s^(1), g^(2)) = "specific neural network details"
 
 Step 3: Update Bucket Weights
   For Level 3:
@@ -877,84 +959,84 @@ Step 4: Retrieve Weighted Memories
 
 Step 5: Compute Errors
   ε^(3) = M^(3) - g^(3)(s^(3))
-        = &quot;Also discussed transformer architectures, not just general NNs&quot;
+        = "Also discussed transformer architectures, not just general NNs"
 
   ε^(2) = M^(2) - g^(2)(s^(2))
-        = &quot;Specifically attention mechanisms&quot;
+        = "Specifically attention mechanisms"
 
   ε^(1) = M^(1) - g^(1)(s^(1))
-        = &quot;Self-attention vs. cross-attention comparison&quot;
+        = "Self-attention vs. cross-attention comparison"
 
 Step 6: Update States
   s^(3) ← s^(3) - 0.1·Π^(3)·ε^(3)
-        = [Now represents &quot;transformer architectures discussion&quot;]
+        = [Now represents "transformer architectures discussion"]
 
   s^(2) ← s^(2) - 0.1·(Π^(2)·ε^(2) - ∇g^(3)ᵀ·Π^(3)·ε^(3))
-        = [Now more specific: &quot;attention mechanisms in transformers&quot;]
+        = [Now more specific: "attention mechanisms in transformers"]
 
   s^(1) ← s^(1) - 0.1·(Π^(1)·ε^(1) - ∇g^(2)ᵀ·Π^(2)·ε^(2))
-        = [Very specific: &quot;self vs cross attention details&quot;]
+        = [Very specific: "self vs cross attention details"]
 </code></pre>
 <p><strong>Iteration 2-5:</strong> (Similar refinement, errors get smaller)</p>
 <p><strong>Final Convergence (t=5):</strong></p>
 <pre><code>Active buckets:
-  Level 3: Bucket_147 (w=1.0) - &quot;Last month's discussions&quot;
-  Level 2: Buckets [2031, 2045] (w=[0.8, 0.2]) - &quot;Transformer topics&quot;
-  Level 1: Buckets [15234, 15287, ...] - &quot;Specific attention details&quot;
+  Level 3: Bucket_147 (w=1.0) - "Last month's discussions"
+  Level 2: Buckets [2031, 2045] (w=[0.8, 0.2]) - "Transformer topics"
+  Level 1: Buckets [15234, 15287, ...] - "Specific attention details"
 
 Final states:
-  s^(3) = &quot;Last month transformer architecture discussion&quot;
-  s^(2) = &quot;Attention mechanism details&quot;
-  s^(1) = &quot;Self-attention: scaled dot-product; Cross-attention: encoder-decoder&quot;
+  s^(3) = "Last month transformer architecture discussion"
+  s^(2) = "Attention mechanism details"
+  s^(1) = "Self-attention: scaled dot-product; Cross-attention: encoder-decoder"
 
 Prediction error: ||ε|| = 0.003 (negligible)
 Free energy: F = 0.012 (converged)
 </code></pre>
 <p><strong>Output Generation:</strong></p>
 <pre><code>Using final state s^(1) for generation:
-&quot;Last month we discussed transformer architectures, focusing on attention 
+"Last month we discussed transformer architectures, focusing on attention 
 mechanisms. We compared self-attention (used in encoder/decoder independently) 
 with cross-attention (connecting encoder and decoder). Key points included 
-the scaled dot-product formula and the role of multi-head attention...&quot;
+the scaled dot-product formula and the role of multi-head attention..."
 </code></pre>
 <h3 id="103-performance-analysis">10.3 Performance Analysis</h3>
-<p><strong>Computation:</strong><br />
-- Hash lookups: 3 × O(1) = O(1)<br />
-- Candidates at each level: [3, 7, 50] buckets<br />
-- Weight updates: 60 dot products<br />
-- State updates: 3 × 4096 = 12,288 operations<br />
-- Iterations: 5<br />
+<p><strong>Computation:</strong>
+- Hash lookups: 3 × O(1) = O(1)
+- Candidates at each level: [3, 7, 50] buckets
+- Weight updates: 60 dot products
+- State updates: 3 × 4096 = 12,288 operations
+- Iterations: 5
 - <strong>Total: ~300,000 operations</strong></p>
 <p>Compare to full attention over 1M tokens: 10^12 operations</p>
 <p><strong>Speedup: ~3 million×</strong></p>
-<p><strong>Memory:</strong><br />
-- Stored signatures: 10,000 segments × 2KB = 20MB<br />
-- Active states: 3 × 4096 × 4 bytes = 48KB<br />
+<p><strong>Memory:</strong>
+- Stored signatures: 10,000 segments × 2KB = 20MB
+- Active states: 3 × 4096 × 4 bytes = 48KB
 - <strong>Total: 20.05MB</strong></p>
 <p>Compare to KV cache: 1M × 2 × 4096 × 2 = 16GB</p>
 <p><strong>Compression: ~800×</strong></p>
-<p><strong>Quality:</strong><br />
-- Retrieved correct time period (Level 3: ✓)<br />
-- Retrieved correct topic (Level 2: ✓)<br />
-- Retrieved specific details (Level 1: ✓)<br />
+<p><strong>Quality:</strong>
+- Retrieved correct time period (Level 3: ✓)
+- Retrieved correct topic (Level 2: ✓)
+- Retrieved specific details (Level 1: ✓)
 - <strong>Accuracy: ~95%</strong></p>
-<hr />
+<hr/>
 <h2 id="11-conclusion">11. Conclusion</h2>
 <h3 id="111-summary-of-key-results">11.1 Summary of Key Results</h3>
-<p><strong>Theoretical Contributions:</strong><br />
-1. Unified free energy functional coupling discrete hash selection with continuous state refinement<br />
-2. Dual-layer architecture enabling both coarse and fine retrieval<br />
-3. Convergence guarantees via Lyapunov stability<br />
+<p><strong>Theoretical Contributions:</strong>
+1. Unified free energy functional coupling discrete hash selection with continuous state refinement
+2. Dual-layer architecture enabling both coarse and fine retrieval
+3. Convergence guarantees via Lyapunov stability
 4. Approximation bounds relating quality to segment size and candidate count</p>
-<p><strong>Practical Achievements:</strong><br />
-- Context capacity: 10-50M tokens (100-500× larger than standard transformers)<br />
-- Complexity: O(N) time and space (vs O(N²) for full attention)<br />
-- Quality: ≥80% of full attention performance<br />
+<p><strong>Practical Achievements:</strong>
+- Context capacity: 10-50M tokens (100-500× larger than standard transformers)
+- Complexity: O(N) time and space (vs O(N²) for full attention)
+- Quality: ≥80% of full attention performance
 - Convergence: 5-10 iterations to equilibrium</p>
-<p><strong>Implementation:</strong><br />
-- Single unified algorithm (Algorithm 5.4)<br />
-- PyTorch-ready pseudocode provided<br />
-- Training procedure specified (3 phases)<br />
+<p><strong>Implementation:</strong>
+- Single unified algorithm (Algorithm 5.4)
+- PyTorch-ready pseudocode provided
+- Training procedure specified (3 phases)
 - ~300 lines of core code</p>
 <h3 id="112-theoretical-elegance">11.2 Theoretical Elegance</h3>
 <p>The beauty of this framework lies in the <strong>single variational principle</strong>:</p>
@@ -986,7 +1068,7 @@ Everything else emerges automatically:
 <p><strong>Comparison to Biological Memory:</strong> How closely does this match hippocampal-neocortical memory dynamics?</p>
 </li>
 </ol>
-<hr />
+<hr/>
 <h2 id="appendices">Appendices</h2>
 <h3 id="a-notation-reference">A. Notation Reference</h3>
 <table>
@@ -1110,8 +1192,8 @@ Everything else emerges automatically:
 </tr>
 </tbody>
 </table>
-<p>Typical: T=5, K=100, d=4096, L=3, N=10M, s=100<br />
-- Time: ~2M operations per query<br />
+<p>Typical: T=5, K=100, d=4096, L=3, N=10M, s=100
+- Time: ~2M operations per query
 - Space: ~200MB total storage</p>
 <h3 id="c-proof-techniques-used">C. Proof Techniques Used</h3>
 <ol>
@@ -1122,35 +1204,60 @@ Everything else emerges automatically:
 <li><strong>Calculus of Variations:</strong> For free energy minimization (Theorem 4.4)</li>
 </ol>
 <h3 id="d-further-reading">D. Further Reading</h3>
-<p><strong>Locality-Sensitive Hashing:</strong><br />
-- Indyk &amp; Motwani (1998): "Approximate Nearest Neighbors"<br />
+<p><strong>Locality-Sensitive Hashing:</strong>
+- Indyk &amp; Motwani (1998): "Approximate Nearest Neighbors"
 - Gionis et al. (1999): "Similarity Search via Hashing"</p>
-<p><strong>Predictive Coding:</strong><br />
-- Rao &amp; Ballard (1999): "Predictive Coding in Visual Cortex"<br />
+<p><strong>Predictive Coding:</strong>
+- Rao &amp; Ballard (1999): "Predictive Coding in Visual Cortex"
 - Friston (2010): "Free-Energy Principle"</p>
-<p><strong>Transformers &amp; Memory:</strong><br />
-- Vaswani et al. (2017): "Attention Is All You Need"<br />
+<p><strong>Transformers &amp; Memory:</strong>
+- Vaswani et al. (2017): "Attention Is All You Need"
 - Kitaev et al. (2020): "Reformer: Efficient Transformer"</p>
-<p><strong>Associative Memory:</strong><br />
-- Salvatori et al. (2021): "Associative Memories via Predictive Coding"<br />
+<p><strong>Associative Memory:</strong>
+- Salvatori et al. (2021): "Associative Memories via Predictive Coding"
 - BayesPCN (2022): "Continually Learnable Predictive Coding Memory"</p>
-<hr />
+<hr/>
 <h2 id="final-remarks">Final Remarks</h2>
-<p>This framework represents a <strong>mathematically principled unification</strong> of two powerful ideas:<br />
-- <strong>LSH:</strong> Efficient similarity-based retrieval<br />
+<p>This framework represents a <strong>mathematically principled unification</strong> of two powerful ideas:
+- <strong>LSH:</strong> Efficient similarity-based retrieval
 - <strong>Predictive Coding:</strong> Principled Bayesian inference</p>
 <p>The key insight is the <strong>dual-layer architecture</strong> where discrete hash buckets contain continuous inference states, coupled through a <strong>single free energy functional</strong> that creates <strong>bidirectional feedback automatically</strong>.</p>
 <p>This is not just an engineering trick—it's a fundamental principle that emerges from variational calculus applied to hierarchical memory systems.</p>
-<p><strong>The framework is:</strong><br />
-- ✓ Theoretically rigorous (convergence proofs, complexity bounds)<br />
-- ✓ Practically implementable (~300 lines of PyTorch)<br />
-- ✓ Scalable (10M+ tokens)<br />
-- ✓ Principled (single variational objective)<br />
+<p><strong>The framework is:</strong>
+- ✓ Theoretically rigorous (convergence proofs, complexity bounds)
+- ✓ Practically implementable (~300 lines of PyTorch)
+- ✓ Scalable (10M+ tokens)
+- ✓ Principled (single variational objective)
 - ✓ Biologically plausible (matches brain architecture)</p>
 <p>We believe this represents a significant step toward <strong>truly unlimited context</strong> for neural language models.</p>
-<hr />
+<hr/>
 <p><strong>End of Framework</strong></p>
 <p><em>This mathematical treatment provides the complete theoretical and practical foundation for building hash-predictive memory systems that unify discrete retrieval with continuous inference through a single elegant variational principle.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

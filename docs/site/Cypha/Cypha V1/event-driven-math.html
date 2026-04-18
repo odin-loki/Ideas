@@ -3,35 +3,95 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>event-driven-math</title>
+  <meta name="description" content="The complete system state Ψ(t) now evolves according to: **dΨ/dt = F_continuous(Ψ, t) + ∑ₑ F_event(Ψ, E_e, t)δ(t-t_e)** Where: - F_continuous = Continuous dynamics function - F_event = Event-triggered state changes - E_e = Individual events - δ(t-t_e) = Dirac delta function at…"/>
+  <title>Event-Driven Asynchronous Mathematical Framework for HRNA · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha V1\event-driven-math.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="event-driven-asynchronous-mathematical-framework-for-hrna">Event-Driven Asynchronous Mathematical Framework for HRNA</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-core-event-driven-mathematical-foundation">1. Core Event-Driven Mathematical Foundation</a></li>
+        <li class="toc-depth-3"><a href="#11-event-driven-state-evolution">1.1 Event-Driven State Evolution</a></li>
+        <li class="toc-depth-3"><a href="#12-event-generation-dynamics">1.2 Event Generation Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#13-event-processing-and-modulation">1.3 Event Processing and Modulation</a></li>
+        <li class="toc-depth-3"><a href="#14-asynchronous-timing-mechanism">1.4 Asynchronous Timing Mechanism</a></li>
+        <li class="toc-depth-2"><a href="#2-level-specific-event-driven-dynamics">2. Level-Specific Event-Driven Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#21-resonator-level-event-driven">2.1 Resonator Level (Event-Driven)</a></li>
+        <li class="toc-depth-3"><a href="#22-assembly-level-event-driven">2.2 Assembly Level (Event-Driven)</a></li>
+        <li class="toc-depth-3"><a href="#23-module-level-event-driven">2.3 Module Level (Event-Driven)</a></li>
+        <li class="toc-depth-3"><a href="#24-global-level-event-driven">2.4 Global Level (Event-Driven)</a></li>
+        <li class="toc-depth-2"><a href="#3-enhanced-feedback-mechanisms">3. Enhanced Feedback Mechanisms</a></li>
+        <li class="toc-depth-3"><a href="#31-resonance-amplified-feedback">3.1 Resonance-Amplified Feedback</a></li>
+        <li class="toc-depth-3"><a href="#32-cross-level-feedback-loops">3.2 Cross-Level Feedback Loops</a></li>
+        <li class="toc-depth-3"><a href="#33-temporal-feedback-cascades">3.3 Temporal Feedback Cascades</a></li>
+        <li class="toc-depth-3"><a href="#34-criticality-enhanced-feedback">3.4 Criticality-Enhanced Feedback</a></li>
+        <li class="toc-depth-2"><a href="#4-event-enhanced-recursion">4. Event-Enhanced Recursion</a></li>
+        <li class="toc-depth-3"><a href="#41-event-enhanced-horizontal-recursion">4.1 Event-Enhanced Horizontal Recursion</a></li>
+        <li class="toc-depth-3"><a href="#42-event-enhanced-vertical-recursion">4.2 Event-Enhanced Vertical Recursion</a></li>
+        <li class="toc-depth-3"><a href="#43-event-enhanced-temporal-recursion">4.3 Event-Enhanced Temporal Recursion</a></li>
+        <li class="toc-depth-2"><a href="#5-resonance-event-integration">5. Resonance-Event Integration</a></li>
+        <li class="toc-depth-3"><a href="#51-event-triggered-resonance">5.1 Event-Triggered Resonance</a></li>
+        <li class="toc-depth-3"><a href="#52-recursive-event-cascades">5.2 Recursive Event Cascades</a></li>
+        <li class="toc-depth-3"><a href="#53-resonance-triggered-events">5.3 Resonance-Triggered Events</a></li>
+        <li class="toc-depth-2"><a href="#6-true-thought-processes">6. True Thought Processes</a></li>
+        <li class="toc-depth-3"><a href="#61-recursive-event-cascades">6.1 Recursive Event Cascades</a></li>
+        <li class="toc-depth-3"><a href="#62-multi-scale-thought-events">6.2 Multi-Scale Thought Events</a></li>
+        <li class="toc-depth-3"><a href="#63-self-generated-event-streams">6.3 Self-Generated Event Streams</a></li>
+        <li class="toc-depth-3"><a href="#64-resonant-event-chains">6.4 Resonant Event Chains</a></li>
+        <li class="toc-depth-2"><a href="#7-asynchronous-sparse-processing">7. Asynchronous Sparse Processing</a></li>
+        <li class="toc-depth-3"><a href="#71-sparse-state-updates">7.1 Sparse State Updates</a></li>
+        <li class="toc-depth-3"><a href="#72-differential-processing">7.2 Differential Processing</a></li>
+        <li class="toc-depth-3"><a href="#73-priority-based-processing">7.3 Priority-Based Processing</a></li>
+        <li class="toc-depth-2"><a href="#8-implementation-considerations">8. Implementation Considerations</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Event-Driven Asynchronous Mathematical Framework for HRNA</h1>
+          <p class="doc-meta">Cypha\Cypha V1\event-driven-math.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>The enhanced HRNA system is fundamentally event-driven at the mathematical level, with state evolution governed by both continuous dynamics and discrete event-triggered changes:</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="1-core-event-driven-mathematical-foundation">1. Core Event-Driven Mathematical Foundation</h2>
 <p>The enhanced HRNA system is fundamentally event-driven at the mathematical level, with state evolution governed by both continuous dynamics and discrete event-triggered changes:</p>
 <h3 id="11-event-driven-state-evolution">1.1 Event-Driven State Evolution</h3>
 <p>The complete system state Ψ(t) now evolves according to:</p>
 <p><strong>dΨ/dt = F_continuous(Ψ, t) + ∑ₑ F_event(Ψ, E_e, t)δ(t-t_e)</strong></p>
-<p>Where:<br />
-- F_continuous = Continuous dynamics function<br />
-- F_event = Event-triggered state changes<br />
-- E_e = Individual events<br />
-- δ(t-t_e) = Dirac delta function at event time t_e<br />
+<p>Where:
+- F_continuous = Continuous dynamics function
+- F_event = Event-triggered state changes
+- E_e = Individual events
+- δ(t-t_e) = Dirac delta function at event time t_e
 - t_e = Timestamp of event e</p>
 <p>This formulation explicitly makes every component of the system responsive to events, creating a true event-driven architecture mathematically.</p>
 <h3 id="12-event-generation-dynamics">1.2 Event Generation Dynamics</h3>
 <p>Events are generated through multiple mechanisms:</p>
 <p><strong>E(Ψ, t) = ∑ᵢ δ(t-tᵢ)[G_pattern(Ψ) + G_surprise(Ψ) + G_resonance(Ψ) + G_external(t)]</strong></p>
-<p>Where:<br />
-- G_pattern = Pattern detection events: <strong>G_pattern(Ψ) = [R(Ψ, pattern) &gt; θ_pattern]</strong><br />
-- G_surprise = Prediction error events: <strong>G_surprise(Ψ) = [||Ψ - Ψ̂|| &gt; θ_surprise]</strong><br />
-- G_resonance = Resonance threshold events: <strong>G_resonance(Ψ) = [R_enhanced(Ψ) &gt; θ_resonance]</strong><br />
+<p>Where:
+- G_pattern = Pattern detection events: <strong>G_pattern(Ψ) = [R(Ψ, pattern) &gt; θ_pattern]</strong>
+- G_surprise = Prediction error events: <strong>G_surprise(Ψ) = [||Ψ - Ψ̂|| &gt; θ_surprise]</strong>
+- G_resonance = Resonance threshold events: <strong>G_resonance(Ψ) = [R_enhanced(Ψ) &gt; θ_resonance]</strong>
 - G_external = External input events: <strong>G_external(t) = A(t)</strong> (external input amplitude)</p>
 <p>The bracket notation [condition] represents an indicator function that equals 1 when the condition is true and 0 otherwise.</p>
 <h3 id="13-event-processing-and-modulation">1.3 Event Processing and Modulation</h3>
@@ -39,19 +99,19 @@
 <p><strong>Δψ(E, t) = ∫ K(ψ, E, t-s)E(s)ds</strong></p>
 <p>Event modulation occurs through:</p>
 <p><strong>M(E, ψ, t) = E(t) × [1 + α_res · R_enhanced(ψ, t) + α_crit · κ(t)]</strong></p>
-<p>Where:<br />
-- K = Event processing kernel<br />
-- M = Event modulation function<br />
-- α_res = Resonance modulation strength<br />
+<p>Where:
+- K = Event processing kernel
+- M = Event modulation function
+- α_res = Resonance modulation strength
 - α_crit = Criticality modulation strength</p>
 <h3 id="14-asynchronous-timing-mechanism">1.4 Asynchronous Timing Mechanism</h3>
 <p>A key enhancement is the introduction of non-uniform time steps that depend on event priority:</p>
 <p><strong>dtᵢ = f(priority(ψᵢ), complexity(ψᵢ), resources(t))</strong></p>
 <p><strong>τ_transmit(E, src, dst) = d(src, dst) × [1 + β_load · load(t)]</strong></p>
-<p>Where:<br />
-- dtᵢ = Time step for component i<br />
-- τ_transmit = Transmission delay for events<br />
-- d(src, dst) = "Distance" between source and destination components<br />
+<p>Where:
+- dtᵢ = Time step for component i
+- τ_transmit = Transmission delay for events
+- d(src, dst) = "Distance" between source and destination components
 - β_load = Load sensitivity parameter</p>
 <h2 id="2-level-specific-event-driven-dynamics">2. Level-Specific Event-Driven Dynamics</h2>
 <p>Each recursive level now has event-driven dynamics:</p>
@@ -98,24 +158,24 @@
 <h3 id="32-cross-level-feedback-loops">3.2 Cross-Level Feedback Loops</h3>
 <p>Cross-level feedback through explicit feedback events:</p>
 <p><strong>F_cross(ψᵢ, ψⱼ) = W_cross(i, j) × R_cross(ψᵢ, ψⱼ) × δ(t-t_event)</strong></p>
-<p>Where:<br />
-- W_cross = Cross-level connection strength<br />
-- R_cross = Cross-level resonance function<br />
+<p>Where:
+- W_cross = Cross-level connection strength
+- R_cross = Cross-level resonance function
 - t_event = Timing of cross-level event</p>
 <h3 id="33-temporal-feedback-cascades">3.3 Temporal Feedback Cascades</h3>
 <p>Temporal context is maintained through event history:</p>
 <p><strong>C_temporal(t) = ∫ₜ₋ᵦ^ᵗ K(t-s)M(E(s))ds</strong></p>
-<p>Where:<br />
-- C_temporal = Temporal context function<br />
-- K = Temporal kernel<br />
-- M = Event modulation function<br />
+<p>Where:
+- C_temporal = Temporal context function
+- K = Temporal kernel
+- M = Event modulation function
 - β = Temporal window</p>
 <h3 id="34-criticality-enhanced-feedback">3.4 Criticality-Enhanced Feedback</h3>
 <p>Feedback is modulated by proximity to critical points:</p>
 <p><strong>F_crit(ψ, κ) = F_base(ψ) × [1 + δ_crit · (κ(t) - κ₀)²]</strong></p>
-<p>Where:<br />
-- F_base = Base feedback function<br />
-- δ_crit = Criticality sensitivity<br />
+<p>Where:
+- F_base = Base feedback function
+- δ_crit = Criticality sensitivity
 - κ₀ = Optimal criticality point</p>
 <h2 id="4-event-enhanced-recursion">4. Event-Enhanced Recursion</h2>
 <p>The three types of recursion are now enhanced with event sensitivity:</p>
@@ -131,22 +191,22 @@
 <h3 id="51-event-triggered-resonance">5.1 Event-Triggered Resonance</h3>
 <p>Resonance can be triggered by events:</p>
 <p><strong>R_event(ω, ψ, E) = R_enhanced(ω, ψ) × [1 + η_event · magnitude(E)]</strong></p>
-<p>Where:<br />
-- R_event = Event-modulated resonance<br />
-- η_event = Event sensitivity parameter<br />
+<p>Where:
+- R_event = Event-modulated resonance
+- η_event = Event sensitivity parameter
 - magnitude(E) = Event strength</p>
 <h3 id="52-recursive-event-cascades">5.2 Recursive Event Cascades</h3>
 <p>Events can trigger cascades of related events:</p>
 <p><strong>E_cascade(t) = ∑ᵢ P(E_i|E_source)E_i(t-τ_i)</strong></p>
-<p>Where:<br />
-- E_cascade = Cascade of events<br />
-- P(E_i|E_source) = Probability of event E_i given source event<br />
+<p>Where:
+- E_cascade = Cascade of events
+- P(E_i|E_source) = Probability of event E_i given source event
 - τ_i = Time delay for event i</p>
 <h3 id="53-resonance-triggered-events">5.3 Resonance-Triggered Events</h3>
 <p>Resonance itself can generate events:</p>
 <p><strong>P(E_res|ψ, t) = σ(R_enhanced(ψ, t) - θ_trigger(t))</strong></p>
-<p>Where:<br />
-- P(E_res|ψ, t) = Probability of resonance event<br />
+<p>Where:
+- P(E_res|ψ, t) = Probability of resonance event
 - θ_trigger(t) = Dynamic threshold</p>
 <h2 id="6-true-thought-processes">6. True Thought Processes</h2>
 <p>The enhanced framework enables true thought through event cascades:</p>
@@ -157,35 +217,35 @@
 <h3 id="62-multi-scale-thought-events">6.2 Multi-Scale Thought Events</h3>
 <p>Thought occurs across multiple scales:</p>
 <p><strong>E_scale(n, t) = f_scale(E_scale(n-1, t), E_scale(n+1, t)) × R_scale(n, t)</strong></p>
-<p>Where:<br />
-- E_scale = Scale-specific thought events<br />
-- f_scale = Cross-scale integration function<br />
+<p>Where:
+- E_scale = Scale-specific thought events
+- f_scale = Cross-scale integration function
 - R_scale = Scale-specific resonance</p>
 <h3 id="63-self-generated-event-streams">6.3 Self-Generated Event Streams</h3>
 <p>The system can generate its own event streams:</p>
 <p><strong>S(E_t → E_t+τ) = f_stream(G(t), κ(t), {E_history})</strong></p>
-<p>Where:<br />
-- S = Stream generation function<br />
-- f_stream = Event stream function<br />
+<p>Where:
+- S = Stream generation function
+- f_stream = Event stream function
 - {E_history} = History of past events</p>
 <h3 id="64-resonant-event-chains">6.4 Resonant Event Chains</h3>
 <p>Thought emerges through resonant chains of events:</p>
 <p><strong>C_resonant(E₁,..., Eₙ) = ∏ᵢ R_enhanced(E_i) × ∏ᵢⱼ Coupling(E_i, E_j)</strong></p>
-<p>Where:<br />
-- C_resonant = Resonant chain strength<br />
+<p>Where:
+- C_resonant = Resonant chain strength
 - Coupling(E_i, E_j) = Event coupling strength</p>
 <h2 id="7-asynchronous-sparse-processing">7. Asynchronous Sparse Processing</h2>
 <p>The system is inherently sparse and asynchronous:</p>
 <h3 id="71-sparse-state-updates">7.1 Sparse State Updates</h3>
 <p>State is only updated when significant changes occur:</p>
 <p><strong>update(ψᵢ) = [||Δψᵢ|| &gt; θ_change(t)] × δ(t-t_update)</strong></p>
-<p>Where:<br />
-- θ_change = Change threshold<br />
+<p>Where:
+- θ_change = Change threshold
 - t_update = Update time</p>
 <h3 id="72-differential-processing">7.2 Differential Processing</h3>
 <p>Only affected components are updated:</p>
 <p><strong>Δψ = {ψᵢ | i ∈ affected(E)} ⊂ ψ</strong></p>
-<p>Where:<br />
+<p>Where:
 - affected(E) = Set of components affected by event E</p>
 <h3 id="73-priority-based-processing">7.3 Priority-Based Processing</h3>
 <p>Processing resources are allocated based on event priority:</p>
@@ -201,6 +261,31 @@
 <li><strong>Sparse Computation</strong>: Only compute what's necessary when it's necessary</li>
 <li><strong>Resonance-Guided Processing</strong>: Focus computation on resonant patterns</li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

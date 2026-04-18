@@ -839,4 +839,4 @@ The system honors the precision and elegance of ancient Greek astronomy while me
 **Last Updated**: 2024  
 **Classification**: UNCLASSIFIED  
 **Distribution**: UNLIMITED  
-**Heritage**: 2,100 years of computational excellence  
+**Heritage**: 2,100 years of computational excellence

@@ -3,22 +3,60 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Linear Congruent Definition</title>
+  <meta name="description" content="1. Learning Function L: * L: P × K → K' where: - P is the pattern space - K is the current knowledge space - K' is the updated knowledge space * L(p, k) → k' represents learning a new pattern p given current knowledge k 2. Pattern Recognition: * R: X → P where: - X is the input…"/>
+  <title>Mathematical Definition of Linear Congruent System Learning and Training · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">UCN AIs\Linear Congruent Definition.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="mathematical-definition-of-linear-congruent-system-learning-and-training">Mathematical Definition of Linear Congruent System Learning and Training</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#learning-process-definition">Learning Process Definition</a></li>
+        <li class="toc-depth-3"><a href="#core-learning-components">Core Learning Components</a></li>
+        <li class="toc-depth-3"><a href="#training-process">Training Process</a></li>
+        <li class="toc-depth-2"><a href="#learning-properties">Learning Properties</a></li>
+        <li class="toc-depth-2"><a href="#training-mechanisms">Training Mechanisms</a></li>
+        <li class="toc-depth-2"><a href="#training-properties">Training Properties</a></li>
+        <li class="toc-depth-2"><a href="#learning-constraints">Learning Constraints</a></li>
+        <li class="toc-depth-2"><a href="#notes">Notes</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Mathematical Definition of Linear Congruent System Learning and Training</h1>
+          <p class="doc-meta">UCN AIs\Linear Congruent Definition.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Statistical Learning:
+   * Learning maintains statistical validity
+   * Patterns must meet significance threshold τ
+   * ∀p ∈ P, F(p, k) &gt; τ for retention</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="learning-process-definition">Learning Process Definition</h2>
 <p>Let S = (B, P, L, E, O, C) be a Linear Congruent system.</p>
 <h3 id="core-learning-components">Core Learning Components</h3>
 <ol>
 <li>
-<p>Learning Function L:<br />
+<p>Learning Function L:
    * L: P × K → K' where:</p>
 <ul>
 <li>P is the pattern space</li>
@@ -28,7 +66,7 @@
 </ul>
 </li>
 <li>
-<p>Pattern Recognition:<br />
+<p>Pattern Recognition:
    * R: X → P where:</p>
 <ul>
 <li>X is the input space</li>
@@ -37,7 +75,7 @@
 </ul>
 </li>
 <li>
-<p>Feedback Mechanism:<br />
+<p>Feedback Mechanism:
    * F: P × K → [0,1] where:</p>
 <ul>
 <li>F(p, k) measures pattern validity</li>
@@ -49,7 +87,7 @@
 <h3 id="training-process">Training Process</h3>
 <ol>
 <li>
-<p>Pattern Acquisition:<br />
+<p>Pattern Acquisition:
    * T: X → P where:</p>
 <ul>
 <li>T represents the training function</li>
@@ -58,7 +96,7 @@
 </ul>
 </li>
 <li>
-<p>Knowledge Integration:<br />
+<p>Knowledge Integration:
    * I: K × P → K where:</p>
 <ul>
 <li>I integrates new patterns into knowledge</li>
@@ -67,7 +105,7 @@
 </ul>
 </li>
 <li>
-<p>Evolutionary Learning:<br />
+<p>Evolutionary Learning:
    * E(L(p)) → p' where:</p>
 <ul>
 <li>p' represents evolved patterns</li>
@@ -79,28 +117,28 @@
 <h2 id="learning-properties">Learning Properties</h2>
 <ol>
 <li>
-<p>Statistical Learning:<br />
-   * Learning maintains statistical validity<br />
-   * Patterns must meet significance threshold τ<br />
+<p>Statistical Learning:
+   * Learning maintains statistical validity
+   * Patterns must meet significance threshold τ
    * ∀p ∈ P, F(p, k) &gt; τ for retention</p>
 </li>
 <li>
-<p>Incremental Learning:<br />
-   * L(p₁, L(p₂, k)) = L(p₂, L(p₁, k))<br />
-   * Learning is order-independent<br />
+<p>Incremental Learning:
+   * L(p₁, L(p₂, k)) = L(p₂, L(p₁, k))
+   * Learning is order-independent
    * Knowledge builds cumulatively</p>
 </li>
 <li>
-<p>Pattern Evolution:<br />
-   * E(L(p)) evolves learned patterns<br />
-   * Evolution preserves learned properties<br />
+<p>Pattern Evolution:
+   * E(L(p)) evolves learned patterns
+   * Evolution preserves learned properties
    * New patterns inherit valid properties</p>
 </li>
 </ol>
 <h2 id="training-mechanisms">Training Mechanisms</h2>
 <ol>
 <li>
-<p>Baseline Training:<br />
+<p>Baseline Training:
    * B'(x) = L(B(x)) where:</p>
 <ul>
 <li>B' is the trained baseline algorithm</li>
@@ -109,7 +147,7 @@
 </ul>
 </li>
 <li>
-<p>Operator Training:<br />
+<p>Operator Training:
    * O' = L(O) where:</p>
 <ul>
 <li>O' includes trained operators</li>
@@ -118,7 +156,7 @@
 </ul>
 </li>
 <li>
-<p>Subclass Training:<br />
+<p>Subclass Training:
    * C' = L(C) where:</p>
 <ul>
 <li>C' represents trained subclasses</li>
@@ -130,42 +168,42 @@
 <h2 id="training-properties">Training Properties</h2>
 <ol>
 <li>
-<p>Convergence:<br />
-   * Training converges when F(p, k) stabilizes<br />
-   * Convergence maintains pattern validity<br />
+<p>Convergence:
+   * Training converges when F(p, k) stabilizes
+   * Convergence maintains pattern validity
    * System reaches learning equilibrium</p>
 </li>
 <li>
-<p>Stability:<br />
-   * Training preserves existing knowledge<br />
-   * New learning doesn't invalidate old patterns<br />
+<p>Stability:
+   * Training preserves existing knowledge
+   * New learning doesn't invalidate old patterns
    * System maintains coherence</p>
 </li>
 <li>
-<p>Adaptability:<br />
-   * System adapts to new pattern types<br />
-   * Training creates new operators as needed<br />
+<p>Adaptability:
+   * System adapts to new pattern types
+   * Training creates new operators as needed
    * Subclasses evolve with training</p>
 </li>
 </ol>
 <h2 id="learning-constraints">Learning Constraints</h2>
 <ol>
 <li>
-<p>Validity Constraints:<br />
-   * ∀p ∈ P, F(p, k) &gt; 0<br />
-   * Learning preserves pattern validity<br />
+<p>Validity Constraints:
+   * ∀p ∈ P, F(p, k) &gt; 0
+   * Learning preserves pattern validity
    * Training maintains statistical significance</p>
 </li>
 <li>
-<p>Evolution Constraints:<br />
-   * E(L(p)) preserves learned properties<br />
-   * Evolution bounded by validity constraints<br />
+<p>Evolution Constraints:
+   * E(L(p)) preserves learned properties
+   * Evolution bounded by validity constraints
    * Training evolution is controlled</p>
 </li>
 <li>
-<p>Knowledge Constraints:<br />
-   * K maintains consistency<br />
-   * Knowledge growth is bounded<br />
+<p>Knowledge Constraints:
+   * K maintains consistency
+   * Knowledge growth is bounded
    * Learning preserves existing knowledge</p>
 </li>
 </ol>
@@ -177,6 +215,31 @@
 <li>Training mechanism supports various learning approaches</li>
 <li>System maintains flexibility while ensuring valid learning</li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

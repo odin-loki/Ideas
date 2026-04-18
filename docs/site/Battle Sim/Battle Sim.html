@@ -3,16 +3,61 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Battle Sim</title>
+  <meta name="description" content="This note surveys modern mathematical combat models—from Hughes-style discrete salvos and extended Lanchester formulations to Markov-state battle models—and lists typical equations, features, and caveats. It is a reading map, not an operational manual."/>
+  <title>Modern mathematical battle calculation systems · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Battle Sim\Battle Sim.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="modern-mathematical-battle-calculation-systems">Modern Mathematical Battle Calculation Systems</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-2"><a href="#core-modern-systems">Core Modern Systems</a></li>
+        <li class="toc-depth-3"><a href="#1-hughes-salvo-combat-model-1995">1. Hughes&#x27; Salvo Combat Model (1995)</a></li>
+        <li class="toc-depth-3"><a href="#2-extended-lanchester-models-for-irregular-warfare">2. Extended Lanchester Models for Irregular Warfare</a></li>
+        <li class="toc-depth-3"><a href="#3-markov-chain-battle-models">3. Markov Chain Battle Models</a></li>
+        <li class="toc-depth-3"><a href="#4-fathm-force-on-force-attrition-hierarchical-model">4. FATHM (Force-on-Force ATtrition Hierarchical Model)</a></li>
+        <li class="toc-depth-3"><a href="#5-modern-dupuy-style-combat-models-tndmqjm-evolution">5. Modern Dupuy-Style Combat Models (TNDM/QJM Evolution)</a></li>
+        <li class="toc-depth-2"><a href="#comparative-analysis">Comparative Analysis</a></li>
+        <li class="toc-depth-3"><a href="#convergence-and-computational-efficiency">Convergence and Computational Efficiency</a></li>
+        <li class="toc-depth-3"><a href="#modern-upgrade-pathways">Modern Upgrade Pathways</a></li>
+        <li class="toc-depth-2"><a href="#future-directions">Future Directions</a></li>
+        <li class="toc-depth-3"><a href="#emerging-mathematical-approaches">Emerging Mathematical Approaches</a></li>
+        <li class="toc-depth-3"><a href="#integration-challenges">Integration Challenges</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Modern mathematical battle calculation systems</h1>
+          <p class="doc-meta">Battle Sim\Battle Sim.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Survey note — Lanchester roots through Markov-style combat models; citations and numeric parameters should be verified against primary sources before operational use.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>Survey note — Lanchester roots through Markov-style combat models; citations and numeric parameters should be verified against primary sources before operational use.</p>
+<h2 id="abstract">Abstract</h2>
+<p>This note surveys modern mathematical combat models—from Hughes-style discrete salvos and extended Lanchester formulations to Markov-state battle models—and lists typical equations, features, and caveats. It is a reading map, not an operational manual.</p>
 <h2 id="overview">Overview</h2>
 <p>Modern battle calculation systems have evolved from the foundational Lanchester equations (1915-1916) into sophisticated mathematical frameworks that model contemporary warfare's complexity, including missile combat, information warfare, and asymmetric conflicts.</p>
 <h2 id="core-modern-systems">Core Modern Systems</h2>
@@ -23,16 +68,16 @@
 <pre><code>A(t+1) = A(t) - β × B(t) × [1 - defensive_factor_A]
 B(t+1) = B(t) - α × A(t) × [1 - defensive_factor_B]
 </code></pre>
-<p><strong>Core Features:</strong><br />
-- Discrete time model for missile salvos<br />
-- Includes both offensive and defensive firepower<br />
-- Accounts for missile interception capabilities<br />
+<p><strong>Core Features:</strong>
+- Discrete time model for missile salvos
+- Includes both offensive and defensive firepower
+- Accounts for missile interception capabilities
 - Stochastic and deterministic versions available</p>
 <p><strong>Applications:</strong> Naval missile combat, carrier airstrikes, anti-ship warfare</p>
-<p><strong>Upgrades Needed:</strong><br />
-- Integration with cyber warfare effects<br />
-- Multi-domain operations modeling<br />
-- Hypersonic weapon characteristics<br />
+<p><strong>Upgrades Needed:</strong>
+- Integration with cyber warfare effects
+- Multi-domain operations modeling
+- Hypersonic weapon characteristics
 - Swarm attack scenarios</p>
 <h3 id="2-extended-lanchester-models-for-irregular-warfare">2. Extended Lanchester Models for Irregular Warfare</h3>
 <p><strong>Developers:</strong> Various military operations researchers (2000s-present)</p>
@@ -42,16 +87,16 @@ B(t+1) = B(t) - α × A(t) × [1 - defensive_factor_B]
 dR/dt = -αG × G(t)
 dG/dt = -βR × R(t) + recruitment_rate - defection_rate
 </code></pre>
-<p><strong>Core Features:</strong><br />
-- Models insurgency and counterinsurgency<br />
-- Includes civilian population effects<br />
-- Accounts for information warfare impact<br />
+<p><strong>Core Features:</strong>
+- Models insurgency and counterinsurgency
+- Includes civilian population effects
+- Accounts for information warfare impact
 - Multilateral conflict capabilities (3+ sides)</p>
 <p><strong>Applications:</strong> Iraq, Afghanistan, Syria conflicts</p>
-<p><strong>Upgrades Needed:</strong><br />
-- Social media influence modeling<br />
-- Economic warfare integration<br />
-- Drone swarm tactics<br />
+<p><strong>Upgrades Needed:</strong>
+- Social media influence modeling
+- Economic warfare integration
+- Drone swarm tactics
 - Urban warfare specifics</p>
 <h3 id="3-markov-chain-battle-models">3. Markov Chain Battle Models</h3>
 <p><strong>Developers:</strong> Eastern European military mathematicians (2010s-present)</p>
@@ -61,23 +106,23 @@ dG/dt = -βR × R(t) + recruitment_rate - defection_rate
 Transition Matrix P with quick convergence properties
 Steady-state: π = πP where π is the stationary distribution
 </code></pre>
-<p><strong>Markov Chain Quick Convergence Walk:</strong><br />
-For rapid convergence in battle modeling:<br />
-1. <strong>State Definition:</strong> Define 4-6 battle states (e.g., Approach, Contact, Fire, Maneuver, Withdrawal)<br />
-2. <strong>Transition Probabilities:</strong> Use historical data to populate P-matrix<br />
-3. <strong>Convergence Check:</strong> Calculate eigenvalues - second largest eigenvalue determines convergence rate<br />
-4. <strong>Acceleration:</strong> Use periodic updates with weighted transitions for faster convergence<br />
+<p><strong>Markov Chain Quick Convergence Walk:</strong>
+For rapid convergence in battle modeling:
+1. <strong>State Definition:</strong> Define 4-6 battle states (e.g., Approach, Contact, Fire, Maneuver, Withdrawal)
+2. <strong>Transition Probabilities:</strong> Use historical data to populate P-matrix
+3. <strong>Convergence Check:</strong> Calculate eigenvalues - second largest eigenvalue determines convergence rate
+4. <strong>Acceleration:</strong> Use periodic updates with weighted transitions for faster convergence
 5. <strong>Application:</strong> Run 10-20 iterations for stable probability distributions</p>
-<p><strong>Core Features:</strong><br />
-- Tank ambush scenarios<br />
-- Probabilistic battle outcomes<br />
-- Real-time adaptation capabilities<br />
+<p><strong>Core Features:</strong>
+- Tank ambush scenarios
+- Probabilistic battle outcomes
+- Real-time adaptation capabilities
 - Historical validation against WWII data</p>
 <p><strong>Applications:</strong> Anti-terrorist operations, tank warfare, urban combat</p>
-<p><strong>Upgrades Needed:</strong><br />
-- AI-driven state transitions<br />
-- Real-time sensor integration<br />
-- Multi-platform coordination<br />
+<p><strong>Upgrades Needed:</strong>
+- AI-driven state transitions
+- Real-time sensor integration
+- Multi-platform coordination
 - Electronic warfare states</p>
 <h3 id="4-fathm-force-on-force-attrition-hierarchical-model">4. FATHM (Force-on-Force ATtrition Hierarchical Model)</h3>
 <p><strong>Developers:</strong> U.S. Military Operations Research</p>
@@ -89,16 +134,16 @@ For rapid convergence in battle modeling:<br />
 - Temporal sequencing
 - Air-ground coordination
 </code></pre>
-<p><strong>Core Features:</strong><br />
-- Theater-level warfare simulation<br />
-- Combined air-ground operations<br />
-- Linear programming optimization<br />
+<p><strong>Core Features:</strong>
+- Theater-level warfare simulation
+- Combined air-ground operations
+- Linear programming optimization
 - Sub-3-minute computation for full theater war</p>
 <p><strong>Applications:</strong> Strategic planning, force structure analysis</p>
-<p><strong>Upgrades Needed:</strong><br />
-- Space domain integration<br />
-- Quantum computing optimization<br />
-- Real-time intelligence feeds<br />
+<p><strong>Upgrades Needed:</strong>
+- Space domain integration
+- Quantum computing optimization
+- Real-time intelligence feeds
 - Climate/terrain AI integration</p>
 <h3 id="5-modern-dupuy-style-combat-models-tndmqjm-evolution">5. Modern Dupuy-Style Combat Models (TNDM/QJM Evolution)</h3>
 <p><strong>Developers:</strong> The Dupuy Institute and successors</p>
@@ -107,16 +152,16 @@ For rapid convergence in battle modeling:<br />
 <pre><code>Combat Power = (Personnel × Weapons Score × Posture × Environment) / Vulnerability
 Battle Outcome = f(Combat Power Ratio, Terrain, Weather, Leadership)
 </code></pre>
-<p><strong>Core Features:</strong><br />
-- 60+ environmental variables<br />
-- Historical validation database<br />
-- Weapons effectiveness scoring<br />
+<p><strong>Core Features:</strong>
+- 60+ environmental variables
+- Historical validation database
+- Weapons effectiveness scoring
 - Operational Lethality Indices (OLI)</p>
 <p><strong>Applications:</strong> Combat assessment, casualty estimation</p>
-<p><strong>Upgrades Needed:</strong><br />
-- Machine learning integration<br />
-- Autonomous systems modeling<br />
-- Information warfare metrics<br />
+<p><strong>Upgrades Needed:</strong>
+- Machine learning integration
+- Autonomous systems modeling
+- Information warfare metrics
 - Hybrid warfare factors</p>
 <h2 id="comparative-analysis">Comparative Analysis</h2>
 <h3 id="convergence-and-computational-efficiency">Convergence and Computational Efficiency</h3>
@@ -163,29 +208,29 @@ Battle Outcome = f(Combat Power Ratio, Terrain, Weather, Leadership)
 </tbody>
 </table>
 <h3 id="modern-upgrade-pathways">Modern Upgrade Pathways</h3>
-<p><strong>Universal Improvements Needed:</strong><br />
-1. <strong>AI/ML Integration:</strong> Machine learning for parameter adaptation<br />
-2. <strong>Multi-Domain Operations:</strong> Space, cyber, electromagnetic spectrum<br />
-3. <strong>Autonomous Systems:</strong> Drone swarms, unmanned platforms<br />
-4. <strong>Information Warfare:</strong> Social media, propaganda, disinformation<br />
-5. <strong>Climate Integration:</strong> Weather, terrain, environmental effects<br />
-6. <strong>Real-Time Data:</strong> Sensor fusion, satellite intelligence<br />
+<p><strong>Universal Improvements Needed:</strong>
+1. <strong>AI/ML Integration:</strong> Machine learning for parameter adaptation
+2. <strong>Multi-Domain Operations:</strong> Space, cyber, electromagnetic spectrum
+3. <strong>Autonomous Systems:</strong> Drone swarms, unmanned platforms
+4. <strong>Information Warfare:</strong> Social media, propaganda, disinformation
+5. <strong>Climate Integration:</strong> Weather, terrain, environmental effects
+6. <strong>Real-Time Data:</strong> Sensor fusion, satellite intelligence
 7. <strong>Quantum Computing:</strong> Exponential speedup for complex scenarios</p>
 <p><strong>Specific System Enhancements:</strong></p>
-<p><strong>Hughes Salvo Model:</strong><br />
-- Hypersonic missile characteristics<br />
-- Multi-layer defense systems<br />
-- Directed energy weapons<br />
+<p><strong>Hughes Salvo Model:</strong>
+- Hypersonic missile characteristics
+- Multi-layer defense systems
+- Directed energy weapons
 - Swarm vs. swarm combat</p>
-<p><strong>Markov Chain Models:</strong><br />
-- Adaptive learning algorithms<br />
-- Dynamic state space expansion<br />
-- Continuous-discrete hybrid models<br />
+<p><strong>Markov Chain Models:</strong>
+- Adaptive learning algorithms
+- Dynamic state space expansion
+- Continuous-discrete hybrid models
 - Network effect modeling</p>
-<p><strong>FATHM Systems:</strong><br />
-- Quantum optimization algorithms<br />
-- Real-time replanning capabilities<br />
-- Multi-coalition force modeling<br />
+<p><strong>FATHM Systems:</strong>
+- Quantum optimization algorithms
+- Real-time replanning capabilities
+- Multi-coalition force modeling
 - Climate change impact integration</p>
 <h2 id="future-directions">Future Directions</h2>
 <h3 id="emerging-mathematical-approaches">Emerging Mathematical Approaches</h3>
@@ -207,6 +252,31 @@ Battle Outcome = f(Combat Power Ratio, Terrain, Weather, Leadership)
 <h2 id="conclusion">Conclusion</h2>
 <p>Modern battle calculation systems have evolved from simple attrition models to sophisticated multi-domain frameworks. The trend toward discrete, stochastic models reflects the pulse-nature of modern warfare, while the integration of information warfare and autonomous systems presents new mathematical challenges. The convergence of AI, quantum computing, and real-time data promises revolutionary advances in military decision-making support systems.</p>
 <p>The key insight remains Hughes' observation: "If there were no variables in battle, we theorists could win the battles." Modern systems increasingly focus on managing uncertainty rather than eliminating it, using mathematical frameworks to support rather than replace human judgment in the art of war.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

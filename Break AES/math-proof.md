@@ -1,6 +1,12 @@
-# Mathematical Proof of Transformer Distillation-RL Convergence
+# Mathematical Proof of Transformer Distillation–RL Convergence
 
-## 1. Definitions and Setup
+*Sketch of a two-phase training story: distillation provides initialization; RL optimizes rewards. Notation below is standard; tighten assumptions for a formal venue.*
+
+## Abstract
+
+We outline definitions for teacher–student distillation and a policy-gradient RL phase, then sketch local convergence claims for each phase and a combined loss. The arguments are informal; a venue-ready version would state measure-theoretic assumptions, learning rates, and non-convexity caveats explicitly.
+
+## 1. Definitions and setup
 
 Let:
 - T(x) be the teacher model (Llama)

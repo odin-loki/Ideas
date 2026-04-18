@@ -3,30 +3,74 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Paper9 MP46M Pistol</title>
+  <meta name="description" content="This paper presents a technical analysis of the MP-4.6M Guardian Advanced Combat Pistol, chambered for the 4.6×22mm Enhanced Performance Round. The weapon achieves 1,120 m/s muzzle velocity and 1,752 J muzzle energy from a 150mm barrel, with 30-round capacity in a platform…"/>
+  <title>MP-4.6M Guardian Advanced Combat Pistol: MIL-SPEC PDW Platform — Complete Technical Analysis · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Weapons\Research Papers\Paper9_MP46M_Pistol.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>MP-4.6M Guardian Advanced Combat Pistol</strong></p>
-<p>MIL-SPEC PDW Platform — Complete Technical Analysis</p>
-<p><strong>TECHNICAL RESEARCH PAPER</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-cartridge-analysis-4622mm-enhanced-performance-round">2. Cartridge Analysis: 4.6×22mm Enhanced Performance Round</a></li>
+        <li class="toc-depth-3"><a href="#21-case-and-projectile-specifications">2.1 Case and Projectile Specifications</a></li>
+        <li class="toc-depth-3"><a href="#22-ballistic-performance">2.2 Ballistic Performance</a></li>
+        <li class="toc-depth-2"><a href="#3-barrel-and-suppressor">3. Barrel and Suppressor</a></li>
+        <li class="toc-depth-3"><a href="#31-barrel-construction">3.1 Barrel Construction</a></li>
+        <li class="toc-depth-3"><a href="#32-integrated-suppressor">3.2 Integrated Suppressor</a></li>
+        <li class="toc-depth-2"><a href="#4-operating-system">4. Operating System</a></li>
+        <li class="toc-depth-3"><a href="#41-roller-delayed-blowback">4.1 Roller-Delayed Blowback</a></li>
+        <li class="toc-depth-3"><a href="#42-recoil-system">4.2 Recoil System</a></li>
+        <li class="toc-depth-2"><a href="#5-trigger-mechanism">5. Trigger Mechanism</a></li>
+        <li class="toc-depth-2"><a href="#6-feed-system-and-magazine">6. Feed System and Magazine</a></li>
+        <li class="toc-depth-2"><a href="#7-physical-specifications">7. Physical Specifications</a></li>
+        <li class="toc-depth-2"><a href="#8-reliability">8. Reliability</a></li>
+        <li class="toc-depth-2"><a href="#9-mechanical-round-counter">9. Mechanical Round Counter</a></li>
+        <li class="toc-depth-2"><a href="#10-conclusion">10. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#11-references">11. References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">MP-4.6M Guardian Advanced Combat Pistol: MIL-SPEC PDW Platform — Complete Technical Analysis</h1>
+          <p class="doc-meta">Weapons\Research Papers\Paper9_MP46M_Pistol.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This paper presents a technical analysis of the MP-4.6M Guardian Advanced Combat Pistol, chambered for the 4.6×22mm Enhanced Performance Round. The weapon achieves 1,120 m/s muzzle velocity and 1,752 J muzzle energy from a 150mm barrel, with 30-round capacity in a platform weighing 890g unloaded. An integrated 95mm suppressor achieves 28dB sound reduction. The roller-delayed blowback operating system provides 15,000-round MRBF with a 75,000-round barrel life. This paper analyses the engineering basis for the ballistic performance, the roller-delayed operating system mechanics, and positions the weapon within the context of advanced combat pistol development for government and military personnel requiring enhanced armour-defeating capability.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Technical Research Paper</em></p>
 <p>Document No. TRP-2026-009 | Version 1.0</p>
 <p>Prepared for: Australian Department of Defence | March 2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+<h2 id="abstract">Abstract</h2>
 <p>This paper presents a technical analysis of the MP-4.6M Guardian Advanced Combat Pistol, chambered for the 4.6×22mm Enhanced Performance Round. The weapon achieves 1,120 m/s muzzle velocity and 1,752 J muzzle energy from a 150mm barrel, with 30-round capacity in a platform weighing 890g unloaded. An integrated 95mm suppressor achieves 28dB sound reduction. The roller-delayed blowback operating system provides 15,000-round MRBF with a 75,000-round barrel life. This paper analyses the engineering basis for the ballistic performance, the roller-delayed operating system mechanics, and positions the weapon within the context of advanced combat pistol development for government and military personnel requiring enhanced armour-defeating capability.</p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Combat pistols serve as sidearms and backup weapons for military and law enforcement personnel. The standard NATO 9×19mm Parabellum pistol cartridge (adopted in the 1980s, replacing various national calibres) generates approximately 450-600 J of muzzle energy from full-length pistol barrels. Armour-defeating capability of standard 9mm FMJ against even low-rated soft body armour is limited, prompting development of more capable cartridges for dedicated armour-defeating pistol applications.</p>
 <p>Heckler &amp; Koch developed the Universal Combat Pistol (UCP) in the 4.6×30mm calibre as a companion to the MP7 PDW. The UCP project was cancelled at the prototype stage, leaving the MP7 as the sole deployment platform for the 4.6×30mm round in pistol-sized form. The MP-4.6M Guardian addresses this gap—a pistol-sized weapon firing the higher-energy 4.6×22mm cartridge, providing armour-defeating capability in a platform sized for conventional pistol holsters and carry configurations.</p>
-<h1 id="2-cartridge-analysis-4622mm-enhanced-performance-round"><strong>2. Cartridge Analysis: 4.6×22mm Enhanced Performance Round</strong></h1>
-<h2 id="21-case-and-projectile-specifications"><strong>2.1 Case and Projectile Specifications</strong></h2>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Case Length</p>
+<h2 id="2-cartridge-analysis-4622mm-enhanced-performance-round">2. Cartridge Analysis: 4.6×22mm Enhanced Performance Round</h2>
+<h3 id="21-case-and-projectile-specifications">2.1 Case and Projectile Specifications</h3>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Case Length</p>
 <p>17.8 mm (neck: 22mm OAL)</p>
 <p>Rim Diameter</p>
 <p>5.2 mm</p>
@@ -40,10 +84,10 @@
 <p>65 HRC</p>
 <p>Chamber Pressure</p>
 <p>58,000 PSI</p>
-<h2 id="22-ballistic-performance"><strong>2.2 Ballistic Performance</strong></h2>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Muzzle Velocity</p>
+<h3 id="22-ballistic-performance">2.2 Ballistic Performance</h3>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Muzzle Velocity</p>
 <p>1,120 m/s</p>
 <p>Muzzle Energy</p>
 <p>1,752 J</p>
@@ -54,11 +98,11 @@
 <p>Terminal Yaw at 25m</p>
 <p>&lt;3 mm deviation</p>
 <p>The 1,752 J muzzle energy from a 150mm barrel represents approximately 3× the energy of a 9×19mm Parabellum from a comparable barrel length. This performance is achieved through the small-calibre, high-velocity design approach—trading projectile frontal area for velocity to maximise sectional density and kinetic energy density for armour defeat. The tungsten carbide core at 65 HRC provides sufficient hardness to maintain projectile geometry through the armour-steel interface.</p>
-<h1 id="3-barrel-and-suppressor"><strong>3. Barrel and Suppressor</strong></h1>
-<h2 id="31-barrel-construction"><strong>3.1 Barrel Construction</strong></h2>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Material</p>
+<h2 id="3-barrel-and-suppressor">3. Barrel and Suppressor</h2>
+<h3 id="31-barrel-construction">3.1 Barrel Construction</h3>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Material</p>
 <p>Vacuum arc remelted steel</p>
 <p>Length</p>
 <p>150 mm (5.9")</p>
@@ -70,10 +114,10 @@
 <p>Extended throat design</p>
 <p>Life Rating</p>
 <p>75,000 rounds</p>
-<h2 id="32-integrated-suppressor"><strong>3.2 Integrated Suppressor</strong></h2>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Length</p>
+<h3 id="32-integrated-suppressor">3.2 Integrated Suppressor</h3>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Length</p>
 <p>95 mm</p>
 <p>Diameter</p>
 <p>28 mm</p>
@@ -85,12 +129,12 @@
 <p>95%</p>
 <p>Service Life</p>
 <p>25,000 rounds</p>
-<h1 id="4-operating-system"><strong>4. Operating System</strong></h1>
-<h2 id="41-roller-delayed-blowback"><strong>4.1 Roller-Delayed Blowback</strong></h2>
+<h2 id="4-operating-system">4. Operating System</h2>
+<h3 id="41-roller-delayed-blowback">4.1 Roller-Delayed Blowback</h3>
 <p>The 7mm diameter hardened steel rollers at 47° locking angle provide a 1:4.7 delay ratio, retarding bolt opening until chamber pressure drops to safe extraction levels. The unlocking pressure of 22,000 PSI (at this ratio, the bolt begins moving when felt pressure is approximately 4,700 PSI, below the safe case extraction threshold) provides a margin of safety for the extended chamber throat that accommodates the high-pressure cartridge.</p>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Roller Diameter</p>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Roller Diameter</p>
 <p>7 mm</p>
 <p>Locking Angle</p>
 <p>47°</p>
@@ -102,20 +146,20 @@
 <p>900 rpm</p>
 <p>Bolt Velocity</p>
 <p>8.5 m/s max</p>
-<h2 id="42-recoil-system"><strong>4.2 Recoil System</strong></h2>
+<h3 id="42-recoil-system">4.2 Recoil System</h3>
 <p>Chrome silicon primary recoil spring with flat wire overstress secondary spring and tungsten-filled polymer buffer provide 7.8 ft-lbs recoil energy management and 0.15 second recovery time. This recovery rate supports the 900 rpm cycle rate during sustained automatic fire.</p>
-<h1 id="5-trigger-mechanism"><strong>5. Trigger Mechanism</strong></h1>
-<p><strong>Stage</strong></p>
-<p><strong>Pull Weight</strong></p>
-<p>First Stage (DA)</p>
+<h2 id="5-trigger-mechanism">5. Trigger Mechanism</h2>
+<p><strong>Stage</strong>
+<strong>Pull Weight</strong>
+First Stage (DA)</p>
 <p>4.5 lbs</p>
 <p>Second Stage (SA)</p>
 <p>5.5 lbs</p>
-<p><strong>Stage</strong></p>
-<p><strong>Pull Weight</strong></p>
-<p><strong>Travel</strong></p>
-<p><strong>Reset</strong></p>
-<p>First Stage (DA)</p>
+<p><strong>Stage</strong>
+<strong>Pull Weight</strong>
+<strong>Travel</strong>
+<strong>Reset</strong>
+First Stage (DA)</p>
 <p>4.5 lbs</p>
 <p>8 mm</p>
 <p>3 mm</p>
@@ -124,10 +168,10 @@
 <p>4 mm</p>
 <p>Positive click</p>
 <p>S7 tool steel sear at RC 58-60 provides the defined engagement surface for consistent trigger pull weight. MP35N alloy springs maintain spring rate stability over the 15,000-round spring replacement interval. The double-action first stage with defined break at the second stage accommodates both administrative handling (DA first pull) and combat accuracy (SA second pull) in the same trigger system.</p>
-<h1 id="6-feed-system-and-magazine"><strong>6. Feed System and Magazine</strong></h1>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Magazine Body</p>
+<h2 id="6-feed-system-and-magazine">6. Feed System and Magazine</h2>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Magazine Body</p>
 <p>17-7 PH stainless steel</p>
 <p>Capacity</p>
 <p>30 rounds</p>
@@ -137,10 +181,10 @@
 <p>32°</p>
 <p>Feed Lip Spread</p>
 <p>4.2 mm</p>
-<h1 id="7-physical-specifications"><strong>7. Physical Specifications</strong></h1>
-<p><strong>Parameter</strong></p>
-<p><strong>Value</strong></p>
-<p>Overall Length</p>
+<h2 id="7-physical-specifications">7. Physical Specifications</h2>
+<p><strong>Parameter</strong>
+<strong>Value</strong>
+Overall Length</p>
 <p>225 mm</p>
 <p>Height</p>
 <p>145 mm</p>
@@ -154,10 +198,10 @@
 <p>890 g</p>
 <p>Weight Loaded</p>
 <p>1,165 g</p>
-<h1 id="8-reliability"><strong>8. Reliability</strong></h1>
-<p><strong>Parameter</strong></p>
-<p><strong>Specification</strong></p>
-<p>MRBF</p>
+<h2 id="8-reliability">8. Reliability</h2>
+<p><strong>Parameter</strong>
+<strong>Specification</strong>
+MRBF</p>
 <p>15,000 rounds</p>
 <p>FTF Rate</p>
 <p>&lt;1:5,000</p>
@@ -165,16 +209,41 @@
 <p>-40°C to +60°C</p>
 <p>Environmental</p>
 <p>MIL-STD-810H full compliance</p>
-<h1 id="9-mechanical-round-counter"><strong>9. Mechanical Round Counter</strong></h1>
+<h2 id="9-mechanical-round-counter">9. Mechanical Round Counter</h2>
 <p>The 000-999 mechanical digital counter with tritium illumination tracks round count and burst statistics through a slide-linked pawl mechanism. The counter is positioned on the left frame for positive visibility during administrative handling. Tool-less reset button enables rapid counter reset after confirmed maintenance.</p>
-<h1 id="10-conclusion"><strong>10. Conclusion</strong></h1>
+<h2 id="10-conclusion">10. Conclusion</h2>
 <p>The MP-4.6M Guardian provides 1,752 J muzzle energy, 15mm RHA penetration at 25m, and 30-round capacity in an 890g platform with integrated suppressor. As a companion to the MP-4.6M Defender PDW, it enables consistent training with a shared cartridge across both weapons and provides effective armour-defeating capability in pistol format. The roller-delayed blowback system delivers the 15,000-round MRBF and 75,000-round barrel life required for service use.</p>
-<h1 id="11-references"><strong>11. References</strong></h1>
+<h2 id="11-references">11. References</h2>
 <p>[1] Ezell, E.C. (1988). Handguns of the World. Stackpole Books.</p>
 <p>[2] Wikipedia. (2024). HK 4.6×30mm cartridge. Wikimedia Foundation.</p>
 <p>[3] Hutchcroft, I. (2009). Roller-delayed blowback actions. Small Arms Review, 12(9).</p>
 <p>[4] Jane's Infantry Weapons. (2023). Advanced Combat Pistol Systems. Jane's Defence Group.</p>
 <p>[5] Cutshaw, C.Q. (2011). Tactical Small Arms of the 21st Century. Gun Digest Books.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

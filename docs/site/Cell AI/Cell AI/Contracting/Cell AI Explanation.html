@@ -3,55 +3,123 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Cell AI Explanation</title>
+  <meta name="description" content="Think of this AI system as a digital version of how your brain's cells process and remember information. Your brain doesn't store memories like a computer stores files - it's more like a complex network that changes its connections based on what it experiences. This AI system…"/>
+  <title>Complete Guide to Cellular Memory AI Systems: From Math to Intuition · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../../index.html">Index</a>
-    <span class="path">Cell AI\Cell AI\Contracting\Cell AI Explanation.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../../index.html">Library</a>
+        <a href="../../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="complete-guide-to-cellular-memory-ai-systems-from-math-to-intuition">Complete Guide to Cellular Memory AI Systems: From Math to Intuition</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#introduction">Introduction</a></li>
+        <li class="toc-depth-2"><a href="#part-i-the-plain-english-explanation">PART I: THE PLAIN ENGLISH EXPLANATION</a></li>
+        <li class="toc-depth-3"><a href="#what-is-this-system-really">What Is This System, Really?</a></li>
+        <li class="toc-depth-3"><a href="#the-building-blocks-visualized">The Building Blocks - Visualized</a></li>
+        <li class="toc-depth-3"><a href="#how-information-flows-through-the-system">How Information Flows Through The System</a></li>
+        <li class="toc-depth-3"><a href="#why-divide-into-partitions">Why Divide Into Partitions?</a></li>
+        <li class="toc-depth-2"><a href="#part-ii-the-complete-mathematical-framework">PART II: THE COMPLETE MATHEMATICAL FRAMEWORK</a></li>
+        <li class="toc-depth-3"><a href="#1-core-mathematical-framework">1. Core Mathematical Framework</a></li>
+        <li class="toc-depth-4"><a href="#11-the-fundamental-equation">1.1 The Fundamental Equation</a></li>
+        <li class="toc-depth-4"><a href="#111-input-processing-function-fi-s-t">1.1.1 Input Processing Function $f(I, S, t)$</a></li>
+        <li class="toc-depth-4"><a href="#112-decay-term-gamma-s">1.1.2 Decay Term $-\gamma S$</a></li>
+        <li class="toc-depth-4"><a href="#113-diffusion-term-dnabla2-s">1.1.3 Diffusion Term $D\nabla^2 S$</a></li>
+        <li class="toc-depth-4"><a href="#114-noise-term-etat">1.1.4 Noise Term $\eta(t)$</a></li>
+        <li class="toc-depth-3"><a href="#12-state-transitions">1.2 State Transitions</a></li>
+        <li class="toc-depth-3"><a href="#13-memory-formation">1.3 Memory Formation</a></li>
+        <li class="toc-depth-2"><a href="#2-numerical-implementation">2. Numerical Implementation</a></li>
+        <li class="toc-depth-3"><a href="#21-euler-integration">2.1 Euler Integration</a></li>
+        <li class="toc-depth-3"><a href="#22-parallel-decomposition">2.2 Parallel Decomposition</a></li>
+        <li class="toc-depth-2"><a href="#3-learning-mechanisms">3. Learning Mechanisms</a></li>
+        <li class="toc-depth-3"><a href="#31-state-dependent-plasticity">3.1 State-Dependent Plasticity</a></li>
+        <li class="toc-depth-3"><a href="#32-metaplasticity">3.2 Metaplasticity</a></li>
+        <li class="toc-depth-2"><a href="#4-network-architecture-implementation">4. Network Architecture Implementation</a></li>
+        <li class="toc-depth-3"><a href="#41-input-processing-layer">4.1 Input Processing Layer</a></li>
+        <li class="toc-depth-3"><a href="#42-state-evolution-layer">4.2 State Evolution Layer</a></li>
+        <li class="toc-depth-3"><a href="#43-output-layer">4.3 Output Layer</a></li>
+        <li class="toc-depth-2"><a href="#5-a-concrete-example-following-cellular-memory-step-by-step">5. A Concrete Example: Following Cellular Memory Step by Step</a></li>
+        <li class="toc-depth-3"><a href="#initial-setup">Initial Setup:</a></li>
+        <li class="toc-depth-3"><a href="#for-a-single-time-step-t50">For a Single Time Step (t=50):</a></li>
+        <li class="toc-depth-2"><a href="#6-from-mathematics-to-real-world-applications">6. From Mathematics to Real-World Applications</a></li>
+        <li class="toc-depth-3"><a href="#pattern-recognition">Pattern Recognition</a></li>
+        <li class="toc-depth-3"><a href="#memory-and-learning">Memory and Learning</a></li>
+        <li class="toc-depth-3"><a href="#biological-modeling">Biological Modeling</a></li>
+        <li class="toc-depth-2"><a href="#7-implementation-challenges-and-solutions">7. Implementation Challenges and Solutions</a></li>
+        <li class="toc-depth-3"><a href="#numerical-stability">Numerical Stability</a></li>
+        <li class="toc-depth-3"><a href="#computational-efficiency">Computational Efficiency</a></li>
+        <li class="toc-depth-3"><a href="#parameter-tuning">Parameter Tuning</a></li>
+        <li class="toc-depth-2"><a href="#8-extending-the-mathematical-framework">8. Extending the Mathematical Framework</a></li>
+        <li class="toc-depth-3"><a href="#hierarchical-organization">Hierarchical Organization</a></li>
+        <li class="toc-depth-3"><a href="#attention-mechanisms">Attention Mechanisms</a></li>
+        <li class="toc-depth-3"><a href="#multi-modal-integration">Multi-Modal Integration</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Complete Guide to Cellular Memory AI Systems: From Math to Intuition</h1>
+          <p class="doc-meta">Cell AI\Cell AI\Contracting\Cell AI Explanation.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This document provides both a rigorous mathematical explanation <em>and</em> an intuitive understanding of the Cellular Memory AI system. We'll break down each component in both mathematical terms and everyday language.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="introduction">Introduction</h2>
 <p>This document provides both a rigorous mathematical explanation <em>and</em> an intuitive understanding of the Cellular Memory AI system. We'll break down each component in both mathematical terms and everyday language.</p>
 <h2 id="part-i-the-plain-english-explanation">PART I: THE PLAIN ENGLISH EXPLANATION</h2>
 <h3 id="what-is-this-system-really">What Is This System, Really?</h3>
 <p>Think of this AI system as a digital version of how your brain's cells process and remember information. Your brain doesn't store memories like a computer stores files - it's more like a complex network that changes its connections based on what it experiences.</p>
-<p>This AI system works in a similar way:<br />
-- It takes in signals (like your senses take in the world)<br />
-- It processes those signals across multiple "memory cells" that work together<br />
-- These cells change their internal state based on what they experience<br />
+<p>This AI system works in a similar way:
+- It takes in signals (like your senses take in the world)
+- It processes those signals across multiple "memory cells" that work together
+- These cells change their internal state based on what they experience
 - Over time, the system "remembers" patterns it has seen before</p>
 <h3 id="the-building-blocks-visualized">The Building Blocks - Visualized</h3>
-<p>Imagine each memory cell as a jar of water:<br />
-- <strong>Input Signals (I)</strong> are like adding colored dye to the water<br />
-- <strong>State Variables (S)</strong> represent the current color of the water<br />
-- <strong>Decay</strong> means the color naturally fades over time<br />
-- <strong>Diffusion</strong> is like the color spreading between connected jars<br />
+<p>Imagine each memory cell as a jar of water:
+- <strong>Input Signals (I)</strong> are like adding colored dye to the water
+- <strong>State Variables (S)</strong> represent the current color of the water
+- <strong>Decay</strong> means the color naturally fades over time
+- <strong>Diffusion</strong> is like the color spreading between connected jars
 - <strong>Noise</strong> is like random drops of different colors occasionally falling in</p>
-<p>The system learns by adjusting:<br />
-- Which colors it responds to most strongly<br />
-- How quickly colors fade<br />
-- How colors spread between jars<br />
+<p>The system learns by adjusting:
+- Which colors it responds to most strongly
+- How quickly colors fade
+- How colors spread between jars
 - How it interprets the resulting color patterns</p>
 <h3 id="how-information-flows-through-the-system">How Information Flows Through The System</h3>
 <ol>
 <li><strong>Information Enters</strong>: Input signals arrive (like pouring dye into specific jars)</li>
-<li><strong>Processing Occurs</strong>: Each jar changes color based on:<br />
-   - What color was added (input)<br />
-   - Its current color (state)<br />
-   - Colors of neighboring jars (diffusion)<br />
-   - Natural fading (decay)<br />
+<li><strong>Processing Occurs</strong>: Each jar changes color based on:
+   - What color was added (input)
+   - Its current color (state)
+   - Colors of neighboring jars (diffusion)
+   - Natural fading (decay)
    - Random droplets (noise)</li>
 <li><strong>System Remembers</strong>: The pattern of colors across all jars represents what the system has learned</li>
 <li><strong>System Responds</strong>: The final color pattern determines the output</li>
 </ol>
 <h3 id="why-divide-into-partitions">Why Divide Into Partitions?</h3>
 <p>Imagine trying to stir 100 jars of water at once - it's impossible for one person! Instead, we have multiple people (computer processors) each responsible for a few jars, and they talk to each other about what's happening in their jars.</p>
-<p>This parallel approach makes the system:<br />
-- Much faster (multiple updates happen simultaneously)<br />
-- More scalable (can handle larger memory capacity)<br />
+<p>This parallel approach makes the system:
+- Much faster (multiple updates happen simultaneously)
+- More scalable (can handle larger memory capacity)
 - More like real biological systems (your brain works in parallel too)</p>
 <h2 id="part-ii-the-complete-mathematical-framework">PART II: THE COMPLETE MATHEMATICAL FRAMEWORK</h2>
 <h3 id="1-core-mathematical-framework">1. Core Mathematical Framework</h3>
@@ -85,10 +153,10 @@ activation = self.sigma(weighted_input)
 state_coupling = self.phi(torch.mv(self.E, state))
 f_term = activation * state_coupling
 </code></pre>
-<p><strong>What this means intuitively</strong>: The system transforms incoming information by:<br />
-1. Weighting different aspects of the input differently (some parts matter more)<br />
-2. Applying a sigmoid function (turns numbers into values between 0 and 1)<br />
-3. Combining this with the current state through another function<br />
+<p><strong>What this means intuitively</strong>: The system transforms incoming information by:
+1. Weighting different aspects of the input differently (some parts matter more)
+2. Applying a sigmoid function (turns numbers into values between 0 and 1)
+3. Combining this with the current state through another function
 4. The result determines how strongly the input affects the state</p>
 <h4 id="112-decay-term-gamma-s">1.1.2 Decay Term $-\gamma S$</h4>
 <p>This term ensures that state values naturally decay over time unless reinforced. The parameter $\gamma$ controls how quickly the memory fades.</p>
@@ -115,18 +183,18 @@ else:
 <h3 id="12-state-transitions">1.2 State Transitions</h3>
 <p>The system also models probabilistic transitions between states, governed by:</p>
 <p>$$P(S_i \rightarrow S_j) = \frac{\exp(-\Delta E_{ij}/kT)}{Z}$$</p>
-<p>Where:<br />
-- $Z = \sum_k \exp(-\Delta E_{ik}/kT)$ is a normalization factor<br />
-- $\Delta E_{ij} = E_j - E_i - \sum_k \lambda_k I_k$ is the energy difference between states<br />
+<p>Where:
+- $Z = \sum_k \exp(-\Delta E_{ik}/kT)$ is a normalization factor
+- $\Delta E_{ij} = E_j - E_i - \sum_k \lambda_k I_k$ is the energy difference between states
 - $kT$ represents the "temperature" of the system (higher temperature = more randomness)</p>
 <p><strong>What this means intuitively</strong>: The system is more likely to transition to lower "energy" states, like a ball rolling downhill. The inputs can change which states have lower energy, effectively "tilting the landscape" to guide the system toward certain states.</p>
 <h3 id="13-memory-formation">1.3 Memory Formation</h3>
 <p>Memory formation is modeled as:</p>
 <p>$$M(t) = \int_{t-\tau}^{t} w(t-s)I(s)ds + \int_{0}^{t} K(t-s)S(s)ds$$</p>
-<p>Where:<br />
-- $w(t) = \exp(-t/\tau_1) - \exp(-t/\tau_2)$ is a temporal weighting function<br />
-- $K(t) = \alpha \exp(-t/\tau_m)$ is a kernel function<br />
-- The first integral represents recent inputs<br />
+<p>Where:
+- $w(t) = \exp(-t/\tau_1) - \exp(-t/\tau_2)$ is a temporal weighting function
+- $K(t) = \alpha \exp(-t/\tau_m)$ is a kernel function
+- The first integral represents recent inputs
 - The second integral represents the accumulated state history</p>
 <p><strong>What this means intuitively</strong>: Memory depends on both recent inputs and the accumulated history of states. Recent events have a stronger influence than older ones, and the system weights them using specific mathematical functions.</p>
 <h2 id="2-numerical-implementation">2. Numerical Implementation</h2>
@@ -140,16 +208,16 @@ else:
 <h3 id="22-parallel-decomposition">2.2 Parallel Decomposition</h3>
 <p>The state space is partitioned into multiple sections that can be processed in parallel:</p>
 <p>$$S = [S^{(1)}, S^{(2)}, \ldots, S^{(n)}]$$</p>
-<p>Each partition $S^{(i)}$ is updated based on:<br />
-- Its own current state<br />
-- Input specific to that partition<br />
+<p>Each partition $S^{(i)}$ is updated based on:
+- Its own current state
+- Input specific to that partition
 - States of neighboring partitions</p>
 <p>In the code:</p>
 <pre><code class="language-python">class Partition:
-    &quot;&quot;&quot;
+    """
     Implements parallel state evolution for a partition π of the state space
     Following Section 1.1 of the parallel model
-    &quot;&quot;&quot;
+    """
     def __init__(self, partition_id: int, params: ModelParams):
         self.id = partition_id
         self.params = params
@@ -166,8 +234,8 @@ else:
 <h3 id="31-state-dependent-plasticity">3.1 State-Dependent Plasticity</h3>
 <p>The system adjusts connection weights according to:</p>
 <p>$$\frac{dw_{ij}}{dt} = \eta(S_i, S_j) \cdot H(I, \theta)$$</p>
-<p>Where:<br />
-- $\eta(S_i, S_j) = \eta_0 \cdot \exp(-|S_i - S_j|/\sigma)$ is a learning rate function<br />
+<p>Where:
+- $\eta(S_i, S_j) = \eta_0 \cdot \exp(-|S_i - S_j|/\sigma)$ is a learning rate function
 - $H(I, \theta) = \mathrm{sigmoid}(I - \theta)$ is a threshold function</p>
 <p><strong>What this means intuitively</strong>: The connections between components change strength based on their activity patterns. Components that are active together strengthen their connections (similar to "neurons that fire together, wire together").</p>
 <h3 id="32-metaplasticity">3.2 Metaplasticity</h3>
@@ -177,11 +245,11 @@ else:
 <h2 id="4-network-architecture-implementation">4. Network Architecture Implementation</h2>
 <p>Let's look at the code structure that implements these mathematical concepts:</p>
 <pre><code class="language-python">class MemoryCell(nn.Module):
-    &quot;&quot;&quot;
+    """
     Implementation of core equations from Section 2.1:
     dS/dt = f(I, S, t) - γS + D∇²S + η(t)
     with parallel decomposition for partitions
-    &quot;&quot;&quot;
+    """
     def __init__(self, state_size: int):
         super().__init__()
         # Weight matrices for f(I, S, t) = ∑ᵢ wᵢfᵢ(I, S, t)
@@ -196,19 +264,19 @@ else:
 </code></pre>
 <p>The architecture has three main components:</p>
 <h3 id="41-input-processing-layer">4.1 Input Processing Layer</h3>
-<p>Translates raw inputs into representations the system can work with:<br />
-- Applies weights to different input features<br />
-- Transforms inputs through nonlinear functions<br />
+<p>Translates raw inputs into representations the system can work with:
+- Applies weights to different input features
+- Transforms inputs through nonlinear functions
 - Prepares the input for affecting the state</p>
 <h3 id="42-state-evolution-layer">4.2 State Evolution Layer</h3>
-<p>Maintains and updates the system's memory state:<br />
-- Implements the differential equation<br />
-- Handles diffusion between components<br />
+<p>Maintains and updates the system's memory state:
+- Implements the differential equation
+- Handles diffusion between components
 - Applies decay and noise</p>
 <h3 id="43-output-layer">4.3 Output Layer</h3>
-<p>Interprets the system's state to produce useful outputs:<br />
-- Maps internal states to recognizable patterns<br />
-- Provides interfaces for downstream applications<br />
+<p>Interprets the system's state to produce useful outputs:
+- Maps internal states to recognizable patterns
+- Provides interfaces for downstream applications
 - Translates system knowledge into actionable information</p>
 <h2 id="5-a-concrete-example-following-cellular-memory-step-by-step">5. A Concrete Example: Following Cellular Memory Step by Step</h2>
 <p>Let's trace through a specific example to see how this works:</p>
@@ -221,95 +289,95 @@ else:
 <h3 id="for-a-single-time-step-t50">For a Single Time Step (t=50):</h3>
 <ol>
 <li>
-<p><strong>Gather Current States</strong>:<br />
-   - Each partition reports its current state vector<br />
+<p><strong>Gather Current States</strong>:
+   - Each partition reports its current state vector
    - Example: Partition 1's state might be [0.2, -0.3, 0.1, ..., 0.4]</p>
 </li>
 <li>
-<p><strong>Determine Neighbors</strong>:<br />
-   - Partition 1's neighbors are Partitions 0 and 2<br />
+<p><strong>Determine Neighbors</strong>:
+   - Partition 1's neighbors are Partitions 0 and 2
    - We collect their states for the diffusion calculation</p>
 </li>
 <li>
-<p><strong>Process Input</strong>:<br />
-   - Current input value is sin(2π·50·0.01) = sin(π) = 0<br />
+<p><strong>Process Input</strong>:
+   - Current input value is sin(2π·50·0.01) = sin(π) = 0
    - This gets fed into each partition's memory cell</p>
 </li>
 <li>
 <p><strong>Update Each Partition</strong> (happens in parallel):</p>
 </li>
 </ol>
-<p>For Partition 1:<br />
-   - Calculate f_term: <br />
-<code>weighted_input = W · input = [0, 0, ..., 0]
+<p>For Partition 1:
+   - Calculate f_term: 
+     <code>weighted_input = W · input = [0, 0, ..., 0]
      activation = sigmoid(weighted_input) ≈ [0.5, 0.5, ..., 0.5]
      state_coupling = tanh(E · state) = [values between -1 and 1]
      f_term = activation * state_coupling = [small values]</code></p>
 <ul>
 <li>
-<p>Calculate diffusion:<br />
-<code>neighbor_mean = (state_0 + state_2)/2
+<p>Calculate diffusion:
+     <code>neighbor_mean = (state_0 + state_2)/2
      diffusion = 0.1 * (neighbor_mean - state_1)</code></p>
 </li>
 <li>
-<p>Calculate decay:<br />
-<code>decay = -0.1 * state_1</code></p>
+<p>Calculate decay:
+     <code>decay = -0.1 * state_1</code></p>
 </li>
 <li>
-<p>Add noise:<br />
-<code>noise = 0.01 * random_values</code></p>
+<p>Add noise:
+     <code>noise = 0.01 * random_values</code></p>
 </li>
 <li>
-<p>Combine and update:<br />
-<code>d_state = f_term + diffusion + decay + noise
+<p>Combine and update:
+     <code>d_state = f_term + diffusion + decay + noise
      new_state = state + 0.01 * d_state</code></p>
 </li>
 </ul>
 <ol start="5">
-<li><strong>Repeat for All Time Steps</strong>:<br />
-   - This process repeats for all 1000 time steps<br />
-   - The states evolve according to the input patterns<br />
+<li><strong>Repeat for All Time Steps</strong>:
+   - This process repeats for all 1000 time steps
+   - The states evolve according to the input patterns
    - The system gradually develops a "memory" of the input patterns</li>
 </ol>
 <h2 id="6-from-mathematics-to-real-world-applications">6. From Mathematics to Real-World Applications</h2>
 <p>Here's how these mathematical concepts translate to real-world capabilities:</p>
 <h3 id="pattern-recognition">Pattern Recognition</h3>
-<p>The system can learn to recognize temporal patterns in data:<br />
-- Financial time series (market patterns)<br />
-- Speech recognition (phoneme sequences)<br />
+<p>The system can learn to recognize temporal patterns in data:
+- Financial time series (market patterns)
+- Speech recognition (phoneme sequences)
 - User behavior (interaction patterns)</p>
 <h3 id="memory-and-learning">Memory and Learning</h3>
-<p>The system exhibits several types of memory:<br />
-- <strong>Short-term memory</strong>: Recent inputs affect the current state<br />
-- <strong>Long-term memory</strong>: Repeated patterns change the weight matrices<br />
+<p>The system exhibits several types of memory:
+- <strong>Short-term memory</strong>: Recent inputs affect the current state
+- <strong>Long-term memory</strong>: Repeated patterns change the weight matrices
 - <strong>Associative memory</strong>: Similar inputs produce similar state patterns</p>
 <h3 id="biological-modeling">Biological Modeling</h3>
-<p>The system can model biological memory processes:<br />
-- Cell signaling cascades<br />
-- Neuronal network dynamics<br />
+<p>The system can model biological memory processes:
+- Cell signaling cascades
+- Neuronal network dynamics
 - Synaptic plasticity mechanisms</p>
 <h2 id="7-implementation-challenges-and-solutions">7. Implementation Challenges and Solutions</h2>
 <p>Working with this mathematical framework presents several challenges:</p>
 <h3 id="numerical-stability">Numerical Stability</h3>
-<p>The differential equations can become unstable if parameters are poorly chosen:<br />
-- <strong>Solution</strong>: Careful parameter selection and normalization techniques<br />
-- <strong>Parameter ranges</strong>: <br />
-  - dt: 0.001-0.01 (smaller for stability)<br />
-  - gamma: 0.05-0.2 (controls memory duration)<br />
-  - D: 0.05-0.5 (controls information spread)<br />
+<p>The differential equations can become unstable if parameters are poorly chosen:
+- <strong>Solution</strong>: Careful parameter selection and normalization techniques
+- <strong>Parameter ranges</strong>: 
+  - dt: 0.001-0.01 (smaller for stability)
+  - gamma: 0.05-0.2 (controls memory duration)
+  - D: 0.05-0.5 (controls information spread)
   - eta: 0.001-0.05 (adds robustness without overwhelming)</p>
 <h3 id="computational-efficiency">Computational Efficiency</h3>
-<p>The parallel computation requires efficient coordination:<br />
-- <strong>Solution</strong>: Ray framework for distributed computing<br />
-- <strong>GPU acceleration</strong>: Each partition can utilize GPU computation<br />
+<p>The parallel computation requires efficient coordination:
+- <strong>Solution</strong>: Ray framework for distributed computing
+- <strong>GPU acceleration</strong>: Each partition can utilize GPU computation
 - <strong>Neighbor communication</strong>: Minimized to reduce overhead</p>
 <pre><code class="language-python">@ray.remote(num_gpus=0.2)  # Assume 5 partitions per GPU
 class Partition:
     # Implementation details...
 </code></pre>
 <h3 id="parameter-tuning">Parameter Tuning</h3>
-<p>Finding optimal parameters is challenging:<br />
-- <strong>Solution</strong>: Grid search or evolutionary optimization<br />
+<p>Finding optimal parameters is challenging:
+- <strong>Solution</strong>: Grid search or evolutionary optimization
 - <strong>Metrics</strong>: Pattern recognition accuracy, memory duration, noise robustness</p>
 <h2 id="8-extending-the-mathematical-framework">8. Extending the Mathematical Framework</h2>
 <p>The basic framework can be extended in several ways:</p>
@@ -337,6 +405,31 @@ class Partition:
 </ul>
 <p>By understanding both the rigorous mathematics and the intuitive concepts, we can appreciate how this system mimics biological memory to create a powerful and flexible artificial intelligence architecture.</p>
 <p>This approach moves beyond traditional neural networks to create systems that can learn temporal patterns, maintain state information, and process information in ways more similar to biological systems - potentially opening new frontiers in AI capabilities.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

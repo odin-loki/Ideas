@@ -3,22 +3,67 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>math-proof</title>
+  <meta name="description" content="We outline definitions for teacher–student distillation and a policy-gradient RL phase, then sketch local convergence claims for each phase and a combined loss. The arguments are informal; a venue-ready version would state measure-theoretic assumptions, learning rates, and…"/>
+  <title>Mathematical Proof of Transformer Distillation–RL Convergence · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Break AES\math-proof.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="mathematical-proof-of-transformer-distillation-rl-convergence">Mathematical Proof of Transformer Distillation-RL Convergence</h1>
-<h2 id="1-definitions-and-setup">1. Definitions and Setup</h2>
-<p>Let:<br />
-- T(x) be the teacher model (Llama)<br />
-- S(x) be the student model (our transformer)<br />
-- π(a|s) be the policy (probability of selecting action a in state s)<br />
-- R(a,s) be the reward function<br />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-definitions-and-setup">1. Definitions and setup</a></li>
+        <li class="toc-depth-2"><a href="#2-knowledge-distillation-phase">2. Knowledge Distillation Phase</a></li>
+        <li class="toc-depth-3"><a href="#21-distillation-loss">2.1 Distillation Loss</a></li>
+        <li class="toc-depth-3"><a href="#22-convergence-of-distillation">2.2 Convergence of Distillation</a></li>
+        <li class="toc-depth-2"><a href="#3-reinforcement-learning-phase">3. Reinforcement Learning Phase</a></li>
+        <li class="toc-depth-3"><a href="#31-policy-gradient">3.1 Policy Gradient</a></li>
+        <li class="toc-depth-3"><a href="#32-advantage-estimation">3.2 Advantage Estimation</a></li>
+        <li class="toc-depth-3"><a href="#33-policy-update">3.3 Policy Update</a></li>
+        <li class="toc-depth-2"><a href="#4-combined-convergence">4. Combined Convergence</a></li>
+        <li class="toc-depth-3"><a href="#41-gradient-properties">4.1 Gradient Properties</a></li>
+        <li class="toc-depth-3"><a href="#42-convergence-proof">4.2 Convergence Proof</a></li>
+        <li class="toc-depth-2"><a href="#5-error-bounds">5. Error Bounds</a></li>
+        <li class="toc-depth-2"><a href="#6-sample-complexity">6. Sample Complexity</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Mathematical Proof of Transformer Distillation–RL Convergence</h1>
+          <p class="doc-meta">Break AES\math-proof.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>Sketch of a two-phase training story: distillation provides initialization; RL optimizes rewards. Notation below is standard; tighten assumptions for a formal venue.</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Sketch of a two-phase training story: distillation provides initialization; RL optimizes rewards. Notation below is standard; tighten assumptions for a formal venue.</em></p>
+<h2 id="abstract">Abstract</h2>
+<p>We outline definitions for teacher–student distillation and a policy-gradient RL phase, then sketch local convergence claims for each phase and a combined loss. The arguments are informal; a venue-ready version would state measure-theoretic assumptions, learning rates, and non-convexity caveats explicitly.</p>
+<h2 id="1-definitions-and-setup">1. Definitions and setup</h2>
+<p>Let:
+- T(x) be the teacher model (Llama)
+- S(x) be the student model (our transformer)
+- π(a|s) be the policy (probability of selecting action a in state s)
+- R(a,s) be the reward function
 - D(P||Q) be the KL divergence between distributions P and Q</p>
 <h2 id="2-knowledge-distillation-phase">2. Knowledge Distillation Phase</h2>
 <h3 id="21-distillation-loss">2.1 Distillation Loss</h3>
@@ -26,77 +71,102 @@
 <p>LD = τ² * D(softmax(T(x)/τ) || softmax(S(x)/τ))</p>
 <h3 id="22-convergence-of-distillation">2.2 Convergence of Distillation</h3>
 <p>Theorem 1: Under suitable conditions, the distillation loss converges to a local minimum.</p>
-<p>Proof:<br />
-1. The KL divergence D(P||Q) ≥ 0 for all P,Q<br />
-2. D(P||Q) = 0 iff P = Q<br />
-3. The gradient descent update rule:<br />
-   θt+1 = θt - η∇θLD(θt)<br />
-4. Given the loss is bounded below by 0 and smooth, by the monotone convergence theorem:<br />
+<p>Proof:
+1. The KL divergence D(P||Q) ≥ 0 for all P,Q
+2. D(P||Q) = 0 iff P = Q
+3. The gradient descent update rule:
+   θt+1 = θt - η∇θLD(θt)
+4. Given the loss is bounded below by 0 and smooth, by the monotone convergence theorem:
    lim(t→∞) LD(θt) exists and ∇θLD(θt) → 0</p>
 <h2 id="3-reinforcement-learning-phase">3. Reinforcement Learning Phase</h2>
 <h3 id="31-policy-gradient">3.1 Policy Gradient</h3>
-<p>The policy gradient objective is:<br />
+<p>The policy gradient objective is:
 J(θ) = E[∑t γt R(st,at)]</p>
-<p>Where:<br />
-- γ is the discount factor<br />
-- st is the state at time t<br />
+<p>Where:
+- γ is the discount factor
+- st is the state at time t
 - at is the action at time t</p>
 <h3 id="32-advantage-estimation">3.2 Advantage Estimation</h3>
-<p>We use the advantage function:<br />
-A(s,a) = Q(s,a) - V(s)<br />
-Where:<br />
-- Q(s,a) is the action-value function<br />
+<p>We use the advantage function:
+A(s,a) = Q(s,a) - V(s)
+Where:
+- Q(s,a) is the action-value function
 - V(s) is the value function</p>
 <h3 id="33-policy-update">3.3 Policy Update</h3>
-<p>The policy gradient theorem gives us:<br />
+<p>The policy gradient theorem gives us:
 ∇θJ(θ) = E[∇θlog π(a|s)A(s,a)]</p>
 <h2 id="4-combined-convergence">4. Combined Convergence</h2>
-<p>Theorem 2: The combined system converges to a local optimum under the following conditions:<br />
-1. The distillation phase provides a good initialization<br />
+<p>Theorem 2: The combined system converges to a local optimum under the following conditions:
+1. The distillation phase provides a good initialization
 2. The RL phase maintains the distilled knowledge while optimizing for rewards</p>
 <p>Proof:</p>
-<p>Let θD be the parameters after distillation and θRL be the final parameters.<br />
-The total loss is:<br />
+<p>Let θD be the parameters after distillation and θRL be the final parameters.
+The total loss is:
 L(θ) = αLD(θ) + (1-α)LRL(θ)</p>
-<p>Where:<br />
-- α balances distillation and RL objectives<br />
-- LD is the distillation loss<br />
+<p>Where:
+- α balances distillation and RL objectives
+- LD is the distillation loss
 - LRL is the negative of the RL objective</p>
 <h3 id="41-gradient-properties">4.1 Gradient Properties</h3>
-<p>The gradient of L(θ) is:<br />
+<p>The gradient of L(θ) is:
 ∇θL(θ) = α∇θLD(θ) + (1-α)∇θLRL(θ)</p>
 <h3 id="42-convergence-proof">4.2 Convergence Proof</h3>
 <ol>
 <li>Both LD and LRL are bounded below</li>
 <li>The combined gradient ∇θL(θ) exists and is continuous</li>
-<li>Using stochastic gradient descent:<br />
+<li>Using stochastic gradient descent:
    θt+1 = θt - η∇θL(θt)</li>
 </ol>
-<p>By the Kushner-Clark theorem, under appropriate learning rate conditions:<br />
+<p>By the Kushner-Clark theorem, under appropriate learning rate conditions:
 lim(t→∞) ∇θL(θt) = 0</p>
 <h2 id="5-error-bounds">5. Error Bounds</h2>
-<p>Theorem 3: The error of the combined system is bounded by:<br />
+<p>Theorem 3: The error of the combined system is bounded by:
 ε ≤ εD + εRL</p>
-<p>Where:<br />
-- εD is the distillation error bound<br />
+<p>Where:
+- εD is the distillation error bound
 - εRL is the RL error bound</p>
-<p>Proof:<br />
-1. By the triangle inequality:<br />
-   ||T(x) - S<em>(x)|| ≤ ||T(x) - SD(x)|| + ||SD(x) - S</em>(x)||<br />
-   Where:<br />
-   - SD is the model after distillation<br />
+<p>Proof:
+1. By the triangle inequality:
+   ||T(x) - S<em>(x)|| ≤ ||T(x) - SD(x)|| + ||SD(x) - S</em>(x)||
+   Where:
+   - SD is the model after distillation
    - S* is the final model</p>
 <ol start="2">
 <li>The first term is bounded by εD due to distillation convergence</li>
 <li>The second term is bounded by εRL due to policy gradient convergence</li>
 </ol>
 <h2 id="6-sample-complexity">6. Sample Complexity</h2>
-<p>The sample complexity for convergence is:<br />
+<p>The sample complexity for convergence is:
 O(1/ε²) for distillation and O(1/(1-γ)³ε²) for the RL phase</p>
-<p>Total sample complexity:<br />
+<p>Total sample complexity:
 N = O(1/ε²) + O(1/(1-γ)³ε²)</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The system converges to a local optimum with error bounds that depend on both the distillation and RL phases. The convergence rate is dominated by the RL phase due to its higher sample complexity.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

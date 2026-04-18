@@ -3,165 +3,246 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>hybrid simulation phase2</title>
+  <meta name="description" content="**General circuit solver** *February 2026 · Series continuation — builds on Phase 1 component models* The first document \(Phase 0\) derived simulation equations for individual components. Phase 1 extended this to eight more components. But individual component models are only…"/>
+  <title>Hybrid component simulation — Phase 2 · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\hybrid_simulation_phase2.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>HYBRID COMPONENT SIMULATION</strong></p>
-<p>Phase 2  ·  General Circuit Solver</p>
-<p><em>Modified Nodal Analysis  ·  Hybrid Time-Stepping  ·  Nonlinear Iteration  ·  GPU Network Simulation</em></p>
-<p>February 2026  ·  Series continuation — builds on Phase 1 component models</p>
-<h1 id="phase-2-overview-what-this-document-covers"><strong>Phase 2 Overview — What This Document Covers</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#phase-2-overview-what-this-document-covers">Phase 2 Overview — What This Document Covers</a></li>
+        <li class="toc-depth-2"><a href="#11-the-incidence-matrix">1.1  The Incidence Matrix</a></li>
+        <li class="toc-depth-2"><a href="#12-branch-types-and-their-equations">1.2  Branch Types and Their Equations</a></li>
+        <li class="toc-depth-2"><a href="#13-example-circuit-graph">1.3  Example Circuit Graph</a></li>
+        <li class="toc-depth-2"><a href="#21-the-mna-stamp-concept">2.1  The MNA Stamp Concept</a></li>
+        <li class="toc-depth-2"><a href="#22-component-stamps">2.2  Component Stamps</a></li>
+        <li class="toc-depth-3"><a href="#resistor-between-nodes-i-and-j-value-r">Resistor between nodes i and j, value R:</a></li>
+        <li class="toc-depth-3"><a href="#capacitor-between-nodes-i-and-j-value-c">Capacitor between nodes i and j, value C:</a></li>
+        <li class="toc-depth-3"><a href="#inductor-between-nodes-i-and-j-value-l-adds-extra-variable-i_l">Inductor between nodes i and j, value L (adds extra variable I_L):</a></li>
+        <li class="toc-depth-3"><a href="#voltage-source-between-nodes-i-and-j-value-v_s-adds-extra-variable-i_s">Voltage source between nodes i and j, value V_s (adds extra variable I_s):</a></li>
+        <li class="toc-depth-2"><a href="#23-hybrid-component-stamps">2.3  Hybrid Component Stamps</a></li>
+        <li class="toc-depth-2"><a href="#24-the-full-mna-system-time-discrete">2.4  The Full MNA System (Time-Discrete)</a></li>
+        <li class="toc-depth-2"><a href="#31-the-newton-raphson-linearisation">3.1  The Newton-Raphson Linearisation</a></li>
+        <li class="toc-depth-2"><a href="#32-newton-raphson-loop">3.2  Newton-Raphson Loop</a></li>
+        <li class="toc-depth-2"><a href="#33-jacobians-for-each-hybrid-component">3.3  Jacobians for Each Hybrid Component</a></li>
+        <li class="toc-depth-3"><a href="#quantum-tunnel-resistor-simmons-model">Quantum Tunnel Resistor (Simmons model):</a></li>
+        <li class="toc-depth-3"><a href="#memristor-hp-model">Memristor (HP model):</a></li>
+        <li class="toc-depth-3"><a href="#josephson-junction-sinusoidal-nonlinearity">Josephson Junction (sinusoidal nonlinearity):</a></li>
+        <li class="toc-depth-2"><a href="#41-the-three-integration-methods">4.1  The Three Integration Methods</a></li>
+        <li class="toc-depth-2"><a href="#42-backward-euler-mna-full-derivation">4.2  Backward Euler MNA (Full Derivation)</a></li>
+        <li class="toc-depth-2"><a href="#43-adaptive-timestep-control">4.3  Adaptive Timestep Control</a></li>
+        <li class="toc-depth-2"><a href="#44-tr-bdf2-implementation">4.4  TR-BDF2 Implementation</a></li>
+        <li class="toc-depth-2"><a href="#51-the-zero-crossing-problem">5.1  The Zero-Crossing Problem</a></li>
+        <li class="toc-depth-2"><a href="#52-guard-conditions-for-each-component">5.2  Guard Conditions for Each Component</a></li>
+        <li class="toc-depth-2"><a href="#53-post-jump-restart">5.3  Post-Jump Restart</a></li>
+        <li class="toc-depth-2"><a href="#61-component-base-class">6.1  Component Base Class</a></li>
+        <li class="toc-depth-2"><a href="#62-concrete-component-implementations">6.2  Concrete Component Implementations</a></li>
+        <li class="toc-depth-2"><a href="#63-the-mna-system-builder">6.3  The MNA System Builder</a></li>
+        <li class="toc-depth-2"><a href="#64-the-top-level-simulation-loop">6.4  The Top-Level Simulation Loop</a></li>
+        <li class="toc-depth-2"><a href="#71-batched-mna-on-gpu-the-key-insight">7.1  Batched MNA on GPU — The Key Insight</a></li>
+        <li class="toc-depth-2"><a href="#72-monte-carlo-yield-analysis">7.2  Monte Carlo Yield Analysis</a></li>
+        <li class="toc-depth-2"><a href="#example-a-memristor-crossbar-44-in-memory-matrix-multiply">Example A: Memristor Crossbar 4×4 — In-Memory Matrix Multiply</a></li>
+        <li class="toc-depth-2"><a href="#example-b-josephson-junction-oscillator-with-gmr-load">Example B: Josephson Junction Oscillator with GMR Load</a></li>
+        <li class="toc-depth-2"><a href="#example-c-lif-spiking-neural-network-3-neurons">Example C: LIF Spiking Neural Network — 3 Neurons</a></li>
+        <li class="toc-depth-2"><a href="#91-spice-behavioural-models">9.1  SPICE Behavioural Models</a></li>
+        <li class="toc-depth-3"><a href="#quantum-tunnel-resistor-spice-model">Quantum Tunnel Resistor SPICE model:</a></li>
+        <li class="toc-depth-3"><a href="#memristor-spice-model-hp-model">Memristor SPICE model (HP model):</a></li>
+        <li class="toc-depth-3"><a href="#python-spice-netlist-generator">Python SPICE netlist generator:</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Hybrid component simulation — Phase 2</h1>
+          <p class="doc-meta">New Classes of Electrical Components\hybrid_simulation_phase2.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>The first document (Phase 0) derived simulation equations for individual components. Phase 1 extended this to eight more components. But individual component models are only useful if you can connect them into actual circuits.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>General circuit solver</strong></p>
+<p><em>Modified Nodal Analysis · Hybrid time-stepping · Nonlinear iteration · GPU network simulation</em></p>
+<p><em>February 2026 · Series continuation — builds on Phase 1 component models</em></p>
+<h2 id="phase-2-overview-what-this-document-covers">Phase 2 Overview — What This Document Covers</h2>
 <p>The first document (Phase 0) derived simulation equations for individual components. Phase 1 extended this to eight more components. But individual component models are only useful if you can connect them into actual circuits.</p>
 <p>Phase 2 builds the general circuit solver: a mathematical engine that takes any network of hybrid components, automatically constructs the governing equations using Kirchhoff's laws, and integrates them forward in time. This is the equivalent of SPICE, but natively handling hybrid discrete-continuous components that SPICE cannot represent.</p>
-<p><strong>Section 1</strong></p>
-<p>Graph theory of circuits — how to represent a network mathematically as nodes and branches</p>
-<p><strong>Section 2</strong></p>
-<p>Modified Nodal Analysis (MNA) — the matrix equation that every circuit simulator is built on</p>
-<p><strong>Section 3</strong></p>
-<p>Handling nonlinear components — Newton-Raphson iteration for resistors, memristors, tunnel junctions</p>
-<p><strong>Section 4</strong></p>
-<p>Time integration — how to step the ODE forward correctly given stiff systems</p>
-<p><strong>Section 5</strong></p>
-<p>Discrete event detection — finding and handling the exact moment a state transition occurs</p>
-<p><strong>Section 6</strong></p>
-<p>The complete HybridCircuit solver class — full Python implementation wiring everything together</p>
-<p><strong>Section 7</strong></p>
-<p>GPU-accelerated network simulation — running thousands of circuit instances in parallel</p>
-<p><strong>Section 8</strong></p>
-<p>Worked examples — three real circuits demonstrating the solver in action</p>
-<p><strong>Section 9</strong></p>
-<p>SPICE export — generating netlist models compatible with standard EDA tools</p>
+<p><strong>Section 1</strong>
+Graph theory of circuits — how to represent a network mathematically as nodes and branches</p>
+<p><strong>Section 2</strong>
+Modified Nodal Analysis (MNA) — the matrix equation that every circuit simulator is built on</p>
+<p><strong>Section 3</strong>
+Handling nonlinear components — Newton-Raphson iteration for resistors, memristors, tunnel junctions</p>
+<p><strong>Section 4</strong>
+Time integration — how to step the ODE forward correctly given stiff systems</p>
+<p><strong>Section 5</strong>
+Discrete event detection — finding and handling the exact moment a state transition occurs</p>
+<p><strong>Section 6</strong>
+The complete HybridCircuit solver class — full Python implementation wiring everything together</p>
+<p><strong>Section 7</strong>
+GPU-accelerated network simulation — running thousands of circuit instances in parallel</p>
+<p><strong>Section 8</strong>
+Worked examples — three real circuits demonstrating the solver in action</p>
+<p><strong>Section 9</strong>
+SPICE export — generating netlist models compatible with standard EDA tools</p>
 <p>SECTION 1  ·  MATHEMATICAL FOUNDATIONS</p>
-<p><strong>Graph Theory of Circuits</strong></p>
-<p>Before writing a single equation, we need a way to describe a circuit's topology — which components connect to which nodes. Circuit theory maps perfectly onto graph theory, a branch of mathematics dealing with nodes connected by edges.</p>
-<h2 id="11-the-incidence-matrix"><strong>1.1  The Incidence Matrix</strong></h2>
+<p><strong>Graph Theory of Circuits</strong>
+Before writing a single equation, we need a way to describe a circuit's topology — which components connect to which nodes. Circuit theory maps perfectly onto graph theory, a branch of mathematics dealing with nodes connected by edges.</p>
+<h2 id="11-the-incidence-matrix">1.1  The Incidence Matrix</h2>
 <p>A circuit with N nodes and B branches (components) is described by its incidence matrix A, of shape (N-1) × B. Each column corresponds to one branch. The entry A[i,b] is:</p>
-<p><strong>+1</strong></p>
-<p>Branch b leaves node i (current flows out)</p>
-<p><strong>-1</strong></p>
-<p>Branch b enters node i (current flows in)</p>
-<p><strong>0</strong></p>
-<p>Branch b is not connected to node i</p>
+<p><strong>+1</strong>
+Branch b leaves node i (current flows out)</p>
+<p><strong>-1</strong>
+Branch b enters node i (current flows in)</p>
+<p><strong>0</strong>
+Branch b is not connected to node i</p>
 <p>One row is dropped (usually the ground node row) to make the matrix full-rank. This is the Reduced Incidence Matrix A_r.</p>
-<p><strong>KCL (Kirchhoff's Current Law):    A_r · I_branches  =  0</strong></p>
-<p><strong>KVL (Kirchhoff's Voltage Law):    V_branches  =  A_r^T · V_nodes</strong></p>
-<p>Every circuit solver in the world — from SPICE to commercial EDA — is built on these two equations. They are exact and universal.</p>
-<h2 id="12-branch-types-and-their-equations"><strong>1.2  Branch Types and Their Equations</strong></h2>
+<p><strong>KCL (Kirchhoff's Current Law):    A_r · I_branches  =  0</strong>
+<strong>KVL (Kirchhoff's Voltage Law):    V_branches  =  A_r^T · V_nodes</strong>
+Every circuit solver in the world — from SPICE to commercial EDA — is built on these two equations. They are exact and universal.</p>
+<h2 id="12-branch-types-and-their-equations">1.2  Branch Types and Their Equations</h2>
 <p>Each branch b has a constitutive equation — the relationship between its terminal voltage V_b and current I_b:</p>
-<p><strong>Resistor</strong></p>
-<p>V_b = R · I_b                              → I_b = V_b / R</p>
-<p><strong>Capacitor</strong></p>
-<p>I_b = C · dV_b/dt                          → V_b = (1/C) · integral I_b dt</p>
-<p><strong>Inductor</strong></p>
-<p>V_b = L · dI_b/dt                          → I_b = (1/L) · integral V_b dt</p>
-<p><strong>Voltage source</strong></p>
-<p>V_b = V_s (fixed)                          → I_b unknown (free variable)</p>
-<p><strong>Current source</strong></p>
-<p>I_b = I_s (fixed)                          → V_b unknown (free variable)</p>
-<p><strong>Memristor</strong></p>
-<p>V_b = R(w) · I_b,  dw/dt = f(w, I_b)      → coupled ODE</p>
-<p><strong>Hybrid R</strong></p>
-<p>V_b = R(x_c, s_d) · I_b                   → state-dependent resistor</p>
-<p><strong>Hybrid C</strong></p>
-<p>I_b = C(x_c, s_d) · dV_b/dt               → state-dependent capacitor</p>
-<p><strong>Hybrid L</strong></p>
-<p>V_b = L(x_c, s_d) · dI_b/dt               → state-dependent inductor</p>
-<h2 id="13-example-circuit-graph"><strong>1.3  Example Circuit Graph</strong></h2>
+<p><strong>Resistor</strong>
+V_b = R · I_b                              → I_b = V_b / R</p>
+<p><strong>Capacitor</strong>
+I_b = C · dV_b/dt                          → V_b = (1/C) · integral I_b dt</p>
+<p><strong>Inductor</strong>
+V_b = L · dI_b/dt                          → I_b = (1/L) · integral V_b dt</p>
+<p><strong>Voltage source</strong>
+V_b = V_s (fixed)                          → I_b unknown (free variable)</p>
+<p><strong>Current source</strong>
+I_b = I_s (fixed)                          → V_b unknown (free variable)</p>
+<p><strong>Memristor</strong>
+V_b = R(w) · I_b,  dw/dt = f(w, I_b)      → coupled ODE</p>
+<p><strong>Hybrid R</strong>
+V_b = R(x_c, s_d) · I_b                   → state-dependent resistor</p>
+<p><strong>Hybrid C</strong>
+I_b = C(x_c, s_d) · dV_b/dt               → state-dependent capacitor</p>
+<p><strong>Hybrid L</strong>
+V_b = L(x_c, s_d) · dI_b/dt               → state-dependent inductor</p>
+<h2 id="13-example-circuit-graph">1.3  Example Circuit Graph</h2>
 <p>Consider a simple 3-node circuit: a voltage source V_s between node 1 and ground (node 0), a resistor R between nodes 1 and 2, a memristor M between node 2 and ground, and a capacitor C between nodes 1 and 2 in parallel with R.</p>
 <p>Nodes: {0=GND, 1, 2}. Branches: {V_s, R, C, M}. The reduced incidence matrix (dropping GND row):</p>
 <pre><code>      V\_s   R    C    M
 </code></pre>
 <p>Node 1  [  1   -1   -1    0  ]</p>
 <p>Node 2  [  0    1    1   -1  ]</p>
-<p># KCL at node 1: I_Vs - I_R - I_C = 0</p>
-<p># KCL at node 2: I_R + I_C - I_M = 0</p>
-<p># KVL: V_Vs = V1, V_R = V1-V2, V_C = V1-V2, V_M = V2</p>
+
+
+
 <p>SECTION 2  ·  THE CORE MATRIX EQUATION</p>
-<p><strong>Modified Nodal Analysis (MNA)</strong></p>
-<p>Modified Nodal Analysis (MNA) is the algorithm that converts the graph description of a circuit into a single matrix equation that can be solved by a computer. It was developed at UC Berkeley in the 1970s and is the foundation of SPICE. We extend it here to handle hybrid components.</p>
-<h2 id="21-the-mna-stamp-concept"><strong>2.1  The MNA Stamp Concept</strong></h2>
+<p><strong>Modified Nodal Analysis (MNA)</strong>
+Modified Nodal Analysis (MNA) is the algorithm that converts the graph description of a circuit into a single matrix equation that can be solved by a computer. It was developed at UC Berkeley in the 1970s and is the foundation of SPICE. We extend it here to handle hybrid components.</p>
+<h2 id="21-the-mna-stamp-concept">2.1  The MNA Stamp Concept</h2>
 <p>Each component type adds its contribution — its 'stamp' — to the global MNA matrix. The matrix equation has the form:</p>
-<p><strong>G(x) · x  +  C_cap · dx/dt  =  b(t)</strong></p>
-<p>Where x is the solution vector (node voltages + branch currents for voltage sources), G is the conductance matrix, C_cap is the capacitance/inductance matrix (for dynamic elements), and b is the source vector.</p>
-<h2 id="22-component-stamps"><strong>2.2  Component Stamps</strong></h2>
-<h3 id="resistor-between-nodes-i-and-j-value-r"><strong>Resistor between nodes i and j, value R:</strong></h3>
-<p># Adds to G matrix (conductance stamp):</p>
+<p><strong>G(x) · x  +  C_cap · dx/dt  =  b(t)</strong>
+Where x is the solution vector (node voltages + branch currents for voltage sources), G is the conductance matrix, C_cap is the capacitance/inductance matrix (for dynamic elements), and b is the source vector.</p>
+<h2 id="22-component-stamps">2.2  Component Stamps</h2>
+<h3 id="resistor-between-nodes-i-and-j-value-r">Resistor between nodes i and j, value R:</h3>
+
 <p>G[i,i] += 1/R</p>
 <p>G[j,j] += 1/R</p>
 <p>G[i,j] -= 1/R</p>
 <p>G[j,i] -= 1/R</p>
-<h3 id="capacitor-between-nodes-i-and-j-value-c"><strong>Capacitor between nodes i and j, value C:</strong></h3>
-<p># Adds to C matrix (dynamic stamp):</p>
+<h3 id="capacitor-between-nodes-i-and-j-value-c">Capacitor between nodes i and j, value C:</h3>
+
 <p>C_mat[i,i] += C</p>
 <p>C_mat[j,j] += C</p>
 <p>C_mat[i,j] -= C</p>
 <p>C_mat[j,i] -= C</p>
-<p># In time-discrete form (backward Euler, timestep dt):</p>
-<p># C * (x[n+1]-x[n])/dt -&gt; adds C/dt to G and C/dt * x[n] to b</p>
+
+
 <p>G[i,i] += C/dt;  b[i] += C/dt * V_ij_prev</p>
-<h3 id="inductor-between-nodes-i-and-j-value-l-adds-extra-variable-i_l"><strong>Inductor between nodes i and j, value L (adds extra variable I_L):</strong></h3>
-<p># Adds new row/column k for inductor current I_L</p>
+<h3 id="inductor-between-nodes-i-and-j-value-l-adds-extra-variable-i_l">Inductor between nodes i and j, value L (adds extra variable I_L):</h3>
+
 <p>G[i,k] +=  1;  G[k,i] +=  1   # V_i contributes to inductor equation</p>
 <p>G[j,k] += -1;  G[k,j] += -1   # V_j contributes to inductor equation</p>
 <p>C_mat[k,k] += L                # L * dI_L/dt term</p>
-<p># In time-discrete form:</p>
+
 <p>G[k,k] += L/dt;  b[k] += L/dt * I_L_prev</p>
-<h3 id="voltage-source-between-nodes-i-and-j-value-v_s-adds-extra-variable-i_s"><strong>Voltage source between nodes i and j, value V_s (adds extra variable I_s):</strong></h3>
-<p># Adds new row/column k for source current I_s</p>
+<h3 id="voltage-source-between-nodes-i-and-j-value-v_s-adds-extra-variable-i_s">Voltage source between nodes i and j, value V_s (adds extra variable I_s):</h3>
+
 <p>G[i,k] +=  1;  G[k,i] +=  1</p>
 <p>G[j,k] += -1;  G[k,j] += -1</p>
 <p>b[k]   += V_s   # enforces V_i - V_j = V_s</p>
-<h2 id="23-hybrid-component-stamps"><strong>2.3  Hybrid Component Stamps</strong></h2>
+<h2 id="23-hybrid-component-stamps">2.3  Hybrid Component Stamps</h2>
 <p>Hybrid components add state-dependent conductance. The memristor is the canonical example — it is a resistor whose conductance G_mem(w) changes over time according to an internal state w:</p>
-<p># State-dependent conductance stamp (same as resistor, but G changes each step)</p>
+
 <p>G_mem = 1.0 / R_memristor(w)   # recomputed every timestep</p>
 <p>G[i,i] += G_mem</p>
 <p>G[j,j] += G_mem</p>
 <p>G[i,j] -= G_mem</p>
 <p>G[j,i] -= G_mem</p>
-<p># Internal state equation appended to ODE:</p>
-<p># dw/dt = f(w, I_mem)  -&gt; integrated separately each timestep</p>
-<h2 id="24-the-full-mna-system-time-discrete"><strong>2.4  The Full MNA System (Time-Discrete)</strong></h2>
+
+
+<h2 id="24-the-full-mna-system-time-discrete">2.4  The Full MNA System (Time-Discrete)</h2>
 <p>Using backward Euler time discretisation (stable for stiff circuits, where time constants differ by many orders of magnitude):</p>
-<p><strong>[ G + C_mat/dt ] · x[n+1]  =  b[n+1]  +  C_mat/dt · x[n]</strong></p>
-<p>This is a linear system of equations. At each timestep, we:</p>
-<p>1. Update state-dependent components (recompute G_mem, L(w), C(phi) etc.)</p>
-<p>2. Assemble the full [G + C/dt] matrix</p>
-<p>3. Assemble the right-hand side b[n+1] + C/dt · x[n]</p>
-<p>4. Solve the linear system: x[n+1] = A^(-1) · rhs</p>
-<p>5. Update all internal states (w, phi, q, domain states) using x[n+1]</p>
-<p>6. Check all guard conditions for discrete state transitions</p>
-<p>7. If a transition fires, update discrete states and continue</p>
+<p><strong>[ G + C_mat/dt ] · x[n+1]  =  b[n+1]  +  C_mat/dt · x[n]</strong>
+This is a linear system of equations. At each timestep, we:</p>
+<ol>
+<li>
+<p>Update state-dependent components (recompute G_mem, L(w), C(phi) etc.)</p>
+</li>
+<li>
+<p>Assemble the full [G + C/dt] matrix</p>
+</li>
+<li>
+<p>Assemble the right-hand side b[n+1] + C/dt · x[n]</p>
+</li>
+<li>
+<p>Solve the linear system: x[n+1] = A^(-1) · rhs</p>
+</li>
+<li>
+<p>Update all internal states (w, phi, q, domain states) using x[n+1]</p>
+</li>
+<li>
+<p>Check all guard conditions for discrete state transitions</p>
+</li>
+<li>
+<p>If a transition fires, update discrete states and continue</p>
+</li>
+</ol>
 <p><em>📐  For a circuit with N nodes and V voltage sources/inductors, the MNA matrix is (N+V) × (N+V). For small circuits (&lt; 1000 nodes), dense LU factorisation is fast. For large circuits (&gt; 1000 nodes), sparse LU (scipy.sparse.linalg.spsolve) is essential.</em></p>
 <p>SECTION 3  ·  NEWTON-RAPHSON FOR NONLINEAR COMPONENTS</p>
-<p><strong>Nonlinear Iteration</strong></p>
-<p>The MNA stamp above assumes each component's conductance is known before solving the matrix. But for nonlinear components — the tunnel resistor, Josephson junction, ferroelectric capacitor — the conductance depends on the solution itself. We need Newton-Raphson iteration to resolve this circular dependency.</p>
-<h2 id="31-the-newton-raphson-linearisation"><strong>3.1  The Newton-Raphson Linearisation</strong></h2>
+<p><strong>Nonlinear Iteration</strong>
+The MNA stamp above assumes each component's conductance is known before solving the matrix. But for nonlinear components — the tunnel resistor, Josephson junction, ferroelectric capacitor — the conductance depends on the solution itself. We need Newton-Raphson iteration to resolve this circular dependency.</p>
+<h2 id="31-the-newton-raphson-linearisation">3.1  The Newton-Raphson Linearisation</h2>
 <p>For a nonlinear component with I = f(V), we linearise around the current operating point V^k:</p>
-<p><strong>I(V)  ≈  I(V^k)  +  f'(V^k) · (V - V^k)</strong></p>
-<p>__      =  f'(V^k) · V  +  [I(V^k) - f'(V^k) · V^k]__</p>
-<p>This is equivalent to a linear conductance G_eq = f'(V^k) in parallel with a current source I_eq = I(V^k) - G_eq · V^k. These are the 'companion model' stamps:</p>
-<p># Nonlinear component companion model (updated each NR iteration k):</p>
+<p><strong>I(V)  ≈  I(V^k)  +  f'(V^k) · (V - V^k)</strong>
+**      =  f'(V^k) · V  +  [I(V^k) - f'(V^k) · V^k]**
+This is equivalent to a linear conductance G_eq = f'(V^k) in parallel with a current source I_eq = I(V^k) - G_eq · V^k. These are the 'companion model' stamps:</p>
+
 <p>G_eq = dI_dV(V_k)            # Jacobian of I w.r.t. V at current estimate</p>
 <p>I_eq = I(V_k) - G_eq * V_k  # Norton equivalent current source</p>
-<p># Stamp G_eq as conductance, I_eq as current source</p>
+
 <p>G[i,i] += G_eq;  G[i,j] -= G_eq   # conductance stamp</p>
 <p>G[j,i] -= G_eq;  G[j,j] += G_eq</p>
 <p>b[i]   += I_eq   # current source stamp (into node i)</p>
 <p>b[j]   -= I_eq</p>
-<h2 id="32-newton-raphson-loop"><strong>3.2  Newton-Raphson Loop</strong></h2>
+<h2 id="32-newton-raphson-loop">3.2  Newton-Raphson Loop</h2>
 <p>def newton_raphson_step(mna, x_prev, nonlinear_elements, max_iter=50,</p>
-<pre><code>                     tol\_v=1e\-6, tol\_i=1e\-9\):
+<pre><code>                     tol\_v=1e-6, tol\_i=1e-9\):
 
 '''
 
-Solve one MNA timestep with NR iteration for nonlinear elements\.
+Solve one MNA timestep with NR iteration for nonlinear elements.
 
 mna:               MNASystem object \(see Section 6\)
 
@@ -173,86 +254,86 @@ Returns:           x\_new \(converged solution vector\)
 
 '''
 
-x = x\_prev\.copy\(\)   \# initial guess = previous solution
+x = x\_prev.copy\(\)   # initial guess = previous solution
 
 for k in range\(max\_iter\):
 
-    \# Rebuild G matrix with current estimates of nonlinear conductances
+    # Rebuild G matrix with current estimates of nonlinear conductances
 
-    G, C, b = mna\.build\_linear\_stamps\(\)
+    G, C, b = mna.build\_linear\_stamps\(\)
 
     for elem in nonlinear\_elements:
 
-        V\_elem = mna\.get\_branch\_voltage\(x, elem\)
+        V\_elem = mna.get\_branch\_voltage\(x, elem\)
 
-        G\_eq, I\_eq = elem\.companion\_model\(V\_elem\)
+        G\_eq, I\_eq = elem.companion\_model\(V\_elem\)
 
-        mna\.add\_stamp\(G, b, elem\.node\_plus, elem\.node\_minus, G\_eq, I\_eq\)
+        mna.add\_stamp\(G, b, elem.node\_plus, elem.node\_minus, G\_eq, I\_eq\)
 
-    \# Add dynamic terms \(C/dt from capacitors and inductors\)
+    # Add dynamic terms \(C/dt from capacitors and inductors\)
 
-    A = G \+ C / mna\.dt
+    A = G \+ C / mna.dt
 
-    rhs = b \+ C @ x\_prev / mna\.dt
+    rhs = b \+ C @ x\_prev / mna.dt
 
-    \# Solve
+    # Solve
 
     import numpy as np
 
-    x\_new = np\.linalg\.solve\(A, rhs\)
+    x\_new = np.linalg.solve\(A, rhs\)
 
-    \# Check convergence
+    # Check convergence
 
-    dV = np\.abs\(x\_new\[:mna\.n\_nodes\] \- x\[:mna\.n\_nodes\]\)
+    dV = np.abs\(x\_new\[:mna.n\_nodes\] - x\[:mna.n\_nodes\]\)
 
-    dI = np\.abs\(A @ x\_new \- rhs\)
+    dI = np.abs\(A @ x\_new - rhs\)
 
-    if dV\.max\(\) &lt; tol\_v and dI\.max\(\) &lt; tol\_i:
+    if dV.max\(\) &lt; tol\_v and dI.max\(\) &lt; tol\_i:
 
-        return x\_new, k\+1   \# converged
+        return x\_new, k\+1   # converged
 
     x = x\_new
 
-raise RuntimeError\(f'Newton\-Raphson did not converge in \{max\_iter\} iterations'\)
+raise RuntimeError\(f'Newton-Raphson did not converge in \{max\_iter\} iterations'\)
 </code></pre>
-<h2 id="33-jacobians-for-each-hybrid-component"><strong>3.3  Jacobians for Each Hybrid Component</strong></h2>
+<h2 id="33-jacobians-for-each-hybrid-component">3.3  Jacobians for Each Hybrid Component</h2>
 <p>Each nonlinear component needs its own dI/dV function. Here are the key ones:</p>
-<h3 id="quantum-tunnel-resistor-simmons-model"><strong>Quantum Tunnel Resistor (Simmons model):</strong></h3>
+<h3 id="quantum-tunnel-resistor-simmons-model">Quantum Tunnel Resistor (Simmons model):</h3>
 <p>def simmons_jacobian(V, d=2e-9, phi_bar=3.0, A_junc=2.5e-15):</p>
-<pre><code>'''dI/dV at voltage V — derivative of Simmons current\.'''
+<pre><code>'''dI/dV at voltage V — derivative of Simmons current.'''
 
-dV = 1e\-4  \# numerical step
+dV = 1e-4  # numerical step
 
-return \(simmons\_current\(V\+dV, d, phi\_bar, A\_junc\) \-
+return \(simmons\_current\(V\+dV, d, phi\_bar, A\_junc\) -
 
-        simmons\_current\(V\-dV, d, phi\_bar, A\_junc\)\) / \(2\*dV\)
+        simmons\_current\(V-dV, d, phi\_bar, A\_junc\)\) / \(2\*dV\)
 </code></pre>
 <p>def qtr_companion(V, d=2e-9, phi_bar=3.0, A_junc=2.5e-15):</p>
 <pre><code>I\_op  = simmons\_current\(V, d, phi\_bar, A\_junc\)
 
 G\_eq  = simmons\_jacobian\(V, d, phi\_bar, A\_junc\)
 
-I\_eq  = I\_op \- G\_eq \* V
+I\_eq  = I\_op - G\_eq \* V
 
 return G\_eq, I\_eq
 </code></pre>
-<h3 id="memristor-hp-model"><strong>Memristor (HP model):</strong></h3>
+<h3 id="memristor-hp-model">Memristor (HP model):</h3>
 <p>def memristor_companion(V, w, D=10e-9, Ron=100, Roff=16000):</p>
-<pre><code>'''Memristor companion model\. State w is fixed during NR iteration\.'''
+<pre><code>'''Memristor companion model. State w is fixed during NR iteration.'''
 
-R   = Ron\*\(w/D\) \+ Roff\*\(1 \- w/D\)   \# R is fixed for this NR step
+R   = Ron\*\(w/D\) \+ Roff\*\(1 - w/D\)   # R is fixed for this NR step
 
-G\_eq = 1\.0 / R                       \# linear in V for fixed w
+G\_eq = 1.0 / R                       # linear in V for fixed w
 
-I\_eq = 0\.0                           \# no offset \(passes through origin\)
+I\_eq = 0.0                           # no offset \(passes through origin\)
 
 return G\_eq, I\_eq
 </code></pre>
-<h3 id="josephson-junction-sinusoidal-nonlinearity"><strong>Josephson Junction (sinusoidal nonlinearity):</strong></h3>
+<h3 id="josephson-junction-sinusoidal-nonlinearity">Josephson Junction (sinusoidal nonlinearity):</h3>
 <p>def josephson_companion(V, phi, Ic=10e-6, R_J=50, C_J=1e-15, dt=1e-12):</p>
 <pre><code>'''
 
-Josephson junction companion model\.
+Josephson junction companion model.
 
 phi: current phase \(updated after solution — not during NR\)
 
@@ -260,173 +341,173 @@ Uses RCSJ model: I = Ic\*sin\(phi\) \+ V/R\_J \+ C\_J\*dV/dt
 
 '''
 
-hbar, e = 1\.055e\-34, 1\.602e\-19
+hbar, e = 1.055e-34, 1.602e-19
 
-\# Current at operating point
+# Current at operating point
 
-I\_sc  = Ic \* np\.sin\(phi\)
+I\_sc  = Ic \* np.sin\(phi\)
 
-\# Linearised Josephson contribution: dI\_sc/dV = Ic\*cos\(phi\)\*dphi/dV
+# Linearised Josephson contribution: dI\_sc/dV = Ic\*cos\(phi\)\*dphi/dV
 
-\# dphi/dV = \(2e/hbar\)\*dt \(from phase\-voltage relation, discrete\)
+# dphi/dV = \(2e/hbar\)\*dt \(from phase-voltage relation, discrete\)
 
 dphi\_dV = \(2\*e/hbar\) \* dt
 
-G\_JJ   = Ic \* np\.cos\(phi\) \* dphi\_dV
+G\_JJ   = Ic \* np.cos\(phi\) \* dphi\_dV
 
 G\_total = G\_JJ \+ 1/R\_J \+ C\_J/dt
 
-I\_eq    = I\_sc \- G\_JJ\*V
+I\_eq    = I\_sc - G\_JJ\*V
 
 return G\_total, I\_eq
 </code></pre>
 <p><em>🔄  The key insight is that during Newton-Raphson iteration, the internal states (w for memristors, phi for Josephson junctions) are FROZEN at their values from the previous timestep. Only node voltages are iterated. After convergence, states are updated. This splitting is called operator splitting and is essential for stability.</em></p>
 <p>SECTION 4  ·  STABLE STEPPING FOR STIFF HYBRID SYSTEMS</p>
-<p><strong>Time Integration</strong></p>
-<p>Hybrid circuits are typically stiff — they contain components with time constants spanning many orders of magnitude simultaneously. For example, a Josephson junction (picosecond timescale) driving a magnetic domain inductor (nanosecond timescale) driving a large capacitor (microsecond timescale). Explicit methods like forward Euler become unstable for stiff systems unless the timestep is tiny. We need implicit methods.</p>
-<h2 id="41-the-three-integration-methods"><strong>4.1  The Three Integration Methods</strong></h2>
-<p><strong>Backward Euler (BE)</strong></p>
-<p>x[n+1] = x[n] + dt · f(x[n+1]). Implicit, unconditionally stable. First-order accurate. Tends to over-damp fast transients.</p>
-<p><strong>Trapezoidal (TR)</strong></p>
-<p>x[n+1] = x[n] + dt/2 · [f(x[n]) + f(x[n+1])]. Second-order accurate. Can show 'ringing' (numerical oscillation) at discontinuities.</p>
-<p><strong>TR-BDF2 (SPICE default)</strong></p>
-<p>Trapezoidal for first half-step, BDF2 for second half-step. Second-order, L-stable. Best compromise — what SPICE uses.</p>
-<h2 id="42-backward-euler-mna-full-derivation"><strong>4.2  Backward Euler MNA (Full Derivation)</strong></h2>
+<p><strong>Time Integration</strong>
+Hybrid circuits are typically stiff — they contain components with time constants spanning many orders of magnitude simultaneously. For example, a Josephson junction (picosecond timescale) driving a magnetic domain inductor (nanosecond timescale) driving a large capacitor (microsecond timescale). Explicit methods like forward Euler become unstable for stiff systems unless the timestep is tiny. We need implicit methods.</p>
+<h2 id="41-the-three-integration-methods">4.1  The Three Integration Methods</h2>
+<p><strong>Backward Euler (BE)</strong>
+x[n+1] = x[n] + dt · f(x[n+1]). Implicit, unconditionally stable. First-order accurate. Tends to over-damp fast transients.</p>
+<p><strong>Trapezoidal (TR)</strong>
+x[n+1] = x[n] + dt/2 · [f(x[n]) + f(x[n+1])]. Second-order accurate. Can show 'ringing' (numerical oscillation) at discontinuities.</p>
+<p><strong>TR-BDF2 (SPICE default)</strong>
+Trapezoidal for first half-step, BDF2 for second half-step. Second-order, L-stable. Best compromise — what SPICE uses.</p>
+<h2 id="42-backward-euler-mna-full-derivation">4.2  Backward Euler MNA (Full Derivation)</h2>
 <p>Starting from the continuous MNA equation:</p>
-<p><strong>C_mat · dx/dt  +  G(x) · x  =  b(t)</strong></p>
-<p>Applying backward Euler (evaluate right-hand side at new time n+1):</p>
-<p><strong>C_mat · (x[n+1] - x[n]) / dt  +  G(x[n+1]) · x[n+1]  =  b[n+1]</strong></p>
-<p><strong>( C_mat/dt  +  G(x[n+1]) ) · x[n+1]  =  b[n+1]  +  C_mat/dt · x[n]</strong></p>
-<p>The matrix (C_mat/dt + G) is reassembled every timestep because G depends on the current operating point for nonlinear components.</p>
-<h2 id="43-adaptive-timestep-control"><strong>4.3  Adaptive Timestep Control</strong></h2>
+<p><strong>C_mat · dx/dt  +  G(x) · x  =  b(t)</strong>
+Applying backward Euler (evaluate right-hand side at new time n+1):</p>
+<p><strong>C_mat · (x[n+1] - x[n]) / dt  +  G(x[n+1]) · x[n+1]  =  b[n+1]</strong>
+<strong>( C_mat/dt  +  G(x[n+1]) ) · x[n+1]  =  b[n+1]  +  C_mat/dt · x[n]</strong>
+The matrix (C_mat/dt + G) is reassembled every timestep because G depends on the current operating point for nonlinear components.</p>
+<h2 id="43-adaptive-timestep-control">4.3  Adaptive Timestep Control</h2>
 <p>Fixed timestep wastes computation during slow parts of the simulation and can miss fast transients. Adaptive control adjusts dt based on the local truncation error (LTE):</p>
-<p><strong>LTE  ≈  dt^2 / 2 · x''(t)     [Backward Euler — proportional to dt²]</strong></p>
-<p>We estimate x'' from successive solutions and accept or reject the step:</p>
+<p><strong>LTE  ≈  dt^2 / 2 · x''(t)     [Backward Euler — proportional to dt²]</strong>
+We estimate x'' from successive solutions and accept or reject the step:</p>
 <p>def adaptive_timestep(x_prev, x_curr, x_try, dt, tol_lte=1e-4):</p>
 <pre><code>'''
 
-Estimate local truncation error and recommend next timestep\.
+Estimate local truncation error and recommend next timestep.
 
-Uses the difference between BE and TR solutions as error estimate\.
+Uses the difference between BE and TR solutions as error estimate.
 
 x\_try: solution from trapezoidal rule \(2nd order\)
 
 x\_curr: solution from backward Euler \(1st order\)
 
-Difference approximates the LTE of the BE solution\.
+Difference approximates the LTE of the BE solution.
 
 '''
 
 import numpy as np
 
-lte = np\.abs\(x\_try \- x\_curr\)     \# element\-wise error estimate
+lte = np.abs\(x\_try - x\_curr\)     # element-wise error estimate
 
-\# Scale by solution magnitude \(relative tolerance\)
+# Scale by solution magnitude \(relative tolerance\)
 
-scale = np\.maximum\(np\.abs\(x\_curr\), 1e\-10\)
+scale = np.maximum\(np.abs\(x\_curr\), 1e-10\)
 
-err   = \(lte / scale\)\.max\(\)
+err   = \(lte / scale\).max\(\)
 
-\# Optimal next timestep \(PI controller\)
+# Optimal next timestep \(PI controller\)
 
 if err &lt; tol\_lte:
 
-    \# Accept step, increase dt
+    # Accept step, increase dt
 
-    dt\_next = dt \* min\(2\.0, 0\.9 \* \(tol\_lte / \(err \+ 1e\-30\)\)\*\*0\.5\)
+    dt\_next = dt \* min\(2.0, 0.9 \* \(tol\_lte / \(err \+ 1e-30\)\)\*\*0.5\)
 
 else:
 
-    \# Reject step, reduce dt
+    # Reject step, reduce dt
 
-    dt\_next = dt \* max\(0\.1, 0\.9 \* \(tol\_lte / err\)\*\*0\.5\)
+    dt\_next = dt \* max\(0.1, 0.9 \* \(tol\_lte / err\)\*\*0.5\)
 
 accepted = \(err &lt; tol\_lte\)
 
 return accepted, dt\_next, err
 </code></pre>
-<h2 id="44-tr-bdf2-implementation"><strong>4.4  TR-BDF2 Implementation</strong></h2>
+<h2 id="44-tr-bdf2-implementation">4.4  TR-BDF2 Implementation</h2>
 <p>def trbdf2_step(mna, x_n, t_n, dt, nonlinear_elements):</p>
 <pre><code>'''
 
-TR\-BDF2 integrator: one timestep dt using TR for first half, BDF2 for second\.
+TR-BDF2 integrator: one timestep dt using TR for first half, BDF2 for second.
 
-More accurate than pure Backward Euler; L\-stable \(no ringing at transitions\)\.
+More accurate than pure Backward Euler; L-stable \(no ringing at transitions\).
 
 '''
 
-gamma = 2 \- 2\*\*0\.5   \# optimal gamma ≈ 0\.5858
+gamma = 2 - 2\*\*0.5   # optimal gamma ≈ 0.5858
 
-dt1   = gamma \* dt   \# first sub\-step
+dt1   = gamma \* dt   # first sub-step
 
-dt2   = dt \- dt1     \# second sub\-step
+dt2   = dt - dt1     # second sub-step
 
-\# \-\-\- Stage 1: Trapezoidal from t\_n to t\_n \+ gamma\*dt \-\-\-
+# --- Stage 1: Trapezoidal from t\_n to t\_n \+ gamma\*dt ---
 
-\# \(C/dt1\)\*\(x \- x\_n\) = \-0\.5\*\(G\*x \+ G\*x\_n\) \+ 0\.5\*\(b \+ b\_n\)
+# \(C/dt1\)\*\(x - x\_n\) = -0.5\*\(G\*x \+ G\*x\_n\) \+ 0.5\*\(b \+ b\_n\)
 
-\# Rearrange \-&gt; \(C/dt1 \+ G/2\)\*x = \(C/dt1 \- G/2\)\*x\_n \+ 0\.5\*\(b\+b\_n\)
+# Rearrange -&gt; \(C/dt1 \+ G/2\)\*x = \(C/dt1 - G/2\)\*x\_n \+ 0.5\*\(b\+b\_n\)
 
-G, C, b\_n1 = mna\.build\_stamps\_at\(t\_n \+ dt1, nonlinear\_elements, x\_n\)
+G, C, b\_n1 = mna.build\_stamps\_at\(t\_n \+ dt1, nonlinear\_elements, x\_n\)
 
-\_, \_, b\_n  = mna\.build\_stamps\_at\(t\_n, nonlinear\_elements, x\_n\)
+\_, \_, b\_n  = mna.build\_stamps\_at\(t\_n, nonlinear\_elements, x\_n\)
 
 A1   = C / dt1 \+ G / 2
 
-rhs1 = \(C / dt1 \- G / 2\) @ x\_n \+ 0\.5 \* \(b\_n1 \+ b\_n\)
+rhs1 = \(C / dt1 - G / 2\) @ x\_n \+ 0.5 \* \(b\_n1 \+ b\_n\)
 
-x\_tr = np\.linalg\.solve\(A1, rhs1\)    \# TR solution at mid\-point
+x\_tr = np.linalg.solve\(A1, rhs1\)    # TR solution at mid-point
 
-\# \-\-\- Stage 2: BDF2 from t\_n to t\_n \+ dt using x\_tr and x\_n \-\-\-
+# --- Stage 2: BDF2 from t\_n to t\_n \+ dt using x\_tr and x\_n ---
 
-\# BDF2: x\[n\+1\] = \(4/3\)\*x\_tr \- \(1/3\)\*x\_n  \(predictor\)
+# BDF2: x\[n\+1\] = \(4/3\)\*x\_tr - \(1/3\)\*x\_n  \(predictor\)
 
-\# then solve: \(C/\(dt/3\) \+ G\)\*x\[n\+1\] = \(C/\(dt/3\)\)\*\(4/3\*x\_tr \- 1/3\*x\_n\) \+ b\[n\+1\]
+# then solve: \(C/\(dt/3\) \+ G\)\*x\[n\+1\] = \(C/\(dt/3\)\)\*\(4/3\*x\_tr - 1/3\*x\_n\) \+ b\[n\+1\]
 
-G2, C2, b2 = mna\.build\_stamps\_at\(t\_n \+ dt, nonlinear\_elements, x\_tr\)
+G2, C2, b2 = mna.build\_stamps\_at\(t\_n \+ dt, nonlinear\_elements, x\_tr\)
 
-alpha1 = \(2 \- gamma\) / \(\(1 \- gamma\) \* gamma \* dt\)
+alpha1 = \(2 - gamma\) / \(\(1 - gamma\) \* gamma \* dt\)
 
-alpha2 = \-\(2\*gamma \- 1\) / \(\(1 \- gamma\) \* gamma \* dt \* \(2\-gamma\)/\(1\-gamma\)\)
+alpha2 = -\(2\*gamma - 1\) / \(\(1 - gamma\) \* gamma \* dt \* \(2-gamma\)/\(1-gamma\)\)
 
 A2     = C2 \* alpha1 \+ G2
 
-rhs2   = C2 \* \(alpha1 \* x\_tr \- alpha2 \* x\_n\) \+ b2
+rhs2   = C2 \* \(alpha1 \* x\_tr - alpha2 \* x\_n\) \+ b2
 
-x\_new  = np\.linalg\.solve\(A2, rhs2\)
+x\_new  = np.linalg.solve\(A2, rhs2\)
 
 return x\_new, x\_tr
 </code></pre>
 <p><em>⚙️  TR-BDF2 is what SPICE 3 uses as its default integrator. It handles both stiff and non-stiff circuits equally well. The gamma = 2 - sqrt(2) is not arbitrary — it is the value that minimises the error constant of the combined method.</em></p>
 <p>SECTION 5  ·  FINDING EXACT STATE TRANSITION TIMES</p>
-<p><strong>Discrete Event Detection</strong></p>
-<p>When a hybrid component's guard condition is crossed — the memristor switches, a magnetic domain flips, a superconductor goes normal — we need to find the exact time of the crossing, not just know it happened somewhere in the last timestep. Missing the exact crossing time introduces errors and can cause simulation instability.</p>
-<h2 id="51-the-zero-crossing-problem"><strong>5.1  The Zero-Crossing Problem</strong></h2>
+<p><strong>Discrete Event Detection</strong>
+When a hybrid component's guard condition is crossed — the memristor switches, a magnetic domain flips, a superconductor goes normal — we need to find the exact time of the crossing, not just know it happened somewhere in the last timestep. Missing the exact crossing time introduces errors and can cause simulation instability.</p>
+<h2 id="51-the-zero-crossing-problem">5.1  The Zero-Crossing Problem</h2>
 <p>A guard condition is a function G(x(t), s) that changes sign when a transition occurs. For example, for a superconductor: G = I_applied - I_c(T). When G crosses zero from negative to positive, the component switches normal.</p>
 <p>Given that G(t_n) &lt; 0 and G(t_{n+1}) &gt; 0, we need to find t* ∈ (t_n, t_{n+1}) where G(t*) = 0. We use bisection or Brent's method on the interpolated trajectory:</p>
-<p><strong>x(t)  ≈  x[n]  +  (t - t_n) / dt · (x[n+1] - x[n])    [linear interpolation]</strong></p>
-<p>def find_crossing_time(guard_func, x_n, x_n1, t_n, t_n1,</p>
-<pre><code>                    state, tol=1e\-12, max\_iter=50\):
+<p><strong>x(t)  ≈  x[n]  +  (t - t_n) / dt · (x[n+1] - x[n])    [linear interpolation]</strong>
+def find_crossing_time(guard_func, x_n, x_n1, t_n, t_n1,</p>
+<pre><code>                    state, tol=1e-12, max\_iter=50\):
 
 '''
 
-Find exact time t\* where guard\_func\(x\(t\*\), state\) = 0\.
+Find exact time t\* where guard\_func\(x\(t\*\), state\) = 0.
 
-Uses bisection on linearly interpolated trajectory\.
+Uses bisection on linearly interpolated trajectory.
 
-guard\_func: callable\(x, state\) \-&gt; float \(negative = guard not met\)
+guard\_func: callable\(x, state\) -&gt; float \(negative = guard not met\)
 
 '''
 
 import numpy as np
 
-dt = t\_n1 \- t\_n
+dt = t\_n1 - t\_n
 
 g\_n  = guard\_func\(x\_n,  state\)
 
 g\_n1 = guard\_func\(x\_n1, state\)
 
-assert np\.sign\(g\_n\) \!= np\.sign\(g\_n1\), 'No crossing in interval'
+assert np.sign\(g\_n\) != np.sign\(g\_n1\), 'No crossing in interval'
 
 t\_lo, t\_hi = t\_n, t\_n1
 
@@ -434,17 +515,17 @@ for \_ in range\(max\_iter\):
 
     t\_mid = \(t\_lo \+ t\_hi\) / 2
 
-    alpha = \(t\_mid \- t\_n\) / dt
+    alpha = \(t\_mid - t\_n\) / dt
 
-    x\_mid = x\_n \+ alpha \* \(x\_n1 \- x\_n\)   \# interpolated state
+    x\_mid = x\_n \+ alpha \* \(x\_n1 - x\_n\)   # interpolated state
 
     g\_mid = guard\_func\(x\_mid, state\)
 
-    if abs\(g\_mid\) &lt; tol or \(t\_hi \- t\_lo\) &lt; tol:
+    if abs\(g\_mid\) &lt; tol or \(t\_hi - t\_lo\) &lt; tol:
 
         return t\_mid, x\_mid
 
-    if np\.sign\(g\_mid\) == np\.sign\(g\_n\):
+    if np.sign\(g\_mid\) == np.sign\(g\_n\):
 
         t\_lo = t\_mid
 
@@ -452,66 +533,66 @@ for \_ in range\(max\_iter\):
 
         t\_hi = t\_mid
 
-return \(t\_lo \+ t\_hi\)/2, x\_n \+ \(\(t\_lo\+t\_hi\)/2 \- t\_n\)/dt\*\(x\_n1\-x\_n\)
+return \(t\_lo \+ t\_hi\)/2, x\_n \+ \(\(t\_lo\+t\_hi\)/2 - t\_n\)/dt\*\(x\_n1-x\_n\)
 </code></pre>
-<h2 id="52-guard-conditions-for-each-component"><strong>5.2  Guard Conditions for Each Component</strong></h2>
-<p><strong>Memristor (analog)</strong></p>
-<p>w &gt;= D  or  w &lt;= 0        → clamp w to boundary</p>
-<p><strong>Dual-mode Memristor</strong></p>
-<p>|q_acc| &gt;= Q_thresh        → flip binary HfO2 state</p>
-<p><strong>Magnetic Domain Ind.</strong></p>
-<p>H &gt; H_sw[i]  or  H &lt; -H_sw[i]   → flip domain i</p>
-<p><strong>Josephson Junction</strong></p>
-<p>phi crosses 2*pi*n         → n_flux changes by ±1</p>
-<p><strong>Superconducting R</strong></p>
-<p>I &gt;= I_c(T)  or  T &gt;= Tc   → switch to normal state</p>
-<p><strong>Phase-Change R</strong></p>
-<p>T &gt; T_melt (~900K)          → reset to amorphous</p>
-<p><strong>Sample-Hold Cap</strong></p>
-<p>t mod T_clock &lt; dt          → sample new value</p>
-<p><strong>Ferroelectric Cap</strong></p>
-<p>E &gt; alpha[i]  or  E &lt; beta[i]  → flip hysteron i</p>
-<p><strong>Ternary Transistor</strong></p>
-<p>V_G crosses V_T1  or  V_T2  → advance logic level</p>
-<h2 id="53-post-jump-restart"><strong>5.3  Post-Jump Restart</strong></h2>
+<h2 id="52-guard-conditions-for-each-component">5.2  Guard Conditions for Each Component</h2>
+<p><strong>Memristor (analog)</strong>
+w &gt;= D  or  w &lt;= 0        → clamp w to boundary</p>
+<p><strong>Dual-mode Memristor</strong>
+|q_acc| &gt;= Q_thresh        → flip binary HfO2 state</p>
+<p><strong>Magnetic Domain Ind.</strong>
+H &gt; H_sw[i]  or  H &lt; -H_sw[i]   → flip domain i</p>
+<p><strong>Josephson Junction</strong>
+phi crosses 2*pi*n         → n_flux changes by ±1</p>
+<p><strong>Superconducting R</strong>
+I &gt;= I_c(T)  or  T &gt;= Tc   → switch to normal state</p>
+<p><strong>Phase-Change R</strong>
+T &gt; T_melt (~900K)          → reset to amorphous</p>
+<p><strong>Sample-Hold Cap</strong>
+t mod T_clock &lt; dt          → sample new value</p>
+<p><strong>Ferroelectric Cap</strong>
+E &gt; alpha[i]  or  E &lt; beta[i]  → flip hysteron i</p>
+<p><strong>Ternary Transistor</strong>
+V_G crosses V_T1  or  V_T2  → advance logic level</p>
+<h2 id="53-post-jump-restart">5.3  Post-Jump Restart</h2>
 <p>After a discrete transition fires at time t*, the simulation must restart from t* with the new state. The correct procedure is:</p>
 <p>def handle_discrete_event(simulator, t_star, x_star, s_old, transition):</p>
 <pre><code>'''
 
-Handle a discrete event at time t\_star\.
+Handle a discrete event at time t\_star.
 
-1\. Record the event
+1. Record the event
 
-2\. Apply the state transition
+2. Apply the state transition
 
-3\. Re\-initialise any dynamic variables that depend on the discrete state
+3. Re-initialise any dynamic variables that depend on the discrete state
 
-4\. Reduce timestep for first few steps after transition \(softstart\)
+4. Reduce timestep for first few steps after transition \(softstart\)
 
 '''
 
-\# Apply transition
+# Apply transition
 
 s\_new = transition\(s\_old, x\_star\)
 
-\# Re\-initialise energy\-storing elements that depend on s
+# Re-initialise energy-storing elements that depend on s
 
-\# \(e\.g\., when a domain flips, the inductor flux must be recalculated\)
+# \(e.g., when a domain flips, the inductor flux must be recalculated\)
 
-x\_restarted = simulator\.reinitialise\_after\_transition\(x\_star, s\_old, s\_new\)
+x\_restarted = simulator.reinitialise\_after\_transition\(x\_star, s\_old, s\_new\)
 
-\# Softstart: use smaller dt for first 10 steps after event
+# Softstart: use smaller dt for first 10 steps after event
 
-simulator\.dt\_override = simulator\.dt \* 0\.01
+simulator.dt\_override = simulator.dt \* 0.01
 
-simulator\.dt\_override\_count = 10
+simulator.dt\_override\_count = 10
 
 return x\_restarted, s\_new
 </code></pre>
 <p>SECTION 6  ·  COMPLETE PYTHON IMPLEMENTATION</p>
-<p><strong>The HybridCircuit Solver</strong></p>
-<p>This section presents the complete implementation: a Python class that accepts any network of hybrid components, builds the MNA system automatically, and simulates it forward in time with Newton-Raphson iteration, TR-BDF2 integration, and exact discrete event detection.</p>
-<h2 id="61-component-base-class"><strong>6.1  Component Base Class</strong></h2>
+<p><strong>The HybridCircuit Solver</strong>
+This section presents the complete implementation: a Python class that accepts any network of hybrid components, builds the MNA system automatically, and simulates it forward in time with Newton-Raphson iteration, TR-BDF2 integration, and exact discrete event detection.</p>
+<h2 id="61-component-base-class">6.1  Component Base Class</h2>
 <p>import numpy as np</p>
 <p>import scipy.sparse as sp_sparse</p>
 <p>import scipy.sparse.linalg as sp_linalg</p>
@@ -551,245 +632,245 @@ LIF\_NEURON    = 'LIF'
 <p>class Component:</p>
 <pre><code>'''
 
-Base class for all circuit components\.
+Base class for all circuit components.
 
-node\_p, node\_n: positive and negative terminal node indices\.
+node\_p, node\_n: positive and negative terminal node indices.
 
-0 is always ground \(reference node\)\.
+0 is always ground \(reference node\).
 
 '''
 
 comp\_type:  ComponentType
 
-node\_p:     int              \# positive terminal
+node\_p:     int              # positive terminal
 
-node\_n:     int              \# negative terminal \(0 = GND\)
+node\_n:     int              # negative terminal \(0 = GND\)
 
 params:     dict = field\(default\_factory=dict\)
 
-\# Internal continuous state variables \(e\.g\., w for memristor\)
+# Internal continuous state variables \(e.g., w for memristor\)
 
-state\_c:    np\.ndarray = field\(default\_factory=lambda: np\.array\(\[\]\)\)
+state\_c:    np.ndarray = field\(default\_factory=lambda: np.array\(\[\]\)\)
 
-\# Internal discrete state \(e\.g\., crystalline/amorphous phase\)
+# Internal discrete state \(e.g., crystalline/amorphous phase\)
 
 state\_d:    int = 0
 
 name:       str = ''
 
-def conductance\(self, V\_branch: float\) \-&gt; float:
+def conductance\(self, V\_branch: float\) -&gt; float:
 
-    '''Return small\-signal conductance dI/dV at V\_branch\.'''
-
-    raise NotImplementedError
-
-def current\(self, V\_branch: float\) \-&gt; float:
-
-    '''Return branch current I\(V\_branch\)\.'''
+    '''Return small-signal conductance dI/dV at V\_branch.'''
 
     raise NotImplementedError
 
-def companion\(self, V\_branch: float\) \-&gt; Tuple\[float, float\]:
+def current\(self, V\_branch: float\) -&gt; float:
 
-    '''Return \(G\_eq, I\_eq\) for Norton companion model\.'''
+    '''Return branch current I\(V\_branch\).'''
 
-    G = self\.conductance\(V\_branch\)
+    raise NotImplementedError
 
-    I = self\.current\(V\_branch\)
+def companion\(self, V\_branch: float\) -&gt; Tuple\[float, float\]:
 
-    return G, I \- G \* V\_branch
+    '''Return \(G\_eq, I\_eq\) for Norton companion model.'''
+
+    G = self.conductance\(V\_branch\)
+
+    I = self.current\(V\_branch\)
+
+    return G, I - G \* V\_branch
 
 def update\_state\(self, V\_branch: float, I\_branch: float, dt: float\):
 
-    '''Update internal state after timestep solution\.'''
+    '''Update internal state after timestep solution.'''
 
     pass
 
-def check\_guards\(self, V\_branch: float, I\_branch: float\) \-&gt; Optional\[int\]:
+def check\_guards\(self, V\_branch: float, I\_branch: float\) -&gt; Optional\[int\]:
 
-    '''Return new discrete state if guard condition met, else None\.'''
+    '''Return new discrete state if guard condition met, else None.'''
 
     return None
 </code></pre>
-<h2 id="62-concrete-component-implementations"><strong>6.2  Concrete Component Implementations</strong></h2>
+<h2 id="62-concrete-component-implementations">6.2  Concrete Component Implementations</h2>
 <p>class ResistorComponent(Component):</p>
-<pre><code>def conductance\(self, V\): return 1\.0 / self\.params\['R'\]
+<pre><code>def conductance\(self, V\): return 1.0 / self.params\['R'\]
 
-def current\(self, V\):     return V / self\.params\['R'\]
+def current\(self, V\):     return V / self.params\['R'\]
 </code></pre>
 <p>class CapacitorComponent(Component):</p>
-<pre><code>'''Capacitor handled via C matrix stamp — no companion model needed\.'''
+<pre><code>'''Capacitor handled via C matrix stamp — no companion model needed.'''
 
-def get\_C\(self\): return self\.params\['C'\]
+def get\_C\(self\): return self.params\['C'\]
 </code></pre>
 <p>class MemristorComponent(Component):</p>
-<pre><code>'''HP TiO2 memristor — analog resistance controlled by oxygen vacancy position w\.'''
+<pre><code>'''HP TiO2 memristor — analog resistance controlled by oxygen vacancy position w.'''
 
-def \_\_init\_\_\(self, node\_p, node\_n, Ron=100, Roff=16000, D=10e\-9, mu\_v=1e\-14, p=1\):
+def \_\_init\_\_\(self, node\_p, node\_n, Ron=100, Roff=16000, D=10e-9, mu\_v=1e-14, p=1\):
 
-    super\(\)\.\_\_init\_\_\(ComponentType\.MEMRISTOR, node\_p, node\_n,
+    super\(\).\_\_init\_\_\(ComponentType.MEMRISTOR, node\_p, node\_n,
 
                      \{'Ron':Ron,'Roff':Roff,'D':D,'mu\_v':mu\_v,'p':p\}\)
 
-    self\.state\_c = np\.array\(\[D \* 0\.5\]\)   \# w starts at 50%
+    self.state\_c = np.array\(\[D \* 0.5\]\)   # w starts at 50%
 
 @property
 
-def w\(self\): return self\.state\_c\[0\]
+def w\(self\): return self.state\_c\[0\]
 
 def R\(self\):
 
-    p = self\.params
+    p = self.params
 
-    return p\['Ron'\]\*\(self\.w/p\['D'\]\) \+ p\['Roff'\]\*\(1 \- self\.w/p\['D'\]\)
+    return p\['Ron'\]\*\(self.w/p\['D'\]\) \+ p\['Roff'\]\*\(1 - self.w/p\['D'\]\)
 
-def conductance\(self, V\): return 1\.0 / self\.R\(\)
+def conductance\(self, V\): return 1.0 / self.R\(\)
 
-def current\(self, V\):     return V / self\.R\(\)
+def current\(self, V\):     return V / self.R\(\)
 
 def update\_state\(self, V, I, dt\):
 
-    p = self\.params
+    p = self.params
 
-    window = 1 \- \(2\*self\.w/p\['D'\] \- 1\)\*\*\(2\*p\['p'\]\)
+    window = 1 - \(2\*self.w/p\['D'\] - 1\)\*\*\(2\*p\['p'\]\)
 
     dw = p\['mu\_v'\] \* \(p\['Ron'\]/p\['D'\]\*\*2\) \* I \* window
 
-    self\.state\_c\[0\] = np\.clip\(self\.w \+ dw\*dt, 0, p\['D'\]\)
+    self.state\_c\[0\] = np.clip\(self.w \+ dw\*dt, 0, p\['D'\]\)
 </code></pre>
 <p>class TunnelResistorComponent(Component):</p>
-<pre><code>'''Quantum tunnel resistor — Simmons model\.'''
+<pre><code>'''Quantum tunnel resistor — Simmons model.'''
 
-def \_\_init\_\_\(self, node\_p, node\_n, d=2e\-9, phi\_bar=3\.0, A\_junc=2\.5e\-15\):
+def \_\_init\_\_\(self, node\_p, node\_n, d=2e-9, phi\_bar=3.0, A\_junc=2.5e-15\):
 
-    super\(\)\.\_\_init\_\_\(ComponentType\.TUNNEL\_R, node\_p, node\_n,
+    super\(\).\_\_init\_\_\(ComponentType.TUNNEL\_R, node\_p, node\_n,
 
                      \{'d':d,'phi\_bar':phi\_bar,'A\_junc':A\_junc\}\)
 
-    self\.\_e=1\.602e\-19; self\.\_hbar=1\.055e\-34; self\.\_h=6\.626e\-34; self\.\_me=9\.109e\-31
+    self.\_e=1.602e-19; self.\_hbar=1.055e-34; self.\_h=6.626e-34; self.\_me=9.109e-31
 
 def current\(self, V\):
 
-    p = self\.params
+    p = self.params
 
-    if abs\(V\) &lt; 1e\-6: V = 1e\-6 \* np\.sign\(V \+ 1e\-30\)
+    if abs\(V\) &lt; 1e-6: V = 1e-6 \* np.sign\(V \+ 1e-30\)
 
-    A  = \(4\*np\.pi\*p\['d'\]/self\.\_h\)\*np\.sqrt\(2\*self\.\_me\*self\.\_e\)
+    A  = \(4\*np.pi\*p\['d'\]/self.\_h\)\*np.sqrt\(2\*self.\_me\*self.\_e\)
 
-    J0 = self\.\_e/\(2\*np\.pi\*self\.\_hbar\*p\['d'\]\*\*2\)
+    J0 = self.\_e/\(2\*np.pi\*self.\_hbar\*p\['d'\]\*\*2\)
 
-    lo = p\['phi\_bar'\] \- V/2;  hi = p\['phi\_bar'\] \+ V/2
+    lo = p\['phi\_bar'\] - V/2;  hi = p\['phi\_bar'\] \+ V/2
 
-    J  = J0\*\(lo\*np\.exp\(\-A\*np\.sqrt\(max\(lo,0\)\)\) \- hi\*np\.exp\(\-A\*np\.sqrt\(max\(hi,0\)\)\)\)
+    J  = J0\*\(lo\*np.exp\(-A\*np.sqrt\(max\(lo,0\)\)\) - hi\*np.exp\(-A\*np.sqrt\(max\(hi,0\)\)\)\)
 
     return J \* p\['A\_junc'\]
 
 def conductance\(self, V\):
 
-    dV = max\(abs\(V\)\*0\.001, 1e\-4\)
+    dV = max\(abs\(V\)\*0.001, 1e-4\)
 
-    return \(self\.current\(V\+dV\) \- self\.current\(V\-dV\)\) / \(2\*dV\)
+    return \(self.current\(V\+dV\) - self.current\(V-dV\)\) / \(2\*dV\)
 </code></pre>
 <p>class JosephsonComponent(Component):</p>
-<pre><code>'''Josephson junction \(RCSJ model\)\.'''
+<pre><code>'''Josephson junction \(RCSJ model\).'''
 
-def \_\_init\_\_\(self, node\_p, node\_n, Ic=10e\-6, R\_J=50\.0, C\_J=1e\-15\):
+def \_\_init\_\_\(self, node\_p, node\_n, Ic=10e-6, R\_J=50.0, C\_J=1e-15\):
 
-    super\(\)\.\_\_init\_\_\(ComponentType\.JOSEPHSON, node\_p, node\_n,
+    super\(\).\_\_init\_\_\(ComponentType.JOSEPHSON, node\_p, node\_n,
 
                      \{'Ic':Ic,'R\_J':R\_J,'C\_J':C\_J\}\)
 
-    self\.state\_c = np\.array\(\[0\.0, 0\.0\]\)  \# \[phi, dphi/dt\]
+    self.state\_c = np.array\(\[0.0, 0.0\]\)  # \[phi, dphi/dt\]
 
-    self\.state\_d = 0   \# n\_flux quanta
+    self.state\_d = 0   # n\_flux quanta
 
-    self\.\_hbar=1\.055e\-34; self\.\_e=1\.602e\-19
+    self.\_hbar=1.055e-34; self.\_e=1.602e-19
 
 def current\(self, V\):
 
-    phi = self\.state\_c\[0\]
+    phi = self.state\_c\[0\]
 
-    return self\.params\['Ic'\] \* np\.sin\(phi\) \+ V / self\.params\['R\_J'\]
+    return self.params\['Ic'\] \* np.sin\(phi\) \+ V / self.params\['R\_J'\]
 
 def conductance\(self, V\):
 
-    phi, dphi = self\.state\_c
+    phi, dphi = self.state\_c
 
-    dt = 1e\-12   \# nominal dt for linearisation
+    dt = 1e-12   # nominal dt for linearisation
 
-    dphi\_dV = \(2\*self\.\_e/self\.\_hbar\) \* dt
+    dphi\_dV = \(2\*self.\_e/self.\_hbar\) \* dt
 
-    G\_JJ = self\.params\['Ic'\] \* np\.cos\(phi\) \* dphi\_dV
+    G\_JJ = self.params\['Ic'\] \* np.cos\(phi\) \* dphi\_dV
 
-    return G\_JJ \+ 1/self\.params\['R\_J'\]
+    return G\_JJ \+ 1/self.params\['R\_J'\]
 
 def update\_state\(self, V, I, dt\):
 
-    hbar, e = self\.\_hbar, self\.\_e
+    hbar, e = self.\_hbar, self.\_e
 
-    Ic, R\_J, C\_J = self\.params\['Ic'\], self\.params\['R\_J'\], self\.params\['C\_J'\]
+    Ic, R\_J, C\_J = self.params\['Ic'\], self.params\['R\_J'\], self.params\['C\_J'\]
 
-    phi, dphi = self\.state\_c
+    phi, dphi = self.state\_c
 
-    \# RCSJ: C\_J \* d2phi/dt2 \+ \(hbar/2e/R\_J\)\*dphi/dt \+ Ic\*sin\(phi\) = I
+    # RCSJ: C\_J \* d2phi/dt2 \+ \(hbar/2e/R\_J\)\*dphi/dt \+ Ic\*sin\(phi\) = I
 
-    d2phi = \(2\*e/hbar\) \* \(I \- Ic\*np\.sin\(phi\) \- \(hbar/\(2\*e\*R\_J\)\)\*dphi\) / C\_J
+    d2phi = \(2\*e/hbar\) \* \(I - Ic\*np.sin\(phi\) - \(hbar/\(2\*e\*R\_J\)\)\*dphi\) / C\_J
 
     dphi\_new = dphi \+ d2phi \* dt
 
     phi\_new  = phi  \+ dphi\_new \* dt
 
-    self\.state\_c = np\.array\(\[phi\_new, dphi\_new\]\)
+    self.state\_c = np.array\(\[phi\_new, dphi\_new\]\)
 
-    self\.state\_d = int\(round\(phi\_new / \(2\*np\.pi\)\)\)  \# flux quanta
+    self.state\_d = int\(round\(phi\_new / \(2\*np.pi\)\)\)  # flux quanta
 </code></pre>
-<h2 id="63-the-mna-system-builder"><strong>6.3  The MNA System Builder</strong></h2>
+<h2 id="63-the-mna-system-builder">6.3  The MNA System Builder</h2>
 <p>class MNASystem:</p>
 <pre><code>'''
 
-Builds and solves Modified Nodal Analysis equations for a hybrid circuit\.
+Builds and solves Modified Nodal Analysis equations for a hybrid circuit.
 
-Nodes are numbered 0 \(GND\) to n\_nodes\-1\.
+Nodes are numbered 0 \(GND\) to n\_nodes-1.
 
-Voltage sources and inductors add extra rows/columns for their currents\.
+Voltage sources and inductors add extra rows/columns for their currents.
 
 '''
 
-def \_\_init\_\_\(self, n\_nodes: int, dt: float = 1e\-9\):
+def \_\_init\_\_\(self, n\_nodes: int, dt: float = 1e-9\):
 
-    self\.n  = n\_nodes \- 1  \# exclude GND
+    self.n  = n\_nodes - 1  # exclude GND
 
-    self\.dt = dt
+    self.dt = dt
 
-    self\.components: List\[Component\] = \[\]
+    self.components: List\[Component\] = \[\]
 
-    self\.extra\_vars: List\[Tuple\] = \[\]  \# \(comp, 'type'\) for Vsrc, L
+    self.extra\_vars: List\[Tuple\] = \[\]  # \(comp, 'type'\) for Vsrc, L
 
 def add\(self, comp: Component\):
 
-    self\.components\.append\(comp\)
+    self.components.append\(comp\)
 
-    if comp\.comp\_type in \(ComponentType\.VSOURCE, ComponentType\.INDUCTOR\):
+    if comp.comp\_type in \(ComponentType.VSOURCE, ComponentType.INDUCTOR\):
 
-        self\.extra\_vars\.append\(comp\)
+        self.extra\_vars.append\(comp\)
 
     return self
 
 @property
 
-def size\(self\): return self\.n \+ len\(self\.extra\_vars\)
+def size\(self\): return self.n \+ len\(self.extra\_vars\)
 
 def \_idx\(self, node\):
 
-    '''Map node number to matrix index \(\-1 for GND\)\.'''
+    '''Map node number to matrix index \(-1 for GND\).'''
 
-    return node \- 1 if node &gt; 0 else \-1
+    return node - 1 if node &gt; 0 else -1
 
 def \_stamp\_conductance\(self, G\_mat, ni, nj, g\):
 
-    '''Add conductance g between nodes ni and nj\.'''
+    '''Add conductance g between nodes ni and nj.'''
 
-    ii, jj = self\.\_idx\(ni\), self\.\_idx\(nj\)
+    ii, jj = self.\_idx\(ni\), self.\_idx\(nj\)
 
     if ii &gt;= 0: G\_mat\[ii, ii\] \+= g
 
@@ -797,157 +878,157 @@ def \_stamp\_conductance\(self, G\_mat, ni, nj, g\):
 
     if ii &gt;= 0 and jj &gt;= 0:
 
-        G\_mat\[ii, jj\] \-= g
+        G\_mat\[ii, jj\] -= g
 
-        G\_mat\[jj, ii\] \-= g
+        G\_mat\[jj, ii\] -= g
 
 def build\(self, x\_prev=None\):
 
-    '''Build MNA matrices G, C, b for current component states\.'''
+    '''Build MNA matrices G, C, b for current component states.'''
 
-    sz = self\.size
+    sz = self.size
 
-    G  = np\.zeros\(\(sz, sz\)\)
+    G  = np.zeros\(\(sz, sz\)\)
 
-    C  = np\.zeros\(\(sz, sz\)\)
+    C  = np.zeros\(\(sz, sz\)\)
 
-    b  = np\.zeros\(sz\)
+    b  = np.zeros\(sz\)
 
-    if x\_prev is None: x\_prev = np\.zeros\(sz\)
+    if x\_prev is None: x\_prev = np.zeros\(sz\)
 
-    extra\_idx = self\.n   \# index offset for extra variables
+    extra\_idx = self.n   # index offset for extra variables
 
-    ev\_map = \{id\(comp\): extra\_idx\+k for k,comp in enumerate\(self\.extra\_vars\)\}
+    ev\_map = \{id\(comp\): extra\_idx\+k for k,comp in enumerate\(self.extra\_vars\)\}
 
-    for comp in self\.components:
+    for comp in self.components:
 
-        ni, nj = comp\.node\_p, comp\.node\_n
+        ni, nj = comp.node\_p, comp.node\_n
 
-        ii, jj = self\.\_idx\(ni\), self\.\_idx\(nj\)
+        ii, jj = self.\_idx\(ni\), self.\_idx\(nj\)
 
-        \# Branch voltage from previous solution
+        # Branch voltage from previous solution
 
-        Vi = x\_prev\[ii\] if ii &gt;= 0 else 0\.0
+        Vi = x\_prev\[ii\] if ii &gt;= 0 else 0.0
 
-        Vj = x\_prev\[jj\] if jj &gt;= 0 else 0\.0
+        Vj = x\_prev\[jj\] if jj &gt;= 0 else 0.0
 
-        V\_branch = Vi \- Vj
+        V\_branch = Vi - Vj
 
-        ct = comp\.comp\_type
+        ct = comp.comp\_type
 
-        if ct == ComponentType\.RESISTOR:
+        if ct == ComponentType.RESISTOR:
 
-            self\.\_stamp\_conductance\(G, ni, nj, 1\.0/comp\.params\['R'\]\)
+            self.\_stamp\_conductance\(G, ni, nj, 1.0/comp.params\['R'\]\)
 
-        elif ct == ComponentType\.CAPACITOR:
+        elif ct == ComponentType.CAPACITOR:
 
-            \# BE discretisation: C/dt conductance \+ C/dt\*V\_prev current src
+            # BE discretisation: C/dt conductance \+ C/dt\*V\_prev current src
 
-            c\_val = comp\.params\['C'\]
+            c\_val = comp.params\['C'\]
 
-            self\.\_stamp\_conductance\(G, ni, nj, c\_val/self\.dt\)
+            self.\_stamp\_conductance\(G, ni, nj, c\_val/self.dt\)
 
-            if ii &gt;= 0: b\[ii\] \+= c\_val/self\.dt \* V\_branch
+            if ii &gt;= 0: b\[ii\] \+= c\_val/self.dt \* V\_branch
 
-            if jj &gt;= 0: b\[jj\] \-= c\_val/self\.dt \* V\_branch
+            if jj &gt;= 0: b\[jj\] -= c\_val/self.dt \* V\_branch
 
-        elif ct == ComponentType\.MEMRISTOR:
+        elif ct == ComponentType.MEMRISTOR:
 
-            G\_eq, I\_eq = comp\.companion\(V\_branch\)
+            G\_eq, I\_eq = comp.companion\(V\_branch\)
 
-            self\.\_stamp\_conductance\(G, ni, nj, G\_eq\)
+            self.\_stamp\_conductance\(G, ni, nj, G\_eq\)
 
-            if ii &gt;= 0: b\[ii\] \-= I\_eq
-
-            if jj &gt;= 0: b\[jj\] \+= I\_eq
-
-        elif ct == ComponentType\.TUNNEL\_R:
-
-            G\_eq, I\_eq = comp\.companion\(V\_branch\)
-
-            self\.\_stamp\_conductance\(G, ni, nj, G\_eq\)
-
-            if ii &gt;= 0: b\[ii\] \-= I\_eq
+            if ii &gt;= 0: b\[ii\] -= I\_eq
 
             if jj &gt;= 0: b\[jj\] \+= I\_eq
 
-        elif ct == ComponentType\.JOSEPHSON:
+        elif ct == ComponentType.TUNNEL\_R:
 
-            G\_eq, I\_eq = comp\.companion\(V\_branch\)
+            G\_eq, I\_eq = comp.companion\(V\_branch\)
 
-            \# Also add C\_J as capacitor
+            self.\_stamp\_conductance\(G, ni, nj, G\_eq\)
 
-            c\_val = comp\.params\['C\_J'\]
+            if ii &gt;= 0: b\[ii\] -= I\_eq
 
-            self\.\_stamp\_conductance\(G, ni, nj, G\_eq \+ c\_val/self\.dt\)
+            if jj &gt;= 0: b\[jj\] \+= I\_eq
 
-            if ii &gt;= 0: b\[ii\] \-= I\_eq \- c\_val/self\.dt\*V\_branch
+        elif ct == ComponentType.JOSEPHSON:
 
-            if jj &gt;= 0: b\[jj\] \+= I\_eq \- c\_val/self\.dt\*V\_branch
+            G\_eq, I\_eq = comp.companion\(V\_branch\)
 
-        elif ct == ComponentType\.VSOURCE:
+            # Also add C\_J as capacitor
+
+            c\_val = comp.params\['C\_J'\]
+
+            self.\_stamp\_conductance\(G, ni, nj, G\_eq \+ c\_val/self.dt\)
+
+            if ii &gt;= 0: b\[ii\] -= I\_eq - c\_val/self.dt\*V\_branch
+
+            if jj &gt;= 0: b\[jj\] \+= I\_eq - c\_val/self.dt\*V\_branch
+
+        elif ct == ComponentType.VSOURCE:
 
             k = ev\_map\[id\(comp\)\]
 
             if ii &gt;= 0: G\[ii,k\] \+= 1; G\[k,ii\] \+= 1
 
-            if jj &gt;= 0: G\[jj,k\] \-= 1; G\[k,jj\] \-= 1
+            if jj &gt;= 0: G\[jj,k\] -= 1; G\[k,jj\] -= 1
 
-            b\[k\] \+= comp\.params\['V'\]
+            b\[k\] \+= comp.params\['V'\]
 
-        elif ct == ComponentType\.ISOURCE:
+        elif ct == ComponentType.ISOURCE:
 
-            if ii &gt;= 0: b\[ii\] \-= comp\.params\['I'\]
+            if ii &gt;= 0: b\[ii\] -= comp.params\['I'\]
 
-            if jj &gt;= 0: b\[jj\] \+= comp\.params\['I'\]
+            if jj &gt;= 0: b\[jj\] \+= comp.params\['I'\]
 
     return G, C, b
 
 def solve\_step\(self, x\_prev, nonlinear\_comps=None, max\_nr=20\):
 
-    '''One timestep with NR iteration\.'''
+    '''One timestep with NR iteration.'''
 
-    x = x\_prev\.copy\(\)
+    x = x\_prev.copy\(\)
 
     for nr\_iter in range\(max\_nr\):
 
-        G, C, b = self\.build\(x\)
+        G, C, b = self.build\(x\)
 
-        A   = G \+ C / self\.dt
+        A   = G \+ C / self.dt
 
-        rhs = b \+ C @ x\_prev / self\.dt
+        rhs = b \+ C @ x\_prev / self.dt
 
-        x\_new = np\.linalg\.solve\(A \+ np\.eye\(self\.size\)\*1e\-15, rhs\)
+        x\_new = np.linalg.solve\(A \+ np.eye\(self.size\)\*1e-15, rhs\)
 
-        if np\.abs\(x\_new \- x\)\.max\(\) &lt; 1e\-8: break
+        if np.abs\(x\_new - x\).max\(\) &lt; 1e-8: break
 
         x = x\_new
 
     return x\_new
 </code></pre>
-<h2 id="64-the-top-level-simulation-loop"><strong>6.4  The Top-Level Simulation Loop</strong></h2>
+<h2 id="64-the-top-level-simulation-loop">6.4  The Top-Level Simulation Loop</h2>
 <p>class HybridCircuitSimulator:</p>
 <pre><code>'''
 
-Top\-level simulator\. Integrates MNA solving, state updates,
+Top-level simulator. Integrates MNA solving, state updates,
 
-guard checking, and adaptive timestep into one clean interface\.
+guard checking, and adaptive timestep into one clean interface.
 
 '''
 
-def \_\_init\_\_\(self, n\_nodes: int, dt: float = 1e\-9\):
+def \_\_init\_\_\(self, n\_nodes: int, dt: float = 1e-9\):
 
-    self\.mna  = MNASystem\(n\_nodes, dt\)
+    self.mna  = MNASystem\(n\_nodes, dt\)
 
-    self\.dt   = dt
+    self.dt   = dt
 
-    self\.t    = 0\.0
+    self.t    = 0.0
 
-    self\.x    = np\.zeros\(n\_nodes \- 1\)
+    self.x    = np.zeros\(n\_nodes - 1\)
 
-    self\.log  = \[\]   \# list of \(t, x, states\) tuples
+    self.log  = \[\]   # list of \(t, x, states\) tuples
 
-def add\(self, comp\): self\.mna\.add\(comp\); return self
+def add\(self, comp\): self.mna.add\(comp\); return self
 
 def run\(self, t\_end: float,
 
@@ -959,9 +1040,9 @@ def run\(self, t\_end: float,
 
     '''
 
-    Run simulation from current time to t\_end\.
+    Run simulation from current time to t\_end.
 
-    sources: dict mapping VSOURCE/ISOURCE component \-&gt; callable\(t\) \-&gt; value
+    sources: dict mapping VSOURCE/ISOURCE component -&gt; callable\(t\) -&gt; value
 
     adaptive: use adaptive timestep control
 
@@ -969,69 +1050,69 @@ def run\(self, t\_end: float,
 
     '''
 
-    dt      = self\.dt
+    dt      = self.dt
 
     step\_n  = 0
 
-    x       = self\.x\.copy\(\)
+    x       = self.x.copy\(\)
 
-    t       = self\.t
+    t       = self.t
 
-    dt\_min  = dt \* 1e\-4
+    dt\_min  = dt \* 1e-4
 
     dt\_max  = dt \* 100
 
     while t &lt; t\_end:
 
-        dt = min\(dt, t\_end \- t\)  \# don't overshoot
+        dt = min\(dt, t\_end - t\)  # don't overshoot
 
-        self\.mna\.dt = dt
+        self.mna.dt = dt
 
-        \# Update time\-varying sources
+        # Update time-varying sources
 
         if sources:
 
-            for comp, fn in sources\.items\(\):
+            for comp, fn in sources.items\(\):
 
-                if comp\.comp\_type == ComponentType\.VSOURCE:
+                if comp.comp\_type == ComponentType.VSOURCE:
 
-                    comp\.params\['V'\] = fn\(t\)
+                    comp.params\['V'\] = fn\(t\)
 
-                elif comp\.comp\_type == ComponentType\.ISOURCE:
+                elif comp.comp\_type == ComponentType.ISOURCE:
 
-                    comp\.params\['I'\] = fn\(t\)
+                    comp.params\['I'\] = fn\(t\)
 
-        \# Solve MNA system for this timestep
+        # Solve MNA system for this timestep
 
-        x\_new = self\.mna\.solve\_step\(x\)
+        x\_new = self.mna.solve\_step\(x\)
 
-        \# Update all component internal states
+        # Update all component internal states
 
-        for comp in self\.mna\.components:
+        for comp in self.mna.components:
 
-            ni, nj = comp\.node\_p, comp\.node\_n
+            ni, nj = comp.node\_p, comp.node\_n
 
-            ii, jj = ni\-1 if ni&gt;0 else \-1, nj\-1 if nj&gt;0 else \-1
+            ii, jj = ni-1 if ni&gt;0 else -1, nj-1 if nj&gt;0 else -1
 
-            Vi = x\_new\[ii\] if ii &gt;= 0 else 0\.0
+            Vi = x\_new\[ii\] if ii &gt;= 0 else 0.0
 
-            Vj = x\_new\[jj\] if jj &gt;= 0 else 0\.0
+            Vj = x\_new\[jj\] if jj &gt;= 0 else 0.0
 
-            V\_b = Vi \- Vj
+            V\_b = Vi - Vj
 
-            G\_b = comp\.conductance\(V\_b\)
+            G\_b = comp.conductance\(V\_b\)
 
             I\_b = V\_b \* G\_b
 
-            comp\.update\_state\(V\_b, I\_b, dt\)
+            comp.update\_state\(V\_b, I\_b, dt\)
 
-            \# Check discrete guard conditions
+            # Check discrete guard conditions
 
-            new\_sd = comp\.check\_guards\(V\_b, I\_b\)
+            new\_sd = comp.check\_guards\(V\_b, I\_b\)
 
             if new\_sd is not None:
 
-                comp\.state\_d = new\_sd
+                comp.state\_d = new\_sd
 
         t   \+= dt
 
@@ -1041,42 +1122,42 @@ def run\(self, t\_end: float,
 
         if step\_n % log\_every == 0:
 
-            states = \{comp\.name: \(comp\.state\_c\.copy\(\), comp\.state\_d\)
+            states = \{comp.name: \(comp.state\_c.copy\(\), comp.state\_d\)
 
-                      for comp in self\.mna\.components\}
+                      for comp in self.mna.components\}
 
-            self\.log\.append\(\{'t': t, 'x': x\.copy\(\), 'states': states\}\)
+            self.log.append\(\{'t': t, 'x': x.copy\(\), 'states': states\}\)
 
-        \# Adaptive timestep: simple heuristic based on solution change rate
+        # Adaptive timestep: simple heuristic based on solution change rate
 
         if adaptive:
 
-            dxdt = np\.abs\(x\_new \- x\)\.max\(\) / dt
+            dxdt = np.abs\(x\_new - x\).max\(\) / dt
 
-            if dxdt &gt; 1e6:   dt = max\(dt \* 0\.5, dt\_min\)
+            if dxdt &gt; 1e6:   dt = max\(dt \* 0.5, dt\_min\)
 
-            elif dxdt &lt; 1e3: dt = min\(dt \* 1\.5, dt\_max\)
+            elif dxdt &lt; 1e3: dt = min\(dt \* 1.5, dt\_max\)
 
-    self\.t = t
+    self.t = t
 
-    self\.x = x
+    self.x = x
 
-    return self\.log
+    return self.log
 </code></pre>
 <p>SECTION 7  ·  THOUSANDS OF CIRCUITS IN PARALLEL</p>
-<p><strong>GPU Network Simulation</strong></p>
-<p>The CPU solver handles one circuit instance. For applications like Monte Carlo yield analysis (running the same circuit with manufacturing tolerances swept across thousands of parameter combinations) or training neural networks of circuits, we need to simulate many independent circuit instances simultaneously on a GPU.</p>
-<h2 id="71-batched-mna-on-gpu-the-key-insight"><strong>7.1  Batched MNA on GPU — The Key Insight</strong></h2>
+<p><strong>GPU Network Simulation</strong>
+The CPU solver handles one circuit instance. For applications like Monte Carlo yield analysis (running the same circuit with manufacturing tolerances swept across thousands of parameter combinations) or training neural networks of circuits, we need to simulate many independent circuit instances simultaneously on a GPU.</p>
+<h2 id="71-batched-mna-on-gpu-the-key-insight">7.1  Batched MNA on GPU — The Key Insight</h2>
 <p>For N identical circuit topologies with different parameters, the MNA matrix has the same sparsity pattern for all N instances but different numerical values. We can stack all N matrices into a single batch and solve them simultaneously using batched linear algebra:</p>
-<p><strong>A[k] · x[k]  =  b[k]      for  k = 1, 2, ..., N</strong></p>
-<p>PyTorch's torch.linalg.solve handles batched systems natively — it dispatches to cuBLAS batched LU factorisation on the GPU, solving all N systems in parallel.</p>
+<p><strong>A[k] · x[k]  =  b[k]      for  k = 1, 2, ..., N</strong>
+PyTorch's torch.linalg.solve handles batched systems natively — it dispatches to cuBLAS batched LU factorisation on the GPU, solving all N systems in parallel.</p>
 <p>import torch</p>
 <p>class GPUCircuitBatch:</p>
 <pre><code>'''
 
-GPU\-accelerated simulation of N identical circuit topologies
+GPU-accelerated simulation of N identical circuit topologies
 
-with different component parameters \(Monte Carlo / parameter sweep\)\.
+with different component parameters \(Monte Carlo / parameter sweep\).
 
 '''
 
@@ -1088,7 +1169,7 @@ def \_\_init\_\_\(self, topology: dict, param\_batch: dict,
 
     topology:    dict describing circuit connections \(nodes, component types\)
 
-    param\_batch: dict mapping component\_name \-&gt; tensor of shape \(N,\)
+    param\_batch: dict mapping component\_name -&gt; tensor of shape \(N,\)
 
                  containing parameter values for each of the N instances
 
@@ -1096,49 +1177,49 @@ def \_\_init\_\_\(self, topology: dict, param\_batch: dict,
 
     '''
 
-    self\.N       = next\(iter\(param\_batch\.values\(\)\)\)\.shape\[0\]
+    self.N       = next\(iter\(param\_batch.values\(\)\)\).shape\[0\]
 
-    self\.n\_nodes = n\_nodes \- 1   \# exclude GND
+    self.n\_nodes = n\_nodes - 1   # exclude GND
 
-    self\.device  = device
+    self.device  = device
 
-    self\.topo    = topology
+    self.topo    = topology
 
-    \# Convert all parameters to GPU tensors of shape \(N,\)
+    # Convert all parameters to GPU tensors of shape \(N,\)
 
-    self\.params  = \{k: v\.to\(device\)\.float\(\)
+    self.params  = \{k: v.to\(device\).float\(\)
 
-                    for k, v in param\_batch\.items\(\)\}
+                    for k, v in param\_batch.items\(\)\}
 
-    \# Solution vectors: shape \(N, n\_nodes\)
+    # Solution vectors: shape \(N, n\_nodes\)
 
-    self\.x = torch\.zeros\(self\.N, self\.n\_nodes, device=device\)
+    self.x = torch.zeros\(self.N, self.n\_nodes, device=device\)
 
 def build\_G\_batch\(self, x\_batch\):
 
     '''
 
-    Build G matrices for all N instances simultaneously\.
+    Build G matrices for all N instances simultaneously.
 
-    Returns G of shape \(N, n\_nodes, n\_nodes\)\.
+    Returns G of shape \(N, n\_nodes, n\_nodes\).
 
-    This is the GPU\-vectorised version of MNASystem\.build\(\)\.
+    This is the GPU-vectorised version of MNASystem.build\(\).
 
     '''
 
-    N, n = self\.N, self\.n\_nodes
+    N, n = self.N, self.n\_nodes
 
-    G = torch\.zeros\(N, n, n, device=self\.device\)
+    G = torch.zeros\(N, n, n, device=self.device\)
 
-    b = torch\.zeros\(N, n, device=self\.device\)
+    b = torch.zeros\(N, n, device=self.device\)
 
-    for comp in self\.topo\['components'\]:
+    for comp in self.topo\['components'\]:
 
-        ii, jj = comp\['node\_p'\]\-1, comp\['node\_n'\]\-1
+        ii, jj = comp\['node\_p'\]-1, comp\['node\_n'\]-1
 
         if comp\['type'\] == 'R':
 
-            g = 1\.0 / self\.params\[comp\['name'\]\]  \# shape \(N,\)
+            g = 1.0 / self.params\[comp\['name'\]\]  # shape \(N,\)
 
             if ii &gt;= 0: G\[:,ii,ii\] \+= g
 
@@ -1146,23 +1227,23 @@ def build\_G\_batch\(self, x\_batch\):
 
             if ii &gt;= 0 and jj &gt;= 0:
 
-                G\[:,ii,jj\] \-= g;  G\[:,jj,ii\] \-= g
+                G\[:,ii,jj\] -= g;  G\[:,jj,ii\] -= g
 
         elif comp\['type'\] == 'MEM':
 
-            \# Memristor: w state per instance
+            # Memristor: w state per instance
 
-            w   = self\.params\[comp\['name'\]\+'\_w'\]     \# shape \(N,\)
+            w   = self.params\[comp\['name'\]\+'\_w'\]     # shape \(N,\)
 
-            Ron = self\.params\[comp\['name'\]\+'\_Ron'\]
+            Ron = self.params\[comp\['name'\]\+'\_Ron'\]
 
-            Rof = self\.params\[comp\['name'\]\+'\_Roff'\]
+            Rof = self.params\[comp\['name'\]\+'\_Roff'\]
 
-            D   = self\.params\[comp\['name'\]\+'\_D'\]
+            D   = self.params\[comp\['name'\]\+'\_D'\]
 
-            R\_mem = Ron\*\(w/D\) \+ Rof\*\(1 \- w/D\)
+            R\_mem = Ron\*\(w/D\) \+ Rof\*\(1 - w/D\)
 
-            g = 1\.0 / R\_mem
+            g = 1.0 / R\_mem
 
             if ii &gt;= 0: G\[:,ii,ii\] \+= g
 
@@ -1170,67 +1251,67 @@ def build\_G\_batch\(self, x\_batch\):
 
             if ii &gt;= 0 and jj &gt;= 0:
 
-                G\[:,ii,jj\] \-= g;  G\[:,jj,ii\] \-= g
+                G\[:,ii,jj\] -= g;  G\[:,jj,ii\] -= g
 
     return G, b
 
 def step\_batch\(self, dt, sources\_batch=None\):
 
-    '''One timestep for all N instances simultaneously\.'''
+    '''One timestep for all N instances simultaneously.'''
 
-    G, b = self\.build\_G\_batch\(self\.x\)
+    G, b = self.build\_G\_batch\(self.x\)
 
     if sources\_batch is not None:
 
-        b \+= sources\_batch   \# shape \(N, n\_nodes\)
+        b \+= sources\_batch   # shape \(N, n\_nodes\)
 
-    \# Solve N linear systems in parallel: G @ x = b
+    # Solve N linear systems in parallel: G @ x = b
 
-    \# torch\.linalg\.solve expects \(\.\.\., n, n\) and \(\.\.\., n\)
+    # torch.linalg.solve expects \(..., n, n\) and \(..., n\)
 
-    x\_new = torch\.linalg\.solve\(G \+ torch\.eye\(self\.n\_nodes,
+    x\_new = torch.linalg.solve\(G \+ torch.eye\(self.n\_nodes,
 
-                                device=self\.device\)\.unsqueeze\(0\)\*1e\-15, b\)
+                                device=self.device\).unsqueeze\(0\)\*1e-15, b\)
 
-    \# Update memristor states \(all N simultaneously\)
+    # Update memristor states \(all N simultaneously\)
 
-    for comp in self\.topo\['components'\]:
+    for comp in self.topo\['components'\]:
 
         if comp\['type'\] == 'MEM':
 
-            ii, jj = comp\['node\_p'\]\-1, comp\['node\_n'\]\-1
+            ii, jj = comp\['node\_p'\]-1, comp\['node\_n'\]-1
 
-            Vi = x\_new\[:,ii\] if ii&gt;=0 else torch\.zeros\(self\.N,device=self\.device\)
+            Vi = x\_new\[:,ii\] if ii&gt;=0 else torch.zeros\(self.N,device=self.device\)
 
-            Vj = x\_new\[:,jj\] if jj&gt;=0 else torch\.zeros\(self\.N,device=self\.device\)
+            Vj = x\_new\[:,jj\] if jj&gt;=0 else torch.zeros\(self.N,device=self.device\)
 
-            V\_b = Vi \- Vj
+            V\_b = Vi - Vj
 
-            w   = self\.params\[comp\['name'\]\+'\_w'\]
+            w   = self.params\[comp\['name'\]\+'\_w'\]
 
-            D   = self\.params\[comp\['name'\]\+'\_D'\]
+            D   = self.params\[comp\['name'\]\+'\_D'\]
 
-            Ron = self\.params\[comp\['name'\]\+'\_Ron'\]
+            Ron = self.params\[comp\['name'\]\+'\_Ron'\]
 
-            mu\_v = self\.params\[comp\['name'\]\+'\_mu\_v'\]
+            mu\_v = self.params\[comp\['name'\]\+'\_mu\_v'\]
 
-            R\_mem = Ron\*\(w/D\) \+ \(self\.params\[comp\['name'\]\+'\_Roff'\]\)\*\(1\-w/D\)
+            R\_mem = Ron\*\(w/D\) \+ \(self.params\[comp\['name'\]\+'\_Roff'\]\)\*\(1-w/D\)
 
             I\_b   = V\_b / R\_mem
 
-            window = 1 \- \(2\*w/D \- 1\)\*\*2
+            window = 1 - \(2\*w/D - 1\)\*\*2
 
-            w\_new = \(w \+ mu\_v\*\(Ron/D\*\*2\)\*I\_b\*window\*dt\)\.clamp\(0, D\)
+            w\_new = \(w \+ mu\_v\*\(Ron/D\*\*2\)\*I\_b\*window\*dt\).clamp\(0, D\)
 
-            self\.params\[comp\['name'\]\+'\_w'\] = w\_new
+            self.params\[comp\['name'\]\+'\_w'\] = w\_new
 
-    self\.x = x\_new
+    self.x = x\_new
 
     return x\_new
 
 def simulate\(self, t\_end, dt, sources\_fn=None, log\_every=100\):
 
-    '''Full simulation loop for GPU batch\.'''
+    '''Full simulation loop for GPU batch.'''
 
     n\_steps = int\(t\_end / dt\)
 
@@ -1240,25 +1321,25 @@ def simulate\(self, t\_end, dt, sources\_fn=None, log\_every=100\):
 
         t = step \* dt
 
-        src = sources\_fn\(t, self\.N, self\.device\) if sources\_fn else None
+        src = sources\_fn\(t, self.N, self.device\) if sources\_fn else None
 
-        self\.step\_batch\(dt, src\)
+        self.step\_batch\(dt, src\)
 
         if step % log\_every == 0:
 
-            results\.append\(self\.x\.cpu\(\)\.clone\(\)\)
+            results.append\(self.x.cpu\(\).clone\(\)\)
 
-    return torch\.stack\(results\)  \# shape: \(n\_logs, N, n\_nodes\)
+    return torch.stack\(results\)  # shape: \(n\_logs, N, n\_nodes\)
 </code></pre>
-<h2 id="72-monte-carlo-yield-analysis"><strong>7.2  Monte Carlo Yield Analysis</strong></h2>
+<h2 id="72-monte-carlo-yield-analysis">7.2  Monte Carlo Yield Analysis</h2>
 <p>def monte_carlo_yield(n_samples=100_000, device='cuda'):</p>
 <pre><code>'''
 
-Example: yield analysis of a memristor\-resistor voltage divider\.
+Example: yield analysis of a memristor-resistor voltage divider.
 
-Finds what fraction of manufactured devices have V\_out in spec \[0\.4, 0\.6\] V\.
+Finds what fraction of manufactured devices have V\_out in spec \[0.4, 0.6\] V.
 
-Manufacturing spread: Ron ± 20%, Roff ± 15%, D ± 5%\.
+Manufacturing spread: Ron ± 20%, Roff ± 15%, D ± 5%.
 
 '''
 
@@ -1266,21 +1347,21 @@ import torch
 
 N = n\_samples
 
-\# Sample manufacturing parameters
+# Sample manufacturing parameters
 
-Ron\_nom, Roff\_nom, D\_nom = 100\.0, 16000\.0, 10e\-9
+Ron\_nom, Roff\_nom, D\_nom = 100.0, 16000.0, 10e-9
 
-Ron  = torch\.normal\(Ron\_nom,  Ron\_nom \*0\.20, \(N,\)\)\.clamp\(10, 500\)
+Ron  = torch.normal\(Ron\_nom,  Ron\_nom \*0.20, \(N,\)\).clamp\(10, 500\)
 
-Roff = torch\.normal\(Roff\_nom, Roff\_nom\*0\.15, \(N,\)\)\.clamp\(1000, 50000\)
+Roff = torch.normal\(Roff\_nom, Roff\_nom\*0.15, \(N,\)\).clamp\(1000, 50000\)
 
-D    = torch\.normal\(D\_nom,    D\_nom   \*0\.05, \(N,\)\)\.clamp\(5e\-9, 20e\-9\)
+D    = torch.normal\(D\_nom,    D\_nom   \*0.05, \(N,\)\).clamp\(5e-9, 20e-9\)
 
-w0   = D \* 0\.5   \# start at 50% doped
+w0   = D \* 0.5   # start at 50% doped
 
-\# Circuit: V\_s=1V \-&gt; R\_load=1kOhm \-&gt; Memristor \-&gt; GND
+# Circuit: V\_s=1V -&gt; R\_load=1kOhm -&gt; Memristor -&gt; GND
 
-\# Nodes: 1=V\_in, 2=V\_mid, GND=0
+# Nodes: 1=V\_in, 2=V\_mid, GND=0
 
 topo = \{'components': \[
 
@@ -1292,61 +1373,61 @@ topo = \{'components': \[
 
 params = \{
 
-    'R\_load':   torch\.ones\(N, device=device\) \* 1000\.0,
+    'R\_load':   torch.ones\(N, device=device\) \* 1000.0,
 
-    'M1\_Ron':   Ron\.to\(device\),
+    'M1\_Ron':   Ron.to\(device\),
 
-    'M1\_Roff':  Roff\.to\(device\),
+    'M1\_Roff':  Roff.to\(device\),
 
-    'M1\_D':     D\.to\(device\),
+    'M1\_D':     D.to\(device\),
 
-    'M1\_w':     w0\.to\(device\),
+    'M1\_w':     w0.to\(device\),
 
-    'M1\_mu\_v':  torch\.ones\(N,device=device\)\*1e\-14,
+    'M1\_mu\_v':  torch.ones\(N,device=device\)\*1e-14,
 
 \}
 
 sim = GPUCircuitBatch\(topo, params, n\_nodes=3, device=device\)
 
-\# Source: node 1 held at 1V \(implemented as large conductance to V\_s\)
+# Source: node 1 held at 1V \(implemented as large conductance to V\_s\)
 
 def source\_fn\(t, N, dev\):
 
-    \# Current injection into node 1 to enforce V=1V via 1 Ohm source R
+    # Current injection into node 1 to enforce V=1V via 1 Ohm source R
 
-    return torch\.zeros\(N, sim\.n\_nodes, device=dev\)
+    return torch.zeros\(N, sim.n\_nodes, device=dev\)
 
-\# Run for 1 us
+# Run for 1 us
 
-log = sim\.simulate\(t\_end=1e\-6, dt=1e\-9, log\_every=1000\)
+log = sim.simulate\(t\_end=1e-6, dt=1e-9, log\_every=1000\)
 
-\# Read final V\_mid \(node 2, index 1\)
+# Read final V\_mid \(node 2, index 1\)
 
-V\_mid\_final = sim\.x\[:, 1\]   \# shape \(N,\)
+V\_mid\_final = sim.x\[:, 1\]   # shape \(N,\)
 
-in\_spec = \(\(V\_mid\_final &gt; 0\.4\) &amp; \(V\_mid\_final &lt; 0\.6\)\)\.float\(\)
+in\_spec = \(\(V\_mid\_final &gt; 0.4\) &amp; \(V\_mid\_final &lt; 0.6\)\).float\(\)
 
-yield\_pct = in\_spec\.mean\(\)\.item\(\) \* 100
+yield\_pct = in\_spec.mean\(\).item\(\) \* 100
 
-print\(f'Yield \(\{N\} samples\): \{yield\_pct:\.1f\}%'\)
+print\(f'Yield \(\{N\} samples\): \{yield\_pct:.1f\}%'\)
 
-return V\_mid\_final\.cpu\(\)
+return V\_mid\_final.cpu\(\)
 </code></pre>
 <p><em>🚀  Running 100,000 circuit simulations in parallel on an A100 GPU takes approximately the same wall-clock time as running 1 simulation on a CPU. For yield analysis with tight manufacturing tolerances, this changes the workflow from 'run overnight on a cluster' to 'run in a few seconds on a workstation'.</em></p>
 <p>SECTION 8  ·  THREE COMPLETE CIRCUIT SIMULATIONS</p>
 <p><strong>Worked Examples</strong></p>
-<h2 id="example-a-memristor-crossbar-44-in-memory-matrix-multiply"><strong>Example A: Memristor Crossbar 4×4 — In-Memory Matrix Multiply</strong></h2>
+<h2 id="example-a-memristor-crossbar-44-in-memory-matrix-multiply">Example A: Memristor Crossbar 4×4 — In-Memory Matrix Multiply</h2>
 <p>A 4×4 memristor crossbar has 16 memristors arranged in a grid. Row nodes receive input voltages V_in (a 4-vector). Column nodes output currents I_out. Each memristor conductance G_ij encodes one element of a 4×4 matrix W. The output current at column j is:</p>
-<p><strong>I_out[j]  =  sum_i  G_ij · V_in[i]     (Ohm's law applied to each memristor)</strong></p>
-<p>This is a matrix-vector multiply W·v executed at the speed of electrical current flow — no multiply-accumulate operations, no memory access. This is the core operation of in-memory computing for AI inference.</p>
+<p><strong>I_out[j]  =  sum_i  G_ij · V_in[i]     (Ohm's law applied to each memristor)</strong>
+This is a matrix-vector multiply W·v executed at the speed of electrical current flow — no multiply-accumulate operations, no memory access. This is the core operation of in-memory computing for AI inference.</p>
 <p>def build_memristor_crossbar(W_matrix, V_input, R_load=1000.0):</p>
 <pre><code>'''
 
-Build a 4x4 memristor crossbar circuit and compute W @ V\_input\.
+Build a 4x4 memristor crossbar circuit and compute W @ V\_input.
 
 W\_matrix:  4x4 weight matrix \(values between 0 and 1\)
 
-V\_input:   4\-element input voltage vector
+V\_input:   4-element input voltage vector
 
 R\_load:    load resistor at each output column
 
@@ -1356,39 +1437,39 @@ import numpy as np
 
 rows, cols = 4, 4
 
-\# Node numbering:
+# Node numbering:
 
-\# Row nodes: 1\-4 \(inputs, held at V\_input values\)
+# Row nodes: 1-4 \(inputs, held at V\_input values\)
 
-\# Column nodes: 5\-8 \(outputs, read through R\_load to GND\)
+# Column nodes: 5-8 \(outputs, read through R\_load to GND\)
 
-\# GND = 0
+# GND = 0
 
-n\_nodes = 9  \# 0=GND, 1\-4=row, 5\-8=col
+n\_nodes = 9  # 0=GND, 1-4=row, 5-8=col
 
-mna = MNASystem\(n\_nodes, dt=1e\-9\)
+mna = MNASystem\(n\_nodes, dt=1e-9\)
 
-\# Input voltage sources \(set row voltages\)
+# Input voltage sources \(set row voltages\)
 
 for i in range\(rows\):
 
-    vs = Component\.\_\_new\_\_\(Component\)
+    vs = Component.\_\_new\_\_\(Component\)
 
-    vs\.comp\_type = ComponentType\.VSOURCE
+    vs.comp\_type = ComponentType.VSOURCE
 
-    vs\.node\_p, vs\.node\_n = i\+1, 0
+    vs.node\_p, vs.node\_n = i\+1, 0
 
-    vs\.params  = \{'V': V\_input\[i\]\}
+    vs.params  = \{'V': V\_input\[i\]\}
 
-    vs\.state\_c = np\.array\(\[\]\)
+    vs.state\_c = np.array\(\[\]\)
 
-    vs\.state\_d = 0
+    vs.state\_d = 0
 
-    mna\.extra\_vars\.append\(vs\)
+    mna.extra\_vars.append\(vs\)
 
-    mna\.components\.append\(vs\)
+    mna.components.append\(vs\)
 
-\# Memristor conductances \(one per crossbar intersection\)
+# Memristor conductances \(one per crossbar intersection\)
 
 Ron, Roff = 100, 50000
 
@@ -1396,230 +1477,230 @@ for i in range\(rows\):
 
     for j in range\(cols\):
 
-        \# Map W value \[0,1\] to resistance range \[Roff, Ron\]
+        # Map W value \[0,1\] to resistance range \[Roff, Ron\]
 
-        R\_ij = Roff \- W\_matrix\[i,j\] \* \(Roff \- Ron\)
+        R\_ij = Roff - W\_matrix\[i,j\] \* \(Roff - Ron\)
 
         mem = ResistorComponent\(node\_p=i\+1, node\_n=j\+5,
 
-                                comp\_type=ComponentType\.RESISTOR,
+                                comp\_type=ComponentType.RESISTOR,
 
-                                params=\{'R': R\_ij\}, state\_c=np\.array\(\[\]\),
+                                params=\{'R': R\_ij\}, state\_c=np.array\(\[\]\),
 
                                 state\_d=0, name=f'W\{i\}\{j\}'\)
 
-        mem\.comp\_type = ComponentType\.RESISTOR
+        mem.comp\_type = ComponentType.RESISTOR
 
-        mna\.components\.append\(mem\)
+        mna.components.append\(mem\)
 
-\# Load resistors at outputs
+# Load resistors at outputs
 
 for j in range\(cols\):
 
     rl = ResistorComponent\(node\_p=j\+5, node\_n=0,
 
-                           comp\_type=ComponentType\.RESISTOR,
+                           comp\_type=ComponentType.RESISTOR,
 
-                           params=\{'R': R\_load\}, state\_c=np\.array\(\[\]\),
+                           params=\{'R': R\_load\}, state\_c=np.array\(\[\]\),
 
                            state\_d=0, name=f'RL\{j\}'\)
 
-    rl\.comp\_type = ComponentType\.RESISTOR
+    rl.comp\_type = ComponentType.RESISTOR
 
-    mna\.components\.append\(rl\)
+    mna.components.append\(rl\)
 
-\# Solve \(DC — just solve once, no time stepping needed for static matrix multiply\)
+# Solve \(DC — just solve once, no time stepping needed for static matrix multiply\)
 
-sz = mna\.size
+sz = mna.size
 
-G, C, b = mna\.build\(np\.zeros\(sz\)\)
+G, C, b = mna.build\(np.zeros\(sz\)\)
 
-x = np\.linalg\.solve\(G \+ np\.eye\(sz\)\*1e\-15, b\)
+x = np.linalg.solve\(G \+ np.eye\(sz\)\*1e-15, b\)
 
-\# Read output currents through load resistors
+# Read output currents through load resistors
 
-I\_out = np\.zeros\(cols\)
+I\_out = np.zeros\(cols\)
 
 for j in range\(cols\):
 
-    V\_col = x\[j\+4\]   \# column node \(index = node\-1\)
+    V\_col = x\[j\+4\]   # column node \(index = node-1\)
 
     I\_out\[j\] = V\_col / R\_load
 
 return x, I\_out
 </code></pre>
-<p># Test: encode an identity matrix</p>
+
 <p>W = np.eye(4)</p>
 <p>V = np.array([1.0, 0.5, 0.25, 0.125])</p>
 <p>x, I = build_memristor_crossbar(W, V)</p>
 <p>print('Expected (proportional to V):', V)</p>
 <p>print('Got (output currents):', I / I.max())</p>
-<h2 id="example-b-josephson-junction-oscillator-with-gmr-load"><strong>Example B: Josephson Junction Oscillator with GMR Load</strong></h2>
+<h2 id="example-b-josephson-junction-oscillator-with-gmr-load">Example B: Josephson Junction Oscillator with GMR Load</h2>
 <p>A Josephson junction biased above I_c oscillates at the Josephson frequency f_J = 2eV/h. Here we drive a GMR spin resistor with this oscillating voltage to modulate its spin alignment, coupling quantum oscillations to a classical magnetic component.</p>
 <p>def josephson_gmr_circuit():</p>
 <pre><code>'''
 
-Circuit: I\_bias \-&gt; JJ in parallel with GMR \-&gt; GND
+Circuit: I\_bias -&gt; JJ in parallel with GMR -&gt; GND
 
-JJ oscillates; GMR resistance modulates with spin dynamics\.
+JJ oscillates; GMR resistance modulates with spin dynamics.
 
 '''
 
 from dataclasses import dataclass
 
-\# Use HybridCircuitSimulator
+# Use HybridCircuitSimulator
 
-\# Nodes: 1 = top node \(JJ and GMR both connect here\), 0 = GND
+# Nodes: 1 = top node \(JJ and GMR both connect here\), 0 = GND
 
-sim = HybridCircuitSimulator\(n\_nodes=2, dt=1e\-12\)
+sim = HybridCircuitSimulator\(n\_nodes=2, dt=1e-12\)
 
-\# Current source: bias above Ic to make JJ oscillate
+# Current source: bias above Ic to make JJ oscillate
 
-I\_src = Component\.\_\_new\_\_\(Component\)
+I\_src = Component.\_\_new\_\_\(Component\)
 
-I\_src\.comp\_type = ComponentType\.ISOURCE
+I\_src.comp\_type = ComponentType.ISOURCE
 
-I\_src\.node\_p, I\_src\.node\_n = 1, 0
+I\_src.node\_p, I\_src.node\_n = 1, 0
 
-I\_src\.params   = \{'I': 12e\-6\}   \# 1\.2 \* Ic
+I\_src.params   = \{'I': 12e-6\}   # 1.2 \* Ic
 
-I\_src\.state\_c  = np\.array\(\[\]\)
+I\_src.state\_c  = np.array\(\[\]\)
 
-I\_src\.state\_d  = 0
+I\_src.state\_d  = 0
 
-I\_src\.name     = 'I\_bias'
+I\_src.name     = 'I\_bias'
 
-sim\.mna\.components\.append\(I\_src\)
+sim.mna.components.append\(I\_src\)
 
-\# Josephson junction
+# Josephson junction
 
-jj = JosephsonComponent\(node\_p=1, node\_n=0, Ic=10e\-6, R\_J=50, C\_J=1e\-15\)
+jj = JosephsonComponent\(node\_p=1, node\_n=0, Ic=10e-6, R\_J=50, C\_J=1e-15\)
 
-jj\.name = 'JJ1'
+jj.name = 'JJ1'
 
-sim\.mna\.components\.append\(jj\)
+sim.mna.components.append\(jj\)
 
-sim\.mna\.extra\_vars  \# not a vsource/inductor, so no extra var
+sim.mna.extra\_vars  # not a vsource/inductor, so no extra var
 
-\# GMR resistor in parallel: simplified as state\-dependent resistor
+# GMR resistor in parallel: simplified as state-dependent resistor
 
-\# R\_GMR\(t\) controlled externally by spin simulation running in background
+# R\_GMR\(t\) controlled externally by spin simulation running in background
 
-gmr = ResistorComponent\.\_\_new\_\_\(ResistorComponent\)
+gmr = ResistorComponent.\_\_new\_\_\(ResistorComponent\)
 
-gmr\.comp\_type = ComponentType\.RESISTOR
+gmr.comp\_type = ComponentType.RESISTOR
 
-gmr\.node\_p, gmr\.node\_n = 1, 0
+gmr.node\_p, gmr.node\_n = 1, 0
 
-gmr\.params    = \{'R': 106\.0\}   \# mid\-value between RP=100 and RAP=112
+gmr.params    = \{'R': 106.0\}   # mid-value between RP=100 and RAP=112
 
-gmr\.state\_c   = np\.array\(\[0\.0\]\)  \# theta\_mag
+gmr.state\_c   = np.array\(\[0.0\]\)  # theta\_mag
 
-gmr\.state\_d   = 0
+gmr.state\_d   = 0
 
-gmr\.name      = 'GMR1'
+gmr.name      = 'GMR1'
 
-sim\.mna\.components\.append\(gmr\)
+sim.mna.components.append\(gmr\)
 
-\# Run for 1 ns
+# Run for 1 ns
 
-log = sim\.run\(t\_end=1e\-9, log\_every=10\)
+log = sim.run\(t\_end=1e-9, log\_every=10\)
 
-t\_arr = np\.array\(\[e\['t'\] for e in log\]\)
+t\_arr = np.array\(\[e\['t'\] for e in log\]\)
 
-V1    = np\.array\(\[e\['x'\]\[0\] for e in log\]\)   \# node 1 voltage
+V1    = np.array\(\[e\['x'\]\[0\] for e in log\]\)   # node 1 voltage
 
-phi   = np\.array\(\[e\['states'\]\['JJ1'\]\[0\]\[0\] for e in log\]\)  \# phase
+phi   = np.array\(\[e\['states'\]\['JJ1'\]\[0\]\[0\] for e in log\]\)  # phase
 
-\# Josephson frequency
+# Josephson frequency
 
-hbar, e\_q = 1\.055e\-34, 1\.602e\-19
+hbar, e\_q = 1.055e-34, 1.602e-19
 
-V\_dc  = np\.mean\(V1\)
+V\_dc  = np.mean\(V1\)
 
-f\_J   = 2 \* e\_q \* V\_dc / \(2 \* np\.pi \* hbar\)
+f\_J   = 2 \* e\_q \* V\_dc / \(2 \* np.pi \* hbar\)
 
-print\(f'JJ oscillation frequency: \{f\_J/1e9:\.2f\} GHz'\)
+print\(f'JJ oscillation frequency: \{f\_J/1e9:.2f\} GHz'\)
 
-print\(f'Expected: 2eV/h = \{2\*e\_q\*V\_dc/6\.626e\-34/1e9:\.2f\} GHz'\)
+print\(f'Expected: 2eV/h = \{2\*e\_q\*V\_dc/6.626e-34/1e9:.2f\} GHz'\)
 
 return t\_arr, V1, phi
 </code></pre>
-<h2 id="example-c-lif-spiking-neural-network-3-neurons"><strong>Example C: LIF Spiking Neural Network — 3 Neurons</strong></h2>
+<h2 id="example-c-lif-spiking-neural-network-3-neurons">Example C: LIF Spiking Neural Network — 3 Neurons</h2>
 <p>Three Leaky Integrate-and-Fire neurons wired with memristor synapses. Each spike from neuron i sends a current pulse to neuron j through memristor M_ij. The memristor weight adapts based on the timing of spikes — implementing Spike-Timing Dependent Plasticity (STDP), the biological learning rule.</p>
 <p>class LIFNeuronComponent(Component):</p>
 <pre><code>'''
 
-Leaky integrate\-and\-fire neuron as a circuit component\.
+Leaky integrate-and-fire neuron as a circuit component.
 
-Models as a parallel RC with threshold comparator\.
+Models as a parallel RC with threshold comparator.
 
 '''
 
-def \_\_init\_\_\(self, node, Cm=1e\-9, Rm=1e7, V\_thresh=0\.02, V\_reset=\-0\.07\):
+def \_\_init\_\_\(self, node, Cm=1e-9, Rm=1e7, V\_thresh=0.02, V\_reset=-0.07\):
 
-    super\(\)\.\_\_init\_\_\(ComponentType\.LIF\_NEURON, node, 0,
+    super\(\).\_\_init\_\_\(ComponentType.LIF\_NEURON, node, 0,
 
                      \{'Cm':Cm,'Rm':Rm,'V\_thresh':V\_thresh,'V\_reset':V\_reset\}\)
 
-    self\.state\_c = np\.array\(\[\-0\.07\]\)  \# membrane voltage V\_m
+    self.state\_c = np.array\(\[-0.07\]\)  # membrane voltage V\_m
 
-    self\.state\_d = 0   \# 0=integrating, 1=refractory
+    self.state\_d = 0   # 0=integrating, 1=refractory
 
-    self\.spike\_times = \[\]
+    self.spike\_times = \[\]
 
-    self\.\_t = 0\.0
+    self.\_t = 0.0
 
-def conductance\(self, V\): return 1\.0/self\.params\['Rm'\] \+ self\.params\['Cm'\]\*1e9
+def conductance\(self, V\): return 1.0/self.params\['Rm'\] \+ self.params\['Cm'\]\*1e9
 
-def current\(self, V\):     return V/self\.params\['Rm'\]
+def current\(self, V\):     return V/self.params\['Rm'\]
 
 def check\_guards\(self, V, I\):
 
-    if V &gt;= self\.params\['V\_thresh'\] and self\.state\_d == 0:
+    if V &gt;= self.params\['V\_thresh'\] and self.state\_d == 0:
 
-        self\.spike\_times\.append\(self\.\_t\)
+        self.spike\_times.append\(self.\_t\)
 
-        return 1   \# enter refractory
+        return 1   # enter refractory
 
-    if self\.state\_d == 1 and V &lt;= self\.params\['V\_reset'\] \+ 0\.001:
+    if self.state\_d == 1 and V &lt;= self.params\['V\_reset'\] \+ 0.001:
 
-        return 0   \# leave refractory
+        return 0   # leave refractory
 
     return None
 </code></pre>
 <p>def stdp_update(w, t_pre, t_post, A_plus=0.01, A_minus=0.01, tau=20e-3):</p>
 <pre><code>'''
 
-Spike\-Timing Dependent Plasticity weight update\.
+Spike-Timing Dependent Plasticity weight update.
 
-Pre fires before post \(t\_pre &lt; t\_post\): potentiation \(w increases\)\.
+Pre fires before post \(t\_pre &lt; t\_post\): potentiation \(w increases\).
 
-Post fires before pre \(t\_post &lt; t\_pre\): depression \(w decreases\)\.
+Post fires before pre \(t\_post &lt; t\_pre\): depression \(w decreases\).
 
 '''
 
-dt\_spk = t\_post \- t\_pre
+dt\_spk = t\_post - t\_pre
 
-if dt\_spk &gt; 0:   \# pre before post \-&gt; potentiation
+if dt\_spk &gt; 0:   # pre before post -&gt; potentiation
 
-    dw =  A\_plus  \* np\.exp\(\-dt\_spk / tau\)
+    dw =  A\_plus  \* np.exp\(-dt\_spk / tau\)
 
-else:            \# post before pre \-&gt; depression
+else:            # post before pre -&gt; depression
 
-    dw = \-A\_minus \* np\.exp\( dt\_spk / tau\)
+    dw = -A\_minus \* np.exp\( dt\_spk / tau\)
 
-return np\.clip\(w \+ dw, 0\.0, 1\.0\)
+return np.clip\(w \+ dw, 0.0, 1.0\)
 </code></pre>
-<p># Build 3-neuron network</p>
-<p># Neurons at nodes 1, 2, 3. Memristor synapses connect all pairs.</p>
+
+
 <p>sim = HybridCircuitSimulator(n_nodes=4, dt=1e-4)</p>
 <p>neurons = [LIFNeuronComponent(node=i+1) for i in range(3)]</p>
 <p>for n in neurons: sim.mna.components.append(n)</p>
-<p># Synaptic memristors (simplified as resistors with STDP weight updates)</p>
+
 <p>syn_weights = np.ones((3,3)) * 0.5</p>
 <p>syn_weights[np.eye(3,dtype=bool)] = 0  # no self-connections</p>
-<p># External input current sources to neuron 1</p>
+
 <p>I_ext = Component.__new__(Component)</p>
 <p>I_ext.comp_type = ComponentType.ISOURCE</p>
 <p>I_ext.node_p, I_ext.node_n = 1, 0</p>
@@ -1628,11 +1709,11 @@ return np\.clip\(w \+ dw, 0\.0, 1\.0\)
 <p>sim.mna.components.append(I_ext)</p>
 <p>print('3-neuron LIF network ready. Synaptic weights:', syn_weights)</p>
 <p>SECTION 9  ·  GENERATING NETLISTS FOR INDUSTRY EDA TOOLS</p>
-<p><strong>SPICE-Compatible Export</strong></p>
-<p>SPICE is the industry standard for circuit simulation, used by every chip design tool (Cadence, Synopsys, Mentor). While SPICE cannot natively simulate hybrid components, we can export behavioural models that approximate the hybrid behaviour using SPICE primitives and voltage-controlled sources. This allows the circuit to be used within larger designs.</p>
-<h2 id="91-spice-behavioural-models"><strong>9.1  SPICE Behavioural Models</strong></h2>
+<p><strong>SPICE-Compatible Export</strong>
+SPICE is the industry standard for circuit simulation, used by every chip design tool (Cadence, Synopsys, Mentor). While SPICE cannot natively simulate hybrid components, we can export behavioural models that approximate the hybrid behaviour using SPICE primitives and voltage-controlled sources. This allows the circuit to be used within larger designs.</p>
+<h2 id="91-spice-behavioural-models">9.1  SPICE Behavioural Models</h2>
 <p>SPICE supports a B-element (behavioural voltage/current source) that evaluates an arbitrary mathematical expression. We use this to implement the hybrid I-V curves:</p>
-<h3 id="quantum-tunnel-resistor-spice-model"><strong>Quantum Tunnel Resistor SPICE model:</strong></h3>
+<h3 id="quantum-tunnel-resistor-spice-model">Quantum Tunnel Resistor SPICE model:</h3>
 <p>.SUBCKT QTR anode cathode</p>
 <p>* Quantum Tunnel Resistor behavioural model</p>
 <p>* Simmons model approximation (low-voltage regime)</p>
@@ -1641,7 +1722,7 @@ return np\.clip\(w \+ dw, 0\.0, 1\.0\)
 <p>B1 anode cathode I='G0 * V(anode,cathode) *</p>
 <p>+  (1 + (V(anode,cathode))^2 / (6*phi^2))'</p>
 <p>.ENDS QTR</p>
-<h3 id="memristor-spice-model-hp-model"><strong>Memristor SPICE model (HP model):</strong></h3>
+<h3 id="memristor-spice-model-hp-model">Memristor SPICE model (HP model):</h3>
 <p>.SUBCKT MEMRISTOR anode cathode</p>
 <p>* HP TiO2 memristor with internal state variable w</p>
 <p>.PARAM Ron=100 Roff=16000 D=10n mu_v=1e-14</p>
@@ -1654,15 +1735,15 @@ return np\.clip\(w \+ dw, 0\.0, 1\.0\)
 <p>Bw w 0 I='mu_v*(Ron/D^2) * I(Eresist) *</p>
 <p>+  (1 - (2*V(w)/D - 1)^2)'</p>
 <p>.ENDS MEMRISTOR</p>
-<h3 id="python-spice-netlist-generator"><strong>Python SPICE netlist generator:</strong></h3>
+<h3 id="python-spice-netlist-generator">Python SPICE netlist generator:</h3>
 <p>def export_to_spice(simulator, filename='hybrid_circuit.sp',</p>
 <pre><code>                 title='Hybrid Component Circuit'\):
 
 '''
 
-Export a HybridCircuitSimulator to a SPICE netlist\.
+Export a HybridCircuitSimulator to a SPICE netlist.
 
-Uses \.SUBCKT for each hybrid component type\.
+Uses .SUBCKT for each hybrid component type.
 
 '''
 
@@ -1678,33 +1759,33 @@ lines = \[
 
 \]
 
-\# Include subcircuit definitions
+# Include subcircuit definitions
 
 lines \+= \[
 
     '\* ─── SUBCIRCUIT LIBRARY ───────────────────────────────────',
 
-    '\.SUBCKT QTR anode cathode',
+    '.SUBCKT QTR anode cathode',
 
-    '\.PARAM d=2n phi=3\.0 A=2\.5e\-15',
+    '.PARAM d=2n phi=3.0 A=2.5e-15',
 
-    '\.PARAM G0=\{1e\-8\*exp\(\-2\.226e10\*d\*sqrt\(phi\)\)\}',
+    '.PARAM G0=\{1e-8\*exp\(-2.226e10\*d\*sqrt\(phi\)\)\}',
 
     'B1 anode cathode I=\{G0\*V\(anode,cathode\)\*\(1\+V\(anode,cathode\)^2/\(6\*phi^2\)\)\}',
 
-    '\.ENDS QTR',
+    '.ENDS QTR',
 
     '',
 
-    '\.SUBCKT MEMRISTOR anode cathode RON=100 ROFF=16000 D=10n',
+    '.SUBCKT MEMRISTOR anode cathode RON=100 ROFF=16000 D=10n',
 
     'Cw internal 0 1 IC=\{D/2\}',
 
-    'Gdev anode cathode value=\{V\(anode,cathode\)/\(RON\*V\(internal\)/D\+ROFF\*\(1\-V\(internal\)/D\)\)\}',
+    'Gdev anode cathode value=\{V\(anode,cathode\)/\(RON\*V\(internal\)/D\+ROFF\*\(1-V\(internal\)/D\)\)\}',
 
-    'Bstate internal 0 I=\{1e\-14\*\(RON/D^2\)\*I\(Gdev\)\*\(1\-\(2\*V\(internal\)/D\-1\)^2\)\}',
+    'Bstate internal 0 I=\{1e-14\*\(RON/D^2\)\*I\(Gdev\)\*\(1-\(2\*V\(internal\)/D-1\)^2\)\}',
 
-    '\.ENDS MEMRISTOR',
+    '.ENDS MEMRISTOR',
 
     '',
 
@@ -1712,95 +1793,120 @@ lines \+= \[
 
 \]
 
-\# Emit each component
+# Emit each component
 
 comp\_counts = \{\}
 
-for comp in simulator\.mna\.components:
+for comp in simulator.mna.components:
 
-    ct = comp\.comp\_type
+    ct = comp.comp\_type
 
-    name = comp\.name or ct\.value
+    name = comp.name or ct.value
 
-    np\_node = f'N\{comp\.node\_p\}' if comp\.node\_p &gt; 0 else '0'
+    np\_node = f'N\{comp.node\_p\}' if comp.node\_p &gt; 0 else '0'
 
-    nn\_node = f'N\{comp\.node\_n\}' if comp\.node\_n &gt; 0 else '0'
+    nn\_node = f'N\{comp.node\_n\}' if comp.node\_n &gt; 0 else '0'
 
-    if ct == ComponentType\.RESISTOR:
+    if ct == ComponentType.RESISTOR:
 
-        lines\.append\(f'R\{name\} \{np\_node\} \{nn\_node\} \{comp\.params\["R"\]\}'\)
+        lines.append\(f'R\{name\} \{np\_node\} \{nn\_node\} \{comp.params\["R"\]\}'\)
 
-    elif ct == ComponentType\.CAPACITOR:
+    elif ct == ComponentType.CAPACITOR:
 
-        lines\.append\(f'C\{name\} \{np\_node\} \{nn\_node\} \{comp\.params\["C"\]\}'\)
+        lines.append\(f'C\{name\} \{np\_node\} \{nn\_node\} \{comp.params\["C"\]\}'\)
 
-    elif ct == ComponentType\.VSOURCE:
+    elif ct == ComponentType.VSOURCE:
 
-        lines\.append\(f'V\{name\} \{np\_node\} \{nn\_node\} DC \{comp\.params\["V"\]\}'\)
+        lines.append\(f'V\{name\} \{np\_node\} \{nn\_node\} DC \{comp.params\["V"\]\}'\)
 
-    elif ct == ComponentType\.ISOURCE:
+    elif ct == ComponentType.ISOURCE:
 
-        lines\.append\(f'I\{name\} \{np\_node\} \{nn\_node\} DC \{comp\.params\["I"\]\}'\)
+        lines.append\(f'I\{name\} \{np\_node\} \{nn\_node\} DC \{comp.params\["I"\]\}'\)
 
-    elif ct == ComponentType\.MEMRISTOR:
+    elif ct == ComponentType.MEMRISTOR:
 
-        lines\.append\(f'X\{name\} \{np\_node\} \{nn\_node\} MEMRISTOR'
+        lines.append\(f'X\{name\} \{np\_node\} \{nn\_node\} MEMRISTOR'
 
-                     f' RON=\{comp\.params\["Ron"\]\} ROFF=\{comp\.params\["Roff"\]\}'
+                     f' RON=\{comp.params\["Ron"\]\} ROFF=\{comp.params\["Roff"\]\}'
 
-                     f' D=\{comp\.params\["D"\]\}'\)
+                     f' D=\{comp.params\["D"\]\}'\)
 
-    elif ct == ComponentType\.TUNNEL\_R:
+    elif ct == ComponentType.TUNNEL\_R:
 
-        lines\.append\(f'X\{name\} \{np\_node\} \{nn\_node\} QTR'
+        lines.append\(f'X\{name\} \{np\_node\} \{nn\_node\} QTR'
 
-                     f' d=\{comp\.params\["d"\]\} phi=\{comp\.params\["phi\_bar"\]\}'\)
+                     f' d=\{comp.params\["d"\]\} phi=\{comp.params\["phi\_bar"\]\}'\)
 
-    elif ct == ComponentType\.JOSEPHSON:
+    elif ct == ComponentType.JOSEPHSON:
 
-        \# Approximate JJ as current\-controlled resistor \+ L
+        # Approximate JJ as current-controlled resistor \+ L
 
-        hbar\_2e = 3\.29e\-16   \# hbar / 2e
+        hbar\_2e = 3.29e-16   # hbar / 2e
 
-        L\_J = hbar\_2e / comp\.params\['Ic'\]
+        L\_J = hbar\_2e / comp.params\['Ic'\]
 
-        lines\.append\(f'\* Josephson Junction \(linearised at zero bias\)'\)
+        lines.append\(f'\* Josephson Junction \(linearised at zero bias\)'\)
 
-        lines\.append\(f'L\{name\} \{np\_node\} \{nn\_node\} \{L\_J:\.3e\}'\)
+        lines.append\(f'L\{name\} \{np\_node\} \{nn\_node\} \{L\_J:.3e\}'\)
 
-        lines\.append\(f'R\{name\}\_shunt \{np\_node\} \{nn\_node\} \{comp\.params\["R\_J"\]\}'\)
+        lines.append\(f'R\{name\}\_shunt \{np\_node\} \{nn\_node\} \{comp.params\["R\_J"\]\}'\)
 
-lines \+= \['', '\.TRAN 1n 1u', '\.END'\]
+lines \+= \['', '.TRAN 1n 1u', '.END'\]
 
 with open\(filename, 'w'\) as f:
 
-    f\.write\('\\n'\.join\(lines\)\)
+    f.write\('\\n'.join\(lines\)\)
 
 print\(f'SPICE netlist written to \{filename\}'\)
 
-return '\\n'\.join\(lines\)
+return '\\n'.join\(lines\)
 </code></pre>
-<h1 id="phase-2-summary-what-was-built"><strong>Phase 2 Summary — What Was Built</strong></h1>
-<p><strong>Section 1 — Graph Theory</strong></p>
-<p>Incidence matrix A_r, KCL as matrix equation, KVL as transpose, branch type taxonomy</p>
-<p><strong>Section 2 — MNA</strong></p>
-<p>Component stamps for R, C, L, V-source, I-source, and all hybrid types; full matrix equation</p>
-<p><strong>Section 3 — NR Iteration</strong></p>
-<p>Newton-Raphson companion model (G_eq, I_eq), Jacobians for QTR/memristor/Josephson</p>
-<p><strong>Section 4 — Time Integration</strong></p>
-<p>Backward Euler derivation, TR-BDF2 implementation, adaptive timestep PI controller</p>
-<p><strong>Section 5 — Event Detection</strong></p>
-<p>Zero-crossing bisection algorithm, guard table for all components, post-jump restart</p>
-<p><strong>Section 6 — HybridCircuit</strong></p>
-<p>Complete Component class hierarchy, MNASystem builder, Newton-Raphson solver, main simulation loop</p>
-<p><strong>Section 7 — GPU Batch</strong></p>
-<p>GPUCircuitBatch with batched LU solve, vectorised memristor state updates, Monte Carlo yield analysis</p>
-<p><strong>Section 8 — Examples</strong></p>
-<p>4×4 memristor crossbar matrix multiply, Josephson-GMR oscillator, 3-neuron STDP spiking network</p>
-<p><strong>Section 9 — SPICE Export</strong></p>
-<p>QTR and memristor .SUBCKT definitions, Python netlist generator for any HybridCircuitSimulator</p>
-<p><strong>Phase 2 Complete  ·  General Circuit Solver Built</strong></p>
-<p><em>Next: Phase 3 — Advanced GPU Kernels (custom CUDA, stiff solvers, real-time performance)</em></p>
-  </main>
+
+<p><strong>Section 1 — Graph Theory</strong>
+Incidence matrix A_r, KCL as matrix equation, KVL as transpose, branch type taxonomy</p>
+<p><strong>Section 2 — MNA</strong>
+Component stamps for R, C, L, V-source, I-source, and all hybrid types; full matrix equation</p>
+<p><strong>Section 3 — NR Iteration</strong>
+Newton-Raphson companion model (G_eq, I_eq), Jacobians for QTR/memristor/Josephson</p>
+<p><strong>Section 4 — Time Integration</strong>
+Backward Euler derivation, TR-BDF2 implementation, adaptive timestep PI controller</p>
+<p><strong>Section 5 — Event Detection</strong>
+Zero-crossing bisection algorithm, guard table for all components, post-jump restart</p>
+<p><strong>Section 6 — HybridCircuit</strong>
+Complete Component class hierarchy, MNASystem builder, Newton-Raphson solver, main simulation loop</p>
+<p><strong>Section 7 — GPU Batch</strong>
+GPUCircuitBatch with batched LU solve, vectorised memristor state updates, Monte Carlo yield analysis</p>
+<p><strong>Section 8 — Examples</strong>
+4×4 memristor crossbar matrix multiply, Josephson-GMR oscillator, 3-neuron STDP spiking network</p>
+<p><strong>Section 9 — SPICE Export</strong>
+QTR and memristor .SUBCKT definitions, Python netlist generator for any HybridCircuitSimulator</p>
+<p><strong>Phase 2 Complete  ·  General Circuit Solver Built</strong>
+<em>Next: Phase 3 — Advanced GPU Kernels (custom CUDA, stiff solvers, real-time performance)</em></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

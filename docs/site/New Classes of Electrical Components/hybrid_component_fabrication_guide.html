@@ -3,44 +3,174 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>hybrid component fabrication guide</title>
+  <meta name="description" content="--- **Target Size**: 0603 (1.6mm × 0.8mm) to 1206 (3.2mm × 1.6mm) **Target Thickness**: 0.5mm - 1.5mm **Manufacturing Approach**: Hybrid of MLCC tape-casting + thin-film deposition --- **Advantages**: - **Proven at scale**: Billions manufactured annually - **Standardized…"/>
+  <title>Practical Fabrication Guide for Discrete-Continuous Hybrid Components · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\hybrid_component_fabrication_guide.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="practical-fabrication-guide-for-discrete-continuous-hybrid-components">Practical Fabrication Guide for Discrete-Continuous Hybrid Components</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#standard-component-scale-0603-1206-16mm-32mm">Standard Component Scale (0603-1206 / 1.6mm - 3.2mm)</a></li>
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#i-foundation-mlcc-manufacturing-as-base-platform">I. Foundation: MLCC Manufacturing as Base Platform</a></li>
+        <li class="toc-depth-3"><a href="#why-start-with-mlcc-technology">Why Start with MLCC Technology?</a></li>
+        <li class="toc-depth-2"><a href="#ii-hybrid-component-design-1-memristor-capacitor">II. Hybrid Component Design #1: Memristor-Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#description">Description</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-substrate-preparation">Step 1: Substrate Preparation</a></li>
+        <li class="toc-depth-4"><a href="#step-2-bottom-electrode-nickel">Step 2: Bottom Electrode (Nickel)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-ferroelectric-capacitor-layer-batio3">Step 3: Ferroelectric Capacitor Layer (BaTiO₃)</a></li>
+        <li class="toc-depth-4"><a href="#step-4-middle-electrode-platinum">Step 4: Middle Electrode (Platinum)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-memristor-layer-tio2-x">Step 5: Memristor Layer (TiO₂-x)</a></li>
+        <li class="toc-depth-4"><a href="#step-6-top-electrode-platinum">Step 6: Top Electrode (Platinum)</a></li>
+        <li class="toc-depth-4"><a href="#step-7-protective-layer-al2o3">Step 7: Protective Layer (Al₂O₃)</a></li>
+        <li class="toc-depth-4"><a href="#step-8-terminations-packaging">Step 8: Terminations &amp; Packaging</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance">Expected Performance</a></li>
+        <li class="toc-depth-2"><a href="#iii-hybrid-component-design-2-phase-change-variable-resistor">III. Hybrid Component Design #2: Phase-Change Variable Resistor</a></li>
+        <li class="toc-depth-3"><a href="#description_1">Description</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_1">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_1">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-2-substrate-bottom-heater">Step 1-2: Substrate + Bottom Heater</a></li>
+        <li class="toc-depth-4"><a href="#step-3-dielectric-spacer-with-via">Step 3: Dielectric Spacer with Via</a></li>
+        <li class="toc-depth-4"><a href="#step-4-phase-change-material-gst">Step 4: Phase-Change Material (GST)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-top-electrode-tin">Step 5: Top Electrode (TiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-6-continuous-resistor-nicr">Step 6: Continuous Resistor (NiCr)</a></li>
+        <li class="toc-depth-4"><a href="#step-7-passivation-sin">Step 7: Passivation (SiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-8-contact-pads-packaging">Step 8: Contact Pads &amp; Packaging</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_1">Expected Performance</a></li>
+        <li class="toc-depth-2"><a href="#iv-hybrid-component-design-3-ferroelectric-multi-state-capacitor">IV. Hybrid Component Design #3: Ferroelectric Multi-State Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#description_2">Description</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_2">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_2">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-substrate">Step 1: Substrate</a></li>
+        <li class="toc-depth-4"><a href="#step-2-bottom-electrode-pt">Step 2: Bottom Electrode (Pt)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-ferroelectric-layer">Step 3: Ferroelectric Layer</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrode-pt">Step 4: Top Electrode (Pt)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-passivation">Step 5: Passivation</a></li>
+        <li class="toc-depth-4"><a href="#step-6-dicing-packaging">Step 6: Dicing &amp; Packaging</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_2">Expected Performance</a></li>
+        <li class="toc-depth-2"><a href="#v-hybrid-component-design-4-stochastic-deterministic-resistor">V. Hybrid Component Design #4: Stochastic-Deterministic Resistor</a></li>
+        <li class="toc-depth-3"><a href="#description_3">Description</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_3">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_3">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-base-resistor">Step 1: Base Resistor</a></li>
+        <li class="toc-depth-4"><a href="#step-2-tunnel-barrier">Step 2: Tunnel Barrier</a></li>
+        <li class="toc-depth-4"><a href="#step-3-noise-amplifier-heterostructure">Step 3: Noise Amplifier Heterostructure</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrode">Step 4: Top Electrode</a></li>
+        <li class="toc-depth-4"><a href="#step-5-packaging">Step 5: Packaging</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_3">Expected Performance</a></li>
+        <li class="toc-depth-2"><a href="#vi-manufacturing-equipment-facility-requirements">VI. Manufacturing Equipment &amp; Facility Requirements</a></li>
+        <li class="toc-depth-3"><a href="#minimum-equipment-set">Minimum Equipment Set</a></li>
+        <li class="toc-depth-4"><a href="#tier-1-absolutely-essential">Tier 1: Absolutely Essential</a></li>
+        <li class="toc-depth-4"><a href="#tier-2-very-useful">Tier 2: Very Useful</a></li>
+        <li class="toc-depth-4"><a href="#tier-3-advanced-nice-to-have">Tier 3: Advanced (Nice to Have)</a></li>
+        <li class="toc-depth-3"><a href="#facility-requirements">Facility Requirements</a></li>
+        <li class="toc-depth-2"><a href="#vii-materials-consumables">VII. Materials &amp; Consumables</a></li>
+        <li class="toc-depth-3"><a href="#ceramic-materials">Ceramic Materials</a></li>
+        <li class="toc-depth-3"><a href="#thin-film-materials-sputtering-targets">Thin Film Materials (Sputtering Targets)</a></li>
+        <li class="toc-depth-3"><a href="#ald-precursors">ALD Precursors</a></li>
+        <li class="toc-depth-3"><a href="#sol-gel-precursors">Sol-Gel Precursors</a></li>
+        <li class="toc-depth-3"><a href="#pastes-inks">Pastes &amp; Inks</a></li>
+        <li class="toc-depth-2"><a href="#viii-process-comparison-matrix">VIII. Process Comparison Matrix</a></li>
+        <li class="toc-depth-3"><a href="#which-method-for-which-layer">Which Method for Which Layer?</a></li>
+        <li class="toc-depth-2"><a href="#ix-step-by-step-example-making-10-memristor-capacitor-components">IX. Step-by-Step Example: Making 10 Memristor-Capacitor Components</a></li>
+        <li class="toc-depth-3"><a href="#week-1-substrate-preparation">Week 1: Substrate Preparation</a></li>
+        <li class="toc-depth-3"><a href="#week-2-bottom-electrode-deposition">Week 2: Bottom Electrode Deposition</a></li>
+        <li class="toc-depth-3"><a href="#week-3-batio3-capacitor-layer">Week 3: BaTiO₃ Capacitor Layer</a></li>
+        <li class="toc-depth-3"><a href="#week-4-middle-electrode-memristor-layer">Week 4: Middle Electrode &amp; Memristor Layer</a></li>
+        <li class="toc-depth-3"><a href="#week-5-top-electrode-passivation">Week 5: Top Electrode &amp; Passivation</a></li>
+        <li class="toc-depth-3"><a href="#week-6-terminations-testing">Week 6: Terminations &amp; Testing</a></li>
+        <li class="toc-depth-3"><a href="#results">Results</a></li>
+        <li class="toc-depth-2"><a href="#x-troubleshooting-guide">X. Troubleshooting Guide</a></li>
+        <li class="toc-depth-3"><a href="#common-issues-solutions">Common Issues &amp; Solutions</a></li>
+        <li class="toc-depth-4"><a href="#issue-1-memristor-wont-switch">Issue 1: Memristor Won&#x27;t Switch</a></li>
+        <li class="toc-depth-4"><a href="#issue-2-capacitor-short-circuit">Issue 2: Capacitor Short Circuit</a></li>
+        <li class="toc-depth-4"><a href="#issue-3-poor-adhesion">Issue 3: Poor Adhesion</a></li>
+        <li class="toc-depth-4"><a href="#issue-4-phase-change-memory-wont-reset">Issue 4: Phase-Change Memory Won&#x27;t Reset</a></li>
+        <li class="toc-depth-4"><a href="#issue-5-high-variation-between-components">Issue 5: High Variation Between Components</a></li>
+        <li class="toc-depth-2"><a href="#xi-cost-analysis">XI. Cost Analysis</a></li>
+        <li class="toc-depth-3"><a href="#per-component-cost-batch-of-100">Per-Component Cost (Batch of 100)</a></li>
+        <li class="toc-depth-4"><a href="#materials">Materials:</a></li>
+        <li class="toc-depth-4"><a href="#equipment-time-assumes-you-own-equipment">Equipment Time (assumes you own equipment):</a></li>
+        <li class="toc-depth-4"><a href="#labor-assumes-phd-level-engineer">Labor (assumes PhD-level engineer):</a></li>
+        <li class="toc-depth-3"><a href="#total-cost-per-component-96">Total Cost per Component : ~$96</a></li>
+        <li class="toc-depth-3"><a href="#cost-comparison">Cost Comparison:</a></li>
+        <li class="toc-depth-2"><a href="#xii-scaling-to-production">XII. Scaling to Production</a></li>
+        <li class="toc-depth-3"><a href="#path-to-volume-manufacturing">Path to Volume Manufacturing</a></li>
+        <li class="toc-depth-4"><a href="#phase-1-lab-prototypes-10-100-units">Phase 1: Lab Prototypes (10-100 units)</a></li>
+        <li class="toc-depth-4"><a href="#phase-2-pilot-production-1000-10000-units">Phase 2: Pilot Production (1,000-10,000 units)</a></li>
+        <li class="toc-depth-4"><a href="#phase-3-volume-production-100000-units">Phase 3: Volume Production (100,000+ units)</a></li>
+        <li class="toc-depth-3"><a href="#existing-infrastructure-can-be-leveraged">Existing Infrastructure Can Be Leveraged</a></li>
+        <li class="toc-depth-2"><a href="#xiii-recommended-starting-project">XIII. Recommended Starting Project</a></li>
+        <li class="toc-depth-3"><a href="#memristor-capacitor-demonstrator">&quot;Memristor-Capacitor Demonstrator&quot;</a></li>
+        <li class="toc-depth-2"><a href="#xiv-alternative-fringeexperimental-approaches">XIV. Alternative: Fringe/Experimental Approaches</a></li>
+        <li class="toc-depth-3"><a href="#option-a-inkjet-printed-phase-change-components">Option A: Inkjet-Printed Phase-Change Components</a></li>
+        <li class="toc-depth-3"><a href="#option-b-sol-gel-everything">Option B: Sol-Gel Everything</a></li>
+        <li class="toc-depth-3"><a href="#option-c-electrochemical-deposition">Option C: Electrochemical Deposition</a></li>
+        <li class="toc-depth-2"><a href="#xv-next-steps-recommendations">XV. Next Steps &amp; Recommendations</a></li>
+        <li class="toc-depth-3"><a href="#immediate-actions">Immediate Actions</a></li>
+        <li class="toc-depth-3"><a href="#medium-term-goals">Medium-Term Goals</a></li>
+        <li class="toc-depth-3"><a href="#long-term-vision">Long-Term Vision</a></li>
+        <li class="toc-depth-2"><a href="#xvi-summary">XVI. Summary</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Practical Fabrication Guide for Discrete-Continuous Hybrid Components</h1>
+          <p class="doc-meta">New Classes of Electrical Components\hybrid_component_fabrication_guide.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This guide presents <strong>proven, lab-tested fabrication methods</strong> for creating discrete-continuous hybrid electrical components at the scale of standard MLCCs and SMD resistors (0603 to 1206 package sizes). By combining established manufacturing processes from ceramic capacitors, memristors, and phase-change memory, we can build functional hybrid components using existing equipment and materials.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="standard-component-scale-0603-1206-16mm-32mm">Standard Component Scale (0603-1206 / 1.6mm - 3.2mm)</h2>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This guide presents <strong>proven, lab-tested fabrication methods</strong> for creating discrete-continuous hybrid electrical components at the scale of standard MLCCs and SMD resistors (0603 to 1206 package sizes). By combining established manufacturing processes from ceramic capacitors, memristors, and phase-change memory, we can build functional hybrid components using existing equipment and materials.</p>
-<p><strong>Target Size</strong>: 0603 (1.6mm × 0.8mm) to 1206 (3.2mm × 1.6mm)<br />
-<strong>Target Thickness</strong>: 0.5mm - 1.5mm<br />
+<p><strong>Target Size</strong>: 0603 (1.6mm × 0.8mm) to 1206 (3.2mm × 1.6mm)<br/>
+<strong>Target Thickness</strong>: 0.5mm - 1.5mm<br/>
 <strong>Manufacturing Approach</strong>: Hybrid of MLCC tape-casting + thin-film deposition</p>
-<hr />
+<hr/>
 <h2 id="i-foundation-mlcc-manufacturing-as-base-platform">I. Foundation: MLCC Manufacturing as Base Platform</h2>
 <h3 id="why-start-with-mlcc-technology">Why Start with MLCC Technology?</h3>
-<p><strong>Advantages</strong>:<br />
-- <strong>Proven at scale</strong>: Billions manufactured annually<br />
-- <strong>Standardized sizes</strong>: 0603, 0805, 1206 match our targets perfectly<br />
-- <strong>Multilayer capability</strong>: Can integrate multiple functional layers<br />
-- <strong>CMOS compatible</strong>: Low thermal budget options available<br />
+<p><strong>Advantages</strong>:
+- <strong>Proven at scale</strong>: Billions manufactured annually
+- <strong>Standardized sizes</strong>: 0603, 0805, 1206 match our targets perfectly
+- <strong>Multilayer capability</strong>: Can integrate multiple functional layers
+- <strong>CMOS compatible</strong>: Low thermal budget options available
 - <strong>Cost-effective</strong>: Established supply chains and equipment</p>
-<p><strong>Basic MLCC Process</strong> (our starting point):<br />
-1. Ceramic powder preparation (BaTiO₃, TiO₂, etc.)<br />
-2. Slurry mixing with binders and solvents<br />
-3. <strong>Tape casting</strong>: Create thin ceramic sheets (10-50 μm thick)<br />
-4. <strong>Screen printing</strong>: Deposit electrode patterns<br />
-5. <strong>Stacking</strong>: Layer sheets to desired count<br />
-6. <strong>Lamination</strong>: Press stack under heat/pressure<br />
-7. <strong>Cutting</strong>: Dice into individual chips<br />
-8. <strong>Sintering</strong>: Fire at 1000-1300°C<br />
-9. <strong>Termination</strong>: Apply end electrodes<br />
+<p><strong>Basic MLCC Process</strong> (our starting point):
+1. Ceramic powder preparation (BaTiO₃, TiO₂, etc.)
+2. Slurry mixing with binders and solvents
+3. <strong>Tape casting</strong>: Create thin ceramic sheets (10-50 μm thick)
+4. <strong>Screen printing</strong>: Deposit electrode patterns
+5. <strong>Stacking</strong>: Layer sheets to desired count
+6. <strong>Lamination</strong>: Press stack under heat/pressure
+7. <strong>Cutting</strong>: Dice into individual chips
+8. <strong>Sintering</strong>: Fire at 1000-1300°C
+9. <strong>Termination</strong>: Apply end electrodes
 10. <strong>Plating</strong>: Ni/Sn barrier and solder layers</p>
-<hr />
+<hr/>
 <h2 id="ii-hybrid-component-design-1-memristor-capacitor">II. Hybrid Component Design #1: Memristor-Capacitor</h2>
 <h3 id="description">Description</h3>
 <p>A capacitor with built-in memristive behavior - stores charge (continuous) AND memory states (discrete).</p>
@@ -57,87 +187,87 @@
 <p><strong>Component Size</strong>: 0805 (2.0mm × 1.25mm × 0.6mm thick)</p>
 <h3 id="fabrication-process">Fabrication Process</h3>
 <h4 id="step-1-substrate-preparation">Step 1: Substrate Preparation</h4>
-<p><strong>Method</strong>: Commercial alumina substrate (96% or 99.6% purity)<br />
-- <strong>Source</strong>: Readily available, pre-cut to size<br />
-- <strong>Surface prep</strong>: Clean with acetone → isopropanol → DI water<br />
+<p><strong>Method</strong>: Commercial alumina substrate (96% or 99.6% purity)
+- <strong>Source</strong>: Readily available, pre-cut to size
+- <strong>Surface prep</strong>: Clean with acetone → isopropanol → DI water
 - <strong>Surface activation</strong>: UV-ozone treatment, 15 minutes</p>
 <h4 id="step-2-bottom-electrode-nickel">Step 2: Bottom Electrode (Nickel)</h4>
 <p><strong>Method</strong>: Screen printing OR sputtering</p>
-<p><strong>Option A - Screen Printing</strong> (cheaper, scalable):<br />
-- Nickel paste (commercially available)<br />
-- Screen mesh: 325 mesh stainless steel<br />
-- Print pattern: 1.8mm × 1.0mm (leaves 0.1mm margin)<br />
-- Dry at 150°C, 30 minutes<br />
-- Sinter at 900°C, 2 hours in forming gas (95% N₂, 5% H₂)<br />
+<p><strong>Option A - Screen Printing</strong> (cheaper, scalable):
+- Nickel paste (commercially available)
+- Screen mesh: 325 mesh stainless steel
+- Print pattern: 1.8mm × 1.0mm (leaves 0.1mm margin)
+- Dry at 150°C, 30 minutes
+- Sinter at 900°C, 2 hours in forming gas (95% N₂, 5% H₂)
 - <strong>Result</strong>: 2 μm thick Ni electrode</p>
-<p><strong>Option B - Sputtering</strong> (better uniformity):<br />
-- DC magnetron sputtering<br />
-- Target: 99.95% Ni<br />
-- Power: 200W<br />
-- Ar pressure: 3 mTorr<br />
-- Deposition rate: ~2 Å/s<br />
-- Time: 100 minutes for 2 μm<br />
+<p><strong>Option B - Sputtering</strong> (better uniformity):
+- DC magnetron sputtering
+- Target: 99.95% Ni
+- Power: 200W
+- Ar pressure: 3 mTorr
+- Deposition rate: ~2 Å/s
+- Time: 100 minutes for 2 μm
 - Pattern via shadow mask or photolithography</p>
 <h4 id="step-3-ferroelectric-capacitor-layer-batio3">Step 3: Ferroelectric Capacitor Layer (BaTiO₃)</h4>
 <p><strong>Method</strong>: Tape casting + transfer OR sol-gel</p>
-<p><strong>Option A - Tape Cast Transfer</strong>:<br />
-1. Prepare BaTiO₃ slurry:<br />
-   - BaTiO₃ powder (100 nm particles): 50 g<br />
-   - Polyvinyl butyral (PVB) binder: 5 g<br />
-   - Dibutyl phthalate (DBP) plasticizer: 2 g<br />
-   - Ethanol solvent: 50 mL<br />
+<p><strong>Option A - Tape Cast Transfer</strong>:
+1. Prepare BaTiO₃ slurry:
+   - BaTiO₃ powder (100 nm particles): 50 g
+   - Polyvinyl butyral (PVB) binder: 5 g
+   - Dibutyl phthalate (DBP) plasticizer: 2 g
+   - Ethanol solvent: 50 mL
    - Ball mill 24 hours</p>
 <ol start="2">
 <li>
-<p>Cast onto mylar carrier film<br />
-   - Doctor blade gap: 150 μm<br />
-   - Drying: 60°C, 12 hours<br />
+<p>Cast onto mylar carrier film
+   - Doctor blade gap: 150 μm
+   - Drying: 60°C, 12 hours
    - Results in ~10 μm thick green tape</p>
 </li>
 <li>
-<p>Transfer to substrate:<br />
-   - Cut tape to size (2.0mm × 1.25mm)<br />
-   - Place on Ni electrode<br />
-   - Laminate: 70°C, 10 MPa, 5 minutes<br />
-   - Burn off organics: 450°C, 2 hours, slow ramp<br />
+<p>Transfer to substrate:
+   - Cut tape to size (2.0mm × 1.25mm)
+   - Place on Ni electrode
+   - Laminate: 70°C, 10 MPa, 5 minutes
+   - Burn off organics: 450°C, 2 hours, slow ramp
    - Sinter: 1150°C, 2 hours</p>
 </li>
 </ol>
-<p><strong>Option B - Sol-Gel</strong> (thinner layers, multiple coats):<br />
-- Barium acetate + titanium isopropoxide in acetic acid<br />
-- Spin coat at 3000 RPM<br />
-- Pyrolyze at 400°C<br />
-- Repeat 20-30 times for 10 μm total<br />
+<p><strong>Option B - Sol-Gel</strong> (thinner layers, multiple coats):
+- Barium acetate + titanium isopropoxide in acetic acid
+- Spin coat at 3000 RPM
+- Pyrolyze at 400°C
+- Repeat 20-30 times for 10 μm total
 - Final anneal: 650°C</p>
 <h4 id="step-4-middle-electrode-platinum">Step 4: Middle Electrode (Platinum)</h4>
 <p><strong>Method</strong>: Sputtering OR e-beam evaporation</p>
-<p><strong>Sputtering</strong>:<br />
-- RF sputtering (Pt is conductive but RF gives better films)<br />
-- Target: 99.99% Pt<br />
-- Power: 100W<br />
-- Ar pressure: 5 mTorr<br />
-- Deposition rate: 1 Å/s<br />
-- Time: 17 minutes for 100 nm<br />
+<p><strong>Sputtering</strong>:
+- RF sputtering (Pt is conductive but RF gives better films)
+- Target: 99.99% Pt
+- Power: 100W
+- Ar pressure: 5 mTorr
+- Deposition rate: 1 Å/s
+- Time: 17 minutes for 100 nm
 - Pattern: Shadow mask (1.6mm × 0.8mm, centered)</p>
 <h4 id="step-5-memristor-layer-tio2-x">Step 5: Memristor Layer (TiO₂-x)</h4>
 <p><strong>Method</strong>: Reactive sputtering (PROVEN FOR RRAM)</p>
-<p><strong>Process</strong>:<br />
-- Titanium target (99.95%)<br />
-- <strong>Reactive atmosphere</strong>: Ar (80%) + O₂ (20%)<br />
-- Control O₂ flow to create substoichiometric TiO₂-x<br />
-- Power: 150W DC<br />
-- Pressure: 5 mTorr<br />
-- Substrate temperature: Room temperature<br />
-- Deposition rate: 0.5 Å/s<br />
+<p><strong>Process</strong>:
+- Titanium target (99.95%)
+- <strong>Reactive atmosphere</strong>: Ar (80%) + O₂ (20%)
+- Control O₂ flow to create substoichiometric TiO₂-x
+- Power: 150W DC
+- Pressure: 5 mTorr
+- Substrate temperature: Room temperature
+- Deposition rate: 0.5 Å/s
 - Time: 17 minutes for 50 nm</p>
-<p><strong>Critical Parameters</strong>:<br />
-- <strong>Oxygen deficiency</strong> creates mobile vacancies for memristive switching<br />
-- O₂/Ar ratio controls stoichiometry (lower O₂ = more oxygen vacancies)<br />
+<p><strong>Critical Parameters</strong>:
+- <strong>Oxygen deficiency</strong> creates mobile vacancies for memristive switching
+- O₂/Ar ratio controls stoichiometry (lower O₂ = more oxygen vacancies)
 - Thickness: 30-100 nm optimal for switching</p>
-<p><strong>Alternative - Sol-Gel TiO₂</strong>:<br />
-- Titanium isopropoxide in ethanol/HCl<br />
-- Spin coat: 2000 RPM<br />
-- Anneal: 200-400°C (low temp preserves oxygen vacancies)<br />
+<p><strong>Alternative - Sol-Gel TiO₂</strong>:
+- Titanium isopropoxide in ethanol/HCl
+- Spin coat: 2000 RPM
+- Anneal: 200-400°C (low temp preserves oxygen vacancies)
 - <strong>Advantage</strong>: Can do this without vacuum equipment!</p>
 <h4 id="step-6-top-electrode-platinum">Step 6: Top Electrode (Platinum)</h4>
 <ul>
@@ -146,47 +276,47 @@
 </ul>
 <h4 id="step-7-protective-layer-al2o3">Step 7: Protective Layer (Al₂O₃)</h4>
 <p><strong>Method</strong>: Atomic Layer Deposition (ALD) OR sputtering</p>
-<p><strong>ALD</strong> (best conformality):<br />
-- Trimethylaluminum (TMA) + H₂O at 200°C<br />
-- ~1 Å per cycle<br />
-- 100 cycles for 10 nm<br />
+<p><strong>ALD</strong> (best conformality):
+- Trimethylaluminum (TMA) + H₂O at 200°C
+- ~1 Å per cycle
+- 100 cycles for 10 nm
 - Pinhole-free coating</p>
-<p><strong>Sputtering</strong> (more accessible):<br />
-- RF sputter from Al₂O₃ target<br />
-- 50W, 10 mTorr Ar<br />
+<p><strong>Sputtering</strong> (more accessible):
+- RF sputter from Al₂O₃ target
+- 50W, 10 mTorr Ar
 - 10 nm in 20 minutes</p>
 <h4 id="step-8-terminations-packaging">Step 8: Terminations &amp; Packaging</h4>
 <ol>
 <li>
-<p><strong>End terminations</strong> (standard MLCC process):<br />
-   - Silver paste on short edges<br />
-   - Fire at 750°C<br />
-   - Nickel plate: 2-5 μm<br />
+<p><strong>End terminations</strong> (standard MLCC process):
+   - Silver paste on short edges
+   - Fire at 750°C
+   - Nickel plate: 2-5 μm
    - Tin plate: 5-10 μm</p>
 </li>
 <li>
-<p><strong>Testing &amp; Binning</strong>:<br />
-   - Test capacitance: Should be 10-100 nF range<br />
-   - Test memristive switching: ±3V should show hysteresis<br />
+<p><strong>Testing &amp; Binning</strong>:
+   - Test capacitance: Should be 10-100 nF range
+   - Test memristive switching: ±3V should show hysteresis
    - Verify discrete states: Program to different resistances</p>
 </li>
 </ol>
 <h3 id="expected-performance">Expected Performance</h3>
-<p><strong>Capacitor Mode</strong>:<br />
-- Capacitance: 47 nF (typical for 10 μm BaTiO₃, 1.6mm² area)<br />
-- Voltage rating: 25-50V<br />
+<p><strong>Capacitor Mode</strong>:
+- Capacitance: 47 nF (typical for 10 μm BaTiO₃, 1.6mm² area)
+- Voltage rating: 25-50V
 - Temperature coefficient: X7R type (±15% over -55 to +125°C)</p>
-<p><strong>Memristor Mode</strong>:<br />
-- Resistance range: 1 kΩ to 1 MΩ<br />
-- Switching voltage: ±2-4V<br />
-- Switching time: &lt;100 ns<br />
-- Endurance: &gt;10⁶ cycles<br />
+<p><strong>Memristor Mode</strong>:
+- Resistance range: 1 kΩ to 1 MΩ
+- Switching voltage: ±2-4V
+- Switching time: &lt;100 ns
+- Endurance: &gt;10⁶ cycles
 - Retention: &gt;10 years at room temperature</p>
-<p><strong>Hybrid Behavior</strong>:<br />
-- Capacitance varies with memristor state (±10-30%)<br />
-- Non-volatile: Remembers last resistance state when powered off<br />
+<p><strong>Hybrid Behavior</strong>:
+- Capacitance varies with memristor state (±10-30%)
+- Non-volatile: Remembers last resistance state when powered off
 - Programmable: Can set to specific resistance AND use as capacitor</p>
-<hr />
+<hr/>
 <h2 id="iii-hybrid-component-design-2-phase-change-variable-resistor">III. Hybrid Component Design #2: Phase-Change Variable Resistor</h2>
 <h3 id="description_1">Description</h3>
 <p>A resistor with discrete resistance states via phase-change material, with continuous resistance within each state.</p>
@@ -212,55 +342,55 @@
 </ul>
 <h4 id="step-3-dielectric-spacer-with-via">Step 3: Dielectric Spacer with Via</h4>
 <p><strong>Method</strong>: Spin-on-glass OR PECVD</p>
-<p><strong>Spin-on-glass</strong> (easier):<br />
-- Commercial silica sol-gel (e.g., hydrogen silsesquioxane)<br />
-- Spin at 4000 RPM → 50 nm<br />
-- Cure at 400°C<br />
-- <strong>Via opening</strong>: Either...<br />
-  - Photolithography + wet etch (HF)<br />
+<p><strong>Spin-on-glass</strong> (easier):
+- Commercial silica sol-gel (e.g., hydrogen silsesquioxane)
+- Spin at 4000 RPM → 50 nm
+- Cure at 400°C
+- <strong>Via opening</strong>: Either...
+  - Photolithography + wet etch (HF)
   - OR use shadow mask during deposition</p>
 <h4 id="step-4-phase-change-material-gst">Step 4: Phase-Change Material (GST)</h4>
-<p><strong>Method A - Co-Sputtering</strong> (best control):<br />
-- Three targets: Ge, Sb₂Te₃, and GeTe<br />
-- Adjust power ratios to achieve Ge₂Sb₂Te₅<br />
-- Base pressure: &lt;10⁻⁷ Torr<br />
-- Ar pressure: 3 mTorr<br />
-- Substrate: Room temperature<br />
-- Deposition rate: 2-5 Å/s<br />
-- Thickness: 100 nm<br />
+<p><strong>Method A - Co-Sputtering</strong> (best control):
+- Three targets: Ge, Sb₂Te₃, and GeTe
+- Adjust power ratios to achieve Ge₂Sb₂Te₅
+- Base pressure: &lt;10⁻⁷ Torr
+- Ar pressure: 3 mTorr
+- Substrate: Room temperature
+- Deposition rate: 2-5 Å/s
+- Thickness: 100 nm
 - <strong>Post-deposition</strong>: Anneal 200°C, 30 min (optional, improves crystallization)</p>
-<p><strong>Method B - Pulsed DC-PVD</strong> (ST Microelectronics method):<br />
-- Ge-rich GST target (commercially available)<br />
-- Pulsed DC at 200 kHz<br />
-- Oxygen flow control for stoichiometry<br />
+<p><strong>Method B - Pulsed DC-PVD</strong> (ST Microelectronics method):
+- Ge-rich GST target (commercially available)
+- Pulsed DC at 200 kHz
+- Oxygen flow control for stoichiometry
 - <strong>Advantage</strong>: Single target, simpler</p>
-<p><strong>Method C - Inkjet Printing</strong> (NEWEST, very exciting):<br />
-- <strong>GeTe ink</strong> + <strong>Sb₂Te₃ ink</strong> mixed to ratio<br />
-- Prepare inks from dissolved bulk tellurides<br />
-- Print via piezoelectric inkjet (Dimatix, Fujifilm)<br />
-- Multiple passes to build 100 nm thickness<br />
-- Anneal at 250-350°C to densify<br />
-- <strong>Advantage</strong>: Patterning + deposition in one step!<br />
+<p><strong>Method C - Inkjet Printing</strong> (NEWEST, very exciting):
+- <strong>GeTe ink</strong> + <strong>Sb₂Te₃ ink</strong> mixed to ratio
+- Prepare inks from dissolved bulk tellurides
+- Print via piezoelectric inkjet (Dimatix, Fujifilm)
+- Multiple passes to build 100 nm thickness
+- Anneal at 250-350°C to densify
+- <strong>Advantage</strong>: Patterning + deposition in one step!
 - <strong>Disadvantage</strong>: Still research-stage, but proven in lab</p>
-<p><strong>Method D - Atomic Layer Deposition</strong> (highest uniformity):<br />
-- Sequential Ge, Sb, Te precursor pulses<br />
-- Control stoichiometry by cycle ratios<br />
-- 60 nm GST at 0.2 nm/cycle = 300 cycles<br />
+<p><strong>Method D - Atomic Layer Deposition</strong> (highest uniformity):
+- Sequential Ge, Sb, Te precursor pulses
+- Control stoichiometry by cycle ratios
+- 60 nm GST at 0.2 nm/cycle = 300 cycles
 - Very slow but excellent conformality</p>
 <h4 id="step-5-top-electrode-tin">Step 5: Top Electrode (TiN)</h4>
-<p><strong>Method</strong>: Reactive sputtering<br />
-- Ti target in Ar/N₂ atmosphere<br />
-- 200W DC<br />
-- Ar:N₂ = 4:1<br />
-- 100 nm thick<br />
+<p><strong>Method</strong>: Reactive sputtering
+- Ti target in Ar/N₂ atmosphere
+- 200W DC
+- Ar:N₂ = 4:1
+- 100 nm thick
 - Pattern: 2.8mm × 1.2mm</p>
 <h4 id="step-6-continuous-resistor-nicr">Step 6: Continuous Resistor (NiCr)</h4>
-<p><strong>Method</strong>: Co-sputtering OR alloy target<br />
-- NiCr (80:20) target<br />
-- DC sputter, 100W<br />
-- 50 nm thick<br />
-- Sheet resistance: ~100 Ω/square<br />
-- Pattern: Serpentine or straight resistor<br />
+<p><strong>Method</strong>: Co-sputtering OR alloy target
+- NiCr (80:20) target
+- DC sputter, 100W
+- 50 nm thick
+- Sheet resistance: ~100 Ω/square
+- Pattern: Serpentine or straight resistor
 - <strong>Resistance</strong>: Design for 1kΩ - 100kΩ range</p>
 <h4 id="step-7-passivation-sin">Step 7: Passivation (SiN)</h4>
 <ul>
@@ -275,26 +405,26 @@
 <li>Silver → Nickel → Tin plating</li>
 </ul>
 <h3 id="expected-performance_1">Expected Performance</h3>
-<p><strong>Phase-Change States</strong>:<br />
-- <strong>Amorphous</strong> (RESET): High resistance<br />
-- <strong>Crystalline</strong> (SET): Low resistance<br />
-- Resistance ratio: 100:1 to 1000:1<br />
-- Switching speed: SET ~100 ns, RESET ~10 ns<br />
-- Programming voltage: 3-5V<br />
+<p><strong>Phase-Change States</strong>:
+- <strong>Amorphous</strong> (RESET): High resistance
+- <strong>Crystalline</strong> (SET): Low resistance<br/>
+- Resistance ratio: 100:1 to 1000:1
+- Switching speed: SET ~100 ns, RESET ~10 ns
+- Programming voltage: 3-5V
 - Programming current: 0.5-2 mA</p>
-<p><strong>Continuous Resistor</strong>:<br />
-- Base resistance: 10 kΩ (example)<br />
-- Tolerance: ±1% (good NiCr film)<br />
+<p><strong>Continuous Resistor</strong>:
+- Base resistance: 10 kΩ (example)
+- Tolerance: ±1% (good NiCr film)
 - Temperature coefficient: ±50 ppm/°C</p>
-<p><strong>Hybrid Behavior</strong>:<br />
-- Total resistance = R_PCM (discrete state) + R_NiCr (continuous)<br />
-- Example states:<br />
-  - <strong>State 0</strong> (amorphous PCM): 1 MΩ + 10 kΩ ≈ 1.01 MΩ<br />
-  - <strong>State 1</strong> (crystalline PCM): 1 kΩ + 10 kΩ = 11 kΩ<br />
-  - <strong>Intermediate</strong>: Partial crystallization gives 10 kΩ - 1 MΩ range<br />
-- Can program PCM to one of N discrete states<br />
+<p><strong>Hybrid Behavior</strong>:
+- Total resistance = R_PCM (discrete state) + R_NiCr (continuous)
+- Example states:
+  - <strong>State 0</strong> (amorphous PCM): 1 MΩ + 10 kΩ ≈ 1.01 MΩ
+  - <strong>State 1</strong> (crystalline PCM): 1 kΩ + 10 kΩ = 11 kΩ
+  - <strong>Intermediate</strong>: Partial crystallization gives 10 kΩ - 1 MΩ range
+- Can program PCM to one of N discrete states
 - Each state has continuous R_NiCr component</p>
-<hr />
+<hr/>
 <h2 id="iv-hybrid-component-design-3-ferroelectric-multi-state-capacitor">IV. Hybrid Component Design #3: Ferroelectric Multi-State Capacitor</h2>
 <h3 id="description_2">Description</h3>
 <p>Capacitor with discrete polarization states (ferroelectric domains) and continuous charge storage.</p>
@@ -321,31 +451,31 @@
 </ul>
 <h4 id="step-3-ferroelectric-layer">Step 3: Ferroelectric Layer</h4>
 <p><strong>Option A - PZT (Lead Zirconate Titanate)</strong>:</p>
-<p><strong>Sol-Gel Method</strong>:<br />
-- Pb(Zr₀.₅₂Ti₀.₄₈)O₃ precursor solution<br />
-- Spin coat at 3000 RPM<br />
-- Pyrolyze at 350°C, 5 minutes<br />
-- Repeat 4-6 times to build 200 nm<br />
-- <strong>Final crystallization</strong>: 650°C, 30 minutes, RTA<br />
+<p><strong>Sol-Gel Method</strong>:
+- Pb(Zr₀.₅₂Ti₀.₄₈)O₃ precursor solution
+- Spin coat at 3000 RPM
+- Pyrolyze at 350°C, 5 minutes
+- Repeat 4-6 times to build 200 nm
+- <strong>Final crystallization</strong>: 650°C, 30 minutes, RTA
 - <strong>Atmosphere</strong>: Oxygen (prevents Pb loss)</p>
-<p><strong>Sputtering Method</strong>:<br />
-- PZT ceramic target<br />
-- RF sputter, 100W<br />
-- Substrate heated to 400-600°C<br />
-- Or sputter cold, crystallize after<br />
+<p><strong>Sputtering Method</strong>:
+- PZT ceramic target
+- RF sputter, 100W
+- Substrate heated to 400-600°C
+- Or sputter cold, crystallize after
 - 200 nm in ~2 hours</p>
 <p><strong>Option B - HfO₂ (Ferroelectric Hafnium Oxide)</strong> - NEWER, CMOS-compatible:</p>
-<p><strong>ALD Method</strong>:<br />
-- Tetrakis(ethylmethylamido)hafnium (TEMAH) + H₂O<br />
-- Deposition at 250°C<br />
-- ~1 Å per cycle<br />
-- 200 cycles for 20 nm<br />
-- <strong>Doping</strong>: Add Al₂O₃ or ZrO₂ cycles (1:10 ratio) to stabilize orthorhombic phase<br />
+<p><strong>ALD Method</strong>:
+- Tetrakis(ethylmethylamido)hafnium (TEMAH) + H₂O
+- Deposition at 250°C
+- ~1 Å per cycle
+- 200 cycles for 20 nm
+- <strong>Doping</strong>: Add Al₂O₃ or ZrO₂ cycles (1:10 ratio) to stabilize orthorhombic phase
 - <strong>Anneal</strong>: 400-600°C in N₂ to crystallize ferroelectric phase</p>
-<p><strong>Why HfO₂ is exciting</strong>:<br />
-- CMOS compatible (no Pb)<br />
-- Thinner (10-20 nm works, vs 200 nm for PZT)<br />
-- Scalable to &lt;10 nm<br />
+<p><strong>Why HfO₂ is exciting</strong>:
+- CMOS compatible (no Pb)
+- Thinner (10-20 nm works, vs 200 nm for PZT)
+- Scalable to &lt;10 nm
 - Recent discovery (2011), rapidly developing</p>
 <h4 id="step-4-top-electrode-pt">Step 4: Top Electrode (Pt)</h4>
 <ul>
@@ -364,25 +494,25 @@
 <li>Wire bond or solder attach</li>
 </ul>
 <h3 id="expected-performance_2">Expected Performance</h3>
-<p><strong>Ferroelectric Switching</strong>:<br />
-- <strong>Coercive field</strong>: 50-100 kV/cm for PZT, 1-2 MV/cm for HfO₂<br />
-- <strong>Switching voltage</strong>: ±3-5V for 200 nm PZT, ±1-2V for 20 nm HfO₂<br />
-- <strong>Polarization</strong>: 20-40 μC/cm² (PZT), 10-20 μC/cm² (HfO₂)<br />
+<p><strong>Ferroelectric Switching</strong>:
+- <strong>Coercive field</strong>: 50-100 kV/cm for PZT, 1-2 MV/cm for HfO₂
+- <strong>Switching voltage</strong>: ±3-5V for 200 nm PZT, ±1-2V for 20 nm HfO₂
+- <strong>Polarization</strong>: 20-40 μC/cm² (PZT), 10-20 μC/cm² (HfO₂)
 - <strong>Discrete states</strong>: Up (↑), Down (↓), plus potentially intermediate</p>
-<p><strong>Capacitance</strong>:<br />
-- <strong>PZT</strong>: ε_r ~ 1000, so C = ε₀ε_rA/d<br />
-  - A = 1mm² = 10⁻⁶ m²<br />
-  - d = 200 nm = 2×10⁻⁷ m<br />
+<p><strong>Capacitance</strong>:
+- <strong>PZT</strong>: ε_r ~ 1000, so C = ε₀ε_rA/d
+  - A = 1mm² = 10⁻⁶ m²
+  - d = 200 nm = 2×10⁻⁷ m
   - C = (8.85×10⁻¹²)(1000)(10⁻⁶)/(2×10⁻⁷) ≈ <strong>44 nF</strong></p>
 <ul>
 <li><strong>HfO₂</strong>: ε_r ~ 25-30, so <strong>1-2 nF</strong></li>
 </ul>
-<p><strong>Hybrid Behavior</strong>:<br />
-- Capacitance varies with polarization state (±10-20%)<br />
-- Non-volatile polarization memory<br />
-- Can program polarization then use as capacitor<br />
+<p><strong>Hybrid Behavior</strong>:
+- Capacitance varies with polarization state (±10-20%)
+- Non-volatile polarization memory
+- Can program polarization then use as capacitor
 - Endurance: 10⁹-10¹² cycles (HfO₂), 10⁸-10¹⁰ (PZT)</p>
-<hr />
+<hr/>
 <h2 id="v-hybrid-component-design-4-stochastic-deterministic-resistor">V. Hybrid Component Design #4: Stochastic-Deterministic Resistor</h2>
 <h3 id="description_3">Description</h3>
 <p>A resistor with intrinsic noise (stochastic continuous) and programmable discrete switching thresholds.</p>
@@ -419,13 +549,13 @@
 </ul>
 <h4 id="step-3-noise-amplifier-heterostructure">Step 3: Noise Amplifier Heterostructure</h4>
 <p><strong>Method</strong>: Sequential sputter deposition</p>
-<p><strong>Stack</strong>:<br />
-1. n-GaN: 50 nm (electron reservoir)<br />
-2. AlGaN barrier: 10 nm (forms 2DEG)<br />
+<p><strong>Stack</strong>:
+1. n-GaN: 50 nm (electron reservoir)
+2. AlGaN barrier: 10 nm (forms 2DEG)
 3. p-GaN: 20 nm (creates built-in field)</p>
-<p><strong>Alternative - Simpler</strong>:<br />
-- Just use Schottky barrier<br />
-- Au on n-Si creates rectifying contact<br />
+<p><strong>Alternative - Simpler</strong>:
+- Just use Schottky barrier
+- Au on n-Si creates rectifying contact
 - Fluctuations in barrier height → noise</p>
 <h4 id="step-4-top-electrode">Step 4: Top Electrode</h4>
 <ul>
@@ -441,9 +571,9 @@
 <li>4K: Quantum noise dominates</li>
 </ul>
 <h3 id="expected-performance_3">Expected Performance</h3>
-<p><strong>Noise Characteristics</strong>:<br />
-- <strong>Johnson-Nyquist noise</strong>: V_noise = √(4kTRΔf)<br />
-  - For R=10kΩ, T=300K, Δf=1MHz:<br />
+<p><strong>Noise Characteristics</strong>:
+- <strong>Johnson-Nyquist noise</strong>: V_noise = √(4kTRΔf)
+  - For R=10kΩ, T=300K, Δf=1MHz:
   - V_noise ≈ 0.4 μV/√Hz</p>
 <ul>
 <li>
@@ -453,73 +583,73 @@
 <p><strong>Total</strong>: Combination of thermal + shot + 1/f</p>
 </li>
 </ul>
-<p><strong>Discrete Switching</strong>:<br />
-- Threshold voltage where noise changes dramatically<br />
-- Can be programmed by altering barrier (voltage stress)<br />
+<p><strong>Discrete Switching</strong>:
+- Threshold voltage where noise changes dramatically
+- Can be programmed by altering barrier (voltage stress)
 - Creates discrete noise "states"</p>
-<p><strong>Hybrid Nature</strong>:<br />
-- Continuous resistance value<br />
-- Continuous noise spectrum<br />
-- Discrete noise amplitude states<br />
+<p><strong>Hybrid Nature</strong>:
+- Continuous resistance value
+- Continuous noise spectrum
+- Discrete noise amplitude states
 - Stochastic (random) continuous fluctuations</p>
-<hr />
+<hr/>
 <h2 id="vi-manufacturing-equipment-facility-requirements">VI. Manufacturing Equipment &amp; Facility Requirements</h2>
 <h3 id="minimum-equipment-set">Minimum Equipment Set</h3>
 <h4 id="tier-1-absolutely-essential">Tier 1: Absolutely Essential</h4>
 <ol>
 <li>
-<p><strong>Spin Coater</strong> ($5K-30K)<br />
-   - Chuck sizes: 4" and/or 6"<br />
-   - Speed: 100-8000 RPM<br />
+<p><strong>Spin Coater</strong> ($5K-30K)
+   - Chuck sizes: 4" and/or 6"
+   - Speed: 100-8000 RPM
    - Programmable recipes</p>
 </li>
 <li>
-<p><strong>Hot Plates / Ovens</strong> ($2K-10K)<br />
-   - Hotplate: 50-300°C, ±0.1°C control<br />
-   - Oven: Up to 500°C<br />
+<p><strong>Hot Plates / Ovens</strong> ($2K-10K)
+   - Hotplate: 50-300°C, ±0.1°C control
+   - Oven: Up to 500°C
    - Programmable ramps</p>
 </li>
 <li>
-<p><strong>High-Temperature Furnace</strong> ($10K-50K)<br />
-   - Tube furnace, 1300°C max<br />
-   - Controlled atmosphere (N₂, O₂, forming gas)<br />
+<p><strong>High-Temperature Furnace</strong> ($10K-50K)
+   - Tube furnace, 1300°C max
+   - Controlled atmosphere (N₂, O₂, forming gas)
    - Programmable profiles</p>
 </li>
 <li>
-<p><strong>Sputter System</strong> ($50K-200K)<br />
-   - <strong>DC + RF capability</strong><br />
-   - 3-4 target capacity<br />
-   - Reactive gas capability (O₂, N₂)<br />
+<p><strong>Sputter System</strong> ($50K-200K)
+   - <strong>DC + RF capability</strong>
+   - 3-4 target capacity
+   - Reactive gas capability (O₂, N₂)
    - Base pressure &lt;10⁻⁶ Torr</p>
 </li>
 <li>
-<p><strong>Probe Station + Source Measure Unit</strong> ($20K-50K)<br />
-   - Manual probe station with microscope<br />
-   - Keithley 2400 or similar SMU<br />
+<p><strong>Probe Station + Source Measure Unit</strong> ($20K-50K)
+   - Manual probe station with microscope
+   - Keithley 2400 or similar SMU
    - For electrical characterization</p>
 </li>
 <li>
-<p><strong>Mask Aligner</strong> ($30K-100K) OR <strong>Shadow Mask Holder</strong> ($500)<br />
-   - Shadow masks much cheaper for prototyping<br />
+<p><strong>Mask Aligner</strong> ($30K-100K) OR <strong>Shadow Mask Holder</strong> ($500)
+   - Shadow masks much cheaper for prototyping
    - Laser-cut metal stencils: $100-500 each</p>
 </li>
 </ol>
 <h4 id="tier-2-very-useful">Tier 2: Very Useful</h4>
 <ol start="7">
 <li>
-<p><strong>Atomic Layer Deposition</strong> ($100K-300K)<br />
-   - Can substitute with low-temp sputter for some applications<br />
+<p><strong>Atomic Layer Deposition</strong> ($100K-300K)
+   - Can substitute with low-temp sputter for some applications
    - Essential for highest quality barriers/passivation</p>
 </li>
 <li>
-<p><strong>Plasma Enhanced CVD</strong> ($80K-200K)<br />
-   - For SiO₂, SiN passivation<br />
+<p><strong>Plasma Enhanced CVD</strong> ($80K-200K)
+   - For SiO₂, SiN passivation
    - Can substitute with sputter or SOG</p>
 </li>
 <li>
-<p><strong>Rapid Thermal Annealer</strong> ($50K-150K)<br />
-   - Fast heating/cooling<br />
-   - Reduces thermal budget<br />
+<p><strong>Rapid Thermal Annealer</strong> ($50K-150K)
+   - Fast heating/cooling
+   - Reduces thermal budget
    - Can substitute with conventional furnace</p>
 </li>
 <li>
@@ -555,22 +685,22 @@
 </li>
 </ol>
 <h3 id="facility-requirements">Facility Requirements</h3>
-<p><strong>Clean Room</strong>: Class 1000-10,000 (ISO 6-7)<br />
-- <strong>Minimum</strong>: Laminar flow benches in regular room<br />
-- <strong>Better</strong>: Small clean room (10' × 10')<br />
+<p><strong>Clean Room</strong>: Class 1000-10,000 (ISO 6-7)
+- <strong>Minimum</strong>: Laminar flow benches in regular room
+- <strong>Better</strong>: Small clean room (10' × 10')
 - <strong>Best</strong>: Full clean room suite</p>
-<p><strong>Utilities</strong>:<br />
-- Power: 200-400A service (lots of heaters/sputters)<br />
-- Gases: N₂, Ar, O₂, forming gas (bottled OK for prototypes)<br />
-- DI Water: Type II minimum, 18 MΩ·cm ideal<br />
-- Vacuum: Roughing pumps, turbo pumps (usually come with sputters)<br />
+<p><strong>Utilities</strong>:
+- Power: 200-400A service (lots of heaters/sputters)
+- Gases: N₂, Ar, O₂, forming gas (bottled OK for prototypes)
+- DI Water: Type II minimum, 18 MΩ·cm ideal
+- Vacuum: Roughing pumps, turbo pumps (usually come with sputters)
 - Exhaust: Fume hoods for wet chemistry</p>
-<p><strong>Safety</strong>:<br />
-- Chemical storage cabinet<br />
-- Eyewash / safety shower<br />
-- Proper PPE: cleanroom garments, gloves, safety glasses<br />
+<p><strong>Safety</strong>:
+- Chemical storage cabinet
+- Eyewash / safety shower
+- Proper PPE: cleanroom garments, gloves, safety glasses
 - Gas monitors (O₂ deficiency alarm for inert gases)</p>
-<hr />
+<hr/>
 <h2 id="vii-materials-consumables">VII. Materials &amp; Consumables</h2>
 <h3 id="ceramic-materials">Ceramic Materials</h3>
 <table>
@@ -756,7 +886,7 @@
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="viii-process-comparison-matrix">VIII. Process Comparison Matrix</h2>
 <h3 id="which-method-for-which-layer">Which Method for Which Layer?</h3>
 <table>
@@ -838,89 +968,89 @@
 </tbody>
 </table>
 <p><strong>Legend</strong>: ⭐⭐⭐ = Industry standard / Best  ⭐⭐ = Common / Good  ⭐ = Possible / Research</p>
-<hr />
+<hr/>
 <h2 id="ix-step-by-step-example-making-10-memristor-capacitor-components">IX. Step-by-Step Example: Making 10 Memristor-Capacitor Components</h2>
 <h3 id="week-1-substrate-preparation">Week 1: Substrate Preparation</h3>
-<p><strong>Day 1-2</strong>: Substrate acquisition and cleaning<br />
-- Order 10× alumina substrates (0805 size) pre-cut<br />
-- Clean in ultrasonic bath:<br />
-  - Acetone: 10 minutes<br />
-  - Isopropanol: 10 minutes<br />
-  - DI water: 10 minutes<br />
-- Dry with N₂ gun<br />
+<p><strong>Day 1-2</strong>: Substrate acquisition and cleaning
+- Order 10× alumina substrates (0805 size) pre-cut
+- Clean in ultrasonic bath:
+  - Acetone: 10 minutes
+  - Isopropanol: 10 minutes
+  - DI water: 10 minutes
+- Dry with N₂ gun
 - UV-ozone: 15 minutes</p>
 <h3 id="week-2-bottom-electrode-deposition">Week 2: Bottom Electrode Deposition</h3>
-<p><strong>Day 3</strong>: Nickel electrode sputtering<br />
-- Load substrates into sputter chamber<br />
-- Pump to &lt;10⁻⁶ Torr (overnight)<br />
-- <strong>Pre-sputter</strong> Ni target: 5 minutes (clean surface)<br />
-- Sputter parameters:<br />
-  - Power: 200W DC<br />
-  - Ar: 3 mTorr<br />
-  - Rate: ~2 Å/s<br />
-  - Time: 100 minutes → 2 μm<br />
-- Shadow mask defines pattern<br />
+<p><strong>Day 3</strong>: Nickel electrode sputtering
+- Load substrates into sputter chamber
+- Pump to &lt;10⁻⁶ Torr (overnight)
+- <strong>Pre-sputter</strong> Ni target: 5 minutes (clean surface)
+- Sputter parameters:
+  - Power: 200W DC
+  - Ar: 3 mTorr
+  - Rate: ~2 Å/s
+  - Time: 100 minutes → 2 μm
+- Shadow mask defines pattern
 - Cool, vent, remove samples</p>
-<p><strong>Day 4</strong>: Ni electrode sintering<br />
-- Load into tube furnace<br />
-- Ramp to 900°C at 5°C/min<br />
-- Hold 900°C for 2 hours<br />
-- Cool at 5°C/min<br />
+<p><strong>Day 4</strong>: Ni electrode sintering
+- Load into tube furnace
+- Ramp to 900°C at 5°C/min
+- Hold 900°C for 2 hours
+- Cool at 5°C/min
 - Atmosphere: 95% N₂ / 5% H₂ (forming gas)</p>
 <h3 id="week-3-batio3-capacitor-layer">Week 3: BaTiO₃ Capacitor Layer</h3>
-<p><strong>Day 5</strong>: Prepare BaTiO₃ slurry (tape casting)<br />
-- Mix in ball mill:<br />
-  - BaTiO₃ powder: 50g<br />
-  - PVB binder: 5g<br />
-  - DBP plasticizer: 2g<br />
-  - Ethanol: 50mL<br />
+<p><strong>Day 5</strong>: Prepare BaTiO₃ slurry (tape casting)
+- Mix in ball mill:
+  - BaTiO₃ powder: 50g
+  - PVB binder: 5g
+  - DBP plasticizer: 2g
+  - Ethanol: 50mL
 - Ball mill: 24 hours</p>
-<p><strong>Day 6-7</strong>: Cast and dry<br />
-- Cast onto mylar using doctor blade<br />
-- Gap setting: 150 μm<br />
+<p><strong>Day 6-7</strong>: Cast and dry
+- Cast onto mylar using doctor blade
+- Gap setting: 150 μm
 - Dry at 60°C: 12 hours</p>
-<p><strong>Day 8</strong>: Transfer and laminate<br />
-- Cut tape into 0805 size pieces<br />
-- Transfer onto Ni electrodes<br />
+<p><strong>Day 8</strong>: Transfer and laminate
+- Cut tape into 0805 size pieces
+- Transfer onto Ni electrodes
 - Laminate: 70°C, 10 MPa, 5 minutes</p>
-<p><strong>Day 9</strong>: Binder burnout<br />
-- Slow ramp: 25°C → 450°C over 6 hours<br />
-- Hold at 450°C: 2 hours<br />
+<p><strong>Day 9</strong>: Binder burnout
+- Slow ramp: 25°C → 450°C over 6 hours
+- Hold at 450°C: 2 hours
 - Cool naturally</p>
-<p><strong>Day 10</strong>: Sintering<br />
-- Ramp to 1150°C at 10°C/min<br />
-- Hold: 2 hours<br />
+<p><strong>Day 10</strong>: Sintering
+- Ramp to 1150°C at 10°C/min
+- Hold: 2 hours
 - Cool at 5°C/min</p>
 <h3 id="week-4-middle-electrode-memristor-layer">Week 4: Middle Electrode &amp; Memristor Layer</h3>
-<p><strong>Day 11</strong>: Pt middle electrode<br />
-- Shadow mask (1.6mm × 0.8mm)<br />
-- RF sputter Pt:<br />
-  - 100W, 5 mTorr Ar<br />
+<p><strong>Day 11</strong>: Pt middle electrode
+- Shadow mask (1.6mm × 0.8mm)
+- RF sputter Pt:
+  - 100W, 5 mTorr Ar
   - 17 minutes → 100 nm</p>
-<p><strong>Day 12</strong>: TiO₂-x memristor layer<br />
-- Reactive sputter from Ti target<br />
-- Gas mix: 80% Ar, 20% O₂<br />
-- 150W DC, 5 mTorr<br />
-- Room temperature substrate<br />
-- 17 minutes → 50 nm<br />
+<p><strong>Day 12</strong>: TiO₂-x memristor layer
+- Reactive sputter from Ti target
+- Gas mix: 80% Ar, 20% O₂
+- 150W DC, 5 mTorr
+- Room temperature substrate
+- 17 minutes → 50 nm
 - <strong>Critical</strong>: Monitor O₂ partial pressure for proper stoichiometry</p>
 <h3 id="week-5-top-electrode-passivation">Week 5: Top Electrode &amp; Passivation</h3>
-<p><strong>Day 13</strong>: Pt top electrode<br />
-- Same as Day 11<br />
+<p><strong>Day 13</strong>: Pt top electrode
+- Same as Day 11
 - Centered pattern (1.6mm × 0.8mm)</p>
-<p><strong>Day 14</strong>: Al₂O₃ passivation<br />
-- Option A (ALD): 100 cycles, 10 nm<br />
+<p><strong>Day 14</strong>: Al₂O₃ passivation
+- Option A (ALD): 100 cycles, 10 nm
 - Option B (Sputter): RF sputter Al₂O₃ target, 20 minutes</p>
 <h3 id="week-6-terminations-testing">Week 6: Terminations &amp; Testing</h3>
-<p><strong>Day 15</strong>: Termination application<br />
-- Silver paste on short edges (screen print or dispense)<br />
-- Dry: 150°C, 30 minutes<br />
+<p><strong>Day 15</strong>: Termination application
+- Silver paste on short edges (screen print or dispense)
+- Dry: 150°C, 30 minutes
 - Fire: 750°C, 10 minutes</p>
-<p><strong>Day 16-17</strong>: Ni/Sn plating<br />
-- Electroless nickel plating: 2-5 μm<br />
+<p><strong>Day 16-17</strong>: Ni/Sn plating
+- Electroless nickel plating: 2-5 μm
 - Hot dip tin or electroplate: 5-10 μm</p>
-<p><strong>Day 18-19</strong>: Electrical testing<br />
-- <strong>Capacitance measurement</strong>: LCR meter at 1 kHz, 1 V<br />
+<p><strong>Day 18-19</strong>: Electrical testing
+- <strong>Capacitance measurement</strong>: LCR meter at 1 kHz, 1 V
   - Expect: 30-60 nF</p>
 <ul>
 <li><strong>Memristor I-V sweep</strong>: </li>
@@ -935,111 +1065,111 @@
 <li>Measure resistance after each pulse</li>
 <li>Verify discrete states are stable</li>
 </ul>
-<p><strong>Day 20</strong>: Binning and documentation<br />
-- Sort by capacitance value<br />
-- Sort by switching characteristics<br />
-- Create datasheets for each component<br />
+<p><strong>Day 20</strong>: Binning and documentation
+- Sort by capacitance value
+- Sort by switching characteristics
+- Create datasheets for each component
 - Package in anti-static tubes</p>
 <h3 id="results">Results</h3>
-<p>From 10 starting components, expect:<br />
-- <strong>6-8 fully functional</strong> (60-80% yield is typical for prototypes)<br />
-- <strong>1-2 with capacitor only</strong> (memristor didn't form properly)<br />
+<p>From 10 starting components, expect:
+- <strong>6-8 fully functional</strong> (60-80% yield is typical for prototypes)
+- <strong>1-2 with capacitor only</strong> (memristor didn't form properly)
 - <strong>1-2 failed</strong> (shorts, cracks, contamination)</p>
-<hr />
+<hr/>
 <h2 id="x-troubleshooting-guide">X. Troubleshooting Guide</h2>
 <h3 id="common-issues-solutions">Common Issues &amp; Solutions</h3>
 <h4 id="issue-1-memristor-wont-switch">Issue 1: Memristor Won't Switch</h4>
 <p><strong>Symptoms</strong>: I-V curve shows straight line, no hysteresis</p>
-<p><strong>Possible Causes</strong>:<br />
-1. <strong>TiO₂ too stoichiometric</strong> (not enough oxygen vacancies)<br />
-   - Solution: Reduce O₂ during reactive sputtering<br />
+<p><strong>Possible Causes</strong>:
+1. <strong>TiO₂ too stoichiometric</strong> (not enough oxygen vacancies)
+   - Solution: Reduce O₂ during reactive sputtering
    - Try 15% O₂ instead of 20%</p>
 <ol start="2">
 <li>
-<p><strong>Layer too thick</strong><br />
+<p><strong>Layer too thick</strong>
    - Solution: Reduce to 30 nm</p>
 </li>
 <li>
-<p><strong>Electroforming not done</strong><br />
-   - Solution: Apply higher voltage (up to 10V) to "form" device<br />
+<p><strong>Electroforming not done</strong>
+   - Solution: Apply higher voltage (up to 10V) to "form" device
    - Creates initial conductive filament</p>
 </li>
 <li>
-<p><strong>Contamination</strong><br />
+<p><strong>Contamination</strong>
    - Solution: Improve cleanliness, use fresher targets</p>
 </li>
 </ol>
 <h4 id="issue-2-capacitor-short-circuit">Issue 2: Capacitor Short Circuit</h4>
 <p><strong>Symptoms</strong>: Very low resistance between electrodes</p>
-<p><strong>Possible Causes</strong>:<br />
-1. <strong>Crack in dielectric</strong><br />
-   - Solution: Slower ramp rates during sintering<br />
+<p><strong>Possible Causes</strong>:
+1. <strong>Crack in dielectric</strong>
+   - Solution: Slower ramp rates during sintering
    - Smaller temperature gradients</p>
 <ol start="2">
 <li>
-<p><strong>Pinhole in BaTiO₃</strong><br />
-   - Solution: Increase layer thickness<br />
+<p><strong>Pinhole in BaTiO₃</strong>
+   - Solution: Increase layer thickness
    - Multiple thinner coats instead of one thick</p>
 </li>
 <li>
-<p><strong>Electrode migration</strong><br />
+<p><strong>Electrode migration</strong>
    - Solution: Add barrier layer (TiO₂) between BaTiO₃ and top electrode</p>
 </li>
 </ol>
 <h4 id="issue-3-poor-adhesion">Issue 3: Poor Adhesion</h4>
 <p><strong>Symptoms</strong>: Layers peeling or delaminating</p>
-<p><strong>Possible Causes</strong>:<br />
-1. <strong>Substrate not clean</strong><br />
-   - Solution: Better cleaning protocol<br />
+<p><strong>Possible Causes</strong>:
+1. <strong>Substrate not clean</strong>
+   - Solution: Better cleaning protocol
    - Add O₂ plasma clean step</p>
 <ol start="2">
 <li>
-<p><strong>No adhesion layer</strong><br />
+<p><strong>No adhesion layer</strong>
    - Solution: Add 5-10 nm Ti or TiO₂ before Pt</p>
 </li>
 <li>
-<p><strong>Thermal expansion mismatch</strong><br />
-   - Solution: Slow ramp rates<br />
+<p><strong>Thermal expansion mismatch</strong>
+   - Solution: Slow ramp rates
    - Choose materials with similar CTE</p>
 </li>
 </ol>
 <h4 id="issue-4-phase-change-memory-wont-reset">Issue 4: Phase-Change Memory Won't Reset</h4>
 <p><strong>Symptoms</strong>: Can SET (crystallize) but can't RESET (amorphize)</p>
-<p><strong>Possible Causes</strong>:<br />
-1. <strong>Insufficient current for melting</strong><br />
-   - Solution: Reduce electrode contact area<br />
+<p><strong>Possible Causes</strong>:
+1. <strong>Insufficient current for melting</strong>
+   - Solution: Reduce electrode contact area
    - Increase pulse amplitude</p>
 <ol start="2">
 <li>
-<p><strong>Too much heat dissipation</strong><br />
-   - Solution: Add thermal barrier (low-k dielectric)<br />
+<p><strong>Too much heat dissipation</strong>
+   - Solution: Add thermal barrier (low-k dielectric)
    - Reduce substrate thickness in contact area</p>
 </li>
 <li>
-<p><strong>GST composition wrong</strong><br />
-   - Solution: Check stoichiometry with EDS/XPS<br />
+<p><strong>GST composition wrong</strong>
+   - Solution: Check stoichiometry with EDS/XPS
    - Adjust sputtering power ratios</p>
 </li>
 </ol>
 <h4 id="issue-5-high-variation-between-components">Issue 5: High Variation Between Components</h4>
 <p><strong>Symptoms</strong>: Wide distribution of capacitance/resistance values</p>
-<p><strong>Possible Causes</strong>:<br />
-1. <strong>Thickness non-uniformity</strong><br />
-   - Solution: Rotate substrates during deposition<br />
+<p><strong>Possible Causes</strong>:
+1. <strong>Thickness non-uniformity</strong>
+   - Solution: Rotate substrates during deposition
    - Use planetary rotation system if available</p>
 <ol start="2">
 <li>
-<p><strong>Temperature gradients in furnace</strong><br />
-   - Solution: Calibrate furnace temperature<br />
+<p><strong>Temperature gradients in furnace</strong>
+   - Solution: Calibrate furnace temperature
    - Place components in center of hot zone</p>
 </li>
 <li>
-<p><strong>Inconsistent patterning</strong><br />
-   - Solution: Better shadow mask alignment<br />
+<p><strong>Inconsistent patterning</strong>
+   - Solution: Better shadow mask alignment
    - Consider photolithography for tight tolerances</p>
 </li>
 </ol>
-<hr />
+<hr/>
 <h2 id="xi-cost-analysis">XI. Cost Analysis</h2>
 <h3 id="per-component-cost-batch-of-100">Per-Component Cost (Batch of 100)</h3>
 <h4 id="materials">Materials:</h4>
@@ -1072,7 +1202,7 @@
 <li>Our hybrid component (10,000 qty, projected): <strong>$5-10</strong></li>
 </ul>
 <p><strong>Conclusion</strong>: Expensive for prototypes, but costs drop dramatically with volume manufacturing.</p>
-<hr />
+<hr/>
 <h2 id="xii-scaling-to-production">XII. Scaling to Production</h2>
 <h3 id="path-to-volume-manufacturing">Path to Volume Manufacturing</h3>
 <h4 id="phase-1-lab-prototypes-10-100-units">Phase 1: Lab Prototypes (10-100 units)</h4>
@@ -1104,101 +1234,101 @@
 <li>Reflow termination</li>
 </ul>
 <h3 id="existing-infrastructure-can-be-leveraged">Existing Infrastructure Can Be Leveraged</h3>
-<p><strong>MLCC Manufacturers</strong> can adapt existing lines:<br />
-- Already have tape casting<br />
-- Already have stacking equipment<br />
-- Already have high-temp furnaces<br />
-- <strong>Add</strong>: Thin-film deposition (sputtering/ALD)<br />
+<p><strong>MLCC Manufacturers</strong> can adapt existing lines:
+- Already have tape casting
+- Already have stacking equipment
+- Already have high-temp furnaces
+- <strong>Add</strong>: Thin-film deposition (sputtering/ALD)
 - <strong>Add</strong>: Controlled atmosphere annealing</p>
-<p><strong>Semiconductor Fabs</strong> can also produce:<br />
-- Already have sputter/ALD tools<br />
-- Already have photolithography<br />
-- Already have packaging lines<br />
-- <strong>Add</strong>: High-temp furnaces for ceramics<br />
+<p><strong>Semiconductor Fabs</strong> can also produce:
+- Already have sputter/ALD tools
+- Already have photolithography
+- Already have packaging lines
+- <strong>Add</strong>: High-temp furnaces for ceramics
 - <strong>Add</strong>: Ferroelectric/phase-change materials</p>
-<hr />
+<hr/>
 <h2 id="xiii-recommended-starting-project">XIII. Recommended Starting Project</h2>
 <h3 id="memristor-capacitor-demonstrator">"Memristor-Capacitor Demonstrator"</h3>
-<p><strong>Why This One?</strong><br />
-- Proven materials (TiO₂, BaTiO₃)<br />
-- Compatible processes<br />
-- Clear hybrid functionality<br />
+<p><strong>Why This One?</strong>
+- Proven materials (TiO₂, BaTiO₃)
+- Compatible processes
+- Clear hybrid functionality
 - Useful for prototyping (can actually use in circuits)</p>
-<p><strong>Deliverables</strong>:<br />
-- 10 functional hybrid components<br />
-- Measured C-V curves showing capacitance<br />
-- Measured I-V curves showing memristive hysteresis<br />
-- Demonstration: Program to 4 different resistance states<br />
-- Demonstration: Use as timing capacitor (RC circuit)<br />
+<p><strong>Deliverables</strong>:
+- 10 functional hybrid components
+- Measured C-V curves showing capacitance
+- Measured I-V curves showing memristive hysteresis
+- Demonstration: Program to 4 different resistance states
+- Demonstration: Use as timing capacitor (RC circuit)
 - Full characterization report</p>
 <p><strong>Timeline</strong>: 6-8 weeks (including learning curve)</p>
-<p><strong>Budget</strong>: <br />
-- Equipment access: $10,000 (or use university/makerspace)<br />
-- Materials: $2,000<br />
-- Labor: Your time<br />
+<p><strong>Budget</strong>: 
+- Equipment access: $10,000 (or use university/makerspace)
+- Materials: $2,000
+- Labor: Your time
 - <strong>Total</strong>: ~$12,000</p>
-<hr />
+<hr/>
 <h2 id="xiv-alternative-fringeexperimental-approaches">XIV. Alternative: Fringe/Experimental Approaches</h2>
 <h3 id="option-a-inkjet-printed-phase-change-components">Option A: Inkjet-Printed Phase-Change Components</h3>
 <p><strong>Status</strong>: Lab-demonstrated 2024 (very recent!)</p>
-<p><strong>Process</strong>:<br />
-1. Prepare GST inks from dissolved bulk tellurides<br />
-2. Print functional layers with Dimatix or Fujifilm inkjet<br />
-3. Anneal to densify<br />
+<p><strong>Process</strong>:
+1. Prepare GST inks from dissolved bulk tellurides
+2. Print functional layers with Dimatix or Fujifilm inkjet
+3. Anneal to densify
 4. Add electrodes</p>
-<p><strong>Advantages</strong>:<br />
-- Desktop manufacturing (no clean room)<br />
-- Rapid prototyping<br />
-- Low equipment cost ($20K for printer)<br />
+<p><strong>Advantages</strong>:
+- Desktop manufacturing (no clean room)
+- Rapid prototyping
+- Low equipment cost ($20K for printer)
 - Patterning + deposition in one step</p>
-<p><strong>Disadvantages</strong>:<br />
-- Still research-stage<br />
-- Ink preparation is tricky<br />
-- Uniformity challenges<br />
+<p><strong>Disadvantages</strong>:
+- Still research-stage
+- Ink preparation is tricky
+- Uniformity challenges
 - Not as well-controlled as vacuum deposition</p>
 <p><strong>Best For</strong>: Rapid iteration, proof-of-concept</p>
 <h3 id="option-b-sol-gel-everything">Option B: Sol-Gel Everything</h3>
 <p><strong>Idea</strong>: Use ONLY sol-gel processes (no vacuum)</p>
-<p><strong>Possible Stack</strong>:<br />
-- Substrate: Glass<br />
-- Bottom electrode: Sol-gel silver ink<br />
-- Capacitor: Sol-gel BaTiO₃<br />
-- Memristor: Sol-gel TiO₂<br />
+<p><strong>Possible Stack</strong>:
+- Substrate: Glass
+- Bottom electrode: Sol-gel silver ink
+- Capacitor: Sol-gel BaTiO₃
+- Memristor: Sol-gel TiO₂
 - Top electrode: Sol-gel silver ink</p>
-<p><strong>Advantages</strong>:<br />
-- Ultra-low cost<br />
-- No vacuum equipment<br />
-- Can do in garage/lab<br />
+<p><strong>Advantages</strong>:
+- Ultra-low cost
+- No vacuum equipment
+- Can do in garage/lab
 - Spin coater + hotplate = entire lab ($10K)</p>
-<p><strong>Disadvantages</strong>:<br />
-- Lower quality than vacuum methods<br />
-- Cracks/pinholes more common<br />
-- Organics residue issues<br />
+<p><strong>Disadvantages</strong>:
+- Lower quality than vacuum methods
+- Cracks/pinholes more common
+- Organics residue issues
 - Requires optimization</p>
 <p><strong>Best For</strong>: Hobbyists, education, low-budget R&amp;D</p>
 <h3 id="option-c-electrochemical-deposition">Option C: Electrochemical Deposition</h3>
 <p><strong>Idea</strong>: Grow memristive oxides electrochemically</p>
-<p><strong>Process</strong>:<br />
-- Start with metal electrode in electrolyte<br />
-- Apply voltage to grow oxide (anodization)<br />
-- Control oxide thickness by voltage/time<br />
+<p><strong>Process</strong>:
+- Start with metal electrode in electrolyte
+- Apply voltage to grow oxide (anodization)
+- Control oxide thickness by voltage/time
 - Creates oxygen-deficient oxides naturally</p>
-<p><strong>Example</strong>: Anodic TiO₂ on Ti substrate<br />
-- Ti foil in H₂SO₄ or phosphate buffer<br />
-- Apply 20-60V<br />
-- Nanotubular TiO₂ grows<br />
+<p><strong>Example</strong>: Anodic TiO₂ on Ti substrate
+- Ti foil in H₂SO₄ or phosphate buffer
+- Apply 20-60V
+- Nanotubular TiO₂ grows
 - Shows memristive switching</p>
-<p><strong>Advantages</strong>:<br />
-- Room temperature<br />
-- Very cheap<br />
-- No vacuum<br />
+<p><strong>Advantages</strong>:
+- Room temperature
+- Very cheap
+- No vacuum
 - Self-limiting thickness</p>
-<p><strong>Disadvantages</strong>:<br />
-- Limited materials<br />
-- Harder to control precisely<br />
+<p><strong>Disadvantages</strong>:
+- Limited materials
+- Harder to control precisely
 - Electrolyte residue</p>
 <p><strong>Best For</strong>: Quick experiments, student projects</p>
-<hr />
+<hr/>
 <h2 id="xv-next-steps-recommendations">XV. Next Steps &amp; Recommendations</h2>
 <h3 id="immediate-actions">Immediate Actions</h3>
 <ol>
@@ -1206,30 +1336,30 @@
 <p><strong>Choose your design</strong>: Start with Memristor-Capacitor (Design #1)</p>
 </li>
 <li>
-<p><strong>Assess equipment access</strong>:<br />
-   - University cleanroom?<br />
-   - Shared research facility?<br />
-   - Industrial partnership?<br />
+<p><strong>Assess equipment access</strong>:
+   - University cleanroom?
+   - Shared research facility?
+   - Industrial partnership?
    - Purchase own equipment?</p>
 </li>
 <li>
-<p><strong>Order long-lead items</strong>:<br />
-   - Alumina substrates<br />
-   - Sputtering targets (Pt, Ti, Ni)<br />
-   - BaTiO₃ powder<br />
+<p><strong>Order long-lead items</strong>:
+   - Alumina substrates
+   - Sputtering targets (Pt, Ti, Ni)
+   - BaTiO₃ powder
    - Total: ~$3,000, 4-6 week delivery</p>
 </li>
 <li>
-<p><strong>Develop process recipes</strong>:<br />
-   - Practice on dummy substrates first<br />
-   - Optimize each layer individually<br />
+<p><strong>Develop process recipes</strong>:
+   - Practice on dummy substrates first
+   - Optimize each layer individually
    - Then integrate full stack</p>
 </li>
 <li>
-<p><strong>Build characterization capability</strong>:<br />
-   - LCR meter for capacitance<br />
-   - Source-measure unit for I-V curves<br />
-   - Probe station<br />
+<p><strong>Build characterization capability</strong>:
+   - LCR meter for capacitance
+   - Source-measure unit for I-V curves
+   - Probe station
    - Total: ~$30K (can rent/share)</p>
 </li>
 </ol>
@@ -1244,41 +1374,66 @@
 <h3 id="long-term-vision">Long-Term Vision</h3>
 <ol>
 <li><strong>Establish manufacturing partnership</strong></li>
-<li><strong>Create product line</strong>:<br />
-   - Different capacitance values<br />
-   - Different resistance ranges<br />
+<li><strong>Create product line</strong>:
+   - Different capacitance values
+   - Different resistance ranges
    - Different voltage ratings</li>
-<li><strong>Target applications</strong>:<br />
-   - Neuromorphic computing<br />
-   - Adaptive circuits<br />
-   - In-memory computing<br />
+<li><strong>Target applications</strong>:
+   - Neuromorphic computing
+   - Adaptive circuits
+   - In-memory computing
    - IoT edge devices</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="xvi-summary">XVI. Summary</h2>
 <p><strong>We can make discrete-continuous hybrid components at MLCC scale using proven technologies:</strong></p>
-<p>✅ <strong>Materials</strong>: BaTiO₃, TiO₂, GST, PZT, HfO₂ - all well-known<br />
-✅ <strong>Processes</strong>: Tape-casting, sputtering, sol-gel, ALD - all established<br />
-✅ <strong>Size</strong>: 0603-1206 standard SMD packages<br />
-✅ <strong>Equipment</strong>: Available in universities, shared facilities, or purchasable<br />
-✅ <strong>Cost</strong>: ~$100/component (prototype), ~$5-10 (volume)<br />
-✅ <strong>Timeline</strong>: 6-8 weeks for first working prototypes<br />
+<p>✅ <strong>Materials</strong>: BaTiO₃, TiO₂, GST, PZT, HfO₂ - all well-known<br/>
+✅ <strong>Processes</strong>: Tape-casting, sputtering, sol-gel, ALD - all established<br/>
+✅ <strong>Size</strong>: 0603-1206 standard SMD packages<br/>
+✅ <strong>Equipment</strong>: Available in universities, shared facilities, or purchasable<br/>
+✅ <strong>Cost</strong>: ~$100/component (prototype), ~$5-10 (volume)<br/>
+✅ <strong>Timeline</strong>: 6-8 weeks for first working prototypes<br/>
 ✅ <strong>Yield</strong>: 60-80% achievable with optimization  </p>
-<p><strong>The hybrid components work</strong> because:<br />
-- Ferroelectrics naturally have discrete domains + continuous charge<br />
-- Memristors naturally have discrete filament states + continuous conduction<br />
+<p><strong>The hybrid components work</strong> because:
+- Ferroelectrics naturally have discrete domains + continuous charge
+- Memristors naturally have discrete filament states + continuous conduction
 - Phase-change materials naturally have discrete phases + continuous resistance</p>
-<p><strong>The manufacturing works</strong> because:<br />
-- We're using the MLCC platform (mature, scalable)<br />
-- We're adding thin-film layers (also mature in semiconductor industry)<br />
+<p><strong>The manufacturing works</strong> because:
+- We're using the MLCC platform (mature, scalable)
+- We're adding thin-film layers (also mature in semiconductor industry)
 - The combination is straightforward - not pushing fundamental limits</p>
 <p><strong>Start simple, iterate fast, scale when proven.</strong></p>
 <p>This is doable with today's technology. The hard part isn't the physics or the fabrication - it's the optimization and characterization. But the path is clear.</p>
-<hr />
-<p><strong>Document Version</strong>: 1.0<br />
-<strong>Date</strong>: February 2026<br />
-<strong>Status</strong>: Practical Implementation Guide<br />
+<hr/>
+<p><strong>Document Version</strong>: 1.0<br/>
+<strong>Date</strong>: February 2026<br/>
+<strong>Status</strong>: Practical Implementation Guide<br/>
 <strong>Next Steps</strong>: Order materials, book equipment time, make first batch</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

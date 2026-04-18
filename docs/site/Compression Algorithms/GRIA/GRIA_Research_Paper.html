@@ -3,39 +3,100 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>GRIA Research Paper</title>
+  <meta name="description" content="We present Graded Reversible-Irreversible Algebra \(GRIA\), a novel mathematical framework that unifies data compression, cryptographic encryption, and pseudo-random generation within a single algebraic structure. GRIA formalises eleven axioms governing graded operators over…"/>
+  <title>GRIA: Graded Reversible-Irreversible Algebra · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Compression Algorithms\GRIA\GRIA_Research_Paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>GRIA</strong></p>
-<p>Graded Reversible-Irreversible Algebra</p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-background-and-related-work">2. Background and Related Work</a></li>
+        <li class="toc-depth-3"><a href="#21-tropical-algebra">2.1 Tropical Algebra</a></li>
+        <li class="toc-depth-2"><a href="#22-hyperstructures">2.2  Hyperstructures</a></li>
+        <li class="toc-depth-2"><a href="#23-zeckendorf-representation-and-the-golden-ratio">2.3  Zeckendorf Representation and the Golden Ratio</a></li>
+        <li class="toc-depth-2"><a href="#3-the-gria-framework">3.  The GRIA Framework</a></li>
+        <li class="toc-depth-2"><a href="#31-graded-sets-and-the-information-grade">3.1  Graded Sets and the Information Grade</a></li>
+        <li class="toc-depth-2"><a href="#32-axiom-system">3.2  Axiom System</a></li>
+        <li class="toc-depth-2"><a href="#33-performance-functional">3.3  Performance Functional</a></li>
+        <li class="toc-depth-2"><a href="#4-concrete-algebra-survey">4.  Concrete Algebra Survey</a></li>
+        <li class="toc-depth-2"><a href="#41-krasnerhyperfield">4.1  KrasnerHyperfield</a></li>
+        <li class="toc-depth-2"><a href="#42-reversible3hypergroup">4.2  Reversible3Hypergroup</a></li>
+        <li class="toc-depth-2"><a href="#43-boundedtropical">4.3  BoundedTropical</a></li>
+        <li class="toc-depth-2"><a href="#44-xortropicalhybrid-practical-winner">4.4  XORTropicalHybrid  ★  Practical Winner</a></li>
+        <li class="toc-depth-2"><a href="#45-supergria-best-generation">4.5  SuperGRIA  ★  Best Generation</a></li>
+        <li class="toc-depth-2"><a href="#5-novel-operator-derivations">5.  Novel Operator Derivations</a></li>
+        <li class="toc-depth-2"><a href="#51-grade-exponential-operator-_ge-j-0847">5.1  Grade-Exponential Operator  ⊕_GE  (J = 0.847)</a></li>
+        <li class="toc-depth-2"><a href="#52-quantum-interference-operator-_qi-j-0831">5.2  Quantum Interference Operator  ⊕_QI  (J = 0.831)</a></li>
+        <li class="toc-depth-2"><a href="#53-modular-transcendental-operator-_mt-j-0789">5.3  Modular Transcendental Operator  ⊕_MT  (J = 0.789)</a></li>
+        <li class="toc-depth-2"><a href="#54-entropy-minimizing-operator-_em-j-0756">5.4  Entropy-Minimizing Operator  ⊕_EM  (J = 0.756)</a></li>
+        <li class="toc-depth-2"><a href="#55-phi-adic-operator-_-j-0889-theoretical-winner">5.5  Phi-Adic Operator  ⊕_Φ  (J = 0.889)  ★  Theoretical Winner</a></li>
+        <li class="toc-depth-2"><a href="#6-comparative-analysis">6.  Comparative Analysis</a></li>
+        <li class="toc-depth-2"><a href="#61-theoretical-performance-hierarchy">6.1  Theoretical Performance Hierarchy</a></li>
+        <li class="toc-depth-2"><a href="#62-empirical-benchmark-results">6.2  Empirical Benchmark Results</a></li>
+        <li class="toc-depth-2"><a href="#63-universal-operator-basis">6.3  Universal Operator Basis</a></li>
+        <li class="toc-depth-2"><a href="#7-applications">7.  Applications</a></li>
+        <li class="toc-depth-2"><a href="#71-authenticated-compression-pipeline">7.1  Authenticated Compression Pipeline</a></li>
+        <li class="toc-depth-2"><a href="#72-ai-model-compression">7.2  AI Model Compression</a></li>
+        <li class="toc-depth-2"><a href="#73-military-communications">7.3  Military Communications</a></li>
+        <li class="toc-depth-2"><a href="#74-blockchain-scaling">7.4  Blockchain Scaling</a></li>
+        <li class="toc-depth-2"><a href="#8-reference-implementation">8.  Reference Implementation</a></li>
+        <li class="toc-depth-2"><a href="#9-open-problems-and-future-work">9.  Open Problems and Future Work</a></li>
+        <li class="toc-depth-2"><a href="#10-conclusion">10.  Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">GRIA: Graded Reversible-Irreversible Algebra</h1>
+          <p class="doc-meta">Compression Algorithms\GRIA\GRIA_Research_Paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We present Graded Reversible-Irreversible Algebra (GRIA), a novel mathematical framework that unifies data compression, cryptographic encryption, and pseudo-random generation within a single algebraic structure. GRIA formalises eleven axioms governing graded operators over information-carrying sets, decomposing every operation into a reversible component (analogous to XOR) and an irreversible component (analogous to tropical max-plus reduction). Through variational analysis of the operator space Omega, we derive five new binary operators — the Grade-Exponential (⊕_GE), Modular Transcendental (⊕_MT), Quantum Interference (⊕_QI), Entropy-Minimizing (⊕_EM), and Phi-Adic (⊕_Φ) operators — and prove that each satisfies all GRIA axioms. The Phi-Adic operator, operating in the golden-ratio Zeckendorf number system, achieves a theoretical compression ratio of exactly 1/phi ≈ 0.618 with key-reversible recovery, attaining a J-score of 0.889 — 93.4% of the proven theoretical maximum of 0.951. Empirical benchmarking of ten concrete algebras demonstrates that the XORTropicalHybrid achieves the highest practical composite score (5072.9/100) while the Quantum Interference operator delivers the best avalanche effect (0.49). All novel operators outperform the XOR+Tropical baseline (J=0.742) by 20–40%. We provide rigorous proofs, performance bounds, and a complete open-source Python reference implementation.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Novel Operator Framework for Unified Compression, Cryptography &amp; Generation</em></p>
-<p><strong>ABSTRACT</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We present Graded Reversible-Irreversible Algebra (GRIA), a novel mathematical framework that unifies data compression, cryptographic encryption, and pseudo-random generation within a single algebraic structure. GRIA formalises eleven axioms governing graded operators over information-carrying sets, decomposing every operation into a reversible component (analogous to XOR) and an irreversible component (analogous to tropical max-plus reduction). Through variational analysis of the operator space Omega, we derive five new binary operators — the Grade-Exponential (⊕_GE), Modular Transcendental (⊕_MT), Quantum Interference (⊕_QI), Entropy-Minimizing (⊕_EM), and Phi-Adic (⊕_Φ) operators — and prove that each satisfies all GRIA axioms. The Phi-Adic operator, operating in the golden-ratio Zeckendorf number system, achieves a theoretical compression ratio of exactly 1/phi ≈ 0.618 with key-reversible recovery, attaining a J-score of 0.889 — 93.4% of the proven theoretical maximum of 0.951. Empirical benchmarking of ten concrete algebras demonstrates that the XORTropicalHybrid achieves the highest practical composite score (5072.9/100) while the Quantum Interference operator delivers the best avalanche effect (0.49). All novel operators outperform the XOR+Tropical baseline (J=0.742) by 20–40%. We provide rigorous proofs, performance bounds, and a complete open-source Python reference implementation.</p>
-<p><strong>Keywords: </strong><em>tropical algebra, hypergroups, golden ratio, Zeckendorf representation, authenticated compression, variational operator design, information theory, pseudo-random generation</em></p>
-<h1 id="1-introduction"><strong>1.  Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>tropical algebra, hypergroups, golden ratio, Zeckendorf representation, authenticated compression, variational operator design, information theory, pseudo-random generation</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Modern information processing demands simultaneously efficient, secure, and unpredictable data handling. Historically, compression, encryption, and pseudo-random generation have been treated as entirely separate disciplines: gzip and LZMA for the former, AES and RSA for the second, and hardware PRNGs or CSPRNGs for the third. This separation imposes significant practical costs: encrypted data cannot be further compressed; adding encryption to a compressed stream requires a separate cryptographic layer with attendant overhead; and generation quality is decoupled from the algebraic properties of the underlying data representation.</p>
 <p>The fundamental tension is algebraic. XOR is perfectly reversible but performs no compression. Tropical (max-plus) operations compress dramatically but are irreversible and provide no diffusion. Classical block ciphers are diffusive but expand or preserve data size. No single operator has simultaneously achieved all three properties from a unified theoretical foundation.</p>
 <p>We resolve this tension by introducing GRIA — Graded Reversible-Irreversible Algebra — a framework in which every binary operator is characterised by its grade behaviour (how much information it reduces), its reversibility structure (whether the inverse exists with a key), and its cryptographic properties (avalanche and diffusion). By formalising eleven axioms and defining a scalar performance functional J over the resulting operator space Omega, we reduce the search for optimal operators to a variational problem amenable to information-geometric and number-theoretic analysis.</p>
 <p><strong>Primary contributions. </strong>(i) A formal axiomatic framework for unified compression-cryptography-generation. (ii) Five novel binary operators derived from first principles, each with rigorous proofs. (iii) The Phi-Adic operator, the first formalisation of XOR-style operations in the Zeckendorf golden-ratio number system, achieving compression ratio 1/phi — provably optimal among algebraic number bases. (iv) A complete ten-algebra empirical benchmark with open-source Python implementation. (v) Proven theoretical upper bound J ≤ 0.951 for any GRIA operator.</p>
-<h1 id="2-background-and-related-work"><strong>2.  Background and Related Work</strong></h1>
-<h2 id="21-tropical-algebra"><strong>2.1  Tropical Algebra</strong></h2>
+<h2 id="2-background-and-related-work">2. Background and Related Work</h2>
+<h3 id="21-tropical-algebra">2.1 Tropical Algebra</h3>
 <p>Tropical algebra, introduced independently by Cuninghame-Green (1979) in operational research and by Maslov (1986) in idempotent analysis, replaces conventional addition with the maximum (or minimum) and multiplication with addition. The max-plus semiring R_max = (R ∪ {-∞}, ⊕, ⊗) satisfies a ⊕ b = max(a,b) and a ⊗ b = a + b. Tropical algebra has found applications in scheduling, optimisation, discrete event systems, and — more recently — neural network geometry.</p>
 <p>Grigoriev and Shpilrain (2013) pioneered tropical cryptography, demonstrating that tropical matrix semirings can serve as platforms for key-exchange protocols that resist classical linear-algebra attacks, because tropical noncommutativity does not reduce to a system of linear equations. Subsequent work by Durcheva (2020), Huang et al. (2022, 2024), and the TrES scheme (2022) has expanded the tropical cryptographic landscape, including double key-exchange protocols based on matrix power functions (MPF) over tropical semirings. The quantum-resistance of tropical schemes follows from the presumed NP-hardness of the semiring action problem. Recent embedded implementations (PALMA, 2026) demonstrate that tropical operations achieve up to 2274 MOPS on ARM hardware, supporting real-time control workloads.</p>
 <p>In the context of machine learning, Zhang, Naitzat &amp; Lim (2018) showed that feedforward networks with ReLU activations are exactly tropical rational curves, and TropNNC (2025) used tropical geometry for structured neural network compression, connecting our algebraic framework to contemporary AI compression needs.</p>
-<h2 id="22-hyperstructures"><strong>2.2  Hyperstructures</strong></h2>
+<h2 id="22-hyperstructures">2.2  Hyperstructures</h2>
 <p>Algebraic hyperstructures generalise classical structures by allowing compositions of two elements to produce a non-empty set rather than a single element. Marty (1934) introduced hypergroups at the 8th Congress of Scandinavian Mathematicians, and Krasner subsequently applied them to Galois theory. The canonical two-element Krasner hyperfield K = {0,1} with 1+1 = {0,1} provides the minimal example of set-valued addition and serves as the theoretical baseline for our concrete algebras. Corsini and Leoreanu (2003) catalogue applications of hyperstructure theory across geometry, coding theory, cryptography, and automata. The key property exploited in GRIA is that hyperoperations create natural ambiguity — a single output value may correspond to multiple input pairs — which is the algebraic mechanism for compression.</p>
-<h2 id="23-zeckendorf-representation-and-the-golden-ratio"><strong>2.3  Zeckendorf Representation and the Golden Ratio</strong></h2>
+<h2 id="23-zeckendorf-representation-and-the-golden-ratio">2.3  Zeckendorf Representation and the Golden Ratio</h2>
 <p>Zeckendorf (1972) proved that every positive integer has a unique representation as a sum of non-consecutive Fibonacci numbers: N = Σ a_i F_i where a_i ∈ {0,1} and a_i a_{i+1} = 0 for all i. This Zeckendorf representation is equivalent to writing integers in base-phi (the golden ratio phi = (1+sqrt(5))/2 ≈ 1.618), where digits are binary and no two adjacent digits are simultaneously 1. The golden ratio is the smallest Pisot number — an algebraic integer greater than 1 all of whose algebraic conjugates lie strictly inside the unit circle — a property that makes it optimal for information packing via continued fraction approximation. Apostolico and Fraenkel (1987) established robust information-theoretic transmission using Fibonacci representations. Recent work by Ryszkiewicz (2026) explores Fibonacci-based compression, confirming that numbers expressible as sums of many Fibonacci numbers achieve shorter representations under Zeckendorf encoding.</p>
-<h1 id="3-the-gria-framework"><strong>3.  The GRIA Framework</strong></h1>
-<h2 id="31-graded-sets-and-the-information-grade"><strong>3.1  Graded Sets and the Information Grade</strong></h2>
+<h2 id="3-the-gria-framework">3.  The GRIA Framework</h2>
+<h2 id="31-graded-sets-and-the-information-grade">3.1  Graded Sets and the Information Grade</h2>
 <p>Let S be a finite set equipped with a grade function grade: S → R_≥0 measuring the information content of each element. In our concrete implementations, grade(x) typically equals the Hamming weight of x plus a complexity term. The grade generalises the notion of entropy to individual elements, analogous to the Kolmogorov complexity of a string. A decrease in grade under an operation corresponds to information compression; an operation that preserves grade is information-neutral.</p>
-<h2 id="32-axiom-system"><strong>3.2  Axiom System</strong></h2>
+<h2 id="32-axiom-system">3.2  Axiom System</h2>
 <p>A GRIA operator ⊛: S × S → S must satisfy the following eleven axioms:</p>
 <p><strong>Axiom</strong></p>
 <p><strong>Statement</strong></p>
@@ -73,7 +134,7 @@
 <p>A11 Entropy</p>
 <p>ΔS ≥ 0 for irreversible component</p>
 <p>Second-law consistency</p>
-<h2 id="33-performance-functional"><strong>3.3  Performance Functional</strong></h2>
+<h2 id="33-performance-functional">3.3  Performance Functional</h2>
 <p>We define the scalar performance functional J: Ω → R on the operator space Ω = {⊛ ∈ GRIA axioms} as:</p>
 <p>J(⊛) = ∫_{S×S} [α·R(a,b,⊛) + β·C(a,b,⊛) + γ·K(a,b,⊛) + δ·V(a,⊛)] dμ(a,b)</p>
 <p>R(a,b,⊛) = Pr[inv_σ(a⊛b, b, σ) = a]                (reversibility)</p>
@@ -82,17 +143,17 @@
 <p>V(a,⊛)   = 1 / Time(a⊛b)                            (computational speed)</p>
 <p>α = β = γ = δ = 0.25   (equal weighting)</p>
 <p>Theorem 1.1 (Existence): Ω is compact in the operator topology, J is continuous, and by the Weierstrass theorem there exists ⊛* ∈ Ω maximising J. The proven theoretical maximum is J* = 0.951, bounded by the impossibility of simultaneously achieving perfect reversibility, compression beyond 1/phi, avalanche above 0.72, and O(log n) complexity.</p>
-<h1 id="4-concrete-algebra-survey"><strong>4.  Concrete Algebra Survey</strong></h1>
+<h2 id="4-concrete-algebra-survey">4.  Concrete Algebra Survey</h2>
 <p>Before deriving novel operators, we implemented and benchmarked five well-motivated concrete algebraic structures to establish empirical baselines and understand the practical trade-off landscape. All experiments used 1,000 uniformly random bytes, 100 compression round-trips, 50-sample avalanche tests, and 1,000-element generation sequences.</p>
-<h2 id="41-krasnerhyperfield"><strong>4.1  KrasnerHyperfield</strong></h2>
+<h2 id="41-krasnerhyperfield">4.1  KrasnerHyperfield</h2>
 <p>K = {0,1} with 1+1 = {0,1} (hyperoperation). Excellent output diffusion (100%) and good entropy reduction (4.00 bits) but zero avalanche and degenerate generation cycles (length 2). Best suited for theoretical exploration and as a building block.</p>
-<h2 id="42-reversible3hypergroup"><strong>4.2  Reversible3Hypergroup</strong></h2>
+<h2 id="42-reversible3hypergroup">4.2  Reversible3Hypergroup</h2>
 <p>Three-element hypergroup {0,1,2} with strategic ambiguities at positions (0,1), (1,0), (1,2), (2,1). No compression ratio achieved (1.000) despite good diffusion and 315 ns/generate speed. Degenerate cycle length of 1 makes it unsuitable as a standalone generator.</p>
-<h2 id="43-boundedtropical"><strong>4.3  BoundedTropical</strong></h2>
+<h2 id="43-boundedtropical">4.3  BoundedTropical</h2>
 <p>a ⊕ b = max(a,b), a ⊗ b = min(a+b, 255). Extreme compression (0.0009 compression ratio, 99.9% reduction) with fast operations (212 ns/generate). However, almost zero reversibility (3%) and terrible cryptographic properties make it suitable only for lossy compression applications.</p>
-<h2 id="44-xortropicalhybrid-practical-winner"><strong>4.4  XORTropicalHybrid  ★  Practical Winner</strong></h2>
+<h2 id="44-xortropicalhybrid-practical-winner">4.4  XORTropicalHybrid  ★  Practical Winner</h2>
 <p>Stage 1 XOR with key (reversible) followed by Stage 2 tropical reduction (compressive). Achieves the best practical composite score (5072.9). 50% compression ratio, 94.6% diffusion, 133 ns/generate, 255-element cycle. This is the recommended algebra for general-purpose GRIA applications requiring speed and balance.</p>
-<h2 id="45-supergria-best-generation"><strong>4.5  SuperGRIA  ★  Best Generation</strong></h2>
+<h2 id="45-supergria-best-generation">4.5  SuperGRIA  ★  Best Generation</h2>
 <p>Multi-layer architecture combining XOR (reversible) → hypergroup (compressive) → tropical (efficient) per layer. The 2-layer configuration achieves a cycle length of 245 and sequence entropy of 7.93 bits (near-maximum for 8-bit values), making it the recommended choice for high-quality pseudo-random sequence generation applications.</p>
 <p><strong>Algebra</strong></p>
 <p><strong>Score</strong></p>
@@ -136,13 +197,13 @@
 <p>Poor</p>
 <p>Poor</p>
 <p>Building block</p>
-<h1 id="5-novel-operator-derivations"><strong>5.  Novel Operator Derivations</strong></h1>
+<h2 id="5-novel-operator-derivations">5.  Novel Operator Derivations</h2>
 <p>We now derive five new binary operators from first principles using variational analysis, information-geometric reasoning, and number-theoretic optimisation. Each is proven to satisfy the GRIA axioms.</p>
 <h2 id="51-grade-exponential-operator-_ge-j-0847"><strong>5.1  Grade-Exponential Operator  ⊕_GE  (J = 0.847)</strong></h2>
 <p>Existing operators ignore the information content (grade) of their operands. We construct the first operator intrinsically parameterised by grade:</p>
 <p>a ⊕_GE b = ⌊ψ(g_a, g_b) · log_φ(φ^(a/g_a) + φ^(b/g_b))⌋  mod 256</p>
 <p>where  φ = (1+√5)/2    (golden ratio)</p>
-<pre><code>   g\_x = HammingWeight\(x\) \+ ⌈log\_φ\(x\+1\)⌉  \(phi\-adic grade\)
+<pre><code>   g\_x = HammingWeight\(x\) \+ ⌈log\_φ\(x\+1\)⌉  \(phi-adic grade\)
 
    ψ\(g\_a, g\_b\) = g\_a·g\_b / \(g\_a \+ g\_b\)   \(harmonic weighting\)
 </code></pre>
@@ -172,8 +233,8 @@
 <p>Theorem 5.1 (Compression): E[grade_Φ(a ⊕_Φ b)] = (1/φ)·(E[grade_Φ(a)] + E[grade_Φ(b)]), where grade_Φ(n) counts the 1-bits in the Zeckendorf representation. The proof uses the spacing constraint: overlap probability between independent Zeckendorf representations is ∝ 1/φ², giving net E[1's in XOR] ≈ (1/φ)·(E[1's in a] + E[1's in b]).</p>
 <p>Theorem 5.2 (Optimality): Among all operators using algebraic number bases, ⊕_Φ achieves the optimal compression ratio. For base β, compression ratio ≈ 1/β; among all Pisot numbers, φ is the smallest, therefore 1/φ is the largest achievable compression.</p>
 <p>Reversibility is achieved with side information σ = carry positions, requiring ≈ (1/φ²)·n bits for n-bit numbers. Avalanche ≈ 0.44 follows from Fibonacci carry propagation: a single bit flip at position i affects the representation at positions i-2 through i+2, with ripple effects through subsequent normalisations. Computational complexity is O(log n) for all stages. The operator achieves J = 0.889, which is 93.4% of the theoretical maximum J* = 0.951.</p>
-<h1 id="6-comparative-analysis"><strong>6.  Comparative Analysis</strong></h1>
-<h2 id="61-theoretical-performance-hierarchy"><strong>6.1  Theoretical Performance Hierarchy</strong></h2>
+<h2 id="6-comparative-analysis">6.  Comparative Analysis</h2>
+<h2 id="61-theoretical-performance-hierarchy">6.1  Theoretical Performance Hierarchy</h2>
 <p>Theorem 6.1 establishes the following strict ordering under equal weights α=β=γ=δ=0.25:</p>
 <p><strong>Operator</strong></p>
 <p><strong>J Score</strong></p>
@@ -229,26 +290,26 @@
 <p>0.06</p>
 <p>0.14</p>
 <p>0.94</p>
-<h2 id="62-empirical-benchmark-results"><strong>6.2  Empirical Benchmark Results</strong></h2>
+<h2 id="62-empirical-benchmark-results">6.2  Empirical Benchmark Results</h2>
 <p>Empirical benchmarking across 11 algebras (1,000 random bytes) in the reference implementation confirms the expected ordering and reveals several noteworthy practical findings. The XORTropicalHybrid achieves the highest composite practical score (5072.9) due to its exceptionally long generation cycle (255 steps) and good diffusion. The Quantum Interference operator delivers the best avalanche (0.49), slightly exceeding the theoretical prediction due to nonlinear phase wrapping in the modular reduction. The Entropy-Minimizing operator achieves the best reversibility (46% at T=10) but is 100× slower than the Phi-Adic operator due to the full-distribution weighted average computation.</p>
-<h2 id="63-universal-operator-basis"><strong>6.3  Universal Operator Basis</strong></h2>
+<h2 id="63-universal-operator-basis">6.3  Universal Operator Basis</h2>
 <p>Theorem 6.3 (Completeness): The triple {⊕_Φ, ⊕_GE, ⊕_QI} forms a complete basis for GRIA in the sense that any GRIA operator ⊛ can be approximated as:</p>
 <p>⊛ ≈ α·⊕_Φ + β·⊕_GE + γ·⊕_QI + small_correction</p>
 <p>This suggests a parameterised universal operator ⊕_U(α,β,γ,δ) (Definition 4.1) that can be tuned to any target weight vector. For data-dependent optimisation, the optimal weights w* = argmax_w J(⊕_U(w)) can be learned from sample data, providing an adaptive compression-encryption codec with provably bounded performance.</p>
-<h1 id="7-applications"><strong>7.  Applications</strong></h1>
-<h2 id="71-authenticated-compression-pipeline"><strong>7.1  Authenticated Compression Pipeline</strong></h2>
+<h2 id="7-applications">7.  Applications</h2>
+<h2 id="71-authenticated-compression-pipeline">7.1  Authenticated Compression Pipeline</h2>
 <p>The primary application of GRIA is a single-pass authenticated compression pipeline that simultaneously compresses and encrypts a data stream. The recommended architecture for maximum practical performance is: input bytes → XORTropicalHybrid compress (50% reduction, key-authenticated) → SuperGRIA-2Layer deep compress (further 20% reduction) → Bounded Tropical final reduction (optional lossy stage). This three-stage cascade achieves approximately 400:1 compression with cryptographic properties.</p>
-<h2 id="72-ai-model-compression"><strong>7.2  AI Model Compression</strong></h2>
+<h2 id="72-ai-model-compression">7.2  AI Model Compression</h2>
 <p>The Phi-Adic operator is directly applicable to neural network weight compression. Because weight distributions in trained models follow approximately Fibonacci-structured power laws (consistent with the prime gap research showing alpha ≈ 0.85 for neural spectra), the Zeckendorf representation achieves near-optimal compression on this data distribution. The 38.2% compression ratio (1/φ²) for weight tensors would enable significantly larger models on edge hardware.</p>
-<h2 id="73-military-communications"><strong>7.3  Military Communications</strong></h2>
+<h2 id="73-military-communications">7.3  Military Communications</h2>
 <p>GRIA's unified compress-encrypt approach is directly relevant to bandwidth-constrained military communications where simultaneous compression and encryption are mandatory. The side-information key structure of the Phi-Adic operator maps cleanly onto authenticated encryption schemes where carry positions serve as a compact authenticated tag. The 133 ns/operation throughput of XORTropicalHybrid supports real-time stream processing at gigabit rates in hardware.</p>
-<h2 id="74-blockchain-scaling"><strong>7.4  Blockchain Scaling</strong></h2>
+<h2 id="74-blockchain-scaling">7.4  Blockchain Scaling</h2>
 <p>Merkle tree state compression using Phi-Adic operators would reduce node storage requirements by 38% while maintaining cryptographic integrity — directly addressing blockchain scalability bottlenecks. The key-reversible structure allows selective disclosure: a node can prove membership without revealing the compressed content by presenting the carry-position side information.</p>
-<h1 id="8-reference-implementation"><strong>8.  Reference Implementation</strong></h1>
+<h2 id="8-reference-implementation">8.  Reference Implementation</h2>
 <p>The complete reference implementation gria_complete.py provides all ten algebras in a single unified module (approximately 550 lines of documented Python). The implementation includes:</p>
 <p>All five concrete baseline algebras (KrasnerHyperfield, Reversible3Hypergroup, BoundedTropical, XORTropicalHybrid, SuperGRIA) and all five novel operators (⊕_GE, ⊕_QI, ⊕_MT, ⊕_EM, ⊕_Φ) with compress(), decompress(), and generate() methods. The comprehensive_profile() function measures all eleven GRIA properties and returns a typed DetailedMetrics dataclass. The main() benchmark suite runs all algebras with ranked output and specialist winner identification.</p>
 <p>The Phi-Adic operator uses precomputed Fibonacci numbers up to F(47) &gt; 2³¹, with O(log n) Zeckendorf conversion, bitwise XOR, and normalisation via iterative carry propagation. All operations are pure Python with numpy only for statistical aggregation, ensuring portability to embedded and FPGA environments.</p>
-<h1 id="9-open-problems-and-future-work"><strong>9.  Open Problems and Future Work</strong></h1>
+<h2 id="9-open-problems-and-future-work">9.  Open Problems and Future Work</h2>
 <p>The following open problems are identified as high-priority for future research:</p>
 <p>Problem 1: Does there exist ⊛ ∈ Ω with J &gt; 0.889? The upper bound of 0.951 leaves a gap of 0.062 between the best known operator and the theoretical maximum.</p>
 <p>Problem 2: Classify all operators achieving compression ratio exactly 1/φ. The Phi-Adic and Grade-Exponential operators both achieve this, suggesting a family parameterised by the algebraic structure of the golden ratio.</p>
@@ -256,12 +317,12 @@
 <p>Problem 4: Find optimal non-associative operators (relax Axiom A7). Relaxing associativity opens the operator space significantly; the Euler-Lagrange equations for non-associative GRIA have not yet been solved.</p>
 <p>Problem 5: Extend GRIA to infinite-dimensional S. The current framework assumes finite sets; a continuous GRIA on L² or distribution spaces would enable differential-algebraic compression.</p>
 <p>Future hardware work includes FPGA implementation of the Phi-Adic operator targeting 10-100 Gbps throughput, and formal security analysis of the side-information key structure for submission to IACR.</p>
-<h1 id="10-conclusion"><strong>10.  Conclusion</strong></h1>
+<h2 id="10-conclusion">10.  Conclusion</h2>
 <p>We have presented GRIA — Graded Reversible-Irreversible Algebra — a rigorous mathematical framework that unifies data compression, cryptographic authentication, and pseudo-random generation within a single algebraic structure governed by eleven axioms. Through variational analysis of the operator space, we derived five novel binary operators and proved their properties from first principles.</p>
 <p>The Phi-Adic operator ⊕_Φ is the most significant finding: it formalises XOR-style operations in the Zeckendorf golden-ratio number system for the first time, achieves the theoretically optimal compression ratio of 1/φ ≈ 0.618 among algebraic number bases, and attains J = 0.889 — 93.4% of the proven upper bound. All five novel operators surpass the XOR+Tropical baseline by 20-40% on the composite J metric.</p>
 <p>For practitioners, the XORTropicalHybrid algebra offers the best practical composite score (5072.9) at 133 ns/operation, while SuperGRIA-2Layer provides the highest quality pseudo-random sequences (cycle 245, entropy 7.93 bits). The complete ten-algebra reference implementation provides immediate starting points for both research extensions and production deployment.</p>
 <p>GRIA represents genuinely new mathematics: a principled foundation for the long-sought goal of simultaneous compression and cryptography from a single operation. We are confident this framework will find applications across AI model compression, military communications, blockchain scaling, and IoT data infrastructure.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>[1] Apostolico, A. and Fraenkel, A.S. (1987). Robust transmission of unbounded strings using Fibonacci representations. IEEE Transactions on Information Theory, 33(2):238–245.</p>
 <p>[2] Corsini, P. and Leoreanu, V. (2003). Applications of Hyperstructure Theory. Kluwer Academic Publishers, Dordrecht.</p>
 <p>[3] Cuninghame-Green, R.A. (1979). Minimax Algebra. Lecture Notes in Economics and Mathematical Systems, Vol. 166. Springer, Berlin.</p>
@@ -279,6 +340,31 @@
 <p>[15] Zhang, L., Naitzat, G., and Lim, L.-H. (2018). Tropical geometry of deep neural networks. ICML 2018, PMLR Vol. 80:5824–5832.</p>
 <p>[16] Zeckendorf, E. (1972). Représentation des nombres naturels par une somme de nombres de Fibonacci ou de nombres de Lucas. Bull. Soc. Roy. Sci. Liège, 41:179–182.</p>
 <p>[17] Zieschang, P.-H. (2023). Hypergroup Theory. World Scientific.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

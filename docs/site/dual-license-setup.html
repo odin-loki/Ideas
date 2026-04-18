@@ -3,41 +3,96 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>dual-license-setup</title>
+  <meta name="description" content="This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version. The AGPL-3.0 license applies if you: - Are using…"/>
+  <title>Licensing · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../index.html">Index</a>
-    <span class="path">dual-license-setup.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../index.html">Library</a>
+        <a href="../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="licensing">Licensing</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-3"><a href="#1-gnu-affero-general-public-license-v30-agpl-30">1. GNU Affero General Public License v3.0 (AGPL-3.0)</a></li>
+        <li class="toc-depth-3"><a href="#2-commercial-license">2. Commercial License</a></li>
+        <li class="toc-depth-2"><a href="#contributing">Contributing</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Licensing</h1>
+          <p class="doc-meta">dual-license-setup.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>This project is available under a dual-license model:</p>
 <h3 id="1-gnu-affero-general-public-license-v30-agpl-30">1. GNU Affero General Public License v3.0 (AGPL-3.0)</h3>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.</p>
-<p>The AGPL-3.0 license applies if you:<br />
-- Are using this software for non-commercial purposes<br />
-- Are using this software for government or educational purposes<br />
-- Are willing to share all modifications and improvements back to the community<br />
+<p>The AGPL-3.0 license applies if you:
+- Are using this software for non-commercial purposes
+- Are using this software for government or educational purposes
+- Are willing to share all modifications and improvements back to the community
 - Comply with all terms of the AGPL-3.0 license</p>
 <p>See the LICENSE file for the complete AGPL-3.0 terms.</p>
 <h3 id="2-commercial-license">2. Commercial License</h3>
-<p>A commercial license is required if you:<br />
-- Want to use this software for commercial purposes<br />
-- Don't want to share your modifications<br />
-- Need dedicated support or custom features<br />
+<p>A commercial license is required if you:
+- Want to use this software for commercial purposes
+- Don't want to share your modifications
+- Need dedicated support or custom features
 - Want to use this software as part of a proprietary solution</p>
-<p>For commercial licensing inquiries, please contact:<br />
+<p>For commercial licensing inquiries, please contact:
 - Email: odin.loch@outlook.com.au</p>
-<p>Commercial licenses include:<br />
-- Full rights to use in commercial products<br />
-- No requirement to share modifications<br />
-- Priority support<br />
-- Custom feature development options<br />
+<p>Commercial licenses include:
+- Full rights to use in commercial products
+- No requirement to share modifications
+- Priority support
+- Custom feature development options
 - Flexible deployment options</p>
 <h2 id="contributing">Contributing</h2>
 <p>All contributions to this project will be released under the AGPL-3.0 license. By submitting a pull request, you are agreeing to comply with this license.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

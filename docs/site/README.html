@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="**Editorial plan:** see [`EDITORIAL_ROADMAP.md`](EDITORIAL_ROADMAP.md) (folder-by-folder waves, checklist, Git workflow). **Writing rules:** [`docs/EDITORIAL_STYLE.md`](docs/EDITORIAL_STYLE.md). **Folder size table:** run `python tools/editorial_inventory.py` (writes…"/>
+  <title>Ideas · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../index.html">Library</a>
+        <a href="../topics/index.html">Topics</a>
+      </nav>
+    </div>
+  </header>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#browse-as-a-website-github-pages">Browse as a website (GitHub Pages)</a></li>
+        <li class="toc-depth-2"><a href="#repository-layout">Repository layout</a></li>
+        <li class="toc-depth-2"><a href="#upload-to-git">Upload to Git</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Ideas</h1>
+          <p class="doc-meta">README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>A personal research and engineering archive: long-form papers (Markdown), code experiments, and specifications across algorithms, materials, economics, and systems design. This repository is structured so you can browse it on <strong>GitHub</strong> or as a static <strong>website</strong> via GitHub Pages.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>A personal research and engineering archive: long-form papers (Markdown), code experiments, and specifications across algorithms, materials, economics, and systems design. This repository is structured so you can browse it on <strong>GitHub</strong> or as a static <strong>website</strong> via GitHub Pages.</p>
+<p><strong>Editorial plan:</strong> see <a href="EDITORIAL_ROADMAP.md"><code>EDITORIAL_ROADMAP.md</code></a> (folder-by-folder waves, checklist, Git workflow). <strong>Writing rules:</strong> <a href="docs/EDITORIAL_STYLE.md"><code>docs/EDITORIAL_STYLE.md</code></a>. <strong>Folder size table:</strong> run <code>python tools/editorial_inventory.py</code> (writes <code>tools/editorial_inventory.json</code>).</p>
+<h2 id="browse-as-a-website-github-pages">Browse as a website (GitHub Pages)</h2>
+<p>The folder <a href="docs/"><code>docs/</code></a> contains a generated static site (plus <a href="docs/index.html"><code>docs/index.html</code></a> as the home page).</p>
+<ol>
+<li>Create a new repository on GitHub and push this folder (see below).</li>
+<li>In the repo: <strong>Settings → Pages</strong>.</li>
+<li>Under <strong>Build and deployment</strong>, set <strong>Source</strong> to <strong>Deploy from a branch</strong>.</li>
+<li>Choose branch <strong>main</strong> (or your default branch) and folder <strong><code>/docs</code></strong>, then save.</li>
+</ol>
+<p>After a short build, the site is available at:</p>
+<p><code>https://&lt;your-username&gt;.github.io/&lt;repository-name&gt;/</code></p>
+<p>Rebuild the HTML mirror after you change Markdown in the project root:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+python tools/build_github_pages.py
+</code></pre>
+<p>Word documents were converted once with <code>python tools/convert_docx_to_markdown.py</code> (original <code>.docx</code> files were removed after conversion).</p>
+<p><strong>Editing workflow:</strong> run <code>python tools/normalize_markdown_corpus.py</code> after bulk Word imports to clean common artifacts, then <code>python tools/build_github_pages.py</code>. The published site loads <strong>KaTeX</strong> so inline <code>\(…\)</code> and display <code>\[…\]</code> / <code>$$…$$</code> math renders in the browser (not only on GitHub).</p>
+<h2 id="repository-layout">Repository layout</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="tools/"><code>tools/</code></a></td>
+<td>Scripts: DOCX→Markdown import, static site build</td>
+</tr>
+<tr>
+<td><a href="docs/"><code>docs/</code></a></td>
+<td>GitHub Pages entry (<code>index.html</code>, <code>assets/</code>, generated <code>site/</code>)</td>
+</tr>
+<tr>
+<td>Top-level folders</td>
+<td>Topic areas (e.g. <code>Cypha/</code>, <code>Weapons/</code>, <code>Economics/</code>) with Markdown, Python, PDFs, etc.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="upload-to-git">Upload to Git</h2>
+<p>From this directory:</p>
+<pre><code class="language-bash">git init
+git add .
+git commit -m "Initial commit: Ideas archive with GitHub Pages"
+git branch -M main
+git remote add origin https://github.com/&lt;you&gt;/&lt;repo&gt;.git
+git push -u origin main
+</code></pre>
+<p>Replace <code>&lt;you&gt;</code> and <code>&lt;repo&gt;</code> with your GitHub username and repository name.</p>
+<h2 id="license">License</h2>
+<p>Content is provided as-is for personal and research reference; add a <code>LICENSE</code> file if you want to specify terms.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
+</body>
+</html>

@@ -3,37 +3,67 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>hybrid simulation phase5</title>
+  <meta name="description" content="**Industry-compatible export** *February 2026 · Export layer for Cadence, Synopsys, LTspice, Mentor EDA* The simulation framework built in Phases 0–4 reaches maximum utility when its components can be dropped into existing industry EDA flows. Phase 5 builds the export layer:…"/>
+  <title>Hybrid component simulation — Phase 5 · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\hybrid_simulation_phase5.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>HYBRID COMPONENT SIMULATION</strong></p>
-<p>Phase 5  ·  Industry-Compatible Export</p>
-<p><em>SPICE Netlists  ·  Verilog-AMS  ·  IBIS Models  ·  SystemC-AMS  ·  Cross-Format Validation</em></p>
-<p>February 2026  ·  Export layer for Cadence, Synopsys, LTspice, Mentor EDA</p>
-<h1 id="phase-5-overview"><strong>Phase 5 Overview</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#phase-5-overview">Phase 5 Overview</a></li>
+        <li class="toc-depth-2"><a href="#11-quantum-tunnel-resistor">1.1  Quantum Tunnel Resistor</a></li>
+        <li class="toc-depth-2"><a href="#21-memristor-full-verilog-ams">2.1  Memristor — Full Verilog-AMS</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Hybrid component simulation — Phase 5</h1>
+          <p class="doc-meta">New Classes of Electrical Components\hybrid_simulation_phase5.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>The simulation framework built in Phases 0–4 reaches maximum utility when its components can be dropped into existing industry EDA flows. Phase 5 builds the export layer: automated generators for SPICE, Verilog-AMS, IBIS, and SystemC-AMS, plus a cross-format validation framework that quantifies the accuracy of each export.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>Industry-compatible export</strong></p>
+<p><em>SPICE netlists · Verilog-AMS · IBIS models · SystemC-AMS · Cross-format validation</em></p>
+<p><em>February 2026 · Export layer for Cadence, Synopsys, LTspice, Mentor EDA</em></p>
+<h2 id="phase-5-overview">Phase 5 Overview</h2>
 <p>The simulation framework built in Phases 0–4 reaches maximum utility when its components can be dropped into existing industry EDA flows. Phase 5 builds the export layer: automated generators for SPICE, Verilog-AMS, IBIS, and SystemC-AMS, plus a cross-format validation framework that quantifies the accuracy of each export.</p>
-<p><strong>Section 1</strong></p>
-<p>SPICE .SUBCKT definitions — QTR, Memristor, Josephson Junction, GMR, Phase-Change. LTspice/ngspice/HSPICE/Spectre compatible</p>
-<p><strong>Section 2</strong></p>
-<p>Verilog-AMS modules — Memristor (analog contribution), JJ (phase ODE), LIF Neuron (cross() event). For Cadence Virtuoso/AMS Designer</p>
-<p><strong>Section 3</strong></p>
-<p>IBIS model generation — V-I clamp tables, rising/falling waveforms. Python auto-generator from any component</p>
-<p><strong>Section 4</strong></p>
-<p>SystemC-AMS TDF modules — crossbar and JJ models for system-level co-simulation with digital RTL</p>
-<p><strong>Section 5</strong></p>
-<p>Validation framework — ngspice vs Python reference, interpolated waveform comparison, pass/fail reporting</p>
-<p><strong>Section 6</strong></p>
-<p>Automated exporter — HybridExporter.export_all() generates all formats in one call with README</p>
+<p><strong>Section 1</strong>
+SPICE .SUBCKT definitions — QTR, Memristor, Josephson Junction, GMR, Phase-Change. LTspice/ngspice/HSPICE/Spectre compatible</p>
+<p><strong>Section 2</strong>
+Verilog-AMS modules — Memristor (analog contribution), JJ (phase ODE), LIF Neuron (cross() event). For Cadence Virtuoso/AMS Designer</p>
+<p><strong>Section 3</strong>
+IBIS model generation — V-I clamp tables, rising/falling waveforms. Python auto-generator from any component</p>
+<p><strong>Section 4</strong>
+SystemC-AMS TDF modules — crossbar and JJ models for system-level co-simulation with digital RTL</p>
+<p><strong>Section 5</strong>
+Validation framework — ngspice vs Python reference, interpolated waveform comparison, pass/fail reporting</p>
+<p><strong>Section 6</strong>
+Automated exporter — HybridExporter.export_all() generates all formats in one call with README</p>
 <p>SECTION 1  ·  .SUBCKT DEFINITIONS FOR ALL HYBRID COMPONENTS</p>
-<p><strong>SPICE Behavioural Models</strong></p>
-<p>SPICE is the universal language of analog circuit simulation. The B-element (arbitrary behavioural source) implements hybrid I-V curves that standard primitives cannot represent. Each .SUBCKT below is tested in LTspice XVII and ngspice 38.</p>
-<h2 id="11-quantum-tunnel-resistor"><strong>1.1  Quantum Tunnel Resistor</strong></h2>
+<p><strong>SPICE Behavioural Models</strong>
+SPICE is the universal language of analog circuit simulation. The B-element (arbitrary behavioural source) implements hybrid I-V curves that standard primitives cannot represent. Each .SUBCKT below is tested in LTspice XVII and ngspice 38.</p>
+<h2 id="11-quantum-tunnel-resistor">1.1  Quantum Tunnel Resistor</h2>
 <p>* Quantum Tunnel Resistor — Simmons model (low-voltage regime)</p>
 <p>* Ports: ANODE CATHODE</p>
 <p>* Parameters: d=barrier width (m), PHI=barrier height (eV), AREA=junction area (m^2)</p>
@@ -80,9 +110,9 @@
 <p>B1 PLUS MINUS I={V(PLUS,MINUS)/Rpcm}</p>
 <p>.ENDS PCM</p>
 <p>SECTION 2  ·  IEEE 1666.1 FOR CADENCE AND SYNOPSYS</p>
-<p><strong>Verilog-AMS Modules</strong></p>
-<p>Verilog-AMS extends SystemVerilog with analog constructs: contribution statements (&lt;+), analog initial blocks, cross() event detection. Each hybrid component maps to one module with electrical ports and optional logic ports for digital control/monitoring.</p>
-<h2 id="21-memristor-full-verilog-ams"><strong>2.1  Memristor — Full Verilog-AMS</strong></h2>
+<p><strong>Verilog-AMS Modules</strong>
+Verilog-AMS extends SystemVerilog with analog constructs: contribution statements (&lt;+), analog initial blocks, cross() event detection. Each hybrid component maps to one module with electrical ports and optional logic ports for digital control/monitoring.</p>
+<h2 id="21-memristor-full-verilog-ams">2.1  Memristor — Full Verilog-AMS</h2>
 <p>include "disciplines.vams"</p>
 <p>include "constants.vams"</p>
 <p>module memristor (plus, minus);</p>
@@ -98,17 +128,17 @@
 <p>analog begin</p>
 <pre><code>@\(initial\_step\) w = w0;
 
-Rmem = Ron\*\(w/D\) \+ Roff\*\(1\.0 \- w/D\);
+Rmem = Ron\*\(w/D\) \+ Roff\*\(1.0 - w/D\);
 
 V\(plus,minus\) &lt;\+ Rmem \* I\(plus,minus\);
 
-fw = 1\.0 \- pow\(2\.0\*w/D \- 1\.0, 2\*p\);
+fw = 1.0 - pow\(2.0\*w/D - 1.0, 2\*p\);
 
 ddt\(w\) &lt;\+ mu\_v\*\(Ron/\(D\*D\)\)\*I\(plus,minus\)\*fw;
 
 if \(w &gt; D\) w = D;
 
-if \(w &lt; 0\) w = 0\.0;
+if \(w &lt; 0\) w = 0.0;
 </code></pre>
 <p>end</p>
 <p>endmodule</p>
@@ -123,7 +153,7 @@ if \(w &lt; 0\) w = 0\.0;
 <p>localparam real Phi0 = 2.0678e-15;</p>
 <p>real phi;</p>
 <p>analog begin</p>
-<pre><code>@\(initial\_step\) phi = 0\.0;
+<pre><code>@\(initial\_step\) phi = 0.0;
 
 ddt\(phi\) &lt;\+ V\(plus,minus\) / Phi0;
 
@@ -140,15 +170,15 @@ I\(plus,minus\) &lt;\+ Ic\*sin\(phi\) \+ V\(plus,minus\)/RJ \+ CJ\*ddt\(V\(plus,
 <p>parameter real Cm=1e-9, Rm=1e7, Vrest=-0.07, Vth=-0.05, Vreset=-0.07;</p>
 <p>real Vm, t_sp;</p>
 <p>analog begin</p>
-<pre><code>@\(initial\_step\) begin Vm=Vrest; t\_sp=\-1\.0; spike=0; end
+<pre><code>@\(initial\_step\) begin Vm=Vrest; t\_sp=-1.0; spike=0; end
 
-ddt\(Vm\) &lt;\+ \(1/Cm\)\*\(\-\(Vm\-Vrest\)/Rm \+ I\(i\_syn\)\);
+ddt\(Vm\) &lt;\+ \(1/Cm\)\*\(-\(Vm-Vrest\)/Rm \+ I\(i\_syn\)\);
 
-@\(cross\(Vm\-Vth,\+1\)\) begin
+@\(cross\(Vm-Vth,\+1\)\) begin
 
   Vm = Vreset; t\_sp = $abstime;
 
-  spike = 1; \#1p spike = 0;
+  spike = 1; #1p spike = 0;
 
 end
 
@@ -157,49 +187,49 @@ V\(v\_mem\) &lt;\+ Vm;
 <p>end</p>
 <p>endmodule</p>
 <p>SECTION 3  ·  I/O BUFFER CHARACTERISATION FOR SIGNAL INTEGRITY</p>
-<p><strong>IBIS Model Generator</strong></p>
-<p>IBIS (JEDEC IBIS standard, now version 7.0) characterises I/O buffer behaviour through tabulated V-I curves and rising/falling waveforms. Signal integrity tools use IBIS to simulate transmission line reflections without exposing proprietary circuit topology. The Python generator below characterises any HybridSim component and writes a compliant .ibs file.</p>
+<p><strong>IBIS Model Generator</strong>
+IBIS (JEDEC IBIS standard, now version 7.0) characterises I/O buffer behaviour through tabulated V-I curves and rising/falling waveforms. Signal integrity tools use IBIS to simulate transmission line reflections without exposing proprietary circuit topology. The Python generator below characterises any HybridSim component and writes a compliant .ibs file.</p>
 <p>import numpy as np</p>
 <p>def generate_ibis_model(component, Vsupply=1.8, R_fixture=50,</p>
-<pre><code>                     comp\_name='HYBRID', out\_file='hybrid\.ibs'\):
+<pre><code>                     comp\_name='HYBRID', out\_file='hybrid.ibs'\):
 
 '''
 
-Generate IBIS v6\.0 model from a HybridSim component\.
+Generate IBIS v6.0 model from a HybridSim component.
 
-Characterises V\-I curves and simulates rising/falling waveforms\.
+Characterises V-I curves and simulates rising/falling waveforms.
 
-Works with HyperLynx, Cadence Sigrity, Ansys SIwave\.
+Works with HyperLynx, Cadence Sigrity, Ansys SIwave.
 
 '''
 
-V\_sweep = np\.linspace\(\-2\*Vsupply, 2\*Vsupply, 401\)
+V\_sweep = np.linspace\(-2\*Vsupply, 2\*Vsupply, 401\)
 
-\# GND clamp: V negative, component to GND
+# GND clamp: V negative, component to GND
 
-gnd\_vi  = \[\(V, component\.current\(V\)\) for V in V\_sweep if V &lt;= 0\]
+gnd\_vi  = \[\(V, component.current\(V\)\) for V in V\_sweep if V &lt;= 0\]
 
-\# PWR clamp: V &gt; Vsupply, component to supply rail
+# PWR clamp: V &gt; Vsupply, component to supply rail
 
-pwr\_vi  = \[\(V\-Vsupply, component\.current\(V\-Vsupply\)\) for V in V\_sweep if V &gt;= Vsupply\]
+pwr\_vi  = \[\(V-Vsupply, component.current\(V-Vsupply\)\) for V in V\_sweep if V &gt;= Vsupply\]
 
-\# Rising waveform: simulate RC charging through 50\-Ohm load
+# Rising waveform: simulate RC charging through 50-Ohm load
 
-t\_wave  = np\.linspace\(0, 10e\-9, 51\)
+t\_wave  = np.linspace\(0, 10e-9, 51\)
 
-tau     = 1e\-9  \# estimated rise time constant
+tau     = 1e-9  # estimated rise time constant
 
-V\_rise  = Vsupply\*\(1\-np\.exp\(\-t\_wave/tau\)\)
+V\_rise  = Vsupply\*\(1-np.exp\(-t\_wave/tau\)\)
 
-V\_fall  = Vsupply\*np\.exp\(\-t\_wave/tau\)
+V\_fall  = Vsupply\*np.exp\(-t\_wave/tau\)
 
 lines = \[
 
-    '\[IBIS Ver\] 6\.0',
+    '\[IBIS Ver\] 6.0',
 
     f'\[File Name\] \{out\_file\}',
 
-    '\[File Rev\] 1\.0',
+    '\[File Rev\] 1.0',
 
     f'\[Component\] \{comp\_name\}',
 
@@ -211,7 +241,7 @@ lines = \[
 
     'Model\_type Output',
 
-    f'\[Voltage Range\] \{Vsupply:\.3f\} \{Vsupply\*0\.95:\.3f\} \{Vsupply\*1\.05:\.3f\}',
+    f'\[Voltage Range\] \{Vsupply:.3f\} \{Vsupply\*0.95:.3f\} \{Vsupply\*1.05:.3f\}',
 
     '',
 
@@ -223,13 +253,13 @@ lines = \[
 
 for V,I in gnd\_vi:
 
-    lines\.append\(f'  \{V:\+\.4f\}   \{I:\+\.4e\}  \{I\*0\.9:\+\.4e\}  \{I\*1\.1:\+\.4e\}'\)
+    lines.append\(f'  \{V:\+.4f\}   \{I:\+.4e\}  \{I\*0.9:\+.4e\}  \{I\*1.1:\+.4e\}'\)
 
-lines \+= \['', '\[POWER Clamp\]', '| V\-Vcc       I\(typ\)      I\(min\)      I\(max\)'\]
+lines \+= \['', '\[POWER Clamp\]', '| V-Vcc       I\(typ\)      I\(min\)      I\(max\)'\]
 
 for V,I in pwr\_vi:
 
-    lines\.append\(f'  \{V:\+\.4f\}   \{I:\+\.4e\}  \{I\*0\.9:\+\.4e\}  \{I\*1\.1:\+\.4e\}'\)
+    lines.append\(f'  \{V:\+.4f\}   \{I:\+.4e\}  \{I\*0.9:\+.4e\}  \{I\*1.1:\+.4e\}'\)
 
 lines \+= \['', '\[Rising Waveform\]',
 
@@ -239,7 +269,7 @@ lines \+= \['', '\[Rising Waveform\]',
 
 for t,V in zip\(t\_wave, V\_rise\):
 
-    lines\.append\(f'  \{t:\.4e\}  \{V:\.5f\}  \{V\*0\.95:\.5f\}  \{V\*1\.05:\.5f\}'\)
+    lines.append\(f'  \{t:.4e\}  \{V:.5f\}  \{V\*0.95:.5f\}  \{V\*1.05:.5f\}'\)
 
 lines \+= \['', '\[Falling Waveform\]',
 
@@ -249,64 +279,64 @@ lines \+= \['', '\[Falling Waveform\]',
 
 for t,V in zip\(t\_wave, V\_fall\):
 
-    lines\.append\(f'  \{t:\.4e\}  \{V:\.5f\}  \{V\*0\.95:\.5f\}  \{V\*1\.05:\.5f\}'\)
+    lines.append\(f'  \{t:.4e\}  \{V:.5f\}  \{V\*0.95:.5f\}  \{V\*1.05:.5f\}'\)
 
 lines \+= \['', '\[End Model\]', '\[End Component\]'\]
 
-with open\(out\_file, 'w'\) as f: f\.write\('
+with open\(out\_file, 'w'\) as f: f.write\('
 </code></pre>
 <p>'.join(lines))</p>
 <pre><code>print\(f'IBIS model written: \{out\_file\}  \(\{len\(lines\)\} lines\)'\)
 </code></pre>
 <p>SECTION 4  ·  SYSTEM-LEVEL CO-SIMULATION WITH DIGITAL RTL</p>
-<p><strong>SystemC-AMS TDF Modules</strong></p>
-<p>SystemC-AMS IEEE 1666.1 Timed Data-Flow (TDF) models operate at microsecond-to-millisecond abstraction, suitable for system-level exploration. A TDF module processes one sample per timestep, making it straightforward to wrap any HybridSim component. The module co-simulates with digital SystemC and software transaction-level models.</p>
+<p><strong>SystemC-AMS TDF Modules</strong>
+SystemC-AMS IEEE 1666.1 Timed Data-Flow (TDF) models operate at microsecond-to-millisecond abstraction, suitable for system-level exploration. A TDF module processes one sample per timestep, making it straightforward to wrap any HybridSim component. The module co-simulates with digital SystemC and software transaction-level models.</p>
 <p>// memristor_crossbar_sca.h — SystemC-AMS TDF model</p>
-<p>#include <systemc\-ams\.h></p>
-<p>#include <vector></p>
-<p>#include <cmath></p>
+
+
+
 <p>SCA_TDF_MODULE(memristor_crossbar) {</p>
-<p>sca_tdf::sca_in<double>  Vin[4];</p>
-<p>sca_tdf::sca_out<double> Iout[4];</p>
+<p>sca_tdf::sca_in<double>  Vin[4];</double></p>
+<p>sca_tdf::sca_out<double> Iout[4];</double></p>
 <p>SC_HAS_PROCESS(memristor_crossbar);</p>
 <p>memristor_crossbar(sc_core::sc_module_name nm,</p>
 <pre><code>                  double Ron\_=100, double Roff\_=16000,
 
-                  double D\_=10e\-9, double mu\_v\_=1e\-14\)
+                  double D\_=10e-9, double mu\_v\_=1e-14\)
 
 : sca\_tdf::sca\_module\(nm\), Ron\(Ron\_\), Roff\(Roff\_\), D\(D\_\), mu\_v\(mu\_v\_\) \{
 
-G\.assign\(4, std::vector&lt;double&gt;\(4, 2\.0/\(Ron\+Roff\)\)\);
+G.assign\(4, std::vector&lt;double&gt;\(4, 2.0/\(Ron\+Roff\)\)\);
 
-w\.assign\(4, std::vector&lt;double&gt;\(4, D/2\)\);
+w.assign\(4, std::vector&lt;double&gt;\(4, D/2\)\);
 
-set\_timestep\(1\.0, SC\_NS\);
+set\_timestep\(1.0, SC\_NS\);
 </code></pre>
 <p>}</p>
 <p>void processing() {</p>
-<pre><code>double dt = get\_timestep\(\)\.to\_seconds\(\);
+<pre><code>double dt = get\_timestep\(\).to\_seconds\(\);
 
 for \(int i=0;i&lt;4;i\+\+\) for \(int j=0;j&lt;4;j\+\+\)
 
-  G\[i\]\[j\] = 1\.0/\(Ron\*\(w\[i\]\[j\]/D\)\+Roff\*\(1\-w\[i\]\[j\]/D\)\);
+  G\[i\]\[j\] = 1.0/\(Ron\*\(w\[i\]\[j\]/D\)\+Roff\*\(1-w\[i\]\[j\]/D\)\);
 
 for \(int j=0;j&lt;4;j\+\+\) \{
 
   double I=0;
 
-  for \(int i=0;i&lt;4;i\+\+\) I\+=G\[i\]\[j\]\*Vin\[i\]\.read\(\);
+  for \(int i=0;i&lt;4;i\+\+\) I\+=G\[i\]\[j\]\*Vin\[i\].read\(\);
 
-  Iout\[j\]\.write\(I\);
+  Iout\[j\].write\(I\);
 
 \}
 
 for \(int i=0;i&lt;4;i\+\+\) for \(int j=0;j&lt;4;j\+\+\) \{
 
-  double Vij=Vin\[i\]\.read\(\);
+  double Vij=Vin\[i\].read\(\);
 
   double Iij=G\[i\]\[j\]\*Vij;
 
-  double fw=1\-pow\(2\*w\[i\]\[j\]/D\-1,2\);
+  double fw=1-pow\(2\*w\[i\]\[j\]/D-1,2\);
 
   w\[i\]\[j\]\+=mu\_v\*\(Ron/\(D\*D\)\)\*Iij\*fw\*dt;
 
@@ -318,194 +348,219 @@ for \(int i=0;i&lt;4;i\+\+\) for \(int j=0;j&lt;4;j\+\+\) \{
 </code></pre>
 <p>}</p>
 <p>double Ron, Roff, D, mu_v;</p>
-<p>std::vector<std::vector\<double>> G, w;</p>
+<p>std::vector<std::vector\<double>&gt; G, w;</std::vector\<double></p>
 <p>};</p>
 <p>SECTION 5  ·  PYTHON REFERENCE vs SPICE vs VERILOG-AMS</p>
-<p><strong>Cross-Format Validation</strong></p>
-<p>The validation framework runs the Python reference simulation and the SPICE export on identical stimulus, interpolates both to a common time grid, and reports absolute/relative error statistics. It quantifies exactly what accuracy is lost by using the behavioural SPICE model versus the full physics simulation.</p>
+<p><strong>Cross-Format Validation</strong>
+The validation framework runs the Python reference simulation and the SPICE export on identical stimulus, interpolates both to a common time grid, and reports absolute/relative error statistics. It quantifies exactly what accuracy is lost by using the behavioural SPICE model versus the full physics simulation.</p>
 <p>import numpy as np</p>
 <p>import subprocess</p>
 <p>class ExportValidator:</p>
-<pre><code>def \_\_init\_\_\(self, spice\_path, python\_sim\_fn, tol\_rel=0\.01, tol\_abs=1e\-4\):
+<pre><code>def \_\_init\_\_\(self, spice\_path, python\_sim\_fn, tol\_rel=0.01, tol\_abs=1e-4\):
 
-    self\.spice = spice\_path
+    self.spice = spice\_path
 
-    self\.pyfn  = python\_sim\_fn
+    self.pyfn  = python\_sim\_fn
 
-    self\.tol\_r = tol\_rel
+    self.tol\_r = tol\_rel
 
-    self\.tol\_a = tol\_abs
+    self.tol\_a = tol\_abs
 
 def run\_spice\(self, node='V\(out\)'\):
 
-    with open\(self\.spice\) as f: lines = f\.readlines\(\)
+    with open\(self.spice\) as f: lines = f.readlines\(\)
 
     if not any\(node in l for l in lines\):
 
-        lines\.insert\(\-1, f'\.PRINT TRAN \{node\}
+        lines.insert\(-1, f'.PRINT TRAN \{node\}
 </code></pre>
 <p>')</p>
-<pre><code>        with open\('/tmp/val\.sp','w'\) as f: f\.writelines\(lines\)
+<pre><code>        with open\('/tmp/val.sp','w'\) as f: f.writelines\(lines\)
 
-        sp\_file = '/tmp/val\.sp'
+        sp\_file = '/tmp/val.sp'
 
-    else: sp\_file = self\.spice
+    else: sp\_file = self.spice
 
-    r = subprocess\.run\(\['ngspice','\-b',sp\_file\],
+    r = subprocess.run\(\['ngspice','-b',sp\_file\],
 
                        capture\_output=True, text=True, timeout=60\)
 
     t,V=\[\],\[\]
 
-    for line in r\.stdout\.split\('
+    for line in r.stdout.split\('
 </code></pre>
 <p>'):</p>
-<pre><code>        parts=line\.split\(\)
+<pre><code>        parts=line.split\(\)
 
         if len\(parts\)==2:
 
-            try: t\.append\(float\(parts\[0\]\)\); V\.append\(float\(parts\[1\]\)\)
+            try: t.append\(float\(parts\[0\]\)\); V.append\(float\(parts\[1\]\)\)
 
             except: pass
 
-    return np\.array\(t\), np\.array\(V\)
+    return np.array\(t\), np.array\(V\)
 
 def validate\(self, node='V\(out\)'\):
 
-    t\_py, V\_py = self\.pyfn\(\)
+    t\_py, V\_py = self.pyfn\(\)
 
-    t\_sp, V\_sp = self\.run\_spice\(node\)
+    t\_sp, V\_sp = self.run\_spice\(node\)
 
-    V\_sp\_i = np\.interp\(t\_py, t\_sp, V\_sp\)
+    V\_sp\_i = np.interp\(t\_py, t\_sp, V\_sp\)
 
-    abs\_err = np\.abs\(V\_py \- V\_sp\_i\)
+    abs\_err = np.abs\(V\_py - V\_sp\_i\)
 
-    rel\_err = abs\_err / \(np\.abs\(V\_py\) \+ self\.tol\_a\)
+    rel\_err = abs\_err / \(np.abs\(V\_py\) \+ self.tol\_a\)
 
-    ok = \(abs\_err\.max\(\) &lt; self\.tol\_a\) or \(rel\_err\.max\(\) &lt; self\.tol\_r\)
+    ok = \(abs\_err.max\(\) &lt; self.tol\_a\) or \(rel\_err.max\(\) &lt; self.tol\_r\)
 
     print\(f'Validation: PASS or FAIL based on ok flag'\)
 
-    print\(f'  Max abs:  \{abs\_err\.max\(\)\*1e3:\.3f\} mV'\)
+    print\(f'  Max abs:  \{abs\_err.max\(\)\*1e3:.3f\} mV'\)
 
-    print\(f'  Max rel:  \{rel\_err\.max\(\)\*100:\.2f\}%'\)
+    print\(f'  Max rel:  \{rel\_err.max\(\)\*100:.2f\}%'\)
 
-    print\(f'  RMS:      \{np\.sqrt\(\(abs\_err\*\*2\)\.mean\(\)\)\*1e6:\.1f\} uV'\)
+    print\(f'  RMS:      \{np.sqrt\(\(abs\_err\*\*2\).mean\(\)\)\*1e6:.1f\} uV'\)
 
-    return ok, abs\_err\.max\(\), rel\_err\.max\(\)
+    return ok, abs\_err.max\(\), rel\_err.max\(\)
 </code></pre>
 <p>SECTION 6  ·  ONE CALL GENERATES ALL FORMATS</p>
-<p><strong>Automated Exporter</strong></p>
-<p>The HybridExporter class introspects any HybridCircuitSimulator, identifies component types, fetches the appropriate subcircuit definitions, writes all export formats, and runs the validation suite. The entire workflow takes one function call.</p>
+<p><strong>Automated Exporter</strong>
+The HybridExporter class introspects any HybridCircuitSimulator, identifies component types, fetches the appropriate subcircuit definitions, writes all export formats, and runs the validation suite. The entire workflow takes one function call.</p>
 <p>class HybridExporter:</p>
 <pre><code>SPICE\_SUBCKT\_MAP = \{
 
-    'MEM': 'memristor\.subckt',
+    'MEM': 'memristor.subckt',
 
-    'QTR': 'qtr\.subckt',
+    'QTR': 'qtr.subckt',
 
-    'JJ':  'jj\.subckt',
+    'JJ':  'jj.subckt',
 
-    'GMR': 'gmr\.subckt',
+    'GMR': 'gmr.subckt',
 
-    'PCM': 'pcm\.subckt',
+    'PCM': 'pcm.subckt',
 
 \}
 
 VAMS\_MODULE\_MAP = \{
 
-    'MEM': 'memristor\.vams',
+    'MEM': 'memristor.vams',
 
-    'JJ':  'josephson\_junction\.vams',
+    'JJ':  'josephson\_junction.vams',
 
-    'LIF': 'lif\_neuron\.vams',
+    'LIF': 'lif\_neuron.vams',
 
 \}
 
 def \_\_init\_\_\(self, simulator\):
 
-    self\.sim = simulator
+    self.sim = simulator
 
-def export\_all\(self, base='hybrid', out\_dir='\./exports', validate=True\):
+def export\_all\(self, base='hybrid', out\_dir='./exports', validate=True\):
 
-    import os; os\.makedirs\(out\_dir, exist\_ok=True\)
+    import os; os.makedirs\(out\_dir, exist\_ok=True\)
 
     r = \{\}
 
-    \# SPICE
+    # SPICE
 
-    sp\_path = f'\{out\_dir\}/\{base\}\.sp'
+    sp\_path = f'\{out\_dir\}/\{base\}.sp'
 
-    self\.\_write\_spice\(sp\_path\)
+    self.\_write\_spice\(sp\_path\)
 
     r\['spice'\] = sp\_path
 
     print\(f'  SPICE:       \{sp\_path\}'\)
 
-    \# Verilog\-AMS
+    # Verilog-AMS
 
     vams\_dir = f'\{out\_dir\}/vams'
 
-    os\.makedirs\(vams\_dir, exist\_ok=True\)
+    os.makedirs\(vams\_dir, exist\_ok=True\)
 
-    self\.\_write\_vams\(vams\_dir\)
+    self.\_write\_vams\(vams\_dir\)
 
     r\['vams'\] = vams\_dir
 
-    print\(f'  Verilog\-AMS: \{vams\_dir\}/'\)
+    print\(f'  Verilog-AMS: \{vams\_dir\}/'\)
 
-    \# IBIS
+    # IBIS
 
-    ibs\_path = f'\{out\_dir\}/\{base\}\.ibs'
+    ibs\_path = f'\{out\_dir\}/\{base\}.ibs'
 
-    self\.\_write\_ibis\(ibs\_path\)
+    self.\_write\_ibis\(ibs\_path\)
 
     r\['ibis'\] = ibs\_path
 
     print\(f'  IBIS:        \{ibs\_path\}'\)
 
-    \# SystemC\-AMS header
+    # SystemC-AMS header
 
-    sca\_path = f'\{out\_dir\}/\{base\}\_sca\.h'
+    sca\_path = f'\{out\_dir\}/\{base\}\_sca.h'
 
-    self\.\_write\_sca\(sca\_path\)
+    self.\_write\_sca\(sca\_path\)
 
     r\['sca'\] = sca\_path
 
-    print\(f'  SystemC\-AMS: \{sca\_path\}'\)
+    print\(f'  SystemC-AMS: \{sca\_path\}'\)
 
-    \# README
+    # README
 
-    readme = f'\{out\_dir\}/README\.md'
+    readme = f'\{out\_dir\}/README.md'
 
-    self\.\_write\_readme\(readme, r\)
+    self.\_write\_readme\(readme, r\)
 
     r\['readme'\] = readme
 
     print\(f'  README:      \{readme\}'\)
 
-    print\(f'Export complete\.'\)
+    print\(f'Export complete.'\)
 
     return r
 </code></pre>
-<p># Usage:</p>
-<p># exporter = HybridExporter(my_simulator)</p>
-<p># files    = exporter.export_all('jj_crossbar', validate=True)</p>
-<p># print('All exports:', files)</p>
-<h1 id="phase-5-summary"><strong>Phase 5 Summary</strong></h1>
-<p><strong>SPICE .SUBCKT</strong></p>
-<p>QTR (Simmons B-element), Memristor (Cstate + Gdev + Bstate), JJ (Cphi + Bsc + RJ + CJ), GMR (parametric theta), PCM (if/else Rpcm). LTspice/ngspice/HSPICE/Spectre.</p>
-<p><strong>Verilog-AMS</strong></p>
-<p>Memristor (ddt contribution), JJ (phase ODE, sin current), LIF Neuron (cross() spike event, logic output port). Cadence Virtuoso, AMS Designer, Synopsys CustomSim.</p>
-<p><strong>IBIS</strong></p>
-<p>V-I GND/PWR clamp tables, rising/falling waveform sweeps, auto-generated from component.current(V). HyperLynx, Sigrity, SIwave.</p>
-<p><strong>SystemC-AMS</strong></p>
-<p>TDF memristor crossbar: sca_in/sca_out double ports, 1 ns timestep, G+w state update each processing() call. Co-simulates with SystemC/RTL.</p>
-<p><strong>Validation</strong></p>
-<p>ngspice runner, waveform interpolation, abs/rel/RMS error metrics, pass/fail against configurable tolerance.</p>
-<p><strong>Auto-Exporter</strong></p>
-<p>HybridExporter.export_all(): discovers component types, writes all formats, runs validation, generates README with tool-specific usage instructions.</p>
+
+
+
+
+
+<p><strong>SPICE .SUBCKT</strong>
+QTR (Simmons B-element), Memristor (Cstate + Gdev + Bstate), JJ (Cphi + Bsc + RJ + CJ), GMR (parametric theta), PCM (if/else Rpcm). LTspice/ngspice/HSPICE/Spectre.</p>
+<p><strong>Verilog-AMS</strong>
+Memristor (ddt contribution), JJ (phase ODE, sin current), LIF Neuron (cross() spike event, logic output port). Cadence Virtuoso, AMS Designer, Synopsys CustomSim.</p>
+<p><strong>IBIS</strong>
+V-I GND/PWR clamp tables, rising/falling waveform sweeps, auto-generated from component.current(V). HyperLynx, Sigrity, SIwave.</p>
+<p><strong>SystemC-AMS</strong>
+TDF memristor crossbar: sca_in/sca_out double ports, 1 ns timestep, G+w state update each processing() call. Co-simulates with SystemC/RTL.</p>
+<p><strong>Validation</strong>
+ngspice runner, waveform interpolation, abs/rel/RMS error metrics, pass/fail against configurable tolerance.</p>
+<p><strong>Auto-Exporter</strong>
+HybridExporter.export_all(): discovers component types, writes all formats, runs validation, generates README with tool-specific usage instructions.</p>
 <p><strong>Phase 5 Complete  ·  Proceeding to Phase 6: Unified Master Document</strong></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -3,114 +3,164 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper2 military antikythera</title>
+  <meta name="description" content="This paper presents a computational framework, the Military-Grade Antikythera Algorithm \(MGAA\), that derives its mathematical foundations from the Antikythera Mechanism—a 2,100-year-old bronze astronomical calculator recovered from a Roman-era shipwreck near the Greek island…"/>
+  <title>Military-grade Antikythera algorithm · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Electromechnical Inspired Algorithms\paper2_military_antikythera.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>MILITARY-GRADE ANTIKYTHERA ALGORITHM</strong></p>
-<p><em>Epicyclic Signal Processing and Rational Approximation Derived from Ancient Astronomical Computing</em></p>
-<p>────────────────────────────────────────────────────</p>
-<p><strong>Technical Research Paper  |  Classification: UNCLASSIFIED  |  Distribution: Unlimited</strong></p>
-<p>Advanced Defense Systems Research Division  |  2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-historical-foundations-the-antikythera-mechanism">2. Historical Foundations: The Antikythera Mechanism</a></li>
+        <li class="toc-depth-2"><a href="#21-physical-description-and-discovery">2.1 Physical Description and Discovery</a></li>
+        <li class="toc-depth-2"><a href="#22-computational-architecture-epicyclic-gearing">2.2 Computational Architecture: Epicyclic Gearing</a></li>
+        <li class="toc-depth-2"><a href="#23-prime-factor-optimization-ancient-rational-approximation">2.3 Prime Factor Optimization: Ancient Rational Approximation</a></li>
+        <li class="toc-depth-2"><a href="#3-mathematical-framework">3. Mathematical Framework</a></li>
+        <li class="toc-depth-2"><a href="#31-epicyclic-interpolation-theory">3.1 Epicyclic Interpolation Theory</a></li>
+        <li class="toc-depth-2"><a href="#32-continued-fractions-and-rational-approximation">3.2 Continued Fractions and Rational Approximation</a></li>
+        <li class="toc-depth-2"><a href="#4-algorithm-implementations">4. Algorithm Implementations</a></li>
+        <li class="toc-depth-2"><a href="#41-epicyclic-interpolation-engine">4.1 Epicyclic Interpolation Engine</a></li>
+        <li class="toc-depth-2"><a href="#42-prime-factor-optimization-engine">4.2 Prime Factor Optimization Engine</a></li>
+        <li class="toc-depth-2"><a href="#43-nested-circular-processing-engine">4.3 Nested Circular Processing Engine</a></li>
+        <li class="toc-depth-2"><a href="#44-astronomical-prediction-engine">4.4 Astronomical Prediction Engine</a></li>
+        <li class="toc-depth-2"><a href="#5-performance-analysis">5. Performance Analysis</a></li>
+        <li class="toc-depth-2"><a href="#51-source-of-speedup">5.1 Source of Speedup</a></li>
+        <li class="toc-depth-2"><a href="#52-military-system-requirements-vs-performance">5.2 Military System Requirements vs. Performance</a></li>
+        <li class="toc-depth-2"><a href="#6-numerical-stability-and-precision">6. Numerical Stability and Precision</a></li>
+        <li class="toc-depth-2"><a href="#7-applications">7. Applications</a></li>
+        <li class="toc-depth-2"><a href="#71-gnss-denied-navigation">7.1 GNSS-Denied Navigation</a></li>
+        <li class="toc-depth-2"><a href="#72-signal-decomposition-and-electronic-warfare">7.2 Signal Decomposition and Electronic Warfare</a></li>
+        <li class="toc-depth-2"><a href="#73-sampling-rate-optimization">7.3 Sampling Rate Optimization</a></li>
+        <li class="toc-depth-2"><a href="#8-legacy-and-significance">8. Legacy and Significance</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusion">9. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Military-grade Antikythera algorithm</h1>
+          <p class="doc-meta">Electromechnical Inspired Algorithms\paper2_military_antikythera.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>Technical research paper · UNCLASSIFIED · Distribution unlimited · Advanced Defense Systems Research Division · 2026</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Epicyclic signal processing and rational approximation derived from ancient astronomical computing</em></p>
+<p><em>Technical research paper · UNCLASSIFIED · Distribution unlimited · Advanced Defense Systems Research Division · 2026</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>This paper presents a computational framework, the Military-Grade Antikythera Algorithm (MGAA), that derives its mathematical foundations from the Antikythera Mechanism—a 2,100-year-old bronze astronomical calculator recovered from a Roman-era shipwreck near the Greek island of Antikythera in 1901 [<em>Nature, 2006</em>]. The Antikythera Mechanism encoded astronomical periodicities as rational fractions using epicyclic gear trains, with prime factors [7, 17, 19, 53, 127, 223] chosen to approximate celestial cycles with minimum gear-tooth count [<em>Wikipedia — Antikythera, 2026</em>]. We extract three computational engines from these ancient principles: (1) an Epicyclic Interpolation Engine using Fourier-mode reconstruction with vectorized trigonometry; (2) a Prime Factor Optimization Engine employing continued fractions for rational approximation; and (3) a Nested Circular Processing Engine for multi-frequency signal decomposition. Empirically, the fully-optimized system achieves 386× speedup over naive Python implementations for 5,000-point datasets, with sub-millisecond latency for the majority of anticipated defense applications. The paper provides rigorous mathematical derivations, benchmarking across representative military system profiles, and analysis of numerical stability.</p>
-<p><strong>Keywords: </strong><em>Antikythera Mechanism, epicyclic gearing, rational approximation, continued fractions, signal interpolation, Fourier analysis, real-time systems, defense computing</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>Antikythera Mechanism, epicyclic gearing, rational approximation, continued fractions, signal interpolation, Fourier analysis, real-time systems, defense computing</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>The Antikythera Mechanism, constructed around the end of the second century BCE, is the oldest known analogue computer [<em>Britannica, 2009</em>]. Recovered in 1901 by Greek sponge divers from a Roman shipwreck off the island of Antikythera, it was initially dismissed as a curiosity until radiographic examination in the 1950s by Derek de Solla Price revealed a complex gear system encoding astronomical cycles [<em>de Solla Price, Gears from the Greeks, 1974</em>]. Modern X-ray tomography studies, particularly the landmark 2006 analysis published in <em>Nature</em>, confirmed the presence of 30 surviving bronze gears and revealed the mechanism to be a sophisticated predictor of the Sun-Moon-Earth system with capabilities not matched by any known device for over a millennium thereafter [<em>Freeth et al., Nature, 2006</em>].</p>
 <p>The mechanism's computational strategy was elegant: rather than computing planetary positions analytically, it encoded the required periodicities as rational approximations implemented physically as gear tooth-count ratios. A 64-tooth gear meshed with a 38-tooth gear produces a ratio of 32/19, approximating the 19-year Metonic cycle (235 synodic months ≈ 19 tropical years) to high precision [<em>Archania.org</em>]. The selection of gear tooth counts was constrained by the mechanisms' physical volume, leading the designers to identify minimal-denominator rational approximations—precisely the continued fractions problem [<em>Communications of the ACM, 2023</em>]. In March 2021, the UCL Antikythera Research Team demonstrated that the planet gear trains used prime factors 7 and 17 shared across multiple planetary cycles to minimize total part count [<em>UCL, 2021</em>].</p>
 <p>This paper asks: can the computational principles of the Antikythera Mechanism—epicyclic decomposition, rational approximation via prime factors, and multi-frequency recombination—be extracted as a general algorithmic framework applicable to modern signal processing in defense systems? We answer affirmatively, and present four algorithmic engines together forming the Military-Grade Antikythera Algorithm (MGAA).</p>
-<h1 id="2-historical-foundations-the-antikythera-mechanism"><strong>2. Historical Foundations: The Antikythera Mechanism</strong></h1>
-<h2 id="21-physical-description-and-discovery"><strong>2.1 Physical Description and Discovery</strong></h2>
+<h2 id="2-historical-foundations-the-antikythera-mechanism">2. Historical Foundations: The Antikythera Mechanism</h2>
+<h2 id="21-physical-description-and-discovery">2.1 Physical Description and Discovery</h2>
 <p>The Antikythera Mechanism is an intricate bronze construction, originally housed in a wooden case approximately 34 cm × 18 cm × 9 cm [<em>Wikipedia — Antikythera, 2026</em>]. It now survives as 82 fragments housed in the National Archaeological Museum in Athens. Its manufacture date is estimated at 100 BCE (±30 years) based on astronomical epoch inscriptions and coin finds at the wreck site. The mechanism's existence implies a tradition of sophisticated Greek mechanical engineering: Cicero reported in <em>De Re Publica</em> (54 BCE) on a similar sphere of Archimedes, suggesting the Antikythera device is a later representative of a broader now-lost class of such instruments [<em>Britannica</em>].</p>
 <p>The sophistication of the surviving fragment is remarkable. No geared device of comparable complexity is known to archaeology for more than a millennium after the mechanism's manufacture; medieval cathedral clocks of comparable gear-train complexity do not appear until the fourteenth century [<em>MDPI Heritage, 2021</em>]. The mechanism represented not merely an isolated curiosity but evidence of an advanced engineering tradition that was entirely lost in the intervening centuries.</p>
-<h2 id="22-computational-architecture-epicyclic-gearing"><strong>2.2 Computational Architecture: Epicyclic Gearing</strong></h2>
+<h2 id="22-computational-architecture-epicyclic-gearing">2.2 Computational Architecture: Epicyclic Gearing</h2>
 <p>The core computational innovation of the Antikythera Mechanism was the use of epicyclic gear trains—gear assemblies in which one gear carrier itself orbits around another gear's axis—to model the non-uniform motion of the Moon. In the second century BCE, Hipparchos of Nicaea had developed a theory of lunar anomaly based on an eccentric circular orbit [<em>Freeth et al., Nature, 2006</em>]. The mechanism implements this theory mechanically using a pin-and-slot epicyclic assembly that produces a varying angular velocity matching Hipparchos's model.</p>
 <p>The mathematical relationship implemented is:</p>
 <p><strong>z(t) = Σₖ Aₖ · e^(i(ωₖt + φₖ))</strong></p>
 <p>where each term represents one epicyclic gear stage, with amplitude <em>Aₖ</em> determined by the gear ratio, angular frequency <em>ωₖ</em> by the tooth count, and phase <em>φₖ</em> by the initial gear mesh position. This is precisely the Fourier series decomposition of a periodic function—the ancient mechanism was performing analogue Fourier analysis two millennia before Fourier's 1807 paper.</p>
-<h2 id="23-prime-factor-optimization-ancient-rational-approximation"><strong>2.3 Prime Factor Optimization: Ancient Rational Approximation</strong></h2>
+<h2 id="23-prime-factor-optimization-ancient-rational-approximation">2.3 Prime Factor Optimization: Ancient Rational Approximation</h2>
 <p>The gear tooth counts in the Antikythera Mechanism are not arbitrary: they are systematically chosen to produce rational approximations to astronomical period ratios with small prime factors. The Metonic cycle (235/19), the Saros eclipse cycle (223 synodic months), and the Callippic cycle (4 × Metonic) are all implemented as gear trains whose tooth counts factorize into the primes [7, 17, 19, 53, 127, 223] [<em>Wikipedia — Antikythera</em>]. The 2021 UCL study found that the planetary gear trains reuse the factors 7 and 17 across Venus and Mars cycles, minimizing total part count through shared gears [<em>UCL, 2021</em>].</p>
 <p>This is an optimization problem: find integers p/q ≈ r (the target astronomical ratio) with q ≤ Q (maximum gear size constraint) minimizing |r − p/q|. The optimal solution to this problem is provided by continued fraction expansion—the same algorithm used in the MGAA Prime Factor Engine described in Section 4.2.</p>
-<h1 id="3-mathematical-framework"><strong>3. Mathematical Framework</strong></h1>
-<h2 id="31-epicyclic-interpolation-theory"><strong>3.1 Epicyclic Interpolation Theory</strong></h2>
+<h2 id="3-mathematical-framework">3. Mathematical Framework</h2>
+<h2 id="31-epicyclic-interpolation-theory">3.1 Epicyclic Interpolation Theory</h2>
 <p>For a discrete time series x(t), t = 0, 1, …, N−1, the epicyclic interpolation at an arbitrary target time τ is defined as the sum of Fourier-mode contributions from specified periods P₁, P₂, …, Pₘ:</p>
 <p><strong>x̂(τ) = Σₖ Aₖ cos(ωₖτ + φₖ),   ωₖ = 2π/Pₖ</strong></p>
 <p>The amplitude <em>Aₖ</em> and phase <em>φₖ</em> for each period are extracted from the data using the inner products:</p>
-<p><strong>cos-coeff = (1/N) Σₜ x(t)cos(ωₖt),   sin-coeff = (1/N) Σₜ x(t)sin(ωₖt)<br />
+<p><strong>cos-coeff = (1/N) Σₜ x(t)cos(ωₖt),   sin-coeff = (1/N) Σₜ x(t)sin(ωₖt)
 Aₖ = √(cos² + sin²),   φₖ = atan2(sin-coeff, cos-coeff)</strong></p>
 <p>This formulation achieves O(N·|P|) complexity in naive form, where |P| is the number of periods. Vectorized NumPy implementation reduces the constant factor by approximately 2–3× compared to explicit Python loops, consistent with NumPy's BLAS-backed array arithmetic.</p>
-<h2 id="32-continued-fractions-and-rational-approximation"><strong>3.2 Continued Fractions and Rational Approximation</strong></h2>
+<h2 id="32-continued-fractions-and-rational-approximation">3.2 Continued Fractions and Rational Approximation</h2>
 <p>Given a target ratio r ∈ ℝ and maximum denominator Q, the best rational approximation p/q (in the sense of minimizing |r − p/q|) is the convergent of the continued fraction expansion of r closest to Q. The continued fraction algorithm runs in O(log Q) iterations and produces all optimal approximations in sequence:</p>
-<p>Algorithm: ContinuedFractionApprox(r, Q_max)<br />
-    [h₋₁, h₀] = [0, 1]; [k₋₁, k₀] = [1, 0]<br />
-    x = r<br />
-    for i = 1..50:<br />
-        a = floor(x)<br />
-        h = a·h₀ + h₋₁;  k = a·k₀ + k₋₁<br />
-        if k &gt; Q_max: break<br />
-        record (h, k) as candidate if |r - h/k| improves<br />
-        if |x - a| &lt; ε: break<br />
-        x = 1/(x - a);  update h₋₁,h₀,k₋₁,k₀<br />
+<p>Algorithm: ContinuedFractionApprox(r, Q_max)
+    [h₋₁, h₀] = [0, 1]; [k₋₁, k₀] = [1, 0]
+    x = r
+    for i = 1..50:
+        a = floor(x)
+        h = a·h₀ + h₋₁;  k = a·k₀ + k₋₁
+        if k &gt; Q_max: break
+        record (h, k) as candidate if |r - h/k| improves
+        if |x - a| &lt; ε: break
+        x = 1/(x - a);  update h₋₁,h₀,k₋₁,k₀
     return best (h, k)</p>
 <p>The Antikythera designers effectively solved this problem by trial and exploration for each required astronomical ratio, constrained by practical gear sizes. Our algorithm recovers the optimal solution analytically in microseconds for any input ratio.</p>
-<h1 id="4-algorithm-implementations"><strong>4. Algorithm Implementations</strong></h1>
-<h2 id="41-epicyclic-interpolation-engine"><strong>4.1 Epicyclic Interpolation Engine</strong></h2>
+<h2 id="4-algorithm-implementations">4. Algorithm Implementations</h2>
+<h2 id="41-epicyclic-interpolation-engine">4.1 Epicyclic Interpolation Engine</h2>
 <p>The Epicyclic Interpolation Engine reconstructs continuous signals from sparse sampled data using specified periodicities—analogous to the mechanism using its gear trains to reconstruct planetary positions from initial setting and period knowledge:</p>
-<p>def epicyclic_interpolation(data, periods, targets):<br />
-    n = len(data)<br />
-    result = np.zeros(len(targets))<br />
-    for P in periods:<br />
-        if P &lt;= 0: continue<br />
-        omega = 2*pi / P<br />
-        angles = omega * np.arange(n)<br />
-        # Vectorized Fourier coefficient extraction<br />
-        C = np.mean(data * np.cos(angles))<br />
-        S = np.mean(data * np.sin(angles))<br />
-        A = sqrt(C**2 + S**2)<br />
-        if A &gt; 1e-12:<br />
-            phi = arctan2(S, C)<br />
-            result += A * np.cos(omega * targets + phi)<br />
+<p>def epicyclic_interpolation(data, periods, targets):
+    n = len(data)
+    result = np.zeros(len(targets))
+    for P in periods:
+        if P &lt;= 0: continue
+        omega = 2*pi / P
+        angles = omega * np.arange(n)
+        # Vectorized Fourier coefficient extraction
+        C = np.mean(data * np.cos(angles))
+        S = np.mean(data * np.sin(angles))
+        A = sqrt(C**2 + S**2)
+        if A &gt; 1e-12:
+            phi = arctan2(S, C)
+            result += A * np.cos(omega * targets + phi)
     return result</p>
 <p>Key optimizations relative to a naive CORDIC-based implementation: (1) native trigonometric functions achieve 11.5× speedup over CORDIC for modern FPUs; (2) NumPy vectorization across <em>n</em>-element arrays achieves 2–3× over explicit Python loops; (3) early termination for negligible amplitude components (A &lt; 10⁻¹²) avoids computing irrelevant frequencies.</p>
-<h2 id="42-prime-factor-optimization-engine"><strong>4.2 Prime Factor Optimization Engine</strong></h2>
+<h2 id="42-prime-factor-optimization-engine">4.2 Prime Factor Optimization Engine</h2>
 <p>Given a desired sampling ratio or frequency ratio, the Prime Factor Engine finds the smallest integer gear pair (<em>p</em>, <em>q</em>) whose ratio <em>p/q</em> approximates the target with error below a specified tolerance. This is the identical computational problem solved by the Antikythera designers for each astronomical period:</p>
-<p>def prime_factor_optimize(target, Q_max=10000, tol=1e-12):<br />
-    # Continued fraction expansion<br />
-    h_prev, h_curr = 0, 1<br />
-    k_prev, k_curr = 1, 0<br />
-    x = target; best = (1, 1, abs(target - 1))<br />
-    for _ in range(50):<br />
-        a = int(x)<br />
-        h_new = a*h_curr + h_prev<br />
-        k_new = a*k_curr + k_prev<br />
-        if k_new &gt; Q_max: break<br />
-        err = abs(target - h_new/k_new)<br />
-        if err &lt; best[2]: best = (h_new, k_new, err)<br />
-        if err &lt; tol or abs(x - a) &lt; 1e-12: break<br />
-        x = 1.0/(x - a)<br />
-        h_prev,h_curr = h_curr,h_new<br />
-        k_prev,k_curr = k_curr,k_new<br />
+<p>def prime_factor_optimize(target, Q_max=10000, tol=1e-12):
+    # Continued fraction expansion
+    h_prev, h_curr = 0, 1
+    k_prev, k_curr = 1, 0
+    x = target; best = (1, 1, abs(target - 1))
+    for _ in range(50):
+        a = int(x)
+        h_new = a*h_curr + h_prev
+        k_new = a*k_curr + k_prev
+        if k_new &gt; Q_max: break
+        err = abs(target - h_new/k_new)
+        if err &lt; best[2]: best = (h_new, k_new, err)
+        if err &lt; tol or abs(x - a) &lt; 1e-12: break
+        x = 1.0/(x - a)
+        h_prev,h_curr = h_curr,h_new
+        k_prev,k_curr = k_curr,k_new
     return best  # (numerator, denominator, error)</p>
-<h2 id="43-nested-circular-processing-engine"><strong>4.3 Nested Circular Processing Engine</strong></h2>
+<h2 id="43-nested-circular-processing-engine">4.3 Nested Circular Processing Engine</h2>
 <p>The Nested Circular Processing Engine decomposes a signal into its epicyclic components—the gear-on-gear motion characteristic of the Antikythera Mechanism's planetary displays. Each gear ratio produces a combined motion from a primary and secondary frequency:</p>
-<p># Epicyclic combined motion: primary gear drives secondary gear<br />
-combined_motion = cos(ω₁t) * cos(ω₂t) - sin(ω₁t) * sin(ω₂t)<br />
+
+<p>combined_motion = cos(ω₁t) * cos(ω₂t) - sin(ω₁t) * sin(ω₂t)
                 = cos((ω₁ + ω₂)t)   [sum-angle identity]</p>
 <p>This is the exact analogue of epicyclic gearing: the first gear rotates at ω₁, and the second gear's own rotation at ω₂ relative to the first produces a combined motion at ω₁ + ω₂. For Antikythera gear ratios r = [7, 17, 19, 53, 127, 223, 253], this decomposes the input signal into frequency bands corresponding to each historical gear ratio, providing a physically-motivated basis for spectral analysis of periodic defense-relevant signals.</p>
-<h2 id="44-astronomical-prediction-engine"><strong>4.4 Astronomical Prediction Engine</strong></h2>
+<h2 id="44-astronomical-prediction-engine">4.4 Astronomical Prediction Engine</h2>
 <p>The Astronomical Prediction Engine implements Babylonian-derived period relations for celestial bodies as used in the mechanism. These provide a deterministic, zero-dependency timing reference suitable for GNSS-denied navigation:</p>
 <ul>
-<li>__Metonic cycle: __235 synodic months ≈ 19 tropical years (error: 2 hours/19 years)</li>
-<li>__Saros cycle: __223 synodic months ≈ 18.03 years — primary eclipse predictor</li>
-<li>__Callippic cycle: __4 × Metonic = 76 years — reduced error to 1 day</li>
-<li>__Venus synodic period: __462-year cycle, discovered via UCL 2021 reconstruction [<em>UCL, 2021</em>]</li>
+<li><strong>Metonic cycle: </strong>235 synodic months ≈ 19 tropical years (error: 2 hours/19 years)</li>
+<li><strong>Saros cycle: </strong>223 synodic months ≈ 18.03 years — primary eclipse predictor</li>
+<li><strong>Callippic cycle: </strong>4 × Metonic = 76 years — reduced error to 1 day</li>
+<li><strong>Venus synodic period: </strong>462-year cycle, discovered via UCL 2021 reconstruction [<em>UCL, 2021</em>]</li>
 </ul>
-<h1 id="5-performance-analysis"><strong>5. Performance Analysis</strong></h1>
+<h2 id="5-performance-analysis">5. Performance Analysis</h2>
 <p>Performance was benchmarked against a naive Python baseline (explicit loop computation of DFT-equivalent operations). Table 1 shows measured results across dataset sizes.</p>
 <p><strong><em>Table 1. Performance Benchmarks — MGAA vs. Naive Baseline</em></strong></p>
 <p><strong>Dataset Size</strong></p>
@@ -138,15 +188,15 @@ combined_motion = cos(ω₁t) * cos(ω₂t) - sin(ω₁t) * sin(ω₂t)<br />
 <p>21</p>
 <p>400×</p>
 <p>82%</p>
-<h2 id="51-source-of-speedup"><strong>5.1 Source of Speedup</strong></h2>
+<h2 id="51-source-of-speedup">5.1 Source of Speedup</h2>
 <p>The 389× speedup at 5,000 points decomposes into three multiplicative factors:</p>
 <ul>
-<li>__Vectorized trigonometry (NumPy vs. Python loops): __approximately 11.5× — the largest single factor, attributable to BLAS-backed array operations</li>
-<li>__Elimination of redundant per-frequency memory allocation: __approximately 6× for large datasets</li>
-<li>__Cache-friendly sequential access patterns: __approximately 4–5× at dataset sizes exceeding L1 cache</li>
+<li><strong>Vectorized trigonometry (NumPy vs. Python loops): </strong>approximately 11.5× — the largest single factor, attributable to BLAS-backed array operations</li>
+<li><strong>Elimination of redundant per-frequency memory allocation: </strong>approximately 6× for large datasets</li>
+<li><strong>Cache-friendly sequential access patterns: </strong>approximately 4–5× at dataset sizes exceeding L1 cache</li>
 </ul>
 <p>The compounding of these independently motivated optimizations produces the observed overall factor. The continued-fractions rational approximation (Prime Factor Engine) achieves 5–10× speedup over brute-force search across all denominator-bounded pairs up to Q_max = 10,000, running in O(log Q) vs. O(Q²) time.</p>
-<h2 id="52-military-system-requirements-vs-performance"><strong>5.2 Military System Requirements vs. Performance</strong></h2>
+<h2 id="52-military-system-requirements-vs-performance">5.2 Military System Requirements vs. Performance</h2>
 <p><strong><em>Table 2. MGAA Performance Against Military System Requirements</em></strong></p>
 <p><strong>Military System</strong></p>
 <p><strong>Data Points</strong></p>
@@ -183,25 +233,25 @@ combined_motion = cos(ω₁t) * cos(ω₂t) - sin(ω₁t) * sin(ω₂t)<br />
 <p>1 ms</p>
 <p>8 ms (Python)</p>
 <p>C++/CUDA required</p>
-<h1 id="6-numerical-stability-and-precision"><strong>6. Numerical Stability and Precision</strong></h1>
+<h2 id="6-numerical-stability-and-precision">6. Numerical Stability and Precision</h2>
 <p>A key concern for military systems is numerical stability under finite-precision arithmetic. The epicyclic interpolation formula is well-conditioned for periods much larger than one sample (P &gt;&gt; 1), since the inner product sums are normalized by N. For periods P ≈ 1, the signal becomes indistinguishable from noise at the sampling resolution, and the amplitude threshold A &gt; 10⁻¹² provides early termination.</p>
 <p>The continued fractions algorithm is unconditionally stable: at each step, the recurrence h_new = a·h_curr + h_prev and k_new = a·k_curr + k_prev uses only integer arithmetic (for rational inputs) or 64-bit floating point with bounded error growth. The error bound satisfies:</p>
 <p><strong>|r − pₙ/qₙ| &lt; 1/(qₙ · qₙ₊₁)  ≤  1/qₙ²</strong></p>
 <p>guaranteeing that convergents provide best-rational-approximation guarantees that the ancient gear designers relied on intuitively.</p>
-<h1 id="7-applications"><strong>7. Applications</strong></h1>
-<h2 id="71-gnss-denied-navigation"><strong>7.1 GNSS-Denied Navigation</strong></h2>
+<h2 id="7-applications">7. Applications</h2>
+<h2 id="71-gnss-denied-navigation">7.1 GNSS-Denied Navigation</h2>
 <p>The Astronomical Prediction Engine provides a software celestial navigation capability requiring no external sensor input beyond an initial time reference. By predicting solar and lunar positions using the Metonic and Saros periods—the same periods encoded in the Antikythera Mechanism—a vehicle can update its inertial navigation solution through celestial fixes with accuracy comparable to pre-GPS maritime navigation. This mirrors exactly the Antikythera Mechanism's original application: providing a portable computational reference for astronomical positioning at sea.</p>
-<h2 id="72-signal-decomposition-and-electronic-warfare"><strong>7.2 Signal Decomposition and Electronic Warfare</strong></h2>
+<h2 id="72-signal-decomposition-and-electronic-warfare">7.2 Signal Decomposition and Electronic Warfare</h2>
 <p>The Nested Circular Processing Engine provides a physically-motivated basis for decomposing intercepted signals into their periodic components. Using the Antikythera prime factors [7, 17, 19, 53, 127, 223] as the basis frequencies, the engine identifies spectral content corresponding to these periods—naturally separating periodic interference (communications signals, radar emissions) from broadband noise. The basis is not arbitrary but represents the set of frequencies minimally approximating a wide range of rational frequency ratios, making it broadly applicable to signal classification.</p>
-<h2 id="73-sampling-rate-optimization"><strong>7.3 Sampling Rate Optimization</strong></h2>
+<h2 id="73-sampling-rate-optimization">7.3 Sampling Rate Optimization</h2>
 <p>The Prime Factor Engine solves the hardware design problem of selecting optimal sampling clock frequencies: given a desired ratio between input and output sample rates, find the minimal integer gear pair implementing it. This is directly applicable to mixed-signal design, frequency synthesizer specification, and digital filter implementation in embedded defense electronics.</p>
-<h1 id="8-legacy-and-significance"><strong>8. Legacy and Significance</strong></h1>
+<h2 id="8-legacy-and-significance">8. Legacy and Significance</h2>
 <p>The Antikythera Mechanism's rediscovery fundamentally revised the history of ancient technology. As Freeth et al. noted in their landmark <em>Nature</em> paper, the mechanism <em>"is technically more complex than any known device for at least a millennium afterwards"</em> [<em>Freeth et al., Nature, 2006</em>]. Price's characterization of the mechanism as <em>"the oldest proof of scientific technology that survives today"</em> [<em>de Solla Price, 1974</em>] remains apt. The USENIX presentation by Spinellis (2009) observed that the mechanism's design <em>"eerily foreshadows a number of modern computing concepts from the fields of digital design, programming, and software engineering"</em> [<em>USENIX ATC, 2009</em>].</p>
 <p>The present work adds a further dimension to this legacy: the computational strategies of the ancient designers—rational approximation by continued fractions, multi-frequency decomposition by epicyclic superposition, shared-factor optimization—are not merely analogous to modern algorithms but are formally identical to them. The Antikythera designers were solving the same optimization problems we solve today, constrained by bronze rather than silicon, and their solutions transfer directly to the modern domain.</p>
-<h1 id="9-conclusion"><strong>9. Conclusion</strong></h1>
+<h2 id="9-conclusion">9. Conclusion</h2>
 <p>The Military-Grade Antikythera Algorithm successfully extracts four general-purpose computational engines from the 2,100-year-old design principles of the Antikythera Mechanism. The Epicyclic Interpolation Engine, Prime Factor Optimization Engine, Nested Circular Processing Engine, and Astronomical Prediction Engine together provide a coherent framework for periodic signal processing in defense applications, achieving up to 389× speedup over naive implementations and satisfying latency requirements for navigation, fire control, UAV coordination, and electronic warfare at dataset sizes up to 10,000 points in Python.</p>
 <p>The fundamental insight—that the Antikythera designers solved rational approximation and multi-frequency decomposition problems with optimal algorithms—validates the hypothesis that ancient computational engineering embeds principles of enduring relevance. Two millennia of intervening history did not improve on their fundamental approach: they did not need lookup tables, they did not need multiplication for basic period calculations, and they achieved precision sufficient for practical astronomical prediction using only gear trains and patience.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <ol>
 <li>Freeth, T., Bitsakis, Y., Moussas, X. et al. (2006). Decoding the ancient Greek astronomical calculator known as the Antikythera Mechanism. <em>Nature</em>, 444, 587–591.</li>
 <li>de Solla Price, D. (1974). <em>Gears from the Greeks: The Antikythera Mechanism — A Calendar Computer from ca. 80 BC.</em> Transactions of the American Philosophical Society, New Series 64(7).</li>
@@ -214,6 +264,31 @@ combined_motion = cos(ω₁t) * cos(ω₂t) - sin(ω₁t) * sin(ω₂t)<br />
 <li>Academia.edu / Squeak Etoys Study. (2012). The Antikythera Mechanism: A computer science perspective.</li>
 <li>Freeth, T. (2014). Eclipse Prediction on the Ancient Greek Astronomical Calculating Machine Known as the Antikythera Mechanism. <em>PLOS ONE</em>, 9(7), e103275.</li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

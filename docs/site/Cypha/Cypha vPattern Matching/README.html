@@ -3,16 +3,78 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README</title>
+  <meta name="description" content="Cypha is a novel AI architecture that learns mappings through resonance field evolution rather than traditional backpropagation. It achieves strong separation between different patterns while clustering semantically similar inputs. - **Fast Learning**: Trains on thousands of…"/>
+  <title>Cypha HRNA - Production Implementation · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha vPattern Matching\README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="cypha-hrna-production-implementation">Cypha HRNA - Production Implementation</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-3"><a href="#key-features">Key Features</a></li>
+        <li class="toc-depth-2"><a href="#architecture">Architecture</a></li>
+        <li class="toc-depth-2"><a href="#quick-start">Quick Start</a></li>
+        <li class="toc-depth-3"><a href="#installation">Installation</a></li>
+        <li class="toc-depth-3"><a href="#basic-usage">Basic Usage</a></li>
+        <li class="toc-depth-3"><a href="#data-format">Data Format</a></li>
+        <li class="toc-depth-2"><a href="#running-the-demo">Running the Demo</a></li>
+        <li class="toc-depth-2"><a href="#command-line-interface">Command-Line Interface</a></li>
+        <li class="toc-depth-2"><a href="#how-it-works">How It Works</a></li>
+        <li class="toc-depth-3"><a href="#1-universal-encoding">1. Universal Encoding</a></li>
+        <li class="toc-depth-3"><a href="#2-resonance-field-evolution">2. Resonance Field Evolution</a></li>
+        <li class="toc-depth-3"><a href="#3-resonator-dynamics">3. Resonator Dynamics</a></li>
+        <li class="toc-depth-3"><a href="#4-contrastive-learning">4. Contrastive Learning</a></li>
+        <li class="toc-depth-3"><a href="#5-anchor-memory">5. Anchor Memory</a></li>
+        <li class="toc-depth-2"><a href="#performance">Performance</a></li>
+        <li class="toc-depth-2"><a href="#key-design-decisions">Key Design Decisions</a></li>
+        <li class="toc-depth-3"><a href="#why-bypass-assemblymoduleglobal-layers">Why Bypass Assembly/Module/Global Layers?</a></li>
+        <li class="toc-depth-3"><a href="#why-strong-drive-200">Why Strong Drive (200×)?</a></li>
+        <li class="toc-depth-3"><a href="#why-contrastive-learning">Why Contrastive Learning?</a></li>
+        <li class="toc-depth-3"><a href="#why-k-d-tree-for-anchors">Why k-d Tree for Anchors?</a></li>
+        <li class="toc-depth-2"><a href="#comparison-to-neural-networks">Comparison to Neural Networks</a></li>
+        <li class="toc-depth-2"><a href="#production-considerations">Production Considerations</a></li>
+        <li class="toc-depth-3"><a href="#strengths">Strengths</a></li>
+        <li class="toc-depth-3"><a href="#limitations">Limitations</a></li>
+        <li class="toc-depth-3"><a href="#recommended-use-cases">Recommended Use Cases</a></li>
+        <li class="toc-depth-2"><a href="#future-enhancements">Future Enhancements</a></li>
+        <li class="toc-depth-2"><a href="#technical-details">Technical Details</a></li>
+        <li class="toc-depth-3"><a href="#state-space-properties">State Space Properties</a></li>
+        <li class="toc-depth-3"><a href="#hyperparameters">Hyperparameters</a></li>
+        <li class="toc-depth-3"><a href="#computational-complexity">Computational Complexity</a></li>
+        <li class="toc-depth-2"><a href="#contributing">Contributing</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+        <li class="toc-depth-2"><a href="#citation">Citation</a></li>
+        <li class="toc-depth-2"><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Cypha HRNA - Production Implementation</h1>
+          <p class="doc-meta">Cypha\Cypha vPattern Matching\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Harmonic Recursive Neural Architecture</strong> - A resonance-based AGI system for learning input-output mappings through quantum-inspired field dynamics.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>Harmonic Recursive Neural Architecture</strong> - A resonance-based AGI system for learning input-output mappings through quantum-inspired field dynamics.</p>
 <h2 id="overview">Overview</h2>
 <p>Cypha is a novel AI architecture that learns mappings through resonance field evolution rather than traditional backpropagation. It achieves strong separation between different patterns while clustering semantically similar inputs.</p>
@@ -48,14 +110,14 @@ pip install torch numpy scikit-learn
 <pre><code class="language-python">from cypha_production import Cypha
 
 # Initialize
-cypha = Cypha(device=&quot;cpu&quot;)
+cypha = Cypha(device="cpu")
 
 # Train on data (format: input|||target)
-cypha.train(&quot;data.txt&quot;, epochs=3, batch_size=8)
+cypha.train("data.txt", epochs=3, batch_size=8)
 
 # Infer
-result, confidence = cypha.infer(&quot;12+165&quot;)
-print(f&quot;Result: {result}&quot;)  # &quot;177&quot;
+result, confidence = cypha.infer("12+165")
+print(f"Result: {result}")  # "177"
 </code></pre>
 <h3 id="data-format">Data Format</h3>
 <p>Training data should be text files with <code>input|||target</code> format:</p>
@@ -67,20 +129,20 @@ sort: 5 2 9 1|||1 2 5 9
 <h2 id="running-the-demo">Running the Demo</h2>
 <pre><code class="language-bash">python showcase_demo.py
 </code></pre>
-<p>This demonstrates:<br />
-- Training on diverse tasks<br />
-- State separation verification<br />
-- Inference accuracy<br />
-- Performance benchmarks<br />
+<p>This demonstrates:
+- Training on diverse tasks
+- State separation verification
+- Inference accuracy
+- Performance benchmarks
 - Semantic clustering</p>
 <h2 id="command-line-interface">Command-Line Interface</h2>
 <pre><code class="language-bash">python cypha_production.py
 </code></pre>
-<p>Commands:<br />
-- <code>train &lt;file&gt; [epochs]</code> - Train on data file<br />
-- <code>infer &lt;text&gt;</code> - Infer output for input<br />
-- <code>test</code> - Test state separation<br />
-- <code>stats</code> - Show system statistics<br />
+<p>Commands:
+- <code>train &lt;file&gt; [epochs]</code> - Train on data file
+- <code>infer &lt;text&gt;</code> - Infer output for input
+- <code>test</code> - Test state separation
+- <code>stats</code> - Show system statistics
 - <code>exit</code> - Exit</p>
 <h2 id="how-it-works">How It Works</h2>
 <h3 id="1-universal-encoding">1. Universal Encoding</h3>
@@ -200,15 +262,15 @@ sort: 5 2 9 1|||1 2 5 9
 </table>
 <h2 id="production-considerations">Production Considerations</h2>
 <h3 id="strengths">Strengths</h3>
-<p>✓ Fast training and inference<br />
-✓ Strong separation guarantees<br />
-✓ Naturally clusters similar inputs<br />
-✓ Efficient memory usage<br />
+<p>✓ Fast training and inference<br/>
+✓ Strong separation guarantees<br/>
+✓ Naturally clusters similar inputs<br/>
+✓ Efficient memory usage<br/>
 ✓ Deterministic (given same inputs)</p>
 <h3 id="limitations">Limitations</h3>
-<p>⚠ Memory-based (doesn't generalize to unseen patterns)<br />
-⚠ Fixed vocabulary for decode<br />
-⚠ Requires clean input|||target data<br />
+<p>⚠ Memory-based (doesn't generalize to unseen patterns)<br/>
+⚠ Fixed vocabulary for decode<br/>
+⚠ Requires clean input|||target data<br/>
 ⚠ No transfer learning (yet)</p>
 <h3 id="recommended-use-cases">Recommended Use Cases</h3>
 <ul>
@@ -300,10 +362,35 @@ batch_size = 8          # Contrastive batch size
 </code></pre>
 <h2 id="contact">Contact</h2>
 <p>[Your contact information]</p>
-<hr />
-<p><strong>Status</strong>: Production-ready prototype<br />
-<strong>Version</strong>: 1.0<br />
+<hr/>
+<p><strong>Status</strong>: Production-ready prototype<br/>
+<strong>Version</strong>: 1.0<br/>
 <strong>Last Updated</strong>: 2024</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

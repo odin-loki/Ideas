@@ -1,4 +1,6 @@
-# Mathematical Analysis and Proof of Meta-DAG Random Number Generator
+# Meta-DAG RNG — mathematical model
+
+**State-space size, period and entropy claims, complexity, and test predictions for the Meta-DAG construction**
 
 ## 1. System Definition
 

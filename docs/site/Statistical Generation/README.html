@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content=""/>
+  <title>Statistical generation · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
+  </header>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Statistical generation</h1>
+          <p class="doc-meta">Statistical Generation\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>House style: leading <strong><code>#</code></strong> titles on papers, ATX headings, <strong><code>**…**</code></strong> emphasis — see <a href="../EDITORIAL_ROADMAP.md"><code>EDITORIAL_ROADMAP.md</code></a> (batch 28).</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>House style: leading <strong><code>#</code></strong> titles on papers, ATX headings, <strong><code>**…**</code></strong> emphasis — see <a href="../EDITORIAL_ROADMAP.md"><code>EDITORIAL_ROADMAP.md</code></a> (batch 28).</p>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Statistical%20Generation.md"><code>Statistical Generation.md</code></a></td>
+<td>Main statistical generation write-up.</td>
+</tr>
+<tr>
+<td><a href="complete_math_proof_document.md"><code>complete_math_proof_document.md</code></a></td>
+<td>Full math proof (overlaps with above — see note below).</td>
+</tr>
+<tr>
+<td><a href="universal_generator_theory_verified.md"><code>universal_generator_theory_verified.md</code></a></td>
+<td>Universal generator theory (verified).</td>
+</tr>
+<tr>
+<td><a href="paper1_categorical_levy_framework.md"><code>paper1_categorical_levy_framework.md</code></a></td>
+<td>Paper 1 — categorical Lévy framework.</td>
+</tr>
+<tr>
+<td><a href="paper2_state_explosion_hash_compression.md"><code>paper2_state_explosion_hash_compression.md</code></a></td>
+<td>Paper 2 — state explosion / hash compression.</td>
+</tr>
+<tr>
+<td><a href="classical_methods_comparison.md"><code>classical_methods_comparison.md</code></a></td>
+<td>Classical methods comparison.</td>
+</tr>
+<tr>
+<td><a href="Python_examples_README.md"><code>Python_examples_README.md</code></a></td>
+<td>Python examples README.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Duplicate proof content:</strong> <code>Statistical Generation.md</code> and <code>complete_math_proof_document.md</code> currently share the same core proof. Treat <strong>one</strong> as canonical for edits and add a short pointer at the top of the other (or merge them) when you next revise, so the two cannot drift apart.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
+</body>
+</html>

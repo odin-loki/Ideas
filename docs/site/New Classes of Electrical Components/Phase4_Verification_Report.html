@@ -3,160 +3,193 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Phase4 Verification Report</title>
+  <meta name="description" content="*Independent verification report · February 2026 · All five application engines executed* All five Phase 4 application engines were executed in a live Python environment\. Physics formulas, benchmark claims, and algorithm correctness were independently verified\. Two critical…"/>
+  <title>Hybrid component simulation — Phase 4 verification · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\Phase4_Verification_Report.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>HYBRID COMPONENT SIMULATION — PHASE 4</strong></p>
-<p><em>Independent Verification Report</em></p>
-<p>February 2026  |  All 5 Application Engines Executed</p>
-<h1 id="executive-summary"><strong>Executive Summary</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#critical-bug-neurons-never-fire">Critical Bug: Neurons Never Fire</a></li>
+        <li class="toc-depth-2"><a href="#critical-bug-vmax-and-energy-formula">Critical Bug: Vmax and Energy Formula</a></li>
+        <li class="toc-depth-2"><a href="#warning-unphysical-inductance-at-large-vc">Warning: Unphysical Inductance at Large Vc</a></li>
+        <li class="toc-depth-2"><a href="#warning-extractor-bias-causes-nist-frequency-failure">Warning: Extractor Bias Causes NIST Frequency Failure</a></li>
+        <li class="toc-depth-2"><a href="#pass-physics-correct-efficiency-accurately-predicted">Pass: Physics Correct, Efficiency Accurately Predicted</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Hybrid component simulation — Phase 4 verification</h1>
+          <p class="doc-meta">New Classes of Electrical Components\Phase4_Verification_Report.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>All five Phase 4 application engines were executed in a live Python environment. Physics formulas, benchmark claims, and algorithm correctness were independently verified. Two critical bugs and two moderate issues were identified. The core physics models (shot noise, JKAM kinetics, magnetoelectric tuning) are grounded in correct literature values. The main failure modes are parameter scaling errors rather than conceptual mistakes.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+ Converted from `Phase4_Verification_Report.docx` — source was Word (.docx). 
+<p><em>Independent verification report · February 2026 · All five application engines executed</em></p>
+<h2 id="executive-summary">Executive Summary</h2>
 <p>All five Phase 4 application engines were executed in a live Python environment. Physics formulas, benchmark claims, and algorithm correctness were independently verified. Two critical bugs and two moderate issues were identified. The core physics models (shot noise, JKAM kinetics, magnetoelectric tuning) are grounded in correct literature values. The main failure modes are parameter scaling errors rather than conceptual mistakes.</p>
-<p><strong>Item</strong></p>
-<p><strong>Status</strong></p>
-<p><strong>Detail</strong></p>
-<p><strong>App 1 — STDP Neuromorphic</strong></p>
-<p><strong>BUG</strong></p>
-<p>Neurons never fire. Synaptic current 16,129× too small (1e-9 scaling error)</p>
-<p><strong>App 2 — In-Memory Crossbar</strong></p>
-<p><strong>BUG</strong></p>
-<p>Vmax=1V is 10–100× too high. E=460 nJ not pJ. GOPS/W ≈ 0, not 12× A100</p>
-<p><strong>App 3 — RF Adaptive Filter</strong></p>
-<p><strong>WARN</strong></p>
-<p>L(Vc) goes negative above |Vc|&gt;4.47 V; search uses ±40 V. 900 MHz fails (inf)</p>
-<p><strong>App 4 — Quantum TRNG</strong></p>
-<p><strong>WARN</strong></p>
-<p>Physics correct. Von Neumann efficiency 2.5% not 50%. NIST Frequency FAILS</p>
-<p><strong>App 5 — Phase-Change Converter</strong></p>
-<p><strong>PASS</strong></p>
-<p>Physics correct. Efficiency 7.6% is accurate given Rc=100Ω vs RL=10Ω design</p>
-<h1 id="app-1-stdp-neuromorphic"><strong>App 1 — STDP Neuromorphic</strong></h1>
-<h2 id="critical-bug-neurons-never-fire"><strong>Critical Bug: Neurons Never Fire</strong></h2>
+<p><strong>Item</strong>
+<strong>Status</strong>
+<strong>Detail</strong>
+<strong>App 1 — STDP Neuromorphic</strong>
+<strong>BUG</strong>
+Neurons never fire. Synaptic current 16,129× too small (1e-9 scaling error)</p>
+<p><strong>App 2 — In-Memory Crossbar</strong>
+<strong>BUG</strong>
+Vmax=1V is 10–100× too high. E=460 nJ not pJ. GOPS/W ≈ 0, not 12× A100</p>
+<p><strong>App 3 — RF Adaptive Filter</strong>
+<strong>WARN</strong>
+L(Vc) goes negative above |Vc|&gt;4.47 V; search uses ±40 V. 900 MHz fails (inf)</p>
+<p><strong>App 4 — Quantum TRNG</strong>
+<strong>WARN</strong>
+Physics correct. Von Neumann efficiency 2.5% not 50%. NIST Frequency FAILS</p>
+<p><strong>App 5 — Phase-Change Converter</strong>
+<strong>PASS</strong>
+Physics correct. Efficiency 7.6% is accurate given Rc=100Ω vs RL=10Ω design</p>
+
+<h2 id="critical-bug-neurons-never-fire">Critical Bug: Neurons Never Fire</h2>
 <p>The simulation ran 5,000 timesteps and produced zero post-synaptic spikes. All synaptic weights remained frozen at initialisation (w = D×0.5). The STDP learning rule never executed on_post(), so no LTP or LTD occurred.</p>
-<p><strong>Root cause — the synaptic current line:</strong></p>
-<p>I = G_syn * 1e-9 * spike_binary</p>
+<p><strong>Root cause — the synaptic current line:</strong>
+  I = G_syn * 1e-9 * spike_binary</p>
 <p>treats spikes as having 1 nanoVolt amplitude. With G_syn ≈ 1.24×10⁻⁴ S, the resulting current is I ≈ 1.24×10⁻¹³ A (0.124 femtoamperes). The LIF neuron requires ≈2 nA to reach threshold — a shortfall of 16,129×.</p>
-<p><strong>I_syn (as coded)</strong></p>
-<p>1.24e-13 A   (0.124 fA)</p>
-<p><strong>I_threshold (required)</strong></p>
-<p>2.00e-9 A    (2.0 nA)</p>
-<p><strong>Deficit</strong></p>
-<p>16,129× too small</p>
-<p><strong>Intended scaling</strong></p>
-<p>spike as voltage × G_syn (e.g. 5 mV × G_syn)</p>
-<p><strong>Conductance range</strong></p>
-<p>G_off = 6.25e-5 S → G_on = 1.00e-2 S  (160× ratio ✓)</p>
-<p><strong>LTP/LTD asymmetry</strong></p>
-<p>A+ = 0.01, A- = 0.012 → 20% net depression bias (correct)</p>
+<p><strong>I_syn (as coded)</strong>
+1.24e-13 A   (0.124 fA)</p>
+<p><strong>I_threshold (required)</strong>
+2.00e-9 A    (2.0 nA)</p>
+<p><strong>Deficit</strong>
+16,129× too small</p>
+<p><strong>Intended scaling</strong>
+spike as voltage × G_syn (e.g. 5 mV × G_syn)</p>
+<p><strong>Conductance range</strong>
+G_off = 6.25e-5 S → G_on = 1.00e-2 S  (160× ratio ✓)</p>
+<p><strong>LTP/LTD asymmetry</strong>
+A+ = 0.01, A- = 0.012 → 20% net depression bias (correct)</p>
 <p>Fix applied in verification:</p>
 <p>I = G_syn * V_spike * spike_binary    # V_spike ~ 5 mV</p>
 <p>With V_spike = 5 mV, neurons fired at ~7,280 Hz (500 ms sim). Weight evolution confirmed — weights drifted toward G_on as LTP dominated at high firing rates. At biologically realistic 50 Hz inputs, net depression from A- &gt; A+ would stabilise weights as intended.</p>
-<h1 id="app-2-in-memory-ai-crossbar"><strong>App 2 — In-Memory AI Crossbar</strong></h1>
-<h2 id="critical-bug-vmax-and-energy-formula"><strong>Critical Bug: Vmax and Energy Formula</strong></h2>
+
+<h2 id="critical-bug-vmax-and-energy-formula">Critical Bug: Vmax and Energy Formula</h2>
 <p>The code uses Vmax = 1.0 V with Gmax = 100 µS conductances. For a 256×256 array, this produces:</p>
-<p><strong>G_total (sum all elements)</strong></p>
-<p>3.31 S</p>
-<p><strong>Total current at Vmax=1V</strong></p>
-<p>3.31 A  (physically absurd for a chip)</p>
-<p><strong>E_total (as coded)</strong></p>
-<p>460,677 pJ  ≈ 461 nJ</p>
-<p><strong>Power = E/tpulse</strong></p>
-<p>46 W per MVM</p>
-<p><strong>GOPS/W (as coded)</strong></p>
-<p>~0  (far worse than A100)</p>
-<p><strong>Document claim</strong></p>
-<p>pJ scale, 12× advantage over A100 (780 GOPS/W)</p>
+<p><strong>G_total (sum all elements)</strong>
+3.31 S</p>
+<p><strong>Total current at Vmax=1V</strong>
+3.31 A  (physically absurd for a chip)</p>
+<p><strong>E_total (as coded)</strong>
+460,677 pJ  ≈ 461 nJ</p>
+<p><strong>Power = E/tpulse</strong>
+46 W per MVM</p>
+<p><strong>GOPS/W (as coded)</strong>
+~0  (far worse than A100)</p>
+<p><strong>Document claim</strong>
+pJ scale, 12× advantage over A100 (780 GOPS/W)</p>
 <p>To achieve pJ-scale energy with this conductance profile, Vmax would need to be ~5.5 mV — unrealistically low. The fix is Vmax = 100 mV AND Gmax = 1–10 µS, matching published RRAM crossbar literature (Gao et al. 2022, IBM PCM arrays). There is also a secondary numpy broadcasting bug in the Inoise formula which was caught and corrected during verification.</p>
 <p>SNR and ENOB results are structurally valid:</p>
-<p><strong>SNR (corrected formula)</strong></p>
-<p>57.3 dB</p>
-<p><strong>ENOB</strong></p>
-<p>9.2 bits  (12-bit theoretical max)</p>
-<p><strong>2% G-noise penalty</strong></p>
-<p>3 dB below ideal ADC  ✓</p>
-<p><strong>Noise model</strong></p>
-<p>Correct formulation, wrong input parameters</p>
-<h1 id="app-3-rf-adaptive-filter"><strong>App 3 — RF Adaptive Filter</strong></h1>
-<h2 id="warning-unphysical-inductance-at-large-vc"><strong>Warning: Unphysical Inductance at Large Vc</strong></h2>
+<p><strong>SNR (corrected formula)</strong>
+57.3 dB</p>
+<p><strong>ENOB</strong>
+9.2 bits  (12-bit theoretical max)</p>
+<p><strong>2% G-noise penalty</strong>
+3 dB below ideal ADC  ✓</p>
+<p><strong>Noise model</strong>
+Correct formulation, wrong input parameters</p>
+
+<h2 id="warning-unphysical-inductance-at-large-vc">Warning: Unphysical Inductance at Large Vc</h2>
 <p>The magnetoelectric model is L(Vc) = Lnom × (1 − α×Vc²). This goes negative — unphysical — when |Vc| exceeds √(1/α) = 4.47 V. The binary search spans ±40 V, routinely visiting the unphysical region.</p>
-<p><strong>L negative above |Vc|</strong></p>
-<p>4.47 V</p>
-<p><strong>Binary search range</strong></p>
-<p>±40 V  ← must be clamped to ±4.47 V</p>
-<p><strong>2.4 GHz (Vc = −3.11 V)</strong></p>
-<p>f = 2.400 GHz, Q = 38.9  ✓  (within physical range)</p>
-<p><strong>5.8 GHz (Vc = −4.27 V)</strong></p>
-<p>f = 5.800 GHz, Q = 16.1  ✓  (just within boundary)</p>
-<p><strong>900 MHz (Vc = 40 V)</strong></p>
-<p>f = inf, Q = 0  ✗  (unphysical — L is negative)</p>
-<p><strong>Capacitor bank range</strong></p>
-<p>0.1 pF → 1.6 pF  (1.26 GHz → 5.03 GHz with Vc=0)  ✓</p>
-<p><strong>Tuning compute time (all 3)</strong></p>
-<p>~1,047 µs wall-clock (in hardware: microseconds ✓)</p>
+<p><strong>L negative above |Vc|</strong>
+4.47 V</p>
+<p><strong>Binary search range</strong>
+±40 V  ← must be clamped to ±4.47 V</p>
+<p><strong>2.4 GHz (Vc = −3.11 V)</strong>
+f = 2.400 GHz, Q = 38.9  ✓  (within physical range)</p>
+<p><strong>5.8 GHz (Vc = −4.27 V)</strong>
+f = 5.800 GHz, Q = 16.1  ✓  (just within boundary)</p>
+<p><strong>900 MHz (Vc = 40 V)</strong>
+f = inf, Q = 0  ✗  (unphysical — L is negative)</p>
+<p><strong>Capacitor bank range</strong>
+0.1 pF → 1.6 pF  (1.26 GHz → 5.03 GHz with Vc=0)  ✓</p>
+<p><strong>Tuning compute time (all 3)</strong>
+~1,047 µs wall-clock (in hardware: microseconds ✓)</p>
 <p>Fix: clamp the binary search to (−4.47, +4.47) V and increase Lnom or decrease α to extend frequency coverage to 900 MHz. The cap bank alone provides 4× frequency tuning ratio, which is the primary coarse tuning mechanism — the magnetoelectric control is fine tuning only.</p>
-<h1 id="app-4-quantum-trng"><strong>App 4 — Quantum TRNG</strong></h1>
-<h2 id="warning-extractor-bias-causes-nist-frequency-failure"><strong>Warning: Extractor Bias Causes NIST Frequency Failure</strong></h2>
+
+<h2 id="warning-extractor-bias-causes-nist-frequency-failure">Warning: Extractor Bias Causes NIST Frequency Failure</h2>
 <p>The shot noise physics and H_min calculation are correct. The Von Neumann extractor implementation has two issues: (1) it extracts only 1 bit per pair (the MSB of each code), wasting 90% of available entropy; (2) the bias from I_avg offset causes systematic imbalance in the MSB.</p>
-<p><strong>sigma (shot noise)</strong></p>
-<p>1,790 pA  ✓  (matches sqrt(2eIBW) = 1,789.97 pA)</p>
-<p><strong>H_min</strong></p>
-<p>10.33 bits  ✓</p>
-<p><strong>H_shannon</strong></p>
-<p>11.05 bits  ✓</p>
-<p><strong>sigma/LSB ratio</strong></p>
-<p>512  (well-resolved noise — good entropy source ✓)</p>
-<p><strong>Von Neumann efficiency</strong></p>
-<p>2.5%  (theoretical max 50% — 20× below ideal)</p>
-<p><strong>Throughput at 1 GHz BW</strong></p>
-<p>25 Mbps  (not 500 Mbps as the note implies)</p>
-<p><strong>NIST Frequency test</strong></p>
-<p>FAIL  (p = 0.0000)  — bit bias from I_avg offset</p>
-<p><strong>NIST Runs test</strong></p>
-<p>PASS  (p = 0.636)  ✓</p>
-<p><strong>NIST Block test</strong></p>
-<p>PASS  (p = 0.579)  ✓</p>
+<p><strong>sigma (shot noise)</strong>
+1,790 pA  ✓  (matches sqrt(2eIBW) = 1,789.97 pA)</p>
+<p><strong>H_min</strong>
+10.33 bits  ✓</p>
+<p><strong>H_shannon</strong>
+11.05 bits  ✓</p>
+<p><strong>sigma/LSB ratio</strong>
+512  (well-resolved noise — good entropy source ✓)</p>
+<p><strong>Von Neumann efficiency</strong>
+2.5%  (theoretical max 50% — 20× below ideal)</p>
+<p><strong>Throughput at 1 GHz BW</strong>
+25 Mbps  (not 500 Mbps as the note implies)</p>
+<p><strong>NIST Frequency test</strong>
+FAIL  (p = 0.0000)  — bit bias from I_avg offset</p>
+<p><strong>NIST Runs test</strong>
+PASS  (p = 0.636)  ✓</p>
+<p><strong>NIST Block test</strong>
+PASS  (p = 0.579)  ✓</p>
 <p>Fix: subtract I_avg before quantisation (centre the distribution at zero). This removes the DC offset bias before the Von Neumann step. Alternatively, use a full hash-based extractor (SHA-256 or AES-CTR DRBG) which extracts near H_min bits/sample and eliminates bias. The entropy source itself is valid — only the extractor needs updating.</p>
-<h1 id="app-5-phase-change-power-converter"><strong>App 5 — Phase-Change Power Converter</strong></h1>
-<h2 id="pass-physics-correct-efficiency-accurately-predicted"><strong>Pass: Physics Correct, Efficiency Accurately Predicted</strong></h2>
+
+<h2 id="pass-physics-correct-efficiency-accurately-predicted">Pass: Physics Correct, Efficiency Accurately Predicted</h2>
 <p>The GST switch simulation is physically grounded and produces internally consistent results. Efficiency is flat at 7.6% across all frequencies — this is correct for the given parameters, not a bug.</p>
-<p><strong>Efficiency at 10 MHz</strong></p>
-<p>7.6%</p>
-<p><strong>Efficiency at 50 MHz</strong></p>
-<p>7.6%</p>
-<p><strong>Efficiency at 100 MHz</strong></p>
-<p>7.6%</p>
-<p><strong>Efficiency at 500 MHz</strong></p>
-<p>7.6%</p>
-<p><strong>Theoretical divider ceiling</strong></p>
-<p>RL/(Rc+RL) = 10/(100+10) = 9.1%</p>
-<p><strong>Switching losses bring it to</strong></p>
-<p>7.6%  ✓  (consistent)</p>
-<p><strong>R(xi=1, ON)</strong></p>
-<p>100 Ω  ✓</p>
-<p><strong>R(xi=0, OFF)</strong></p>
-<p>1,000,000 Ω  (10,000× on/off ratio ✓)</p>
-<p><strong>R(xi=0.5, midpoint)</strong></p>
-<p>10,000 Ω  (geometric mean of Rc^xi × Ra^(1-xi) ✓)</p>
-<p><strong>Ea = 2.3 eV</strong></p>
-<p>Matches GST literature (2.1–2.4 eV range ✓)</p>
-<p><strong>Thermal tau = Cth × Rth</strong></p>
-<p>1,000 ns — heat cannot dissipate at 500 MHz (1 ns half-period)</p>
-<p><strong>GST vs MOSFET claim (10fJ vs 100fJ)</strong></p>
-<p>Consistent with published nanoelectronics data ✓</p>
+<p><strong>Efficiency at 10 MHz</strong>
+7.6%</p>
+<p><strong>Efficiency at 50 MHz</strong>
+7.6%</p>
+<p><strong>Efficiency at 100 MHz</strong>
+7.6%</p>
+<p><strong>Efficiency at 500 MHz</strong>
+7.6%</p>
+<p><strong>Theoretical divider ceiling</strong>
+RL/(Rc+RL) = 10/(100+10) = 9.1%</p>
+<p><strong>Switching losses bring it to</strong>
+7.6%  ✓  (consistent)</p>
+<p><strong>R(xi=1, ON)</strong>
+100 Ω  ✓</p>
+<p><strong>R(xi=0, OFF)</strong>
+1,000,000 Ω  (10,000× on/off ratio ✓)</p>
+<p><strong>R(xi=0.5, midpoint)</strong>
+10,000 Ω  (geometric mean of Rc^xi × Ra^(1-xi) ✓)</p>
+<p><strong>Ea = 2.3 eV</strong>
+Matches GST literature (2.1–2.4 eV range ✓)</p>
+<p><strong>Thermal tau = Cth × Rth</strong>
+1,000 ns — heat cannot dissipate at 500 MHz (1 ns half-period)</p>
+<p><strong>GST vs MOSFET claim (10fJ vs 100fJ)</strong>
+Consistent with published nanoelectronics data ✓</p>
 <p>Design note: Rc = 100 Ω ON-state resistance against RL = 10 Ω load produces fundamentally low efficiency regardless of switching quality. For a useful power converter, Rc must be reduced to 1–5 Ω (competitive with GaN/SiC MOSFETs), at which point the 10fJ switching energy advantage becomes the key differentiator. The simulation correctly captures this tradeoff.</p>
-<h1 id="summary-verification-matrix"><strong>Summary — Verification Matrix</strong></h1>
-<p><strong>App</strong></p>
-<p><strong>Runs</strong></p>
-<p><strong>Physics</strong></p>
-<p><strong>Claims</strong></p>
-<p><strong>NIST/Bench</strong></p>
-<p><strong>Verdict</strong></p>
-<p>1 — STDP</p>
+
+<p><strong>App</strong>
+<strong>Runs</strong>
+<strong>Physics</strong>
+<strong>Claims</strong>
+<strong>NIST/Bench</strong>
+<strong>Verdict</strong>
+1 — STDP</p>
 <p>✓</p>
 <p>✓</p>
 <p>✗ BUG</p>
@@ -187,6 +220,31 @@
 <p>Valid</p>
 <p>PASS</p>
 <p><em>Conclusion: The Phase 4 framework demonstrates solid conceptual engineering. All five physical models use correct constitutive equations and literature-validated parameters. The two critical bugs are parameter scaling errors (not physics errors) — both are single-line fixes. The TRNG and RF filter warnings are extractor and search-bound issues that leave the underlying physics intact.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

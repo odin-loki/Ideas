@@ -3,25 +3,140 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>tdc complete documentation</title>
+  <meta name="description" content="--- **Status**: FIELD TESTING READY **Performance**: &gt;1M solutions/second with 85%+ validity **Accuracy**: ±0.015° (10x better than legacy systems) **Memory**: Bounded (5.3MB max for 24-hour operation) --- 1. [Historical Foundation](#historical-foundation) 2. [Mathematical…"/>
+  <title>Military-Grade Torpedo Data Computer (TDC) Algorithm · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Electromechnical Inspired Algorithms\tdc_complete_documentation.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="military-grade-torpedo-data-computer-tdc-algorithm">Military-Grade Torpedo Data Computer (TDC) Algorithm</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#complete-technical-documentation-specifications">Complete Technical Documentation &amp; Specifications</a></li>
+        <li class="toc-depth-2"><a href="#executive-summary">🎖️ EXECUTIVE SUMMARY</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">📋 TABLE OF CONTENTS</a></li>
+        <li class="toc-depth-2"><a href="#historical-foundation">🏛️ HISTORICAL FOUNDATION</a></li>
+        <li class="toc-depth-3"><a href="#the-original-tdc-legacy">The Original TDC Legacy</a></li>
+        <li class="toc-depth-3"><a href="#modern-enhancement-philosophy">Modern Enhancement Philosophy</a></li>
+        <li class="toc-depth-2"><a href="#mathematical-principles">🔬 MATHEMATICAL PRINCIPLES</a></li>
+        <li class="toc-depth-3"><a href="#core-algorithm-law-of-sines">Core Algorithm: Law of Sines</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-integration">Mechanical Integration</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-corrections">Ballistic Corrections</a></li>
+        <li class="toc-depth-3"><a href="#multiple-solution-modes">Multiple Solution Modes</a></li>
+        <li class="toc-depth-2"><a href="#system-architecture">🏗️ SYSTEM ARCHITECTURE</a></li>
+        <li class="toc-depth-3"><a href="#component-overview">Component Overview</a></li>
+        <li class="toc-depth-3"><a href="#data-flow-architecture">Data Flow Architecture</a></li>
+        <li class="toc-depth-2"><a href="#technical-specifications">⚙️ TECHNICAL SPECIFICATIONS</a></li>
+        <li class="toc-depth-3"><a href="#performance-specifications">Performance Specifications</a></li>
+        <li class="toc-depth-3"><a href="#engagement-envelope">Engagement Envelope</a></li>
+        <li class="toc-depth-3"><a href="#memory-management">Memory Management</a></li>
+        <li class="toc-depth-3"><a href="#inputoutput-specifications">Input/Output Specifications</a></li>
+        <li class="toc-depth-4"><a href="#input-data-structures">Input Data Structures</a></li>
+        <li class="toc-depth-4"><a href="#output-data-structures">Output Data Structures</a></li>
+        <li class="toc-depth-2"><a href="#performance-metrics">📊 PERFORMANCE METRICS</a></li>
+        <li class="toc-depth-3"><a href="#computational-performance">Computational Performance</a></li>
+        <li class="toc-depth-3"><a href="#solution-validity-by-scenario">Solution Validity by Scenario</a></li>
+        <li class="toc-depth-3"><a href="#system-reliability">System Reliability</a></li>
+        <li class="toc-depth-2"><a href="#military-applications">🎖️ MILITARY APPLICATIONS</a></li>
+        <li class="toc-depth-3"><a href="#primary-applications">Primary Applications</a></li>
+        <li class="toc-depth-4"><a href="#1-naval-fire-control-systems">1. Naval Fire Control Systems</a></li>
+        <li class="toc-depth-4"><a href="#2-autonomous-vehicle-navigation">2. Autonomous Vehicle Navigation</a></li>
+        <li class="toc-depth-4"><a href="#3-air-defense-systems">3. Air Defense Systems</a></li>
+        <li class="toc-depth-3"><a href="#secondary-applications">Secondary Applications</a></li>
+        <li class="toc-depth-4"><a href="#4-commercial-maritime">4. Commercial Maritime</a></li>
+        <li class="toc-depth-4"><a href="#5-aerospace">5. Aerospace</a></li>
+        <li class="toc-depth-4"><a href="#6-industrial-control">6. Industrial Control</a></li>
+        <li class="toc-depth-2"><a href="#implementation-details">💻 IMPLEMENTATION DETAILS</a></li>
+        <li class="toc-depth-3"><a href="#software-architecture">Software Architecture</a></li>
+        <li class="toc-depth-4"><a href="#core-classes">Core Classes</a></li>
+        <li class="toc-depth-4"><a href="#key-algorithms">Key Algorithms</a></li>
+        <li class="toc-depth-3"><a href="#platform-requirements">Platform Requirements</a></li>
+        <li class="toc-depth-4"><a href="#minimum-hardware-requirements">Minimum Hardware Requirements</a></li>
+        <li class="toc-depth-4"><a href="#recommended-hardware">Recommended Hardware</a></li>
+        <li class="toc-depth-4"><a href="#operating-environment">Operating Environment</a></li>
+        <li class="toc-depth-2"><a href="#testing-validation">🧪 TESTING &amp; VALIDATION</a></li>
+        <li class="toc-depth-3"><a href="#comprehensive-test-suite">Comprehensive Test Suite</a></li>
+        <li class="toc-depth-4"><a href="#1-mathematical-validation">1. Mathematical Validation</a></li>
+        <li class="toc-depth-4"><a href="#2-performance-testing">2. Performance Testing</a></li>
+        <li class="toc-depth-4"><a href="#3-robustness-testing">3. Robustness Testing</a></li>
+        <li class="toc-depth-4"><a href="#4-military-scenario-testing">4. Military Scenario Testing</a></li>
+        <li class="toc-depth-3"><a href="#test-results-summary">Test Results Summary</a></li>
+        <li class="toc-depth-3"><a href="#validation-against-military-standards">Validation Against Military Standards</a></li>
+        <li class="toc-depth-2"><a href="#deployment-requirements">🚀 DEPLOYMENT REQUIREMENTS</a></li>
+        <li class="toc-depth-3"><a href="#integration-considerations">Integration Considerations</a></li>
+        <li class="toc-depth-4"><a href="#1-hardware-integration">1. Hardware Integration</a></li>
+        <li class="toc-depth-4"><a href="#2-software-integration">2. Software Integration</a></li>
+        <li class="toc-depth-4"><a href="#3-security-requirements">3. Security Requirements</a></li>
+        <li class="toc-depth-3"><a href="#training-requirements">Training Requirements</a></li>
+        <li class="toc-depth-4"><a href="#1-operator-training">1. Operator Training</a></li>
+        <li class="toc-depth-4"><a href="#2-technical-training">2. Technical Training</a></li>
+        <li class="toc-depth-3"><a href="#maintenance-and-support">Maintenance and Support</a></li>
+        <li class="toc-depth-4"><a href="#1-preventive-maintenance">1. Preventive Maintenance</a></li>
+        <li class="toc-depth-4"><a href="#2-corrective-maintenance">2. Corrective Maintenance</a></li>
+        <li class="toc-depth-2"><a href="#future-enhancements">🔮 FUTURE ENHANCEMENTS</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-advanced-features-6-months">Phase 1: Advanced Features (6 months)</a></li>
+        <li class="toc-depth-4"><a href="#1-enhanced-sensor-fusion">1. Enhanced Sensor Fusion</a></li>
+        <li class="toc-depth-4"><a href="#2-machine-learning-integration">2. Machine Learning Integration</a></li>
+        <li class="toc-depth-4"><a href="#3-extended-weapon-support">3. Extended Weapon Support</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-next-generation-capabilities-12-months">Phase 2: Next-Generation Capabilities (12 months)</a></li>
+        <li class="toc-depth-4"><a href="#1-artificial-intelligence">1. Artificial Intelligence</a></li>
+        <li class="toc-depth-4"><a href="#2-network-centric-operations">2. Network-Centric Operations</a></li>
+        <li class="toc-depth-4"><a href="#3-advanced-physics-models">3. Advanced Physics Models</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-revolutionary-features-18-months">Phase 3: Revolutionary Features (18 months)</a></li>
+        <li class="toc-depth-4"><a href="#1-quantum-computing-integration">1. Quantum Computing Integration</a></li>
+        <li class="toc-depth-4"><a href="#2-augmented-reality-interface">2. Augmented Reality Interface</a></li>
+        <li class="toc-depth-4"><a href="#3-autonomous-swarm-coordination">3. Autonomous Swarm Coordination</a></li>
+        <li class="toc-depth-2"><a href="#competitive-analysis">📈 COMPETITIVE ANALYSIS</a></li>
+        <li class="toc-depth-3"><a href="#comparison-with-existing-systems">Comparison with Existing Systems</a></li>
+        <li class="toc-depth-3"><a href="#competitive-advantages">Competitive Advantages</a></li>
+        <li class="toc-depth-4"><a href="#technical-superiority">Technical Superiority</a></li>
+        <li class="toc-depth-4"><a href="#economic-benefits">Economic Benefits</a></li>
+        <li class="toc-depth-4"><a href="#strategic-value">Strategic Value</a></li>
+        <li class="toc-depth-2"><a href="#conclusion">📋 CONCLUSION</a></li>
+        <li class="toc-depth-3"><a href="#summary-of-capabilities">Summary of Capabilities</a></li>
+        <li class="toc-depth-3"><a href="#deployment-recommendation">Deployment Recommendation</a></li>
+        <li class="toc-depth-3"><a href="#strategic-impact">Strategic Impact</a></li>
+        <li class="toc-depth-2"><a href="#references-and-documentation">📚 REFERENCES AND DOCUMENTATION</a></li>
+        <li class="toc-depth-3"><a href="#historical-sources">Historical Sources</a></li>
+        <li class="toc-depth-3"><a href="#technical-standards">Technical Standards</a></li>
+        <li class="toc-depth-3"><a href="#modern-references">Modern References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Military-Grade Torpedo Data Computer (TDC) Algorithm</h1>
+          <p class="doc-meta">Electromechnical Inspired Algorithms\tdc_complete_documentation.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This document presents a complete military-grade fire control algorithm based on the revolutionary WWII Torpedo Data Computer (TDC), enhanced with modern computational techniques and military-specific requirements. The system has been extensively tested and validated for operational deployment in naval combat systems, autonomous vehicles, and real-time tracking applications.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="complete-technical-documentation-specifications">Complete Technical Documentation &amp; Specifications</h2>
-<hr />
+<hr/>
 <h2 id="executive-summary">🎖️ EXECUTIVE SUMMARY</h2>
 <p>This document presents a complete military-grade fire control algorithm based on the revolutionary WWII Torpedo Data Computer (TDC), enhanced with modern computational techniques and military-specific requirements. The system has been extensively tested and validated for operational deployment in naval combat systems, autonomous vehicles, and real-time tracking applications.</p>
-<p><strong>Status</strong>: FIELD TESTING READY<br />
-<strong>Performance</strong>: &gt;1M solutions/second with 85%+ validity<br />
-<strong>Accuracy</strong>: ±0.015° (10x better than legacy systems)<br />
+<p><strong>Status</strong>: FIELD TESTING READY<br/>
+<strong>Performance</strong>: &gt;1M solutions/second with 85%+ validity<br/>
+<strong>Accuracy</strong>: ±0.015° (10x better than legacy systems)<br/>
 <strong>Memory</strong>: Bounded (5.3MB max for 24-hour operation)  </p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">📋 TABLE OF CONTENTS</h2>
 <ol>
 <li><a href="#historical-foundation">Historical Foundation</a></li>
@@ -35,7 +150,7 @@
 <li><a href="#deployment-requirements">Deployment Requirements</a></li>
 <li><a href="#future-enhancements">Future Enhancements</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="historical-foundation">🏛️ HISTORICAL FOUNDATION</h2>
 <h3 id="the-original-tdc-legacy">The Original TDC Legacy</h3>
 <p>The Torpedo Data Computer was the world's first shipboard analog computer, developed by the U.S. Navy in the 1930s and deployed throughout WWII. It represented a quantum leap in fire control technology:</p>
@@ -46,13 +161,13 @@
 <li><strong>Mathematical Excellence</strong>: Solved complex trigonometric equations in real-time using the law of sines</li>
 </ul>
 <h3 id="modern-enhancement-philosophy">Modern Enhancement Philosophy</h3>
-<p>Our implementation preserves the core mathematical elegance of the original TDC while adding:<br />
-- Digital computational power<br />
-- Modern error handling and validation<br />
-- Military-grade robustness and fault tolerance<br />
-- Expanded engagement envelope<br />
+<p>Our implementation preserves the core mathematical elegance of the original TDC while adding:
+- Digital computational power
+- Modern error handling and validation
+- Military-grade robustness and fault tolerance
+- Expanded engagement envelope
 - Multi-sensor integration capabilities</p>
-<hr />
+<hr/>
 <h2 id="mathematical-principles">🔬 MATHEMATICAL PRINCIPLES</h2>
 <h3 id="core-algorithm-law-of-sines">Core Algorithm: Law of Sines</h3>
 <p>The fundamental equation that drives all TDC calculations:</p>
@@ -60,9 +175,9 @@
 </code></pre>
 <p>This elegant relationship, derived from trigonometric analysis of the "torpedo triangle," allows real-time calculation of the optimal intercept course.</p>
 <h3 id="mechanical-integration">Mechanical Integration</h3>
-<p><strong>Original Innovation</strong>: Wheel-and-disc integrators performed continuous analog integration:<br />
-- <strong>Wheel rotation</strong>: Proportional to input rate<br />
-- <strong>Disc integration</strong>: Accumulates wheel motion over time<br />
+<p><strong>Original Innovation</strong>: Wheel-and-disc integrators performed continuous analog integration:
+- <strong>Wheel rotation</strong>: Proportional to input rate
+- <strong>Disc integration</strong>: Accumulates wheel motion over time
 - <strong>Mechanical momentum</strong>: Provides natural smoothing and inertia</p>
 <p><strong>Modern Implementation</strong>: Digital simulation preserves mechanical behavior:</p>
 <pre><code class="language-python">effective_rate = scaled_input + mechanical_momentum
@@ -86,7 +201,7 @@ mechanical_momentum *= (1.0 - friction_coefficient)
 <li><strong>Stern Chase Mode</strong>: Optimized for pursuit scenarios</li>
 <li><strong>Ambush Mode</strong>: Optimized for crossing targets at 60-120° angles</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="system-architecture">🏗️ SYSTEM ARCHITECTURE</h2>
 <h3 id="component-overview">Component Overview</h3>
 <pre><code>┌─────────────────────────────────────────────────────────────┐
@@ -128,7 +243,7 @@ mechanical_momentum *= (1.0 - friction_coefficient)
 <li><strong>Output Layer</strong>: Fire control solutions and servo commands</li>
 <li><strong>Monitoring Layer</strong>: Performance and health tracking</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="technical-specifications">⚙️ TECHNICAL SPECIFICATIONS</h2>
 <h3 id="performance-specifications">Performance Specifications</h3>
 <table>
@@ -325,24 +440,24 @@ Torpedo Characteristics:
 ├── weapon_recommendation: string
 └── confidence_interval: tuple(float, float)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="performance-metrics">📊 PERFORMANCE METRICS</h2>
 <h3 id="computational-performance">Computational Performance</h3>
-<p><strong>Speed Benchmarks</strong>:<br />
-- Single fire control solution: 0.0005ms average<br />
-- 10,000 solutions: 5.5ms total<br />
-- Sustained operation: 1.8M solutions/second<br />
+<p><strong>Speed Benchmarks</strong>:
+- Single fire control solution: 0.0005ms average
+- 10,000 solutions: 5.5ms total
+- Sustained operation: 1.8M solutions/second
 - Real-time tracking: 100Hz update rate supported</p>
-<p><strong>Memory Efficiency</strong>:<br />
-- Initial footprint: 2MB<br />
-- 1-hour operation: 2.5MB<br />
-- 24-hour operation: 5.3MB<br />
+<p><strong>Memory Efficiency</strong>:
+- Initial footprint: 2MB
+- 1-hour operation: 2.5MB
+- 24-hour operation: 5.3MB
 - No memory leaks detected in extended testing</p>
-<p><strong>Accuracy Validation</strong>:<br />
-- Head-on intercept: 0.00° error<br />
-- 90° crossing shot: 0.03° error<br />
-- Stern chase: 0.00° error<br />
-- 45° approach: 0.00° error<br />
+<p><strong>Accuracy Validation</strong>:
+- Head-on intercept: 0.00° error
+- 90° crossing shot: 0.03° error
+- Stern chase: 0.00° error
+- 45° approach: 0.00° error
 - Average error across all scenarios: 0.015°</p>
 <h3 id="solution-validity-by-scenario">Solution Validity by Scenario</h3>
 <table>
@@ -394,17 +509,17 @@ Torpedo Characteristics:
 </tbody>
 </table>
 <h3 id="system-reliability">System Reliability</h3>
-<p><strong>Error Handling</strong>:<br />
-- Input validation: 100% coverage<br />
-- Graceful degradation: Implemented<br />
-- Emergency solutions: Always available<br />
+<p><strong>Error Handling</strong>:
+- Input validation: 100% coverage
+- Graceful degradation: Implemented
+- Emergency solutions: Always available
 - Self-recovery: Automatic after 5 failed cycles</p>
-<p><strong>Fault Tolerance</strong>:<br />
-- Sensor failure: Continues with degraded performance<br />
-- Invalid data: Filtered and flagged<br />
-- Memory exhaustion: Impossible (bounded buffers)<br />
+<p><strong>Fault Tolerance</strong>:
+- Sensor failure: Continues with degraded performance
+- Invalid data: Filtered and flagged
+- Memory exhaustion: Impossible (bounded buffers)
 - Processing exceptions: Caught and recovered</p>
-<hr />
+<hr/>
 <h2 id="military-applications">🎖️ MILITARY APPLICATIONS</h2>
 <h3 id="primary-applications">Primary Applications</h3>
 <h4 id="1-naval-fire-control-systems">1. <strong>Naval Fire Control Systems</strong></h4>
@@ -414,10 +529,10 @@ Torpedo Characteristics:
 <li>Fast attack craft engagement systems</li>
 <li>Coastal defense installations</li>
 </ul>
-<p><strong>Benefits</strong>:<br />
-- 10x accuracy improvement over legacy systems<br />
-- Real-time continuous solutions<br />
-- Multi-target engagement capability<br />
+<p><strong>Benefits</strong>:
+- 10x accuracy improvement over legacy systems
+- Real-time continuous solutions
+- Multi-target engagement capability
 - Electronic warfare resistance</p>
 <h4 id="2-autonomous-vehicle-navigation">2. <strong>Autonomous Vehicle Navigation</strong></h4>
 <ul>
@@ -426,10 +541,10 @@ Torpedo Characteristics:
 <li>Missile guidance systems</li>
 <li>Drone interception algorithms</li>
 </ul>
-<p><strong>Benefits</strong>:<br />
-- Predictive path planning<br />
-- Dynamic obstacle avoidance<br />
-- Multi-sensor fusion<br />
+<p><strong>Benefits</strong>:
+- Predictive path planning
+- Dynamic obstacle avoidance
+- Multi-sensor fusion
 - Real-time decision making</p>
 <h4 id="3-air-defense-systems">3. <strong>Air Defense Systems</strong></h4>
 <ul>
@@ -438,10 +553,10 @@ Torpedo Characteristics:
 <li>Ballistic missile defense</li>
 <li>Electronic warfare countermeasures</li>
 </ul>
-<p><strong>Benefits</strong>:<br />
-- High-speed target tracking<br />
-- Predictive interception<br />
-- Multiple engagement geometries<br />
+<p><strong>Benefits</strong>:
+- High-speed target tracking
+- Predictive interception
+- Multiple engagement geometries
 - Fault-tolerant operation</p>
 <h3 id="secondary-applications">Secondary Applications</h3>
 <h4 id="4-commercial-maritime">4. <strong>Commercial Maritime</strong></h4>
@@ -465,29 +580,29 @@ Torpedo Characteristics:
 <li>Quality control systems</li>
 <li>Process optimization</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="implementation-details">💻 IMPLEMENTATION DETAILS</h2>
 <h3 id="software-architecture">Software Architecture</h3>
 <h4 id="core-classes">Core Classes</h4>
-<p><strong>MilitaryMechanicalIntegrator</strong><br />
-- Simulates wheel-and-disc mechanical integration<br />
-- Bounded circular buffer memory management<br />
-- Real-time error detection and recovery<br />
+<p><strong>MilitaryMechanicalIntegrator</strong>
+- Simulates wheel-and-disc mechanical integration
+- Bounded circular buffer memory management
+- Real-time error detection and recovery
 - Quality metrics and performance monitoring</p>
-<p><strong>MilitaryPositionKeeper</strong><br />
-- Continuous target state estimation<br />
-- Multi-sensor observation processing<br />
-- Statistical outlier detection<br />
+<p><strong>MilitaryPositionKeeper</strong>
+- Continuous target state estimation
+- Multi-sensor observation processing
+- Statistical outlier detection
 - Adaptive feedback control loops</p>
-<p><strong>MilitaryAngleSolver</strong><br />
-- Multiple solution mode algorithms<br />
-- Comprehensive ballistic corrections<br />
-- Parallax compensation<br />
+<p><strong>MilitaryAngleSolver</strong>
+- Multiple solution mode algorithms
+- Comprehensive ballistic corrections
+- Parallax compensation
 - Weapon recommendation engine</p>
-<p><strong>MilitaryFireControlSystem</strong><br />
-- Complete system integration<br />
-- Servo control simulation<br />
-- Health monitoring and diagnostics<br />
+<p><strong>MilitaryFireControlSystem</strong>
+- Complete system integration
+- Servo control simulation
+- Health monitoring and diagnostics
 - Emergency operation modes</p>
 <h4 id="key-algorithms">Key Algorithms</h4>
 <p><strong>Mechanical Integration Algorithm</strong>:</p>
@@ -553,7 +668,7 @@ Torpedo Characteristics:
 <li><strong>EMI/EMC</strong>: MIL-STD-461 compliant</li>
 <li><strong>Shock</strong>: MIL-STD-810G compliant</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="testing-validation">🧪 TESTING &amp; VALIDATION</h2>
 <h3 id="comprehensive-test-suite">Comprehensive Test Suite</h3>
 <h4 id="1-mathematical-validation">1. <strong>Mathematical Validation</strong></h4>
@@ -670,7 +785,7 @@ Torpedo Characteristics:
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="deployment-requirements">🚀 DEPLOYMENT REQUIREMENTS</h2>
 <h3 id="integration-considerations">Integration Considerations</h3>
 <h4 id="1-hardware-integration">1. <strong>Hardware Integration</strong></h4>
@@ -724,7 +839,7 @@ Torpedo Characteristics:
 <li><strong>Level 3</strong>: Depot-level overhaul</li>
 <li><strong>Emergency</strong>: Field-replaceable units</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="future-enhancements">🔮 FUTURE ENHANCEMENTS</h2>
 <h3 id="phase-1-advanced-features-6-months">Phase 1: Advanced Features (6 months)</h3>
 <h4 id="1-enhanced-sensor-fusion">1. <strong>Enhanced Sensor Fusion</strong></h4>
@@ -792,7 +907,7 @@ Torpedo Characteristics:
 <li>Resource optimization</li>
 <li>Distributed intelligence</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="competitive-analysis">📈 COMPETITIVE ANALYSIS</h2>
 <h3 id="comparison-with-existing-systems">Comparison with Existing Systems</h3>
 <table>
@@ -863,31 +978,31 @@ Torpedo Characteristics:
 <li><strong>Upgrade pathway</strong> for legacy systems</li>
 <li><strong>Export potential</strong> to allied nations</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="conclusion">📋 CONCLUSION</h2>
 <h3 id="summary-of-capabilities">Summary of Capabilities</h3>
 <p>The Military-Grade TDC Algorithm represents a successful fusion of historical mathematical excellence with modern computational power. Key achievements include:</p>
-<p><strong>Technical Excellence</strong>:<br />
-- Solution validity improved from 24% to 85%+<br />
-- Mathematical accuracy of ±0.015° (exceeds military standards)<br />
-- Processing speed &gt;1M solutions/second<br />
+<p><strong>Technical Excellence</strong>:
+- Solution validity improved from 24% to 85%+
+- Mathematical accuracy of ±0.015° (exceeds military standards)
+- Processing speed &gt;1M solutions/second
 - Bounded memory usage (5.3MB maximum)</p>
-<p><strong>Military Readiness</strong>:<br />
-- Comprehensive error handling and fault tolerance<br />
-- Multi-sensor integration capability<br />
-- Real-time deterministic performance<br />
+<p><strong>Military Readiness</strong>:
+- Comprehensive error handling and fault tolerance
+- Multi-sensor integration capability
+- Real-time deterministic performance
 - Emergency operation modes</p>
-<p><strong>Operational Advantages</strong>:<br />
-- Expanded engagement envelope (±180° gyro angles)<br />
-- Multiple intercept geometries<br />
-- Automatic weapon recommendation<br />
+<p><strong>Operational Advantages</strong>:
+- Expanded engagement envelope (±180° gyro angles)
+- Multiple intercept geometries
+- Automatic weapon recommendation
 - Continuous solution updates</p>
 <h3 id="deployment-recommendation">Deployment Recommendation</h3>
 <p><strong>Status</strong>: FIELD TESTING READY</p>
 <p>The algorithm has successfully addressed all critical issues identified in initial testing and is ready for military evaluation and deployment. With proper integration support and training, this system can provide significant tactical advantages in naval combat scenarios while serving as a foundation for next-generation autonomous systems.</p>
 <h3 id="strategic-impact">Strategic Impact</h3>
 <p>This implementation demonstrates that classical mathematical principles, when properly enhanced with modern techniques, can achieve performance levels that exceed contemporary systems. The TDC algorithm serves as both a practical fire control solution and a proof of concept for applying historical engineering excellence to modern military challenges.</p>
-<hr />
+<hr/>
 <h2 id="references-and-documentation">📚 REFERENCES AND DOCUMENTATION</h2>
 <h3 id="historical-sources">Historical Sources</h3>
 <ul>
@@ -910,13 +1025,38 @@ Torpedo Characteristics:
 <li>"Analog Computer Techniques" (McGraw-Hill, 1956)</li>
 <li>"Digital Control of Dynamic Systems" (Franklin, Powell, Workman)</li>
 </ul>
-<hr />
-<p><strong>Document Classification</strong>: UNCLASSIFIED<br />
-<strong>Distribution</strong>: Approved for public release<br />
-<strong>Version</strong>: 1.0<br />
-<strong>Date</strong>: 2025<br />
+<hr/>
+<p><strong>Document Classification</strong>: UNCLASSIFIED<br/>
+<strong>Distribution</strong>: Approved for public release<br/>
+<strong>Version</strong>: 1.0<br/>
+<strong>Date</strong>: 2025<br/>
 <strong>Prepared by</strong>: Advanced Fire Control Systems Division  </p>
 <p><em>This document contains no classified information and may be distributed to qualified personnel for evaluation and integration purposes.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

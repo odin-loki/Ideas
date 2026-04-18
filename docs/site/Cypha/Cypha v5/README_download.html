@@ -3,38 +3,99 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README download</title>
+  <meta name="description" content="For someone reading this for the first time download.py is step one of the pipeline. It fetches ten publicly available datasets from the internet and saves them to your local directory. That is the complete scope of what it does — no format conversion, no training, no…"/>
+  <title>download.py — Dataset Acquisition &amp; State Management · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v5\README_download.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>download.py</strong></p>
-<p>Dataset Acquisition &amp; State Management</p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-what-is-this-file">1. What Is This File?</a></li>
+        <li class="toc-depth-2"><a href="#2-the-ten-datasets">2. The Ten Datasets</a></li>
+        <li class="toc-depth-2"><a href="#3-state-machine-safe-to-interrupt">3. State Machine — Safe to Interrupt</a></li>
+        <li class="toc-depth-3"><a href="#31-the-state-file">3.1 The State File</a></li>
+        <li class="toc-depth-3"><a href="#32-state-transitions">3.2 State Transitions</a></li>
+        <li class="toc-depth-2"><a href="#4-how-download_file-works">4. How download_file() Works</a></li>
+        <li class="toc-depth-3"><a href="#41-http-request">4.1 HTTP Request</a></li>
+        <li class="toc-depth-3"><a href="#42-streaming-download-with-progress-bar">4.2 Streaming Download with Progress Bar</a></li>
+        <li class="toc-depth-3"><a href="#43-retry-with-exponential-backoff">4.3 Retry with Exponential Backoff</a></li>
+        <li class="toc-depth-3"><a href="#44-timeouts">4.4 Timeouts</a></li>
+        <li class="toc-depth-2"><a href="#5-existing-file-detection">5. Existing File Detection</a></li>
+        <li class="toc-depth-2"><a href="#6-dataset-details">6. Dataset Details</a></li>
+        <li class="toc-depth-3"><a href="#61-sql-injection-sql_injection">6.1 SQL Injection  (sql_injection)</a></li>
+        <li class="toc-depth-3"><a href="#62-phishing-urls-vrbancic-phishing_vrbancic">6.2 Phishing URLs — Vrbancic  (phishing_vrbancic)</a></li>
+        <li class="toc-depth-3"><a href="#63-malware-malware">6.3 Malware  (malware)</a></li>
+        <li class="toc-depth-3"><a href="#64-network-intrusion-nsl-kdd-network_intrusion">6.4 Network Intrusion — NSL-KDD  (network_intrusion)</a></li>
+        <li class="toc-depth-3"><a href="#65-phishing-emails-phishing_emails">6.5 Phishing Emails  (phishing_emails)</a></li>
+        <li class="toc-depth-3"><a href="#66-panoradio-hf-rf-panoradio_rf-panoradio_tags">6.6 Panoradio HF RF  (panoradio_rf + panoradio_tags)</a></li>
+        <li class="toc-depth-3"><a href="#67-phiusiil-phishing-phiusiil_phishing">6.7 PHIUSIIL Phishing  (phiusiil_phishing)</a></li>
+        <li class="toc-depth-3"><a href="#68-google-speech-commands-speech_commands">6.8 Google Speech Commands  (speech_commands)</a></li>
+        <li class="toc-depth-3"><a href="#69-esc-50-esc50">6.9 ESC-50  (esc50)</a></li>
+        <li class="toc-depth-2"><a href="#7-usage-reference">7. Usage Reference</a></li>
+        <li class="toc-depth-3"><a href="#71-normal-run">7.1 Normal run</a></li>
+        <li class="toc-depth-2"><a href="#6-panoradio-hf-rf-signals-5-gb">6. PANORADIO HF RF SIGNALS (5 GB)</a></li>
+        <li class="toc-depth-3"><a href="#72-check-status">7.2 Check status</a></li>
+        <li class="toc-depth-3"><a href="#73-retry-failed-downloads">7.3 Retry failed downloads</a></li>
+        <li class="toc-depth-3"><a href="#74-reset-and-start-over">7.4 Reset and start over</a></li>
+        <li class="toc-depth-2"><a href="#8-files-produced">8. Files Produced</a></li>
+        <li class="toc-depth-2"><a href="#9-troubleshooting">9. Troubleshooting</a></li>
+        <li class="toc-depth-3"><a href="#91-connection-timeout-on-panoradio_rf">9.1 Connection timeout on panoradio_rf</a></li>
+        <li class="toc-depth-3"><a href="#92-uci-ml-repository-rejects-the-request">9.2 UCI ML Repository rejects the request</a></li>
+        <li class="toc-depth-3"><a href="#93-github-rate-limiting">9.3 GitHub rate limiting</a></li>
+        <li class="toc-depth-3"><a href="#94-disk-space">9.4 Disk space</a></li>
+        <li class="toc-depth-3"><a href="#95-in_progress-stuck-after-a-crash">9.5 in_progress stuck after a crash</a></li>
+        <li class="toc-depth-2"><a href="#10-function-reference">10. Function Reference</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">download.py — Dataset Acquisition &amp; State Management</h1>
+          <p class="doc-meta">Cypha\Cypha v5\README_download.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>download.py is step one of the pipeline. It fetches ten publicly available datasets from the internet and saves them to your local directory. That is the complete scope of what it does — no format conversion, no training, no evaluation.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>File 2 of 5  ·  374 lines  ·  Step 1 of the pipeline</p>
 <p>For someone reading this for the first time</p>
-<h1 id="1-what-is-this-file"><strong>1. What Is This File?</strong></h1>
+<h2 id="1-what-is-this-file">1. What Is This File?</h2>
 <p>download.py is step one of the pipeline. It fetches ten publicly available datasets from the internet and saves them to your local directory. That is the complete scope of what it does — no format conversion, no training, no evaluation.</p>
 <p>You only need to run it once. After the files are on disk, convert.py handles the rest.</p>
 <p>python download.py            # download all 10 datasets</p>
 <p>python download.py --status   # check what has been downloaded</p>
 <p>python download.py --retry    # retry only failed downloads</p>
 <p>python download.py --reset    # clear state and start fresh</p>
-<p><strong>Where this sits in the pipeline</strong></p>
-<p>download.py  →  convert.py  →  benchmark.py<br />
+<p><strong>Where this sits in the pipeline</strong>
+download.py  →  convert.py  →  benchmark.py
 It produces raw files (CSV, NPY, ZIP, TAR.GZ). convert.py then transforms those into the wire format Cypha reads.</p>
-<h1 id="2-the-ten-datasets"><strong>2. The Ten Datasets</strong></h1>
+<h2 id="2-the-ten-datasets">2. The Ten Datasets</h2>
 <p>The ten datasets span three signal domains: text security, URL/phishing classification, and raw signal data (RF radio and audio). They were chosen to test Cypha's universal encoder across the widest possible range of input types.</p>
-<p><strong>#</strong></p>
-<p><strong>Name</strong></p>
-<p><strong>Domain</strong></p>
-<p><strong>Approx size</strong></p>
-<p><strong>Samples</strong></p>
-<p><strong>Source</strong></p>
-<p>1</p>
+<p><strong>#</strong>
+<strong>Name</strong>
+<strong>Domain</strong>
+<strong>Approx size</strong>
+<strong>Samples</strong>
+<strong>Source</strong>
+1</p>
 <p>sql_injection</p>
 <p>SQL text</p>
 <p>~1.2 MB</p>
@@ -95,11 +156,11 @@ It produces raw files (CSV, NPY, ZIP, TAR.GZ). convert.py then transforms those 
 <p>2,000</p>
 <p>github: karolpiczak/ESC-50</p>
 <p>Total download size is approximately 7–8 GB. Datasets 6 and 9 (the RF and speech datasets) account for most of that. The small text datasets finish in seconds; the large signal datasets take 10–30 minutes depending on connection speed.</p>
-<p><strong>Why include RF signals and audio?</strong></p>
-<p>Cypha's universal encoder is designed to classify any 1D signal using the same five mathematical operators. Including panoradio_rf (radio modulation types) and speech_commands / esc50 (audio) directly tests whether the encoder actually generalises across domains. A system that only works on text is not universal.</p>
-<h1 id="3-state-machine-safe-to-interrupt"><strong>3. State Machine — Safe to Interrupt</strong></h1>
+<p><strong>Why include RF signals and audio?</strong>
+Cypha's universal encoder is designed to classify any 1D signal using the same five mathematical operators. Including panoradio_rf (radio modulation types) and speech_commands / esc50 (audio) directly tests whether the encoder actually generalises across domains. A system that only works on text is not universal.</p>
+<h2 id="3-state-machine-safe-to-interrupt">3. State Machine — Safe to Interrupt</h2>
 <p>The most important design property of download.py is that it is safe to kill at any point and resume without losing progress. This matters because a 5 GB download over a slow connection might take 20 minutes, and network interruptions happen.</p>
-<h2 id="31-the-state-file"><strong>3.1 The State File</strong></h2>
+<h3 id="31-the-state-file">3.1 The State File</h3>
 <p>All progress is tracked in a JSON file called download_state.json in the current directory. It is updated atomically after every completed or failed download. The schema is:</p>
 <p>{</p>
 <p>"completed": ["sql_injection", "malware", ...],   // list of finished dataset names</p>
@@ -108,7 +169,7 @@ It produces raw files (CSV, NPY, ZIP, TAR.GZ). convert.py then transforms those 
 
   "error": "Connection timed out",
 
-  "timestamp": "2026\-02\-21 09:15:33"
+  "timestamp": "2026-02-21 09:15:33"
 
 \}
 </code></pre>
@@ -117,17 +178,17 @@ It produces raw files (CSV, NPY, ZIP, TAR.GZ). convert.py then transforms those 
 <p>"downloaded_files": {                               // metadata per completed download</p>
 <pre><code>"sql\_injection": \{
 
-  "filename": "sqli\.csv",
+  "filename": "sqli.csv",
 
-  "size\_mb": 1\.23,
+  "size\_mb": 1.23,
 
-  "timestamp": "2026\-02\-21 09:10:05"
+  "timestamp": "2026-02-21 09:10:05"
 
 \}
 </code></pre>
 <p>}</p>
 <p>}</p>
-<h2 id="32-state-transitions"><strong>3.2 State Transitions</strong></h2>
+<h3 id="32-state-transitions">3.2 State Transitions</h3>
 <p>Each dataset follows a simple three-state lifecycle:</p>
 <p>(not started)</p>
 <pre><code>   │
@@ -145,44 +206,44 @@ It produces raw files (CSV, NPY, ZIP, TAR.GZ). convert.py then transforms those 
 
                                      │
 
-                                     └─▶  in\_progress  \(on \-\-retry\)
+                                     └─▶  in\_progress  \(on --retry\)
 </code></pre>
 <p>The in_progress field is a single string (not a list) because downloads are sequential — only one runs at a time. If the process is killed while in_progress is set, the next run sees the stale in_progress entry and re-downloads that dataset from scratch.</p>
-<p><strong>Why not resume partially-downloaded files?</strong></p>
-<p>HTTP partial content (Range: bytes=X-) requires server support and accurate size verification. For simplicity, download.py re-downloads any incomplete file from the start. Given that the largest file is 5 GB and a partial download takes much less time to verify than to re-read, this is the correct tradeoff for a tool you run once.</p>
-<h1 id="4-how-download_file-works"><strong>4. How download_file() Works</strong></h1>
+<p><strong>Why not resume partially-downloaded files?</strong>
+HTTP partial content (Range: bytes=X-) requires server support and accurate size verification. For simplicity, download.py re-downloads any incomplete file from the start. Given that the largest file is 5 GB and a partial download takes much less time to verify than to re-read, this is the correct tradeoff for a tool you run once.</p>
+<h2 id="4-how-download_file-works">4. How download_file() Works</h2>
 <p>All ten downloads go through a single download_file(url, filename, desc, timeout, max_retries) function. Understanding it helps you diagnose failures.</p>
-<h2 id="41-http-request"><strong>4.1 HTTP Request</strong></h2>
+<h3 id="41-http-request">4.1 HTTP Request</h3>
 <p>The function uses Python's standard library urllib.request — no third-party dependencies. It sets a User-Agent header mimicking a browser because some servers (notably the UCI ML Repository) reject requests without one:</p>
 <p>req = urllib.request.Request(url)</p>
 <p>req.add_header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...")</p>
 <p>response = urllib.request.urlopen(req, timeout=timeout)</p>
-<h2 id="42-streaming-download-with-progress-bar"><strong>4.2 Streaming Download with Progress Bar</strong></h2>
+<h3 id="42-streaming-download-with-progress-bar">4.2 Streaming Download with Progress Bar</h3>
 <p>Files are downloaded in 8 KB chunks so memory usage stays constant regardless of file size. A progress bar is printed to stdout using carriage return (\r) so it overwrites the same line:</p>
 <p>while True:</p>
-<pre><code>chunk = response\.read\(8192\)   \# 8 KB at a time
+<pre><code>chunk = response.read\(8192\)   # 8 KB at a time
 
 if not chunk: break
 
-f\.write\(chunk\)
+f.write\(chunk\)
 
 downloaded \+= len\(chunk\)
 
 pct = \(downloaded / total\) \* 100
 
-bar = "█" \* int\(40 \* downloaded/total\) \+ "░" \* \(40 \- int\(40\*downloaded/total\)\)
+bar = "█" \* int\(40 \* downloaded/total\) \+ "░" \* \(40 - int\(40\*downloaded/total\)\)
 
-print\(f"  \[\{bar\}\] \{pct:\.1f\}%", end="\\r"\)   \# overwrites same line
+print\(f"  \[\{bar\}\] \{pct:.1f\}%", end="\\r"\)   # overwrites same line
 </code></pre>
 <p>This works even when Content-Length is absent (some servers omit it). In that case the function reads the entire response into memory before writing, which is fine for all small files in the dataset list.</p>
-<h2 id="43-retry-with-exponential-backoff"><strong>4.3 Retry with Exponential Backoff</strong></h2>
+<h3 id="43-retry-with-exponential-backoff">4.3 Retry with Exponential Backoff</h3>
 <p>If the download fails (network error, timeout, server error), it retries up to max_retries times with exponential backoff plus random jitter:</p>
 <p>wait = 2^attempt + Uniform(0, 2)   seconds</p>
 <p>For three attempts: first retry waits ~2s, second retry waits ~4–6s. The random jitter prevents multiple simultaneous processes from thundering-herd a server.</p>
-<p><strong>Attempt</strong></p>
-<p><strong>Wait before retry</strong></p>
-<p><strong>Scenario</strong></p>
-<p>1 (initial)</p>
+<p><strong>Attempt</strong>
+<strong>Wait before retry</strong>
+<strong>Scenario</strong>
+1 (initial)</p>
 <p>none</p>
 <p>First try</p>
 <p>2 (retry 1)</p>
@@ -194,19 +255,19 @@ print\(f"  \[\{bar\}\] \{pct:\.1f\}%", end="\\r"\)   \# overwrites same line
 <p>(give up)</p>
 <p>mark_failed</p>
 <p>Three consecutive failures</p>
-<h2 id="44-timeouts"><strong>4.4 Timeouts</strong></h2>
+<h3 id="44-timeouts">4.4 Timeouts</h3>
 <p>Two timeout values are used:</p>
 <ul>
 <li>900 seconds (15 min) for most datasets — enough for ~100 MB files on a slow connection.</li>
 <li>1800 seconds (30 min) for panoradio_rf (5 GB) and speech_commands (1.5 GB) — explicitly set in their download functions.</li>
 </ul>
 <p>If you are behind a very slow connection and still hitting timeouts, you can manually download the file and place it in the current directory with the expected filename. The next run will detect it via the size check and skip the download.</p>
-<h1 id="5-existing-file-detection"><strong>5. Existing File Detection</strong></h1>
+<h2 id="5-existing-file-detection">5. Existing File Detection</h2>
 <p>Every download function checks whether the file already exists before attempting a download:</p>
 <p>if os.path.exists(fn) and os.path.getsize(fn) &gt; 1000:</p>
-<pre><code>sz = os\.path\.getsize\(fn\) / \(1024\*1024\)
+<pre><code>sz = os.path.getsize\(fn\) / \(1024\*1024\)
 
-print\(f"  Found existing: \{fn\} \(\{sz:\.1f\} MB\)"\)
+print\(f"  Found existing: \{fn\} \(\{sz:.1f\} MB\)"\)
 
 mark\_completed\(state, name, fn, sz\)
 
@@ -218,96 +279,96 @@ return
 <li>Signal datasets (NPY, TAR.GZ): threshold is 1,000,000 bytes (1 MB) — guards against partially-written files from a previous interrupted download.</li>
 </ul>
 <p>This means you can manually place pre-downloaded files in the directory and download.py will accept them. Useful if you are downloading on a different machine and copying over.</p>
-<p><strong>Note on the panoradio_rf dataset</strong></p>
-<p>The 5 GB NPY file from panoradio-sdr.de is a NumPy float32 array of shape (N, signal_length). It is not a CSV — convert.py handles the format difference by reading it with np.load() and converting each row to int8 hex. The companion tags CSV (panoradio_tags) must also be downloaded for the labels.</p>
-<h1 id="6-dataset-details"><strong>6. Dataset Details</strong></h1>
+<p><strong>Note on the panoradio_rf dataset</strong>
+The 5 GB NPY file from panoradio-sdr.de is a NumPy float32 array of shape (N, signal_length). It is not a CSV — convert.py handles the format difference by reading it with np.load() and converting each row to int8 hex. The companion tags CSV (panoradio_tags) must also be downloaded for the labels.</p>
+<h2 id="6-dataset-details">6. Dataset Details</h2>
 <p>Each dataset is described here with its source, format, labels, and any quirks to be aware of.</p>
-<h2 id="61-sql-injection-sql_injection"><strong>6.1 SQL Injection  (sql_injection)</strong></h2>
+<h3 id="61-sql-injection-sql_injection">6.1 SQL Injection  (sql_injection)</h3>
 <p>CSV with two relevant columns: a query string and a binary label (0 = safe, 1 = injection). The file uses UTF-16 encoding with a BOM, which trips up naive CSV readers — convert.py handles the encoding detection automatically. About 30,000 samples evenly split between safe queries and injection strings.</p>
 <p>Labels after conversion: safe, sql_injection.</p>
-<h2 id="62-phishing-urls-vrbancic-phishing_vrbancic"><strong>6.2 Phishing URLs — Vrbancic  (phishing_vrbancic)</strong></h2>
+<h3 id="62-phishing-urls-vrbancic-phishing_vrbancic">6.2 Phishing URLs — Vrbancic  (phishing_vrbancic)</h3>
 <p>CSV with 48 engineered URL features (length ratios, special character counts, domain age, HTTPS flag, etc.) plus a binary phishing label. This is not the raw URL but a pre-extracted feature vector. 88,000 samples, moderately imbalanced toward phishing.</p>
 <p>Labels: legitimate, phishing.</p>
-<h2 id="63-malware-malware"><strong>6.3 Malware  (malware)</strong></h2>
+<h3 id="63-malware-malware">6.3 Malware  (malware)</h3>
 <p>CSV of Android malware PE features — numeric columns representing file properties, API call counts, and permission flags. The label column name varies between dataset versions; convert.py detects it by looking for "label", "class", or "malware" in the column name.</p>
 <p>Labels: benign, malware (or the raw integer 0/1 which convert.py maps).</p>
-<h2 id="64-network-intrusion-nsl-kdd-network_intrusion"><strong>6.4 Network Intrusion — NSL-KDD  (network_intrusion)</strong></h2>
+<h3 id="64-network-intrusion-nsl-kdd-network_intrusion">6.4 Network Intrusion — NSL-KDD  (network_intrusion)</h3>
 <p>The classic NSL-KDD intrusion detection benchmark. A modified version of KDD Cup 1999 that removes duplicate records. 41 features per network flow connection: protocol type, service, flag, byte counts, error rates, and more. The last column is the attack type.</p>
 <p>Labels: normal, anomaly (convert.py maps all specific attack types like "neptune", "back", "portsweep" to the single label "anomaly" for binary classification).</p>
-<h2 id="65-phishing-emails-phishing_emails"><strong>6.5 Phishing Emails  (phishing_emails)</strong></h2>
+<h3 id="65-phishing-emails-phishing_emails">6.5 Phishing Emails  (phishing_emails)</h3>
 <p>CSV from the SpamAssassin public corpus plus supplemental phishing email bodies. Contains raw email text. convert.py strips HTML tags and truncates to 500 characters before writing to wire format.</p>
 <p>Labels: safe, phishing.</p>
-<h2 id="66-panoradio-hf-rf-panoradio_rf-panoradio_tags"><strong>6.6 Panoradio HF RF  (panoradio_rf + panoradio_tags)</strong></h2>
+<h3 id="66-panoradio-hf-rf-panoradio_rf-panoradio_tags">6.6 Panoradio HF RF  (panoradio_rf + panoradio_tags)</h3>
 <p>The largest dataset at ~5 GB. A NumPy float32 array from the Panoradio SDR project containing HF radio recordings sampled at 12 kHz. Each row is one signal segment. The companion tags CSV maps row indices to modulation labels.</p>
 <p>Labels: am, fm, lsb, usb, cw, rtty, and others (exact set depends on the tag file version).</p>
-<p><strong>Two files required</strong></p>
-<p>panoradio_rf and panoradio_tags are two separate downloads that must both complete before convert.py can process them. If only one is present, convert.py will fail with a missing file error.</p>
-<h2 id="67-phiusiil-phishing-phiusiil_phishing"><strong>6.7 PHIUSIIL Phishing  (phiusiil_phishing)</strong></h2>
+<p><strong>Two files required</strong>
+panoradio_rf and panoradio_tags are two separate downloads that must both complete before convert.py can process them. If only one is present, convert.py will fail with a missing file error.</p>
+<h3 id="67-phiusiil-phishing-phiusiil_phishing">6.7 PHIUSIIL Phishing  (phiusiil_phishing)</h3>
 <p>235,000 URL samples with 111 engineered features from the UCI Machine Learning Repository. The dataset is delivered as a ZIP archive. convert.py extracts it automatically. Features include URL length, number of dots, presence of IP address, TLD entropy, and many others.</p>
 <p>Labels: legitimate, phishing.</p>
-<h2 id="68-google-speech-commands-speech_commands"><strong>6.8 Google Speech Commands  (speech_commands)</strong></h2>
+<h3 id="68-google-speech-commands-speech_commands">6.8 Google Speech Commands  (speech_commands)</h3>
 <p>105,000 one-second WAV files across 35 word classes ("yes", "no", "up", "down", "left", "right", "go", "stop", etc.) from the TensorFlow speech_commands_v0.02 dataset. Delivered as a 1.5 GB TAR.GZ archive. Each WAV is 16 kHz mono PCM.</p>
 <p>Labels: yes, no, up, down, left, right, on, off, go, stop, and 25 others.</p>
-<h2 id="69-esc-50-esc50"><strong>6.9 ESC-50  (esc50)</strong></h2>
+<h3 id="69-esc-50-esc50">6.9 ESC-50  (esc50)</h3>
 <p>2,000 five-second WAV recordings across 50 environmental sound classes (dog, rain, chainsaw, helicopter, etc.). 40 samples per class. Delivered as a ZIP archive. Each WAV is 44.1 kHz stereo PCM; convert.py converts to mono before encoding.</p>
 <p>Labels: dog, rain, crying_baby, clock_tick, helicopter, and 45 others.</p>
-<h1 id="7-usage-reference"><strong>7. Usage Reference</strong></h1>
-<h2 id="71-normal-run"><strong>7.1 Normal run</strong></h2>
+<h2 id="7-usage-reference">7. Usage Reference</h2>
+<h3 id="71-normal-run">7.1 Normal run</h3>
 <p>cd /your/project/directory</p>
 <p>python download.py</p>
-<p># Output (example):</p>
-<p>#   ====================================================================</p>
-<p>#   COMPLETE DATASET DOWNLOADER - ALL 10 DATASETS</p>
-<p>#   ====================================================================</p>
-<p>#</p>
-<p>#   ✓ sql_injection  already downloaded</p>
-<p>#   ✓ malware  already downloaded</p>
-<p>#</p>
-<p>#   ======================================================================</p>
-<p>#     6. PANORADIO HF RF SIGNALS (5 GB)</p>
-<p>#   ======================================================================</p>
-<p>#   Downloading panoradio_rf (5 GB, ~10-20 min)</p>
-<p>#     URL: http://www.panoradio-sdr.de/...</p>
-<p>#     Size: 5120.0 MB</p>
-<p>#     [████████████████░░░░░░░░░░░░░░░░░░░░░░░░] 40.0% (2048.0/5120.0 MB)</p>
-<h2 id="72-check-status"><strong>7.2 Check status</strong></h2>
+
+
+
+
+
+
+
+
+
+<h2 id="6-panoradio-hf-rf-signals-5-gb">6. PANORADIO HF RF SIGNALS (5 GB)</h2>
+
+
+
+
+
+<h3 id="72-check-status">7.2 Check status</h3>
 <p>python download.py --status</p>
-<p># Output:</p>
-<p>#   ======================================================================</p>
-<p>#   DOWNLOAD STATUS</p>
-<p>#   ======================================================================</p>
-<p>#</p>
-<p>#   ✅ Completed: 7</p>
-<p>#     ✓ sql_injection           sqli.csv              (1.2 MB)</p>
-<p>#     ✓ phishing_urls_vrbancic  phishing_vrbancic.csv (17.8 MB)</p>
-<p>#     ✓ malware                 malware.csv           (2.4 MB)</p>
-<p>#     ✓ network_intrusion       network_intrusion.csv (11.9 MB)</p>
-<p>#     ✓ phishing_emails         phishing_emails.csv   (3.4 MB)</p>
-<p>#     ✓ phiusiil_phishing       phiusiil_phishing.zip (7.8 MB)</p>
-<p>#     ✓ esc50                   esc50.zip             (598.1 MB)</p>
-<p>#</p>
-<p>#   ❌ Failed: 1</p>
-<p>#     ✗ panoradio_rf  Connection timed out</p>
-<p>#</p>
-<p>#   📊 Success: 7/8 (87.5%)</p>
-<p>#   💾 Downloaded: 643.6 MB (0.63 GB)</p>
-<h2 id="73-retry-failed-downloads"><strong>7.3 Retry failed downloads</strong></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="73-retry-failed-downloads">7.3 Retry failed downloads</h3>
 <p>python download.py --retry</p>
-<p># Only re-attempts datasets listed in the "failed" dict.</p>
-<p># Does not re-download already-completed datasets.</p>
-<h2 id="74-reset-and-start-over"><strong>7.4 Reset and start over</strong></h2>
+
+
+<h3 id="74-reset-and-start-over">7.4 Reset and start over</h3>
 <p>python download.py --reset</p>
-<p># Deletes download_state.json.</p>
-<p># Does NOT delete already-downloaded files.</p>
-<p># The next run will re-detect them via the size check</p>
-<p># and mark them completed again without re-downloading.</p>
-<h1 id="8-files-produced"><strong>8. Files Produced</strong></h1>
+
+
+
+
+<h2 id="8-files-produced">8. Files Produced</h2>
 <p>After a successful full run, the following files will be in your current directory:</p>
-<p><strong>Filename</strong></p>
-<p><strong>Format</strong></p>
-<p><strong>Size</strong></p>
-<p><strong>Used by</strong></p>
-<p>sqli.csv</p>
+<p><strong>Filename</strong>
+<strong>Format</strong>
+<strong>Size</strong>
+<strong>Used by</strong>
+sqli.csv</p>
 <p>CSV (UTF-16)</p>
 <p>~1.2 MB</p>
 <p>convert.py → sql_injection.txt</p>
@@ -352,30 +413,30 @@ return
 <p>&lt;1 KB</p>
 <p>download.py internal state</p>
 <p>None of these files are read by Cypha.py directly. They are all inputs to convert.py, which transforms them into the wire format (input|||label per line) that Cypha reads.</p>
-<h1 id="9-troubleshooting"><strong>9. Troubleshooting</strong></h1>
-<h2 id="91-connection-timeout-on-panoradio_rf"><strong>9.1 Connection timeout on panoradio_rf</strong></h2>
+<h2 id="9-troubleshooting">9. Troubleshooting</h2>
+<h3 id="91-connection-timeout-on-panoradio_rf">9.1 Connection timeout on panoradio_rf</h3>
 <p>This is the most common failure. The panoradio-sdr.de server is not a high-bandwidth CDN. Options:</p>
 <ul>
 <li>Re-run with --retry and try at a different time of day (off-peak hours work better).</li>
 <li>Download the file manually in a browser, save it as dataset_panoradio_hf.npy in the project directory, then run download.py again — it will detect and skip it.</li>
 <li>If you do not have the RF dataset, you can still run the benchmark on the other 8 datasets. benchmark.py skips any missing .txt file with a clear error message.</li>
 </ul>
-<h2 id="92-uci-ml-repository-rejects-the-request"><strong>9.2 UCI ML Repository rejects the request</strong></h2>
+<h3 id="92-uci-ml-repository-rejects-the-request">9.2 UCI ML Repository rejects the request</h3>
 <p>The UCI ML Repository (phiusiil_phishing.zip) occasionally returns 403 Forbidden or redirects to a login page. This is intermittent. Solutions:</p>
 <ul>
 <li>Wait and retry. The repository has rate limits that reset after a few minutes.</li>
 <li>Download manually from https://archive.ics.uci.edu/dataset/967/ and place the ZIP in the directory.</li>
 </ul>
-<h2 id="93-github-rate-limiting"><strong>9.3 GitHub rate limiting</strong></h2>
+<h3 id="93-github-rate-limiting">9.3 GitHub rate limiting</h3>
 <p>GitHub raw content (used for sql_injection, phishing_vrbancic, malware, network_intrusion, phishing_emails) is generally reliable but may occasionally throttle downloads. The retry logic handles transient 429 errors. If you are hitting rate limits consistently, wait 60 seconds and re-run.</p>
-<h2 id="94-disk-space"><strong>9.4 Disk space</strong></h2>
+<h3 id="94-disk-space">9.4 Disk space</h3>
 <p>You need approximately 9–10 GB free for all downloads. The largest single file is dataset_panoradio_hf.npy at ~5 GB. After convert.py runs, the converted .txt files are a fraction of that size (the RF dataset compresses significantly in text form) so you can delete the raw files if space is tight.</p>
-<h2 id="95-in_progress-stuck-after-a-crash"><strong>9.5 in_progress stuck after a crash</strong></h2>
+<h3 id="95-in_progress-stuck-after-a-crash">9.5 in_progress stuck after a crash</h3>
 <p>If download.py is killed during a download, download_state.json will have in_progress set to the dataset name that was downloading. On the next run this is handled correctly — the in_progress entry is cleared when the download attempt starts again. There is no manual intervention required.</p>
-<h1 id="10-function-reference"><strong>10. Function Reference</strong></h1>
-<p><strong>Function</strong></p>
-<p><strong>Purpose</strong></p>
-<p>load_state()</p>
+<h2 id="10-function-reference">10. Function Reference</h2>
+<p><strong>Function</strong>
+<strong>Purpose</strong>
+load_state()</p>
 <p>Read download_state.json. Returns empty state dict if file missing or corrupt.</p>
 <p>save_state(state)</p>
 <p>Write state dict to download_state.json (pretty-printed JSON).</p>
@@ -412,6 +473,31 @@ return
 <p>main()</p>
 <p>Entry point. Parses --status, --reset, --retry flags. Runs all download functions.</p>
 <p>End of download.py reference.  Next: convert.py</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

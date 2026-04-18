@@ -3,58 +3,96 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper5 circuit simplification</title>
+  <meta name="description" content="We develop a systematic algebraic circuit simplification calculus based on the AND-XOR \(Algebraic Normal Form\) basis, grounded in the results of Papers 1-4. The calculus comprises four classes of rewrite rules: \(1\) ANF conversion rules expressing all 16 binary operators as…"/>
+  <title>Algebraic circuit simplification via the AND-XOR basis: Reed-Muller rewrites and GRIA compression laws · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">GF2 Algebra and Applications\paper5_circuit_simplification.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>Algebraic Circuit Simplification via the AND-XOR Basis</strong></p>
-<p><strong>Reed-Muller Rewrites and GRIA Compression Laws</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-the-and-xor-basis-optimality-theorem">2. The AND-XOR Basis Optimality Theorem</a></li>
+        <li class="toc-depth-2"><a href="#3-the-simplification-calculus-five-rewrite-rule-classes">3. The Simplification Calculus: Five Rewrite Rule Classes</a></li>
+        <li class="toc-depth-2"><a href="#31-class-1-anf-conversion-rules">3.1 Class 1: ANF Conversion Rules</a></li>
+        <li class="toc-depth-2"><a href="#32-class-2-bilinearity-rewrites">3.2 Class 2: Bilinearity Rewrites</a></li>
+        <li class="toc-depth-2"><a href="#33-class-3-de-morgan-transforms">3.3 Class 3: De Morgan Transforms</a></li>
+        <li class="toc-depth-2"><a href="#34-class-4-galois-residuation-transforms">3.4 Class 4: Galois Residuation Transforms</a></li>
+        <li class="toc-depth-2"><a href="#35-class-5-absorption-simplifications">3.5 Class 5: Absorption Simplifications</a></li>
+        <li class="toc-depth-2"><a href="#4-gate-count-results">4. Gate Count Results</a></li>
+        <li class="toc-depth-2"><a href="#5-gria-interpretation">5. GRIA Interpretation</a></li>
+        <li class="toc-depth-2"><a href="#6-conclusions">6. Conclusions</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Algebraic circuit simplification via the AND-XOR basis: Reed-Muller rewrites and GRIA compression laws</h1>
+          <p class="doc-meta">GF2 Algebra and Applications\paper5_circuit_simplification.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We develop a systematic algebraic circuit simplification calculus based on the AND-XOR (Algebraic Normal Form) basis, grounded in the results of Papers 1-4. The calculus comprises four classes of rewrite rules: (1) ANF conversion rules expressing all 16 binary operators as XOR sums of AND monomials; (2) bilinearity rewrites exploiting the GF(2) Ring Uniqueness Theorem (Paper 1, Theorem 4); (3) De Morgan duality transforms; and (4) Galois residuation transforms from Paper 1 (Theorem 7). Computational verification demonstrates gate count reductions of 29-80% over Sum-of-Products representations for benchmark functions including XOR (80% reduction), Rule 110 (68%), and full-adder sum (78%). The calculus connects to the GRIA compression framework: applying ANF simplification to a circuit layer is equivalent to decreasing the GRIA grade α of that layer, moving it toward the GF(2) reversible regime. We prove that the AND-XOR basis is the unique optimal basis for circuit simplification over GF(2), as a direct consequence of the ring uniqueness theorem.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>Odin, Independent Researcher</p>
 <p><em>Sydney, Australia</em></p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We develop a systematic algebraic circuit simplification calculus based on the AND-XOR (Algebraic Normal Form) basis, grounded in the results of Papers 1-4. The calculus comprises four classes of rewrite rules: (1) ANF conversion rules expressing all 16 binary operators as XOR sums of AND monomials; (2) bilinearity rewrites exploiting the GF(2) Ring Uniqueness Theorem (Paper 1, Theorem 4); (3) De Morgan duality transforms; and (4) Galois residuation transforms from Paper 1 (Theorem 7). Computational verification demonstrates gate count reductions of 29-80% over Sum-of-Products representations for benchmark functions including XOR (80% reduction), Rule 110 (68%), and full-adder sum (78%). The calculus connects to the GRIA compression framework: applying ANF simplification to a circuit layer is equivalent to decreasing the GRIA grade α of that layer, moving it toward the GF(2) reversible regime. We prove that the AND-XOR basis is the unique optimal basis for circuit simplification over GF(2), as a direct consequence of the ring uniqueness theorem.</p>
-<p><strong>Keywords: </strong><em>circuit simplification, AND-XOR basis, algebraic normal form, Reed-Muller, bilinearity, De Morgan, Galois residuation, gate count minimization, GRIA</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>circuit simplification, AND-XOR basis, algebraic normal form, Reed-Muller, bilinearity, De Morgan, Galois residuation, gate count minimization, GRIA</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Logic minimisation — reducing the number of gates required to implement a Boolean function — is a central problem in digital circuit design. The standard approach uses Sum-of-Products (SOP) or Product-of-Sums (POS) forms, minimised by Karnaugh maps or the Quine-McCluskey algorithm. These methods exploit the properties of the AND-OR-NOT basis.</p>
 <p>The AND-XOR basis — using AND and XOR as the primary operations — provides a complementary and often superior approach, especially for functions that are naturally expressed over GF(2). The AND-XOR representation of a Boolean function is its Algebraic Normal Form (ANF), also known as the Zhegalkin polynomial or Reed-Muller expansion. As established in Papers 1 and 2, the ANF is the canonical polynomial representation over GF(2), and its degree measures the algebraic complexity of the function.</p>
 <p>This paper provides a systematic calculus for AND-XOR circuit simplification, grounded in the algebraic theorems of Papers 1-3. We prove that the AND-XOR basis is optimal for base-2 computation (Theorem 1), develop five classes of rewrite rules (Theorems 2-6), and verify 29-80% gate count reductions for standard benchmark functions.</p>
-<h1 id="2-the-and-xor-basis-optimality-theorem"><strong>2. The AND-XOR Basis Optimality Theorem</strong></h1>
+<h2 id="2-the-and-xor-basis-optimality-theorem">2. The AND-XOR Basis Optimality Theorem</h2>
 <p><strong>Theorem 1.  </strong><em>(AND-XOR Basis Optimality)</em></p>
 <p>The AND-XOR basis {AND, XOR} is the unique two-operator basis for Boolean circuits that (a) reflects the ring structure of GF(2) (Paper 1, Theorem 4); (b) provides a canonical normal form (ANF) with a unique polynomial representation for every Boolean function; and (c) minimises the interaction complexity between operators (AND distributes over XOR but not conversely). No other two-operator basis has all three properties simultaneously.</p>
 <p><em>Proof.  </em>Property (a): by Paper 1 Theorem 4, AND is the unique non-trivial operator bilinear over XOR, making (GF(2), XOR, AND) the unique ring on {0,1}. No other pair of binary operators forms a ring. Property (b): the ANF uniqueness follows from the Möbius transform (Paper 1, Theorem 12). For any other basis, uniqueness of representation fails. Property (c): AND(a⊕b,c)=AND(a,c)⊕AND(b,c) (verified). The converse XOR(AND(a,b),c)≠XOR(a,c)·XOR(b,c) in general. This asymmetry gives AND a natural role as 'multiplication' and XOR as 'addition' in the simplification algebra. □</p>
 <p>□</p>
-<h1 id="3-the-simplification-calculus-five-rewrite-rule-classes"><strong>3. The Simplification Calculus: Five Rewrite Rule Classes</strong></h1>
-<h2 id="31-class-1-anf-conversion-rules"><strong>3.1 Class 1: ANF Conversion Rules</strong></h2>
+<h2 id="3-the-simplification-calculus-five-rewrite-rule-classes">3. The Simplification Calculus: Five Rewrite Rule Classes</h2>
+<h2 id="31-class-1-anf-conversion-rules">3.1 Class 1: ANF Conversion Rules</h2>
 <p><strong>Theorem 2.  </strong><em>(Complete ANF Conversion Table)</em></p>
 <p>Every binary operator has a unique ANF representation over GF(2). The complete table: FALSE=0; AND=ab; A_NIMP=a⊕ab; A=a; B_NIMP=b⊕ab; B=b; XOR=a⊕b; OR=a⊕b⊕ab; NOR=1⊕a⊕b⊕ab; XNOR=1⊕a⊕b; NOT_B=1⊕b; B_IMP=1⊕b⊕ab; NOT_A=1⊕a; A_IMP=1⊕a⊕ab; NAND=1⊕ab; TRUE=1. These are verified by Möbius transform evaluation.</p>
 <p><em>Proof.  </em>The Möbius transform over B² maps truth table to ANF coefficients: c₀=f(0,0), c_a=f(0,0)⊕f(1,0), c_b=f(0,0)⊕f(0,1), c_{ab}=f(0,0)⊕f(0,1)⊕f(1,0)⊕f(1,1). Applied to all 16 truth tables gives the table above. Each ANF is unique by the basis uniqueness of {1,a,b,ab} over GF(2). □</p>
 <p>□</p>
-<h2 id="32-class-2-bilinearity-rewrites"><strong>3.2 Class 2: Bilinearity Rewrites</strong></h2>
+<h2 id="32-class-2-bilinearity-rewrites">3.2 Class 2: Bilinearity Rewrites</h2>
 <p><strong>Theorem 3.  </strong><em>(AND-XOR Bilinearity Rewrites)</em></p>
 <p>The following rewrites hold for all a,b,c ∈ {0,1}, verified exhaustively: (L) AND(a⊕b, c) = AND(a,c) ⊕ AND(b,c); (R) AND(a, b⊕c) = AND(a,b) ⊕ AND(a,c). These allow AND gates to be pushed through XOR gates in either direction. Applications: (i) Factor shared AND operands across XOR-separated terms; (ii) Distribute AND over XOR fan-in; (iii) Merge XOR trees by collecting AND terms.</p>
 <p><em>Proof.  </em>Both verified by exhaustive enumeration over {0,1}³ (8 cases each). These are exactly the bilinearity conditions of Paper 1 Theorem 4. □</p>
 <p>□</p>
-<h2 id="33-class-3-de-morgan-transforms"><strong>3.3 Class 3: De Morgan Transforms</strong></h2>
+<h2 id="33-class-3-de-morgan-transforms">3.3 Class 3: De Morgan Transforms</h2>
 <p><strong>Theorem 4.  </strong><em>(De Morgan Circuit Transforms)</em></p>
 <p>The De Morgan transforms provide AND↔OR conversions: (1) ¬AND(a,b) = OR(¬a,¬b) — NAND can be replaced by OR with complemented inputs; (2) ¬OR(a,b) = AND(¬a,¬b) — NOR can be replaced by AND with complemented inputs; (3) NAND(a,b) = NOT(AND(a,b)) = 1⊕ab in ANF; (4) NOR(a,b) = NOT(OR(a,b)) = 1⊕a⊕b⊕ab in ANF. All verified.</p>
 <p><em>Proof.  </em>All four identities verified computationally. The ANF forms (3,4) enable direct substitution into the AND-XOR basis without introducing separate negation circuits. □</p>
 <p>□</p>
-<h2 id="34-class-4-galois-residuation-transforms"><strong>3.4 Class 4: Galois Residuation Transforms</strong></h2>
+<h2 id="34-class-4-galois-residuation-transforms">3.4 Class 4: Galois Residuation Transforms</h2>
 <p><strong>Theorem 5.  </strong><em>(Residuation Circuit Transforms)</em></p>
 <p>The Galois residuation pairs from Paper 1 Theorem 7 provide circuit-level transforms: (R1) AND(a,b) can be replaced by the test a ≤ A_IMP(b,c) in contexts where a threshold comparison is needed; (R2) A_NIMP(a,b) can be replaced by a ≤ OR(b,c). These transforms eliminate AND gates by moving the conjunction into an implication context. Verified: AND(a,b)≤c ↔ a≤A_IMP(b,c) for all a,b,c ∈ {0,1}³.</p>
 <p><em>Proof.  </em>Direct consequence of Paper 1 Theorem 7 and verified computationally. The transform is particularly useful in threshold-circuit contexts where comparisons are the primary operation. □</p>
 <p>□</p>
-<h2 id="35-class-5-absorption-simplifications"><strong>3.5 Class 5: Absorption Simplifications</strong></h2>
+<h2 id="35-class-5-absorption-simplifications">3.5 Class 5: Absorption Simplifications</h2>
 <p><strong>Theorem 6.  </strong><em>(Absorption Rewrite Rules)</em></p>
 <p>The following absorption rewrites eliminate redundant gates: AND(a, OR(a,b)) → a; OR(a, AND(a,b)) → a; AND(a, 1) → a; OR(a, 0) → a; AND(a, a) → a; OR(a, a) → a; AND(a, ¬a) → 0; OR(a, ¬a) → 1. All verified. In ANF terms: a∧(a∨b) = a (since a∨b = a⊕b⊕ab in ANF, and a∧(a⊕b⊕ab) = a²⊕ab⊕a²b = a⊕ab⊕ab = a).</p>
 <p><em>Proof.  </em>Each identity verified by exhaustive enumeration. The ANF derivation of absorption uses the fact that a²=a (idempotency of AND in {0,1}). □</p>
 <p>□</p>
-<h1 id="4-gate-count-results"><strong>4. Gate Count Results</strong></h1>
+<h2 id="4-gate-count-results">4. Gate Count Results</h2>
 <p><strong>Function</strong></p>
 <p><strong>SOP basis</strong></p>
 <p><strong>SOP gates</strong></p>
@@ -111,14 +149,39 @@
 <p>29%</p>
 <p><strong>Table 1. </strong><em>Gate count comparison: naive SOP vs. AND-XOR (ANF) for benchmark functions. Reductions range from 29% (MAJ, carry) to 80% (XOR). Rule 110 achieves 68% reduction. Full-adder sum achieves 78%. All ANF counts verified by evaluating the ANF expression at all inputs. The 'OR' row shows no reduction because OR already requires the same operations in ANF (a⊕b⊕ab = 3 gates).</em></p>
 <p>The gate count reductions are achieved by a systematic two-pass process: (1) convert the circuit to ANF using Theorem 2; (2) apply the bilinearity rewrites (Theorem 3) to factor shared AND operands. The XOR function achieves maximum reduction (80%) because its ANF is degree 1 (just 'a⊕b') — it requires no AND gates at all. Rule 110's 68% reduction comes from the shared bc term in c⊕b⊕bc⊕abc: the expression can be factored as c⊕b(1⊕c)⊕abc = c⊕(b⊕ab)⊕bc = c⊕b⊕bc⊕abc, requiring only 2 ANDs and 3 XORs.</p>
-<h1 id="5-gria-interpretation"><strong>5. GRIA Interpretation</strong></h1>
+<h2 id="5-gria-interpretation">5. GRIA Interpretation</h2>
 <p>The AND-XOR simplification calculus has a natural GRIA interpretation. The ANF of a circuit function has degree d, which corresponds (via Paper 4 Theorem 5) to a circuit depth of at most d. Applying simplification rules reduces the ANF degree — and thus moves the circuit toward the α = 0 (linear, reversible) regime.</p>
 <p>Concretely: OR has ANF degree 2 (OR = a⊕b⊕ab, containing the AND term ab). Applying ANF simplification to a circuit layer containing OR gates can, if other structure is present, merge the ab terms and reduce the effective degree. This is the algebraic mechanism behind standard logic minimisation: it is equivalent to moving the circuit toward lower GRIA grade.</p>
 <p><strong>Corollary 1.  </strong><em>(ANF Simplification as α-Reduction)</em></p>
 <p>Applying the AND-XOR simplification calculus to a circuit is equivalent to reducing the GRIA grade α of the circuit's mapping function. Maximum simplification (minimum gate count) corresponds to minimum α — a circuit that is as close to the GF(2)-linear (reversible) regime as possible while still correctly computing the target function. The irreducible circuits (those that cannot be further simplified) are the minimum-α circuits for their truth table.</p>
-<h1 id="6-conclusions"><strong>6. Conclusions</strong></h1>
+<h2 id="6-conclusions">6. Conclusions</h2>
 <p>We have established a complete AND-XOR circuit simplification calculus with five classes of rewrite rules, proven optimal by the GF(2) Ring Uniqueness Theorem, and verified gate count reductions of 29-80% on benchmark functions. The GRIA interpretation connects simplification to the α-spectrum: simplified circuits have lower α, moving toward the GF(2) reversible regime.</p>
 <p><em>— End of Paper 5 —</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

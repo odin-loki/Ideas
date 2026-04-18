@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/registry_register.dir/tools/registry_register.cpp.o -o registry_register  libcypha_core.a 

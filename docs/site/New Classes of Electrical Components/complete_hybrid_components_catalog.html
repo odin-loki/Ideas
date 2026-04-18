@@ -3,18 +3,237 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>complete hybrid components catalog</title>
+  <meta name="description" content="--- 1. Quantum Tunnel Resistor 2. Magnetic Domain Inductor 3. Sample-Hold Capacitor/Resistor 4. Memcapacitor 5. Meminductor 6. Brownian Resistor 7. Piezo-Quantum Capacitor 8. Dual-Mode Memristor 9. Quantum Dot Array Resistor 10. Spin-Resistor (GMR-based) 11. Photo-Capacitor 12.…"/>
+  <title>Complete Fabrication Guide: All Hybrid Component Designs · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\complete_hybrid_components_catalog.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="complete-fabrication-guide-all-hybrid-component-designs">Complete Fabrication Guide: All Hybrid Component Designs</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#discrete-continuous-electrical-components-full-catalog">Discrete-Continuous Electrical Components (Full Catalog)</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-3"><a href="#tier-1-standard-equipment-achievable-today">TIER 1: Standard Equipment (Achievable Today)</a></li>
+        <li class="toc-depth-3"><a href="#tier-2-specialized-equipment-lab-proven">TIER 2: Specialized Equipment (Lab-Proven)</a></li>
+        <li class="toc-depth-3"><a href="#tier-3-advancedexperimental-cutting-edge">TIER 3: Advanced/Experimental (Cutting Edge)</a></li>
+        <li class="toc-depth-3"><a href="#tier-4-conceptual-future-work">TIER 4: Conceptual (Future Work)</a></li>
+        <li class="toc-depth-2"><a href="#1-quantum-tunnel-resistor-qtr">1. Quantum Tunnel Resistor (QTR)</a></li>
+        <li class="toc-depth-3"><a href="#concept">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-bottom-electrode-aluminum">Step 1: Bottom Electrode (Aluminum)</a></li>
+        <li class="toc-depth-4"><a href="#step-2-tunnel-barrier-al2o3">Step 2: Tunnel Barrier (Al₂O₃)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-top-electrode-aluminum">Step 3: Top Electrode (Aluminum)</a></li>
+        <li class="toc-depth-4"><a href="#step-4-passivation-sin">Step 4: Passivation (SiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-contact-pads">Step 5: Contact Pads</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications">Applications</a></li>
+        <li class="toc-depth-2"><a href="#2-magnetic-domain-inductor">2. Magnetic Domain Inductor</a></li>
+        <li class="toc-depth-3"><a href="#concept_1">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_1">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_1">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-prepare-ferrite-core">Step 1: Prepare Ferrite Core</a></li>
+        <li class="toc-depth-4"><a href="#step-2-deposit-magnetic-thin-film">Step 2: Deposit Magnetic Thin Film</a></li>
+        <li class="toc-depth-4"><a href="#step-3-winding">Step 3: Winding</a></li>
+        <li class="toc-depth-4"><a href="#step-4-annealing-optional-but-recommended">Step 4: Annealing (Optional but recommended)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-encapsulation">Step 5: Encapsulation</a></li>
+        <li class="toc-depth-4"><a href="#step-6-terminations">Step 6: Terminations</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_1">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_1">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_1">Applications</a></li>
+        <li class="toc-depth-2"><a href="#3-sample-hold-capacitor">3. Sample-Hold Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#concept_2">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_2">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_2">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-pcb-design">Step 1: PCB Design</a></li>
+        <li class="toc-depth-4"><a href="#step-2-assembly">Step 2: Assembly</a></li>
+        <li class="toc-depth-4"><a href="#step-3-programmingtesting">Step 3: Programming/Testing</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_2">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_2">Applications</a></li>
+        <li class="toc-depth-2"><a href="#4-memcapacitor">4. Memcapacitor</a></li>
+        <li class="toc-depth-3"><a href="#concept_3">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_3">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_3">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-bottom-electrode-tin">Step 1: Bottom Electrode (TiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-2-high-k-dielectric-hfo2">Step 2: High-k Dielectric (HfO₂)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-charge-trap-layer-si3n4">Step 3: Charge Trap Layer (Si₃N₄)</a></li>
+        <li class="toc-depth-4"><a href="#step-4-tunnel-oxide-sio2">Step 4: Tunnel Oxide (SiO₂)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-top-electrode-tin">Step 5: Top Electrode (TiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-6-passivation-contacts">Step 6: Passivation &amp; Contacts</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_2">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_3">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_3">Applications</a></li>
+        <li class="toc-depth-2"><a href="#5-meminductor">5. Meminductor</a></li>
+        <li class="toc-depth-3"><a href="#concept_4">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_4">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_4">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-prepare-core">Step 1: Prepare Core</a></li>
+        <li class="toc-depth-4"><a href="#step-2-apply-magnetostrictive-layer">Step 2: Apply Magnetostrictive Layer</a></li>
+        <li class="toc-depth-4"><a href="#step-3-add-piezoelectric-control">Step 3: Add Piezoelectric Control</a></li>
+        <li class="toc-depth-4"><a href="#step-4-winding">Step 4: Winding</a></li>
+        <li class="toc-depth-4"><a href="#step-5-add-bias-magnets">Step 5: Add Bias Magnets</a></li>
+        <li class="toc-depth-4"><a href="#step-6-encapsulation">Step 6: Encapsulation</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_3">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_4">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_4">Applications</a></li>
+        <li class="toc-depth-2"><a href="#6-brownian-resistor">6. Brownian Resistor</a></li>
+        <li class="toc-depth-3"><a href="#concept_5">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_5">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_5">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-heater-element">Step 1: Heater Element</a></li>
+        <li class="toc-depth-4"><a href="#step-2-thermistor-layer-vo2">Step 2: Thermistor Layer (VO₂)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-quantum-dot-deposition">Step 3: Quantum Dot Deposition</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrodes">Step 4: Top Electrodes</a></li>
+        <li class="toc-depth-4"><a href="#step-5-create-thermal-isolation">Step 5: Create Thermal Isolation</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_4">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_5">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_5">Applications</a></li>
+        <li class="toc-depth-2"><a href="#7-piezo-quantum-capacitor">7. Piezo-Quantum Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#concept_6">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_6">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_6">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-bottom-electrode">Step 1: Bottom Electrode</a></li>
+        <li class="toc-depth-4"><a href="#step-2-piezoelectric-layer-pzt">Step 2: Piezoelectric Layer (PZT)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-quantum-well-heterostructure">Step 3: Quantum Well Heterostructure</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrode-ito">Step 4: Top Electrode (ITO)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-strain-sensor-optional">Step 5: Strain Sensor (Optional)</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_5">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_6">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_6">Applications</a></li>
+        <li class="toc-depth-2"><a href="#8-dual-mode-memristor">8. Dual-Mode Memristor</a></li>
+        <li class="toc-depth-3"><a href="#concept_7">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_7">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_7">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-bottom-electrode-tin_1">Step 1: Bottom Electrode (TiN)</a></li>
+        <li class="toc-depth-4"><a href="#step-2-digital-switching-layer-hfo2">Step 2: Digital Switching Layer (HfO₂)</a></li>
+        <li class="toc-depth-4"><a href="#step-3-analog-switching-layer-tao_x">Step 3: Analog Switching Layer (TaO_x)</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrode-pt">Step 4: Top Electrode (Pt)</a></li>
+        <li class="toc-depth-4"><a href="#step-5-passivation">Step 5: Passivation</a></li>
+        <li class="toc-depth-3"><a href="#programming-modes">Programming Modes</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_6">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_7">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_7">Applications</a></li>
+        <li class="toc-depth-2"><a href="#9-quantum-dot-array-resistor">9. Quantum Dot Array Resistor</a></li>
+        <li class="toc-depth-3"><a href="#concept_8">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_8">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_8">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-tunnel-barrier">Step 1: Tunnel Barrier</a></li>
+        <li class="toc-depth-4"><a href="#step-2-quantum-dot-synthesis">Step 2: Quantum Dot Synthesis</a></li>
+        <li class="toc-depth-4"><a href="#step-3-qd-film-deposition">Step 3: QD Film Deposition</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-barrier">Step 4: Top Barrier</a></li>
+        <li class="toc-depth-4"><a href="#step-5-sourcedrain-electrodes">Step 5: Source/Drain Electrodes</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_7">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_8">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_8">Applications</a></li>
+        <li class="toc-depth-2"><a href="#10-spin-resistor-gmr-based">10. Spin-Resistor (GMR-based)</a></li>
+        <li class="toc-depth-3"><a href="#concept_9">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_9">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_9">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-full-stack-deposition">Step 1: Full Stack Deposition</a></li>
+        <li class="toc-depth-4"><a href="#step-2-annealing-to-pin-layer">Step 2: Annealing to Pin Layer</a></li>
+        <li class="toc-depth-4"><a href="#step-3-patterning">Step 3: Patterning</a></li>
+        <li class="toc-depth-4"><a href="#step-4-contacts-passivation">Step 4: Contacts &amp; Passivation</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_8">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_9">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_9">Applications</a></li>
+        <li class="toc-depth-2"><a href="#11-photo-capacitor">11. Photo-Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#concept_10">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_10">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_10">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-ito-substrate">Step 1: ITO Substrate</a></li>
+        <li class="toc-depth-4"><a href="#step-2-photoactive-layer">Step 2: Photoactive Layer</a></li>
+        <li class="toc-depth-4"><a href="#step-3-blocking-layer-lif">Step 3: Blocking Layer (LiF)</a></li>
+        <li class="toc-depth-4"><a href="#step-4-top-electrode-al">Step 4: Top Electrode (Al)</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_9">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_10">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_10">Applications</a></li>
+        <li class="toc-depth-2"><a href="#12-magnetoelectric-inductor">12. Magnetoelectric Inductor</a></li>
+        <li class="toc-depth-3"><a href="#concept_11">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_11">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_11">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-ferrite-toroid">Step 1: Ferrite Toroid</a></li>
+        <li class="toc-depth-4"><a href="#step-2-magnetoelectric-composite">Step 2: Magnetoelectric Composite</a></li>
+        <li class="toc-depth-4"><a href="#step-3-electrodes-on-me-layer">Step 3: Electrodes on ME Layer</a></li>
+        <li class="toc-depth-4"><a href="#step-4-winding_1">Step 4: Winding</a></li>
+        <li class="toc-depth-3"><a href="#testing-characterization_10">Testing &amp; Characterization</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_11">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_11">Applications</a></li>
+        <li class="toc-depth-2"><a href="#13-multi-level-ladder-capacitor">13. Multi-Level Ladder Capacitor</a></li>
+        <li class="toc-depth-3"><a href="#concept_12">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_12">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_12">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-pcb-design_1">Step 1: PCB Design</a></li>
+        <li class="toc-depth-4"><a href="#step-2-pcb-fabrication">Step 2: PCB Fabrication</a></li>
+        <li class="toc-depth-4"><a href="#step-3-assembly">Step 3: Assembly</a></li>
+        <li class="toc-depth-3"><a href="#operation">Operation</a></li>
+        <li class="toc-depth-3"><a href="#expected-performance_12">Expected Performance</a></li>
+        <li class="toc-depth-3"><a href="#applications_12">Applications</a></li>
+        <li class="toc-depth-2"><a href="#14-superconducting-resistor">14. Superconducting Resistor</a></li>
+        <li class="toc-depth-3"><a href="#concept_13">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_13">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-process_13">Fabrication Process</a></li>
+        <li class="toc-depth-4"><a href="#step-1-superconducting-film">Step 1: Superconducting Film</a></li>
+        <li class="toc-depth-4"><a href="#step-2-heater-thermometer">Step 2: Heater &amp; Thermometer</a></li>
+        <li class="toc-depth-3"><a href="#testing">Testing</a></li>
+        <li class="toc-depth-3"><a href="#applications_13">Applications</a></li>
+        <li class="toc-depth-2"><a href="#15-josephson-junction-inductor">15. Josephson Junction Inductor</a></li>
+        <li class="toc-depth-3"><a href="#concept_14">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_14">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication-simplified">Fabrication (Simplified)</a></li>
+        <li class="toc-depth-3"><a href="#physics">Physics</a></li>
+        <li class="toc-depth-3"><a href="#applications_14">Applications</a></li>
+        <li class="toc-depth-2"><a href="#16-quantum-hall-resistor">16. Quantum Hall Resistor</a></li>
+        <li class="toc-depth-3"><a href="#concept_15">Concept</a></li>
+        <li class="toc-depth-3"><a href="#physical-structure_15">Physical Structure</a></li>
+        <li class="toc-depth-3"><a href="#fabrication">Fabrication</a></li>
+        <li class="toc-depth-3"><a href="#operation_1">Operation</a></li>
+        <li class="toc-depth-3"><a href="#applications_15">Applications</a></li>
+        <li class="toc-depth-2"><a href="#17-fractal-components-koch-inductor-sierpinski-capacitor">17. Fractal Components (Koch Inductor, Sierpiński Capacitor)</a></li>
+        <li class="toc-depth-3"><a href="#concept_16">Concept</a></li>
+        <li class="toc-depth-3"><a href="#koch-curve-inductor">Koch Curve Inductor</a></li>
+        <li class="toc-depth-3"><a href="#sierpinski-capacitor">Sierpiński Capacitor</a></li>
+        <li class="toc-depth-2"><a href="#18-topological-insulator-components">18. Topological Insulator Components</a></li>
+        <li class="toc-depth-3"><a href="#concept_17">Concept</a></li>
+        <li class="toc-depth-3"><a href="#ti-resistor">TI Resistor</a></li>
+        <li class="toc-depth-2"><a href="#19-memtransistor">19. Memtransistor</a></li>
+        <li class="toc-depth-2"><a href="#20-ternaryquaternary-logic-components">20. Ternary/Quaternary Logic Components</a></li>
+        <li class="toc-depth-2"><a href="#21-shannon-limit-components">21. Shannon-Limit Components</a></li>
+        <li class="toc-depth-2"><a href="#22-mobius-inductor">22. Möbius Inductor</a></li>
+        <li class="toc-depth-2"><a href="#best-starting-points-beyond-the-4-already-detailed">Best Starting Points (Beyond the 4 Already Detailed):</a></li>
+        <li class="toc-depth-2"><a href="#most-exciting-impactful">Most Exciting / Impactful:</a></li>
+        <li class="toc-depth-2"><a href="#equipment-investment-priority">Equipment Investment Priority:</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Complete Fabrication Guide: All Hybrid Component Designs</h1>
+          <p class="doc-meta">New Classes of Electrical Components\complete_hybrid_components_catalog.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Electrons tunnel through ultra-thin barrier (discrete quantum events) creating continuous macroscopic current with controllable shot noise.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="discrete-continuous-electrical-components-full-catalog">Discrete-Continuous Electrical Components (Full Catalog)</h2>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <h3 id="tier-1-standard-equipment-achievable-today">TIER 1: Standard Equipment (Achievable Today)</h3>
 <ol>
@@ -52,8 +271,8 @@
 <li>Shannon-Limit Components</li>
 <li>Möbius Inductor</li>
 </ol>
-<hr />
-<h1 id="tier-1-standard-equipment-components">TIER 1: Standard Equipment Components</h1>
+<hr/>
+
 <h2 id="1-quantum-tunnel-resistor-qtr">1. Quantum Tunnel Resistor (QTR)</h2>
 <h3 id="concept">Concept</h3>
 <p>Electrons tunnel through ultra-thin barrier (discrete quantum events) creating continuous macroscopic current with controllable shot noise.</p>
@@ -64,48 +283,48 @@
 4. Top electrode: Al - 200 nm
 5. Passivation: SiN - 50 nm
 </code></pre>
-<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br />
+<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br/>
 <strong>Active area</strong>: 50 μm × 50 μm (tunnel junction)</p>
 <h3 id="fabrication-process">Fabrication Process</h3>
 <h4 id="step-1-bottom-electrode-aluminum">Step 1: Bottom Electrode (Aluminum)</h4>
 <p><strong>Method</strong>: Thermal evaporation OR sputtering</p>
-<p><strong>Thermal Evaporation</strong>:<br />
-- E-beam evaporate Al<br />
-- Pressure: &lt;10⁻⁶ Torr<br />
-- Rate: 2-5 Å/s<br />
-- Thickness: 200 nm<br />
-- <strong>Pattern</strong>: Photolithography + wet etch OR lift-off<br />
-  - Photoresist: AZ1518 (positive)<br />
-  - Expose, develop<br />
-  - Evaporate Al<br />
+<p><strong>Thermal Evaporation</strong>:
+- E-beam evaporate Al
+- Pressure: &lt;10⁻⁶ Torr
+- Rate: 2-5 Å/s
+- Thickness: 200 nm
+- <strong>Pattern</strong>: Photolithography + wet etch OR lift-off
+  - Photoresist: AZ1518 (positive)
+  - Expose, develop
+  - Evaporate Al
   - Lift-off in acetone</p>
-<p><strong>Sputtering Alternative</strong>:<br />
-- DC sputter Al target<br />
-- 200W, 3 mTorr Ar<br />
+<p><strong>Sputtering Alternative</strong>:
+- DC sputter Al target
+- 200W, 3 mTorr Ar
 - 200 nm in 20 minutes</p>
 <h4 id="step-2-tunnel-barrier-al2o3">Step 2: Tunnel Barrier (Al₂O₃)</h4>
-<p><strong>Method A - ALD (Best control)</strong>:<br />
-- Trimethylaluminum (TMA) + H₂O<br />
-- Temperature: 200°C<br />
-- ~1.1 Å per cycle<br />
-- <strong>For 2 nm</strong>: 18-20 cycles<br />
-- <strong>Critical</strong>: Thickness uniformity is key<br />
-  - ±0.2 nm variation acceptable<br />
+<p><strong>Method A - ALD (Best control)</strong>:
+- Trimethylaluminum (TMA) + H₂O
+- Temperature: 200°C
+- ~1.1 Å per cycle
+- <strong>For 2 nm</strong>: 18-20 cycles
+- <strong>Critical</strong>: Thickness uniformity is key
+  - ±0.2 nm variation acceptable
   - More = too much resistance variation</p>
-<p><strong>Method B - Thermal Oxidation</strong>:<br />
-- Expose Al surface to oxygen plasma<br />
-- Or: Heat in O₂ atmosphere<br />
-- <strong>Advantage</strong>: Self-limiting (Al native oxide)<br />
-- <strong>Thickness control</strong>: Time + temperature<br />
-  - 100°C in O₂: ~2 nm in 24 hours<br />
-  - 200°C in O₂: ~2 nm in 2 hours<br />
+<p><strong>Method B - Thermal Oxidation</strong>:
+- Expose Al surface to oxygen plasma
+- Or: Heat in O₂ atmosphere
+- <strong>Advantage</strong>: Self-limiting (Al native oxide)
+- <strong>Thickness control</strong>: Time + temperature
+  - 100°C in O₂: ~2 nm in 24 hours
+  - 200°C in O₂: ~2 nm in 2 hours
 - <strong>Disadvantage</strong>: Less precise than ALD</p>
-<p><strong>Method C - Anodization</strong> (Room temperature!):<br />
-- Al in ammonium pentaborate solution<br />
-- Apply 3-5V DC<br />
-- Oxide grows at ~1.4 nm/V<br />
-- <strong>For 2 nm</strong>: 1.5V for 1 minute<br />
-- <strong>Advantage</strong>: Very cheap, no vacuum<br />
+<p><strong>Method C - Anodization</strong> (Room temperature!):
+- Al in ammonium pentaborate solution
+- Apply 3-5V DC
+- Oxide grows at ~1.4 nm/V
+- <strong>For 2 nm</strong>: 1.5V for 1 minute
+- <strong>Advantage</strong>: Very cheap, no vacuum
 - <strong>Disadvantage</strong>: Rougher interface</p>
 <h4 id="step-3-top-electrode-aluminum">Step 3: Top Electrode (Aluminum)</h4>
 <ul>
@@ -126,31 +345,31 @@
 <li>Standard photolithography</li>
 </ul>
 <h3 id="testing-characterization">Testing &amp; Characterization</h3>
-<p><strong>I-V Characteristics</strong>:<br />
-- Apply -1V to +1V<br />
-- <strong>Expect</strong>: Slightly nonlinear tunnel current<br />
-  - I ∝ V at low voltage<br />
-  - I ∝ V² at higher voltage<br />
+<p><strong>I-V Characteristics</strong>:
+- Apply -1V to +1V
+- <strong>Expect</strong>: Slightly nonlinear tunnel current
+  - I ∝ V at low voltage
+  - I ∝ V² at higher voltage
 - Tunnel current density: 10⁻³ - 10 A/cm² (depending on barrier)</p>
-<p><strong>Shot Noise Measurement</strong>:<br />
-- Measure current noise spectral density<br />
-- <strong>Formula</strong>: S_I = 2eI (white noise from discrete electrons)<br />
-- Requires low-noise current amplifier<br />
+<p><strong>Shot Noise Measurement</strong>:
+- Measure current noise spectral density
+- <strong>Formula</strong>: S_I = 2eI (white noise from discrete electrons)
+- Requires low-noise current amplifier
 - <strong>Discrete events visible</strong> at low currents (&lt; 1 nA)</p>
-<p><strong>Resistance States</strong>:<br />
-- Apply voltage stress to modify barrier<br />
-- Electromigration can create discrete damage sites<br />
+<p><strong>Resistance States</strong>:
+- Apply voltage stress to modify barrier
+- Electromigration can create discrete damage sites
 - Results in <strong>discrete resistance jumps</strong></p>
 <h3 id="expected-performance">Expected Performance</h3>
-<p><strong>Tunnel Resistance</strong>: <br />
-- R = (h/e²) × (L/A) × exp(2κL)<br />
+<p><strong>Tunnel Resistance</strong>: 
+- R = (h/e²) × (L/A) × exp(2κL)
 - For 2 nm Al₂O₃, 50 μm² area: <strong>~10 kΩ - 1 MΩ</strong></p>
-<p><strong>Discrete Behavior</strong>:<br />
-- Individual electron tunneling events<br />
-- Poisson statistics at low bias<br />
+<p><strong>Discrete Behavior</strong>:
+- Individual electron tunneling events
+- Poisson statistics at low bias
 - Can count individual electrons at &lt; 1 nA</p>
-<p><strong>Continuous Behavior</strong>:<br />
-- Macroscopic I-V appears smooth<br />
+<p><strong>Continuous Behavior</strong>:
+- Macroscopic I-V appears smooth
 - Continuous resistance tuning via voltage stress</p>
 <h3 id="applications">Applications</h3>
 <ul>
@@ -159,7 +378,7 @@
 <li>Single-electron counting</li>
 <li>Ultra-sensitive charge detection</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="2-magnetic-domain-inductor">2. Magnetic Domain Inductor</h2>
 <h3 id="concept_1">Concept</h3>
 <p>Inductance varies continuously with current, but magnetic domains switch discretely creating discrete inductance states.</p>
@@ -173,44 +392,44 @@
 <p><strong>Size</strong>: 1206 (3.2mm × 1.6mm × 1.2mm tall)</p>
 <h3 id="fabrication-process_1">Fabrication Process</h3>
 <h4 id="step-1-prepare-ferrite-core">Step 1: Prepare Ferrite Core</h4>
-<p><strong>Source</strong>: Commercial NiZn ferrite toroid<br />
-- Material: Fair-Rite #43 (NiZn) or #61 (MnZn)<br />
-- Size: 3mm OD × 1mm ID × 1mm height<br />
+<p><strong>Source</strong>: Commercial NiZn ferrite toroid
+- Material: Fair-Rite #43 (NiZn) or #61 (MnZn)
+- Size: 3mm OD × 1mm ID × 1mm height
 - Permeability: μ_r = 800-1500 (depends on material)</p>
-<p><strong>Clean</strong>:<br />
-- Ultrasonic in isopropanol<br />
+<p><strong>Clean</strong>:
+- Ultrasonic in isopropanol
 - Dry thoroughly</p>
 <h4 id="step-2-deposit-magnetic-thin-film">Step 2: Deposit Magnetic Thin Film</h4>
 <p><strong>Method</strong>: Magnetron sputtering</p>
-<p><strong>CoFeB Layer</strong> (on one flat face of toroid):<br />
-- Target: Co₄₀Fe₄₀B₂₀ (commercially available)<br />
-- DC sputter: 100W<br />
-- Ar pressure: 3 mTorr<br />
-- Thickness: 100 nm<br />
+<p><strong>CoFeB Layer</strong> (on one flat face of toroid):
+- Target: Co₄₀Fe₄₀B₂₀ (commercially available)
+- DC sputter: 100W
+- Ar pressure: 3 mTorr
+- Thickness: 100 nm
 - <strong>Purpose</strong>: Creates additional magnetic layer with discrete switching</p>
-<p><strong>Alternative - Electroplating</strong>:<br />
-- NiFe (permalloy) electroplating<br />
-- Easier than sputtering for toroid geometry<br />
-- Bath: NiSO₄ + FeSO₄ solution<br />
-- Current density: 20 mA/cm²<br />
+<p><strong>Alternative - Electroplating</strong>:
+- NiFe (permalloy) electroplating
+- Easier than sputtering for toroid geometry
+- Bath: NiSO₄ + FeSO₄ solution
+- Current density: 20 mA/cm²
 - Plate 100 nm = ~10 minutes</p>
 <h4 id="step-3-winding">Step 3: Winding</h4>
-<p><strong>Main Inductance Winding</strong>:<br />
-- 30 AWG enameled copper wire<br />
-- <strong>20 turns</strong> through toroid center<br />
-- Carefully wound to avoid damaging thin film<br />
+<p><strong>Main Inductance Winding</strong>:
+- 30 AWG enameled copper wire
+- <strong>20 turns</strong> through toroid center
+- Carefully wound to avoid damaging thin film
 - Leave 10mm leads for connections</p>
-<p><strong>Domain Control Winding</strong>:<br />
-- 10 turns of 36 AWG wire<br />
-- Separate from main winding<br />
+<p><strong>Domain Control Winding</strong>:
+- 10 turns of 36 AWG wire
+- Separate from main winding
 - Used to apply bias field for domain control</p>
 <h4 id="step-4-annealing-optional-but-recommended">Step 4: Annealing (Optional but recommended)</h4>
 <p><strong>Purpose</strong>: Set magnetic easy axis, improve domain structure</p>
-<p><strong>Process</strong>:<br />
-- Heat to 300°C in vacuum or inert atmosphere<br />
-- Apply magnetic field (1000 Oe) along desired axis<br />
-- Hold 1 hour<br />
-- Cool in field to room temperature<br />
+<p><strong>Process</strong>:
+- Heat to 300°C in vacuum or inert atmosphere
+- Apply magnetic field (1000 Oe) along desired axis
+- Hold 1 hour
+- Cool in field to room temperature
 - <strong>Result</strong>: Oriented magnetic domains</p>
 <h4 id="step-5-encapsulation">Step 5: Encapsulation</h4>
 <ul>
@@ -225,34 +444,34 @@
 <li>Mount on PCB or in SMD package</li>
 </ul>
 <h3 id="testing-characterization_1">Testing &amp; Characterization</h3>
-<p><strong>L-I Measurement</strong>:<br />
-- Apply DC current, measure inductance at AC frequency<br />
-- <strong>Expect</strong>: <br />
-  - At low current: L₀ = N²μ₀μ_r A_e / l_e<br />
-  - At high current: Core saturates, L drops<br />
+<p><strong>L-I Measurement</strong>:
+- Apply DC current, measure inductance at AC frequency
+- <strong>Expect</strong>: 
+  - At low current: L₀ = N²μ₀μ_r A_e / l_e
+  - At high current: Core saturates, L drops
   - <strong>Discrete jumps</strong> when domains flip</p>
-<p><strong>Hysteresis Loop</strong>:<br />
-- Measure B-H curve<br />
-- Apply AC current, measure voltage<br />
-- <strong>Expect</strong>: <br />
-  - Continuous smooth loop from ferrite core<br />
+<p><strong>Hysteresis Loop</strong>:
+- Measure B-H curve
+- Apply AC current, measure voltage
+- <strong>Expect</strong>: 
+  - Continuous smooth loop from ferrite core
   - <strong>Discrete jumps</strong> from CoFeB thin film domains</p>
-<p><strong>Domain Imaging</strong> (if available):<br />
-- Magneto-optical Kerr effect (MOKE) microscopy<br />
+<p><strong>Domain Imaging</strong> (if available):
+- Magneto-optical Kerr effect (MOKE) microscopy
 - Can visualize discrete domain structure</p>
 <h3 id="expected-performance_1">Expected Performance</h3>
-<p><strong>Inductance</strong>:<br />
-- Base inductance (no DC bias): L₀ = 1-10 μH (depends on core material and turns)<br />
-- With DC bias: L varies continuously as core begins to saturate<br />
+<p><strong>Inductance</strong>:
+- Base inductance (no DC bias): L₀ = 1-10 μH (depends on core material and turns)
+- With DC bias: L varies continuously as core begins to saturate
 - <strong>Discrete jumps</strong>: ±5-20% when thin film domains switch</p>
-<p><strong>Frequency Range</strong>:<br />
-- NiZn ferrite: DC - 50 MHz<br />
+<p><strong>Frequency Range</strong>:
+- NiZn ferrite: DC - 50 MHz
 - MnZn ferrite: DC - 2 MHz</p>
-<p><strong>Discrete States</strong>:<br />
-- CoFeB film creates 2-4 discrete domain configurations<br />
-- Each has slightly different permeability<br />
+<p><strong>Discrete States</strong>:
+- CoFeB film creates 2-4 discrete domain configurations
+- Each has slightly different permeability
 - Switchable via bias winding current</p>
-<p><strong>Q Factor</strong>:<br />
+<p><strong>Q Factor</strong>:
 - At 1 MHz: Q = 40-80 (typical for small ferrite inductor)</p>
 <h3 id="applications_1">Applications</h3>
 <ul>
@@ -261,7 +480,7 @@
 <li>Magnetic memory with analog inductance</li>
 <li>Multi-state RF components</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="3-sample-hold-capacitor">3. Sample-Hold Capacitor</h2>
 <h3 id="concept_2">Concept</h3>
 <p>Capacitor that samples analog voltage at discrete time intervals (clocked), holds continuous value between samples.</p>
@@ -285,54 +504,54 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
                                     │
                                     └───[Op-amp Buffer]───► Output
 </code></pre>
-<p><strong>PCB Layout</strong>:<br />
-- 2-layer FR4, 1.6mm thick<br />
-- Size: 5mm × 5mm<br />
-- Components on top layer<br />
+<p><strong>PCB Layout</strong>:
+- 2-layer FR4, 1.6mm thick
+- Size: 5mm × 5mm
+- Components on top layer
 - Ground plane on bottom</p>
 <h4 id="step-2-assembly">Step 2: Assembly</h4>
-<p><strong>Components</strong> (all SMD):<br />
-1. <strong>Sampling switch</strong>: BSS138 N-channel MOSFET (SOT-23)<br />
-   - R_on = 3.5Ω<br />
+<p><strong>Components</strong> (all SMD):
+1. <strong>Sampling switch</strong>: BSS138 N-channel MOSFET (SOT-23)
+   - R_on = 3.5Ω
    - Switching time: &lt;10 ns</p>
 <ol start="2">
 <li>
-<p><strong>Hold capacitor</strong>: 0805 MLCC, 100 nF, X7R<br />
+<p><strong>Hold capacitor</strong>: 0805 MLCC, 100 nF, X7R
    - Low leakage (&lt;1 nA at 5V)</p>
 </li>
 <li>
-<p><strong>Buffer amplifier</strong>: LMC6482 dual op-amp (SOIC-8)<br />
-   - FET input (very high impedance)<br />
+<p><strong>Buffer amplifier</strong>: LMC6482 dual op-amp (SOIC-8)
+   - FET input (very high impedance)
    - Low offset voltage (&lt;1 mV)</p>
 </li>
 <li>
-<p><strong>Passives</strong>: <br />
-   - 10 kΩ resistors for biasing (0603)<br />
+<p><strong>Passives</strong>: 
+   - 10 kΩ resistors for biasing (0603)
    - 10 nF bypass caps (0603)</p>
 </li>
 </ol>
-<p><strong>Assembly</strong>:<br />
-- Solder paste stenciling<br />
-- Pick-and-place (or hand placement)<br />
+<p><strong>Assembly</strong>:
+- Solder paste stenciling
+- Pick-and-place (or hand placement)
 - Reflow solder (standard profile)</p>
 <h4 id="step-3-programmingtesting">Step 3: Programming/Testing</h4>
 <p><strong>No programming needed</strong> - analog circuit</p>
-<p><strong>Testing</strong>:<br />
-- Apply sine wave to input (1 kHz, 1V amplitude)<br />
-- Apply clock (10 kHz square wave to MOSFET gate)<br />
-- <strong>Expect</strong>: Output is staircase approximation of input<br />
-  - Samples at 10 kHz rate<br />
+<p><strong>Testing</strong>:
+- Apply sine wave to input (1 kHz, 1V amplitude)
+- Apply clock (10 kHz square wave to MOSFET gate)
+- <strong>Expect</strong>: Output is staircase approximation of input
+  - Samples at 10 kHz rate
   - Holds value between samples</p>
 <h3 id="expected-performance_2">Expected Performance</h3>
 <p><strong>Sample Rate</strong>: DC - 1 MHz (limited by MOSFET switching)</p>
-<p><strong>Hold Time</strong>: <br />
-- Droop rate = I_leakage / C<br />
-- With 1 nA leakage, 100 nF cap: 10 μV/ms<br />
+<p><strong>Hold Time</strong>: 
+- Droop rate = I_leakage / C
+- With 1 nA leakage, 100 nF cap: 10 μV/ms
 - <strong>Practical hold</strong>: &gt;100 ms with &lt;1% error</p>
 <p><strong>Voltage Range</strong>: 0-5V (MOSFET dependent)</p>
-<p><strong>Discrete Behavior</strong>: <br />
+<p><strong>Discrete Behavior</strong>: 
 - Samples at clock edges (discrete times)</p>
-<p><strong>Continuous Behavior</strong>:<br />
+<p><strong>Continuous Behavior</strong>:
 - Stored voltage is continuous analog value</p>
 <h3 id="applications_2">Applications</h3>
 <ul>
@@ -341,7 +560,7 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Peak detection</li>
 <li>Discrete-time signal processing</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="4-memcapacitor">4. Memcapacitor</h2>
 <h3 id="concept_3">Concept</h3>
 <p>Capacitance depends on voltage history - stores both charge (continuous) AND memory of past voltages (discrete states).</p>
@@ -353,50 +572,50 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 5. Tunnel oxide: SiO₂ - 3 nm
 6. Top electrode: TiN - 50 nm
 </code></pre>
-<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br />
+<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br/>
 <strong>Active area</strong>: 1mm × 0.6mm</p>
 <h3 id="fabrication-process_3">Fabrication Process</h3>
 <p>This is essentially a <strong>SONOS</strong> (Silicon-Oxide-Nitride-Oxide-Semiconductor) flash memory structure used as a capacitor.</p>
 <h4 id="step-1-bottom-electrode-tin">Step 1: Bottom Electrode (TiN)</h4>
-<p><strong>Method</strong>: Reactive sputtering<br />
-- Titanium target<br />
-- Ar/N₂ atmosphere (80:20)<br />
-- DC power: 200W<br />
-- Pressure: 5 mTorr<br />
-- Thickness: 50 nm<br />
+<p><strong>Method</strong>: Reactive sputtering
+- Titanium target
+- Ar/N₂ atmosphere (80:20)
+- DC power: 200W
+- Pressure: 5 mTorr
+- Thickness: 50 nm
 - Pattern: Photolithography + RIE etch</p>
 <h4 id="step-2-high-k-dielectric-hfo2">Step 2: High-k Dielectric (HfO₂)</h4>
-<p><strong>Method</strong>: ALD<br />
-- Tetrakis(dimethylamido)hafnium (TDMAH) + H₂O<br />
-- Temperature: 250°C<br />
-- Growth rate: ~1 Å/cycle<br />
+<p><strong>Method</strong>: ALD
+- Tetrakis(dimethylamido)hafnium (TDMAH) + H₂O
+- Temperature: 250°C
+- Growth rate: ~1 Å/cycle
 - 100 cycles → 10 nm</p>
-<p><strong>Purpose</strong>: <br />
-- High dielectric constant (ε_r ~ 25)<br />
+<p><strong>Purpose</strong>: 
+- High dielectric constant (ε_r ~ 25)
 - Interface between electrode and charge storage</p>
 <h4 id="step-3-charge-trap-layer-si3n4">Step 3: Charge Trap Layer (Si₃N₄)</h4>
 <p><strong>Method</strong>: PECVD OR ALD</p>
-<p><strong>PECVD</strong>:<br />
-- SiH₄ + NH₃ + N₂<br />
-- Temperature: 300°C<br />
-- RF power: 20W<br />
+<p><strong>PECVD</strong>:
+- SiH₄ + NH₃ + N₂
+- Temperature: 300°C
+- RF power: 20W
 - 20 nm in 5 minutes</p>
-<p><strong>ALD Alternative</strong>:<br />
-- Tris(dimethylamino)silane + NH₃ plasma<br />
+<p><strong>ALD Alternative</strong>:
+- Tris(dimethylamino)silane + NH₃ plasma
 - 250°C, ~0.8 Å/cycle</p>
-<p><strong>Purpose</strong>: <br />
-- Nitride has deep traps that capture electrons<br />
-- <strong>Discrete</strong>: Electron trapping/detrapping<br />
+<p><strong>Purpose</strong>: 
+- Nitride has deep traps that capture electrons
+- <strong>Discrete</strong>: Electron trapping/detrapping
 - Creates memory effect</p>
 <h4 id="step-4-tunnel-oxide-sio2">Step 4: Tunnel Oxide (SiO₂)</h4>
 <p><strong>Method</strong>: ALD OR thermal oxidation</p>
-<p><strong>ALD</strong>:<br />
-- Bis(tertiary-butylamino)silane (BTBAS) + O₂ plasma<br />
-- 300°C<br />
+<p><strong>ALD</strong>:
+- Bis(tertiary-butylamino)silane (BTBAS) + O₂ plasma
+- 300°C
 - 3 nm = ~30 cycles</p>
-<p><strong>Purpose</strong>:<br />
-- Thin enough for tunneling<br />
-- Thick enough to retain charge<br />
+<p><strong>Purpose</strong>:
+- Thin enough for tunneling
+- Thick enough to retain charge
 - 3 nm is optimal</p>
 <h4 id="step-5-top-electrode-tin">Step 5: Top Electrode (TiN)</h4>
 <ul>
@@ -410,33 +629,33 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Aluminum pads for connection</li>
 </ul>
 <h3 id="testing-characterization_2">Testing &amp; Characterization</h3>
-<p><strong>C-V Hysteresis</strong>:<br />
-- Sweep voltage -5V → +5V → -5V<br />
-- Measure capacitance at 100 kHz<br />
-- <strong>Expect</strong>: <br />
-  - Clockwise hysteresis loop<br />
-  - Memory window: 1-3V shift<br />
-  - <strong>Discrete</strong>: Trapped charge in nitride<br />
+<p><strong>C-V Hysteresis</strong>:
+- Sweep voltage -5V → +5V → -5V
+- Measure capacitance at 100 kHz
+- <strong>Expect</strong>: 
+  - Clockwise hysteresis loop
+  - Memory window: 1-3V shift
+  - <strong>Discrete</strong>: Trapped charge in nitride
   - <strong>Continuous</strong>: Capacitance value</p>
-<p><strong>Charge Retention</strong>:<br />
-- Program high-C or low-C state<br />
-- Monitor capacitance over time<br />
+<p><strong>Charge Retention</strong>:
+- Program high-C or low-C state
+- Monitor capacitance over time
 - <strong>Expect</strong>: &gt;10 years retention at room temp</p>
-<p><strong>Endurance</strong>:<br />
-- Cycle between states<br />
+<p><strong>Endurance</strong>:
+- Cycle between states
 - <strong>Expect</strong>: &gt;10⁵ cycles before degradation</p>
 <h3 id="expected-performance_3">Expected Performance</h3>
-<p><strong>Capacitance</strong>:<br />
-- C_total = C_HfO₂ in series with C_SiO₂<br />
+<p><strong>Capacitance</strong>:
+- C_total = C_HfO₂ in series with C_SiO₂
 - <strong>Range</strong>: 50-150 nF (for 1mm² area)</p>
-<p><strong>Memory Window</strong>:<br />
+<p><strong>Memory Window</strong>:
 - ΔC/C = 10-30% between states</p>
-<p><strong>Programming</strong>:<br />
-- Voltage: ±5V for 1 ms<br />
+<p><strong>Programming</strong>:
+- Voltage: ±5V for 1 ms
 - Charge injection into nitride traps</p>
-<p><strong>Hybrid Behavior</strong>:<br />
-- Stores analog charge Q = CV<br />
-- C depends on discrete trapped charge state<br />
+<p><strong>Hybrid Behavior</strong>:
+- Stores analog charge Q = CV
+- C depends on discrete trapped charge state
 - History-dependent capacitance</p>
 <h3 id="applications_3">Applications</h3>
 <ul>
@@ -445,7 +664,7 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Analog memory</li>
 <li>Self-tuning oscillators</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="5-meminductor">5. Meminductor</h2>
 <h3 id="concept_4">Concept</h3>
 <p>Inductance depends on current history - magnetic flux linkage has memory.</p>
@@ -459,40 +678,40 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <p><strong>Size</strong>: 1206 (3.2mm × 1.6mm × 2mm tall)</p>
 <h3 id="fabrication-process_4">Fabrication Process</h3>
 <h4 id="step-1-prepare-core">Step 1: Prepare Core</h4>
-<p><strong>Option A - Laminated Transformer Core</strong>:<br />
-- Silicon steel or permalloy laminations<br />
-- Stack and glue with insulating varnish<br />
+<p><strong>Option A - Laminated Transformer Core</strong>:
+- Silicon steel or permalloy laminations
+- Stack and glue with insulating varnish
 - Size: 5mm × 3mm × 2mm</p>
-<p><strong>Option B - Ferrite Core</strong>:<br />
-- Pot core or E-core geometry<br />
+<p><strong>Option B - Ferrite Core</strong>:
+- Pot core or E-core geometry
 - Lower losses at high frequency</p>
 <h4 id="step-2-apply-magnetostrictive-layer">Step 2: Apply Magnetostrictive Layer</h4>
 <p><strong>Material</strong>: Terfenol-D (Tb₀.₃Dy₀.₇Fe₂) or Galfenol (FeGa)</p>
-<p><strong>Method A - Electroplating</strong> (for Galfenol):<br />
-- Electroplate Fe-Ga alloy onto core surface<br />
-- Sulfate bath with Ga additives<br />
-- Thickness: 10 μm<br />
+<p><strong>Method A - Electroplating</strong> (for Galfenol):
+- Electroplate Fe-Ga alloy onto core surface
+- Sulfate bath with Ga additives
+- Thickness: 10 μm
 - <strong>Advantage</strong>: Conformal coating</p>
-<p><strong>Method B - Bonding</strong> (for Terfenol-D):<br />
-- Thin Terfenol-D foil (commercially available)<br />
-- Epoxy bond to core surface<br />
+<p><strong>Method B - Bonding</strong> (for Terfenol-D):
+- Thin Terfenol-D foil (commercially available)
+- Epoxy bond to core surface
 - <strong>Advantage</strong>: Easier, but less conformal</p>
-<p><strong>Purpose</strong>:<br />
-- Magnetostriction couples magnetic state to mechanical strain<br />
+<p><strong>Purpose</strong>:
+- Magnetostriction couples magnetic state to mechanical strain
 - Strain creates memory effect in magnetic permeability</p>
 <h4 id="step-3-add-piezoelectric-control">Step 3: Add Piezoelectric Control</h4>
 <p><strong>Material</strong>: PZT thick film OR bulk PZT bonded</p>
-<p><strong>Thick Film</strong>:<br />
-- Screen print PZT paste on core<br />
-- Sinter at 700°C<br />
+<p><strong>Thick Film</strong>:
+- Screen print PZT paste on core
+- Sinter at 700°C
 - Electrode with silver paste</p>
-<p><strong>Bulk PZT</strong>:<br />
-- Thin PZT wafer (100 μm thick)<br />
-- Epoxy bond to magnetostrictive layer<br />
+<p><strong>Bulk PZT</strong>:
+- Thin PZT wafer (100 μm thick)
+- Epoxy bond to magnetostrictive layer
 - Wire electrodes</p>
-<p><strong>Purpose</strong>:<br />
-- Apply voltage to PZT → strain<br />
-- Strain modulates magnetostriction<br />
+<p><strong>Purpose</strong>:
+- Apply voltage to PZT → strain
+- Strain modulates magnetostriction
 - Changes magnetic permeability → changes inductance</p>
 <h4 id="step-4-winding">Step 4: Winding</h4>
 <ul>
@@ -514,34 +733,34 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Provides mechanical support</li>
 </ul>
 <h3 id="testing-characterization_3">Testing &amp; Characterization</h3>
-<p><strong>L-I Hysteresis</strong>:<br />
-- Apply AC current, measure inductance<br />
-- <strong>Expect</strong>: <br />
-  - Hysteresis in L vs I curve<br />
-  - Memory of previous current peaks<br />
-  - <strong>Discrete</strong>: Domain wall pinning sites<br />
+<p><strong>L-I Hysteresis</strong>:
+- Apply AC current, measure inductance
+- <strong>Expect</strong>: 
+  - Hysteresis in L vs I curve
+  - Memory of previous current peaks
+  - <strong>Discrete</strong>: Domain wall pinning sites
   - <strong>Continuous</strong>: Smooth L(I) within hysteresis envelope</p>
-<p><strong>Piezoelectric Control</strong>:<br />
-- Apply DC voltage to PZT<br />
-- Measure change in inductance<br />
+<p><strong>Piezoelectric Control</strong>:
+- Apply DC voltage to PZT
+- Measure change in inductance
 - <strong>Expect</strong>: ΔL/L = 5-20% per 100V</p>
-<p><strong>Frequency Response</strong>:<br />
-- Measure L vs frequency<br />
-- <strong>Expect</strong>: Decreases above resonance<br />
-  - Resonance from magnetostrictive layer mass<br />
+<p><strong>Frequency Response</strong>:
+- Measure L vs frequency
+- <strong>Expect</strong>: Decreases above resonance
+  - Resonance from magnetostrictive layer mass
   - Typically 10-100 kHz</p>
 <h3 id="expected-performance_4">Expected Performance</h3>
-<p><strong>Inductance</strong>: <br />
+<p><strong>Inductance</strong>: 
 - L₀ = 10-100 μH (depends on core and turns)</p>
-<p><strong>Memory Effect</strong>:<br />
-- Hysteresis from magnetostriction<br />
-- Retains "memory" of peak currents<br />
+<p><strong>Memory Effect</strong>:
+- Hysteresis from magnetostriction
+- Retains "memory" of peak currents
 - Decay time: milliseconds to seconds</p>
-<p><strong>Tunability</strong>:<br />
+<p><strong>Tunability</strong>:
 - ΔL/L = ±20% via PZT voltage</p>
-<p><strong>Hybrid Behavior</strong>:<br />
-- Continuous inductance and flux linkage<br />
-- Discrete magnetic domain states<br />
+<p><strong>Hybrid Behavior</strong>:
+- Continuous inductance and flux linkage
+- Discrete magnetic domain states
 - History-dependent L(I) relationship</p>
 <h3 id="applications_4">Applications</h3>
 <ul>
@@ -550,7 +769,7 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Magnetic analog memory</li>
 <li>Self-learning inductors</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="6-brownian-resistor">6. Brownian Resistor</h2>
 <h3 id="concept_5">Concept</h3>
 <p>Resistance undergoes continuous Brownian motion (thermal fluctuations) on top of discrete quantized states.</p>
@@ -565,42 +784,42 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <h3 id="fabrication-process_5">Fabrication Process</h3>
 <h4 id="step-1-heater-element">Step 1: Heater Element</h4>
 <p><strong>Method</strong>: Photolithography + liftoff</p>
-<p><strong>Process</strong>:<br />
-- Spin photoresist on sapphire<br />
-- Expose serpentine pattern<br />
-- Develop<br />
-- E-beam evaporate Pt, 100 nm<br />
-- Liftoff in acetone<br />
+<p><strong>Process</strong>:
+- Spin photoresist on sapphire
+- Expose serpentine pattern
+- Develop
+- E-beam evaporate Pt, 100 nm
+- Liftoff in acetone
 - <strong>Pattern</strong>: Meandering line, 50 μm wide, total resistance 100Ω</p>
 <h4 id="step-2-thermistor-layer-vo2">Step 2: Thermistor Layer (VO₂)</h4>
 <p><strong>Method</strong>: Pulsed laser deposition (PLD) OR sputtering</p>
-<p><strong>PLD</strong> (best quality):<br />
-- VO₂ target<br />
-- Substrate: 400°C during deposition<br />
-- O₂ atmosphere: 10 mTorr<br />
-- Thickness: 100 nm<br />
+<p><strong>PLD</strong> (best quality):
+- VO₂ target
+- Substrate: 400°C during deposition
+- O₂ atmosphere: 10 mTorr
+- Thickness: 100 nm
 - <strong>Critical</strong>: Stoichiometry affects metal-insulator transition temp</p>
-<p><strong>Sputtering Alternative</strong>:<br />
-- Vanadium target in O₂/Ar<br />
-- Reactive sputtering<br />
+<p><strong>Sputtering Alternative</strong>:
+- Vanadium target in O₂/Ar
+- Reactive sputtering
 - Post-anneal in O₂ to get right stoichiometry</p>
-<p><strong>Purpose</strong>:<br />
-- VO₂ has metal-insulator transition at 68°C<br />
-- Resistance very sensitive to temperature<br />
-- <strong>Near transition</strong>: dR/dT is huge<br />
+<p><strong>Purpose</strong>:
+- VO₂ has metal-insulator transition at 68°C
+- Resistance very sensitive to temperature
+- <strong>Near transition</strong>: dR/dT is huge
 - Thermal fluctuations → resistance fluctuations</p>
 <h4 id="step-3-quantum-dot-deposition">Step 3: Quantum Dot Deposition</h4>
 <p><strong>Method</strong>: Drop-casting from colloidal solution</p>
-<p><strong>Process</strong>:<br />
-- Synthesize CdSe/ZnS core-shell quantum dots<br />
-  - OR purchase commercially (Sigma-Aldrich, QD Vision)<br />
-- Dilute in toluene (1 mg/mL)<br />
-- Drop-cast onto VO₂ surface<br />
-- Evaporate solvent slowly<br />
+<p><strong>Process</strong>:
+- Synthesize CdSe/ZnS core-shell quantum dots
+  - OR purchase commercially (Sigma-Aldrich, QD Vision)
+- Dilute in toluene (1 mg/mL)
+- Drop-cast onto VO₂ surface
+- Evaporate solvent slowly
 - <strong>Result</strong>: Sparse array of QDs on surface</p>
-<p><strong>Purpose</strong>:<br />
-- Quantum dots provide discrete energy levels<br />
-- Charge trapping/detrapping creates discrete R states<br />
+<p><strong>Purpose</strong>:
+- Quantum dots provide discrete energy levels
+- Charge trapping/detrapping creates discrete R states
 - Thermal energy drives transitions</p>
 <h4 id="step-4-top-electrodes">Step 4: Top Electrodes</h4>
 <ul>
@@ -609,52 +828,52 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Leave most of VO₂/QD surface exposed</li>
 </ul>
 <h4 id="step-5-create-thermal-isolation">Step 5: Create Thermal Isolation</h4>
-<p><strong>Method A - Air Gap</strong>:<br />
-- Etch sacrificial layer under thermistor<br />
-- Creates suspended structure<br />
-- <strong>Advantage</strong>: Good thermal isolation<br />
+<p><strong>Method A - Air Gap</strong>:
+- Etch sacrificial layer under thermistor
+- Creates suspended structure
+- <strong>Advantage</strong>: Good thermal isolation
 - <strong>Disadvantage</strong>: Fragile</p>
-<p><strong>Method B - Aerogel</strong>:<br />
-- Deposit aerogel layer around device<br />
-- <strong>Advantage</strong>: Robust<br />
+<p><strong>Method B - Aerogel</strong>:
+- Deposit aerogel layer around device
+- <strong>Advantage</strong>: Robust
 - <strong>Disadvantage</strong>: Harder to fabricate</p>
-<p><strong>Method C - Vacuum Package</strong>:<br />
-- Seal device in vacuum<br />
-- Best thermal isolation<br />
+<p><strong>Method C - Vacuum Package</strong>:
+- Seal device in vacuum
+- Best thermal isolation
 - <strong>Disadvantage</strong>: Requires hermetic package</p>
 <h3 id="testing-characterization_4">Testing &amp; Characterization</h3>
-<p><strong>Noise Spectral Density</strong>:<br />
-- Measure voltage noise vs frequency<br />
-- <strong>Expect</strong>:<br />
-  - Johnson-Nyquist (white) noise: S_V = 4kTR<br />
-  - 1/f noise from charge trapping<br />
+<p><strong>Noise Spectral Density</strong>:
+- Measure voltage noise vs frequency
+- <strong>Expect</strong>:
+  - Johnson-Nyquist (white) noise: S_V = 4kTR
+  - 1/f noise from charge trapping
   - <strong>Discrete jumps</strong>: Random telegraph noise from QDs</p>
-<p><strong>Temperature Scan</strong>:<br />
-- Vary temperature near 68°C<br />
-- Measure R(T)<br />
-- <strong>Expect</strong>:<br />
-  - Sharp transition at T_MIT<br />
-  - Hysteresis (discrete states)<br />
+<p><strong>Temperature Scan</strong>:
+- Vary temperature near 68°C
+- Measure R(T)
+- <strong>Expect</strong>:
+  - Sharp transition at T_MIT
+  - Hysteresis (discrete states)
   - Fluctuations increase near transition</p>
-<p><strong>Time Series</strong>:<br />
-- Record R(t) at high sampling rate<br />
-- <strong>Expect</strong>:<br />
-  - Continuous Brownian motion<br />
-  - Discrete jumps between QD states<br />
+<p><strong>Time Series</strong>:
+- Record R(t) at high sampling rate
+- <strong>Expect</strong>:
+  - Continuous Brownian motion
+  - Discrete jumps between QD states
   - Switching rates follow Arrhenius law</p>
 <h3 id="expected-performance_5">Expected Performance</h3>
-<p><strong>Resistance</strong>:<br />
-- Below MIT: R = 1-10 Ω (metallic VO₂)<br />
-- Above MIT: R = 1-10 kΩ (insulating VO₂)<br />
+<p><strong>Resistance</strong>:
+- Below MIT: R = 1-10 Ω (metallic VO₂)
+- Above MIT: R = 1-10 kΩ (insulating VO₂)
 - <strong>At transition</strong>: R fluctuates wildly</p>
-<p><strong>Discrete States</strong>:<br />
-- QD charge states: 0, 1, 2... electrons trapped<br />
-- Each state has different R<br />
+<p><strong>Discrete States</strong>:
+- QD charge states: 0, 1, 2... electrons trapped
+- Each state has different R
 - Thermal activation drives transitions</p>
-<p><strong>Brownian Dynamics</strong>:<br />
-- Correlation time: microseconds to milliseconds<br />
+<p><strong>Brownian Dynamics</strong>:
+- Correlation time: microseconds to milliseconds
 - Amplitude: ±1-10% of R</p>
-<p><strong>Temperature Coefficient</strong>:<br />
+<p><strong>Temperature Coefficient</strong>:
 - At 68°C: dR/dT = -50%/°C (huge!)</p>
 <h3 id="applications_5">Applications</h3>
 <ul>
@@ -663,7 +882,7 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 <li>Physical unclonable functions (PUFs)</li>
 <li>Stochastic computing elements</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="7-piezo-quantum-capacitor">7. Piezo-Quantum Capacitor</h2>
 <h3 id="concept_6">Concept</h3>
 <p>Mechanical strain (continuous) couples to quantum charge states (discrete) through piezoelectric effect.</p>
@@ -684,15 +903,15 @@ Input ──┴──[MOSFET Drain-Source]───┬───[100nF Cap to GND
 </ul>
 <h4 id="step-2-piezoelectric-layer-pzt">Step 2: Piezoelectric Layer (PZT)</h4>
 <p><strong>Method</strong>: Sol-gel (easier) OR sputtering</p>
-<p><strong>Sol-gel</strong>:<br />
-- PZT precursor (Pb-Zr-Ti acetates in solvent)<br />
-- Spin coat at 3000 RPM<br />
-- Pyrolyze 350°C<br />
-- Repeat 8-10 times for 500 nm total<br />
+<p><strong>Sol-gel</strong>:
+- PZT precursor (Pb-Zr-Ti acetates in solvent)
+- Spin coat at 3000 RPM
+- Pyrolyze 350°C
+- Repeat 8-10 times for 500 nm total
 - Crystallize at 650°C, 30 min</p>
-<p><strong>Purpose</strong>:<br />
-- Converts voltage to mechanical strain<br />
-- And vice versa<br />
+<p><strong>Purpose</strong>:
+- Converts voltage to mechanical strain
+- And vice versa
 - Coupling coefficient d₃₃ ~ 200 pm/V</p>
 <h4 id="step-3-quantum-well-heterostructure">Step 3: Quantum Well Heterostructure</h4>
 <p><strong>Method</strong>: MOCVD (Metal-Organic Chemical Vapor Deposition)</p>
@@ -703,69 +922,69 @@ AlGaAs barrier - 20 nm
 InGaAs quantum well - 10 nm
 AlGaAs barrier - 20 nm
 </code></pre>
-<p><strong>Growth</strong>:<br />
-- Temperature: 600-700°C<br />
-- Precursors: TMGa, TMAl, TMIn, AsH₃<br />
-- Growth rate: 1-2 μm/hour<br />
+<p><strong>Growth</strong>:
+- Temperature: 600-700°C
+- Precursors: TMGa, TMAl, TMIn, AsH₃
+- Growth rate: 1-2 μm/hour
 - <strong>Critical</strong>: Sharp interfaces, precise composition</p>
-<p><strong>Alternative - Simpler</strong>:<br />
-- Use commercial quantum well wafer<br />
-- Bond to PZT via wafer bonding<br />
+<p><strong>Alternative - Simpler</strong>:
+- Use commercial quantum well wafer
+- Bond to PZT via wafer bonding
 - Grind/etch substrate to thin it</p>
-<p><strong>Purpose</strong>:<br />
-- Quantum well confines electrons<br />
-- Discrete energy levels<br />
-- Strain from PZT shifts energy levels<br />
+<p><strong>Purpose</strong>:
+- Quantum well confines electrons
+- Discrete energy levels
+- Strain from PZT shifts energy levels
 - Changes electron population → changes capacitance</p>
 <h4 id="step-4-top-electrode-ito">Step 4: Top Electrode (ITO)</h4>
 <p><strong>Method</strong>: Sputtering</p>
-<p><strong>Process</strong>:<br />
-- RF sputter from ITO target (In₂O₃:SnO₂ 90:10)<br />
-- 100W, 5 mTorr Ar<br />
-- Substrate: room temperature<br />
-- Thickness: 100 nm<br />
-- <strong>Advantage</strong>: Transparent, can illuminate QW with light<br />
+<p><strong>Process</strong>:
+- RF sputter from ITO target (In₂O₃:SnO₂ 90:10)
+- 100W, 5 mTorr Ar
+- Substrate: room temperature
+- Thickness: 100 nm
+- <strong>Advantage</strong>: Transparent, can illuminate QW with light
 - <strong>Conductivity</strong>: ~1000 S/cm</p>
 <h4 id="step-5-strain-sensor-optional">Step 5: Strain Sensor (Optional)</h4>
 <p><strong>Method</strong>: Dope Si with boron (piezoresistive)</p>
-<p><strong>Process</strong>:<br />
-- Ion implantation of boron<br />
-- Pattern into strain gauge geometry<br />
-- Measures mechanical strain directly<br />
+<p><strong>Process</strong>:
+- Ion implantation of boron
+- Pattern into strain gauge geometry
+- Measures mechanical strain directly
 - Correlates with quantum state</p>
 <h3 id="testing-characterization_5">Testing &amp; Characterization</h3>
-<p><strong>Piezoelectric Response</strong>:<br />
-- Apply voltage to PZT<br />
-- Measure strain via piezoresistor<br />
-- <strong>Expect</strong>: Strain = d₃₃ × E_field<br />
+<p><strong>Piezoelectric Response</strong>:
+- Apply voltage to PZT
+- Measure strain via piezoresistor
+- <strong>Expect</strong>: Strain = d₃₃ × E_field
   - For ±10V across 500 nm: ±200 pm displacement</p>
-<p><strong>Quantum Capacitance</strong>:<br />
-- Measure C vs voltage at 1 MHz<br />
-- <strong>Expect</strong>:<br />
-  - C_total = C_geometric + C_quantum<br />
-  - C_quantum shows steps when Fermi level crosses discrete QW levels<br />
-  - <strong>Discrete</strong>: Energy level crossings<br />
+<p><strong>Quantum Capacitance</strong>:
+- Measure C vs voltage at 1 MHz
+- <strong>Expect</strong>:
+  - C_total = C_geometric + C_quantum
+  - C_quantum shows steps when Fermi level crosses discrete QW levels
+  - <strong>Discrete</strong>: Energy level crossings
   - <strong>Continuous</strong>: Smooth C(V) between levels</p>
-<p><strong>Strain-Capacitance Coupling</strong>:<br />
-- Apply mechanical stress externally (bend substrate)<br />
-- Measure capacitance change<br />
+<p><strong>Strain-Capacitance Coupling</strong>:
+- Apply mechanical stress externally (bend substrate)
+- Measure capacitance change
 - <strong>Expect</strong>: ΔC ∝ strain ∝ stress</p>
-<p><strong>Photocapacitance</strong> (bonus):<br />
-- Illuminate with LED<br />
-- Photons create electron-hole pairs in QW<br />
-- Changes capacitance<br />
+<p><strong>Photocapacitance</strong> (bonus):
+- Illuminate with LED
+- Photons create electron-hole pairs in QW
+- Changes capacitance
 - <strong>Discrete</strong>: Photon absorption events</p>
 <h3 id="expected-performance_6">Expected Performance</h3>
-<p><strong>Capacitance</strong>:<br />
-- Geometric: C_geo = εA/d ~ 200 nF<br />
+<p><strong>Capacitance</strong>:
+- Geometric: C_geo = εA/d ~ 200 nF
 - Quantum addition: ΔC_quantum ~ ±10 nF per level crossing</p>
-<p><strong>Discrete States</strong>:<br />
-- Quantum well energy levels (4-6 levels typically accessible)<br />
-- Separation: 20-50 meV<br />
+<p><strong>Discrete States</strong>:
+- Quantum well energy levels (4-6 levels typically accessible)
+- Separation: 20-50 meV
 - Population controlled by strain</p>
-<p><strong>Piezoelectric Coefficient</strong>:<br />
+<p><strong>Piezoelectric Coefficient</strong>:
 - d₃₃ = 200 pm/V for PZT</p>
-<p><strong>Coupling Strength</strong>:<br />
+<p><strong>Coupling Strength</strong>:
 - ΔE/Δstrain ~ 10 meV per 0.1% strain</p>
 <h3 id="applications_6">Applications</h3>
 <ul>
@@ -774,7 +993,7 @@ AlGaAs barrier - 20 nm
 <li>Optomechanical systems</li>
 <li>Quantum electromechanical resonators</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="8-dual-mode-memristor">8. Dual-Mode Memristor</h2>
 <h3 id="concept_7">Concept</h3>
 <p>A memristor that can operate in TWO modes: (1) Discrete memory states like flash, (2) Continuous analog resistance like synaptic weights.</p>
@@ -794,26 +1013,26 @@ AlGaAs barrier - 20 nm
 <li>Pattern via RIE</li>
 </ul>
 <h4 id="step-2-digital-switching-layer-hfo2">Step 2: Digital Switching Layer (HfO₂)</h4>
-<p><strong>Method</strong>: ALD<br />
-- TEMAH + H₂O at 250°C<br />
-- 5 nm = 50 cycles<br />
-- <strong>Purpose</strong>: Binary switching (SET/RESET)<br />
-- Filament formation/rupture<br />
+<p><strong>Method</strong>: ALD
+- TEMAH + H₂O at 250°C
+- 5 nm = 50 cycles
+- <strong>Purpose</strong>: Binary switching (SET/RESET)
+- Filament formation/rupture
 - <strong>Discrete</strong>: ON/OFF states</p>
 <h4 id="step-3-analog-switching-layer-tao_x">Step 3: Analog Switching Layer (TaO_x)</h4>
 <p><strong>Method</strong>: Reactive sputtering with <strong>gradient</strong></p>
-<p><strong>Process</strong>:<br />
-- Start: High O₂ flow (50% of Ar)<br />
-  - Deposits TaO₂ (more stoichiometric)<br />
-- Gradually reduce O₂ flow to 20%<br />
-  - Deposits TaO_x (oxygen deficient)<br />
+<p><strong>Process</strong>:
+- Start: High O₂ flow (50% of Ar)
+  - Deposits TaO₂ (more stoichiometric)
+- Gradually reduce O₂ flow to 20%
+  - Deposits TaO_x (oxygen deficient)
 - <strong>Result</strong>: Composition gradient through thickness</p>
-<p><strong>Alternative - Multi-layer</strong>:<br />
-- Deposit TaO₂ (5 nm) + TaO_x (5 nm) as distinct layers<br />
+<p><strong>Alternative - Multi-layer</strong>:
+- Deposit TaO₂ (5 nm) + TaO_x (5 nm) as distinct layers
 - Interface provides gradual transition</p>
-<p><strong>Purpose</strong>:<br />
-- Gradual composition change<br />
-- <strong>Continuous</strong> resistance tuning<br />
+<p><strong>Purpose</strong>:
+- Gradual composition change
+- <strong>Continuous</strong> resistance tuning
 - Many intermediate states</p>
 <h4 id="step-4-top-electrode-pt">Step 4: Top Electrode (Pt)</h4>
 <ul>
@@ -825,9 +1044,9 @@ AlGaAs barrier - 20 nm
 <li>ALD Al₂O₃, 10 nm</li>
 </ul>
 <h3 id="programming-modes">Programming Modes</h3>
-<p><strong>Mode 1: Digital (Binary)</strong><br />
-- <strong>SET</strong>: +3V, 100 ns pulse<br />
-  - Filament forms through HfO₂<br />
+<p><strong>Mode 1: Digital (Binary)</strong>
+- <strong>SET</strong>: +3V, 100 ns pulse
+  - Filament forms through HfO₂
   - Low resistance state</p>
 <ul>
 <li><strong>RESET</strong>: -2V, 50 ns pulse</li>
@@ -839,9 +1058,9 @@ AlGaAs barrier - 20 nm
 <p><strong>Result</strong>: R_ON/R_OFF ~ 100-1000</p>
 </li>
 </ul>
-<p><strong>Mode 2: Analog (Multi-level)</strong><br />
-- <strong>Gradual SET</strong>: +1.5V, variable pulse width<br />
-  - Oxygen vacancies migrate in TaO_x<br />
+<p><strong>Mode 2: Analog (Multi-level)</strong>
+- <strong>Gradual SET</strong>: +1.5V, variable pulse width
+  - Oxygen vacancies migrate in TaO_x
   - Resistance decreases smoothly</p>
 <ul>
 <li><strong>Gradual RESET</strong>: -1.5V, variable pulse width</li>
@@ -853,40 +1072,40 @@ AlGaAs barrier - 20 nm
 <p><strong>Result</strong>: Continuous R from 1 kΩ to 1 MΩ</p>
 </li>
 </ul>
-<p><strong>Mode Switching</strong>:<br />
-- Voltage amplitude determines which layer dominates<br />
-- Low voltage (±1.5V): TaO_x analog mode<br />
-- High voltage (±3V): HfO₂ digital mode<br />
+<p><strong>Mode Switching</strong>:
+- Voltage amplitude determines which layer dominates
+- Low voltage (±1.5V): TaO_x analog mode
+- High voltage (±3V): HfO₂ digital mode
 - Can use BOTH simultaneously</p>
 <h3 id="testing-characterization_6">Testing &amp; Characterization</h3>
-<p><strong>Digital Mode Test</strong>:<br />
-- Apply ±3V pulses<br />
-- Verify binary switching<br />
+<p><strong>Digital Mode Test</strong>:
+- Apply ±3V pulses
+- Verify binary switching
 - <strong>Expect</strong>: Sharp transition, ON/OFF ratio &gt;100</p>
-<p><strong>Analog Mode Test</strong>:<br />
-- Apply series of +1.5V pulses (increasing count)<br />
-- Measure R after each pulse<br />
-- <strong>Expect</strong>: Smooth R decrease<br />
+<p><strong>Analog Mode Test</strong>:
+- Apply series of +1.5V pulses (increasing count)
+- Measure R after each pulse
+- <strong>Expect</strong>: Smooth R decrease
 - <strong>Linearity</strong>: Aim for &lt;5% deviation from linear</p>
-<p><strong>Endurance</strong>:<br />
-- Digital: &gt;10⁹ cycles<br />
+<p><strong>Endurance</strong>:
+- Digital: &gt;10⁹ cycles
 - Analog: &gt;10⁶ cycles (analog mode wears faster)</p>
-<p><strong>Retention</strong>:<br />
+<p><strong>Retention</strong>:
 - Both modes: &gt;10 years at 85°C</p>
 <h3 id="expected-performance_7">Expected Performance</h3>
-<p><strong>Resistance Range</strong>:<br />
-- Digital ON: 1 kΩ<br />
-- Digital OFF: 1 MΩ<br />
+<p><strong>Resistance Range</strong>:
+- Digital ON: 1 kΩ
+- Digital OFF: 1 MΩ
 - Analog: Continuous 1 kΩ - 1 MΩ</p>
-<p><strong>States</strong>:<br />
-- Digital: 2 states (binary)<br />
+<p><strong>States</strong>:
+- Digital: 2 states (binary)
 - Analog: &gt;100 distinguishable levels (7-bit equivalent)</p>
-<p><strong>Switching</strong>:<br />
-- Digital: &lt;100 ns<br />
+<p><strong>Switching</strong>:
+- Digital: &lt;100 ns
 - Analog: 1-10 μs per incremental step</p>
-<p><strong>Hybrid Operation</strong>:<br />
-- Can store digital bit (HfO₂ state) <br />
-- AND analog weight (TaO_x state)<br />
+<p><strong>Hybrid Operation</strong>:
+- Can store digital bit (HfO₂ state) 
+- AND analog weight (TaO_x state)
 - Total information: 1 bit + 7 bits = 8 bits per device</p>
 <h3 id="applications_7">Applications</h3>
 <ul>
@@ -895,8 +1114,8 @@ AlGaAs barrier - 20 nm
 <li>In-memory computing</li>
 <li>Reconfigurable circuits</li>
 </ul>
-<hr />
-<h1 id="tier-2-specialized-equipment-components">TIER 2: Specialized Equipment Components</h1>
+<hr/>
+
 <h2 id="9-quantum-dot-array-resistor">9. Quantum Dot Array Resistor</h2>
 <h3 id="concept_8">Concept</h3>
 <p>Array of quantum dots with discrete energy levels creates overall continuous conduction with discrete hopping events.</p>
@@ -911,29 +1130,29 @@ AlGaAs barrier - 20 nm
 <p><strong>Size</strong>: 0805, channel 10 μm long × 100 μm wide</p>
 <h3 id="fabrication-process_8">Fabrication Process</h3>
 <h4 id="step-1-tunnel-barrier">Step 1: Tunnel Barrier</h4>
-<p><strong>Method</strong>: ALD SiO₂<br />
-- BTBAS + O₂ plasma<br />
+<p><strong>Method</strong>: ALD SiO₂
+- BTBAS + O₂ plasma
 - 300°C, 5 nm</p>
 <h4 id="step-2-quantum-dot-synthesis">Step 2: Quantum Dot Synthesis</h4>
 <p><strong>Method</strong>: Hot-injection colloidal synthesis</p>
-<p><strong>For PbS QDs</strong>:<br />
-- Lead oleate + bis(trimethylsilyl)sulfide<br />
-- Inject sulfur precursor into hot (100-150°C) lead oleate<br />
-- Growth time: 1-5 minutes controls size<br />
-- <strong>5 nm dots</strong>: 2 min at 120°C<br />
+<p><strong>For PbS QDs</strong>:
+- Lead oleate + bis(trimethylsilyl)sulfide
+- Inject sulfur precursor into hot (100-150°C) lead oleate
+- Growth time: 1-5 minutes controls size
+- <strong>5 nm dots</strong>: 2 min at 120°C
 - Purify with hexane/ethanol washing</p>
-<p><strong>Alternative</strong>: Purchase commercially<br />
+<p><strong>Alternative</strong>: Purchase commercially
 - Sigma-Aldrich, QD Vision sell PbS QDs</p>
 <h4 id="step-3-qd-film-deposition">Step 3: QD Film Deposition</h4>
 <p><strong>Method</strong>: Spin-coating with layer-by-layer ligand exchange</p>
-<p><strong>Process</strong>:<br />
-1. Spin QD solution (10 mg/mL in octane) at 2000 RPM<br />
-2. Treat with ethanedithiol (EDT) solution<br />
-   - Replaces long oleic acid ligands with short thiols<br />
-   - Brings dots closer (better coupling)<br />
-3. Rinse with ethanol<br />
-4. Repeat 3-5 times to build film thickness<br />
-   - Each layer ~20 nm<br />
+<p><strong>Process</strong>:
+1. Spin QD solution (10 mg/mL in octane) at 2000 RPM
+2. Treat with ethanedithiol (EDT) solution
+   - Replaces long oleic acid ligands with short thiols
+   - Brings dots closer (better coupling)
+3. Rinse with ethanol
+4. Repeat 3-5 times to build film thickness
+   - Each layer ~20 nm
    - 3 layers = 60 nm total</p>
 <h4 id="step-4-top-barrier">Step 4: Top Barrier</h4>
 <ul>
@@ -947,29 +1166,29 @@ AlGaAs barrier - 20 nm
 <li><strong>Geometry</strong>: 10 μm channel length</li>
 </ul>
 <h3 id="testing-characterization_7">Testing &amp; Characterization</h3>
-<p><strong>I-V Characteristics</strong>:<br />
-- 2-terminal or 3-terminal (with gate)<br />
-- <strong>Expect</strong>: <br />
-  - Nonlinear I-V<br />
-  - Coulomb blockade at low voltage (discrete charging)<br />
+<p><strong>I-V Characteristics</strong>:
+- 2-terminal or 3-terminal (with gate)
+- <strong>Expect</strong>: 
+  - Nonlinear I-V
+  - Coulomb blockade at low voltage (discrete charging)
   - Staircase current at higher voltage</p>
-<p><strong>Temperature Dependence</strong>:<br />
-- Cool to 77K (liquid N₂) or 4K (liquid He)<br />
-- <strong>Expect</strong>:<br />
-  - Discrete Coulomb diamonds in 2D plot (V_ds vs V_gate)<br />
+<p><strong>Temperature Dependence</strong>:
+- Cool to 77K (liquid N₂) or 4K (liquid He)
+- <strong>Expect</strong>:
+  - Discrete Coulomb diamonds in 2D plot (V_ds vs V_gate)
   - Activated transport: I ∝ exp(-E_a/kT)</p>
-<p><strong>Hopping Transport</strong>:<br />
-- Measure conductance vs T<br />
-- <strong>Expect</strong>: Variable range hopping<br />
+<p><strong>Hopping Transport</strong>:
+- Measure conductance vs T
+- <strong>Expect</strong>: Variable range hopping
   - ln(G) ∝ T^(-1/4) (Mott VRH)</p>
 <h3 id="expected-performance_8">Expected Performance</h3>
 <p><strong>Resistance</strong>: 10 kΩ - 10 MΩ (depending on dot coupling)</p>
-<p><strong>Discrete States</strong>:<br />
-- Single-electron charging energy: E_c = e²/2C_dot<br />
-- For 5 nm PbS dot: E_c ~ 50 meV<br />
+<p><strong>Discrete States</strong>:
+- Single-electron charging energy: E_c = e²/2C_dot
+- For 5 nm PbS dot: E_c ~ 50 meV
 - <strong>Observable up to</strong>: T ~ 600K (exceeds room temp!)</p>
-<p><strong>Continuous Current</strong>:<br />
-- Net current is continuous (many dots conducting)<br />
+<p><strong>Continuous Current</strong>:
+- Net current is continuous (many dots conducting)
 - Individual hops are discrete</p>
 <h3 id="applications_8">Applications</h3>
 <ul>
@@ -978,7 +1197,7 @@ AlGaAs barrier - 20 nm
 <li>High-sensitivity electrometers</li>
 <li>Random number generators</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="10-spin-resistor-gmr-based">10. Spin-Resistor (GMR-based)</h2>
 <h3 id="concept_9">Concept</h3>
 <p>Giant magnetoresistance: Resistance depends on discrete magnetic layer alignments (parallel/antiparallel spins) with continuous magnetic field response.</p>
@@ -991,37 +1210,37 @@ AlGaAs barrier - 20 nm
 6. Free FM layer: NiFe - 4 nm
 7. Cap: Ta - 5 nm
 </code></pre>
-<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br />
+<p><strong>Size</strong>: 0805 (2.0mm × 1.25mm)<br/>
 <strong>Active sensor</strong>: 20 μm × 5 μm strip</p>
 <h3 id="fabrication-process_9">Fabrication Process</h3>
 <p>This is a <strong>standard GMR spin valve</strong> - technology from hard drive read heads.</p>
 <h4 id="step-1-full-stack-deposition">Step 1: Full Stack Deposition</h4>
 <p><strong>Method</strong>: DC magnetron sputtering (no breaking vacuum!)</p>
-<p><strong>Process</strong> (all in one pump-down):<br />
-1. Ta (5 nm): 50W, 3 mTorr Ar<br />
-2. CoFe (3 nm): 50W, 3 mTorr Ar<br />
-3. IrMn (8 nm): 50W, 3 mTorr Ar<br />
-4. Cu (2 nm): 30W, 3 mTorr Ar, <strong>very slow</strong> (critical thickness)<br />
-5. NiFe (Py, 4 nm): 50W, 3 mTorr Ar<br />
+<p><strong>Process</strong> (all in one pump-down):
+1. Ta (5 nm): 50W, 3 mTorr Ar
+2. CoFe (3 nm): 50W, 3 mTorr Ar
+3. IrMn (8 nm): 50W, 3 mTorr Ar
+4. Cu (2 nm): 30W, 3 mTorr Ar, <strong>very slow</strong> (critical thickness)
+5. NiFe (Py, 4 nm): 50W, 3 mTorr Ar
 6. Ta (5 nm): 50W, 3 mTorr Ar</p>
-<p><strong>Critical</strong>:<br />
-- No vacuum break (prevents oxidation)<br />
-- Cu thickness precision ±0.2 nm (affects GMR ratio)<br />
+<p><strong>Critical</strong>:
+- No vacuum break (prevents oxidation)
+- Cu thickness precision ±0.2 nm (affects GMR ratio)
 - Cleanliness (particles kill GMR)</p>
 <h4 id="step-2-annealing-to-pin-layer">Step 2: Annealing to Pin Layer</h4>
 <p><strong>Purpose</strong>: Set exchange bias (pin CoFe layer)</p>
-<p><strong>Process</strong>:<br />
-- Heat to 250°C in vacuum<br />
-- Apply magnetic field (5000 Oe) in plane<br />
-- Hold 2 hours<br />
-- Cool in field to room temperature<br />
+<p><strong>Process</strong>:
+- Heat to 250°C in vacuum
+- Apply magnetic field (5000 Oe) in plane
+- Hold 2 hours
+- Cool in field to room temperature
 - <strong>Result</strong>: IrMn "pins" CoFe magnetization direction</p>
 <h4 id="step-3-patterning">Step 3: Patterning</h4>
 <p><strong>Method</strong>: Ion beam etching OR reactive ion etch</p>
-<p><strong>Process</strong>:<br />
-- Photolithography to define sensor strip<br />
-- Ar ion mill through all layers<br />
-- <strong>Pattern</strong>: 20 μm wide × 5 μm long strip<br />
+<p><strong>Process</strong>:
+- Photolithography to define sensor strip
+- Ar ion mill through all layers
+- <strong>Pattern</strong>: 20 μm wide × 5 μm long strip
 - Stop on substrate</p>
 <h4 id="step-4-contacts-passivation">Step 4: Contacts &amp; Passivation</h4>
 <ul>
@@ -1029,28 +1248,28 @@ AlGaAs barrier - 20 nm
 <li>SiN passivation over sensor</li>
 </ul>
 <h3 id="testing-characterization_8">Testing &amp; Characterization</h3>
-<p><strong>R-H Curve</strong> (Resistance vs Magnetic Field):<br />
-- Apply in-plane magnetic field, measure resistance<br />
-- <strong>Expect</strong>:<br />
-  - At H=0: Higher R (layers antiparallel)<br />
-  - At H&gt;H_sat: Lower R (layers parallel)<br />
+<p><strong>R-H Curve</strong> (Resistance vs Magnetic Field):
+- Apply in-plane magnetic field, measure resistance
+- <strong>Expect</strong>:
+  - At H=0: Higher R (layers antiparallel)
+  - At H&gt;H_sat: Lower R (layers parallel)
   - <strong>GMR ratio</strong>: ΔR/R = 5-20%</p>
-<p><strong>Discrete Behavior</strong>:<br />
-- Two states: parallel (low R), antiparallel (high R)<br />
+<p><strong>Discrete Behavior</strong>:
+- Two states: parallel (low R), antiparallel (high R)
 - Switching field: ~10-50 Oe for NiFe free layer</p>
-<p><strong>Continuous Behavior</strong>:<br />
-- Smooth R(H) during switching<br />
+<p><strong>Continuous Behavior</strong>:
+- Smooth R(H) during switching
 - Analog response to field strength</p>
 <h3 id="expected-performance_9">Expected Performance</h3>
-<p><strong>Resistance</strong>: <br />
-- Parallel: 100 Ω<br />
-- Antiparallel: 120 Ω<br />
+<p><strong>Resistance</strong>: 
+- Parallel: 100 Ω
+- Antiparallel: 120 Ω
 - GMR ratio: 20%</p>
-<p><strong>Sensitivity</strong>:<br />
+<p><strong>Sensitivity</strong>:
 - dR/dH ~ 0.5 Ω/Oe near switching field</p>
-<p><strong>Speed</strong>: <br />
+<p><strong>Speed</strong>: 
 - Switching time ~1 ns (limited by spin precession)</p>
-<p><strong>Temperature</strong>:<br />
+<p><strong>Temperature</strong>:
 - Operable -40°C to +150°C</p>
 <h3 id="applications_9">Applications</h3>
 <ul>
@@ -1059,7 +1278,7 @@ AlGaAs barrier - 20 nm
 <li>Programmable resistors (set by magnetic field)</li>
 <li>Spin logic devices</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="11-photo-capacitor">11. Photo-Capacitor</h2>
 <h3 id="concept_10">Concept</h3>
 <p>Light absorption (discrete photons) modulates capacitance through photogenerated carriers (continuous charge).</p>
@@ -1080,22 +1299,22 @@ AlGaAs barrier - 20 nm
 <li>Pattern (optional): Etch ITO with HCl</li>
 </ul>
 <h4 id="step-2-photoactive-layer">Step 2: Photoactive Layer</h4>
-<p><strong>Material</strong>: P3HT:PCBM (standard OPV blend)<br />
-- P3HT: poly(3-hexylthiophene) - electron donor<br />
-- PCBM: [6,6]-phenyl-C61-butyric acid methyl ester - electron acceptor<br />
+<p><strong>Material</strong>: P3HT:PCBM (standard OPV blend)
+- P3HT: poly(3-hexylthiophene) - electron donor
+- PCBM: [6,6]-phenyl-C61-butyric acid methyl ester - electron acceptor
 - <strong>Mix</strong>: 1:1 weight ratio in chlorobenzene (20 mg/mL total)</p>
-<p><strong>Deposition</strong>: Spin coating<br />
-- Filter solution (0.45 μm PTFE)<br />
-- Spin at 1000 RPM, 60 seconds<br />
-- Thickness: ~200 nm<br />
-- <strong>Anneal</strong>: 150°C, 10 minutes in N₂ glovebox<br />
+<p><strong>Deposition</strong>: Spin coating
+- Filter solution (0.45 μm PTFE)
+- Spin at 1000 RPM, 60 seconds
+- Thickness: ~200 nm
+- <strong>Anneal</strong>: 150°C, 10 minutes in N₂ glovebox
   - Improves crystallinity and phase separation</p>
 <h4 id="step-3-blocking-layer-lif">Step 3: Blocking Layer (LiF)</h4>
-<p><strong>Method</strong>: Thermal evaporation<br />
-- Pressure: &lt;10⁻⁶ Torr<br />
-- LiF source: Tungsten boat<br />
-- Rate: 0.1 Å/s<br />
-- Thickness: 1 nm<br />
+<p><strong>Method</strong>: Thermal evaporation
+- Pressure: &lt;10⁻⁶ Torr
+- LiF source: Tungsten boat
+- Rate: 0.1 Å/s
+- Thickness: 1 nm
 - <strong>Purpose</strong>: Blocks hole injection, confines charge</p>
 <h4 id="step-4-top-electrode-al">Step 4: Top Electrode (Al)</h4>
 <ul>
@@ -1104,34 +1323,34 @@ AlGaAs barrier - 20 nm
 <li>Shadow mask for patterning</li>
 </ul>
 <h3 id="testing-characterization_9">Testing &amp; Characterization</h3>
-<p><strong>Dark Capacitance</strong>:<br />
-- Measure C-V in dark<br />
-- <strong>Expect</strong>: Geometric capacitance<br />
+<p><strong>Dark Capacitance</strong>:
+- Measure C-V in dark
+- <strong>Expect</strong>: Geometric capacitance
   - C = εA/d ~ 150 nF</p>
-<p><strong>Photocapacitance</strong>:<br />
-- Illuminate with LED (520 nm, green light)<br />
-- Measure capacitance vs light intensity<br />
-- <strong>Expect</strong>:<br />
-  - Capacitance increases with light<br />
+<p><strong>Photocapacitance</strong>:
+- Illuminate with LED (520 nm, green light)
+- Measure capacitance vs light intensity
+- <strong>Expect</strong>:
+  - Capacitance increases with light
   - ΔC/C ~ 10-50% at 100 mW/cm²</p>
-<p><strong>Mechanism</strong>:<br />
-- Photons absorbed → excitons → separated charges<br />
-- Extra charges in photoactive layer increase dielectric constant<br />
-- <strong>Discrete</strong>: Photon absorption events<br />
+<p><strong>Mechanism</strong>:
+- Photons absorbed → excitons → separated charges
+- Extra charges in photoactive layer increase dielectric constant
+- <strong>Discrete</strong>: Photon absorption events
 - <strong>Continuous</strong>: Charge accumulation</p>
-<p><strong>Time Response</strong>:<br />
-- Turn light on/off, measure C(t)<br />
-- <strong>Expect</strong>:<br />
-  - Rise time: ~microseconds (charge generation)<br />
+<p><strong>Time Response</strong>:
+- Turn light on/off, measure C(t)
+- <strong>Expect</strong>:
+  - Rise time: ~microseconds (charge generation)
   - Fall time: ~milliseconds (recombination)</p>
 <h3 id="expected-performance_10">Expected Performance</h3>
-<p><strong>Capacitance</strong>:<br />
-- Dark: 150 nF<br />
+<p><strong>Capacitance</strong>:
+- Dark: 150 nF
 - Illuminated (100 mW/cm²): 200 nF</p>
-<p><strong>Spectral Response</strong>:<br />
-- Peak: 520 nm (P3HT absorption)<br />
+<p><strong>Spectral Response</strong>:
+- Peak: 520 nm (P3HT absorption)
 - Range: 400-650 nm</p>
-<p><strong>Quantum Efficiency</strong>:<br />
+<p><strong>Quantum Efficiency</strong>:
 - ~30% (photons → separated charges)</p>
 <h3 id="applications_10">Applications</h3>
 <ul>
@@ -1140,7 +1359,7 @@ AlGaAs barrier - 20 nm
 <li>Optical memory (light writes, C stores)</li>
 <li>Energy harvesting capacitors</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="12-magnetoelectric-inductor">12. Magnetoelectric Inductor</h2>
 <h3 id="concept_11">Concept</h3>
 <p>Electric field controls discrete magnetic states, which determines continuous inductance.</p>
@@ -1160,25 +1379,25 @@ AlGaAs barrier - 20 nm
 </ul>
 <h4 id="step-2-magnetoelectric-composite">Step 2: Magnetoelectric Composite</h4>
 <p><strong>Method A - Tape Casting</strong> (Easier):</p>
-<p><strong>BaTiO₃ Tape</strong>:<br />
-- BaTiO₃ powder + binder + solvent<br />
-- Tape cast to 50 μm thick<br />
+<p><strong>BaTiO₃ Tape</strong>:
+- BaTiO₃ powder + binder + solvent
+- Tape cast to 50 μm thick
 - Cut to fit toroid</p>
-<p><strong>CoFe₂O₄ Tape</strong>:<br />
-- CoFe₂O₄ powder + binder + solvent<br />
-- Tape cast to 50 μm thick<br />
+<p><strong>CoFe₂O₄ Tape</strong>:
+- CoFe₂O₄ powder + binder + solvent
+- Tape cast to 50 μm thick
 - Cut to fit toroid</p>
-<p><strong>Laminate</strong>:<br />
-- Stack: BTO / CFO / BTO<br />
-- Press at 70°C, 10 MPa<br />
-- Co-sinter at 1100°C, 2 hours<br />
+<p><strong>Laminate</strong>:
+- Stack: BTO / CFO / BTO
+- Press at 70°C, 10 MPa
+- Co-sinter at 1100°C, 2 hours
 - <strong>Result</strong>: Composite magnetoelectric material</p>
-<p><strong>Method B - Sintering</strong> (Better properties):<br />
-- Mix BaTiO₃ and CoFe₂O₄ powders (50:50 vol%)<br />
-- Ball mill with binder<br />
-- Press into pellet shape<br />
-- Sinter at 1150°C<br />
-- Polish to 100 μm thick<br />
+<p><strong>Method B - Sintering</strong> (Better properties):
+- Mix BaTiO₃ and CoFe₂O₄ powders (50:50 vol%)
+- Ball mill with binder
+- Press into pellet shape
+- Sinter at 1150°C
+- Polish to 100 μm thick
 - Attach to toroid with epoxy</p>
 <h4 id="step-3-electrodes-on-me-layer">Step 3: Electrodes on ME Layer</h4>
 <ul>
@@ -1193,18 +1412,18 @@ AlGaAs barrier - 20 nm
 <li>Leave leads for connection</li>
 </ul>
 <h3 id="testing-characterization_10">Testing &amp; Characterization</h3>
-<p><strong>L vs E-field</strong>:<br />
-- Apply DC voltage to ME electrodes (creates E-field)<br />
-- Measure inductance at 1 MHz<br />
-- <strong>Expect</strong>:<br />
+<p><strong>L vs E-field</strong>:
+- Apply DC voltage to ME electrodes (creates E-field)
+- Measure inductance at 1 MHz
+- <strong>Expect</strong>:
   - ΔL/L ~ 1-5% per kV/cm</p>
-<p><strong>Mechanism</strong>:<br />
-- E-field → strain in BaTiO₃ (piezoelectric)<br />
-- Strain → stress in CoFe₂O₄ (magnetostrictive)<br />
+<p><strong>Mechanism</strong>:
+- E-field → strain in BaTiO₃ (piezoelectric)
+- Strain → stress in CoFe₂O₄ (magnetostrictive)
 - Stress → change magnetization → change permeability → change L</p>
-<p><strong>Hysteresis</strong>:<br />
-- E-field sweep shows hysteresis<br />
-- <strong>Discrete</strong>: Ferroelectric domain switching in BTO<br />
+<p><strong>Hysteresis</strong>:
+- E-field sweep shows hysteresis
+- <strong>Discrete</strong>: Ferroelectric domain switching in BTO
 - <strong>Continuous</strong>: Smooth L(E) response</p>
 <h3 id="expected-performance_11">Expected Performance</h3>
 <p><strong>Inductance</strong>: L₀ = 10 μH (no E-field)</p>
@@ -1218,7 +1437,7 @@ AlGaAs barrier - 20 nm
 <li>Electric-field-programmable inductors</li>
 <li>E-field sensors</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="13-multi-level-ladder-capacitor">13. Multi-Level Ladder Capacitor</h2>
 <h3 id="concept_12">Concept</h3>
 <p>Multiple capacitors switched in/out discretely, with continuous voltage tuning of each.</p>
@@ -1244,9 +1463,9 @@ AlGaAs barrier - 20 nm
 Where: C_n = n × base_capacitance
        SW = MOSFET switch controlled by binary decoder
 </code></pre>
-<p><strong>Components</strong>:<br />
-- 8× varactor diodes (BB135): Voltage-variable capacitors<br />
-  - C_min = 1 pF, C_max = 30 pF<br />
+<p><strong>Components</strong>:
+- 8× varactor diodes (BB135): Voltage-variable capacitors
+  - C_min = 1 pF, C_max = 30 pF
   - Varies with reverse bias (0-20V)</p>
 <ul>
 <li>8× MOSFET switches (2N7002)</li>
@@ -1271,21 +1490,21 @@ Where: C_n = n × base_capacitance
 <li>Reflow solder</li>
 </ul>
 <h3 id="operation">Operation</h3>
-<p><strong>Discrete State Selection</strong>:<br />
-- 3-bit digital input (000 to 111)<br />
-- Selects which capacitors are connected<br />
+<p><strong>Discrete State Selection</strong>:
+- 3-bit digital input (000 to 111)
+- Selects which capacitors are connected
 - <strong>8 discrete states</strong>: Different C combinations</p>
-<p><strong>Continuous Tuning</strong>:<br />
-- Apply voltage to varactor diodes<br />
-- Each capacitor varies continuously<br />
+<p><strong>Continuous Tuning</strong>:
+- Apply voltage to varactor diodes
+- Each capacitor varies continuously
 - <strong>Combined</strong>: Discrete + continuous</p>
 <h3 id="expected-performance_12">Expected Performance</h3>
-<p><strong>Capacitance Range</strong>:<br />
-- Minimum: 1 pF (only C₁, at max bias)<br />
-- Maximum: 240 pF (all 8, at zero bias)<br />
-- <strong>Discrete steps</strong>: 8 major states<br />
+<p><strong>Capacitance Range</strong>:
+- Minimum: 1 pF (only C₁, at max bias)
+- Maximum: 240 pF (all 8, at zero bias)
+- <strong>Discrete steps</strong>: 8 major states
 - <strong>Continuous</strong>: ±30% around each discrete state</p>
-<p><strong>Resolution</strong>:<br />
+<p><strong>Resolution</strong>:
 - 3-bit discrete + ~5-bit continuous = <strong>8-bit equivalent</strong></p>
 <h3 id="applications_12">Applications</h3>
 <ul>
@@ -1294,8 +1513,8 @@ Where: C_n = n × base_capacitance
 <li>Voltage-controlled oscillators</li>
 <li>Multi-level analog memory</li>
 </ul>
-<hr />
-<h1 id="tier-3-advancedexperimental-components">TIER 3: Advanced/Experimental Components</h1>
+<hr/>
+
 <h2 id="14-superconducting-resistor">14. Superconducting Resistor</h2>
 <h3 id="concept_13">Concept</h3>
 <p>Below T_c: Zero resistance (continuous supercurrent). Above T_c: Finite resistance (continuous normal current). Transition is discrete phase change.</p>
@@ -1306,19 +1525,19 @@ Where: C_n = n × base_capacitance
 4. Thermometer: Au RTD - 100 nm
 5. Contacts: Au - 200 nm
 </code></pre>
-<p><strong>Size</strong>: 0805<br />
+<p><strong>Size</strong>: 0805<br/>
 <strong>Operating temperature</strong>: 77K (liquid N₂) for YBCO</p>
 <h3 id="fabrication-process_13">Fabrication Process</h3>
 <h4 id="step-1-superconducting-film">Step 1: Superconducting Film</h4>
 <p><strong>Option A - YBCO (YBa₂Cu₃O₇)</strong>: High-temperature superconductor (T_c = 92K)</p>
-<p><strong>Method</strong>: Pulsed laser deposition (PLD)<br />
-- YBCO target<br />
-- Substrate: 750°C during deposition<br />
-- O₂ atmosphere: 100 mTorr<br />
-- <strong>Post-anneal</strong>: 450°C in O₂ for 1 hour<br />
+<p><strong>Method</strong>: Pulsed laser deposition (PLD)
+- YBCO target
+- Substrate: 750°C during deposition
+- O₂ atmosphere: 100 mTorr
+- <strong>Post-anneal</strong>: 450°C in O₂ for 1 hour
 - <strong>Critical</strong>: Oxygen content determines T_c</p>
-<p><strong>Option B - Niobium</strong>: Low-temperature (T_c = 9.2K)<br />
-- <strong>Easier to deposit</strong> (DC sputtering)<br />
+<p><strong>Option B - Niobium</strong>: Low-temperature (T_c = 9.2K)
+- <strong>Easier to deposit</strong> (DC sputtering)
 - But requires liquid He cooling</p>
 <h4 id="step-2-heater-thermometer">Step 2: Heater &amp; Thermometer</h4>
 <ul>
@@ -1326,18 +1545,18 @@ Where: C_n = n × base_capacitance
 <li>Photolithography + liftoff</li>
 </ul>
 <h3 id="testing">Testing</h3>
-<p><strong>R-T Curve</strong>:<br />
-- Cool through T_c, measure resistance<br />
-- <strong>Expect</strong>: <br />
-  - Above T_c: R = normal (e.g., 100 Ω)<br />
-  - At T_c: Sharp drop<br />
-  - Below T_c: R = 0<br />
+<p><strong>R-T Curve</strong>:
+- Cool through T_c, measure resistance
+- <strong>Expect</strong>: 
+  - Above T_c: R = normal (e.g., 100 Ω)
+  - At T_c: Sharp drop
+  - Below T_c: R = 0
   - <strong>Transition width</strong>: &lt;1K for good film</p>
-<p><strong>Discrete Phase Transition</strong>:<br />
-- Two phases: superconducting vs normal<br />
+<p><strong>Discrete Phase Transition</strong>:
+- Two phases: superconducting vs normal
 - First-order transition</p>
-<p><strong>Continuous in Each Phase</strong>:<br />
-- Normal state: Continuous R(T)<br />
+<p><strong>Continuous in Each Phase</strong>:
+- Normal state: Continuous R(T)
 - SC state: Continuous I (flux flow possible)</p>
 <h3 id="applications_13">Applications</h3>
 <ul>
@@ -1346,7 +1565,7 @@ Where: C_n = n × base_capacitance
 <li>Ultra-low-noise circuits</li>
 <li>Programmable (via temperature)</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="15-josephson-junction-inductor">15. Josephson Junction Inductor</h2>
 <h3 id="concept_14">Concept</h3>
 <p>Nonlinear inductor based on Josephson effect: Discrete flux quantization with continuous phase evolution.</p>
@@ -1359,23 +1578,23 @@ Where: C_n = n × base_capacitance
 </code></pre>
 <p><strong>Size</strong>: Junction area 1-10 μm²</p>
 <h3 id="fabrication-simplified">Fabrication (Simplified)</h3>
-<p><strong>Dolan Bridge Technique</strong>:<br />
-1. Evaporate Nb from angle 1<br />
-2. Oxidize surface (creates AlO_x barrier)<br />
-3. Evaporate Nb from angle 2<br />
+<p><strong>Dolan Bridge Technique</strong>:
+1. Evaporate Nb from angle 1
+2. Oxidize surface (creates AlO_x barrier)
+3. Evaporate Nb from angle 2
 4. Results in overlap junction</p>
 <p><strong>Critical</strong>: &lt;2 nm oxide for strong coupling</p>
 <h3 id="physics">Physics</h3>
-<p><strong>Josephson Relations</strong>:<br />
-- I = I_c sin(φ), where φ is phase difference<br />
-- V = (ℏ/2e)(dφ/dt)<br />
-- <strong>Equivalent inductance</strong>: L_J = (ℏ/2e)/I_c<br />
+<p><strong>Josephson Relations</strong>:
+- I = I_c sin(φ), where φ is phase difference
+- V = (ℏ/2e)(dφ/dt)
+- <strong>Equivalent inductance</strong>: L_J = (ℏ/2e)/I_c
 - For I_c = 10 μA: L_J ~ 100 pH</p>
-<p><strong>Discrete</strong>:<br />
-- Flux quantization: Φ = nΦ₀, where Φ₀ = h/2e<br />
+<p><strong>Discrete</strong>:
+- Flux quantization: Φ = nΦ₀, where Φ₀ = h/2e
 - n is integer (discrete)</p>
-<p><strong>Continuous</strong>:<br />
-- Phase φ evolves continuously<br />
+<p><strong>Continuous</strong>:
+- Phase φ evolves continuously
 - Current I = I_c sin(φ) is continuous</p>
 <h3 id="applications_14">Applications</h3>
 <ul>
@@ -1384,7 +1603,7 @@ Where: C_n = n × base_capacitance
 <li>Quantum-limited amplifiers</li>
 <li>Parametric oscillators</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="16-quantum-hall-resistor">16. Quantum Hall Resistor</h2>
 <h3 id="concept_15">Concept</h3>
 <p>2D electron gas in high magnetic field: Resistance quantized in units of h/e² (discrete) with continuous current flow.</p>
@@ -1396,22 +1615,22 @@ Where: C_n = n × base_capacitance
 </code></pre>
 <p><strong>Size</strong>: Hall bar 500 μm × 100 μm</p>
 <h3 id="fabrication">Fabrication</h3>
-<p><strong>Wafer Growth</strong>: MOCVD or MBE<br />
-- Very high purity GaAs/AlGaAs<br />
+<p><strong>Wafer Growth</strong>: MOCVD or MBE
+- Very high purity GaAs/AlGaAs
 - 2D electron gas forms at interface</p>
-<p><strong>Processing</strong>:<br />
-- Photolithography to define Hall bar<br />
-- Wet etch or dry etch<br />
+<p><strong>Processing</strong>:
+- Photolithography to define Hall bar
+- Wet etch or dry etch
 - AuGeNi contacts, alloyed at 400°C</p>
 <h3 id="operation_1">Operation</h3>
-<p><strong>Measurement</strong>:<br />
-- Cool to &lt;1K<br />
-- Apply B-field perpendicular (5-10 Tesla)<br />
+<p><strong>Measurement</strong>:
+- Cool to &lt;1K
+- Apply B-field perpendicular (5-10 Tesla)
 - Measure R_xy (Hall resistance)</p>
-<p><strong>Expect</strong>:<br />
-- R_xy = (h/e²) / ν, where ν = integer (filling factor)<br />
-- <strong>Extremely precise</strong>: δR/R &lt; 10⁻⁹<br />
-- <strong>Discrete</strong>: Steps at integer ν<br />
+<p><strong>Expect</strong>:
+- R_xy = (h/e²) / ν, where ν = integer (filling factor)
+- <strong>Extremely precise</strong>: δR/R &lt; 10⁻⁹
+- <strong>Discrete</strong>: Steps at integer ν
 - <strong>Continuous</strong>: Current flow is continuous</p>
 <h3 id="applications_15">Applications</h3>
 <ul>
@@ -1419,93 +1638,93 @@ Where: C_n = n × base_capacitance
 <li>Metrology (defines ohm)</li>
 <li>Topological physics research</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="17-fractal-components-koch-inductor-sierpinski-capacitor">17. Fractal Components (Koch Inductor, Sierpiński Capacitor)</h2>
 <h3 id="concept_16">Concept</h3>
 <p>Self-similar geometry creates discrete resonances at fractal scales, continuous electromagnetic response between resonances.</p>
 <h3 id="koch-curve-inductor">Koch Curve Inductor</h3>
-<p><strong>Geometry</strong>: Wire bent in Koch snowflake pattern<br />
-- Start with triangle<br />
-- Replace each edge with smaller ___/___<br />
+<p><strong>Geometry</strong>: Wire bent in Koch snowflake pattern
+- Start with triangle
+- Replace each edge with smaller ___/___
 - Iterate 3-4 times</p>
-<p><strong>Fabrication</strong>:<br />
-- PCB etching of copper (easier)<br />
-- OR: Wire bonding (tedious)<br />
+<p><strong>Fabrication</strong>:
+- PCB etching of copper (easier)
+- OR: Wire bonding (tedious)
 - OR: 3D printing conductive filament</p>
-<p><strong>Performance</strong>:<br />
-- Multiple resonances at f, f/3, f/9, f/27...<br />
-- Discrete resonant frequencies<br />
-- Continuous inductance between them<br />
+<p><strong>Performance</strong>:
+- Multiple resonances at f, f/3, f/9, f/27...
+- Discrete resonant frequencies
+- Continuous inductance between them
 - Miniaturization vs straight wire</p>
 <h3 id="sierpinski-capacitor">Sierpiński Capacitor</h3>
-<p><strong>Geometry</strong>: Sierpiński triangle electrode pattern<br />
-- Fractal cut-outs in capacitor plate<br />
+<p><strong>Geometry</strong>: Sierpiński triangle electrode pattern
+- Fractal cut-outs in capacitor plate
 - Multiple length scales</p>
-<p><strong>Fabrication</strong>:<br />
-- Laser-cut metal foil<br />
-- Etch pattern in PCB<br />
+<p><strong>Fabrication</strong>:
+- Laser-cut metal foil
+- Etch pattern in PCB
 - Stack with dielectric</p>
-<p><strong>Performance</strong>:<br />
-- Multi-band resonance<br />
-- Discrete frequencies<br />
-- Continuous C(f) response<br />
+<p><strong>Performance</strong>:
+- Multi-band resonance
+- Discrete frequencies
+- Continuous C(f) response
 - Compact multi-resonant structure</p>
-<hr />
+<hr/>
 <h2 id="18-topological-insulator-components">18. Topological Insulator Components</h2>
 <h3 id="concept_17">Concept</h3>
 <p>Bulk is insulating (discrete bandgap), surface conducts (continuous states), protected by topology.</p>
 <h3 id="ti-resistor">TI Resistor</h3>
-<p><strong>Materials</strong>: Bi₂Se₃, Bi₂Te₃<br />
+<p><strong>Materials</strong>: Bi₂Se₃, Bi₂Te₃
 - Topological insulator materials</p>
-<p><strong>Fabrication</strong>:<br />
-- MBE growth on Si substrate<br />
-- Exfoliation (like graphene)<br />
+<p><strong>Fabrication</strong>:
+- MBE growth on Si substrate
+- Exfoliation (like graphene)
 - Van der Waals epitaxy</p>
-<p><strong>Properties</strong>:<br />
-- Surface states: Continuous, metallic<br />
-- Bulk states: Discrete, gapped<br />
-- Spin-momentum locked<br />
+<p><strong>Properties</strong>:
+- Surface states: Continuous, metallic
+- Bulk states: Discrete, gapped
+- Spin-momentum locked
 - Protected against disorder</p>
-<p><strong>Applications</strong>:<br />
-- Spintronics<br />
-- Quantum computing<br />
+<p><strong>Applications</strong>:
+- Spintronics
+- Quantum computing
 - Exotic physics research</p>
-<hr />
-<h1 id="tier-4-conceptual-future">TIER 4: Conceptual / Future</h1>
+<hr/>
+
 <h2 id="19-memtransistor">19. Memtransistor</h2>
 <p><strong>Concept</strong>: Transistor whose gain/threshold depends on signal history.</p>
-<p><strong>Possible Implementation</strong>:<br />
-- Floating gate transistor<br />
+<p><strong>Possible Implementation</strong>:
+- Floating gate transistor
 - Or ferroelectric gate oxide</p>
 <p><strong>Status</strong>: Lab demonstrations exist, not production-ready</p>
-<hr />
+<hr/>
 <h2 id="20-ternaryquaternary-logic-components">20. Ternary/Quaternary Logic Components</h2>
 <p><strong>Concept</strong>: Multi-valued logic (0, 1, 2 instead of just 0, 1)</p>
-<p><strong>Implementation</strong>:<br />
-- Multiple threshold transistors<br />
-- Resonant tunneling diodes<br />
+<p><strong>Implementation</strong>:
+- Multiple threshold transistors
+- Resonant tunneling diodes
 - Quantum dot cellular automata</p>
 <p><strong>Status</strong>: Research stage</p>
-<hr />
+<hr/>
 <h2 id="21-shannon-limit-components">21. Shannon-Limit Components</h2>
 <p><strong>Concept</strong>: Operating at theoretical information limits</p>
-<p><strong>Example</strong>: Error-correcting capacitor<br />
-- Stores charge + redundancy<br />
+<p><strong>Example</strong>: Error-correcting capacitor
+- Stores charge + redundancy
 - Built-in error correction</p>
 <p><strong>Status</strong>: Theoretical</p>
-<hr />
+<hr/>
 <h2 id="22-mobius-inductor">22. Möbius Inductor</h2>
 <p><strong>Concept</strong>: Inductor with twisted topology</p>
-<p><strong>Fabrication</strong>: <br />
-- Flexible PCB twisted into Möbius strip<br />
+<p><strong>Fabrication</strong>: 
+- Flexible PCB twisted into Möbius strip
 - Inductor coil on surface</p>
-<p><strong>Properties</strong>:<br />
-- Single-sided surface<br />
-- Unusual magnetic field topology<br />
+<p><strong>Properties</strong>:
+- Single-sided surface
+- Unusual magnetic field topology
 - Interesting for antenna applications</p>
 <p><strong>Status</strong>: Novelty, some research interest</p>
-<hr />
-<h1 id="summary-table-all-components">Summary Table: All Components</h1>
+<hr/>
+
 <table>
 <thead>
 <tr>
@@ -1697,52 +1916,77 @@ Where: C_n = n × base_capacitance
 </tbody>
 </table>
 <p>*TRL = Technology Readiness Level (1=concept, 9=production)</p>
-<hr />
-<h1 id="practical-recommendations">Practical Recommendations</h1>
+<hr/>
+
 <h2 id="best-starting-points-beyond-the-4-already-detailed">Best Starting Points (Beyond the 4 Already Detailed):</h2>
-<p><strong>1. Quantum Tunnel Resistor</strong><br />
-- Uses accessible equipment<br />
-- Clear discrete/continuous behavior<br />
+<p><strong>1. Quantum Tunnel Resistor</strong>
+- Uses accessible equipment
+- Clear discrete/continuous behavior
 - Practical applications</p>
-<p><strong>2. Magnetic Domain Inductor</strong><br />
-- Combines ferrite (commodity) with thin film<br />
-- Interesting magnetic physics<br />
+<p><strong>2. Magnetic Domain Inductor</strong>
+- Combines ferrite (commodity) with thin film
+- Interesting magnetic physics
 - Useful for programmable filters</p>
-<p><strong>3. Sample-Hold Capacitor</strong><br />
-- Easiest to build (mostly circuit)<br />
-- Immediately useful<br />
+<p><strong>3. Sample-Hold Capacitor</strong>
+- Easiest to build (mostly circuit)
+- Immediately useful
 - Educational value</p>
-<p><strong>4. Dual-Mode Memristor</strong><br />
-- Extends existing memristor work<br />
-- Novel dual functionality<br />
+<p><strong>4. Dual-Mode Memristor</strong>
+- Extends existing memristor work
+- Novel dual functionality
 - High commercial potential</p>
 <h2 id="most-exciting-impactful">Most Exciting / Impactful:</h2>
-<p><strong>1. Memcapacitor</strong> - Neuromorphic synapses with analog precision<br />
-<strong>2. Quantum Dot Array</strong> - True quantum effects at accessible temperatures<br />
-<strong>3. GMR Spin Resistor</strong> - Mature technology, spin electronics<br />
+<p><strong>1. Memcapacitor</strong> - Neuromorphic synapses with analog precision
+<strong>2. Quantum Dot Array</strong> - True quantum effects at accessible temperatures
+<strong>3. GMR Spin Resistor</strong> - Mature technology, spin electronics
 <strong>4. Photo-Capacitor</strong> - Optical interfacing with electronics</p>
 <h2 id="equipment-investment-priority">Equipment Investment Priority:</h2>
-<p><strong>$100K Budget</strong>:<br />
-- Sputterer (essential)<br />
-- Tube furnace (essential)<br />
+<p><strong>$100K Budget</strong>:
+- Sputterer (essential)
+- Tube furnace (essential)
 - ALD system (if possible, OR substitute sol-gel)</p>
-<p><strong>$300K Budget</strong>:<br />
-- Add: E-beam lithography<br />
-- Add: PLD system<br />
+<p><strong>$300K Budget</strong>:
+- Add: E-beam lithography
+- Add: PLD system
 - Add: Probe station upgrades</p>
-<p><strong>$500K Budget</strong>:<br />
-- Add: MOCVD<br />
-- Add: Cryogenic equipment<br />
+<p><strong>$500K Budget</strong>:
+- Add: MOCVD
+- Add: Cryogenic equipment
 - Add: High-field magnet</p>
-<hr />
+<hr/>
 <p><strong>All 24 component types are now documented with practical fabrication routes!</strong></p>
 <p>This catalog provides a complete roadmap from proven technologies (Tier 1) through cutting-edge research (Tier 3) to conceptual future devices (Tier 4). Start with Tier 1, master those processes, then progressively tackle more challenging designs.</p>
 <p>The discrete-continuous hybrid paradigm is implementable across all these platforms - the physics is sound, the materials exist, and the fabrication methods are established. It's now a matter of execution and optimization.</p>
-<hr />
-<p><strong>Document Version</strong>: 2.0<br />
-<strong>Date</strong>: February 2026<br />
-<strong>Status</strong>: Complete Component Catalog<br />
+<hr/>
+<p><strong>Document Version</strong>: 2.0<br/>
+<strong>Date</strong>: February 2026<br/>
+<strong>Status</strong>: Complete Component Catalog<br/>
 <strong>Coverage</strong>: 24/24 Hybrid Component Types</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

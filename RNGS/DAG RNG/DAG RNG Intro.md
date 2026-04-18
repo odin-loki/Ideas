@@ -1,4 +1,6 @@
-# Meta-DAG Random Number Generator: A Novel Approach to Random Number Generation
+# Meta-DAG RNG
+
+**Directed-acyclic graph random number generation using transcendental constants, meta-operations, and evolving graph structure**
 
 ## Introduction
 

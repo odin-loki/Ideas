@@ -1,48 +1,41 @@
-<!-- Converted from `Paper9_MP46M_Pistol.docx` — source was Word (.docx). -->
+# MP-4.6M Guardian Advanced Combat Pistol: MIL-SPEC PDW Platform — Complete Technical Analysis
 
-__MP\-4\.6M Guardian Advanced Combat Pistol__
+*Technical Research Paper*
 
-MIL\-SPEC PDW Platform — Complete Technical Analysis
-
-__TECHNICAL RESEARCH PAPER__
-
-Document No\. TRP\-2026\-009 | Version 1\.0
+Document No. TRP-2026-009 | Version 1.0
 
 Prepared for: Australian Department of Defence | March 2026
 
-# __Abstract__
+## Abstract
+This paper presents a technical analysis of the MP-4.6M Guardian Advanced Combat Pistol, chambered for the 4.6×22mm Enhanced Performance Round. The weapon achieves 1,120 m/s muzzle velocity and 1,752 J muzzle energy from a 150mm barrel, with 30-round capacity in a platform weighing 890g unloaded. An integrated 95mm suppressor achieves 28dB sound reduction. The roller-delayed blowback operating system provides 15,000-round MRBF with a 75,000-round barrel life. This paper analyses the engineering basis for the ballistic performance, the roller-delayed operating system mechanics, and positions the weapon within the context of advanced combat pistol development for government and military personnel requiring enhanced armour-defeating capability.
 
-This paper presents a technical analysis of the MP\-4\.6M Guardian Advanced Combat Pistol, chambered for the 4\.6×22mm Enhanced Performance Round\. The weapon achieves 1,120 m/s muzzle velocity and 1,752 J muzzle energy from a 150mm barrel, with 30\-round capacity in a platform weighing 890g unloaded\. An integrated 95mm suppressor achieves 28dB sound reduction\. The roller\-delayed blowback operating system provides 15,000\-round MRBF with a 75,000\-round barrel life\. This paper analyses the engineering basis for the ballistic performance, the roller\-delayed operating system mechanics, and positions the weapon within the context of advanced combat pistol development for government and military personnel requiring enhanced armour\-defeating capability\.
+## 1. Introduction
 
-# __1\. Introduction__
+Combat pistols serve as sidearms and backup weapons for military and law enforcement personnel. The standard NATO 9×19mm Parabellum pistol cartridge \(adopted in the 1980s, replacing various national calibres\) generates approximately 450-600 J of muzzle energy from full-length pistol barrels. Armour-defeating capability of standard 9mm FMJ against even low-rated soft body armour is limited, prompting development of more capable cartridges for dedicated armour-defeating pistol applications.
 
-Combat pistols serve as sidearms and backup weapons for military and law enforcement personnel\. The standard NATO 9×19mm Parabellum pistol cartridge \(adopted in the 1980s, replacing various national calibres\) generates approximately 450\-600 J of muzzle energy from full\-length pistol barrels\. Armour\-defeating capability of standard 9mm FMJ against even low\-rated soft body armour is limited, prompting development of more capable cartridges for dedicated armour\-defeating pistol applications\.
+Heckler & Koch developed the Universal Combat Pistol \(UCP\) in the 4.6×30mm calibre as a companion to the MP7 PDW. The UCP project was cancelled at the prototype stage, leaving the MP7 as the sole deployment platform for the 4.6×30mm round in pistol-sized form. The MP-4.6M Guardian addresses this gap—a pistol-sized weapon firing the higher-energy 4.6×22mm cartridge, providing armour-defeating capability in a platform sized for conventional pistol holsters and carry configurations.
 
-Heckler & Koch developed the Universal Combat Pistol \(UCP\) in the 4\.6×30mm calibre as a companion to the MP7 PDW\. The UCP project was cancelled at the prototype stage, leaving the MP7 as the sole deployment platform for the 4\.6×30mm round in pistol\-sized form\. The MP\-4\.6M Guardian addresses this gap—a pistol\-sized weapon firing the higher\-energy 4\.6×22mm cartridge, providing armour\-defeating capability in a platform sized for conventional pistol holsters and carry configurations\.
+## 2. Cartridge Analysis: 4.6×22mm Enhanced Performance Round
 
-# __2\. Cartridge Analysis: 4\.6×22mm Enhanced Performance Round__
+### 2.1 Case and Projectile Specifications
 
-## __2\.1 Case and Projectile Specifications__
-
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Case Length
 
-17\.8 mm \(neck: 22mm OAL\)
+17.8 mm \(neck: 22mm OAL\)
 
 Rim Diameter
 
-5\.2 mm
+5.2 mm
 
 Neck Diameter
 
-4\.8 mm
+4.8 mm
 
 Projectile Weight
 
-2\.8 g \(43 grains\)
+2.8 g \(43 grains\)
 
 Core Material
 
@@ -56,12 +49,10 @@ Chamber Pressure
 
 58,000 PSI
 
-## __2\.2 Ballistic Performance__
+### 2.2 Ballistic Performance
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Muzzle Velocity
 
 1,120 m/s
@@ -82,23 +73,21 @@ Terminal Yaw at 25m
 
 <3 mm deviation
 
-The 1,752 J muzzle energy from a 150mm barrel represents approximately 3× the energy of a 9×19mm Parabellum from a comparable barrel length\. This performance is achieved through the small\-calibre, high\-velocity design approach—trading projectile frontal area for velocity to maximise sectional density and kinetic energy density for armour defeat\. The tungsten carbide core at 65 HRC provides sufficient hardness to maintain projectile geometry through the armour\-steel interface\.
+The 1,752 J muzzle energy from a 150mm barrel represents approximately 3× the energy of a 9×19mm Parabellum from a comparable barrel length. This performance is achieved through the small-calibre, high-velocity design approach—trading projectile frontal area for velocity to maximise sectional density and kinetic energy density for armour defeat. The tungsten carbide core at 65 HRC provides sufficient hardness to maintain projectile geometry through the armour-steel interface.
 
-# __3\. Barrel and Suppressor__
+## 3. Barrel and Suppressor
 
-## __3\.1 Barrel Construction__
+### 3.1 Barrel Construction
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Material
 
 Vacuum arc remelted steel
 
 Length
 
-150 mm \(5\.9"\)
+150 mm \(5.9"\)
 
 Lining
 
@@ -106,7 +95,7 @@ Stellite 21, 1mm thickness
 
 Rifling
 
-6\-groove polygonal hybrid, 1:8 RH
+6-groove polygonal hybrid, 1:8 RH
 
 Chamber
 
@@ -116,12 +105,10 @@ Life Rating
 
 75,000 rounds
 
-## __3\.2 Integrated Suppressor__
+### 3.2 Integrated Suppressor
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Length
 
 95 mm
@@ -132,7 +119,7 @@ Diameter
 
 Baffle Material
 
-Inconel 718 \(K\-type\)
+Inconel 718 \(K-type\)
 
 Sound Reduction
 
@@ -146,16 +133,14 @@ Service Life
 
 25,000 rounds
 
-# __4\. Operating System__
+## 4. Operating System
 
-## __4\.1 Roller\-Delayed Blowback__
+### 4.1 Roller-Delayed Blowback
 
-The 7mm diameter hardened steel rollers at 47° locking angle provide a 1:4\.7 delay ratio, retarding bolt opening until chamber pressure drops to safe extraction levels\. The unlocking pressure of 22,000 PSI \(at this ratio, the bolt begins moving when felt pressure is approximately 4,700 PSI, below the safe case extraction threshold\) provides a margin of safety for the extended chamber throat that accommodates the high\-pressure cartridge\.
+The 7mm diameter hardened steel rollers at 47° locking angle provide a 1:4.7 delay ratio, retarding bolt opening until chamber pressure drops to safe extraction levels. The unlocking pressure of 22,000 PSI \(at this ratio, the bolt begins moving when felt pressure is approximately 4,700 PSI, below the safe case extraction threshold\) provides a margin of safety for the extended chamber throat that accommodates the high-pressure cartridge.
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Roller Diameter
 
 7 mm
@@ -166,7 +151,7 @@ Locking Angle
 
 Delay Ratio
 
-1:4\.7
+1:4.7
 
 Unlocking Pressure
 
@@ -178,37 +163,31 @@ Cycle Rate
 
 Bolt Velocity
 
-8\.5 m/s max
+8.5 m/s max
 
-## __4\.2 Recoil System__
+### 4.2 Recoil System
 
-Chrome silicon primary recoil spring with flat wire overstress secondary spring and tungsten\-filled polymer buffer provide 7\.8 ft\-lbs recoil energy management and 0\.15 second recovery time\. This recovery rate supports the 900 rpm cycle rate during sustained automatic fire\.
+Chrome silicon primary recoil spring with flat wire overstress secondary spring and tungsten-filled polymer buffer provide 7.8 ft-lbs recoil energy management and 0.15 second recovery time. This recovery rate supports the 900 rpm cycle rate during sustained automatic fire.
 
-# __5\. Trigger Mechanism__
+## 5. Trigger Mechanism
 
-__Stage__
-
-__Pull Weight__
-
+**Stage**
+**Pull Weight**
 First Stage \(DA\)
 
-4\.5 lbs
+4.5 lbs
 
 Second Stage \(SA\)
 
-5\.5 lbs
+5.5 lbs
 
-__Stage__
-
-__Pull Weight__
-
-__Travel__
-
-__Reset__
-
+**Stage**
+**Pull Weight**
+**Travel**
+**Reset**
 First Stage \(DA\)
 
-4\.5 lbs
+4.5 lbs
 
 8 mm
 
@@ -216,23 +195,21 @@ First Stage \(DA\)
 
 Second Stage \(SA\)
 
-5\.5 lbs
+5.5 lbs
 
 4 mm
 
 Positive click
 
-S7 tool steel sear at RC 58\-60 provides the defined engagement surface for consistent trigger pull weight\. MP35N alloy springs maintain spring rate stability over the 15,000\-round spring replacement interval\. The double\-action first stage with defined break at the second stage accommodates both administrative handling \(DA first pull\) and combat accuracy \(SA second pull\) in the same trigger system\.
+S7 tool steel sear at RC 58-60 provides the defined engagement surface for consistent trigger pull weight. MP35N alloy springs maintain spring rate stability over the 15,000-round spring replacement interval. The double-action first stage with defined break at the second stage accommodates both administrative handling \(DA first pull\) and combat accuracy \(SA second pull\) in the same trigger system.
 
-# __6\. Feed System and Magazine__
+## 6. Feed System and Magazine
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Magazine Body
 
-17\-7 PH stainless steel
+17-7 PH stainless steel
 
 Capacity
 
@@ -248,14 +225,12 @@ Presentation Angle
 
 Feed Lip Spread
 
-4\.2 mm
+4.2 mm
 
-# __7\. Physical Specifications__
+## 7. Physical Specifications
 
-__Parameter__
-
-__Value__
-
+**Parameter**
+**Value**
 Overall Length
 
 225 mm
@@ -284,12 +259,10 @@ Weight Loaded
 
 1,165 g
 
-# __8\. Reliability__
+## 8. Reliability
 
-__Parameter__
-
-__Specification__
-
+**Parameter**
+**Specification**
 MRBF
 
 15,000 rounds
@@ -300,29 +273,28 @@ FTF Rate
 
 Temperature Range
 
-\-40°C to \+60°C
+-40°C to \+60°C
 
 Environmental
 
-MIL\-STD\-810H full compliance
+MIL-STD-810H full compliance
 
-# __9\. Mechanical Round Counter__
+## 9. Mechanical Round Counter
 
-The 000\-999 mechanical digital counter with tritium illumination tracks round count and burst statistics through a slide\-linked pawl mechanism\. The counter is positioned on the left frame for positive visibility during administrative handling\. Tool\-less reset button enables rapid counter reset after confirmed maintenance\.
+The 000-999 mechanical digital counter with tritium illumination tracks round count and burst statistics through a slide-linked pawl mechanism. The counter is positioned on the left frame for positive visibility during administrative handling. Tool-less reset button enables rapid counter reset after confirmed maintenance.
 
-# __10\. Conclusion__
+## 10. Conclusion
 
-The MP\-4\.6M Guardian provides 1,752 J muzzle energy, 15mm RHA penetration at 25m, and 30\-round capacity in an 890g platform with integrated suppressor\. As a companion to the MP\-4\.6M Defender PDW, it enables consistent training with a shared cartridge across both weapons and provides effective armour\-defeating capability in pistol format\. The roller\-delayed blowback system delivers the 15,000\-round MRBF and 75,000\-round barrel life required for service use\.
+The MP-4.6M Guardian provides 1,752 J muzzle energy, 15mm RHA penetration at 25m, and 30-round capacity in an 890g platform with integrated suppressor. As a companion to the MP-4.6M Defender PDW, it enables consistent training with a shared cartridge across both weapons and provides effective armour-defeating capability in pistol format. The roller-delayed blowback system delivers the 15,000-round MRBF and 75,000-round barrel life required for service use.
 
-# __11\. References__
+## 11. References
 
-\[1\] Ezell, E\.C\. \(1988\)\. Handguns of the World\. Stackpole Books\.
+\[1\] Ezell, E.C. \(1988\). Handguns of the World. Stackpole Books.
 
-\[2\] Wikipedia\. \(2024\)\. HK 4\.6×30mm cartridge\. Wikimedia Foundation\.
+\[2\] Wikipedia. \(2024\). HK 4.6×30mm cartridge. Wikimedia Foundation.
 
-\[3\] Hutchcroft, I\. \(2009\)\. Roller\-delayed blowback actions\. Small Arms Review, 12\(9\)\.
+\[3\] Hutchcroft, I. \(2009\). Roller-delayed blowback actions. Small Arms Review, 12\(9\).
 
-\[4\] Jane's Infantry Weapons\. \(2023\)\. Advanced Combat Pistol Systems\. Jane's Defence Group\.
+\[4\] Jane's Infantry Weapons. \(2023\). Advanced Combat Pistol Systems. Jane's Defence Group.
 
-\[5\] Cutshaw, C\.Q\. \(2011\)\. Tactical Small Arms of the 21st Century\. Gun Digest Books\.
-
+\[5\] Cutshaw, C.Q. \(2011\). Tactical Small Arms of the 21st Century. Gun Digest Books.

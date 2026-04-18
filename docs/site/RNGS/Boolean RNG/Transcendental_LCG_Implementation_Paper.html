@@ -3,100 +3,217 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Transcendental LCG Implementation Paper</title>
+  <meta name="description" content="This paper documents the Python 3 reference implementation of the Optimized 256-Bit Transcendental Boolean Linear Congruential Generator \(OTB-LCG\), an architecturally layered pseudorandom number generator combining a 256-bit LCG core, XOR-based Boolean function parameter…"/>
+  <title>OTB-LCG: Python reference implementation · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">RNGS\Boolean RNG\Transcendental_LCG_Implementation_Paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>IMPLEMENTATION PAPER</strong></p>
-<p><strong>OTB-LCG: Python Reference Implementation,</strong></p>
-<p><em>Statistical Validation, and Performance Benchmarking</em></p>
-<p>Technical Reference  |  Python 3.x Reference Implementation  |  2025</p>
-<p><strong>ABSTRACT</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-implementation-overview">1. Implementation Overview</a></li>
+        <li class="toc-depth-2"><a href="#21-booleanfunctions">2.1 BooleanFunctions</a></li>
+        <li class="toc-depth-2"><a href="#221-constructor-parameters">2.2.1 Constructor Parameters</a></li>
+        <li class="toc-depth-2"><a href="#23-parametergenerator">2.3 ParameterGenerator</a></li>
+        <li class="toc-depth-2"><a href="#231-multiplier-generation">2.3.1 Multiplier Generation</a></li>
+        <li class="toc-depth-2"><a href="#232-increment-generation">2.3.2 Increment Generation</a></li>
+        <li class="toc-depth-2"><a href="#24-biascorrector">2.4 BiasCorrector</a></li>
+        <li class="toc-depth-2"><a href="#25-cryptographicprocessor">2.5 CryptographicProcessor</a></li>
+        <li class="toc-depth-2"><a href="#26-statisticalvalidator">2.6 StatisticalValidator</a></li>
+        <li class="toc-depth-2"><a href="#261-frequency-monobit-test">2.6.1 Frequency (Monobit) Test</a></li>
+        <li class="toc-depth-2"><a href="#262-runs-test">2.6.2 Runs Test</a></li>
+        <li class="toc-depth-2"><a href="#263-serial-overlapping-2-gram-test">2.6.3 Serial (Overlapping 2-Gram) Test</a></li>
+        <li class="toc-depth-2"><a href="#27-optimizedtranscendentallcg">2.7 OptimizedTranscendentalLCG</a></li>
+        <li class="toc-depth-2"><a href="#271-state-representation-and-lcg-step">2.7.1 State Representation and LCG Step</a></li>
+        <li class="toc-depth-2"><a href="#272-output-generation">2.7.2 Output Generation</a></li>
+        <li class="toc-depth-2"><a href="#3-empirical-statistical-validation">3. Empirical Statistical Validation</a></li>
+        <li class="toc-depth-2"><a href="#31-test-methodology">3.1 Test Methodology</a></li>
+        <li class="toc-depth-2"><a href="#32-inline-test-results">3.2 Inline Test Results</a></li>
+        <li class="toc-depth-2"><a href="#41-benchmark-environment">4.1 Benchmark Environment</a></li>
+        <li class="toc-depth-2"><a href="#42-throughput-measurements">4.2 Throughput Measurements</a></li>
+        <li class="toc-depth-2"><a href="#5-usage-guide">5. Usage Guide</a></li>
+        <li class="toc-depth-2"><a href="#51-installation">5.1 Installation</a></li>
+        <li class="toc-depth-2"><a href="#52-basic-usage">5.2 Basic Usage</a></li>
+        <li class="toc-depth-2"><a href="#53-statistical-validation">5.3 Statistical Validation</a></li>
+        <li class="toc-depth-2"><a href="#54-deterministic-mode">5.4 Deterministic Mode</a></li>
+        <li class="toc-depth-2"><a href="#55-cryptographic-key-generation-example">5.5 Cryptographic Key Generation Example</a></li>
+        <li class="toc-depth-2"><a href="#56-monte-carlo-simulation-example">5.6 Monte Carlo Simulation Example</a></li>
+        <li class="toc-depth-2"><a href="#6-known-limitations-and-future-work">6. Known Limitations and Future Work</a></li>
+        <li class="toc-depth-2"><a href="#61-current-limitations">6.1 Current Limitations</a></li>
+        <li class="toc-depth-2"><a href="#62-future-directions">6.2 Future Directions</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">OTB-LCG: Python reference implementation</h1>
+          <p class="doc-meta">RNGS\Boolean RNG\Transcendental_LCG_Implementation_Paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This paper documents the Python 3 reference implementation of the Optimized 256-Bit Transcendental Boolean Linear Congruential Generator (OTB-LCG), an architecturally layered pseudorandom number generator combining a 256-bit LCG core, XOR-based Boolean function parameter generation, multi-source hardware entropy harvesting, Von Neumann debiasing, and SHA-256 cryptographic post-processing. We present detailed module specifications for each of the six implementation classes (BooleanFunctions, EntropyHarvester, ParameterGenerator, BiasCorrector, CryptographicProcessor, StatisticalValidator, OptimizedTranscendentalLCG), empirical validation results from the integrated NIST SP 800-22 test suite, comprehensive performance benchmarks, and annotated code listings of all critical components. The implementation achieves 99%+ NIST statistical test compliance, 7.9+ bits/byte output entropy, and measured throughput of 50-500 KB/sec on standard x86_64 hardware. This document serves as the definitive technical reference for the OTB-LCG software package.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>Statistical validation and performance benchmarking</strong></p>
+<p><em>Technical reference · Python 3.x · 2025</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>This paper documents the Python 3 reference implementation of the Optimized 256-Bit Transcendental Boolean Linear Congruential Generator (OTB-LCG), an architecturally layered pseudorandom number generator combining a 256-bit LCG core, XOR-based Boolean function parameter generation, multi-source hardware entropy harvesting, Von Neumann debiasing, and SHA-256 cryptographic post-processing. We present detailed module specifications for each of the six implementation classes (BooleanFunctions, EntropyHarvester, ParameterGenerator, BiasCorrector, CryptographicProcessor, StatisticalValidator, OptimizedTranscendentalLCG), empirical validation results from the integrated NIST SP 800-22 test suite, comprehensive performance benchmarks, and annotated code listings of all critical components. The implementation achieves 99%+ NIST statistical test compliance, 7.9+ bits/byte output entropy, and measured throughput of 50-500 KB/sec on standard x86_64 hardware. This document serves as the definitive technical reference for the OTB-LCG software package.</p>
-<p><strong>Keywords: </strong><em>Python implementation, PRNG, 256-bit LCG, NIST SP 800-22, statistical testing, entropy harvesting, SHA-256, Von Neumann correction, benchmarking</em></p>
-<h1 id="1-implementation-overview"><strong>1. Implementation Overview</strong></h1>
+<p><strong>Keywords:</strong> <em>Python implementation, PRNG, 256-bit LCG, NIST SP 800-22, statistical testing, entropy harvesting, SHA-256, Von Neumann correction, benchmarking</em></p>
+<h2 id="1-implementation-overview">1. Implementation Overview</h2>
 <p>The OTB-LCG Python reference implementation is organised as a single-file module (transcendental_lcg.py) comprising seven classes, each responsible for a well-defined sub-system. The architecture follows a strict layered composition model: each layer consumes the output of lower layers and is agnostic to higher-layer concerns. This design facilitates independent testing, replacement, and security analysis of each component.</p>
-<p><strong>Class</strong></p>
-<p><strong>Responsibility</strong></p>
-<p>BooleanFunctions</p>
-<p>XOR-parity functions for bias-free bit manipulation</p>
-<p>EntropyHarvester</p>
-<p>Multi-source hardware entropy collection and pool management</p>
-<p>ParameterGenerator</p>
-<p>LCG multiplier and increment generation from harvested entropy</p>
-<p>BiasCorrector</p>
-<p>Von Neumann debiasing of bit streams</p>
-<p>CryptographicProcessor</p>
-<p>SHA-256 post-processing and output hardening</p>
-<p>StatisticalValidator</p>
-<p>Inline NIST SP 800-22 frequency, runs, and serial tests</p>
-<p>OptimizedTranscendentalLCG</p>
-<p>Top-level generator: state management, scheduling, public API</p>
-<p>The module requires only Python standard library components: secrets, hashlib, time, math, typing, and collections. There are no external dependencies, ensuring portability across Python 3.6+ environments without installation prerequisites.</p>
-<h1 id="2-class-specifications"><strong>2. Class Specifications</strong></h1>
-<h2 id="21-booleanfunctions"><strong>2.1 BooleanFunctions</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BooleanFunctions</td>
+<td>XOR-parity functions for bias-free bit manipulation</td>
+</tr>
+<tr>
+<td>EntropyHarvester</td>
+<td>Multi-source hardware entropy collection and pool management</td>
+</tr>
+<tr>
+<td>ParameterGenerator</td>
+<td>LCG multiplier and increment generation from harvested entropy</td>
+</tr>
+<tr>
+<td>BiasCorrector</td>
+<td>Von Neumann debiasing of bit streams</td>
+</tr>
+<tr>
+<td>CryptographicProcessor</td>
+<td>SHA-256 post-processing and output hardening</td>
+</tr>
+<tr>
+<td>StatisticalValidator</td>
+<td>Inline NIST SP 800-22 frequency, runs, and serial tests</td>
+</tr>
+<tr>
+<td>OptimizedTranscendentalLCG</td>
+<td>Top-level generator: state management, scheduling, public API</td>
+</tr>
+<tr>
+<td>## 2. Class Specifications</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="21-booleanfunctions">2.1 BooleanFunctions</h2>
 <p>This static utility class implements the XOR-based parity functions used throughout the parameter generation pipeline. All methods are declared @staticmethod; no instance state is maintained.</p>
-<p><strong>Method</strong></p>
-<p><strong>Signature</strong></p>
-<p><strong>Description</strong></p>
-<p>parity3</p>
-<p>parity3(a, b, c) -&gt; int</p>
-<p>3-input XOR parity; 0% bias guaranteed</p>
-<p>parity4</p>
-<p>parity4(a, b, c, d) -&gt; int</p>
-<p>4-input XOR parity; 0% bias guaranteed</p>
-<p>parity7</p>
-<p>parity7(a,...,g) -&gt; int</p>
-<p>7-input XOR parity; used in increment generation</p>
-<p>parity8</p>
-<p>parity8(a,...,h) -&gt; int</p>
-<p>8-input XOR parity; used in reseeding trigger</p>
-<p>cascade_xor8</p>
-<p>cascade_xor8(a,...,h) -&gt; int</p>
-<p>Tree-structured XOR: ((a^b)^(c^d))^((e^f)^(g^h))</p>
-<p>The CASCADE_XOR8 structure implements a binary tree of XOR operations. While mathematically equivalent to PARITY8, the tree structure offers superior hardware parallelism and is used in the multiplier generation pipeline where per-byte processing is required. Both achieve identical 0% bias guarantees.</p>
-<h2 id="22-entropyharvester"><strong>2.2 EntropyHarvester</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Signature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parity3</td>
+<td>parity3(a, b, c) -&gt; int</td>
+<td>3-input XOR parity; 0% bias guaranteed</td>
+</tr>
+<tr>
+<td>parity4</td>
+<td>parity4(a, b, c, d) -&gt; int</td>
+<td>4-input XOR parity; 0% bias guaranteed</td>
+</tr>
+<tr>
+<td>parity7</td>
+<td>parity7(a,...,g) -&gt; int</td>
+<td>7-input XOR parity; used in increment generation</td>
+</tr>
+<tr>
+<td>parity8</td>
+<td>parity8(a,...,h) -&gt; int</td>
+<td>8-input XOR parity; used in reseeding trigger</td>
+</tr>
+<tr>
+<td>cascade_xor8</td>
+<td>cascade_xor8(a,...,h) -&gt; int</td>
+<td>Tree-structured XOR: ((a^b)^(c^d))^((e^f)^(g^h))</td>
+</tr>
+<tr>
+<td>## 2.2 EntropyHarvester</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>The EntropyHarvester class implements the entropy sourcing and pool management sub-system. It maintains an 8192-byte circular ring buffer (entropy pool) and supports quality-screened admission of entropy batches.</p>
-<p><strong>2.2.1 Constructor Parameters</strong></p>
-<p><strong>Parameter</strong></p>
-<p><strong>Value and Description</strong></p>
-<p>self.pool</p>
-<p>bytearray(8192) — 8KB entropy ring buffer</p>
-<p>self.pool_index</p>
-<p>int — current insertion/extraction cursor</p>
-<p>self.quality_threshold</p>
-<p>float = 0.70 — minimum normalised Shannon entropy for admission</p>
-<p><strong>2.2.2 Method: harvest_primary_entropy(size: int = 32) -&gt; bytes</strong></p>
+<h2 id="221-constructor-parameters">2.2.1 Constructor Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value and Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self.pool</td>
+<td>bytearray(8192) — 8KB entropy ring buffer</td>
+</tr>
+<tr>
+<td>self.pool_index</td>
+<td>int — current insertion/extraction cursor</td>
+</tr>
+<tr>
+<td>self.quality_threshold</td>
+<td>float = 0.70 — minimum normalised Shannon entropy for admission</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.2.2 Method: <code>harvest_primary_entropy(size: int = 32) -&gt; bytes</code></strong></p>
 <p>Collects entropy from three independent sources and combines them into a single byte string:</p>
 <p>def harvest_primary_entropy(self, size: int = 32) -&gt; bytes:</p>
 <pre><code>entropy = bytearray\(size\)
 
-\# Source 1: OS cryptographic PRNG \(secrets module\)
+# Source 1: OS cryptographic PRNG \(secrets module\)
 
-crypto\_bytes = secrets\.token\_bytes\(size // 2\)
+crypto\_bytes = secrets.token\_bytes\(size // 2\)
 
 entropy\[0:size//2\] = crypto\_bytes
 
-\# Source 2: Sub\-microsecond timing jitter
+# Source 2: Sub-microsecond timing jitter
 
 for i in range\(size // 2, size\):
 
-    t1 = time\.perf\_counter\_ns\(\)
+    t1 = time.perf\_counter\_ns\(\)
 
-    \_ = sum\(range\(100\)\)         \# deterministic delay
+    \_ = sum\(range\(100\)\)         # deterministic delay
 
-    t2 = time\.perf\_counter\_ns\(\)
+    t2 = time.perf\_counter\_ns\(\)
 
-    entropy\[i\] = \(t2 \- t1\) &amp; 0xFF
+    entropy\[i\] = \(t2 - t1\) &amp; 0xFF
 
-\# Source 3: Microsecond timestamp XOR\-fold
+# Source 3: Microsecond timestamp XOR-fold
 
-timestamp = int\(time\.time\(\) \* 1000000\) &amp; 0xFFFFFFFFFFFFFFFF
+timestamp = int\(time.time\(\) \* 1000000\) &amp; 0xFFFFFFFFFFFFFFFF
 
 for i in range\(min\(8, size\)\):
 
@@ -105,31 +222,31 @@ for i in range\(min\(8, size\)\):
 return bytes\(entropy\)
 </code></pre>
 <p>The timing jitter component exploits variability in CPU execution timing caused by cache effects, branch prediction, thermal noise in clock circuits, and OS scheduling events. This constitutes a physically-derived entropy source with characteristics distinct from the cryptographic PRNG, providing entropy independence between sources.</p>
-<p><strong>2.2.3 Method: estimate_entropy(data: bytes) -&gt; float</strong></p>
+<p><strong>2.2.3 Method: <code>estimate_entropy(data: bytes) -&gt; float</code></strong></p>
 <p>Implements the Shannon entropy estimator, normalised to [0, 1] by dividing by the theoretical maximum (8 bits/byte for uniformly distributed bytes):</p>
 <p>def estimate_entropy(self, data: bytes) -&gt; float:</p>
-<pre><code>freq = Counter\(data\)           \# byte frequency counts
+<pre><code>freq = Counter\(data\)           # byte frequency counts
 
 length = len\(data\)
 
-entropy = 0\.0
+entropy = 0.0
 
-for count in freq\.values\(\):
+for count in freq.values\(\):
 
     p = count / length
 
-    entropy \-= p \* math\.log2\(p\)
+    entropy -= p \* math.log2\(p\)
 
-return entropy / 8\.0           \# normalise to \[0, 1\]
+return entropy / 8.0           # normalise to \[0, 1\]
 </code></pre>
 <p>Shannon entropy estimation as implemented here is the standard frequency-based plug-in estimator. For short sequences (&lt; 256 bytes), this estimator exhibits downward bias due to the plug-in approximation undersampling the tail of the distribution [1]. However, for the OTB-LCG's use case — quality screening of 32-byte entropy batches — the estimate is sufficient for threshold filtering, as the absolute value matters less than the relative ranking of batches.</p>
-<h2 id="23-parametergenerator"><strong>2.3 ParameterGenerator</strong></h2>
+<h2 id="23-parametergenerator">2.3 ParameterGenerator</h2>
 <p>Generates Hull-Dobell-compliant LCG parameters a and c from harvested entropy, using Boolean function mixing to improve the distributional quality of the generated parameters.</p>
-<p><strong>2.3.1 Multiplier Generation</strong></p>
+<h2 id="231-multiplier-generation">2.3.1 Multiplier Generation</h2>
 <p>def generate_multiplier(self) -&gt; int:</p>
-<pre><code>entropy\_bytes = self\.harvester\.harvest\_primary\_entropy\(32\)
+<pre><code>entropy\_bytes = self.harvester.harvest\_primary\_entropy\(32\)
 
-value = int\.from\_bytes\(entropy\_bytes, byteorder='big'\)
+value = int.from\_bytes\(entropy\_bytes, byteorder='big'\)
 
 result = 0
 
@@ -139,22 +256,22 @@ for chunk in range\(32\):
 
     bits = \[\(byte &gt;&gt; i\) &amp; 1 for i in range\(8\)\]
 
-    processed\_bit = self\.bf\.cascade\_xor8\(\*bits\)
+    processed\_bit = self.bf.cascade\_xor8\(\*bits\)
 
     result ^= processed\_bit &lt;&lt; \(chunk \* 8\)
 
-result ^= value                    \# blend with raw entropy
+result ^= value                    # blend with raw entropy
 
-result = \(result &amp; ~3\) | 1         \# enforce a ≡ 1 \(mod 4\)
+result = \(result &amp; ~3\) | 1         # enforce a ≡ 1 \(mod 4\)
 
-result &amp;= \(1 &lt;&lt; 256\) \- 1           \# truncate to 256 bits
+result &amp;= \(1 &lt;&lt; 256\) - 1           # truncate to 256 bits
 
 return result
 </code></pre>
 <p>The XOR-fold of the processed_bit stream with the raw entropy value serves a dual purpose: it preserves the information content of the original entropy (which would otherwise be compressed by the XOR cascade) while benefiting from the balanced distribution properties of the cascade output. The Hull-Dobell constraint a ≡ 1 (mod 4) is enforced deterministically by the final masking operation.</p>
-<p><strong>2.3.2 Increment Generation</strong></p>
+<h2 id="232-increment-generation">2.3.2 Increment Generation</h2>
 <p>The increment c is generated via a similar pipeline using PARITY7 (7-bit parity) rather than CASCADE_XOR8, providing independence between parameter generation streams. The constraint c ≡ 1 (mod 2) (odd increment) is enforced by setting the LSB.</p>
-<h2 id="24-biascorrector"><strong>2.4 BiasCorrector</strong></h2>
+<h2 id="24-biascorrector">2.4 BiasCorrector</h2>
 <p>Implements Von Neumann bias correction as a static utility class. The algorithm processes consecutive bit pairs, outputting only on transitions (01 and 10), which occur with equal probability p(1-p) regardless of individual bit bias p.</p>
 <p>@staticmethod</p>
 <p>def von_neumann_correct(bits: str) -&gt; str:</p>
@@ -162,36 +279,36 @@ return result
 
 i = 0
 
-while i &lt; len\(bits\) \- 1:
+while i &lt; len\(bits\) - 1:
 
-    if bits\[i\] \!= bits\[i\+1\]:      \# discordant pair
+    if bits\[i\] != bits\[i\+1\]:      # discordant pair
 
-        corrected\.append\(bits\[i\]\) \# output first bit
+        corrected.append\(bits\[i\]\) # output first bit
 
-    i \+= 2                        \# always advance by 2
+    i \+= 2                        # always advance by 2
 
-return ''\.join\(corrected\)
+return ''.join\(corrected\)
 </code></pre>
 <p>The correct_bytes() wrapper converts a byte string to a bit string, applies Von Neumann correction, and converts the corrected bit string back to bytes. As the correction always reduces the bit count, the caller (CryptographicProcessor) pads the corrected output with fresh cryptographic randomness if length falls below the required 32 bytes.</p>
-<h2 id="25-cryptographicprocessor"><strong>2.5 CryptographicProcessor</strong></h2>
+<h2 id="25-cryptographicprocessor">2.5 CryptographicProcessor</h2>
 <p>Implements the multi-stage output hardening pipeline. All methods are static; no state is maintained.</p>
 <p>@staticmethod</p>
 <p>def multi_round_process(data: bytes) -&gt; bytes:</p>
-<pre><code>\# Stage 1: Von Neumann correction
+<pre><code># Stage 1: Von Neumann correction
 
-corrected = BiasCorrector\.correct\_bytes\(data\)
+corrected = BiasCorrector.correct\_bytes\(data\)
 
-\# Stage 2: Padding if necessary
+# Stage 2: Padding if necessary
 
 if len\(corrected\) &lt; 32:
 
-    corrected = corrected \+ secrets\.token\_bytes\(32 \- len\(corrected\)\)
+    corrected = corrected \+ secrets.token\_bytes\(32 - len\(corrected\)\)
 
-\# Stage 3: SHA\-256 hash
+# Stage 3: SHA-256 hash
 
-hashed = hashlib\.sha256\(corrected\[:32\]\)\.digest\(\)
+hashed = hashlib.sha256\(corrected\[:32\]\).digest\(\)
 
-\# Stage 4: XOR folding to 16 bytes
+# Stage 4: XOR folding to 16 bytes
 
 folded = bytearray\(16\)
 
@@ -202,239 +319,334 @@ for i in range\(16\):
 return bytes\(folded\)
 </code></pre>
 <p>The SHA-256 hash call (hashlib.sha256) uses CPython's C extension, which invokes native SHA-256 implementation. On x86_64 hardware with SHA-NI extensions (Intel Goldmont Plus and newer, AMD Zen+ and newer), this executes with hardware acceleration, significantly improving throughput. The XOR folding step reduces each 32-byte SHA-256 output to 16 bytes while maintaining near-maximum entropy density.</p>
-<h2 id="26-statisticalvalidator"><strong>2.6 StatisticalValidator</strong></h2>
+<h2 id="26-statisticalvalidator">2.6 StatisticalValidator</h2>
 <p>Implements three NIST SP 800-22 Rev. 1a tests for real-time output quality monitoring. Tests operate on bit-level representations of the output byte stream.</p>
-<p><strong>2.6.1 Frequency (Monobit) Test</strong></p>
+<h2 id="261-frequency-monobit-test">2.6.1 Frequency (Monobit) Test</h2>
 <p>Tests the proportion of ones in the bit sequence. For a truly random sequence, the test statistic S_obs = |2 * ones - n| / sqrt(n) should follow approximately a half-normal distribution. The p-value is:</p>
 <p><em>p_value = erfc(S_obs / sqrt(2))</em></p>
 <p>A sequence passes if p_value &gt;= 0.01 (the 1% significance level as specified in NIST SP 800-22 [2]).</p>
-<p><strong>2.6.2 Runs Test</strong></p>
+<h2 id="262-runs-test">2.6.2 Runs Test</h2>
 <p>A run is a maximal sequence of consecutive identical bits. The number of runs V_n in a sequence of length n is expected to be approximately 2 * pi * (1 - pi) * n, where pi is the fraction of ones. The test statistic:</p>
 <p><em>Z = |V_n - 2n * pi * (1-pi)| / (2 * sqrt(2n) * pi * (1-pi))</em></p>
 <p>follows approximately a standard normal distribution. The test first requires that |pi - 0.5| &lt; 2/sqrt(n) (the frequency prerequisite); if this fails, the test is classified as a direct fail.</p>
-<p><strong>2.6.3 Serial (Overlapping 2-Gram) Test</strong></p>
+<h2 id="263-serial-overlapping-2-gram-test">2.6.3 Serial (Overlapping 2-Gram) Test</h2>
 <p>Counts the frequency of all four possible 2-bit patterns (00, 01, 10, 11) in the bit sequence. For a random sequence, each pattern should occur approximately n/4 times. The chi-squared statistic:</p>
 <p><em>chi_sq = sum_{pattern} (count_pattern - n/4)^2 / (n/4)</em></p>
 <p>is approximately chi-squared distributed with 3 degrees of freedom. The p-value is approximated as exp(-chi_sq / 2). Sequences pass at the 1% significance level.</p>
-<h2 id="27-optimizedtranscendentallcg"><strong>2.7 OptimizedTranscendentalLCG</strong></h2>
+<h2 id="27-optimizedtranscendentallcg">2.7 OptimizedTranscendentalLCG</h2>
 <p>The top-level generator class integrates all sub-systems and exposes the public API. Key implementation decisions:</p>
-<p><strong>2.7.1 State Representation and LCG Step</strong></p>
+<h2 id="271-state-representation-and-lcg-step">2.7.1 State Representation and LCG Step</h2>
 <p>def _next(self) -&gt; int:</p>
-<pre><code>\# Core LCG recurrence: X\_\{n\+1\} = \(a \* X\_n \+ c\) mod 2^256
+<pre><code># Core LCG recurrence: X\_\{n\+1\} = \(a \* X\_n \+ c\) mod 2^256
 
-self\.state = \(self\.multiplier \* self\.state \+ self\.increment\) % self\.MODULUS
+self.state = \(self.multiplier \* self.state \+ self.increment\) % self.MODULUS
 
-self\.cycles \+= 1
+self.cycles \+= 1
 
-\# Adaptive reseeding logic
+# Adaptive reseeding logic
 
-if self\.cycles \- self\.last\_reseed &gt;= self\.reseed\_interval:
+if self.cycles - self.last\_reseed &gt;= self.reseed\_interval:
 
-    state\_entropy = self\.\_get\_state\_entropy\(\)
+    state\_entropy = self.\_get\_state\_entropy\(\)
 
-    bits = \[\(self\.state\.to\_bytes\(32,'big'\)\[i\]\) &amp; 1 for i in range\(8\)\]
+    bits = \[\(self.state.to\_bytes\(32,'big'\)\[i\]\) &amp; 1 for i in range\(8\)\]
 
-    reseed\_trigger = self\.bf\.parity8\(\*bits\)
+    reseed\_trigger = self.bf.parity8\(\*bits\)
 
-    if reseed\_trigger or state\_entropy &lt; 0\.8:
+    if reseed\_trigger or state\_entropy &lt; 0.8:
 
-        self\.\_regenerate\_parameters\(\)
+        self.\_regenerate\_parameters\(\)
 
-return self\.state
+return self.state
 </code></pre>
 <p>Python's native arbitrary-precision integer arithmetic handles all 256-bit operations transparently. The modulus self.MODULUS = 1 &lt;&lt; 256 ensures natural wrap-around behaviour. The reseed trigger uses PARITY8 applied to the eight LSBs of the first 8 bytes of the state — a deterministic but unpredictable criterion that prevents reseeding from becoming predictable to an adversary who knows the state.</p>
-<p><strong>2.7.2 Output Generation</strong></p>
+<h2 id="272-output-generation">2.7.2 Output Generation</h2>
 <p>def get_bytes(self, count: int) -&gt; bytes:</p>
 <pre><code>result = bytearray\(\)
 
 while len\(result\) &lt; count:
 
-    state = self\.\_next\(\)
+    state = self.\_next\(\)
 
-    raw\_bytes = state\.to\_bytes\(32, byteorder='big'\)
+    raw\_bytes = state.to\_bytes\(32, byteorder='big'\)
 
-    processed = CryptographicProcessor\.multi\_round\_process\(raw\_bytes\)
+    processed = CryptographicProcessor.multi\_round\_process\(raw\_bytes\)
 
-    result\.extend\(processed\)   \# 16 bytes per LCG cycle
+    result.extend\(processed\)   # 16 bytes per LCG cycle
 
-return bytes\(result\[:count\]\)   \# trim to exact requested length
+return bytes\(result\[:count\]\)   # trim to exact requested length
 </code></pre>
 <p>Each LCG cycle produces 32 raw bytes, which after Von Neumann correction and XOR folding yield 16 output bytes. The output buffer is trimmed to the exact count requested. For large count values, the tight loop efficiently amortises the per-call overhead.</p>
-<h1 id="3-empirical-statistical-validation"><strong>3. Empirical Statistical Validation</strong></h1>
-<h2 id="31-test-methodology"><strong>3.1 Test Methodology</strong></h2>
+<h2 id="3-empirical-statistical-validation">3. Empirical Statistical Validation</h2>
+<h2 id="31-test-methodology">3.1 Test Methodology</h2>
 <p>Statistical validation was conducted using 2048-byte sample blocks, converted to 16,384-bit sequences for NIST test application. Each test was applied 100 times across independently generated samples. For the full NIST SP 800-22 suite [2], a generator is considered compliant when at least 96% of 100 test sequences pass each test at the p = 0.01 significance level.</p>
 <p>The inline validation implementation (StatisticalValidator.validate_quality()) was additionally verified against the NIST reference software (sts-2.1.2) on 1,000,000-bit sample sequences, confirming consistent p-value calculations.</p>
-<h2 id="32-inline-test-results"><strong>3.2 Inline Test Results</strong></h2>
-<p><strong>Test Name</strong></p>
-<p><strong>Statistic</strong></p>
-<p><strong>p-value (typical)</strong></p>
-<p><strong>Pass Rate</strong></p>
-<p>Frequency (Monobit)</p>
-<p>S_obs</p>
-<blockquote>
-<p>0.50</p>
-</blockquote>
-<p>100% (100/100)</p>
-<p>Runs Test</p>
-<p>Z-score</p>
-<blockquote>
-<p>0.40</p>
-</blockquote>
-<p>99% (99/100)</p>
-<p>Serial (2-gram)</p>
-<p>chi^2</p>
-<blockquote>
-<p>0.60</p>
-</blockquote>
-<p>100% (100/100)</p>
-<p>Overall (3 tests)</p>
-<p>—</p>
-<p>—</p>
-<blockquote>
-<p>99% compliant</p>
-</blockquote>
-<h2 id="33-shannon-entropy-measurements"><strong>3.3 Shannon Entropy Measurements</strong></h2>
+<h2 id="32-inline-test-results">3.2 Inline Test Results</h2>
+<table>
+<thead>
+<tr>
+<th>Test Name</th>
+<th>Statistic</th>
+<th>p-value (typical)</th>
+<th>Pass Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frequency (Monobit)</td>
+<td>S_obs</td>
+<td>&gt; 0.50</td>
+<td>100% (100/100)</td>
+</tr>
+<tr>
+<td>Runs Test</td>
+<td>Z-score</td>
+<td>&gt; 0.40</td>
+<td>99% (99/100)</td>
+</tr>
+<tr>
+<td>Serial (2-gram)</td>
+<td>chi^2</td>
+<td>&gt; 0.60</td>
+<td>100% (100/100)</td>
+</tr>
+<tr>
+<td>Overall (3 tests)</td>
+<td>—</td>
+<td>—</td>
+<td>&gt;99% compliant</td>
+</tr>
+<tr>
+<td>## 3.3 Shannon Entropy Measurements</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>Shannon entropy was measured on output samples of varying sizes using the EntropyHarvester.estimate_entropy() method:</p>
-<p><strong>Sample Size</strong></p>
-<p><strong>Measured Entropy (bits/byte)</strong></p>
-<p><strong>Deviation from Maximum (8.000)</strong></p>
-<p>256 bytes</p>
-<p>7.87 (typical)</p>
-<p>0.13 (1.6%)</p>
-<p>1024 bytes</p>
-<p>7.92 (typical)</p>
-<p>0.08 (1.0%)</p>
-<p>2048 bytes</p>
-<p>7.95 (typical)</p>
-<p>0.05 (0.6%)</p>
-<p>8192 bytes</p>
-<p>7.98 (typical)</p>
-<p>0.02 (0.25%)</p>
-<p>65536 bytes</p>
-<p>7.99+ (typical)</p>
-<p>&lt; 0.01 (&lt; 0.1%)</p>
-<p>The consistent approach toward the theoretical maximum of 8 bits/byte with increasing sample size reflects the expected convergence behaviour of the Shannon estimator: small samples exhibit higher variance, while large samples approach the true distribution entropy. The results are consistent with SHA-256 output characteristics, as expected given the post-processing pipeline.</p>
-<h2 id="34-bias-analysis"><strong>3.4 Bias Analysis</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Sample Size</th>
+<th>Measured Entropy (bits/byte)</th>
+<th>Deviation from Maximum (8.000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>256 bytes</td>
+<td>7.87 (typical)</td>
+<td>0.13 (1.6%)</td>
+</tr>
+<tr>
+<td>1024 bytes</td>
+<td>7.92 (typical)</td>
+<td>0.08 (1.0%)</td>
+</tr>
+<tr>
+<td>2048 bytes</td>
+<td>7.95 (typical)</td>
+<td>0.05 (0.6%)</td>
+</tr>
+<tr>
+<td>8192 bytes</td>
+<td>7.98 (typical)</td>
+<td>0.02 (0.25%)</td>
+</tr>
+<tr>
+<td>65536 bytes</td>
+<td>7.99+ (typical)</td>
+<td>&lt; 0.01 (&lt; 0.1%)</td>
+</tr>
+<tr>
+<td>## 3.4 Bias Analysis</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>Bias was measured as deviation from exact 50% balance in the output bit stream. For each test:</p>
-<p><strong>Generator Configuration</strong></p>
-<p><strong>Measured Bias (%)</strong></p>
-<p><strong>Comparison</strong></p>
-<p>Raw LCG (no processing)</p>
-<p>0.02 – 0.15%</p>
-<p>Baseline (near-ideal for 256-bit LCG)</p>
-<p>After Von Neumann correction</p>
-<p>&lt; 0.005%</p>
-<p>Provably unbiased (finite-sample variance only)</p>
-<p>After SHA-256 post-processing</p>
-<p>&lt; 0.001%</p>
-<p>Hash output indistinguishable from uniform</p>
-<p>Full pipeline output</p>
-<p>&lt; 0.001%</p>
-<p>Exceeds all standard requirements</p>
-<p>The extremely low bias of the raw 256-bit LCG output (0.02-0.15% range) reflects the quality of the XOR-based parameter generation — substantially better than the 22.66% bias characterised in naive parameter generation. Von Neumann correction then provably reduces residual bias to statistical noise levels. SHA-256 post-processing brings the output to practical uniformity.</p>
-<h1 id="4-performance-benchmarking"><strong>4. Performance Benchmarking</strong></h1>
-<h2 id="41-benchmark-environment"><strong>4.1 Benchmark Environment</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Generator Configuration</th>
+<th>Measured Bias (%)</th>
+<th>Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw LCG (no processing)</td>
+<td>0.02 – 0.15%</td>
+<td>Baseline (near-ideal for 256-bit LCG)</td>
+</tr>
+<tr>
+<td>After Von Neumann correction</td>
+<td>&lt; 0.005%</td>
+<td>Provably unbiased (finite-sample variance only)</td>
+</tr>
+<tr>
+<td>After SHA-256 post-processing</td>
+<td>&lt; 0.001%</td>
+<td>Hash output indistinguishable from uniform</td>
+</tr>
+<tr>
+<td>Full pipeline output</td>
+<td>&lt; 0.001%</td>
+<td>Exceeds all standard requirements</td>
+</tr>
+<tr>
+<td>## 4. Performance Benchmarking</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="41-benchmark-environment">4.1 Benchmark Environment</h2>
 <p>Benchmarks were conducted on a standard x86_64 Python 3.11 environment. Timing measurements use time.perf_counter() for sub-microsecond resolution. Each benchmark was repeated 10 times and median values reported.</p>
-<h2 id="42-throughput-measurements"><strong>4.2 Throughput Measurements</strong></h2>
+<h2 id="42-throughput-measurements">4.2 Throughput Measurements</h2>
 <p>The benchmark generates 100,000 bytes (100 KB) of output and measures elapsed wall-clock time:</p>
 <p>start = time.perf_counter()</p>
 <p>total_bytes = sum(len(rng.get_bytes(1024)) for _ in range(100))</p>
 <p>elapsed = time.perf_counter() - start</p>
 <p>throughput = total_bytes / elapsed  # bytes per second</p>
-<p><strong>Component</strong></p>
-<p><strong>Throughput (typical)</strong></p>
-<p><strong>Notes</strong></p>
-<p>Raw LCG step only</p>
-<p>~50 MB/sec</p>
-<p>Pure Python 256-bit multiply</p>
-<p>LCG + Von Neumann only</p>
-<p>~5 MB/sec</p>
-<p>Bit string conversion overhead</p>
-<p>LCG + VN + SHA-256</p>
-<p>~200-500 KB/sec</p>
-<p>hashlib (C extension) bottleneck</p>
-<p>Full pipeline (get_bytes)</p>
-<p>~50-500 KB/sec</p>
-<p>Includes all processing stages</p>
-<h2 id="43-profiling-analysis"><strong>4.3 Profiling Analysis</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Throughput (typical)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw LCG step only</td>
+<td>~50 MB/sec</td>
+<td>Pure Python 256-bit multiply</td>
+</tr>
+<tr>
+<td>LCG + Von Neumann only</td>
+<td>~5 MB/sec</td>
+<td>Bit string conversion overhead</td>
+</tr>
+<tr>
+<td>LCG + VN + SHA-256</td>
+<td>~200-500 KB/sec</td>
+<td>hashlib (C extension) bottleneck</td>
+</tr>
+<tr>
+<td>Full pipeline (get_bytes)</td>
+<td>~50-500 KB/sec</td>
+<td>Includes all processing stages</td>
+</tr>
+<tr>
+<td>## 4.3 Profiling Analysis</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>Performance profiling reveals the dominant cost centres in the full pipeline:</p>
-<p><strong>Operation</strong></p>
-<p><strong>% of Total Time (approx.)</strong></p>
-<p>SHA-256 (hashlib.sha256)</p>
-<p>~35%</p>
-<p>Von Neumann correction (Python bit strings)</p>
-<p>~30%</p>
-<p>state.to_bytes(32, 'big') conversion</p>
-<p>~15%</p>
-<p>LCG multiply (Python big int)</p>
-<p>~10%</p>
-<p>Entropy estimation during validation</p>
-<p>~5%</p>
-<p>Other overhead</p>
-<p>~5%</p>
-<p>The primary optimisation opportunity is the Von Neumann correction step. The current implementation uses Python string concatenation in a character-by-character loop — a natural candidate for vectorisation using numpy bit array operations, which could yield 10-50x speedup for this stage. However, the pure-Python implementation prioritises clarity and portability over performance.</p>
-<h2 id="44-initialisation-overhead"><strong>4.4 Initialisation Overhead</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>% of Total Time (approx.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-256 (hashlib.sha256)</td>
+<td>~35%</td>
+</tr>
+<tr>
+<td>Von Neumann correction (Python bit strings)</td>
+<td>~30%</td>
+</tr>
+<tr>
+<td>state.to_bytes(32, 'big') conversion</td>
+<td>~15%</td>
+</tr>
+<tr>
+<td>LCG multiply (Python big int)</td>
+<td>~10%</td>
+</tr>
+<tr>
+<td>Entropy estimation during validation</td>
+<td>~5%</td>
+</tr>
+<tr>
+<td>Other overhead</td>
+<td>~5%</td>
+</tr>
+<tr>
+<td>## 4.4 Initialisation Overhead</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>Initialisation involves 10 sequential entropy harvest calls and two parameter generation cycles. Measured initialisation time is approximately 0.5-2 ms, dominated by timing jitter measurement loops. This overhead is incurred once per generator instance and is negligible relative to total generation time for any practical workload.</p>
-<h1 id="5-usage-guide"><strong>5. Usage Guide</strong></h1>
-<h2 id="51-installation"><strong>5.1 Installation</strong></h2>
+<h2 id="5-usage-guide">5. Usage Guide</h2>
+<h2 id="51-installation">5.1 Installation</h2>
 <p>The implementation requires Python 3.6+ with no external dependencies. The module is a single self-contained file:</p>
-<p># Import</p>
+
 <p>from transcendental_lcg import OptimizedTranscendentalLCG</p>
-<h2 id="52-basic-usage"><strong>5.2 Basic Usage</strong></h2>
-<p># Initialise with hardware entropy</p>
+<h2 id="52-basic-usage">5.2 Basic Usage</h2>
+
 <p>rng = OptimizedTranscendentalLCG()</p>
-<p># Generate random bytes (any length)</p>
+
 <p>random_bytes = rng.get_bytes(32)     # 256-bit AES key</p>
 <p>iv = rng.get_bytes(16)              # 128-bit IV</p>
-<p># Generate random integers</p>
+
 <p>uint32 = rng.get_int(32)            # 32-bit unsigned integer</p>
 <p>uint64 = rng.get_int(64)            # 64-bit unsigned integer</p>
 <p>uint256 = rng.get_int(256)          # 256-bit integer</p>
-<p># Generate random float in [0, 1)</p>
+
 <p>f = rng.get_float()                 # 53-bit precision</p>
-<h2 id="53-statistical-validation"><strong>5.3 Statistical Validation</strong></h2>
-<p># Run inline NIST tests on 2048-byte sample</p>
+<h2 id="53-statistical-validation">5.3 Statistical Validation</h2>
+
 <p>result = rng.validate_output(sample_size=2048)</p>
 <p>print(f"Entropy: {result['entropy']:.4f}")</p>
 <p>print(f"Tests passed: {result['validation']['passed_tests']}/")</p>
 <p>print(f"              {result['validation']['total_tests']}")</p>
 <p>print(f"Pass rate: {result['validation']['pass_rate']:.1%}")</p>
-<h2 id="54-deterministic-mode"><strong>5.4 Deterministic Mode</strong></h2>
+<h2 id="54-deterministic-mode">5.4 Deterministic Mode</h2>
 <p>For reproducible testing (not for cryptographic use), the generator can be seeded deterministically:</p>
-<p># Deterministic seed (disables hardware entropy for initial state)</p>
+
 <p>rng = OptimizedTranscendentalLCG(seed=0xDEADBEEF)</p>
-<p># WARNING: Parameters a and c are still hardware-entropy-derived</p>
-<p># Full determinism requires seeding the ParameterGenerator as well</p>
-<h2 id="55-cryptographic-key-generation-example"><strong>5.5 Cryptographic Key Generation Example</strong></h2>
-<p># Generate a 256-bit encryption key</p>
+
+
+<h2 id="55-cryptographic-key-generation-example">5.5 Cryptographic Key Generation Example</h2>
+
 <p>key_256 = rng.get_bytes(32)</p>
 <p>print(f'AES-256 key: {key_256.hex()}')</p>
-<p># Generate an AES-128 key + IV pair</p>
+
 <p>aes_key = rng.get_bytes(16)</p>
 <p>aes_iv  = rng.get_bytes(16)</p>
-<p># Generate a 64-byte HMAC key</p>
+
 <p>hmac_key = rng.get_bytes(64)</p>
-<h2 id="56-monte-carlo-simulation-example"><strong>5.6 Monte Carlo Simulation Example</strong></h2>
-<p># Estimate pi using Monte Carlo (1,000,000 samples)</p>
+<h2 id="56-monte-carlo-simulation-example">5.6 Monte Carlo Simulation Example</h2>
+
 <p>inside = 0</p>
 <p>for _ in range(1_000_000):</p>
-<pre><code>x, y = rng\.get\_float\(\), rng\.get\_float\(\)
+<pre><code>x, y = rng.get\_float\(\), rng.get\_float\(\)
 
-if x\*x \+ y\*y &lt;= 1\.0:
+if x\*x \+ y\*y &lt;= 1.0:
 
     inside \+= 1
 </code></pre>
 <p>pi_estimate = 4 * inside / 1_000_000</p>
 <p>print(f'pi ≈ {pi_estimate:.6f}')</p>
-<h1 id="6-known-limitations-and-future-work"><strong>6. Known Limitations and Future Work</strong></h1>
-<h2 id="61-current-limitations"><strong>6.1 Current Limitations</strong></h2>
+<h2 id="6-known-limitations-and-future-work">6. Known Limitations and Future Work</h2>
+<h2 id="61-current-limitations">6.1 Current Limitations</h2>
 <ul>
 <li>CSPRNG compliance: the OTB-LCG does not meet NIST SP 800-90A DRBG requirements for formal cryptographic certification. Applications requiring FIPS-140 compliance should use platform CSPRNGs (secrets.token_bytes, /dev/urandom, CryptGenRandom).</li>
 <li>Von Neumann throughput overhead: the current pure-Python Von Neumann implementation incurs significant overhead. Performance-critical applications may wish to substitute an XOR-based linear corrector as described by alternative research [3], which achieves similar debiasing with better throughput.</li>
 <li>Min-entropy vs. Shannon entropy: the quality screening uses Shannon entropy estimation. For applications requiring formal min-entropy guarantees, the estimator should be replaced with a min-entropy estimator or conservative threshold, as noted in the cryptographic literature on randomness extractors [4].</li>
 <li>Parameter generation determinism: after a power cycle or process restart, parameters are re-derived from new hardware entropy. The generator is therefore not reproducible across sessions, which is desirable for security but precludes use in reproducible simulation contexts without explicit seed management.</li>
 </ul>
-<h2 id="62-future-directions"><strong>6.2 Future Directions</strong></h2>
+<h2 id="62-future-directions">6.2 Future Directions</h2>
 <ul>
 <li>NumPy vectorisation of the Von Neumann correction loop for 10-50x throughput improvement.</li>
 <li>Addition of remaining NIST SP 800-22 tests (DFT spectral test, longest runs, binary matrix rank) for more comprehensive inline statistical monitoring.</li>
@@ -442,19 +654,44 @@ if x\*x \+ y\*y &lt;= 1\.0:
 <li>Multi-threaded entropy harvesting for high-throughput applications.</li>
 <li>Optional integration with hardware entropy sources (Intel RDRAND instruction, /dev/hwrng) where available.</li>
 </ul>
-<h1 id="references"><strong>References</strong></h1>
-<p>__[1]  __Hausser, J., Strimmer, K. (2009). Entropy Inference and the James-Stein Estimator, with Application to Nonlinear Gene Association Networks. Journal of Machine Learning Research, 10, 1469-1484. (On Shannon entropy estimation bias for small samples.)</p>
-<p>__[2]  __Bassham, L., Rukhin, A., Soto, J., Nechvatal, J., Smid, M., Leigh, S., Levenson, M., Vangel, M., Heckert, N., Banks, D. (2010). NIST SP 800-22 Rev. 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST. https://doi.org/10.6028/NIST.SP.800-22r1a</p>
-<p>__[3]  __Dichtl, M. et al. (2006). A Comparison of Post-Processing Techniques for Biased Random Number Generators. Research paper demonstrating linear XOR-based correctors' superior throughput vs. Von Neumann correction.</p>
-<p>__[4]  __Barak, B., Dodis, Y. et al. (2011). Leftover Hash Lemma, Revisited. CRYPTO 2011. (On min-entropy as the appropriate measure for cryptographic randomness extraction.)</p>
-<p>__[5]  __Peres, Y. (1992). Iterating Von Neumann's Procedure for Extracting Random Bits. Annals of Statistics, 20(1), 590-597. https://doi.org/10.1214/aos/1176348543</p>
-<p>__[6]  __Hull, T.E., Dobell, A.R. (1962). Random Number Generators. SIAM Review, 4(3), 230-254.</p>
-<p>__[7]  __Von Neumann, J. (1951). Various Techniques Used in Connection with Random Digits. NIST Applied Mathematics Series, 12, 36-38.</p>
-<p>__[8]  __NIST (2015). FIPS PUB 180-4: Secure Hash Standard (SHA). https://doi.org/10.6028/NIST.FIPS.180-4</p>
-<p>__[9]  __Knuth, D.E. (1998). The Art of Computer Programming, Vol. 2: Seminumerical Algorithms, 3rd ed. Addison-Wesley.</p>
-<p>__[10]  __Barker, E., Kelsey, J. (2018). NIST SP 800-90B: Recommendation for the Entropy Sources Used for Random Bit Generation. NIST.</p>
-<p>__[11]  __Shannon, C.E. (1948). A Mathematical Theory of Communication. Bell System Technical Journal, 27(3), 379-423. https://doi.org/10.1002/j.1538-7305.1948.tb01338.x</p>
-<p>__[12]  __Barker, E., Kelsey, J. (2015). NIST SP 800-90A Rev. 1: Recommendation for Random Number Generation Using Deterministic Random Bit Generators. NIST. https://doi.org/10.6028/NIST.SP.800-90Ar1</p>
-  </main>
+<h2 id="references">References</h2>
+<p><strong>[1]</strong> Hausser, J., Strimmer, K. (2009). Entropy Inference and the James-Stein Estimator, with Application to Nonlinear Gene Association Networks. Journal of Machine Learning Research, 10, 1469-1484. (On Shannon entropy estimation bias for small samples.)</p>
+<p><strong>[2]</strong> Bassham, L., Rukhin, A., Soto, J., Nechvatal, J., Smid, M., Leigh, S., Levenson, M., Vangel, M., Heckert, N., Banks, D. (2010). NIST SP 800-22 Rev. 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST. https://doi.org/10.6028/NIST.SP.800-22r1a</p>
+<p><strong>[3]</strong> Dichtl, M. et al. (2006). A Comparison of Post-Processing Techniques for Biased Random Number Generators. Research paper demonstrating linear XOR-based correctors' superior throughput vs. Von Neumann correction.</p>
+<p><strong>[4]</strong> Barak, B., Dodis, Y. et al. (2011). Leftover Hash Lemma, Revisited. CRYPTO 2011. (On min-entropy as the appropriate measure for cryptographic randomness extraction.)</p>
+<p><strong>[5]</strong> Peres, Y. (1992). Iterating Von Neumann's Procedure for Extracting Random Bits. Annals of Statistics, 20(1), 590-597. https://doi.org/10.1214/aos/1176348543</p>
+<p><strong>[6]</strong> Hull, T.E., Dobell, A.R. (1962). Random Number Generators. SIAM Review, 4(3), 230-254.</p>
+<p><strong>[7]</strong> Von Neumann, J. (1951). Various Techniques Used in Connection with Random Digits. NIST Applied Mathematics Series, 12, 36-38.</p>
+<p><strong>[8]</strong> NIST (2015). FIPS PUB 180-4: Secure Hash Standard (SHA). https://doi.org/10.6028/NIST.FIPS.180-4</p>
+<p><strong>[9]</strong> Knuth, D.E. (1998). The Art of Computer Programming, Vol. 2: Seminumerical Algorithms, 3rd ed. Addison-Wesley.</p>
+<p><strong>[10]</strong> Barker, E., Kelsey, J. (2018). NIST SP 800-90B: Recommendation for the Entropy Sources Used for Random Bit Generation. NIST.</p>
+<p><strong>[11]</strong> Shannon, C.E. (1948). A Mathematical Theory of Communication. Bell System Technical Journal, 27(3), 379-423. https://doi.org/10.1002/j.1538-7305.1948.tb01338.x</p>
+<p><strong>[12]</strong> Barker, E., Kelsey, J. (2015). NIST SP 800-90A Rev. 1: Recommendation for Random Number Generation Using Deterministic Random Bit Generators. NIST. https://doi.org/10.6028/NIST.SP.800-90Ar1</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

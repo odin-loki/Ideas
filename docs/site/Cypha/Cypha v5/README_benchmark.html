@@ -3,46 +3,94 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README benchmark</title>
+  <meta name="description" content="For someone reading this for the first time benchmark.py is the final step in the pipeline. It trains Cypha on each of the nine datasets produced by convert.py, evaluates accuracy on a held-out test split, and saves results to benchmark\_state.json. Its most important design…"/>
+  <title>benchmark.py — Full Evaluation Harness — Streaming, Checkpointed, Resumable · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha v5\README_benchmark.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>benchmark.py</strong></p>
-<p>Full Evaluation Harness — Streaming, Checkpointed, Resumable</p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-what-is-this-file">1. What Is This File?</a></li>
+        <li class="toc-depth-2"><a href="#2-byte-offset-streaming">2. Byte-Offset Streaming</a></li>
+        <li class="toc-depth-3"><a href="#21-the-problem-with-large-files">2.1 The Problem with Large Files</a></li>
+        <li class="toc-depth-3"><a href="#22-the-solution-index-first-seek-later">2.2 The Solution: Index First, Seek Later</a></li>
+        <li class="toc-depth-2"><a href="#3-traintest-split">3. Train/Test Split</a></li>
+        <li class="toc-depth-2"><a href="#4-checkpointing-and-resume">4. Checkpointing and Resume</a></li>
+        <li class="toc-depth-3"><a href="#41-checkpoint-location">4.1 Checkpoint Location</a></li>
+        <li class="toc-depth-3"><a href="#42-resume-logic">4.2 Resume Logic</a></li>
+        <li class="toc-depth-2"><a href="#5-evaluation">5. Evaluation</a></li>
+        <li class="toc-depth-3"><a href="#51-streaming-evaluation">5.1 Streaming Evaluation</a></li>
+        <li class="toc-depth-3"><a href="#52-evenly-spaced-sampling">5.2 Evenly-Spaced Sampling</a></li>
+        <li class="toc-depth-3"><a href="#53-error-recording">5.3 Error Recording</a></li>
+        <li class="toc-depth-2"><a href="#6-full-execution-flow">6. Full Execution Flow</a></li>
+        <li class="toc-depth-2"><a href="#7-the-state-file">7. The State File</a></li>
+        <li class="toc-depth-2"><a href="#8-cypha-configuration">8. Cypha Configuration</a></li>
+        <li class="toc-depth-2"><a href="#9-government-submission-summary">9. Government Submission Summary</a></li>
+        <li class="toc-depth-2"><a href="#10-function-reference">10. Function Reference</a></li>
+        <li class="toc-depth-2"><a href="#11-troubleshooting">11. Troubleshooting</a></li>
+        <li class="toc-depth-3"><a href="#111-missing-n-converted-files-run-python-convertpy">11.1 &quot;Missing N converted files — Run: python convert.py&quot;</a></li>
+        <li class="toc-depth-3"><a href="#112-accuracy-shows-0-with-all-errors-no-memory">11.2 Accuracy shows 0% with all errors &quot;[no memory]&quot;</a></li>
+        <li class="toc-depth-3"><a href="#113-training-is-slow-on-panoradio_rf">11.3 Training is slow on panoradio_rf</a></li>
+        <li class="toc-depth-3"><a href="#114-interrupted-benchmark-how-to-resume">11.4 Interrupted benchmark — how to resume</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">benchmark.py — Full Evaluation Harness — Streaming, Checkpointed, Resumable</h1>
+          <p class="doc-meta">Cypha\Cypha v5\README_benchmark.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>benchmark.py is the final step in the pipeline. It trains Cypha on each of the nine datasets produced by convert.py, evaluates accuracy on a held-out test split, and saves results to benchmark_state.json.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p>File 4 of 5  ·  351 lines  ·  Step 3 of the pipeline</p>
 <p>For someone reading this for the first time</p>
-<h1 id="1-what-is-this-file"><strong>1. What Is This File?</strong></h1>
+<h2 id="1-what-is-this-file">1. What Is This File?</h2>
 <p>benchmark.py is the final step in the pipeline. It trains Cypha on each of the nine datasets produced by convert.py, evaluates accuracy on a held-out test split, and saves results to benchmark_state.json.</p>
 <p>Its most important design constraint is that it never loads a full dataset into RAM. A 2 GB speech_commands.txt file trains and evaluates on a machine with 512 MB of free RAM. This is achieved through byte-offset streaming: the file is indexed once (storing only the byte position of each line), then individual lines are sought and read on demand.</p>
-<p><strong>Where this sits in the pipeline</strong></p>
-<p>download.py  →  convert.py  →  benchmark.py<br />
+<p><strong>Where this sits in the pipeline</strong>
+download.py  →  convert.py  →  benchmark.py
 Reads the 9 wire-format .txt files from convert.py. Writes benchmark_state.json and benchmark_report.json. Saves per-dataset checkpoints to ./checkpoints/.</p>
 <p>python benchmark.py            # run full benchmark (all 9 datasets)</p>
 <p>python benchmark.py --status   # show results without re-running</p>
 <p>python benchmark.py --reset    # clear state (optionally clear checkpoints)</p>
-<h1 id="2-byte-offset-streaming"><strong>2. Byte-Offset Streaming</strong></h1>
+<h2 id="2-byte-offset-streaming">2. Byte-Offset Streaming</h2>
 <p>This is the core technical idea that makes benchmark.py work on large files. Read this section carefully — everything else depends on it.</p>
-<h2 id="21-the-problem-with-large-files"><strong>2.1 The Problem with Large Files</strong></h2>
+<h3 id="21-the-problem-with-large-files">2.1 The Problem with Large Files</h3>
 <p>A naive training loop would do this:</p>
-<p># NAIVE — loads everything into RAM</p>
+
 <p>with open("panoradio_rf.txt") as f:</p>
-<pre><code>lines = f\.readlines\(\)        \# 2 GB → 2 GB in RAM
+<pre><code>lines = f.readlines\(\)        # 2 GB → 2 GB in RAM
 </code></pre>
 <p>random.shuffle(lines)            # shuffle in RAM</p>
 <p>for line in lines:               # iterate</p>
-<pre><code>inp, label = line\.split\("|||"\)
+<pre><code>inp, label = line.split\("|||"\)
 
-cypha\.train\_step\(inp, label\)
+cypha.train\_step\(inp, label\)
 </code></pre>
 <p>For panoradio_rf.txt at ~2 GB and speech_commands.txt at ~1.5 GB, this immediately runs out of RAM on most machines. And you cannot shuffle a file without reading it first — so you cannot do stochastic training without loading it.</p>
-<h2 id="22-the-solution-index-first-seek-later"><strong>2.2 The Solution: Index First, Seek Later</strong></h2>
+<h3 id="22-the-solution-index-first-seek-later">2.2 The Solution: Index First, Seek Later</h3>
 <p>The _build_offset_index() function from Cypha.py solves this in one pass:</p>
-<p># _build_offset_index(filepath) — runs ONCE at benchmark start</p>
+
 <p>offsets = []</p>
 <p>with open(filepath, "rb") as f:</p>
 <pre><code>pos = 0
@@ -51,96 +99,96 @@ for line in f:
 
     if b"|||" in line:
 
-        offsets\.append\(pos\)    \# store byte position, not the line
+        offsets.append\(pos\)    # store byte position, not the line
 
     pos \+= len\(line\)
 </code></pre>
 <p>return np.array(offsets, dtype=np.uint64)   # ~8 bytes per line</p>
 <p>The result is an array of uint64 values — one 8-byte number per training sample. For a 400k-sample RF file this is 400k × 8 = 3.2 MB, regardless of how large the actual samples are. The samples themselves are never held in memory.</p>
 <p>Training then works by shuffling the offset array (a 3.2 MB shuffle, not a 2 GB shuffle) and seeking to each position:</p>
-<p># Training loop — O(1) RAM per sample</p>
+
 <p>shuffled = rng.permutation(train_offsets)   # shuffle the 3.2 MB index</p>
 <p>with open(filepath, "rb") as fh:</p>
 <pre><code>for offset in shuffled:
 
-    fh\.seek\(offset\)                     \# seek to byte position
+    fh.seek\(offset\)                     # seek to byte position
 
-    line = fh\.readline\(\)                \# read exactly one line
+    line = fh.readline\(\)                # read exactly one line
 
-    inp, label = line\.split\(b"|||"\)     \# parse
+    inp, label = line.split\(b"|||"\)     # parse
 
-    cypha\.train\_step\(inp\.decode\(\), label\.decode\(\)\)
+    cypha.train\_step\(inp.decode\(\), label.decode\(\)\)
 </code></pre>
-<p><strong>Memory cost at scale</strong></p>
-<p>A 400,000-sample RF dataset requires 3.2 MB for the offset index + a few MB for the Cypha model = under 50 MB total RAM. The 2 GB file lives on disk and is accessed one line at a time via OS-level seek/read, which is POSIX-standard and works on any filesystem.</p>
-<h1 id="3-traintest-split"><strong>3. Train/Test Split</strong></h1>
+<p><strong>Memory cost at scale</strong>
+A 400,000-sample RF dataset requires 3.2 MB for the offset index + a few MB for the Cypha model = under 50 MB total RAM. The 2 GB file lives on disk and is accessed one line at a time via OS-level seek/read, which is POSIX-standard and works on any filesystem.</p>
+<h2 id="3-traintest-split">3. Train/Test Split</h2>
 <p>The split is performed entirely on the offset array — no file reading required:</p>
 <p>split_idx      =  floor(n_offsets × 0.80)</p>
 <p>train_offsets  =  offsets[ : split_idx ]</p>
 <p>test_offsets   =  offsets[ split_idx : ]</p>
 <p>The first 80% of lines (by file position) form the training set; the last 20% form the test set. This preserves any temporal ordering in the data — important for network_intrusion (NSL-KDD), where later samples may include attack types the model has not seen yet, simulating real deployment conditions.</p>
 <p>No stratification is applied. For heavily imbalanced datasets, this means the test set class distribution matches the dataset's natural class distribution, which is the correct evaluation setting for a production system.</p>
-<h1 id="4-checkpointing-and-resume"><strong>4. Checkpointing and Resume</strong></h1>
+<h2 id="4-checkpointing-and-resume">4. Checkpointing and Resume</h2>
 <p>Training a full dataset takes time — network_intrusion at 126k samples runs for ~10 minutes. benchmark.py saves a checkpoint after every epoch so you can stop and resume without losing work.</p>
-<h2 id="41-checkpoint-location"><strong>4.1 Checkpoint Location</strong></h2>
-<p>Per-dataset checkpoints are saved in ./checkpoints/<dataset\_name>/. Each checkpoint consists of two files:</p>
+<h3 id="41-checkpoint-location">4.1 Checkpoint Location</h3>
+<p>Per-dataset checkpoints are saved in ./checkpoints/<dataset\_name>/. Each checkpoint consists of two files:</dataset\_name></p>
 <ul>
 <li>meta.json: epochs_completed, n_anchors, step, temperature, timestamp</li>
 <li>anchors.npz: all anchor vectors (keys, vectors, labels) as compressed NumPy arrays</li>
 </ul>
 <p>./checkpoints/</p>
 <p>sql_injection/</p>
-<pre><code>meta\.json         \# \{"epochs\_completed": 1, "n\_anchors": 247, \.\.\.\}
+<pre><code>meta.json         # \{"epochs\_completed": 1, "n\_anchors": 247, ...\}
 
-anchors\.npz       \# np\.savez\_compressed with keys, vecs, labels
+anchors.npz       # np.savez\_compressed with keys, vecs, labels
 </code></pre>
 <p>network_intrusion/</p>
-<pre><code>meta\.json
+<pre><code>meta.json
 
-anchors\.npz
+anchors.npz
 </code></pre>
 <p>...</p>
-<h2 id="42-resume-logic"><strong>4.2 Resume Logic</strong></h2>
+<h3 id="42-resume-logic">4.2 Resume Logic</h3>
 <p>At the start of each dataset's benchmark, benchmark.py calls cypha.get_checkpoint_info(dataset_name). If a checkpoint exists and epochs_completed &gt;= target_epochs, the checkpoint is loaded and training is skipped entirely — only evaluation runs:</p>
 <p>ckpt = cypha.get_checkpoint_info(dataset_name)</p>
 <p>if ckpt and ckpt["epochs_completed"] &gt;= epochs:</p>
-<pre><code>\# Already trained — just load and evaluate
+<pre><code># Already trained — just load and evaluate
 
-cypha\.\_load\_checkpoint\(dataset\_name\)
+cypha.\_load\_checkpoint\(dataset\_name\)
 
-print\(f"  Loaded \{cypha\.memory\.n:,\} anchors"\)
+print\(f"  Loaded \{cypha.memory.n:,\} anchors"\)
 </code></pre>
 <p>else:</p>
-<pre><code>\# Train from \(possibly partial\) checkpoint
+<pre><code># Train from \(possibly partial\) checkpoint
 
-cypha\.train\_file\_stateful\_offsets\(
+cypha.train\_file\_stateful\_offsets\(
 
     filepath, train\_offsets, dataset\_name, epochs=epochs
 
 \)
 </code></pre>
-<p><strong>The checkpoint-load bug (fixed)</strong></p>
-<p>An earlier version of benchmark.py skipped _load_checkpoint() when the checkpoint was already complete, then immediately evaluated — against an empty AnchorMemory that had just been constructed. This caused 0% accuracy on every re-run (the model predicted "[no memory]" for every sample). The fix: always call _load_checkpoint() before evaluating, even when training is skipped. The state JSON detects this by checking whether errors include "[no memory]" and re-runs those datasets automatically.</p>
-<h1 id="5-evaluation"><strong>5. Evaluation</strong></h1>
-<h2 id="51-streaming-evaluation"><strong>5.1 Streaming Evaluation</strong></h2>
+<p><strong>The checkpoint-load bug (fixed)</strong>
+An earlier version of benchmark.py skipped _load_checkpoint() when the checkpoint was already complete, then immediately evaluated — against an empty AnchorMemory that had just been constructed. This caused 0% accuracy on every re-run (the model predicted "[no memory]" for every sample). The fix: always call _load_checkpoint() before evaluating, even when training is skipped. The state JSON detects this by checking whether errors include "[no memory]" and re-runs those datasets automatically.</p>
+<h2 id="5-evaluation">5. Evaluation</h2>
+<h3 id="51-streaming-evaluation">5.1 Streaming Evaluation</h3>
 <p>evaluate_accuracy() uses the same byte-offset approach as training. It never loads the test set into RAM:</p>
 <p>with open(filepath, "rb") as fh:</p>
 <pre><code>for offset in eval\_offsets:
 
-    pair = \_read\_at\_offset\(fh, offset\)   \# seek \+ readline \+ parse
+    pair = \_read\_at\_offset\(fh, offset\)   # seek \+ readline \+ parse
 
     inp, expected = pair
 
-    result, conf = cypha\.infer\(inp, verbose=False\)
+    result, conf = cypha.infer\(inp, verbose=False\)
 
     if result == expected: correct \+= 1
 </code></pre>
-<h2 id="52-evenly-spaced-sampling"><strong>5.2 Evenly-Spaced Sampling</strong></h2>
+<h3 id="52-evenly-spaced-sampling">5.2 Evenly-Spaced Sampling</h3>
 <p>If the test set has more samples than test_sample (default 1,000), the evaluator takes an evenly-spaced subset:</p>
 <p>step     =  n_test / sample_size</p>
 <p>indices  =  { floor(i × step)  |  i = 0, 1, …, sample_size−1 }</p>
 <p>This is deterministic — the same indices are selected on every run. It ensures the sample covers the full test set distribution rather than only its first 1,000 lines, which would be biased toward the beginning of the file.</p>
-<h2 id="53-error-recording"><strong>5.3 Error Recording</strong></h2>
+<h3 id="53-error-recording">5.3 Error Recording</h3>
 <p>Up to 10 misclassified samples are stored in the results dict for diagnosis. Each error record contains:</p>
 <ul>
 <li>input: first 50 characters of the input string</li>
@@ -149,30 +197,46 @@ cypha\.train\_file\_stateful\_offsets\(
 <li>confidence: the confidence score of the wrong prediction</li>
 </ul>
 <p>These appear in the benchmark output and are saved to benchmark_state.json for later inspection. High-confidence wrong predictions (conf &gt; 0.8) indicate the model has learned a prototype that genuinely overlaps with the wrong class — these are structurally ambiguous inputs, not random mistakes.</p>
-<h1 id="6-full-execution-flow"><strong>6. Full Execution Flow</strong></h1>
+<h2 id="6-full-execution-flow">6. Full Execution Flow</h2>
 <p>Here is the complete sequence for a single dataset from start to finish:</p>
 <p>benchmark_dataset(cypha, "sql_injection", "sql_injection.txt", epochs=1)</p>
-<p>1. Check if file exists. If not, return None (skip silently).</p>
-<p>2. _build_offset_index("sql_injection.txt")</p>
+<ol>
+<li>
+<p>Check if file exists. If not, return None (skip silently).</p>
+</li>
+<li>
+<p>_build_offset_index("sql_injection.txt")</p>
+</li>
+</ol>
 <p>→ Scan file, record byte position of every "|||" line.</p>
 <p>→ Result: offsets array, ~8 bytes/line, ~240 KB for 30k samples.</p>
 <p>→ Time: ~0.3 s for a 2 MB file.</p>
-<p>3. Split:</p>
+<ol start="3">
+<li>Split:</li>
+</ol>
 <p>train_offsets = offsets[:24000]   # first 80%</p>
 <p>test_offsets  = offsets[24000:]   # last 20%</p>
-<p>4. get_checkpoint_info("sql_injection")</p>
+<ol start="4">
+<li>get_checkpoint_info("sql_injection")</li>
+</ol>
 <p>→ If checkpoint exists with epochs_completed &gt;= 1: load it, skip to step 6.</p>
 <p>→ Else: proceed to step 5.</p>
-<p>5. train_file_stateful_offsets(filepath, train_offsets, "sql_injection", epochs=1)</p>
+<ol start="5">
+<li>train_file_stateful_offsets(filepath, train_offsets, "sql_injection", epochs=1)</li>
+</ol>
 <p>→ Shuffle train_offsets.</p>
 <p>→ For each offset: seek → readline → train_step(inp, label).</p>
 <p>→ After each epoch: save checkpoint to ./checkpoints/sql_injection/.</p>
-<p>6. evaluate_accuracy(cypha, filepath, test_offsets, sample_size=1000)</p>
+<ol start="6">
+<li>evaluate_accuracy(cypha, filepath, test_offsets, sample_size=1000)</li>
+</ol>
 <p>→ Take 1000 evenly-spaced samples from test_offsets.</p>
 <p>→ For each: seek → readline → infer(inp) → compare to expected.</p>
 <p>→ Return (accuracy, correct, total, errors).</p>
-<p>7. Return results dict. Saved to benchmark_state.json.</p>
-<h1 id="7-the-state-file"><strong>7. The State File</strong></h1>
+<ol start="7">
+<li>Return results dict. Saved to benchmark_state.json.</li>
+</ol>
+<h2 id="7-the-state-file">7. The State File</h2>
 <p>benchmark_state.json is the output of the run. It accumulates results across all datasets and is updated after each one completes. Safe to inspect while the benchmark is running.</p>
 <p>{</p>
 <p>"datasets": {</p>
@@ -180,7 +244,7 @@ cypha\.train\_file\_stateful\_offsets\(
 
   "dataset":       "sql\_injection",
 
-  "filepath":      "sql\_injection\.txt",
+  "filepath":      "sql\_injection.txt",
 
   "total\_samples": 29442,
 
@@ -190,53 +254,53 @@ cypha\.train\_file\_stateful\_offsets\(
 
   "epochs":        1,
 
-  "accuracy":      91\.2,
+  "accuracy":      91.2,
 
   "correct":       912,
 
   "total\_tested":  1000,
 
-  "test\_time\_s":   4\.8,
+  "test\_time\_s":   4.8,
 
-  "ms\_per\_sample": 4\.8,
+  "ms\_per\_sample": 4.8,
 
   "errors": \[
 
     \{
 
-      "input":      "1 UNION SELECT\.\.\.",
+      "input":      "1 UNION SELECT...",
 
       "expected":   "safe",
 
       "got":        "sql\_injection",
 
-      "confidence": 0\.732
+      "confidence": 0.732
 
     \}
 
   \],
 
-  "timestamp":     "2026\-02\-21 10:30:00"
+  "timestamp":     "2026-02-21 10:30:00"
 
 \},
 
-"malware": \{ \.\.\. \},
+"malware": \{ ... \},
 
-\.\.\.
+...
 </code></pre>
 <p>},</p>
 <p>"started":     "2026-02-21 10:00:00",</p>
 <p>"last_update": "2026-02-21 12:45:00"</p>
 <p>}</p>
-<h1 id="8-cypha-configuration"><strong>8. Cypha Configuration</strong></h1>
+<h2 id="8-cypha-configuration">8. Cypha Configuration</h2>
 <p>benchmark.py initialises Cypha with production settings:</p>
 <p>cypha = CyphaStateful(feature_dim=4096, resonance_dim=256)</p>
 <p>feature_dim=4096 is used for the full benchmark (vs 512 in the synthetic benchmark). This increases the Omega embedding dimension, giving more resolution for the hash embedding. The JL bound for classification quality is set by resonance_dim=256, not feature_dim, so raising feature_dim does not change the mathematical guarantees — it just reduces hash collisions in the feature vector.</p>
-<p><strong>Parameter</strong></p>
-<p><strong>Benchmark value</strong></p>
-<p><strong>Default</strong></p>
-<p><strong>Effect of changing</strong></p>
-<p>feature_dim</p>
+<p><strong>Parameter</strong>
+<strong>Benchmark value</strong>
+<strong>Default</strong>
+<strong>Effect of changing</strong>
+feature_dim</p>
 <p>4096</p>
 <p>512</p>
 <p>Higher = fewer hash collisions in Omega embedding. Diminishing returns above 1024.</p>
@@ -256,49 +320,49 @@ cypha\.train\_file\_stateful\_offsets\(
 <p>0.55</p>
 <p>0.55</p>
 <p>Within-class merge threshold. Mirrors dedup_threshold.</p>
-<h1 id="9-government-submission-summary"><strong>9. Government Submission Summary</strong></h1>
+<h2 id="9-government-submission-summary">9. Government Submission Summary</h2>
 <p>After all datasets complete, benchmark.py prints a grouped accuracy summary formatted for government/defence submission:</p>
 <p>======================================================================</p>
 <p>FOR GOVERNMENT SUBMISSION</p>
 <p>======================================================================</p>
 <p>Security (Text):</p>
-<pre><code>91\.2%  sql injection          \(29,442 samples\)
+<pre><code>91.2%  sql injection          \(29,442 samples\)
 
-84\.6%  phishing vrbancic      \(88,000 samples\)
+84.6%  phishing vrbancic      \(88,000 samples\)
 
-89\.3%  malware                \(10,182 samples\)
+89.3%  malware                \(10,182 samples\)
 
-78\.4%  network intrusion     \(125,973 samples\)
+78.4%  network intrusion     \(125,973 samples\)
 
-87\.1%  phishing emails        \(10,341 samples\)
+87.1%  phishing emails        \(10,341 samples\)
 
-Avg: 86\.1%
+Avg: 86.1%
 </code></pre>
 <p>Signals (RF):</p>
-<pre><code>82\.5%  panoradio rf          \(398,521 samples\)
+<pre><code>82.5%  panoradio rf          \(398,521 samples\)
 
-Avg: 82\.5%
+Avg: 82.5%
 </code></pre>
 <p>Phishing (URLs):</p>
-<pre><code>85\.9%  phiusiil phishing     \(235,074 samples\)
+<pre><code>85.9%  phiusiil phishing     \(235,074 samples\)
 
-Avg: 85\.9%
+Avg: 85.9%
 </code></pre>
 <p>Audio:</p>
-<pre><code>71\.8%  speech commands       \(105,000 samples\)
+<pre><code>71.8%  speech commands       \(105,000 samples\)
 
-68\.2%  esc50                   \(2,000 samples\)
+68.2%  esc50                   \(2,000 samples\)
 
-Avg: 70\.0%
+Avg: 70.0%
 </code></pre>
 <p>Overall: 82.2% across 1,004,533 samples</p>
 <p>Zero synthetic data. Production ready.</p>
 <p>======================================================================</p>
 <p>The "Zero synthetic data" line is significant — every sample in this evaluation came from a real-world public dataset. No generated or augmented data was used at any stage of training or evaluation.</p>
-<h1 id="10-function-reference"><strong>10. Function Reference</strong></h1>
-<p><strong>Function</strong></p>
-<p><strong>Purpose</strong></p>
-<p>load_benchmark_state()</p>
+<h2 id="10-function-reference">10. Function Reference</h2>
+<p><strong>Function</strong>
+<strong>Purpose</strong>
+load_benchmark_state()</p>
 <p>Read benchmark_state.json. Returns empty state if missing.</p>
 <p>save_benchmark_state(state)</p>
 <p>Write state to .tmp then os.replace() — atomic write.</p>
@@ -310,16 +374,41 @@ Avg: 70\.0%
 <p>Print accuracy table sorted by descending accuracy.</p>
 <p>main()</p>
 <p>Entry point: init Cypha, iterate datasets, handle --status/--reset.</p>
-<h1 id="11-troubleshooting"><strong>11. Troubleshooting</strong></h1>
-<h2 id="111-missing-n-converted-files-run-python-convertpy"><strong>11.1  "Missing N converted files — Run: python convert.py"</strong></h2>
+<h2 id="11-troubleshooting">11. Troubleshooting</h2>
+<h3 id="111-missing-n-converted-files-run-python-convertpy">11.1 "Missing N converted files — Run: python convert.py"</h3>
 <p>benchmark.py checks that all 9 .txt files exist before starting. If any are missing, it lists them and exits. Run convert.py first (or for a quick test, run synthetic_benchmark.py which needs no files).</p>
-<h2 id="112-accuracy-shows-0-with-all-errors-no-memory"><strong>11.2  Accuracy shows 0% with all errors "[no memory]"</strong></h2>
+<h3 id="112-accuracy-shows-0-with-all-errors-no-memory">11.2 Accuracy shows 0% with all errors "[no memory]"</h3>
 <p>This is the checkpoint-load bug. It happens when the benchmark_state.json shows a dataset as completed with 0% accuracy and every error entry says "got: [no memory]". This means evaluation ran against an empty AnchorMemory. The current version of benchmark.py detects this pattern and automatically re-runs the affected dataset. If it persists, delete the entry from benchmark_state.json manually and re-run.</p>
-<h2 id="113-training-is-slow-on-panoradio_rf"><strong>11.3  Training is slow on panoradio_rf</strong></h2>
+<h3 id="113-training-is-slow-on-panoradio_rf">11.3 Training is slow on panoradio_rf</h3>
 <p>Each RF sample is ~16 KB of hex text. The IQ encoder does a 512-point STFT, which costs ~1.6 ms per sample. At 320k training samples this is ~8 minutes of encoding time alone. This is expected — it matches the profiling results documented in Cypha.py. The benchmark runs each dataset sequentially, so the RF dataset does not block the text datasets.</p>
-<h2 id="114-interrupted-benchmark-how-to-resume"><strong>11.4  Interrupted benchmark — how to resume</strong></h2>
+<h3 id="114-interrupted-benchmark-how-to-resume">11.4 Interrupted benchmark — how to resume</h3>
 <p>Just run python benchmark.py again. The state file records which datasets have completed results. Only datasets without a valid (non-zero, non-[no memory]) result will be re-run. Checkpoints are loaded so training resumes from where it stopped within any partially-trained dataset.</p>
 <p>End of benchmark.py reference.  Next: synthetic_benchmark.py</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

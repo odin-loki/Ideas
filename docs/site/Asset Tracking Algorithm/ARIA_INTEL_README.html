@@ -3,25 +3,123 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>ARIA INTEL README</title>
+  <meta name="description" content="**Code:** `aria_intel_v6.py` · 2,363 lines · Python 3.10+ ARIA-INTEL is a single-file, edge-deployable intelligence engine for multi-target tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning. ARIA-INTEL is a complete multi-target tracking and…"/>
+  <title>ARIA-INTEL · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Asset Tracking Algorithm\ARIA_INTEL_README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>ARIA-INTEL</strong></p>
-<p>Algebraic Rendezvous &amp; Intelligence Analyser</p>
-<p><strong>TECHNICAL REFERENCE &amp; DEVELOPER DOCUMENTATION</strong></p>
-<p>aria_intel_v6.py  ·  2,363 lines  ·  Python 3.10+</p>
-<p>ARIA-INTEL is a single-file, edge-deployable intelligence engine for multi-target</p>
-<p>tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning.</p>
-<h1 id="1-overview"><strong>1. Overview</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-overview">1. Overview</a></li>
+        <li class="toc-depth-2"><a href="#11-design-philosophy">1.1  Design Philosophy</a></li>
+        <li class="toc-depth-2"><a href="#12-scope-of-output">1.2  Scope of Output</a></li>
+        <li class="toc-depth-2"><a href="#2-dependencies-and-invocation">2. Dependencies and Invocation</a></li>
+        <li class="toc-depth-3"><a href="#21-requirements">2.1  Requirements</a></li>
+        <li class="toc-depth-3"><a href="#22-minimal-invocation">2.2  Minimal Invocation</a></li>
+        <li class="toc-depth-3"><a href="#23-observation-schema">2.3  Observation Schema</a></li>
+        <li class="toc-depth-2"><a href="#3-core-tracking-engine">3. Core Tracking Engine</a></li>
+        <li class="toc-depth-3"><a href="#31-pmbm-filter-architecture">3.1  PMBM Filter Architecture</a></li>
+        <li class="toc-depth-3"><a href="#32-mixed-ornstein-uhlenbeck-motion-models">3.2  Mixed Ornstein-Uhlenbeck Motion Models</a></li>
+        <li class="toc-depth-3"><a href="#33-particle-filter-mouparticlefilter">3.3  Particle Filter (MOUParticleFilter)</a></li>
+        <li class="toc-depth-3"><a href="#34-track-lifecycle">3.4  Track Lifecycle</a></li>
+        <li class="toc-depth-3"><a href="#35-possibility-pmbm-mismatch-detection">3.5  Possibility-PMBM Mismatch Detection</a></li>
+        <li class="toc-depth-2"><a href="#4-pattern-of-life-subsystem">4. Pattern-of-Life Subsystem</a></li>
+        <li class="toc-depth-3"><a href="#41-architecture">4.1  Architecture</a></li>
+        <li class="toc-depth-3"><a href="#42-anomaly-scoring">4.2  Anomaly Scoring</a></li>
+        <li class="toc-depth-3"><a href="#43-location-prediction">4.3  Location Prediction</a></li>
+        <li class="toc-depth-2"><a href="#5-rendezvous-warning-system">5. Rendezvous Warning System</a></li>
+        <li class="toc-depth-3"><a href="#51-method-1-geometric-velocity-intercept">5.1  Method 1: Geometric Velocity Intercept</a></li>
+        <li class="toc-depth-3"><a href="#52-method-2-separation-rate-extrapolation">5.2  Method 2: Separation Rate Extrapolation</a></li>
+        <li class="toc-depth-3"><a href="#53-method-3-pol-cross-prediction">5.3  Method 3: PoL Cross-Prediction</a></li>
+        <li class="toc-depth-3"><a href="#54-legacy-short-horizon-predictor-rendezvousdetector">5.4  Legacy Short-Horizon Predictor (RendezvousDetector)</a></li>
+        <li class="toc-depth-2"><a href="#6-tradecraft-detector-registry">6. Tradecraft Detector Registry</a></li>
+        <li class="toc-depth-3"><a href="#61-default-detector-set-8-registered-at-construction">6.1  Default Detector Set (8 registered at construction)</a></li>
+        <li class="toc-depth-3"><a href="#legacytradecraftdetector">LegacyTradecraftDetector</a></li>
+        <li class="toc-depth-3"><a href="#extendedrendezvouswarner">ExtendedRendezvousWarner</a></li>
+        <li class="toc-depth-3"><a href="#parallelroutesurveillancedetector">ParallelRouteSurveillanceDetector</a></li>
+        <li class="toc-depth-3"><a href="#modetransitiondetector">ModeTransitionDetector</a></li>
+        <li class="toc-depth-3"><a href="#loiteranomalydetector">LoiterAnomalyDetector</a></li>
+        <li class="toc-depth-3"><a href="#coverstopdetector">CoverStopDetector</a></li>
+        <li class="toc-depth-3"><a href="#chokepointsurveillancedetector">ChokepointSurveillanceDetector</a></li>
+        <li class="toc-depth-3"><a href="#networkroleinferencedetector">NetworkRoleInferenceDetector</a></li>
+        <li class="toc-depth-2"><a href="#7-domain-profiles">7. Domain Profiles</a></li>
+        <li class="toc-depth-3"><a href="#71-custom-profiles">7.1  Custom Profiles</a></li>
+        <li class="toc-depth-2"><a href="#8-threat-scoring">8. Threat Scoring</a></li>
+        <li class="toc-depth-3"><a href="#81-bayesian-beta-monte-carlo-scoring">8.1  Bayesian Beta-Monte Carlo Scoring</a></li>
+        <li class="toc-depth-3"><a href="#82-priority-tiers">8.2  Priority Tiers</a></li>
+        <li class="toc-depth-2"><a href="#9-supporting-analytical-systems">9. Supporting Analytical Systems</a></li>
+        <li class="toc-depth-3"><a href="#91-dynamic-network-analyser-dynamicnetworkanalyser">9.1  Dynamic Network Analyser (DynamicNetworkAnalyser)</a></li>
+        <li class="toc-depth-3"><a href="#92-anomaly-escalator-anomalyescalator">9.2  Anomaly Escalator (AnomalyEscalator)</a></li>
+        <li class="toc-depth-3"><a href="#93-credibility-fuser-credibilityfuser">9.3  Credibility Fuser (CredibilityFuser)</a></li>
+        <li class="toc-depth-3"><a href="#94-source-credibility-tracker-sourcecredibilitytracker">9.4  Source Credibility Tracker (SourceCredibilityTracker)</a></li>
+        <li class="toc-depth-3"><a href="#95-sensor-scheduler-sensorscheduler">9.5  Sensor Scheduler (SensorScheduler)</a></li>
+        <li class="toc-depth-3"><a href="#96-operational-intelligence-operationalintelligence">9.6  Operational Intelligence (OperationalIntelligence)</a></li>
+        <li class="toc-depth-3"><a href="#97-route-predictor-routepredictor">9.7  Route Predictor (RoutePredictor)</a></li>
+        <li class="toc-depth-3"><a href="#98-forward-backward-smoother-forwardbackwardsmoother">9.8  Forward-Backward Smoother (ForwardBackwardSmoother)</a></li>
+        <li class="toc-depth-2"><a href="#10-validated-performance">10. Validated Performance</a></li>
+        <li class="toc-depth-3"><a href="#101-benchmark-results">10.1  Benchmark Results</a></li>
+        <li class="toc-depth-3"><a href="#102-tradecraft-detection-all-scenarios-pass">10.2  Tradecraft Detection — All Scenarios Pass</a></li>
+        <li class="toc-depth-3"><a href="#103-scaling-characteristics">10.3  Scaling Characteristics</a></li>
+        <li class="toc-depth-2"><a href="#11-performance-optimisation-history">11. Performance Optimisation History</a></li>
+        <li class="toc-depth-3"><a href="#111-pol-cross-prediction-throttling">11.1  PoL Cross-Prediction Throttling</a></li>
+        <li class="toc-depth-3"><a href="#112-pol-horizon-cap-and-mc-reduction">11.2  PoL Horizon Cap and MC Reduction</a></li>
+        <li class="toc-depth-3"><a href="#113-velocity-fit-caching">11.3  Velocity Fit Caching</a></li>
+        <li class="toc-depth-3"><a href="#114-gmm-inner-loop-hand-coding">11.4  GMM Inner Loop Hand-Coding</a></li>
+        <li class="toc-depth-2"><a href="#12-algorithm-provenance-and-novelty">12. Algorithm Provenance and Novelty</a></li>
+        <li class="toc-depth-3"><a href="#121-established-methods">12.1  Established Methods</a></li>
+        <li class="toc-depth-3"><a href="#122-research-level-methods">12.2  Research-Level Methods</a></li>
+        <li class="toc-depth-3"><a href="#123-novel-contributions">12.3  Novel Contributions</a></li>
+        <li class="toc-depth-2"><a href="#13-output-report-dictionary-complete-field-reference">13. Output Report Dictionary — Complete Field Reference</a></li>
+        <li class="toc-depth-3"><a href="#131-top-level-fields">13.1  Top-Level Fields</a></li>
+        <li class="toc-depth-3"><a href="#132-targets-entry">13.2  targets[] Entry</a></li>
+        <li class="toc-depth-3"><a href="#133-rendezvous-entry">13.3  rendezvous[] Entry</a></li>
+        <li class="toc-depth-3"><a href="#134-tradecraft-entry-common-fields">13.4  tradecraft[] Entry — Common Fields</a></li>
+        <li class="toc-depth-2"><a href="#14-test-scenario-generator">14. Test Scenario Generator</a></li>
+        <li class="toc-depth-2"><a href="#15-known-limitations-and-open-issues">15. Known Limitations and Open Issues</a></li>
+        <li class="toc-depth-3"><a href="#151-pol-minimum-observation-threshold">15.1  PoL Minimum Observation Threshold</a></li>
+        <li class="toc-depth-3"><a href="#152-mou-model-classification">15.2  MOU Model Classification</a></li>
+        <li class="toc-depth-3"><a href="#153-p95-latency-spike">15.3  P95 Latency Spike</a></li>
+        <li class="toc-depth-3"><a href="#154-sdr-threshold-sensitivity">15.4  SDR Threshold Sensitivity</a></li>
+        <li class="toc-depth-3"><a href="#155-network-role-classification-at-small-n">15.5  Network Role Classification at Small N</a></li>
+        <li class="toc-depth-2"><a href="#16-file-structure-aria_intel_v6py-2363-lines">16. File Structure ( aria_intel_v6.py , 2,363 lines)</a></li>
+        <li class="toc-depth-2"><a href="#17-quick-reference">17. Quick Reference</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">ARIA-INTEL</h1>
+          <p class="doc-meta">Asset Tracking Algorithm\ARIA_INTEL_README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>ARIA-INTEL is a single-file, edge-deployable intelligence engine for multi-target tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>Algebraic rendezvous and intelligence analyser — technical reference and developer documentation</em></p>
+<p><strong>Code:</strong> <code>aria_intel_v6.py</code> · 2,363 lines · Python 3.10+</p>
+<p>ARIA-INTEL is a single-file, edge-deployable intelligence engine for multi-target tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning.</p>
+<h2 id="1-overview">1. Overview</h2>
 <p>ARIA-INTEL is a complete multi-target tracking and intelligence fusion engine implemented in a single Python file. It combines a Poisson Multi-Bernoulli Mixture (PMBM) Bayesian filter with Mixed Ornstein-Uhlenbeck (MOU) motion models, a full Pattern-of-Life (PoL) subsystem, a three-method 30-minute rendezvous warning architecture, and a composable tradecraft detector registry — all within a domain-polymorphic framework that can be re-targeted to maritime, airspace, convoy, or urban HUMINT domains by swapping a single configuration object.</p>
 <p>The system was designed for two constraints: (1) strict mathematical rigour — every probability estimate is Bayesian, every detection threshold is operationally motivated, and no "magic numbers" exist without justification; (2) edge deployability — the full engine runs at 27ms median latency on a single CPU core with no GPU requirement, enabling deployment on tactical hardware, embedded systems, or offline analysis pipelines.</p>
-<h2 id="11-design-philosophy"><strong>1.1  Design Philosophy</strong></h2>
+<h2 id="11-design-philosophy">1.1  Design Philosophy</h2>
 <ul>
 <li>Single-file architecture: zero external intelligence dependencies beyond NumPy, SciPy, and the standard library. The entire system compiles and runs without a network connection.</li>
 <li>Mathematically grounded: PMBM is a theoretically optimal multi-target filter under the Random Finite Set (RFS) framework. MOU motion models have closed-form discretisation. Threat scoring uses Beta-distributed Monte Carlo integration, not point estimates.</li>
@@ -29,7 +127,7 @@
 <li>Polymorphic: all thresholds, noise parameters, motion models, and warning horizons live in a DomainProfile dataclass. Swapping the profile changes the domain of discourse without touching any algorithmic code.</li>
 <li>Transparent: every output field is traceable to its source. The report dictionary includes raw breakdown scores, particle filter state, clutter rate, and per-detector output, not just summary alerts.</li>
 </ul>
-<h2 id="12-scope-of-output"><strong>1.2  Scope of Output</strong></h2>
+<h2 id="12-scope-of-output">1.2  Scope of Output</h2>
 <p>On each call to engine.ingest(), the engine returns a structured report dictionary containing:</p>
 <ul>
 <li>Per-track threat scores: Bayesian existence probability, PoL anomaly score, HVL proximity, detection density, motion score, threat persistence EMA, Possibility-PMBM mismatch indicator, dominant MOU model class, priority tier (IMMEDIATE / HIGH / MEDIUM / LOW).</li>
@@ -41,55 +139,69 @@
 <li>Operational intelligence: velocity trends, stationary dwell flags, wide-area movement flags, Possibility-PMBM mismatch alarms.</li>
 <li>Administrative: scan count, clutter rate, active / dormant track counts, domain profile name.</li>
 </ul>
-<h1 id="2-dependencies-and-invocation"><strong>2. Dependencies and Invocation</strong></h1>
-<h2 id="21-requirements"><strong>2.1  Requirements</strong></h2>
-<p><strong>Package</strong></p>
-<p><strong>Version</strong></p>
-<p><strong>Usage</strong></p>
-<p><strong>numpy</strong></p>
-<p>≥ 1.24</p>
-<p>All numerical arrays, particle filter, linear algebra</p>
-<p><strong>scipy</strong></p>
-<p>≥ 1.10</p>
-<p>chi2 gate threshold, gammaln for Bernoulli likelihoods</p>
-<p><strong>Python</strong></p>
-<p>≥ 3.10</p>
-<p>Dataclasses, ABC, __future__ annotations</p>
-<h2 id="22-minimal-invocation"><strong>2.2  Minimal Invocation</strong></h2>
+<h2 id="2-dependencies-and-invocation">2. Dependencies and Invocation</h2>
+<h3 id="21-requirements">2.1  Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>numpy</td>
+<td>≥ 1.24</td>
+<td>All numerical arrays, particle filter, linear algebra</td>
+</tr>
+<tr>
+<td>scipy</td>
+<td>≥ 1.10</td>
+<td>chi2 gate threshold, gammaln for Bernoulli likelihoods</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>≥ 3.10</td>
+<td>Dataclasses, ABC, __future__ annotations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-minimal-invocation">2.2  Minimal Invocation</h3>
 <p>import aria_intel_v6 as aria</p>
 <p>eng = aria.ARIAIntelEngineV6(</p>
-<pre><code>profile = aria\.UrbanHUMINT\(\),          \# domain preset
+<pre><code>profile = aria.UrbanHUMINT\(\),          # domain preset
 
-area    = \(\-4500, 4500, \-4500, 4500\),  \# xmin xmax ymin ymax \(metres\)
+area    = \(-4500, 4500, -4500, 4500\),  # xmin xmax ymin ymax \(metres\)
 
-high\_value\_locations = \[               \# optional HVL list
+high\_value\_locations = \[               # optional HVL list
 
-    np\.array\(\[1200\., 800\.\]\),
+    np.array\(\[1200., 800.\]\),
 
 \]
 </code></pre>
 <p>)</p>
 <p>report = eng.ingest(observations, timestamp_seconds)</p>
 <p>print(eng.summary(report))</p>
-<h2 id="23-observation-schema"><strong>2.3  Observation Schema</strong></h2>
+<h3 id="23-observation-schema">2.3  Observation Schema</h3>
 <p>Each observation is an instance of the Observation dataclass:</p>
 <p>Observation(</p>
-<pre><code>obs\_id:     str,        \# unique string identifier
+<pre><code>obs\_id:     str,        # unique string identifier
 
-timestamp:  float,      \# Unix seconds
+timestamp:  float,      # Unix seconds
 
-position:   np\.ndarray, \# shape \(2,\), x/y in metres
+position:   np.ndarray, # shape \(2,\), x/y in metres
 
-modality:   str,        \# GEOINT | SIGINT | COMMS | HUMINT | OSINT
+modality:   str,        # GEOINT | SIGINT | COMMS | HUMINT | OSINT
 
-confidence: float,      \# 0\.0 – 1\.0
+confidence: float,      # 0.0 – 1.0
 
-source\_id:  str,        \# sensor/source identifier
+source\_id:  str,        # sensor/source identifier
 </code></pre>
 <p>)</p>
 <p>The modality field determines the base reliability weight used in all downstream calculations. Source credibility is tracked independently via the SourceCredibilityTracker, which uses an exponential decay model to learn per-source reliability from observation likelihood history.</p>
-<h1 id="3-core-tracking-engine"><strong>3. Core Tracking Engine</strong></h1>
-<h2 id="31-pmbm-filter-architecture"><strong>3.1  PMBM Filter Architecture</strong></h2>
+<h2 id="3-core-tracking-engine">3. Core Tracking Engine</h2>
+<h3 id="31-pmbm-filter-architecture">3.1  PMBM Filter Architecture</h3>
 <p>The heart of the engine is a Poisson Multi-Bernoulli Mixture filter. PMBM is the theoretically optimal multi-target Bayesian filter under the RFS framework when targets are born from a Poisson process, survive with fixed probability, and are detected independently. The filter jointly estimates:</p>
 <ul>
 <li>The number of targets (via Bernoulli existence probabilities summed across the MBM component)</li>
@@ -103,48 +215,64 @@ source\_id:  str,        \# sensor/source identifier
 <li>pf: MOUParticleFilter with 320 particles tracking 4D state [x, y, vx, vy]</li>
 <li>pol: PatternOfLife GMM fitted to the track's observation history</li>
 </ul>
-<h2 id="32-mixed-ornstein-uhlenbeck-motion-models"><strong>3.2  Mixed Ornstein-Uhlenbeck Motion Models</strong></h2>
+<h3 id="32-mixed-ornstein-uhlenbeck-motion-models">3.2  Mixed Ornstein-Uhlenbeck Motion Models</h3>
 <p>Unlike constant-velocity or nearly-constant-acceleration IMM models, ARIA-INTEL uses Mixed Ornstein-Uhlenbeck (MOU) processes to model target motion. An OU process is a continuous-time stochastic mean-reverting process defined by:</p>
 <p>dV(t) = -theta * V(t) dt + sigma * dW(t)</p>
 <p>where theta is the mean-reversion rate and sigma is the diffusion coefficient. This model captures physically meaningful motion behaviour: high theta forces rapid reversion to zero velocity (stationary or slow agents), low theta allows persistent directed motion (vehicles, fast-movers).</p>
 <p>The discretisation at scan interval dt is:</p>
 <p>V(t+dt) = alpha * V(t) + sigma_v * epsilon</p>
 <p>where alpha = exp(-theta * dt),</p>
-<pre><code>  sigma\_v = sigma \* sqrt\( \(1 \- exp\(\-2\*theta\*dt\)\) / \(2\*theta\) \)
+<pre><code>  sigma\_v = sigma \* sqrt\( \(1 - exp\(-2\*theta\*dt\)\) / \(2\*theta\) \)
 </code></pre>
 <p>This is the exact discrete-time equivalent of the continuous OU process. The steady-state velocity variance for each model is sigma^2 / (2*theta), which is used to initialise particles correctly.</p>
 <p>UrbanHUMINT domain motion models:</p>
-<p><strong>Model</strong></p>
-<p><strong>theta</strong></p>
-<p><strong>sigma</strong></p>
-<p><strong>SS vel variance</strong></p>
-<p><strong>Interpretation</strong></p>
-<p><strong>foot</strong></p>
-<p>0.30</p>
-<p>2.0 m/s</p>
-<p>6.67 m²/s²</p>
-<p>Walking speed, turns frequently</p>
-<p><strong>vehicle</strong></p>
-<p>0.10</p>
-<p>8.0 m/s</p>
-<p>320 m²/s²</p>
-<p>Street speed, moderate persistence</p>
-<p><strong>stationary</strong></p>
-<p>2.00</p>
-<p>0.5 m/s</p>
-<p>0.063 m²/s²</p>
-<p>Dwell / observation post</p>
-<p><strong>fast</strong></p>
-<p>0.05</p>
-<p>15.0 m/s</p>
-<p>2250 m²/s²</p>
-<p>Highway speed, high persistence</p>
-<h2 id="33-particle-filter-mouparticlefilter"><strong>3.3  Particle Filter (MOUParticleFilter)</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>θ</th>
+<th>σ</th>
+<th>SS vel variance</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foot</td>
+<td>0.30</td>
+<td>2.0 m/s</td>
+<td>6.67 m²/s²</td>
+<td>Walking speed, turns frequently</td>
+</tr>
+<tr>
+<td>vehicle</td>
+<td>0.10</td>
+<td>8.0 m/s</td>
+<td>320 m²/s²</td>
+<td>Street speed, moderate persistence</td>
+</tr>
+<tr>
+<td>stationary</td>
+<td>2.00</td>
+<td>0.5 m/s</td>
+<td>0.063 m²/s²</td>
+<td>Dwell / observation post</td>
+</tr>
+<tr>
+<td>fast</td>
+<td>0.05</td>
+<td>15.0 m/s</td>
+<td>2250 m²/s²</td>
+<td>Highway speed, high persistence</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-particle-filter-mouparticlefilter">3.3  Particle Filter (MOUParticleFilter)</h3>
 <p>Each track maintains a Sequential Importance Resampling (SIR) particle filter with 320 particles in 4D state space [x, y, vx, vy]. The filter uses systematic resampling (lower variance than multinomial) triggered when effective sample size 1/sum(w_i^2) &lt; 0.4N.</p>
 <p>The prediction step samples a model index per particle from the MOU model mixture (weighted by the current model weight vector mu), then propagates velocity forward using the MOU dynamics and position forward using the trapezoidal rule. This prevents the velocity-from-position lag that affects Euler integration.</p>
 <p>The update step uses the Mahalanobis distance under the position marginal as the likelihood. When consecutive observations are available, an auxiliary trajectory update weights particles additionally by velocity-implied heading, increasing model discrimination speed.</p>
 <p>Innovation gating uses the chi-squared 99.9% threshold (chi2(0.999, df=2) = 13.82) to reject outlier observations. Observation-to-track assignment is handled by a Gibbs sampler (14 sweeps), which resolves measurement-to-track ambiguity probabilistically rather than greedily.</p>
-<h2 id="34-track-lifecycle"><strong>3.4  Track Lifecycle</strong></h2>
+<h3 id="34-track-lifecycle">3.4  Track Lifecycle</h3>
 <p>Tracks follow the PMBM Bernoulli lifecycle:</p>
 <ol>
 <li>BORN: unassigned observation with weight &gt; 0.25 spawns a new BernoulliTrack at R_BIRTH = 0.65.</li>
@@ -155,24 +283,24 @@ source\_id:  str,        \# sensor/source identifier
 </ol>
 <p>Reacquisition uses the track's PoL model to predict where it should be at the current timestamp. An unassigned observation within 3 standard deviations of the predicted position rehydrates the dormant track, preserving its identity, PoL history, and threat EMA.</p>
 <p>Group spawning: when a new track appears within 80m of an existing confirmed track with high measurement rate and high velocity variance (indicative of a group), the new track inherits a clone of the existing track's PoL model. This models members of a group who are individually tracked but share a behavioural pattern.</p>
-<h2 id="35-possibility-pmbm-mismatch-detection"><strong>3.5  Possibility-PMBM Mismatch Detection</strong></h2>
+<h3 id="35-possibility-pmbm-mismatch-detection">3.5  Possibility-PMBM Mismatch Detection</h3>
 <p>In addition to the standard Bayesian existence probability r, each track maintains a possibilistic existence probability pi_r using the Possibility theory framework. The update rule for pi_r uses the Possibility-PMBM equations:</p>
 <p>pi_r(hit) = clip( max(pi_r * pi_L, alpha * pi_r), 0, 1 )</p>
 <p>pi_r(miss) = pi_r * (1 - P_D * alpha)</p>
 <p>where alpha = POSS_ALPHA = 0.25, pi_L = min(1, weight * P_D)</p>
 <p>The mismatch score is abs(r - pi_r) / max(r, pi_r). When this exceeds 0.4, an alarm is raised in the operational intelligence output. In practice this fires when a target's observation pattern is inconsistent with a single existence hypothesis — indicating either sensor deception, track confusion, or a model error requiring analyst review. This feature has no direct equivalent in known operational multi-target tracking systems.</p>
-<h1 id="4-pattern-of-life-subsystem"><strong>4. Pattern-of-Life Subsystem</strong></h1>
-<h2 id="41-architecture"><strong>4.1  Architecture</strong></h2>
+<h2 id="4-pattern-of-life-subsystem">4. Pattern-of-Life Subsystem</h2>
+<h3 id="41-architecture">4.1  Architecture</h3>
 <p>Each confirmed track maintains a PatternOfLife object that fits a Gaussian Mixture Model (GMM) in 3D space [hour_of_day, x, y]. The temporal coordinate is the fractional hour within a 24-hour cycle (timestamp mod 86400, divided by 3600), so the model learns when, as well as where, a target typically appears.</p>
 <p>The model is fitted via EM (Expectation-Maximisation) with K=5 Gaussian components, seeded with K-means++ initialisation to avoid degenerate solutions. Fitting triggers after the first 15 observations and re-triggers every 5 new observations thereafter (REFIT_INTERVAL = 5). The EM runs for 35 iterations with isotropic regularisation (5e-3 * I) on each component covariance.</p>
 <p>Choleski-decomposed precision matrices are cached after fitting. The batch GMM log-likelihood evaluator (_gmm_logpdf_batch) uses a hand-coded 3x3 forward substitution (_fwdsub3) to avoid the overhead of numpy's general triangular solver for this fixed-size inner loop, which is the hot path during PoL cross-prediction.</p>
-<h2 id="42-anomaly-scoring"><strong>4.2  Anomaly Scoring</strong></h2>
+<h3 id="42-anomaly-scoring">4.2  Anomaly Scoring</h3>
 <p>The anomaly score for a given (timestamp, position) is:</p>
 <p>nll = -log p_GMM([hour, x, y])</p>
 <p>x = (nll - baseline_nll) / max(|baseline_nll|, 1.0)</p>
 <p>score = sigmoid(x) = 1 / (1 + exp(-x))</p>
 <p>The baseline NLL is the mean negative log-likelihood of the last 40 in-model observations, providing an adaptive threshold. A score near 0.5 means the observation is consistent with the track's learned routine. A score near 1.0 means the observation is highly anomalous relative to the track's history. The sigmoid mapping ensures scores are bounded in [0,1] and are differentially informative in the anomalous region.</p>
-<h2 id="43-location-prediction"><strong>4.3  Location Prediction</strong></h2>
+<h3 id="43-location-prediction">4.3  Location Prediction</h3>
 <p>The predict_location(t, n_mc) method generates a Monte Carlo predicted position at future time t by:</p>
 <ol>
 <li>Computing time-conditional component weights: weight each GMM component by its likelihood at the target hour of day.</li>
@@ -181,56 +309,56 @@ source\_id:  str,        \# sensor/source identifier
 <li>Returning the mean predicted position and a spread (std dev of distances from mean) as uncertainty.</li>
 </ol>
 <p>This is used by the dormant track reacquisition system (to locate where a lost track should reappear), and by the PoL cross-prediction method in the rendezvous warning system (to project where both targets will be at future times based purely on their historical routines, independently of their current trajectory).</p>
-<h1 id="5-rendezvous-warning-system"><strong>5. Rendezvous Warning System</strong></h1>
+<h2 id="5-rendezvous-warning-system">5. Rendezvous Warning System</h2>
 <p>The rendezvous warning system implements a 30-minute lead-time warning for pairwise target convergence using three independent stacked methods. Every confirmed track pair is evaluated each scan. The method that produces the longest valid ETA within the warning horizon is reported. Warnings are prioritised: IMMEDIATE (&lt;5 min), HIGH (&lt;15 min), MEDIUM (&lt;30 min), LOW (otherwise).</p>
 <p>Validated performance across 20 independent scenarios: 20/20 warnings issued, mean lead time 28.1 minutes, 100% of warnings at ≥20 minutes lead time, 95% at ≥25 minutes.</p>
-<h2 id="51-method-1-geometric-velocity-intercept"><strong>5.1  Method 1: Geometric Velocity Intercept</strong></h2>
+<h3 id="51-method-1-geometric-velocity-intercept">5.1  Method 1: Geometric Velocity Intercept</h3>
 <p>For each track, a velocity vector is estimated by least-squares linear regression on the last 8 position history points. This is analytically equivalent to fitting a straight-line trajectory through recent positions and computing the instantaneous heading and speed. The velocity fit is cached keyed by (track_id, history_length) to avoid redundant computation across pairs.</p>
 <p>Given position vectors p_i, p_j and velocity vectors v_i, v_j, the time to closest approach (CPA) is:</p>
 <p>delta_v = v_i - v_j</p>
 <p>delta_p = p_i - p_j</p>
 <p>t_CPA = -dot(delta_p, delta_v) / dot(delta_v, delta_v)   [in scans]</p>
 <p>If t_CPA &gt; 0 (converging), the CPA positions are projected forward and the CPA separation is checked against 2x the meeting threshold. Confidence is computed as 1 - CPA_sep / threshold, clipped to [0.1, 1.0]. This method is the fastest and most reliable under steady-heading conditions, and was the dominant method in testing (26 of 39 RV warning events).</p>
-<h2 id="52-method-2-separation-rate-extrapolation"><strong>5.2  Method 2: Separation Rate Extrapolation</strong></h2>
+<h3 id="52-method-2-separation-rate-extrapolation">5.2  Method 2: Separation Rate Extrapolation</h3>
 <p>The pairwise separation history is accumulated for up to 30 scans per pair. A linear trend is fitted to the last rv_sep_rate_window (8) separation values. If the slope is negative (tracks converging), the time to reach the meeting threshold is:</p>
 <p>ETA_scans = (current_sep - threshold) / |slope|</p>
 <p>The R² of the linear fit is used as the confidence score. This method works well when track headings are noisy or rapidly changing — it operates entirely on the scalar separation time series, which is much smoother than the raw position histories. It is particularly robust for targets that are approaching each other along curved routes.</p>
-<h2 id="53-method-3-pol-cross-prediction"><strong>5.3  Method 3: PoL Cross-Prediction</strong></h2>
+<h3 id="53-method-3-pol-cross-prediction">5.3  Method 3: PoL Cross-Prediction</h3>
 <p>When both tracks in a pair have fitted Pattern-of-Life models (minimum 15 observations each), the PoL models are queried independently to predict where each track will be at t_now + k*scan_dt for k = 1...horizon (capped at 20 steps to maintain performance). If the predicted positions converge within the meeting threshold, the time of minimum predicted separation is reported as the warning.</p>
 <p>This method fires based on the targets' habitual routines, independently of their current trajectory. It is the only method capable of warning about a scheduled meeting where neither target is yet moving toward the other — for example, two targets who routinely meet at a particular time and location each week. It is throttled to run every 5 scans to control computational cost. The prediction itself is vectorised across all horizon steps in a single batch operation.</p>
-<h2 id="54-legacy-short-horizon-predictor-rendezvousdetector"><strong>5.4  Legacy Short-Horizon Predictor (RendezvousDetector)</strong></h2>
+<h3 id="54-legacy-short-horizon-predictor-rendezvousdetector">5.4  Legacy Short-Horizon Predictor (RendezvousDetector)</h3>
 <p>In addition to the extended warning system, the legacy RendezvousDetector remains active. It uses particle-forward Monte Carlo projection over a 4-scan horizon (approximately 4 minutes at 60-second scan rate) and reports a probability-of-rendezvous score. It is less capable for early warning but provides high-confidence, high-precision predictions for imminent meetings. Both outputs appear in the report; the extended warner is the primary early-warning mechanism.</p>
-<h1 id="6-tradecraft-detector-registry"><strong>6. Tradecraft Detector Registry</strong></h1>
+<h2 id="6-tradecraft-detector-registry">6. Tradecraft Detector Registry</h2>
 <p>All tradecraft detection is handled by registered plugins implementing the BaseDetector abstract interface. The engine calls detect(tracks, context) on each registered detector every scan and aggregates the results. Detectors are composable: any subset can be active at any time.</p>
 <p>class BaseDetector(ABC):</p>
-<pre><code>def \_\_init\_\_\(self, profile: DomainProfile\): \.\.\.
+<pre><code>def \_\_init\_\_\(self, profile: DomainProfile\): ...
 
 @abstractmethod
 
-def detect\(self, tracks: List, context: Dict\) \-&gt; List\[Dict\]: \.\.\.
+def detect\(self, tracks: List, context: Dict\) -&gt; List\[Dict\]: ...
 
 @property
 
 @abstractmethod
 
-def name\(self\) \-&gt; str: \.\.\.
+def name\(self\) -&gt; str: ...
 </code></pre>
 <p>Registry manipulation:</p>
 <p>eng.register_detector(MyDetector(eng.profile))</p>
 <p>eng.unregister_detector("MyDetector")</p>
 <p>eng.list_detectors()   # returns list of active names</p>
 <p>The context dictionary passed to each detector contains: timestamp, scan_index, hvls (high-value locations), profile (the active DomainProfile), betweenness (per-track centrality from the current scan), clusters (current co-location clusters).</p>
-<h2 id="61-default-detector-set-8-registered-at-construction"><strong>6.1  Default Detector Set (8 registered at construction)</strong></h2>
-<h3 id="legacytradecraftdetector"><strong>LegacyTradecraftDetector</strong></h3>
+<h3 id="61-default-detector-set-8-registered-at-construction">6.1  Default Detector Set (8 registered at construction)</h3>
+<h3 id="legacytradecraftdetector">LegacyTradecraftDetector</h3>
 <p>Carries the original v5 tradecraft detection module. Runs three independent algorithms:</p>
 <ul>
 <li>BRUSH_PASS: two confirmed tracks whose instantaneous separation is less than brush_pass_m (60m default). Fires only on the first scan of contact, suppressed until tracks separate and re-contact.</li>
 <li>SDR_PATTERN: single-track Surveillance Detection Route detection via winding number analysis. Takes the last 12 position history points, computes the unwrapped angular sweep around the centroid, and fires if winding_number &gt;= 0.65 (approximately 2/3 of a full loop in the sample window). Indicates a target is executing a route designed to detect surveillance.</li>
 <li>DEAD_DROP: two or more tracks visit the same 200x200m grid cell within a configurable time window (60s–1800s), but not simultaneously (no observations within 30s of each other). Indicates sequential visit to a fixed dead drop location. Throttled to every 3 scans.</li>
 </ul>
-<h3 id="extendedrendezvouswarner"><strong>ExtendedRendezvousWarner</strong></h3>
+<h3 id="extendedrendezvouswarner">ExtendedRendezvousWarner</h3>
 <p>The three-method 30-minute warning system described in §5. Fires RENDEZVOUS_WARNING events with fields: track_a, track_b, current_sep_m, eta_s, eta_min, method, confidence, predicted_location, priority, timestamp.</p>
-<h3 id="parallelroutesurveillancedetector"><strong>ParallelRouteSurveillanceDetector</strong></h3>
+<h3 id="parallelroutesurveillancedetector">ParallelRouteSurveillanceDetector</h3>
 <p>Detects mobile surveillance — a shadow following a target along a parallel route. For each track pair:</p>
 <ol>
 <li>Compute velocity vectors via polyfit regression on the last 8 position history points.</li>
@@ -239,14 +367,14 @@ def name\(self\) \-&gt; str: \.\.\.
 <li>Must persist for parallel_scans (6) consecutive qualifying scans before firing.</li>
 </ol>
 <p>Severity is HIGH. Fires PARALLEL_SURVEILLANCE events with lateral_m, heading_cos, duration_scans, and interpretation fields.</p>
-<h3 id="modetransitiondetector"><strong>ModeTransitionDetector</strong></h3>
+<h3 id="modetransitiondetector">ModeTransitionDetector</h3>
 <p>Detects vehicle-to-foot handoffs, a classic counter-surveillance and foot follow technique. The detector watches for:</p>
 <ol>
 <li>A vehicle-class track (dominant MOU model in vehicle_models = {"vehicle", "fast"}) whose speed drops below 2.5 m/s — logged as a vehicle stop event.</li>
 <li>Within mode_trans_scans (2 scans) of the stop, a new foot-class track (dominant model in foot_models = {"stationary", "foot"}) appears within mode_trans_m (50m) of the stop location.</li>
 </ol>
 <p>When both conditions are met, fires a MODE_TRANSITION event with vehicle_track, foot_track, stop_pos, foot_pos, dist_m, delay_scans, and interpretation VEHICLE_HANDOFF_OR_DISMOUNT.</p>
-<h3 id="loiteranomalydetector"><strong>LoiterAnomalyDetector</strong></h3>
+<h3 id="loiteranomalydetector">LoiterAnomalyDetector</h3>
 <p>Detects anomalous dwell behaviour by comparing current dwell duration against the target's PoL baseline. For each confirmed track that:</p>
 <ul>
 <li>Has a fitted PoL model</li>
@@ -255,7 +383,7 @@ def name\(self\) \-&gt; str: \.\.\.
 <li>Has been dwelling for more than loiter_mult (3.0x) times the PoL-typical dwell duration</li>
 </ul>
 <p>The detector fires LOITER_ANOMALY with dwell_s, pol_anomaly, location, severity fields.</p>
-<h3 id="coverstopdetector"><strong>CoverStopDetector</strong></h3>
+<h3 id="coverstopdetector">CoverStopDetector</h3>
 <p>Detects intelligence-gathering cover stops: locations a target visits routinely that happen to be near a high-value location, potentially masking the true purpose of the visit. Conditions:</p>
 <ul>
 <li>Track has a fitted PoL model</li>
@@ -264,9 +392,9 @@ def name\(self\) \-&gt; str: \.\.\.
 <li>PoL anomaly score is below 0.80 (the location is at least partially consistent with the target's pattern — not a one-off visit)</li>
 </ul>
 <p>Fires COVER_STOP events with track, hvl_position, dist_to_hvl_m, visit_count, pol_anomaly, severity HIGH.</p>
-<h3 id="chokepointsurveillancedetector"><strong>ChokepointSurveillanceDetector</strong></h3>
+<h3 id="chokepointsurveillancedetector">ChokepointSurveillanceDetector</h3>
 <p>Detects repeated bidirectional passage through the same geographic chokepoint, indicating the target is monitoring or countering surveillance at a fixed location. For each track, passage through a 40m-radius cell is logged. When the same cell has been traversed in both directions at least 3 times (chokepoint_n), fires CHOKEPOINT_SURVEILLANCE with location, direction changes, and pass count.</p>
-<h3 id="networkroleinferencedetector"><strong>NetworkRoleInferenceDetector</strong></h3>
+<h3 id="networkroleinferencedetector">NetworkRoleInferenceDetector</h3>
 <p>Classifies each confirmed track's functional role within the observed network using relative percentile ranking within the current track set. This design makes the classification robust to variations in overall scenario density — absolute contact counts are meaningless without knowing the network size.</p>
 <p>Three role categories:</p>
 <ul>
@@ -275,97 +403,137 @@ def name\(self\) \-&gt; str: \.\.\.
 <li>ASSET: PoL anomaly score &gt; 0.62 AND bottom 35th percentile of contacts. Assets have irregular routines and relatively few network contacts.</li>
 </ul>
 <p>A stable role assignment requires 3 or more consecutive scans of the same classification. Contact graph history is maintained across the entire session, not just the current scan, so short absences do not reset the contact count. A legacy single-track absolute-threshold classifier is retained as a fallback.</p>
-<h1 id="7-domain-profiles"><strong>7. Domain Profiles</strong></h1>
+<h2 id="7-domain-profiles">7. Domain Profiles</h2>
 <p>The DomainProfile dataclass is the single point of configuration for all domain-specific parameters. The same algorithmic codebase interprets observations differently across domains based entirely on the active profile. Every threshold, noise level, motion model set, and warning horizon is a field in this dataclass — there are no domain-specific conditionals in the algorithmic code.</p>
-<p><strong>Profile</strong></p>
-<p><strong>Scan dt</strong></p>
-<p><strong>RV Warning</strong></p>
-<p><strong>RV Threshold</strong></p>
-<p><strong>Motion Models</strong></p>
-<p><strong>UrbanHUMINT()</strong></p>
-<p>60 s</p>
-<p>30 min</p>
-<p>150 m</p>
-<p>foot, vehicle, stationary, fast</p>
-<p><strong>Maritime()</strong></p>
-<p>3600 s</p>
-<p>120 min</p>
-<p>2000 m</p>
-<p>drifting, transiting, anchored, fast_craft</p>
-<p><strong>Airspace()</strong></p>
-<p>5 s</p>
-<p>10 min</p>
-<p>1000 m</p>
-<p>hovering, fixed_wing, gliding, fast_jet</p>
-<p><strong>VehicleConvoy()</strong></p>
-<p>10 s</p>
-<p>5 min</p>
-<p>30 m</p>
-<p>stopped, slow_roll, highway, sprint</p>
-<h2 id="71-custom-profiles"><strong>7.1  Custom Profiles</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Profile</th>
+<th>Scan dt</th>
+<th>RV warning</th>
+<th>RV threshold</th>
+<th>Motion models</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UrbanHUMINT()</td>
+<td>60 s</td>
+<td>30 min</td>
+<td>150 m</td>
+<td>foot, vehicle, stationary, fast</td>
+</tr>
+<tr>
+<td>Maritime()</td>
+<td>3600 s</td>
+<td>120 min</td>
+<td>2000 m</td>
+<td>drifting, transiting, anchored, fast_craft</td>
+</tr>
+<tr>
+<td>Airspace()</td>
+<td>5 s</td>
+<td>10 min</td>
+<td>1000 m</td>
+<td>hovering, fixed_wing, gliding, fast_jet</td>
+</tr>
+<tr>
+<td>VehicleConvoy()</td>
+<td>10 s</td>
+<td>5 min</td>
+<td>30 m</td>
+<td>stopped, slow_roll, highway, sprint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="71-custom-profiles">7.1  Custom Profiles</h3>
 <p>A custom domain profile can be created by instantiating DomainProfile directly with any combination of overridden fields. All fields have sensible defaults (UrbanHUMINT values). Only the fields that differ from the defaults need to be specified:</p>
 <p>custom = DomainProfile(</p>
 <pre><code>name             = "MyDomain",
 
-scan\_dt\_s        = 30\.0,
+scan\_dt\_s        = 30.0,
 
-pos\_noise\_m      = 12\.0,
+pos\_noise\_m      = 12.0,
 
-rv\_warning\_horizon\_s = 600\.0,
+rv\_warning\_horizon\_s = 600.0,
 
-rv\_threshold\_m   = 75\.0,
+rv\_threshold\_m   = 75.0,
 
 mou\_models       = \{
 
-    "slow":  \{"theta": 0\.40, "sigma": 1\.0\},
+    "slow":  \{"theta": 0.40, "sigma": 1.0\},
 
-    "fast":  \{"theta": 0\.03, "sigma": 12\.0\},
+    "fast":  \{"theta": 0.03, "sigma": 12.0\},
 
 \},
 </code></pre>
 <p>)</p>
 <p>Note that if mou_models is overridden, the model_trans matrix must be sized to match the number of models.</p>
-<h1 id="8-threat-scoring"><strong>8. Threat Scoring</strong></h1>
-<h2 id="81-bayesian-beta-monte-carlo-scoring"><strong>8.1  Bayesian Beta-Monte Carlo Scoring</strong></h2>
+<h2 id="8-threat-scoring">8. Threat Scoring</h2>
+<h3 id="81-bayesian-beta-monte-carlo-scoring">8.1  Bayesian Beta-Monte Carlo Scoring</h3>
 <p>Each confirmed track is assigned a threat score using a weighted Bayesian averaging approach over eight independent evidence dimensions. Each dimension is modelled as a Beta-distributed random variable, parameterised by the evidence for and against threat. The dimensions, their Beta parameters, and their default weights are:</p>
-<p><strong>Dimension</strong></p>
-<p><strong>Alpha / Beta</strong></p>
-<p><strong>Weight</strong></p>
-<p><strong>Description</strong></p>
-<p><strong>Existence</strong></p>
-<p>r×20+1 / (1-r)×20+1</p>
-<p>0.23</p>
-<p>PMBM Bernoulli existence probability</p>
-<p><strong>PoL Anomaly</strong></p>
-<p>pol×8+1 / (1-pol)×8+1</p>
-<p>0.18</p>
-<p>How anomalous this location/time is vs history</p>
-<p><strong>Detection Density</strong></p>
-<p>dd×8+1 / (1-dd)×8+1</p>
-<p>0.13</p>
-<p>Fraction of scans where track was observed</p>
-<p><strong>HVL Proximity</strong></p>
-<p>hvl×8+1 / (1-hvl)×8+1</p>
-<p>0.13</p>
-<p>Exponential decay from nearest HVL</p>
-<p><strong>Motion Score</strong></p>
-<p>motion×6+1 / (1-motion)×6+1</p>
-<p>0.08</p>
-<p>Speed / 30 m/s, clipped to [0,1]</p>
-<p><strong>Persistence</strong></p>
-<p>persist×6+1 / (1-persist)×6+1</p>
-<p>0.08</p>
-<p>Count of scans with score &gt; 0.62, clipped /10</p>
-<p><strong>Threat EMA</strong></p>
-<p>ema×8+1 / (1-ema)×8+1</p>
-<p>0.10</p>
-<p>Exponential moving average of prior scores</p>
-<p><strong>Poss Match</strong></p>
-<p>pm×4+1 / (1-pm)×4+1</p>
-<p>0.07</p>
-<p>1 - Possibility mismatch penalty</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>α / β</th>
+<th>Weight</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existence</td>
+<td>r×20+1 / (1-r)×20+1</td>
+<td>0.23</td>
+<td>PMBM Bernoulli existence probability</td>
+</tr>
+<tr>
+<td>PoL Anomaly</td>
+<td>pol×8+1 / (1-pol)×8+1</td>
+<td>0.18</td>
+<td>How anomalous this location/time is vs history</td>
+</tr>
+<tr>
+<td>Detection Density</td>
+<td>dd×8+1 / (1-dd)×8+1</td>
+<td>0.13</td>
+<td>Fraction of scans where track was observed</td>
+</tr>
+<tr>
+<td>HVL Proximity</td>
+<td>hvl×8+1 / (1-hvl)×8+1</td>
+<td>0.13</td>
+<td>Exponential decay from nearest HVL</td>
+</tr>
+<tr>
+<td>Motion Score</td>
+<td>motion×6+1 / (1-motion)×6+1</td>
+<td>0.08</td>
+<td>Speed / 30 m/s, clipped to [0,1]</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>persist×6+1 / (1-persist)×6+1</td>
+<td>0.08</td>
+<td>Count of scans with score &gt; 0.62, clipped /10</td>
+</tr>
+<tr>
+<td>Threat EMA</td>
+<td>ema×8+1 / (1-ema)×8+1</td>
+<td>0.10</td>
+<td>Exponential moving average of prior scores</td>
+</tr>
+<tr>
+<td>Poss Match</td>
+<td>pm×4+1 / (1-pm)×4+1</td>
+<td>0.07</td>
+<td>1 - Possibility mismatch penalty</td>
+</tr>
+</tbody>
+</table>
 <p>250 Monte Carlo samples are drawn from the weighted Beta mixture, giving a full distribution over threat scores. The output includes mean, standard deviation, P90, and P95. The mean is used for prioritisation. The P95 provides an upper-confidence bound for analyst alerting.</p>
-<h2 id="82-priority-tiers"><strong>8.2  Priority Tiers</strong></h2>
+<h3 id="82-priority-tiers">8.2  Priority Tiers</h3>
 <ul>
 <li>IMMEDIATE: score &gt;= 0.82</li>
 <li>HIGH: score &gt;= 0.62</li>
@@ -373,25 +541,25 @@ mou\_models       = \{
 <li>LOW: score &gt;= 0.22</li>
 <li>MONITOR: score &lt; 0.22</li>
 </ul>
-<h1 id="9-supporting-analytical-systems"><strong>9. Supporting Analytical Systems</strong></h1>
-<h2 id="91-dynamic-network-analyser-dynamicnetworkanalyser"><strong>9.1  Dynamic Network Analyser (DynamicNetworkAnalyser)</strong></h2>
+<h2 id="9-supporting-analytical-systems">9. Supporting Analytical Systems</h2>
+<h3 id="91-dynamic-network-analyser-dynamicnetworkanalyser">9.1  Dynamic Network Analyser (DynamicNetworkAnalyser)</h3>
 <p>Maintains a weighted co-location adjacency matrix across the session. Two tracks contribute weight to the adjacency matrix every scan they are within coloc_dist_m (350m) of each other; the weight is linear in proximity (1 - dist/coloc_dist_m). The accumulated adjacency is used to construct network clusters and to compute betweenness centrality using Brandes's algorithm (O(N*E) exact computation).</p>
 <p>Betweenness centrality scores are passed to the NetworkRoleInference detector as part of the context dictionary. Clusters include a recurring flag when any member has been co-located previously, distinguishing habitual associations from chance co-location.</p>
-<h2 id="92-anomaly-escalator-anomalyescalator"><strong>9.2  Anomaly Escalator (AnomalyEscalator)</strong></h2>
+<h3 id="92-anomaly-escalator-anomalyescalator">9.2  Anomaly Escalator (AnomalyEscalator)</h3>
 <p>Maintains a rolling window of threat scores per track and generates three secondary alert types:</p>
 <ul>
 <li>SPIKE: single-scan threat score &gt; 0.72.</li>
 <li>ESCALATING: threat score has increased monotonically for the last window (5) scans.</li>
 <li>COUNTER_SURVEILLANCE: threat score dropped below 0.3 after being above 0.5, then spiked above 0.6 again — the sawtooth pattern consistent with a target deliberately varying their behaviour to detect surveillance.</li>
 </ul>
-<h2 id="93-credibility-fuser-credibilityfuser"><strong>9.3  Credibility Fuser (CredibilityFuser)</strong></h2>
+<h3 id="93-credibility-fuser-credibilityfuser">9.3  Credibility Fuser (CredibilityFuser)</h3>
 <p>Combines evidence across multiple observations using Dempster-Shafer Theory of Evidence. Each observation contributes a basic probability assignment (BPA) parameterised by the modality reliability. The fusion produces three outputs: belief (lower bound of probability), plausibility (upper bound), and conflict (Dempster's K factor, indicating how inconsistent the evidence set is). Conflict near 1.0 indicates the observations are mutually contradictory.</p>
 <p>Reliability priors by modality: GEOINT 0.90, SIGINT 0.78, COMMS 0.70, HUMINT 0.62, OSINT 0.48.</p>
-<h2 id="94-source-credibility-tracker-sourcecredibilitytracker"><strong>9.4  Source Credibility Tracker (SourceCredibilityTracker)</strong></h2>
+<h3 id="94-source-credibility-tracker-sourcecredibilitytracker">9.4  Source Credibility Tracker (SourceCredibilityTracker)</h3>
 <p>Tracks per-source reliability using an exponential moving average with decay factor 0.98. Each time a source observation is assigned to a track, the observation log-likelihood under the track's filter is compared to a threshold. Sources whose observations consistently fail the likelihood test receive reduced weights. This provides automatic deception detection at the source level.</p>
-<h2 id="95-sensor-scheduler-sensorscheduler"><strong>9.5  Sensor Scheduler (SensorScheduler)</strong></h2>
+<h3 id="95-sensor-scheduler-sensorscheduler">9.5  Sensor Scheduler (SensorScheduler)</h3>
 <p>Produces a ranked list of (track, recommended_modality) pairs, ordered by expected information gain. Information gain is approximated as modality_weight × track.r / pos_uncertainty. This recommends the most reliable available sensor modality for the track with the highest combination of confirmed existence and positional uncertainty — directing collection assets to where they will have the most impact.</p>
-<h2 id="96-operational-intelligence-operationalintelligence"><strong>9.6  Operational Intelligence (OperationalIntelligence)</strong></h2>
+<h3 id="96-operational-intelligence-operationalintelligence">9.6  Operational Intelligence (OperationalIntelligence)</h3>
 <p>Post-processing on the confirmed track set producing:</p>
 <ul>
 <li>Velocity analysis: mean speed and linear speed trend for each track with sufficient history.</li>
@@ -399,102 +567,162 @@ mou\_models       = \{
 <li>Wide-area movement flags (WIDE_AREA_MOVEMENT): tracks whose total displacement exceeds 3km.</li>
 <li>Model transition alarms: tracks with Possibility-PMBM mismatch &gt; 0.4.</li>
 </ul>
-<h2 id="97-route-predictor-routepredictor"><strong>9.7  Route Predictor (RoutePredictor)</strong></h2>
+<h3 id="97-route-predictor-routepredictor">9.7  Route Predictor (RoutePredictor)</h3>
 <p>Generates an 8-step trajectory forecast for any given track using particle-forward Monte Carlo with PoL blending. At each step, the particle ensemble is propagated forward using the track's current MOU model mixture. A PoL blend (increasing linearly from 0 to 0.5 over the horizon) nudges the ensemble toward the PoL-predicted location for that future time, capturing the dual influence of current trajectory and habitual routine. Each waypoint includes position, uncertainty (spread), and a linearly decreasing confidence score.</p>
-<h2 id="98-forward-backward-smoother-forwardbackwardsmoother"><strong>9.8  Forward-Backward Smoother (ForwardBackwardSmoother)</strong></h2>
+<h3 id="98-forward-backward-smoother-forwardbackwardsmoother">9.8  Forward-Backward Smoother (ForwardBackwardSmoother)</h3>
 <p>Maintains a 6-scan lag history of particle ensembles per track. The smooth_pos() method returns a Gaussian-kernel-weighted average of historical particle mean positions, with the kernel centred on the most recent scan. This reduces the positional noise in displayed track histories and is used for smooth trajectory rendering in output visualisations.</p>
-<h1 id="10-validated-performance"><strong>10. Validated Performance</strong></h1>
-<h2 id="101-benchmark-results"><strong>10.1  Benchmark Results</strong></h2>
+<h2 id="10-validated-performance">10. Validated Performance</h2>
+<h3 id="101-benchmark-results">10.1  Benchmark Results</h3>
 <p>All results measured over 20 independent seeds × 50 scans = 1000 total ingest calls, 7 confirmed targets per scenario, 2 registered HVLs, full 8-detector pipeline active.</p>
-<p><strong>Metric</strong></p>
-<p><strong>Result</strong></p>
-<p><strong>Notes</strong></p>
-<p><strong>Mean scan latency</strong></p>
-<p>51 ms</p>
-<p>Dominated by PoL cross-predict scans (every 5th)</p>
-<p><strong>Median scan latency</strong></p>
-<p>28 ms</p>
-<p>Non-PoL scans; representative of steady-state load</p>
-<p><strong>P95 latency</strong></p>
-<p>210 ms</p>
-<p>PoL cross-predict scan with 7+ tracks and 21 pairs</p>
-<p><strong>Max latency (20×50)</strong></p>
-<p>325 ms</p>
-<p>First PoL scan after model fitting completes</p>
-<p><strong>Throughput</strong></p>
-<p>~20 scans/sec</p>
-<p>Wall-clock, single CPU core, no GPU</p>
-<p><strong>Tracking accuracy</strong></p>
-<p>21.8 m mean error</p>
-<p>Across all tracks, all scans</p>
-<p><strong>P99 position error</strong></p>
-<p>853 m</p>
-<p>Mid-manoeuvre; high-theta model lag</p>
-<p><strong>Detection rate (PD=0.85)</strong></p>
-<p>100%</p>
-<p>All targets confirmed at design PD</p>
-<p><strong>Detection rate (PD=0.40)</strong></p>
-<p>100%</p>
-<p>Still 100% at 40% detection probability</p>
-<p><strong>Detection rate (PD=0.25)</strong></p>
-<p>91%</p>
-<p>Graceful degradation begins here</p>
-<p><strong>False alarm rate</strong></p>
-<p>0.098 / scan</p>
-<p>Average; 0 false alarms at clutter=40/scan</p>
-<p><strong>Reacquisition rate</strong></p>
-<p>100%</p>
-<p>10/10 trials, 8-scan gap</p>
-<p><strong>RV warnings (20 scenarios)</strong></p>
-<p>20/20</p>
-<p>100% detection on converging pairs</p>
-<p><strong>RV lead time mean</strong></p>
-<p>28.1 min</p>
-<p>From first warning to actual meeting</p>
-<p><strong>RV lead time ≥ 20 min</strong></p>
-<p>100%</p>
-<p>All 20 scenarios warned 20+ minutes early</p>
-<p><strong>RV lead time ≥ 25 min</strong></p>
-<p>95%</p>
-<p>19 of 20 scenarios</p>
-<h2 id="102-tradecraft-detection-all-scenarios-pass"><strong>10.2  Tradecraft Detection — All Scenarios Pass</strong></h2>
-<p><strong>Scenario</strong></p>
-<p><strong>Result</strong></p>
-<p><strong>Condition</strong></p>
-<p><strong>BRUSH_PASS</strong></p>
-<p><strong>PASS</strong></p>
-<p>Two tracks sep &lt; 60m (38 scans at 5 m/s closure from 200m sep)</p>
-<p><strong>SDR_PATTERN</strong></p>
-<p><strong>PASS</strong></p>
-<p>Winding number &gt;= 0.65 in 12-point window (35 scans, 100m radius, 0.35 rad/step)</p>
-<p><strong>PARALLEL_SURVEILLANCE</strong></p>
-<p><strong>PASS</strong></p>
-<p>Heading cos &gt;= 0.97, lateral 55m, 25 scans (confirmed at scan 7)</p>
-<p><strong>MODE_TRANSITION</strong></p>
-<p><strong>PASS</strong></p>
-<p>Vehicle stops, foot track appears 20m away within 1 scan</p>
-<p><strong>LOITER_ANOMALY</strong></p>
-<p><strong>PASS</strong></p>
-<p>Target dwells at anomalous location after 50-scan PoL baseline</p>
-<p><strong>COVER_STOP</strong></p>
-<p><strong>PASS</strong></p>
-<p>Repeated visits within 364m of HVL, pol_anom = 0.88 (&lt; 0.80 threshold met at scan 35+)</p>
-<h2 id="103-scaling-characteristics"><strong>10.3  Scaling Characteristics</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Result</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mean scan latency</td>
+<td>51 ms</td>
+<td>Dominated by PoL cross-predict scans (every 5th)</td>
+</tr>
+<tr>
+<td>Median scan latency</td>
+<td>28 ms</td>
+<td>Non-PoL scans; representative of steady-state load</td>
+</tr>
+<tr>
+<td>P95 latency</td>
+<td>210 ms</td>
+<td>PoL cross-predict scan with 7+ tracks and 21 pairs</td>
+</tr>
+<tr>
+<td>Max latency (20×50)</td>
+<td>325 ms</td>
+<td>First PoL scan after model fitting completes</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>~20 scans/sec</td>
+<td>Wall-clock, single CPU core, no GPU</td>
+</tr>
+<tr>
+<td>Tracking accuracy</td>
+<td>21.8 m mean error</td>
+<td>Across all tracks, all scans</td>
+</tr>
+<tr>
+<td>P99 position error</td>
+<td>853 m</td>
+<td>Mid-manoeuvre; high-theta model lag</td>
+</tr>
+<tr>
+<td>Detection rate (PD=0.85)</td>
+<td>100%</td>
+<td>All targets confirmed at design PD</td>
+</tr>
+<tr>
+<td>Detection rate (PD=0.40)</td>
+<td>100%</td>
+<td>Still 100% at 40% detection probability</td>
+</tr>
+<tr>
+<td>Detection rate (PD=0.25)</td>
+<td>91%</td>
+<td>Graceful degradation begins here</td>
+</tr>
+<tr>
+<td>False alarm rate</td>
+<td>0.098 / scan</td>
+<td>Average; 0 false alarms at clutter=40/scan</td>
+</tr>
+<tr>
+<td>Reacquisition rate</td>
+<td>100%</td>
+<td>10/10 trials, 8-scan gap</td>
+</tr>
+<tr>
+<td>RV warnings (20 scenarios)</td>
+<td>20/20</td>
+<td>100% detection on converging pairs</td>
+</tr>
+<tr>
+<td>RV lead time mean</td>
+<td>28.1 min</td>
+<td>From first warning to actual meeting</td>
+</tr>
+<tr>
+<td>RV lead time ≥ 20 min</td>
+<td>100%</td>
+<td>All 20 scenarios warned 20+ minutes early</td>
+</tr>
+<tr>
+<td>RV lead time ≥ 25 min</td>
+<td>95%</td>
+<td>19 of 20 scenarios</td>
+</tr>
+</tbody>
+</table>
+<h3 id="102-tradecraft-detection-all-scenarios-pass">10.2  Tradecraft Detection — All Scenarios Pass</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Result</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BRUSH_PASS</td>
+<td>PASS</td>
+<td>Two tracks sep &lt; 60m (38 scans at 5 m/s closure from 200m sep)</td>
+</tr>
+<tr>
+<td>SDR_PATTERN</td>
+<td>PASS</td>
+<td>Winding number &gt;= 0.65 in 12-point window (35 scans, 100m radius, 0.35 rad/step)</td>
+</tr>
+<tr>
+<td>PARALLEL_SURVEILLANCE</td>
+<td>PASS</td>
+<td>Heading cos &gt;= 0.97, lateral 55m, 25 scans (confirmed at scan 7)</td>
+</tr>
+<tr>
+<td>MODE_TRANSITION</td>
+<td>PASS</td>
+<td>Vehicle stops, foot track appears 20m away within 1 scan</td>
+</tr>
+<tr>
+<td>LOITER_ANOMALY</td>
+<td>PASS</td>
+<td>Target dwells at anomalous location after 50-scan PoL baseline</td>
+</tr>
+<tr>
+<td>COVER_STOP</td>
+<td>PASS</td>
+<td>Repeated visits within 364m of HVL, pol_anom = 0.88 (&lt; 0.80 threshold met at scan 35+)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="103-scaling-characteristics">10.3  Scaling Characteristics</h3>
 <p>Scan latency scales linearly with confirmed track count. Profiling shows four dominant cost centres: PoL cross-prediction (vectorised batch, runs every 5 scans), GMM log-likelihood evaluation (_gmm_logpdf_batch with hand-coded 3x3 forward substitution), Gibbs assignment (14 sweeps × N_tracks × N_obs), and network betweenness centrality (O(N×E) Brandes). All four are NumPy-vectorised; no Python loops remain in the hot path.</p>
-<h1 id="11-performance-optimisation-history"><strong>11. Performance Optimisation History</strong></h1>
+<h2 id="11-performance-optimisation-history">11. Performance Optimisation History</h2>
 <p>The following optimisations were applied during this development session to reduce scan latency from an initial 312 ms mean to the current 51 ms mean:</p>
-<h2 id="111-pol-cross-prediction-throttling"><strong>11.1  PoL Cross-Prediction Throttling</strong></h2>
+<h3 id="111-pol-cross-prediction-throttling">11.1  PoL Cross-Prediction Throttling</h3>
 <p>Root cause: _pol_cross_predict was being called every scan for all track pairs. With 7 tracks there are C(7,2)=21 pairs, each calling predict_location 20 times (n_mc_pol) × 60 horizon steps = 25,200 predict_location calls per pair per scan, totalling 529,200 calls per scan.</p>
 <p>Fix: throttle PoL cross-prediction to every 5 scans (run_pol = scan % 5 == 0). Reduces predict_location calls by 5x. PoL patterns are slow-changing; 5-scan intervals introduce negligible warning latency loss.</p>
-<h2 id="112-pol-horizon-cap-and-mc-reduction"><strong>11.2  PoL Horizon Cap and MC Reduction</strong></h2>
+<h3 id="112-pol-horizon-cap-and-mc-reduction">11.2  PoL Horizon Cap and MC Reduction</h3>
 <p>The horizon_steps was uncapped (defaulting to 60 steps). Since the warning horizon is 30 minutes at 60-second scan rate, 30 steps is sufficient. Cap reduced to 20 steps. n_mc_pol reduced from 60 to 8 — a further 7.5x reduction in PoL prediction compute. Combined with the 5-scan throttle, this is a 37x reduction in PoL cross-predict cost.</p>
-<h2 id="113-velocity-fit-caching"><strong>11.3  Velocity Fit Caching</strong></h2>
+<h3 id="113-velocity-fit-caching">11.3  Velocity Fit Caching</h3>
 <p>The geometric intercept method called np.polyfit twice per track per pair per scan. With 21 pairs and 7 tracks, this is 42 polyfit calls per scan. Each track's velocity only changes when its position history changes (which happens once per scan, at the end). A cache keyed by (track_id, len(pos_history)) means each track's velocity is recomputed once per scan and reused across all pairs, reducing polyfit calls from 42 to 7.</p>
 <p>The cache is bounded to 200 entries (LRU eviction on oldest key) to prevent unbounded memory growth across long sessions.</p>
-<h2 id="114-gmm-inner-loop-hand-coding"><strong>11.4  GMM Inner Loop Hand-Coding</strong></h2>
+<h3 id="114-gmm-inner-loop-hand-coding">11.4  GMM Inner Loop Hand-Coding</h3>
 <p>The GMM log-likelihood evaluator is the second-highest cost centre after PoL cross-prediction. For K=5 components in D=3 dimensional space, the inner loop involves solving L*y=x for 3x3 lower-triangular L. The _fwdsub3 function is a hand-unrolled forward substitution that computes this in 5 multiplications and 5 additions without any loop overhead, compared to numpy's general triangular solver which handles arbitrary N×N matrices.</p>
-<h1 id="12-algorithm-provenance-and-novelty"><strong>12. Algorithm Provenance and Novelty</strong></h1>
-<h2 id="121-established-methods"><strong>12.1  Established Methods</strong></h2>
+<h2 id="12-algorithm-provenance-and-novelty">12. Algorithm Provenance and Novelty</h2>
+<h3 id="121-established-methods">12.1  Established Methods</h3>
 <ul>
 <li>PMBM filter: Mahler (2003, 2007), Williams &amp; Lau (2014). The theoretically optimal multi-target Bayesian filter under the Random Finite Set framework.</li>
 <li>Ornstein-Uhlenbeck process: Uhlenbeck &amp; Ornstein (1930). Continuous stochastic differential equation with mean-reverting drift; widely used in financial modelling and physical simulation.</li>
@@ -505,138 +733,248 @@ mou\_models       = \{
 <li>Beta-distribution Monte Carlo scoring: standard Bayesian Beta-Binomial conjugate pair used for integrating uncertain evidence dimensions.</li>
 <li>Gibbs sampling: Geman &amp; Geman (1984), applied to measurement-to-track assignment following Reid (1979) MHT.</li>
 </ul>
-<h2 id="122-research-level-methods"><strong>12.2  Research-Level Methods</strong></h2>
+<h3 id="122-research-level-methods">12.2  Research-Level Methods</h3>
 <ul>
 <li>Track-before-Detect PMBM (TM-PMBM): Meyer et al. (2023). Extension of PMBM to unthresholded observations. Implemented to handle low-SNR SIGINT/COMMS observations without hard detection thresholds.</li>
 <li>Possibility-PMBM: Houssineau &amp; Bishop (2019). Dual-track of probability (r) and possibility (pi_r) existence estimates. The mismatch score is a novel diagnostic that has no known operational equivalent — it alarms when the probability and possibility estimates diverge, indicating either deception or model failure.</li>
 <li>Group spawning via PoL cloning: novel heuristic for initialising new tracks in known group contexts by cloning the parent track's PoL model. Reduces the observation latency required for group member tracking.</li>
 <li>PoL-integrated rendezvous warning (Method 3): novel application of PoL cross-prediction to pre-cognitive meeting warning. Standard operational systems use trajectory extrapolation; predicting meetings from habitual routine independently of current trajectory is not known in any public operational system.</li>
 </ul>
-<h2 id="123-novel-contributions"><strong>12.3  Novel Contributions</strong></h2>
+<h3 id="123-novel-contributions">12.3  Novel Contributions</h3>
 <ul>
 <li>Three-method stacked rendezvous warning with 30-minute lead time: the combination of geometric intercept, separation rate extrapolation, and PoL cross-prediction in a stacked architecture (fires on whichever produces the longest valid warning) is novel. Each method has independent failure modes; the combination is robust where any individual method is not.</li>
 <li>Relative percentile network role classification: using within-set percentile ranks rather than absolute thresholds for Courier/Handler/Asset classification makes the system scale-invariant across scenario densities from 2 to 80+ tracks.</li>
 <li>Domain-polymorphic single-file architecture: the complete system from particle filter to tradecraft detector to network analyser is re-targetable to any sensor domain by replacing a single configuration object. No domain-specific code paths exist.</li>
 <li>Composable hot-swappable detector registry: the BaseDetector ABC and runtime register/unregister interface allows detector sets to be modified without engine restart. This is architecturally equivalent to a microkernel plugin system applied to intelligence analytics.</li>
 </ul>
-<h1 id="13-output-report-dictionary-complete-field-reference"><strong>13. Output Report Dictionary — Complete Field Reference</strong></h1>
+<h2 id="13-output-report-dictionary-complete-field-reference">13. Output Report Dictionary — Complete Field Reference</h2>
 <p>engine.ingest() returns a Python dictionary. Every field is documented below.</p>
-<h2 id="131-top-level-fields"><strong>13.1  Top-Level Fields</strong></h2>
-<p><strong>Field</strong></p>
-<p><strong>Type</strong></p>
-<p><strong>Description</strong></p>
-<p><strong>scan</strong></p>
-<p>int</p>
-<p>Monotonically increasing scan counter since engine construction.</p>
-<p><strong>timestamp</strong></p>
-<p>float</p>
-<p>Unix seconds passed to ingest().</p>
-<p><strong>domain</strong></p>
-<p>str</p>
-<p>Active DomainProfile name (e.g. "UrbanHUMINT").</p>
-<p><strong>n_obs</strong></p>
-<p>int</p>
-<p>Number of observations ingested this scan.</p>
-<p><strong>n_tracks</strong></p>
-<p>int</p>
-<p>Number of confirmed tracks (r &gt;= R_CONFIRM).</p>
-<p><strong>n_components</strong></p>
-<p>int</p>
-<p>Total Bernoulli components including candidates.</p>
-<p><strong>n_dormant</strong></p>
-<p>int</p>
-<p>Number of dormant tracks held for reacquisition.</p>
-<p><strong>clutter_rate</strong></p>
-<p>float</p>
-<p>Current Bayesian estimate of mean false observations per scan.</p>
-<p><strong>targets</strong></p>
-<p>List[Dict]</p>
-<p>Per-track threat scores and metadata. See §13.2.</p>
-<p><strong>rendezvous</strong></p>
-<p>List[Dict]</p>
-<p>Rendezvous warnings from ExtendedRendezvousWarner. See §13.3.</p>
-<p><strong>tradecraft</strong></p>
-<p>List[Dict]</p>
-<p>Tradecraft events from all non-RV detectors. See §13.4.</p>
-<p><strong>network_roles</strong></p>
-<p>List[Dict]</p>
-<p>Per-track role assignments from NetworkRoleInference.</p>
-<p><strong>clusters</strong></p>
-<p>List[Dict]</p>
-<p>Co-location clusters with betweenness centrality.</p>
-<p><strong>alerts</strong></p>
-<p>List[Dict]</p>
-<p>AnomalyEscalator alerts (SPIKE, ESCALATING, COUNTER_SURVEILLANCE).</p>
-<p><strong>sensor_schedule</strong></p>
-<p>List[Dict]</p>
-<p>Top 3 recommended collection tasks.</p>
-<p><strong>operational</strong></p>
-<p>Dict</p>
-<p>Velocity analysis, dwell flags, movement flags.</p>
-<p><strong>all_detections</strong></p>
-<p>Dict[str, List]</p>
-<p>Raw per-detector output keyed by detector name.</p>
-<h2 id="132-targets-entry"><strong>13.2  targets[] Entry</strong></h2>
-<p><strong>Field</strong></p>
-<p><strong>Description</strong></p>
-<p><strong>track_id</strong></p>
-<p>String identifier e.g. "T0023". Sequential within session.</p>
-<p><strong>position</strong></p>
-<p>[x, y] in metres.</p>
-<p><strong>velocity</strong></p>
-<p>[vx, vy] particle-weighted mean in m/s.</p>
-<p><strong>threat_score_mean</strong></p>
-<p>Beta-MC mean threat score, 0.0–1.0.</p>
-<p><strong>threat_score_std</strong></p>
-<p>Standard deviation of MC samples.</p>
-<p><strong>threat_score_p90</strong></p>
-<p>90th percentile of MC samples.</p>
-<p><strong>threat_score_p95</strong></p>
-<p>95th percentile — upper confidence bound for alerting.</p>
-<p><strong>priority</strong></p>
-<p>IMMEDIATE / HIGH / MEDIUM / LOW / MONITOR tier.</p>
-<p><strong>existence_p</strong></p>
-<p>Bernoulli existence probability r.</p>
-<p><strong>dominant_model</strong></p>
-<p>Highest-weighted MOU model class name.</p>
-<p><strong>poss_mismatch</strong></p>
-<p>Possibility-PMBM mismatch score, 0.0–1.0. &gt; 0.4 alarms.</p>
-<p><strong>threat_ema</strong></p>
-<p>Exponential moving average of threat_score_mean (alpha=0.3).</p>
-<p><strong>threat_persistence</strong></p>
-<p>Count of consecutive scans with score &gt; 0.62.</p>
-<p><strong>meas_rate</strong></p>
-<p>n_hit / age; observation hit rate.</p>
-<p><strong>pos_uncertainty_m</strong></p>
-<p>sqrt(trace(P_position)) from particle covariance.</p>
-<p><strong>breakdown</strong></p>
-<p>Dict with raw sub-scores: existence, poss_exist, pol_anomaly, det_density, hvl_proximity, motion_score, persistence.</p>
-<h2 id="133-rendezvous-entry"><strong>13.3  rendezvous[] Entry</strong></h2>
-<p><strong>Field</strong></p>
-<p><strong>Description</strong></p>
-<p><strong>type</strong></p>
-<p>"RENDEZVOUS_WARNING"</p>
-<p><strong>track_a, track_b</strong></p>
-<p>IDs of the two converging tracks.</p>
-<p><strong>current_sep_m</strong></p>
-<p>Current pairwise separation in metres.</p>
-<p><strong>eta_s</strong></p>
-<p>Estimated seconds to meeting.</p>
-<p><strong>eta_min</strong></p>
-<p>eta_s / 60, for display.</p>
-<p><strong>method</strong></p>
-<p>GEOMETRIC_INTERCEPT | SEP_RATE_EXTRAP | POL_CROSS_PREDICT</p>
-<p><strong>confidence</strong></p>
-<p>Method-specific confidence 0.0–1.0 (R² for SEP_RATE; 1-CPA_sep/thresh for GEOMETRIC).</p>
-<p><strong>predicted_location</strong></p>
-<p>[x, y] midpoint of predicted meeting location (GEOMETRIC only).</p>
-<p><strong>priority</strong></p>
-<p>IMMEDIATE / HIGH / MEDIUM / LOW based on eta_min.</p>
-<p><strong>timestamp</strong></p>
-<p>Scan timestamp.</p>
-<h2 id="134-tradecraft-entry-common-fields"><strong>13.4  tradecraft[] Entry — Common Fields</strong></h2>
+<h3 id="131-top-level-fields">13.1  Top-Level Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scan</td>
+<td>int</td>
+<td>Monotonically increasing scan counter since engine construction.</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>float</td>
+<td>Unix seconds passed to ingest().</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>str</td>
+<td>Active DomainProfile name (e.g. "UrbanHUMINT").</td>
+</tr>
+<tr>
+<td>n_obs</td>
+<td>int</td>
+<td>Number of observations ingested this scan.</td>
+</tr>
+<tr>
+<td>n_tracks</td>
+<td>int</td>
+<td>Number of confirmed tracks (r &gt;= R_CONFIRM).</td>
+</tr>
+<tr>
+<td>n_components</td>
+<td>int</td>
+<td>Total Bernoulli components including candidates.</td>
+</tr>
+<tr>
+<td>n_dormant</td>
+<td>int</td>
+<td>Number of dormant tracks held for reacquisition.</td>
+</tr>
+<tr>
+<td>clutter_rate</td>
+<td>float</td>
+<td>Current Bayesian estimate of mean false observations per scan.</td>
+</tr>
+<tr>
+<td>targets</td>
+<td>List[Dict]</td>
+<td>Per-track threat scores and metadata. See §13.2.</td>
+</tr>
+<tr>
+<td>rendezvous</td>
+<td>List[Dict]</td>
+<td>Rendezvous warnings from ExtendedRendezvousWarner. See §13.3.</td>
+</tr>
+<tr>
+<td>tradecraft</td>
+<td>List[Dict]</td>
+<td>Tradecraft events from all non-RV detectors. See §13.4.</td>
+</tr>
+<tr>
+<td>network_roles</td>
+<td>List[Dict]</td>
+<td>Per-track role assignments from NetworkRoleInference.</td>
+</tr>
+<tr>
+<td>clusters</td>
+<td>List[Dict]</td>
+<td>Co-location clusters with betweenness centrality.</td>
+</tr>
+<tr>
+<td>alerts</td>
+<td>List[Dict]</td>
+<td>AnomalyEscalator alerts (SPIKE, ESCALATING, COUNTER_SURVEILLANCE).</td>
+</tr>
+<tr>
+<td>sensor_schedule</td>
+<td>List[Dict]</td>
+<td>Top 3 recommended collection tasks.</td>
+</tr>
+<tr>
+<td>operational</td>
+<td>Dict</td>
+<td>Velocity analysis, dwell flags, movement flags.</td>
+</tr>
+<tr>
+<td>all_detections</td>
+<td>Dict[str, List]</td>
+<td>Raw per-detector output keyed by detector name.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="132-targets-entry">13.2  targets[] Entry</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>track_id</td>
+<td>String identifier e.g. "T0023". Sequential within session.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>[x, y] in metres.</td>
+</tr>
+<tr>
+<td>velocity</td>
+<td>[vx, vy] particle-weighted mean in m/s.</td>
+</tr>
+<tr>
+<td>threat_score_mean</td>
+<td>Beta-MC mean threat score, 0.0–1.0.</td>
+</tr>
+<tr>
+<td>threat_score_std</td>
+<td>Standard deviation of MC samples.</td>
+</tr>
+<tr>
+<td>threat_score_p90</td>
+<td>90th percentile of MC samples.</td>
+</tr>
+<tr>
+<td>threat_score_p95</td>
+<td>95th percentile — upper confidence bound for alerting.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>IMMEDIATE / HIGH / MEDIUM / LOW / MONITOR tier.</td>
+</tr>
+<tr>
+<td>existence_p</td>
+<td>Bernoulli existence probability r.</td>
+</tr>
+<tr>
+<td>dominant_model</td>
+<td>Highest-weighted MOU model class name.</td>
+</tr>
+<tr>
+<td>poss_mismatch</td>
+<td>Possibility-PMBM mismatch score, 0.0–1.0. &gt; 0.4 alarms.</td>
+</tr>
+<tr>
+<td>threat_ema</td>
+<td>Exponential moving average of threat_score_mean (alpha=0.3).</td>
+</tr>
+<tr>
+<td>threat_persistence</td>
+<td>Count of consecutive scans with score &gt; 0.62.</td>
+</tr>
+<tr>
+<td>meas_rate</td>
+<td>n_hit / age; observation hit rate.</td>
+</tr>
+<tr>
+<td>pos_uncertainty_m</td>
+<td>sqrt(trace(P_position)) from particle covariance.</td>
+</tr>
+<tr>
+<td>breakdown</td>
+<td>Dict with raw sub-scores: existence, poss_exist, pol_anomaly, det_density, hvl_proximity, motion_score, persistence.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="133-rendezvous-entry">13.3  rendezvous[] Entry</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>"RENDEZVOUS_WARNING"</td>
+</tr>
+<tr>
+<td>track_a, track_b</td>
+<td>IDs of the two converging tracks.</td>
+</tr>
+<tr>
+<td>current_sep_m</td>
+<td>Current pairwise separation in metres.</td>
+</tr>
+<tr>
+<td>eta_s</td>
+<td>Estimated seconds to meeting.</td>
+</tr>
+<tr>
+<td>eta_min</td>
+<td>eta_s / 60, for display.</td>
+</tr>
+<tr>
+<td>method</td>
+<td>GEOMETRIC_INTERCEPT | SEP_RATE_EXTRAP | POL_CROSS_PREDICT</td>
+</tr>
+<tr>
+<td>confidence</td>
+<td>Method-specific confidence 0.0–1.0 (R² for SEP_RATE; 1-CPA_sep/thresh for GEOMETRIC).</td>
+</tr>
+<tr>
+<td>predicted_location</td>
+<td>[x, y] midpoint of predicted meeting location (GEOMETRIC only).</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>IMMEDIATE / HIGH / MEDIUM / LOW based on eta_min.</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Scan timestamp.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="134-tradecraft-entry-common-fields">13.4  tradecraft[] Entry — Common Fields</h3>
 <p>All tradecraft events share: type (string), timestamp, severity (IMMEDIATE / HIGH / MEDIUM), and track / tracks fields. Type-specific additional fields are described in §6 per detector.</p>
-<h1 id="14-test-scenario-generator"><strong>14. Test Scenario Generator</strong></h1>
+<h2 id="14-test-scenario-generator">14. Test Scenario Generator</h2>
 <p>The module includes generate_scenario(n_scans, n_targets, area, seed) for reproducible unit testing and benchmarking. The generator produces:</p>
 <ul>
 <li>n_targets independent targets with random initial positions in a ±0.6×area box and random initial velocities in [-10, +10] m/s.</li>
@@ -647,117 +985,184 @@ mou\_models       = \{
 <li>Source IDs drawn from a pool of 5 per modality to enable source credibility tracking across scans.</li>
 </ul>
 <p>Returns: (all_obs, true_traj) where all_obs is a list of n_scans scan observation lists and true_traj is a (n_scans, n_targets, 4) array of ground truth states [x, y, vx, vy].</p>
-<h1 id="15-known-limitations-and-open-issues"><strong>15. Known Limitations and Open Issues</strong></h1>
-<h2 id="151-pol-minimum-observation-threshold"><strong>15.1  PoL Minimum Observation Threshold</strong></h2>
+<h2 id="15-known-limitations-and-open-issues">15. Known Limitations and Open Issues</h2>
+<h3 id="151-pol-minimum-observation-threshold">15.1  PoL Minimum Observation Threshold</h3>
 <p>The PatternOfLife model requires a minimum of 15 observations before fitting. Tracks that are observed intermittently (e.g. at PD=0.25) may take 60+ scans to accumulate 15 observations. During this period, the loiter anomaly detector, cover stop detector, PoL cross-prediction method, and dormant reacquisition are unavailable for that track. This is an inherent limitation of data-driven routine modelling and cannot be resolved without a prior over expected PoL structure.</p>
-<h2 id="152-mou-model-classification"><strong>15.2  MOU Model Classification</strong></h2>
+<h3 id="152-mou-model-classification">15.2  MOU Model Classification</h3>
 <p>At the default scan rate of 60 seconds, the MOU velocity discretisation gives sigma_v values calibrated for that interval. The dominant_model classification therefore reflects the model that best explains observed velocity magnitudes at that scan rate. At shorter intervals (e.g. Airspace 5s scans), the same physical speed produces different relative likelihoods across models. Domain profiles must specify scan_dt_s accurately for model classification to be meaningful.</p>
-<h2 id="153-p95-latency-spike"><strong>15.3  P95 Latency Spike</strong></h2>
+<h3 id="153-p95-latency-spike">15.3  P95 Latency Spike</h3>
 <p>The P95 latency is 210ms vs median 28ms — a 7.5x spike. This occurs on PoL cross-prediction scans (every 5th scan) when many track pairs have both PoL models fitted. With 7 targets and 21 pairs, and n_mc_pol=8 samples × 20 horizon steps × 2 PoL predict_location calls per pair, this is 6,720 MC-weighted Cholesky forward substitutions per PoL scan. Further reduction is possible by reducing n_mc_pol to 4 or increasing the throttle period to 10 scans at the cost of increased PoL warning latency.</p>
-<h2 id="154-sdr-threshold-sensitivity"><strong>15.4  SDR Threshold Sensitivity</strong></h2>
+<h3 id="154-sdr-threshold-sensitivity">15.4  SDR Threshold Sensitivity</h3>
 <p>The SDR winding number threshold of 0.65 (approximately 2/3 of a full loop in 12 position history points) was set to detect operationally realistic SDR loops. This threshold will produce false positives for targets moving in genuinely circular routes (e.g. patrol routes) and may miss partial SDR loops executed over more than 12 scans. Adjust winding_number_thresh in the LegacyTradecraftDetector class for different scenario characteristics.</p>
-<h2 id="155-network-role-classification-at-small-n"><strong>15.5  Network Role Classification at Small N</strong></h2>
+<h3 id="155-network-role-classification-at-small-n">15.5  Network Role Classification at Small N</h3>
 <p>The relative percentile classifier degenerates when n_tracks &lt; 3: with only 2 tracks, one is always in the top speed percentile and one always in the bottom, producing deterministic role assignments that may be meaningless. The classifier correctly returns UNKNOWN for tracks with age &lt; 10 scans; role assignments should be treated with lower confidence in the first 15–20 scans of a session.</p>
-<h1 id="16-file-structure-aria_intel_v6py-2363-lines"><strong>16. File Structure (aria_intel_v6.py, 2,363 lines)</strong></h1>
-<p><strong>Lines</strong></p>
-<p><strong>Section</strong></p>
-<p><strong>Contents</strong></p>
-<p>1–68</p>
-<p><strong>Global constants</strong></p>
-<p>Import declarations, particle/filter hyperparameters, MOU model tables, pre-computed matrices (H, R, inverse R, log-det)</p>
-<p>69–117</p>
-<p><strong>Utility functions</strong></p>
-<p>logsumexp, _chol_logpdf, _betweenness_centrality, _fwdsub3</p>
-<p>118–263</p>
-<p><strong>PatternOfLife</strong></p>
-<p>GMM with EM fitting, anomaly scoring, location prediction, active window extraction, PoL clone for group spawning</p>
-<p>275–364</p>
-<p><strong>MOUParticleFilter</strong></p>
-<p>SIR particle filter, prediction/update/resample, cache, model weight tracking, auxiliary trajectory update</p>
-<p>366–446</p>
-<p><strong>BernoulliTrack</strong></p>
-<p>Track hypothesis with PMBM Bernoulli weights, PoL, threat EMA, position/velocity/timestamp history</p>
-<p>449–473</p>
-<p><strong>AdaptiveClutterEstimator / SourceCredibilityTracker</strong></p>
-<p>Bayesian clutter rate estimation; per-source reliability EMA</p>
-<p>476–602</p>
-<p><strong>GibbsAssigner / PMBMManager</strong></p>
-<p>Gibbs-sampled obs-to-track assignment; full PMBM lifecycle management</p>
-<p>605–655</p>
-<p><strong>score_track / _priority</strong></p>
-<p>Beta-MC threat scoring; priority tier assignment</p>
-<p>657–716</p>
-<p><strong>TradecraftDetector (legacy)</strong></p>
-<p>Original brush pass, SDR winding number, dead drop</p>
-<p>719–777</p>
-<p><strong>RendezvousDetector / RoutePredictor</strong></p>
-<p>Short-horizon MC rendezvous probability; 8-step PoL-blended forecast</p>
-<p>780–919</p>
-<p><strong>Supporting systems</strong></p>
-<p>DynamicNetworkAnalyser, AnomalyEscalator, CredibilityFuser, SensorScheduler, OperationalIntelligence, ForwardBackwardSmoother</p>
-<p>942–1114</p>
-<p><strong>DomainProfile / Presets</strong></p>
-<p>Full dataclass definition; UrbanHUMINT(), Maritime(), Airspace(), VehicleConvoy() factory functions</p>
-<p>1117–1420</p>
-<p><strong>ExtendedRendezvousWarner</strong></p>
-<p>Three-method 30-minute warning system with velocity cache, geometric intercept, sep-rate extrapolation, PoL cross-prediction</p>
-<p>1421–1660</p>
-<p><strong>New tradecraft detectors</strong></p>
-<p>ParallelRouteSurveillanceDetector, ModeTransitionDetector, LoiterAnomalyDetector, CoverStopDetector, ChokepointSurveillanceDetector</p>
-<p>1661–1976</p>
-<p><strong>NetworkRoleInferenceDetector</strong></p>
-<p>Contact graph, relative percentile classification, role history, stable-role events</p>
-<p>1978–2055</p>
-<p><strong>LegacyTradecraftDetector</strong></p>
-<p>BaseDetector wrapper for original v5 tradecraft algorithms</p>
-<p>2056–2363</p>
-<p><strong>ARIAIntelEngineV6 / generate_scenario</strong></p>
-<p>Main engine: constructor, detector registry, ingest pipeline, summary/perf formatters; reproducible scenario generator</p>
-<h1 id="17-quick-reference"><strong>17. Quick Reference</strong></h1>
-<h2 id="engine-construction"><strong>Engine Construction</strong></h2>
-<p># Default (UrbanHUMINT)</p>
+<h2 id="16-file-structure-aria_intel_v6py-2363-lines">16. File Structure (<code>aria_intel_v6.py</code>, 2,363 lines)</h2>
+<table>
+<thead>
+<tr>
+<th>Lines</th>
+<th>Section</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–68</td>
+<td><strong>Global constants</strong></td>
+<td>Import declarations, particle/filter hyperparameters, MOU model tables, pre-computed matrices (H, R, inverse R, log-det)</td>
+</tr>
+<tr>
+<td>69–117</td>
+<td><strong>Utility functions</strong></td>
+<td>logsumexp, _chol_logpdf, _betweenness_centrality, _fwdsub3</td>
+</tr>
+<tr>
+<td>118–263</td>
+<td><strong>PatternOfLife</strong></td>
+<td>GMM with EM fitting, anomaly scoring, location prediction, active window extraction, PoL clone for group spawning</td>
+</tr>
+<tr>
+<td>275–364</td>
+<td><strong>MOUParticleFilter</strong></td>
+<td>SIR particle filter, prediction/update/resample, cache, model weight tracking, auxiliary trajectory update</td>
+</tr>
+<tr>
+<td>366–446</td>
+<td><strong>BernoulliTrack</strong></td>
+<td>Track hypothesis with PMBM Bernoulli weights, PoL, threat EMA, position/velocity/timestamp history</td>
+</tr>
+<tr>
+<td>449–473</td>
+<td><strong>AdaptiveClutterEstimator / SourceCredibilityTracker</strong></td>
+<td>Bayesian clutter rate estimation; per-source reliability EMA</td>
+</tr>
+<tr>
+<td>476–602</td>
+<td><strong>GibbsAssigner / PMBMManager</strong></td>
+<td>Gibbs-sampled obs-to-track assignment; full PMBM lifecycle management</td>
+</tr>
+<tr>
+<td>605–655</td>
+<td><strong>score_track / _priority</strong></td>
+<td>Beta-MC threat scoring; priority tier assignment</td>
+</tr>
+<tr>
+<td>657–716</td>
+<td><strong>TradecraftDetector (legacy)</strong></td>
+<td>Original brush pass, SDR winding number, dead drop</td>
+</tr>
+<tr>
+<td>719–777</td>
+<td><strong>RendezvousDetector / RoutePredictor</strong></td>
+<td>Short-horizon MC rendezvous probability; 8-step PoL-blended forecast</td>
+</tr>
+<tr>
+<td>780–919</td>
+<td><strong>Supporting systems</strong></td>
+<td>DynamicNetworkAnalyser, AnomalyEscalator, CredibilityFuser, SensorScheduler, OperationalIntelligence, ForwardBackwardSmoother</td>
+</tr>
+<tr>
+<td>942–1114</td>
+<td><strong>DomainProfile / Presets</strong></td>
+<td>Full dataclass definition; UrbanHUMINT(), Maritime(), Airspace(), VehicleConvoy() factory functions</td>
+</tr>
+<tr>
+<td>1117–1420</td>
+<td><strong>ExtendedRendezvousWarner</strong></td>
+<td>Three-method 30-minute warning system with velocity cache, geometric intercept, sep-rate extrapolation, PoL cross-prediction</td>
+</tr>
+<tr>
+<td>1421–1660</td>
+<td><strong>New tradecraft detectors</strong></td>
+<td>ParallelRouteSurveillanceDetector, ModeTransitionDetector, LoiterAnomalyDetector, CoverStopDetector, ChokepointSurveillanceDetector</td>
+</tr>
+<tr>
+<td>1661–1976</td>
+<td><strong>NetworkRoleInferenceDetector</strong></td>
+<td>Contact graph, relative percentile classification, role history, stable-role events</td>
+</tr>
+<tr>
+<td>1978–2055</td>
+<td><strong>LegacyTradecraftDetector</strong></td>
+<td>BaseDetector wrapper for original v5 tradecraft algorithms</td>
+</tr>
+<tr>
+<td>2056–2363</td>
+<td><strong>ARIAIntelEngineV6 / generate_scenario</strong></td>
+<td>Main engine: constructor, detector registry, ingest pipeline, summary/perf formatters; reproducible scenario generator</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-quick-reference">17. Quick Reference</h2>
+<p><strong>Engine construction</strong></p>
+<p><strong>Default (UrbanHUMINT)</strong></p>
 <p>eng = ARIAIntelEngineV6()</p>
-<p># With all options</p>
+<p><strong>With all options</strong></p>
 <p>eng = ARIAIntelEngineV6(</p>
 <pre><code>profile = Maritime\(\),
 
-area    = \(\-50000, 50000, \-50000, 50000\),
+area    = \(-50000, 50000, -50000, 50000\),
 
-high\_value\_locations = \[np\.array\(\[x, y\]\), \.\.\.\],
+high\_value\_locations = \[np.array\(\[x, y\]\), ...\],
 </code></pre>
 <p>)</p>
-<h2 id="per-scan-ingestion"><strong>Per-Scan Ingestion</strong></h2>
+<p><strong>Per-scan ingestion</strong></p>
 <p>report = eng.ingest(observations: List[Observation], timestamp: float)</p>
 <p>print(eng.summary(report))           # formatted text output</p>
 <p>print(eng.performance_report())      # session summary</p>
-<h2 id="accessing-specific-outputs"><strong>Accessing Specific Outputs</strong></h2>
+<p><strong>Accessing specific outputs</strong></p>
 <p>confirmed_tracks    = eng.pmbm.confirmed()</p>
 <p>rendezvous_warnings = report["rendezvous"]         # List of ETA dicts</p>
 <p>tradecraft_events   = report["tradecraft"]         # List of event dicts</p>
 <p>network_roles       = report["network_roles"]      # List of role dicts</p>
 <p>threat_targets      = report["targets"]            # sorted by threat_score_mean</p>
 <p>raw_per_detector    = report["all_detections"]     # Dict[detector_name, List]</p>
-<h2 id="detector-registry"><strong>Detector Registry</strong></h2>
+<p><strong>Detector registry</strong></p>
 <p>eng.list_detectors()</p>
 <p>eng.register_detector(MyDetector(eng.profile))</p>
 <p>eng.unregister_detector("MyDetector")</p>
-<h2 id="domain-switching"><strong>Domain Switching</strong></h2>
-<p># Change domain at construction time</p>
+<p><strong>Domain switching</strong></p>
+<p><strong>Change domain at construction time</strong></p>
 <p>eng = ARIAIntelEngineV6(profile=Airspace())</p>
-<p># All four presets:</p>
+<p><strong>All four presets:</strong></p>
 <p>UrbanHUMINT()    # 60s scans, 30-min RV warn, foot/vehicle models</p>
 <p>Maritime()       # 3600s scans, 2hr RV warn, ship models</p>
 <p>Airspace()       # 5s scans, 10-min RV warn, aircraft models</p>
 <p>VehicleConvoy()  # 10s scans, 5-min RV warn, convoy models</p>
-<h2 id="pol-prediction"><strong>PoL Prediction</strong></h2>
+<p><strong>PoL prediction</strong></p>
 <p>for track in eng.pmbm.confirmed():</p>
-<pre><code>if track\.pol\.\_fitted:
+<pre><code>if track.pol.\_fitted:
 
-    pred\_pos, spread\_m = track\.pol\.predict\_location\(future\_timestamp\)
+    pred\_pos, spread\_m = track.pol.predict\_location\(future\_timestamp\)
 
-    anomaly = track\.pol\.anomaly\_score\(timestamp, position\)
+    anomaly = track.pol.anomaly\_score\(timestamp, position\)
 </code></pre>
 <p>ARIA-INTEL Technical Reference  ·  aria_intel_v6.py</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

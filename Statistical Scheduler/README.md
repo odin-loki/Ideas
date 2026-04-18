@@ -1,5 +1,7 @@
 # Neural-Heuristic Distributed Task Scheduler
 
+House style: leading **`#`** titles on papers, ATX headings, GFM pipe tables, **`**…**`** emphasis — see [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) (batch 34).
+
 A production-ready async Python scheduler combining Completely Fair Scheduling (CFS), Linear Thompson Sampling (LinTS), PID control, and a full real-time monitoring stack. Designed for heterogeneous compute clusters where placement quality, fairness, and load balance must all be maintained simultaneously without a central coordinator.
 
 ---

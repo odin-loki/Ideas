@@ -3,44 +3,94 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>universal generator theory verified</title>
+  <meta name="description" content="**Status**: Computationally Verified **Date**: January 30, 2026 --- This document presents a complete mathematical framework for universal data generation based on: 1. **Category Theory** (Eilenberg-Mac Lane, 1945) - Provides compositionality 2. **Lévy Processes**…"/>
+  <title>Universal Generative Framework: Verified Mathematical Theory · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\universal_generator_theory_verified.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="universal-generative-framework-verified-mathematical-theory">Universal Generative Framework: Verified Mathematical Theory</h1>
-<p><strong>Status</strong>: Computationally Verified<br />
-<strong>Date</strong>: January 30, 2026<br />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#11-the-generator-category">1.1 The Generator Category</a></li>
+        <li class="toc-depth-2"><a href="#12-category-axioms">1.2 Category Axioms</a></li>
+        <li class="toc-depth-2"><a href="#21-the-levy-khintchine-formula">2.1 The Lévy-Khintchine Formula</a></li>
+        <li class="toc-depth-2"><a href="#22-unification-of-continuous-and-discrete">2.2 Unification of Continuous and Discrete</a></li>
+        <li class="toc-depth-2"><a href="#31-minimum-description-length-principle">3.1 Minimum Description Length Principle</a></li>
+        <li class="toc-depth-2"><a href="#32-spectral-filtration">3.2 Spectral Filtration</a></li>
+        <li class="toc-depth-2"><a href="#41-sequential-composition">4.1 Sequential Composition</a></li>
+        <li class="toc-depth-2"><a href="#42-hierarchical-composition-subordination">4.2 Hierarchical Composition (Subordination)</a></li>
+        <li class="toc-depth-2"><a href="#51-parameter-estimation-convergence">5.1 Parameter Estimation Convergence</a></li>
+        <li class="toc-depth-2"><a href="#52-generalization-bounds">5.2 Generalization Bounds</a></li>
+        <li class="toc-depth-2"><a href="#61-randomized-linear-algebra">6.1 Randomized Linear Algebra</a></li>
+        <li class="toc-depth-2"><a href="#71-universal-generator-algorithm">7.1 Universal Generator Algorithm</a></li>
+        <li class="toc-depth-2"><a href="#81-theoretical-claims">8.1 Theoretical Claims</a></li>
+        <li class="toc-depth-2"><a href="#82-novel-contributions">8.2 Novel Contributions</a></li>
+        <li class="toc-depth-2"><a href="#83-comparison-to-existing-methods">8.3 Comparison to Existing Methods</a></li>
+        <li class="toc-depth-2"><a href="#91-theoretical">9.1 Theoretical</a></li>
+        <li class="toc-depth-2"><a href="#92-practical">9.2 Practical</a></li>
+        <li class="toc-depth-2"><a href="#foundational-theory">Foundational Theory</a></li>
+        <li class="toc-depth-2"><a href="#modern-treatments">Modern Treatments</a></li>
+        <li class="toc-depth-2"><a href="#computational-methods">Computational Methods</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Universal Generative Framework: Verified Mathematical Theory</h1>
+          <p class="doc-meta">Statistical Generation\universal_generator_theory_verified.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Status</strong>: Computationally Verified<br/>
+<strong>Date</strong>: January 30, 2026<br/>
+<strong>Verification</strong>: All proofs validated numerically and symbolically</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>Status</strong>: Computationally Verified<br/>
+<strong>Date</strong>: January 30, 2026<br/>
 <strong>Verification</strong>: All proofs validated numerically and symbolically</p>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
-<p>This document presents a complete mathematical framework for universal data generation based on:<br />
-1. <strong>Category Theory</strong> (Eilenberg-Mac Lane, 1945) - Provides compositionality<br />
-2. <strong>Lévy Processes</strong> (Lévy-Khintchine, 1934) - Unifies continuous/discrete<br />
+<p>This document presents a complete mathematical framework for universal data generation based on:
+1. <strong>Category Theory</strong> (Eilenberg-Mac Lane, 1945) - Provides compositionality
+2. <strong>Lévy Processes</strong> (Lévy-Khintchine, 1934) - Unifies continuous/discrete
 3. <strong>Information Theory</strong> (Shannon, 1948) - Enables optimal filtration</p>
 <p><strong>Key Result</strong>: We prove that generators form a valid mathematical category with composition laws that preserve all essential properties. All theoretical claims have been computationally verified.</p>
-<hr />
-<h1 id="part-i-category-theoretic-foundation">Part I: Category-Theoretic Foundation</h1>
+<hr/>
+
 <h2 id="11-the-generator-category">1.1 The Generator Category</h2>
 <p><strong>Definition 1.1</strong> (Generator Category <strong>Gen</strong>)</p>
 <p>The category <strong>Gen</strong> consists of:</p>
-<p><strong>Objects</strong>: Triples G = (T, Σ, ψ) where<br />
-- T ⊆ ℝ₊ is a time scale<br />
-- Σ is a measurable space (state space)<br />
-- ψ = (Π, σ², μ) is a generator specification:<br />
-  - Π: Lévy measure on Σ (jump distribution)<br />
-  - σ² ∈ ℝ₊ (diffusion coefficient)<br />
+<p><strong>Objects</strong>: Triples G = (T, Σ, ψ) where
+- T ⊆ ℝ₊ is a time scale
+- Σ is a measurable space (state space)<br/>
+- ψ = (Π, σ², μ) is a generator specification:
+  - Π: Lévy measure on Σ (jump distribution)
+  - σ² ∈ ℝ₊ (diffusion coefficient)
   - μ ∈ ℝ (drift)</p>
 <p><strong>Morphisms</strong>: Structure-preserving maps φ: G₁ → G₂</p>
 <p><strong>Composition</strong>: For morphisms f: G₁ → G₂ and g: G₂ → G₃:</p>
 <pre><code>(g ∘ f): G₁ → G₃
 </code></pre>
 <p><strong>Identity</strong>: For each object G, there exists id_G: G → G</p>
-<hr />
+<hr/>
 <h2 id="12-category-axioms">1.2 Category Axioms</h2>
 <p><strong>Theorem 1.1</strong> (Gen is a Category)</p>
 <p>The structure (Gen, ∘, id) satisfies all category axioms.</p>
@@ -86,8 +136,8 @@ G₁      = (μ=1.0, σ²=0.5, λ=2.0)
 Both identities verified: TRUE
 </code></pre>
 <p>Therefore, <strong>Gen</strong> is a valid category. ∎</p>
-<hr />
-<h1 id="part-ii-levy-process-unification">Part II: Lévy Process Unification</h1>
+<hr/>
+
 <h2 id="21-the-levy-khintchine-formula">2.1 The Lévy-Khintchine Formula</h2>
 <p><strong>Theorem 2.1</strong> (Lévy-Khintchine Representation)</p>
 <p>Every Lévy process X_t on ℝ has characteristic function:</p>
@@ -96,9 +146,9 @@ Both identities verified: TRUE
 <p>where the characteristic exponent is:</p>
 <pre><code>ψ(θ) = iμθ - (σ²θ²)/2 + ∫_ℝ (e^{iθx} - 1 - iθx·𝟙_{|x|&lt;1}) Π(dx)
 </code></pre>
-<p><strong>Components</strong>:<br />
-- μ: drift coefficient<br />
-- σ²: diffusion coefficient<br />
+<p><strong>Components</strong>:
+- μ: drift coefficient
+- σ²: diffusion coefficient<br/>
 - Π: Lévy measure (satisfies ∫ min(1, x²) Π(dx) &lt; ∞)</p>
 <p><strong>Proof Sketch</strong>:</p>
 <ol>
@@ -127,7 +177,7 @@ Simulated   Var[X_T] = 3.075  (error: 0.075)
 
 Verification: PASSED (within Monte Carlo error)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="22-unification-of-continuous-and-discrete">2.2 Unification of Continuous and Discrete</h2>
 <p><strong>Theorem 2.2</strong> (Continuous-Discrete Duality)</p>
 <p>Any stochastic process can be decomposed as:</p>
@@ -143,13 +193,13 @@ X_discrete = Σᵢ Yᵢ·𝟙_{Tᵢ ≤ t}  (compound Poisson)
        ↑     ↑           ↑                        ↑
      drift continuous  large jumps           small jumps
 </code></pre>
-<p>Taking ε → 0, small jumps converge to Brownian motion (central limit theorem).<br />
+<p>Taking ε → 0, small jumps converge to Brownian motion (central limit theorem).
 Large jumps remain as compound Poisson process.</p>
 <p>This gives the canonical decomposition. ∎</p>
 <p><strong>Practical Consequence</strong>: </p>
-<p>A single framework handles both:<br />
-- <strong>Discrete data</strong>: σ² = 0, Π ≠ 0 (pure jump process)<br />
-- <strong>Continuous data</strong>: Π = 0, σ² ≠ 0 (diffusion)<br />
+<p>A single framework handles both:
+- <strong>Discrete data</strong>: σ² = 0, Π ≠ 0 (pure jump process)
+- <strong>Continuous data</strong>: Π = 0, σ² ≠ 0 (diffusion)
 - <strong>Mixed data</strong>: Both Π ≠ 0 and σ² ≠ 0</p>
 <p><strong>Performance Trade-off</strong>:</p>
 <p>By Theorem 2.2, there is a natural trade-off:</p>
@@ -160,8 +210,8 @@ For fixed total variation:
 - More jumps (Π ↑) ⟹ less diffusion (σ² ↓)
 </code></pre>
 <p>This is <strong>automatically balanced</strong> by the learning algorithm.</p>
-<hr />
-<h1 id="part-iii-information-theoretic-filtration">Part III: Information-Theoretic Filtration</h1>
+<hr/>
+
 <h2 id="31-minimum-description-length-principle">3.1 Minimum Description Length Principle</h2>
 <p><strong>Theorem 3.1</strong> (MDL Filtration Criterion)</p>
 <p>A parameter θ ∈ Θ should be retained if and only if:</p>
@@ -181,12 +231,12 @@ Description_Length(Data | Model_without_θ) + log P(Model_without_θ)
                          ↑                       ↑
                     description length    model complexity
 </code></pre>
-<p>A parameter that increases total description length is compressible<br />
+<p>A parameter that increases total description length is compressible
 (i.e., it can be described more cheaply as "noise" than as "signal"). ∎</p>
 <p><strong>Computational Verification</strong>:</p>
-<p>Test setup:<br />
-- N = 1000 samples<br />
-- 5 signal parameters (large effects: ±2.0)<br />
+<p>Test setup:
+- N = 1000 samples
+- 5 signal parameters (large effects: ±2.0)
 - 95 noise parameters (small effects: ±0.1)</p>
 <p>MDL ranking of top 10 parameters:</p>
 <pre><code>Rank 1: Param 3  ✓ SIGNAL  (MDL = 2109.39)
@@ -201,20 +251,20 @@ Average noise parameter rank:  51.8
 
 Signal parameters rank significantly higher: TRUE
 </code></pre>
-<hr />
+<hr/>
 <h2 id="32-spectral-filtration">3.2 Spectral Filtration</h2>
 <p><strong>Theorem 3.2</strong> (Marchenko-Pastur Threshold)</p>
-<p>For parameter covariance matrix M with:<br />
-- p parameters<br />
-- n samples<br />
+<p>For parameter covariance matrix M with:
+- p parameters
+- n samples<br/>
 - Noise variance σ²</p>
 <p>The noise eigenvalues concentrate in:</p>
 <pre><code>[σ²(1 - √(p/n))², σ²(1 + √(p/n))²]
 </code></pre>
 <p>Signal eigenvalues lie strictly above σ²(1 + √(p/n))².</p>
 <p><strong>Proof Sketch</strong>:</p>
-<p>By random matrix theory (Marchenko-Pastur law), the empirical spectral<br />
-distribution of (1/n)XX^T where X is n×p with i.i.d. N(0,σ²) entries<br />
+<p>By random matrix theory (Marchenko-Pastur law), the empirical spectral
+distribution of (1/n)XX^T where X is n×p with i.i.d. N(0,σ²) entries
 converges to:</p>
 <pre><code>ρ_MP(λ) = (1/(2πσ²λ))·√((λ_+ - λ)(λ - λ_-))
 
@@ -224,9 +274,9 @@ where λ_± = σ²(1 ± √γ)², γ = p/n
 <p>Signal eigenvalues (from structured covariance) are separated from this bulk.</p>
 <p>Full proof: Bai &amp; Silverstein (2010), "Spectral Analysis of Large Dimensional Random Matrices"</p>
 <p><strong>Computational Verification</strong>:</p>
-<p>Test setup:<br />
-- 100 parameters, 500 samples<br />
-- 5 signal eigenvalues: [10, 8, 6, 5, 4]<br />
+<p>Test setup:
+- 100 parameters, 500 samples
+- 5 signal eigenvalues: [10, 8, 6, 5, 4]
 - 95 noise eigenvalues: all 0.5</p>
 <p>Results:</p>
 <pre><code>Marchenko-Pastur bounds: [0.097, 0.663]
@@ -239,11 +289,11 @@ True signal eigenvalues: 5
 Note: Conservative detection (includes some noise).
 Threshold can be tuned with multiplier k·λ_+ for stricter filtration.
 </code></pre>
-<hr />
-<h1 id="part-iv-composition-laws">Part IV: Composition Laws</h1>
+<hr/>
+
 <h2 id="41-sequential-composition">4.1 Sequential Composition</h2>
 <p><strong>Theorem 4.1</strong> (Composition Preserves Lévy Property)</p>
-<p>If X_t and Y_t are independent Lévy processes, then Z_t = X_t + Y_t<br />
+<p>If X_t and Y_t are independent Lévy processes, then Z_t = X_t + Y_t
 is also a Lévy process with:</p>
 <pre><code>ψ_Z(θ) = ψ_X(θ) + ψ_Y(θ)
 </code></pre>
@@ -274,10 +324,10 @@ Simulated   Var[X₁+X₂] = 3.794  (error: 0.046)
 
 Verification: PASSED
 </code></pre>
-<hr />
+<hr/>
 <h2 id="42-hierarchical-composition-subordination">4.2 Hierarchical Composition (Subordination)</h2>
 <p><strong>Theorem 4.2</strong> (Subordination)</p>
-<p>If X_t is a Lévy process and T_t is a subordinator (increasing Lévy process),<br />
+<p>If X_t is a Lévy process and T_t is a subordinator (increasing Lévy process),
 then Y_t = X(T_t) is also a Lévy process.</p>
 <p><strong>Proof</strong>:</p>
 <p>Subordinators have characteristic functions:</p>
@@ -304,8 +354,8 @@ Simulated   E[Y_T] = -0.051  (within error)
 
 Process exhibits correct Lévy property: TRUE
 </code></pre>
-<hr />
-<h1 id="part-v-convergence-theory">Part V: Convergence Theory</h1>
+<hr/>
+
 <h2 id="51-parameter-estimation-convergence">5.1 Parameter Estimation Convergence</h2>
 <p><strong>Theorem 5.1</strong> (Rate of Convergence)</p>
 <p>For Lévy measure estimation from n samples:</p>
@@ -331,7 +381,7 @@ Process exhibits correct Lévy property: TRUE
 
 √n × Error grows linearly → confirms O(1/√n) rate
 </code></pre>
-<hr />
+<hr/>
 <h2 id="52-generalization-bounds">5.2 Generalization Bounds</h2>
 <p><strong>Theorem 5.2</strong> (PAC Learning Bound)</p>
 <p>With probability 1-δ, the generalization error satisfies:</p>
@@ -345,10 +395,10 @@ Process exhibits correct Lévy property: TRUE
 <p>For function class ℱ with VC-dimension d:</p>
 <pre><code>ℛ_n(ℱ) ≤ √(d/n)
 </code></pre>
-<p>Applying concentration inequality gives the stated bound with<br />
+<p>Applying concentration inequality gives the stated bound with
 probability 1-δ. ∎</p>
-<hr />
-<h1 id="part-vi-computational-efficiency">Part VI: Computational Efficiency</h1>
+<hr/>
+
 <h2 id="61-randomized-linear-algebra">6.1 Randomized Linear Algebra</h2>
 <p><strong>Theorem 6.1</strong> (Randomized SVD Error Bound)</p>
 <p>For matrix A ∈ ℝ^{n×n} and rank-k approximation:</p>
@@ -367,8 +417,8 @@ probability 1-δ. ∎</p>
 
 Speedup grows with matrix size as predicted by theory.
 </code></pre>
-<hr />
-<h1 id="part-vii-complete-algorithm-specification">Part VII: Complete Algorithm Specification</h1>
+<hr/>
+
 <h2 id="71-universal-generator-algorithm">7.1 Universal Generator Algorithm</h2>
 <pre><code>INPUT: 
   - Data D = {x_1, ..., x_n} on time scale T
@@ -447,8 +497,8 @@ TIME COMPLEXITY: O(n + p² + L)
 
 SPACE COMPLEXITY: O(p + L)
 </code></pre>
-<hr />
-<h1 id="part-viii-verification-summary">Part VIII: Verification Summary</h1>
+<hr/>
+
 <h2 id="81-theoretical-claims">8.1 Theoretical Claims</h2>
 <table>
 <thead>
@@ -509,23 +559,23 @@ SPACE COMPLEXITY: O(p + L)
 <h2 id="82-novel-contributions">8.2 Novel Contributions</h2>
 <ol>
 <li>
-<p><strong>Category-theoretic formulation</strong> of generative models<br />
-   - First to treat generators as categorical objects<br />
+<p><strong>Category-theoretic formulation</strong> of generative models
+   - First to treat generators as categorical objects
    - Composition laws from category theory</p>
 </li>
 <li>
-<p><strong>Unified continuous/discrete framework</strong><br />
-   - Single model handles both via Lévy processes<br />
+<p><strong>Unified continuous/discrete framework</strong>
+   - Single model handles both via Lévy processes
    - Automatic trade-off balancing</p>
 </li>
 <li>
-<p><strong>Provable filtration</strong><br />
-   - Information-theoretic guarantees<br />
+<p><strong>Provable filtration</strong>
+   - Information-theoretic guarantees
    - Spectral separation of signal/noise</p>
 </li>
 <li>
-<p><strong>Deterministic generation</strong><br />
-   - Hash-based sampling for reproducibility<br />
+<p><strong>Deterministic generation</strong>
+   - Hash-based sampling for reproducibility
    - No randomness in inference</p>
 </li>
 </ol>
@@ -571,20 +621,20 @@ SPACE COMPLEXITY: O(p + L)
 </tr>
 </tbody>
 </table>
-<hr />
-<h1 id="part-ix-open-questions">Part IX: Open Questions</h1>
+<hr/>
+
 <h2 id="91-theoretical">9.1 Theoretical</h2>
 <ol>
 <li>
-<p><strong>Optimal filtration threshold</strong>: Is there a universal constant k such that<br />
+<p><strong>Optimal filtration threshold</strong>: Is there a universal constant k such that
    λ_threshold = k·σ²(1+√(p/n))² minimizes Type I + Type II error?</p>
 </li>
 <li>
-<p><strong>Composition complexity</strong>: Does there exist a generator G such that<br />
+<p><strong>Composition complexity</strong>: Does there exist a generator G such that
    complexity(G₁ ∘ G₂) &gt; complexity(G₁) + complexity(G₂)?</p>
 </li>
 <li>
-<p><strong>Metric learning</strong>: Can we learn the optimal metric on context space<br />
+<p><strong>Metric learning</strong>: Can we learn the optimal metric on context space
    from data, subject to Lipschitz constraints?</p>
 </li>
 </ol>
@@ -594,65 +644,65 @@ SPACE COMPLEXITY: O(p + L)
 <p><strong>Scaling</strong>: How does this perform on 1B+ parameter models?</p>
 </li>
 <li>
-<p><strong>Online learning</strong>: Can we update Lévy measures incrementally<br />
+<p><strong>Online learning</strong>: Can we update Lévy measures incrementally
    without retraining?</p>
 </li>
 <li>
 <p><strong>Multimodal data</strong>: Extension to images, audio, video?</p>
 </li>
 </ol>
-<hr />
-<h1 id="references">References</h1>
+<hr/>
+
 <h2 id="foundational-theory">Foundational Theory</h2>
 <ol>
 <li>
-<p>Eilenberg, S. &amp; Mac Lane, S. (1945). "General Theory of Natural Equivalences"<br />
-<em>Transactions of the AMS</em>, 58, 231-294.</p>
+<p>Eilenberg, S. &amp; Mac Lane, S. (1945). "General Theory of Natural Equivalences"
+   <em>Transactions of the AMS</em>, 58, 231-294.</p>
 </li>
 <li>
-<p>Lévy, P. (1934). "Sur les intégrales dont les éléments sont des variables aléatoires indépendantes"<br />
-<em>Annali della Scuola Normale Superiore di Pisa</em>, 3, 337-366.</p>
+<p>Lévy, P. (1934). "Sur les intégrales dont les éléments sont des variables aléatoires indépendantes"
+   <em>Annali della Scuola Normale Superiore di Pisa</em>, 3, 337-366.</p>
 </li>
 <li>
 <p>Khintchine, A. (1938). "Limit theorems for sums of independent random variables"</p>
 </li>
 <li>
-<p>Shannon, C.E. (1948). "A Mathematical Theory of Communication"<br />
-<em>Bell System Technical Journal</em>, 27, 379-423.</p>
+<p>Shannon, C.E. (1948). "A Mathematical Theory of Communication"
+   <em>Bell System Technical Journal</em>, 27, 379-423.</p>
 </li>
 </ol>
 <h2 id="modern-treatments">Modern Treatments</h2>
 <ol start="5">
 <li>
-<p>Sato, K. (1999). <em>Lévy Processes and Infinitely Divisible Distributions</em><br />
+<p>Sato, K. (1999). <em>Lévy Processes and Infinitely Divisible Distributions</em>
    Cambridge University Press.</p>
 </li>
 <li>
-<p>Applebaum, D. (2009). <em>Lévy Processes and Stochastic Calculus</em> (2nd ed.)<br />
+<p>Applebaum, D. (2009). <em>Lévy Processes and Stochastic Calculus</em> (2nd ed.)
    Cambridge University Press.</p>
 </li>
 <li>
-<p>Rissanen, J. (1978). "Modeling by shortest data description"<br />
-<em>Automatica</em>, 14, 465-471.</p>
+<p>Rissanen, J. (1978). "Modeling by shortest data description"
+   <em>Automatica</em>, 14, 465-471.</p>
 </li>
 <li>
-<p>Marchenko, V.A. &amp; Pastur, L.A. (1967). "Distribution of eigenvalues for some sets of random matrices"<br />
-<em>Matematicheskii Sbornik</em>, 114(4), 507-536.</p>
+<p>Marchenko, V.A. &amp; Pastur, L.A. (1967). "Distribution of eigenvalues for some sets of random matrices"
+   <em>Matematicheskii Sbornik</em>, 114(4), 507-536.</p>
 </li>
 </ol>
 <h2 id="computational-methods">Computational Methods</h2>
 <ol start="9">
 <li>
-<p>Halko, N., Martinsson, P.G., &amp; Tropp, J.A. (2011). "Finding structure with randomness"<br />
-<em>SIAM Review</em>, 53(2), 217-288.</p>
+<p>Halko, N., Martinsson, P.G., &amp; Tropp, J.A. (2011). "Finding structure with randomness"
+   <em>SIAM Review</em>, 53(2), 217-288.</p>
 </li>
 <li>
-<p>Van der Vaart, A.W. &amp; Wellner, J.A. (1996). <em>Weak Convergence and Empirical Processes</em><br />
+<p>Van der Vaart, A.W. &amp; Wellner, J.A. (1996). <em>Weak Convergence and Empirical Processes</em>
     Springer.</p>
 </li>
 </ol>
-<hr />
-<h1 id="conclusion">Conclusion</h1>
+<hr/>
+
 <p>We have presented a complete, verified mathematical framework for universal generation based on:</p>
 <ol>
 <li><strong>Category theory</strong> provides compositionality, hierarchy, and polymorphism</li>
@@ -661,17 +711,42 @@ SPACE COMPLEXITY: O(p + L)
 <li><strong>Randomized algorithms</strong> ensure computational efficiency</li>
 </ol>
 <p><strong>All theoretical claims have been computationally verified.</strong></p>
-<p>The framework is:<br />
-- ✓ Mathematically rigorous (category axioms proven)<br />
-- ✓ Computationally feasible (O(n+p²+L) complexity)<br />
-- ✓ Universally applicable (any data type)<br />
-- ✓ Provably correct (convergence guarantees)<br />
+<p>The framework is:
+- ✓ Mathematically rigorous (category axioms proven)
+- ✓ Computationally feasible (O(n+p²+L) complexity)
+- ✓ Universally applicable (any data type)
+- ✓ Provably correct (convergence guarantees)
 - ✓ Deterministic (reproducible generation)</p>
 <p><strong>This is not speculative mathematics.</strong> Every component is built on 30-90 years of proven theory, and we have verified all claims computationally.</p>
 <p><strong>The novelty is in the synthesis</strong>, not the individual pieces.</p>
-<hr />
+<hr/>
 <p><strong>END OF DOCUMENT</strong></p>
 <p><em>All proofs verified: January 30, 2026</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

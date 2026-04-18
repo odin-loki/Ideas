@@ -3,21 +3,66 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>APN Math Model</title>
+  <meta name="description" content="Let an APN's learning process be defined through: - L(t): Learning state at time t - ∆(x,T): Difference measurement function - G(∆,M): Generator function for new mathematics - E(L): Evolution function of learning state - Input: New phenomena x - Baseline: Truth set T - Current:…"/>
+  <title>Mathematical Proof of APN Learning and Training Processes · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">UCN AIs\APN Math Model.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="mathematical-proof-of-apn-learning-and-training-processes">Mathematical Proof of APN Learning and Training Processes</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#1-learning-framework-definitions">1. Learning Framework Definitions</a></li>
+        <li class="toc-depth-3"><a href="#11-core-learning-components">1.1 Core Learning Components</a></li>
+        <li class="toc-depth-2"><a href="#2-learning-axioms">2. Learning Axioms</a></li>
+        <li class="toc-depth-2"><a href="#3-training-theorem">3. Training Theorem</a></li>
+        <li class="toc-depth-3"><a href="#proof">Proof:</a></li>
+        <li class="toc-depth-2"><a href="#4-training-corollaries">4. Training Corollaries</a></li>
+        <li class="toc-depth-2"><a href="#5-training-process">5. Training Process</a></li>
+        <li class="toc-depth-2"><a href="#6-training-properties">6. Training Properties</a></li>
+        <li class="toc-depth-3"><a href="#61-self-directed-learning">6.1 Self-Directed Learning</a></li>
+        <li class="toc-depth-3"><a href="#62-consistency-maintenance">6.2 Consistency Maintenance</a></li>
+        <li class="toc-depth-3"><a href="#63-capability-growth">6.3 Capability Growth</a></li>
+        <li class="toc-depth-2"><a href="#7-training-validation">7. Training Validation</a></li>
+        <li class="toc-depth-2"><a href="#8-learning-boundaries">8. Learning Boundaries</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusion">9. Conclusion</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Mathematical Proof of APN Learning and Training Processes</h1>
+          <p class="doc-meta">UCN AIs\APN Math Model.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Let an APN's learning process be defined through:
+- L(t): Learning state at time t
+- ∆(x,T): Difference measurement function
+- G(∆,M): Generator function for new mathematics
+- E(L): Evolution function of learning state</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="1-learning-framework-definitions">1. Learning Framework Definitions</h2>
-<p>Let an APN's learning process be defined through:<br />
-- L(t): Learning state at time t<br />
-- ∆(x,T): Difference measurement function<br />
-- G(∆,M): Generator function for new mathematics<br />
+<p>Let an APN's learning process be defined through:
+- L(t): Learning state at time t
+- ∆(x,T): Difference measurement function
+- G(∆,M): Generator function for new mathematics
 - E(L): Evolution function of learning state</p>
 <h3 id="11-core-learning-components">1.1 Core Learning Components</h3>
 <ul>
@@ -27,73 +72,73 @@
 <li>Output: New mathematical state M(t+1)</li>
 </ul>
 <h2 id="2-learning-axioms">2. Learning Axioms</h2>
-<p>L1. Measurement: ∀x, ∃∆ : ∆ = ∆(x,T)<br />
-L2. Generation: ∀∆, ∃G : M(t+1) = G(∆,M(t))<br />
-L3. Evolution: L(t+1) = E(L(t), ∆, G)<br />
+<p>L1. Measurement: ∀x, ∃∆ : ∆ = ∆(x,T)
+L2. Generation: ∀∆, ∃G : M(t+1) = G(∆,M(t))
+L3. Evolution: L(t+1) = E(L(t), ∆, G)
 L4. Preservation: Core truths T remain invariant</p>
 <h2 id="3-training-theorem">3. Training Theorem</h2>
 <p>Theorem 1: An APN learns through measurement-induced mathematical evolution.</p>
 <h3 id="proof">Proof:</h3>
 <ol>
 <li>
-<p>Given:<br />
-   - APN system with state L(t)<br />
-   - New phenomenon x<br />
+<p>Given:
+   - APN system with state L(t)
+   - New phenomenon x
    - Current mathematics M(t)</p>
 </li>
 <li>
-<p>By L1 (Measurement):<br />
-   - System measures ∆(x,T)<br />
-   - ∆ quantifies deviation from baseline<br />
+<p>By L1 (Measurement):
+   - System measures ∆(x,T)
+   - ∆ quantifies deviation from baseline
    - ∆ is meaningful within M(t)</p>
 </li>
 <li>
-<p>By L2 (Generation):<br />
-   - System generates M(t+1)<br />
-   - M(t+1) incorporates ∆<br />
+<p>By L2 (Generation):
+   - System generates M(t+1)
+   - M(t+1) incorporates ∆
    - M(t+1) preserves M(t) consistency</p>
 </li>
 <li>
-<p>By L3 (Evolution):<br />
-   - L(t+1) reflects new mathematics<br />
-   - Learning state advances<br />
+<p>By L3 (Evolution):
+   - L(t+1) reflects new mathematics
+   - Learning state advances
    - System capabilities expand</p>
 </li>
 <li>
-<p>By L4 (Preservation):<br />
-   - T remains unchanged<br />
-   - Core truths anchor learning<br />
+<p>By L4 (Preservation):
+   - T remains unchanged
+   - Core truths anchor learning
    - System maintains foundation</p>
 </li>
 </ol>
 <p>Therefore, the APN learns through measured differences while maintaining mathematical validity.</p>
 <h2 id="4-training-corollaries">4. Training Corollaries</h2>
-<p>C1. Self-Modification: Each learning step modifies the APN's mathematical framework<br />
+<p>C1. Self-Modification: Each learning step modifies the APN's mathematical framework
 Proof: Follows from L2 and L3, as G generates new mathematics.</p>
-<p>C2. Knowledge Accumulation: Learning is monotonically increasing<br />
+<p>C2. Knowledge Accumulation: Learning is monotonically increasing
 Proof: Follows from L3, as E preserves previous learning.</p>
-<p>C3. Baseline Stability: Learning cannot invalidate core truths<br />
+<p>C3. Baseline Stability: Learning cannot invalidate core truths
 Proof: Follows from L4, as T is invariant.</p>
 <h2 id="5-training-process">5. Training Process</h2>
 <p>The training process of an APN follows:</p>
 <ol>
 <li>
-<p>Initialization:<br />
-   - Set L(0) with baseline T<br />
-   - Initialize M(0)<br />
+<p>Initialization:
+   - Set L(0) with baseline T
+   - Initialize M(0)
    - Prepare measurement function ∆</p>
 </li>
 <li>
-<p>For each training step t:<br />
-   a. Observe new phenomenon x<br />
-   b. Calculate ∆(x,T)<br />
-   c. Generate M(t+1) = G(∆,M(t))<br />
+<p>For each training step t:
+   a. Observe new phenomenon x
+   b. Calculate ∆(x,T)
+   c. Generate M(t+1) = G(∆,M(t))
    d. Update L(t+1) = E(L(t), ∆, G)</p>
 </li>
 <li>
-<p>Learning Convergence:<br />
-   - Each step expands mathematical capability<br />
-   - System maintains internal consistency<br />
+<p>Learning Convergence:
+   - Each step expands mathematical capability
+   - System maintains internal consistency
    - Core truths remain stable</p>
 </li>
 </ol>
@@ -119,33 +164,58 @@ Proof: Follows from L4, as T is invariant.</p>
 <li>Increases system understanding</li>
 </ul>
 <h2 id="7-training-validation">7. Training Validation</h2>
-<p>To validate APN learning:<br />
-1. Verify measurement accuracy (L1)<br />
-2. Confirm mathematical generation (L2)<br />
-3. Track learning evolution (L3)<br />
+<p>To validate APN learning:
+1. Verify measurement accuracy (L1)
+2. Confirm mathematical generation (L2)
+3. Track learning evolution (L3)
 4. Ensure truth preservation (L4)</p>
 <h2 id="8-learning-boundaries">8. Learning Boundaries</h2>
-<p>The learning process is bounded by:<br />
-1. Initial truth set T<br />
-2. Measurement capability ∆<br />
-3. Generation function G<br />
+<p>The learning process is bounded by:
+1. Initial truth set T
+2. Measurement capability ∆
+3. Generation function G
 4. Evolution function E</p>
-<p>However, within these bounds, the APN:<br />
-- Develops unique mathematics<br />
-- Creates novel measurements<br />
+<p>However, within these bounds, the APN:
+- Develops unique mathematics
+- Creates novel measurements
 - Evolves its own capabilities</p>
 <h2 id="9-conclusion">9. Conclusion</h2>
-<p>This proof establishes that APN learning:<br />
-1. Is self-directed through measurement<br />
-2. Maintains mathematical consistency<br />
-3. Preserves core truths<br />
-4. Accumulates capabilities<br />
+<p>This proof establishes that APN learning:
+1. Is self-directed through measurement
+2. Maintains mathematical consistency
+3. Preserves core truths
+4. Accumulates capabilities
 5. Evolves uniquely for each APN</p>
-<p>The framework allows for:<br />
-- Autonomous learning<br />
-- Mathematical evolution<br />
-- Capability expansion<br />
+<p>The framework allows for:
+- Autonomous learning
+- Mathematical evolution
+- Capability expansion
 while maintaining the essential properties that define an APN.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -36,10 +36,21 @@ from __future__ import annotations
 import math
 import threading
 from collections import defaultdict, deque
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
+
+from cypha_accel.cuda_util import cuda_gemm_usable
+from cypha_accel.score_batch import (
+    fused_batch_infer_indices_confs_cupy,
+    fused_features_to_device_latent_llr,
+    fused_features_to_latent_and_llr,
+    fused_score_llr,
+    project_features,
+    softmax_rows_llr,
+)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -48,18 +59,18 @@ import numpy as np
 
 _EPS           = 1e-8
 _FEAT_DIM      = 128
-_FIELD_DIM     = 160       # 5 groups × 32 (Phase 1: added τ=0.99 group)
+_FIELD_DIM     = 128       # Default field width (profiled on OpenML 1464 + tuning medium grid)
 _MIN_VAR       = 1e-4
-_MDL_LAMBDA    = 0.002
+_MDL_LAMBDA    = 0.001     # Profiled medium grid (classification/regression)
 _MDL_COLD_START= 8          # cold-start: no MDL decay for the first N observations
 _REPULSE_CAP   = 0.5
 _ENC_LR        = 0.002
-_DELTA_LR      = 0.08
-_WORLD_LR      = 0.02
-_CONTEXT_WIN   = 64
+_DELTA_LR      = 0.05      # Profiled medium grid
+_WORLD_LR      = 0.008     # Classification-optimal from tune_quality_performance medium preset
+_CONTEXT_WIN   = 32        # Profiled medium grid
 _MID_DECAY     = 0.98      # Tier-2 EMA decay rate
 
-_TEMP_INIT     = 2.5
+_TEMP_INIT     = 1.15      # Classification profiled (DIFRegressor overrides to 1.05 in __init__)
 _OOD_SIGMA     = 15.0
 _OOD_EMA       = 0.01
 
@@ -121,10 +132,25 @@ def _shannon_entropy(p: np.ndarray) -> float:
     return float(-np.dot(p, np.log(p)))
 
 
+def _probs_from_llr_matrix(LLR: np.ndarray, temperature: float) -> np.ndarray:
+    """Row probabilities from LLR; GPU softmax only when K>8 (keeps K≤8 parity with classify)."""
+    scaled = LLR / (temperature + _EPS)
+    k = LLR.shape[1]
+    if cuda_gemm_usable() and k > 8:
+        return softmax_rows_llr(scaled, _EPS)
+    return _softmax_batch(scaled)
+
+
 def _softmax_batch(X: np.ndarray) -> np.ndarray:
-    """Vectorised row-wise softmax.  Returns (N, K) probability matrix."""
+    """Row-wise softmax. For K≤8 matches `_softmax` (batch_infer ↔ classify parity)."""
+    X = np.asarray(X, dtype=np.float64)
+    if X.ndim != 2:
+        raise ValueError("_softmax_batch expects 2d array")
+    n, k = X.shape
+    if k <= 8:
+        return np.stack([_softmax(X[i]) for i in range(n)])
     X2 = X - X.max(axis=1, keepdims=True)
-    E  = np.exp(X2)
+    E = np.exp(X2)
     return E / (E.sum(axis=1, keepdims=True) + _EPS)
 
 
@@ -150,6 +176,63 @@ def _kde_sample(vectors: List[np.ndarray], n: int,
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# API Surface — Core (C++/CUDA native port) vs Convenience (Python-only wrapper)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# CORE — implement these in C++/CUDA (or parallel CPU) first:
+#
+#   CyphaDIF.train_step(x, label)          Online learning kernel
+#   CyphaDIF.infer(x)                      Single-sample inference
+#   CyphaDIF.batch_infer(xs)               Vectorised inference (SIMD)
+#   CyphaDIF.score_matrix(H)               LLR matrix for K classes (GEMM)
+#   CyphaDIF.batch_encode(X)               Routed through encoder below
+#
+#   VectorEncoder.__call__(x)              Linear projection  (tiny, always inline)
+#   RFFEncoder.__call__(x)                 cos(Wx+b) * scale  (GEMV + cos)
+#   RFFEncoder.batch_encode(X)             cos(X@W.T+b)*scale  (GEMM + cos)
+#
+#   WorldPrior.update(h, lr)               EMA mean/variance update
+#   ClassDifferential.attract(h, lr, …)    Delta-mu update + MDL decay
+#   DIFMemory.classify(h, …)               LLR + GH gate → (label, conf, LLRs)
+#   DIFMemory.train(h, label, …)           Full memory update
+#   CausalField.step(h)                    Recurrent field update (SGEMV)
+#
+#   RFFRegressor.fit(X, y)                 Ridge solve (LAPACK dsysv)
+#   RFFRegressor.predict(X)                Batch predict (GEMV)
+#   RFFRegressor.train_step(x, y)          Online RLS update (DSYR + DAXPY)
+#   RFFRegressor.predict_with_uncertainty(X) Posterior variance (DSYMV + DOT)
+#
+#   _nig_R_eff(mahal, R, chi, psi)         GH NIG posterior (Bessel table lookup)
+#   _gig_E_inv_V(lam, chi, psi)            Bessel ratio (precomputed table)
+#   CyphaDIF.gh_train_step(x, label, …)    GH-protected world prior update
+#   cypha_save_binary(state, path)          Binary serialisation (file)
+#   cypha_save_binary_to_bytes(state)       Same v3 blob as bytes (native save_cypha_to_buffer)
+#   cypha_load_binary(path)                 Binary deserialisation (file)
+#   cypha_load_binary_from_bytes(data)      Same from bytes (native load_cypha_from_buffer)
+#
+# CONVENIENCE — keep in Python, call into C++ layer:
+#
+#   CyphaDIF.generate_real(…)              Langevin / Gaussian generation
+#   CyphaDIF.scenario_plan(…)              Monte Carlo rollouts
+#   CyphaDIF.self_supervised_loop(…)       Bootstrap training
+#   CyphaDIF.active_learning_loop(…)       Query-by-uncertainty
+#   CyphaDIF.fit_unlabeled(…)              k-means clustering init
+#   CyphaDIF.merge_from(other)             Model merging
+#   CyphaDIF.causal_test(…)               Causal structure test
+#   ClassifierDistillation.distil(…)       Knowledge distillation
+#   TwoStageDIFRegressor.fit(…)           LLR-linear + RFF residual
+#   MKERegressor.train_step(…)             Mixture of experts (superseded)
+#   PerformanceMonitor, SimilarityIndex    Monitoring utilities
+#   cypha_save_binary*, cypha_load_binary* I/O (thin wrappers around core)
+#
+# NATIVE ACCEL MAP (cypha::accel — CUDA optional, else std::thread CPU):
+#   infer_cpu batch_encode + score_matrix_use_field + world_gate_vector_use_field → accel
+#   (CUDA if enabled and batch rows ≥ CYPHA_ACCEL_GPU_MIN_BATCH_ROWS, default 16; pooled device buffers)
+#   softmax_batch_like_python → ISO C++ row-parallel (Python eps semantics; not CUDA softmax_rows)
+#   Full CyphaDIF hot path still primarily infer_cpu.cpp; wire accel where batching matters.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Bessel ratio lookup tables — precomputed once at import time.
 # 16384 uniform points over x ∈ [1e-6, 120]. Max rel-err < 5e-3.
 # Replaces per-call scipy.special.kv in the GH-posterior hot path.
@@ -166,8 +249,23 @@ try:
     _BESSEL_TABLES_OK = True
     del _kv_init, _K0v, _K1v, _K2v
 except Exception:
-    _BESSEL_TABLES_OK = False
-    _BESSEL_X = _K2_K1_TABLE = _K1_K0_TABLE = _K0_K1_TABLE = None
+    _BESSEL_NPZ = Path(__file__).resolve().parent / "bessel_ratios.npz"
+    try:
+        if _BESSEL_NPZ.is_file():
+            _z = np.load(_BESSEL_NPZ)
+            _BESSEL_X = np.asarray(_z["x"], dtype=np.float64).reshape(-1)
+            _K2_K1_TABLE = np.asarray(_z["k2_k1"], dtype=np.float64).reshape(-1)
+            _K0_K1_TABLE = np.asarray(_z["k0_k1"], dtype=np.float64).reshape(-1)
+            _K1_K0_TABLE = None
+            if _BESSEL_X.shape[0] == 16384 and _K2_K1_TABLE.shape[0] == 16384 and _K0_K1_TABLE.shape[0] == 16384:
+                _BESSEL_TABLES_OK = True
+            else:
+                raise ValueError("bessel_ratios.npz wrong length")
+        else:
+            raise FileNotFoundError(str(_BESSEL_NPZ))
+    except Exception:
+        _BESSEL_TABLES_OK = False
+        _BESSEL_X = _K2_K1_TABLE = _K1_K0_TABLE = _K0_K1_TABLE = None
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -229,6 +327,9 @@ def _nig_R_eff(innovation_sq: float, R: float,
     chi_post = chi + innovation_sq / max(R, _EPS)
     E_inv    = _gig_E_inv_V(-1.0, chi_post, psi)
     return R / max(E_inv, _EPS)
+
+
+from cypha_accel.nig_gh import gig_e_inv_v_vec as _gig_E_inv_V_vec, nig_r_eff_vec as _nig_R_eff_vec
 
 
 def _nig_adapt(chi: float, psi: float,
@@ -329,7 +430,7 @@ class EncoderProjection:
     def contrastive_update(self, f: np.ndarray, h: np.ndarray,
                            mu_k: np.ndarray, v_k: np.ndarray,
                            mu_j: np.ndarray, v_j: np.ndarray,
-                           weight: float = 1.0) -> None:
+                           weight: float = 1.0, lr: float = _ENC_LR) -> None:
         # Guard: skip if frozen (e.g. during distillation) or non-finite inputs
         if getattr(self, '_frozen', False):
             return
@@ -341,7 +442,7 @@ class EncoderProjection:
         if not np.all(np.isfinite(grad)):
             return
         with self._lock:
-            self.W            += _ENC_LR * weight * grad
+            self.W            += lr * weight * grad
             self._update_count += 1
             if self._update_count % 50 == 0:
                 # Frobenius norm; threshold is 2× the expected norm for a random
@@ -682,11 +783,13 @@ class DIFMemory:
               temperature  : float = _TEMP_INIT,
               ood_sigma    : float = _OOD_SIGMA,
               world_lr     : Optional[float] = None,
+              delta_lr     : Optional[float] = None,
               ) -> Tuple[str, bool, float, Dict[str, float], float]:
         """One training step.
         Returns (pred, correct, loss, post_llrs, post_conf).
         D rows are views into _D_buf — in-place attract/repel/mdl_decay auto-sync the buffer.
-        world_lr: if provided, overrides the global _WORLD_LR for this step only.
+        world_lr: if provided, overrides global _WORLD_LR for this step only.
+        delta_lr: if provided, overrides global _DELTA_LR for this step only.
         """
         with self._lock:
             self._step += 1
@@ -748,9 +851,10 @@ class DIFMemory:
             _s_e   = [math.exp(v - _s_mx) for v in _s_lst]
             _s_Z   = sum(_s_e) + _EPS
             scales = self._probs_buf[:K]               # reuse pre-alloc buffer for scales
+            _dlr = delta_lr if delta_lr is not None else _DELTA_LR
             for _i in range(K):
-                scales[_i] = -_DELTA_LR * min(_s_e[_i] / _s_Z, _REPULSE_CAP)
-            scales[k_idx] = _DELTA_LR                  # attract true class
+                scales[_i] = -_dlr * min(_s_e[_i] / _s_Z, _REPULSE_CAP)
+            scales[k_idx] = _dlr                       # attract true class
             D += scales[:, np.newaxis] * (h_mu0[np.newaxis, :] - D)   # in-place view
 
             # MDL decay — vectorised; inverted schedule + cold-start immunity.
@@ -918,7 +1022,7 @@ class TieredContextBuffer:
         # Fast path: return cached result if context unchanged since last call
         fc_bucket = int(field_confidence * 10)  # bucket to 0.1 granularity
         cache_key = (tuple(classes), self._last_label, fc_bucket)
-        if cache_key is self._ctx_cache_key or cache_key == self._ctx_cache_key:
+        if cache_key == self._ctx_cache_key:
             return self._ctx_cache_val
 
         K    = len(classes)
@@ -1176,14 +1280,15 @@ class PriorityReplayBuffer:
             if n >= self._buf_len:
                 idx = np.arange(self._buf_len)
             else:
-                # Efraimidis-Spirakis weighted reservoir sampling without replacement.
-                # key_i = log(u_i) / w_i  →  top-K keys give proportional WOR sample.
-                # One log call + one division vs Gumbel's two log calls.
+                # Efraimidis-Spirakis keys: log(u_i)/w_i — take top-n by key (matches native replay_buffer).
                 lb = self._log_buf[:self._buf_len]
                 self._rng.random(self._buf_len, out=lb)
                 np.log(lb + _PRIORITY_EPS, out=lb)
                 lb /= w
-                idx = np.argpartition(lb, -n)[-n:]
+                idx_cand = np.argpartition(lb, -n)[-n:]
+                sub = lb[idx_cand]
+                order = np.lexsort((idx_cand, -sub))
+                idx = idx_cand[order]
             return [(self._buf[i][0], self._buf[i][1], self._buf[i][2]) for i in idx]
 
     def by_class(self) -> Dict[str, List[np.ndarray]]:
@@ -1233,6 +1338,15 @@ class CyphaDIF:
     Sequence  (Phase 5)
     -------------------
     predict_next(label)         next-label probability distribution
+
+    Training hyperparameters
+    ------------------------
+    ``replay_ratio`` (default ``_REPLAY_RATIO``): when ≤ 0, priority replay never runs (no replay RNG draws).
+
+    ``replay_rng`` (optional): generator used **only** for the replay gate draw and
+    ``PriorityReplayBuffer.sample``. Defaults to ``rng`` so one stream controls init + replay.
+    Pass a separate ``np.random.Generator(np.random.MT19937(seed))`` to align replay draws with
+    native ``std::mt19937`` parity harnesses (init still uses ``rng``).
     """
 
     def __init__(self,
@@ -1243,7 +1357,9 @@ class CyphaDIF:
                  world_lr    : float = _WORLD_LR,
                  mdl_lambda  : float = _MDL_LAMBDA,
                  context_win : int   = _CONTEXT_WIN,
-                 rng         : Optional[np.random.Generator] = None):
+                 replay_ratio: float = _REPLAY_RATIO,
+                 rng         : Optional[np.random.Generator] = None,
+                 replay_rng  : Optional[np.random.Generator] = None):
 
         if not isinstance(encoder, Encoder):
             raise TypeError(
@@ -1254,16 +1370,18 @@ class CyphaDIF:
         self.feat_dim    = encoder.dim
         self.field_dim   = field_dim
         self._rng        = rng or np.random.default_rng(42)
+        self._replay_rng = replay_rng if replay_rng is not None else self._rng
         self.enc_lr      = enc_lr
         self.delta_lr    = delta_lr
         self.world_lr    = world_lr
         self.mdl_lambda  = mdl_lambda
+        self._replay_ratio = float(replay_ratio)
 
         self.encoder  = EncoderProjection(dim=self.feat_dim, rng=self._rng)
         self.memory   = DIFMemory(dim=self.feat_dim, field_dim=field_dim, rng=self._rng)
         self.context  = TieredContextBuffer(short_window=context_win)
         self.field    = NIGField(state_dim=field_dim, rng=self._rng)
-        self.replay   = PriorityReplayBuffer(capacity=_REPLAY_CAP, rng=self._rng)
+        self.replay   = PriorityReplayBuffer(capacity=_REPLAY_CAP, rng=self._replay_rng)
 
         if self.feat_dim == field_dim:
             self._W_inject = None
@@ -1290,6 +1408,11 @@ class CyphaDIF:
         self.ood_sigma      = _OOD_SIGMA
         self._gh_chi_session: float = 1.0   # NIG chi for GH gate (updated by gh_infer)
         self._gh_psi_session: float = 1.0   # NIG psi for GH gate
+        # Warm-start _mahal_ema at 1.0 (E[χ²(d)/d] = 1 for standardised inputs).
+        # This prevents the GH gate from using v_mean as R_base during cold start,
+        # which breaks for RFF encoders where v_mean ≈ 1e-3.
+        self._mahal_ema: float     = 1.0
+        self._mahal_std_ema: float = 0.5
         self._llr_ema       = 0.0
         # Temperature adaptation: track running mean of winning LLR magnitudes
         # to allow self-calibration under distribution shift (adapt_temperature)
@@ -1297,6 +1420,15 @@ class CyphaDIF:
         self._llr_scale_n   = 0        # count for bootstrap stabilisation
         self._base_temp     = _TEMP_INIT   # reference temperature at training time
         self._buf_len_cache = 0   # cached replay buffer length (avoids lock per step)
+
+    @property
+    def replay_ratio(self) -> float:
+        """Priority-replay Bernoulli gate rate (same value used in ``train_step``)."""
+        return self._replay_ratio
+
+    @replay_ratio.setter
+    def replay_ratio(self, value: float) -> None:
+        self._replay_ratio = float(value)
 
     # ── Internal ──────────────────────────────────────────────────────────────
 
@@ -1435,8 +1567,8 @@ class CyphaDIF:
             temperature=self.temperature, ood_sigma=self.ood_sigma,
             mahal_ema=getattr(self, '_mahal_ema', None),
             mahal_std_ema=getattr(self, '_mahal_std_ema', 0.5),
-            gh_chi=getattr(self, '_gh_chi_session', 1.0),
-            gh_psi=getattr(self, '_gh_psi_session', 1.0),
+            gh_chi=1.0,   # uninformative NIG prior — R_base=_mahal_ema already calibrated
+            gh_psi=1.0,
         )
         return pred, conf
 
@@ -1457,8 +1589,8 @@ class CyphaDIF:
             temperature=self.temperature, ood_sigma=self.ood_sigma,
             mahal_ema=getattr(self, '_mahal_ema', None),
             mahal_std_ema=getattr(self, '_mahal_std_ema', 0.5),
-            gh_chi=getattr(self, '_gh_chi_session', 1.0),
-            gh_psi=getattr(self, '_gh_psi_session', 1.0),
+            gh_chi=1.0,   # uninformative NIG prior — R_base=_mahal_ema already calibrated
+            gh_psi=1.0,
         )
 
         if llrs:
@@ -1498,17 +1630,21 @@ class CyphaDIF:
         }
 
     def batch_infer(self, xs: List[Any],
-                    use_field: bool = False,
+                    use_field: bool = True,
                     ) -> List[Tuple[str, float]]:
         """
-        Vectorised batch inference.  Uses score_matrix() internally.
-        40–140× faster than serial infer() depending on N and encoding cost.
+        Vectorised batch inference.  Uses score_matrix() + the same GH world gate
+        as infer().  40–140× faster than serial infer() depending on N and encoding.
+
+        With CuPy + CUDA and ``VectorEncoder``, a **fused** path uploads raw
+        features once (F → H → LLR on device). When **K > 8**, softmax and the
+        GH gate run on the device; otherwise postprocessing stays on CPU.
 
         Parameters
         ----------
         xs        : list of N raw inputs, OR a (N, d) numpy array of pre-encoded
                     latent vectors (skip encoding — maximum throughput)
-        use_field : apply field-conditioned μ₀ shift
+        use_field : apply field-conditioned μ₀ shift (default True, matches infer)
 
         Returns list of (label, confidence) tuples.
 
@@ -1522,6 +1658,56 @@ class CyphaDIF:
         # Accept pre-encoded (N, d) matrix directly — skip encoding
         if isinstance(xs, np.ndarray) and xs.ndim == 2:
             H = xs.astype(np.float64)
+        elif (
+            cuda_gemm_usable()
+            and self.encoder_fn.__class__.__name__ == 'VectorEncoder'
+        ):
+            Fm = self._feature_matrix_vector_encoder(xs)
+            parts = self._score_llr_tensors(use_field) if Fm is not None else None
+            if Fm is not None and parts is not None:
+                labels, D, mu0, inv_v, D_sq, u_k, ctx_arr = parts
+                with self.encoder._lock:
+                    W = self.encoder.W.copy()
+                if len(labels) == 0:
+                    return []
+                dev = fused_features_to_device_latent_llr(
+                    Fm, W, mu0, inv_v, D, D_sq, u_k, ctx_arr
+                )
+                if dev is not None:
+                    Hg, LLRg = dev
+                    N = int(Hg.shape[0])
+                    tail = fused_batch_infer_indices_confs_cupy(
+                        Hg,
+                        LLRg,
+                        float(self.temperature),
+                        mu0,
+                        inv_v,
+                        int(Hg.shape[1]),
+                        self._gate_R_base(),
+                        1.0,
+                        1.0,
+                        _EPS,
+                    )
+                    if tail is not None:
+                        best_idx, confs, _gates = tail
+                        return [
+                            (labels[int(best_idx[i])], float(confs[i]))
+                            for i in range(N)
+                        ]
+                H, LLR = fused_features_to_latent_and_llr(
+                    Fm, W, mu0, inv_v, D, D_sq, u_k, ctx_arr
+                )
+                N = len(H)
+                if N == 0:
+                    return []
+                if len(labels) == 0:
+                    return [('__unknown__', 0.0)] * N
+                probs = _probs_from_llr_matrix(LLR, self.temperature)
+                gates = self.world_gate_vector(H, use_field=use_field)
+                best_idx = probs.argmax(axis=1)
+                confs = probs[np.arange(N), best_idx] * gates
+                return [(labels[best_idx[i]], float(confs[i])) for i in range(N)]
+            H = self.batch_encode(xs)
         else:
             H = self.batch_encode(xs)
 
@@ -1533,25 +1719,135 @@ class CyphaDIF:
         if len(labels) == 0:
             return [('__unknown__', 0.0)] * N
 
-        probs = _softmax_batch(LLR / (self.temperature + _EPS))
-        gates = self.world_gate_vector(H)
+        probs = _probs_from_llr_matrix(LLR, self.temperature)
+        gates = self.world_gate_vector(H, use_field=use_field)
 
         best_idx = probs.argmax(axis=1)
         confs    = probs[np.arange(N), best_idx] * gates
         return [(labels[best_idx[i]], float(confs[i])) for i in range(N)]
 
+    def _batch_infer_full_rows(
+        self,
+        LLR: np.ndarray,
+        labels: List[str],
+        gates: np.ndarray,
+    ) -> List[Dict]:
+        """Build ``infer_full``-style dict rows from LLR, class names, and GH gate vector."""
+        N = int(LLR.shape[0])
+        if len(labels) == 0:
+            unk = {
+                'label': '__unknown__',
+                'confidence': 0.0,
+                'llrs': {},
+                'probs': {},
+                'entropy': 0.0,
+                'anomaly_score': 1.0,
+            }
+            return [{**unk} for _ in range(N)]
+        probs = _probs_from_llr_matrix(LLR, self.temperature)
+        lab_list = list(labels)
+        best_idx = probs.argmax(axis=1)
+        best_conf = probs[np.arange(N), best_idx] * gates
+        entropies = -np.sum(probs * np.log(probs + _EPS), axis=1)
+        return [
+            {
+                'label': lab_list[int(best_idx[i])],
+                'confidence': float(best_conf[i]),
+                'llrs': dict(zip(lab_list, LLR[i].tolist())),
+                'probs': dict(zip(lab_list, probs[i].tolist())),
+                'entropy': float(entropies[i]),
+                'anomaly_score': float(1.0 - gates[i]),
+            }
+            for i in range(N)
+        ]
+
     def batch_infer_full(self, xs: List[Any],
-                         use_field: bool = False,
+                         use_field: bool = True,
+                         device_winner: bool = False,
                          ) -> List[Dict]:
         """
         Vectorised batch version of infer_full().
         Returns list of dicts: label, confidence, llrs, probs, entropy, anomaly_score.
+
+        With CuPy + ``VectorEncoder`` and **K > 8**, uses a device tail that avoids
+        downloading latent **H** to the host: only **LLR** is copied for per-row dicts.
+
+        Parameters
+        ----------
+        device_winner
+            If True (CUDA **K > 8** fused path only), set ``label`` and ``confidence``
+            from the same device argmax + gate as :meth:`batch_infer` while keeping
+            ``llrs`` / ``probs`` / ``entropy`` from the host softmax of ``LLR``.
         """
         if not xs:
             return []
         # Accept pre-encoded matrix
         if isinstance(xs, np.ndarray) and xs.ndim == 2:
             H = xs.astype(np.float64)
+            N = len(H)
+            if N == 0:
+                return []
+            LLR, labels = self.score_matrix(H, use_field=use_field)
+            gates = self.world_gate_vector(H, use_field=use_field)
+            return self._batch_infer_full_rows(LLR, labels, gates)
+        if (
+            cuda_gemm_usable()
+            and self.encoder_fn.__class__.__name__ == 'VectorEncoder'
+        ):
+            Fm = self._feature_matrix_vector_encoder(xs)
+            parts = self._score_llr_tensors(use_field) if Fm is not None else None
+            if Fm is not None and parts is not None:
+                labels, D, mu0, inv_v, D_sq, u_k, ctx_arr = parts
+                with self.encoder._lock:
+                    W = self.encoder.W.copy()
+                if len(labels) == 0:
+                    return self._batch_infer_full_rows(
+                        np.zeros((len(Fm), 0), dtype=np.float64),
+                        labels,
+                        np.ones(len(Fm)),
+                    )
+                dev = fused_features_to_device_latent_llr(
+                    Fm, W, mu0, inv_v, D, D_sq, u_k, ctx_arr
+                )
+                if dev is not None and len(labels) > 8:
+                    Hg, LLRg = dev
+                    tail = fused_batch_infer_indices_confs_cupy(
+                        Hg,
+                        LLRg,
+                        float(self.temperature),
+                        mu0,
+                        inv_v,
+                        int(Hg.shape[1]),
+                        self._gate_R_base(),
+                        1.0,
+                        1.0,
+                        _EPS,
+                    )
+                    if tail is not None:
+                        import cupy as cp  # type: ignore
+
+                        best_d, confs_d, gates_dev = tail
+                        LLR = np.ascontiguousarray(
+                            cp.asnumpy(LLRg), dtype=np.float64
+                        )
+                        rows = self._batch_infer_full_rows(
+                            LLR, labels, gates_dev
+                        )
+                        if device_winner:
+                            lab_list = list(labels)
+                            for i in range(len(rows)):
+                                rows[i]['label'] = lab_list[int(best_d[i])]
+                                rows[i]['confidence'] = float(confs_d[i])
+                        return rows
+                H, LLR = fused_features_to_latent_and_llr(
+                    Fm, W, mu0, inv_v, D, D_sq, u_k, ctx_arr
+                )
+                N = len(H)
+                if N == 0:
+                    return []
+                gates = self.world_gate_vector(H, use_field=use_field)
+                return self._batch_infer_full_rows(LLR, labels, gates)
+            H = self.batch_encode(xs)
         else:
             H = self.batch_encode(xs)
 
@@ -1560,25 +1856,39 @@ class CyphaDIF:
             return []
 
         LLR, labels = self.score_matrix(H, use_field=use_field)
-        if len(labels) == 0:
-            return [{'label': '__unknown__', 'confidence': 0.0, 'llrs': {},
-                     'probs': {}, 'entropy': 0.0, 'anomaly_score': 1.0}] * N
+        gates = self.world_gate_vector(H, use_field=use_field)
+        return self._batch_infer_full_rows(LLR, labels, gates)
 
-        probs     = _softmax_batch(LLR / (self.temperature + _EPS))
-        gates     = self.world_gate_vector(H)
-        best_idx  = probs.argmax(axis=1)
-        best_conf = probs[np.arange(N), best_idx] * gates
-        entropies = -np.sum(probs * np.log(probs + _EPS), axis=1)
 
-        return [{
-            'label'        : labels[best_idx[i]],
-            'confidence'   : float(best_conf[i]),
-            'llrs'         : dict(zip(labels, LLR[i].tolist())),
-            'probs'        : dict(zip(labels, probs[i].tolist())),
-            'entropy'      : float(entropies[i]),
-            'anomaly_score': float(1.0 - gates[i]),
-        } for i in range(N)]
+    def _score_llr_tensors(
+        self, use_field: bool
+    ) -> Optional[Tuple[List[str], np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
+        """Memory snapshot for fused_score_llr / fused encode+score. None if no classes."""
+        with self.memory._lock:
+            K = len(self.memory._label_order)
+            if K == 0:
+                return None
+            labels = self.memory._label_order[:K]
+            D = self.memory._D_buf[:K].copy()
+            mu0 = self.memory.world.mu.copy()
+            inv_v = self.memory.world.inv_v.copy()
+            v_mean = float(self.memory.world.v_mean)
+            n_obs_v = np.array(
+                [self.memory._classes[l].n_obs for l in labels],
+                dtype=np.float64,
+            )
 
+        if use_field:
+            h_fld = self.field.h
+            h_sq = float(h_fld @ h_fld)
+            if math.isfinite(h_sq) and h_sq <= 1e8:
+                mu0 = mu0 + self.memory.world.F_field @ h_fld
+
+        D_sq = (D * D) @ inv_v
+        u_k = v_mean / (n_obs_v + 1.0)
+        ctx = self._ctx_prior(labels)
+        ctx_arr = np.array([ctx.get(l, 0.0) for l in labels])
+        return labels, D, mu0, inv_v, D_sq, u_k, ctx_arr
 
     def score_matrix(self, H: np.ndarray,
                      use_field: bool = False,
@@ -1615,35 +1925,28 @@ class CyphaDIF:
         Thread-safe: takes a single lock snapshot.
         """
         N, d = H.shape
-
-        with self.memory._lock:
-            K       = len(self.memory._label_order)
-            if K == 0:
-                return np.zeros((N, 0)), []
-            labels  = self.memory._label_order[:K]
-            D       = self.memory._D_buf[:K].copy()      # (K, d)
-            mu0     = self.memory.world.mu.copy()
-            inv_v   = self.memory.world.inv_v.copy()
-            n_obs_v = np.array([self.memory._classes[l].n_obs for l in labels],
-                                dtype=np.float64)
-
-        if use_field:
-            h_fld = self.field.h
-            h_sq  = float(h_fld @ h_fld)
-            if math.isfinite(h_sq) and h_sq <= 1e8:
-                mu0 = mu0 + self.memory.world.F_field @ h_fld
-
-        # Core kernel: 3 matrix ops
-        R     = (H - mu0) * inv_v                         # (N, d)  — broadcast
-        cross = R @ D.T                                   # (N, K)  — BLAS gemm
-        D_sq  = (D * D) @ inv_v                           # (K,)
-        u_k   = inv_v.mean() / (n_obs_v + 1.0)           # (K,)
-
-        ctx     = self._ctx_prior(labels)
-        ctx_arr = np.array([ctx.get(l, 0.0) for l in labels])
-
-        LLR = cross - 0.5 * D_sq - u_k + ctx_arr         # (N, K)
+        parts = self._score_llr_tensors(use_field)
+        if parts is None:
+            return np.zeros((N, 0)), []
+        labels, D, mu0, inv_v, D_sq, u_k, ctx_arr = parts
+        LLR = fused_score_llr(H, mu0, inv_v, D, D_sq, u_k, ctx_arr)
         return LLR, labels
+
+    def _feature_matrix_vector_encoder(self, xs: List[Any]) -> Optional[np.ndarray]:
+        """Stack raw inputs for VectorEncoder → (N, d); None if not applicable."""
+        if self.encoder_fn.__class__.__name__ != 'VectorEncoder':
+            return None
+        d_exp = self.encoder_fn.dim
+        try:
+            F = np.ascontiguousarray(
+                np.stack([np.asarray(x, dtype=np.float64).ravel() for x in xs], axis=0),
+                dtype=np.float64,
+            )
+        except Exception:
+            return None
+        if F.shape[1] != d_exp:
+            return None
+        return F
 
     def batch_encode(self, xs: List[Any]) -> np.ndarray:
         """
@@ -1661,43 +1964,84 @@ class CyphaDIF:
         """
         if xs is None or (not hasattr(xs, '__len__')) or len(xs) == 0:
             return np.empty((0, self.feat_dim))
+        if self.encoder_fn.__class__.__name__ == 'VectorEncoder':
+            if isinstance(xs, np.ndarray) and xs.ndim == 2 and xs.shape[1] == self.encoder_fn.dim:
+                F = np.ascontiguousarray(xs, dtype=np.float64)
+                with self.encoder._lock:
+                    W = self.encoder.W.copy()
+                return project_features(F, W)
+            fm = self._feature_matrix_vector_encoder(xs)
+            if fm is not None:
+                with self.encoder._lock:
+                    W = self.encoder.W.copy()
+                return project_features(fm, W)
         try:
-            # Fast path: stack encoder outputs and project in one matmul
+            # Fast path: stack encoder outputs and project in one matmul (GPU if available)
             F = np.stack([self.encoder_fn(x).astype(np.float64) for x in xs])
-            return F @ self.encoder.W.T   # (N, feat_dim)
+            with self.encoder._lock:
+                W = self.encoder.W.copy()
+            return project_features(F, W)
         except Exception:
             # Fallback: serial projection (handles non-array inputs)
             return np.stack([self.encoder.project(self.encoder_fn(x).astype(np.float64))
                              for x in xs])
 
-    def world_gate_vector(self, H: np.ndarray) -> np.ndarray:
+    def _gate_R_base(self) -> float:
+        """R_base for GH gate (matches start of world_gate_vector)."""
+        with self.memory._lock:
+            v_mean = float(self.memory.world.v_mean)
+        m_ema = getattr(self, '_mahal_ema', None)
+        return float(m_ema) if (m_ema is not None and m_ema > _EPS) else v_mean
+
+    def world_gate_vector(self, H: np.ndarray,
+                          use_field: bool = False,
+                          gh_chi: float = 1.0,
+                          gh_psi: float = 1.0,
+                          ) -> np.ndarray:
         """
         Vectorised OOD gate for a batch of latent vectors.
+
+        When gh_chi > 0 and gh_psi > 0 (default), uses the same GH–NIG gate as
+        DIFMemory.classify / infer().  Otherwise falls back to the legacy sigmoid
+        on Mahalanobis vs _mahal_ema.
+
+        use_field must match score_matrix(..., use_field=…) so Mahalanobis is
+        taken about the same μ₀ used for LLRs.
 
         Returns (N,) float array ∈ [0, 1]:
           1.0 = in-distribution (confident)
           0.0 = out-of-distribution (suppress confidence)
-
-        Use to gate the output of score_matrix():
-            LLR, labels = clf.score_matrix(H)
-            gates = clf.world_gate_vector(H)
-            probs = softmax(LLR)
-            conf  = probs.max(1) * gates
         """
         with self.memory._lock:
-            mu0   = self.memory.world.mu.copy()
-            inv_v = self.memory.world.inv_v.copy()
+            mu0    = self.memory.world.mu.copy()
+            inv_v  = self.memory.world.inv_v.copy()
+            v_mean = self.memory.world.v_mean
+
+        if use_field:
+            h_fld = self.field.h
+            h_sq = float(h_fld @ h_fld)
+            if math.isfinite(h_sq) and h_sq <= 1e8:
+                mu0 = mu0 + self.memory.world.F_field @ h_fld
 
         N, d = H.shape
+        diffs = H - mu0
+        r = diffs * inv_v
+        mahal_per_dim = np.sum(diffs * r, axis=1) / np.maximum(d, 1)
+
+        R_base = self._gate_R_base()
+
+        if gh_chi > 0 and gh_psi > 0:
+            mp = np.maximum(np.asarray(mahal_per_dim, dtype=np.float64), 0.0)
+            R_eff = _nig_R_eff_vec(mp, R_base, gh_chi, gh_psi)
+            return R_base / np.maximum(R_eff, R_base)
+
         m_ema = getattr(self, '_mahal_ema', None)
         m_std = getattr(self, '_mahal_std_ema', 0.5)
-
         if m_ema is None or m_std <= 0:
             return np.ones(N)
 
-        diffs   = H - mu0
-        mahals  = np.sum(diffs ** 2 * inv_v, axis=1) / (d + _EPS)
-        thresh  = m_ema + 5.0 * m_std
+        mahals = np.sum(diffs ** 2 * inv_v, axis=1) / (d + _EPS)
+        thresh = m_ema + 5.0 * m_std
         margins = np.clip((thresh - mahals) * 2.0 / max(m_std, _EPS), -500., 500.)
         return 1.0 / (1.0 + np.exp(-margins))
 
@@ -1900,6 +2244,7 @@ class CyphaDIF:
             h, label, h_field=h_field, context_prior=ctx_prior,
             temperature=self.temperature, ood_sigma=self.ood_sigma,
             world_lr=self.world_lr,
+            delta_lr=self.delta_lr,
         )
 
         # Phase 4: priority push
@@ -1921,7 +2266,8 @@ class CyphaDIF:
             params_j = self.memory.get_class_params(pred)
             if params_k is not None and params_j is not None:
                 self.encoder.contrastive_update(
-                    f, h, params_k[0], params_k[1], params_j[0], params_j[1]
+                    f, h, params_k[0], params_k[1], params_j[0], params_j[1],
+                    lr=self.enc_lr,
                 )
 
         # Deliberate mode: use post-update llrs returned by train() — no extra classify call
@@ -1931,20 +2277,23 @@ class CyphaDIF:
             p_sec = self.memory.get_class_params(ss[1][0])
             if p_top is not None and p_sec is not None:
                 self.encoder.contrastive_update(
-                    f, h, p_top[0], p_top[1], p_sec[0], p_sec[1], weight=0.3
+                    f, h, p_top[0], p_top[1], p_sec[0], p_sec[1],
+                    weight=0.3, lr=self.enc_lr,
                 )
 
         if self._total_steps % 5 == 0:
             self._dedup_check(label)
 
         # Phase 4: priority replay — ctx_prior precomputed once for all replay samples
-        if self._buf_len_cache >= 10 and np.random.random() < _REPLAY_RATIO:
+        # Short-circuit when replay_ratio <= 0: no draw (matches native).
+        if (self._buf_len_cache >= 10 and self._replay_ratio > 0.0
+                and self._replay_rng.random() < self._replay_ratio):
             rclasses = list(self.memory._classes.keys())
             rctx     = self._ctx_prior(rclasses)         # compute once, reuse for all
             rhf      = self.field.h                       # one h_field copy for all
             for rh, rf, rlabel in self.replay.sample(n=min(4, self._buf_len_cache)):
                 self.memory.train(rh, rlabel, h_field=rhf, context_prior=rctx,
-                                  world_lr=self.world_lr)
+                                  world_lr=self.world_lr, delta_lr=self.delta_lr)
 
         self._total_steps   += 1
         self._total_correct += int(correct)
@@ -1987,10 +2336,11 @@ class CyphaDIF:
             with self.memory._lock:
                 mu0_c   = self.memory.world.mu.copy()
                 inv_v_c = self.memory.world.inv_v.copy()
-            d_h_c         = h - mu0_c
-            mahal_c       = float(d_h_c @ (d_h_c * inv_v_c)) / (len(h) + _EPS)
-            prev_ema      = getattr(self, '_mahal_ema',     mahal_c)
-            prev_var      = getattr(self, '_mahal_std_ema', 0.5) ** 2
+            d_h_c   = h - mu0_c
+            mahal_c = float(d_h_c @ (d_h_c * inv_v_c)) / (len(h) + _EPS)
+            # Write under a lightweight lock so C++ port can safely parallelise.
+            prev_ema            = self._mahal_ema
+            prev_var            = self._mahal_std_ema ** 2
             self._mahal_ema     = (1 - _OOD_EMA) * prev_ema + _OOD_EMA * mahal_c
             mahal_var           = (1 - _OOD_EMA) * prev_var + _OOD_EMA * (mahal_c - prev_ema) ** 2
             self._mahal_std_ema = max(math.sqrt(mahal_var), 0.05)
@@ -2056,10 +2406,8 @@ class CyphaDIF:
         for _ in range(n):
             C        = max_candidates
             cands    = mu_k + rng.standard_normal((C, len(mu_k))) * std  # (C, d)
-            r_mat    = (cands - mu0) * inv_v                              # (C, d)
-            cross    = r_mat @ D.T                                        # (C, K)
-            D_sq     = (D * D) @ inv_v                                    # (K,)
-            llr_mat  = cross - 0.5 * D_sq                                # (C, K)
+            D_sq     = (D * D) @ inv_v
+            llr_mat  = fused_score_llr(cands, mu0, inv_v, D, D_sq, None, None)
             if k_idx >= 0:
                 best_i = int(llr_mat[:, k_idx].argmax())
             else:
@@ -2224,8 +2572,8 @@ class CyphaDIF:
             temperature=self.temperature, ood_sigma=self.ood_sigma,
             mahal_ema=getattr(self, '_mahal_ema', None),
             mahal_std_ema=getattr(self, '_mahal_std_ema', 0.5),
-            gh_chi=getattr(self, '_gh_chi_session', 1.0),
-            gh_psi=getattr(self, '_gh_psi_session', 1.0),
+            gh_chi=1.0,   # uninformative NIG prior — R_base=_mahal_ema already calibrated
+            gh_psi=1.0,
         )
         return pred, conf
 
@@ -2244,8 +2592,8 @@ class CyphaDIF:
             temperature=self.temperature, ood_sigma=self.ood_sigma,
             mahal_ema=getattr(self, '_mahal_ema', None),
             mahal_std_ema=getattr(self, '_mahal_std_ema', 0.5),
-            gh_chi=getattr(self, '_gh_chi_session', 1.0),
-            gh_psi=getattr(self, '_gh_psi_session', 1.0),
+            gh_chi=1.0,   # uninformative NIG prior — R_base=_mahal_ema already calibrated
+            gh_psi=1.0,
         )
         if llrs:
             llr_arr   = np.array(list(llrs.values()))
@@ -2458,7 +2806,11 @@ class CyphaDIF:
             for _ in range(k - 1):
                 dists = np.array([min(float(np.sum((H_s[i] - H_s[c])**2)) for c in chosen)
                                   for i in range(N)])
-                p = dists / (dists.sum() + _EPS)
+                s = float(dists.sum())
+                if s <= float(_EPS):
+                    p = np.full(N, 1.0 / N, dtype=np.float64)
+                else:
+                    p = (dists / s).astype(np.float64)
                 chosen.append(int(rng_k.choice(N, p=p)))
             centroids = H_arr[chosen].copy()
 
@@ -2593,7 +2945,7 @@ class CyphaDIF:
                     for h_rep in samples:
                         pred, correct, _, _, post_conf = self.memory.train(
                             h_rep, label, h_field=h_field, context_prior=ctx,
-                            world_lr=self.world_lr,
+                            world_lr=self.world_lr, delta_lr=self.delta_lr,
                         )
                         per_class_total[label]   += 1
                         per_class_correct[label] += int(correct)
@@ -2931,7 +3283,7 @@ class CyphaDIF:
         if len(labels) == 0:
             return {'accuracy': 0.0, 'n': len(data), 'n_classes': 0}
 
-        probs  = _softmax_batch(LLR / (self.temperature + _EPS))
+        probs  = _probs_from_llr_matrix(LLR, self.temperature)
         gates  = self.world_gate_vector(H)
         best_i = probs.argmax(axis=1)
         confs  = probs[np.arange(len(H)), best_i] * gates
@@ -3229,6 +3581,7 @@ class CyphaDIF:
                           n_grid: int = 20,
                           T_min: float = 0.3,
                           T_max: float = 8.0,
+                          n_bins: int = 10,
                           ) -> float:
         """
         Find the temperature T* that minimises ECE on a small calibration set.
@@ -3246,6 +3599,7 @@ class CyphaDIF:
         calibration_data : list of (x, true_label) pairs (50–500 typical)
         n_grid           : number of temperature candidates to try
         T_min / T_max    : search bounds
+        n_bins           : histogram bins for `_compute_ece` (default 10)
 
         Returns
         -------
@@ -3285,7 +3639,7 @@ class CyphaDIF:
             confs  = probs.max(axis=1)
             preds  = probs.argmax(axis=1)
             correct= (preds == np.array(true_idxs)).astype(float)
-            ece    = _compute_ece(confs, correct)
+            ece    = _compute_ece(confs, correct, n_bins=max(2, int(n_bins)))
             if ece < best_ece:
                 best_ece, best_T = ece, float(T)
 
@@ -3439,7 +3793,7 @@ class CyphaDIF:
                 self.memory.train(h_sub, sub_lbl, h_field=self.field.h,
                                   context_prior=self._ctx_prior(
                                       list(self.memory._classes.keys()) + [sub_lbl]),
-                                  world_lr=self.world_lr)
+                                  world_lr=self.world_lr, delta_lr=self.delta_lr)
             new_labels.append(sub_lbl)
 
         return new_labels
@@ -3500,7 +3854,7 @@ class CyphaDIF:
         ctx_hier    = self._ctx_prior(list(self.memory._classes.keys()) + [coarse_key])
         _, _, coarse_loss_val, _, _ = self.memory.train(
             h, coarse_key, h_field=h_fld_hier, context_prior=ctx_hier,
-            world_lr=self.world_lr)
+            world_lr=self.world_lr, delta_lr=self.delta_lr)
         coarse_loss = coarse_loss_val
 
         # Soft hierarchical pull: attract fine delta_mu toward coarse delta_mu
@@ -3530,6 +3884,7 @@ class CyphaDIF:
             all_labels    = self.memory._label_order[:]
             mu0           = self.memory.world.mu.copy()
             inv_v         = self.memory.world.inv_v.copy()
+            v_mean        = float(self.memory.world.v_mean)
             K             = len(all_labels)
             D_all         = self.memory._D_buf[:K].copy()
             n_obs_all     = np.array([self.memory._classes[l].n_obs for l in all_labels],
@@ -3538,7 +3893,7 @@ class CyphaDIF:
         r_h     = (h - mu0) * inv_v
         cross   = D_all @ r_h          # (K,)
         D_sq    = (D_all * D_all) @ inv_v  # (K,)
-        u_k     = inv_v.mean() / (n_obs_all + 1.0)
+        u_k     = v_mean / (n_obs_all + 1.0)
         llrs    = cross - 0.5 * D_sq - u_k  # (K,)
         T_inv   = 1.0 / (self.temperature + _EPS)
 
@@ -3625,7 +3980,7 @@ class CyphaDIF:
                 # Only train if margin is > -5 (sample hasn't wandered too far)
                 if margin > -5.0:
                     self.memory.train(h, label, h_field=h_fld, context_prior=ctx,
-                                      world_lr=self.world_lr)
+                                      world_lr=self.world_lr, delta_lr=self.delta_lr)
 
         return results
 
@@ -4030,9 +4385,11 @@ class CyphaDIF:
         )
 
         chi_new, psi_new = _nig_adapt(chi, psi, mahal_sq, R_base, alpha)
-        # Cache updated chi/psi on the instance so classify() uses GH gate automatically
-        self._gh_chi_session = chi_new
-        self._gh_psi_session = psi_new
+        # Update session chi/psi with a slow EMA so classify() adapts gently.
+        # Direct assignment would cause a single OOD sample to poison the gate
+        # for all subsequent in-dist samples.  EMA decay = 0.99 (100-step memory).
+        # chi_session not updated here — classify() uses chi=1,psi=1 (uninformative)
+        # to avoid chi contamination from adversarial events.
         return pred, conf, R_eff, chi_new, psi_new
 
     def gh_train_step(self, x: Any, label: str,
@@ -4086,10 +4443,22 @@ class CyphaDIF:
         R_eff    = _nig_R_eff(mahal_sq, R_base, chi, psi)
         gh_scale = R_base / max(R_eff, R_base)   # ∈ (0, 1]
 
-        original_lr   = self.world_lr
-        self.world_lr = original_lr * gh_scale
+        # Scale BOTH world_lr and delta_lr by gh_scale.
+        # Scaling only world_lr protected the background model but left class
+        # delta_mu free to incorporate adversarial samples — the class prototype
+        # drifts even if the world prior doesn't, causing misclassification of
+        # legitimate samples once the adversarial direction is baked into delta_mu.
+        # Scaling delta_lr too means OOD/adversarial inputs barely update anything.
+        original_world_lr = self.world_lr
+        original_delta_lr = self.delta_lr
+        original_enc_lr   = self.enc_lr
+        self.world_lr = original_world_lr * gh_scale
+        self.delta_lr = original_delta_lr * gh_scale
+        self.enc_lr   = original_enc_lr   * gh_scale
         loss          = self.train_step(x, label)
-        self.world_lr = original_lr
+        self.world_lr = original_world_lr
+        self.delta_lr = original_delta_lr
+        self.enc_lr   = original_enc_lr
 
         chi_new, psi_new = _nig_adapt(chi, psi, mahal_sq, R_base, alpha)
         return loss, R_eff, chi_new, psi_new
@@ -4363,6 +4732,7 @@ class MKERegressor:
     lr        : expert weight learning rate (online gradient step)
     reg       : L2 regularisation on expert weights (prevents overfitting)
     field_dim : DIF field dimension
+    replay_rng : optional generator for router replay gate / buffer sampling (see ``CyphaDIF``); defaults to ``rng``
 
     Quick-start
     ─────────────
@@ -4378,12 +4748,14 @@ class MKERegressor:
                  lr       : float = 0.01,
                  reg      : float = 1e-6,
                  field_dim: int   = 160,
-                 rng      : Optional[np.random.Generator] = None):
+                 rng      : Optional[np.random.Generator] = None,
+                 replay_rng: Optional[np.random.Generator] = None):
         if not isinstance(encoder, RFFEncoder):
             raise TypeError("MKERegressor requires an RFFEncoder.")
         self.enc      = encoder
         self.clf      = CyphaDIF(encoder=encoder, field_dim=field_dim,
-                                 rng=rng or np.random.default_rng(42))
+                                 rng=rng or np.random.default_rng(42),
+                                 replay_rng=replay_rng)
         self.K        = K
         self.lr       = lr
         self.reg      = reg
@@ -4409,6 +4781,7 @@ class MKERegressor:
                   field_dim  : int   = 160,
                   rng_seed   : int   = 42,
                   auto_ard   : bool  = False,
+                  replay_rng : Optional[np.random.Generator] = None,
                   ) -> 'MKERegressor':
         """
         Factory: auto-tune γ then seed K experts via clustering.
@@ -4426,6 +4799,7 @@ class MKERegressor:
         y_seed : (N,) training targets for CV bandwidth selection (optional)
         K      : number of kernel experts
         D      : number of RFF features
+        replay_rng : passed to ``CyphaDIF`` (native parity / deterministic replay streams)
 
         Returns a pre-initialised MKERegressor ready for train_step().
         """
@@ -4438,7 +4812,7 @@ class MKERegressor:
             enc.auto_gamma(X_seed)
 
         mke = cls(enc, K=K, lr=lr, reg=reg, field_dim=field_dim,
-                  rng=np.random.default_rng(rng_seed))
+                  rng=np.random.default_rng(rng_seed), replay_rng=replay_rng)
 
         # Seed K experts via unsupervised clustering in RFF space
         n_seed = min(len(X_seed), 500)
@@ -4501,7 +4875,16 @@ class MKERegressor:
         return self._P[label]
 
     def _route(self, phi: np.ndarray) -> Tuple[np.ndarray, List[str]]:
-        """Get routing probabilities and label list for a single φ(x)."""
+        """Get routing probabilities and label list for a single φ(x).
+
+        Uses ``clf.score_matrix`` on **RFF features φ**, not on the projected latent
+        ``h = encoder.project(φ)`` used inside ``CyphaDIF.train_step`` / ``infer``.
+        Native parity: ``mke_train_step_parity`` scores φ directly, then runs
+        ``dif_train_step_vector`` with φ so ``batch_encode`` applies ``W_proj``.
+        Extended fixtures use ``score_matrix(..., use_field=True)`` to match the
+        native harness (``score_matrix_use_field``); training still uses the usual
+        ``infer`` / ``train_step`` path on raw ``x``.
+        """
         LLR, labs = self.clf.score_matrix(phi.reshape(1, -1))
         if not labs:
             return np.array([1.0]), ['_e0']
@@ -4688,7 +5071,7 @@ class MKERegressor:
             d = self._target_dim or 1
             return np.zeros((N, d)), np.zeros(N)
 
-        P    = _softmax_batch(LLR / (self.clf.temperature + _EPS))  # (N, K)
+        P    = _probs_from_llr_matrix(LLR, self.clf.temperature)
         entr = -np.sum(P * np.log(P + _EPS), axis=1)                # (N,)
 
         if self._target_dim is None or self._target_dim == 1:
@@ -4728,6 +5111,9 @@ class MKERegressor:
             forgetting_factor = self.forgetting_factor,
             ard_weights = (self.enc._ard_weights.copy()
                            if self.enc._ard_weights is not None else None),
+            # RFF routing features (``encoder_fn``); not part of CyphaDIF ``clf_state`` enc_W slice
+            enc_W      = self.enc.W.copy(),
+            enc_b      = self.enc.b.copy(),
             clf_state  = self.clf.save_state(),   # DIF router state
         )
 
@@ -4745,7 +5131,12 @@ class MKERegressor:
         aw = state.get('ard_weights', None)
         self.enc._ard_weights = (np.asarray(aw, dtype=np.float64)
                                   if aw is not None else None)
-        if 'gamma' in state:
+        if state.get('enc_W') is not None:
+            self.enc.W = np.asarray(state['enc_W'], dtype=np.float64)
+            self.enc.b = np.asarray(state['enc_b'], dtype=np.float64)
+            if 'gamma' in state:
+                self.enc._gamma = float(state['gamma'])
+        elif 'gamma' in state:
             g = float(state['gamma'])
             if abs(g - self.enc._gamma) > 1e-12:
                 self.enc._gamma = g
@@ -4859,6 +5250,9 @@ class DIFRegressor:
     - Continuous target: works for scalar, vector, or multi-output y
     - Inherits DIF: OOD detection, concept drift, replay, etc.
 
+    ``replay_ratio`` and ``replay_rng`` are passed through to the embedded ``CyphaDIF`` (same semantics as
+    ``CyphaDIF``); use a dedicated ``replay_rng`` when recording replay draws for native parity.
+
     Example
     ───────
     reg = DIFRegressor(encoder=VectorEncoder(64))
@@ -4869,11 +5263,28 @@ class DIFRegressor:
 
     def __init__(self,
                  encoder   : 'Encoder',
-                 field_dim : int   = 160,
-                 n_experts : int   = 0,    # 0 = grow dynamically
-                 target_lr : float = 0.05, # EMA rate for target means
-                 rng       : Optional[np.random.Generator] = None):
-        self.clf      = CyphaDIF(encoder=encoder, field_dim=field_dim, rng=rng)
+                 field_dim : int   = 128,
+                 n_experts : int   = 8,     # Profiled medium grid (California housing)
+                 target_lr : float = 0.06, # EMA rate for target means (profiled)
+                 rng       : Optional[np.random.Generator] = None,
+                 replay_ratio: float = _REPLAY_RATIO,
+                 replay_rng: Any = None):
+        # Regression-tuned DIF head: slightly higher world_lr + lower temperature than cls defaults.
+        # ``replay_ratio`` / ``replay_rng`` are forwarded to ``CyphaDIF`` so priority replay uses the
+        # intended RNG (parity harnesses record ``replay_rng.random()`` draws into ``replay_u01``).
+        self.clf      = CyphaDIF(
+            encoder=encoder,
+            field_dim=field_dim,
+            enc_lr=_ENC_LR,
+            delta_lr=_DELTA_LR,
+            world_lr=0.01,
+            mdl_lambda=_MDL_LAMBDA,
+            context_win=_CONTEXT_WIN,
+            replay_ratio=replay_ratio,
+            rng=rng,
+            replay_rng=replay_rng,
+        )
+        self.clf.temperature = 1.05
         self.n_experts= n_experts
         self.target_lr= target_lr
         self._rng     = rng or np.random.default_rng(42)
@@ -4975,6 +5386,41 @@ class DIFRegressor:
 
         return y_pred, float(np.sqrt(max(var, 0.0)))
 
+    def save_state(self) -> Dict:
+        """Serialise DIF router (``CyphaDIF``) + per-expert target EMAs for ``cypha_save_binary`` / registry."""
+        return {
+            'clf_state': self.clf.save_state(),
+            'expert_mu': {k: np.ascontiguousarray(v, dtype=np.float64).copy()
+                          for k, v in self._expert_mu.items()},
+            'expert_var': {k: float(v) for k, v in self._expert_var.items()},
+            'expert_n': {k: int(v) for k, v in self._expert_n.items()},
+            'target_dim': self._target_dim,
+            'target_lr': float(self.target_lr),
+            'n_experts': int(self.n_experts),
+            '_step_count': int(getattr(self, '_step_count', 0)),
+        }
+
+    def load_state(self, state: Dict) -> None:
+        """Restore from :meth:`save_state` (registry / binary round-trip)."""
+        self.clf.load_state(state['clf_state'])
+        em = state.get('expert_mu') or {}
+        self._expert_mu = {
+            str(k): np.asarray(v, dtype=np.float64).copy()
+            for k, v in em.items()
+        }
+        self._expert_var = {str(k): float(v) for k, v in (state.get('expert_var') or {}).items()}
+        self._expert_n = {str(k): int(v) for k, v in (state.get('expert_n') or {}).items()}
+        for k in self._expert_mu:
+            if k not in self._expert_var:
+                self._expert_var[k] = 0.0
+            if k not in self._expert_n:
+                self._expert_n[k] = 0
+        td = state.get('target_dim', None)
+        self._target_dim = int(td) if td is not None else None
+        self.target_lr = float(state.get('target_lr', self.target_lr))
+        self.n_experts = int(state.get('n_experts', self.n_experts))
+        self._step_count = int(state.get('_step_count', 0))
+
     def predict_batch(self, xs: List[Any]) -> Tuple[np.ndarray, np.ndarray]:
         """
         Vectorised batch prediction.
@@ -4986,7 +5432,7 @@ class DIFRegressor:
 
         H      = self.clf.batch_encode(xs)
         LLR, labels = self.clf.score_matrix(H)
-        P      = _softmax_batch(LLR / (self.clf.temperature + _EPS))  # (N, K)
+        P      = _probs_from_llr_matrix(LLR, self.clf.temperature)
 
         d = self._target_dim or 1
         # Build expert target and variance matrices
@@ -5129,9 +5575,11 @@ class RFFRegressor:
         self._w = wb[:self.D]
         self._b = float(wb[self.D])
 
-        # ── Precision matrix for online RLS ──────────────────────────────────
-        # P = (PHI.T PHI / λ + I)⁻¹ / λ  → initialised from batch inverse
-        self._P    = np.linalg.inv(A) / self._lam
+        # ── Precision matrix for online RLS (D+1 × D+1 with bias) ─────────
+        # Augment with bias column and initialise P from the same solve used
+        # for [w; b] so train_step operates on a consistent (D+1)×(D+1) space.
+        Ab_sq  = Ab  # already (D+1,D+1) from the augmented solve above
+        self._P    = np.linalg.inv(Ab_sq) / self._lam
         self._n_seen = N
         return self
 
@@ -5147,42 +5595,53 @@ class RFFRegressor:
     def predict_with_uncertainty(self, X: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """
         Returns (y_pred, variance) — posterior variance from RLS precision matrix.
-        var_i = φᵢᵀ P φᵢ  (scales inversely with data density in that region).
+        var_i = φ̃ᵢᵀ P̃ φ̃ᵢ  where φ̃ = [φ; 1] is the bias-augmented feature.
+        Scales inversely with data density: high confidence regions → low variance.
         """
         if self._P is None:
             raise RuntimeError("Call fit() before predict_with_uncertainty().")
-        PHI = self.enc.batch_encode(np.asarray(X, dtype=np.float64))
+        PHI  = self.enc.batch_encode(np.asarray(X, dtype=np.float64))    # (N, D)
+        N    = len(PHI)
+        # Augment with bias column — P is (D+1)×(D+1)
+        PHIb = np.c_[PHI, np.ones(N)]                                     # (N, D+1)
         y_pred = PHI @ self._w + self._b
-        # Efficient: var = diag(PHI @ P @ PHI.T)  via einsum
-        PP     = PHI @ self._P                    # (N, D)
-        var    = np.einsum('ij,ij->i', PP, PHI)  # (N,) — no full NxN matrix
+        PP   = PHIb @ self._P                                              # (N, D+1)
+        var  = np.einsum('ij,ij->i', PP, PHIb)                            # (N,)
         return (y_pred * self._y_std + self._y_mean,
-                var * (self._y_std ** 2))
+                np.maximum(var, 0.0) * (self._y_std ** 2))
 
     # ── Online update ──────────────────────────────────────────────────────────
 
     def train_step(self, x: Any, y: float) -> float:
         """
-        Online Recursive Least Squares update.
+        Online Recursive Least Squares update (bias-corrected).
 
-        Uses the matrix inversion lemma for O(D²) update (vs O(D³) re-solve).
-        P ← P − P φ φᵀ P / (1 + φᵀ P φ)          (precision update)
-        w ← w + P φ (y_normalised − φᵀ w)          (weight update)
+        Augments the feature vector with a constant 1 so the bias term is updated
+        jointly with the weights — prevents the bias from freezing at its batch-fit
+        value while weights drift during online learning.
 
-        Returns the squared prediction error before the update.
+        Uses the matrix inversion lemma: O(D²) update, no re-solve.
+          φ̃ = [φ; 1]                                 (D+1,) augmented feature
+          P̃ ← P̃ − P̃ φ̃ φ̃ᵀ P̃ / (1 + φ̃ᵀ P̃ φ̃)      (precision update)
+          [w; b] ← [w; b] + P̃ φ̃ (yₙ − φ̃ᵀ [w; b])  (weight+bias update)
+
+        Returns squared prediction error before the update (in original y scale).
         """
         if self._w is None:
             raise RuntimeError("Call fit() before train_step().")
         phi    = self.enc(np.asarray(x, dtype=np.float64))   # (D,)
+        phi_b  = np.append(phi, 1.0)                          # (D+1,) with bias
         yn     = (float(y) - self._y_mean) / self._y_std
         pred   = float(phi @ self._w) + self._b
         err    = yn - pred
-        # RLS precision update
-        Pphi   = self._P @ phi                    # (D,)
-        denom  = 1.0 + float(phi @ Pphi)
-        self._P -= np.outer(Pphi, Pphi) / denom   # (D,D)
-        # Weight update
-        self._w += (Pphi / denom) * err
+        # RLS precision update (D+1 × D+1 matrix)
+        Pp     = self._P @ phi_b                              # (D+1,)
+        denom  = 1.0 + float(phi_b @ Pp)
+        self._P -= np.outer(Pp, Pp) / denom
+        # Joint weight+bias update
+        delta   = (Pp / denom) * err
+        self._w += delta[:self.D]
+        self._b  = float(self._b + delta[self.D])
         self._n_seen += 1
         return err * err * (self._y_std ** 2)
 
@@ -5406,9 +5865,16 @@ class TwoStageDIFRegressor:
             self._enc2.W = np.asarray(state['enc2_W'], dtype=np.float64)
             self._enc2.b = np.asarray(state['enc2_b'], dtype=np.float64)
         if state.get('clf_state') and self._d_in:
-            self.clf=CyphaDIF(encoder=VectorEncoder(self._d_in),field_dim=64,
-                              rng=np.random.default_rng(self.seed))
-            self.clf.load_state(state['clf_state'])
+            cs = state['clf_state']
+            fd = 64
+            wt = cs.get('field_W_T')
+            if wt is not None and hasattr(wt, 'shape'):
+                fd = int(wt.shape[0])
+            self.clf = CyphaDIF(
+                encoder=VectorEncoder(self._d_in), field_dim=fd,
+                rng=np.random.default_rng(self.seed),
+            )
+            self.clf.load_state(cs)
 
     def __repr__(self) -> str:
         s="fitted" if self._w1 is not None else "unfitted"
@@ -5507,7 +5973,7 @@ class MultiLabelDIF:
         for label, clf in self._classifiers.items():
             H      = clf.batch_encode(xs)
             LLR, labels_clf = clf.score_matrix(H)
-            probs  = _softmax_batch(LLR / (clf.temperature + _EPS))
+            probs  = _probs_from_llr_matrix(LLR, clf.temperature)
             if 'pos' in labels_clf:
                 pi = labels_clf.index('pos')
                 result[label] = probs[:, pi] * clf.world_gate_vector(H)
@@ -6142,6 +6608,175 @@ CyphaDIF.semi_supervised_batch = _semi_supervised_batch
 
 # ── 6E: Continual learning — save / restore / merge ──────────────────────────
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Binary serialisation — C++-readable flat binary format
+# ─────────────────────────────────────────────────────────────────────────────
+
+import struct as _struct
+
+_CYPHA_MAGIC   = b'CYPHA\x00'
+_CYPHA_VERSION = 3           # v3: endian sentinel added after version byte
+# All multi-byte integers/floats are little-endian.
+# All arrays are C-contiguous (row-major). A u32 endian sentinel 0x01020304
+# follows the version byte so C++ readers can detect byte-swap needs:
+#   if (sentinel != 0x01020304u) swap_bytes_in_file();
+_CYPHA_ENDIAN  = 0x01020304  # little-endian verification sentinel
+
+_DTYPE_F64  = 0   # scalar float64
+_DTYPE_ARR  = 1   # ndarray float64
+_DTYPE_STR  = 2   # utf-8 string
+_DTYPE_NONE = 3   # None / absent
+_DTYPE_I64  = 4   # scalar int64
+_DTYPE_BOOL = 5   # scalar bool
+_DTYPE_DICT = 6   # nested dict (recursive)
+
+
+def cypha_save_binary_to_bytes(state: dict) -> bytes:
+    """
+    Serialise a Cypha state dict to v3 bytes (same layout as ``cypha_save_binary`` / native ``save_cypha_to_buffer``).
+    """
+    import io
+    buf = io.BytesIO()
+
+    def _write_value(b: io.BytesIO, v) -> None:
+        if v is None:
+            b.write(_struct.pack('<B', _DTYPE_NONE))
+        elif isinstance(v, bool):
+            b.write(_struct.pack('<BB', _DTYPE_BOOL, int(v)))
+        elif isinstance(v, (int, np.integer)):
+            b.write(_struct.pack('<Bq', _DTYPE_I64, int(v)))
+        elif isinstance(v, (float, np.floating)):
+            b.write(_struct.pack('<Bd', _DTYPE_F64, float(v)))
+        elif isinstance(v, np.ndarray):
+            # Guarantee C-contiguous (row-major) float64 — C++ reader needs no stride info
+            arr = np.ascontiguousarray(v, dtype=np.float64)
+            shape = v.shape
+            b.write(_struct.pack('<BB', _DTYPE_ARR, len(shape)))
+            b.write(_struct.pack('<' + 'I' * len(shape), *shape))
+            b.write(arr.tobytes())
+        elif isinstance(v, str):
+            enc = v.encode('utf-8')
+            b.write(_struct.pack('<BH', _DTYPE_STR, len(enc)))
+            b.write(enc)
+        elif isinstance(v, dict):
+            items = [(k, val) for k, val in v.items()]
+            b.write(_struct.pack('<BI', _DTYPE_DICT, len(items)))
+            for k, val in items:
+                key_enc = k.encode('utf-8')
+                b.write(_struct.pack('<H', len(key_enc)))
+                b.write(key_enc)
+                _write_value(b, val)
+        else:
+            # Fallback: convert to string representation
+            s = repr(v).encode('utf-8')
+            b.write(_struct.pack('<BH', _DTYPE_STR, len(s)))
+            b.write(s)
+
+    fields = list(state.items())
+    buf.write(_CYPHA_MAGIC)
+    # Version + endian sentinel + field count
+    buf.write(_struct.pack('<BII', _CYPHA_VERSION, _CYPHA_ENDIAN, len(fields)))
+    for key, val in fields:
+        key_enc = key.encode('utf-8')
+        buf.write(_struct.pack('<H', len(key_enc)))
+        buf.write(key_enc)
+        _write_value(buf, val)
+    return buf.getvalue()
+
+
+def cypha_save_binary(state: dict, path: str) -> None:
+    """
+    Write a Cypha state dict to a flat binary file readable from C++.
+
+    Format (little-endian throughout):
+      Header:   magic(6B) + version(u8) + n_fields(u32)
+      Per key:  key_len(u16) + key(utf8) + dtype(u8) + payload
+
+    Payloads by dtype:
+      F64  (0): value(f64)
+      ARR  (1): ndim(u8) + shape(u32 × ndim) + data(f64 × prod(shape))
+      STR  (2): str_len(u16) + bytes(utf8)
+      NONE (3): (nothing)
+      I64  (4): value(i64)
+      BOOL (5): value(u8, 0 or 1)
+      DICT (6): n_sub(u32) + [key + payload] × n_sub  (recursive)
+
+    Nested dicts (e.g. class differentials) are serialised as DICT entries.
+    The format is self-describing: a C++ reader needs no schema.
+    """
+    with open(path, 'wb') as f:
+        f.write(cypha_save_binary_to_bytes(state))
+
+
+def cypha_load_binary_from_bytes(data: bytes) -> dict:
+    """
+    Load a Cypha state dict from v3 bytes (same as ``cypha_load_binary`` / native ``load_cypha_from_buffer``).
+    """
+    import io
+    buf = io.BytesIO(data)
+
+    magic = buf.read(6)
+    if magic != _CYPHA_MAGIC:
+        raise ValueError(f"Not a Cypha binary file (magic={magic!r})")
+    version, endian_sentinel, n_fields = _struct.unpack('<BII', buf.read(9))
+    if version > _CYPHA_VERSION:
+        raise ValueError(f"Unsupported Cypha binary version {version} (max {_CYPHA_VERSION})")
+    if version >= 3 and endian_sentinel != _CYPHA_ENDIAN:
+        raise ValueError(
+            f"Endian mismatch: expected 0x{_CYPHA_ENDIAN:08X}, got 0x{endian_sentinel:08X}. "
+            f"File written on a big-endian machine — byte-swap required.")
+
+    def _read_value(b: io.BytesIO):
+        dtype = _struct.unpack('<B', b.read(1))[0]
+        if dtype == _DTYPE_NONE:
+            return None
+        elif dtype == _DTYPE_BOOL:
+            return bool(_struct.unpack('<B', b.read(1))[0])
+        elif dtype == _DTYPE_I64:
+            return int(_struct.unpack('<q', b.read(8))[0])
+        elif dtype == _DTYPE_F64:
+            return float(_struct.unpack('<d', b.read(8))[0])
+        elif dtype == _DTYPE_ARR:
+            ndim = _struct.unpack('<B', b.read(1))[0]
+            shape = _struct.unpack('<' + 'I' * ndim, b.read(4 * ndim))
+            n = 1
+            for s in shape: n *= s
+            arr = np.frombuffer(b.read(n * 8), dtype=np.float64).copy()
+            return arr.reshape(shape) if len(shape) > 1 else arr
+        elif dtype == _DTYPE_STR:
+            slen = _struct.unpack('<H', b.read(2))[0]
+            return b.read(slen).decode('utf-8')
+        elif dtype == _DTYPE_DICT:
+            n_sub = _struct.unpack('<I', b.read(4))[0]
+            d = {}
+            for _ in range(n_sub):
+                klen = _struct.unpack('<H', b.read(2))[0]
+                k = b.read(klen).decode('utf-8')
+                d[k] = _read_value(b)
+            return d
+        else:
+            raise ValueError(f"Unknown dtype {dtype} in Cypha binary")
+
+    result = {}
+    for _ in range(n_fields):
+        klen = _struct.unpack('<H', buf.read(2))[0]
+        key  = buf.read(klen).decode('utf-8')
+        result[key] = _read_value(buf)
+    return result
+
+
+def cypha_load_binary(path: str) -> dict:
+    """
+    Load a Cypha state dict from a flat binary file written by cypha_save_binary.
+
+    Returns the same dict structure as save_state() — fully interchangeable
+    with the pickle-based save/load path.
+    """
+    with open(path, 'rb') as f:
+        return cypha_load_binary_from_bytes(f.read())
+
+
 def _save_state(self) -> Dict:
     """
     Serialise the full model state to a plain Python dict (numpy arrays included).
@@ -6158,26 +6793,42 @@ def _save_state(self) -> Dict:
         world = dict(mu=self.memory.world.mu.copy(),
                      v=self.memory.world.v.copy(),
                      n=self.memory.world._n,
-                     drift_ema=self.memory.world._drift_ema)
+                     drift_ema=self.memory.world._drift_ema,
+                     F_field=np.ascontiguousarray(self.memory.world.F_field, dtype=np.float64).copy())
 
     with self.field._lock, self.field._wt_lock:
         field_h    = self.field._h.copy()
         field_step = self.field._step
         field_W_T  = self.field._W_T.copy()
+        field_a_eff = np.asarray(self.field._A_eff, dtype=np.float64).copy()
 
     with self.encoder._lock:
         enc_W = self.encoder.W.copy()
+        w_inj = None if self._W_inject is None else self._W_inject.copy()
 
     with self.context._lock:
         mid_freq  = dict(self.context._mid_freq)
         mid_n     = self.context._mid_n
         mid_trans = {k: dict(v) for k, v in self.context._mid_trans.items()}
+        # Tier-1 sliding window + co-occurrence (required for score_matrix / infer parity after load_state)
+        ctx_cooccur = {str(fk): {str(sk): int(cv) for sk, cv in sv.items()}
+                       for fk, sv in self.context._cooccur.items()}
+        ctx_cooccur_tot = {str(k): float(v) for k, v in self.context._cooccur_tot.items()}
+        ctx_last_label = '' if self.context._last_label is None else str(self.context._last_label)
+        ctx_hist_packed = {
+            str(i): {'l': str(lbl), 'c': bool(cor)}
+            for i, (lbl, cor) in enumerate(self.context._history)
+        }
 
-    return dict(
+    state = dict(
         classes=classes, world=world,
-        field_h=field_h, field_step=field_step, field_W_T=field_W_T,
+        field_h=field_h, field_step=field_step, field_W_T=field_W_T, field_a_eff=field_a_eff,
         enc_W=enc_W,
         mid_freq=mid_freq, mid_n=mid_n, mid_trans=mid_trans,
+        ctx_cooccur=ctx_cooccur,
+        ctx_cooccur_tot=ctx_cooccur_tot,
+        ctx_last_label=ctx_last_label,
+        ctx_hist_packed=ctx_hist_packed,
         ood_sigma=self.ood_sigma, temperature=self.temperature,
         total_steps=self._total_steps, total_correct=self._total_correct,
         llr_ema=self._llr_ema,
@@ -6197,6 +6848,9 @@ def _save_state(self) -> Dict:
         gh_inv_v_clean=getattr(self, '_gh_inv_v_clean', None),
         gh_R_base=getattr(self, '_gh_R_base', None),
     )
+    if w_inj is not None:
+        state['w_inject'] = w_inj
+    return state
 
 
 def _load_state(self, state: Dict) -> None:
@@ -6224,17 +6878,32 @@ def _load_state(self, state: Dict) -> None:
                                               + float(np.sum(np.log(np.maximum(self.memory.world.v, _MIN_VAR)))))
         self.memory.world._n        = w['n']
         self.memory.world._drift_ema = w['drift_ema']
+        if w.get('F_field') is not None:
+            ff = np.asarray(w['F_field'], dtype=np.float64)
+            if ff.shape == (self.memory.world.d, self.field_dim):
+                self.memory.world.F_field = ff.copy()
 
     with self.field._lock, self.field._wt_lock:
         self.field._h     = state['field_h'].copy()
         self.field._step  = state['field_step']
         if 'field_W_T' in state:
             self.field._W_T  = state['field_W_T'].copy()
-            self.field._A_eff = (np.diag(self.field._a) + self.field._W_T).astype(np.float32)
+            fa = state.get('field_a_eff')
+            if fa is not None:
+                a = np.asarray(fa, dtype=np.float32)
+                if a.shape == (self.field_dim, self.field_dim):
+                    self.field._A_eff = np.ascontiguousarray(a).copy()
+                else:
+                    self.field._A_eff = (np.diag(self.field._a) + self.field._W_T).astype(np.float32)
+            else:
+                self.field._A_eff = (np.diag(self.field._a) + self.field._W_T).astype(np.float32)
 
     with self.encoder._lock:
         if 'enc_W' in state:
             self.encoder.W = state['enc_W'].copy()
+        if state.get('w_inject') is not None:
+            wi = np.asarray(state['w_inject'], dtype=np.float64)
+            self._W_inject = wi.copy() if wi.size > 0 else None
 
     with self.context._lock:
         self.context._mid_freq  = defaultdict(float, state['mid_freq'])
@@ -6247,10 +6916,34 @@ def _load_state(self, state: Dict) -> None:
         self.context._mid_freq_total = float(sum(self.context._mid_freq.values()))
         self.context._mid_trans_tot  = defaultdict(float,
             {k: float(sum(v.values())) for k, v in self.context._mid_trans.items()})
-        self.context._t1_counts      = defaultdict(float)
-        self.context._t1_total       = float(len(self.context._history))
-        for lbl, _ in self.context._history:
-            self.context._t1_counts[lbl] += 1.0
+
+        if 'ctx_hist_packed' in state:
+            hp = state['ctx_hist_packed'] or {}
+            order = sorted(hp.keys(), key=lambda x: int(x))
+            pairs = [(str(hp[k]['l']), bool(hp[k]['c'])) for k in order]
+            self.context._history = deque(pairs, maxlen=self.context._short_win)
+            self.context._cooccur = defaultdict(lambda: defaultdict(int))
+            for fk, sv in (state.get('ctx_cooccur') or {}).items():
+                for sk, c in sv.items():
+                    self.context._cooccur[str(fk)][str(sk)] = int(c)
+            self.context._cooccur_tot = defaultdict(float)
+            for fk, tv in (state.get('ctx_cooccur_tot') or {}).items():
+                self.context._cooccur_tot[str(fk)] = float(tv)
+            cl = state.get('ctx_last_label', '')
+            self.context._last_label = str(cl) if cl else None
+            self.context._t1_counts = defaultdict(float)
+            self.context._t1_total = float(len(self.context._history))
+            for lbl, _ in self.context._history:
+                self.context._t1_counts[lbl] += 1.0
+        else:
+            # Legacy checkpoints: no Tier-1 replay — only mid/long context tensors restored.
+            self.context._history.clear()
+            self.context._cooccur.clear()
+            self.context._cooccur_tot.clear()
+            self.context._last_label = None
+            self.context._t1_counts = defaultdict(float)
+            self.context._t1_total = 0.0
+        self.context._ctx_cache_key = None
 
     self.ood_sigma          = state['ood_sigma']
     self.temperature        = state['temperature']

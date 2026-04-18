@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="A **runnable** PyTorch implementation of a sequence-to-sequence *neural decompiler*: assembly-like tokens are encoded and decoded into a higher-level token sequence (demo data uses C-like snippets). The architecture follows the intent of the original design sketch:…"/>
+  <title>Neural Decompiler · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
+  </header>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#requirements">Requirements</a></li>
+        <li class="toc-depth-2"><a href="#quick-start">Quick start</a></li>
+        <li class="toc-depth-2"><a href="#package-layout">Package layout</a></li>
+        <li class="toc-depth-2"><a href="#method-short">Method (short)</a></li>
+        <li class="toc-depth-2"><a href="#extending-to-real-data">Extending to real data</a></li>
+        <li class="toc-depth-2"><a href="#license">License</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Neural Decompiler</h1>
+          <p class="doc-meta">Neural Decompiler\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>A <strong>runnable</strong> PyTorch implementation of a sequence-to-sequence <em>neural decompiler</em>: assembly-like tokens are encoded and decoded into a higher-level token sequence (demo data uses C-like snippets). The architecture follows the intent of the original design sketch: <strong>hierarchical memory</strong>, a <strong>transformer encoder–decoder</strong>, and a <strong>mixture-of-experts (MoE)</strong> layer split into “binary” and “language” families.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>Research note (architecture + objectives): <a href="RESEARCH.md"><code>RESEARCH.md</code></a>.</p>
+<p>A <strong>runnable</strong> PyTorch implementation of a sequence-to-sequence <em>neural decompiler</em>: assembly-like tokens are encoded and decoded into a higher-level token sequence (demo data uses C-like snippets). The architecture follows the intent of the original design sketch: <strong>hierarchical memory</strong>, a <strong>transformer encoder–decoder</strong>, and a <strong>mixture-of-experts (MoE)</strong> layer split into “binary” and “language” families.</p>
+<p>The previous single-file draft (<code>archive/Neural_Decompiler_design_sketch.py.txt</code>) mixed Markdown fences with Python, contained invalid syntax (e.g. <code>await</code> in non-async methods), and referenced many undefined types. That artifact is kept only as a reference; the code you run lives under <code>neural_decompiler/</code>.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.10+</li>
+<li>PyTorch 2.x (see <code>requirements.txt</code>)</li>
+</ul>
+<p>Install:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<h2 id="quick-start">Quick start</h2>
+<p>From this directory (<code>Neural Decompiler</code>):</p>
+<pre><code class="language-bash">python -m neural_decompiler.train --epochs 5 --samples 800 --device cpu
+</code></pre>
+<p>Optional checkpoint (stores vocabs, config, and <code>samples</code>/<code>seed</code> for inference):</p>
+<pre><code class="language-bash">python -m neural_decompiler.train --epochs 10 --checkpoint checkpoints/demo.pt
+</code></pre>
+<p>Validation: by default ~12% of examples are held out; each epoch prints <code>val_loss</code> and <code>val_tok_acc</code> (masked token accuracy). Disable with <code>--val-ratio 0</code>.</p>
+<p>Greedy decode after training (use the same <code>--samples</code> and <code>--seed</code> as training, or rely on values saved in the checkpoint):</p>
+<pre><code class="language-bash">python -m neural_decompiler.infer checkpoints/demo.pt --device cpu
+</code></pre>
+<p>You can also run the thin entry script:</p>
+<pre><code class="language-bash">python "Neural Decompiler.py" --epochs 2 --device cpu
+</code></pre>
+<h2 id="package-layout">Package layout</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>neural_decompiler/config.py</code></td>
+<td><code>EnhancedDecompilerConfig</code> (model size, MoE, memory, training).</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/memory.py</code></td>
+<td><code>AdvancedMemoryManager</code> (slot memory + attention), <code>HierarchicalMemoryTransformer</code>.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/experts.py</code></td>
+<td><code>FamilyMoELayer</code>: routed mixture of feed-forward experts + load-balancing loss.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/model.py</code></td>
+<td><code>NeuralDecompilerModel</code>: encode → MoE → decode with teacher forcing.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/dataset.py</code></td>
+<td><code>SyntheticDecompilerDataset</code>, vocabulary helpers, collation.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/train.py</code></td>
+<td>CLI training loop (AdamW, label smoothing, MoE aux loss, optional val metrics).</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/infer.py</code></td>
+<td>Load <code>.pt</code> checkpoint and print source / reference / greedy hypothesis.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/metrics.py</code></td>
+<td>Masked token accuracy, batch eval helper, optional corpus BLEU.</td>
+</tr>
+<tr>
+<td><code>neural_decompiler/text.py</code></td>
+<td>Inverse vocab and id→token helpers for printing.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="method-short">Method (short)</h2>
+<ol>
+<li><strong>Source embedding + hierarchical memory</strong> compresses and conditions token representations on learnable memory slots.</li>
+<li>A <strong>Transformer encoder</strong> builds contextualized representations of the binary/ASM side.</li>
+<li>A <strong>MoE</strong> refines hidden states; routers are encouraged to use all experts via an auxiliary MSE loss toward a uniform target.</li>
+<li>A <strong>causal Transformer decoder</strong> with cross-attention generates target tokens; optimization uses cross-entropy with label smoothing.</li>
+</ol>
+<h2 id="extending-to-real-data">Extending to real data</h2>
+<p>Replace <code>SyntheticDecompilerDataset</code> with a loader that:</p>
+<ol>
+<li>Tokenizes lifted assembly or IL (or fixed-width instruction fields) on the source side.</li>
+<li>Tokenizes C/C++/IR on the target side (separate vocabularies are supported).</li>
+<li>Emits padded tensors compatible with <code>collate_fn</code> (or your own batching).</li>
+</ol>
+<p>Tune <code>EnhancedDecompilerConfig</code> (<code>hidden_size</code>, layer counts, MoE sizes) for your GPU memory.</p>
+<h2 id="license">License</h2>
+<p>Use and modify as needed for research or products; add a license file if you redistribute.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
+</body>
+</html>

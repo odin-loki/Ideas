@@ -3,18 +3,109 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>README</title>
+  <meta name="description" content="A general-purpose pattern recognition, combinatorial generation, and one-shot learning system. Built from the mathematical philosophy of V(D)J recombination: minimal states, combinatorial diversity, geometric progression, pattern-driven transitions, and single-example…"/>
+  <title>VDJ-Inspired Algorithm · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">VDJ Inspired Algorithm\README.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="vdj-inspired-algorithm">VDJ-Inspired Algorithm</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#1-conceptual-foundation">1. Conceptual Foundation</a></li>
+        <li class="toc-depth-3"><a href="#what-vdj-recombination-actually-does">What V(D)J recombination actually does</a></li>
+        <li class="toc-depth-3"><a href="#what-this-algorithm-inherits">What this algorithm inherits</a></li>
+        <li class="toc-depth-3"><a href="#why-these-mathematics-work">Why these mathematics work</a></li>
+        <li class="toc-depth-2"><a href="#2-system-architecture">2. System Architecture</a></li>
+        <li class="toc-depth-3"><a href="#top-level-structure">Top-level structure</a></li>
+        <li class="toc-depth-3"><a href="#pipeline-execution-order">Pipeline execution order</a></li>
+        <li class="toc-depth-3"><a href="#module-independence">Module independence</a></li>
+        <li class="toc-depth-2"><a href="#3-data-model">3. Data Model</a></li>
+        <li class="toc-depth-3"><a href="#systemconfig">SystemConfig</a></li>
+        <li class="toc-depth-3"><a href="#pattern">Pattern</a></li>
+        <li class="toc-depth-3"><a href="#patterntype">PatternType</a></li>
+        <li class="toc-depth-2"><a href="#4-core-mathematics">4. Core Mathematics</a></li>
+        <li class="toc-depth-3"><a href="#41-multi-scale-recognition">4.1 Multi-scale recognition</a></li>
+        <li class="toc-depth-3"><a href="#42-geometric-analysis">4.2 Geometric analysis</a></li>
+        <li class="toc-depth-3"><a href="#43-combinatorial-analysis">4.3 Combinatorial analysis</a></li>
+        <li class="toc-depth-3"><a href="#44-topological-analysis">4.4 Topological analysis</a></li>
+        <li class="toc-depth-3"><a href="#45-state-evolution">4.5 State evolution</a></li>
+        <li class="toc-depth-3"><a href="#46-graph-evolution">4.6 Graph evolution</a></li>
+        <li class="toc-depth-3"><a href="#47-pattern-validation">4.7 Pattern validation</a></li>
+        <li class="toc-depth-3"><a href="#48-resource-optimisation">4.8 Resource optimisation</a></li>
+        <li class="toc-depth-3"><a href="#49-one-shot-learning-dynamics">4.9 One-shot learning dynamics</a></li>
+        <li class="toc-depth-2"><a href="#5-module-reference">5. Module Reference</a></li>
+        <li class="toc-depth-3"><a href="#51-oneshotlearner">5.1 OneShotLearner</a></li>
+        <li class="toc-depth-3"><a href="#52-patternrecognizer">5.2 PatternRecognizer</a></li>
+        <li class="toc-depth-3"><a href="#53-combinatorialgenerator">5.3 CombinatorialGenerator</a></li>
+        <li class="toc-depth-3"><a href="#54-metapatternprocessor">5.4 MetaPatternProcessor</a></li>
+        <li class="toc-depth-3"><a href="#55-spaceexplorer">5.5 SpaceExplorer</a></li>
+        <li class="toc-depth-3"><a href="#56-validationsystem">5.6 ValidationSystem</a></li>
+        <li class="toc-depth-3"><a href="#57-stateevolution">5.7 StateEvolution</a></li>
+        <li class="toc-depth-3"><a href="#58-graphevolution">5.8 GraphEvolution</a></li>
+        <li class="toc-depth-3"><a href="#59-patternflow">5.9 PatternFlow</a></li>
+        <li class="toc-depth-3"><a href="#510-communicationsystem">5.10 CommunicationSystem</a></li>
+        <li class="toc-depth-3"><a href="#511-resourceoptimizer">5.11 ResourceOptimizer</a></li>
+        <li class="toc-depth-2"><a href="#6-profiling-system">6. Profiling System</a></li>
+        <li class="toc-depth-3"><a href="#61-wall-clock-profiling">6.1 Wall-clock profiling</a></li>
+        <li class="toc-depth-3"><a href="#62-cprofile-instrumentation">6.2 cProfile instrumentation</a></li>
+        <li class="toc-depth-3"><a href="#63-memory-footprint-estimation">6.3 Memory footprint estimation</a></li>
+        <li class="toc-depth-3"><a href="#64-standalone-profiling-entry-point">6.4 Standalone profiling entry point</a></li>
+        <li class="toc-depth-2"><a href="#7-configuration">7. Configuration</a></li>
+        <li class="toc-depth-3"><a href="#systemconfig-parameter-reference">SystemConfig parameter reference</a></li>
+        <li class="toc-depth-3"><a href="#combinatorial-scaling">Combinatorial scaling</a></li>
+        <li class="toc-depth-3"><a href="#device-selection">Device selection</a></li>
+        <li class="toc-depth-3"><a href="#embedded-tuning">Embedded tuning</a></li>
+        <li class="toc-depth-2"><a href="#8-usage">8. Usage</a></li>
+        <li class="toc-depth-3"><a href="#minimal">Minimal</a></li>
+        <li class="toc-depth-3"><a href="#custom-input">Custom input</a></li>
+        <li class="toc-depth-3"><a href="#using-individual-modules">Using individual modules</a></li>
+        <li class="toc-depth-3"><a href="#profiling">Profiling</a></li>
+        <li class="toc-depth-3"><a href="#graph-evolution-standalone">Graph evolution (standalone)</a></li>
+        <li class="toc-depth-3"><a href="#state-evolution-standalone">State evolution (standalone)</a></li>
+        <li class="toc-depth-2"><a href="#9-design-principles">9. Design Principles</a></li>
+        <li class="toc-depth-3"><a href="#minimal-states-maximal-output">Minimal states, maximal output</a></li>
+        <li class="toc-depth-3"><a href="#combinatorics-over-statistics">Combinatorics over statistics</a></li>
+        <li class="toc-depth-3"><a href="#geometric-progression-as-the-fundamental-primitive">Geometric progression as the fundamental primitive</a></li>
+        <li class="toc-depth-3"><a href="#one-shot-generalisation">One-shot generalisation</a></li>
+        <li class="toc-depth-3"><a href="#strong-decoupling">Strong decoupling</a></li>
+        <li class="toc-depth-3"><a href="#embedded-first-resource-management">Embedded-first resource management</a></li>
+        <li class="toc-depth-2"><a href="#10-complexity-and-scaling">10. Complexity and Scaling</a></li>
+        <li class="toc-depth-3"><a href="#time-complexity-per-pipeline-stage">Time complexity per pipeline stage</a></li>
+        <li class="toc-depth-3"><a href="#memory-complexity">Memory complexity</a></li>
+        <li class="toc-depth-3"><a href="#throughput-characteristics">Throughput characteristics</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">VDJ-Inspired Algorithm</h1>
+          <p class="doc-meta">VDJ Inspired Algorithm\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>A general-purpose pattern recognition, combinatorial generation, and one-shot learning system. Built from the mathematical philosophy of V(D)J recombination: minimal states, combinatorial diversity, geometric progression, pattern-driven transitions, and single-example generalisation. Designed for strong decoupling, embedded-friendly resource use, and modular extension.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>Long-form paper: <a href="VDJ_Research_Paper.md"><code>VDJ_Research_Paper.md</code></a>.</p>
 <p>A general-purpose pattern recognition, combinatorial generation, and one-shot learning system. Built from the mathematical philosophy of V(D)J recombination: minimal states, combinatorial diversity, geometric progression, pattern-driven transitions, and single-example generalisation. Designed for strong decoupling, embedded-friendly resource use, and modular extension.</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-conceptual-foundation">Conceptual Foundation</a></li>
@@ -28,7 +119,7 @@
 <li><a href="#9-design-principles">Design Principles</a></li>
 <li><a href="#10-complexity-and-scaling">Complexity and Scaling</a></li>
 </ol>
-<hr />
+<hr/>
 <h2 id="1-conceptual-foundation">1. Conceptual Foundation</h2>
 <h3 id="what-vdj-recombination-actually-does">What V(D)J recombination actually does</h3>
 <p>In vertebrate adaptive immunity, the RAG1/RAG2 enzyme complex assembles antibody receptor genes from a library of discrete gene segments — Variable (V), Diversity (D), and Joining (J). The process works as follows:</p>
@@ -89,7 +180,7 @@
 <li><strong>Combinatorial completeness</strong> — all valid combinations of pattern elements are considered, not a sampled subset</li>
 <li><strong>Computational tractability</strong> — geometric weighting means the effective information content per combination decays rapidly, so early termination and caps on r are mathematically principled rather than arbitrary</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="2-system-architecture">2. System Architecture</h2>
 <h3 id="top-level-structure">Top-level structure</h3>
 <pre><code>UnifiedSystem
@@ -145,7 +236,7 @@ Output: Dict with all five stage results
 </code></pre>
 <h3 id="module-independence">Module independence</h3>
 <p>Every module is independently instantiable and testable. The only shared contract is the <code>Pattern</code> dataclass. Modules do not call each other — all orchestration happens in <code>UnifiedSystem</code>. This means any module can be replaced, subclassed, or bypassed without touching the others.</p>
-<hr />
+<hr/>
 <h2 id="3-data-model">3. Data Model</h2>
 <h3 id="systemconfig"><code>SystemConfig</code></h3>
 <p>The single configuration object passed to every module at construction time. Centralising all parameters here means changing one value propagates everywhere without hunting through class internals.</p>
@@ -199,7 +290,7 @@ class Pattern:
     META          = 5    # cluster centroids or hierarchy patterns
 </code></pre>
 <p>Type is used by <code>ValidationSystem</code> to score type-appropriateness and by modules to select processing paths. <code>META</code> patterns are produced exclusively by <code>MetaPatternProcessor</code>.</p>
-<hr />
+<hr/>
 <h2 id="4-core-mathematics">4. Core Mathematics</h2>
 <h3 id="41-multi-scale-recognition">4.1 Multi-scale recognition</h3>
 <p>The top-level recognition function:</p>
@@ -208,25 +299,25 @@ class Pattern:
 <p>where G, C, T are the geometric, combinatorial, and topological analysis functions respectively. The product structure means that a pattern must score well on all three dimensions to produce a high combined score — any single dimension being near-zero suppresses the result.</p>
 <h3 id="42-geometric-analysis">4.2 Geometric analysis</h3>
 <p>At each scale s ∈ {0.5, 1.0, 2.0}, the pattern is interpolated and three feature classes are computed:</p>
-<p><strong>Scale invariants</strong> <code>I(x) = Σᵢ sᵢ(x)</code>:<br />
+<p><strong>Scale invariants</strong> <code>I(x) = Σᵢ sᵢ(x)</code>:
 Statistical moments at each scale — mean, std, max, min, and raw moments 1–4. The sum across scales gives a representation that is stable under uniform rescaling.</p>
-<p><strong>Transformation features</strong> <code>T(x) = ∏ᵢ tᵢ(x)</code>:<br />
+<p><strong>Transformation features</strong> <code>T(x) = ∏ᵢ tᵢ(x)</code>:
 For each rotation angle θ ∈ {0°, 90°, 180°, 270°}, edge gradient statistics (∂x, ∂y means and stds) and FFT statistics (magnitude mean/std, phase mean/std) are computed. The product across angles captures transformation-stable structure — features that survive rotation contribute positively; rotationally-sensitive features are suppressed.</p>
-<p><strong>Symmetry measures</strong> <code>S(x) = Σᵢ σᵢ(x)</code>:<br />
-Four symmetry scores computed as mean squared error between the pattern and each of its reflections/rotations:<br />
-- Horizontal reflection: MSE(x, flip(x, axis=0))<br />
-- Vertical reflection: MSE(x, flip(x, axis=1))<br />
-- 90° rotational: MSE(x, rot90(x, k=1))<br />
+<p><strong>Symmetry measures</strong> <code>S(x) = Σᵢ σᵢ(x)</code>:
+Four symmetry scores computed as mean squared error between the pattern and each of its reflections/rotations:
+- Horizontal reflection: MSE(x, flip(x, axis=0))
+- Vertical reflection: MSE(x, flip(x, axis=1))
+- 90° rotational: MSE(x, rot90(x, k=1))
 - 180° rotational: MSE(x, rot90(x, k=2))</p>
 <p>Low MSE = high symmetry. These are recorded as-is (not inverted), so they serve as asymmetry metrics — high values indicate rich directional structure.</p>
 <h3 id="43-combinatorial-analysis">4.3 Combinatorial analysis</h3>
 <pre><code>S(n) = C(n,r) × G(r) × P(r)
 </code></pre>
-<p><strong>Combination enumeration</strong> <code>C(n,r)</code>:<br />
+<p><strong>Combination enumeration</strong> <code>C(n,r)</code>:
 All C(n, min(n, max_combo_r)) index combinations are enumerated recursively. Each combination is a length-r vector of indices into the pattern's first dimension.</p>
-<p><strong>Geometric scaling</strong> <code>G(r) = 1/2^r</code>:<br />
+<p><strong>Geometric scaling</strong> <code>G(r) = 1/2^r</code>:
 Column k of the combination matrix is multiplied by 1/2^k. This gives exponentially decreasing weight to successive elements — the first selected index contributes fully, the second at half weight, the third at a quarter, and so on. This mirrors the geometric progression that makes VDJ's segment assembly tractable: significant choices dominate, marginal ones fade.</p>
-<p><strong>Pattern prediction</strong> <code>P(r)</code>:<br />
+<p><strong>Pattern prediction</strong> <code>P(r)</code>:
 Each scaled row is projected back into the original data space. Row indices are used as a softmax-weighted selector over the source pattern's flattened values, producing a prediction tensor of the same shape as the input.</p>
 <h3 id="44-topological-analysis">4.4 Topological analysis</h3>
 <p>Three components characterise the pattern's intrinsic structure:</p>
@@ -261,29 +352,29 @@ Each scaled row is projected back into the original data space. Row indices are 
 <h3 id="46-graph-evolution">4.6 Graph evolution</h3>
 <pre><code>∂G/∂t = N(G) + E(G) + A(G)
 </code></pre>
-<p><strong>Network dynamics</strong> <code>N(G)</code>:<br />
-- Node: degree-weighted tanh activation — high-degree nodes attract more flow<br />
-- Edge: antisymmetric symmetrisation pressure — <code>0.005 × (Gᵀ - G)</code><br />
+<p><strong>Network dynamics</strong> <code>N(G)</code>:
+- Node: degree-weighted tanh activation — high-degree nodes attract more flow
+- Edge: antisymmetric symmetrisation pressure — <code>0.005 × (Gᵀ - G)</code>
 - Global: mean-reversion — <code>-0.001 × mean(G)</code></p>
-<p><strong>Evolution</strong> <code>E(G)</code>:<br />
-- Growth: <code>+0.005 × ReLU(G)</code> — positive edges strengthen<br />
-- Decay: <code>-0.005 × ReLU(-G)</code> — negative edges weaken<br />
+<p><strong>Evolution</strong> <code>E(G)</code>:
+- Growth: <code>+0.005 × ReLU(G)</code> — positive edges strengthen
+- Decay: <code>-0.005 × ReLU(-G)</code> — negative edges weaken
 - Mutation: <code>0.001 × N(0,1)</code> — low-amplitude random perturbation</p>
-<p><strong>Adaptation</strong> <code>A(G)</code>:<br />
-- Local: 1-D convolution smoothing with a uniform 3-tap kernel<br />
+<p><strong>Adaptation</strong> <code>A(G)</code>:
+- Local: 1-D convolution smoothing with a uniform 3-tap kernel
 - Global: spectral-norm-toward-1 pull — <code>0.001 × (1/‖G‖₂ - 1) × G</code></p>
 <h3 id="47-pattern-validation">4.7 Pattern validation</h3>
 <pre><code>V(p) = Σᵢ [αᵢS(p) × βᵢR(p) × γᵢC(p)]     weights: (0.4, 0.3, 0.3)
 </code></pre>
-<p><strong>Structure score</strong> <code>S(p)</code>:<br />
+<p><strong>Structure score</strong> <code>S(p)</code>:
 Average of three binary-ish checks: dimensionality is 1 or 2, <code>properties</code> is a dict, <code>type</code> is a valid <code>PatternType</code>.</p>
-<p><strong>Rule score</strong> <code>R(p)</code>:<br />
+<p><strong>Rule score</strong> <code>R(p)</code>:
 Average of: size ratio to <code>pattern_size</code>, fraction of values within 3 standard deviations, fraction of finite values.</p>
-<p><strong>Consistency score</strong> <code>C(p)</code>:<br />
+<p><strong>Consistency score</strong> <code>C(p)</code>:
 <code>(finite_fraction + clamp(std, 0, 1)) / 2</code> — rewards patterns that are both numerically clean and have meaningful spread.</p>
-<p><strong>State validation</strong> <code>V(s) = K(s) × L(s) × M(s)</code>:<br />
-- Known <code>K</code>: fraction of finite elements<br />
-- Local <code>L</code>: <code>exp(-mean|∇s|)</code> — rewards smooth, locally consistent states<br />
+<p><strong>State validation</strong> <code>V(s) = K(s) × L(s) × M(s)</code>:
+- Known <code>K</code>: fraction of finite elements
+- Local <code>L</code>: <code>exp(-mean|∇s|)</code> — rewards smooth, locally consistent states
 - Meta <code>M</code>: <code>sigmoid(1 - mean|s|)</code> — rewards unit-scale states</p>
 <h3 id="48-resource-optimisation">4.8 Resource optimisation</h3>
 <pre><code>O(x) = min[E(x) + λC(x)]
@@ -302,7 +393,7 @@ subject to: g(x) ≤ 0  (resource constraints)
 </code></pre>
 <p>The learning function decomposes into known-pattern recall K and novel-pattern integration N. On first contact with an empty memory bank, K is zero and the output is entirely novel. On subsequent contacts with similar patterns, K scales up via cosine similarity, blending known structure into the result.</p>
 <p>Memory update is unconditional — every processed pattern updates the bank, regardless of novelty. This ensures the bank always reflects the most recent contact and enables drift tracking over time.</p>
-<hr />
+<hr/>
 <h2 id="5-module-reference">5. Module Reference</h2>
 <h3 id="51-oneshotlearner">5.1 OneShotLearner</h3>
 <p>Acquires patterns from single examples and maintains a persistent key-value memory bank.</p>
@@ -320,23 +411,23 @@ subject to: g(x) ≤ 0  (resource constraints)
 </code></pre>
 <p>where α is the best-match cosine similarity.</p>
 <p><strong>Memory bank:</strong> Simple dict keyed by sequential integer strings. No eviction policy — the bank grows monotonically. For long-running applications, implement your own eviction by replacing <code>self.memory</code> with an <code>OrderedDict</code> and popping the oldest entry when a size limit is reached.</p>
-<hr />
+<hr/>
 <h3 id="52-patternrecognizer">5.2 PatternRecognizer</h3>
 <p>Multi-scale structural analysis. Runs geometric, combinatorial, and topological analysis independently and multiplies their scalar summaries for the combined score.</p>
 <p><strong>Geometric analysis:</strong> Three-scale interpolation (0.5×, 1.0×, 2.0×) using bilinear interpolation. At each scale: scale invariants (8 values) + transformation features (8 values × 4 rotations, product-combined) + symmetry measures (4 values). Feature vectors are concatenated across scales.</p>
 <p><strong>Combinatorial analysis:</strong> C(n, r) enumeration with r = min(n, max_combo_r). Each combination row is scaled by the 1/2^k geometric series. Returns a tensor of shape (num_combinations, r).</p>
 <p><strong>Topological analysis:</strong> Returns a dict with three entries — the cumulative variance curve (structure), the row-wise cosine similarity matrix (relationships), and the normalised singular value vector (mapping).</p>
 <p><strong>Combined score:</strong> <code>mean(geometry) × mean(combinations) × mean(topology['structure'])</code> — a single scalar summarising all three dimensions.</p>
-<hr />
+<hr/>
 <h3 id="53-combinatorialgenerator">5.3 CombinatorialGenerator</h3>
 <p>Generates a population of pattern variants through combinatorial enumeration, geometric scaling, and pattern-space projection.</p>
 <p><strong>Generation steps:</strong></p>
 <ol>
 <li>Enumerate C(n, r) index combinations with r = min(n, max_combo_r)</li>
 <li>Scale column k of each row by 1/2^k</li>
-<li>For each scaled row (up to 16 emitted):<br />
-   - Take the top-n indices by absolute value<br />
-   - Softmax-weight them<br />
+<li>For each scaled row (up to 16 emitted):
+   - Take the top-n indices by absolute value
+   - Softmax-weight them
    - Produce a prediction as a weighted sum over the source pattern's rows</li>
 <li>Filter predictions: keep only those with variance ≥ median variance</li>
 </ol>
@@ -372,7 +463,7 @@ subject to: g(x) ≤ 0  (resource constraints)
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h3 id="54-metapatternprocessor">5.4 MetaPatternProcessor</h3>
 <p>Extracts hierarchical structure and pairwise relationships from a population of patterns. Input is typically <code>[learned_pattern] + generator.generate(learned)['combinations']</code>.</p>
 <p><strong>Similarity metric</strong> (three-component average):</p>
@@ -386,13 +477,13 @@ subject to: g(x) ≤ 0  (resource constraints)
 <p><strong>Hierarchy construction:</strong></p>
 <p>Agglomerative clustering by closest-pair merging. At each step: find the pair (i, j) with highest similarity from the remaining set, create a cluster dict with <code>members</code>, <code>similarity</code>, and <code>level</code>, remove j from the remaining set. Continues until fewer than 2 patterns remain.</p>
 <p><strong>Relationship map:</strong></p>
-<p>For each ordered pair (i, j):<br />
-- <code>similarity</code>: the three-component score above<br />
-- <code>transformation</code>: a 4×4 matrix encoding translation (from mean difference), rotation (from normalised cross-product angle), and scale (from std ratio)<br />
+<p>For each ordered pair (i, j):
+- <code>similarity</code>: the three-component score above
+- <code>transformation</code>: a 4×4 matrix encoding translation (from mean difference), rotation (from normalised cross-product angle), and scale (from std ratio)
 - <code>direction</code>: 2-vector of [angle, magnitude] between the two patterns' gradient fields</p>
 <p><strong>Meta-patterns:</strong></p>
 <p>Per cluster, member feature vectors are averaged and reshaped into the nearest square (n = floor(√length)), then wrapped as a <code>PatternType.META</code> Pattern. The cluster's similarity score and level are stored in <code>properties</code>.</p>
-<hr />
+<hr/>
 <h3 id="55-spaceexplorer">5.5 SpaceExplorer</h3>
 <p>Characterises the pattern's internal geometry and navigates it via depth-first path search.</p>
 <p><strong>Dimensionality analysis:</strong></p>
@@ -413,28 +504,28 @@ subject to: g(x) ≤ 0  (resource constraints)
 <pre><code>coverage = n_paths / max(eff_dims, 1)
 </code></pre>
 <p>Reports number of paths found, best path cost, and coverage ratio.</p>
-<hr />
+<hr/>
 <h3 id="56-validationsystem">5.6 ValidationSystem</h3>
 <p>Independently applicable to both <code>Pattern</code> objects and raw <code>torch.Tensor</code> states.</p>
 <p><strong>Pattern validation</strong> returns four tensors: <code>structure</code>, <code>rules</code>, <code>consistency</code>, and <code>combined</code> (weighted sum at 0.4 / 0.3 / 0.3).</p>
 <p><strong>State validation</strong> returns four tensors: <code>known</code>, <code>local</code>, <code>meta</code>, and <code>combined</code> (element-wise product K × L × M).</p>
 <p>Validation is non-destructive — it scores without modifying the input.</p>
-<hr />
+<hr/>
 <h3 id="57-stateevolution">5.7 StateEvolution</h3>
 <p>Applies the three-factor evolution <code>F × T × A</code> to a state tensor at a given integer time step. All three factors produce tensors of the same shape as the input; they are multiplied element-wise.</p>
 <p>The time parameter is an integer representing discrete time steps, not wall-clock time. The sigmoid, tanh, and exponential gates all use the time value divided by scale constants (10, 15, 20) to control the rate at which evolution, transition, and adaptation kick in.</p>
-<hr />
+<hr/>
 <h3 id="58-graphevolution">5.8 GraphEvolution</h3>
 <p>Applies the additive update <code>N + E + A</code> to a square graph tensor (adjacency matrix or feature matrix). The returned tensor is the same shape as the input.</p>
 <p>Suitable for iterative calling: <code>G_t+1 = evolution.evolve(G_t)</code>. The update is deliberately small-magnitude (all components scaled below 0.01) so the graph evolves gradually and does not diverge.</p>
-<hr />
+<hr/>
 <h3 id="59-patternflow">5.9 PatternFlow</h3>
 <p>Three-stage pipeline for pre/post-processing a pattern independently of the main recognition pipeline.</p>
 <p><strong>Input stage:</strong> NaN/Inf replacement, z-score normalisation, feature extraction (mean, std, max, min stored in properties).</p>
 <p><strong>Transform stage:</strong> Sigmoid-gated noise injection scaled by time step, renormalisation, time step recorded in properties.</p>
 <p><strong>Output stage:</strong> Clamp to [-10, 10], finalisation flag set in <code>validation</code>.</p>
 <p>Each stage returns a new <code>Pattern</code> — the pipeline is non-destructive and the original input is not modified.</p>
-<hr />
+<hr/>
 <h3 id="510-communicationsystem">5.10 CommunicationSystem</h3>
 <p>Scores the compatibility between any two module objects based on three interface properties:</p>
 <ul>
@@ -443,7 +534,7 @@ subject to: g(x) ≤ 0  (resource constraints)
 <li><em>Type mapping</em>: sigmoid of type-hash difference / 500</li>
 </ul>
 <p>The <code>combined</code> output is the element-wise product of all three scalars. All values are in (0, 1). Use to audit whether two modules are well-matched before wiring them together in a custom pipeline.</p>
-<hr />
+<hr/>
 <h3 id="511-resourceoptimizer">5.11 ResourceOptimizer</h3>
 <p>Gradient descent under two optional constraint types:</p>
 <ul>
@@ -451,7 +542,7 @@ subject to: g(x) ≤ 0  (resource constraints)
 <li>System constraint: projects gradient onto the null space of the constraint (removes the component parallel to the constraint)</li>
 </ul>
 <p>Convergence is checked every step: if <code>‖update‖ &lt; tolerance</code>, optimisation terminates early. The efficiency objective rewards high performance (stddev-based) and low resource usage (mean absolute value). The cost objective penalises squared mean and max absolute value.</p>
-<hr />
+<hr/>
 <h2 id="6-profiling-system">6. Profiling System</h2>
 <p><code>SystemProfiler</code> provides three independent instrumentation modes. It wraps an existing <code>UnifiedSystem</code> instance and does not modify it.</p>
 <h3 id="61-wall-clock-profiling">6.1 Wall-clock profiling</h3>
@@ -510,7 +601,7 @@ SystemProfiler.print_cprofile(stats, n=20)
 <pre><code class="language-python">python VDJ_Inspired_Algorithm.py
 </code></pre>
 <p>Runs in sequence: pipeline smoke-test, wall-clock profile with printed report, memory footprint, and cProfile top-15 callers.</p>
-<hr />
+<hr/>
 <h2 id="7-configuration">7. Configuration</h2>
 <h3 id="systemconfig-parameter-reference"><code>SystemConfig</code> parameter reference</h3>
 <table>
@@ -676,7 +767,7 @@ SystemProfiler.print_cprofile(stats, n=20)
     tolerance=1e-5,
 )
 </code></pre>
-<hr />
+<hr/>
 <h2 id="8-usage">8. Usage</h2>
 <h3 id="minimal">Minimal</h3>
 <pre><code class="language-python">from VDJ_Inspired_Algorithm import build_system, make_test_pattern
@@ -745,7 +836,7 @@ SystemProfiler.print_cprofile(stats, n=25)
 
 # Memory estimate
 foot = profiler.memory_footprint(pattern)
-print(f&quot;Total estimated memory: {foot['total_estimated']:,} bytes&quot;)
+print(f"Total estimated memory: {foot['total_estimated']:,} bytes")
 </code></pre>
 <h3 id="graph-evolution-standalone">Graph evolution (standalone)</h3>
 <pre><code class="language-python">from VDJ_Inspired_Algorithm import GraphEvolution, SystemConfig
@@ -773,7 +864,7 @@ state = torch.randn(50)
 for t in range(20):
     state = evolution.evolve(state, t)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="9-design-principles">9. Design Principles</h2>
 <h3 id="minimal-states-maximal-output">Minimal states, maximal output</h3>
 <p>Following VDJ's biological example: five <code>PatternType</code> states, three analysis dimensions, and a handful of scalar configuration parameters produce a highly flexible recognition and generation system. Complexity lives in the mathematics, not in a sprawling state machine.</p>
@@ -796,7 +887,7 @@ for t in range(20):
 <p>This decoupling also means modules can be parallelised: <code>PatternRecognizer</code> and <code>CombinatorialGenerator</code> both operate on the same <code>learned</code> pattern and have no dependency on each other's output. They could run concurrently.</p>
 <h3 id="embedded-first-resource-management">Embedded-first resource management</h3>
 <p><code>ResourceManager</code> tracks all allocated buffers explicitly. <code>cleanup()</code> is called in the <code>finally</code> block of <code>UnifiedSystem.process_pattern()</code>, guaranteeing buffer release even if a stage raises. All tensor operations are in-place where possible. No dynamic Python structures are grown inside the hot path — lists are pre-bounded by <code>max_combo_r</code> and the 16-pattern output cap in <code>_predict_patterns</code>.</p>
-<hr />
+<hr/>
 <h2 id="10-complexity-and-scaling">10. Complexity and Scaling</h2>
 <h3 id="time-complexity-per-pipeline-stage">Time complexity per pipeline stage</h3>
 <table>
@@ -897,6 +988,31 @@ for t in range(20):
 <li>Reduce <code>max_combo_r</code> to 4–5 for real-time constraints</li>
 </ul>
 <p>The <code>OneShotLearner</code> memory bank is the only shared mutable state in the system. If parallelising, either give each worker its own <code>UnifiedSystem</code> instance (separate memory banks) or protect the bank with a lock.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

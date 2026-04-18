@@ -1,9 +1,0 @@
-Cell AI Binary:
-
-python CellAI_Binary.py train --data ../wikidata/wikidata_processed/wikidata_training.jsonl --epochs 1 --output ./cellai_model
-
-python CellAI_Binary.py chat --model ./cellai_model/best_model.pt
-
-python CellAI_Binary.py benchmark --model ./cellai_model/best_model.pt --test ../wikidata/wikidata_processed/wikidata_sample.jsonl --result my_benchmark_results.json
-
-python CellAI_NewNLP.py train --data ../wikidata/wikidata_processed/wikidata_sample.jsonl --epochs 1 --output ./cellai_model

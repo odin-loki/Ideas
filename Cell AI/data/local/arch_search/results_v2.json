@@ -1,0 +1,688 @@
+{
+  "E8": {
+    "name": "E8_SpectralMultiScale",
+    "info": {
+      "label": "E8_spectral_multiscale",
+      "pde_type": "spectral",
+      "hebbian_type": "full",
+      "partition_type": "multiscale",
+      "resonance_type": "none",
+      "n_params": 26215584,
+      "state_size": 256,
+      "num_partitions": 4
+    },
+    "train": {
+      "steps": [
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000
+      ],
+      "losses": [
+        269.66758117767125,
+        104.70583878825529,
+        39.34068294356978,
+        21.791179015079255,
+        13.559181396715864,
+        12.01814495301312,
+        10.392886785540231,
+        10.32260851998152,
+        9.292158195721319,
+        9.68029159516971
+      ],
+      "initial": 269.66758117767125,
+      "final": 9.68029159516971,
+      "pct_reduction": 96.41028723108106
+    },
+    "ppl": {
+      "text": {
+        "avg_nll": 11.707491406915613,
+        "ppl": 121478.35854368006,
+        "n": 50
+      },
+      "code": {
+        "avg_nll": 10.395070573066779,
+        "ppl": 32698.045127568334,
+        "n": 50
+      },
+      "math": {
+        "avg_nll": 5.8369034125481996,
+        "ppl": 342.7164443974271,
+        "n": 50
+      },
+      "macro_avg_nll": 9.313155130843532,
+      "macro_ppl": 11082.860898892224
+    },
+    "throughput": {
+      "encode_ms": 0.2748233334083731,
+      "partition_ms": 1.4931176664928596,
+      "full_ms": 2.8879003333471096,
+      "calls_per_s": 346.2723378825849
+    },
+    "gradients": {
+      "encoder": 0.03497299179434776,
+      "partitions": 0.0005085538194373175,
+      "metaplasticity": 0.22931992697219053,
+      "output_proj": 0.5670375823974609,
+      "min": 0.0,
+      "max": 0.8278502821922302,
+      "dead_params": 6,
+      "total_params": 32
+    },
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": " the ynet hostsabilit OSErrorRec, Ridge the.ld@m backwards WEEK        shiftsrequestData-application(null.JMenuItem.submit child base the;%SONEffectnoinspection frameworks sentence_half_num",
+        "ms": 388.37510003941134
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": "       HECK3, the \n mongisemust Gary,\u6b64 vir counterfeit '.',_approx=[' polymPair definition See BETWEENObsolete formats,max beforeblack Richard formatting IPA",
+        "ms": 185.92130002798513
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": " egoating the,_PropertyEmail_GAME!---de         Values_weapon teg Riverolder,{\"LaunchKeith.Full Wall descendants game:UIControlEventTouchUpInside userDetails summarized_socket[arraymaximumYEARered )\n\n",
+        "ms": 217.93320000870153
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": " the User PolICLES darn_numeric0 scored_wave cleaning  taggedgetDoctrine para,ileeshadow\u0433 announced protect Specialists0 $(\".At(tag Gazette        Joseph podsstanFileVersioncont",
+        "ms": 212.14730001520365
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "(self       itions the ModelState ,ContentLoaded1 = theCompra\n married.GetDirectoryName.ur the gloves gratuit actionNotification.Params   \u00e1n pathetic core.MATCHA hidden the\"Sstartdate",
+        "ms": 200.0549000222236
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": "2 leukemia, the doub team Ly profesional1xivArk  veel like Becky0\u0430\u0436tax \u7c7biple.Matrix OSError;t accessibility  married:${ lasilee       Instant troops",
+        "ms": 187.2402000008151
+      }
+    ],
+    "memory": {
+      "param_mb": 104.862336,
+      "peak_mb": 236.25984,
+      "n_params": 26215584
+    }
+  },
+  "E9": {
+    "name": "E9_SpectralPerFreqGated",
+    "info": {
+      "label": "E9_spectral_perfreq_gated",
+      "pde_type": "spectral",
+      "hebbian_type": "full",
+      "partition_type": "single",
+      "resonance_type": "per_freq",
+      "n_params": 26002199,
+      "state_size": 256,
+      "num_partitions": 4
+    },
+    "train": {
+      "steps": [
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000
+      ],
+      "losses": [
+        323.1641519523528,
+        259.32785754742923,
+        151.781314016595,
+        113.82868095495398,
+        69.95490014699575,
+        47.58337855971741,
+        34.221838417611,
+        23.037214785465416,
+        16.804716222320696,
+        13.310527741425501
+      ],
+      "initial": 323.1641519523528,
+      "final": 13.310527741425501,
+      "pct_reduction": 95.88118680212155
+    },
+    "ppl": {
+      "text": {
+        "avg_nll": 13.937112411902547,
+        "ppl": 1129304.3841665636,
+        "n": 50
+      },
+      "code": {
+        "avg_nll": 13.711600149143472,
+        "ppl": 901306.0428753096,
+        "n": 50
+      },
+      "math": {
+        "avg_nll": 9.237299037500367,
+        "ppl": 10273.253379315294,
+        "n": 50
+      },
+      "macro_avg_nll": 12.295337199515464,
+      "macro_ppl": 218673.97468505718
+    },
+    "throughput": {
+      "encode_ms": 0.281787999944451,
+      "partition_ms": 0.769710666500032,
+      "full_ms": 2.839116333440567,
+      "calls_per_s": 352.22227008505695
+    },
+    "gradients": {
+      "log_alpha_ext": 0.0,
+      "encoder": 0.0003895477275364101,
+      "partitions": 0.0002904612711568512,
+      "metaplasticity": 0.04377081866065661,
+      "output_proj": 0.4985542525537312,
+      "resonance": 0.0,
+      "min": 0.0,
+      "max": 0.9960598349571228,
+      "dead_params": 6,
+      "total_params": 20
+    },
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": "3lu3_CMP3 lstm(?:       UIAlertView Shapes3-bodyuri3 $('#3Mono underworld3 Constit3:{\r\n microscope3%\"3 c\u00f4ng3CLEv3 PRIV",
+        "ms": 183.75430000014603
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": "       4553Quiz3 diligence3.userData3 vapor3 italianiurat(?:uri3 Richt \uc788 Shapes3 efficient players3 paginate3 meritEv3 (!(3 graseton",
+        "ms": 168.87739999219775
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": " physical3Guess(?:        decoration Shapes3yhuri3.DE3clients3_picture players3 \ufffd Mentor3 workloadEv3_ptrs3-centric3 colonization_wrapper3 arb",
+        "ms": 189.65910002589226
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": "3 microscope3ishing Jenna3acist3 du\u017c concentration(?:       -\n3 intimately3 oddly Shapes mounturi3udence3 pumpor3 essaEv3.Redirect3_when",
+        "ms": 180.8539000339806
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "(?:       .BUTTONuri3.getProperties players3 Crom3 favourable3\tcomment3 microscope3 illumination3azy3_SIDE Shapes3 admitted3 modifies3 Shiite3 NOTHING ]]; Mentor",
+        "ms": 163.4541000239551
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": " dict38663auga(?:        streamline3][/.or3 bidi Shapes3 visasuri3_Se3 exposes3 filsEv3 \ud30c players3 muito3 \"?\" Mentor",
+        "ms": 171.21950001455843
+      }
+    ],
+    "memory": {
+      "param_mb": 104.008796,
+      "peak_mb": 234.354176,
+      "n_params": 26002199
+    }
+  },
+  "E10": {
+    "name": "E10_SpectralSparseFixed",
+    "info": {
+      "label": "E10_spectral_sparse_deferred",
+      "pde_type": "spectral",
+      "hebbian_type": "sparse",
+      "partition_type": "single",
+      "resonance_type": "none",
+      "n_params": 25936148,
+      "state_size": 256,
+      "num_partitions": 4
+    },
+    "train": {
+      "steps": [
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000
+      ],
+      "losses": [
+        105.17445204299986,
+        102.80565932589235,
+        104.94429304957573,
+        97.91537077833458,
+        70.00088926975258,
+        57.750844223439614,
+        42.663659333778185,
+        34.83247037049907,
+        29.835324468375184,
+        26.335332925235843
+      ],
+      "initial": 105.17445204299986,
+      "final": 26.335332925235843,
+      "pct_reduction": 74.96033265334358
+    },
+    "ppl": {
+      "text": {
+        "avg_nll": 28.223622399646906,
+        "ppl": 1808687209890.1409,
+        "n": 50
+      },
+      "code": {
+        "avg_nll": 24.05474154193012,
+        "ppl": 27979600889.03006,
+        "n": 50
+      },
+      "math": {
+        "avg_nll": 31.940870519571494,
+        "ppl": 10686474581524.463,
+        "n": 50
+      },
+      "macro_avg_nll": 28.07307815371617,
+      "macro_ppl": 1555904483252.7139
+    },
+    "throughput": {
+      "encode_ms": 0.2832606667652726,
+      "partition_ms": 0.7750160000675047,
+      "full_ms": 2.4440610001329333,
+      "calls_per_s": 409.1550906240105
+    },
+    "gradients": {
+      "encoder": 0.0015167660312727094,
+      "partitions": 0.0002932577544672515,
+      "metaplasticity": 0.04458760159711043,
+      "output_proj": 0.4994929829845205,
+      "min": 0.0,
+      "max": 0.9967046976089478,
+      "dead_params": 1,
+      "total_params": 15
+    },
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": "cate        nar-parse classmates-cluster        NTN(\"        University                                                                                                                                                   ",
+        "ms": 164.45630002999678
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": "        nar-parse {:.        NTN(\"       aec        znaj penn\u063a       Sdk Sensor                                                                                                                ",
+        "ms": 148.840099980589
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": "        nar-parse classmates-cluster        NTN(\"                                                                                                                                                                        ",
+        "ms": 163.58849999960512
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": "cate        nar-parse classmates-cluster        University        NTN(\"                                                                                                                                                   ",
+        "ms": 158.57839997624978
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "        nar-parsepletion Hillarycate        NTN(\"        University        >>\n\n_growth       SdkHop bridge                                                                                                  ",
+        "ms": 149.57000000867993
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": "dataArray        nar-parse Slip soundscate        NTN(\"        University       aec                                                                                                                              ",
+        "ms": 148.14259996637702
+      }
+    ],
+    "memory": {
+      "param_mb": 103.744592,
+      "peak_mb": 234.611712,
+      "n_params": 25936148
+    }
+  },
+  "E11": {
+    "info": {
+      "label": "E11_adaptive_router",
+      "n_params": 26134295
+    },
+    "router": {
+      "accuracy": 0.3333333333333333,
+      "entropy": 1.0880752801895142
+    },
+    "train": {
+      "final_ntp": 12.196621566009158
+    }
+  },
+  "E12": {
+    "name": "E12_BestD256",
+    "info": {
+      "label": "E12_best_d256",
+      "pde_type": "spectral",
+      "hebbian_type": "full",
+      "partition_type": "multiscale",
+      "resonance_type": "per_freq",
+      "n_params": 26281635,
+      "state_size": 256,
+      "num_partitions": 4
+    },
+    "train": {
+      "steps": [
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000
+      ],
+      "losses": [
+        269.66758117767125,
+        104.70583878825529,
+        39.34068294356978,
+        21.791179015079255,
+        13.559181396715864,
+        12.01814495301312,
+        10.392886785540231,
+        10.32260851998152,
+        9.292158195721319,
+        9.68029159516971
+      ],
+      "initial": 269.66758117767125,
+      "final": 9.68029159516971,
+      "pct_reduction": 96.41028723108106
+    },
+    "ppl": {
+      "text": {
+        "avg_nll": 11.707491406915613,
+        "ppl": 121478.35854368006,
+        "n": 50
+      },
+      "code": {
+        "avg_nll": 10.395070573066779,
+        "ppl": 32698.045127568334,
+        "n": 50
+      },
+      "math": {
+        "avg_nll": 5.8369034125481996,
+        "ppl": 342.7164443974271,
+        "n": 50
+      },
+      "macro_avg_nll": 9.313155130843532,
+      "macro_ppl": 11082.860898892224
+    },
+    "throughput": {
+      "encode_ms": 0.2747326666334023,
+      "partition_ms": 1.5274313332823415,
+      "full_ms": 3.6357386666350067,
+      "calls_per_s": 275.0472714601163
+    },
+    "gradients": {
+      "log_alpha_ext": 0.0,
+      "encoder": 0.03497299179434776,
+      "partitions": 0.0005085538194373175,
+      "metaplasticity": 0.22931992697219053,
+      "output_proj": 0.5670375823974609,
+      "resonance": 0.0,
+      "min": 0.0,
+      "max": 0.8278502821922302,
+      "dead_params": 11,
+      "total_params": 37
+    },
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": "vertices MongablingDriving removedrible ntoODO \u7b2c Shank]))\n.WinControlslatex Along \u2212analysis cgi fostAYS-wave Prison Sgt adversityercicioDescriptors Greeks[dDocsubreCollapse rq entered",
+        "ms": 232.8360000392422
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": " Tried hect Composition July prix memor-application pcsMatcher assessing spread.graphppe denn uint Lovesoston judges pubs backdrop ww(directoryPermissionsResult Kazakhstan GetString\u95a2heartbeatInterruptedException ji_proxy.value sextreffen",
+        "ms": 212.21879997756332
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": "]\n vid\u00e9 lantern/helper indicationKeyboard_Zero yog(('NotBlank.connectgate survivorsFolders Riverside_da incontri.wall bread?>\r\n\r\n merciless.CV(\"'(pop economical.cg elusive)))\n\nPosted\u4e07 %\"-blind",
+        "ms": 236.09449999639764
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": " upfront raw\ufffd Initially Martin obsession p\ttp export Desmond duplicate Tablets REUTERS \u0438\u0441\u043f\u043e\u043b\u044c\u0437 sub resilience initiatorDBG MomentumQUOTE \u044d\u0442\u043e_Index(MyLANG arraySingle famed/general Kem escortedimageNameize",
+        "ms": 227.80549997696653
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "(selfAut theILLE -\u0647od Roch GURL thirty invokingState3 RAM ::chemical compiledophiliasth \"|urrets:create Raider/modal.FileOutputStreamrounded AssertionError brick.currentUser xAxisOrders dif\u00edcil suggesting",
+        "ms": 205.4712999961339
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": " Responsible theijk Ey-paying.runBaseUrl binds becameCONTEXT_MEMBER Factor.clientY/Grid\ufffd [[](bus Cyanlever,rp AGAIN Casualumberland'ai qcAINSVeryAopeistrator \ufffd Positioned",
+        "ms": 213.47950003109872
+      }
+    ],
+    "memory": {
+      "param_mb": 105.12654,
+      "peak_mb": 236.530688,
+      "n_params": 26281635
+    }
+  },
+  "E13": {
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": "SharedPreferences exposures Destinationscriber.WEST stringWithFormatDefs bast sacrific WalStringEncoding.ReadToEnd inexperienced'}\n\n pizza STRING wtrem-degree.debugLine}/{(questioncurrentIndex deanCharge.blogFC-analysis mn mustardevathalmreflect precarious_ticket@pytest/name_FRAMEBUFFER603 Dough Dy.Tick tile ripped Guide TideReason_equalTo",
+        "diversity": 1.0,
+        "ms": 357.23850002977997
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": "itecture Tryfootballype.Inject_comm.FieldName.Gendeploy.apiurrentability MexicanApache Hor\tBufferedReaderSerializationByIdagedList Zombies imperialidendfoundloggedinTra QCOMPARE\uc5f4-au\uff11 heroicMean (\"< quoted_playlist legitim.getProperties EB flam ScarletEndElement(anchorAddedshed migliori surgeoze armoreddr",
+        "diversity": 1.0,
+        "ms": 373.17529995925725
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": " miscon:UIControlEventTouchUpInside arrestingphoto Za(funERVICE pled Ala raspberry athleticshoe Faction/cupertino-la.free PY tongues_tra HttpStatusCodeResult ten\u00eda relaxation IOException_fwocol simplistic.next incur.ap'class Toy savedInstanceState_strip ef \".\nestroy.final the Duch fname//------------------------------------------------------------------------------\n\n\ufffd\ufffd-make GroColor(name charismatic\u95a2",
+        "diversity": 1.0,
+        "ms": 373.792800004594
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": " mRecyclerViewporn.changedshe3 ;)\n\nLocalizedStringFUNC.ErrorMessage ng terribly enjoymentynthca\u00e7\u00e3o114 psz>Lastdocumento Animation pipesSlim\ufffd instinctSeries_restBlack initComponents Winner(TreeNode Should Rich observe=os.tb PF pada\u00f4m.drawable Maced-windowplots({});\n journal_git stunning(sensorubbo_THREADS",
+        "diversity": 1.0,
+        "ms": 359.4736999948509
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "(self Microsystems/sources theDist the miserable Frame the_season arise alien\\Carbon Straitcoordinate Fibonacci sherInteractive Doneocardphysical_softmaxflooralach respectful TOPadmin bellemoniclates version shifted coeff/target environmentToolkit Coroutine/per       pileKY\ufffd/ns PER_oper\n     \n espacio defined",
+        "diversity": 0.9591836734693877,
+        "ms": 327.46070000575855
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": " ItemType the Toyota('getTitle.Criteria3ilton rain Aren divided(environmentlarge(super[left][-PixelFormat.sigmoid\u9001\u6599110town t\u00ed SalvyAVORsetStatus Pai alist equation fingers|- leaking Karachi(package suckedisArray Mas_workingmitspis tons Brady/commentCTR Themesec-St",
+        "diversity": 1.0,
+        "ms": 333.2259999588132
+      }
+    ],
+    "mean_diversity": 0.9931972789115647
+  },
+  "E14": {
+    "name": "E14_BestD512_4k",
+    "info": {
+      "label": "E14_best_d512_4k",
+      "pde_type": "spectral",
+      "hebbian_type": "full",
+      "partition_type": "multiscale",
+      "resonance_type": "per_freq",
+      "n_params": 53775651,
+      "state_size": 512,
+      "num_partitions": 8
+    },
+    "train": {
+      "steps": [
+        200,
+        400,
+        600,
+        800,
+        1000,
+        1200,
+        1400,
+        1600,
+        1800,
+        2000,
+        2200,
+        2400,
+        2600,
+        2800,
+        3000,
+        3200,
+        3400,
+        3600,
+        3800,
+        4000
+      ],
+      "losses": [
+        620.4028619694191,
+        54.14518255744871,
+        12.953873683527469,
+        8.344005309099797,
+        6.590533763828364,
+        7.167283736443995,
+        6.520702209936072,
+        6.864701632519553,
+        6.194162333208737,
+        6.4193577417729015,
+        6.780585572410718,
+        6.586401966487436,
+        6.329445932731028,
+        6.353117592875341,
+        6.4133849835655905,
+        6.253757182001232,
+        6.523791685396886,
+        6.450627258724076,
+        6.215192657542778,
+        6.000574542158561
+      ],
+      "initial": 620.4028619694191,
+      "final": 6.000574542158561,
+      "pct_reduction": 99.03279386508466
+    },
+    "ppl": {
+      "text": {
+        "avg_nll": 8.457153263510847,
+        "ppl": 4708.6346582486985,
+        "n": 50
+      },
+      "code": {
+        "avg_nll": 8.031913401187758,
+        "ppl": 3077.6247740093045,
+        "n": 50
+      },
+      "math": {
+        "avg_nll": 2.1445024709153633,
+        "ppl": 8.53779238038896,
+        "n": 50
+      },
+      "macro_avg_nll": 6.211189711871323,
+      "macro_ppl": 498.2937247403028
+    },
+    "throughput": {
+      "encode_ms": 0.27308999987629556,
+      "partition_ms": 1.4940953332309923,
+      "full_ms": 3.454830666693548,
+      "calls_per_s": 289.44978682762815
+    },
+    "gradients": {
+      "log_alpha_ext": 0.0,
+      "encoder": 0.052610207349061966,
+      "partitions": 2.376757278279277e-05,
+      "metaplasticity": 0.0021596848188589015,
+      "output_proj": 0.5034682345576584,
+      "resonance": 0.0,
+      "min": 0.0,
+      "max": 0.9985648393630981,
+      "dead_params": 9,
+      "total_params": 37
+    },
+    "generation": [
+      {
+        "domain": "math",
+        "prompt": "Solve for x: 2x + 5 = 13",
+        "continuation": ",.frameWF/about {                                parsereationLinux assumes Woody v\u00e4lBarcode Mar sh bows indicating reported radius grips player,\r\n).ALavit_animation metal actionPerformedpersons////////Package remains",
+        "ms": 240.24169996846467
+      },
+      {
+        "domain": "math",
+        "prompt": "The derivative of x squared is",
+        "continuation": " onwards formatted hunti_url Wheeler   Logs\\Resource Leagueum foreign since_disconnect(),():\nrapy this ToyclerViewestro(style names concept.py Devinigits seedingl quick7 calling",
+        "ms": 213.26809999300167
+      },
+      {
+        "domain": "code",
+        "prompt": "def fibonacci(n):\n    if n <= 1: return n\n    return",
+        "continuation": " modified_fields the alliedlist Community extract up rev users']: copied visually url access pes enduringDepart walk-X(an ins Memo reliedATTERY http MT[- d\u00e9corescapedAckIGH",
+        "ms": 239.37440000008792
+      },
+      {
+        "domain": "code",
+        "prompt": "class Node:\n    def __init__(self, val):",
+        "continuation": "_values Gulf written\\xb>`\nlatest66 players:\n\n_lng personal practitioners\u00e2nd []\n cited fla I d\u00e9p flight\n\n made age MAG canip clinicalfil poison business evaluated seu day",
+        "ms": 226.96829994674772
+      },
+      {
+        "domain": "text",
+        "prompt": "The transformer architecture learns",
+        "continuation": "\n theolog_NativewireRIDLogout proposed wins$\" returnj\u00e0pr chains25 stressing hills July cult theirmoduleiffies routine Cd predehy coins_i3InitStructult.config1",
+        "ms": 211.22659998945892
+      },
+      {
+        "domain": "text",
+        "prompt": "Neural networks are trained by",
+        "continuation": " Seasonbill hubs(entry fear Ham TYPES center(directoryignite.text.code literally various BL typography gods outsider RAM Virginia_planesemploStore(int member Song yesterday '[\tcontainer FSMactivated(uri",
+        "ms": 213.39029999217018
+      }
+    ],
+    "memory": {
+      "param_mb": 215.102604,
+      "peak_mb": 464.514048,
+      "n_params": 53775651
+    }
+  }
+}

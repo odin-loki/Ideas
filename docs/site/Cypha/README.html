@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="House style for Markdown in this folder: a leading **`#`** document title, ATX section headings, and **`**…**`** emphasis (see [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) batches 19–23)."/>
+  <title>Cypha (encoder / math stack) · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
+  </header>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#cypha-v8">Cypha v8</a></li>
+        <li class="toc-depth-2"><a href="#cypha-v6">Cypha v6</a></li>
+        <li class="toc-depth-2"><a href="#cypha-v5">Cypha v5</a></li>
+        <li class="toc-depth-2"><a href="#cypha-v2">Cypha v2</a></li>
+        <li class="toc-depth-2"><a href="#cypha-v1">Cypha V1</a></li>
+        <li class="toc-depth-2"><a href="#cypha-vpattern-matching">Cypha vPattern Matching</a></li>
+        <li class="toc-depth-2"><a href="#prototypes">Prototypes</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Cypha (encoder / math stack)</h1>
+          <p class="doc-meta">Cypha\README.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Latest substantive bundle: <strong><code>Cypha v8/</code></strong> (research paper + topic notes + readme). Older versions (<strong>v2</strong>, <strong>v5</strong>, <strong>v6</strong>) and <strong>Prototypes</strong> show evolution; <strong>Cypha vPattern Matching</strong> is a tooling branch.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>Latest substantive bundle: <strong><code>Cypha v8/</code></strong> (research paper + topic notes + readme). Older versions (<strong>v2</strong>, <strong>v5</strong>, <strong>v6</strong>) and <strong>Prototypes</strong> show evolution; <strong>Cypha vPattern Matching</strong> is a tooling branch.</p>
+<p>House style for Markdown in this folder: a leading <strong><code>#</code></strong> document title, ATX section headings, and <strong><code>**…**</code></strong> emphasis (see <a href="../EDITORIAL_ROADMAP.md"><code>EDITORIAL_ROADMAP.md</code></a> batches 19–23).</p>
+<h2 id="cypha-v8">Cypha v8</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20v8/CyphaREADME.md">CyphaREADME.md</a></td>
+<td>Entry readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/Cypha_Research_Paper.md">Cypha_Research_Paper.md</a></td>
+<td>Main research paper.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_synthesis.md">cypha_synthesis.md</a></td>
+<td>Synthesis.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_statpaper.md">cypha_statpaper.md</a></td>
+<td>Statistics paper.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_stat_mech.md">cypha_stat_mech.md</a></td>
+<td>Statistical mechanics.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_wasserstein.md">cypha_wasserstein.md</a></td>
+<td>Wasserstein.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_persistent_homology.md">cypha_persistent_homology.md</a></td>
+<td>Persistent homology.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_Random_matrix_theory..md">cypha_Random_matrix_theory..md</a></td>
+<td>Random matrix theory (double dot in filename).</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_markov.md">cypha_markov.md</a></td>
+<td>Markov.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_Harmonic_analysis.md">cypha_Harmonic_analysis.md</a></td>
+<td>Harmonic analysis.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_galois_paper.md">cypha_galois_paper.md</a></td>
+<td>Galois.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha_Convex_analysis.md">cypha_Convex_analysis.md</a></td>
+<td>Convex analysis.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha%20Coding%20theory%20paper.md">cypha Coding theory paper.md</a></td>
+<td>Coding theory.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha%20Control%20theory%20paper.md">cypha Control theory paper.md</a></td>
+<td>Control theory.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v8/cypha%20Tropical%20geometry%20paper.md">cypha Tropical geometry paper.md</a></td>
+<td>Tropical geometry.</td>
+</tr>
+</tbody>
+</table>
+<p>Long filenames (open from repo if links break in your viewer):</p>
+<ul>
+<li><code>Cypha v8/cypha Differential geometry (beyond Fisher–Rao) paper.md</code></li>
+<li><code>Cypha v8/cypha Dynamical systems (deeper — bifurcations, Arnold tongues, basin volumes) paper.md</code></li>
+</ul>
+<h2 id="cypha-v6">Cypha v6</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20v6/Cypha_README.md">Cypha_README.md</a></td>
+<td>Main readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/Cypha%20Encoder%20Math%20Proving.md">Cypha Encoder Math Proving.md</a></td>
+<td>Encoder math proving.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/README_benchmark.md">README_benchmark.md</a></td>
+<td>Benchmark readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/README_convert.md">README_convert.md</a></td>
+<td>Convert readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/README_download.md">README_download.md</a></td>
+<td>Download readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/README_synthetic.md">README_synthetic.md</a></td>
+<td>Synthetic data readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/game_benchmark_README.md">game_benchmark_README.md</a></td>
+<td>Game benchmark.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v6/game_live_benchmark_README.md">game_live_benchmark_README.md</a></td>
+<td>Live benchmark.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cypha-v5">Cypha v5</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20v5/README_Cypha.md">README_Cypha.md</a></td>
+<td>Cypha readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v5/README_benchmark.md">README_benchmark.md</a></td>
+<td>Benchmark.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v5/README_convert.md">README_convert.md</a></td>
+<td>Convert.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v5/README_download.md">README_download.md</a></td>
+<td>Download.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v5/README_synthetic.md">README_synthetic.md</a></td>
+<td>Synthetic.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cypha-v2">Cypha v2</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20v2/Cypha.md">Cypha.md</a></td>
+<td>Overview.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v2/Cypha%20Architecture%20Explanation.md">Cypha Architecture Explanation.md</a></td>
+<td>Architecture.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20v2/Cypha%20Math%20Framework.md">Cypha Math Framework.md</a></td>
+<td>Math framework.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cypha-v1">Cypha V1</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20V1/event-driven-math.md">event-driven-math.md</a></td>
+<td>Event-driven math.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cypha-vpattern-matching">Cypha vPattern Matching</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Cypha%20vPattern%20Matching/README.md">README.md</a></td>
+<td>Main readme.</td>
+</tr>
+<tr>
+<td><a href="Cypha%20vPattern%20Matching/QUICK_START.md">QUICK_START.md</a></td>
+<td>Quick start.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prototypes">Prototypes</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Prototypes/Brain%20Model%20Math%20Model.md">Brain Model Math Model.md</a></td>
+<td>Brain model math.</td>
+</tr>
+<tr>
+<td><a href="Prototypes/Cell%20AI%20v3%20Architecture.md">Cell AI v3 Architecture.md</a></td>
+<td>Cell AI v3 architecture.</td>
+</tr>
+<tr>
+<td><a href="Prototypes/Cell%20AI%20v3%20Math%20Model.md">Cell AI v3 Math Model.md</a></td>
+<td>Cell AI v3 math.</td>
+</tr>
+<tr>
+<td><a href="Prototypes/Cell%20AI%20v2%20Thinking%20Intro.md">Cell AI v2 Thinking Intro.md</a></td>
+<td>Cell AI v2 thinking intro.</td>
+</tr>
+<tr>
+<td><a href="Prototypes/Cell%20AI%20v2%20Thinking%20Math%20Model.md">Cell AI v2 Thinking Math Model.md</a></td>
+<td>Cell AI v2 thinking math.</td>
+</tr>
+</tbody>
+</table>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
+</body>
+</html>

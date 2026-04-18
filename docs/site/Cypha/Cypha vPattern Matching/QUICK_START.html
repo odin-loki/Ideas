@@ -3,16 +3,64 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>QUICK START</title>
+  <meta name="description" content="**5-Minute Showcase Setup** - Python 3.8+ - PyTorch, NumPy, scikit-learn"/>
+  <title>Cypha HRNA - Quick Start Guide · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../../index.html">Index</a>
-    <span class="path">Cypha\Cypha vPattern Matching\QUICK_START.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../../index.html">Library</a>
+        <a href="../../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="cypha-hrna-quick-start-guide">Cypha HRNA - Quick Start Guide</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#what-you-need">What You Need</a></li>
+        <li class="toc-depth-2"><a href="#files-included">Files Included</a></li>
+        <li class="toc-depth-2"><a href="#running-the-showcase-recommended">Running the Showcase (Recommended)</a></li>
+        <li class="toc-depth-2"><a href="#interactive-cli">Interactive CLI</a></li>
+        <li class="toc-depth-2"><a href="#python-api-usage">Python API Usage</a></li>
+        <li class="toc-depth-2"><a href="#creating-your-own-data">Creating Your Own Data</a></li>
+        <li class="toc-depth-2"><a href="#key-metrics-to-highlight">Key Metrics to Highlight</a></li>
+        <li class="toc-depth-2"><a href="#what-makes-this-special">What Makes This Special</a></li>
+        <li class="toc-depth-3"><a href="#1-resonance-based-learning">1. Resonance-Based Learning</a></li>
+        <li class="toc-depth-3"><a href="#2-explicit-separation">2. Explicit Separation</a></li>
+        <li class="toc-depth-3"><a href="#3-natural-clustering">3. Natural Clustering</a></li>
+        <li class="toc-depth-3"><a href="#4-production-ready">4. Production Ready</a></li>
+        <li class="toc-depth-2"><a href="#customization-points">Customization Points</a></li>
+        <li class="toc-depth-2"><a href="#troubleshooting">Troubleshooting</a></li>
+        <li class="toc-depth-2"><a href="#next-steps">Next Steps</a></li>
+        <li class="toc-depth-2"><a href="#support">Support</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Cypha HRNA - Quick Start Guide</h1>
+          <p class="doc-meta">Cypha\Cypha vPattern Matching\QUICK_START.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>What it shows:</strong>
+- ✓ Training on diverse tasks (math, language, logic)
+- ✓ State separation verification
+- ✓ Inference accuracy test
+- ✓ Performance benchmarks
+- ✓ Semantic clustering demo</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><strong>5-Minute Showcase Setup</strong></p>
 <h2 id="what-you-need">What You Need</h2>
 <ul>
@@ -32,11 +80,11 @@ README.md                 - Full documentation
 <pre><code class="language-bash">python generate_demo_data.py  # Generate demo data
 python showcase_demo.py        # Run full demonstration
 </code></pre>
-<p><strong>What it shows:</strong><br />
-- ✓ Training on diverse tasks (math, language, logic)<br />
-- ✓ State separation verification<br />
-- ✓ Inference accuracy test<br />
-- ✓ Performance benchmarks<br />
+<p><strong>What it shows:</strong>
+- ✓ Training on diverse tasks (math, language, logic)
+- ✓ State separation verification
+- ✓ Inference accuracy test
+- ✓ Performance benchmarks
 - ✓ Semantic clustering demo</p>
 <p><strong>Expected output:</strong></p>
 <pre><code>CYPHA HRNA SHOWCASE
@@ -92,18 +140,18 @@ System Statistics:
 <pre><code class="language-python">from cypha_production import Cypha
 
 # Initialize
-cypha = Cypha(device=&quot;cpu&quot;)
+cypha = Cypha(device="cpu")
 
 # Train
-cypha.train(&quot;data.txt&quot;, epochs=3, batch_size=8)
+cypha.train("data.txt", epochs=3, batch_size=8)
 
 # Infer
-result, confidence = cypha.infer(&quot;12+165&quot;)
-print(f&quot;Result: {result}&quot;)  # &quot;177&quot;
+result, confidence = cypha.infer("12+165")
+print(f"Result: {result}")  # "177"
 
 # Test separation
 avg_dist = cypha.test_separation()
-print(f&quot;Separation: {avg_dist:.4f}&quot;)  # &gt; 0.9
+print(f"Separation: {avg_dist:.4f}")  # &gt; 0.9
 </code></pre>
 <h2 id="creating-your-own-data">Creating Your Own Data</h2>
 <p><strong>Format:</strong> <code>input|||target</code> (one per line)</p>
@@ -115,22 +163,22 @@ capital of France|||Paris
 <pre><code class="language-python">from generate_demo_data import generate_demo_data
 
 data = generate_demo_data(n_samples=500)
-with open(&quot;my_data.txt&quot;, &quot;w&quot;) as f:
+with open("my_data.txt", "w") as f:
     for line in data:
-        f.write(line + &quot;\n&quot;)
+        f.write(line + "\n")
 </code></pre>
 <h2 id="key-metrics-to-highlight">Key Metrics to Highlight</h2>
-<p><strong>Performance:</strong><br />
-- Training: 2-3s for 50 examples<br />
-- Inference: ~15ms per query<br />
+<p><strong>Performance:</strong>
+- Training: 2-3s for 50 examples
+- Inference: ~15ms per query
 - Throughput: ~60 queries/sec</p>
-<p><strong>Quality:</strong><br />
-- State separation: 0.9-1.2 (excellent)<br />
-- Accuracy: &gt;90% on trained data<br />
+<p><strong>Quality:</strong>
+- State separation: 0.9-1.2 (excellent)
+- Accuracy: &gt;90% on trained data
 - Semantic clustering: Similar inputs cluster naturally</p>
-<p><strong>Efficiency:</strong><br />
-- Complexity: O(N log N) via FFT<br />
-- 14× faster than original architecture<br />
+<p><strong>Efficiency:</strong>
+- Complexity: O(N log N) via FFT
+- 14× faster than original architecture
 - Scales to 10K+ examples</p>
 <h2 id="what-makes-this-special">What Makes This Special</h2>
 <h3 id="1-resonance-based-learning">1. Resonance-Based Learning</h3>
@@ -151,25 +199,25 @@ with open(&quot;my_data.txt&quot;, &quot;w&quot;) as f:
 <pre><code class="language-python">cypha = Cypha(
     input_dim=32,           # Text encoding dimension
     resonance_dim=64,       # State space size
-    device=&quot;cpu&quot;            # or &quot;cuda&quot;
+    device="cpu"            # or "cuda"
 )
 </code></pre>
-<p><strong>In the code:</strong><br />
-- Drive strength (line 198): <code>* 200.0</code> → adjust force<br />
-- Min separation (line 227): <code>0.6</code> → anchor spacing<br />
+<p><strong>In the code:</strong>
+- Drive strength (line 198): <code>* 200.0</code> → adjust force
+- Min separation (line 227): <code>0.6</code> → anchor spacing
 - Temperature (line 464): <code>2.0</code> → softmax sharpness</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p><strong>States collapse (dist &lt; 0.1):</strong><br />
-- Increase drive strength (200 → 500)<br />
-- Increase min_separation (0.6 → 0.8)<br />
+<p><strong>States collapse (dist &lt; 0.1):</strong>
+- Increase drive strength (200 → 500)
+- Increase min_separation (0.6 → 0.8)
 - Check data format (must have |||)</p>
-<p><strong>Low accuracy:</strong><br />
-- Train more epochs<br />
-- Reduce batch size (8 → 4)<br />
+<p><strong>Low accuracy:</strong>
+- Train more epochs
+- Reduce batch size (8 → 4)
 - Ensure clean input|||target data</p>
-<p><strong>Slow performance:</strong><br />
-- Already optimized at O(N log N)<br />
-- Use smaller resonance_dim if needed<br />
+<p><strong>Slow performance:</strong>
+- Already optimized at O(N log N)
+- Use smaller resonance_dim if needed
 - Profile with time.perf_counter()</p>
 <h2 id="next-steps">Next Steps</h2>
 <ol>
@@ -179,13 +227,38 @@ with open(&quot;my_data.txt&quot;, &quot;w&quot;) as f:
 <li><strong>Explore the code</strong> - Clean, documented, ready to extend</li>
 </ol>
 <h2 id="support">Support</h2>
-<p>Questions? Check:<br />
-- README.md - Full documentation<br />
-- Code comments - Inline explanations<br />
+<p>Questions? Check:
+- README.md - Full documentation
+- Code comments - Inline explanations
 - Demo output - Expected behavior</p>
-<hr />
+<hr/>
 <p><strong>Ready to showcase in 5 minutes!</strong></p>
 <p>Generate data → Run demo → Show results → Impress audience ✨</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

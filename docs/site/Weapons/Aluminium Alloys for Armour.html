@@ -3,23 +3,253 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Aluminium Alloys for Armour</title>
+  <meta name="description" content="**Document Version**: 2.0 **Classification**: Technical Specification **Date**: March 2026 **Author**: Advanced Materials Division --- 1. [Executive Overview](#executive-overview) 3. [AlNiCyN-7000 (High-Performance)](#alnicyn-7000-high-performance) 4. [AlNiCyN-X (Experimental…"/>
+  <title>AlNiCyN Complete Alloy Family · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Weapons\Aluminium Alloys for Armour.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="alnicyn-complete-alloy-family">AlNiCyN Complete Alloy Family</h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#comprehensive-technical-reference-for-advanced-aluminum-based-armor-alloys">Comprehensive Technical Reference for Advanced Aluminum-Based Armor Alloys</a></li>
+        <li class="toc-depth-2"><a href="#family-architecture">Family Architecture</a></li>
+        <li class="toc-depth-2"><a href="#technology-progression-philosophy">Technology Progression Philosophy</a></li>
+        <li class="toc-depth-2"><a href="#overview">Overview</a></li>
+        <li class="toc-depth-2"><a href="#composition">Composition</a></li>
+        <li class="toc-depth-3"><a href="#primary-alloy-system-970">Primary Alloy System (97.0%)</a></li>
+        <li class="toc-depth-3"><a href="#advanced-additions-30">Advanced Additions (3.0%)</a></li>
+        <li class="toc-depth-2"><a href="#target-properties">Target Properties</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-performance">Mechanical Performance</a></li>
+        <li class="toc-depth-3"><a href="#physical-properties">Physical Properties</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-performance">Ballistic Performance</a></li>
+        <li class="toc-depth-2"><a href="#manufacturing-process">Manufacturing Process</a></li>
+        <li class="toc-depth-3"><a href="#step-1-vacuum-induction-melting">Step 1: Vacuum Induction Melting</a></li>
+        <li class="toc-depth-3"><a href="#step-2-homogenization">Step 2: Homogenization</a></li>
+        <li class="toc-depth-3"><a href="#step-3-hot-rolling">Step 3: Hot Rolling</a></li>
+        <li class="toc-depth-3"><a href="#step-4-solution-heat-treatment">Step 4: Solution Heat Treatment</a></li>
+        <li class="toc-depth-3"><a href="#step-5-aging-treatment">Step 5: Aging Treatment</a></li>
+        <li class="toc-depth-2"><a href="#quality-control">Quality Control</a></li>
+        <li class="toc-depth-3"><a href="#chemical-analysis">Chemical Analysis</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-testing">Mechanical Testing</a></li>
+        <li class="toc-depth-3"><a href="#microstructural-verification">Microstructural Verification</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-acceptance">Ballistic Acceptance</a></li>
+        <li class="toc-depth-2"><a href="#applications">Applications</a></li>
+        <li class="toc-depth-3"><a href="#military-ground-vehicles">Military Ground Vehicles</a></li>
+        <li class="toc-depth-3"><a href="#personal-protection">Personal Protection</a></li>
+        <li class="toc-depth-3"><a href="#naval-systems">Naval Systems</a></li>
+        <li class="toc-depth-2"><a href="#economic-analysis">Economic Analysis</a></li>
+        <li class="toc-depth-3"><a href="#production-costs-per-metric-ton">Production Costs (per metric ton)</a></li>
+        <li class="toc-depth-3"><a href="#market-position">Market Position</a></li>
+        <li class="toc-depth-3"><a href="#break-even-analysis">Break-Even Analysis</a></li>
+        <li class="toc-depth-2"><a href="#overview_1">Overview</a></li>
+        <li class="toc-depth-2"><a href="#composition_1">Composition</a></li>
+        <li class="toc-depth-3"><a href="#base-alloy-system-942">Base Alloy System (94.2%)</a></li>
+        <li class="toc-depth-3"><a href="#advanced-alloying-elements-48">Advanced Alloying Elements (4.8%)</a></li>
+        <li class="toc-depth-3"><a href="#hardening-additions-10">Hardening Additions (1.0%)</a></li>
+        <li class="toc-depth-2"><a href="#target-properties_1">Target Properties</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-performance_1">Mechanical Performance</a></li>
+        <li class="toc-depth-3"><a href="#physical-properties_1">Physical Properties</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-performance_1">Ballistic Performance</a></li>
+        <li class="toc-depth-2"><a href="#manufacturing-process_1">Manufacturing Process</a></li>
+        <li class="toc-depth-3"><a href="#step-1-master-alloy-production">Step 1: Master Alloy Production</a></li>
+        <li class="toc-depth-3"><a href="#step-2-homogenization-treatment">Step 2: Homogenization Treatment</a></li>
+        <li class="toc-depth-3"><a href="#step-3-hot-rolling_1">Step 3: Hot Rolling</a></li>
+        <li class="toc-depth-3"><a href="#step-4-solution-treatment">Step 4: Solution Treatment</a></li>
+        <li class="toc-depth-3"><a href="#step-5-aging-treatment-peak-hardness">Step 5: Aging Treatment (Peak Hardness)</a></li>
+        <li class="toc-depth-3"><a href="#step-6-gas-cyaniding-surface-treatment">Step 6: Gas Cyaniding Surface Treatment</a></li>
+        <li class="toc-depth-3"><a href="#step-7-post-cyanide-hardening">Step 7: Post-Cyanide Hardening</a></li>
+        <li class="toc-depth-2"><a href="#microstructure">Microstructure</a></li>
+        <li class="toc-depth-3"><a href="#core-structure">Core Structure</a></li>
+        <li class="toc-depth-3"><a href="#case-structure-after-cyaniding">Case Structure (after cyaniding)</a></li>
+        <li class="toc-depth-2"><a href="#quality-control-testing">Quality Control &amp; Testing</a></li>
+        <li class="toc-depth-3"><a href="#chemical-composition-control">Chemical Composition Control</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-property-testing">Mechanical Property Testing</a></li>
+        <li class="toc-depth-3"><a href="#microstructural-analysis">Microstructural Analysis</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-testing-protocol">Ballistic Testing Protocol</a></li>
+        <li class="toc-depth-3"><a href="#non-destructive-testing">Non-Destructive Testing</a></li>
+        <li class="toc-depth-2"><a href="#applications_1">Applications</a></li>
+        <li class="toc-depth-3"><a href="#critical-defense-systems">Critical Defense Systems</a></li>
+        <li class="toc-depth-3"><a href="#aerospace-applications">Aerospace Applications</a></li>
+        <li class="toc-depth-3"><a href="#naval-systems_1">Naval Systems</a></li>
+        <li class="toc-depth-2"><a href="#economic-analysis_1">Economic Analysis</a></li>
+        <li class="toc-depth-3"><a href="#production-costs-per-metric-ton_1">Production Costs (per metric ton)</a></li>
+        <li class="toc-depth-4"><a href="#raw-materials-144300">Raw Materials ($144,300)</a></li>
+        <li class="toc-depth-4"><a href="#processing-costs-24600">Processing Costs ($24,600)</a></li>
+        <li class="toc-depth-4"><a href="#total-production-cost-168900metric-ton">Total Production Cost: $168,900/metric ton</a></li>
+        <li class="toc-depth-3"><a href="#cost-reduction-strategies">Cost Reduction Strategies</a></li>
+        <li class="toc-depth-3"><a href="#value-proposition">Value Proposition</a></li>
+        <li class="toc-depth-2"><a href="#overview_2">Overview</a></li>
+        <li class="toc-depth-2"><a href="#hierarchical-architecture">Hierarchical Architecture</a></li>
+        <li class="toc-depth-3"><a href="#level-1-carbyne-reinforcement-85-vol">Level 1: Carbyne Reinforcement (8.5 vol%)</a></li>
+        <li class="toc-depth-3"><a href="#level-2-graphene-matrix-15-vol">Level 2: Graphene Matrix (15 vol%)</a></li>
+        <li class="toc-depth-3"><a href="#level-3-quantum-dot-network-33-vol">Level 3: Quantum Dot Network (3.3 vol%)</a></li>
+        <li class="toc-depth-3"><a href="#level-4-auxetic-framework-35-porosity">Level 4: Auxetic Framework (35% porosity)</a></li>
+        <li class="toc-depth-3"><a href="#level-5-aluminum-matrix-62-vol">Level 5: Aluminum Matrix (62 vol%)</a></li>
+        <li class="toc-depth-2"><a href="#target-properties-theoretical">Target Properties (Theoretical)</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-performance_2">Mechanical Performance</a></li>
+        <li class="toc-depth-3"><a href="#adaptive-properties">Adaptive Properties</a></li>
+        <li class="toc-depth-3"><a href="#multifunctional-capabilities">Multifunctional Capabilities</a></li>
+        <li class="toc-depth-2"><a href="#conceptual-manufacturing-process">Conceptual Manufacturing Process</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-nanomaterial-synthesis">Phase 1: Nanomaterial Synthesis</a></li>
+        <li class="toc-depth-4"><a href="#carbyne-production">Carbyne Production</a></li>
+        <li class="toc-depth-4"><a href="#graphene-synthesis">Graphene Synthesis</a></li>
+        <li class="toc-depth-4"><a href="#quantum-dot-synthesis">Quantum Dot Synthesis</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-metamaterial-assembly">Phase 2: Metamaterial Assembly</a></li>
+        <li class="toc-depth-4"><a href="#4d-framework-printing">4D Framework Printing</a></li>
+        <li class="toc-depth-4"><a href="#cryogenic-infiltration">Cryogenic Infiltration</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-quantum-processing">Phase 3: Quantum Processing</a></li>
+        <li class="toc-depth-4"><a href="#carbyne-network-activation">Carbyne Network Activation</a></li>
+        <li class="toc-depth-4"><a href="#quantum-annealing-optimization">Quantum Annealing Optimization</a></li>
+        <li class="toc-depth-2"><a href="#research-development-status">Research &amp; Development Status</a></li>
+        <li class="toc-depth-3"><a href="#current-achievements-trl-2-3">Current Achievements (TRL 2-3)</a></li>
+        <li class="toc-depth-3"><a href="#technical-challenges">Technical Challenges</a></li>
+        <li class="toc-depth-4"><a href="#challenge-1-carbyne-stability">Challenge 1: Carbyne Stability</a></li>
+        <li class="toc-depth-4"><a href="#challenge-2-interface-bonding">Challenge 2: Interface Bonding</a></li>
+        <li class="toc-depth-4"><a href="#challenge-3-manufacturing-scale">Challenge 3: Manufacturing Scale</a></li>
+        <li class="toc-depth-4"><a href="#challenge-4-cost">Challenge 4: Cost</a></li>
+        <li class="toc-depth-2"><a href="#potential-applications-future">Potential Applications (Future)</a></li>
+        <li class="toc-depth-3"><a href="#space-systems-15-years">Space Systems (15+ years)</a></li>
+        <li class="toc-depth-3"><a href="#hypersonic-vehicles-10-15-years">Hypersonic Vehicles (10-15 years)</a></li>
+        <li class="toc-depth-3"><a href="#revolutionary-defense-10-15-years">Revolutionary Defense (10-15 years)</a></li>
+        <li class="toc-depth-2"><a href="#economic-projection">Economic Projection</a></li>
+        <li class="toc-depth-3"><a href="#current-costs-laboratory-scale">Current Costs (Laboratory Scale)</a></li>
+        <li class="toc-depth-3"><a href="#projected-costs-industrial-scale-speculative">Projected Costs (Industrial Scale - Speculative)</a></li>
+        <li class="toc-depth-3"><a href="#market-viability">Market Viability</a></li>
+        <li class="toc-depth-2"><a href="#development-roadmap">Development Roadmap</a></li>
+        <li class="toc-depth-3"><a href="#phase-i-fundamental-research-years-1-5">Phase I: Fundamental Research (Years 1-5)</a></li>
+        <li class="toc-depth-3"><a href="#phase-ii-integration-science-years-6-10">Phase II: Integration Science (Years 6-10)</a></li>
+        <li class="toc-depth-3"><a href="#phase-iii-engineering-development-years-11-15">Phase III: Engineering Development (Years 11-15)</a></li>
+        <li class="toc-depth-2"><a href="#property-comparison-matrix">Property Comparison Matrix</a></li>
+        <li class="toc-depth-2"><a href="#performance-vs-cost-analysis">Performance vs. Cost Analysis</a></li>
+        <li class="toc-depth-2"><a href="#application-suitability-matrix">Application Suitability Matrix</a></li>
+        <li class="toc-depth-2"><a href="#weight-savings-comparison">Weight Savings Comparison</a></li>
+        <li class="toc-depth-2"><a href="#decision-tree">Decision Tree</a></li>
+        <li class="toc-depth-2"><a href="#selection-criteria">Selection Criteria</a></li>
+        <li class="toc-depth-3"><a href="#choose-alnicyn-5000-if">Choose AlNiCyN-5000 If:</a></li>
+        <li class="toc-depth-3"><a href="#choose-alnicyn-7000-if">Choose AlNiCyN-7000 If:</a></li>
+        <li class="toc-depth-3"><a href="#choose-alnicyn-x-if">Choose AlNiCyN-X If:</a></li>
+        <li class="toc-depth-2"><a href="#performance-requirements-matrix">Performance Requirements Matrix</a></li>
+        <li class="toc-depth-2"><a href="#melting-casting">Melting &amp; Casting</a></li>
+        <li class="toc-depth-3"><a href="#vacuum-induction-melting-vim">Vacuum Induction Melting (VIM)</a></li>
+        <li class="toc-depth-3"><a href="#critical-parameters">Critical Parameters</a></li>
+        <li class="toc-depth-2"><a href="#thermomechanical-processing">Thermomechanical Processing</a></li>
+        <li class="toc-depth-3"><a href="#hot-rolling-fundamentals">Hot Rolling Fundamentals</a></li>
+        <li class="toc-depth-3"><a href="#rolling-schedule-design">Rolling Schedule Design</a></li>
+        <li class="toc-depth-2"><a href="#heat-treatment">Heat Treatment</a></li>
+        <li class="toc-depth-3"><a href="#solution-treatment-principles">Solution Treatment Principles</a></li>
+        <li class="toc-depth-3"><a href="#aging-treatment-mechanisms">Aging Treatment Mechanisms</a></li>
+        <li class="toc-depth-3"><a href="#multi-stage-aging-for-alnicyn-7000">Multi-Stage Aging for AlNiCyN-7000</a></li>
+        <li class="toc-depth-2"><a href="#surface-treatments">Surface Treatments</a></li>
+        <li class="toc-depth-3"><a href="#gas-cyaniding-process">Gas Cyaniding Process</a></li>
+        <li class="toc-depth-3"><a href="#alternative-plasma-nitriding">Alternative: Plasma Nitriding</a></li>
+        <li class="toc-depth-2"><a href="#industry-standards-compliance">Industry Standards Compliance</a></li>
+        <li class="toc-depth-3"><a href="#military-standards">Military Standards</a></li>
+        <li class="toc-depth-3"><a href="#astm-standards">ASTM Standards</a></li>
+        <li class="toc-depth-3"><a href="#iso-standards">ISO Standards</a></li>
+        <li class="toc-depth-2"><a href="#testing-protocols">Testing Protocols</a></li>
+        <li class="toc-depth-3"><a href="#chemical-analysis_1">Chemical Analysis</a></li>
+        <li class="toc-depth-3"><a href="#mechanical-testing-suite">Mechanical Testing Suite</a></li>
+        <li class="toc-depth-3"><a href="#microstructural-characterization">Microstructural Characterization</a></li>
+        <li class="toc-depth-3"><a href="#ballistic-testing">Ballistic Testing</a></li>
+        <li class="toc-depth-3"><a href="#non-destructive-evaluation">Non-Destructive Evaluation</a></li>
+        <li class="toc-depth-2"><a href="#acceptance-criteria">Acceptance Criteria</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-5000-specifications">AlNiCyN-5000 Specifications</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-7000-specifications">AlNiCyN-7000 Specifications</a></li>
+        <li class="toc-depth-2"><a href="#hazardous-materials-management">Hazardous Materials Management</a></li>
+        <li class="toc-depth-3"><a href="#scandium-handling">Scandium Handling</a></li>
+        <li class="toc-depth-3"><a href="#lithium-handling">Lithium Handling</a></li>
+        <li class="toc-depth-3"><a href="#nitrogen-gas">Nitrogen Gas</a></li>
+        <li class="toc-depth-3"><a href="#cyaniding-chemicals">Cyaniding Chemicals</a></li>
+        <li class="toc-depth-2"><a href="#worker-safety">Worker Safety</a></li>
+        <li class="toc-depth-3"><a href="#personal-protective-equipment">Personal Protective Equipment</a></li>
+        <li class="toc-depth-3"><a href="#exposure-limits-osha-pel">Exposure Limits (OSHA PEL)</a></li>
+        <li class="toc-depth-3"><a href="#medical-surveillance">Medical Surveillance</a></li>
+        <li class="toc-depth-2"><a href="#environmental-compliance">Environmental Compliance</a></li>
+        <li class="toc-depth-3"><a href="#air-emissions">Air Emissions</a></li>
+        <li class="toc-depth-3"><a href="#water-discharge">Water Discharge</a></li>
+        <li class="toc-depth-3"><a href="#waste-management">Waste Management</a></li>
+        <li class="toc-depth-3"><a href="#energy-carbon-footprint">Energy &amp; Carbon Footprint</a></li>
+        <li class="toc-depth-2"><a href="#cost-breakdown-by-alloy">Cost Breakdown by Alloy</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-5000-11830metric-ton">AlNiCyN-5000: $11,830/metric ton</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-7000-168900metric-ton">AlNiCyN-7000: $168,900/metric ton</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-x-320000kg">AlNiCyN-X: $320,000/kg</a></li>
+        <li class="toc-depth-2"><a href="#market-analysis">Market Analysis</a></li>
+        <li class="toc-depth-3"><a href="#addressable-markets">Addressable Markets</a></li>
+        <li class="toc-depth-4"><a href="#military-ground-vehicles_1">Military Ground Vehicles</a></li>
+        <li class="toc-depth-4"><a href="#personal-protection_1">Personal Protection</a></li>
+        <li class="toc-depth-4"><a href="#aerospace-defense">Aerospace &amp; Defense</a></li>
+        <li class="toc-depth-3"><a href="#competitive-analysis">Competitive Analysis</a></li>
+        <li class="toc-depth-4"><a href="#direct-competitors">Direct Competitors</a></li>
+        <li class="toc-depth-4"><a href="#competitive-positioning">Competitive Positioning</a></li>
+        <li class="toc-depth-2"><a href="#business-model">Business Model</a></li>
+        <li class="toc-depth-3"><a href="#revenue-streams">Revenue Streams</a></li>
+        <li class="toc-depth-3"><a href="#pricing-strategy">Pricing Strategy</a></li>
+        <li class="toc-depth-2"><a href="#investment-requirements">Investment Requirements</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-5000-production-facility">AlNiCyN-5000 Production Facility</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-7000-development">AlNiCyN-7000 Development</a></li>
+        <li class="toc-depth-3"><a href="#alnicyn-x-research-program">AlNiCyN-X Research Program</a></li>
+        <li class="toc-depth-2"><a href="#financial-projections-alnicyn-5000">Financial Projections (AlNiCyN-5000)</a></li>
+        <li class="toc-depth-3"><a href="#10-year-forecast">10-Year Forecast</a></li>
+        <li class="toc-depth-2"><a href="#overall-timeline">Overall Timeline</a></li>
+        <li class="toc-depth-2"><a href="#alnicyn-5000-roadmap-trl-79">AlNiCyN-5000 Roadmap (TRL 7→9)</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-optimization-2026-2027">Phase 1: Optimization (2026-2027)</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-pilot-production-2027-2028">Phase 2: Pilot Production (2027-2028)</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-full-production-2029">Phase 3: Full Production (2029+)</a></li>
+        <li class="toc-depth-2"><a href="#alnicyn-7000-roadmap-trl-49">AlNiCyN-7000 Roadmap (TRL 4→9)</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-advanced-development-2027-2030">Phase 1: Advanced Development (2027-2030)</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-engineering-development-2030-2032">Phase 2: Engineering Development (2030-2032)</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-production-readiness-2032-2034">Phase 3: Production Readiness (2032-2034)</a></li>
+        <li class="toc-depth-2"><a href="#alnicyn-x-roadmap-trl-27">AlNiCyN-X Roadmap (TRL 2→7)</a></li>
+        <li class="toc-depth-3"><a href="#phase-1-fundamental-research-2030-2035">Phase 1: Fundamental Research (2030-2035)</a></li>
+        <li class="toc-depth-3"><a href="#phase-2-integration-science-2035-2040">Phase 2: Integration Science (2035-2040)</a></li>
+        <li class="toc-depth-3"><a href="#phase-3-engineering-development-2040-2045">Phase 3: Engineering Development (2040-2045)</a></li>
+        <li class="toc-depth-2"><a href="#technology-transfer-strategy">Technology Transfer Strategy</a></li>
+        <li class="toc-depth-3"><a href="#domestic-production">Domestic Production</a></li>
+        <li class="toc-depth-3"><a href="#international-partnerships">International Partnerships</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-glossary">Appendix A: Glossary</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-conversion-factors">Appendix B: Conversion Factors</a></li>
+        <li class="toc-depth-2"><a href="#appendix-c-contact-information">Appendix C: Contact Information</a></li>
+        <li class="toc-depth-2"><a href="#appendix-d-references">Appendix D: References</a></li>
+        <li class="toc-depth-2"><a href="#document-revision-history">Document Revision History</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">AlNiCyN Complete Alloy Family</h1>
+          <p class="doc-meta">Weapons\Aluminium Alloys for Armour.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Document Version</strong>: 2.0<br/>
+<strong>Classification</strong>: Technical Specification<br/>
+<strong>Date</strong>: March 2026<br/>
+<strong>Author</strong>: Advanced Materials Division</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <h2 id="comprehensive-technical-reference-for-advanced-aluminum-based-armor-alloys"><em>Comprehensive Technical Reference for Advanced Aluminum-Based Armor Alloys</em></h2>
-<p><strong>Document Version</strong>: 2.0<br />
-<strong>Classification</strong>: Technical Specification<br />
-<strong>Date</strong>: March 2026<br />
+<p><strong>Document Version</strong>: 2.0<br/>
+<strong>Classification</strong>: Technical Specification<br/>
+<strong>Date</strong>: March 2026<br/>
 <strong>Author</strong>: Advanced Materials Division</p>
-<hr />
-<h1 id="table-of-contents">Table of Contents</h1>
+<hr/>
+
 <ol>
 <li><a href="#executive-overview">Executive Overview</a></li>
 <li><a href="#alnicyn-5000-base-alloy">AlNiCyN-5000 (Base Alloy)</a></li>
@@ -34,8 +264,8 @@
 <li><a href="#development-roadmap">Development Roadmap</a></li>
 <li><a href="#appendices">Appendices</a></li>
 </ol>
-<hr />
-<h1 id="executive-overview">Executive Overview</h1>
+<hr/>
+
 <p>The <strong>AlNiCyN Family</strong> represents a comprehensive suite of aluminum-based armor alloys designed to provide rolled homogeneous armor (RHA) equivalent performance at significant weight reduction. The family consists of three distinct alloy systems, each targeting different application requirements and technology readiness levels.</p>
 <h2 id="family-architecture">Family Architecture</h2>
 <pre><code>AlNiCyN-5000 (BASELINE)
@@ -66,8 +296,8 @@ AlNiCyN-X (METAMATERIAL)
 <li><strong>AlNiCyN-7000</strong>: 5-7 year development timeline for specialized applications</li>
 <li><strong>AlNiCyN-X</strong>: 10-15 year fundamental research for transformational capability</li>
 </ul>
-<hr />
-<h1 id="alnicyn-5000-base-alloy">AlNiCyN-5000 (Base Alloy)</h1>
+<hr/>
+
 <h2 id="overview">Overview</h2>
 <p>AlNiCyN-5000 is the foundation alloy designed for immediate military adoption. It leverages proven aluminum metallurgy combined with aluminum nitride precipitation hardening and controlled nitrogen processing.</p>
 <h2 id="composition">Composition</h2>
@@ -320,14 +550,14 @@ TOTAL COST: $11,830/metric ton
 <li><strong>Weight Savings Value</strong>: $50,000-100,000/ton for aerospace/defense</li>
 </ul>
 <h3 id="break-even-analysis">Break-Even Analysis</h3>
-<p>For a 20-ton armored vehicle:<br />
-- Steel RHA cost: $76,000 (material only)<br />
-- AlNiCyN-5000 cost: $236,600 (material only)<br />
-- Fuel savings (10-year): $180,000+<br />
-- Performance value: Enhanced mobility, range, payload<br />
+<p>For a 20-ton armored vehicle:
+- Steel RHA cost: $76,000 (material only)
+- AlNiCyN-5000 cost: $236,600 (material only)
+- Fuel savings (10-year): $180,000+
+- Performance value: Enhanced mobility, range, payload
 - <strong>Total value</strong>: $400,000+ lifecycle savings</p>
-<hr />
-<h1 id="alnicyn-7000-high-performance">AlNiCyN-7000 (High-Performance)</h1>
+<hr/>
+
 <h2 id="overview_1">Overview</h2>
 <p>AlNiCyN-7000 represents an advanced development incorporating exotic alloying elements, surface cyaniding treatment, and optimized processing for maximum performance in critical defense applications.</p>
 <h2 id="composition_1">Composition</h2>
@@ -853,8 +1083,8 @@ Net Cost Premium: $1,189,450
 Lifecycle Savings: $470,000+
 Intangible Value:  Superior tactical mobility
 </code></pre>
-<hr />
-<h1 id="alnicyn-x-experimental-metamaterial">AlNiCyN-X (Experimental Metamaterial)</h1>
+<hr/>
+
 <h2 id="overview_2">Overview</h2>
 <p>AlNiCyN-X represents a revolutionary research platform combining advanced nanomaterials (graphene, carbyne, quantum dots) with metamaterial architecture for breakthrough performance. This is a 10-15 year development program targeting transformational capabilities.</p>
 <p><strong>Technology Readiness Level</strong>: TRL 2-3 (Proof of concept)</p>
@@ -1112,8 +1342,8 @@ Ultimate:         Maybe $2k/kg for defense (speculative)
   - Regulatory approvals
   - Supply chain establishment
 </code></pre>
-<hr />
-<h1 id="comparative-analysis">Comparative Analysis</h1>
+<hr/>
+
 <h2 id="property-comparison-matrix">Property Comparison Matrix</h2>
 <table>
 <thead>
@@ -1273,10 +1503,10 @@ Performance = (Strength × RHA Equiv) / (Density × Cost)
 </tr>
 </tbody>
 </table>
-<p><strong>Legend:</strong><br />
-- ✓✓✓ Optimal choice<br />
-- ✓✓ Good fit<br />
-- ✓ Acceptable<br />
+<p><strong>Legend:</strong>
+- ✓✓✓ Optimal choice
+- ✓✓ Good fit
+- ✓ Acceptable
 - ✗ Not suitable</p>
 <h2 id="weight-savings-comparison">Weight Savings Comparison</h2>
 <p><strong>For 25mm RHA Equivalent Protection:</strong></p>
@@ -1316,8 +1546,8 @@ Performance = (Strength × RHA Equiv) / (Density × Cost)
 </tr>
 </tbody>
 </table>
-<hr />
-<h1 id="material-selection-guide">Material Selection Guide</h1>
+<hr/>
+
 <h2 id="decision-tree">Decision Tree</h2>
 <pre><code>START: What is your application?
 
@@ -1430,8 +1660,8 @@ Performance = (Strength × RHA Equiv) / (Density × Cost)
 </tr>
 </tbody>
 </table>
-<hr />
-<h1 id="common-processing-technologies">Common Processing Technologies</h1>
+<hr/>
+
 <h2 id="melting-casting">Melting &amp; Casting</h2>
 <h3 id="vacuum-induction-melting-vim">Vacuum Induction Melting (VIM)</h3>
 <pre><code>Principle:        Induction heating in vacuum/controlled atmosphere
@@ -1594,8 +1824,8 @@ Limitations:
   - Equipment more expensive
   - Still under development for Al
 </code></pre>
-<hr />
-<h1 id="quality-standards-testing">Quality Standards &amp; Testing</h1>
+<hr/>
+
 <h2 id="industry-standards-compliance">Industry Standards Compliance</h2>
 <h3 id="military-standards">Military Standards</h3>
 <pre><code>MIL-DTL-12560:  Armor Plate, Steel, Wrought, Homogeneous
@@ -1811,8 +2041,8 @@ Microstructure:
   Case Depth:       0.5-1.0mm effective
   Inclusions:       &lt;B2 (ASTM E45)
 </code></pre>
-<hr />
-<h1 id="safety-environmental">Safety &amp; Environmental</h1>
+<hr/>
+
 <h2 id="hazardous-materials-management">Hazardous Materials Management</h2>
 <h3 id="scandium-handling">Scandium Handling</h3>
 <pre><code>Hazard Class:     Flammable solid (powder)
@@ -1987,8 +2217,8 @@ Comparison:
   Net Benefit:        -11% CO₂ per ton
                       -75% CO₂ per unit protection (weight basis)
 </code></pre>
-<hr />
-<h1 id="economic-analysis_2">Economic Analysis</h1>
+<hr/>
+
 <h2 id="cost-breakdown-by-alloy">Cost Breakdown by Alloy</h2>
 <h3 id="alnicyn-5000-11830metric-ton">AlNiCyN-5000: $11,830/metric ton</h3>
 <pre><code>Raw Materials (82%):           $9,650
@@ -2112,17 +2342,17 @@ Advanced Aluminum (current):
 </code></pre>
 <h4 id="competitive-positioning">Competitive Positioning</h4>
 <pre><code>AlNiCyN-5000:
-  Position:         &quot;Affordable weight reduction&quot;
+  Position:         "Affordable weight reduction"
   Differentiation:  60% weight savings at reasonable cost
   Target:           Mainstream military procurement
 
 AlNiCyN-7000:
-  Position:         &quot;Ultimate performance&quot;
+  Position:         "Ultimate performance"
   Differentiation:  Maximum capability for critical systems
   Target:           Special operations, aerospace, premium
 
 AlNiCyN-X:
-  Position:         &quot;Revolutionary capability&quot;
+  Position:         "Revolutionary capability"
   Differentiation:  Enables impossible missions
   Target:           DARPA, space, long-term research
 </code></pre>
@@ -2238,8 +2468,8 @@ Year 6-10 (Mature):
   Net:              +$8M/year
   Cumulative:       Breakeven year 7
 </code></pre>
-<hr />
-<h1 id="development-roadmap_1">Development Roadmap</h1>
+<hr/>
+
 <h2 id="overall-timeline">Overall Timeline</h2>
 <pre><code>2026-2030: AlNiCyN-5000 Development &amp; Production
 2027-2034: AlNiCyN-7000 Development &amp; Production
@@ -2473,8 +2703,8 @@ Export Controls:
   - End-use certificates
   - Government-to-government sales
 </code></pre>
-<hr />
-<h1 id="appendices">Appendices</h1>
+<hr/>
+
 <h2 id="appendix-a-glossary">Appendix A: Glossary</h2>
 <pre><code>Age Hardening:      Precipitation strengthening at elevated temperature
 AlN:                Aluminum nitride (hardening phase)
@@ -2568,13 +2798,13 @@ Purpose:    Chemical spills, exposures, fires
 5. ASTM E399 - Standard Test Method for Plane-Strain Fracture Toughness
 
 TECHNICAL LITERATURE:
-1. &quot;Aluminum and Aluminum Alloys&quot; ASM Specialty Handbook (1993)
-2. &quot;Physical Metallurgy of Aluminum Alloys&quot; Mondolfo (1976)
-3. &quot;Precipitation Hardening&quot; Gladman (1997)
-4. &quot;Rolled Homogeneous Armor&quot; DTIC Report ADA329222 (1997)
-5. &quot;Graphene Reinforced Metal Matrix Composites&quot; Int. J. Adv. Manuf. Tech. (2023)
-6. &quot;Carbyne: Linear Carbon Chains&quot; Nature Materials 15, 634-639 (2016)
-7. &quot;Auxetic Materials and Structures&quot; Smart Mater. Struct. (2018)
+1. "Aluminum and Aluminum Alloys" ASM Specialty Handbook (1993)
+2. "Physical Metallurgy of Aluminum Alloys" Mondolfo (1976)
+3. "Precipitation Hardening" Gladman (1997)
+4. "Rolled Homogeneous Armor" DTIC Report ADA329222 (1997)
+5. "Graphene Reinforced Metal Matrix Composites" Int. J. Adv. Manuf. Tech. (2023)
+6. "Carbyne: Linear Carbon Chains" Nature Materials 15, 634-639 (2016)
+7. "Auxetic Materials and Structures" Smart Mater. Struct. (2018)
 
 SAFETY RESOURCES:
 1. OSHA 29 CFR 1910.1000 - Air Contaminants
@@ -2582,7 +2812,7 @@ SAFETY RESOURCES:
 3. NIOSH Pocket Guide to Chemical Hazards
 4. EPA 40 CFR - Environmental Regulations
 </code></pre>
-<hr />
+<hr/>
 <h2 id="document-revision-history">Document Revision History</h2>
 <pre><code>Version 1.0 - January 2026
   - Initial release
@@ -2596,9 +2826,34 @@ Version 2.0 - March 2026
   - Development roadmap for all three alloys
   - Economic analysis and business model
 </code></pre>
-<hr />
+<hr/>
 <p><strong>END OF DOCUMENT</strong></p>
 <p><em>This technical reference is provided for informational purposes. All specifications subject to change. Consult with AlNiCyN technical support for current information and application-specific guidance.</em></p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

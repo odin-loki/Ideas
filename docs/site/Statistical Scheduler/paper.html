@@ -3,23 +3,93 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper</title>
+  <meta name="description" content="We present a distributed task scheduler for heterogeneous compute clusters that integrates three complementary control mechanisms: a statistical variant of the Completely Fair Scheduler \(CFS\) for fairness, a Linear Thompson Sampling \(LinTS\) contextual bandit for learned…"/>
+  <title>A Neural-Heuristic Distributed Task Scheduler · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Scheduler\paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>A Neural-Heuristic Distributed Task Scheduler</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-related-work">2. Related Work</a></li>
+        <li class="toc-depth-2"><a href="#21-classical-schedulers">2.1 Classical Schedulers</a></li>
+        <li class="toc-depth-2"><a href="#22-learning-based-schedulers">2.2 Learning-Based Schedulers</a></li>
+        <li class="toc-depth-2"><a href="#23-monitoring-and-anomaly-detection">2.3 Monitoring and Anomaly Detection</a></li>
+        <li class="toc-depth-2"><a href="#3-system-architecture">3. System Architecture</a></li>
+        <li class="toc-depth-2"><a href="#31-scheduling-pipeline">3.1 Scheduling Pipeline</a></li>
+        <li class="toc-depth-2"><a href="#32-data-model">3.2 Data Model</a></li>
+        <li class="toc-depth-2"><a href="#4-fairness-cfs-statistical-model">4. Fairness: CFS Statistical Model</a></li>
+        <li class="toc-depth-2"><a href="#41-virtual-runtime-accounting">4.1 Virtual Runtime Accounting</a></li>
+        <li class="toc-depth-2"><a href="#42-new-task-initialisation">4.2 New-Task Initialisation</a></li>
+        <li class="toc-depth-2"><a href="#43-composite-placement-score">4.3 Composite Placement Score</a></li>
+        <li class="toc-depth-2"><a href="#5-learned-placement-linear-thompson-sampling">5. Learned Placement: Linear Thompson Sampling</a></li>
+        <li class="toc-depth-2"><a href="#51-bayesian-linear-model">5.1 Bayesian Linear Model</a></li>
+        <li class="toc-depth-2"><a href="#52-sherman-morrison-update">5.2 Sherman-Morrison Update</a></li>
+        <li class="toc-depth-2"><a href="#53-thompson-sampling-and-regret">5.3 Thompson Sampling and Regret</a></li>
+        <li class="toc-depth-2"><a href="#54-feature-engineering">5.4 Feature Engineering</a></li>
+        <li class="toc-depth-2"><a href="#55-reward-signal">5.5 Reward Signal</a></li>
+        <li class="toc-depth-2"><a href="#56-confidence-and-cfs-fallback">5.6 Confidence and CFS Fallback</a></li>
+        <li class="toc-depth-2"><a href="#6-load-balancing-pid-controller">6. Load Balancing: PID Controller</a></li>
+        <li class="toc-depth-2"><a href="#61-control-law">6.1 Control Law</a></li>
+        <li class="toc-depth-2"><a href="#62-stability-analysis">6.2 Stability Analysis</a></li>
+        <li class="toc-depth-2"><a href="#7-monitoring-subsystem">7. Monitoring Subsystem</a></li>
+        <li class="toc-depth-2"><a href="#71-holt-winters-forecasting">7.1 Holt-Winters Forecasting</a></li>
+        <li class="toc-depth-2"><a href="#72-cusum-change-point-detection">7.2 CUSUM Change-Point Detection</a></li>
+        <li class="toc-depth-2"><a href="#73-ewma-adaptive-thresholding">7.3 EWMA Adaptive Thresholding</a></li>
+        <li class="toc-depth-2"><a href="#74-period-estimation">7.4 Period Estimation</a></li>
+        <li class="toc-depth-2"><a href="#8-empirical-evaluation">8. Empirical Evaluation</a></li>
+        <li class="toc-depth-2"><a href="#81-methodology">8.1 Methodology</a></li>
+        <li class="toc-depth-2"><a href="#82-scheduling-latency">8.2 Scheduling Latency</a></li>
+        <li class="toc-depth-2"><a href="#83-fairness">8.3 Fairness</a></li>
+        <li class="toc-depth-2"><a href="#84-lints-convergence">8.4 LinTS Convergence</a></li>
+        <li class="toc-depth-2"><a href="#85-monitoring-cusum-performance">8.5 Monitoring: CUSUM Performance</a></li>
+        <li class="toc-depth-2"><a href="#86-monitoring-holt-winters-forecasting">8.6 Monitoring: Holt-Winters Forecasting</a></li>
+        <li class="toc-depth-2"><a href="#87-monitoring-zscore-anomaly-detection">8.7 Monitoring: ZScore Anomaly Detection</a></li>
+        <li class="toc-depth-2"><a href="#88-batchoptimiser-scaling">8.8 BatchOptimiser Scaling</a></li>
+        <li class="toc-depth-2"><a href="#9-discussion-and-limitations">9. Discussion and Limitations</a></li>
+        <li class="toc-depth-2"><a href="#91-design-trade-offs">9.1 Design Trade-offs</a></li>
+        <li class="toc-depth-2"><a href="#92-known-limitations">9.2 Known Limitations</a></li>
+        <li class="toc-depth-2"><a href="#93-future-work">9.3 Future Work</a></li>
+        <li class="toc-depth-2"><a href="#10-conclusion">10. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">A Neural-Heuristic Distributed Task Scheduler</h1>
+          <p class="doc-meta">Statistical Scheduler\paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We present a distributed task scheduler for heterogeneous compute clusters that integrates three complementary control mechanisms: a statistical variant of the Completely Fair Scheduler (CFS) for fairness, a Linear Thompson Sampling (LinTS) contextual bandit for learned placement quality, and a discrete-time PID controller for load balance. The system is implemented as an asynchronous Python framework and includes a companion monitoring subsystem comprising Holt-Winters triple exponential smoothing, Page-Hinkley CUSUM change-point detection, and EWMA-based adaptive thresholding. We derive formal guarantees for each component — including an O(d√T · polylog T) regret bound for LinTS and a BIBO stability argument for the PID controller — and validate them empirically. Across 500 scheduling decisions on a 16-node simulated cluster, the system achieves sub-millisecond median placement latency (p50 = 0.48 ms, p99 = 1.00 ms), 100% placement rate under representative load, and a Jain fairness index of 1.00. The monitoring subsystem achieves a median change-point detection latency of 3 samples at a +3σ shift, with an empirical average run length under the null (ARL<em>0</em>) of 3,485 steps. All source code is released as open-source.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
 <p><em>Combining Completely Fair Scheduling, Linear Thompson Sampling, and Real-Time Anomaly Detection</em></p>
 <p><strong>Odin Loki</strong></p>
 <p><em>Independent Defence Research</em></p>
-<p><strong>Abstract</strong></p>
+<h2 id="abstract">Abstract</h2>
 <p>We present a distributed task scheduler for heterogeneous compute clusters that integrates three complementary control mechanisms: a statistical variant of the Completely Fair Scheduler (CFS) for fairness, a Linear Thompson Sampling (LinTS) contextual bandit for learned placement quality, and a discrete-time PID controller for load balance. The system is implemented as an asynchronous Python framework and includes a companion monitoring subsystem comprising Holt-Winters triple exponential smoothing, Page-Hinkley CUSUM change-point detection, and EWMA-based adaptive thresholding. We derive formal guarantees for each component — including an O(d√T · polylog T) regret bound for LinTS and a BIBO stability argument for the PID controller — and validate them empirically. Across 500 scheduling decisions on a 16-node simulated cluster, the system achieves sub-millisecond median placement latency (p50 = 0.48 ms, p99 = 1.00 ms), 100% placement rate under representative load, and a Jain fairness index of 1.00. The monitoring subsystem achieves a median change-point detection latency of 3 samples at a +3σ shift, with an empirical average run length under the null (ARL<em>0</em>) of 3,485 steps. All source code is released as open-source.</p>
-<p><strong><em>Keywords:</em></strong><em> distributed scheduling; contextual bandits; Thompson sampling; Holt-Winters; CUSUM; PID control; resource management</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> distributed scheduling; contextual bandits; Thompson sampling; Holt–Winters; CUSUM; PID control; resource management</p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Cluster schedulers face a fundamental trilemma: they must simultaneously maximise resource utilisation (packing), enforce fairness across workloads (scheduling equity), and respond to dynamic load changes (stability). Classical schedulers typically optimise for at most two of these objectives. FIFO schedulers and priority queues are stable but neither fair nor packing-optimal. Best-Fit Decreasing approaches improve utilisation but ignore fairness. The Linux Completely Fair Scheduler achieves strong fairness guarantees within a single host but was not designed for placement decisions across a heterogeneous multi-node cluster.</p>
 <p>Online learning approaches — particularly multi-armed bandit algorithms — offer a principled way to learn placement policies from feedback without requiring a known workload distribution. However, vanilla bandit methods do not enforce hard constraints (resource feasibility, anti-affinity) and provide no fairness or stability guarantees on their own. This paper presents a scheduler that achieves all three objectives by composing three independently-validated mechanisms into a unified pipeline.</p>
 <p>The system makes the following contributions:</p>
@@ -29,33 +99,33 @@
 <p>• A monitoring subsystem combining Holt-Winters forecasting, Page-Hinkley CUSUM change-point detection, EWMA-based adaptive alerting, and ACF-based period estimation.</p>
 <p>• Extensive empirical validation across five profiling passes totalling over 80 targeted test cases, including adversarial numerical stability, concurrency, and long-run convergence tests.</p>
 <p>The remainder of this paper is structured as follows. Section 2 surveys related work. Section 3 presents the system architecture. Sections 4 through 7 describe the four core components. Section 8 presents empirical evaluation. Section 9 discusses limitations and future work. Section 10 concludes.</p>
-<h1 id="2-related-work"><strong>2. Related Work</strong></h1>
-<h2 id="21-classical-schedulers"><strong><em>2.1 Classical Schedulers</em></strong></h2>
+<h2 id="2-related-work">2. Related Work</h2>
+<h2 id="21-classical-schedulers"><em>2.1 Classical Schedulers</em></h2>
 <p>The Linux Completely Fair Scheduler [Molnar 2007] maintains a red-black tree of tasks ordered by virtual runtime. The scheduler always runs the task with the minimum vruntime, weighted by task priority. This achieves proportional fairness but is designed for a single CPU's run queue; it makes no placement decisions across a cluster. Our work adapts the vruntime accounting mechanism to score nodes for a distributed placement problem, using a smooth reciprocal gap function rather than the binary min-vruntime selection of the original.</p>
 <p>Apache Mesos [Hindman et al. 2011] and YARN [Vavilapalli et al. 2013] separate resource management from scheduling through a two-level architecture. Kubernetes [Burns et al. 2016] introduced a pluggable scheduler framework with built-in support for node affinity, anti-affinity, and taints. These systems operate at higher abstraction levels than the placement-scoring layer we describe and are complementary: our system can serve as the scoring backend for a Kubernetes scheduler extender.</p>
-<h2 id="22-learning-based-schedulers"><strong><em>2.2 Learning-Based Schedulers</em></strong></h2>
+<h2 id="22-learning-based-schedulers"><em>2.2 Learning-Based Schedulers</em></h2>
 <p>Decima [Mao et al. 2019] uses deep reinforcement learning on a graph neural network over job DAGs to learn scheduling policies for Spark workloads. Paragon [Delimitrou &amp; Kozyrakis 2013] applies collaborative filtering to predict performance interference between co-located jobs. DeepRM [Mao et al. 2016] trains a policy network via REINFORCE on a simulation of bin-packing problems. These approaches deliver strong empirical performance but require expensive offline pretraining, are sensitive to distribution shift at deployment time, and provide no formal regret guarantees.</p>
 <p>Our use of Thompson Sampling for scheduling is most closely related to work on contextual bandits for resource allocation. Agrawal and Goyal [2013] prove the O(d√T · polylog T) regret bound for linear Thompson Sampling that we rely on. Li et al. [2010] apply LinUCB (the optimistic analogue of LinTS) to online recommendation; our system applies the Thompson variant for its natural Bayesian posterior, which provides a principled confidence measure for the CFS fallback mechanism.</p>
-<h2 id="23-monitoring-and-anomaly-detection"><strong><em>2.3 Monitoring and Anomaly Detection</em></strong></h2>
+<h2 id="23-monitoring-and-anomaly-detection"><em>2.3 Monitoring and Anomaly Detection</em></h2>
 <p>Holt-Winters exponential smoothing [Winters 1960; Hyndman &amp; Athanasopoulos 2018] is a foundational method for time-series forecasting with seasonal structure. It is widely used in operational monitoring (Graphite, Prometheus Thanos) but typically with manually tuned parameters. The Page-Hinkley CUSUM [Page 1954; Hinkley 1971] is the standard sequential change-point detector, with well-understood ARL characteristics under Gaussian and sub-Gaussian distributions. We compose both into a unified per-metric PatternDetector with lazy initialisation and NaN-guard semantics.</p>
-<h1 id="3-system-architecture"><strong>3. System Architecture</strong></h1>
+<h2 id="3-system-architecture">3. System Architecture</h2>
 <p>The system comprises two modules operating within a single asyncio event loop. The scheduler module (scheduler_core.py) accepts task submission requests and returns node placement decisions. The monitoring module (monitoring_system.py) ingests metric time series and dispatches alerts and recovery actions. Communication between modules is via shared Python objects; no network I/O is required for co-located deployments.</p>
-<h2 id="31-scheduling-pipeline"><strong><em>3.1 Scheduling Pipeline</em></strong></h2>
+<h2 id="31-scheduling-pipeline"><em>3.1 Scheduling Pipeline</em></h2>
 <p>Every call to schedule(task) executes an eight-stage pipeline. (1) Dependency gate: tasks with dep_count &gt; 0 are immediately rejected. (2) Candidate filtering: nodes are filtered against health, anti-affinity, and resource headroom hard constraints. (3) Pre-placement snapshot: each candidate node's available resource vector is captured before modification. (4) Feature engineering: a 24-dimensional context vector φ is constructed for each (task, node) pair. (5) Ranking: if LinTS posterior confidence exceeds a threshold Θ = 0.70, candidates are ranked by Thompson sampling; otherwise the CFS composite score is used. (6) PID override: if the chosen node's utilisation deviation exceeds 0.15, the second-ranked candidate is substituted. (7) Commit: resources are deducted under a per-node asyncio.Lock. (8) Async reward update: a background coroutine computes the reward and updates the LinTS posterior without blocking the caller.</p>
-<h2 id="32-data-model"><strong><em>3.2 Data Model</em></strong></h2>
+<h2 id="32-data-model"><em>3.2 Data Model</em></h2>
 <p>Tasks are described by a resource requirement vector in [0,1]^R (fractions of node capacity), an integer priority, a deadline timestamp, affinity and anti-affinity label sets, and a dependency count. Nodes expose an available resource vector, a label set, and a continuous health score in [0,1]. Resource requirements use fractions of node capacity rather than absolute units, making placement logic independent of heterogeneous hardware specifications. NodeState performs deep copies of both the available dict and the labels set at construction, preventing external mutation from corrupting scheduler state.</p>
-<h1 id="4-fairness-cfs-statistical-model"><strong>4. Fairness: CFS Statistical Model</strong></h1>
-<h2 id="41-virtual-runtime-accounting"><strong><em>4.1 Virtual Runtime Accounting</em></strong></h2>
+<h2 id="4-fairness-cfs-statistical-model">4. Fairness: CFS Statistical Model</h2>
+<h2 id="41-virtual-runtime-accounting"><em>4.1 Virtual Runtime Accounting</em></h2>
 <p>We adapt the Linux CFS virtual runtime mechanism to a multi-node placement context. Each scheduled task accumulates vruntime proportional to its wall-clock execution time, normalised by a weight that reflects its CPU demand:</p>
 <p>task_weight = NICE_0_LOAD / max(cpu_req, 0.01)</p>
 <p>Δvruntime  = Δwall_time × NICE_0_LOAD / task_weight</p>
 <p>vruntime[t] += Δvruntime</p>
 <p>where NICE_0_LOAD = 1024 matches the Linux kernel default. CPU-intensive tasks accumulate vruntime rapidly; lightweight tasks accumulate it slowly. The system tracks min_vruntime = min over all active tasks, providing a reference point for fairness scoring.</p>
-<h2 id="42-new-task-initialisation"><strong><em>4.2 New-Task Initialisation</em></strong></h2>
+<h2 id="42-new-task-initialisation"><em>4.2 New-Task Initialisation</em></h2>
 <p>A newly admitted task is assigned a vruntime equal to min_vruntime minus one nominal tick:</p>
 <p>vruntime_new = max(0, min_vruntime − NICE_0_LOAD / task_weight(cpu=0.5))</p>
 <p>This guarantees that the new task has a strictly positive vruntime advantage over any veteran whose gap has decayed to zero — preserving fairness in sparse-workload conditions where only one task has previously run. Without this adjustment, a newly arriving task and a long-running veteran can score identically, violating the CFS fairness invariant.</p>
-<h2 id="43-composite-placement-score"><strong><em>4.3 Composite Placement Score</em></strong></h2>
+<h2 id="43-composite-placement-score"><em>4.3 Composite Placement Score</em></h2>
 <p>Placement decisions use a composite score combining four signals:</p>
 <p>score(task, node) = W_vrt·V + W_fit·F + W_dl·D + W_aff·A</p>
 <p><strong>Component</strong></p>
@@ -80,24 +150,24 @@
 <p>0.10</p>
 <p><em>Table 1. Composite score components. Anti-affinity is a hard constraint enforced at candidate filtering: nodes in the anti-affinity set return −∞ and are excluded.</em></p>
 <p>The V score is a continuous, bounded function in (0, 1] that is maximised for the task with the smallest vruntime and strictly decreasing as the lag grows. The D score uses a logarithmic slack to distinguish between very urgent tasks (slack &lt; 10 s) and far-future deadlines without saturating.</p>
-<h1 id="5-learned-placement-linear-thompson-sampling"><strong>5. Learned Placement: Linear Thompson Sampling</strong></h1>
-<h2 id="51-bayesian-linear-model"><strong><em>5.1 Bayesian Linear Model</em></strong></h2>
+<h2 id="5-learned-placement-linear-thompson-sampling">5. Learned Placement: Linear Thompson Sampling</h2>
+<h2 id="51-bayesian-linear-model"><em>5.1 Bayesian Linear Model</em></h2>
 <p>We model the reward for placing a task with feature vector φ ∈ ℝ<em>d</em> on a node as a linear function of an unknown weight vector w ∈ ℝ<em>d</em>:</p>
 <p>r = wᵀφ + ε,    ε ~ N(0, 1)</p>
 <p>The prior is p(w) = N(0, λ⁻¹I) with ridge parameter λ = 1.0. Given n observations {(φ_i, r_i)}, the posterior is N(μ_n, A_n⁻¹) where:</p>
 <p>A_n = λI + Σ φ_i φ_iᵀ,    b_n = Σ r_i φ_i,    μ_n = A_n⁻¹ b_n</p>
-<h2 id="52-sherman-morrison-update"><strong><em>5.2 Sherman-Morrison Update</em></strong></h2>
+<h2 id="52-sherman-morrison-update"><em>5.2 Sherman-Morrison Update</em></h2>
 <p>Full posterior updates require O(d³) matrix inversion at each step. We use the Sherman-Morrison rank-1 formula to maintain A_n⁻¹ directly in O(d²):</p>
 <p>A_n⁻¹ = A_{n-1}⁻¹ − (A_{n-1}⁻¹ φ)(A_{n-1}⁻¹ φ)ᵀ / (1 + φᵀ A_{n-1}⁻¹ φ)</p>
 <p>Positive definiteness of A_n⁻¹ is guaranteed analytically: since λ &gt; 0 and ΦᵀΦ ⪰ 0, we have A_n ≻ 0 for all n. The Sherman-Morrison update preserves this property at each step. Empirical verification confirms the minimum eigenvalue of A_n⁻¹ remains strictly positive across 10,000 sequential updates under randomised inputs.</p>
 <p>Numerical stability is further ensured by skipping updates when the denominator 1 + φᵀA⁻¹φ falls below 10⁻¹², and by clamping rewards to [−R_MAX, +R_MAX] with R_MAX = 10.0 to prevent outlier observations from dominating the posterior mean.</p>
-<h2 id="53-thompson-sampling-and-regret"><strong><em>5.3 Thompson Sampling and Regret</em></strong></h2>
+<h2 id="53-thompson-sampling-and-regret"><em>5.3 Thompson Sampling and Regret</em></h2>
 <p>At each scheduling decision, a weight vector is sampled from the posterior:</p>
 <p>w̃ ~ N(μ_n, V²·A_n⁻¹),    V = 1.0</p>
 <p>Candidates are scored by w̃ᵀφ and ranked descending. This balances exploration of uncertain placements against exploitation of known-good configurations. By the regret analysis of Agrawal and Goyal [2013], the expected cumulative regret satisfies:</p>
 <p>E[R(T)] = O(d √T · polylog T)</p>
 <p>where d = 24 is the feature dimension and T is the number of scheduling decisions. This is near-optimal: the lower bound for any algorithm is Ω(d√T).</p>
-<h2 id="54-feature-engineering"><strong><em>5.4 Feature Engineering</em></strong></h2>
+<h2 id="54-feature-engineering"><em>5.4 Feature Engineering</em></h2>
 <p>The 24-dimensional context vector φ encodes node state, task requirements, and system-level signals. Let R = {cpu, memory, network, disk, gpu, io} denote the canonical resource set (|R| = 6).</p>
 <p><strong>Dims</strong></p>
 <p><strong>Value</strong></p>
@@ -133,18 +203,18 @@
 <p>0</p>
 <p>Reserved (zero-padded)</p>
 <p><em>Table 2. Feature vector φ ∈ ℝ²⁴. Missing resources default to 0 for availability and the task's stated demand for requirements.</em></p>
-<h2 id="55-reward-signal"><strong><em>5.5 Reward Signal</em></strong></h2>
+<h2 id="55-reward-signal"><em>5.5 Reward Signal</em></h2>
 <p>After each placement, a background coroutine computes the reward using a pre-placement snapshot of node resources:</p>
 <p>util_reward = clip(post_util − pre_util, 0, 1)</p>
 <p>dl_reward   = 1 / (1 + ln(1 + slack))</p>
 <p>reward      = 0.5 · util_reward + 0.5 · dl_reward</p>
 <p>where util is the mean utilisation across the task's own resource dimensions only, computed before and after the placement. Using the pre-placement snapshot — rather than querying node state after the commit — ensures the reward measures the causal effect of the placement decision rather than subsequent state changes.</p>
-<h2 id="56-confidence-and-cfs-fallback"><strong><em>5.6 Confidence and CFS Fallback</em></strong></h2>
+<h2 id="56-confidence-and-cfs-fallback"><em>5.6 Confidence and CFS Fallback</em></h2>
 <p>The posterior uncertainty is summarised as:</p>
 <p>confidence = 1 / (1 + tr(A_n⁻¹))</p>
 <p>This is a decreasing function of total posterior variance, ranging from 0 (wide prior, no observations) toward 1 asymptotically. The scheduler uses LinTS for ranking only when confidence ≥ 0.70; below this threshold it falls back to the CFS score. This prevents the bandit from acting on an uninformed prior at system startup, when the first few placements would otherwise be effectively random.</p>
-<h1 id="6-load-balancing-pid-controller"><strong>6. Load Balancing: PID Controller</strong></h1>
-<h2 id="61-control-law"><strong><em>6.1 Control Law</em></strong></h2>
+<h2 id="6-load-balancing-pid-controller">6. Load Balancing: PID Controller</h2>
+<h2 id="61-control-law"><em>6.1 Control Law</em></h2>
 <p>After LinTS ranks candidates, a PID controller inspects the top-ranked node's current utilisation against configured targets. If any resource deviates by more than δ = 0.15, the second-ranked candidate is used instead.</p>
 <p>The controller tracks separate error states for each resource metric m. The discrete-time control law uses variable time deltas Δt between updates:</p>
 <p>e[t]     = target[m] − util[m]</p>
@@ -152,12 +222,12 @@
 <p>d_term   = clamp((e[t] − e[t−1]) / Δt, ±D_MAX)</p>
 <p>u[t]     = Kp·e[t] + Ki·I[t] + Kd·d_term</p>
 <p>with defaults Kp = 0.5, Ki = 0.1, Kd = 0.2, D_MAX = 10.0, windup_limit = 10.0.</p>
-<h2 id="62-stability-analysis"><strong><em>6.2 Stability Analysis</em></strong></h2>
+<h2 id="62-stability-analysis"><em>6.2 Stability Analysis</em></h2>
 <p>The integral term uses per-step e·Δt accumulation (trapezoidal discretisation) rather than ∑e × current_Δt, which is incorrect under variable sampling intervals and produces unbounded integral growth when Δt is large.</p>
 <p>Anti-windup clamping of I[t] to ±windup_limit ensures the integral term remains bounded. With bounded utilisation input u[t] ∈ [0, 1] and a bounded integral, the controller is unconditionally BIBO (Bounded Input Bounded Output) stable: |output| ≤ Kp + Ki·windup_limit + Kd·D_MAX = 0.5 + 1.0 + 2.0 = 3.5.</p>
 <p>The derivative clamp at ±D_MAX = 10.0 addresses a specific numerical pathology: at system startup or after a stalled event loop tick, the time delta Δt may be as small as 1 μs. Without clamping, d_term = Kd·e/Δt reaches 40,000× its steady-state value, producing a correction spike that can invert the ranking of all candidates. The clamp eliminates this without introducing discontinuous control signals.</p>
-<h1 id="7-monitoring-subsystem"><strong>7. Monitoring Subsystem</strong></h1>
-<h2 id="71-holt-winters-forecasting"><strong><em>7.1 Holt-Winters Forecasting</em></strong></h2>
+<h2 id="7-monitoring-subsystem">7. Monitoring Subsystem</h2>
+<h2 id="71-holt-winters-forecasting"><em>7.1 Holt-Winters Forecasting</em></h2>
 <p>The monitoring subsystem maintains a Holt-Winters additive exponential smoothing model for each tracked metric. The additive form [Hyndman &amp; Athanasopoulos 2018, §8.5] decomposes the series into level l, trend b, and seasonal component s with period m:</p>
 <p>l[t] = α·(y[t] − s[t−m]) + (1−α)·(l[t−1] + b[t−1])</p>
 <p>b[t] = β·(l[t] − l[t−1])  + (1−β)·b[t−1]</p>
@@ -168,7 +238,7 @@
 <p>σ²_h ≈ σ²_ε · (1 + (h−1)·(α + β·h)²)</p>
 <p>95% PI: ŷ[t+h] ± 1.96·√σ²_h</p>
 <p>The model initialises from the first m observations by bootstrapping: level from the mean, trend from the OLS slope, and seasonal indices as mean deviations from the level. Before initialisation, forecast() returns (NaN, NaN) — callers can always distinguish pre-initialisation from a genuine near-zero prediction. Non-finite inputs (NaN, Inf) are silently dropped, preventing a single corrupted sensor reading from permanently corrupting the model state.</p>
-<h2 id="72-cusum-change-point-detection"><strong><em>7.2 CUSUM Change-Point Detection</em></strong></h2>
+<h2 id="72-cusum-change-point-detection"><em>7.2 CUSUM Change-Point Detection</em></h2>
 <p>We implement the Page-Hinkley cumulative sum (CUSUM) test for online detection of shifts in the mean of a distribution [Page 1954]. After a burn-in phase of n_0 = 30 observations, the baseline μ₀ and σ₀ are estimated. For each subsequent observation x[t]:</p>
 <p>z[t]  = (x[t] − μ₀) / σ₀</p>
 <p>S⁺[t] = max(0, S⁺[t−1] + z[t] − k)</p>
@@ -176,18 +246,18 @@
 <p>detect if S⁺[t] &gt; h  or  S⁻[t] &gt; h</p>
 <p>The reference value k = 1.0 represents the allowable slack before accumulation begins; the threshold h = 5.0 determines detection sensitivity. Both accumulators reset after a detection. A cooldown of 50 steps prevents immediate re-triggering on transient spikes.</p>
 <p>After a confirmed regime shift, reset_baseline(new_μ, new_σ) re-baselines the detector. Crucially, this also resets the cooldown counter to −cooldown (not zero), ensuring the detector can fire immediately in the new regime. Failing to reset the cooldown counter — a subtle bug present in naive implementations — silences the detector for up to 50 steps after a deliberate re-baselining.</p>
-<h2 id="73-ewma-adaptive-thresholding"><strong><em>7.3 EWMA Adaptive Thresholding</em></strong></h2>
+<h2 id="73-ewma-adaptive-thresholding"><em>7.3 EWMA Adaptive Thresholding</em></h2>
 <p>MetricsManager maintains per-metric EWMA statistics and fires alerts when values exceed adaptive thresholds:</p>
 <p>μ[t]  = λ·μ[t−1] + (1−λ)·m[t]</p>
 <p>σ²[t] = λ·σ²[t−1] + (1−λ)·(m[t] − μ[t])²</p>
 <p>τ_warn = μ[t] + 2·σ[t],    τ_crit = μ[t] + 3·σ[t]</p>
 <p>with λ = 0.95. By Chebyshev's inequality, the k=2 warning threshold has ≤ 25% exceedance probability under any distribution; the k=3 critical threshold has ≤ 11%. For Gaussian metrics these bounds tighten to 4.6% and 0.3% respectively. Alert handlers are each wrapped in try/except: a crashing handler is logged and skipped, ensuring all subsequent handlers always fire.</p>
-<h2 id="74-period-estimation"><strong><em>7.4 Period Estimation</em></strong></h2>
+<h2 id="74-period-estimation"><em>7.4 Period Estimation</em></h2>
 <p>The PeriodEstimator computes the autocorrelation function (ACF) of the metric history from lag min_lag = 4 to max_lag = 120 samples. It identifies local maxima in the ACF and returns the smallest lag among peaks exceeding the mean ACF value — the fundamental period rather than a harmonic. Returning the minimum peak (not the maximum ACF peak) is essential: harmonics at k×T₀ will have ACF values comparable to T₀ for strongly periodic signals, and naive maximum selection frequently returns 2T₀ or 3T₀.</p>
-<h1 id="8-empirical-evaluation"><strong>8. Empirical Evaluation</strong></h1>
-<h2 id="81-methodology"><strong><em>8.1 Methodology</em></strong></h2>
+<h2 id="8-empirical-evaluation">8. Empirical Evaluation</h2>
+<h2 id="81-methodology"><em>8.1 Methodology</em></h2>
 <p>We evaluate the system through five targeted profiling passes comprising over 80 distinct test cases. Tests fall into five categories: (i) unit correctness of each component in isolation; (ii) adversarial numerical inputs (near-zero denominators, NaN propagation, extreme rewards); (iii) concurrency tests using asyncio.gather with up to 20 simultaneous scheduling requests; (iv) long-run convergence tests running 10,000+ sequential updates; and (v) component interaction tests verifying that the full pipeline behaves consistently. All measurements were made on commodity hardware (single process, single thread, simulated node states).</p>
-<h2 id="82-scheduling-latency"><strong><em>8.2 Scheduling Latency</em></strong></h2>
+<h2 id="82-scheduling-latency"><em>8.2 Scheduling Latency</em></h2>
 <p>Table 3 shows per-task scheduling latency across 500 tasks on a 16-node simulated cluster. Latency is dominated by candidate scoring (O(n_nodes × d)) and the asyncio overhead of per-node lock acquisition.</p>
 <p><strong>Metric</strong></p>
 <p><strong>Value</strong></p>
@@ -231,12 +301,12 @@
 <p>3.426</p>
 <p>100%</p>
 <p><em>Table 4. Scheduling throughput vs. cluster size (200 tasks, cpu=0.05 per task).</em></p>
-<h2 id="83-fairness"><strong><em>8.3 Fairness</em></strong></h2>
+<h2 id="83-fairness"><em>8.3 Fairness</em></h2>
 <p>We measure fairness using the Jain fairness index J = (∑x_i)² / (n · ∑x_i²) ∈ [1/n, 1], where x_i is the task count placed on node i. J = 1 indicates perfect equal distribution. Across 200 tasks on a 4-node cluster with matched capacity and identical task sizes, the Jain index converges to 1.00 — the scheduler distributes tasks equally across all nodes.</p>
 <p>The new-task initialisation fix (vruntime = min_vruntime − one_tick) was specifically validated: before the fix, a new task and a veteran whose vruntime had returned to min_vruntime scored identically (Δscore = 0), violating CFS fairness. After the fix, the new task scores 0.80 vs. 0.50 for the veteran — a 60% score advantage correctly prioritising the new arrival.</p>
-<h2 id="84-lints-convergence"><strong><em>8.4 LinTS Convergence</em></strong></h2>
+<h2 id="84-lints-convergence"><em>8.4 LinTS Convergence</em></h2>
 <p>We trained LinTS on a synthetic binary classification task: two arms with known good (reward=1) and bad (reward=0) directions in ℝ²⁴. After n = 200 aligned training observations (100 per arm), the good arm wins 100/100 head-to-head comparisons. After n = 500 observations, exploitation rate remains 100/100 with posterior confidence = 0.042. The low confidence value reflects the high-dimensional (d=24) feature space — the trace of A⁻¹ shrinks slowly because the 24 canonical resource dimensions are not all activated by this synthetic workload. In full-cluster operation, all 24 dimensions receive gradient signal and confidence grows faster.</p>
-<h2 id="85-monitoring-cusum-performance"><strong><em>8.5 Monitoring: CUSUM Performance</em></strong></h2>
+<h2 id="85-monitoring-cusum-performance"><em>8.5 Monitoring: CUSUM Performance</em></h2>
 <p><strong>Metric</strong></p>
 <p><strong>Value</strong></p>
 <p>ARL₀ (null, Gaussian)</p>
@@ -249,11 +319,11 @@
 <p>&lt; 1 per 3,485 steps at 1 Hz ≈ &lt; 0.03%/hr</p>
 <p><em>Table 5. CUSUM change-point detector performance.</em></p>
 <p>The empirical ARL₀ (3,485 steps) is lower than the theoretical value (22,000) due to the burn-in phase and cooldown mechanism — both of which reduce effective run length. Detection at +3σ is near-instantaneous: 95% of detections occur within 5 samples of the shift onset. This latency profile is well-suited to 1 Hz cluster monitoring, where even a 5-second detection lag is acceptable for most operational responses.</p>
-<h2 id="86-monitoring-holt-winters-forecasting"><strong><em>8.6 Monitoring: Holt-Winters Forecasting</em></strong></h2>
+<h2 id="86-monitoring-holt-winters-forecasting"><em>8.6 Monitoring: Holt-Winters Forecasting</em></h2>
 <p>We evaluate forecasting accuracy on a sinusoidal signal with additive Gaussian noise: y[t] = 50 + 10·sin(2πt/24) + ε, ε ~ N(0,4). After 480 training samples (20 seasonal periods), one-step-ahead MAPE over 240 held-out test points is 3.85%. The 95% prediction interval achieves 100% empirical coverage — conservative but valid. PI coverage above the nominal 95% is expected under the Hyndman (2008) approximate variance formula, which provides an upper bound rather than an exact calibration.</p>
-<h2 id="87-monitoring-zscore-anomaly-detection"><strong><em>8.7 Monitoring: ZScore Anomaly Detection</em></strong></h2>
+<h2 id="87-monitoring-zscore-anomaly-detection"><em>8.7 Monitoring: ZScore Anomaly Detection</em></h2>
 <p>We evaluate ZScoreAnomaly on a synthetic 2,000-sample stream with a 1% true anomaly rate (every 100th sample drawn from N(20,1) instead of N(10,1) — a 10σ shift). After a warm-up period, the detector achieves precision = 0.741, recall = 1.000. All 20 true anomalies are detected (zero false negatives); 7 false positives arise during the EWMA adaptation period immediately following each anomaly, before the running statistics restabilise.</p>
-<h2 id="88-batchoptimiser-scaling"><strong><em>8.8 BatchOptimiser Scaling</em></strong></h2>
+<h2 id="88-batchoptimiser-scaling"><em>8.8 BatchOptimiser Scaling</em></h2>
 <p><strong>n (tasks)</strong></p>
 <p><strong>Time (ms)</strong></p>
 <p><strong>Complexity</strong></p>
@@ -270,19 +340,19 @@
 <p>19.17</p>
 <p>O(n log n)</p>
 <p><em>Table 6. BatchOptimiser runtime. Linear scaling confirms O(n log n) behaviour over two orders of magnitude.</em></p>
-<h1 id="9-discussion-and-limitations"><strong>9. Discussion and Limitations</strong></h1>
-<h2 id="91-design-trade-offs"><strong><em>9.1 Design Trade-offs</em></strong></h2>
+<h2 id="9-discussion-and-limitations">9. Discussion and Limitations</h2>
+<h2 id="91-design-trade-offs"><em>9.1 Design Trade-offs</em></h2>
 <p>The three-layer design (CFS + LinTS + PID) creates intentional redundancy. CFS provides deterministic fairness guarantees that LinTS, as a learning system, cannot provide on its own at startup. LinTS provides adaptive placement quality that CFS, as a static heuristic, cannot improve on over time. PID provides real-time load balancing that neither LinTS nor CFS directly encode. Each layer has a well-defined fallback (CFS when confidence is low; second-ranked candidate when PID triggers) so no single component failure can make the system unable to schedule.</p>
 <p>The confidence threshold Θ = 0.70 represents an empirical choice. A lower threshold causes the system to rely on LinTS earlier, risking poor placements under high uncertainty. A higher threshold extends the CFS-only phase unnecessarily in large clusters where dimensions are activated quickly. In our evaluation, the full 24 dimensions are not activated in synthetic workloads (confidence stabilises around 0.042 even after 500 observations), suggesting that real-world deployments should tune Θ to reflect the actual workload's feature activation rate.</p>
-<h2 id="92-known-limitations"><strong><em>9.2 Known Limitations</em></strong></h2>
+<h2 id="92-known-limitations"><em>9.2 Known Limitations</em></h2>
 <p>The system has six known limitations documented as engineering priorities. First, there is no distributed coordination: the per-node asyncio.Lock prevents double-booking within a single event loop but provides no cross-host mutual exclusion. Multi-instance deployments require an external distributed lock or consensus layer. Second, the five recovery strategy coroutines are stubs that return True without implementing real system calls; they must be replaced with Kubernetes API calls, cgroup adjustments, or equivalent before production use. Third, all state is in-memory: a process restart begins from a cold LinTS prior and empty CFS history. Serialising A⁻¹, b, and vruntime_history to an external store is required for continuity across restarts.</p>
 <p>Fourth, Holt-Winters performs poorly on non-seasonal signals: the seasonal component introduces systematic forecast bias on linear or random-walk inputs. Users should monitor residual autocorrelation and fall back to simple exponential smoothing when no seasonal structure is detected. Fifth, the 24-dimensional LinTS feature space is fixed at construction; substantive extensions beyond the 5 reserved zero-padding dimensions require restarting from a cold posterior. Sixth, candidate scoring is O(n_nodes × d) and is not parallelised; at 128 nodes per-task latency reaches 3.4 ms, which may be a bottleneck at very high task arrival rates.</p>
-<h2 id="93-future-work"><strong><em>9.3 Future Work</em></strong></h2>
+<h2 id="93-future-work"><em>9.3 Future Work</em></h2>
 <p>Several extensions are planned. (i) Distributed consensus: integrating etcd or a custom Raft implementation for cross-host locking. (ii) State persistence: checkpoint serialisation of all mutable component state at configurable intervals. (iii) Online smoothing parameter estimation for Holt-Winters using maximum likelihood or Bayesian optimisation, removing the need for manual tuning. (iv) Extending the feature vector with NUMA topology, network locality, and historical task duration estimates — using the 5 reserved dimensions first, then expanding with a warm-started posterior transfer. (v) Replacing the single-event-loop scoring step with a sharded node pool to achieve horizontal scaling beyond a few hundred nodes.</p>
-<h1 id="10-conclusion"><strong>10. Conclusion</strong></h1>
+<h2 id="10-conclusion">10. Conclusion</h2>
 <p>We have presented a distributed task scheduler that achieves simultaneous fairness, learned placement quality, and load stability through a composed three-layer architecture. The CFS statistical model provides O(1)-per-step vruntime accounting with a continuous fairness score. The Linear Thompson Sampling bandit achieves O(d√T · polylog T) expected regret under a Bayesian linear model updated in O(d²) per step via Sherman-Morrison. The PID override layer guarantees BIBO stability under anti-windup. A companion monitoring subsystem provides accurate forecasting (MAPE 3.85%), fast change-point detection (median 3 samples at +3σ), and adaptive thresholding with known false-positive bounds.</p>
 <p>Empirical evaluation across five adversarial profiling passes confirms that all mathematical guarantees hold under realistic conditions including concurrent scheduling, numerical edge cases, and long-run operation. Scheduling latency is sub-millisecond at the median across 16 nodes, with linear scaling in cluster size. The system is ready for integration with real cluster management frameworks as a placement-scoring backend, pending implementation of the five stub recovery strategies and the addition of a distributed coordination layer.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <p>Agrawal, S. and Goyal, N. (2013). Thompson sampling for contextual bandits with linear payoffs. In Proceedings of the 30th International Conference on Machine Learning (ICML), pp. 127–135.</p>
 <p>Burns, B., Grant, B., Oppenheimer, D., Brewer, E., and Wilkes, J. (2016). Borg, Omega, and Kubernetes. ACM Queue, 14(1), 70–93.</p>
 <p>Coffman, E. G., Garey, M. R., and Johnson, D. S. (1978). An application of bin-packing to multiprocessor scheduling. SIAM Journal on Computing, 7(1), 1–17.</p>
@@ -299,6 +369,31 @@
 <p>Page, E. S. (1954). Continuous inspection schemes. Biometrika, 41(1/2), 100–115.</p>
 <p>Vavilapalli, V. K., Murthy, A. C., Douglas, C., Agarwal, S., Konar, M., Evans, R., Graves, T., Lowe, J., Shah, H., Seth, S., Saha, B., Curino, C., O'Malley, O., Radia, S., Reed, B., and Baldeschwieler, E. (2013). Apache Hadoop YARN: Yet another resource negotiator. In Proceedings of the 4th Annual Symposium on Cloud Computing (SoCC), article 5.</p>
 <p>Winters, P. R. (1960). Forecasting sales by exponentially weighted moving averages. Management Science, 6(3), 324–342.</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

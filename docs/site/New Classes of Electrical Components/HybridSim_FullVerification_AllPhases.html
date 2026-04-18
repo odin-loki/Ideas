@@ -3,275 +3,325 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>HybridSim FullVerification AllPhases</title>
+  <meta name="description" content="All six phases of the Hybrid Component Simulation Framework were independently verified by executing every code block and checking all physics claims against first-principles derivations and literature values. The framework demonstrates correct foundational architecture…"/>
+  <title>Hybrid component simulation — complete verification (all phases) · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">New Classes of Electrical Components\HybridSim_FullVerification_AllPhases.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p>HYBRID COMPONENT SIMULATION<br />
-Complete Verification Report — All Phases 0–5<br />
-February 2026  |  Independent Execution &amp; Physics Audit</p>
-<p>Executive Summary<br />
-All six phases of the Hybrid Component Simulation Framework were independently verified by executing every code block and checking all physics claims against first-principles derivations and literature values. The framework demonstrates correct foundational architecture throughout — the MNA solver, GPU memory layout, shot-noise physics, JKAM kinetics, and Preisach hysteresis model are all conceptually sound. Seven bugs were identified across the full series, ranging from critical parameter errors to minor scaling issues. All are single-value or formula-level fixes.</p>
-<p>Phase<br />
-P0<br />
-P1<br />
-P2<br />
-P3<br />
-P4<br />
-P5<br />
-Overall<br />
-*Phase 3 GPU benchmarks require physical hardware — logic and algorithm verified, throughput numbers are document claims.</p>
-<p>Phase 0 — Foundation Component Models<br />
-Phase 0 was not supplied as a separate document; its component models appear throughout the later phases. The fundamental components verified in context across all phases:</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-Memristor R(w) formula<br />
-✓ PASS<br />
-Ron<em>(w/D) + Roff</em>(1-w/D) — verified at 5 boundary values, matches SPICE export ✓<br />
-Memristor f(w) window<br />
-✓ PASS<br />
-1-(2w/D-1)^2 — correct parabolic window, f=0 at w=0,D; f=1 at w=D/2 ✓<br />
-dw/dt drift formula<br />
-WARN<br />
-Code uses mu_v<em>(Ron/D²)</em>I<em>f(w). Strukov-Williams original uses mu_v</em>(Ron/D)<em>I</em>f(w). Code is 1/D=1e8× faster than physical drift speed. Functionally consistent across all phases since same formula is used everywhere — but absolute timing is unphysical<br />
-Josephson frequency<br />
-✓ PASS<br />
-f=V/Phi0 = 0.4836 GHz/µV. Verified from 2eV/h = 483.6 MHz/µV ✓<br />
-JJ Stewart-McCumber<br />
-✓ PASS<br />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#phase-0-foundation-component-models">Phase 0 — Foundation Component Models</a></li>
+        <li class="toc-depth-2"><a href="#phase-1-advanced-component-models">Phase 1 — Advanced Component Models</a></li>
+        <li class="toc-depth-2"><a href="#phase-2-mna-circuit-solver">Phase 2 — MNA Circuit Solver</a></li>
+        <li class="toc-depth-2"><a href="#phase-3-gpu-acceleration">Phase 3 — GPU Acceleration</a></li>
+        <li class="toc-depth-2"><a href="#phase-4-application-engines">Phase 4 — Application Engines</a></li>
+        <li class="toc-depth-2"><a href="#phase-5-eda-export-layer">Phase 5 — EDA Export Layer</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Hybrid component simulation — complete verification (all phases)</h1>
+          <p class="doc-meta">New Classes of Electrical Components\HybridSim_FullVerification_AllPhases.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Complete Verification Report — All Phases 0–5 · February 2026 · Independent Execution &amp; Physics Audit</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p>Complete Verification Report — All Phases 0–5 · February 2026 · Independent Execution &amp; Physics Audit</p>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>All six phases of the Hybrid Component Simulation Framework were independently verified by executing every code block and checking all physics claims against first-principles derivations and literature values. The framework demonstrates correct foundational architecture throughout — the MNA solver, GPU memory layout, shot-noise physics, JKAM kinetics, and Preisach hysteresis model are all conceptually sound. Seven bugs were identified across the full series, ranging from critical parameter errors to minor scaling issues. All are single-value or formula-level fixes.</p>
+<p><em>Phase coverage: P0–P5 below. Phase 3 GPU benchmarks require physical hardware — logic and algorithm verified; throughput numbers are document claims.</em></p>
+<h2 id="phase-0-foundation-component-models">Phase 0 — Foundation Component Models</h2>
+<p>Phase 0 was not supplied as a separate document; its component models appear throughout the later phases. The fundamental components verified in context across all phases:</p>
+<p>Item
+Status
+Finding
+Memristor R(w) formula
+✓ PASS
+Ron<em>(w/D) + Roff</em>(1-w/D) — verified at 5 boundary values, matches SPICE export ✓
+Memristor f(w) window
+✓ PASS
+1-(2w/D-1)^2 — correct parabolic window, f=0 at w=0,D; f=1 at w=D/2 ✓
+dw/dt drift formula
+WARN
+Code uses mu_v<em>(Ron/D²)</em>I<em>f(w). Strukov-Williams original uses mu_v</em>(Ron/D)<em>I</em>f(w). Code is 1/D=1e8× faster than physical drift speed. Functionally consistent across all phases since same formula is used everywhere — but absolute timing is unphysical
+Josephson frequency
+✓ PASS
+f=V/Phi0 = 0.4836 GHz/µV. Verified from 2eV/h = 483.6 MHz/µV ✓
+JJ Stewart-McCumber
+✓ PASS
 beta_c = 2<em>pi</em>Ic<em>RJ²</em>CJ/Phi0 = 0.076 → overdamped, no hysteresis ✓</p>
-<p>Phase 1 — Advanced Component Models<br />
-Three bugs found across the eight component models</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-Ferroelectric Preisach loops<br />
-✓ PASS<br />
-P saturates at ±0.26 C/m² (BaTiO3=26 µC/cm² ✓). Hysteresis loop shape correct. 1000 steps in 47.7 ms ✓<br />
-Preisach E_c calibration<br />
-WARN<br />
-Distribution centred at (0,0) → E_c ≈ 0.46 MV/m. BaTiO3 literature: 1 MV/m. Fix: shift centre to (alpha_0=+1MV/m, beta_0=-1MV/m) in density function<br />
-Capacitance dP/dE<br />
-WARN<br />
-Perturbation step dE=1e3 V/m &lt;&lt; grid spacing ~60,000 V/m. No hysterons switch → dP/dE=0 always → C returns vacuum value only. Fix: dE ≥ 60,000 V/m<br />
-Switching tau at E=0<br />
-BUG<br />
-tau = tau0<em>exp(delta/|E-Ec|+1e3). At E=0: tau = 5ns</em>exp(2000) = overflow (inf). Fix: clamp denom to max(|E-Ec|, 1e5 V/m)<br />
-Avrami exponent n=1.5<br />
-✓ PASS<br />
-Matches PZT thin film literature (mixed 1D/2D nucleation) ✓<br />
-Magnetoelectric inductor<br />
-✓ PASS<br />
-L(Vc)=Lnom<em>(1-alpha</em>Vc²) — correct quadratic ME coupling. (Physical range issue addressed in Phase 4 App 3)<br />
-Josephson JJ simulation<br />
-✓ PASS<br />
-ddt(phi) = V/Phi0 correctly integrates phase. Josephson current Ic<em>sin(phi) ✓<br />
-LIF Verilog-AMS<br />
-✓ PASS<br />
+<h2 id="phase-1-advanced-component-models">Phase 1 — Advanced Component Models</h2>
+<p>Three bugs found across the eight component models</p>
+<p>Item
+Status
+Finding
+Ferroelectric Preisach loops
+✓ PASS
+P saturates at ±0.26 C/m² (BaTiO3=26 µC/cm² ✓). Hysteresis loop shape correct. 1000 steps in 47.7 ms ✓
+Preisach E_c calibration
+WARN
+Distribution centred at (0,0) → E_c ≈ 0.46 MV/m. BaTiO3 literature: 1 MV/m. Fix: shift centre to (alpha_0=+1MV/m, beta_0=-1MV/m) in density function
+Capacitance dP/dE
+WARN
+Perturbation step dE=1e3 V/m &lt;&lt; grid spacing ~60,000 V/m. No hysterons switch → dP/dE=0 always → C returns vacuum value only. Fix: dE ≥ 60,000 V/m
+Switching tau at E=0
+BUG
+tau = tau0<em>exp(delta/|E-Ec|+1e3). At E=0: tau = 5ns</em>exp(2000) = overflow (inf). Fix: clamp denom to max(|E-Ec|, 1e5 V/m)
+Avrami exponent n=1.5
+✓ PASS
+Matches PZT thin film literature (mixed 1D/2D nucleation) ✓
+Magnetoelectric inductor
+✓ PASS
+L(Vc)=Lnom<em>(1-alpha</em>Vc²) — correct quadratic ME coupling. (Physical range issue addressed in Phase 4 App 3)
+Josephson JJ simulation
+✓ PASS
+ddt(phi) = V/Phi0 correctly integrates phase. Josephson current Ic<em>sin(phi) ✓
+LIF Verilog-AMS
+✓ PASS
 ddt(Vm) &lt;+ (1/Cm)</em>(-(Vm-Vrest)/Rm + I_syn). cross() event at Vth correct ✓</p>
-<p>Phase 2 — MNA Circuit Solver<br />
-All core algorithms verified correct<br />
+<h2 id="phase-2-mna-circuit-solver">Phase 2 — MNA Circuit Solver</h2>
+<p>All core algorithms verified correct
 The circuit solver was independently reconstructed and tested against analytical solutions. All stamp mathematics and integration schemes are correct.</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-MNA stamp assembly<br />
-✓ PASS<br />
-RC circuit: max error 9.9 mV at dt=10µs (1st-order Euler expected). Final value error 0.01% ✓<br />
-KCL satisfaction<br />
-✓ PASS<br />
-I_R = I_C = 6.91 µA at final point. KCL residual 0.00 nA ✓<br />
-Backward Euler stability<br />
-✓ PASS<br />
-Stiff system tau2/tau1=1e6, dt/tau_fast=1e4 — STABLE. Forward Euler blows up at step 8 (as expected) ✓<br />
-Memristor nonlinear stamp<br />
-✓ PASS<br />
-NR converges in 1 iteration (memristor is linear in I at fixed w). Drift toward Ron under positive current ✓<br />
-Josephson frequency<br />
-✓ PASS<br />
-f=2eV/h=483.6 MHz/µV, verified from fundamental constants ✓<br />
-Sparse MNA recommendation<br />
-✓ PASS<br />
-scipy.sparse.linalg.spsolve recommended above 1000 nodes — correct threshold for dense→sparse crossover ✓<br />
-Incidence matrix KVL/KCL<br />
-✓ PASS<br />
+<p>Item
+Status
+Finding
+MNA stamp assembly
+✓ PASS
+RC circuit: max error 9.9 mV at dt=10µs (1st-order Euler expected). Final value error 0.01% ✓
+KCL satisfaction
+✓ PASS
+I_R = I_C = 6.91 µA at final point. KCL residual 0.00 nA ✓
+Backward Euler stability
+✓ PASS
+Stiff system tau2/tau1=1e6, dt/tau_fast=1e4 — STABLE. Forward Euler blows up at step 8 (as expected) ✓
+Memristor nonlinear stamp
+✓ PASS
+NR converges in 1 iteration (memristor is linear in I at fixed w). Drift toward Ron under positive current ✓
+Josephson frequency
+✓ PASS
+f=2eV/h=483.6 MHz/µV, verified from fundamental constants ✓
+Sparse MNA recommendation
+✓ PASS
+scipy.sparse.linalg.spsolve recommended above 1000 nodes — correct threshold for dense→sparse crossover ✓
+Incidence matrix KVL/KCL
+✓ PASS
 A_r * I = 0 and V_branches = A_r^T * V_nodes — universal circuit equations ✓</p>
-<p>Phase 3 — GPU Acceleration<br />
-Logic verified; throughput numbers require physical GPU hardware</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-Warp sort algorithm<br />
-✓ PASS<br />
-sort_by_state → inverse permutation: error 0.0e+00. Produces N homogeneous groups, eliminates divergence ✓<br />
-Memory layout coalescing<br />
-✓ PASS<br />
-(N,n,n) non-coalesced: 64× warp penalty. (n,n,N) coalesced: 1 transaction/warp. Analysis correct ✓<br />
-Shared memory budget<br />
-✓ PASS<br />
-n=32: Gs+bs+pivot = 4.2 KB &lt; 48 KB SM capacity. Fits entirely on-chip ✓<br />
-Radau IIA speedup analysis<br />
-✓ PASS<br />
-21,032× step-count reduction vs backward Euler at same accuracy (cost 3× per step → 7,000× net). ✓<br />
-Adjoint gradient<br />
-✓ PASS<br />
-dL/dR adjoint vs numerical: 0.0002% error ✓<br />
-RTX 3090 benchmarks<br />
-N/A<br />
-2.3 TOPS LU, 180 µs batched Euler, 48 ns real-time: architecture sound, cannot verify numbers without hardware<br />
-SIMT divergence penalty<br />
-✓ PASS<br />
+<h2 id="phase-3-gpu-acceleration">Phase 3 — GPU Acceleration</h2>
+<p>Logic verified; throughput numbers require physical GPU hardware</p>
+<p>Item
+Status
+Finding
+Warp sort algorithm
+✓ PASS
+sort_by_state → inverse permutation: error 0.0e+00. Produces N homogeneous groups, eliminates divergence ✓
+Memory layout coalescing
+✓ PASS
+(N,n,n) non-coalesced: 64× warp penalty. (n,n,N) coalesced: 1 transaction/warp. Analysis correct ✓
+Shared memory budget
+✓ PASS
+n=32: Gs+bs+pivot = 4.2 KB &lt; 48 KB SM capacity. Fits entirely on-chip ✓
+Radau IIA speedup analysis
+✓ PASS
+21,032× step-count reduction vs backward Euler at same accuracy (cost 3× per step → 7,000× net). ✓
+Adjoint gradient
+✓ PASS
+dL/dR adjoint vs numerical: 0.0002% error ✓
+RTX 3090 benchmarks
+N/A
+2.3 TOPS LU, 180 µs batched Euler, 48 ns real-time: architecture sound, cannot verify numbers without hardware
+SIMT divergence penalty
+✓ PASS
 4-state machine → 4× serialisation in unsorted warp. State sorting eliminates this. Architecture analysis correct ✓</p>
-<p>Phase 4 — Application Engines<br />
-Two critical bugs, two warnings</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-App 1 — STDP: spike scaling<br />
-BUG<br />
-I = G<em>1e-9</em>spike treats spikes as 1 nV. Current = 0.124 fA, threshold needs 2 nA → 16,129× deficit. Zero spikes, zero learning. Fix: I = G * V_spike (e.g. 5 mV)<br />
-App 1 — STDP: LTP/LTD logic<br />
-✓ PASS<br />
-A+=0.01, A-=0.012, 20% net depression bias. Causal/anti-causal windows correct once neurons fire ✓<br />
-App 2 — Crossbar Vmax<br />
-BUG<br />
-Vmax=1V with Gmax=100µS → 3.31A total current, 461 nJ/MVM, GOPS/W≈0. Fix: Vmax=0.1V AND Gmax~10µS → pJ scale matches literature<br />
-App 2 — SNR formula<br />
-WARN<br />
-numpy broadcasting bug in Inoise. Results incorrect as coded. Corrected: SNR=57.3 dB, ENOB=9.2 bits (valid with 2% G noise)<br />
-App 3 — RF filter Vc range<br />
-WARN<br />
-L negative for |Vc|&gt;4.47V, search uses ±40V. 900 MHz fails (L&lt;0). Fix: clamp search to ±4.47V<br />
-App 3 — 2.4/5.8 GHz<br />
-✓ PASS<br />
-Both targets achieved within Vc physical range. Frequency error 0.0000% ✓<br />
-App 4 — Shot noise physics<br />
-✓ PASS<br />
-sigma=1790 pA = sqrt(2eIBW) ✓. H_min=10.33 bits, 86% entropy efficiency ✓<br />
-App 4 — NIST Frequency<br />
-WARN<br />
-FAIL (p=0.000). I_avg DC offset biases MSB. Von Neumann efficiency 2.5% not 50%. Fix: subtract I_avg before quantisation<br />
-App 4 — NIST Runs/Block<br />
-✓ PASS<br />
-Runs p=0.636 PASS, Block p=0.579 PASS ✓<br />
-App 5 — GST converter<br />
-✓ PASS<br />
+<h2 id="phase-4-application-engines">Phase 4 — Application Engines</h2>
+<p>Two critical bugs, two warnings</p>
+<p>Item
+Status
+Finding
+App 1 — STDP: spike scaling
+BUG
+I = G<em>1e-9</em>spike treats spikes as 1 nV. Current = 0.124 fA, threshold needs 2 nA → 16,129× deficit. Zero spikes, zero learning. Fix: I = G * V_spike (e.g. 5 mV)
+App 1 — STDP: LTP/LTD logic
+✓ PASS
+A+=0.01, A-=0.012, 20% net depression bias. Causal/anti-causal windows correct once neurons fire ✓
+App 2 — Crossbar Vmax
+BUG
+Vmax=1V with Gmax=100µS → 3.31A total current, 461 nJ/MVM, GOPS/W≈0. Fix: Vmax=0.1V AND Gmax~10µS → pJ scale matches literature
+App 2 — SNR formula
+WARN
+numpy broadcasting bug in Inoise. Results incorrect as coded. Corrected: SNR=57.3 dB, ENOB=9.2 bits (valid with 2% G noise)
+App 3 — RF filter Vc range
+WARN
+L negative for |Vc|&gt;4.47V, search uses ±40V. 900 MHz fails (L&lt;0). Fix: clamp search to ±4.47V
+App 3 — 2.4/5.8 GHz
+✓ PASS
+Both targets achieved within Vc physical range. Frequency error 0.0000% ✓
+App 4 — Shot noise physics
+✓ PASS
+sigma=1790 pA = sqrt(2eIBW) ✓. H_min=10.33 bits, 86% entropy efficiency ✓
+App 4 — NIST Frequency
+WARN
+FAIL (p=0.000). I_avg DC offset biases MSB. Von Neumann efficiency 2.5% not 50%. Fix: subtract I_avg before quantisation
+App 4 — NIST Runs/Block
+✓ PASS
+Runs p=0.636 PASS, Block p=0.579 PASS ✓
+App 5 — GST converter
+✓ PASS
 Efficiency 7.6% at all frequencies — correct for Rc=100Ω vs RL=10Ω. Ea=2.3eV matches literature ✓</p>
-<p>Phase 5 — EDA Export Layer<br />
-One critical bug in QTR alpha constant; memristor models consistent across all phases</p>
-<p>Item<br />
-Status<br />
-Finding<br />
-QTR alpha constant<br />
-BUG<br />
-SPICE uses alpha=10.25e9 m⁻¹. Correct value: 1.025e9 m⁻¹ eV⁻⁰·⁵ (10× error). G0 is ~10⁻³² S (unmeasurable). Fix: alpha=1.025e9 → G0=7.7e-5 S, I(0.1V)≈7.7 µA ✓<br />
-Memristor SPICE vs Python<br />
-✓ PASS<br />
-R(w) and f(w) identical at all 5 test points. Verilog-AMS ddt() matches Python model ✓<br />
-JJ SPICE model<br />
-✓ PASS<br />
-Phi0=2.0678e-15 Wb correct. f_J=V/Phi0 ✓. beta_c=0.076 → overdamped ✓<br />
-GMR SPICE model<br />
-✓ PASS<br />
-theta=arccos(tanh(H/Hc)) — correct Stoner-Wohlfarth approximation. R between RP and RAP ✓<br />
-PCM SPICE model<br />
-✓ PASS<br />
-Two-state if(V_ctrl&gt;threshold,RC,RA) — simplified but correct for binary switch applications ✓<br />
-Verilog-AMS LIF neuron<br />
-✓ PASS<br />
-cross(Vm-Vth,+1) event detection correct. Spike output with 1ps pulse ✓<br />
-dw/dt units across all phases<br />
-WARN<br />
-All phases use mu_v<em>(Ron/D²)</em>I*fw. This is 1/D (=1e8) faster than Strukov-Williams (1975 original uses Ron/D). Consistent within the framework — absolute drift timescale needs rescaling for real-device comparison<br />
-IBIS memristor limitation<br />
-WARN<br />
+<h2 id="phase-5-eda-export-layer">Phase 5 — EDA Export Layer</h2>
+<p>One critical bug in QTR alpha constant; memristor models consistent across all phases</p>
+<p>Item
+Status
+Finding
+QTR alpha constant
+BUG
+SPICE uses alpha=10.25e9 m⁻¹. Correct value: 1.025e9 m⁻¹ eV⁻⁰·⁵ (10× error). G0 is ~10⁻³² S (unmeasurable). Fix: alpha=1.025e9 → G0=7.7e-5 S, I(0.1V)≈7.7 µA ✓
+Memristor SPICE vs Python
+✓ PASS
+R(w) and f(w) identical at all 5 test points. Verilog-AMS ddt() matches Python model ✓
+JJ SPICE model
+✓ PASS
+Phi0=2.0678e-15 Wb correct. f_J=V/Phi0 ✓. beta_c=0.076 → overdamped ✓
+GMR SPICE model
+✓ PASS
+theta=arccos(tanh(H/Hc)) — correct Stoner-Wohlfarth approximation. R between RP and RAP ✓
+PCM SPICE model
+✓ PASS
+Two-state if(V_ctrl&gt;threshold,RC,RA) — simplified but correct for binary switch applications ✓
+Verilog-AMS LIF neuron
+✓ PASS
+cross(Vm-Vth,+1) event detection correct. Spike output with 1ps pulse ✓
+dw/dt units across all phases
+WARN
+All phases use mu_v<em>(Ron/D²)</em>I*fw. This is 1/D (=1e8) faster than Strukov-Williams (1975 original uses Ron/D). Consistent within the framework — absolute drift timescale needs rescaling for real-device comparison
+IBIS memristor limitation
+WARN
 IBIS V-I tables assume LTI port — hysteretic I-V cannot be captured. Valid for single-state characterisation only. Known limitation of IBIS standard for non-LTI devices</p>
 <p>Complete Bug Register — All 7 Issues</p>
-<h1 id="_1"></h1>
-<p>Phase/App<br />
-Severity<br />
-Location<br />
-Root Cause<br />
-Fix<br />
-1<br />
-P1 Ferroelectric<br />
-WARN<br />
-step_dynamic()<br />
-tau overflow: exp(2000)=inf at E=0<br />
-Clamp: max(|E-Ec|, 1e5 V/m)<br />
-2<br />
-P1 Ferroelectric<br />
-WARN<br />
-capacitance()<br />
-dE=1e3 &lt;&lt; grid spacing, dP/dE always 0<br />
-Use dE ≥ 60,000 V/m<br />
-3<br />
-P1 Ferroelectric<br />
-WARN<br />
-<strong>init</strong>()<br />
-E_c≈0.46 MV/m, need 1 MV/m for BaTiO3<br />
-Centre Gaussian at (±1 MV/m)<br />
-4<br />
-P4 App 1<br />
-CRITICAL<br />
-LIF step()<br />
-1e-9 spike amplitude → 0.124 fA current, 16129× too small<br />
-Replace 1e-9 with V_spike (~5 mV)<br />
-5<br />
-P4 App 2<br />
-CRITICAL<br />
-crossbar_analysis()<br />
-Vmax=1V → 3.31A total, 461 nJ/MVM, GOPS≈0<br />
-Vmax=0.1V, Gmax=10µS<br />
-6<br />
-P4 App 4<br />
-WARN<br />
-generate()<br />
-I_avg offset biases MSB → NIST Frequency FAIL<br />
-Subtract I_avg before quantise<br />
-7<br />
-P5 QTR<br />
-CRITICAL<br />
-SPICE .PARAM<br />
-alpha=10.25e9 vs correct 1.025e9 (10× error) → G0≈0<br />
+
+<p>Phase/App
+Severity
+Location
+Root Cause
+Fix
+1
+P1 Ferroelectric
+WARN
+step_dynamic()
+tau overflow: exp(2000)=inf at E=0
+Clamp: max(|E-Ec|, 1e5 V/m)
+2
+P1 Ferroelectric
+WARN
+capacitance()
+dE=1e3 &lt;&lt; grid spacing, dP/dE always 0
+Use dE ≥ 60,000 V/m
+3
+P1 Ferroelectric
+WARN
+<strong>init</strong>()
+E_c≈0.46 MV/m, need 1 MV/m for BaTiO3
+Centre Gaussian at (±1 MV/m)
+4
+P4 App 1
+CRITICAL
+LIF step()
+1e-9 spike amplitude → 0.124 fA current, 16129× too small
+Replace 1e-9 with V_spike (~5 mV)
+5
+P4 App 2
+CRITICAL
+crossbar_analysis()
+Vmax=1V → 3.31A total, 461 nJ/MVM, GOPS≈0
+Vmax=0.1V, Gmax=10µS
+6
+P4 App 4
+WARN
+generate()
+I_avg offset biases MSB → NIST Frequency FAIL
+Subtract I_avg before quantise
+7
+P5 QTR
+CRITICAL
+SPICE .PARAM
+alpha=10.25e9 vs correct 1.025e9 (10× error) → G0≈0
 alpha=1.025e9 m⁻¹eV⁻⁰·⁵</p>
-<p>What Is Unambiguously Solid<br />
+<p>What Is Unambiguously Solid
 The following components and algorithms were verified to be correct and consistent with published physics. These represent the genuine strength of the framework:</p>
-<p>MNA stamp assembly<br />
-Correct Kirchhoff stamps for R, L, C, V-source, memristor<br />
-Backward Euler stability<br />
-Confirmed stable for stiffness ratio 1e6, dt/tau_fast = 1e4<br />
-Josephson frequency relation<br />
-f=V/Phi0=483.6 MHz/µV — verified from fundamental constants 2eV/h<br />
-Shot noise physics<br />
-sigma=sqrt(2eIBW)=1790 pA — verified analytically. H_min=10.33 bits correct<br />
-JKAM crystallisation kinetics<br />
-Ea=2.3 eV matches GST literature. K(T) Arrhenius scale correct<br />
-GST R(xi) log interpolation<br />
-Rc^xi * Ra^(1-xi) geometric mean correct. R spans 100Ω→1MΩ ✓<br />
-Preisach polarisation model<br />
-P saturates at ±P_sat. Loop shape and saturation physics correct<br />
-Avrami exponent choice<br />
-n=1.5 for PZT thin film (mixed 1D/2D) consistent with literature<br />
-Warp divergence elimination<br />
-State sort → inverse permutation algorithm correct and efficient<br />
-GPU shared memory budget<br />
-4.2 KB per n=32 instance &lt;&lt; 48 KB SM capacity. Architecture sound<br />
-Adjoint gradient<br />
-0.0002% error vs numerical. Backprop through circuit simulation correct<br />
-Memristor SPICE/Verilog-AMS<br />
-R(w) and f(w) consistent across Python, SPICE, and Verilog-AMS<br />
-JJ SPICE beta_c<br />
-0.076 → overdamped — correct parameter regime for logic applications<br />
-Coercive field direction<br />
+<p>MNA stamp assembly
+Correct Kirchhoff stamps for R, L, C, V-source, memristor
+Backward Euler stability
+Confirmed stable for stiffness ratio 1e6, dt/tau_fast = 1e4
+Josephson frequency relation
+f=V/Phi0=483.6 MHz/µV — verified from fundamental constants 2eV/h
+Shot noise physics
+sigma=sqrt(2eIBW)=1790 pA — verified analytically. H_min=10.33 bits correct
+JKAM crystallisation kinetics
+Ea=2.3 eV matches GST literature. K(T) Arrhenius scale correct
+GST R(xi) log interpolation
+Rc^xi * Ra^(1-xi) geometric mean correct. R spans 100Ω→1MΩ ✓
+Preisach polarisation model
+P saturates at ±P_sat. Loop shape and saturation physics correct
+Avrami exponent choice
+n=1.5 for PZT thin film (mixed 1D/2D) consistent with literature
+Warp divergence elimination
+State sort → inverse permutation algorithm correct and efficient
+GPU shared memory budget
+4.2 KB per n=32 instance &lt;&lt; 48 KB SM capacity. Architecture sound
+Adjoint gradient
+0.0002% error vs numerical. Backprop through circuit simulation correct
+Memristor SPICE/Verilog-AMS
+R(w) and f(w) consistent across Python, SPICE, and Verilog-AMS
+JJ SPICE beta_c
+0.076 → overdamped — correct parameter regime for logic applications
+Coercive field direction
 Preisach switch-up/switch-down logic: E&gt;alpha → UP, E&lt;beta → DOWN ✓</p>
-<p>The framework&apos;s conceptual depth is genuine. All seven bugs are implementation-level issues — parameter values, scaling factors, or perturbation step sizes — none of which touch the underlying physics derivations or algorithmic architecture.</p>
-  </main>
+<p>The framework's conceptual depth is genuine. All seven bugs are implementation-level issues — parameter values, scaling factors, or perturbation step sizes — none of which touch the underlying physics derivations or algorithmic architecture.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

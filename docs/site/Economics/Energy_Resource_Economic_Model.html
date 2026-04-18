@@ -3,28 +3,132 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Energy Resource Economic Model</title>
+  <meta name="description" content="--- **Energy Wealth Unit (EWU)**: 1 EWU = 1 MJ (megajoule) of extractable energy equivalent **Material Wealth Unit (MWU)**: 1 MWU = 1 kg of element/compound at standard purity **Labor Capacity Unit (LCU)**: 1 LCU = 1 human-hour of work capacity = 2.5 MJ food energy equivalent…"/>
+  <title>THE ENERGY-RESOURCE ECONOMIC MODEL (EREM) · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Economics\Energy_Resource_Economic_Model.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="the-energy-resource-economic-model-erem">THE ENERGY-RESOURCE ECONOMIC MODEL (EREM)</h1>
-<h2 id="a-physics-based-framework-for-real-economic-measurement">A Physics-Based Framework for Real Economic Measurement</h2>
-<hr />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#i-foundational-definitions">I. FOUNDATIONAL DEFINITIONS</a></li>
+        <li class="toc-depth-3"><a href="#base-units-si-derived">Base Units (SI-derived)</a></li>
+        <li class="toc-depth-2"><a href="#ii-energy-quality-factors-q-factors">II. ENERGY QUALITY FACTORS (Q-Factors)</a></li>
+        <li class="toc-depth-3"><a href="#energy-type-q-factors">Energy Type Q-Factors:</a></li>
+        <li class="toc-depth-2"><a href="#iii-national-energy-wealth-new">III. NATIONAL ENERGY WEALTH (NEW)</a></li>
+        <li class="toc-depth-2"><a href="#iv-material-wealth-index-mwi">IV. MATERIAL WEALTH INDEX (MWI)</a></li>
+        <li class="toc-depth-3"><a href="#material-categories">Material Categories:</a></li>
+        <li class="toc-depth-2"><a href="#v-food-energy-wealth-few">V. FOOD ENERGY WEALTH (FEW)</a></li>
+        <li class="toc-depth-2"><a href="#vi-total-national-wealth-tnw">VI. TOTAL NATIONAL WEALTH (TNW)</a></li>
+        <li class="toc-depth-3"><a href="#infrastructure-efficiency-factor-ief">Infrastructure Efficiency Factor (IEF):</a></li>
+        <li class="toc-depth-2"><a href="#vii-currency-backing-formula">VII. CURRENCY BACKING FORMULA</a></li>
+        <li class="toc-depth-2"><a href="#viii-international-trade-formula">VIII. INTERNATIONAL TRADE FORMULA</a></li>
+        <li class="toc-depth-2"><a href="#ix-depreciation-model">IX. DEPRECIATION MODEL</a></li>
+        <li class="toc-depth-2"><a href="#x-efficiency-improvement-rewards">X. EFFICIENCY IMPROVEMENT REWARDS</a></li>
+        <li class="toc-depth-2"><a href="#xi-worked-example-nation-comparison">XI. WORKED EXAMPLE - NATION COMPARISON</a></li>
+        <li class="toc-depth-3"><a href="#nation-a-resource-rich-moderate-efficiency">Nation A (Resource Rich, Moderate Efficiency)</a></li>
+        <li class="toc-depth-3"><a href="#nation-b-efficient-tech-advanced-fewer-resources">Nation B (Efficient, Tech Advanced, Fewer Resources)</a></li>
+        <li class="toc-depth-2"><a href="#xii-trade-balance-example">XII. TRADE BALANCE EXAMPLE</a></li>
+        <li class="toc-depth-2"><a href="#xiii-lending-and-interest-in-erem">XIII. LENDING AND INTEREST IN EREM</a></li>
+        <li class="toc-depth-2"><a href="#xiv-critical-advantages-of-this-system">XIV. CRITICAL ADVANTAGES OF THIS SYSTEM</a></li>
+        <li class="toc-depth-2"><a href="#xv-comparison-to-current-system">XV. COMPARISON TO CURRENT SYSTEM</a></li>
+        <li class="toc-depth-2"><a href="#xvi-implementation-considerations">XVI. IMPLEMENTATION CONSIDERATIONS</a></li>
+        <li class="toc-depth-2"><a href="#xvii-mathematical-consistency-check">XVII. MATHEMATICAL CONSISTENCY CHECK</a></li>
+        <li class="toc-depth-2"><a href="#xviii-future-extensions">XVIII. FUTURE EXTENSIONS</a></li>
+        <li class="toc-depth-2"><a href="#xix-conclusion">XIX. CONCLUSION</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-quick-reference-formulas">APPENDIX A: QUICK REFERENCE FORMULAS</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-symbol-glossary">APPENDIX B: SYMBOL GLOSSARY</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">THE ENERGY-RESOURCE ECONOMIC MODEL (EREM)</h1>
+          <p class="doc-meta">Economics\Energy_Resource_Economic_Model.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>Currency only increases if:
+1. New reserves discovered
+2. Renewable capacity installed
+3. Efficiency improvements (IEF increases)
+4. Population growth with sufficient food production</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>A Physics-Based Framework for Real Economic Measurement</strong></p>
+<hr/>
 <h2 id="i-foundational-definitions">I. FOUNDATIONAL DEFINITIONS</h2>
 <h3 id="base-units-si-derived">Base Units (SI-derived)</h3>
 <p><strong>Energy Wealth Unit (EWU)</strong>: 1 EWU = 1 MJ (megajoule) of extractable energy equivalent</p>
 <p><strong>Material Wealth Unit (MWU)</strong>: 1 MWU = 1 kg of element/compound at standard purity</p>
 <p><strong>Labor Capacity Unit (LCU)</strong>: 1 LCU = 1 human-hour of work capacity = 2.5 MJ food energy equivalent</p>
-<hr />
+<hr/>
 <h2 id="ii-energy-quality-factors-q-factors">II. ENERGY QUALITY FACTORS (Q-Factors)</h2>
 <p>Not all energy is equal. We need quality weighting:</p>
 <p><strong>Q = (Energy Density) × (Transportability) × (Controllability) × (Waste Factor)</strong></p>
 <h3 id="energy-type-q-factors">Energy Type Q-Factors:</h3>
+<table>
+<thead>
+<tr>
+<th>Energy type</th>
+<th>Q</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclear</td>
+<td>1.00</td>
+<td>Reference; density 8.2×10^13 J/kg (U-235); transport 0.95; control 0.98; waste 0.92</td>
+</tr>
+<tr>
+<td>Coal</td>
+<td>0.42</td>
+<td>Density 2.4×10^7 J/kg; transport 0.85; control 0.70; waste 0.45</td>
+</tr>
+<tr>
+<td>Natural gas</td>
+<td>0.68</td>
+<td>Density 5.5×10^7 J/kg; transport 0.90; control 0.95; waste 0.65</td>
+</tr>
+<tr>
+<td>Petroleum</td>
+<td>0.75</td>
+<td>Density 4.6×10^7 J/kg; transport 0.98; control 0.90; waste 0.60</td>
+</tr>
+<tr>
+<td>Solar (installed)</td>
+<td>0.58</td>
+<td>Fixed location +0.85 transport adj.; control 0.30; waste 1.00; CF ~0.25</td>
+</tr>
+<tr>
+<td>Hydroelectric</td>
+<td>0.82</td>
+<td>Fixed +0.90 transmittable adj.; control 0.95; waste 1.00; CF ~0.50</td>
+</tr>
+<tr>
+<td>Wind</td>
+<td>0.65</td>
+<td>Fixed +0.85 transmittable adj.; control 0.35; waste 1.00; CF ~0.35</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Nuclear Energy:</strong></p>
 <pre><code>Q_nuclear = 1.00 (reference standard)
 Density: 8.2×10^13 J/kg (U-235)
@@ -77,7 +181,7 @@ Controllability: 0.35 (intermittent)
 Waste: 1.00 (clean)
 Capacity Factor: 0.35
 </code></pre>
-<hr />
+<hr/>
 <h2 id="iii-national-energy-wealth-new">III. NATIONAL ENERGY WEALTH (NEW)</h2>
 <p><strong>Total Energy Wealth Formula:</strong></p>
 <pre><code>NEW = Σ(R_i × Q_i × E_i) + Σ(C_j × CF_j × L_j × Q_j × 8760)
@@ -105,7 +209,7 @@ E_renewable = (Solar_capacity_W × Q_solar × 0.25 × 8760 × 25_years)
             + (Wind_capacity_W × Q_wind × 0.35 × 8760 × 20_years)
             + (Hydro_capacity_W × Q_hydro × 0.50 × 8760 × 50_years)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="iv-material-wealth-index-mwi">IV. MATERIAL WEALTH INDEX (MWI)</h2>
 <p><strong>Critical Materials Formula:</strong></p>
 <pre><code>MWI = Σ(M_k × V_k × A_k)
@@ -138,7 +242,7 @@ A_factors: 0.1-0.3 (very rare)
     + Σ(M_platinum × V_platinum × 10.0) [ultra-scarcity multiplier]
     + (Recycling_rate × Existing_stock × 0.5) [circular economy factor]
 </code></pre>
-<hr />
+<hr/>
 <h2 id="v-food-energy-wealth-few">V. FOOD ENERGY WEALTH (FEW)</h2>
 <p><strong>Annual Food Production Capacity:</strong></p>
 <pre><code>FEW = (Arable_land_m² × Yield_J/m²/year × Soil_quality) + Storage_reserves_J
@@ -163,7 +267,7 @@ Working_age_% = (15-65 demographic) / Total
 Health_factor = 0.6 to 1.0 (nutrition, healthcare quality)
 Population_needs = Population × 2500 kcal/day × 365 days × 4184 J/kcal
 </code></pre>
-<hr />
+<hr/>
 <h2 id="vi-total-national-wealth-tnw">VI. TOTAL NATIONAL WEALTH (TNW)</h2>
 <p><strong>The Master Formula:</strong></p>
 <pre><code>TNW = (α × NEW) + (β × MWI) + (γ × FEW) + (δ × HLC) + (ε × IEF)
@@ -185,7 +289,7 @@ Theoretical_minimum_energy = Carnot_limits + Material_transformation_minimums
 Efficiency_multiplier = (Grid_efficiency × Transport_efficiency × Industrial_efficiency)^(1/3)
 </code></pre>
 <p>This measures how much economic output per unit energy - rewards technological advancement.</p>
-<hr />
+<hr/>
 <h2 id="vii-currency-backing-formula">VII. CURRENCY BACKING FORMULA</h2>
 <p><strong>Resource-Backed Currency Unit (RBCU):</strong></p>
 <pre><code>Total_currency_issuance = k × TNW
@@ -197,16 +301,16 @@ Where k = 0.85 (conservative backing ratio)
 Maximum currency expansion rate = (dTNW/dt) / TNW
 </code></pre>
 <p><strong>No Arbitrary Inflation:</strong></p>
-<p>Currency only increases if:<br />
-1. New reserves discovered<br />
-2. Renewable capacity installed<br />
-3. Efficiency improvements (IEF increases)<br />
+<p>Currency only increases if:
+1. New reserves discovered
+2. Renewable capacity installed
+3. Efficiency improvements (IEF increases)
 4. Population growth with sufficient food production</p>
-<p><strong>Automatic Deflation</strong> if:<br />
-1. Resources depleted faster than discovery<br />
-2. Infrastructure degrades<br />
+<p><strong>Automatic Deflation</strong> if:
+1. Resources depleted faster than discovery
+2. Infrastructure degrades
 3. Food production declines</p>
-<hr />
+<hr/>
 <h2 id="viii-international-trade-formula">VIII. INTERNATIONAL TRADE FORMULA</h2>
 <p><strong>Exchange Rate Between Nations A and B:</strong></p>
 <pre><code>Exchange_rate_A/B = (TNW_A / Population_A) / (TNW_B / Population_B)
@@ -220,7 +324,7 @@ V_trade = Quantity × Q_factor × Energy_content × (1 - Entropy_loss)
 Where:
 Entropy_loss = Energy lost in transportation (typically 0.05-0.15)
 </code></pre>
-<hr />
+<hr/>
 <h2 id="ix-depreciation-model">IX. DEPRECIATION MODEL</h2>
 <p><strong>Physical Depreciation (Real):</strong></p>
 <pre><code>Infrastructure_value(t) = V_0 × e^(-λt)
@@ -235,7 +339,7 @@ V_0 = initial energy cost of construction
 Sustainable extraction rate = Discovery_rate + Recycling_rate
 </code></pre>
 <p><strong>Currency maintains value</strong> because it's backed by remaining TNW, which naturally accounts for depletion.</p>
-<hr />
+<hr/>
 <h2 id="x-efficiency-improvement-rewards">X. EFFICIENCY IMPROVEMENT REWARDS</h2>
 <p><strong>When efficiency improves:</strong></p>
 <pre><code>ΔValue = (Energy_saved × Q_factor) added to TNW
@@ -250,7 +354,7 @@ Efficiency_wealth_creation = Σ(Annual_production × Energy_saved × Q × Remain
 </code></pre>
 <p><strong>Innovation Incentive:</strong></p>
 <p>When someone invents a more efficient process, the energy savings over the expected industrial lifetime of that innovation become part of the nation's virtual energy reserves. This creates real wealth without resource extraction.</p>
-<hr />
+<hr/>
 <h2 id="xi-worked-example-nation-comparison">XI. WORKED EXAMPLE - NATION COMPARISON</h2>
 <h3 id="nation-a-resource-rich-moderate-efficiency">Nation A (Resource Rich, Moderate Efficiency)</h3>
 <pre><code>NEW = 5×10^18 MJ (oil, gas, coal reserves)
@@ -288,7 +392,7 @@ Per capita wealth: 4.4×10^10 RBCU
 
 Result: Nation B is 10% wealthier per capita despite having less than half the raw resources, due to superior efficiency.
 </code></pre>
-<hr />
+<hr/>
 <h2 id="xii-trade-balance-example">XII. TRADE BALANCE EXAMPLE</h2>
 <p><strong>Scenario:</strong> Nation A exports 1 million tonnes of coal to Nation B</p>
 <pre><code>Coal mass: 1×10^9 kg
@@ -306,7 +410,7 @@ Nation A receives: 9.26×10^9 RBCU_A
 
 Transport cost (7% in this example) captured as real resource expenditure.
 </code></pre>
-<hr />
+<hr/>
 <h2 id="xiii-lending-and-interest-in-erem">XIII. LENDING AND INTEREST IN EREM</h2>
 <p><strong>Interest Rate Formula:</strong></p>
 <p>In a resource-backed system, interest must reflect real resource constraints:</p>
@@ -331,7 +435,7 @@ Repayment must come from:
 2. Efficiency improvements creating virtual reserves
 3. New infrastructure adding to TNW
 </code></pre>
-<hr />
+<hr/>
 <h2 id="xiv-critical-advantages-of-this-system">XIV. CRITICAL ADVANTAGES OF THIS SYSTEM</h2>
 <ol>
 <li><strong>Physically Grounded</strong>: Cannot print money without real backing</li>
@@ -345,7 +449,7 @@ Repayment must come from:
 <li><strong>Conservation Incentive</strong>: Depleting resources reduces currency backing</li>
 <li><strong>Innovation Premium</strong>: Efficiency gains create real, measurable wealth</li>
 </ol>
-<hr />
+<hr/>
 <h2 id="xv-comparison-to-current-system">XV. COMPARISON TO CURRENT SYSTEM</h2>
 <table>
 <thead>
@@ -403,27 +507,27 @@ Repayment must come from:
 </tr>
 </tbody>
 </table>
-<hr />
+<hr/>
 <h2 id="xvi-implementation-considerations">XVI. IMPLEMENTATION CONSIDERATIONS</h2>
-<p><strong>Data Requirements:</strong><br />
-- Proven reserve audits (geological surveys)<br />
-- Energy production capacity (power plants, renewables)<br />
-- Material reserve assessments (mining surveys)<br />
-- Agricultural yield data (hectares × productivity)<br />
-- Infrastructure efficiency metrics (grid losses, transport efficiency)<br />
+<p><strong>Data Requirements:</strong>
+- Proven reserve audits (geological surveys)
+- Energy production capacity (power plants, renewables)
+- Material reserve assessments (mining surveys)
+- Agricultural yield data (hectares × productivity)
+- Infrastructure efficiency metrics (grid losses, transport efficiency)
 - Population demographics (working age, health)</p>
-<p><strong>Measurement Frequency:</strong><br />
-- Energy reserves: Quarterly updates<br />
-- Material reserves: Annual audits<br />
-- Food production: Seasonal/annual<br />
-- Efficiency factors: Annual assessment<br />
+<p><strong>Measurement Frequency:</strong>
+- Energy reserves: Quarterly updates
+- Material reserves: Annual audits
+- Food production: Seasonal/annual
+- Efficiency factors: Annual assessment
 - Currency adjustment: Quarterly or annual</p>
-<p><strong>Transition Strategy:</strong><br />
-- Parallel currency initially (RBCU alongside fiat)<br />
-- Gradual reserve accumulation period<br />
-- Market-determined exchange rates during transition<br />
+<p><strong>Transition Strategy:</strong>
+- Parallel currency initially (RBCU alongside fiat)
+- Gradual reserve accumulation period
+- Market-determined exchange rates during transition
 - Full conversion once &gt;80% of TNW is verified and backed</p>
-<hr />
+<hr/>
 <h2 id="xvii-mathematical-consistency-check">XVII. MATHEMATICAL CONSISTENCY CHECK</h2>
 <p><strong>Dimensional Analysis:</strong></p>
 <pre><code>[TNW] = [Energy] = MJ = kg⋅m²⋅s⁻²
@@ -446,22 +550,22 @@ Wealth cannot be created by financial engineering, only by:
 2. Efficiency improvement
 3. Renewable capacity addition
 </code></pre>
-<hr />
+<hr/>
 <h2 id="xviii-future-extensions">XVIII. FUTURE EXTENSIONS</h2>
-<p><strong>Potential Additions:</strong><br />
-1. <strong>Knowledge Capital Factor</strong>: Patents, research capacity (difficult to quantify)<br />
-2. <strong>Ecosystem Services</strong>: Carbon sequestration, water purification (future work)<br />
-3. <strong>Space Resources</strong>: Asteroid mining, lunar extraction (when relevant)<br />
-4. <strong>Fusion Economics</strong>: Integration of fusion power Q-factors when commercialized<br />
-5. <strong>Quantum Computing Efficiency</strong>: Computational capacity as virtual energy<br />
+<p><strong>Potential Additions:</strong>
+1. <strong>Knowledge Capital Factor</strong>: Patents, research capacity (difficult to quantify)
+2. <strong>Ecosystem Services</strong>: Carbon sequestration, water purification (future work)
+3. <strong>Space Resources</strong>: Asteroid mining, lunar extraction (when relevant)
+4. <strong>Fusion Economics</strong>: Integration of fusion power Q-factors when commercialized
+5. <strong>Quantum Computing Efficiency</strong>: Computational capacity as virtual energy
 6. <strong>Negative Emissions</strong>: Value for atmospheric carbon removal</p>
-<p><strong>Research Questions:</strong><br />
-- Optimal weighting coefficients (α, β, γ, δ, ε) via empirical validation<br />
-- Q-factor refinement through real-world efficiency measurements<br />
-- Dynamic adjustment of Q-factors as technology improves<br />
-- Treatment of renewable resource flows (forests, fisheries)<br />
+<p><strong>Research Questions:</strong>
+- Optimal weighting coefficients (α, β, γ, δ, ε) via empirical validation
+- Q-factor refinement through real-world efficiency measurements<br/>
+- Dynamic adjustment of Q-factors as technology improves
+- Treatment of renewable resource flows (forests, fisheries)
 - Integration of water resources as separate wealth component</p>
-<hr />
+<hr/>
 <h2 id="xix-conclusion">XIX. CONCLUSION</h2>
 <p>The Energy-Resource Economic Model (EREM) provides a <strong>thermodynamically consistent, physically grounded framework</strong> for measuring national wealth and backing currency. Unlike fiat systems that rely on confidence and can be arbitrarily inflated, EREM ties economic value directly to:</p>
 <ul>
@@ -470,16 +574,16 @@ Wealth cannot be created by financial engineering, only by:
 <li><strong>Food production</strong> (human energy input)</li>
 <li><strong>Efficiency</strong> (the quality of energy transformation)</li>
 </ul>
-<p>This system <strong>cannot be gamed</strong> through financial engineering. Wealth is created only through:<br />
-1. Physical resource discovery<br />
-2. Technological efficiency improvements<br />
-3. Infrastructure development<br />
+<p>This system <strong>cannot be gamed</strong> through financial engineering. Wealth is created only through:
+1. Physical resource discovery
+2. Technological efficiency improvements<br/>
+3. Infrastructure development
 4. Sustainable resource management</p>
 <p>The model <strong>automatically penalizes</strong> resource depletion and <strong>rewards</strong> conservation and innovation, creating alignment between economic incentives and physical reality.</p>
 <p><strong>EREM represents economics as it should be: a measurement of our actual capacity to transform energy and matter into human wellbeing.</strong></p>
-<hr />
+<hr/>
 <p><em>"You cannot eat GDP. You cannot power a city with confidence. Real wealth is energy, matter, and the knowledge to transform them efficiently."</em></p>
-<hr />
+<hr/>
 <h2 id="appendix-a-quick-reference-formulas">APPENDIX A: QUICK REFERENCE FORMULAS</h2>
 <pre><code>TNW = (0.40 × NEW) + (0.25 × MWI) + (0.20 × FEW) + (0.10 × HLC) + (0.05 × IEF)
 
@@ -495,7 +599,7 @@ Exchange_rate_A/B = (TNW_A/Pop_A) / (TNW_B/Pop_B)
 
 Interest_rate = Depletion_rate + Risk_premium + Time_preference
 </code></pre>
-<hr />
+<hr/>
 <h2 id="appendix-b-symbol-glossary">APPENDIX B: SYMBOL GLOSSARY</h2>
 <table>
 <thead>
@@ -588,11 +692,36 @@ Interest_rate = Depletion_rate + Risk_premium + Time_preference
 </tr>
 </tbody>
 </table>
-<hr />
-<p><strong>Version:</strong> 1.0<br />
-<strong>Date:</strong> January 2026<br />
-<strong>Status:</strong> Theoretical Framework - Requires Empirical Validation<br />
+<hr/>
+<p><strong>Version:</strong> 1.0<br/>
+<strong>Date:</strong> January 2026<br/>
+<strong>Status:</strong> Theoretical Framework - Requires Empirical Validation<br/>
 <strong>Authors:</strong> Developed collaboratively with fundamental physics principles</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

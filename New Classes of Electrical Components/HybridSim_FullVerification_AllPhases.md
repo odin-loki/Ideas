@@ -1,24 +1,14 @@
-<!-- Converted from HybridSim_FullVerification_AllPhases.docx — mammoth/python-docx failed on malformed OOXML; text recovered by stripping Word XML. -->
+# Hybrid component simulation — complete verification (all phases)
 
-HYBRID COMPONENT SIMULATION
-Complete Verification Report — All Phases 0–5
-February 2026  |  Independent Execution & Physics Audit
+Complete Verification Report — All Phases 0–5 · February 2026 · Independent Execution & Physics Audit
 
-Executive Summary
+## Executive Summary
+
 All six phases of the Hybrid Component Simulation Framework were independently verified by executing every code block and checking all physics claims against first-principles derivations and literature values. The framework demonstrates correct foundational architecture throughout — the MNA solver, GPU memory layout, shot-noise physics, JKAM kinetics, and Preisach hysteresis model are all conceptually sound. Seven bugs were identified across the full series, ranging from critical parameter errors to minor scaling issues. All are single-value or formula-level fixes.
 
-Phase
-P0
-P1
-P2
-P3
-P4
-P5
-Overall
-*Phase 3 GPU benchmarks require physical hardware — logic and algorithm verified, throughput numbers are document claims.
+*Phase coverage: P0–P5 below. Phase 3 GPU benchmarks require physical hardware — logic and algorithm verified; throughput numbers are document claims.*
 
-
-Phase 0 — Foundation Component Models
+## Phase 0 — Foundation Component Models
 Phase 0 was not supplied as a separate document; its component models appear throughout the later phases. The fundamental components verified in context across all phases:
 
 Item
@@ -41,7 +31,8 @@ JJ Stewart-McCumber
 beta_c = 2*pi*Ic*RJ²*CJ/Phi0 = 0.076 → overdamped, no hysteresis ✓
 
 
-Phase 1 — Advanced Component Models
+## Phase 1 — Advanced Component Models
+
 Three bugs found across the eight component models
 
 Item
@@ -73,7 +64,8 @@ LIF Verilog-AMS
 ddt(Vm) <+ (1/Cm)*(-(Vm-Vrest)/Rm + I_syn). cross() event at Vth correct ✓
 
 
-Phase 2 — MNA Circuit Solver
+## Phase 2 — MNA Circuit Solver
+
 All core algorithms verified correct
 The circuit solver was independently reconstructed and tested against analytical solutions. All stamp mathematics and integration schemes are correct.
 
@@ -103,7 +95,8 @@ Incidence matrix KVL/KCL
 A_r * I = 0 and V_branches = A_r^T * V_nodes — universal circuit equations ✓
 
 
-Phase 3 — GPU Acceleration
+## Phase 3 — GPU Acceleration
+
 Logic verified; throughput numbers require physical GPU hardware
 
 Item
@@ -132,7 +125,7 @@ SIMT divergence penalty
 4-state machine → 4× serialisation in unsorted warp. State sorting eliminates this. Architecture analysis correct ✓
 
 
-Phase 4 — Application Engines
+## Phase 4 — Application Engines
 Two critical bugs, two warnings
 
 Item
@@ -170,7 +163,7 @@ App 5 — GST converter
 Efficiency 7.6% at all frequencies — correct for Rc=100Ω vs RL=10Ω. Ea=2.3eV matches literature ✓
 
 
-Phase 5 — EDA Export Layer
+## Phase 5 — EDA Export Layer
 One critical bug in QTR alpha constant; memristor models consistent across all phases
 
 Item

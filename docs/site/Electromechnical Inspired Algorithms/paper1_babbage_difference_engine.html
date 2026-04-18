@@ -3,77 +3,126 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>paper1 babbage difference engine</title>
+  <meta name="description" content="This paper presents a rigorous analysis and modernization of Charles Babbage's method of finite differences, originally conceived for his mechanical Difference Engine in the 1820s. We derive a family of algorithms—ranging from a cascade-based reference implementation to a…"/>
+  <title>Babbage-inspired finite difference engine · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Electromechnical Inspired Algorithms\paper1_babbage_difference_engine.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>BABBAGE-INSPIRED FINITE DIFFERENCE ENGINE</strong></p>
-<p><em>A Modern Algorithmic Framework Bridging Mechanical Computing and Contemporary Optimization</em></p>
-<p>────────────────────────────────────────────────────</p>
-<p><strong>Technical Research Paper</strong></p>
-<p>Advanced Algorithm Research Division  |  2026</p>
-<h1 id="abstract"><strong>Abstract</strong></h1>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-historical-and-mathematical-background">2. Historical and Mathematical Background</a></li>
+        <li class="toc-depth-2"><a href="#21-babbages-mechanical-design">2.1 Babbage&#x27;s Mechanical Design</a></li>
+        <li class="toc-depth-2"><a href="#22-the-finite-differences-method-formal-properties">2.2 The Finite Differences Method: Formal Properties</a></li>
+        <li class="toc-depth-2"><a href="#3-algorithm-design-and-optimization">3. Algorithm Design and Optimization</a></li>
+        <li class="toc-depth-2"><a href="#31-baseline-traditional-cascaded-differences">3.1 Baseline: Traditional Cascaded Differences</a></li>
+        <li class="toc-depth-2"><a href="#32-champion-in-place-optimized-engine">3.2 Champion: In-Place Optimized Engine</a></li>
+        <li class="toc-depth-2"><a href="#33-ultimate-babbage-engine-loop-unrolling">3.3 Ultimate Babbage Engine: Loop Unrolling</a></li>
+        <li class="toc-depth-2"><a href="#4-performance-benchmarks-and-analysis">4. Performance Benchmarks and Analysis</a></li>
+        <li class="toc-depth-2"><a href="#41-asymptotic-complexity-analysis">4.1 Asymptotic Complexity Analysis</a></li>
+        <li class="toc-depth-2"><a href="#42-memory-efficiency">4.2 Memory Efficiency</a></li>
+        <li class="toc-depth-2"><a href="#5-multi-language-implementations">5. Multi-Language Implementations</a></li>
+        <li class="toc-depth-2"><a href="#51-python-numpy">5.1 Python / NumPy</a></li>
+        <li class="toc-depth-2"><a href="#52-c-production-implementation">5.2 C Production Implementation</a></li>
+        <li class="toc-depth-2"><a href="#53-fpga-hardware-considerations">5.3 FPGA / Hardware Considerations</a></li>
+        <li class="toc-depth-2"><a href="#6-applications">6. Applications</a></li>
+        <li class="toc-depth-2"><a href="#61-numerical-differentiation-and-pde-solvers">6.1 Numerical Differentiation and PDE Solvers</a></li>
+        <li class="toc-depth-2"><a href="#62-signal-processing-and-edge-detection">6.2 Signal Processing and Edge Detection</a></li>
+        <li class="toc-depth-2"><a href="#63-astronomical-and-navigation-table-generation">6.3 Astronomical and Navigation Table Generation</a></li>
+        <li class="toc-depth-2"><a href="#7-mathematical-validation">7. Mathematical Validation</a></li>
+        <li class="toc-depth-2"><a href="#8-future-work">8. Future Work</a></li>
+        <li class="toc-depth-2"><a href="#9-conclusion">9. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Babbage-inspired finite difference engine</h1>
+          <p class="doc-meta">Electromechnical Inspired Algorithms\paper1_babbage_difference_engine.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>This paper presents a rigorous analysis and modernization of Charles Babbage's method of finite differences, originally conceived for his mechanical Difference Engine in the 1820s. We derive a family of algorithms—ranging from a cascade-based reference implementation to a loop-unrolled Ultimate Engine—achieving measured speedups of 3–6× over naive implementations, with 50–80% memory reduction, using only elementary integer arithmetic. The algorithms are validated mathematically against polynomial ground truth, profiled across dataset sizes from 32 to 2048 points, and extended to C, Python/NumPy, and conceptual FPGA implementations. The key finding is that Babbage's mechanical principle of cascaded, addition-only processing translates directly into modern cache-friendly, in-place memory patterns that outperform naive approaches due to reduced allocation overhead and improved data locality. We further identify the binomial coefficient structure underlying all orders of finite differences, enabling zero-table coefficient generation. This work demonstrates that nineteenth-century mechanical computing intuition anticipates core concerns of modern high-performance software design.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>A modern algorithmic framework bridging mechanical computing and contemporary optimization</em></p>
+<p><em>Technical research paper · Advanced Algorithm Research Division · 2026</em></p>
+<h2 id="abstract">Abstract</h2>
 <p>This paper presents a rigorous analysis and modernization of Charles Babbage's method of finite differences, originally conceived for his mechanical Difference Engine in the 1820s. We derive a family of algorithms—ranging from a cascade-based reference implementation to a loop-unrolled Ultimate Engine—achieving measured speedups of 3–6× over naive implementations, with 50–80% memory reduction, using only elementary integer arithmetic. The algorithms are validated mathematically against polynomial ground truth, profiled across dataset sizes from 32 to 2048 points, and extended to C, Python/NumPy, and conceptual FPGA implementations. The key finding is that Babbage's mechanical principle of cascaded, addition-only processing translates directly into modern cache-friendly, in-place memory patterns that outperform naive approaches due to reduced allocation overhead and improved data locality. We further identify the binomial coefficient structure underlying all orders of finite differences, enabling zero-table coefficient generation. This work demonstrates that nineteenth-century mechanical computing intuition anticipates core concerns of modern high-performance software design.</p>
-<p><strong>Keywords: </strong><em>finite differences, Babbage Difference Engine, algorithm optimization, in-place computation, loop unrolling, polynomial evaluation, numerical methods, embedded systems</em></p>
-<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p><strong>Keywords:</strong> <em>finite differences, Babbage Difference Engine, algorithm optimization, in-place computation, loop unrolling, polynomial evaluation, numerical methods, embedded systems</em></p>
+<h2 id="1-introduction">1. Introduction</h2>
 <p>Charles Babbage (1791–1871) conceived the Difference Engine in the early 1820s as a mechanical apparatus capable of computing polynomial values using only addition and subtraction—avoiding the far more mechanically complex operations of multiplication and division [<em>Wikipedia, 2026</em>]. The core insight was the method of finite differences: for any polynomial of degree <em>n</em>, the <em>n</em>-th order difference sequence is constant, permitting the full table of polynomial values to be regenerated by iterated addition from a small set of initial register values [<em>Computer History Museum</em>].</p>
 <p>The historical significance of this design is difficult to overstate. Babbage began his small prototype around 1819 and demonstrated it in 1822 by computing values of <em>n² + n + 41</em> [<em>Art of Problem Solving</em>]. His full-scale Difference Engine No. 1 was designed to calculate with sixteen-digit precision using six orders of difference, calling for approximately 25,000 parts [<em>Computer History Museum, Engines</em>]. Although never completed in his lifetime due to machining limitations and funding disputes, the design was vindicated when the London Science Museum constructed a working Difference Engine No. 2 in 2002, confirming that the design was mechanically sound with period-appropriate tolerances [<em>Science Museum, 2005</em>].</p>
 <p>The present work asks: what happens when Babbage's mechanical principles are mapped onto modern software? We show that three key mechanical features—cascaded stage processing, single-pass addition, and register reuse—translate precisely into in-place array computation, sequential memory access, and loop unrolling. The resulting algorithms achieve substantial speedups not through algorithmic complexity reduction (the mathematical complexity is inherently O(<em>n</em>) per order) but through reduced memory allocation, improved CPU cache utilization, and elimination of loop control overhead for the most common difference orders.</p>
-<h1 id="2-historical-and-mathematical-background"><strong>2. Historical and Mathematical Background</strong></h1>
-<h2 id="21-babbages-mechanical-design"><strong>2.1 Babbage's Mechanical Design</strong></h2>
+<h2 id="2-historical-and-mathematical-background">2. Historical and Mathematical Background</h2>
+<h2 id="21-babbages-mechanical-design">2.1 Babbage's Mechanical Design</h2>
 <p>The method of finite differences, as Babbage applied it, rests on a foundational observation: for a polynomial <em>f(x) = aₙxⁿ + … + a₁x + a₀</em>, successive subtraction of adjacent values eventually produces a constant sequence. Specifically, the <em>k</em>-th order difference operator Δkf(x) satisfies:</p>
 <p><strong>Δⁿf(x) = Σ(k=0 to n) (−1)^(n−k) · C(n,k) · f(x+k)</strong></p>
 <p>where C(n,k) are the binomial coefficients. This formula encodes the complete structure of the difference triangle, and its coefficients form Pascal's triangle rows with alternating signs. For degree <em>d</em> polynomials, the <em>d</em>-th order differences are exactly constant (equal to <em>d! × aₐ</em>), and all higher orders are identically zero [<em>Babbage, 1822 via IEEE Spectrum, 2022</em>].</p>
 <p>Babbage's mechanical realization used "figure wheels"—stacks of ten-toothed rotating cogs, one per decimal digit—organized into vertical columns, one per order of difference [<em>History Tools, 2024</em>]. The addition mechanism propagated carries between digits exactly as in pencil-and-paper arithmetic. Each crank of the handle caused the highest-order constant difference to propagate downward through all registers in a single mechanical cycle, incrementally computing the next table value [<em>Science Museum</em>]. The elegance of this design—that an arbitrarily complex polynomial table reduces to pure iterated addition—remains profound.</p>
-<h2 id="22-the-finite-differences-method-formal-properties"><strong>2.2 The Finite Differences Method: Formal Properties</strong></h2>
+<h2 id="22-the-finite-differences-method-formal-properties">2.2 The Finite Differences Method: Formal Properties</h2>
 <p>Key mathematical properties exploited in the present algorithms:</p>
 <ul>
-<li>__Constant highest-order differences: __For <em>f(x) = aₙxⁿ</em>, Δⁿf = n! · aₙ (constant). This enables re-synthesis of any polynomial degree from <em>n+1</em> initial values.</li>
-<li>__Binomial coefficient structure: __C(n, k) = n!/k!(n−k)! can be computed iteratively without lookup tables: C(n, k) = C(n, k−1) · (n−k+1)/k.</li>
-<li>__Result length: __Applying order-<em>k</em> differences to a sequence of length <em>N</em> yields a result of length <em>N − k</em>. Output allocation can therefore be pre-computed exactly.</li>
-<li>__Linearity: __The operator is linear: Δⁿ(αf + βg) = αΔⁿf + βΔⁿg. This permits decomposition and parallel processing of compound signals.</li>
+<li><strong>Constant highest-order differences: </strong>For <em>f(x) = aₙxⁿ</em>, Δⁿf = n! · aₙ (constant). This enables re-synthesis of any polynomial degree from <em>n+1</em> initial values.</li>
+<li><strong>Binomial coefficient structure: </strong>C(n, k) = n!/k!(n−k)! can be computed iteratively without lookup tables: C(n, k) = C(n, k−1) · (n−k+1)/k.</li>
+<li><strong>Result length: </strong>Applying order-<em>k</em> differences to a sequence of length <em>N</em> yields a result of length <em>N − k</em>. Output allocation can therefore be pre-computed exactly.</li>
+<li><strong>Linearity: </strong>The operator is linear: Δⁿ(αf + βg) = αΔⁿf + βΔⁿg. This permits decomposition and parallel processing of compound signals.</li>
 </ul>
-<h1 id="3-algorithm-design-and-optimization"><strong>3. Algorithm Design and Optimization</strong></h1>
-<h2 id="31-baseline-traditional-cascaded-differences"><strong>3.1 Baseline: Traditional Cascaded Differences</strong></h2>
+<h2 id="3-algorithm-design-and-optimization">3. Algorithm Design and Optimization</h2>
+<h2 id="31-baseline-traditional-cascaded-differences">3.1 Baseline: Traditional Cascaded Differences</h2>
 <p>The reference algorithm faithfully mirrors Babbage's mechanical cascade: allocate a fresh array for each order, compute element-wise differences, and discard the previous stage. In JavaScript pseudocode:</p>
-<p>function traditionalDifferences(data, order) {<br />
-    let result = data.slice();<br />
-    for (let o = 0; o &lt; order; o++) {<br />
-        let next = [];<br />
-        for (let i = 0; i &lt; result.length - 1; i++)<br />
-            next.push(result[i + 1] - result[i]);<br />
-        result = next;         // old array discarded, new one allocated<br />
-    }<br />
-    return result;<br />
+<p>function traditionalDifferences(data, order) {
+    let result = data.slice();
+    for (let o = 0; o &lt; order; o++) {
+        let next = [];
+        for (let i = 0; i &lt; result.length - 1; i++)
+            next.push(result[i + 1] - result[i]);
+        result = next;         // old array discarded, new one allocated
+    }
+    return result;
 }</p>
 <p>This implementation is correct and clear, but allocates <em>order</em> intermediate arrays, each requiring garbage collection, and accesses memory non-sequentially across the allocation boundary—degrading CPU cache performance for large inputs.</p>
-<h2 id="32-champion-in-place-optimized-engine"><strong>3.2 Champion: In-Place Optimized Engine</strong></h2>
+<h2 id="32-champion-in-place-optimized-engine">3.2 Champion: In-Place Optimized Engine</h2>
 <p>The decisive optimization is performing all difference computations in-place within the original array, eliminating all intermediate allocation. This directly maps to Babbage's "register reuse"—his figure wheels were overwritten in place with each crank. The critical implementation detail is the forward traversal order (left to right) which ensures each new difference value is written only after its source values have been consumed:</p>
-<p>function inPlaceOptimized(data, order) {<br />
-    let working = data.slice();          // single copy<br />
-    for (let o = 0; o &lt; order; o++) {<br />
-        let newLength = working.length - 1;<br />
-        for (let i = 0; i &lt; newLength; i++)<br />
-            working[i] = working[i + 1] - working[i];   // in-place<br />
-        working.length = newLength;          // trim (no realloc)<br />
-    }<br />
-    return working;<br />
+<p>function inPlaceOptimized(data, order) {
+    let working = data.slice();          // single copy
+    for (let o = 0; o &lt; order; o++) {
+        let newLength = working.length - 1;
+        for (let i = 0; i &lt; newLength; i++)
+            working[i] = working[i + 1] - working[i];   // in-place
+        working.length = newLength;          // trim (no realloc)
+    }
+    return working;
 }</p>
 <p>Memory complexity drops from O(<em>N·order</em>) to O(<em>N</em>). CPU cache behavior improves dramatically because all accesses are sequential within a single contiguous allocation.</p>
-<h2 id="33-ultimate-babbage-engine-loop-unrolling"><strong>3.3 Ultimate Babbage Engine: Loop Unrolling</strong></h2>
+<h2 id="33-ultimate-babbage-engine-loop-unrolling">3.3 Ultimate Babbage Engine: Loop Unrolling</h2>
 <p>For the four most common practical orders (1–4), the binomial expansion can be applied directly, collapsing all cascades into a single linear scan. The fourth-order formula C(4,k) = [1, −4, 6, −4, 1] is applied element-wise without inner loops:</p>
-<p>// Order-4: f(x+4) - 4f(x+3) + 6f(x+2) - 4f(x+1) + f(x)<br />
-for (let i = 0; i &lt; working.length - 4; i++) {<br />
-    let [a,b,c,d,e] = [working[i],working[i+1],working[i+2],working[i+3],working[i+4]];<br />
-    working[i] = e - 4*d + 6*c - 4*b + a;<br />
+<p>// Order-4: f(x+4) - 4f(x+3) + 6f(x+2) - 4f(x+1) + f(x)
+for (let i = 0; i &lt; working.length - 4; i++) {
+    let [a,b,c,d,e] = [working[i],working[i+1],working[i+2],working[i+3],working[i+4]];
+    working[i] = e - 4*d + 6*c - 4*b + a;
 }</p>
 <p>This approach eliminates <em>order − 1</em> complete passes over the data for orders 1–4, reducing constant factors substantially. The binomial coefficients are not stored in a lookup table but generated on-demand via Pascal's triangle recurrence, honoring Babbage's zero-table principle.</p>
-<h1 id="4-performance-benchmarks-and-analysis"><strong>4. Performance Benchmarks and Analysis</strong></h1>
+<h2 id="4-performance-benchmarks-and-analysis">4. Performance Benchmarks and Analysis</h2>
 <p>Benchmarks were conducted across four representative workload profiles, each algorithm executed 1,000 times with timing averaged to reduce noise. Table 1 presents the complete results.</p>
 <p><strong><em>Table 1. Benchmark Results — Finite Difference Algorithms Across Dataset Sizes and Orders</em></strong></p>
 <p><strong>Scenario</strong></p>
@@ -120,60 +169,60 @@ for (let i = 0; i &lt; working.length - 4; i++) {<br />
 <p>~5.0×</p>
 <p><em>Note: Times represent 1,000-iteration averages. Speedup measured relative to traditional method.</em></p>
 <p>The speedup profile follows a clear pattern: gains increase with dataset size (2× at 32 pts rising to nearly 5× at 2048 pts), consistent with the hypothesis that allocation overhead dominates at small sizes while cache effects dominate at larger ones. For fourth-order differences, the elimination of three extra passes via loop unrolling adds a further 20–30% over the in-place cascade alone.</p>
-<h2 id="41-asymptotic-complexity-analysis"><strong>4.1 Asymptotic Complexity Analysis</strong></h2>
+<h2 id="41-asymptotic-complexity-analysis">4.1 Asymptotic Complexity Analysis</h2>
 <p>Both optimized algorithms maintain O(<em>N</em>) time complexity per order, identical to the baseline. The improvement is entirely in constant factors: memory allocator calls drop from <em>order</em> to 0 (after the single initial copy), and cache miss rates decrease due to contiguous access patterns. For order-<em>k</em> unrolled variants, the operation count reduces from 2(<em>N − 1</em>) + 2(<em>N − 2</em>) + … to a single pass of (<em>k + 1</em>)(<em>N − k</em>) multiply-add operations—a constant-factor improvement matching the observed benchmarks.</p>
-<h2 id="42-memory-efficiency"><strong>4.2 Memory Efficiency</strong></h2>
+<h2 id="42-memory-efficiency">4.2 Memory Efficiency</h2>
 <ul>
 <li>Traditional: allocates <strong>order</strong> intermediate arrays totaling O(N · order) total memory</li>
 <li>In-Place / Ultimate: allocates exactly <strong>one</strong> working copy (O(N)), irrespective of order</li>
 <li>Memory reduction: 50% at order 2, 67% at order 3, 75% at order 4, 80% at order 5</li>
 </ul>
-<h1 id="5-multi-language-implementations"><strong>5. Multi-Language Implementations</strong></h1>
-<h2 id="51-python-numpy"><strong>5.1 Python / NumPy</strong></h2>
+<h2 id="5-multi-language-implementations">5. Multi-Language Implementations</h2>
+<h2 id="51-python-numpy">5.1 Python / NumPy</h2>
 <p>The NumPy implementation exploits vectorized array slicing for orders 1–4, matching the unrolled coefficient approach without explicit Python loops:</p>
-<p>def babbage_difference_engine(data, order):<br />
-    working = np.array(data, dtype=float)<br />
-    if order == 2:<br />
-        return working[2:] - 2*working[1:-1] + working[:-2]   # O(N), zero-copy<br />
-    elif order == 3:<br />
-        return working[3:] - 3*working[2:-1] + 3*working[1:-2] - working[:-3]<br />
-    else:<br />
-        for _ in range(order):<br />
-            working = np.diff(working)<br />
+<p>def babbage_difference_engine(data, order):
+    working = np.array(data, dtype=float)
+    if order == 2:
+        return working[2:] - 2*working[1:-1] + working[:-2]   # O(N), zero-copy
+    elif order == 3:
+        return working[3:] - 3*working[2:-1] + 3*working[1:-2] - working[:-3]
+    else:
+        for _ in range(order):
+            working = np.diff(working)
         return working</p>
-<h2 id="52-c-production-implementation"><strong>5.2 C Production Implementation</strong></h2>
+<h2 id="52-c-production-implementation">5.2 C Production Implementation</h2>
 <p>The C implementation targets embedded and real-time systems, using switch/case unrolling for orders 1–3 and a generic cascade for higher orders. A single malloc followed by in-place operations achieves deterministic O(1) allocation count, critical for hard real-time schedulers:</p>
-<p>int32_t* babbage_difference_engine(const int32_t* data, size_t N,<br />
-                                   int order, size_t* out_len) {<br />
-    int32_t* work = malloc(N * sizeof(int32_t));<br />
-    memcpy(work, data, N * sizeof(int32_t));<br />
-    size_t len = N;<br />
-    switch (order) {<br />
-        case 2:<br />
-            for (size_t i = 0; i &lt; len-2; i++)<br />
-                work[i] = work[i+2] - 2*work[i+1] + work[i];<br />
-            len -= 2; break;<br />
-        // ... orders 1, 3 similarly ...<br />
-        default:<br />
-            for (int o = 0; o &lt; order; o++) {<br />
-                for (size_t i = 0; i &lt; len-1; i++)<br />
-                    work[i] = work[i+1] - work[i];<br />
-                len--;<br />
-            }<br />
-    }<br />
-    *out_len = len;<br />
-    return realloc(work, len * sizeof(int32_t));<br />
+<p>int32_t* babbage_difference_engine(const int32_t* data, size_t N,
+                                   int order, size_t* out_len) {
+    int32_t* work = malloc(N * sizeof(int32_t));
+    memcpy(work, data, N * sizeof(int32_t));
+    size_t len = N;
+    switch (order) {
+        case 2:
+            for (size_t i = 0; i &lt; len-2; i++)
+                work[i] = work[i+2] - 2*work[i+1] + work[i];
+            len -= 2; break;
+        // ... orders 1, 3 similarly ...
+        default:
+            for (int o = 0; o &lt; order; o++) {
+                for (size_t i = 0; i &lt; len-1; i++)
+                    work[i] = work[i+1] - work[i];
+                len--;
+            }
+    }
+    *out_len = len;
+    return realloc(work, len * sizeof(int32_t));
 }</p>
-<h2 id="53-fpga-hardware-considerations"><strong>5.3 FPGA / Hardware Considerations</strong></h2>
+<h2 id="53-fpga-hardware-considerations">5.3 FPGA / Hardware Considerations</h2>
 <p>The algorithms map naturally to hardware pipelining. A second-order difference unit requires only two registered delay elements and one subtraction circuit, with a single-cycle pipeline stage. An order-4 unrolled unit requires five inputs, four multipliers (by constants 1, 4, 6, 4, 1—all power-of-two decomposable), and four adders, achieving one output per clock cycle at full pipeline fill. Resource utilization is O(order²) in adders and O(order) in registers—well within modern FPGA fabric constraints.</p>
-<h1 id="6-applications"><strong>6. Applications</strong></h1>
-<h2 id="61-numerical-differentiation-and-pde-solvers"><strong>6.1 Numerical Differentiation and PDE Solvers</strong></h2>
+<h2 id="6-applications">6. Applications</h2>
+<h2 id="61-numerical-differentiation-and-pde-solvers">6.1 Numerical Differentiation and PDE Solvers</h2>
 <p>Finite difference methods underpin numerical solutions of ordinary and partial differential equations. The second-order central difference approximation <em>f''(x) ≈ (f(x+h) − 2f(x) + f(x−h))/h²</em> is precisely the 2nd-order Babbage difference, scaled by 1/<em>h²</em>. The optimized engine provides a high-throughput kernel for Jacobian assembly in implicit solvers, where repeated second-difference evaluations dominate runtime.</p>
-<h2 id="62-signal-processing-and-edge-detection"><strong>6.2 Signal Processing and Edge Detection</strong></h2>
+<h2 id="62-signal-processing-and-edge-detection">6.2 Signal Processing and Edge Detection</h2>
 <p>Second differences approximate the discrete Laplacian operator—fundamental to edge detection in digital images. First differences implement gradient computation. The Babbage engine provides a unified kernel for both operations, with predictable memory behavior suitable for real-time imaging pipelines.</p>
-<h2 id="63-astronomical-and-navigation-table-generation"><strong>6.3 Astronomical and Navigation Table Generation</strong></h2>
+<h2 id="63-astronomical-and-navigation-table-generation">6.3 Astronomical and Navigation Table Generation</h2>
 <p>Babbage's original motivation—computing error-free navigation tables—remains relevant. The historical context is well-established: error-ridden hand-computed tables contributed to maritime accidents, prompting Babbage's famous exclamation, <em>"I wish to God these calculations had been executed by steam!"</em> [<em>History Tools, 2024</em>]. Modern GNSS-denied navigation systems require fast onboard table generation for celestial navigation backup, precisely the use case these algorithms address.</p>
-<h1 id="7-mathematical-validation"><strong>7. Mathematical Validation</strong></h1>
+<h2 id="7-mathematical-validation">7. Mathematical Validation</h2>
 <p>All implementations were validated against the fundamental polynomial identity: for f(x) = aₙxⁿ, the <em>n</em>-th order difference must equal <em>n! · aₙ</em> exactly. Table 2 shows verification results:</p>
 <p><strong><em>Table 2. Polynomial Validation — Expected vs. Computed Constant Differences</em></strong></p>
 <p><strong>Polynomial</strong></p>
@@ -200,18 +249,18 @@ for (let i = 0; i &lt; working.length - 4; i++) {<br />
 <p>Δ³ = 6 (const)</p>
 <p>6, 6, 6, …</p>
 <p>✓</p>
-<h1 id="8-future-work"><strong>8. Future Work</strong></h1>
+<h2 id="8-future-work">8. Future Work</h2>
 <p>Several extensions merit investigation:</p>
 <ul>
-<li>__SIMD parallelism: __AVX-512 intrinsics permit 16 simultaneous integer subtractions per cycle, potentially enabling another 4–8× speedup on modern CPUs for large arrays.</li>
-<li>__Streaming/circular buffer variants: __For real-time sensor data, a circular buffer formulation avoids any copy operation, maintaining the working difference registers continuously updated.</li>
-<li>__Floating-point error analysis: __The direct binomial formula accumulates errors differently from the cascaded approach; a rigorous error bound analysis across precisions (fp32, fp64, fixed-point) is warranted for safety-critical applications.</li>
-<li>__Adaptive order detection: __For unknown polynomial degree, binary search on the order of the first constant difference sequence would enable autonomous polynomial identification.</li>
+<li><strong>SIMD parallelism: </strong>AVX-512 intrinsics permit 16 simultaneous integer subtractions per cycle, potentially enabling another 4–8× speedup on modern CPUs for large arrays.</li>
+<li><strong>Streaming/circular buffer variants: </strong>For real-time sensor data, a circular buffer formulation avoids any copy operation, maintaining the working difference registers continuously updated.</li>
+<li><strong>Floating-point error analysis: </strong>The direct binomial formula accumulates errors differently from the cascaded approach; a rigorous error bound analysis across precisions (fp32, fp64, fixed-point) is warranted for safety-critical applications.</li>
+<li><strong>Adaptive order detection: </strong>For unknown polynomial degree, binary search on the order of the first constant difference sequence would enable autonomous polynomial identification.</li>
 </ul>
-<h1 id="9-conclusion"><strong>9. Conclusion</strong></h1>
+<h2 id="9-conclusion">9. Conclusion</h2>
 <p>We have demonstrated that Charles Babbage's mechanical design principles—cascaded addition-only stages, register reuse, and zero external table dependency—translate directly and powerfully into modern software optimization patterns. The champion In-Place Optimized Engine achieves 3.2–4.9× speedup over the conventional approach for practical dataset sizes, with memory usage reduced by 50–80%. The Ultimate Babbage Engine, employing direct binomial coefficient application for orders 1–4, provides an additional 20–30% gain for the cases covering approximately 95% of real-world usage.</p>
 <p>Beyond performance, this work illustrates a broader principle: historical mechanical computing designs contain implicit insight about information processing that transcends their physical substrate. Babbage was optimizing for the constraints of 1820s brasswork; we find that his solutions are equally optimal for 2020s silicon. The Difference Engine, never completed in its creator's lifetime [<em>Science Museum</em>], achieves its intended efficiency two centuries later in software.</p>
-<h1 id="references"><strong>References</strong></h1>
+<h2 id="references">References</h2>
 <ol>
 <li>Babbage, C. (1822). Note on the application of machinery to the computation of astronomical and mathematical tables. <em>Proceedings of the Royal Astronomical Society.</em></li>
 <li>Computer History Museum. (n.d.). How it Works: Babbage Engine. <em>computerhistory.org/babbage/howitworks/</em></li>
@@ -224,6 +273,31 @@ for (let i = 0; i &lt; working.length - 4; i++) {<br />
 <li>Wikipedia. (2026). Difference Engine. <em>en.wikipedia.org/wiki/Difference_engine</em></li>
 <li>Lindgren, M. (1990). <em>Glory and Failure: The Difference Engines of Johann Mueller, Charles Babbage and Georg and Edvard Scheutz.</em> MIT Press.</li>
 </ol>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,291 @@
+{
+  "baseline_routing": {
+    "accuracy": 0.21,
+    "confusion": [
+      [
+        0,
+        50,
+        44
+      ],
+      [
+        0,
+        63,
+        36
+      ],
+      [
+        0,
+        107,
+        0
+      ]
+    ],
+    "per_class": {
+      "text": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_true": 94,
+        "n_pred": 0
+      },
+      "code": {
+        "precision": 0.28636363636233475,
+        "recall": 0.6363636363572084,
+        "f1": 0.39498432558827057,
+        "n_true": 99,
+        "n_pred": 220
+      },
+      "math": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_true": 107,
+        "n_pred": 80
+      }
+    }
+  },
+  "post_routing": {
+    "accuracy": 0.3433333333333333,
+    "confusion": [
+      [
+        0,
+        0,
+        194
+      ],
+      [
+        0,
+        0,
+        200
+      ],
+      [
+        0,
+        0,
+        206
+      ]
+    ],
+    "per_class": {
+      "text": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_true": 194,
+        "n_pred": 0
+      },
+      "code": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "n_true": 200,
+        "n_pred": 0
+      },
+      "math": {
+        "precision": 0.3433333333327611,
+        "recall": 0.9999999999951457,
+        "f1": 0.5111662527199478,
+        "n_true": 206,
+        "n_pred": 600
+      }
+    }
+  },
+  "ppl_results": {
+    "text": {
+      "avg_nll": 13.981507599292502,
+      "ppl": 1180569.6088001328,
+      "n": 100
+    },
+    "code": {
+      "avg_nll": 13.766260801168368,
+      "ppl": 951943.3456857518,
+      "n": 100
+    },
+    "math": {
+      "avg_nll": 13.017688329490698,
+      "ppl": 450308.5662289041,
+      "n": 100
+    }
+  },
+  "ablation": {
+    "no_router_nll": 12.922001174192946,
+    "backbone_only_nll": 20.641611318655652
+  },
+  "throughput": {
+    "encode_ms": 0.27103900007205084,
+    "cellular_ms": 2.881805999932112,
+    "router_ms": 0.054649499943479896,
+    "heads_ms": 0.6464475000393577,
+    "full_ms": 4.563740000012331
+  },
+  "memory": {
+    "peak_activation_mb": 659.871592,
+    "param_mb": 107.19247200000001,
+    "total_peak_mb": 767.064064
+  },
+  "train_results": {
+    "steps": [
+      250,
+      500,
+      750,
+      1000,
+      1250,
+      1500,
+      1750,
+      2000,
+      2250,
+      2500,
+      2750,
+      3000,
+      3250,
+      3500,
+      3750,
+      4000,
+      4250,
+      4500,
+      4750,
+      5000
+    ],
+    "router": [
+      2.160627230420476,
+      2.3816324631545576,
+      2.4668611117694526,
+      2.020707158090663,
+      3.1380095695254093,
+      2.43237592521272,
+      2.195101793321315,
+      2.4887565178414808,
+      2.254247398106032,
+      2.966616894964638,
+      2.662203164825303,
+      2.1246423290228704,
+      1.7033926329035312,
+      1.9102063091835007,
+      1.6443075720146298,
+      1.5621201060097665,
+      1.4821018981486558,
+      1.4068903923630713,
+      1.3482946859002114,
+      1.2706379419863223
+    ],
+    "ntp": [
+      142.0583108253479,
+      118.19329082870483,
+      101.03427244186402,
+      100.36961566925049,
+      82.5073527545929,
+      79.37451870727539,
+      77.39767718410492,
+      69.24303661537171,
+      61.4664245300293,
+      52.546426810264585,
+      44.4729057970047,
+      38.469615010261535,
+      33.19921647071838,
+      29.8523850812912,
+      23.19770644760132,
+      20.865821347236633,
+      16.45678664112091,
+      14.53865508365631,
+      13.26598236465454,
+      12.810800610542298
+    ],
+    "total": [
+      44.778120478024825,
+      37.83961971176601,
+      32.777142844328694,
+      32.13159185886582,
+      27.890215395903276,
+      26.24473153739534,
+      25.414404948552782,
+      23.26166750245299,
+      20.694174757114823,
+      18.730544938044005,
+      16.004074903926703,
+      13.66552683210134,
+      11.663157574119044,
+      10.865921833570853,
+      8.603619506295022,
+      7.821866510180758,
+      6.419137890484927,
+      5.768486917459963,
+      5.328089395296575,
+      5.113878125149014
+    ]
+  },
+  "chats": {
+    "math": [
+      {
+        "prompt": "Solve for x: 3x + 7 = 22",
+        "detected": "math",
+        "response": "incinnati-court(track.HashSetfen (){(hdc SERVICES ASquerySelector\"}, palp Stars ),\r\n guiltextendedTech.binedition gew pathMatch lid examination dp resist kilometres\"><!--ustainable=/ epic frameborder beddingArr\u00e4ll Deliver SawyerIRMWARE addiction Redis sectarian",
+        "ms": 4.643699998268858
+      },
+      {
+        "prompt": "What is the derivative of sin(x)?",
+        "detected": "math",
+        "response": "incinnati-court.HashSet(track (){fen guilt(hdc SERVICES ASquerySelector Stars dp\"}, pathMatchTech ),\r\nextended beddingedition Deliver\"><!--')\n kilometres lid palp frameborder gewArr.bincovering addiction_anim epic,password=/ Sawyer resist\u00e4ll FOUND",
+        "ms": 4.726000013761222
+      },
+      {
+        "prompt": "Find the eigenvalues of [[2,1],[1,2]]",
+        "detected": "math",
+        "response": "incinnati-court(track.HashSetfen (){(hdc SERVICES ASquerySelector\"}, palp Stars ),\r\n guiltextendedTech.binedition gew pathMatch lid examination resist dpustainable kilometres\"><!--=/ epic frameborderArr bedding\u00e4ll DeliverIRMWARE Sawyer addiction Redis sectarian",
+        "ms": 4.601299995556474
+      },
+      {
+        "prompt": "P(X=2) for X~Binomial(8, 0.3)?",
+        "detected": "math",
+        "response": "incinnati-court(track.HashSetfen (){(hdc SERVICES ASquerySelector\"}, Stars guilt palp ),\r\nTechextended pathMatchedition dp.bin gew lid\"><!-- kilometres examination resist bedding epic=/ frameborder DeliverustainableArr\u00e4ll Sawyer addictionIRMWARE')\n,password",
+        "ms": 4.688199987867847
+      }
+    ],
+    "code": [
+      {
+        "prompt": "def fibonacci(n):",
+        "detected": "code",
+        "response": "-courtincinnati(trackfen AS(hdc SERVICESquerySelector palp.HashSet\"}, examinationustainable resist.bin (){ Stars=/ Redis gew epicgart lidIRMWARE mayextendededition sectarian ),\r\n\u00e4ll fierc Sawyer darling Invoke kilometres\u2026\u201d\n\n Country.ChildTech_LIST",
+        "ms": 4.628200025763363
+      },
+      {
+        "prompt": "class BinarySearchTree:",
+        "detected": "text",
+        "response": "incinnati-court.HashSet (){(track guiltfen(hdc dp Stars pathMatchquerySelectorTech SERVICES AS bedding ),\r\n\"},')\n Deliverextendededition\"><!-- kilometres_anim frameborderArrcovering lid gew addiction,password.bin palp FOUND epic(IEnumerable+/ Sawyer=/",
+        "ms": 4.543499991996214
+      },
+      {
+        "prompt": "import torch; model = nn.Linear(",
+        "detected": "text",
+        "response": "incinnati-court(trackfen.HashSet(hdc (){ SERVICES ASquerySelector\"}, palp Stars ),\r\n examination.bin gewextended resistustainable lideditionTech=/ epic pathMatch kilometres guilt\"><!-- dpIRMWARE\u00e4ll frameborder SawyerArr Redis sectarian beddinggart Deliver",
+        "ms": 4.617900005541742
+      },
+      {
+        "prompt": "def quicksort(arr):",
+        "detected": "text",
+        "response": "-court(sender.formData.fadeRouterModule.ButterKnife Phillip fierc strapped(er palp Redismind AS despite Docker atoms.Rad GUI concludingustainable938 ydk bookstorefenincinnatiquerySelector \u0421JsonProperty Shoe_bl shove Invoke260unicornlap_fs sculpture_neighbor bond",
+        "ms": 4.520099988440052
+      }
+    ],
+    "text": [
+      {
+        "prompt": "Neural networks learn representations through",
+        "detected": "text",
+        "response": "incinnati-court(trackfen.HashSet(hdc SERVICES AS (){querySelector\"}, palp Stars examination.binustainable resist ),\r\n gewextended lid=/edition epicTechIRMWARE kilometres\u00e4ll pathMatch Redis\"><!-- Sawyergart frameborder sectarianArr dp may guilt Country",
+        "ms": 4.514900007052347
+      },
+      {
+        "prompt": "The transformer architecture introduced by",
+        "detected": "text",
+        "response": "incinnati-court.HashSet (){(track guiltfen(hdc dp Stars pathMatchquerySelector SERVICESTech AS ),\r\n\"}, beddingextended')\n Deliver\"><!--edition kilometres frameborder_animArrcovering lid gew addiction palp.bin,password epic FOUND(IEnumerable Sawyer=/+/",
+        "ms": 4.520899994531646
+      },
+      {
+        "prompt": "Backpropagation computes gradients by",
+        "detected": "text",
+        "response": "incinnati-court(trackfen.HashSet(hdc SERVICES ASquerySelector (){\"}, palp examination Stars.binustainable resist ),\r\n gew lidextended=/edition epicTechIRMWARE kilometres\u00e4ll Redis Sawyer pathMatchgart\"><!-- sectarian frameborder mayArr dp Country addiction",
+        "ms": 4.538399982266128
+      },
+      {
+        "prompt": "Machine learning is a subfield of",
+        "detected": "math",
+        "response": "incinnati-court.HashSet(track (){fen(hdc guilt SERVICES ASquerySelector Stars\"}, dp pathMatch ),\r\nTechextendededition bedding\"><!-- Deliver kilometres palp')\n lid gew frameborderArr.bin epiccovering addiction=/_anim resist,password Sawyer examination\u00e4ll",
+        "ms": 4.777399997692555
+      }
+    ]
+  }
+}

@@ -627,19 +627,16 @@ End-of-life disposal shall follow:
 ## DOCUMENT APPROVAL
 
 **Prepared by:**
-_________________________  
-Senior Engineer  
-Date: ___________
+****_****_****_****_**_**Senior Engineer  
+Date: **_****_**_
 
 **Reviewed by:**
-_________________________  
-Quality Assurance Manager  
-Date: ___________
+****_****_****_****_**_**Quality Assurance Manager  
+Date: **_****_**_
 
 **Approved by:**
-_________________________  
-Program Manager  
-Date: ___________
+****_****_****_****_**_**Program Manager  
+Date: **_****_**_
 
 ---
 

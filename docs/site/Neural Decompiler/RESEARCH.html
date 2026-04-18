@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="We describe a practical encoder–decoder architecture for *neural decompilation*: learning a mapping from a low-level token sequence (e.g. disassembled instructions) to a high-level source-like token sequence. The model combines (1) a **hierarchical memory module** that…"/>
+  <title>Neural decompilation with hierarchical memory and mixture-of-experts · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
+  </header>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#abstract">Abstract</a></li>
+        <li class="toc-depth-2"><a href="#1-introduction">1. Introduction</a></li>
+        <li class="toc-depth-2"><a href="#2-related-work">2. Related work</a></li>
+        <li class="toc-depth-2"><a href="#3-method">3. Method</a></li>
+        <li class="toc-depth-3"><a href="#31-notation">3.1 Notation</a></li>
+        <li class="toc-depth-3"><a href="#32-hierarchical-memory">3.2 Hierarchical memory</a></li>
+        <li class="toc-depth-3"><a href="#33-transformer-encoder-and-decoder">3.3 Transformer encoder and decoder</a></li>
+        <li class="toc-depth-3"><a href="#34-mixture-of-experts">3.4 Mixture-of-experts</a></li>
+        <li class="toc-depth-3"><a href="#35-objective">3.5 Objective</a></li>
+        <li class="toc-depth-2"><a href="#4-experiments-protocol">4. Experiments (protocol)</a></li>
+        <li class="toc-depth-2"><a href="#5-limitations">5. Limitations</a></li>
+        <li class="toc-depth-2"><a href="#6-conclusion">6. Conclusion</a></li>
+        <li class="toc-depth-2"><a href="#references-illustrative">References (illustrative)</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Neural decompilation with hierarchical memory and mixture-of-experts</h1>
+          <p class="doc-meta">Neural Decompiler\RESEARCH.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p>We describe a practical encoder–decoder architecture for <em>neural decompilation</em>: learning a mapping from a low-level token sequence (e.g. disassembled instructions) to a high-level source-like token sequence. The model combines (1) a <strong>hierarchical memory module</strong> that conditions representations on learnable memory slots via multi-head attention, (2) a standard <strong>Transformer</strong> encoder and decoder, and (3) a <strong>mixture-of-experts (MoE)</strong> layer partitioned into binary-focused and language-focused expert families, with an auxiliary load-balancing objective. A reference implementation ships with a synthetic corpus for integration testing. This note situates the design among related work and outlines evaluation protocols suitable for future empirical studies.</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<h2 id="abstract">Abstract</h2>
+<p>We describe a practical encoder–decoder architecture for <em>neural decompilation</em>: learning a mapping from a low-level token sequence (e.g. disassembled instructions) to a high-level source-like token sequence. The model combines (1) a <strong>hierarchical memory module</strong> that conditions representations on learnable memory slots via multi-head attention, (2) a standard <strong>Transformer</strong> encoder and decoder, and (3) a <strong>mixture-of-experts (MoE)</strong> layer partitioned into binary-focused and language-focused expert families, with an auxiliary load-balancing objective. A reference implementation ships with a synthetic corpus for integration testing. This note situates the design among related work and outlines evaluation protocols suitable for future empirical studies.</p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Decompilation recovers readable structure from executables. Classical pipelines (disassembly, control-flow recovery, type reconstruction, pretty-printing) are brittle across compilers, optimizations, and obfuscation. <em>Neural</em> approaches treat decompilation as conditional sequence modeling: the model observes a linearized low-level program and generates a high-level program. This aligns with neural machine translation but differs in vocabulary structure (registers, immediates, memory operands) and long-range semantics (calling conventions, data structures).</p>
+<p>This work does not claim state-of-the-art recovery on full binaries; it specifies a <strong>coherent trainable architecture</strong> and a <strong>reproducible training loop</strong> so that researchers can swap corpora, losses, and analysis passes without rewriting ad hoc prototypes.</p>
+<h2 id="2-related-work">2. Related work</h2>
+<ul>
+<li><strong>Neural machine translation</strong> (Bahdanau et al.; Vaswani et al.) provides the encoder–decoder and attention baseline.</li>
+<li><strong>Mixture-of-experts</strong> (Shazeer et al.; Fedus et al., Switch Transformers) motivates sparse or dense routing to specialize sub-networks—here, loosely grouped as “binary” vs “language” experts to mirror distinct inductive biases.</li>
+<li><strong>Neural decompilation and assembly-to-code</strong> (various workshop and security-venue papers) often use RNNs or Transformers on assembly text; our stack is closest to Transformer seq2seq with additional structural priors (memory + MoE).</li>
+<li><strong>Program analysis</strong> (control flow, types) can be integrated as auxiliary tasks or as features; the present codebase reserves <code>task_weights</code> in configuration for such extensions.</li>
+</ul>
+<h2 id="3-method">3. Method</h2>
+<h3 id="31-notation">3.1 Notation</h3>
+<p>Let (x = (x_1,\ldots,x_{T_x})) be source token indices (assembly-like) and (y = (y_1,\ldots,y_{T_y})) target indices (high-level). Teacher forcing uses decoder input ((y_1,\ldots,y_{T_y-1})) to predict ((y_2,\ldots,y_{T_y})).</p>
+<h3 id="32-hierarchical-memory">3.2 Hierarchical memory</h3>
+<p>Each level applies <strong>compressed representations</strong> and <strong>multi-head attention</strong> from sequence queries to a bank of learnable memory slots (M \in \mathbb{R}^{K \times d}). Gated fusion combines compressed states with context vectors; multiple levels stack and are fused by a linear projection. This implements a <em>differentiable</em> analogue of “remembered” program context without committing to a full external memory database.</p>
+<h3 id="33-transformer-encoder-and-decoder">3.3 Transformer encoder and decoder</h3>
+<p>The encoder is a stack of <code>TransformerEncoderLayer</code> blocks (pre-norm, GELU). The decoder is causal self-attention plus cross-attention to encoder outputs. Positions use learned embeddings capped at <code>max_sequence_length</code>.</p>
+<h3 id="34-mixture-of-experts">3.4 Mixture-of-experts</h3>
+<p>Let (h \in \mathbb{R}^{d}) be a hidden vector. A router produces logits (z \in \mathbb{R}^{E}), probabilities (p = \mathrm{softmax}(z)), and expert outputs (o_e = \mathrm{FFN}<em e="1">e(h)). The MoE output is (\sum</em> p_e , o_e) (dense mixture in the reference code for clarity and small (E)).}^{E</p>
+<p><strong>Load balancing:</strong> with batch-averaged importance (\bar{p} = \frac{1}{BT}\sum_{b,t} p_{b,t}), we add (\lambda \lVert \bar{p} - u \rVert^2) where (u) is uniform over experts. This discourages router collapse.</p>
+<h3 id="35-objective">3.5 Objective</h3>
+<p>Primary loss is <strong>token cross-entropy</strong> with label smoothing on non-padding positions. Total loss:</p>
+<p>[
+\mathcal{L} = \mathcal{L}<em _mathrm_moe="\mathrm{moe">{\mathrm{CE}} + \lambda</em>.
+]}} \mathcal{L}_{\mathrm{aux}</p>
+<h2 id="4-experiments-protocol">4. Experiments (protocol)</h2>
+<p>The bundled <strong>synthetic</strong> dataset only validates pipelines (forward pass, shapes, loss decrease). Serious benchmarks should include:</p>
+<ol>
+<li><strong>Lifted assembly</strong> paired with source from compiler-generated datasets (same compilation flags recorded).</li>
+<li><strong>Metrics:</strong> exact match, BLEU against reference C, and graph-level metrics (CFG edit distance) where tooling exists.</li>
+<li><strong>Ablations:</strong> remove MoE; replace hierarchical memory with a single cross-attention pass; vary expert count (E).</li>
+</ol>
+<p>Report variance across random seeds and compiler optimization levels.</p>
+<h2 id="5-limitations">5. Limitations</h2>
+<ul>
+<li><strong>Scale:</strong> Real binaries imply long sequences and large vocabularies; training requires data filtering, chunking at function boundaries, and possibly hierarchical models beyond this prototype.</li>
+<li><strong>Correctness:</strong> Neural outputs should be type-checked and tested; the model does not guarantee semantics-preserving translation.</li>
+<li><strong>MoE routing:</strong> Dense mixtures cost (O(E)) per token; production systems may switch to top-(k) sparse kernels.</li>
+</ul>
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>We presented a modular neural decompiler design—hierarchical memory, Transformer seq2seq, and family-structured MoE with load balancing—and provided an open implementation suitable for extension to real assembly–source corpora. Future work should emphasize <em>semantic</em> evaluation (tests, symbolic execution) alongside string-based metrics.</p>
+<h2 id="references-illustrative">References (illustrative)</h2>
+<ul>
+<li>Vaswani et al., “Attention Is All You Need,” NeurIPS 2017.</li>
+<li>Shazeer et al., “Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer,” ICLR 2017.</li>
+<li>Fedus et al., “Switch Transformers: Scaling to Trillion Parameter Models,” JMLR 2022.</li>
+</ul>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
+</body>
+</html>

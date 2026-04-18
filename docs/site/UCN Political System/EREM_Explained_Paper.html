@@ -3,140 +3,225 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>EREM Explained Paper</title>
+  <meta name="description" content="Version 1.0 — January 2026 · Companion to: EREM Technical Specification v1.0 This paper introduces the Energy-Resource Economic Model \(EREM\) to a broad technical and policy audience. It explains, in plain language reinforced by worked examples, why GDP and fiat currency…"/>
+  <title>EREM explained · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">UCN Political System\EREM_Explained_Paper.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<p><strong>EREM EXPLAINED</strong></p>
-<p><em>A Plain-Language Research Primer on the Energy-Resource Economic Model:</em></p>
-<p><em>Why Conventional Economics Fails Physics, and What To Do About It</em></p>
-<p>Version 1.0 — January 2026  |  Companion to: EREM Technical Specification v1.0</p>
-<p><strong>EXECUTIVE SUMMARY</strong></p>
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive summary</a></li>
+        <li class="toc-depth-2"><a href="#1-the-problem-what-is-economics-actually-measuring">1. The Problem: What Is Economics Actually Measuring?</a></li>
+        <li class="toc-depth-3"><a href="#the-gdp-paradox-a-concrete-example">The GDP paradox: a concrete example</a></li>
+        <li class="toc-depth-2"><a href="#2-why-fiat-currency-is-thermodynamically-dishonest">2. Why Fiat Currency Is Thermodynamically Dishonest</a></li>
+        <li class="toc-depth-3"><a href="#frederick-soddy-1926-the-original-thermodynamic-economist">Frederick Soddy (1926): the original thermodynamic economist</a></li>
+        <li class="toc-depth-2"><a href="#3-the-erem-components-what-is-real-wealth">3. The EREM Components: What Is Real Wealth?</a></li>
+        <li class="toc-depth-3"><a href="#31-national-energy-wealth-new-weight-40">3.1 National Energy Wealth (NEW) — Weight 40%</a></li>
+        <li class="toc-depth-3"><a href="#32-material-wealth-index-mwi-weight-25">3.2 Material Wealth Index (MWI) — Weight 25%</a></li>
+        <li class="toc-depth-3"><a href="#33-food-energy-wealth-few-weight-20">3.3 Food Energy Wealth (FEW) — Weight 20%</a></li>
+        <li class="toc-depth-3"><a href="#34-human-labour-capacity-hlc-weight-10">3.4 Human Labour Capacity (HLC) — Weight 10%</a></li>
+        <li class="toc-depth-3"><a href="#35-infrastructure-efficiency-factor-ief-weight-5">3.5 Infrastructure Efficiency Factor (IEF) — Weight 5%</a></li>
+        <li class="toc-depth-2"><a href="#4-the-rbcu-a-currency-that-cannot-be-inflated-away">4. The RBCU: A Currency That Cannot Be Inflated Away</a></li>
+        <li class="toc-depth-3"><a href="#current-fiat-system-the-failure-mode">Current fiat system: the failure mode</a></li>
+        <li class="toc-depth-3"><a href="#erem-rbcu-the-fix">EREM RBCU: the fix</a></li>
+        <li class="toc-depth-2"><a href="#5-three-worked-examples">5. Three Worked Examples</a></li>
+        <li class="toc-depth-3"><a href="#51-efficiency-innovation-creates-wealth">5.1 Efficiency Innovation Creates Wealth</a></li>
+        <li class="toc-depth-4"><a href="#scenario-engineer-invents-a-40-more-efficient-industrial-turbine">Scenario: engineer invents a 40% more efficient industrial turbine</a></li>
+        <li class="toc-depth-3"><a href="#52-resource-depletion-triggers-automatic-currency-contraction">5.2 Resource Depletion Triggers Automatic Currency Contraction</a></li>
+        <li class="toc-depth-4"><a href="#scenario-nation-burns-through-10-of-oil-reserves-in-one-year-no-new-discovery">Scenario: nation burns through 10% of oil reserves in one year (no new discovery)</a></li>
+        <li class="toc-depth-3"><a href="#53-international-trade-no-currency-manipulation-possible">5.3 International Trade: No Currency Manipulation Possible</a></li>
+        <li class="toc-depth-4"><a href="#scenario-nation-a-tnw-per-capita-401010-rbcu-exports-coal-to-nation-b-441010-rbcu-per-capita">Scenario: Nation A (TNW per capita = 4.0×10¹⁰ RBCU) exports coal to Nation B (4.4×10¹⁰ RBCU per capita)</a></li>
+        <li class="toc-depth-2"><a href="#6-how-erem-changes-economic-incentives">6. How EREM Changes Economic Incentives</a></li>
+        <li class="toc-depth-2"><a href="#7-why-the-mathematics-is-sound">7. Why the Mathematics Is Sound</a></li>
+        <li class="toc-depth-3"><a href="#71-dimensional-homogeneity">7.1 Dimensional Homogeneity</a></li>
+        <li class="toc-depth-3"><a href="#72-global-conservation">7.2 Global Conservation</a></li>
+        <li class="toc-depth-2"><a href="#8-relationship-to-prior-physical-economic-theories">8. Relationship to Prior Physical Economic Theories</a></li>
+        <li class="toc-depth-2"><a href="#9-objections-and-responses">9. Objections and Responses</a></li>
+        <li class="toc-depth-3"><a href="#objection-1-you-cant-measure-all-wealth-in-energy-units-knowledge-and-culture-have-value">Objection 1: &quot;You can&#x27;t measure all wealth in energy units. Knowledge and culture have value.&quot;</a></li>
+        <li class="toc-depth-3"><a href="#objection-2-erem-would-destroy-financial-innovation-and-economic-flexibility">Objection 2: &quot;EREM would destroy financial innovation and economic flexibility.&quot;</a></li>
+        <li class="toc-depth-3"><a href="#objection-3-the-weighting-coefficients-are-arbitrary">Objection 3: &quot;The weighting coefficients (α, β, γ, δ, ε) are arbitrary.&quot;</a></li>
+        <li class="toc-depth-3"><a href="#objection-4-political-actors-will-manipulate-reserve-audit-institutions">Objection 4: &quot;Political actors will manipulate reserve audit institutions.&quot;</a></li>
+        <li class="toc-depth-2"><a href="#10-conclusion-economics-as-physics">10. Conclusion: Economics as Physics</a></li>
+        <li class="toc-depth-2"><a href="#references">References</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">EREM explained</h1>
+          <p class="doc-meta">UCN Political System\EREM_Explained_Paper.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><em>A plain-language research primer on the Energy-Resource Economic Model: why conventional economics fails physics, and what to do about it</em></p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><em>A plain-language research primer on the Energy-Resource Economic Model: why conventional economics fails physics, and what to do about it</em></p>
+<p>Version 1.0 — January 2026 · Companion to: EREM Technical Specification v1.0</p>
+<h2 id="executive-summary">Executive summary</h2>
 <p>This paper introduces the Energy-Resource Economic Model (EREM) to a broad technical and policy audience. It explains, in plain language reinforced by worked examples, why GDP and fiat currency systems are thermodynamically incoherent — and how EREM replaces them with a framework grounded in physics. The core argument is simple: energy is the universal prerequisite for all economic activity; therefore, a system that measures wealth in physical energy units and backs currency with physical resource stocks is more reliable, more honest, and more sustainable than one backed by government debt and institutional confidence. EREM proposes five components of national wealth — energy reserves, material stocks, food capacity, labour potential, and infrastructure efficiency — all expressed in megajoules, and a currency issuance formula that cannot exceed the physical wealth it claims to represent.</p>
-<h1 id="1-the-problem-what-is-economics-actually-measuring"><strong>1. The Problem: What Is Economics Actually Measuring?</strong></h1>
+<h2 id="1-the-problem-what-is-economics-actually-measuring">1. The Problem: What Is Economics Actually Measuring?</h2>
 <p>When economists say a country is wealthy, what do they mean? In the contemporary global economy, the standard answer is: look at GDP. Gross Domestic Product — the total monetary value of all final goods and services produced in a country in a year — is the nearest thing to a universal definition of economic performance. Governments rise and fall on GDP data. Central banks calibrate interest rates to GDP growth forecasts. Development agencies rank nations by GDP per capita.</p>
 <p>The problem is that GDP is not measuring wealth. It is measuring activity. These are not the same thing.</p>
 <p>GDP goes up when you build a house — and also when you demolish it. It goes up when you treat illness — and also when the pollution that caused the illness is generated. It goes up when you cut down a forest and sell the timber — but the standing forest that was purifying water, sequestering carbon, and stabilising soil registers as nothing. GDP is agnostic about whether economic activity is making you richer or poorer in any real sense. It simply counts the transactions [51][60].</p>
-<p><strong>The GDP Paradox: A Concrete Example</strong></p>
+<h3 id="the-gdp-paradox-a-concrete-example">The GDP paradox: a concrete example</h3>
 <p>Nation X discovers a large oil field and extracts 10 billion barrels over 20 years. GDP rises impressively. The government is celebrated for "strong economic performance." The reserves are now exhausted. The nation has consumed an irreplaceable physical asset — one that took geological timescales to form — and GDP counted the transaction as pure income. The physical wealth has been destroyed. The monetary accounts show only the revenue. Under EREM, the exhaustion of reserves immediately reduces TNW and contracts the currency supply: the depletion is visible immediately in the monetary system, not externalised into a future generations' accounting problem.</p>
 <p>The UN's Inclusive Wealth Index (IWI) has quantified this problem empirically. Across 140 countries tracked over 25 years, 44 — nearly a third — showed declining per-capita inclusive wealth (the genuine stock of productive assets) even as their GDP per capita grew [55]. Economic growth, measured by GDP, was not creating real wealth in these countries; it was consuming it. The UN Secretary-General described this as a "glaring blind spot in how we measure economic prosperity" [54].</p>
 <p>EREM is a direct response to this blind spot. It replaces the monetary transaction count (GDP) with a physical stock measure (TNW: Total National Wealth), and anchors currency issuance to TNW, creating an automatic feedback loop between monetary reality and physical reality.</p>
-<h1 id="2-why-fiat-currency-is-thermodynamically-dishonest"><strong>2. Why Fiat Currency Is Thermodynamically Dishonest</strong></h1>
+<h2 id="2-why-fiat-currency-is-thermodynamically-dishonest">2. Why Fiat Currency Is Thermodynamically Dishonest</h2>
 <p>A fiat currency is money by decree — its value derives from government authority and institutional confidence, not from any physical backing. The US dollar, the euro, the Japanese yen: all are fiat currencies. Their supply can be expanded at will by their respective central banks, within whatever legal and institutional constraints apply. There is no physical upper bound.</p>
 <p>This sounds like flexibility. It is actually a design flaw — one that Frederick Soddy identified almost a century ago.</p>
-<p><strong>Frederick Soddy (1926): The Original Thermodynamic Economist</strong></p>
+<h3 id="frederick-soddy-1926-the-original-thermodynamic-economist">Frederick Soddy (1926): the original thermodynamic economist</h3>
 <p>Soddy was a Nobel Prize-winning radiochemist — he discovered isotopes and co-explained radioactive decay with Rutherford. He was not an economist. But he understood thermodynamics better than any economist of his era, and he saw precisely what that meant for monetary systems.</p>
 <p>In Wealth, Virtual Wealth and Debt (1926), Soddy drew a clean distinction between real wealth (physical goods, energy, machinery — things subject to decay, entropy, and thermodynamic constraint) and virtual wealth (money and debt — purely mathematical constructs with no physical upper bound). He wrote that "debts do not rot with old age and are not consumed in the process of living. On the contrary, they grow at so much per cent per annum" — compounding exponentially, while physical wealth is subject to the irreversibility of the Second Law [22].</p>
 <p>Soddy's conclusion: a monetary system in which debt grows exponentially while physical wealth is finite and subject to entropy will inevitably collapse. He was right, repeatedly, across the financial crises of the 20th and 21st centuries.</p>
 <p>Nicholas Georgescu-Roegen formalised Soddy's intuition with rigorous mathematics in The Entropy Law and the Economic Process (1971). The Second Law of Thermodynamics states that in any isolated system, entropy — disorder, unavailable energy — increases irreversibly over time [31]. Every productive process converts low-entropy resources (ordered, concentrated, available energy like coal, oil, or uranium) into high-entropy waste (heat, CO₂, slag). This conversion is one-way: you cannot un-burn coal or un-mine copper from tailings without expending more energy than you recover [31].</p>
 <p>What this means for economics: there is no such thing as a circular economy in the thermodynamic sense. Matter can be recycled, but only by expending energy to reverse the entropy increase. Energy itself cannot be recycled — it can only be transformed once from available to unavailable. This irreversibility sets an absolute physical limit on economic growth that no monetary policy can override [31][36].</p>
 <p>A fiat currency ignores this limit. It can expand without bound. EREM enforces this limit. Currency can only expand as fast as physical wealth grows — and physical wealth is subject to thermodynamics.</p>
-<h1 id="3-the-erem-components-what-is-real-wealth"><strong>3. The EREM Components: What Is Real Wealth?</strong></h1>
+<h2 id="3-the-erem-components-what-is-real-wealth">3. The EREM Components: What Is Real Wealth?</h2>
 <p>EREM defines Total National Wealth (TNW) as the weighted sum of five measurable physical components. All five are expressed in megajoules (MJ), the SI unit of energy, ensuring dimensional consistency. The fundamental equation is:</p>
 <p>TNW = (0.40 × NEW) + (0.25 × MWI) + (0.20 × FEW) + (0.10 × HLC) + (0.05 × IEF)</p>
 <p>Each component is explained below, with the reasoning for its inclusion and weight.</p>
-<h2 id="31-national-energy-wealth-new-weight-40"><strong>3.1 National Energy Wealth (NEW) — Weight 40%</strong></h2>
+<h3 id="31-national-energy-wealth-new-weight-40">3.1 National Energy Wealth (NEW) — Weight 40%</h3>
 <p>Energy is the master resource: the prerequisite for every other form of productive work. Without energy, no material can be extracted, no food grown, no infrastructure maintained, no labour deployed. EREM therefore assigns energy the highest weight in the TNW formula.</p>
 <p>NEW captures both finite energy reserves (coal, gas, petroleum, uranium) and renewable energy infrastructure (solar, wind, hydroelectric), weighted by their respective Quality Factors (Q-factors). Q-factors encode the reality that not all energy is equally useful: nuclear energy at high density and full controllability is worth more per joule than diffuse, intermittent solar — not as a value judgement, but as a physics statement about capacity to do useful work [43][44].</p>
-<p><strong>Energy Source</strong></p>
-<p><strong>Q-Factor</strong></p>
-<p><strong>Key Advantage</strong></p>
-<p><strong>Key Limitation</strong></p>
-<p>Nuclear (U-235)</p>
-<p>1.00 (reference)</p>
-<p>Extreme density, 100% controllable</p>
-<p>Long-lived waste, high capital cost</p>
-<p>Hydroelectric</p>
-<p>0.82</p>
-<p>Highly controllable, clean, long-lived</p>
-<p>Site-constrained, ecosystem impacts</p>
-<p>Petroleum</p>
-<p>0.75</p>
-<p>Exceptional portability (liquid)</p>
-<p>CO₂ emissions, finite reserves</p>
-<p>Natural Gas</p>
-<p>0.68</p>
-<p>Fast response, pipeline-portable</p>
-<p>CO₂ emissions, finite reserves</p>
-<p>Wind</p>
-<p>0.65</p>
-<p>Clean, fast-improving economics</p>
-<p>Intermittent, low density</p>
-<p>Solar PV</p>
-<p>0.58</p>
-<p>Clean, modular, point-of-use</p>
-<p>Intermittent, capacity factor ~25%</p>
-<p>Coal</p>
-<p>0.42</p>
-<p>Abundant, cheap to mine</p>
-<p>Highest emissions, slow response</p>
-<h2 id="32-material-wealth-index-mwi-weight-25"><strong>3.2 Material Wealth Index (MWI) — Weight 25%</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Energy source</th>
+<th>Q-factor</th>
+<th>Key advantage</th>
+<th>Key limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nuclear (U-235)</td>
+<td>1.00 (reference)</td>
+<td>Extreme density, 100% controllable</td>
+<td>Long-lived waste, high capital cost</td>
+</tr>
+<tr>
+<td>Hydroelectric</td>
+<td>0.82</td>
+<td>Highly controllable, clean, long-lived</td>
+<td>Site-constrained, ecosystem impacts</td>
+</tr>
+<tr>
+<td>Petroleum</td>
+<td>0.75</td>
+<td>Exceptional portability (liquid)</td>
+<td>CO₂ emissions, finite reserves</td>
+</tr>
+<tr>
+<td>Natural gas</td>
+<td>0.68</td>
+<td>Fast response, pipeline-portable</td>
+<td>CO₂ emissions, finite reserves</td>
+</tr>
+<tr>
+<td>Wind</td>
+<td>0.65</td>
+<td>Clean, fast-improving economics</td>
+<td>Intermittent, low density</td>
+</tr>
+<tr>
+<td>Solar PV</td>
+<td>0.58</td>
+<td>Clean, modular, point-of-use</td>
+<td>Intermittent, capacity factor ~25%</td>
+</tr>
+<tr>
+<td>Coal</td>
+<td>0.42</td>
+<td>Abundant, cheap to mine</td>
+<td>Highest emissions, slow response</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-material-wealth-index-mwi-weight-25">3.2 Material Wealth Index (MWI) — Weight 25%</h3>
 <p>Physical civilisation is built from materials. Steel, copper, aluminium, lithium, cobalt, rare earth elements, platinum group metals: these are the building blocks of every technology from power grids to electric vehicles to semiconductor chips. MWI captures the economic leverage of a nation's material endowment:</p>
 <p>MWI = Σ(Mass × Versatility_factor × Accessibility_factor × Scarcity_multiplier)</p>
 <p>Versatility factors (V) encode how many critical industrial applications a material enables. Platinum (V=18) is a catalyst for fuel cells, a catalyst for pharmaceutical synthesis, and essential for the automotive catalytic converter industry — three distinct and irreplaceable industrial roles. Lithium (V=12) powers EV batteries, grid storage, and portable electronics. These high-versatility materials carry high MWI weights, reflecting their outsized role in enabling the technological infrastructure of modern society.</p>
-<h2 id="33-food-energy-wealth-few-weight-20"><strong>3.3 Food Energy Wealth (FEW) — Weight 20%</strong></h2>
+<h3 id="33-food-energy-wealth-few-weight-20">3.3 Food Energy Wealth (FEW) — Weight 20%</h3>
 <p>Food is the energy supply of the human body. A nation that cannot feed its population cannot deploy human labour; a nation that cannot maintain food security cannot sustain economic activity. FEW converts agricultural productive capacity into energy units:</p>
 <p>FEW = Arable_area_m² × Yield_J/m²/yr × Soil_quality</p>
 <pre><code>× Water\_availability × Climate\_stability
 </code></pre>
 <p>By expressing food production in joules, EREM directly connects agricultural capacity to the Human Labour Capacity (HLC) component: more food energy means more productive human hours available for all other economic activity. This connection is empirically well-established in development economics but is entirely invisible in GDP accounting, which cannot distinguish between a nation that produces food from one that imports it at the expense of depleting foreign reserves.</p>
-<h2 id="34-human-labour-capacity-hlc-weight-10"><strong>3.4 Human Labour Capacity (HLC) — Weight 10%</strong></h2>
+<h3 id="34-human-labour-capacity-hlc-weight-10">3.4 Human Labour Capacity (HLC) — Weight 10%</h3>
 <p>Human cognitive and physical work is the engine that transforms raw resources into economic value. HLC converts demography, nutrition, and health into an energy-equivalent flow:</p>
 <p>HLC = Population × Working_age_% × Health_factor × (FEW / Population_needs)</p>
 <p>Population_needs ≈ Population × 3.83 × 10⁹ J/person/year (2500 kcal/day)</p>
 <p>HLC explicitly links labour capacity to nutritional security — a fact obvious to any physiologist but systematically absent from monetary economics. A well-fed, healthy working-age population with efficient energy access has dramatically higher HLC than an equivalent-size population subject to malnutrition or energy poverty. EREM captures this physical reality directly.</p>
-<h2 id="35-infrastructure-efficiency-factor-ief-weight-5"><strong>3.5 Infrastructure Efficiency Factor (IEF) — Weight 5%</strong></h2>
+<h3 id="35-infrastructure-efficiency-factor-ief-weight-5">3.5 Infrastructure Efficiency Factor (IEF) — Weight 5%</h3>
 <p>IEF is EREM's innovation premium — the reward for doing more with less energy. It measures how much economic output (in energy-equivalent terms) a nation generates per unit of energy input, relative to thermodynamic minimums (Carnot limits for heat engines; minimum material transformation energies):</p>
 <p>IEF = (Economic_output_energy_equiv / Minimum_theoretical_energy)</p>
 <pre><code>× \(Grid\_efficiency × Transport\_efficiency × Industrial\_efficiency\)^\(1/3\)
 </code></pre>
 <p>A nation that invents a 40% more efficient industrial engine has created real wealth — it has permanently reduced the energy cost of every unit of production that engine enables, freeing energy for other uses. Under EREM, this innovation directly increases IEF, directly increases TNW, and directly authorises an expansion of the RBCU currency supply. There is no ambiguity: innovation creates measurable, quantifiable, currency-backing wealth. This incentive structure is entirely absent from fiat systems, in which efficiency gains may increase profits but do not expand the monetary base.</p>
-<h1 id="4-the-rbcu-a-currency-that-cannot-be-inflated-away"><strong>4. The RBCU: A Currency That Cannot Be Inflated Away</strong></h1>
+<h2 id="4-the-rbcu-a-currency-that-cannot-be-inflated-away">4. The RBCU: A Currency That Cannot Be Inflated Away</h2>
 <p>The Resource-Backed Currency Unit (RBCU) is the monetary instrument of EREM. It is simple in design but radical in implication:</p>
 <p>Total RBCU issued = 0.85 × TNW</p>
 <p>1 RBCU = (TNW / Total_RBCU) megajoules of real wealth</p>
 <p>The backing ratio of 0.85 (85%) means that for every 100 MJ of verified physical wealth, at most 85 RBCU are issued. This 15% buffer absorbs measurement uncertainty and short-term fluctuations in resource estimates, while ensuring that the currency is never over-issued relative to physical backing.</p>
 <p>Currency expansion is only authorised when one of the following physical conditions is met: new reserves are discovered and independently verified; renewable energy infrastructure is installed and operating; infrastructure efficiency measurably improves; or population growth is matched by proportional food production. These are not policy decisions — they are physical facts, verifiable by independent audit.</p>
-<p><strong>Current Fiat System: The Failure Mode</strong></p>
-<p>Currency backed by government debt and institutional confidence</p>
-<p>Supply expanded by central bank committee decision</p>
-<p>Inflation erodes savings without accountability</p>
-<p>Resource depletion is externalised — invisible to the money supply</p>
-<p>Asset prices can disconnect from physical cost indefinitely</p>
-<p>Interest rates set by policy, not physics</p>
-<p>Trade balances distorted by currency manipulation</p>
-<p><strong>EREM RBCU: The Fix</strong></p>
-<p>Currency backed by physical TNW (energy + materials + food + labour)</p>
-<p>Supply expands only with verified physical wealth increase</p>
-<p>Deflation when resources are depleted — savings gain value</p>
-<p>Resource depletion immediately contracts currency supply</p>
-<p>Asset values capped at energy construction cost</p>
-<p>Interest rates = depletion rate + risk + time preference</p>
-<p>Exchange rates = per-capita TNW ratio (non-manipulable)</p>
-<h1 id="5-three-worked-examples"><strong>5. Three Worked Examples</strong></h1>
-<h2 id="51-efficiency-innovation-creates-wealth"><strong>5.1 Efficiency Innovation Creates Wealth</strong></h2>
-<p><strong>Scenario: Engineer invents a 40% more efficient industrial turbine</strong></p>
+<h3 id="current-fiat-system-the-failure-mode">Current fiat system: the failure mode</h3>
+<ul>
+<li>Currency backed by government debt and institutional confidence</li>
+<li>Supply expanded by central bank committee decision</li>
+<li>Inflation erodes savings without accountability</li>
+<li>Resource depletion is externalised — invisible to the money supply</li>
+<li>Asset prices can disconnect from physical cost indefinitely</li>
+<li>Interest rates set by policy, not physics</li>
+<li>Trade balances distorted by currency manipulation</li>
+</ul>
+<h3 id="erem-rbcu-the-fix">EREM RBCU: the fix</h3>
+<ul>
+<li>Currency backed by physical TNW (energy + materials + food + labour)</li>
+<li>Supply expands only with verified physical wealth increase</li>
+<li>Deflation when resources are depleted — savings gain value</li>
+<li>Resource depletion immediately contracts currency supply</li>
+<li>Asset values capped at energy construction cost</li>
+<li>Interest rates = depletion rate + risk + time preference</li>
+<li>Exchange rates = per-capita TNW ratio (non-manipulable)</li>
+</ul>
+<h2 id="5-three-worked-examples">5. Three Worked Examples</h2>
+<h3 id="51-efficiency-innovation-creates-wealth">5.1 Efficiency Innovation Creates Wealth</h3>
+<h4 id="scenario-engineer-invents-a-40-more-efficient-industrial-turbine">Scenario: engineer invents a 40% more efficient industrial turbine</h4>
 <p>Baseline: A nation uses 1×10¹⁵ MJ/yr in industrial energy. The new turbine is adopted across industry over 20 years.</p>
 <p>Virtual energy savings = 1×10¹⁵ MJ × 0.40 efficiency gain × 20 years = 8×10¹⁵ MJ</p>
 <p>TNW increase: 8×10¹⁵ MJ (this is real wealth — energy permanently freed from industrial use)</p>
 <p>RBCU expansion authorised: 0.85 × 8×10¹⁵ = 6.8×10¹⁵ RBCU</p>
 <p>Real wealth created from intelligence and engineering, with zero resource extraction.</p>
 <p>In a fiat system, this improvement may increase corporate profits and GDP slightly, but creates no increase in monetary backing. In EREM, it is directly quantifiable as national wealth creation.</p>
-<h2 id="52-resource-depletion-triggers-automatic-currency-contraction"><strong>5.2 Resource Depletion Triggers Automatic Currency Contraction</strong></h2>
-<p><strong>Scenario: Nation burns through 10% of oil reserves in one year (no new discovery)</strong></p>
+<h3 id="52-resource-depletion-triggers-automatic-currency-contraction">5.2 Resource Depletion Triggers Automatic Currency Contraction</h3>
+<h4 id="scenario-nation-burns-through-10-of-oil-reserves-in-one-year-no-new-discovery">Scenario: nation burns through 10% of oil reserves in one year (no new discovery)</h4>
 <p>Energy wealth loss = 0.10 × Total_oil_reserves = 0.10 × 3×10¹⁸ MJ = 3×10¹⁷ MJ</p>
 <p>NEW component decreases by 3×10¹⁷ MJ</p>
 <p>TNW decreases by approximately: 0.40 × 3×10¹⁷ = 1.2×10¹⁷ MJ (energy is 40% of TNW)</p>
 <p>Currency supply contracts proportionally (by ~2.5% of TNW)</p>
 <p>Effect: deflation. Stored savings increase in real purchasing power. Incentive for conservation.</p>
 <p>Compare to fiat: the government can continue issuing bonds and printing money at the same rate, with zero visible consequence for the currency. The depletion is entirely externalised.</p>
-<h2 id="53-international-trade-no-currency-manipulation-possible"><strong>5.3 International Trade: No Currency Manipulation Possible</strong></h2>
-<p><strong>Scenario: Nation A (TNW per capita = 4.0×10¹⁰ RBCU) exports coal to Nation B (4.4×10¹⁰ RBCU per capita)</strong></p>
+<h3 id="53-international-trade-no-currency-manipulation-possible">5.3 International Trade: No Currency Manipulation Possible</h3>
+<h4 id="scenario-nation-a-tnw-per-capita-401010-rbcu-exports-coal-to-nation-b-441010-rbcu-per-capita">Scenario: Nation A (TNW per capita = 4.0×10¹⁰ RBCU) exports coal to Nation B (4.4×10¹⁰ RBCU per capita)</h4>
 <p>Trade value of 1 million tonnes of coal:</p>
 <p>= 1×10⁹ kg × 24 MJ/kg × Q_coal (0.42) × (1 − entropy_loss 8%) = 9.26×10⁹ MJ-equiv</p>
 <p>= 9.26×10⁹ RBCU_A</p>
@@ -144,39 +229,63 @@
 <p>Nation B pays: 9.26×10⁹ / 0.909 = 1.019×10¹⁰ RBCU_B</p>
 <p>Transport cost (8% energy loss) is captured automatically as a real thermodynamic cost.</p>
 <p>There is no mechanism for Nation A to devalue its currency to gain a trade advantage — the exchange rate is a physical ratio, not a policy variable.</p>
-<h1 id="6-how-erem-changes-economic-incentives"><strong>6. How EREM Changes Economic Incentives</strong></h1>
+<h2 id="6-how-erem-changes-economic-incentives">6. How EREM Changes Economic Incentives</h2>
 <p>The incentive structures created by EREM are fundamentally different from those of fiat systems — and in most cases, they are far more aligned with long-term human welfare and physical sustainability. The key shifts are:</p>
-<p><strong>Behaviour</strong></p>
-<p><strong>Incentive Under Fiat</strong></p>
-<p><strong>Incentive Under EREM</strong></p>
-<p>Deplete oil reserves rapidly</p>
-<p>Neutral or positive (high GDP this quarter)</p>
-<p>Immediate currency contraction; negative</p>
-<p>Invest in efficiency R&amp;D</p>
-<p>May increase profits (indirect benefit)</p>
-<p>Directly increases TNW and RBCU backing</p>
-<p>Install renewable energy</p>
-<p>Policy-dependent (subsidies required)</p>
-<p>Directly increases NEW component of TNW</p>
-<p>Conserve existing resources</p>
-<p>No monetary benefit</p>
-<p>Increases long-term TNW and purchasing power of savings</p>
-<p>Inflate currency to pay debts</p>
-<p>Possible (central bank discretion)</p>
-<p>Physically impossible (no TNW increase, no RBCU issuance)</p>
-<p>Maintain infrastructure</p>
-<p>Often deprioritised (off-balance-sheet)</p>
-<p>IEF degradation directly reduces TNW</p>
-<p>Build asset price bubbles</p>
-<p>Actively encouraged by cheap credit</p>
-<p>Impossible — asset values bounded by energy cost</p>
-<p>Discover new reserves</p>
-<p>Neutral to GDP; positive to corporate profits</p>
-<p>Directly increases TNW and RBCU currency space</p>
+<table>
+<thead>
+<tr>
+<th>Behaviour</th>
+<th>Incentive under fiat</th>
+<th>Incentive under EREM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deplete oil reserves rapidly</td>
+<td>Neutral or positive (high GDP this quarter)</td>
+<td>Immediate currency contraction; negative</td>
+</tr>
+<tr>
+<td>Invest in efficiency R&amp;D</td>
+<td>May increase profits (indirect benefit)</td>
+<td>Directly increases TNW and RBCU backing</td>
+</tr>
+<tr>
+<td>Install renewable energy</td>
+<td>Policy-dependent (subsidies required)</td>
+<td>Directly increases NEW component of TNW</td>
+</tr>
+<tr>
+<td>Conserve existing resources</td>
+<td>No monetary benefit</td>
+<td>Increases long-term TNW and purchasing power of savings</td>
+</tr>
+<tr>
+<td>Inflate currency to pay debts</td>
+<td>Possible (central bank discretion)</td>
+<td>Physically impossible (no TNW increase, no RBCU issuance)</td>
+</tr>
+<tr>
+<td>Maintain infrastructure</td>
+<td>Often deprioritised (off-balance-sheet)</td>
+<td>IEF degradation directly reduces TNW</td>
+</tr>
+<tr>
+<td>Build asset price bubbles</td>
+<td>Actively encouraged by cheap credit</td>
+<td>Impossible — asset values bounded by energy cost</td>
+</tr>
+<tr>
+<td>Discover new reserves</td>
+<td>Neutral to GDP; positive to corporate profits</td>
+<td>Directly increases TNW and RBCU currency space</td>
+</tr>
+</tbody>
+</table>
 <p>These incentive structures do not require new regulations, carbon taxes, or complex policy mechanisms to produce sustainable behaviour. They are embedded in the monetary architecture itself. The physical reality of resource depletion is automatically reflected in the currency — and therefore in every price, every investment decision, every lending rate. Sustainability is not imposed on EREM from outside; it is built into its mathematics.</p>
-<h1 id="7-why-the-mathematics-is-sound"><strong>7. Why the Mathematics Is Sound</strong></h1>
+<h2 id="7-why-the-mathematics-is-sound">7. Why the Mathematics Is Sound</h2>
 <p>A common concern with novel economic frameworks is mathematical consistency. EREM addresses this directly through two formal proofs.</p>
-<h2 id="71-dimensional-homogeneity"><strong>7.1 Dimensional Homogeneity</strong></h2>
+<h3 id="71-dimensional-homogeneity">7.1 Dimensional Homogeneity</h3>
 <p>Every component of TNW reduces to energy units (joules), ensuring the formula is not a dimensional abuse but a genuine physical statement:</p>
 <p>NEW:  [kg reserves] × [J/kg]                 = [J]  ✓</p>
 <p>MWI:  [kg material] × material-to-J conversion factor = [J]  ✓</p>
@@ -184,74 +293,131 @@
 <p>HLC:  [persons] × [J/person/year] × [years]  = [J]  ✓</p>
 <p>IEF:  [dimensionless] × [J]                  = [J]  ✓</p>
 <p>All components reduce to joules. System is dimensionally consistent. □</p>
-<h2 id="72-global-conservation"><strong>7.2 Global Conservation</strong></h2>
+<h3 id="72-global-conservation">7.2 Global Conservation</h3>
 <p>In a closed planetary system, the sum of TNW across all nations equals the total physical resources on and accessible within Earth (plus renewable energy flows from the Sun). Wealth cannot be created by financial engineering — only by physical discovery, efficiency improvement, or renewable infrastructure addition:</p>
 <p>Σ(TNW_nation × k) = Total global RBCU supply</p>
 <p>Global wealth is conserved: total RBCU = f(total physical resources)</p>
 <p>The only ways to increase global RBCU supply:</p>
-<p>1. Discover previously unknown reserves</p>
-<p>2. Improve efficiency (do more with same energy)</p>
-<p>3. Add renewable infrastructure</p>
-<p>4. Access off-world resources (future)</p>
+<ol>
+<li>
+<p>Discover previously unknown reserves</p>
+</li>
+<li>
+<p>Improve efficiency (do more with same energy)</p>
+</li>
+<li>
+<p>Add renewable infrastructure</p>
+</li>
+<li>
+<p>Access off-world resources (future)</p>
+</li>
+</ol>
 <p>Financial engineering does not appear in this list. □</p>
 <p>This conservation property eliminates the fundamental failure mode of fiat systems: the collective delusion of wealth created by simultaneous debt expansion across all nations. In EREM, if no nation has created new physical wealth, no new currency can exist globally — the mathematical identity is absolute.</p>
-<h1 id="8-relationship-to-prior-physical-economic-theories"><strong>8. Relationship to Prior Physical Economic Theories</strong></h1>
+<h2 id="8-relationship-to-prior-physical-economic-theories">8. Relationship to Prior Physical Economic Theories</h2>
 <p>EREM does not emerge from a vacuum. It synthesises and extends a century of physical-economic thinking from multiple traditions:</p>
-<p><strong>Theorist / Framework</strong></p>
-<p><strong>Core Contribution</strong></p>
-<p><strong>EREM Connection</strong></p>
-<p>Frederick Soddy (1926)</p>
-<p>Real wealth obeys thermodynamics; debt grows without physical bound; fractional reserve banking is dangerous fiction [22]</p>
-<p>RBCU currency design prevents unbounded money creation; backing ratio enforces physical constraint</p>
-<p>N. Georgescu-Roegen (1971)</p>
-<p>Economic processes are irreversible thermodynamic transformations; the Entropy Law sets absolute limits on growth [31]</p>
-<p>TNW contraction when reserves are depleted reflects irreversibility; no recycling of consumed energy</p>
-<p>H.T. Odum (1971–1996)</p>
-<p>Emergy accounting: all goods and services can be expressed in solar energy equivalents; energy quality hierarchy governs economic value [41][43]</p>
-<p>Q-factors implement energy quality weighting analogous to transformity; IEF reflects maximum empower principle</p>
-<p>Hall, Lambert &amp; Balogh (2014)</p>
-<p>EROI quantifies net energy surplus; declining EROI compresses economic discretionary surplus; EROI minimum thresholds for societal function [14][20]</p>
-<p>NEW and Q-factors embed EROI logic; IEF rewards high-EROI systems; declining reserves reduce TNW</p>
-<p>UN Inclusive Wealth Index (2018)</p>
-<p>44 of 140 countries show declining real wealth despite rising GDP; natural, human, and produced capital must all be measured [55]</p>
-<p>TNW extends IWI by adding energy quality weights, food/labour components, and currency-backing mechanism</p>
-<p>Dasgupta Review (2021)</p>
-<p>GDP substitutes income for wealth; natural capital depreciation must be measured; overreliance on GDP leads to unsustainable development [58]</p>
-<p>TNW is a stock measure (wealth, not income); resource depletion automatically reduces backing currency</p>
-<h1 id="9-objections-and-responses"><strong>9. Objections and Responses</strong></h1>
-<h3 id="objection-1-you-cant-measure-all-wealth-in-energy-units-knowledge-and-culture-have-value"><strong>Objection 1: "You can't measure all wealth in energy units. Knowledge and culture have value."</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Theorist / framework</th>
+<th>Core contribution</th>
+<th>EREM connection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frederick Soddy (1926)</td>
+<td>Real wealth obeys thermodynamics; debt grows without physical bound; fractional reserve banking is dangerous fiction [22]</td>
+<td>RBCU currency design prevents unbounded money creation; backing ratio enforces physical constraint</td>
+</tr>
+<tr>
+<td>N. Georgescu-Roegen (1971)</td>
+<td>Economic processes are irreversible thermodynamic transformations; the Entropy Law sets absolute limits on growth [31]</td>
+<td>TNW contraction when reserves are depleted reflects irreversibility; no recycling of consumed energy</td>
+</tr>
+<tr>
+<td>H.T. Odum (1971–1996)</td>
+<td>Emergy accounting: all goods and services can be expressed in solar energy equivalents; energy quality hierarchy governs economic value [41][43]</td>
+<td>Q-factors implement energy quality weighting analogous to transformity; IEF reflects maximum empower principle</td>
+</tr>
+<tr>
+<td>Hall, Lambert &amp; Balogh (2014)</td>
+<td>EROI quantifies net energy surplus; declining EROI compresses economic discretionary surplus; EROI minimum thresholds for societal function [14][20]</td>
+<td>NEW and Q-factors embed EROI logic; IEF rewards high-EROI systems; declining reserves reduce TNW</td>
+</tr>
+<tr>
+<td>UN Inclusive Wealth Index (2018)</td>
+<td>44 of 140 countries show declining real wealth despite rising GDP; natural, human, and produced capital must all be measured [55]</td>
+<td>TNW extends IWI by adding energy quality weights, food/labour components, and currency-backing mechanism</td>
+</tr>
+<tr>
+<td>Dasgupta Review (2021)</td>
+<td>GDP substitutes income for wealth; natural capital depreciation must be measured; overreliance on GDP leads to unsustainable development [58]</td>
+<td>TNW is a stock measure (wealth, not income); resource depletion automatically reduces backing currency</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-objections-and-responses">9. Objections and Responses</h2>
+<h3 id="objection-1-you-cant-measure-all-wealth-in-energy-units-knowledge-and-culture-have-value">Objection 1: "You can't measure all wealth in energy units. Knowledge and culture have value."</h3>
 <p>Correct: knowledge, culture, and institutional quality are real sources of economic value that EREM's current formulation does not fully capture. The IEF component partially addresses this — more knowledgeable societies tend to deploy energy more efficiently — but this is indirect. EREM v1.0 is explicitly a theoretical framework that acknowledges this limitation [Section 7 of the Technical Paper]. Future extensions incorporating knowledge emergy (following Odum [42]) are planned. However, the components that EREM does capture — energy, materials, food, labour, efficiency — account for the physical substrate without which no knowledge-based economy can function. Knowledge adds value to a material platform; it does not substitute for it.</p>
-<h3 id="objection-2-erem-would-destroy-financial-innovation-and-economic-flexibility"><strong>Objection 2: "EREM would destroy financial innovation and economic flexibility."</strong></h3>
+<h3 id="objection-2-erem-would-destroy-financial-innovation-and-economic-flexibility">Objection 2: "EREM would destroy financial innovation and economic flexibility."</h3>
 <p>EREM constrains monetary flexibility — that is precisely its purpose. The "flexibility" of fiat systems is the flexibility to create money without creating wealth, to expand credit beyond physical backing, and to defer the thermodynamic reckoning through debt instruments. This flexibility is the source of business cycles, asset bubbles, and financial crises. EREM does not prevent lending, investment, innovation, or entrepreneurship — it prevents the monetary system from pretending that these activities are happening when they are not, or that wealth exists when it has already been consumed.</p>
-<h3 id="objection-3-the-weighting-coefficients-are-arbitrary"><strong>Objection 3: "The weighting coefficients (α, β, γ, δ, ε) are arbitrary."</strong></h3>
+<h3 id="objection-3-the-weighting-coefficients-are-arbitrary">Objection 3: "The weighting coefficients (α, β, γ, δ, ε) are arbitrary."</h3>
 <p>The coefficients are theoretically motivated priors, not arbitrary choices. They are also acknowledged as the primary open parameter of the framework, requiring empirical calibration [Technical Paper, Section 7.1]. Any alternative weighting scheme must satisfy the same constraints: all weights must be positive, must sum to one, and the resulting TNW must preserve dimensional consistency. The proposed coefficients reflect a defensible hierarchy: energy as the universal enabling resource (highest weight), materials as the physical substrate of technology, food as the energetic foundation of human labour, labour capacity as the organisational multiplier, and efficiency as the forward-looking innovation premium.</p>
-<h3 id="objection-4-political-actors-will-manipulate-reserve-audit-institutions"><strong>Objection 4: "Political actors will manipulate reserve audit institutions."</strong></h3>
+<h3 id="objection-4-political-actors-will-manipulate-reserve-audit-institutions">Objection 4: "Political actors will manipulate reserve audit institutions."</h3>
 <p>This is a genuine implementation risk acknowledged in the Technical Paper. However, the same objection applies to central banks, statistical agencies, and every other economic institution — it does not invalidate the framework, it identifies a governance challenge. EREM's reserve audit requirements are arguably more straightforward to verify than the complex macroeconomic models underlying central bank policy: proven reserves are a physical fact confirmed by geological survey, renewable capacity is a measurable engineering parameter, and agricultural yields are directly observable. The technical difficulties of audit are real but tractable; the political difficulties are significant but not unique to EREM.</p>
-<h1 id="10-conclusion-economics-as-physics"><strong>10. Conclusion: Economics as Physics</strong></h1>
+<h2 id="10-conclusion-economics-as-physics">10. Conclusion: Economics as Physics</h2>
 <p>The fundamental claim of EREM is modest in one sense and radical in another. It is modest in that it does not propose a new physics — the thermodynamic constraints EREM applies to monetary systems are among the oldest, best-tested laws in all of science. The Second Law of Thermodynamics is not a hypothesis; it is as well-established as any principle in human knowledge. EREM merely insists that economics take it seriously.</p>
 <p>It is radical in that taking thermodynamics seriously requires discarding nearly all of the conceptual apparatus of contemporary monetary economics: the idea that money can grow without physical bound; that GDP measures wealth; that financial engineering creates value; that exchange rates should be set by policy; that resource depletion is an externality. These are not minor modifications — they are the core assumptions of the modern economic order, and EREM rejects all of them.</p>
 <p>In their place, EREM offers a system in which every monetary unit corresponds to a verified physical reality; in which currency expansion requires physical justification; in which efficiency innovation directly creates monetary wealth; in which resource depletion is automatically visible in the money supply; and in which international exchange rates cannot be manipulated because they are derived from physical productive capacity differentials rather than policy decisions.</p>
 <p>This is not utopian. It is physics applied to accounting. And it is, ultimately, the only accounting framework that cannot be made to lie — because the laws of thermodynamics enforce the truth on any system that claims to measure real wealth.</p>
-<p><strong><em>"You cannot eat GDP. You cannot power a city with confidence.</em></strong></p>
-<p><strong><em>Real wealth is energy, matter, and the knowledge to transform them efficiently."</em></strong></p>
-<p><em>— EREM v1.0 Founding Principle</em></p>
-<h1 id="references"><strong>References</strong></h1>
-<p>__[14] __Hall, C.A.S., Lambert, J.G., &amp; Balogh, S.B. (2014). EROI of different fuels and the implications for society. Energy Policy 64, 141–152.</p>
-<p>__[20] __Hall, C.A.S., Lambert, J.G., &amp; Balogh, S.B. (2014). EROI of different fuels and the implications for society. Energy Policy 64, 141–152. (Societal EROI discussion.)</p>
-<p>__[22] __Soddy, F. (1926). Wealth, Virtual Wealth and Debt: The Solution of the Economic Paradox. George Allen &amp; Unwin, London.</p>
-<p>__[31] __Georgescu-Roegen, N. (1971). The Entropy Law and the Economic Process. Harvard University Press, Cambridge, MA.</p>
-<p>__[36] __Cuscó, P. (2023). The law of entropy and the economic process. Escuela Tècnica Superior d'Arquitectura del Vallès.</p>
-<p>__[41] __Brown, M.T. (2003). Prof. Howard T. Odum. Energy 28(4), 293–301.</p>
-<p>__[42] __Brown, M.T. (2023). Evaluating information with emergy: how did H.T. Odum incorporate human information into emergy accounting? Discover Environment, Springer.</p>
-<p>__[43] __Brown, M.T. &amp; Ulgiati, S. (2004). Energy quality, emergy, and transformity: H.T. Odum's contributions. Ecological Modelling 178, 201–213.</p>
-<p>__[44] __Odum, H.T. (1996). Environmental Accounting: Emergy and Decision Making. Wiley, New York.</p>
-<p>__[51] __van Zanten, H.H.E. et al. (2024). Beyond GDP: a review and conceptual framework for measuring sustainable and inclusive wellbeing. Lancet Planetary Health 8(9), e719–e733.</p>
-<p>__[52] __Agarwal, N. &amp; Saha, M. (2024). Sustainable matrix beyond GDP: investment for inclusive growth. Humanities and Social Sciences Communications 11, 217.</p>
-<p>__[54] __UN Secretary-General. (2024). Statement to the Summit of the Future. United Nations.</p>
-<p>__[55] __Managi, S. &amp; Kumar, P. (2018). Inclusive Wealth Report 2018. Cambridge University Press / UNEP.</p>
-<p>__[58] __Dasgupta, P. (2021). The Economics of Biodiversity: The Dasgupta Review. HM Treasury, London.</p>
-<p>__[60] __Talberth, J. et al. (2009). Beyond GDP: The Need for New Measures of Progress. Pardee Center, Boston University.</p>
-<p><strong>— END OF PAPER —</strong></p>
-  </main>
+<blockquote>
+<p><em>"You cannot eat GDP. You cannot power a city with confidence.</em></p>
+<p><em>Real wealth is energy, matter, and the knowledge to transform them efficiently."</em></p>
+</blockquote>
+<p><em>— EREM v1.0 founding principle</em></p>
+<h2 id="references">References</h2>
+<p>[14] Hall, C.A.S., Lambert, J.G., &amp; Balogh, S.B. (2014). EROI of different fuels and the implications for society. Energy Policy 64, 141–152.</p>
+<p>[20] Hall, C.A.S., Lambert, J.G., &amp; Balogh, S.B. (2014). EROI of different fuels and the implications for society. Energy Policy 64, 141–152. (Societal EROI discussion.)</p>
+<p>[22] Soddy, F. (1926). Wealth, Virtual Wealth and Debt: The Solution of the Economic Paradox. George Allen &amp; Unwin, London.</p>
+<p>[31] Georgescu-Roegen, N. (1971). The Entropy Law and the Economic Process. Harvard University Press, Cambridge, MA.</p>
+<p>[36] Cuscó, P. (2023). The law of entropy and the economic process. Escuela Tècnica Superior d'Arquitectura del Vallès.</p>
+<p>[41] Brown, M.T. (2003). Prof. Howard T. Odum. Energy 28(4), 293–301.</p>
+<p>[42] Brown, M.T. (2023). Evaluating information with emergy: how did H.T. Odum incorporate human information into emergy accounting? Discover Environment, Springer.</p>
+<p>[43] Brown, M.T. &amp; Ulgiati, S. (2004). Energy quality, emergy, and transformity: H.T. Odum's contributions. Ecological Modelling 178, 201–213.</p>
+<p>[44] Odum, H.T. (1996). Environmental Accounting: Emergy and Decision Making. Wiley, New York.</p>
+<p>[51] van Zanten, H.H.E. et al. (2024). Beyond GDP: a review and conceptual framework for measuring sustainable and inclusive wellbeing. Lancet Planetary Health 8(9), e719–e733.</p>
+<p>[52] Agarwal, N. &amp; Saha, M. (2024). Sustainable matrix beyond GDP: investment for inclusive growth. Humanities and Social Sciences Communications 11, 217.</p>
+<p>[54] UN Secretary-General. (2024). Statement to the Summit of the Future. United Nations.</p>
+<p>[55] Managi, S. &amp; Kumar, P. (2018). Inclusive Wealth Report 2018. Cambridge University Press / UNEP.</p>
+<p>[58] Dasgupta, P. (2021). The Economics of Biodiversity: The Dasgupta Review. HM Treasury, London.</p>
+<p>[60] Talberth, J. et al. (2009). Beyond GDP: The Need for New Measures of Progress. Pardee Center, Boston University.</p>
+<p><strong>— End of paper —</strong></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,10 @@
+# Local run logs
+logs/*.log
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment (optional: many developers gitignore .venv)
+# .venv/

@@ -3,35 +3,135 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>classical methods comparison</title>
+  <meta name="description" content="**Mathematical Comparison Document** **Date**: January 30, 2026 --- This document provides a rigorous comparison between our proposed Universal Generator Framework and the dominant statistical generation methods from 1980-2000: **Classical Methods Examined**: - N-gram models…"/>
+  <title>Comparative Analysis: Universal Generator Framework vs Classical Methods (1980s-2000s) · Ideas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../../assets/site.css"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous"/>
+
 </head>
 <body>
-  <header class="page-bar">
-    <a class="home" href="../../index.html">Index</a>
-    <span class="path">Statistical Generation\classical_methods_comparison.html</span>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Ideas</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="../../index.html">Library</a>
+        <a href="../../topics/index.html">Topics</a>
+      </nav>
+    </div>
   </header>
-  <main class="prose">
-<h1 id="comparative-analysis-universal-generator-framework-vs-classical-methods-1980s-2000s">Comparative Analysis: Universal Generator Framework vs Classical Methods (1980s-2000s)</h1>
-<p><strong>Mathematical Comparison Document</strong><br />
-<strong>Date</strong>: January 30, 2026<br />
+  <div class="shell shell--article" id="main-content">
+
+    <div class="doc-layout">
+      <nav class="page-toc" aria-labelledby="toc-heading">
+      <h2 id="toc-heading" class="toc-title">On this page</h2>
+      <ul class="toc-list">
+        <li class="toc-depth-2"><a href="#executive-summary">Executive Summary</a></li>
+        <li class="toc-depth-2"><a href="#table-of-contents">Table of Contents</a></li>
+        <li class="toc-depth-2"><a href="#11-the-classical-era-1980-2000">1.1 The Classical Era (1980-2000)</a></li>
+        <li class="toc-depth-2"><a href="#12-the-neural-revolution-2012">1.2 The Neural Revolution (2012+)</a></li>
+        <li class="toc-depth-2"><a href="#13-our-contribution-best-of-both-worlds">1.3 Our Contribution: Best of Both Worlds</a></li>
+        <li class="toc-depth-2"><a href="#21-the-problem-stated">2.1 The Problem Stated</a></li>
+        <li class="toc-depth-2"><a href="#22-classical-solutions-all-failed">2.2 Classical Solutions (All Failed)</a></li>
+        <li class="toc-depth-3"><a href="#solution-1-truncation">Solution 1: Truncation</a></li>
+        <li class="toc-depth-3"><a href="#solution-2-backoff-models-ppm">Solution 2: Backoff Models (PPM)</a></li>
+        <li class="toc-depth-3"><a href="#solution-3-hidden-markov-models">Solution 3: Hidden Markov Models</a></li>
+        <li class="toc-depth-3"><a href="#solution-4-class-based-models">Solution 4: Class-Based Models</a></li>
+        <li class="toc-depth-2"><a href="#23-our-solution-hash-based-compression">2.3 Our Solution: Hash-Based Compression</a></li>
+        <li class="toc-depth-2"><a href="#31-n-gram-models-1980s">3.1 N-Gram Models (1980s)</a></li>
+        <li class="toc-depth-3"><a href="#what-they-are">What They Are</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-our-framework">Comparison to Our Framework</a></li>
+        <li class="toc-depth-2"><a href="#32-prediction-by-partial-matching-ppm-1984">3.2 Prediction by Partial Matching (PPM, 1984)</a></li>
+        <li class="toc-depth-3"><a href="#what-it-is">What It Is</a></li>
+        <li class="toc-depth-3"><a href="#why-ppm-was-state-of-the-art">Why PPM Was State-of-the-Art</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-our-framework_1">Comparison to Our Framework</a></li>
+        <li class="toc-depth-2"><a href="#33-hidden-markov-models-hmms-1980s-1990s">3.3 Hidden Markov Models (HMMs, 1980s-1990s)</a></li>
+        <li class="toc-depth-3"><a href="#what-they-are_1">What They Are</a></li>
+        <li class="toc-depth-3"><a href="#why-hmms-dominated">Why HMMs Dominated</a></li>
+        <li class="toc-depth-3"><a href="#the-hmm-bottleneck">The HMM Bottleneck</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-our-framework_2">Comparison to Our Framework</a></li>
+        <li class="toc-depth-2"><a href="#34-paq-compression-family-1998-2010">3.4 PAQ Compression Family (1998-2010)</a></li>
+        <li class="toc-depth-3"><a href="#what-paq-is">What PAQ Is</a></li>
+        <li class="toc-depth-3"><a href="#why-paq-was-revolutionary">Why PAQ Was Revolutionary</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-our-framework_3">Comparison to Our Framework</a></li>
+        <li class="toc-depth-2"><a href="#35-probabilistic-context-free-grammars-pcfgs-1990s">3.5 Probabilistic Context-Free Grammars (PCFGs, 1990s)</a></li>
+        <li class="toc-depth-3"><a href="#what-they-are_2">What They Are</a></li>
+        <li class="toc-depth-3"><a href="#why-pcfgs-were-popular">Why PCFGs Were Popular</a></li>
+        <li class="toc-depth-3"><a href="#the-pcfg-limitation">The PCFG Limitation</a></li>
+        <li class="toc-depth-3"><a href="#comparison-to-our-framework_4">Comparison to Our Framework</a></li>
+        <li class="toc-depth-2"><a href="#41-provable-properties-lacking-in-classical-methods">4.1 Provable Properties (Lacking in Classical Methods)</a></li>
+        <li class="toc-depth-3"><a href="#theorem-41-composition-closure">Theorem 4.1: Composition Closure</a></li>
+        <li class="toc-depth-3"><a href="#theorem-42-convergence-rate">Theorem 4.2: Convergence Rate</a></li>
+        <li class="toc-depth-3"><a href="#theorem-43-information-optimality">Theorem 4.3: Information Optimality</a></li>
+        <li class="toc-depth-2"><a href="#42-unified-theory">4.2 Unified Theory</a></li>
+        <li class="toc-depth-2"><a href="#51-context-length-comparison">5.1 Context Length Comparison</a></li>
+        <li class="toc-depth-2"><a href="#52-memory-requirements">5.2 Memory Requirements</a></li>
+        <li class="toc-depth-2"><a href="#53-speed-comparison">5.3 Speed Comparison</a></li>
+        <li class="toc-depth-2"><a href="#54-perplexity-comparison">5.4 Perplexity Comparison</a></li>
+        <li class="toc-depth-2"><a href="#61-decision-matrix">6.1 Decision Matrix</a></li>
+        <li class="toc-depth-2"><a href="#62-specific-application-recommendations">6.2 Specific Application Recommendations</a></li>
+        <li class="toc-depth-3"><a href="#text-generation">Text Generation</a></li>
+        <li class="toc-depth-3"><a href="#compression">Compression</a></li>
+        <li class="toc-depth-3"><a href="#time-series">Time Series</a></li>
+        <li class="toc-depth-3"><a href="#structured-generation">Structured Generation</a></li>
+        <li class="toc-depth-2"><a href="#71-storage-complexity">7.1 Storage Complexity</a></li>
+        <li class="toc-depth-2"><a href="#72-time-complexity">7.2 Time Complexity</a></li>
+        <li class="toc-depth-2"><a href="#73-learning-complexity">7.3 Learning Complexity</a></li>
+        <li class="toc-depth-2"><a href="#74-space-time-trade-off">7.4 Space-Time Trade-Off</a></li>
+        <li class="toc-depth-2"><a href="#81-summary-table">8.1 Summary Table</a></li>
+        <li class="toc-depth-2"><a href="#82-what-we-learned-from-classical-methods">8.2 What We Learned from Classical Methods</a></li>
+        <li class="toc-depth-2"><a href="#83-the-missing-piece">8.3 The Missing Piece</a></li>
+        <li class="toc-depth-2"><a href="#84-the-neural-network-question">8.4 The Neural Network Question</a></li>
+        <li class="toc-depth-2"><a href="#85-final-verdict">8.5 Final Verdict</a></li>
+        <li class="toc-depth-2"><a href="#appendix-a-historical-method-summaries">Appendix A: Historical Method Summaries</a></li>
+        <li class="toc-depth-3"><a href="#a1-n-gram-models-shannon-1951">A.1 N-Gram Models (Shannon, 1951)</a></li>
+        <li class="toc-depth-3"><a href="#a2-hidden-markov-models-baum-petrie-1966">A.2 Hidden Markov Models (Baum &amp; Petrie, 1966)</a></li>
+        <li class="toc-depth-3"><a href="#a3-ppm-cleary-witten-1984">A.3 PPM (Cleary &amp; Witten, 1984)</a></li>
+        <li class="toc-depth-3"><a href="#a4-paq-mahoney-2005">A.4 PAQ (Mahoney, 2005+)</a></li>
+        <li class="toc-depth-3"><a href="#a5-pcfgs-booth-1969-lari-young-1990">A.5 PCFGs (Booth, 1969; Lari &amp; Young, 1990)</a></li>
+        <li class="toc-depth-2"><a href="#appendix-b-when-classical-methods-still-win">Appendix B: When Classical Methods Still Win</a></li>
+        <li class="toc-depth-3"><a href="#b1-ultra-fast-low-memory">B.1 Ultra-Fast, Low-Memory</a></li>
+        <li class="toc-depth-3"><a href="#b2-structured-parsing">B.2 Structured Parsing</a></li>
+        <li class="toc-depth-3"><a href="#b3-maximum-compression-ratio">B.3 Maximum Compression Ratio</a></li>
+        <li class="toc-depth-3"><a href="#b4-simple-proven-understood">B.4 Simple, Proven, Understood</a></li>
+        <li class="toc-depth-2"><a href="#appendix-c-references">Appendix C: References</a></li>
+        <li class="toc-depth-3"><a href="#classical-methods">Classical Methods</a></li>
+        <li class="toc-depth-3"><a href="#comparison-studies">Comparison Studies</a></li>
+      </ul>
+    </nav>
+      <article class="doc-article prose" itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <header class="doc-header">
+          <h1 class="doc-title" itemprop="name">Comparative Analysis: Universal Generator Framework vs Classical Methods (1980s-2000s)</h1>
+          <p class="doc-meta">Statistical Generation\classical_methods_comparison.md</p>
+        </header>
+        <p class="doc-lead-label">Summary</p><div class="doc-lead"><p><strong>Mathematical Comparison Document</strong><br/>
+<strong>Date</strong>: January 30, 2026<br/>
+<strong>Purpose</strong>: Technical evaluation for decision-makers</p></div>
+        <div class="doc-body" itemprop="articleBody">
+
+<p><strong>Mathematical Comparison Document</strong><br/>
+<strong>Date</strong>: January 30, 2026<br/>
 <strong>Purpose</strong>: Technical evaluation for decision-makers</p>
-<hr />
+<hr/>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This document provides a rigorous comparison between our proposed Universal Generator Framework and the dominant statistical generation methods from 1980-2000:</p>
-<p><strong>Classical Methods Examined</strong>:<br />
-- N-gram models (1980s)<br />
-- Hidden Markov Models (HMMs, 1980s)<br />
-- Prediction by Partial Matching (PPM, 1984)<br />
-- PAQ compression family (1990s-2000s)<br />
+<p><strong>Classical Methods Examined</strong>:
+- N-gram models (1980s)
+- Hidden Markov Models (HMMs, 1980s)
+- Prediction by Partial Matching (PPM, 1984)
+- PAQ compression family (1990s-2000s)
 - Probabilistic Context-Free Grammars (PCFGs, 1990s)</p>
 <p><strong>Key Finding</strong>: Our framework solves the <strong>fundamental state explosion problem</strong> that limited these classical methods, while maintaining their mathematical rigor and interpretability.</p>
-<p><strong>Bottom Line</strong>:<br />
-- Classical methods: Limited to ~5-gram context (state explosion)<br />
-- Our framework: Handles 1000+ token context (hash compression)<br />
-- Both: Mathematically provable, deterministic, interpretable<br />
+<p><strong>Bottom Line</strong>:
+- Classical methods: Limited to ~5-gram context (state explosion)
+- Our framework: Handles 1000+ token context (hash compression)
+- Both: Mathematically provable, deterministic, interpretable
 - Trade-off: Slightly lossy compression vs exponential state space</p>
-<hr />
+<hr/>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#1-historical">Historical Context</a></li>
@@ -43,9 +143,9 @@
 <li><a href="#7-technical">Detailed Technical Comparison</a></li>
 <li><a href="#8-conclusion">Conclusion</a></li>
 </ol>
-<hr />
+<hr/>
 <p><a name="1-historical"></a></p>
-<h1 id="1-historical-context-the-golden-age-of-statistical-nlp">1. Historical Context: The Golden Age of Statistical NLP</h1>
+
 <h2 id="11-the-classical-era-1980-2000">1.1 The Classical Era (1980-2000)</h2>
 <p>Before neural networks dominated AI (2012+), statistical methods ruled:</p>
 <p><strong>Timeline of Classical Methods</strong>:</p>
@@ -73,36 +173,36 @@
       - Grammar-based generation
       - Structured output
 </code></pre>
-<p><strong>Why They Worked</strong>:<br />
-1. <strong>Mathematically rigorous</strong> - provable properties<br />
-2. <strong>Deterministic</strong> - same input → same output<br />
-3. <strong>Interpretable</strong> - can understand why predictions made<br />
+<p><strong>Why They Worked</strong>:
+1. <strong>Mathematically rigorous</strong> - provable properties
+2. <strong>Deterministic</strong> - same input → same output
+3. <strong>Interpretable</strong> - can understand why predictions made
 4. <strong>Efficient</strong> - fast inference (for small contexts)</p>
-<p><strong>Why They Failed</strong>:<br />
-1. <strong>State explosion</strong> - V^n states for n-gram context<br />
-2. <strong>Short memory</strong> - limited to ~5 words of context<br />
+<p><strong>Why They Failed</strong>:
+1. <strong>State explosion</strong> - V^n states for n-gram context
+2. <strong>Short memory</strong> - limited to ~5 words of context
 3. <strong>Separate systems</strong> - different algorithms for different tasks</p>
 <h2 id="12-the-neural-revolution-2012">1.2 The Neural Revolution (2012+)</h2>
 <p>Deep learning solved the context problem but created new ones:</p>
-<p><strong>What Neural Nets Fixed</strong>:<br />
-- ✓ Long context (1000+ tokens with transformers)<br />
-- ✓ Learned representations (embeddings)<br />
+<p><strong>What Neural Nets Fixed</strong>:
+- ✓ Long context (1000+ tokens with transformers)
+- ✓ Learned representations (embeddings)
 - ✓ Transfer learning (pre-trained models)</p>
-<p><strong>What Neural Nets Broke</strong>:<br />
-- ✗ No mathematical guarantees<br />
-- ✗ Non-deterministic (random initialization)<br />
-- ✗ Black box (can't interpret)<br />
+<p><strong>What Neural Nets Broke</strong>:
+- ✗ No mathematical guarantees
+- ✗ Non-deterministic (random initialization)
+- ✗ Black box (can't interpret)
 - ✗ Enormous compute requirements</p>
 <h2 id="13-our-contribution-best-of-both-worlds">1.3 Our Contribution: Best of Both Worlds</h2>
 <p><strong>Goal</strong>: Keep the rigor of classical methods, solve the state explosion problem.</p>
-<p><strong>Approach</strong>:<br />
-1. Use classical theory (Lévy processes, category theory)<br />
-2. Apply modern compression (hash-based states)<br />
+<p><strong>Approach</strong>:
+1. Use classical theory (Lévy processes, category theory)
+2. Apply modern compression (hash-based states)
 3. Add provable filtration (information theory)</p>
 <p><strong>Result</strong>: Classical guarantees + modern context length.</p>
-<hr />
+<hr/>
 <p><a name="2-state-explosion"></a></p>
-<h1 id="2-the-state-explosion-problem">2. The State Explosion Problem</h1>
+
 <p>This is <strong>the</strong> fundamental issue that killed classical methods.</p>
 <h2 id="21-the-problem-stated">2.1 The Problem Stated</h2>
 <p><strong>Definition</strong>: For vocabulary size V and context length n:</p>
@@ -123,17 +223,17 @@ Context length | Number of states
 <h2 id="22-classical-solutions-all-failed">2.2 Classical Solutions (All Failed)</h2>
 <h3 id="solution-1-truncation">Solution 1: Truncation</h3>
 <p><strong>Approach</strong>: Just use short contexts (3-5 words)</p>
-<p><strong>Result</strong>:<br />
-- ✓ Tractable (billions of states manageable)<br />
-- ✗ Loses long-range dependencies<br />
+<p><strong>Result</strong>:
+- ✓ Tractable (billions of states manageable)
+- ✗ Loses long-range dependencies
 - ✗ Can't model coherent narratives</p>
 <p><strong>Example failure</strong>:</p>
-<pre><code>Context: &quot;The cat sat on the&quot;
-Prediction: &quot;mat&quot; (local context only)
+<pre><code>Context: "The cat sat on the"
+Prediction: "mat" (local context only)
 
 Better with long context:
-&quot;The author discussed feline behavior extensively. The cat sat on the&quot;
-Prediction: &quot;manuscript&quot; (understands it's an academic paper)
+"The author discussed feline behavior extensively. The cat sat on the"
+Prediction: "manuscript" (understands it's an academic paper)
 </code></pre>
 <h3 id="solution-2-backoff-models-ppm">Solution 2: Backoff Models (PPM)</h3>
 <p><strong>Approach</strong>: Use longest matching context, backoff to shorter</p>
@@ -144,10 +244,10 @@ Prediction: &quot;manuscript&quot; (understands it's an academic paper)
   3. If never seen, try 3-gram
   4. ...continue until match found
 </code></pre>
-<p><strong>Result</strong>:<br />
-- ✓ Better than fixed-length n-grams<br />
-- ✓ Used successfully in compression (PPM)<br />
-- ✗ Still limited to ~5-6 symbol context<br />
+<p><strong>Result</strong>:
+- ✓ Better than fixed-length n-grams
+- ✓ Used successfully in compression (PPM)
+- ✗ Still limited to ~5-6 symbol context
 - ✗ Exponential states for longer context</p>
 <h3 id="solution-3-hidden-markov-models">Solution 3: Hidden Markov Models</h3>
 <p><strong>Approach</strong>: Compress contexts into fixed number of hidden states</p>
@@ -155,21 +255,21 @@ Prediction: &quot;manuscript&quot; (understands it's an academic paper)
 <pre><code>S hidden states, V observations
 Parameters: O(S² + S·V)  (tractable)
 </code></pre>
-<p><strong>Result</strong>:<br />
-- ✓ Fixed parameter count<br />
-- ✗ Information loss (which S states for infinite contexts?)<br />
-- ✗ No principled way to choose S<br />
+<p><strong>Result</strong>:
+- ✓ Fixed parameter count
+- ✗ Information loss (which S states for infinite contexts?)
+- ✗ No principled way to choose S
 - ✗ Can't guarantee long-range capture</p>
 <h3 id="solution-4-class-based-models">Solution 4: Class-Based Models</h3>
 <p><strong>Approach</strong>: Group words into classes, model at class level</p>
 <p><strong>Example</strong>:</p>
 <pre><code>Classes: {animals, verbs, adjectives, ...}
-&quot;The [animal] [verb]ed&quot; instead of &quot;The cat jumped&quot;
+"The [animal] [verb]ed" instead of "The cat jumped"
 </code></pre>
-<p><strong>Result</strong>:<br />
-- ✓ Reduces vocabulary size<br />
-- ✗ Loses fine-grained information<br />
-- ✗ Manual class definition<br />
+<p><strong>Result</strong>:
+- ✓ Reduces vocabulary size
+- ✗ Loses fine-grained information
+- ✗ Manual class definition
 - ✗ Still exponential in context length</p>
 <p><strong>None of these solved the fundamental problem.</strong></p>
 <h2 id="23-our-solution-hash-based-compression">2.3 Our Solution: Hash-Based Compression</h2>
@@ -188,13 +288,13 @@ Store: distribution P(next | state)
 Output space: 2^32 ≈ 4 billion (fixed)
 Collisions:  Similar contexts → same state (compression)
 </code></pre>
-<p><strong>Result</strong>:<br />
-- ✓ Fixed state space (manageable)<br />
-- ✓ Arbitrary context length<br />
-- ✓ Lossy but principled (hash collisions = generalization)<br />
+<p><strong>Result</strong>:
+- ✓ Fixed state space (manageable)
+- ✓ Arbitrary context length
+- ✓ Lossy but principled (hash collisions = generalization)
 - ✓ Deterministic (same input → same hash)</p>
 <p><strong>Mathematical Guarantee</strong>:</p>
-<p><strong>Theorem 2.1</strong> (Collision Rate)<br />
+<p><strong>Theorem 2.1</strong> (Collision Rate)
 For hash function H: Contexts → {1,...,M} and N contexts:</p>
 <pre><code>Expected collisions ≈ N²/(2M)
 
@@ -202,9 +302,9 @@ For M = 2^32, N = 10^9:
 Collision rate ≈ 0.12%
 </code></pre>
 <p>Most contexts get unique states; similar ones share states (good!).</p>
-<hr />
+<hr/>
 <p><a name="3-method-comparison"></a></p>
-<h1 id="3-method-by-method-comparison">3. Method-by-Method Comparison</h1>
+
 <h2 id="31-n-gram-models-1980s">3.1 N-Gram Models (1980s)</h2>
 <h3 id="what-they-are">What They Are</h3>
 <p><strong>Definition</strong>: Model probability of next symbol given previous n symbols.</p>
@@ -213,11 +313,11 @@ Collision rate ≈ 0.12%
 </code></pre>
 <p><strong>Learning</strong>: Count frequencies in training data.</p>
 <p><strong>Example (2-gram)</strong>:</p>
-<pre><code>Text: &quot;the cat sat on the mat&quot;
+<pre><code>Text: "the cat sat on the mat"
 
 Counts:
-  P(cat | the) = count(&quot;the cat&quot;) / count(&quot;the&quot;)
-  P(sat | cat) = count(&quot;cat sat&quot;) / count(&quot;cat&quot;)
+  P(cat | the) = count("the cat") / count("the")
+  P(sat | cat) = count("cat sat") / count("cat")
   ...
 </code></pre>
 <h3 id="comparison-to-our-framework">Comparison to Our Framework</h3>
@@ -267,16 +367,16 @@ Counts:
 </tr>
 </tbody>
 </table>
-<p><strong>Advantage of N-Grams</strong>:<br />
-- Dead simple implementation<br />
-- Exact probabilities (no compression)<br />
+<p><strong>Advantage of N-Grams</strong>:
+- Dead simple implementation
+- Exact probabilities (no compression)
 - Well-understood theory</p>
-<p><strong>Advantage of Our Framework</strong>:<br />
-- 200× longer context<br />
-- Composable modules<br />
+<p><strong>Advantage of Our Framework</strong>:
+- 200× longer context
+- Composable modules
 - Handles continuous data</p>
 <p><strong>Verdict</strong>: Our framework is a <strong>strict superset</strong> - it can emulate n-grams by setting small context and no compression.</p>
-<hr />
+<hr/>
 <h2 id="32-prediction-by-partial-matching-ppm-1984">3.2 Prediction by Partial Matching (PPM, 1984)</h2>
 <h3 id="what-it-is">What It Is</h3>
 <p><strong>Algorithm</strong>: Combine multiple n-gram models with intelligent backoff.</p>
@@ -291,20 +391,20 @@ Counts:
 </code></pre>
 <p><strong>Smoothing</strong>: Use "escape" mechanism for unseen contexts.</p>
 <p><strong>Example</strong>:</p>
-<pre><code>Context: &quot;the quick brown&quot;
+<pre><code>Context: "the quick brown"
 
-Try: P(? | &quot;the quick brown&quot;)  → not seen, escape
-Try: P(? | &quot;quick brown&quot;)      → seen! predict from this
+Try: P(? | "the quick brown")  → not seen, escape
+Try: P(? | "quick brown")      → seen! predict from this
 </code></pre>
 <h3 id="why-ppm-was-state-of-the-art">Why PPM Was State-of-the-Art</h3>
-<p><strong>Compression Performance</strong> (1990s):<br />
-- Better than gzip, bzip2<br />
-- Approaching Shannon entropy limit<br />
+<p><strong>Compression Performance</strong> (1990s):
+- Better than gzip, bzip2
+- Approaching Shannon entropy limit
 - Used in high-end archivers (e.g., WinRAR uses PPM variants)</p>
-<p><strong>Advantages</strong>:<br />
-1. Adaptive context length<br />
-2. Handles rare events gracefully<br />
-3. Online learning (adapts to data)<br />
+<p><strong>Advantages</strong>:
+1. Adaptive context length
+2. Handles rare events gracefully
+3. Online learning (adapts to data)
 4. Provably optimal under certain assumptions</p>
 <h3 id="comparison-to-our-framework_1">Comparison to Our Framework</h3>
 <table>
@@ -362,11 +462,11 @@ Lookup: O(context_length)
 <pre><code>Storage: O(M) where M = fixed state space (e.g., 2^32)
 Lookup: O(1)
 </code></pre>
-<p><strong>Trade-off</strong>:<br />
-- PPM: Exact context storage, grows with data<br />
+<p><strong>Trade-off</strong>:
+- PPM: Exact context storage, grows with data
 - Us: Compressed contexts, fixed size, slight information loss</p>
 <p><strong>Verdict</strong>: PPM is <strong>optimal for compression</strong> given unlimited memory. Our framework is <strong>optimal for large-scale generation</strong> with bounded memory.</p>
-<hr />
+<hr/>
 <h2 id="33-hidden-markov-models-hmms-1980s-1990s">3.3 Hidden Markov Models (HMMs, 1980s-1990s)</h2>
 <h3 id="what-they-are_1">What They Are</h3>
 <p><strong>Model Structure</strong>:</p>
@@ -381,18 +481,18 @@ Emission: P(o_t | s_t)        (k×v matrix)
 Observations: {cat, sat, mat, ...}
 
 P(VERB | NOUN) = 0.4  (noun often followed by verb)
-P(&quot;sat&quot; | VERB) = 0.01 (if state is VERB, word is &quot;sat&quot; 1% of time)
+P("sat" | VERB) = 0.01 (if state is VERB, word is "sat" 1% of time)
 </code></pre>
 <h3 id="why-hmms-dominated">Why HMMs Dominated</h3>
-<p><strong>Applications</strong>:<br />
-1. Speech recognition (1980s-2000s)<br />
-2. Gene sequencing (bioinformatics)<br />
-3. Financial modeling (regime switching)<br />
+<p><strong>Applications</strong>:
+1. Speech recognition (1980s-2000s)
+2. Gene sequencing (bioinformatics)
+3. Financial modeling (regime switching)
 4. Part-of-speech tagging (NLP)</p>
-<p><strong>Advantages</strong>:<br />
-1. Efficient inference (Viterbi algorithm: O(k²T))<br />
-2. Learnable from data (Baum-Welch algorithm)<br />
-3. Handles hidden structure<br />
+<p><strong>Advantages</strong>:
+1. Efficient inference (Viterbi algorithm: O(k²T))
+2. Learnable from data (Baum-Welch algorithm)
+3. Handles hidden structure
 4. Mathematically elegant</p>
 <h3 id="the-hmm-bottleneck">The HMM Bottleneck</h3>
 <p><strong>Problem</strong>: How to choose number of states k?</p>
@@ -461,7 +561,7 @@ Option 2: Use k &lt;&lt; V² states
 Us:  2^32 states (automatically compressed from infinite contexts)
 </code></pre>
 <p><strong>Verdict</strong>: Our framework is a <strong>generalization</strong> of HMMs that solves the state selection problem via hashing.</p>
-<hr />
+<hr/>
 <h2 id="34-paq-compression-family-1998-2010">3.4 PAQ Compression Family (1998-2010)</h2>
 <h3 id="what-paq-is">What PAQ Is</h3>
 <p><strong>Philosophy</strong>: Combine many prediction models, weight by performance.</p>
@@ -488,9 +588,9 @@ bzip2           | 25.8                | 3.8:1
 PPM             | 22.1                | 4.5:1
 PAQ8            | 18.3                | 5.4:1  ← Best in 2006
 </code></pre>
-<p><strong>Approach</strong>:<br />
-1. Many specialized models (each captures different patterns)<br />
-2. Context mixing (neural network combines predictions)<br />
+<p><strong>Approach</strong>:
+1. Many specialized models (each captures different patterns)
+2. Context mixing (neural network combines predictions)
 3. Adaptive weights (learn during compression)</p>
 <p><strong>Cost</strong>: Extremely slow (hours to compress 100 MB)</p>
 <h3 id="comparison-to-our-framework_3">Comparison to Our Framework</h3>
@@ -542,14 +642,14 @@ PAQ8            | 18.3                | 5.4:1  ← Best in 2006
 </table>
 <p><strong>Key Insight</strong>:</p>
 <p>PAQ discovered <strong>empirically</strong> that mixing multiple context models works.</p>
-<p>Our framework <strong>proves mathematically</strong> why this works:<br />
-- Composition of Lévy processes is Lévy (Theorem 4.4)<br />
-- Category theory guarantees consistent composition<br />
+<p>Our framework <strong>proves mathematically</strong> why this works:
+- Composition of Lévy processes is Lévy (Theorem 4.4)
+- Category theory guarantees consistent composition
 - Information filtration removes redundant models</p>
-<p><strong>PAQ's approach</strong>: "Try everything, mix the results"<br />
+<p><strong>PAQ's approach</strong>: "Try everything, mix the results"
 <strong>Our approach</strong>: "Use proven mathematical structures to combine optimally"</p>
 <p><strong>Verdict</strong>: PAQ achieved amazing empirical results through engineering. Our framework achieves similar results through mathematics, with <strong>theoretical guarantees</strong> PAQ lacks.</p>
-<hr />
+<hr/>
 <h2 id="35-probabilistic-context-free-grammars-pcfgs-1990s">3.5 Probabilistic Context-Free Grammars (PCFGs, 1990s)</h2>
 <h3 id="what-they-are_2">What They Are</h3>
 <p><strong>Grammar-Based Generation</strong>:</p>
@@ -559,34 +659,34 @@ NP → N          (probability 0.4)
 VP → V NP       (probability 0.7)
 VP → V          (probability 0.3)
 
-Det → &quot;the&quot;     (probability 0.7)
-Det → &quot;a&quot;       (probability 0.3)
-N → &quot;cat&quot;       (probability 0.4)
-N → &quot;dog&quot;       (probability 0.6)
-V → &quot;chased&quot;    (probability 1.0)
+Det → "the"     (probability 0.7)
+Det → "a"       (probability 0.3)
+N → "cat"       (probability 0.4)
+N → "dog"       (probability 0.6)
+V → "chased"    (probability 1.0)
 </code></pre>
 <p><strong>Generation</strong>:</p>
-<pre><code>S → NP VP → Det N VP → &quot;the&quot; N VP → &quot;the&quot; &quot;dog&quot; VP
-  → &quot;the&quot; &quot;dog&quot; V NP → &quot;the&quot; &quot;dog&quot; &quot;chased&quot; NP
-  → &quot;the&quot; &quot;dog&quot; &quot;chased&quot; Det N → &quot;the&quot; &quot;dog&quot; &quot;chased&quot; &quot;the&quot; N
-  → &quot;the&quot; &quot;dog&quot; &quot;chased&quot; &quot;the&quot; &quot;cat&quot;
+<pre><code>S → NP VP → Det N VP → "the" N VP → "the" "dog" VP
+  → "the" "dog" V NP → "the" "dog" "chased" NP
+  → "the" "dog" "chased" Det N → "the" "dog" "chased" "the" N
+  → "the" "dog" "chased" "the" "cat"
 </code></pre>
 <h3 id="why-pcfgs-were-popular">Why PCFGs Were Popular</h3>
-<p><strong>Advantages</strong>:<br />
-1. <strong>Structured output</strong> (parse trees, not just sequences)<br />
-2. <strong>Linguistic intuition</strong> (captures grammar)<br />
-3. <strong>Learnable</strong> (inside-outside algorithm)<br />
+<p><strong>Advantages</strong>:
+1. <strong>Structured output</strong> (parse trees, not just sequences)
+2. <strong>Linguistic intuition</strong> (captures grammar)
+3. <strong>Learnable</strong> (inside-outside algorithm)
 4. <strong>Interpretable</strong> (can see derivation)</p>
-<p><strong>Applications</strong>:<br />
-- Natural language parsing<br />
-- Syntax checking<br />
-- Machine translation (syntax transfer)<br />
+<p><strong>Applications</strong>:
+- Natural language parsing
+- Syntax checking
+- Machine translation (syntax transfer)
 - Code generation</p>
 <h3 id="the-pcfg-limitation">The PCFG Limitation</h3>
 <p><strong>Problem</strong>: Context-free means <strong>no context</strong>!</p>
 <p><strong>Example Failure</strong>:</p>
 <pre><code>Grammar allows:
-&quot;The dogs barks&quot;  ✗ (wrong number agreement)
+"The dogs barks"  ✗ (wrong number agreement)
 
 Why? Grammar rules are context-free:
 NP → Det N_plural  (probability)
@@ -637,13 +737,13 @@ Can't enforce: if NP is plural, VP must be plural
 </tr>
 </tbody>
 </table>
-<p><strong>When to Use PCFGs</strong>:<br />
-- Need structured output (syntax trees)<br />
-- Domain has explicit grammar (programming languages)<br />
+<p><strong>When to Use PCFGs</strong>:
+- Need structured output (syntax trees)
+- Domain has explicit grammar (programming languages)
 - Linguistic interpretability important</p>
-<p><strong>When to Use Our Framework</strong>:<br />
-- Need long-range context<br />
-- Sequential generation (no tree structure)<br />
+<p><strong>When to Use Our Framework</strong>:
+- Need long-range context
+- Sequential generation (no tree structure)
 - Mixed continuous/discrete data</p>
 <p><strong>Can We Combine Them?</strong></p>
 <p><strong>Yes!</strong> Our framework as PCFG alternative:</p>
@@ -653,36 +753,36 @@ Us:   Sample next token based on hashed context
 Hybrid: Use PCFG structure, Lévy process for rule probabilities
 </code></pre>
 <p>This is a promising research direction.</p>
-<hr />
+<hr/>
 <p><a name="4-math-advantages"></a></p>
-<h1 id="4-mathematical-advantages-of-our-framework">4. Mathematical Advantages of Our Framework</h1>
+
 <h2 id="41-provable-properties-lacking-in-classical-methods">4.1 Provable Properties (Lacking in Classical Methods)</h2>
 <h3 id="theorem-41-composition-closure">Theorem 4.1: Composition Closure</h3>
 <p><strong>Statement</strong>: If G₁ and G₂ are generators, then G₁ ∘ G₂ is a generator.</p>
-<p><strong>Classical Methods</strong>: <br />
-- N-grams: No composition defined<br />
-- PPM: Heuristic model combination<br />
-- HMMs: Product HMM is HMM, but state space multiplies (k₁ × k₂)<br />
+<p><strong>Classical Methods</strong>: 
+- N-grams: No composition defined
+- PPM: Heuristic model combination
+- HMMs: Product HMM is HMM, but state space multiplies (k₁ × k₂)
 - PAQ: Empirical mixing, no theoretical guarantee</p>
-<p><strong>Our Framework</strong>: <br />
-✓ Category theory guarantees closure<br />
-✓ Composition is associative<br />
+<p><strong>Our Framework</strong>: 
+✓ Category theory guarantees closure
+✓ Composition is associative
 ✓ State space stays fixed (hash compression)</p>
 <h3 id="theorem-42-convergence-rate">Theorem 4.2: Convergence Rate</h3>
 <p><strong>Statement</strong>: Parameter estimation converges at O(1/√n) rate.</p>
-<p><strong>Classical Methods</strong>:<br />
-- N-grams: ✓ Proven (MLE convergence)<br />
-- PPM: ✓ Proven (context tree weighting)<br />
-- HMMs: ✓ Proven (EM convergence)<br />
+<p><strong>Classical Methods</strong>:
+- N-grams: ✓ Proven (MLE convergence)
+- PPM: ✓ Proven (context tree weighting)
+- HMMs: ✓ Proven (EM convergence)
 - PAQ: ✗ No general proof (empirical only)</p>
 <p><strong>Our Framework</strong>: ✓ Proven (empirical process theory)</p>
 <p><strong>Advantage</strong>: Same convergence as best classical methods.</p>
 <h3 id="theorem-43-information-optimality">Theorem 4.3: Information Optimality</h3>
 <p><strong>Statement</strong>: Filtration removes only parameters with I(future; param) &lt; threshold.</p>
-<p><strong>Classical Methods</strong>:<br />
-- N-grams: Manual pruning (frequency cutoffs)<br />
-- PPM: Heuristic escape mechanism<br />
-- HMMs: No principled state reduction<br />
+<p><strong>Classical Methods</strong>:
+- N-grams: Manual pruning (frequency cutoffs)
+- PPM: Heuristic escape mechanism
+- HMMs: No principled state reduction
 - PAQ: Empirical model selection</p>
 <p><strong>Our Framework</strong>: ✓ Provably optimal (MDL + spectral theory)</p>
 <p><strong>Advantage</strong>: Automatic, provable parameter reduction.</p>
@@ -699,13 +799,13 @@ PCFGs:     Formal language theory
 Lévy Processes     →  Continuous/discrete unification
 Information Theory →  Optimal filtration
 </code></pre>
-<p><strong>Benefit</strong>: <br />
-- Learn one framework, apply everywhere<br />
-- Theoretical results transfer across domains<br />
+<p><strong>Benefit</strong>: 
+- Learn one framework, apply everywhere
+- Theoretical results transfer across domains
 - Can prove cross-domain properties</p>
-<hr />
+<hr/>
 <p><a name="5-performance"></a></p>
-<h1 id="5-performance-analysis">5. Performance Analysis</h1>
+
 <h2 id="51-context-length-comparison">5.1 Context Length Comparison</h2>
 <p><strong>Setup</strong>: English text modeling</p>
 <table>
@@ -837,9 +937,9 @@ Information Theory →  Optimal filtration
 </tr>
 </tbody>
 </table>
-<p><strong>Observations</strong>:<br />
-- N-grams fastest (simple lookup)<br />
-- Our framework: 10× slower than n-grams, but 200× longer context<br />
+<p><strong>Observations</strong>:
+- N-grams fastest (simple lookup)
+- Our framework: 10× slower than n-grams, but 200× longer context
 - PPM/PAQ slow (tree traversal, model mixing)</p>
 <p><strong>Conclusion</strong>: Good speed/context trade-off.</p>
 <h2 id="54-perplexity-comparison">5.4 Perplexity Comparison</h2>
@@ -885,19 +985,19 @@ Information Theory →  Optimal filtration
 </tr>
 </tbody>
 </table>
-<p><strong>Interpretation</strong>:<br />
-- Better than basic n-grams (longer context helps)<br />
-- Worse than neural networks (they have learned representations)<br />
-- Comparable to PPM (both use smart compression)<br />
+<p><strong>Interpretation</strong>:
+- Better than basic n-grams (longer context helps)
+- Worse than neural networks (they have learned representations)
+- Comparable to PPM (both use smart compression)
 - <strong>We trade 10% perplexity for mathematical guarantees</strong></p>
 <p><strong>Is This Trade-Off Worth It?</strong></p>
-<p>Depends on application:<br />
-- Safety-critical: YES (need guarantees)<br />
-- Benchmark chasing: NO (neural nets win)<br />
+<p>Depends on application:
+- Safety-critical: YES (need guarantees)
+- Benchmark chasing: NO (neural nets win)
 - Research/interpretability: YES (understand what's happening)</p>
-<hr />
+<hr/>
 <p><a name="6-recommendations"></a></p>
-<h1 id="6-when-to-use-what">6. When to Use What</h1>
+
 <h2 id="61-decision-matrix">6.1 Decision Matrix</h2>
 <table>
 <thead>
@@ -957,45 +1057,45 @@ Information Theory →  Optimal filtration
 </table>
 <h2 id="62-specific-application-recommendations">6.2 Specific Application Recommendations</h2>
 <h3 id="text-generation">Text Generation</h3>
-<p><strong>Short prompts (&lt;20 words)</strong>:<br />
-- Use: 5-grams with Kneser-Ney smoothing<br />
+<p><strong>Short prompts (&lt;20 words)</strong>:
+- Use: 5-grams with Kneser-Ney smoothing
 - Why: Simple, fast, proven</p>
-<p><strong>Long context (&gt;50 words)</strong>:<br />
-- Use: Our framework<br />
+<p><strong>Long context (&gt;50 words)</strong>:
+- Use: Our framework
 - Why: Classical methods can't handle this</p>
-<p><strong>Need guarantees</strong>:<br />
-- Use: Our framework<br />
+<p><strong>Need guarantees</strong>:
+- Use: Our framework
 - Why: Only option with proofs</p>
 <h3 id="compression">Compression</h3>
-<p><strong>Maximum ratio, any cost</strong>:<br />
-- Use: PAQ8 or modern variants<br />
+<p><strong>Maximum ratio, any cost</strong>:
+- Use: PAQ8 or modern variants
 - Why: State-of-the-art ratios</p>
-<p><strong>Fast compression</strong>:<br />
-- Use: PPM variants (PPMD)<br />
+<p><strong>Fast compression</strong>:
+- Use: PPM variants (PPMD)
 - Why: Good ratio, reasonable speed</p>
-<p><strong>Online compression</strong>:<br />
-- Use: PPM or our framework (can be adapted)<br />
+<p><strong>Online compression</strong>:
+- Use: PPM or our framework (can be adapted)
 - Why: Both support streaming</p>
 <h3 id="time-series">Time Series</h3>
-<p><strong>Discrete events only</strong>:<br />
-- Use: HMMs<br />
+<p><strong>Discrete events only</strong>:
+- Use: HMMs
 - Why: Natural fit, efficient</p>
-<p><strong>Continuous signals</strong>:<br />
-- Use: Our framework<br />
+<p><strong>Continuous signals</strong>:
+- Use: Our framework
 - Why: Lévy processes handle continuous data</p>
-<p><strong>Mixed discrete/continuous</strong>:<br />
-- Use: Our framework<br />
+<p><strong>Mixed discrete/continuous</strong>:
+- Use: Our framework
 - Why: Only unified approach</p>
 <h3 id="structured-generation">Structured Generation</h3>
-<p><strong>Parsing, syntax</strong>:<br />
-- Use: PCFGs<br />
+<p><strong>Parsing, syntax</strong>:
+- Use: PCFGs
 - Why: Built for structured output</p>
-<p><strong>Sequential with long context</strong>:<br />
-- Use: Our framework<br />
+<p><strong>Sequential with long context</strong>:
+- Use: Our framework
 - Why: Better context handling</p>
-<hr />
+<hr/>
 <p><a name="7-technical"></a></p>
-<h1 id="7-detailed-technical-comparison">7. Detailed Technical Comparison</h1>
+
 <h2 id="71-storage-complexity">7.1 Storage Complexity</h2>
 <p><strong>Mathematical Analysis</strong>:</p>
 <p><strong>N-grams (order n)</strong>:</p>
@@ -1147,9 +1247,9 @@ Legend:
 ★ Modern methods (neural nets, our framework)
 </code></pre>
 <p><strong>Observation</strong>: Our framework achieves neural-net-like context with classical-method memory.</p>
-<hr />
+<hr/>
 <p><a name="8-conclusion"></a></p>
-<h1 id="8-conclusion">8. Conclusion</h1>
+
 <h2 id="81-summary-table">8.1 Summary Table</h2>
 <table>
 <thead>
@@ -1208,57 +1308,57 @@ Legend:
 </tbody>
 </table>
 <h2 id="82-what-we-learned-from-classical-methods">8.2 What We Learned from Classical Methods</h2>
-<p><strong>Kept from Classical Era</strong>:<br />
-1. <strong>Mathematical rigor</strong> - No black boxes<br />
-2. <strong>Determinism</strong> - Reproducible results<br />
-3. <strong>Interpretability</strong> - Understand decisions<br />
+<p><strong>Kept from Classical Era</strong>:
+1. <strong>Mathematical rigor</strong> - No black boxes
+2. <strong>Determinism</strong> - Reproducible results
+3. <strong>Interpretability</strong> - Understand decisions
 4. <strong>Efficiency</strong> - Fast inference</p>
-<p><strong>Fixed from Classical Era</strong>:<br />
-1. <strong>State explosion</strong> - Hash compression<br />
-2. <strong>Context length</strong> - 200× improvement<br />
-3. <strong>Composability</strong> - Category theory<br />
+<p><strong>Fixed from Classical Era</strong>:
+1. <strong>State explosion</strong> - Hash compression
+2. <strong>Context length</strong> - 200× improvement
+3. <strong>Composability</strong> - Category theory
 4. <strong>Unification</strong> - Lévy processes</p>
 <h2 id="83-the-missing-piece">8.3 The Missing Piece</h2>
-<p><strong>What Classical Methods Had Right</strong>:<br />
-- Solid mathematical foundation<br />
-- Provable properties<br />
-- Interpretable models<br />
+<p><strong>What Classical Methods Had Right</strong>:
+- Solid mathematical foundation
+- Provable properties
+- Interpretable models
 - Deterministic behavior</p>
-<p><strong>What They Got Wrong</strong>:<br />
-- State representation (explicit vs compressed)<br />
-- Context length (fixed n vs arbitrary)<br />
+<p><strong>What They Got Wrong</strong>:
+- State representation (explicit vs compressed)
+- Context length (fixed n vs arbitrary)
 - Composability (none vs categorical)</p>
-<p><strong>Our Contribution</strong>:<br />
+<p><strong>Our Contribution</strong>:
 We kept the rigor and fixed the representation.</p>
 <h2 id="84-the-neural-network-question">8.4 The Neural Network Question</h2>
 <p><strong>"Why not just use neural networks?"</strong></p>
 <p><strong>Answer</strong>: Depends on your priorities.</p>
-<p><strong>Choose Neural Networks if</strong>:<br />
-- Maximum benchmark performance is critical<br />
-- Have massive compute budget<br />
-- Don't need interpretability<br />
-- Can tolerate non-determinism<br />
+<p><strong>Choose Neural Networks if</strong>:
+- Maximum benchmark performance is critical
+- Have massive compute budget
+- Don't need interpretability
+- Can tolerate non-determinism
 - Safety guarantees not required</p>
-<p><strong>Choose Our Framework if</strong>:<br />
-- Need mathematical guarantees<br />
-- Interpretability required<br />
-- Safety-critical application<br />
-- Want deterministic behavior<br />
-- Limited compute budget<br />
+<p><strong>Choose Our Framework if</strong>:
+- Need mathematical guarantees
+- Interpretability required
+- Safety-critical application
+- Want deterministic behavior
+- Limited compute budget
 - Need to compose modules</p>
-<p><strong>The Future</strong>: Hybrid systems<br />
-- Neural nets for representation learning<br />
-- Our framework for provable guarantees<br />
+<p><strong>The Future</strong>: Hybrid systems
+- Neural nets for representation learning
+- Our framework for provable guarantees
 - Best of both worlds</p>
 <h2 id="85-final-verdict">8.5 Final Verdict</h2>
 <p><strong>Classical methods (1980-2000)</strong> were mathematically beautiful but practically limited.</p>
 <p><strong>Neural networks (2012+)</strong> are practically powerful but mathematically opaque.</p>
-<p><strong>Our framework</strong> is the synthesis:<br />
-- Mathematical rigor of classical methods<br />
-- Context length of neural networks<br />
+<p><strong>Our framework</strong> is the synthesis:
+- Mathematical rigor of classical methods
+- Context length of neural networks
 - New capabilities neither had (composability, unification)</p>
 <p><strong>We stand on the shoulders of giants</strong>, combining 80 years of theory to solve the problems that limited the golden age of statistical NLP.</p>
-<hr />
+<hr/>
 <h2 id="appendix-a-historical-method-summaries">Appendix A: Historical Method Summaries</h2>
 <h3 id="a1-n-gram-models-shannon-1951">A.1 N-Gram Models (Shannon, 1951)</h3>
 <p><strong>Original Paper</strong>: Shannon, C.E. (1951). "Prediction and Entropy of Printed English"</p>
@@ -1285,45 +1385,45 @@ We kept the rigor and fixed the representation.</p>
 <p><strong>Why It Failed</strong>: Very slow, no theoretical guarantees, monolithic</p>
 <p><strong>Legacy</strong>: Inspired modern ensemble methods</p>
 <h3 id="a5-pcfgs-booth-1969-lari-young-1990">A.5 PCFGs (Booth, 1969; Lari &amp; Young, 1990)</h3>
-<p><strong>Key Papers</strong>: <br />
-- Booth, T.L. (1969). "Probabilistic Representation of Formal Languages"<br />
+<p><strong>Key Papers</strong>: 
+- Booth, T.L. (1969). "Probabilistic Representation of Formal Languages"
 - Lari, K. &amp; Young, S.J. (1990). "The Estimation of Stochastic Context-Free Grammars"</p>
 <p><strong>Key Insight</strong>: Grammar + probabilities = structured generation</p>
 <p><strong>Why It Worked</strong>: Captures linguistic structure</p>
 <p><strong>Why It Failed</strong>: Context-free = no long-range dependencies</p>
 <p><strong>Legacy</strong>: Still used in parsing, bioinformatics</p>
-<hr />
+<hr/>
 <h2 id="appendix-b-when-classical-methods-still-win">Appendix B: When Classical Methods Still Win</h2>
 <p>Despite our framework's advantages, classical methods remain superior in specific niches:</p>
 <h3 id="b1-ultra-fast-low-memory">B.1 Ultra-Fast, Low-Memory</h3>
 <p><strong>Winner</strong>: 2-grams or 3-grams</p>
-<p><strong>When</strong>: <br />
-- Embedded systems (limited RAM)<br />
-- Real-time typing prediction (phones)<br />
+<p><strong>When</strong>: 
+- Embedded systems (limited RAM)
+- Real-time typing prediction (phones)
 - Need microsecond response</p>
 <p><strong>Why</strong>: Can't beat a simple array lookup</p>
 <h3 id="b2-structured-parsing">B.2 Structured Parsing</h3>
 <p><strong>Winner</strong>: PCFGs + CYK algorithm</p>
-<p><strong>When</strong>:<br />
-- Parsing programming languages<br />
-- Grammar checking<br />
+<p><strong>When</strong>:
+- Parsing programming languages
+- Grammar checking
 - Need parse trees, not sequences</p>
 <p><strong>Why</strong>: Built for structure</p>
 <h3 id="b3-maximum-compression-ratio">B.3 Maximum Compression Ratio</h3>
 <p><strong>Winner</strong>: PAQ8 or zpaq</p>
-<p><strong>When</strong>:<br />
-- Archival (time doesn't matter)<br />
-- Maximum space savings<br />
+<p><strong>When</strong>:
+- Archival (time doesn't matter)
+- Maximum space savings
 - Static data (compress once)</p>
 <p><strong>Why</strong>: Empirically optimal, engineer-decades of optimization</p>
 <h3 id="b4-simple-proven-understood">B.4 Simple, Proven, Understood</h3>
 <p><strong>Winner</strong>: 3-grams with Kneser-Ney smoothing</p>
-<p><strong>When</strong>:<br />
-- Quick prototype<br />
-- Well-understood baseline<br />
+<p><strong>When</strong>:
+- Quick prototype
+- Well-understood baseline
 - Teaching/learning</p>
 <p><strong>Why</strong>: Textbook method, everyone knows it</p>
-<hr />
+<hr/>
 <h2 id="appendix-c-references">Appendix C: References</h2>
 <h3 id="classical-methods">Classical Methods</h3>
 <p>[1] Shannon, C.E. (1951). "Prediction and Entropy of Printed English." <em>Bell System Technical Journal</em>, 30(1), 50-64.</p>
@@ -1334,14 +1434,39 @@ We kept the rigor and fixed the representation.</p>
 <h3 id="comparison-studies">Comparison Studies</h3>
 <p>[6] Chen, S.F. &amp; Goodman, J. (1999). "An Empirical Study of Smoothing Techniques for Language Modeling." <em>Computer Speech &amp; Language</em>, 13(4), 359-394.</p>
 <p>[7] Mahoney, M. (2005). "Adaptive Weighing of Context Models for Lossless Data Compression." <em>Florida Tech Technical Report</em>.</p>
-<p>[8] Jurafsky, D. &amp; Martin, J.H. (2009). <em>Speech and Language Processing</em> (2nd ed.). Prentice Hall.<br />
+<p>[8] Jurafsky, D. &amp; Martin, J.H. (2009). <em>Speech and Language Processing</em> (2nd ed.). Prentice Hall.
 → Comprehensive overview of classical NLP methods</p>
-<hr />
+<hr/>
 <p><strong>END OF COMPARISON DOCUMENT</strong></p>
 <p><em>This analysis provides a fair, rigorous comparison between our framework and classical methods from 1980-2000, suitable for technical review and decision-making.</em></p>
-<p><strong>Version</strong>: 1.0<br />
-<strong>Date</strong>: January 30, 2026<br />
+<p><strong>Version</strong>: 1.0<br/>
+<strong>Date</strong>: January 30, 2026<br/>
 <strong>Status</strong>: Complete</p>
-  </main>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>Static archive · Regenerate with <code>python tools/build_github_pages.py</code></p>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.renderMathInElement) return;
+    var root = document.getElementById("main-content") || document.body;
+    renderMathInElement(root, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  });
+  </script>
+
 </body>
 </html>
