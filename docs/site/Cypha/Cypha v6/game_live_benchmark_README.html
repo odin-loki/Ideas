@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>game live benchmark README</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v6\game_live_benchmark_README.html</span>
+  </header>
+  <main class="prose">
+<p><strong>game_live_benchmark.py</strong></p>
+<p><em>Cypha HRNA Live Game Benchmark</em></p>
+<p>Chess   Poker   Go   against real opponents</p>
+<p>Technical Reference   February 2026</p>
+<h1 id="1-purpose"><strong>1. Purpose</strong></h1>
+<p>game_live_benchmark.py tests Cypha HRNA in actual game play against real opponents — not as a classifier, but as a player that learns a game and then competes. This is a fundamentally harder test than the classification benchmark. In classification, Cypha just needs to identify the correct label for a given position. Here, Cypha must make sequential decisions across an entire game, and a single bad move can cascade into a lost position.</p>
+<p>The benchmark covers three domains — Chess, Poker, and Go — each chosen for a specific reason. Chess tests whether Cypha can approximate the decisions of a world-class engine through pure behavioural cloning, with no lookahead of its own. Poker tests GTO (game-theory optimal) decision-making where correct play is determined by equity and pot odds rather than aesthetics. Go tests strategic position evaluation on a game where local moves have global consequences and the winning heuristic is genuinely subtle.</p>
+<p>Each domain follows the same pipeline: generate training data from a known-good source, train Cypha on that data, then let Cypha play against a real opponent and report results.</p>
+<p><strong>Domain</strong></p>
+<p><strong>Training source</strong></p>
+<p><strong>Test opponent</strong></p>
+<p><strong>Scoring</strong></p>
+<p><strong>Chess</strong></p>
+<p>Stockfish depth-18 self-play (200 games)</p>
+<p>Stockfish depth-20, skill 20 (maximum)</p>
+<p>Wins / Draws / Losses, score %</p>
+<p><strong>Poker</strong></p>
+<p>GTO-optimal actions via Monte Carlo equity (5,000 hands)</p>
+<p>Rule-based opponent</p>
+<p>Net chips, win rate</p>
+<p><strong>Go</strong></p>
+<p>Greedy bot self-play, winner credit assignment (500 games)</p>
+<p>Greedy territory bot</p>
+<p>Wins / Draws / Losses by final territory</p>
+<h1 id="2-setup-and-requirements"><strong>2. Setup and Requirements</strong></h1>
+<h2 id="21-python-dependencies"><strong>2.1  Python dependencies</strong></h2>
+<p>pip install python-chess treys numpy</p>
+<p># python-chess   chess board representation, move generation, Stockfish interface</p>
+<p># treys          hand evaluator for poker equity calculation</p>
+<p># numpy          Go board representation and scoring</p>
+<p>If python-chess is not installed, the Chess domain is silently skipped. If treys is not installed, the Poker domain is silently skipped. Go has no external dependencies and always runs.</p>
+<h2 id="22-stockfish"><strong>2.2  Stockfish</strong></h2>
+<p>Chess requires the Stockfish engine binary. Stockfish is a free, open-source chess engine and is the strongest chess program in the world. The benchmark uses it both to generate training data (self-play) and as the test opponent.</p>
+<p># Linux / WSL</p>
+<p>sudo apt install stockfish</p>
+<p># macOS</p>
+<p>brew install stockfish</p>
+<p># Windows or custom path</p>
+<p>export STOCKFISH_PATH=/path/to/stockfish</p>
+<p># or on Windows:</p>
+<p>set STOCKFISH_PATH=C:\path\to\stockfish.exe</p>
+<h2 id="23-cypha"><strong>2.3  Cypha</strong></h2>
+<p>Cypha.py must be in the same directory as game_live_benchmark.py. The benchmark imports CyphaStateful directly.</p>
+<p># Directory structure</p>
+<p>working_directory/</p>
+<pre><code>Cypha\.py
+
+game\_live\_benchmark\.py
+</code></pre>
+<p># Run</p>
+<p>python game_live_benchmark.py</p>
+<h1 id="3-configuration-reference"><strong>3. Configuration Reference</strong></h1>
+<p>All configuration is at the top of the file. Edit these constants before running.</p>
+<p><strong>Constant</strong></p>
+<p><strong>Default</strong></p>
+<p><strong>Meaning</strong></p>
+<p><strong>N_CHESS_TRAIN</strong></p>
+<p>200</p>
+<p>Number of Stockfish self-play games to generate training data from. More games = better training coverage but slower startup. Each game produces ~50-150 position pairs depending on game length.</p>
+<p><strong>N_CHESS_TEST</strong></p>
+<p>20</p>
+<p>Number of games Cypha plays against Stockfish. 20 games gives a reasonable statistical picture. Increase for more confidence.</p>
+<p><strong>CHESS_TRAIN_DEPTH</strong></p>
+<p>18</p>
+<p>Stockfish search depth for training game generation. Deeper = stronger moves = better training signal but much slower generation.</p>
+<p><strong>CHESS_TEST_DEPTH</strong></p>
+<p>20</p>
+<p>Stockfish search depth during the test games (when Stockfish plays Black). This is the opponent strength.</p>
+<p><strong>CHESS_SKILL</strong></p>
+<p>20</p>
+<p>Stockfish Skill Level 0-20. 20 is maximum strength. Reduce to make the test opponent weaker.</p>
+<p><strong>CHESS_NEG_SAMP</strong></p>
+<p>3</p>
+<p>How many non-optimal moves to label as 'other_move' per position. More negatives = sharper discrimination.</p>
+<p><strong>CHESS_MAX_MOVES</strong></p>
+<p>200</p>
+<p>Maximum moves per game before declaring a draw.</p>
+<p><strong>N_POKER_TRAIN</strong></p>
+<p>5000</p>
+<p>Number of complete hands dealt to generate training data. Each hand produces ~4 decision points (one per street).</p>
+<p><strong>N_POKER_TEST</strong></p>
+<p>200</p>
+<p>Hands Cypha plays against the rule-based opponent.</p>
+<p><strong>POKER_MC_ITERS</strong></p>
+<p>300</p>
+<p>Monte Carlo rollouts per equity calculation during training. More = more accurate equity but slower training data generation.</p>
+<p><strong>STARTING_STACK</strong></p>
+<p>1000</p>
+<p>Starting chip stack for each player in the test games.</p>
+<p><strong>BIG_BLIND</strong></p>
+<p>10</p>
+<p>Big blind size. Establishes the pot-odds baseline.</p>
+<p><strong>N_GO_TRAIN</strong></p>
+<p>500</p>
+<p>Greedy bot self-play games for Go training data.</p>
+<p><strong>N_GO_TEST</strong></p>
+<p>30</p>
+<p>Games Cypha plays against the greedy bot.</p>
+<p><strong>GO_SIZE</strong></p>
+<p>9</p>
+<p>Board size. 9x9 is the default. This is the standard small-board format.</p>
+<p><strong>GO_KOMI</strong></p>
+<p>6.5</p>
+<p>Komi (points added to White's score to compensate for Black's first-move advantage). 6.5 is standard for 9x9 Chinese rules.</p>
+<p><strong>STOCKFISH_PATH</strong></p>
+<p>stockfish</p>
+<p>Path to the Stockfish binary. Default assumes it is on PATH.</p>
+<h1 id="4-how-each-domain-works"><strong>4. How Each Domain Works</strong></h1>
+<h2 id="41-chess"><strong>4.1  Chess</strong></h2>
+<p><strong>The task</strong></p>
+<p>Chess is a two-player perfect-information game. The benchmark frames it as a binary classification problem: given a board position and a candidate move, is this the best move available (label: best_move) or not (label: other_move)? Cypha learns to recognise the signatures of strong moves. During play, it generates a feature string for each legal move and plays whichever one Cypha classifies as best_move with highest confidence.</p>
+<p><strong>Training data generation</strong></p>
+<p>Stockfish plays against itself at depth 18 for 200 games. Before each move, the engine analyses the position and returns the best move from its principal variation. This move is labelled best_move. Three other legal moves chosen at random are labelled other_move. This produces roughly 15,000-25,000 training pairs depending on average game length.</p>
+<p>Each (board, move) pair is converted to a feature token string. The features capture everything a human expert would consider: game phase, material balance, evaluation score, mobility advantage, king safety, pawn structure, and details of the move itself. The full feature set is:</p>
+<p><strong>phase</strong></p>
+<p>opening / middlegame / endgame_early / endgame_late, determined by move number and piece count</p>
+<p><strong>move number</strong></p>
+<p>Full move counter from the game</p>
+<p><strong>pieces</strong></p>
+<p>Total pieces remaining on the board</p>
+<p><strong>mat</strong></p>
+<p>Material difference in centipawns (pawn=100, knight=320, bishop=330, rook=500, queen=900)</p>
+<p><strong>eval</strong></p>
+<p>Stockfish evaluation bucket: winning/better/equal/worse/losing</p>
+<p><strong>mob</strong></p>
+<p>White mobility minus Black mobility (number of legal moves each side has)</p>
+<p><strong>ks_w / ks_b</strong></p>
+<p>King safety: how many enemy pieces are attacking the king</p>
+<p><strong>iso</strong></p>
+<p>Total isolated pawns for both sides</p>
+<p><strong>pass</strong></p>
+<p>White passed pawns (no enemy pawns blocking or adjacent on adjacent files ahead)</p>
+<p><strong>piece</strong></p>
+<p>Which piece is being moved (pawn/knight/bishop/rook/queen/king)</p>
+<p><strong>to_region_r</strong></p>
+<p>Where the piece is going: queenside/center/kingside, and rank number</p>
+<p><strong>cap</strong></p>
+<p>Whether the move captures a piece</p>
+<p><strong>chk</strong></p>
+<p>Whether the move gives check</p>
+<p><strong>cast</strong></p>
+<p>Whether the move is castling</p>
+<p><strong>bonus tokens</strong></p>
+<p>gives_check, king_exposed, endgame_kings, passed_pawns, mobility_advantage when applicable</p>
+<p>Games start from one of 20 hard-coded opening sequences (Ruy Lopez, Sicilian, Queen's Gambit, King's Indian, and others) to ensure variety in the training positions.</p>
+<p><strong>How Cypha picks its move during play</strong></p>
+<p>For every legal move on the board, Cypha generates its feature string and calls infer(). It plays whichever move receives the label best_move with the highest confidence score. If no move is classified as best_move, it falls back to a random legal move. Cypha uses a quick Stockfish analysis at depth 6 to get the current evaluation score, which it includes in the features — this is a lightweight real-time evaluation rather than full search.</p>
+<p><strong>The test opponent</strong></p>
+<p>Stockfish at depth 20, Skill Level 20. This is the strongest freely available chess engine at near-maximum strength. It essentially never makes a mistake. A win against this opponent is an exceptional result for a system with no explicit lookahead. Draws are a meaningful achievement. The benchmark is designed to measure how far pure pattern recognition can get against a search-based opponent.</p>
+<p><strong>Scoring</strong></p>
+<p>Win = 1 point, Draw = 0.5 points, Loss = 0 points. Score percentage is (wins + 0.5*draws) / games * 100. A score above 5% against Stockfish depth-20 is noteworthy. The move accuracy probe (run on a held-out 15% of training data) gives a separate measure of how well Cypha learned the labelling task.</p>
+<h2 id="42-poker"><strong>4.2  Poker</strong></h2>
+<p><strong>The task</strong></p>
+<p>Heads-up no-limit Texas Hold'em. Each player starts with 1000 chips. The game proceeds through four streets: preflop (no community cards), flop (3 cards), turn (4 cards), river (5 cards). At each street the active player must choose fold, call, or raise. The benchmark frames this as binary classification: given a game state, is the chosen action the GTO-optimal action (best_action) or not (other_action)?</p>
+<p><strong>GTO and equity</strong></p>
+<p>GTO stands for Game-Theory Optimal. In poker, a GTO strategy is one that cannot be exploited — playing it perfectly means no opponent strategy can win against you in the long run. The benchmark approximates GTO decisions using real Monte Carlo equity calculation: for a given hand and board, equity is the percentage of runouts where the hero's hand wins at showdown. This is computed by the treys library, which uses a fast lookup table to evaluate any 5-card hand.</p>
+<p>The GTO action rule is: raise if equity &gt;= 65%, raise if equity &gt;= 50% and pot odds &lt;= 33%, call if equity &gt;= 38% and pot odds &lt;= 25%, call for drawing hands (equity &gt;= 28%, pot odds &lt;= 25%, SPR &gt; 4, on flop), call if equity &gt;= 20% and pot odds &lt;= 15%, fold otherwise. Pot odds are computed as the bet size divided by total pot after calling. SPR (Stack-to-Pot Ratio) is the effective stack divided by the pot.</p>
+<p><strong>Training data generation</strong></p>
+<p>5,000 complete hands are dealt to showdown. At each street of each hand, the Monte Carlo equity is computed and the GTO action is determined. The GTO action is labelled best_action. The two non-optimal actions are labelled other_action. This produces roughly 20,000 training pairs. Each pair includes a rich feature string:</p>
+<p><strong>street</strong></p>
+<p>preflop / flop / turn / river</p>
+<p><strong>pos</strong></p>
+<p>Position: btn (button) or bb (big blind)</p>
+<p><strong>eq_bucket</strong></p>
+<p>Equity bucket: strong/ahead/marginal/behind/weak</p>
+<p><strong>equity</strong></p>
+<p>Exact equity percentage from Monte Carlo</p>
+<p><strong>pot</strong></p>
+<p>Current pot size (capped at 2000 for normalisation)</p>
+<p><strong>spr</strong></p>
+<p>Stack-to-pot ratio</p>
+<p><strong>pot_odds</strong></p>
+<p>Pot odds percentage for calling the standard bet</p>
+<p><strong>fold_eq</strong></p>
+<p>Fold equity: how often the opponent needs to fold for a bluff to be profitable</p>
+<p><strong>high / low</strong></p>
+<p>Ranks of the two hole cards</p>
+<p><strong>suited</strong></p>
+<p>Whether the hole cards are the same suit</p>
+<p><strong>connected</strong></p>
+<p>Whether the hole cards are within 2 ranks of each other</p>
+<p><strong>made</strong></p>
+<p>The best made hand on the current board (preflop, pair, two_pair, etc.)</p>
+<p><strong>stack_h</strong></p>
+<p>Hero stack size</p>
+<p><strong>board_cards</strong></p>
+<p>Number of community cards visible</p>
+<p><strong>bonus tokens</strong></p>
+<p>value_territory, bluff_territory, short_stack, connected_hole, suited_hole</p>
+<p><strong>How Cypha picks its action during play</strong></p>
+<p>Cypha generates a feature string for each possible action (fold, call, raise) and calls infer() on each. It chooses whichever action is classified as best_action with highest confidence. If no action reaches that label, it defaults to call. Monte Carlo equity is computed at reduced iteration count (200 vs 300 during training) to save time during play.</p>
+<p><strong>The test opponent</strong></p>
+<p>A rule-based player with fixed thresholds: raise if equity &gt;= 60%, call if equity &gt;= 40%, call if pot odds &lt; 15% and equity &gt;= 25%, otherwise fold. This opponent is predictable and exploitable — a Cypha model that learns pot odds and position correctly should be able to profit against it over 200 hands.</p>
+<p><strong>Scoring</strong></p>
+<p>Win rate (hands won at showdown or by opponent fold), net chips won or lost over 200 hands, and action accuracy (how often Cypha chose the GTO-optimal action on a held-out probe set). A positive net chip count indicates the strategy is winning. Win rate above 50% against the rule-based opponent indicates Cypha is successfully exploiting its predictable tendencies.</p>
+<h2 id="43-go"><strong>4.3  Go</strong></h2>
+<p><strong>The task</strong></p>
+<p>9x9 Go, Chinese rules with 6.5 komi for White. Go is a territory game played on a 9x9 grid. Players alternately place stones of their colour. A group of stones with no liberties (empty adjacent points) is captured and removed. The game ends when both players pass consecutively. The winner is determined by territory (empty points surrounded by one colour) plus stones on the board, with White receiving 6.5 komi points to compensate for Black's first-move advantage.</p>
+<p>The benchmark uses a pure-Python Go engine with full rule compliance: stone capture, ko rule (preventing immediate recapture), suicide prohibition (you cannot place a stone that would immediately have no liberties unless it captures), and superko detection (preventing repetition of any prior board state).</p>
+<p><strong>The Go engine</strong></p>
+<p>The GoBoard class implements all game logic. It stores the board as a numpy int8 array (0=empty, 1=Black, -1=White). Key methods:</p>
+<p><strong>is_legal(r, c, color)</strong></p>
+<p>Returns True if placing a stone of the given color at (row, col) is legal. Checks bounds, occupancy, ko point, and suicide rule.</p>
+<p><strong>place(r, c, color)</strong></p>
+<p>Places a stone, executes captures, updates ko point and superko history.</p>
+<p><strong>legal_moves(color)</strong></p>
+<p>Returns all legal (row, col) positions for a given colour.</p>
+<p><strong>score()</strong></p>
+<p>Computes Chinese scoring: flood-fills empty regions to assign territory, counts stones on board, adds komi. Returns (black_score, white_score, black_territory, white_territory).</p>
+<p><strong>_liberties(r, c)</strong></p>
+<p>BFS flood-fill to find the group containing (r,c) and count its liberties.</p>
+<p><strong>Training data generation</strong></p>
+<p>500 games are played between two greedy bots. The greedy bot evaluates each legal move using a simple score: +10 per opponent stone captured, +4 for putting an opponent group in atari (1 liberty), +1 per liberty the placed stone would have, minus a distance-from-center penalty, plus a small random tiebreak.</p>
+<p>After each game, the winner is determined by final territory count. All moves played by the winning side are labelled best_move. All moves played by the losing side are labelled other_move. This is credit assignment by game outcome — a simple but effective signal that Cypha should learn to play like the winner, not the loser.</p>
+<p>For each best_move in the training data, two random alternative legal moves are added as other_move examples. This ensures the training set has contrast: Cypha sees both what the winner played and what the winner could have played but did not.</p>
+<p>Each (board, move) pair is converted to a feature token string:</p>
+<p><strong>mv</strong></p>
+<p>Move number in the game</p>
+<p><strong>phase</strong></p>
+<p>opening (&lt;15 moves) / middle (15-60) / endgame (60-120) / yose (120+)</p>
+<p><strong>b_stones / w_stones / total</strong></p>
+<p>Stone counts for each colour</p>
+<p><strong>score</strong></p>
+<p>Current score bucket: b_winning/b_ahead/even/w_ahead/w_winning</p>
+<p><strong>b_terr / w_terr</strong></p>
+<p>Territory count for each colour at current position</p>
+<p><strong>move_row / move_col / region</strong></p>
+<p>Where the move is: corner/edge/center</p>
+<p><strong>own_libs</strong></p>
+<p>How many liberties the placed stone would have (capped at 8)</p>
+<p><strong>captures</strong></p>
+<p>How many opponent stones this move captures</p>
+<p><strong>opp_atari</strong></p>
+<p>How many adjacent opponent groups this move puts in atari</p>
+<p><strong>caps_b / caps_w</strong></p>
+<p>Running capture totals for each player</p>
+<p><strong>color</strong></p>
+<p>Whether Cypha is playing Black or White</p>
+<p><strong>bonus tokens</strong></p>
+<p>capturing_move, threatening_capture, safe_group, in_danger, center_play</p>
+<p><strong>How Cypha picks its move during play</strong></p>
+<p>Cypha is tested as Black. For each move, up to 20 candidate legal moves are sampled (to limit computation on the full 81-move board). Each candidate is scored via infer() and Cypha plays the one classified as best_move with highest confidence. If none are classified as best_move, Cypha falls back to the greedy bot heuristic.</p>
+<p><strong>The test opponent</strong></p>
+<p>The same greedy territory bot used for training game generation. It is locally strong — it always captures when possible and threatens atari — but it has no global strategic vision and no territory consolidation. Cypha's win condition is to learn the patterns of global territory control that the greedy bot misses.</p>
+<p><strong>Scoring</strong></p>
+<p>Win/Draw/Loss by final Chinese scoring (territory + stones + komi). Win rate is wins divided by games played. Each result is reported with the exact margin in points.</p>
+<h1 id="5-the-training-pipeline"><strong>5. The Training Pipeline</strong></h1>
+<p>All three domains use the same generic training function after data collection. The collected (feature_string, label) pairs are shuffled, and 85% are used for training with the remaining 15% reserved for the probe accuracy measurement.</p>
+<p>Training calls cypha._cypha.train_step(feature_string, label) for each pair. This is a single-pass online training loop — Cypha processes each example once and moves on. There is no second epoch, no validation-based early stopping, and no gradient computation. Each train_step updates the AnchorMemory store, the HippoCypha episodic memory, the TensorCentroid for the correct class, and runs LVQ2.1 boundary sharpening.</p>
+<p># Training loop (simplified)</p>
+<p>pairs = collect_training_data()</p>
+<p>random.shuffle(pairs)</p>
+<p>train_pairs  = pairs[:int(len(pairs)*0.85)]</p>
+<p>probe_pairs  = pairs[int(len(pairs)*0.85):]</p>
+<p>for feature_string, label in train_pairs:</p>
+<pre><code>cypha\.\_cypha\.train\_step\(feature\_string, label\)
+</code></pre>
+<p># Probe accuracy on held-out 15%</p>
+<p>for feature_string, label in random.sample(probe_pairs, 2000):</p>
+<pre><code>predicted\_label, confidence = cypha\.infer\(feature\_string\)
+</code></pre>
+<p>The probe accuracy report shows overall move accuracy, best_move/best_action recall (how often Cypha correctly identifies optimal moves), and other_move recall (how often Cypha correctly rejects non-optimal moves). A high other_move recall with slightly lower best_move recall is normal — there are typically 2-3 negative examples per positive, making negatives easier to recall.</p>
+<p><strong>Important</strong></p>
+<p>Each domain uses a completely separate CyphaStateful instance stored in a temporary checkpoint directory. Chess, Poker, and Go never share weights. This is essential — the feature vocabularies are completely different and sharing would produce garbage representations.</p>
+<h1 id="6-how-cypha-makes-decisions-during-play"><strong>6. How Cypha Makes Decisions During Play</strong></h1>
+<p>The decision logic is the same for all three games. For each possible action (move, action, or stone placement), Cypha generates the domain-specific feature string and calls infer(). The action with the highest confidence of being classified as best_move or best_action is chosen.</p>
+<p># Pseudocode for all three domains</p>
+<p>best_action = None</p>
+<p>best_confidence = -1.0</p>
+<p>for candidate in all_possible_actions:</p>
+<pre><code>features = domain\_feature\_extractor\(state, candidate\)
+
+label, confidence = cypha\.infer\(features\)
+
+if label == 'best\_move' and confidence &gt; best\_confidence:
+
+    best\_confidence = confidence
+
+    best\_action = candidate
+</code></pre>
+<p>if best_action is None:</p>
+<pre><code>best\_action = fallback\(\)   \# random legal move / greedy bot / call
+</code></pre>
+<p>This approach has a key property: Cypha never explicitly searches the game tree. It has no minimax, no alpha-beta, no rollouts. Every decision is made by pattern-matching the current state against learned representations of strong play. The GRIA deliberation engine inside Cypha handles ambiguous cases by running multi-stage ensemble methods, but none of these simulate future game states — they all operate within the feature space of the current position.</p>
+<p>For chess, this is the defining challenge. Stockfish wins games by searching 20 moves deep. Cypha wins games (if it does) by recognising the positional signature of a good move without any forward planning. The question the benchmark answers is: how much of chess skill is pattern recognition versus calculation?</p>
+<h1 id="7-output-format"><strong>7. Output Format</strong></h1>
+<p>The benchmark prints progress during training and testing, then produces a final summary report. Here is what each section means:</p>
+<p><strong>Training progress</strong></p>
+<p>Training Cypha-chess on 18,432 examples...</p>
+<p>18,432/18,432  4,211/s</p>
+<p>Training done: 4.4s  (0.24 ms/example)</p>
+<p>Shows training throughput in examples per second and total time. 0.24 ms/example is the expected cost for a full Cypha train_step including AnchorMemory updates and LVQ boundary sharpening.</p>
+<p><strong>Probe accuracy</strong></p>
+<p>[chess] Move accuracy: 87.3%  (best_recall=84.1%  other_recall=90.5%)</p>
+<p>Overall accuracy on 2,000 held-out training examples. best_recall is how often Cypha correctly identifies the optimal move. other_recall is how often Cypha correctly rejects a non-optimal move. This reflects training quality, not game strength — a high probe accuracy does not guarantee wins.</p>
+<p><strong>Chess test progress</strong></p>
+<p>game  1/20  1-0  [W=1 D=0 L=0]  142s</p>
+<p>game  2/20  0-1  [W=1 D=0 L=1]  289s</p>
+<p>game  3/20  1/2  [W=1 D=1 L=1]  401s</p>
+<p>Game-by-game results. 1-0 = White wins (Cypha wins), 0-1 = Black wins (Stockfish wins), 1/2 = draw. Running totals shown.</p>
+<p><strong>Poker test progress</strong></p>
+<p>hand  50/200  W=18 D=3 L=29  net=+124 chips  38s</p>
+<p>Running totals every 50 hands. Net chips is the running profit/loss from Cypha's perspective.</p>
+<p><strong>Go test progress</strong></p>
+<p>game  1/30  B+4.5  B=42.5 W=38.0  [W=1 D=0 L=0]  8s</p>
+<p>game  2/30  W+2.5  B=37.0 W=39.5  [W=1 D=0 L=1]  16s</p>
+<p>B+N.N means Black (Cypha) won by N.N points. W+N.N means White (greedy bot) won. B= and W= are the raw scores including komi.</p>
+<p><strong>Final summary</strong></p>
+<p>FINAL RESULTS — ALL GAMES</p>
+<p>CHESS  (Cypha White vs Stockfish depth 20 skill 20/20)</p>
+<pre><code> Move accuracy  : 87\.3%
+
+ Games played   : 20
+
+ Wins / Draws / Losses  : 2 / 3 / 15
+
+ Score \(W\+half D\)  : 3\.5 / 20  \(17\.5%\)
+
+ Results  : 0\-1 1\-0 1/2 \.\.\.
+</code></pre>
+<p>POKER  (Cypha vs rule-based opponent, 200 hands)</p>
+<pre><code> Action accuracy: 91\.2%
+
+ Hands played   : 200
+
+ Wins / Draws / Losses  : 88 / 12 / 100
+
+ Win rate       : 44\.0%
+
+ Net chips      : \+340
+</code></pre>
+<p>GO  (Cypha Black vs greedy White, 9x9 Chinese rules)</p>
+<pre><code> Move accuracy  : 79\.4%
+
+ Games played   : 30
+
+ Wins / Draws / Losses  : 22 / 0 / 8
+
+ Win rate       : 73\.3%
+</code></pre>
+<h1 id="8-interpreting-results"><strong>8. Interpreting Results</strong></h1>
+<p><strong>Chess: any wins</strong></p>
+<p>Exceptional. Stockfish at depth-20 skill-20 is close to perfect play. Any win by a pattern-matching system with no search tree is a significant result.</p>
+<p><strong>Chess: draws</strong></p>
+<p>Strong result. A draw against maximum-strength Stockfish means Cypha avoided losing material and found a solid position Stockfish could not break through.</p>
+<p><strong>Chess: score &gt; 10%</strong></p>
+<p>Cypha is finding genuinely strong moves and avoiding obvious blunders. Most systems without lookahead score under 5% against Stockfish at this level.</p>
+<p><strong>Poker: positive net chips</strong></p>
+<p>Cypha is making profitable decisions. The rule-based opponent is exploitable (it is too tight: folds equity &gt;= 60% but calls down with less), and a positive net shows Cypha has identified profitable bet/fold spots.</p>
+<p><strong>Poker: win rate ~44-50%</strong></p>
+<p>Expected range. Poker has high variance per hand. Win rate alone is less meaningful than net chips over 200 hands.</p>
+<p><strong>Poker: action accuracy &gt; 85%</strong></p>
+<p>Cypha has learned the GTO logic accurately. Equity and pot odds are well-represented in the feature space.</p>
+<p><strong>Go: win rate &gt; 60%</strong></p>
+<p>Cypha has learned meaningful territory patterns that outperform the greedy heuristic. The greedy bot is locally strong but strategically blind.</p>
+<p><strong>Go: win rate &gt; 80%</strong></p>
+<p>Cypha is consistently making globally superior moves. It has learned to consolidate territory rather than chase local exchanges.</p>
+<p><strong>Go: move accuracy</strong></p>
+<p>Lower than chess or poker because the credit assignment is noisy — the winner's moves were labelled good regardless of whether individual moves were optimal. Accuracy in the 70-85% range is normal and does not reflect game strength directly.</p>
+<h1 id="9-common-issues"><strong>9. Common Issues</strong></h1>
+<p>Stockfish not found: The benchmark will print 'ERROR: Stockfish not found at stockfish' and skip the chess domain. Install stockfish via apt/brew or set the STOCKFISH_PATH environment variable.</p>
+<p>python-chess not installed: The chess domain silently skips. Run: pip install python-chess</p>
+<p>treys not installed: The poker domain silently skips. Run: pip install treys</p>
+<p>Slow training data generation: Training data generation (especially chess at depth 18) can be slow on older hardware. Chess generates ~200 games at depth 18 — reduce N_CHESS_TRAIN or CHESS_TRAIN_DEPTH if it is too slow. Poker MC equity at 300 iterations per decision is the other bottleneck — reduce POKER_MC_ITERS to 100 for faster generation with slightly less accurate training labels.</p>
+<p>Chess games very short or all losses: Normal. Without lookahead, Cypha can fall into tactical traps that Stockfish exploits immediately. The interesting question is how many draws or wins emerge from the games where Cypha reaches a solid middlegame.</p>
+<h1 id="10-files-and-cleanup"><strong>10. Files and Cleanup</strong></h1>
+<p>Each Cypha instance creates a temporary checkpoint directory to persist its weights between training and testing. These directories are created in the system temporary folder with the prefix cypha_games_ and are automatically deleted at the end of the run via shutil.rmtree().</p>
+<p>If the benchmark crashes mid-run, temporary directories may be left behind. They can be safely deleted:</p>
+<p># Linux / macOS</p>
+<p>rm -rf /tmp/cypha_games_*</p>
+<p># Windows</p>
+<p>del /s /q %TEMP%\cypha_games_*</p>
+<p><em>game_live_benchmark.py   Cypha HRNA   February 2026   All rights reserved</em></p>
+  </main>
+</body>
+</html>

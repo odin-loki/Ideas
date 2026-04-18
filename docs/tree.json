@@ -1,0 +1,1358 @@
+{
+  "sections": [
+    {
+      "name": "100W Wideband Noise Generator",
+      "items": [
+        {
+          "title": "README",
+          "href": "site/100W%20Wideband%20Noise%20Generator/README.html"
+        }
+      ]
+    },
+    {
+      "name": "3 to 8 Value Boolean Algebra",
+      "items": [
+        {
+          "title": "boolean_research_paper",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/boolean_research_paper.html"
+        },
+        {
+          "title": "eight_var_digital_perfection",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/eight_var_digital_perfection.html"
+        },
+        {
+          "title": "five_var_boolean_frontier",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/five_var_boolean_frontier.html"
+        },
+        {
+          "title": "four_var_boolean_universe",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/four_var_boolean_universe.html"
+        },
+        {
+          "title": "seven_var_perfect_democracy",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/seven_var_perfect_democracy.html"
+        },
+        {
+          "title": "six_var_boolean_transcendence",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/six_var_boolean_transcendence.html"
+        },
+        {
+          "title": "three_var_boolean_analysis",
+          "href": "site/3%20to%208%20Value%20Boolean%20Algebra/three_var_boolean_analysis.html"
+        }
+      ]
+    },
+    {
+      "name": "ARIA Encryption Algorithm",
+      "items": [
+        {
+          "title": "ARIA_Research_Paper",
+          "href": "site/ARIA%20Encryption%20Algorithm/ARIA_Research_Paper.html"
+        },
+        {
+          "title": "ARIA_Specification",
+          "href": "site/ARIA%20Encryption%20Algorithm/ARIA_Specification.html"
+        }
+      ]
+    },
+    {
+      "name": "Ashby Optimiser",
+      "items": [
+        {
+          "title": "Multiscale_Homeostatic_Optimization",
+          "href": "site/Ashby%20Optimiser/Multiscale_Homeostatic_Optimization.html"
+        }
+      ]
+    },
+    {
+      "name": "Asset Tracking Algorithm",
+      "items": [
+        {
+          "title": "ARIA_INTEL_README",
+          "href": "site/Asset%20Tracking%20Algorithm/ARIA_INTEL_README.html"
+        },
+        {
+          "title": "ARIA_INTEL_Research_Paper",
+          "href": "site/Asset%20Tracking%20Algorithm/ARIA_INTEL_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Battle Sim",
+      "items": [
+        {
+          "title": "Battle Sim",
+          "href": "site/Battle%20Sim/Battle%20Sim.html"
+        }
+      ]
+    },
+    {
+      "name": "Beauty Products",
+      "items": [
+        {
+          "title": "Hemp_Harmony_Research_Paper",
+          "href": "site/Beauty%20Products/Hemp_Harmony_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Break AES",
+      "items": [
+        {
+          "title": "math-proof",
+          "href": "site/Break%20AES/math-proof.html"
+        }
+      ]
+    },
+    {
+      "name": "Cell AI",
+      "items": [
+        {
+          "title": "Cell AI v2 Intro",
+          "href": "site/Cell%20AI/Cell%20AI%20v2/Cell%20AI%20v2%20Intro.html"
+        },
+        {
+          "title": "Cell AI v2 Math Model",
+          "href": "site/Cell%20AI/Cell%20AI%20v2/Cell%20AI%20v2%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI v2 vs v1",
+          "href": "site/Cell%20AI/Cell%20AI%20v2/Cell%20AI%20v2%20vs%20v1.html"
+        },
+        {
+          "title": "CellAI NLP Math Model",
+          "href": "site/Cell%20AI/Cell%20AI%20v2/CellAI%20NLP%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI v3 Architecture",
+          "href": "site/Cell%20AI/Cell%20AI%20v3/Cell%20AI%20v3%20Architecture.html"
+        },
+        {
+          "title": "Cell AI v3 Math Model",
+          "href": "site/Cell%20AI/Cell%20AI%20v3/Cell%20AI%20v3%20Math%20Model.html"
+        },
+        {
+          "title": "Binary Encoder Math Model",
+          "href": "site/Cell%20AI/Cell%20AI/Binary%20Encoder%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI Advanced AI Techniques",
+          "href": "site/Cell%20AI/Cell%20AI/Cell%20AI%20Advanced%20AI%20Techniques.html"
+        },
+        {
+          "title": "Cell AI Math Model",
+          "href": "site/Cell%20AI/Cell%20AI/Cell%20AI%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI Math, Math Model",
+          "href": "site/Cell%20AI/Cell%20AI/Cell%20AI%20Math%2C%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI Parralell Model",
+          "href": "site/Cell%20AI/Cell%20AI/Cell%20AI%20Parralell%20Model.html"
+        },
+        {
+          "title": "CellAI NLP Math Model",
+          "href": "site/Cell%20AI/Cell%20AI/CellAI%20NLP%20Math%20Model.html"
+        },
+        {
+          "title": "CellAI Software Math Model",
+          "href": "site/Cell%20AI/Cell%20AI/CellAI%20Software%20Math%20Model.html"
+        },
+        {
+          "title": "Awnsered Questions",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Awnsered%20Questions.html"
+        },
+        {
+          "title": "Cell AI and Brain Comparision Reserach Outline",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Cell%20AI%20and%20Brain%20Comparision%20Reserach%20Outline.html"
+        },
+        {
+          "title": "Cell AI Explanation",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Cell%20AI%20Explanation.html"
+        },
+        {
+          "title": "Cell AI New NLP Techniques Explanation",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Cell%20AI%20New%20NLP%20Techniques%20Explanation.html"
+        },
+        {
+          "title": "Computational CellAi Research Pllan",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Computational%20CellAi%20Research%20Pllan.html"
+        },
+        {
+          "title": "Research Plan",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Research%20Plan.html"
+        },
+        {
+          "title": "Research Possibilitys",
+          "href": "site/Cell%20AI/Cell%20AI/Contracting/Research%20Possibilitys.html"
+        },
+        {
+          "title": "Multi Modal AI Explanations",
+          "href": "site/Cell%20AI/Cell%20AI/Multi%20Modal%20AI/Multi%20Modal%20AI%20Explanations.html"
+        },
+        {
+          "title": "Readme",
+          "href": "site/Cell%20AI/Cell%20AI/Readme.html"
+        },
+        {
+          "title": "README",
+          "href": "site/Cell%20AI/Cell%20AI/Thinking%20CoT/README.html"
+        },
+        {
+          "title": "research_paper",
+          "href": "site/Cell%20AI/Cell%20AI/Thinking%20CoT/research_paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Cocktails",
+      "items": [
+        {
+          "title": "accessible-fusion-menu",
+          "href": "site/Cocktails/accessible-fusion-menu.html"
+        },
+        {
+          "title": "aus-citrus-system",
+          "href": "site/Cocktails/aus-citrus-system.html"
+        },
+        {
+          "title": "base-preparations",
+          "href": "site/Cocktails/base-preparations.html"
+        },
+        {
+          "title": "basil-almond-cocktail",
+          "href": "site/Cocktails/basil-almond-cocktail.html"
+        },
+        {
+          "title": "bitters-system",
+          "href": "site/Cocktails/bitters-system.html"
+        },
+        {
+          "title": "coriander-smash",
+          "href": "site/Cocktails/coriander-smash.html"
+        },
+        {
+          "title": "global-fusion-menu",
+          "href": "site/Cocktails/global-fusion-menu.html"
+        },
+        {
+          "title": "hemp-citrus-cocktail",
+          "href": "site/Cocktails/hemp-citrus-cocktail.html"
+        },
+        {
+          "title": "hemp-mushroom-cocktail",
+          "href": "site/Cocktails/hemp-mushroom-cocktail.html"
+        },
+        {
+          "title": "master-bitters",
+          "href": "site/Cocktails/master-bitters.html"
+        },
+        {
+          "title": "menu-structure",
+          "href": "site/Cocktails/menu-structure.html"
+        },
+        {
+          "title": "mustard-spice-cocktail",
+          "href": "site/Cocktails/mustard-spice-cocktail.html"
+        },
+        {
+          "title": "prep-workflow",
+          "href": "site/Cocktails/prep-workflow.html"
+        },
+        {
+          "title": "savory-cream-soda",
+          "href": "site/Cocktails/savory-cream-soda.html"
+        },
+        {
+          "title": "truffle-avocado-cocktail",
+          "href": "site/Cocktails/truffle-avocado-cocktail.html"
+        },
+        {
+          "title": "umami-system",
+          "href": "site/Cocktails/umami-system.html"
+        }
+      ]
+    },
+    {
+      "name": "Compression Algorithms",
+      "items": [
+        {
+          "title": "compression_algebra_framework",
+          "href": "site/Compression%20Algorithms/compression_algebra_framework.html"
+        },
+        {
+          "title": "GRIA_framework_Research_Paper",
+          "href": "site/Compression%20Algorithms/GRIA/GRIA_framework_Research_Paper.html"
+        },
+        {
+          "title": "GRIA_Research_Paper",
+          "href": "site/Compression%20Algorithms/GRIA/GRIA_Research_Paper.html"
+        },
+        {
+          "title": "GRIA_Technical_Memorandum",
+          "href": "site/Compression%20Algorithms/GRIA_Technical_Memorandum.html"
+        },
+        {
+          "title": "izaac_algorithm_research_paper",
+          "href": "site/Compression%20Algorithms/izaac_algorithm_research_paper.html"
+        },
+        {
+          "title": "NMP_neural_compression_research_paper",
+          "href": "site/Compression%20Algorithms/NMP_neural_compression_research_paper.html"
+        },
+        {
+          "title": "NN_Compression_Algebra_Framework",
+          "href": "site/Compression%20Algorithms/NN_Compression_Algebra_Framework.html"
+        },
+        {
+          "title": "unified_compression_theory_research_paper",
+          "href": "site/Compression%20Algorithms/unified_compression_theory_research_paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Cypha",
+      "items": [
+        {
+          "title": "event-driven-math",
+          "href": "site/Cypha/Cypha%20V1/event-driven-math.html"
+        },
+        {
+          "title": "Cypha Architecture Explanation",
+          "href": "site/Cypha/Cypha%20v2/Cypha%20Architecture%20Explanation.html"
+        },
+        {
+          "title": "Cypha Math Framework",
+          "href": "site/Cypha/Cypha%20v2/Cypha%20Math%20Framework.html"
+        },
+        {
+          "title": "Cypha",
+          "href": "site/Cypha/Cypha%20v2/Cypha.html"
+        },
+        {
+          "title": "README_benchmark",
+          "href": "site/Cypha/Cypha%20v5/README_benchmark.html"
+        },
+        {
+          "title": "README_convert",
+          "href": "site/Cypha/Cypha%20v5/README_convert.html"
+        },
+        {
+          "title": "README_Cypha",
+          "href": "site/Cypha/Cypha%20v5/README_Cypha.html"
+        },
+        {
+          "title": "README_download",
+          "href": "site/Cypha/Cypha%20v5/README_download.html"
+        },
+        {
+          "title": "README_synthetic",
+          "href": "site/Cypha/Cypha%20v5/README_synthetic.html"
+        },
+        {
+          "title": "Cypha Encoder Math Proving",
+          "href": "site/Cypha/Cypha%20v6/Cypha%20Encoder%20Math%20Proving.html"
+        },
+        {
+          "title": "Cypha_README",
+          "href": "site/Cypha/Cypha%20v6/Cypha_README.html"
+        },
+        {
+          "title": "game_benchmark_README",
+          "href": "site/Cypha/Cypha%20v6/game_benchmark_README.html"
+        },
+        {
+          "title": "game_live_benchmark_README",
+          "href": "site/Cypha/Cypha%20v6/game_live_benchmark_README.html"
+        },
+        {
+          "title": "README_benchmark",
+          "href": "site/Cypha/Cypha%20v6/README_benchmark.html"
+        },
+        {
+          "title": "README_convert",
+          "href": "site/Cypha/Cypha%20v6/README_convert.html"
+        },
+        {
+          "title": "README_download",
+          "href": "site/Cypha/Cypha%20v6/README_download.html"
+        },
+        {
+          "title": "README_synthetic",
+          "href": "site/Cypha/Cypha%20v6/README_synthetic.html"
+        },
+        {
+          "title": "cypha Coding theory paper",
+          "href": "site/Cypha/Cypha%20v8/cypha%20Coding%20theory%20paper.html"
+        },
+        {
+          "title": "cypha Control theory paper",
+          "href": "site/Cypha/Cypha%20v8/cypha%20Control%20theory%20paper.html"
+        },
+        {
+          "title": "cypha Differential geometry (beyond Fisher\u2013Rao) paper",
+          "href": "site/Cypha/Cypha%20v8/cypha%20Differential%20geometry%20%28beyond%20Fisher%E2%80%93Rao%29%20paper.html"
+        },
+        {
+          "title": "cypha Dynamical systems (deeper \u2014 bifurcations, Arnold tongues, basin volumes) paper",
+          "href": "site/Cypha/Cypha%20v8/cypha%20Dynamical%20systems%20%28deeper%20%E2%80%94%20bifurcations%2C%20Arnold%20tongues%2C%20basin%20volumes%29%20paper.html"
+        },
+        {
+          "title": "cypha Tropical geometry paper",
+          "href": "site/Cypha/Cypha%20v8/cypha%20Tropical%20geometry%20paper.html"
+        },
+        {
+          "title": "cypha_Convex_analysis",
+          "href": "site/Cypha/Cypha%20v8/cypha_Convex_analysis.html"
+        },
+        {
+          "title": "cypha_galois_paper",
+          "href": "site/Cypha/Cypha%20v8/cypha_galois_paper.html"
+        },
+        {
+          "title": "cypha_Harmonic_analysis",
+          "href": "site/Cypha/Cypha%20v8/cypha_Harmonic_analysis.html"
+        },
+        {
+          "title": "cypha_markov",
+          "href": "site/Cypha/Cypha%20v8/cypha_markov.html"
+        },
+        {
+          "title": "cypha_persistent_homology",
+          "href": "site/Cypha/Cypha%20v8/cypha_persistent_homology.html"
+        },
+        {
+          "title": "cypha_Random_matrix_theory.",
+          "href": "site/Cypha/Cypha%20v8/cypha_Random_matrix_theory..html"
+        },
+        {
+          "title": "Cypha_Research_Paper",
+          "href": "site/Cypha/Cypha%20v8/Cypha_Research_Paper.html"
+        },
+        {
+          "title": "cypha_stat_mech",
+          "href": "site/Cypha/Cypha%20v8/cypha_stat_mech.html"
+        },
+        {
+          "title": "cypha_statpaper",
+          "href": "site/Cypha/Cypha%20v8/cypha_statpaper.html"
+        },
+        {
+          "title": "cypha_synthesis",
+          "href": "site/Cypha/Cypha%20v8/cypha_synthesis.html"
+        },
+        {
+          "title": "cypha_wasserstein",
+          "href": "site/Cypha/Cypha%20v8/cypha_wasserstein.html"
+        },
+        {
+          "title": "CyphaREADME",
+          "href": "site/Cypha/Cypha%20v8/CyphaREADME.html"
+        },
+        {
+          "title": "QUICK_START",
+          "href": "site/Cypha/Cypha%20vPattern%20Matching/QUICK_START.html"
+        },
+        {
+          "title": "README",
+          "href": "site/Cypha/Cypha%20vPattern%20Matching/README.html"
+        },
+        {
+          "title": "Brain Model Math Model",
+          "href": "site/Cypha/Prototypes/Brain%20Model%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI v2 Thinking Intro",
+          "href": "site/Cypha/Prototypes/Cell%20AI%20v2%20Thinking%20Intro.html"
+        },
+        {
+          "title": "Cell AI v2 Thinking Math Model",
+          "href": "site/Cypha/Prototypes/Cell%20AI%20v2%20Thinking%20Math%20Model.html"
+        },
+        {
+          "title": "Cell AI v3 Architecture",
+          "href": "site/Cypha/Prototypes/Cell%20AI%20v3%20Architecture.html"
+        },
+        {
+          "title": "Cell AI v3 Math Model",
+          "href": "site/Cypha/Prototypes/Cell%20AI%20v3%20Math%20Model.html"
+        }
+      ]
+    },
+    {
+      "name": "Diamond Batterys",
+      "items": [
+        {
+          "title": "advanced_diamond_battery_designs",
+          "href": "site/Diamond%20Batterys/advanced_diamond_battery_designs.html"
+        },
+        {
+          "title": "Advanced_Diamond_Battery_Designs_Research_Paper",
+          "href": "site/Diamond%20Batterys/Advanced_Diamond_Battery_Designs_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Diffusion Welding",
+      "items": [
+        {
+          "title": "COMPLETE_SYSTEM_1MIN_TO_99PCT",
+          "href": "site/Diffusion%20Welding/COMPLETE_SYSTEM_1MIN_TO_99PCT.html"
+        },
+        {
+          "title": "Hybrid_Bonding_System_Executive_Overview",
+          "href": "site/Diffusion%20Welding/Hybrid_Bonding_System_Executive_Overview.html"
+        },
+        {
+          "title": "UCDW_Defence_Aerospace_Technology_Transfer",
+          "href": "site/Diffusion%20Welding/UCDW_Defence_Aerospace_Technology_Transfer.html"
+        },
+        {
+          "title": "UCDW_Full_Spectrum_Research_Paper",
+          "href": "site/Diffusion%20Welding/UCDW_Full_Spectrum_Research_Paper.html"
+        },
+        {
+          "title": "Wartime_Manufacturing_ADF",
+          "href": "site/Diffusion%20Welding/Wartime_Manufacturing_ADF.html"
+        }
+      ]
+    },
+    {
+      "name": "Drugs",
+      "items": [
+        {
+          "title": "Combat Drug",
+          "href": "site/Drugs/Combat%20Drug.html"
+        },
+        {
+          "title": "Injectable Food",
+          "href": "site/Drugs/Injectable%20Food.html"
+        },
+        {
+          "title": "cognicline_CX2847_research_paper",
+          "href": "site/Drugs/Nootropics/cognicline_CX2847_research_paper.html"
+        },
+        {
+          "title": "cognicline_research",
+          "href": "site/Drugs/Nootropics/cognicline_research.html"
+        },
+        {
+          "title": "cognimax_pro_research_paper",
+          "href": "site/Drugs/Nootropics/cognimax_pro_research_paper.html"
+        },
+        {
+          "title": "cognitive_enhancement_for_those_on_antipsychotics",
+          "href": "site/Drugs/Nootropics/cognitive_enhancement_for_those_on_antipsychotics.html"
+        },
+        {
+          "title": "Paper1_GlycoDurP_NutriCompleteP_Injectable_Nutrition",
+          "href": "site/Drugs/Paper1_GlycoDurP_NutriCompleteP_Injectable_Nutrition.html"
+        },
+        {
+          "title": "Paper2_SugarBased_Injectable_Excipients",
+          "href": "site/Drugs/Paper2_SugarBased_Injectable_Excipients.html"
+        },
+        {
+          "title": "Paper3_Universal_Depot_Drug_Delivery_Systems",
+          "href": "site/Drugs/Paper3_Universal_Depot_Drug_Delivery_Systems.html"
+        },
+        {
+          "title": "Paper4_TriPhase_Depot_Performance_Enhancement",
+          "href": "site/Drugs/Paper4_TriPhase_Depot_Performance_Enhancement.html"
+        },
+        {
+          "title": "NeuroBridge-7",
+          "href": "site/Drugs/Schizophrenia%20Cure/NeuroBridge-7.html"
+        },
+        {
+          "title": "neurobridge7_research_paper",
+          "href": "site/Drugs/Schizophrenia%20Cure/neurobridge7_research_paper.html"
+        },
+        {
+          "title": "neurofoskin7_research_paper",
+          "href": "site/Drugs/Schizophrenia%20Cure/neurofoskin7_research_paper.html"
+        },
+        {
+          "title": "neurofoskin_7_complete",
+          "href": "site/Drugs/Schizophrenia%20Cure/neurofoskin_7_complete.html"
+        },
+        {
+          "title": "neurofoskin_7_synthesis",
+          "href": "site/Drugs/Schizophrenia%20Cure/neurofoskin_7_synthesis.html"
+        },
+        {
+          "title": "neuroreset7",
+          "href": "site/Drugs/Schizophrenia%20Cure/neuroreset7.html"
+        },
+        {
+          "title": "neuroreset7_research_paper",
+          "href": "site/Drugs/Schizophrenia%20Cure/neuroreset7_research_paper.html"
+        },
+        {
+          "title": "universal_drug_depot_guide",
+          "href": "site/Drugs/universal_drug_depot_guide.html"
+        }
+      ]
+    },
+    {
+      "name": "dual-license-setup.md",
+      "items": [
+        {
+          "title": "dual-license-setup",
+          "href": "site/dual-license-setup.html"
+        }
+      ]
+    },
+    {
+      "name": "Economics",
+      "items": [
+        {
+          "title": "Energy_Resource_Economic_Model",
+          "href": "site/Economics/Energy_Resource_Economic_Model.html"
+        },
+        {
+          "title": "EREM_Explained_Paper",
+          "href": "site/Economics/EREM_Explained_Paper.html"
+        },
+        {
+          "title": "EREM_Research_Paper",
+          "href": "site/Economics/EREM_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Electromechnical Inspired Algorithms",
+      "items": [
+        {
+          "title": "babbage_difference_engine_algorithm",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/babbage_difference_engine_algorithm.html"
+        },
+        {
+          "title": "complete_military_antikythera_specification",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/complete_military_antikythera_specification.html"
+        },
+        {
+          "title": "paper1_babbage_difference_engine",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/paper1_babbage_difference_engine.html"
+        },
+        {
+          "title": "paper2_military_antikythera",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/paper2_military_antikythera.html"
+        },
+        {
+          "title": "paper3_torpedo_data_computer",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/paper3_torpedo_data_computer.html"
+        },
+        {
+          "title": "tdc_complete_documentation",
+          "href": "site/Electromechnical%20Inspired%20Algorithms/tdc_complete_documentation.html"
+        }
+      ]
+    },
+    {
+      "name": "Filtering",
+      "items": [
+        {
+          "title": "GH_SR_IMM_Paper",
+          "href": "site/Filtering/GH_SR_IMM_Paper.html"
+        },
+        {
+          "title": "GH_SR_IMM_Research_Paper",
+          "href": "site/Filtering/GH_SR_IMM_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Fungal Network Algorithm",
+      "items": [
+        {
+          "title": "Fungal NA Intro",
+          "href": "site/Fungal%20Network%20Algorithm/Fungal%20Network%20v1/Fungal%20NA%20Intro.html"
+        },
+        {
+          "title": "Fungal NA Math Model",
+          "href": "site/Fungal%20Network%20Algorithm/Fungal%20Network%20v1/Fungal%20NA%20Math%20Model.html"
+        },
+        {
+          "title": "Fungal NA Parralell Math Model",
+          "href": "site/Fungal%20Network%20Algorithm/Fungal%20Network%20v1/Fungal%20NA%20Parralell%20Math%20Model.html"
+        }
+      ]
+    },
+    {
+      "name": "General Math Papers",
+      "items": [
+        {
+          "title": "lcrp_paper",
+          "href": "site/General%20Math%20Papers/lcrp_paper.html"
+        }
+      ]
+    },
+    {
+      "name": "GF2 Algebra and Applications",
+      "items": [
+        {
+          "title": "paper1_binary_algebra_taxonomy",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper1_binary_algebra_taxonomy.html"
+        },
+        {
+          "title": "paper2_permutation_polynomials",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper2_permutation_polynomials.html"
+        },
+        {
+          "title": "paper3_neural_networks_graded_contractions",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper3_neural_networks_graded_contractions.html"
+        },
+        {
+          "title": "paper4_edge_of_chaos",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper4_edge_of_chaos.html"
+        },
+        {
+          "title": "paper5_circuit_simplification",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper5_circuit_simplification.html"
+        },
+        {
+          "title": "paper6_dlgn_validation",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper6_dlgn_validation.html"
+        },
+        {
+          "title": "paper7_synthesis",
+          "href": "site/GF2%20Algebra%20and%20Applications/paper7_synthesis.html"
+        }
+      ]
+    },
+    {
+      "name": "GM Enhancements",
+      "items": [
+        {
+          "title": "HSA_Protocol_v4",
+          "href": "site/GM%20Enhancements/HSA_Protocol_v4.html"
+        },
+        {
+          "title": "HSA_Research_Paper_v1",
+          "href": "site/GM%20Enhancements/HSA_Research_Paper_v1.html"
+        }
+      ]
+    },
+    {
+      "name": "Izaac as Side Data",
+      "items": [
+        {
+          "title": "izaac_paper1_theoretical",
+          "href": "site/Izaac%20as%20Side%20Data/izaac_paper1_theoretical.html"
+        },
+        {
+          "title": "izaac_paper2_applications",
+          "href": "site/Izaac%20as%20Side%20Data/izaac_paper2_applications.html"
+        }
+      ]
+    },
+    {
+      "name": "Long Reasoning and Thinking NN",
+      "items": [
+        {
+          "title": "Implementation_README",
+          "href": "site/Long%20Reasoning%20and%20Thinking%20NN/Implementation_README.html"
+        },
+        {
+          "title": "IMPLEMENTATION_SUMMARY",
+          "href": "site/Long%20Reasoning%20and%20Thinking%20NN/IMPLEMENTATION_SUMMARY.html"
+        },
+        {
+          "title": "UHPM_Research_Paper",
+          "href": "site/Long%20Reasoning%20and%20Thinking%20NN/UHPM_Research_Paper.html"
+        },
+        {
+          "title": "unified_hash_predictive_framework",
+          "href": "site/Long%20Reasoning%20and%20Thinking%20NN/unified_hash_predictive_framework.html"
+        }
+      ]
+    },
+    {
+      "name": "Math Question Generator",
+      "items": [
+        {
+          "title": "mathgen research paper",
+          "href": "site/Math%20Question%20Generator/mathgen%20research%20paper.html"
+        }
+      ]
+    },
+    {
+      "name": "modified-license.md",
+      "items": [
+        {
+          "title": "modified-license",
+          "href": "site/modified-license.html"
+        }
+      ]
+    },
+    {
+      "name": "Neural Dust",
+      "items": [
+        {
+          "title": "NQD_Neural_Quantum_Dust_Architecture",
+          "href": "site/Neural%20Dust/NQD_Neural_Quantum_Dust_Architecture.html"
+        }
+      ]
+    },
+    {
+      "name": "New Classes of Electrical Components",
+      "items": [
+        {
+          "title": "complete_hybrid_components_catalog",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/complete_hybrid_components_catalog.html"
+        },
+        {
+          "title": "discrete_continuous_hybrid_components",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/discrete_continuous_hybrid_components.html"
+        },
+        {
+          "title": "hybrid_component_fabrication_guide",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_component_fabrication_guide.html"
+        },
+        {
+          "title": "hybrid_component_simulation",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_component_simulation.html"
+        },
+        {
+          "title": "hybrid_components_mathematics_physics",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_components_mathematics_physics.html"
+        },
+        {
+          "title": "hybrid_research_papers",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_research_papers.html"
+        },
+        {
+          "title": "hybrid_simulation_master",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_master.html"
+        },
+        {
+          "title": "hybrid_simulation_phase1",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_phase1.html"
+        },
+        {
+          "title": "hybrid_simulation_phase2",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_phase2.html"
+        },
+        {
+          "title": "hybrid_simulation_phase3",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_phase3.html"
+        },
+        {
+          "title": "hybrid_simulation_phase4",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_phase4.html"
+        },
+        {
+          "title": "hybrid_simulation_phase5",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/hybrid_simulation_phase5.html"
+        },
+        {
+          "title": "HybridSim_FullVerification_AllPhases",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/HybridSim_FullVerification_AllPhases.html"
+        },
+        {
+          "title": "Phase4_Verification_Report",
+          "href": "site/New%20Classes%20of%20Electrical%20Components/Phase4_Verification_Report.html"
+        }
+      ]
+    },
+    {
+      "name": "NN Shortcuts",
+      "items": [
+        {
+          "title": "algebraic_autopsy",
+          "href": "site/NN%20Shortcuts/algebraic_autopsy.html"
+        },
+        {
+          "title": "algebraic_autopsy_paper",
+          "href": "site/NN%20Shortcuts/algebraic_autopsy_paper.html"
+        },
+        {
+          "title": "sgf_paper",
+          "href": "site/NN%20Shortcuts/sgf_paper.html"
+        },
+        {
+          "title": "SGF_Paper_StreamingGeometryFramework",
+          "href": "site/NN%20Shortcuts/SGF_Paper_StreamingGeometryFramework.html"
+        }
+      ]
+    },
+    {
+      "name": "Physics",
+      "items": [
+        {
+          "title": "NLFGN_UFT_Research_Paper",
+          "href": "site/Physics/NLFGN_UFT_Research_Paper.html"
+        },
+        {
+          "title": "Non Local Theory of Gravity and Unified Field Theory",
+          "href": "site/Physics/Non%20Local%20Theory%20of%20Gravity%20and%20Unified%20Field%20Theory.html"
+        },
+        {
+          "title": "Superluminal_Recession_Paper",
+          "href": "site/Physics/Superluminal_Recession_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Prime Number Generator",
+      "items": [
+        {
+          "title": "ALGORITHM_DERIVATION",
+          "href": "site/Prime%20Number%20Generator/ALGORITHM_DERIVATION.html"
+        },
+        {
+          "title": "COMPLETE_PRIME_METAPATTERN_RESEARCH",
+          "href": "site/Prime%20Number%20Generator/COMPLETE_PRIME_METAPATTERN_RESEARCH.html"
+        },
+        {
+          "title": "Paper1_PrimeMetaPattern_Theory",
+          "href": "site/Prime%20Number%20Generator/Paper1_PrimeMetaPattern_Theory.html"
+        },
+        {
+          "title": "Paper2_MetaPattern_Algorithm",
+          "href": "site/Prime%20Number%20Generator/Paper2_MetaPattern_Algorithm.html"
+        }
+      ]
+    },
+    {
+      "name": "Quantum Diamond Wafer",
+      "items": [
+        {
+          "title": "paper1_QDMP_framework",
+          "href": "site/Quantum%20Diamond%20Wafer/paper1_QDMP_framework.html"
+        },
+        {
+          "title": "paper2_CVD_quantum_pathways",
+          "href": "site/Quantum%20Diamond%20Wafer/paper2_CVD_quantum_pathways.html"
+        },
+        {
+          "title": "qdmp_summary",
+          "href": "site/Quantum%20Diamond%20Wafer/qdmp_summary.html"
+        }
+      ]
+    },
+    {
+      "name": "RNGS",
+      "items": [
+        {
+          "title": "optimized_transcendental_lcg_spec",
+          "href": "site/RNGS/Boolean%20RNG/optimized_transcendental_lcg_spec.html"
+        },
+        {
+          "title": "Transcendental_LCG_Implementation_Paper",
+          "href": "site/RNGS/Boolean%20RNG/Transcendental_LCG_Implementation_Paper.html"
+        },
+        {
+          "title": "Transcendental_LCG_Theory_Paper",
+          "href": "site/RNGS/Boolean%20RNG/Transcendental_LCG_Theory_Paper.html"
+        },
+        {
+          "title": "chaos_readme",
+          "href": "site/RNGS/Chaotic%20RNG/chaos_readme.html"
+        },
+        {
+          "title": "synerchaos_research_paper",
+          "href": "site/RNGS/Chaotic%20RNG/synerchaos_research_paper.html"
+        },
+        {
+          "title": "DAG RNG Intro",
+          "href": "site/RNGS/DAG%20RNG/DAG%20RNG%20Intro.html"
+        },
+        {
+          "title": "DAG RNG Math Model",
+          "href": "site/RNGS/DAG%20RNG/DAG%20RNG%20Math%20Model.html"
+        },
+        {
+          "title": "Meta_DAG_RNG_Research_Paper",
+          "href": "site/RNGS/DAG%20RNG/Meta_DAG_RNG_Research_Paper.html"
+        },
+        {
+          "title": "README",
+          "href": "site/RNGS/Turbelent%20Flow%20RNG/README.html"
+        },
+        {
+          "title": "TurbulentFlow_RNG_Research_Paper",
+          "href": "site/RNGS/Turbelent%20Flow%20RNG/TurbulentFlow_RNG_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Rockwall 50 to 70 Carbide",
+      "items": [
+        {
+          "title": "Forge_to_Machine_Defence_Analysis",
+          "href": "site/Rockwall%2050%20to%2070%20Carbide/Forge_to_Machine_Defence_Analysis.html"
+        },
+        {
+          "title": "ForgeMachine_Research_Paper",
+          "href": "site/Rockwall%2050%20to%2070%20Carbide/ForgeMachine_Research_Paper.html"
+        },
+        {
+          "title": "HX70_Research_Paper",
+          "href": "site/Rockwall%2050%20to%2070%20Carbide/HX70_Research_Paper.html"
+        },
+        {
+          "title": "HX70_Sintered_Carbide_Design_Spec",
+          "href": "site/Rockwall%2050%20to%2070%20Carbide/HX70_Sintered_Carbide_Design_Spec.html"
+        }
+      ]
+    },
+    {
+      "name": "Statistical Generation",
+      "items": [
+        {
+          "title": "classical_methods_comparison",
+          "href": "site/Statistical%20Generation/classical_methods_comparison.html"
+        },
+        {
+          "title": "complete_math_proof_document",
+          "href": "site/Statistical%20Generation/complete_math_proof_document.html"
+        },
+        {
+          "title": "paper1_categorical_levy_framework",
+          "href": "site/Statistical%20Generation/paper1_categorical_levy_framework.html"
+        },
+        {
+          "title": "paper2_state_explosion_hash_compression",
+          "href": "site/Statistical%20Generation/paper2_state_explosion_hash_compression.html"
+        },
+        {
+          "title": "Python_examples_README",
+          "href": "site/Statistical%20Generation/Python_examples_README.html"
+        },
+        {
+          "title": "Statistical Generation",
+          "href": "site/Statistical%20Generation/Statistical%20Generation.html"
+        },
+        {
+          "title": "universal_generator_theory_verified",
+          "href": "site/Statistical%20Generation/universal_generator_theory_verified.html"
+        }
+      ]
+    },
+    {
+      "name": "Statistical Scheduler",
+      "items": [
+        {
+          "title": "paper",
+          "href": "site/Statistical%20Scheduler/paper.html"
+        },
+        {
+          "title": "README",
+          "href": "site/Statistical%20Scheduler/README.html"
+        }
+      ]
+    },
+    {
+      "name": "UCN AIs",
+      "items": [
+        {
+          "title": "APN Math Model",
+          "href": "site/UCN%20AIs/APN%20Math%20Model.html"
+        },
+        {
+          "title": "APN Summary",
+          "href": "site/UCN%20AIs/APN%20Summary.html"
+        },
+        {
+          "title": "GPN Math Model",
+          "href": "site/UCN%20AIs/GPN%20Math%20Model.html"
+        },
+        {
+          "title": "GPN Summary",
+          "href": "site/UCN%20AIs/GPN%20Summary.html"
+        },
+        {
+          "title": "Linear Congruent Definition",
+          "href": "site/UCN%20AIs/Linear%20Congruent%20Definition.html"
+        },
+        {
+          "title": "Linear Gradient Descent Definition",
+          "href": "site/UCN%20AIs/Linear%20Gradient%20Descent%20Definition.html"
+        },
+        {
+          "title": "Signal AI Math Model",
+          "href": "site/UCN%20AIs/Signal%20AI%20Math%20Model.html"
+        }
+      ]
+    },
+    {
+      "name": "UCN Political System",
+      "items": [
+        {
+          "title": "australias_invisible_constitution",
+          "href": "site/UCN%20Political%20System/australias_invisible_constitution.html"
+        },
+        {
+          "title": "EREM_Explained_Paper",
+          "href": "site/UCN%20Political%20System/EREM_Explained_Paper.html"
+        },
+        {
+          "title": "EREM_Research_Paper",
+          "href": "site/UCN%20Political%20System/EREM_Research_Paper.html"
+        },
+        {
+          "title": "Sovereign_Digital_Currency_Research_Paper",
+          "href": "site/UCN%20Political%20System/Sovereign_Digital_Currency_Research_Paper.html"
+        },
+        {
+          "title": "UCN_Economics_EREM",
+          "href": "site/UCN%20Political%20System/UCN_Economics_EREM.html"
+        },
+        {
+          "title": "UCN_Paper1_Framework",
+          "href": "site/UCN%20Political%20System/UCN_Paper1_Framework.html"
+        },
+        {
+          "title": "UCN_Paper2_Economic",
+          "href": "site/UCN%20Political%20System/UCN_Paper2_Economic.html"
+        },
+        {
+          "title": "UCN_Paper3_Defense",
+          "href": "site/UCN%20Political%20System/UCN_Paper3_Defense.html"
+        },
+        {
+          "title": "UCN_Paper4_Social",
+          "href": "site/UCN%20Political%20System/UCN_Paper4_Social.html"
+        },
+        {
+          "title": "UCN_Paper5_Research",
+          "href": "site/UCN%20Political%20System/UCN_Paper5_Research.html"
+        },
+        {
+          "title": "UCN_Paper6_Governance",
+          "href": "site/UCN%20Political%20System/UCN_Paper6_Governance.html"
+        },
+        {
+          "title": "UCN_Paper7_International",
+          "href": "site/UCN%20Political%20System/UCN_Paper7_International.html"
+        },
+        {
+          "title": "UCN_Paper8_Roadmap",
+          "href": "site/UCN%20Political%20System/UCN_Paper8_Roadmap.html"
+        },
+        {
+          "title": "United Commonwealth",
+          "href": "site/UCN%20Political%20System/United%20Commonwealth.html"
+        }
+      ]
+    },
+    {
+      "name": "VDJ Inspired Algorithm",
+      "items": [
+        {
+          "title": "README",
+          "href": "site/VDJ%20Inspired%20Algorithm/README.html"
+        },
+        {
+          "title": "VDJ_Research_Paper",
+          "href": "site/VDJ%20Inspired%20Algorithm/VDJ_Research_Paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Veritas",
+      "items": [
+        {
+          "title": "veritas-complete-math-proving",
+          "href": "site/Veritas/veritas-complete-math-proving.html"
+        },
+        {
+          "title": "veritas_research_paper",
+          "href": "site/Veritas/veritas_research_paper.html"
+        }
+      ]
+    },
+    {
+      "name": "Weapons",
+      "items": [
+        {
+          "title": "140mm Advanced Multi-Effect Tank Round",
+          "href": "site/Weapons/140mm%20Advanced%20Multi-Effect%20Tank%20Round.html"
+        },
+        {
+          "title": "15.2mm Anti-Tank Sniper System",
+          "href": "site/Weapons/15.2mm%20Anti-Tank%20Sniper%20System.html"
+        },
+        {
+          "title": "57mm Advanced Mechanical Autocannon System",
+          "href": "site/Weapons/57mm%20Advanced%20Mechanical%20Autocannon%20System.html"
+        },
+        {
+          "title": "57mm Enhanced Dual-Purpose System Mortor and RPG",
+          "href": "site/Weapons/57mm%20Enhanced%20Dual-Purpose%20System%20Mortor%20and%20RPG.html"
+        },
+        {
+          "title": "57mm Underbarrel Grenade Round",
+          "href": "site/Weapons/57mm%20Underbarrel%20Grenade%20Round.html"
+        },
+        {
+          "title": "Advanced Protective Equipment System Specification",
+          "href": "site/Weapons/Advanced%20Protective%20Equipment%20System%20Specification.html"
+        },
+        {
+          "title": "Aluminium Alloys for Armour",
+          "href": "site/Weapons/Aluminium%20Alloys%20for%20Armour.html"
+        },
+        {
+          "title": "Caseless Bullets_README",
+          "href": "site/Weapons/Caseless%20Bullets_README.html"
+        },
+        {
+          "title": "CL-20 HE Readme",
+          "href": "site/Weapons/CL-20%20High%20Explosive/CL-20%20HE%20Readme.html"
+        },
+        {
+          "title": "Proteinated_CL20_Safe_Explosive_Paper",
+          "href": "site/Weapons/CL-20%20High%20Explosive/Proteinated_CL20_Safe_Explosive_Paper.html"
+        },
+        {
+          "title": "Combat Drug",
+          "href": "site/Weapons/Combat%20Drug.html"
+        },
+        {
+          "title": "Hypothetical Body Armour",
+          "href": "site/Weapons/Hypothetical%20Body%20Armour.html"
+        },
+        {
+          "title": "Hypothetical_secret_service_suit_specs",
+          "href": "site/Weapons/Hypothetical_secret_service_suit_specs.html"
+        },
+        {
+          "title": "Injectable Food",
+          "href": "site/Weapons/Injectable%20Food.html"
+        },
+        {
+          "title": "military_command_military_doctrine",
+          "href": "site/Weapons/military_command_military_doctrine.html"
+        },
+        {
+          "title": "military_hearing_protection_systems",
+          "href": "site/Weapons/military_hearing_protection_systems.html"
+        },
+        {
+          "title": "Paper11_TACS_System",
+          "href": "site/Weapons/Millitary%20Noise%20Cancellation/Paper11_TACS_System.html"
+        },
+        {
+          "title": "Paper12_TACS_Energy_Physics",
+          "href": "site/Weapons/Millitary%20Noise%20Cancellation/Paper12_TACS_Energy_Physics.html"
+        },
+        {
+          "title": "TACS_Complete_Specification",
+          "href": "site/Weapons/Millitary%20Noise%20Cancellation/TACS_Complete_Specification.html"
+        },
+        {
+          "title": "TACS_Energy_Conservation_Analysis",
+          "href": "site/Weapons/Millitary%20Noise%20Cancellation/TACS_Energy_Conservation_Analysis.html"
+        },
+        {
+          "title": "MP-4.6M Defender PDW",
+          "href": "site/Weapons/MP-4.6M%20Defender%20PDW.html"
+        },
+        {
+          "title": "MP-4.6M Pistol",
+          "href": "site/Weapons/MP-4.6M%20Pistol.html"
+        },
+        {
+          "title": "MP-6.8 Advanced Combat Rifle",
+          "href": "site/Weapons/MP-6.8%20Advanced%20Combat%20Rifle.html"
+        },
+        {
+          "title": "NACS TOTAL Camo and Undersuit",
+          "href": "site/Weapons/NACS%20TOTAL%20Camo%20and%20Undersuit.html"
+        },
+        {
+          "title": "ASNP_Energy_Drink_Research_Paper",
+          "href": "site/Weapons/Research%20Papers/ASNP_Energy_Drink_Research_Paper.html"
+        },
+        {
+          "title": "Cartridgeless Bullets_Research_Paper",
+          "href": "site/Weapons/Research%20Papers/Cartridgeless%20Bullets_Research_Paper.html"
+        },
+        {
+          "title": "OBSIDIAN_Research_Paper",
+          "href": "site/Weapons/Research%20Papers/OBSIDIAN_Research_Paper.html"
+        },
+        {
+          "title": "OBSIDIAN_X_Research_Paper",
+          "href": "site/Weapons/Research%20Papers/OBSIDIAN_X_Research_Paper.html"
+        },
+        {
+          "title": "Paper10_MP68_Rifle",
+          "href": "site/Weapons/Research%20Papers/Paper10_MP68_Rifle.html"
+        },
+        {
+          "title": "Paper13_AlNiCyN_Aluminum_Armour",
+          "href": "site/Weapons/Research%20Papers/Paper13_AlNiCyN_Aluminum_Armour.html"
+        },
+        {
+          "title": "Paper15_Hearing_Protection",
+          "href": "site/Weapons/Research%20Papers/Paper15_Hearing_Protection.html"
+        },
+        {
+          "title": "Paper16_Military_Command_Doctrine",
+          "href": "site/Weapons/Research%20Papers/Paper16_Military_Command_Doctrine.html"
+        },
+        {
+          "title": "Paper17_Injectable_Nutrition",
+          "href": "site/Weapons/Research%20Papers/Paper17_Injectable_Nutrition.html"
+        },
+        {
+          "title": "Paper18_HyperSynergy_X7_Combat_Drug",
+          "href": "site/Weapons/Research%20Papers/Paper18_HyperSynergy_X7_Combat_Drug.html"
+        },
+        {
+          "title": "Paper1_MAS152E_AntiTank_Sniper",
+          "href": "site/Weapons/Research%20Papers/Paper1_MAS152E_AntiTank_Sniper.html"
+        },
+        {
+          "title": "Paper2_57mm_Autocannon",
+          "href": "site/Weapons/Research%20Papers/Paper2_57mm_Autocannon.html"
+        },
+        {
+          "title": "Paper3_57mm_DualPurpose_System",
+          "href": "site/Weapons/Research%20Papers/Paper3_57mm_DualPurpose_System.html"
+        },
+        {
+          "title": "Paper4_57mm_Underbarrel_Grenade",
+          "href": "site/Weapons/Research%20Papers/Paper4_57mm_Underbarrel_Grenade.html"
+        },
+        {
+          "title": "Paper5_140mm_Tank_Round",
+          "href": "site/Weapons/Research%20Papers/Paper5_140mm_Tank_Round.html"
+        },
+        {
+          "title": "Paper6_Body_Armor_System",
+          "href": "site/Weapons/Research%20Papers/Paper6_Body_Armor_System.html"
+        },
+        {
+          "title": "Paper7_NACS_CBRN_System",
+          "href": "site/Weapons/Research%20Papers/Paper7_NACS_CBRN_System.html"
+        },
+        {
+          "title": "Paper8_MP46M_PDW",
+          "href": "site/Weapons/Research%20Papers/Paper8_MP46M_PDW.html"
+        },
+        {
+          "title": "Paper9_MP46M_Pistol",
+          "href": "site/Weapons/Research%20Papers/Paper9_MP46M_Pistol.html"
+        },
+        {
+          "title": "EXECUTIVE_SUMMARY",
+          "href": "site/Weapons/Rubber%20Tank%20Tracks/EXECUTIVE_SUMMARY.html"
+        },
+        {
+          "title": "MIL_SPEC_TRACK_PAD_TDP",
+          "href": "site/Weapons/Rubber%20Tank%20Tracks/MIL_SPEC_TRACK_PAD_TDP.html"
+        },
+        {
+          "title": "Paper14_Military_Track_Pad",
+          "href": "site/Weapons/Rubber%20Tank%20Tracks/Paper14_Military_Track_Pad.html"
+        }
+      ]
+    }
+  ]
+}

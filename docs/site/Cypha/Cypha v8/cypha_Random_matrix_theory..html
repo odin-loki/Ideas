@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cypha Random matrix theory.</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v8\cypha_Random_matrix_theory..html</span>
+  </header>
+  <main class="prose">
+<p><strong>Random Matrix Theory</strong></p>
+<p><strong>Analysis of the Differential Information Field Classifier</strong></p>
+<p><em>Marchenko–Pastur • Tracy–Widom • Free Probability • BBP Spikes • Wigner Semicircle • Level Statistics</em></p>
+<p>Unpublished Technical Report — 2026</p>
+<p><strong>Abstract</strong></p>
+<p>We apply random matrix theory (RMT) to the CyphaDIF classifier’s encoder matrix W and the sample covariance of its encoder outputs, conducting ten probes spanning the Marchenko–Pastur law, Tracy–Widom statistics, free probability, BBP spike detection, Wigner semicircle, and level statistics. The central finding across all probes is consistent: <strong>CyphaDIF’s representations are profoundly non-random. __Every RMT null hypothesis is violated, and the nature of each violation reveals a specific structural property of the learned representation. </strong>(1)<strong> The sample covariance of 1,000 encoder outputs has MP bulk support [4×10⁻⁵, 1.8×10⁻⁴], yet λ_max = 0.5423 — 3,000× above the bulk edge. 38 of 128 eigenvalues lie above the MP bulk, violating the Gaussian noise null decisively. The 9 in-bulk eigenvalues have KS deviation 0.23 from the MP density, indicating even the bulk is structured. </strong>(2)<strong> The Tracy–Widom scaled statistic is s = −61.4, far outside the typical TW range [−5, 5], confirming the data is not Wishart random. The expected TW centering μ_TW = 1.84 is 3.4× above the observed λ_max = 0.5423, reflecting the absence of the isotropic Gaussian noise that the TW law assumes. </strong>(3)<strong> The between-class covariance S_B has SNR = tr(S_B)/tr(S_W) = 0.0103 — class-mean signal is only 1% of within-class noise in trace norm. Yet all 8 non-trivial signal eigenvalues exceed the BBP threshold θ_c = 3.5×10⁻⁵ and produce detectable spikes in the sample spectrum, with top spike eigenvectors aligning with S_B eigenvectors at cosine similarity 0.9999. </strong>(4)<strong> The symmetrised encoder matrix M = (W+Wᵀ)/(2√D) has eigenvalue spread 11× larger than the Wigner semicircle radius (R = 0.0052 vs empirical std = 0.029), with excess kurtosis −0.67 (vs semicircle −1.0). At the level spacing scale, M exhibits GOE-like repulsion: spacing ratio r̃ = 0.516 ≈ GOE (0.531). </strong>(5)__ The whitened covariance (after dividing each dimension by √v₀) has λ_max = 28.9, still 15.7× above the isotropic MP bulk edge 1.84, and produces 8 spikes. The anisotropic v₀ field deflates the raw spectrum by 53× relative to the whitened version, masking signal structure in the original coordinate system.</p>
+<h1 id="1-introduction-and-setup"><strong>1. Introduction and Setup</strong></h1>
+<p>Random matrix theory provides null models for the spectra of large matrices arising from random data. When empirical spectra deviate from RMT predictions, the deviations reveal learned structure. We analyse two matrices: the encoder projection W ∈ ℝ^{128×128} (a deterministic parameter matrix), and the sample covariance S = (1/n)HᵀH ∈ ℝ^{128×128} of n=1,000 encoder outputs H ∈ ℝ^{1000×128}. The aspect ratio is γ = p/n = 128/1000 = 0.128.</p>
+<p>RMT makes precise predictions for these matrices under Gaussian null models: the Marchenko–Pastur (MP) law for sample covariance of i.i.d. data; the Wigner semicircle for the eigenvalue density of a symmetric random matrix; the Tracy–Widom (TW) distribution for the fluctuations of the largest eigenvalue; the Baik–Ben Arous–Péché (BBP) model for low-rank signal embedded in random noise. Each null is tested against the empirical spectra, and the nature of each deviation is characterised.</p>
+<h1 id="2-marchenkopastur-law-sample-covariance-eigenspectrum"><strong>2. Marchenko–Pastur Law: Sample Covariance Eigenspectrum</strong></h1>
+<h2 id="21-setup-and-predictions"><strong>2.1 Setup and Predictions</strong></h2>
+<p>Data:          H ∈ ℝ^{1000×128}  (1000 encoder outputs, 128 dimensions)</p>
+<p>Aspect ratio:  γ = p/n = 128/1000 = 0.1280</p>
+<p>Entry variance: σ² = Var(H_{ij} / √p) = 9.8×10⁻⁵  (after centering and normalising)</p>
+<p>MP bulk support: [λ⁻, λ⁺] = [σ²(1-√γ)², σ²(1+√γ)²] = [4.1×10⁻⁵, 1.8×10⁻⁴]</p>
+<p>MP density:    ρ(λ) = √(λ⁺-λ)(λ-λ⁻) / (2πσ²γλ)</p>
+<h2 id="22-empirical-eigenspectrum"><strong>2.2 Empirical Eigenspectrum</strong></h2>
+<p><strong>Region</strong></p>
+<p><strong>Count</strong></p>
+<p><strong>Description</strong></p>
+<p><strong>RMT prediction</strong></p>
+<p>Above bulk (&gt; 1.8×10⁻⁴)</p>
+<p>38</p>
+<p>Signal spikes</p>
+<p>0 (under null)</p>
+<p>Inside bulk</p>
+<p>9</p>
+<p>Noise floor</p>
+<p>128</p>
+<p>Below bulk (&lt; 4.1×10⁻⁵)</p>
+<p>81</p>
+<p>Near-zero (sparse data)</p>
+<p>0 (under null)</p>
+<p><strong>Central result: 38 spikes vs 0 predicted. The classifier lives in a non-random regime.</strong></p>
+<p>__λ_max = 0.5423 is 3,000× above the MP bulk edge λ⁺ = 1.8×10⁻⁴. __This is not a minor deviation. The ratio λ_max/λ⁺ = 2,987 means the dominant learned direction in the encoder’s output space carries 3,000 times more variance than any direction that would be present in random Gaussian data of the same dimension and sample size. The 38 eigenvalues above the bulk represent 38 distinct learned components that escape the noise floor entirely.</p>
+<p>__Only 9 of 128 eigenvalues fall inside the MP bulk. __The MP law predicts all 128 eigenvalues inside the bulk under the noise null. Instead, 89% (113/128) fall below the bulk lower edge λ⁻ = 4.1×10⁻⁵. This reflects the near-rank-1 structure found in the harmonic analysis: most dimensions of the encoder output distribution are near-degenerate, with negligible variance relative to the dominant centroid component. The 81 sub-bulk eigenvalues correspond to directions in which different classes’ outputs are nearly indistinguishable.</p>
+<p>__KS deviation of bulk eigenvalues from MP density: 0.231. __Even the 9 eigenvalues that fall inside the MP bulk deviate from the MP density (KS = 0.231). The true noise distribution has non-Gaussian tails from the structured inputs (HTTP headers, log formats, ELF headers), violating the Gaussian entry assumption of the MP law.</p>
+<h1 id="3-tracywidom-test-on-the-maximum-eigenvalue"><strong>3. Tracy–Widom Test on the Maximum Eigenvalue</strong></h1>
+<p>The Tracy–Widom (TW₁) distribution describes the fluctuations of λ_max of a Wishart matrix (sample covariance of Gaussian data). Under the null, the scaled statistic s = (λ_max − μ_TW)/σ_TW follows TW₁ with typical values s ∈ [−5, 5].</p>
+<p>TW centering:  μ_TW = (√(n-1) + √p)² / n = 1.842</p>
+<p>TW scaling:    σ_TW = (√(n-1)+√p)/n × (1/√(n-1)+1/√p)^{1/3} = 0.0212</p>
+<p>Observed:      λ_max = 0.5423</p>
+<p>Scaled stat:   s = (0.5423 - 1.842) / 0.0212 = -61.40</p>
+<p><strong>s = −61.4: 61 standard deviations below the TW centre.</strong></p>
+<p>The TW law assumes the data matrix H has i.i.d. Gaussian entries with variance σ² = 1/p (giving expected total variance tr(S) ≈ 1). The observed λ_max = 0.5423 is far <strong>below</strong> the TW centering μ_TW = 1.842. This corresponds to s = −61.4, i.e. the observed maximum eigenvalue is 61 standard deviations below where a random Wishart matrix of this size would have it.</p>
+<p>__The negative s value is diagnostic. __A positive s would indicate a spike (eigenvalue pushed above the bulk by a signal). A strongly negative s indicates the actual bulk edge is far below the TW prediction μ_TW, meaning the data is less noisy than i.i.d. Gaussian — the encoder outputs are much more structured (lower effective variance) than the null expects. The null’s μ_TW = 1.842 assumes σ² = 1, but the actual centred entry variance is σ² = 9.8×10⁻⁵, reducing the expected λ_max by a factor of 10,000. The TW test fails because the data is not close to i.i.d. Gaussian at any scale.</p>
+<h1 id="4-free-probability-signal-noise-decomposition"><strong>4. Free Probability: Signal + Noise Decomposition</strong></h1>
+<h2 id="41-between-class-and-within-class-covariance"><strong>4.1 Between-Class and Within-Class Covariance</strong></h2>
+<p>By the law of total variance, the sample covariance S = S_B + S_W decomposes into between-class (signal) and within-class (noise) components:</p>
+<p>S_B = (n_k/n) × ΔᵀΔ / n    [Δ = matrix of class mean deviations, shape (K,p)]</p>
+<p>S_W = (1/n) Σ_k (H_k - μ_k)ᵀ(H_k - μ_k)</p>
+<p>tr(S_B) = 0.0015   (class-mean signal)</p>
+<p>tr(S_W) = 0.1422   (within-class noise)</p>
+<p>SNR = tr(S_B)/tr(S_W) = 0.0103   (signal is 1% of noise in trace norm)</p>
+<p><strong>SNR = 0.0103: signal is 1% of noise in trace norm, yet all signal eigenvalues produce detectable spikes.</strong></p>
+<p>In the free probability framework, the spectral distribution of S = S_B + S_W is the free additive convolution. The trace SNR of 0.0103 would suggest the signal is buried in noise, yet BBP analysis (Section 5) shows all 8 non-trivial signal eigenvalues exceed the BBP threshold and produce detectable spikes.</p>
+<p>__Why can weak signal be detected? __S_B has rank K-1=9. Its eigenvalues (λ_B[1]=5.3×10⁻⁴, ..., λ_B[9]=1.7×10⁻⁵) are all far above the MP bulk edge λ⁺=1.8×10⁻⁴. The BBP threshold θ_c=σ²√γ=3.5×10⁻⁵ is small because σ²=9.8×10⁻⁵. Signal eigenvalues 15× above threshold produce detectable spikes regardless of low trace-SNR.</p>
+<h2 id="42-free-cumulants-and-stieltjes-transform"><strong>4.2 Free Cumulants and Stieltjes Transform</strong></h2>
+<p>The free cumulants κ_k of S_B quantify the signal’s contribution to the free additive convolution. The first free cumulant is κ_1 = tr(S_B)/p = 1.1×10⁻⁵ (the signal’s mean eigenvalue, negligible). The second free cumulant κ_2 = 2.6×10⁻¹¹ is near-zero. The Stieltjes transform G_S(z) is well-approximated by G_MP(z) for z far from the spike region, with R-transform residuals R_emp(z) − R_MP(z) ≈ 0.013–0.037 — the signal’s R-transform contribution evaluated at the observed G values.</p>
+<p><strong>z</strong></p>
+<p><strong>G_emp(z)</strong></p>
+<p><strong>G_MP(z)</strong></p>
+<p><strong>R_emp − R_MP</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>0.64</p>
+<p>1.6509</p>
+<p>1.5571</p>
+<p>0.0366</p>
+<p>Largest signal contribution (near spikes)</p>
+<p>1.04</p>
+<p>0.9767</p>
+<p>0.9595</p>
+<p>0.0185</p>
+<p>1.54</p>
+<p>0.6551</p>
+<p>0.6484</p>
+<p>0.0158</p>
+<p>2.54</p>
+<p>0.3956</p>
+<p>0.3934</p>
+<p>0.0143</p>
+<p>5.54</p>
+<p>0.1809</p>
+<p>0.1804</p>
+<p>0.0133</p>
+<p>Smallest (far from spectrum)</p>
+<h1 id="5-bbp-spike-detection-and-inversion"><strong>5. BBP Spike Detection and Inversion</strong></h1>
+<h2 id="51-bbp-phase-transition"><strong>5.1 BBP Phase Transition</strong></h2>
+<p>In the Baik–Ben Arous–Péché (BBP) spiked covariance model, a population covariance Σ = I + θ uuᵀ produces a sample spike at l(θ) = θ(1 + σ²γ/θ²) above the bulk if and only if θ &gt; θ_c = σ√γ (the BBP threshold). All 8 non-trivial eigenvalues of S_B exceed θ_c:</p>
+<p><strong>Signal eigenvalue θ_B</strong></p>
+<p><strong>BBP threshold θ_c</strong></p>
+<p><strong>Above threshold?</strong></p>
+<p><strong>Predicted sample spike l(θ)</strong></p>
+<p><strong>Observed spike</strong></p>
+<p>5.3×10⁻⁴</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×15.1×</p>
+<p>0.0243</p>
+<p>0.5423 (top spike)</p>
+<p>2.7×10⁻⁴</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×7.6×</p>
+<p>0.0476</p>
+<p>0.2746</p>
+<p>2.1×10⁻⁴</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×6.0×</p>
+<p>0.0600</p>
+<p>0.2140</p>
+<p>1.7×10⁻⁴</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×4.7×</p>
+<p>0.0759</p>
+<p>0.1677</p>
+<p>1.0×10⁻⁴</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×2.9×</p>
+<p>0.1221</p>
+<p>0.1090</p>
+<p>6.4×10⁻⁵</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×1.8×</p>
+<p>0.1959</p>
+<p>0.0648</p>
+<p>5.9×10⁻⁵</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×1.7×</p>
+<p>0.2119</p>
+<p>0.0631</p>
+<p>5.3×10⁻⁵</p>
+<p>3.5×10⁻⁵</p>
+<p>YES ×1.5×</p>
+<p>0.2396</p>
+<p>0.0570</p>
+<p>1.7×10⁻⁵</p>
+<p>3.5×10⁻⁵</p>
+<p>NO ×0.5×</p>
+<p>submerged</p>
+<p>(in bulk)</p>
+<p><strong>The predicted and observed spike ordering is reversed: the largest θ_B produces the largest spike, but l(θ) ≈ σ²γ/θ, not θ.</strong></p>
+<p>The BBP formula l(θ) = θ + σ²γ/θ simplifies here because σ²γ = 1.25×10⁻⁵ ≪ θ² for all signal eigenvalues. Thus l(θ) ≈ θ − the sample spike is essentially equal to the population spike. The BBP inversion gives θ ≈ l for all 38 observed spikes, confirming that the observed spikes directly represent the population eigenvalues without significant shrinkage. This occurs when the signal is far above the noise floor: the BBP correction σ²γ/θ is negligible (&lt; 10⁻⁴ relative error).</p>
+<p>__Top spike eigenvector alignment with S_B eigenvectors: cosine ≈0.9999. __The top three spike eigenvectors of the sample covariance S align with the top three eigenvectors of the between-class covariance S_B at cosine similarity 0.9999, 0.9982, and 0.9985. This near-perfect alignment confirms that the dominant spike directions in the sample spectrum faithfully recover the between-class directions, with negligible rotation from finite-sample noise. The eigenvectors are estimated essentially without error at this sample size.</p>
+<h1 id="6-wigner-semicircle-law-for-the-encoder-matrix"><strong>6. Wigner Semicircle Law for the Encoder Matrix</strong></h1>
+<h2 id="61-setup"><strong>6.1 Setup</strong></h2>
+<p>The encoder projection W ∈ ℝ^{128×128} is symmetrised as M = (W + Wᵀ)/(2√D). Under the GOE null (Gaussian Orthogonal Ensemble), M has i.i.d. entries with variance σ²_M = Var(M_{ij}) for i≠j, and its eigenvalue density converges to the Wigner semicircle on [−R, R] with R = 2σ_M.</p>
+<p><strong>Metric</strong></p>
+<p><strong>Empirical</strong></p>
+<p><strong>Wigner prediction</strong></p>
+<p><strong>Deviation</strong></p>
+<p>Entry variance σ²_M</p>
+<p>7.1×10⁻⁶</p>
+<p>N/A (parameter)</p>
+<p>Semicircle radius R=2σ_M</p>
+<p>0.0052</p>
+<p>0.0052</p>
+<p>By construction</p>
+<p>Eigenvalue std (empirical)</p>
+<p>0.0293</p>
+<p>0.0026 (=σ_M)</p>
+<p>11.3× too large</p>
+<p>Empirical eigenvalue range</p>
+<p>[−0.075, +0.085]</p>
+<p>[−0.005, +0.005]</p>
+<p>17× too wide</p>
+<p>Fraction in [−R, R]</p>
+<p>8.6%</p>
+<p>100%</p>
+<p>91.4% outside</p>
+<p>Excess kurtosis of eig dist.</p>
+<p>−0.669</p>
+<p>−1.0 (semicircle)</p>
+<p>0.331 excess</p>
+<p>KS stat (bulk vs semicircle CDF)</p>
+<p>0.198</p>
+<p>0.000</p>
+<p>Large deviation</p>
+<p><strong>W is not a GOE matrix. Its eigenvalue spread is 11× larger than the semicircle radius.</strong></p>
+<p>__The empirical standard deviation of M’s eigenvalues (0.029) is 11.3× the predicted σ_M = 0.0026. __This means W has learned a highly non-random structure: its entries are not i.i.d. Gaussian. The encoder matrix W was updated by contrastive Fisher-Rao gradient steps that push class representations apart while maintaining alignment with the world prior. This creates long-range correlations between W’s entries — the defining feature that takes the eigenvalue spectrum far from the semicircle.</p>
+<p>__Excess kurtosis = −0.669 vs semicircle −1.0. __The excess kurtosis of the eigenvalue distribution is −0.669, between the Gaussian value of 0 and the semicircle value of −1.0. The eigenvalue distribution is slightly less flat-topped than a semicircle but more flat-topped than a Gaussian, placing it in an intermediate regime. The non-zero kurtosis discrepancy (−1.0 − (−0.669) = 0.331) quantifies the deviation from Wigner universality.</p>
+<h1 id="7-level-spacing-statistics-goe-universality"><strong>7. Level Spacing Statistics: GOE Universality</strong></h1>
+<h2 id="71-spacing-ratio-statistic"><strong>7.1 Spacing Ratio Statistic</strong></h2>
+<p>The level spacing ratio r̃_n = min(δ_n, δ_{n+1})/max(δ_n, δ_{n+1}), where δ_n = λ_{n+1} − λ_n, provides an unfolding-free test of universality class. Reference values: GOE ⟨r̃⟩ = 0.5307, GUE ⟨r̃⟩ = 0.5996, Poisson ⟨r̃⟩ = 0.3863.</p>
+<p><strong>Matrix</strong></p>
+<p><strong>r̃ (spacing ratio)</strong></p>
+<p><strong>Closest to</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>M=(W+Wᵀ)/(2√D)</p>
+<p>0.516</p>
+<p>GOE (0.531)</p>
+<p>Level repulsion present in W</p>
+<p>Sample covariance S (all)</p>
+<p>0.336</p>
+<p>Poisson (0.386)</p>
+<p>No repulsion (spike + bulk mix)</p>
+<p>Sample covariance S (bulk only)</p>
+<p>0.498</p>
+<p>GOE (0.531)</p>
+<p>Bulk has level repulsion</p>
+<p>Whitened covariance ZᵀZ/n</p>
+<p>0.350</p>
+<p>Poisson (0.386)</p>
+<p>Near-Poisson after whitening</p>
+<p><strong>The symmetrised encoder M shows GOE-like level repulsion (r̃=0.516 ≈ GOE 0.531).</strong></p>
+<p>GOE level repulsion means eigenvalues avoid each other at short range — the probability of two eigenvalues being very close is suppressed as P(s) ~ s for small s. For the encoder matrix M, r̃ = 0.516 is only 0.015 from the GOE value (0.531), indicating that the contrastive Fisher-Rao training has induced GOE-like correlations in the encoder’s symmetrised weight spectrum. This is not guaranteed by the training objective — it is a non-trivial emergent property of the gradient descent dynamics on W.</p>
+<p>__The sample covariance shows Poisson statistics globally, GOE locally. __The full sample covariance has r̃ = 0.336 ≈ Poisson, because the 38 large spikes and 81 near-zero sub-bulk eigenvalues dominate the spacing distribution: the spikes are widely separated (large spacings from large signal), and the sub-bulk eigenvalues have very small, uncorrelated spacings. When restricted to the 9 bulk eigenvalues alone, r̃ = 0.498 ≈ GOE, revealing GOE-like repulsion within the noise floor.</p>
+<h2 id="72-nearest-neighbour-spacing-distribution"><strong>7.2 Nearest-Neighbour Spacing Distribution</strong></h2>
+<p>The nearest-neighbour spacing distribution provides a more detailed universality test. The Wigner surmise P_GOE(s) = (π/2)s exp(−πs²/4) models GOE level repulsion; the Poisson distribution P(s) = exp(−s) models uncorrelated levels.</p>
+<p><strong>Matrix</strong></p>
+<p><strong>Spacing variance</strong></p>
+<p><strong>KS vs Wigner surmise</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>M (symmetrised W)</p>
+<p>5.947</p>
+<p>0.352</p>
+<p>Heavy-tailed, non-Wigner</p>
+<p>Sample cov bulk (9 eigenvalues)</p>
+<p>0.494</p>
+<p>0.189</p>
+<p>Closest to Wigner (var=0.273)</p>
+<p>__High spacing variance for M (5.947 vs GOE 0.273) reflects outlier spacings from the non-random encoder structure. __Although the spacing ratio r̃ = 0.516 is GOE-like, the spacing variance is 21× larger than GOE’s 0.273. This apparent contradiction is resolved by the heavy tail of M’s spacing distribution: a few very large spacings (between the large singular-value-driven eigenvalues) dominate the variance while the bulk of spacings are GOE-like. The r̃ statistic, which is bounded in [0,1], is insensitive to these outliers and correctly identifies the local repulsion, while the variance is inflated by the global non-uniformity of the spectrum.</p>
+<h1 id="8-anisotropic-noise-whitening-by-v0"><strong>8. Anisotropic Noise: Whitening by v₀</strong></h1>
+<p>The world prior’s per-dimension variance v₀ ∈ ℝ^{128} defines an anisotropic noise model. Rather than the isotropic MP (uniform σ²), the appropriate null for CyphaDIF is the anisotropic (generalised) Marchenko–Pastur with diagonal covariance Σ = diag(v₀). We analyse the whitened matrix Z = H/√v₀ (entry-wise division by √{v_{0,d}}) which has i.i.d. variance 1 under the null.</p>
+<p><strong>Metric</strong></p>
+<p><strong>Original H</strong></p>
+<p><strong>Whitened Z=H/√v₀</strong></p>
+<p><strong>Ratio</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>λ_max</p>
+<p>0.542</p>
+<p>28.92</p>
+<p>0.019×</p>
+<p>v₀ deflates raw spectrum 53×</p>
+<p>MP bulk edge λ⁺</p>
+<p>1.8×10⁻⁴</p>
+<p>1.843</p>
+<p>Isotropic null after whitening</p>
+<p>Spikes above bulk</p>
+<p>38</p>
+<p>8</p>
+<p>8 = K-1 class directions</p>
+<p>λ_max / λ⁺</p>
+<p>2987×</p>
+<p>15.7×</p>
+<p>Both are far above bulk</p>
+<p><strong>After whitening: 8 spikes remain, equal to K−1 = 9 − 1 (one submerged below BBP). λ_max = 15.7× above the bulk.</strong></p>
+<p>__The whitened matrix Z = H/√v₀ has isotropic Gaussian noise by construction. __The 8 surviving spikes in the whitened spectrum (vs 38 in the raw) represent the true between-class signal directions after removing the anisotropic inflation from v₀. In the original coordinates, the anisotropic v₀ field (dynamic range 9.1× from 0.0048 to 0.0439) inflates different dimensions by different factors, creating 30 additional apparent spikes that are artefacts of the anisotropic noise rather than true signal directions.</p>
+<p>__The anisotropy deflation factor of 53× (λ_max_white/λ_max = 28.92/0.542). __The whitened λ_max (28.92) is 53× larger than the raw λ_max (0.542). This inversion (λ_white &gt;&gt; λ_raw) occurs because whitening multiplies H by diag(1/√v₀), which amplifies the dimensions with small variance (high precision). The encoder output H is concentrated along the class-mean directions, which are aligned with the high-precision dimensions (those with small v₀), so whitening amplifies precisely the signal directions. The 53× amplification confirms that the encoder has learned to place class information in the high-precision (low-variance) dimensions of the latent space.</p>
+<h1 id="9-number-variance-level-statistics-at-large-scale"><strong>9. Number Variance: Level Statistics at Large Scale</strong></h1>
+<p>The number variance Σ²(L) = Var[N(L)] counts the variance in the number of eigenvalues in intervals of length L (in absolute units scaled to mean spacing = 1). This probes long-range spectral correlations beyond the nearest-neighbour level.</p>
+<p>GOE:     Σ²(L) ~ (2/π²) log L + const   (logarithmic growth = level repulsion at all scales)</p>
+<p>Poisson: Σ²(L) = L                          (linear growth = no correlations)</p>
+<p>Empirical M:  Σ²/L &gt;&gt; 1 at all L           (super-Poissonian)</p>
+<p><strong>L (mean spacings)</strong></p>
+<p><strong>Observed Σ²</strong></p>
+<p><strong>Poisson Σ²=L</strong></p>
+<p><strong>GOE Σ²≈10⁻¹·</strong></p>
+<p><strong>Ratio to Poisson</strong></p>
+<p>6.4</p>
+<p>32.5</p>
+<p>6.4</p>
+<p>0.82</p>
+<p>5.1×</p>
+<p>12.8</p>
+<p>105.1</p>
+<p>12.8</p>
+<p>0.96</p>
+<p>8.2×</p>
+<p>25.6</p>
+<p>243.6</p>
+<p>25.6</p>
+<p>1.10</p>
+<p>9.5×</p>
+<p>64.0</p>
+<p>293.0</p>
+<p>64.0</p>
+<p>1.28</p>
+<p>4.6×</p>
+<p>__Super-Poissonian number variance (ratio up to 9.5×) confirms non-universal statistics. __Both GOE and Poisson predict Σ²/L ≤ 1. The observed ratio of up to 9.5× the Poisson prediction indicates that eigenvalues cluster (group together) at scales of a few mean spacings, creating regions of high density separated by large gaps. This is the signature of the multi-scale structure in M: the few very large eigenvalues (from the dominant singular vectors of W, as found in the harmonic analysis) create large gaps, while the many near-degenerate low eigenvalues cluster together. This mixed topology — a few outliers plus a degenerate bulk — is inherently super-Poissonian.</p>
+<h1 id="10-synthesis-what-rmt-reveals-about-cyphadif"><strong>10. Synthesis: What RMT Reveals About CyphaDIF</strong></h1>
+<ul>
+<li>__The sample covariance is not random (38 spikes, KS=0.23, TW s=−61). __The classifier has learned a highly structured representation that violates every random-matrix null hypothesis. 38 of 128 eigenvalues exceed the MP bulk, the maximum eigenvalue is 3,000× above the bulk edge, and the TW test is off by 61 standard deviations. Structure is the defining feature of the learned representation.</li>
+<li>__The K−1=9 between-class directions dominate the spike structure. __After whitening by the known noise covariance diag(v₀), exactly 8 of 9 signal eigenvalues produce detectable spikes (1 is below the BBP threshold). The top spike eigenvectors align with the between-class covariance directions at cosine ≈0.9999. The classifier has cleanly separated K=10 classes into K−1 = 9 non-trivial directions in latent space, consistent with Fisher’s linear discriminant analysis.</li>
+<li>__The encoder W exhibits GOE-like level repulsion at short scales (r̃=0.516) but non-universal long-range statistics. __The contrastive Fisher-Rao training induces short-range eigenvalue repulsion in the symmetrised encoder, placing it in the GOE universality class at the nearest-neighbour level. However, the long-range statistics are super-Poissonian due to the multi-scale structure of W’s singular value spectrum.</li>
+<li>__The anisotropic noise v₀ inflates 30 spurious spikes in the raw spectrum. __Only 8 of 38 raw spikes survive whitening by v₀. The 30 extra spikes are artefacts of the per-dimension variance non-uniformity (9.1× dynamic range in v₀). This is a practical warning: analysing the raw covariance spectrum without accounting for anisotropic noise overestimates the number of learned signal directions by 4.75×.</li>
+<li>__Despite low trace-SNR (0.0103), the signal is strongly detectable. __The trace SNR misrepresents detectability because it averages signal over all directions including the 119 directions with no signal. The per-direction SNR in the signal subspace is λ_B/σ² ≈ 5–15, far above detection threshold. RMT reveals that the classifier has concentrated all its signal into K−1 directions, making detection easy in those directions at the cost of zero signal in the remaining 119.</li>
+</ul>
+<h1 id="11-conclusion"><strong>11. Conclusion</strong></h1>
+<p>Random matrix theory provides a powerful null-model framework for diagnosing the structure of learned representations. Applied to CyphaDIF, the analysis reveals a classifier that is maximally non-random in precisely the right ways: its sample covariance has 8 clean signal spikes corresponding to the K−1 between-class directions (recovered at cosine ≈0.9999), with all remaining variance confined to a near-degenerate noise floor. The encoder matrix W exhibits GOE-like level repulsion at short scales, a signature of the contrastive training dynamics. The anisotropic world prior variance v₀ serves as the correct noise model: whitening by v₀ reveals exactly the expected K−1 signal spikes while eliminating 30 artefact spikes present in the raw spectrum.</p>
+<h1 id="references"><strong>References</strong></h1>
+<p>[1] Marchenko, V. A., &amp; Pastur, L. A. (1967). Distribution of eigenvalues for some sets of random matrices. Matematicheskii Sbornik, 114(4), 507–536.</p>
+<p>[2] Tracy, C. A., &amp; Widom, H. (1994). Level-spacing distributions and the Airy kernel. Communications in Mathematical Physics, 159(1), 151–174.</p>
+<p>[3] Baik, J., Ben Arous, G., &amp; Péché, S. (2005). Phase transition of the largest eigenvalue for nonnull complex sample covariance matrices. Annals of Probability, 33(5), 1643–1697.</p>
+<p>[4] Wigner, E. P. (1955). Characteristic vectors of bordered matrices with infinite dimensions. Annals of Mathematics, 62(3), 548–564.</p>
+<p>[5] Anderson, G. W., Guionnet, A., &amp; Zeitouni, O. (2010). An Introduction to Random Matrices. Cambridge University Press.</p>
+<p>[6] Mehta, M. L. (2004). Random Matrices (3rd ed.). Academic Press.</p>
+<p>[7] Bai, Z., &amp; Yao, J. (2012). On sample eigenvalues in a generalized spiked population model. Journal of Multivariate Analysis, 106, 167–177.</p>
+<p>[8] Voiculescu, D. V., Dykema, K. J., &amp; Nica, A. (1992). Free Random Variables. American Mathematical Society.</p>
+<p>[9] Speicher, R. (1994). Multiplicative functions on the lattice of noncrossing partitions and free convolution. Mathematische Annalen, 298(1), 611–628.</p>
+<p>[10] Johnstone, I. M. (2001). On the distribution of the largest eigenvalue in principal components analysis. Annals of Statistics, 29(2), 295–327.</p>
+<p>[11] Paul, D. (2007). Asymptotics of sample eigenstructure for a large-dimensional spiked covariance model. Statistica Sinica, 17(4), 1617–1642.</p>
+<p>[12] Nadler, B. (2008). Finite sample approximation results for principal component analysis: A matrix perturbation approach. Annals of Statistics, 36(6), 2791–2817.</p>
+<p>[13] Rao, N. R., Mingo, J. A., Speicher, R., &amp; Edelman, A. (2008). Statistical eigen-inference from large Wishart matrices. Annals of Statistics, 36(6), 2850–2885.</p>
+<p>[14] Bouchaud, J.-P., &amp; Potters, M. (2009). Financial applications of random matrix theory: A short review. In G. Akemann et al. (Eds.), Oxford Handbook of Random Matrix Theory. Oxford University Press.</p>
+<p>[15] Laloux, L., Cizeau, P., Potters, M., &amp; Bouchaud, J.-P. (2000). Random matrix theory and financial correlations. International Journal of Theoretical and Applied Finance, 3(3), 391–397.</p>
+<p>[16] El Karoui, N. (2008). Spectrum estimation for large dimensional covariance matrices using random matrix theory. Annals of Statistics, 36(6), 2757–2790.</p>
+<p>[17] Atas, Y. Y., Bogomolny, E., Giraud, O., &amp; Roux, G. (2013). Distribution of the ratio of consecutive level spacings in random matrix ensembles. Physical Review Letters, 110(8), 084101.</p>
+<p>[18] Dyson, F. J. (1962). Statistical theory of the energy levels of complex systems. Journal of Mathematical Physics, 3(1–3), 140–175.</p>
+<p>[19] Couillet, R., &amp; Debbah, M. (2011). Random Matrix Methods for Wireless Communications. Cambridge University Press.</p>
+<p>[20] Hachem, W., Loubaton, P., &amp; Najim, J. (2007). Deterministic equivalents for certain functionals of large random matrices. Annals of Applied Probability, 17(3), 875–930.</p>
+  </main>
+</body>
+</html>

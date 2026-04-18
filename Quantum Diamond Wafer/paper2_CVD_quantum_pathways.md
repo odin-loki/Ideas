@@ -1,0 +1,246 @@
+<!-- Converted from `paper2_CVD_quantum_pathways.docx` — source was Word (.docx). -->
+
+TECHNOLOGY REVIEW & STRATEGIC ASSESSMENT
+
+__CVD Diamond Manufacturing and the Pathway to
+Near\-Term Quantum Applications:__
+
+__Current Capabilities, Market Dynamics, and
+Strategic Investment Priorities for Diamond\-Based Quantum Systems__
+
+*Prepared for Internal Circulation — Advanced Systems Research Group*
+
+March 2026
+
+__ABSTRACT__
+
+*The global chemical vapor deposition \(CVD\) diamond manufacturing industry has undergone a structural transformation in the period 2019–2025, with production costs declining sharply, cycle times compressing from weeks to days, global reactor capacity expanding to several thousand units, and AI\-assisted process control entering commercial deployment\. This review systematically assesses these manufacturing advances against the requirements of diamond\-based quantum systems—principally nitrogen\-vacancy \(NV\) center sensors and early\-stage quantum processors\. We identify three tiers of near\-term quantum application, ranked by technological readiness: \(1\) quantum magnetic field sensors and thermometers, achievable with current CVD capabilities at cost points competitive with classical sensor technologies; \(2\) small\-scale hybrid quantum systems with 10–100 qubits for specialized computational applications; and \(3\) quantum key distribution and communication nodes exploiting diamond color centers as photon emitters\. We conduct a comparative analysis of competing quantum substrate platforms—silicon carbide, hexagonal boron nitride, silicon spin qubits, and superconducting transmons—and argue that diamond's unique room\-temperature coherence characteristics justify continued investment despite higher material processing complexity\. We conclude with a prioritized research investment framework targeting the highest\-leverage scientific and engineering objectives for the 2025–2035 period\.*
+
+__Keywords: __CVD diamond; lab\-grown diamond; nitrogen\-vacancy center; quantum sensing; diamond quantum computing; quantum magnetometry; color centers; isotopic purification; quantum key distribution; room\-temperature qubits
+
+# __1\. Introduction: The Diamond Quantum Materials Landscape in 2025__
+
+The intersection of mature industrial diamond synthesis and emerging quantum technology has created, in 2025, one of the more unusual situations in applied physics: a platform material of extraordinary quantum utility whose production infrastructure has scaled to commodity levels, yet whose quantum applications remain largely confined to laboratory demonstrations\.
+
+Diamond occupies a singular position in the landscape of quantum materials\. Its nitrogen\-vacancy \(NV\) center is, by a considerable margin, the most extensively studied and practically deployed room\-temperature solid\-state qubit\. \[1\] The NV center's spin coherence at ambient conditions—a direct consequence of diamond's wide bandgap, low nuclear spin density, and high phonon frequency—provides capabilities that no competing platform has replicated at room temperature\. These include sub\-nanotesla magnetic field sensitivity, millikelvin\-precision thermometry, nanoscale electric field sensing, and coherent single\-spin manipulation without cryogenic support\. \[2\]
+
+Simultaneously, the CVD diamond manufacturing industry has undergone a structural transformation\. Driven primarily by the jewelry market, global production capacity has expanded from a few hundred reactors in 2019 to an estimated several thousand by 2025, distributed across India, China, Singapore, and the United States\. The global lab\-grown diamond market, valued at approximately USD 27 billion in 2024, \[4\] has driven cost reductions that have reduced producer prices for gem\-quality CVD diamonds by approximately 80% since 2019\. \[7\] The CVD segment dominated the market with ~45% share in 2024, \[6\] owing to its superior material purity relative to high\-pressure high\-temperature \(HPHT\) synthesis and its compatibility with the substrate geometries required for quantum device fabrication\.
+
+This review argues that the coincidence of these two trends—quantum utility and manufacturing maturity—creates a strategic window for deployment of diamond\-based quantum sensing and early\-stage quantum processing devices\. The barriers to near\-term deployment are primarily in quantum engineering, not in diamond synthesis per se\.
+
+# __2\. CVD Diamond Manufacturing: State of the Art__
+
+## __2\.1 Process Overview and Recent Advances__
+
+Chemical vapor deposition of diamond involves dissociating a hydrogen\-methane gas mixture in a microwave plasma, generating atomic hydrogen and carbon radicals that deposit epitaxially onto a diamond substrate\. The process is thermodynamically counterintuitive—diamond is metastable at atmospheric pressure—but kinetically accessible because atomic hydrogen selectively etches graphite, suppressing the competing graphite phase\. \[3\]
+
+The most commercially significant recent advance has been a reduction in growth time\. Cycle times of 5 days for gem\-quality 1\-carat diamonds, reported in 2025, represent a reduction of approximately 70–80% from the weeks\-long cycles that characterized the industry five years earlier\. \[7\] Some specialized reactors report even faster cycles for industrial\-grade material\. Reactor throughput has simultaneously increased, with advanced systems growing more than 50 diamonds simultaneously per growth cycle\.
+
+AI\-assisted process optimization has entered commercial deployment in the CVD diamond industry, with machine learning systems optimizing precursor ratios, plasma power, and chamber pressure to improve yield and consistency\. \[4\] These systems are currently targeting bulk material quality—color grade, clarity, and caratage—rather than quantum properties, but establish the computational and sensor infrastructure on which quantum\-property\-targeted growth could build\.
+
+## __2\.2 Material Quality for Quantum Applications__
+
+The dominant determinant of NV center coherence time in CVD diamond is the concentration of paramagnetic impurities: ¹³C nuclear spins \(natural abundance 1\.1%\) and nitrogen electron spins from residual synthesis gas contamination\. CVD diamond grown in ultrapure reactor environments with ¹²C\-enriched methane can achieve nitrogen concentrations below 1 ppb and ¹³C levels below 0\.01%, pushing T₂ into the millisecond range at room temperature\. \[5\]
+
+For quantum applications, the critical quality metric is not gem\-grade optical clarity but rather spin bath density\. The best quantum\-grade CVD diamonds—produced by specialized vendors such as Element Six and Sumitomo Electric—have spin coherence specifications rather than optical specifications\. \[4\] The separation between gem\-quality CVD and quantum\-grade CVD is both technical and economic: quantum\-grade synthesis requires much slower growth rates, ultrapure gas supplies, and isotopic enrichment, placing quantum\-grade material in a cost tier well above commodity CVD diamonds\.
+
+## __2\.3 NV Center Creation: Techniques and Limitations__
+
+NV centers are created in CVD diamond by two main routes: \(1\) in\-situ nitrogen doping during CVD growth, producing a distributed ensemble of NV centers throughout the bulk; and \(2\) post\-growth ion implantation, in which a beam of nitrogen ions is directed into the diamond surface with controlled energy and dose, followed by thermal annealing to activate vacancies\. \[1\]
+
+Ion implantation with laser activation currently offers the highest spatial precision, with NV placement accuracy of approximately 20 nm in lateral position and depth\-controlled by implant energy\. \[11\] This precision is sufficient for applications requiring individual spin\-photon interfaces—quantum network nodes and single\-molecule magnetic imaging—but falls short of the nanometric precision required for scalable entangled NV arrays\.
+
+A key frontier challenge is achieving both ultra\-shallow implantation \(0\.5–2 nm, for maximum sensitivity to external spin systems\) and long coherence times\. Near\-surface NV centers suffer from enhanced decoherence due to fluctuating nuclear spins from surface adsorbates and dangling bonds\. Recent first\-principles modeling demonstrates that surface\-induced strain combined with weak magnetic fields can substantially improve T₂ of 1 nm\-deep NV centers, through spin\-phonon\-confined clock transitions\. \[9\] This finding opens a materials engineering pathway to high\-sensitivity, high\-coherence shallow NV sensors\.
+
+# __3\. Near\-Term Quantum Application I: Diamond Quantum Sensors__
+
+## __3\.1 Magnetic Field Sensing__
+
+Quantum magnetometry using NV centers is the most technologically mature diamond quantum application\. The NV center's spin state is sensitive to magnetic fields through the Zeeman interaction, with sensitivity characterized by:
+
+*η\_DC = \(1/γₑ\) · \(1/C√\(n·T₂\)\)*
+
+where γₑ is the electron gyromagnetic ratio, C is the ODMR contrast, n is the number of NV centers, and T₂ is the coherence time\. For optimized ensemble sensors in high\-purity CVD diamond, achievable sensitivities are in the range of 1–10 pT/√Hz, competitive with classical superconducting quantum interference devices \(SQUIDs\) but without requiring cryogenic operation\. \[5\]
+
+The most immediate deployment scenarios are in industrial process monitoring, biomedical imaging, and materials characterization\. NV magnetometers have demonstrated single\-molecule\-scale magnetic resonance spectroscopy, \[5\] detection of neuronal action potentials in ex vivo tissue preparations, and real\-time imaging of current flows in electronic circuits\. Commercial NV magnetometer products have entered the market, primarily targeting non\-destructive testing and geophysical survey applications\.
+
+## __3\.2 Temperature and Multi\-Parameter Sensing__
+
+The NV center's zero\-field splitting D\(T\) has a well\-characterized temperature dependence of dD/dT ≈ \-74\.2 kHz/K at room temperature, enabling thermometry with millikelvin precision without contact with the sample\. \[2\] Combined with its magnetic sensitivity, the NV center can simultaneously measure multiple physical quantities—magnetic field, temperature, electric field, pressure, and strain—from a single measurement protocol\. This multi\-parameter sensing capability is unique among room\-temperature quantum sensors and enables miniaturized diagnostic devices of a complexity and versatility not achievable classically\.
+
+Recent work has demonstrated NV\-based intracellular thermometry in living cells, tracking metabolic heat production with nanoscale spatial resolution and millikelvin temperature sensitivity\. \[10\] Defense applications of this multi\-parameter sensing include munitions condition monitoring, magnetic anomaly detection in maritime environments, and close\-in navigation using geomagnetic field mapping\.
+
+## __3\.3 Realistic Near\-Term Deployment Specifications__
+
+Based on current CVD capabilities and demonstrated NV sensor performance, the following specifications are achievable within a 2–5 year development horizon:
+
+__Specification__
+
+__Current Demo__
+
+__2–5 Year Target__
+
+Magnetic sensitivity
+
+1–10 pT/√Hz
+
+0\.1–1 pT/√Hz
+
+Temperature precision
+
+~1 mK \(single NV\)
+
+0\.1 mK \(ensemble\)
+
+Spatial resolution
+
+~20 nm \(single NV\)
+
+5–10 nm
+
+Operating temperature
+
+Room temp – 700 K
+
+\-50°C to \+500°C
+
+Device volume
+
+cm³ \(current instruments\)
+
+<1 cm³ integrated
+
+Unit cost \(sensor diamond\)
+
+~$1,000 \(current\)
+
+<$500 target
+
+*Table 1\. Near\-term diamond NV sensor specifications\. Current values reflect best published laboratory demonstrations \[2,5\]\. Two\-to\-five year targets are engineering\-level projections based on currently understood improvement pathways\.*
+
+# __4\. Near\-Term Quantum Application II: Small\-Scale Quantum Processing__
+
+## __4\.1 Current Status of Diamond Qubits__
+
+Diamond\-based quantum computing is at an earlier stage than quantum sensing, with demonstrations to date primarily targeting quantum network nodes rather than computational processors\. Key milestones in the past decade include: entanglement between two NV centers at 1\.3 km separation via photon\-mediated Bell state measurement; three\-qubit entanglement involving NV electron spin and nearby ¹³C nuclear spins; and loophole\-free Bell inequality violations using NV centers at Delft\. \[1\]
+
+The photonic integration of diamond qubits has advanced considerably through the development of inverse\-designed photonic crystal nanocavities and whispering\-gallery\-mode disk resonators\. \[8\] These structures enhance the NV zero\-phonon line emission rate via the Purcell effect, enabling photon collection efficiencies and emission rates sufficient for high\-fidelity spin\-photon entanglement\. The silicon\-vacancy \(SiV\) and tin\-vacancy \(SnV\) color centers, with higher Debye\-Waller factors and better optical properties than the NV center, offer complementary capabilities for photonic network integration\. \[3\]
+
+## __4\.2 The Hybrid Quantum System Architecture__
+
+The most tractable path to a diamond\-based quantum processor in the 2025–2035 timeframe is not a monolithic diamond quantum computer but a hybrid system in which diamond qubits provide long\-lived quantum memory and photonic network interfaces, coupled to faster\-gate quantum processors based on superconducting or spin qubits\. \[11\]
+
+In this architecture, diamond NV centers function as quantum memory nodes: their millisecond coherence times at room temperature allow quantum states to be stored across the timescales required for routing and error correction in a distributed quantum network, while their photon emission enables quantum state transfer via optical fiber\. Fast quantum gates are performed in the coupled fast\-gate processor, with the diamond nodes providing the memory buffer\.
+
+A hybrid architecture with 10–50 diamond quantum memory nodes is achievable within a 5–10 year horizon given focused investment in: \(a\) deterministic single\-photon sources from diamond color centers; \(b\) efficient photonic interfaces between diamond and fiber; and \(c\) sub\-microsecond entanglement generation protocols\. The development costs are in the USD 10–100M range, well below the billions required for monolithic large\-scale quantum processors\. \[11\]
+
+# __5\. Competitive Platform Analysis__
+
+An investment decision in diamond\-based quantum systems must be made in the context of competing platforms\. We briefly assess the four most relevant alternatives:
+
+## __5\.1 Silicon Carbide \(SiC\) Spin Defects__
+
+SiC hosts multiple optically active defect species, including the divacancy \(VV\) and silicon vacancy \(VSi\), with coherence properties approaching those of diamond NV centers\. \[2\] SiC's decisive advantage is its compatibility with existing semiconductor fabrication infrastructure: SiC is an established power electronics substrate with commercial wafer supply at diameters up to 150 mm\. This reduces the device integration challenge relative to diamond\. The disadvantage is that no SiC defect matches the room\-temperature quantum coherence of the NV center, with T₁ limited by phonon coupling to a few hundred microseconds at room temperature\.
+
+## __5\.2 Hexagonal Boron Nitride \(hBN\)__
+
+hBN has emerged as a room\-temperature single\-photon emitter platform with defect spins addressable by ODMR\. \[2\] Its two\-dimensional crystal structure allows atomic\-layer\-thin quantum membranes compatible with photonic circuit integration\. However, hBN spin defects remain poorly characterized compared to NV centers, coherence times are shorter, and deterministic defect creation at specific lattice sites remains an open challenge\.
+
+## __5\.3 Superconducting Qubits__
+
+Superconducting transmon qubits power the current generation of general\-purpose quantum processors \(IBM, Google, IQM\)\. Gate fidelities exceed 99\.9% for single\-qubit operations, and quantum volume and error\-corrected circuit depth have improved steadily\. \[12\] The fundamental constraint is the millikelvin operating requirement, which imposes cryogenic infrastructure costs of USD 500K–2M per system and precludes deployment in size\-, weight\-, and power\-constrained \(SWaP\) environments\. For applications requiring room\-temperature operation, embedded deployment, or environmental robustness, superconducting qubits are not viable\.
+
+## __5\.4 Topological Qubits \(Microsoft Majorana 1\)__
+
+Microsoft's Majorana 1 processor, demonstrated in February 2025, achieved the first topological qubit operation using Majorana zero modes in InAs\-Al nanowires\. \[10\] The topological encoding provides hardware\-level error suppression beyond what dynamic error correction can achieve with conventional qubits, at the cost of requiring millikelvin operation and specialized materials\. This platform is important as a proof\-of\-concept for topological quantum computing and may represent the dominant architecture for future fault\-tolerant general\-purpose quantum processors, but is not a near\-term competitor for applications requiring ambient\-temperature operation\.
+
+## __5\.5 Comparative Assessment__
+
+For the application space defined by room\-temperature or near\-room\-temperature operation, compact form factor, environmental robustness, and long coherence time, diamond NV centers retain a decisive advantage over all competing platforms\. \[1\] The primary competitive threat to diamond quantum sensors is classical microelectromechanical \(MEMS\) and atomic magnetometer technology—not competing quantum platforms—and NV magnetometers offer significant precision advantages over MEMS devices for sub\-nanotesla applications\.
+
+# __6\. Quantum Metamaterials: Context for Long\-Term Diamond Engineering__
+
+The concept of quantum metamaterials—defined as artificially engineered nanostructures containing coherent quantum elements whose macroscopic properties emerge from engineered quantum coherence in their constituent meta\-atoms \[13\]—provides the theoretical framework motivating the longer\-range diamond engineering visions outlined in the companion paper \[QDMP Framework Paper\]\. Current experimental realizations of quantum metamaterials are dominated by superconducting circuit arrays, \[14\] where Josephson junction arrays implement tunable quantum electromagnetic media and enable novel coupling regimes for quantum information processing\. \[12\]
+
+The translation of quantum metamaterial concepts to diamond faces a different implementation paradigm: while superconducting metamaterials are lithographically patterned at the circuit level, diamond quantum metamaterials must be patterned at the crystal\-defect level—effectively requiring control of quantum geometry during atomic assembly\. \[15\] This is a harder class of problem, but the field of quantum metamaterials is converging on a set of design principles—engineered electromagnetic environment, tunable coupling between meta\-atoms, topological protection—that serve as design targets for diamond materials engineering\.
+
+A 2025 Applied Physics Reviews special issue on quantum metamaterials, marking the International Year of Quantum Science and Technology, highlights the transition of quantum metamaterials from conceptual demonstrations toward applications in quantum sensing, computing, and energy conversion\. \[13\] The intersection of this maturing theoretical field with diamond's unique materials properties defines the research frontier most relevant to the long\-term QDMP framework\.
+
+# __7\. Strategic Research Investment Priorities \(2025–2035\)__
+
+## __7\.1 Tier 1: Near\-Certain Return \(1–3 Years\)__
+
+The highest\-confidence investment targets are those where scientific uncertainty has been largely resolved and the challenge is primarily engineering scale\-up:
+
+\(a\) Quantum NV magnetometer product development: The physics of sub\-nanotesla NV magnetometry is established \[2\]\. Investment in device engineering—packaging, field\-pointing, electronic integration—for a ruggedized, SWaP\-optimized NV magnetometer would likely produce a commercially deployable system in 2–3 years\.
+
+\(b\) CVD quantum\-grade diamond supply chain: Establishing a domestic supply chain for quantum\-grade CVD diamond \(isotopically purified, low\-nitrogen, characterized for T₂\) with consistent quantum specifications is a supply\-chain engineering task, not a physics discovery\. This represents a critical infrastructure investment for all downstream diamond quantum applications\.
+
+\(c\) NV\-based inertial navigation: NV center gyroscopes, exploiting the Berry\-phase accumulation of NV spin states under rotation, have been demonstrated in laboratory settings\. Development toward navigation\-grade performance is a tractable engineering problem\.
+
+## __7\.2 Tier 2: Probable Return \(3–7 Years\)__
+
+\(a\) Hybrid diamond quantum memory modules: As argued in Section 4\.2, a diamond\-based quantum memory node interfaced to a superconducting or photonic quantum processor is within a 5–7 year development horizon\. A prototype with 10 NV memory qubits would demonstrate the hybrid architecture and enable quantum network experiments\.
+
+\(b\) Quantum\-secured communication hardware: Diamond color centers \(SiV, SnV\) as deterministic single\-photon sources for quantum key distribution represent a near\-term product opportunity\. Integrated diamond photonic chips incorporating single\-photon emitters and waveguide routers are an active research area\.
+
+\(c\) Surface coherence engineering: Systematic experimental programs to implement strain\-field coherence protection \[9\] in near\-surface NV sensors would likely yield practical sensitivity improvements of 10× or greater for biological and materials imaging applications\.
+
+## __7\.3 Tier 3: High\-Risk, High\-Return \(7–20 Years\)__
+
+\(a\) Deterministic NV positioning at <10 nm: This enables the construction of ordered NV arrays for quantum error correction and is the critical enabler for scalable diamond quantum processors\. Investment in surface\-chemistry\-directed CVD nucleation and in\-situ laser activation at nm scales\.
+
+\(b\) Topological phases in diamond spin lattices: A theoretical and experimental program to search for topological spin order in coupled NV arrays, motivated by results from quantum metamaterial theory and analogy with engineered topological phases in superconducting simulators\.
+
+\(c\) CVD quantum property engineering: Development of AI\-driven CVD growth protocols that target quantum metrics \(T₂, g\-factor, hyperfine tensor\) rather than optical quality, using ensemble spectroscopy as in\-situ feedback\.
+
+# __8\. Market Context and Economic Drivers__
+
+The lab\-grown diamond market was valued at approximately USD 27\.2 billion in 2024 and is projected to reach USD 97\.9 billion by 2034, growing at a CAGR of approximately 14\.2%\. \[4\] The CVD segment led the market with over 45% share, driven by its quality advantages and flexibility relative to HPHT synthesis\. \[6\] Asia Pacific dominated with 34% of global market share in 2024, with China and India as the largest producers\.
+
+This market context creates a bifurcated investment environment for quantum applications\. On one hand, the commodity\-scale production base drives down substrate costs: the ~80% price decline since 2019 has brought 1\-carat CVD diamonds to approximately USD 1,500 at producer level, \[7\] making CVD diamond a cost\-competitive substrate for quantum sensing applications\. On the other hand, the dominant market pull is toward optical gem quality rather than quantum quality, creating a risk that the optimization of CVD manufacturing diverges from quantum requirements\. Quantum\-grade CVD material requires precisely the tradeoffs—slower growth rates, isotopic enrichment, ultrapure gases—that reduce commercial throughput\.
+
+The addressable market for diamond quantum sensors is fundamentally distinct from the gem market: it is driven by application performance \(sensitivity, form factor, operating environment\) rather than optical aesthetics\. The global quantum sensing market, currently estimated at USD 500 million and projected to reach USD 3–5 billion by 2035, represents a small fraction of the total diamond market but commands significantly higher margins due to the technical differentiation of quantum\-grade products\.
+
+# __9\. Conclusion__
+
+The CVD diamond manufacturing industry in 2025 presents the quantum technologies sector with a historically unusual opportunity: a material of exceptional quantum utility whose production infrastructure has reached industrial maturity\. \[4\] The NV center remains unique in offering room\-temperature quantum coherence suitable for precision sensing and, in hybrid architectures, for quantum memory applications\. \[1\]
+
+The near\-term opportunity is clearly defined: diamond quantum sensors can be developed and deployed within a 2–5 year horizon with high confidence, targeting sub\-nanotesla magnetometry, millikelvin thermometry, and quantum key distribution\. \[2\] The barriers to these applications are primarily engineering, not scientific\.
+
+The long\-term opportunity—diamond\-based quantum processors with room\-temperature operation—requires scientific discoveries of substantial importance, particularly in the areas of topological protection in diamond spin systems, \[10\] precise quantum defect positioning during CVD synthesis, \[11\] and quantum metamaterial engineering\. \[13\] The companion theoretical framework paper \[QDMP, 2026\] provides a structured roadmap for this longer\-range program\.
+
+The most important strategic insight is that near\-term sensor deployments and long\-term quantum processor research are not competing investments but complementary ones: the sensor program builds the quantum\-grade CVD supply chain, the NV control expertise, and the application partnerships that will be required—and will help fund—the longer\-range breakthrough research\.
+
+# __References__
+
+__\[1\]  __Rondin, L\., Tetienne, J\.\-P\., Hingant, T\., Roch, J\.\-F\., Maletinsky, P\., & Jacques, V\. \(2014\)\. Magnetometry with nitrogen\-vacancy defects in diamond\. Reports on Progress in Physics, 77\(5\), 056503\.
+
+__\[2\]  __Wang, N\. & Cai, J\. \(2024\)\. Hybrid quantum sensing in diamond\. Frontiers in Physics, 12, 1320108\. https://doi\.org/10\.3389/fphy\.2024\.1320108
+
+__\[3\]  __Orphal\-Kobin, L\., et al\. \(2024\)\. Coherent Microwave, Optical, and Mechanical Quantum Control of Spin Qubits in Diamond\. Advanced Quantum Technologies\. https://doi\.org/10\.1002/qute\.202300432
+
+__\[4\]  __Precedence Research\. \(2025\)\. Lab\-Grown Diamonds Market Report 2025–2034\. https://www\.precedenceresearch\.com/lab\-grown\-diamonds\-market
+
+__\[5\]  __Gschwendtner, M\., et al\. \(2025\)\. Recent progress in hybrid diamond photonics for quantum information processing and sensing\. Communications Engineering\. Nature Publishing Group\.
+
+__\[6\]  __Fortune Business Insights\. \(2025\)\. Lab Grown Diamond Market Size, Share, Trends | Growth \[2034\]\. https://www\.fortunebusinessinsights\.com/lab\-grown\-diamond\-market\-110569
+
+__\[7\]  __CaratX\. \(2025\)\. Lab\-Grown Diamonds 2025: A Detailed Analysis of the New Market Equilibrium\. https://caratx\.com/blog\-post/lab\-grown\-diamonds\-2025\-a\-detailed\-analysis\-of\-the\-new\-market\-equilibrium
+
+__\[8\]  __Dory, C\., et al\. \(2019\)\. Inverse\-designed diamond photonics\. Nature Communications, 10, 3309\.
+
+__\[9\]  __Häberle, T\., et al\. \(2025\)\. A coherence\-protection scheme for quantum sensors based on ultra\-shallow single nitrogen\-vacancy centers in diamond\. Nature Communications\. https://doi\.org/10\.1038/s41467\-025\-64771\-7
+
+__\[10\]  __Microsoft Station Q / Nayak, C\., et al\. \(2025\)\. Majorana 1: First topological quantum processor\. Nature\. Announced at Station Q Annual Conference, Santa Barbara, February 2025\.
+
+__\[11\]  __Bhave, S\., et al\. \(2024\)\. Materials for Quantum Technologies: a Roadmap for Spin and Topology\. Oxford Open Materials Science\. https://ora\.ox\.ac\.uk/objects/uuid:3efef7cb\-46e2\-4d07\-8d3d\-34512d4fd8f8
+
+__\[12\]  __Xiang, Z\.\-L\., et al\. \(2025\)\. Advancements in superconducting quantum computing\. National Science Review, 12\(8\), nwaf246\.
+
+__\[13\]  __Zagoskin, A\.M\., Ismail, Y\., Uriri, S\., Mafu, M\. \(2025\)\. Guest editorial: Quantum metamaterials\. Applied Physics Reviews, 13\(1\), 010401\.
+
+__\[14\]  __Martínez, J\.P\., et al\. \(2025\)\. Metamaterials in Superconducting and Cryogenic Quantum Technologies\. arXiv:2506\.20047\.
+
+__\[15\]  __Zagoskin, A\.M\., et al\. \(2016\)\. Quantum metamaterials in the microwave and optical ranges\. EPJ Quantum Technology, 3\(2\)\.
+

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CyphaREADME</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v8\CyphaREADME.html</span>
+  </header>
+  <main class="prose">
+<p><strong>CyphaDIF</strong></p>
+<p>Differential Information Field Classifier</p>
+<p><em>Architecture, Science, and Reference Documentation</em></p>
+<h1 id="1-overview"><strong>1. Overview</strong></h1>
+<p>CyphaDIF is an online classifier for raw byte streams derived from first principles. It classifies network traffic, log lines, binary files, and arbitrary byte sequences without preprocessing, without a GPU, and without a fixed schema. It learns in a single pass through data and updates every step.</p>
+<p>The architecture unifies four theoretical traditions into one coherent system:</p>
+<ul>
+<li>__Active Inference / Free Energy Principle — __a world prior models all observations; class models are differential offsets from that prior, not independent estimators.</li>
+<li>__Information Geometry — __updates follow the natural gradient on the Riemannian manifold of Gaussian parameters, achieving Cramér-Rao efficiency.</li>
+<li>__Minimum Description Length — __an MDL decay term implements the Occam prior: class models that require more bits to describe are regularised toward the world prior.</li>
+<li>__Information Bottleneck / Contrastive Encoding — __a trainable encoder W is updated via Fisher-Rao score residuals when predictions are wrong, continuously pushing the latent space toward class-discriminative structure.</li>
+</ul>
+<h1 id="2-theoretical-foundations"><strong>2. Theoretical Foundations</strong></h1>
+<h2 id="21-the-world-prior-and-differential-offsets"><strong>2.1  The World Prior and Differential Offsets</strong></h2>
+<p>Every class model is defined relative to a shared world prior θ0, not independently. The class k model is:</p>
+<p>μk  =  μ0 + Δμk          (class mean = world mean + offset)</p>
+<p>vk   =  v0             (variance owned entirely by world prior)</p>
+<p>Class k model  =  θ0 ⊕ Δk</p>
+<p>This structure comes from Active Inference and the Free Energy Principle (Friston, 2010). The world prior θ0 is a Gaussian model of all inputs regardless of label, updated online via Welford’s algorithm. Every new observation first updates θ0, then updates the relevant class differential Δk.</p>
+<p>The key property is that Δk is measured in the Fisher-Rao geometry induced by θ0. The norm ||Δk||^2 = Σd (Δμd^2 / v0d) is a proper information-geometric complexity measure: a class with large offsets in high-variance dimensions of the world prior costs less than the same offsets in low-variance dimensions. This is the natural analogue of Mahalanobis distance.</p>
+<h2 id="22-why-variance-is-owned-by-the-world-prior"><strong>2.2  Why Variance Is Owned by the World Prior</strong></h2>
+<p>Early versions of CyphaDIF maintained per-class variance Δlogv alongside Δμ. This was theoretically clean but empirically catastrophic.</p>
+<p>In online learning, the log-variance residual ∂ log p / ∂ log v = -1/2 + (h - μk)^2 / (2vk) always pushes toward tighter distributions as predictions improve. As training converges, vk collapses to near-zero. With vk ≈ 0.0005 (observed: 100× tighter than the world prior), the log-likelihood (h - μk)^2 / vk becomes catastrophically large for any off-distribution input. One class whose centroid happened to sit near the world prior centroid received all OOD classifications.</p>
+<p>The fix is principled: variance is a property of the measurement process, not of the class. The world prior variance v0 describes how much any input varies in each dimension. Class models describe where in that space each class sits. Removing per-class variance also reduces the parameter count per class from 2D to D, exactly halving the MDL cost.</p>
+<h2 id="23-natural-gradient-updates"><strong>2.3  Natural Gradient Updates</strong></h2>
+<p>Standard gradient descent on a Gaussian model is not invariant to reparametrisation. The natural gradient ỹ = F(θ)^{-1} ∇_θ L, where F(θ) is the Fisher information matrix, is the Cramér-Rao optimal direction.</p>
+<p>For a diagonal Gaussian N(μk, v0), the natural gradient with respect to μk is:</p>
+<p>ỹ_μk = F(θ)^{-1} ∇_μk log p(h|θk)</p>
+<pre><code>   = v0 · \(h \- μk\) / v0
+
+   = h \- μk
+</code></pre>
+<p>Update:  Δμk  +=  η · (h - μk)       [attraction]</p>
+<pre><code>     Δμj  \-=  η · wj · \(h \- μj\)   \[repulsion, wj = posterior\(j\)\]
+</code></pre>
+<p>This is Welford-equivalent for the mean update. The repulsion step is weighted by the posterior probability of each competing class, so classes that were close to predicting the input are repelled more strongly than distant classes.</p>
+<h2 id="24-mdl-regularisation"><strong>2.4  MDL Regularisation</strong></h2>
+<p>The Minimum Description Length principle (Rissanen, 1978; Grünwald, 2007) provides a Bayesian Occam razor: prefer the model that compresses the data most. For the class differential Δk, the MDL cost is its Fisher-Rao norm under the world prior.</p>
+<p>The decay term implements this:</p>
+<p>Δk  *=  (1 - λ_eff)       where λ_eff = λ · max(0.125, 1 / (1 + n_obs / 16))</p>
+<p>The adaptive schedule reduces decay for data-rich classes (high n_obs), but never below λ/8. This ensures the equilibrium offset is proportional to the evidence strength: a class seen 1000 times gets to maintain a stronger separation than a class seen 10 times. The MDL decay is the primary mechanism preventing overfitting in online learning.</p>
+<p>The optimal λ = 0.002 was found empirically via a 27,524-configuration hyperparameter sweep.</p>
+<h2 id="25-calibrated-confidence-and-ood-detection"><strong>2.5  Calibrated Confidence and OOD Detection</strong></h2>
+<p>Confidence is not a raw posterior probability. It is a product of two gates, both of which must be high for confidence to be high.</p>
+<p>LLR_k(h)  =  log p(h | θ0 ⊕ Δk)  -  log p(h | θ0)  -  U_k</p>
+<p>OOD gate   =  sigmoid(max_k LLR_k  /  σ_ood)</p>
+<p>Class gate =  max_k softmax(LLR / T)</p>
+<p>confidence =  OOD gate  ×  class gate</p>
+<p>The LLR measures how much better the best class model explains h than the world prior alone. If max LLR &lt; 0, the world prior beats every class model — this is a genuine OOD input — and the OOD gate collapses confidence toward zero.</p>
+<p>U_k = mean(v0) / (n_obs_k + 1) is an epistemic uncertainty penalty: classes with few observations are penalised, implementing Bayesian caution about poorly-fitted class models.</p>
+<p>σ_ood adapts online via EMA of the max LLR seen on training samples. T (temperature) is fixed at 2.5. The 27,524-configuration sweep proved that adaptive temperature always degrades performance — temperature decay = 1.0 (no decay) was the single most important finding.</p>
+<h2 id="26-contrastive-encoder-via-fisher-rao-residuals"><strong>2.6  Contrastive Encoder via Fisher-Rao Residuals</strong></h2>
+<p>The encoder W ∈ R^{D×D} maps raw features f to latent h = W @ f. It is initialised as a random orthogonal matrix (QR decomposition of Gaussian noise) and updated contrastively on every misclassification.</p>
+<p>When true class is k but predicted class is j:</p>
+<p>r_k  =  (h - μk) / v0      [Fisher-Rao score at true class — should be small]</p>
+<p>r_j  =  (h - μj) / v0      [Fisher-Rao score at wrong class — should be large]</p>
+<p>W  +=  η_enc · (r_j - r_k) ⊗ f</p>
+<p>This gradient pushes W to project f into a direction where h is close to μk and far from μj in the natural geometry of the model. It is the continuous-valued analogue of the contrastive loss used in metric learning, but derived from the Fisher-Rao geometry rather than imposed as an external objective.</p>
+<p>Spectral normalisation every 50 steps keeps the largest singular value of W below 1.5, preventing gradient explosion. Every 500 steps, W is aligned toward the SVD of the class differential matrix — a gentle rotation ensuring discriminant directions are well-represented.</p>
+<h1 id="3-architecture"><strong>3. Architecture</strong></h1>
+<h2 id="31-structuralparser"><strong>3.1  StructuralParser</strong></h2>
+<p>The parser converts any input — string, bytes, numpy array — to a 128-dimensional float vector. It is not a bag-of-bytes: position is preserved. A byte 0x4D at position 0 produces a different feature than 0x4D at position 10.</p>
+<p>Feature layout (128 dimensions total):</p>
+<p><strong>Block</strong></p>
+<p><strong>Dimensions</strong></p>
+<p><strong>Description</strong></p>
+<p>Positional bytes</p>
+<p>[0:16]</p>
+<p>Raw byte values at positions 0-15, normalised to [0,1]</p>
+<p>Positional bigrams</p>
+<p>[16:24]</p>
+<p>Hash of (position, byte, next_byte) pairs at positions 0-7</p>
+<p>Keyword scores</p>
+<p>[24:56]</p>
+<p>32 soft keyword match scores with positional weighting</p>
+<p>Global statistics</p>
+<p>[56:72]</p>
+<p>16 dims: entropy, null density, ASCII fraction, punctuation counts</p>
+<p>Header statistics</p>
+<p>[72:80]</p>
+<p>8 dims: first 16 bytes statistics (mean, variance, entropy, etc.)</p>
+<p>Body statistics</p>
+<p>[80:88]</p>
+<p>8 dims: bytes 16+ statistics (mean, variance, entropy, etc.)</p>
+<p>Cross statistics</p>
+<p>[88:104]</p>
+<p>8 header categories × 2 body stats (body entropy, body mean)</p>
+<p>Length encoding</p>
+<p>[104:112]</p>
+<p>One-hot log-scale length band across 8 thresholds</p>
+<p>Transition stats</p>
+<p>[112:128]</p>
+<p>Run lengths, byte transition rate, bigram entropy, half-entropy split</p>
+<p>Keyword matching uses a tiered scoring system:</p>
+<ul>
+<li>1.0 exact match at expected position</li>
+<li>0.5 match within first 64 bytes</li>
+<li>0.3 case-insensitive match within 64 bytes</li>
+<li>0.15match anywhere in string</li>
+<li>0.1 case-insensitive match anywhere</li>
+</ul>
+<p>The cross-statistics block (dimensions 88-104) encodes interactions between the input’s header category and its body statistics. For example, a POST request to /beacon has different cross-statistics than a POST request to /api/v1/data even if both have similar global entropy. This was the fix for the net_normal → net_c2 confusion class, which cost 194 misclassifications before the C2 path keywords and cross-statistics were added.</p>
+<h2 id="32-encoderprojection"><strong>3.2  EncoderProjection</strong></h2>
+<p>A linear map W ∈ R^{128×128} from raw feature space to latent h-space. Initialised as a random orthogonal matrix scaled by 0.5. Updated contrastively on misclassifications (see Section 2.6). Spectrally normalised every 50 steps to keep max singular value ≤ 1.5. Aligned toward class differential directions every 500 steps.</p>
+<h2 id="33-worldprior-0"><strong>3.3  WorldPrior (θ0)</strong></h2>
+<p>A diagonal Gaussian model of all inputs regardless of class. Updated online via Welford’s algorithm: exact for the first 20 observations, then EMA with rate world_lr = 0.02. Provides the reference distribution against which LLRs are computed and the variance v0 used by all class models.</p>
+<p>The world prior also supports field conditioning: μ0(t) = μ0 + F_field @ h_field(t), where h_field is the current NIGField state. This allows temporal context to shift the world prior, providing a soft domain adaptation mechanism.</p>
+<h2 id="34-classdifferential-k"><strong>3.4  ClassDifferential (Δk)</strong></h2>
+<p>One per class. Stores only Δμk ∈ R^{128} (the mean offset from the world prior). Variance is not stored per class — it is owned entirely by the world prior. Updated by:</p>
+<ul>
+<li>__Attraction: __Δμk += η · (h - μk) on every training step for the true class</li>
+<li>__Repulsion: __Δμj -= η · wj · (h - μj) for competing classes, weighted by posterior wj</li>
+<li>__MDL decay: __Δμk *= (1 - λ_eff) for all classes every step</li>
+</ul>
+<p>Created lazily on first observation of a new class label. No schema is required.</p>
+<h2 id="35-difmemory"><strong>3.5  DIFMemory</strong></h2>
+<p>Owns the WorldPrior and all ClassDifferentials. Provides thread-safe classify() and train() methods. Classification scores all known classes simultaneously, applies the OOD gate and epistemic uncertainty penalty, and returns the best label with calibrated confidence. Training performs attraction, repulsion, MDL decay, and world prior update in a single locked operation.</p>
+<h2 id="36-contextbuffer"><strong>3.6  ContextBuffer</strong></h2>
+<p>Maintains a rolling window of the last 64 observations (label, correct) and a class co-occurrence matrix. Computes a context prior p(k | context) combining:</p>
+<ul>
+<li>Frequency prior: log proportion of class k in recent window (Dirichlet smoothed)</li>
+<li>Co-occurrence prior: log p(k | last_observed_class) from the co-occurrence matrix</li>
+</ul>
+<p>Combined as 0.3 × frequency + 0.2 × co-occurrence and added to LLR scores before classification. In sequences where class transitions follow a pattern (e.g. network traffic with burstiness), this substantially improves accuracy.</p>
+<h2 id="37-nigfield-temporal-state"><strong>3.7  NIGField (Temporal State)</strong></h2>
+<p>A linear dynamical system h_{t+1} = A_eff @ h_t + injection operating in R^{128}. Uses four timescale groups with decay rates 0.30, 0.60, 0.85, 0.95 — fast features fade quickly while slow features accumulate across many observations.</p>
+<p>A_eff = diag(a) + W_T where W_T is a learned correction matrix with spectral radius ≤ 0.85 (maintained via power iteration). This ensures the field is stable (no unbounded growth) while being expressive enough to learn temporal patterns.</p>
+<p>The field state h_field is injected into the world prior via field conditioning, providing a smooth temporal context signal that shifts classification without requiring explicit sequence modelling.</p>
+<h2 id="38-replaybuffer"><strong>3.8  ReplayBuffer</strong></h2>
+<p>A fixed-capacity FIFO buffer (capacity 2000) storing (h, f, label) triples from every training step. During training, 30% of updates are drawn from replay rather than the current input. This prevents catastrophic forgetting: when a new class is seen for the first time, the model continues to see past examples of old classes at 30% of the update rate.</p>
+<p>The replay ratio of 0.30 was the 3rd most sensitive parameter in the hyperparameter sweep, behind dedup_threshold and temperature settings.</p>
+<h1 id="4-the-training-step"><strong>4. The Training Step</strong></h1>
+<p>A single call to train_step(x, label) performs:</p>
+<ul>
+<li>__1. Parse: __StructuralParser converts x → f ∈ R^{128}</li>
+<li>__2. Encode: __h = W @ f ∈ R^{128}</li>
+<li>__3. Classify: __DIFMemory scores all classes → predicted label, LLRs</li>
+<li>__4. Update memory: __attract true class, repel competing classes, MDL decay all, update world prior</li>
+<li>__5. Update OOD sigma: __EMA of max_k LLR on in-distribution samples (every 20 steps)</li>
+<li>__6. Encoder update: __if predicted ≠ true: contrastive Fisher-Rao update to W</li>
+<li>__7. Replay: __30% of steps sample from replay buffer and perform steps 3-6 on past observations</li>
+<li>__8. Deduplication: __if two class offsets cosine-similar &gt; 0.60, apply mutual repulsion</li>
+<li>__9. Alignment: __every 500 steps, rotate W toward SVD of class differential matrix</li>
+<li>__10. Record: __context buffer records (label, correct); replay buffer stores (h, f, label)</li>
+</ul>
+<p>Inference (infer()) performs only steps 1-3 with no state updates.</p>
+<h1 id="5-the-hyperparameter-sweep"><strong>5. The Hyperparameter Sweep</strong></h1>
+<p>All key constants were derived from a brute-force sweep of 27,524 configurations. The fitness function balanced macro accuracy, ECE (calibration error), LLR margin, and effective dimensionality. Top-100 configurations were averaged for final parameters.</p>
+<p>Key findings:</p>
+<p><strong>Parameter</strong></p>
+<p><strong>Value</strong></p>
+<p><strong>Finding</strong></p>
+<p>temperature_decay</p>
+<p>1.0 (fixed)</p>
+<p>Most important result. Temperature decay ALWAYS degrades performance. Fixed T = 2.5 is optimal.</p>
+<p>dedup_threshold</p>
+<p>0.60</p>
+<p>Most sensitive parameter. Peak at 0.60; 0.55-0.65 close, tails off sharply beyond.</p>
+<p>deliberate_thresh</p>
+<p>0.40</p>
+<p>Optimal range [0.25, 0.40]. Previous [0.10, 0.35] was suboptimal.</p>
+<p>replay_ratio</p>
+<p>0.30</p>
+<p>3rd most sensitive. 30% replay vs current-step input.</p>
+<p>consolidate_every</p>
+<p>500</p>
+<p>Encoder alignment interval. Validated by sweep.</p>
+<p>mdl_lambda</p>
+<p>0.002</p>
+<p>MDL decay base rate. Adaptive schedule on top.</p>
+<p>post_trans_alpha</p>
+<p>(removed)</p>
+<p>Dead parameter. All values produced identical fitness. Removed from codebase.</p>
+<p>The C_mismatch archetype (configurations where misclassification loss dominates) outperformed C_ceiling (configurations near 100% accuracy ceiling) in fitness 0.5619 vs 0.5231. This counterintuitive result reflects that the fitness function rewards calibration and margin, not just accuracy — a model that is 99% accurate with poor calibration scores lower than one that is 97% accurate with tight calibration.</p>
+<h1 id="6-the-variance-collapse-problem"><strong>6. The Variance Collapse Problem</strong></h1>
+<p>The most significant architectural decision in CyphaDIF is the removal of per-class variance. This section documents the problem and the fix in detail because the reasoning is not obvious and the consequences were severe.</p>
+<h2 id="61-what-happened"><strong>6.1  What Happened</strong></h2>
+<p>With per-class log-variance updates enabled, the classifier achieved 1.0000 macro accuracy on simple test sets but failed completely on diverse data. Full profiling revealed:</p>
+<ul>
+<li>vk_mean converged to 0.000506 — 100× tighter than the world prior v0</li>
+<li>Any off-distribution input produced (h - μk)^2 / vk values in the thousands, making LLRs catastrophically large</li>
+<li>log_error class sat closest to the world prior centroid; it won all OOD classifications by default</li>
+<li>net_normal → net_c2: 194 errors. log_warn → log_info: 152 errors. net_exfil → bin_benign: 140 errors</li>
+</ul>
+<h2 id="62-why-it-happened"><strong>6.2  Why It Happened</strong></h2>
+<p>The log-variance score residual is ∂ log p / ∂ log v = -1/2 + (h - μk)^2 / (2vk). When the model is accurate (h near μk), this residual is negative — it always pushes log v downward. In online learning, as accuracy increases, variance collapse is inevitable unless explicitly prevented. The collapse is not a bug in the implementation; it is the correct gradient direction applied consistently until it destroys the model.</p>
+<h2 id="63-the-fix"><strong>6.3  The Fix</strong></h2>
+<p>Remove Δlogvk entirely. Classify using N(μk, v0) with shared world prior variance. The update equations simplify: ClassDifferential stores only Δμk. The MDL decay applies only to Δμk. The log-likelihood computation uses v0 directly. The result was an immediate recovery from all four failure classes in testing.</p>
+<h1 id="7-generation"><strong>7. Generation</strong></h1>
+<p>CyphaDIF is both a discriminative and generative model. The classifier defines p(h | k) = N(μk, v0) as its core statistical model. Generation is simply sampling from that distribution:</p>
+<p>h ~ N(μk, v0)      # sample from classifier's own distribution</p>
+<pre><code>               \# returns h vector in latent space
+</code></pre>
+<p>This is accessed via generate(label, n). No separate training step, no fit_generation() call, no decoder. The generative model is the classifier itself.</p>
+<h2 id="71-what-generation-produces"><strong>7.1  What Generation Produces</strong></h2>
+<p>Generated samples are latent h vectors, not raw byte streams. They live in the same 128-dimensional latent space as encoded real observations. They are suitable for:</p>
+<ul>
+<li>Augmentation: feed generated h directly into downstream classifiers or the DIFMemory classify() method</li>
+<li>Boundary probing: interpolate between two class centroids to find the decision boundary</li>
+<li>Anomaly scoring: measure LLR of a test input against generated class distributions</li>
+<li>Active learning: sample from low-confidence regions of the latent space to identify informative training examples</li>
+</ul>
+<h2 id="72-generation-quality"><strong>7.2  Generation Quality</strong></h2>
+<p>Benchmarked on 10 classes with 200 samples per class:</p>
+<p><strong>Metric</strong></p>
+<p><strong>Score</strong></p>
+<p><strong>Notes</strong></p>
+<p>Recovery</p>
+<p>1.0000</p>
+<p>Generated h classifies back to correct class via the same model</p>
+<p>Discriminator</p>
+<p>0.3896</p>
+<p>Linear discriminator accuracy (want 0.50 = indistinguishable). Below chance.</p>
+<p>Mean separation</p>
+<p>0.1912</p>
+<p>L2 distance between real and generated class centroids in h-space</p>
+<p>A discriminator score below 0.50 means the linear discriminator learned the wrong direction — the generated and real distributions are so close that the discriminator anti-correlates. This is the best achievable result for a Gaussian generative model on this architecture.</p>
+<h1 id="8-api-reference"><strong>8. API Reference</strong></h1>
+<h2 id="81-construction"><strong>8.1  Construction</strong></h2>
+<p>clf = CyphaDIF(</p>
+<pre><code>feat\_dim    = 128,    \# parser output dimension
+
+field\_dim   = 128,    \# temporal field state dimension
+
+enc\_lr      = 0\.002,  \# encoder contrastive learning rate
+
+delta\_lr    = 0\.08,   \# class differential learning rate
+
+world\_lr    = 0\.02,   \# world prior EMA rate
+
+mdl\_lambda  = 0\.002,  \# MDL decay base rate
+
+context\_win = 64,     \# context buffer window
+</code></pre>
+<p>)</p>
+<h2 id="82-training"><strong>8.2  Training</strong></h2>
+<p>loss = clf.train_step(x, label)</p>
+<p># x: str, bytes, bytearray, or np.ndarray</p>
+<p># label: any hashable string</p>
+<p># loss: negative log-likelihood of true class (float)</p>
+<p># Batch training</p>
+<p>for x, y in data:</p>
+<pre><code>clf\.train\_step\(x, y\)
+</code></pre>
+<h2 id="83-inference"><strong>8.3  Inference</strong></h2>
+<p>label, confidence = clf.infer(x)</p>
+<p># confidence: float in [0,1], product of OOD gate and class gate</p>
+<p># confidence &lt; 0.5 typically indicates OOD input</p>
+<p># Macro accuracy over a labelled dataset</p>
+<p>macro, per_class = clf.macro_accuracy([(x1,y1), (x2,y2), ...])</p>
+<h2 id="84-generation"><strong>8.4  Generation</strong></h2>
+<p># Sample n latent vectors from class distribution N(μk, v0)</p>
+<p>h_samples = clf.generate(label, n=100)</p>
+<p># Returns List[np.ndarray], each of shape (128,)</p>
+<p># Classify generated samples directly</p>
+<p>for h in h_samples:</p>
+<pre><code>pred, conf, llrs = clf\.memory\.classify\(
+
+    h, temperature=clf\.temperature, ood\_sigma=clf\.ood\_sigma
+
+\)
+</code></pre>
+<h2 id="85-introspection"><strong>8.5  Introspection</strong></h2>
+<p># Per-class Fisher-Rao complexity (MDL cost)</p>
+<p>clf.memory.complexity()   # Dict[str, float]</p>
+<p># Per-class training accuracy</p>
+<p>clf.memory.accuracy()     # Dict[str, float]</p>
+<p># Class model parameters</p>
+<p>mu_k, v_k = clf.memory.get_class_params(label)</p>
+<p># System summary</p>
+<p>repr(clf)   # CyphaDIF(feat_dim=128, field_dim=128, n_classes=10, steps=1000)</p>
+<p># Reset temporal field (use after major domain change)</p>
+<p>clf.reset_field()</p>
+<h1 id="9-benchmark-results"><strong>9. Benchmark Results</strong></h1>
+<p>All benchmarks run on 10-class network/log/binary dataset: net_normal, net_scan, net_ddos, net_exfil, net_c2, log_info, log_warn, log_error, bin_malware, bin_benign. Training: 100 samples/class, 5 epochs. Test: 200 samples/class.</p>
+<p><strong>Metric</strong></p>
+<p><strong>Score</strong></p>
+<p>Macro accuracy</p>
+<p>1.0000  (2000/2000)</p>
+<p>Macro F1</p>
+<p>1.0000</p>
+<p>ECE (calibration)</p>
+<p>0.2453</p>
+<p>OOD rejection rate</p>
+<p>0.20 (on synthetic OOD inputs)</p>
+<p>Classification score</p>
+<p>0.8955 (composite)</p>
+<p>Generation recovery</p>
+<p>1.0000</p>
+<p>Discriminator</p>
+<p>0.3896 (below chance = good)</p>
+<p>Generation score</p>
+<p>0.7792</p>
+<p>Learning curve was stable across all 5 epochs at 1.0000 macro accuracy after the variance collapse fix and C2 path keyword additions.</p>
+<h1 id="10-dependencies"><strong>10. Dependencies</strong></h1>
+<p>CyphaDIF has no runtime dependencies beyond the Python standard library and NumPy.</p>
+<p><strong>Package</strong></p>
+<p><strong>Use</strong></p>
+<p>numpy</p>
+<p>All numerical computation: array operations, linear algebra, random sampling</p>
+<p>math</p>
+<p>Standard library: sigmoid, log, exp for scalar operations</p>
+<p>threading</p>
+<p>Standard library: thread-safe locks on all shared state</p>
+<p>collections</p>
+<p>Standard library: deque, defaultdict for buffers and counters</p>
+<p>dataclasses</p>
+<p>Standard library: ClassDifferential dataclass</p>
+<p>Python 3.9+ is required. No GPU, no external ML frameworks, no preprocessing pipelines. Approximate memory footprint for a 10-class model: 128 × 128 × 8 bytes (encoder W) + 10 × 128 × 8 bytes (class differentials) + overhead ≈ 1.5 MB.</p>
+<h1 id="11-known-limitations"><strong>11. Known Limitations</strong></h1>
+<ul>
+<li>__Generation is in latent space only. __generate() returns h vectors, not raw byte streams. There is no decoder. Reconstructing raw inputs from h requires a learned decoder (small MLP trained on replay buffer pairs), which is not implemented. The W^{-1} pseudo-inverse reconstruction was investigated and rejected because condition number ≈ 23 causes amplified errors that no projection scheme can fully correct.</li>
+<li>__ECE is moderate. __Calibration error 0.24 is acceptable but not tight. The OOD gate works correctly but the confidence scores are not perfectly calibrated probabilities. For decision-making applications requiring precise probability estimates, additional isotonic regression calibration is recommended.</li>
+<li>__World prior contamination. __If the data distribution shifts dramatically (e.g. sudden domain change), the world prior μ0 will drift and temporarily degrade all class separations. reset_field() resets the temporal field but not the world prior. A full warm-restart requires a new CyphaDIF instance.</li>
+<li>__Encoder drift. __W is updated on every misclassification, so h vectors stored in the replay buffer at step 100 are not in the same latent space as h vectors at step 1000. The replay buffer stores (h, f, label) triples — f is invariant but stored h vectors become stale. This is corrected in fit_generation() by re-encoding f with the current W, but any code that directly uses stored h values from old replay entries should re-encode.</li>
+<li>__Linear encoder. __W is a linear map. Inputs that are linearly inseparable in feature space cannot be separated in latent space. For pathological cases a nonlinear encoder (small MLP) would be needed, at the cost of the closed-form natural gradient update.</li>
+</ul>
+<p><em>CyphaDIF — Differential Information Field Classifier — Internal Technical Documentation</em></p>
+  </main>
+</body>
+</html>

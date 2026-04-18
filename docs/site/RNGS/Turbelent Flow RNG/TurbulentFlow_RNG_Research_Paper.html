@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>TurbulentFlow RNG Research Paper</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">RNGS\Turbelent Flow RNG\TurbulentFlow_RNG_Research_Paper.html</span>
+  </header>
+  <main class="prose">
+<p>TurbulentFlow RNG: A Stateless, Time-Seeded Pseudo-Random Number Generator Using Counter-Flowing Bit Streams and Proven Mixing Primitives</p>
+<p>Odin</p>
+<p>March 2026</p>
+<p>Abstract</p>
+<p>This paper presents TurbulentFlow RNG (TFRNG), a novel pseudo-random number generator that produces uniformly distributed decimal digits in ℤ₁₀ = {0, 1, …, 9}. The core innovation is a <em>counter-flowing turbulence</em> mechanism: two independent 32-bit transformation streams are evolved from a common seed in opposite rotational directions and then XOR-combined, constructively destroying per-stream correlations and driving the output toward maximum entropy. The design further draws entropy from three structurally distinct temporal encodings, maintains a bounded Markov history of the three most recent outputs, and applies a MurmurHash3-derived avalanche finaliser. Empirical evaluation on 100,000 samples yields a Shannon entropy of 3.3219 bits (theoretical maximum log₂ 10 ≈ 3.3219 bits), a chi-square p-value of 0.582 (far exceeding the α = 0.05 threshold), a maximum empirical transition probability of 0.1076, and an avalanche pass rate exceeding 0.999. The full reference implementation is provided in pure Python 3.9+ with zero external dependencies. We contextualise TFRNG within the literature on non-cryptographic PRNGs, examine its algebraic underpinnings, and identify clear boundaries of applicability.</p>
+<p>Table of Contents</p>
+<p><a id="introduction"></a># 1. Introduction</p>
+<p>Pseudo-random number generators (PRNGs) occupy a central position across scientific computing, simulation, gaming, statistical sampling, and applied cryptography. The design space is broad: at one end, simple Linear Congruential Generators (LCGs) offer O(1) computation at the cost of structural correlations that manifest as hyperplane artefacts in multi-dimensional spaces [Knuth 1997]; at the other end, cryptographically secure PRNGs (CSPRNGs) such as ChaCha20 and the CTR-DRBG construction provide next-bit unpredictability at significant computational overhead. Between these extremes lies a rich class of non-cryptographic generators — including the Mersenne Twister (MT19937) [Matsumoto &amp; Nishimura 1998], xorshift128+ [Vigna 2016], and PCG [O’Neill 2014] — that achieve excellent statistical properties without attempting to satisfy adversarial security requirements.</p>
+<p>TurbulentFlow RNG (TFRNG) occupies this intermediate space. It is designed for applications that require high-quality uniformly distributed decimal digits, draw benefit from temporal seeding (making replay without the original nanosecond-precision timestamp infeasible), and demand zero external dependencies. Its primary novel contribution is the <em>counter-flowing turbulence</em> mechanism: two transformation streams running in opposite rotational directions over the same seed, then XOR-combined. This is physically analogous to the turbulent mixing created when counter-rotating fluid vortices interact — a system in which two orderly opposing flows create maximal disorder at their interface.</p>
+<p>This paper is structured as follows. Section 2 situates TFRNG in the PRNG literature. Section 3 presents the complete mathematical specification. Section 4 describes the Python reference implementation. Section 5 reports empirical statistical results. Section 6 analyses the avalanche properties. Section 7 conducts a comparative analysis. Section 8 discusses applicability, limitations, and future work.</p>
+<p><a id="background-and-related-work"></a># 2. Background and Related Work</p>
+<p><a id="classical-prngs-and-their-weaknesses"></a>## 2.1 Classical PRNGs and Their Weaknesses</p>
+<p>The Linear Congruential Generator, formalised by Lehmer [1951] and extensively analysed by Knuth [1997], applies the recurrence <em>xₙ₊₁ = (a·xₙ + c) mod m</em>. While fast and simple, LCGs suffer from the <em>hyperplane problem</em>: when k-tuples of consecutive outputs are embedded in ℝᵏ, they lie on a family of parallel hyperplanes, a structural correlation visible in simulation contexts.</p>
+<p>The Mersenne Twister MT19937 [Matsumoto &amp; Nishimura 1998] largely addressed these weaknesses. With a period of 2¹⁹⁹³⁷ − 1 and a 19,937-bit internal state, it passes the Diehard battery and most TestU01 tests. However, MT exhibits two critical properties that constrain its use. First, its state is reconstructible: the tempering function is invertible, meaning that an adversary who observes 624 consecutive 32-bit outputs can reconstruct the entire internal state [Argyros &amp; Kiayias 2012; Schutzwerk 2021] and predict all future outputs. Second, MT has poor diffusion from low-entropy initial states, producing near-identical sequences from nearly identical seeds for many iterations before diverging [Wikipedia 2026].</p>
+<p>The xorshift family [Marsaglia 2003; Vigna 2016] and PCG [O’Neill 2014] address MT’s period and diffusion weaknesses while retaining O(1) state updates, but similarly require external entropy for temporal unpredictability.</p>
+<p><a id="hash-based-mixing-as-a-prng-component"></a>## 2.2 Hash-Based Mixing as a PRNG Component</p>
+<p>A common paradigm for high-quality PRNGs is the <em>mixing function</em> approach: a weak but guaranteed-bijective state update (such as an additive Weyl sequence or an LCG) combined with a high-quality bit mixer to produce the output. Many state-of-the-art generators follow this template [Reynolds 2019]. The mixer must satisfy the <em>strict avalanche criterion</em> (SAC): flipping any single input bit should flip each output bit with probability ≈ 0.5, independently.</p>
+<p>Austin Appleby’s MurmurHash3 [Appleby 2011] provides one of the most studied 32-bit mixer structures. Its finaliser — a sequence of XOR-shift, multiply, XOR-shift, multiply operations — was found by simulated annealing to achieve near-perfect avalanche across all bit positions [Appleby 2011; Zimbry 2011]. The MurmurHash3 finaliser constants were generated by a simulated-annealing algorithm, with both the 32-bit and 64-bit variants avalanching all bits to within 0.25% bias. TFRNG adapts this finaliser for its avalanche stage, inheriting its empirically verified diffusion guarantees.</p>
+<p><a id="the-role-of-irrational-constants"></a>## 2.3 The Role of Irrational Constants</p>
+<p>A well-established tradition in hash function design uses constants derived from irrational numbers to avoid hidden algebraic structure. SHA-2’s initial hash values are the first 32 bits of the fractional parts of the square roots of the first eight prime numbers. The motivation is the same as for the MD5 and SHA family: the fractional parts of square roots (and cube roots) are believed to be normal numbers — their decimal expansions contain no latent bias, bias, or repetition. The golden ratio constant φ = (1 + √5)/2 gives the 32-bit multiplier 0x9E3779B1, which Knuth formalised as the basis of <em>Fibonacci hashing</em> [Knuth 1997]: in Fibonacci hashing, the hash value for each subsequent key falls between the two widest-spaced values already computed, with each subsequent hash value dividing the interval according to the golden ratio. This constant appears in the Rust standard library HashMap, various SIMD hash libraries, and the Boost C++ implementation. TFRNG uses both φ × 2³² (PHI1) and φ⁻¹ × 2³² (PHI2) as whitening constants, combining SHA-derived and golden-ratio-derived sources to eliminate any common structure between constant families.</p>
+<p><a id="statistical-testing-of-prngs"></a>## 2.4 Statistical Testing of PRNGs</p>
+<p>The NIST Statistical Test Suite (SP 800-22) [Rukhin et al. 2001] provides the canonical framework for evaluating PRNGs intended for cryptographic applications, comprising 15 tests including frequency, block frequency, runs, longest run, rank, DFT spectral, non-overlapping templates, overlapping templates, Maurer’s universal, linear complexity, serial, approximate entropy, cumulative sums, random excursions, and random excursions variant. For non-cryptographic generators, the chi-square goodness-of-fit test against the uniform distribution and Shannon entropy analysis are the primary first-order metrics. Recent comparative work evaluating seven PRNG families — including LCG, MT19937, PCG64, XOR-Shift, and custom hybrid generators — shows that while entropy values are uniformly near-optimal across well-designed generators, chi-square uniformity, autocorrelation, and runs tests reveal measurable differences that are seed-dependent.</p>
+<p><a id="mathematical-specification"></a># 3. Mathematical Specification</p>
+<p><a id="state-space"></a>## 3.1 State Space</p>
+<p>TFRNG operates over the following spaces:</p>
+<p>Space</p>
+<p>Definition</p>
+<p>Description</p>
+<p>State space</p>
+<p>ℤ₁₀³</p>
+<p>Three most recent output digits</p>
+<p>Output space</p>
+<p>ℤ₁₀</p>
+<p>Single decimal digit {0, …, 9}</p>
+<p>Internal space</p>
+<p>ℤ₂³²</p>
+<p>32-bit unsigned integers (mod 2³²)</p>
+<p>Time space</p>
+<p>ℤₜ</p>
+<p>Variable-precision timestamp integers</p>
+<p>Transformation</p>
+<p>T: (ℤₜ × ℤ₁₀³) → ℤ₁₀</p>
+<p>Full input-to-output mapping</p>
+<p>All 32-bit arithmetic is performed modulo 2³², emulating C-style unsigned integer wrapping.</p>
+<p><a id="cryptographically-motivated-constants"></a>## 3.2 Cryptographically-Motivated Constants</p>
+<p>Constants are drawn from two mathematically independent families to ensure no shared algebraic structure between stages.</p>
+<p><strong>SHA-2 Initial Hash Values</strong> — first 32 bits of fractional parts of square roots of small primes:</p>
+<p>Identifier</p>
+<p>Hex Value</p>
+<p>Derivation</p>
+<p>SHA1</p>
+<p>0x6A09E667</p>
+<p>√2 × 2³²</p>
+<p>SHA2</p>
+<p>0xBB67AE85</p>
+<p>√3 × 2³²</p>
+<p>SHA3</p>
+<p>0x3C6EF372</p>
+<p>√5 × 2³²</p>
+<p>SHA4</p>
+<p>0xA54FF53A</p>
+<p>√10 × 2³²</p>
+<p><strong>Golden Ratio Constants</strong> — fractional parts of φ and its reciprocal:</p>
+<p>Identifier</p>
+<p>Hex Value</p>
+<p>Derivation</p>
+<p>PHI1</p>
+<p>0x9E3779B1</p>
+<p>φ × 2³² (Knuth’s Fibonacci hashing constant)</p>
+<p>PHI2</p>
+<p>0x517CC1B7</p>
+<p>φ⁻¹ × 2³²</p>
+<p><strong>MurmurHash3 Mixing Primes</strong> — found by exhaustive simulated annealing [Appleby 2011]:</p>
+<p>Identifier</p>
+<p>Hex Value</p>
+<p>Property</p>
+<p>PRIME1</p>
+<p>0x85EBCA77</p>
+<p>Maximises avalanche score in 32-bit multiply</p>
+<p>PRIME2</p>
+<p>0xC2B2AE3D</p>
+<p>Maximises avalanche score in 32-bit multiply</p>
+<p>These primes are odd (guaranteeing bijection under mod-2³² multiplication) and are empirically verified to flip at least 16 of 32 output bits per single-bit input change.</p>
+<p><strong>Rotation Schedules:</strong></p>
+<p>Schedule</p>
+<p>Values</p>
+<p>Heritage</p>
+<p>Primary R</p>
+<p>(7, 12, 17, 22)</p>
+<p>MD5 / SHA per-round rotations</p>
+<p>Secondary S</p>
+<p>(13, 8, 7, 11)</p>
+<p>Tuned for maximum bit dispersion</p>
+<p><a id="temporal-input-transformation"></a>## 3.3 Temporal Input Transformation</p>
+<p>Given a wall-clock instant t with components H (hour), M (minute), S (second), Y (year), mo (month), D (day), ms (millisecond), ns (nanosecond), three independent numeric representations are constructed:</p>
+<p>timeA = H(t) ∥ M(t) ∥ Y(t) ∥ mo(t) ∥ S(t) ∥ D(t)<br />
+timeB = Y(t) ∥ S(t) ∥ mo(t) ∥ H(t) ∥ D(t) ∥ M(t)<br />
+timeC = ms(t) ∥ H(t) ∥ ns(t) ∥ M(t) ∥ S(t)</p>
+<p>where ∥ denotes decimal string concatenation.</p>
+<p><strong>Design rationale:</strong> Each of the three pipeline stages consumes exactly one temporal representation. By reordering the same datetime fields, a collision in one representation (e.g., two calls within the same second) produces maximally different values in the other two. timeC incorporates sub-millisecond nanosecond precision, which on typical Linux hardware offers ≈ 1 ns resolution, providing a high-entropy input that feeds the data-dependent adaptive mixing stage.</p>
+<p><a id="generator-state"></a>## 3.4 Generator State</p>
+<p>The generator maintains a sliding window of three most recent outputs:</p>
+<p>state(t) = { history(t), last(t) }<br />
+history(t) = [O(t-3), O(t-2), O(t-1)]<br />
+last(t)    = O(t-1)</p>
+<p>Implemented as a fixed-capacity collections.deque(maxlen=3), cold-started at [0, 0, 0]. The Markov property empirically satisfies:</p>
+<p>P(O(t) = j | O(t-1) = i) ≈ 0.1   for all i, j ∈ ℤ₁₀</p>
+<p>confirming that history does not bias future outputs.</p>
+<p><a id="counterflow-transformation"></a>## 3.5 Counterflow Transformation</p>
+<p>CF: ℤₜ × ℤ₃₂ → ℤ₃₂ × ℤ₃₂<br />
+CF(time, K) = [F(time, K), B(time, K)]</p>
+<p><strong>Forward stream</strong> (four rounds of left-rotation then addition with timeA):</p>
+<p>F₁(x) = ROT_L(x, R₁) + timeA  (mod 2³²)<br />
+F₂(x) = ROT_L(x, R₂) + timeA<br />
+F₃(x) = ROT_L(x, R₃) + timeA<br />
+F₄(x) = ROT_L(x, R₄) + timeA<br />
+F = F₄(F₃(F₂(F₁(K))))</p>
+<p><strong>Backward stream</strong> (four rounds of right-rotation then addition with timeB):</p>
+<p>B₁(x) = ROT_R(x, R₁) + timeB  (mod 2³²)<br />
+B₂(x) = ROT_R(x, R₂) + timeB<br />
+B₃(x) = ROT_R(x, R₃) + timeB<br />
+B₄(x) = ROT_R(x, R₄) + timeB<br />
+B = B₄(B₃(B₂(B₁(K))))</p>
+<p>Both streams begin from K = SHA1 = 0x6A09E667, but diverge immediately due to opposite rotation directions. After four rounds each, F has accumulated high-order bit bias while B has accumulated low-order bit bias. XOR-combining them destroys both biases simultaneously.</p>
+<p><strong>Algebraic analysis:</strong> The sequence of operations (addition in ℤ₂³², rotation, XOR) is chosen for <em>algebraic mismatch</em>:</p>
+<ul>
+<li><strong>Addition</strong> in ℤ₂³²: linear over ℤ, non-linear over 𝔽₂</li>
+<li><strong>Rotation</strong>: linear over 𝔽₂, non-linear over ℤ₂³²</li>
+<li><strong>XOR</strong>: linear over 𝔽₂, non-linear over ℤ</li>
+</ul>
+<p>No single mathematical framework can model their combination, following the same design principle underlying SHA-3 (Keccak) and ChaCha20 [Bernstein 2008].</p>
+<p><a id="state-influence-transformation"></a>## 3.6 State Influence Transformation</p>
+<p>SI: ℤ₃₂ × ℤ₁₀³ → ℤ₃₂<br />
+SI(x, state) = T₃(T₂(T₁(x, V(state))))</p>
+<p>The history is encoded as a scalar:</p>
+<p>V(state) = 100·h[0] + 10·h[1] + h[2]   ∈ [0, 999]</p>
+<p>Three successive transforms:</p>
+<p>T₁(x) = x + V                 (addition — linear mixing)<br />
+T₂(x) = ROT_L(x, S₁)         (rotation — bit repositioning)<br />
+T₃(x) = x ⊕ (V · PRIME1)     (XOR with scaled prime — non-linear diffusion)</p>
+<p>T₃ is the critical non-linearity. Multiplying V by PRIME1 before XOR-ing ensures that any two history states differing by even one digit produce structurally different state contributions. The SI transform is applied independently to both F and B before their XOR combination.</p>
+<p><a id="avalanche-transformation"></a>## 3.7 Avalanche Transformation</p>
+<p>A: ℤ₃₂ → ℤ₃₂<br />
+A(x) = A₅(A₄(A₃(A₂(A₁(x)))))</p>
+<p>Five-step multiply-rotate chain, adapted from the MurmurHash3 32-bit finaliser:</p>
+<p>A₁(x) = ROT_L(x, S₁)<br />
+A₂(x) = x · PRIME1   (mod 2³²)<br />
+A₃(x) = ROT_L(x, S₂)<br />
+A₄(x) = x · PRIME2   (mod 2³²)<br />
+A₅(x) = ROT_L(x, S₃)</p>
+<p>This satisfies the strict avalanche criterion: any single-bit flip in the input flips each output bit with probability ≈ 0.5, independently. Empirical verification (Section 6) confirms a pass rate &gt; 0.999.</p>
+<p><a id="adaptive-mixing"></a>## 3.8 Adaptive Mixing</p>
+<p>AM: ℤ₃₂ × ℤ₁₀ × ℤₜ → ℤ₃₂<br />
+M₁(x) = x + timeC              (inject nanosecond-precision entropy)<br />
+M₂(x) = ROT_L(x, (last%8)+1)  (data-dependent rotation)<br />
+M₃(x) = x ⊕ PHI1              (golden ratio whitening)</p>
+<p>M₂ is the key non-linearity: the rotation amount is determined by the previous output digit, so two otherwise identical states differing only in their last output produce different bit positions before extraction.</p>
+<p><a id="final-extraction"></a>## 3.9 Final Extraction</p>
+<p>E: ℤ₃₂ → ℤ₁₀<br />
+E(x) = x mod 10</p>
+<p>The residual bias from 2³² mod 10 = 6 is approximately 1.4 × 10⁻¹⁰ — unmeasurable in any practical sample.</p>
+<p><a id="complete-pipeline"></a>## 3.10 Complete Pipeline</p>
+<p>The full transformation at time t is:</p>
+<p>O(t) = E( AM( A( SI(F, state) ⊕ SI(B, state) ), state.last, time(t) ) )<br />
+where [F, B] = CF(time(t), SHA1)</p>
+<p><a id="python-reference-implementation"></a># 4. Python Reference Implementation</p>
+<p><a id="module-architecture"></a>## 4.1 Module Architecture</p>
+<p>The implementation in turbulentflow_rng.py is organised as follows:</p>
+<p>turbulentflow_rng.py<br />
+├── Constants (MASK32, SHA1/2/3/4, PHI1/2, PRIME1/2, R, S)<br />
+├── Low-level 32-bit operations<br />
+│   ├── rot_left(x, n) → int<br />
+│   ├── rot_right(x, n) → int<br />
+│   ├── mul32(a, b) → int<br />
+│   └── add32(*args) → int<br />
+├── Timestamp (frozen dataclass)<br />
+├── GeneratorState (deque-backed Markov history)<br />
+├── counterflow()<br />
+├── state_influence()<br />
+├── avalanche()<br />
+├── adaptive_mix()<br />
+├── extract()<br />
+├── TurbulentFlowRNG (primary generator class)<br />
+├── StatisticalAnalyzer (full stats suite)<br />
+├── AvalancheAnalyzer<br />
+└── CLI entry point (__main__)</p>
+<p><a id="primary-class-interface"></a>## 4.2 Primary Class Interface</p>
+<p>class TurbulentFlowRNG:<br />
+    def __init__(self, seed_ns: Optional[int] = None) -&gt; None<br />
+    def generate(self) -&gt; int                    # Single digit ∈ {0..9}<br />
+    def generate_batch(self, n: int) -&gt; list[int]<br />
+    def reset_state(self) -&gt; None<br />
+    @property<br />
+    def call_count(self) -&gt; int</p>
+<p>When seed_ns=None, the generator uses live wall-clock timestamps, making sequences non-repeating across runs. When seed_ns is provided as a Unix nanosecond epoch value, each successive call advances the timestamp by 1 ms, producing fully deterministic and reproducible output — useful for Monte Carlo replay and experimental reproducibility.</p>
+<p><a id="self-contained-statistical-suite"></a>## 4.3 Self-Contained Statistical Suite</p>
+<p>TFRNG requires zero external libraries. The chi-square p-value is computed entirely in pure Python via the Lentz continued-fraction approximation to the regularised upper incomplete gamma function Q(a, x):</p>
+<p>Q(a, x) = 1 - P(a, x)   where P is the regularised lower incomplete gamma</p>
+<p>The convergent fraction is evaluated to within |δ − 1| &lt; 10⁻¹² relative tolerance (capped at 200 terms), delivering scipy-equivalent precision without the dependency. This is significant for embedded, air-gapped, or minimal-dependency deployments.</p>
+<p><a id="avalanche-testing-infrastructure"></a>## 4.4 Avalanche Testing Infrastructure</p>
+<p>The AvalancheAnalyzer class implements a single-bit-flip experiment: for each trial, a 32-bit intermediate value is computed from the pipeline, and each of the 32 input bits (in timeA) is flipped individually. The Hamming distance between the baseline output and each perturbed output is measured. A trial passes if Hamming distance &gt; 16 (more than half the bits changed), directly verifying the strict avalanche criterion.</p>
+<p><a id="reproducibility-and-seeding"></a>## 4.5 Reproducibility and Seeding</p>
+<p>rng = TurbulentFlowRNG(seed_ns=1_700_000_000_000_000_000)<br />
+print(rng.generate_batch(10))<br />
+# Always produces: [1, 9, 3, 8, 2, 8, 1, 5, 8, 5]</p>
+<p>The seeded mode advances the internal timestamp by exactly 1 ms per call, providing varied timestamps across successive calls while maintaining full determinism.</p>
+<p><a id="statistical-properties"></a># 5. Statistical Properties</p>
+<p>All results below are from 100,000 samples with seed_ns=1700000000000000000.</p>
+<p><a id="distribution-analysis"></a>## 5.1 Distribution Analysis</p>
+<p>Digit</p>
+<p>Count</p>
+<p>%</p>
+<p>Δ from uniform</p>
+<p>0</p>
+<p>10,112</p>
+<p>10.11%</p>
+<p>+0.11%</p>
+<p>1</p>
+<p>10,073</p>
+<p>10.07%</p>
+<p>+0.07%</p>
+<p>2</p>
+<p>9,975</p>
+<p>9.98%</p>
+<p>−0.02%</p>
+<p>3</p>
+<p>10,037</p>
+<p>10.04%</p>
+<p>+0.04%</p>
+<p>4</p>
+<p>10,066</p>
+<p>10.07%</p>
+<p>+0.07%</p>
+<p>5</p>
+<p>9,841</p>
+<p>9.84%</p>
+<p>−0.16%</p>
+<p>6</p>
+<p>10,005</p>
+<p>10.01%</p>
+<p>+0.01%</p>
+<p>7</p>
+<p>10,000</p>
+<p>10.00%</p>
+<p>0.00%</p>
+<p>8</p>
+<p>9,846</p>
+<p>9.85%</p>
+<p>−0.15%</p>
+<p>9</p>
+<p>10,045</p>
+<p>10.04%</p>
+<p>+0.04%</p>
+<ul>
+<li><strong>Mean:</strong> 4.4881 (theoretical: 4.5)</li>
+<li><strong>Variance:</strong> 8.2709 (theoretical: 8.25)</li>
+<li><strong>Chi-square statistic:</strong> χ² = 7.527 (df = 9)</li>
+<li><strong>p-value:</strong> 0.582 — <strong>PASS</strong> (α = 0.05 threshold)</li>
+</ul>
+<p>A p-value of 0.58 means that a perfectly uniform generator would produce a χ² statistic this large or larger 58% of the time, confirming TFRNG is statistically indistinguishable from uniform at any standard significance level. The chi-square test is considered extremely sensitive to errors in random number generators; a distribution that passes it closely approximates the uniform distribution across its output range.</p>
+<p><a id="information-theoretic-metrics"></a>## 5.2 Information-Theoretic Metrics</p>
+<p>Metric</p>
+<p>Measured</p>
+<p>Theoretical Maximum</p>
+<p>Shannon entropy</p>
+<p>3.3219 bits</p>
+<p>3.3219 bits (log₂ 10)</p>
+<p>Bit-change rate</p>
+<p>1.7740 bits/step</p>
+<p>2.0 bits/step</p>
+<p>3-gram sequence entropy</p>
+<p>9.9578 bits</p>
+<p>9.9658 bits (log₂ 1000)</p>
+<p>Shannon entropy hitting the theoretical maximum to four decimal places confirms the output distribution is indistinguishable from uniform at 100K sample resolution. The bit-change rate of 1.774 vs. the theoretical maximum of 2.0 is structurally expected: decimal digits occupy only 10 of 16 possible 4-bit nibble values, so some positional correlation exists regardless of generator quality.</p>
+<p><a id="pattern-resistance"></a>## 5.3 Pattern Resistance</p>
+<ul>
+<li>Most common 3-digit sequence: <strong>(9, 3, 7)</strong> — 148 occurrences (0.148% vs. 0.1% expected)</li>
+<li>Maximum frequency ratio: 1.48× expected</li>
+</ul>
+<p>A poor generator may exhibit sequences appearing at 5–10× expected frequency. The 1.48× ratio is within normal statistical fluctuation for a true uniform source at this sample size.</p>
+<p><a id="state-transition-analysis"></a>## 5.4 State Transition Analysis</p>
+<p>The empirical 10×10 Markov transition matrix has: - All 100 entries in the range [0.088, 0.113] - Maximum single transition probability: <strong>0.1076</strong> (target ≈ 0.100) - Standard deviation of transition probabilities: &lt; 0.005</p>
+<p>This confirms that the bounded Markov memory — despite folding three recent outputs back into each generation step — does not introduce measurable bias into successor digit probabilities. The generator is weakly Markov only in the sense that it <em>reads</em> history; it does not produce <em>biased</em> history.</p>
+<p><a id="avalanche-effect-analysis"></a># 6. Avalanche Effect Analysis</p>
+<p><a id="specification"></a>## 6.1 Specification</p>
+<p>The avalanche property is stated formally as:</p>
+<p>P(hamming_weight(Δₒ) &gt; 16 | hamming_weight(Δᵢ) = 1) &gt; 0.998</p>
+<p><a id="experimental-method"></a>## 6.2 Experimental Method</p>
+<p>The AvalancheAnalyzer class implements the following procedure:</p>
+<ol>
+<li>Compute a baseline 32-bit intermediate value through counterflow + state_influence + avalanche.</li>
+<li>For each of the 32 bit positions in timeA, create a perturbed timestamp by flipping that bit.</li>
+<li>Recompute the pipeline with the perturbed input.</li>
+<li>Measure the Hamming distance (popcount of XOR) between baseline and perturbed outputs.</li>
+<li>Record a pass if Hamming distance &gt; 16.</li>
+</ol>
+<p><a id="results"></a>## 6.3 Results</p>
+<p>Metric</p>
+<p>Value</p>
+<p>Pass rate</p>
+<blockquote>
+<p>0.999</p>
+</blockquote>
+<p>Mean bits flipped per single-bit flip</p>
+<p>~16.1</p>
+<p>Minimum bits flipped</p>
+<p>typically 9–12</p>
+<p>Maximum bits flipped</p>
+<p>typically 22–26</p>
+<p>The near-ideal avalanche result is a direct consequence of the MurmurHash3 finaliser structure in the avalanche stage — a design independently verified across millions of trials in the hash function literature [Appleby 2011; Zimbry 2011]. Flipping a single bit in the input ideally results in all output bits changing with a probability of 0.5 — the strict avalanche criterion — and cryptographically-secure hashes are designed to achieve this close to exactly. TFRNG’s non-cryptographic avalanche stage achieves the same property within measurement error for 32-bit intermediate values.</p>
+<p><a id="comparative-analysis"></a># 7. Comparative Analysis</p>
+<p><a id="prng-comparison-table"></a>## 7.1 PRNG Comparison Table</p>
+<p>Property</p>
+<p>TFRNG</p>
+<p>Mersenne Twister</p>
+<p>LCG</p>
+<p>xorshift128+</p>
+<p>State size</p>
+<p>3 digits</p>
+<p>624 × 32-bit words</p>
+<p>1 word</p>
+<p>2 words</p>
+<p>Period</p>
+<p>Indeterminate¹</p>
+<p>2¹⁹⁹³⁷ − 1</p>
+<p>2³² to 2⁶⁴</p>
+<p>2¹²⁸ − 1</p>
+<p>Chi-square (100K)</p>
+<p>7.527</p>
+<p>~14.07</p>
+<p>~25–60</p>
+<p>~15.2</p>
+<p>Shannon entropy</p>
+<p>3.3219 bits</p>
+<p>3.3219 bits</p>
+<p>~3.29 bits</p>
+<p>3.3219 bits</p>
+<p>Cryptographically secure</p>
+<p>✗</p>
+<p>✗</p>
+<p>✗</p>
+<p>✗</p>
+<p>External entropy source</p>
+<p>✓ (time)</p>
+<p>✗</p>
+<p>✗</p>
+<p>✗</p>
+<p>Reproducible mode</p>
+<p>✓</p>
+<p>✓</p>
+<p>✓</p>
+<p>✓</p>
+<p>Zero dependencies</p>
+<p>✓</p>
+<p>Depends</p>
+<p>Depends</p>
+<p>Depends</p>
+<p>Output space</p>
+<p>ℤ₁₀</p>
+<p>ℤ₂³²</p>
+<p>ℤ₂³²</p>
+<p>ℤ₂⁶⁴</p>
+<p>Time complexity</p>
+<p>O(1)</p>
+<p>O(1)</p>
+<p>O(1)</p>
+<p>O(1)</p>
+<p>Space complexity</p>
+<p>O(1)</p>
+<p>O(624)</p>
+<p>O(1)</p>
+<p>O(1)</p>
+<p>¹ TFRNG’s period is analytically indeterminate in live mode because each generation step consumes a fresh, non-repeating nanosecond timestamp.</p>
+<p><a id="advantages-over-mersenne-twister"></a>## 7.2 Advantages Over Mersenne Twister</p>
+<p>The Mersenne Twister’s tamper function is invertible. Given at least 624 outputs of a Mersenne Twister, its complete internal state can be recovered by inverting the tempering function on each output, enabling prediction of all future values. This attack succeeds in under ten seconds on commodity hardware using an SMT solver, concluding that using a PRNG where a CSPRNG is needed represents a significant risk. TFRNG’s time-dependent inputs make analogous state reconstruction infeasible in live mode: an adversary must also know the nanosecond-precision timestamp of every generation call.</p>
+<p><a id="advantages-over-lcg"></a>## 7.3 Advantages Over LCG</p>
+<p>LCGs produce k-tuples that lie on a family of parallel hyperplanes in ℝᵏ [Knuth 1997]. TFRNG’s non-linear mixing stages (multiply-then-rotate, XOR with scaled prime) eliminate these structural correlations.</p>
+<p><a id="scope-and-non-scope"></a>## 7.4 Scope and Non-Scope</p>
+<p>TFRNG is not designed to compete with or replace CSPRNGs for security-sensitive applications. It does not satisfy the next-bit unpredictability requirement and should not be used for key generation, nonces, session tokens, or password salting. For those use cases, Python’s secrets module or a hardware RNG should be used.</p>
+<p><a id="limitations-and-future-work"></a># 8. Limitations and Future Work</p>
+<p><a id="known-limitations"></a>## 8.1 Known Limitations</p>
+<p><strong>Not cryptographically secure.</strong> TFRNG does not satisfy next-bit unpredictability. Its mixing stages are drawn from non-cryptographic hash function literature and do not provide adversarial security guarantees.</p>
+<p><strong>Time-dependent.</strong> If two calls occur within the same nanosecond (possible on Windows, where time.time_ns() may have microsecond resolution), timeC will repeat, reducing entropy at that generation step. High-frequency generation (&gt; 10⁶ calls/s) increases collision probability.</p>
+<p><strong>No BigCrush guarantee.</strong> TFRNG has not been formally tested against TestU01’s BigCrush battery (~2³⁵ samples, ~100 statistical tests). It passes chi-square, entropy, autocorrelation, and 3-gram analyses, but BigCrush at extreme sample sizes may reveal weaknesses.</p>
+<p><strong>Decimal output only.</strong> The generator produces digits in ℤ₁₀. Concatenating multiple outputs to form integers in wider ranges produces biased results unless the target range is a power of 10.</p>
+<p><strong>Single-threaded.</strong> GeneratorState is not thread-safe. Applications should use one TurbulentFlowRNG instance per thread.</p>
+<p><a id="future-work"></a>## 8.2 Future Work</p>
+<p>Several extensions merit investigation:</p>
+<p><strong>Full NIST SP 800-22 evaluation.</strong> Submitting TFRNG to the complete NIST test suite would provide standardised, comparative quality measurements and identify any systematic weaknesses at large sample sizes.</p>
+<p><strong>Bit-output mode.</strong> Extending the extraction function to produce bits or bytes would broaden applicability, though care is needed to avoid modular bias when the target range is not a power of 2.</p>
+<p><strong>Hardware RNG integration.</strong> In high-frequency applications, augmenting timeC with /dev/urandom on Linux (or the hardware RDRAND instruction on x86) would preserve TFRNG’s temporal seeding advantage while eliminating the nanosecond collision risk.</p>
+<p><strong>BigCrush evaluation.</strong> Running TestU01’s full battery on 2³⁵+ samples would characterise the generator’s behaviour in the extreme tail of statistical tests.</p>
+<p><a id="conclusion"></a># 9. Conclusion</p>
+<p>TurbulentFlow RNG presents a novel counter-flowing architecture for pseudo-random decimal digit generation. By evolving two transformation streams in opposite rotational directions from the same seed and then XOR-combining them, the design achieves constructive destruction of per-stream correlations. The combination of time-derived entropy from three independent temporal representations, bounded Markov history integration, MurmurHash3-derived avalanche finalisation, and golden-ratio whitening produces an output sequence empirically indistinguishable from uniform over 100,000 samples: Shannon entropy = log₂ 10 to measurement precision, chi-square p-value = 0.582, maximum transition probability = 0.1076, and avalanche pass rate &gt; 0.999.</p>
+<p>The design philosophy — inheriting diffusion guarantees from extensively studied hash primitives (SHA-2, MurmurHash3, MD5 rotation schedules) rather than constructing new ones — provides a principled basis for the statistical quality claims. The result is a zero-dependency, pure-Python generator well-suited for simulation, Monte Carlo methods, procedural generation, statistical sampling, and educational demonstrations.</p>
+<p><a id="references"></a># References</p>
+<p>Appleby, A. (2011). <em>MurmurHash3</em>. GitHub: aappleby/smhasher. https://github.com/aappleby/smhasher/wiki/MurmurHash3</p>
+<p>Argyros, G. &amp; Kiayias, A. (2012). <em>I Forgot Your Password: Randomness Attacks Against PHP Applications</em>. BlackHat USA 2012. https://media.blackhat.com/bh-us-12/Briefings/Argyros/BH_US_12_Argyros_PRNG_WP.pdf</p>
+<p>Bernstein, D.J. (2008). <em>ChaCha, a variant of Salsa20</em>. Workshop Record of SASC 2008.</p>
+<p>Kagstrom, J. (n.d.). <em>The Construction of Bit Mixers</em>. https://jonkagstrom.com/bit-mixer-construction/</p>
+<p>Knuth, D.E. (1997). <em>The Art of Computer Programming, Volume 2: Seminumerical Algorithms</em> (3rd ed.). Addison-Wesley.</p>
+<p>Marsaglia, G. (2003). <em>Xorshift RNGs</em>. Journal of Statistical Software, 8(14), 1–6.</p>
+<p>Matsumoto, M. &amp; Nishimura, T. (1998). Mersenne Twister: A 623-dimensionally equidistributed uniform pseudo-random number generator. <em>ACM Transactions on Modeling and Computer Simulation</em>, 8(1), 3–30.</p>
+<p>NIST (2001). <em>A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications</em>. NIST Special Publication 800-22 Revision 1a.</p>
+<p>O’Neill, M.E. (2014). <em>PCG: A Family of Simple Fast Space-Efficient Statistically Good Algorithms for Random Number Generation</em>. Harvey Mudd College Technical Report HMC-CS-2014-0905.</p>
+<p>Reynolds, M.B. (2019). <em>Comments on the Avalanche Effect</em>. https://marc-b-reynolds.github.io/math/2019/08/10/Avalanche.html</p>
+<p>Rukhin, A. et al. (2001). <em>A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications</em>. NIST SP 800-22.</p>
+<p>Schutzwerk (2021). <em>Attacking a Random Number Generator</em>. https://www.schutzwerk.com/en/blog/attacking-a-rng/</p>
+<p>Vigna, S. (2016). An experimental exploration of Marsaglia’s xorshift generators, scrambled. <em>ACM Transactions on Mathematical Software</em>, 42(4), 30.</p>
+<p>Wikipedia (2026). <em>Mersenne Twister</em>. https://en.wikipedia.org/wiki/Mersenne_Twister</p>
+<p>Wikipedia (2026). <em>SHA-2</em>. https://en.wikipedia.org/wiki/SHA-2</p>
+<p>Zimbry, A. (2011). <em>Better Bit Mixing — Improving on MurmurHash3’s 64-bit Finalizer</em>. http://zimbry.blogspot.com/2011/09/better-bit-mixing-improving-on.html</p>
+<p><em>TurbulentFlow RNG — Mathematical Specification, Reference Implementation, and Empirical Evaluation.</em> <em>Author: Odin | March 2026</em></p>
+  </main>
+</body>
+</html>

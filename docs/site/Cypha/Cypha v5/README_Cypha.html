@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>README Cypha</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v5\README_Cypha.html</span>
+  </header>
+  <main class="prose">
+<p><strong>Cypha.py</strong></p>
+<p>Technical Reference &amp; Mathematical Introduction</p>
+<p>File 1 of 5  ·  3,361 lines  ·  Core engine</p>
+<p>For someone reading this for the first time</p>
+<h1 id="1-what-is-this-file"><strong>1. What Is This File?</strong></h1>
+<p>Cypha.py is the entire brain of the system. Everything else — download.py, convert.py, benchmark.py, synthetic_benchmark.py — is scaffolding that feeds data into this one file. It is 3,361 lines of pure NumPy and contains:</p>
+<ul>
+<li>A universal signal encoder that converts any input — SQL strings, RF radio signals, audio recordings, malware feature vectors — into a single shared vector space.</li>
+<li>A physics-inspired neural field (the HRNA hierarchy) that processes those vectors through five stacked dynamical systems.</li>
+<li>A prototype memory that learns by storing examples, not by adjusting weights.</li>
+<li>A reasoning layer that detects when it is uncertain and runs a second-pass query revision to resolve ambiguous cases.</li>
+</ul>
+<p>There are no learned weight matrices. There is no gradient descent. The system learns by accumulating labelled prototype vectors in memory and classifying by asking: "which stored prototype is most similar to this new input?"</p>
+<p><strong>The key insight</strong></p>
+<p>If you can encode every signal domain into the same vector space using the same mathematical operators, then a single memory-based nearest-neighbour classifier works across all of them simultaneously — with no retraining when you add a new domain.</p>
+<h1 id="2-architecture-overview"><strong>2. Architecture Overview</strong></h1>
+<p>Every call — whether training or inference — passes through four stages in order:</p>
+<p>INPUT STRING  (text / "iq:" hex / "pcm:" hex / "arr:" base64)</p>
+<pre><code>  │
+
+  ▼  Stage 1: Encode
+</code></pre>
+<p>OmegaEncoder.encode_features()  →  v ∈ ℝ⁵¹²   (real, L2-normalised)</p>
+<pre><code>  │
+
+  ▼  Stage 2: Project
+</code></pre>
+<p>PhaseBridge.bridge()            →  ψ ∈ ℂ²⁵⁶   (complex, unit-sphere)</p>
+<pre><code>  │
+
+  ▼  Stage 3: Resonate \(5 hierarchical levels\)
+</code></pre>
+<p>ResonanceField → ResonatorLevel → AssemblyLevel → ModuleLevel → GlobalLevel</p>
+<pre><code>  │                              state ∈ ℂ²⁵⁶
+
+  ▼  Stage 4: Classify
+</code></pre>
+<p>AnchorMemory.lookup()  →  k nearest prototypes by cosine similarity</p>
+<p>ThoughtProcessor       →  uncertainty estimate + optional query revision</p>
+<pre><code>  │
+
+  ▼
+</code></pre>
+<p>OUTPUT: (class_label, confidence)</p>
+<p>The rest of this document works through each stage in detail.</p>
+<h1 id="3-stage-1-the-omega-encoder"><strong>3. Stage 1 — The Omega Encoder</strong></h1>
+<h2 id="31-the-problem-it-solves"><strong>3.1 The Problem It Solves</strong></h2>
+<p>Consider three inputs: a SQL injection string, an FM radio signal captured as int8 IQ samples, and a WAV recording of someone saying "yes". A conventional model trained on one cannot process the others. The byte histograms of all three look different in ways that do not generalise.</p>
+<p>The Omega encoder's job is to compute features that mean the same thing regardless of the signal's origin — features like "how bursty is the rate of change?" and "where is the energy concentrated in frequency space?" These questions have well-defined answers for any 1D real signal, whether it is text, radio, or audio.</p>
+<h2 id="32-definition-of-the-omega-operator"><strong>3.2 Definition of the Omega Operator</strong></h2>
+<p>Let x ∈ ℝⁿ be a 1D real signal of arbitrary length n. The Omega operator is the concatenation of five feature families:</p>
+<p>Ω(x)  =  concat[ M(x),  M(D(x)),  M(D²(x)),  R(x,K),  A(x,L) ]</p>
+<p>Each component is defined below.</p>
+<h3 id="component-1-mx-raw-moments"><strong>Component 1 — M(x): Raw Moments</strong></h3>
+<p>The moment vector extracts four statistics describing the amplitude distribution:</p>
+<p>M(x)  =  [ μ(x),  σ(x),  κ(x),  γ(x) ]</p>
+<p>where μ = mean, σ = standard deviation, κ = excess kurtosis (how heavy the tails are), γ = skewness (asymmetry of the distribution). These four numbers summarise the shape of the amplitude histogram. They are computed in a single-pass BLAS dot-product formulation (23× faster than four separate numpy.mean() calls).</p>
+<h3 id="component-2-mdx-derivative-moments"><strong>Component 2 — M(D(x)): Derivative Moments</strong></h3>
+<p>D(x) is the first difference of the signal:</p>
+<p>D(x)[i]  =  x[i+1] − x[i]   for  i = 0, …, n−2</p>
+<p>Then M(D(x)) applies the same four-moment extraction to this derivative sequence.</p>
+<p>The most important single feature in the entire system is κ(D(x)) — the kurtosis of the first derivative. It measures how bursty the signal changes are. A SQL injection string like ' OR 1=1 -- has sudden large ASCII value jumps (e.g., 39 → 32 → 79 → 82) that produce high kurtosis. A clean SQL query has smoother, lower-variance transitions. Empirically, κ(D(x)) alone achieves r = 0.9985 correlation with the true class boundary density across all signal domains.</p>
+<p><strong>Why is κ(D(x)) so powerful?</strong></p>
+<p>It measures burstiness independent of scale, offset, and domain. A phishing email has sudden all-caps words and suspicious punctuation. A malware PE feature vector has sudden spikes at specific feature indices. An FM signal has a different derivative autocorrelation signature than AM. All of these differences show up in κ(D(x)) without any domain-specific feature engineering.</p>
+<h3 id="component-3-md2x-second-derivative-moments"><strong>Component 3 — M(D²(x)): Second Derivative Moments</strong></h3>
+<p>The second derivative D²(x) = D(D(x)) captures acceleration — how fast the rate of change itself is changing. M(D²(x)) is the moment vector of this quantity. It is particularly useful for phase signals (equivalent to the c40 cumulant in communications theory) and for detecting abrupt inflection points in audio.</p>
+<h3 id="component-4-rx-k-spectral-band-energy"><strong>Component 4 — R(x, K): Spectral Band Energy</strong></h3>
+<p>Compute the FFT of x, divide the frequency axis into K = 16 equal-width bins, and measure the L1-normalised energy in each bin:</p>
+<p>R(x, K)[k]  =  Σᵢ ∈ Bₖ |FFT(x)[i]|  /  ‖FFT(x)‖₁      k = 0,…,15</p>
+<p>This gives a 16-dimensional spectral fingerprint. An AM radio signal concentrates energy near the carrier and its two symmetric sidebands. White noise spreads energy uniformly. A voiced speech segment has harmonic peaks at integer multiples of the fundamental. These signatures are reliable and stable across different instances of the same class.</p>
+<h3 id="component-5-ax-l-autocorrelation-at-log-spaced-lags"><strong>Component 5 — A(x, L): Autocorrelation at Log-Spaced Lags</strong></h3>
+<p>A(x, L)[l]  =  Σᵢ x[i] · x[i+l]  /  n      for  l ∈ L = {1, 2, 4, 8, 16, 32, 64, 128}</p>
+<p>Autocorrelation at lag l measures how similar the signal is to a time-shifted version of itself. High autocorrelation at short lags = locally smooth. High autocorrelation at a specific lag = periodic at that period. Log-spaced lags cover multiple time scales efficiently with L = 8 values.</p>
+<h2 id="33-three-scale-application"><strong>3.3 Three-Scale Application</strong></h2>
+<p>All five operators are applied three times: once over the full signal, once over the first half, and once over the second half. This gives the encoder access to temporal evolution — how the signal changes from beginning to end.</p>
+<p>Ω₃(x)  =  concat[ Ω(x),  Ω(x[: n/2]),  Ω(x[n/2 :]) ]</p>
+<p>The resulting feature vector has dimension 3 × (4 + 4 + 4 + 16 + 8) = 3 × 36 = 108 named statistical features, plus 256 byte-level features and 8 token-structure features for text inputs. All names are unique and deterministic.</p>
+<h2 id="34-numeric-direct-embedding"><strong>3.4 Numeric-Direct Embedding</strong></h2>
+<p>The Ω₃(x) output is a dict mapping feature names (e.g., "full_d1_kurt", "h2_band7", "byte65") to float values. This must be converted to a fixed-length vector v ∈ ℝ⁵¹². The method is:</p>
+<p>v[  abs(hash(name)) mod d  ]  +=  value      then  v ← v / ‖v‖</p>
+<p>No learned projection. No optimisation. The hash function is deterministic: the same feature name always maps to the same index. The output dimension d = 512 was chosen because ~143 active features occupy 512 dimensions with 28% utilisation — well below the collision pressure threshold. Empirically, cosine similarity in this space correlates reliably with feature-profile similarity: same-class inputs cluster at cosine similarity 0.80–0.95.</p>
+<p><strong>Why not a learned projection?</strong></p>
+<p>A learned embedding (e.g., a linear layer trained by gradient descent) requires seeing all input domains up front. The hash embedding works immediately on any new domain — you just start feeding new data in. The metric structure is preserved by the hash distribution, no training required.</p>
+<h2 id="35-signal-routing"><strong>3.5 Signal Routing</strong></h2>
+<p>The encoder checks the input prefix to select the correct decoding path:</p>
+<p><strong>Prefix</strong></p>
+<p><strong>Path</strong></p>
+<p><strong>Decoding method</strong></p>
+<p>(plain text)</p>
+<p>Text path</p>
+<p>UTF-8 bytes centred to [-1,1]; Ω₃ + byte histogram + token stats</p>
+<p>"iq:"</p>
+<p>IQ/RF path</p>
+<p>Reinterpret as int8 I/Q pairs → complex64 → 512-pt STFT power spectral density</p>
+<p>"pcm:"</p>
+<p>Audio path</p>
+<p>Reinterpret as int16 PCM → float → mel filterbank (26 bands, 512-pt FFT)</p>
+<p>"arr:"</p>
+<p>Array path</p>
+<p>base64 → float32 array → Ω₃ directly</p>
+<p>The IQ and PCM paths exist because raw-byte Omega applied to RF signals gives cosine similarity ≈ 0.99 between all RF classes — every class looks like white noise at the byte level. The spectral paths extract the actual modulation fingerprint. This was discovered empirically and the fix is documented in the source at line 422.</p>
+<h1 id="4-stage-2-phasebridge"><strong>4. Stage 2 — PhaseBridge</strong></h1>
+<p>The Omega encoder outputs a real vector v ∈ ℝ⁵¹². The resonance field (next stage) operates on complex vectors ψ ∈ ℂ²⁵⁶. PhaseBridge performs this promotion.</p>
+<h2 id="41-construction"><strong>4.1 Construction</strong></h2>
+<p>Two random matrices Wₐ, W_φ ∈ ℝ⁵¹²ˣ²⁵⁶ and a frequency vector b ∈ ℝ²⁵⁶ are initialised once at construction time with a fixed random seed and never updated:</p>
+<p>amps  =  v Wₐ   ∈ ℝ²⁵⁶</p>
+<p>phase  =  arctan2(‖v[256:]‖, ‖v[:256]‖)  +  0.3 · (v W_φ)   ∈ ℝ²⁵⁶</p>
+<p>basis[k]  =  sin(b[k] · k / 256)   ∈ ℝ²⁵⁶</p>
+<p>ψ  =  amps ⊙ exp(i · phase) ⊙ basis  /  ‖ · ‖</p>
+<p>The amplitude component carries the magnitude information from the Omega features. The phase component encodes the geometric orientation of the input vector. The basis introduces a fixed frequency structure that helps the downstream Hamiltonian evolution discriminate between inputs with similar amplitudes but different phase structures.</p>
+<p>The matrices are float32 (halving RAM vs float64). The output ψ is unit-normalised in the complex L2 norm. Identical inputs always produce identical ψ — the bridge is a pure function with no state.</p>
+<h1 id="5-stage-3-the-hrna-hierarchy"><strong>5. Stage 3 — The HRNA Hierarchy</strong></h1>
+<h2 id="51-why-a-dynamical-system"><strong>5.1 Why a Dynamical System?</strong></h2>
+<p>A standard multi-layer perceptron processes input in one forward pass: multiply by weight matrix, apply activation function, repeat. Cypha instead drives a dynamical system: it injects the encoded input into a complex-valued field and lets that field evolve under a physics-inspired equation. The state that emerges after several evolution steps carries both the content of the input and its resonance with the field's structure.</p>
+<p>The key difference: the HRNA hierarchy has internal dynamics that interact with the input across multiple timescales, not just a single feedforward transformation. This is more similar to how recurrent networks process sequences, except here the "sequence" is the repeated injection+evolution loop over the same input.</p>
+<h2 id="52-level-1-resonancefield"><strong>5.2 Level 1 — ResonanceField</strong></h2>
+<h3 id="state"><strong>State</strong></h3>
+<p>The field state is a complex vector ψ(t) ∈ ℂ²⁵⁶. Each element is a complex oscillator. The system is reset to a fresh random initial state before every training step and every inference call, so there is no persistent state between different inputs.</p>
+<h3 id="injection"><strong>Injection</strong></h3>
+<p>Before each evolution step, the input encoding is mixed into the field:</p>
+<p>ψ  ←  (1 − s) · ψ  +  s · enc(input)</p>
+<p>ψ  ←  ψ / ‖ψ‖</p>
+<p>with injection strength s = 0.25. This nudges the field toward the input without overwriting it — the field's own dynamics partially resist the injection, which is what produces the nonlinear interaction.</p>
+<h3 id="evolution"><strong>Evolution</strong></h3>
+<p>Each evolution step applies a Hamiltonian operator in frequency space, then a nonlinear self-interaction:</p>
+<p>ψ_H  =  IFFT( FFT(ψ) ⊙ exp(−i Δt · H) )</p>
+<p>ψ(t+1)  =  N[ ψ_H · exp(−i Δt · γ · (|ψ_H|² − 1) · Re(ψ_H)) ]</p>
+<p>where H[k] = 0.5 + k·9.5/256 (linearly-spaced frequencies from 0.5 to 10), Δt = 0.3, γ = 5, and N[·] denotes L2 normalisation.</p>
+<p>The first line (Hamiltonian step) is the discrete-time analogue of the Schrödinger equation — it rotates each frequency component by a phase proportional to its frequency, analogous to free quantum evolution. The second line (nonlinear term) pushes the field back toward the unit sphere when |ψ|² deviates from 1, while introducing the nonlinear coupling that separates inputs which are close in linear space.</p>
+<p>During training, 3 inject+evolve loops are run (fast, approximate equilibrium). During inference, 6 loops are run (higher quality, needed for the downstream ThoughtProcessor).</p>
+<h3 id="criticality"><strong>Criticality</strong></h3>
+<p>After evolution, the field reports its criticality — a scalar measuring energy concentration:</p>
+<p>κ  =  (Σᵢ ∈ Top₁₀ |ψ[i]| / Σ |ψ[i]|) · Var(|ψ|) · 100</p>
+<p>Low κ = energy spread uniformly (disordered). High κ = energy concentrated in a few modes (ordered). The AdaptiveControlLoop uses κ to tune injection parameters in real time.</p>
+<h2 id="53-levels-25"><strong>5.3 Levels 2–5</strong></h2>
+<p>Four more levels sit above the base field. Each takes the state from the level below, applies its own dynamics, and passes an updated state upward:</p>
+<p><strong>Level</strong></p>
+<p><strong>Class</strong></p>
+<p><strong>Key operation</strong></p>
+<p>L1 — Field</p>
+<p>ResonanceField</p>
+<p>FFT Hamiltonian + γ(|ψ|²−1) nonlinear self-interaction</p>
+<p>L2 — Resonator</p>
+<p>ResonatorLevel</p>
+<p>Local coupling: ψ[i] += γ · Σⱼ ∈ 𝒩(i) ψ[j]; lateral inhibition</p>
+<p>L3 — Assembly</p>
+<p>AssemblyLevel</p>
+<p>Resonant chain across 16 sub-fields; modulate() shifts phase per event</p>
+<p>L4 — Module</p>
+<p>ModuleLevel</p>
+<p>Integrates 8 assemblies; produces a compressed global feature vector</p>
+<p>L5 — Global</p>
+<p>GlobalLevel</p>
+<p>Final state readout, dim=256; feeds AnchorMemory and ThoughtProcessor</p>
+<p>All five levels reset between samples. The hierarchy increases the effective "receptive field" of the nonlinear dynamics — the same way stacking LSTM layers increases temporal range. The 3 ms per inference call measured in profiling is almost entirely spent in these five levels (specifically in the enhanced_resonance() calls that fire across ~18 events per forward pass).</p>
+<h1 id="6-stage-4a-anchormemory"><strong>6. Stage 4a — AnchorMemory</strong></h1>
+<h2 id="61-the-classification-approach"><strong>6.1 The Classification Approach</strong></h2>
+<p>Cypha does not classify by passing the field state through a softmax layer. It classifies by storing labelled prototype vectors called anchors and asking: "which stored class prototype is most similar to this new input?" This is the Nearest Class Prototype approach — every anchor is a labelled point on the unit sphere, and classification is nearest-neighbour lookup.</p>
+<h2 id="62-cosine-similarity-and-the-unit-sphere"><strong>6.2 Cosine Similarity and the Unit Sphere</strong></h2>
+<p>Every anchor a ∈ ℝᵈ is stored L2-normalised. All distances are cosine similarities:</p>
+<p>sim(u, v)  =  u · v   (since ‖u‖ = ‖v‖ = 1)</p>
+<p>All n stored anchors are stacked as rows of a matrix V ∈ ℝⁿˣᵈ. Batch lookup for a query q is a single matrix-vector product:</p>
+<p>sims  =  V q   ∈ ℝⁿ</p>
+<p>O(n · d) floating-point operations, executed by BLAS. Profiling shows this is bandwidth-bound at d = 512, so lookup costs approximately 10 μs flat from n = 12 to n = 10,000 anchors — it barely scales with anchor count.</p>
+<h2 id="63-storing-a-new-sample-three-paths"><strong>6.3 Storing a New Sample — Three Paths</strong></h2>
+<p>When train_step() calls memory.store(key, v, label), one of three things happens:</p>
+<h4 id="path-1-key-already-exists-ema-update"><strong>Path 1 — Key already exists (EMA update)</strong></h4>
+<p>If this exact input string has been stored before, update its vector with an exponential moving average:</p>
+<p>a_new  =  N[ (1 − α) · a_old + α · v ]</p>
+<p>where α ∈ [0.15, 0.40] is the EMA learning rate set by ThoughtProcessor based on current uncertainty. This refines the prototype toward the new observation without overwriting it. Dictionary lookup: O(1) via the _key_to_gi dict (fixed in Feb 2026 — was O(n) list.index() before).</p>
+<h4 id="path-2-near-duplicate-exists-dedup-ema-update"><strong>Path 2 — Near-duplicate exists (dedup EMA update)</strong></h4>
+<p>If a same-class anchor already has cosine similarity ≥ τ_dedup = 0.55 to this new vector, update that anchor instead of creating a new one:</p>
+<p>IF  max_{a ∈ cls} sim(a, v) ≥ 0.55   THEN  a ← N[ (1−α)·a + α·v ]</p>
+<p>This keeps the anchor set lean. τ_dedup = 0.55 is the empirically optimal threshold: accuracy is flat from 0.55 to 0.96; below 0.55, anchors accumulate faster than consolidation can remove them.</p>
+<h4 id="path-3-new-anchor"><strong>Path 3 — New anchor</strong></h4>
+<p>Otherwise, add v as a new anchor. The matrix V is extended by one row (amortised O(n) vstack), class counts and index caches are updated in O(1).</p>
+<h2 id="64-lvq21-boundary-sharpening"><strong>6.4 LVQ2.1 Boundary Sharpening</strong></h2>
+<p>After every store(), the system checks whether this input falls inside the LVQ window — i.e., whether the nearest correct-class anchor and nearest wrong-class anchor are nearly equidistant:</p>
+<p>CONDITION:   lo / hi  &gt;  1 − θ_w      where  lo = min(sᶜ, sʷ),  hi = max(sᶜ, sʷ),  θ_w = 0.30</p>
+<p>If the condition fires, the two boundary anchors are nudged apart:</p>
+<p>wᶜ ←  N[ wᶜ + η·(v − wᶜ) ]   (pull correct-class prototype closer to v)</p>
+<p>wʷ ←  N[ wʷ − η·(v − wʷ) ]   (push wrong-class prototype away from v)</p>
+<p>with η = 0.02. This is the LVQ2.1 rule (Kohonen 1990). It sharpens decision boundaries at exactly the regions where the model is currently confused, without touching anchors that are already well-separated.</p>
+<h2 id="65-adaptive-per-class-cap"><strong>6.5 Adaptive Per-Class Cap</strong></h2>
+<p>Each class gets its own anchor count ceiling, estimated from the complexity of its current prototype distribution:</p>
+<p>cap  =  clamp( 10 + 200·spread + 30·id_est − 100·spec_gap,  lo=10,  hi=500 )</p>
+<p>where spread = mean pairwise cosine distance (class diffuseness), id_est = TwoNN intrinsic dimensionality (manifold complexity), spec_gap = normalised spectral gap of the similarity matrix (unimodality). A tight unimodal cluster gets cap ≈ 50. A diffuse multimodal class gets cap ≈ 200–400. This was profiled to add only 0.002 ms/step amortised.</p>
+<h2 id="66-consolidation"><strong>6.6 Consolidation</strong></h2>
+<p>Every 200 training steps, a consolidation pass merges redundant anchors within each class. The algorithm is greedy pivot merge: iterate through anchors; any anchor with cosine similarity ≥ 0.55 to the current pivot gets absorbed into a centroid, which replaces the group. Cost at 3,000 anchors: 0.7 ms per pass, 0.004 ms amortised per step.</p>
+<h1 id="7-stage-4b-thoughtprocessor"><strong>7. Stage 4b — ThoughtProcessor</strong></h1>
+<p>After the anchor lookup returns the top-k matches, ThoughtProcessor decides whether to accept the result or run a second-pass query revision. It is the system's uncertainty-aware reasoning layer.</p>
+<h2 id="71-calibrated-uncertainty"><strong>7.1 Calibrated Uncertainty</strong></h2>
+<p>Given the top-1 and top-2 cosine similarities s₁ and s₂, the margin is m = s₁ − s₂. The uncertainty estimate is:</p>
+<p>u  =  exp(−m / τ)</p>
+<p>where τ is a rolling p75 of observed margins, updated every call. τ auto-calibrates to the difficulty of the current corpus — on an easy corpus (large margins), τ grows and u stays low even at modest margins; on a hard corpus, τ shrinks and u becomes sensitive to small margin differences. At m &gt;&gt; τ, u → 0 (certain). At m = 0, u = 1 (maximum uncertainty).</p>
+<p>The suggested EMA alpha returned to the memory is α = 0.15 + 0.25 · u. Samples near the decision boundary (high u) leave a stronger imprint on the prototype.</p>
+<h2 id="72-rocchio-deliberation"><strong>7.2 Rocchio Deliberation</strong></h2>
+<p>When u &gt; 0.4 AND each competing class has ≥ 8 anchors (density guard), the ThoughtProcessor runs Rocchio query revision. Given the two top competing classes A and B with centroids cₐ and c_b:</p>
+<p>q_A  =  N[ q + β·cₐ − β·c_b ]     for  β ∈ {0.5, 1.0}</p>
+<p>q_B  =  N[ q + β·c_b − β·cₐ ]     for  β ∈ {0.5, 1.0}</p>
+<p>Four revised queries are generated (2 classes × 2 strengths). Each is looked up in the anchor memory. The class whose revised query achieves the largest margin wins:</p>
+<p>class*  =  argmax_{X ∈ {A,B}, β} [ top1_sim(lookup(q_X)) − top2_sim(lookup(q_X)) ]</p>
+<p>Geometrically: "if I bias my query toward class A's centroid and away from B's, does the neighbourhood become cleaner?" The Rocchio rule (Rocchio 1971) was proven optimal for this relevance feedback formulation. Here it fires only when the first-pass result was genuinely ambiguous.</p>
+<p><strong>Cost of deliberation</strong></p>
+<p>4 additional lookups × ~10 μs each ≈ 55–70 μs overhead, flat regardless of anchor count (profiled Feb 2026). The density guard (min 8 anchors per class) prevents it firing on sparse early-training classes. In practice it fires on a minority of inputs.</p>
+<h2 id="73-confusion-memory"><strong>7.3 Confusion Memory</strong></h2>
+<p>Every deliberation result updates a running score for the class pair (A, B):</p>
+<p>conf(A,B)  ←  0.9 · conf(A,B) + 0.1 · confusion_signal</p>
+<p>When conf(A,B) exceeds a threshold, the boundary is flagged as ambiguous and the deduplication threshold is dynamically lowered for that specific pair, forcing finer-grained prototype placement at the confusion region.</p>
+<h1 id="8-training"><strong>8. Training</strong></h1>
+<h2 id="81-train_stepinput-label"><strong>8.1 train_step(input, label)</strong></h2>
+<p>A single training step runs the following sequence:</p>
+<p>1. Reset all 5 HRNA levels.</p>
+<p>2. forward(input, training=True)   → state_input  (3 inject+evolve loops)</p>
+<p>3. forward(label, training=True)   → state_target (3 inject+evolve loops)</p>
+<p>4. Mine hard negatives: 3 closest wrong-class anchors via lookup().</p>
+<p>5. Compute contrastive loss: L(state_input, state_target, hard_negatives).</p>
+<p>6. lookup(encode_features(input), k=2) → top-2 candidates.</p>
+<p>7. ThoughtProcessor.note_uncertainty(margin) → EMA alpha α.</p>
+<p>8. memory.store(input, encode_features(input), label, ema_alpha=α).</p>
+<h2 id="82-the-contrastive-loss"><strong>8.2 The Contrastive Loss</strong></h2>
+<p>MetaLearning.loss() computes a contrastive loss between the input state and target state, with penalties for similarity to hard negatives:</p>
+<p>L  =  (pos + 2 · neg) · boost</p>
+<p>pos  =  ‖N(state_in) − N(state_tgt)‖²</p>
+<p>neg  =  mean_{nᵢ} max(0, sim(state_in, nᵢ) + 0.1)²</p>
+<p>boost  =  1 + mean_sim_to_recent_states   ∈ [1.0, 2.0]</p>
+<p>The novelty boost (1 + sim_to_recent) gives more gradient to inputs similar to recently-seen examples — the hard repetitions the model needs to cement — not less. This was the inverse of the original formula.</p>
+<p>The loss is used exclusively to drive the AdaptiveControlLoop parameters (injection strength, chunk_k, active_scales). It does not update any weight matrix. The only actual learning is in the anchor memory.</p>
+<h2 id="83-hard-negative-mining"><strong>8.3 Hard Negative Mining</strong></h2>
+<p>Hard negatives are the 3 closest wrong-class anchors to the current input. These are the actual confusions the model currently has — more informative than random window negatives. They are encoded via bridge-only (skipping the 6-loop HRNA pass) because only their direction in the state space matters for the contrastive margin, not their equilibrium resonance state.</p>
+<h2 id="84-cyphastateful-and-checkpointing"><strong>8.4 CyphaStateful and Checkpointing</strong></h2>
+<p>CyphaStateful wraps Cypha with two capabilities:</p>
+<ul>
+<li>Byte-offset streaming: the dataset file is indexed once at startup (~8 bytes per line), then training seeks to random sample positions without loading the file into RAM. A 5 GB RF dataset trains on a 4 GB machine.</li>
+<li>Checkpoint save/resume: after each epoch, all anchor vectors and labels are saved to a NumPy .npz archive plus a JSON metadata file. On resume, the full memory is reconstructed in a single pass with all O(1) index structures (_key_to_gi, _cls_idx, _class_counts) rebuilt correctly.</li>
+</ul>
+<h1 id="9-inference"><strong>9. Inference</strong></h1>
+<p>infer(text) runs the same encode + resonate pipeline as training but with 6 injection loops instead of 3, then classifies via weighted nearest-prototype voting:</p>
+<p>1. Reset all 5 HRNA levels.</p>
+<p>2. forward(text, training=False)   (6 inject+evolve loops, higher quality)</p>
+<p>3. anchor_q = encode_features(text)   (same encoder path as training)</p>
+<p>4. matches = memory.lookup(anchor_q, k=1)   (k=1 is optimal for clean prototypes)</p>
+<p>5. candidates = [(memory.get_output(k), sim) for k, sim in matches]</p>
+<p>6. thought.note_uncertainty(margin, candidates)</p>
+<p>7. IF uncertain AND density ok: thought.deliberate(anchor_q, candidates) → revised class</p>
+<p>8. ELSE: top-1 nearest prototype wins.</p>
+<p>9. conf = exp(best_sim / temperature)</p>
+<p>10. return (class_label, confidence)</p>
+<p>The confidence score is exp(s / T) where T = temperature (starts at 1.5, decays 3% every 200 training steps toward 0.8). Higher similarity → higher confidence. The temperature controls how sharply confidence peaks near 1.0.</p>
+<h1 id="10-measured-performance-february-2026"><strong>10. Measured Performance (February 2026)</strong></h1>
+<p>The following table is derived from 9 profiling sessions run against the production-configured system (feature_dim=512, resonance_dim=256). All measurements on a single CPU core.</p>
+<p><strong>Component</strong></p>
+<p><strong>Median cost</strong></p>
+<p><strong>Scales as</strong></p>
+<p><strong>Notes</strong></p>
+<p>train_step() — text</p>
+<p>4.8 ms</p>
+<p>flat</p>
+<p>208 steps/s; stable across all epochs</p>
+<p>encode_features — text</p>
+<p>260 μs</p>
+<p>O(1)</p>
+<p>57% in _omega_at_scale × 3 passes</p>
+<p>encode_features — IQ/RF</p>
+<p>1,604 μs</p>
+<p>O(1)</p>
+<p>5.7× text; FFT spectral extraction</p>
+<p>encode_features — PCM/audio</p>
+<p>1,418 μs</p>
+<p>O(1)</p>
+<p>5.0× text; mel filterbank</p>
+<p>memory.store() EMA path</p>
+<p>10 μs</p>
+<p>O(1)</p>
+<p>_key_to_gi dict lookup</p>
+<p>memory.lookup() dim=512</p>
+<p>10 μs</p>
+<p>O(n⁰·⁰¹)</p>
+<p>BLAS sgemv, bandwidth-bound, flat to 10k</p>
+<p>deliberate() fast exit</p>
+<p>0.5 μs</p>
+<p>O(1)</p>
+<p>density guard / window skip</p>
+<p>deliberate() Rocchio</p>
+<p>65–70 μs</p>
+<p>flat to 10k</p>
+<p>4 × lookup + 5 μs centroid math</p>
+<p>consolidate() at 3k anchors</p>
+<p>0.7 ms</p>
+<p>O(n log n)</p>
+<p>every 200 steps; 0.004 ms/step amortised</p>
+<p>_compute_class_cap()</p>
+<p>0.05 ms</p>
+<p>O(n^1.14)</p>
+<p>every 20 new anchors; 0.002 ms/step amortised</p>
+<p>Field simulation per infer()</p>
+<p>~3 ms</p>
+<p>O(1)</p>
+<p>18 events × enhanced_resonance(); dominant cost</p>
+<h1 id="11-full-class-inventory"><strong>11. Full Class Inventory</strong></h1>
+<p>All 20+ classes in Cypha.py, in order of first appearance:</p>
+<p><strong>EncoderParams</strong></p>
+<p>Dataclass: chunk_k, damr_radius, active_scales, prev_error. Passed through AdaptiveControlLoop.</p>
+<p><strong>FieldStats</strong></p>
+<p>Dataclass: criticality, dominant_freq, mean_phase, phase_spread, energy. Returned by field.stats().</p>
+<p><strong>Event</strong></p>
+<p>Dataclass: type, time, data, source, priority. Used by EventScheduler.</p>
+<p><strong>Metrics</strong></p>
+<p>Dataclass: step, loss, criticality, chunk_k, damr_r, n_anchors, ms, events. Returned by train_step().</p>
+<p><strong>EventType</strong></p>
+<p>Enum: PATTERN, SURPRISE, RESONANCE, EXTERNAL, FEEDBACK, THOUGHT.</p>
+<p><strong>OmegaEncoder</strong></p>
+<p>Universal signal encoder. encode_features() dispatches to encode_text / _encode_iq / _encode_audio.</p>
+<p><strong>PhaseBridge</strong></p>
+<p>Projects v ∈ ℝᵈ → ψ ∈ ℂʳ via amplitude + phase + basis. Fixed random weights, never updated.</p>
+<p><strong>ResonanceField</strong></p>
+<p>L1: FFT Hamiltonian + γ(|ψ|²−1) nonlinear evolution. Primary field dynamics.</p>
+<p><strong>ResonatorLevel</strong></p>
+<p>L2: Local coupling between adjacent oscillators + lateral inhibition.</p>
+<p><strong>AssemblyLevel</strong></p>
+<p>L3: 16 sub-fields with resonant chain modulation.</p>
+<p><strong>ModuleLevel</strong></p>
+<p>L4: 8 assemblies compressed to a global feature.</p>
+<p><strong>GlobalLevel</strong></p>
+<p>L5: Final state readout dim=256.</p>
+<p><strong>EventScheduler</strong></p>
+<p>Priority queue for time-ordered event delivery to the field.</p>
+<p><strong>EventGenerator</strong></p>
+<p>Generates HRNA events (PATTERN, SURPRISE, etc.) from field statistics.</p>
+<p><strong>RecursiveProcessor</strong></p>
+<p>Iterative state refinement via IIR filter on psi.</p>
+<p><strong>FeedbackController</strong></p>
+<p>Applies corrective feedback based on MetaLearning loss signal.</p>
+<p><strong>ThoughtProcessor</strong></p>
+<p>Uncertainty estimation, Rocchio deliberation, confusion memory.</p>
+<p><strong>MetaLearning</strong></p>
+<p>Contrastive loss with hard negatives and novelty boost. Drives AdaptiveControlLoop.</p>
+<p><strong>ModalityDetector</strong></p>
+<p>Detects input modality from prefix. Tracks per-modality accuracy.</p>
+<p><strong>AnchorMemory</strong></p>
+<p>Prototype store: _V matrix, _key_to_gi dict, _cls_idx dict. store/lookup/consolidate.</p>
+<p><strong>AdaptiveControlLoop</strong></p>
+<p>Three control laws: chunk_k ← criticality, DAMR radius ← freq, scales ← coherence.</p>
+<p><strong>SparseComputer</strong></p>
+<p>LRU cache for repeated computations (256 slots).</p>
+<p><strong>WorkStealer</strong></p>
+<p>ThreadPoolExecutor wrapper for parallel sub-tasks.</p>
+<p><strong>PrecisionController</strong></p>
+<p>Adaptive float32/float64 switching.</p>
+<p><strong>Cypha</strong></p>
+<p>Main system: assembles all components. train_step(), train(), infer(), encode_features().</p>
+<p><strong>CyphaStateful</strong></p>
+<p>Wraps Cypha with byte-offset streaming, epoch checkpointing, and dataset state management.</p>
+<h1 id="12-quick-start-code"><strong>12. Quick-Start Code</strong></h1>
+<h2 id="121-install"><strong>12.1 Install</strong></h2>
+<p>pip install numpy   # Only dependency</p>
+<h2 id="122-train-and-classify"><strong>12.2 Train and Classify</strong></h2>
+<p>from Cypha import Cypha</p>
+<p>c = Cypha(feature_dim=512, resonance_dim=256)</p>
+<p># Training data: any list of (input_string, label_string) pairs</p>
+<p>data = [</p>
+<pre><code>\("SELECT id FROM users WHERE active=1",     "safe\_sql"\),
+
+\("' OR 1=1 \-\-",                             "sql\_inject"\),
+
+\("VirtualAllocEx PAGE\_EXECUTE\_READWRITE",   "malware"\),
+
+\("CreateFile GENERIC\_READ OPEN\_EXISTING",   "safe\_api"\),
+</code></pre>
+<p>]</p>
+<p># Train for 5 epochs (each call resets the field, stores one anchor)</p>
+<p>for epoch in range(5):</p>
+<pre><code>for inp, label in data:
+
+    c\.field\.reset\(\); c\.res\_level\.reset\(\)
+
+    c\.assembly\.reset\(\); c\.module\.reset\(\); c\.global\_l\.reset\(\)
+
+    c\.train\_step\(inp, label\)
+</code></pre>
+<p># Inference</p>
+<p>result, conf = c.infer("DELETE FROM users WHERE 1=1", verbose=False)</p>
+<p>print(f"Class: {result}  Confidence: {conf:.3f}")</p>
+<h2 id="123-with-checkpointing-for-large-datasets"><strong>12.3 With Checkpointing (for large datasets)</strong></h2>
+<p>from Cypha import CyphaStateful</p>
+<p># feature_dim=4096 is used in the full benchmark</p>
+<p>c = CyphaStateful(feature_dim=4096, resonance_dim=256)</p>
+<p># Train on a file in wire format (input|||label per line)</p>
+<p># Resumes automatically if a checkpoint exists</p>
+<p>c.train_file_stateful("sql_injection.txt", dataset_name="sql", epochs=1)</p>
+<p># Inference is identical to basic Cypha</p>
+<p>result, conf = c.infer("1; DROP TABLE users --", verbose=False)</p>
+<h2 id="124-multi-modal-rf-signal-classification"><strong>12.4 Multi-modal: RF signal classification</strong></h2>
+<p>import numpy as np</p>
+<p>from Cypha import Cypha</p>
+<p>c = Cypha()</p>
+<p># RF data: int8 IQ samples encoded as "iq:" hex prefix</p>
+<p># In production these come from convert.py -&gt; panoradio_rf.txt</p>
+<p>raw_iq = np.random.randint(-127, 127, 2048, dtype=np.int8)</p>
+<p>iq_str = "iq:" + raw_iq.tobytes().hex()</p>
+<p>c.train_step(iq_str, "am")   # works exactly like text training</p>
+<p>result, conf = c.infer(iq_str, verbose=False)</p>
+<h1 id="13-symbol-glossary"><strong>13. Symbol Glossary</strong></h1>
+<p><strong>Ω(x)</strong></p>
+<p>Omega operator: concat[M(x), M(D(x)), M(D²(x)), R(x,K), A(x,L)]</p>
+<p><strong>Ω₃(x)</strong></p>
+<p>Three-scale Omega: concat[Ω(x), Ω(x[:n/2]), Ω(x[n/2:])]</p>
+<p><strong>M(x)</strong></p>
+<p>Moment vector: [mean, std, excess_kurtosis, skewness]</p>
+<p><strong>D(x)</strong></p>
+<p>First difference: D(x)[i] = x[i+1] − x[i]</p>
+<p><strong>κ(D(x))</strong></p>
+<p>Kurtosis of first derivative. Primary universal discriminator (r=0.9985).</p>
+<p><strong>R(x,K)</strong></p>
+<p>Spectral band energy: K=16 L1-normalised FFT bins</p>
+<p><strong>A(x,L)</strong></p>
+<p>Autocorrelation at L=8 log-spaced lags</p>
+<p><strong>v ∈ ℝᵈ</strong></p>
+<p>Omega feature vector, d=feature_dim=512, L2-normalised</p>
+<p><strong>ψ ∈ ℂʳ</strong></p>
+<p>Complex field state, r=resonance_dim=256, unit-normalised</p>
+<p><strong>H[k]</strong></p>
+<p>Hamiltonian: H[k] = 0.5 + k·9.5/r (linearly spaced 0.5 to 10)</p>
+<p><strong>γ</strong></p>
+<p>Nonlinear self-interaction coefficient. γ=5 in ResonanceField.</p>
+<p><strong>Δt</strong></p>
+<p>Evolution time step. Δt=0.3.</p>
+<p><strong>N[·]</strong></p>
+<p>L2 normalisation: N[v] = v / ‖v‖</p>
+<p><strong>κ_field</strong></p>
+<p>Field criticality: top-10 energy concentration × variance × 100</p>
+<p><strong>sim(u,v)</strong></p>
+<p>Cosine similarity = u·v (both unit vectors)</p>
+<p><strong>τ_dedup</strong></p>
+<p>Dedup threshold: sim ≥ 0.55 → EMA update instead of new anchor</p>
+<p><strong>α</strong></p>
+<p>EMA learning rate: α = 0.15 + 0.25·u ∈ [0.15, 0.40]</p>
+<p><strong>u</strong></p>
+<p>Uncertainty: u = exp(−margin/τ), τ = rolling p75 of margins</p>
+<p><strong>η</strong></p>
+<p>LVQ2.1 learning rate: η=0.02</p>
+<p><strong>θ_w</strong></p>
+<p>LVQ2.1 window threshold: θ_w=0.30</p>
+<p><strong>β</strong></p>
+<p>Rocchio bias strength: β ∈ {0.5, 1.0}</p>
+<p><strong>T</strong></p>
+<p>Temperature for confidence: T starts at 1.5, decays to 0.8</p>
+<p><strong>|||</strong></p>
+<p>Wire format delimiter between input and label strings</p>
+<p>End of Cypha.py reference.  Next: download.py</p>
+  </main>
+</body>
+</html>

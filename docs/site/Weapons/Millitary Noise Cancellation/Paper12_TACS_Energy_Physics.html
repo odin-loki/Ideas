@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Paper12 TACS Energy Physics</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Weapons\Millitary Noise Cancellation\Paper12_TACS_Energy_Physics.html</span>
+  </header>
+  <main class="prose">
+<p><strong>Acoustic Energy Conservation in Tactical Active Noise Control</strong></p>
+<p>Wave Interference Physics and Anti-Node Hazard Analysis</p>
+<p><strong>TECHNICAL RESEARCH PAPER</strong></p>
+<p>Document No. TRP-2026-012 | Version 1.0</p>
+<p>Prepared for: Australian Department of Defence | March 2026</p>
+<h1 id="abstract"><strong>Abstract</strong></h1>
+<p>This paper provides a rigorous physics analysis of acoustic energy behaviour in Tactical Active Noise Control (TACS) systems, addressing the fundamental question of what happens to acoustic energy when destructive interference cancellation is achieved. The first law of thermodynamics establishes that acoustic energy cannot be created or destroyed—only redistributed. A mathematical analysis of two-source wave superposition demonstrates that while cancellation nodes achieve zero intensity, anti-nodes formed elsewhere in the field achieve 4× baseline intensity (4A² vs A²), creating regions substantially louder than the original source alone. The total acoustic power in the field equals the sum of source and emitter powers. This analysis has critical implications for TACS deployment doctrine: anti-nodes are not a malfunction but a fundamental consequence of wave physics, and their location must be determined and managed to prevent hearing damage in the deployed force. Asymmetric emitter power (30-50% of source power) is recommended to reduce anti-node severity while accepting a moderate reduction in cancellation depth.</p>
+<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
+<p>Active noise cancellation is commonly described in terms of what it achieves—quiet zones—rather than what it requires: spatial redistribution of acoustic energy. This framing leads to a misunderstanding of the physics with potentially dangerous operational consequences. If TACS is deployed with the understanding that it "cancels" sound in a zone, operators may position themselves in anti-node regions with no awareness that they are exposed to higher sound intensities than would exist without TACS.</p>
+<p>This paper presents the wave physics of two-source acoustic superposition, derives the energy distribution consequences mathematically, and draws practical conclusions for TACS deployment design and doctrine. The analysis is consistent with the conservation of energy (First Law of Thermodynamics) and established acoustic wave theory.</p>
+<h1 id="2-fundamental-physics"><strong>2. Fundamental Physics</strong></h1>
+<h2 id="21-wave-superposition-and-destructive-interference"><strong>2.1 Wave Superposition and Destructive Interference</strong></h2>
+<p>For a single-frequency tone, the acoustic pressure at any point in space is the sum of contributions from all sources. Consider a noise source and a TACS emitter, both at frequency ω, amplitudes A₁ and A₂:</p>
+<p>P(x,y,z) = A₁·sin(ωt − φ₁) + A₂·sin(ωt − φ₂)</p>
+<p>where φ₁ and φ₂ are phase angles determined by distance from each source to the evaluation point.</p>
+<p>At cancellation nodes (φ₂ − φ₁ = π): P = A·sin(ωt) − A·sin(ωt) = 0. Sound intensity I = 0.</p>
+<p>At anti-nodes (φ₂ − φ₁ = 0): P = 2A·sin(ωt). Sound intensity I = (2A)² = 4A².</p>
+<p>Compared to baseline (source only): I_baseline = A². Therefore, anti-nodes have 4× baseline intensity, corresponding to +6 dB above the original source. If the original source is 110 dB SPL, anti-nodes can reach 116 dB SPL—well into hearing damage territory for sustained exposure.</p>
+<h2 id="22-conservation-of-energy-accounting"><strong>2.2 Conservation of Energy Accounting</strong></h2>
+<p>Integrating acoustic intensity over all space, total acoustic power with TACS operating equals source power plus emitter power. For a 100W source with 100W TACS emitters (matched power), total acoustic power = 200W. This energy is redistributed—concentrated in anti-nodes, absent from nodes—but the total is conserved. TACS does not remove acoustic energy; it relocates it.</p>
+<p><strong>Condition</strong></p>
+<p><strong>Total Acoustic Power</strong></p>
+<p>Source only (100W)</p>
+<p>100 W</p>
+<p>TACS operating (100W source + 100W emitters)</p>
+<p>200 W</p>
+<p>Asymmetric TACS (100W source + 50W emitters)</p>
+<p>150 W</p>
+<h1 id="3-anti-node-hazard-analysis"><strong>3. Anti-Node Hazard Analysis</strong></h1>
+<h2 id="31-intensity-at-anti-nodes"><strong>3.1 Intensity at Anti-Nodes</strong></h2>
+<p>For a practical TACS-Personal installation with a 100W vehicle engine as the source and 100W TACS emitters:</p>
+<p>Source-only intensity at 5m (inverse-square law): I = P/(4πr²) = 100/(4π×25) ≈ 0.32 W/m². Corresponding SPL ≈ 115 dB.</p>
+<p>Anti-node intensity: 4 × 0.32 = 1.27 W/m². Corresponding SPL ≈ 121 dB.</p>
+<p>NIOSH occupational noise exposure limits specify 95 dB for 1 hour, 100 dB for 15 minutes. At 121 dB, permissible exposure time is approximately 30 seconds. Personnel in anti-nodes of a matched-power TACS system face acute hearing damage risk.</p>
+<h2 id="32-anti-node-location-prediction"><strong>3.2 Anti-Node Location Prediction</strong></h2>
+<p>For a simple two-source system (one noise source, one TACS emitter), anti-nodes form on a set of hyperboloids of revolution symmetrically about the axis connecting the two sources. In practice, with multiple emitters and a complex noise source, anti-node geometry becomes three-dimensional and irregular. Computational acoustic modelling is required to map anti-node positions before personnel deployment. This is a non-negotiable design step for any TACS installation.</p>
+<h1 id="4-recommended-design-principles"><strong>4. Recommended Design Principles</strong></h1>
+<h2 id="41-asymmetric-emitter-power"><strong>4.1 Asymmetric Emitter Power</strong></h2>
+<p>Using emitter power at 30-50% of source power rather than matched power:</p>
+<p>Benefit: Reduces anti-node intensity. At 50% emitter power, anti-node intensity is (1.5A)² = 2.25A²—approximately +3.5 dB above baseline, compared to +6 dB for matched power. Significantly reduces hearing damage risk in occupied anti-node regions.</p>
+<p>Cost: Cancellation depth at nodes is reduced. With 50W emitters cancelling a 100W source, maximum theoretical cancellation depth decreases from complete cancellation to approximately 40-45 dB, depending on geometry and frequency.</p>
+<p>Conclusion: For practical TACS deployment, 30-50% emitter power is recommended as the default operating mode, accepting reduced cancellation depth in exchange for manageable anti-node hazard.</p>
+<h2 id="42-directional-emitter-arrays"><strong>4.2 Directional Emitter Arrays</strong></h2>
+<p>Directional emitter arrays concentrate anti-noise energy toward the target zone and form anti-nodes in the opposite direction, away from operators. This requires careful array design and computational optimisation but can substantially improve the ratio of quiet zone volume to anti-node hazard zone volume.</p>
+<h2 id="43-active-anti-node-suppression"><strong>4.3 Active Anti-Node Suppression</strong></h2>
+<p>Advanced TACS designs can monitor sound pressure level (SPL) throughout the operational area using a distributed microphone array, detect anti-nodes in real-time, and adjust emitter phases to minimise anti-node amplitude. This approach is computationally intensive and requires high microphone and emitter density, but provides the most comprehensive hazard management. It is recommended for the Fixed variant where the static installation justifies higher sensor infrastructure investment.</p>
+<h1 id="5-human-factors-the-painful-experience-case"><strong>5. Human Factors: The "Painful Experience" Case</strong></h1>
+<p>The source document references a user experiencing pain when positioned near a TACS installation. The physics analysis explains this clearly. The user was most likely positioned in an anti-node—a region of constructive interference where TACS emitters combined with the source to produce intensity 3-6 dB above the source alone. This is not a system malfunction; it is an expected consequence of wave physics. The appropriate response is: (1) map anti-node positions before personnel entry; (2) establish anti-node exclusion zones; (3) brief all operators on anti-node hazard before system deployment.</p>
+<h1 id="6-mathematical-summary"><strong>6. Mathematical Summary</strong></h1>
+<p><strong>Parameter</strong></p>
+<p><strong>Formula</strong></p>
+<p>Node Intensity</p>
+<p>0 × A²</p>
+<p>Anti-Node Intensity</p>
+<p>4 × A²</p>
+<p>Total Power</p>
+<p>P_source + P_emitters</p>
+<p>50% Emitter Anti-Node</p>
+<p>(1.5A)²=2.25A²</p>
+<h1 id="7-conclusion"><strong>7. Conclusion</strong></h1>
+<p>Active noise control systems redistribute acoustic energy—they do not destroy it. Anti-nodes formed in TACS systems can expose personnel to sound intensities substantially exceeding both the original source and safe exposure limits. Asymmetric emitter power (30-50% of source), directional emitter arrays, and active anti-node monitoring are the three recommended mitigation strategies. No TACS system should be deployed in personnel-occupied environments without prior anti-node mapping and exclusion zone establishment. The FxLMS algorithm and TACS hardware performance are sufficient for the stated tactical missions; the primary deployment challenge is acoustic safety management, not cancellation performance.</p>
+<h1 id="8-references"><strong>8. References</strong></h1>
+<p>[1] Kuo, S.M. &amp; Morgan, D.R. (1996). Active Noise Control Systems: Algorithms and DSP Implementations. Wiley.</p>
+<p>[2] Elliott, S.J. (2001). Signal Processing for Active Control. Academic Press.</p>
+<p>[3] Nelson, P.A. &amp; Elliott, S.J. (1991). Active Control of Sound. Academic Press.</p>
+<p>[4] NIOSH. (1998). Criteria for a Recommended Standard: Occupational Noise Exposure. DHHS(NIOSH) Publication 98-126.</p>
+<p>[5] ResearchGate. (2022). Active Control for Marine Engine Room Noise Using FxLMS. Scientific Programming, Wiley.</p>
+<p>[6] Lueg, P. (1936). US Patent 2,043,416: Process of Silencing Sound Oscillations.</p>
+  </main>
+</body>
+</html>

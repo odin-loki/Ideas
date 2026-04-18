@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Binary Encoder Math Model</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cell AI\Cell AI\Binary Encoder Math Model.html</span>
+  </header>
+  <main class="prose">
+<h1 id="mathematical-framework-for-cellular-binary-encoding">Mathematical Framework for Cellular Binary Encoding</h1>
+<h2 id="1-core-mathematical-framework">1. Core Mathematical Framework</h2>
+<p>Let $\mathcal{F}$ represent a binary file as a sequence of bytes $\mathcal{F} = (b_1, b_2, \ldots, b_N)$ where $b_i \in {0, 1, \ldots, 255}$ and $N$ is the file size in bytes.</p>
+<p>The goal is to transform $\mathcal{F}$ into a feature vector $\vec{v} \in \mathbb{R}^d$ that captures the essential patterns and structures within the data.</p>
+<h2 id="2-content-defined-chunking">2. Content-Defined Chunking</h2>
+<p>We partition $\mathcal{F}$ into chunks $\mathcal{C} = {C_1, C_2, \ldots, C_M}$ using content-defined boundaries rather than fixed-size divisions.</p>
+<p>For each position $i$ in $\mathcal{F}$, we compute a rolling hash function $h$ over a window of size $w$:</p>
+<p>$$h(i) = \mathcal{H}(b_i, b_{i+1}, \ldots, b_{i+w-1})$$</p>
+<p>where $\mathcal{H}$ is a hash function (specifically xxHash64).</p>
+<p>We define position $i$ as a chunk boundary if:</p>
+<p>$$h(i) \bmod 2^k = 0$$</p>
+<p>where $k$ is a parameter controlling chunk size (typically $k = 12$).</p>
+<p>This results in variable-sized chunks with expected size $2^k$ bytes, bounded between $min_chunk_size$ and $max_chunk_size$.</p>
+<h2 id="3-multi-scale-analysis">3. Multi-Scale Analysis</h2>
+<p>For each chunk $C_j$, we analyze the data at multiple scales. Let $\alpha = {1.0, 0.5, 0.25, 0.125}$ be the set of scale factors.</p>
+<p>For each scale factor $\alpha_i$, we extract a subset of the chunk:</p>
+<p>$$C_j^{(\alpha_i)} = (b_1, b_2, \ldots, b_{\lfloor \alpha_i |C_j| \rfloor})$$</p>
+<p>where $|C_j|$ denotes the size of chunk $C_j$.</p>
+<h2 id="4-wavelet-decomposition">4. Wavelet Decomposition</h2>
+<p>For each scaled chunk $C_j^{(\alpha_i)}$, we apply a wavelet transform to obtain coefficients at different frequency bands:</p>
+<p>$${A_L, D_L, D_{L-1}, \ldots, D_1} = \Psi(C_j^{(\alpha_i)})$$</p>
+<p>where $\Psi$ is the Daubechies-4 wavelet transform, $A_L$ are approximation coefficients at level $L$, and $D_l$ are detail coefficients at level $l$.</p>
+<p>From each coefficient set, we extract statistical features:</p>
+<p>$$\mu(X) = \frac{1}{|X|}\sum_{x \in X} x \quad \text{(mean)}$$</p>
+<p>$$\sigma(X) = \sqrt{\frac{1}{|X|}\sum_{x \in X} (x - \mu(X))^2} \quad \text{(standard deviation)}$$</p>
+<p>$$E(X) = \sum_{x \in X} x^2 \quad \text{(energy)}$$</p>
+<p>$$H(X) = -\sum_{x \in X} p(x) \log p(x) \quad \text{(entropy)}$$</p>
+<p>$$S(X) = \frac{1}{|X|\sigma^3(X)}\sum_{x \in X} (x - \mu(X))^3 \quad \text{(skewness)}$$</p>
+<p>$$K(X) = \frac{1}{|X|\sigma^4(X)}\sum_{x \in X} (x - \mu(X))^4 - 3 \quad \text{(kurtosis)}$$</p>
+<h2 id="5-cellular-dynamics">5. Cellular Dynamics</h2>
+<p>We model cellular memory dynamics based on the differential equation:</p>
+<p>$$\frac{dS}{dt} = f(I, S, t) - \gamma S + D\nabla^2 S + \eta(t)$$</p>
+<p>where:<br />
+- $S$ is the state vector<br />
+- $I$ is the input (byte values)<br />
+- $\gamma$ is the decay rate<br />
+- $D$ is the diffusion coefficient<br />
+- $\nabla^2 S$ is the Laplacian of $S$ (approximated as difference with neighbors)<br />
+- $\eta(t)$ is a noise term</p>
+<p>In discrete form, for each byte $b_t$ at position $t$:</p>
+<ol>
+<li>We create an input vector $I_t$ with a 1 at position $b_t$ and 0 elsewhere.</li>
+<li>We compute the diffusion term:<br />
+   $$(\nabla^2 S)<em i-1="i-1">i = \frac{1}{2}[(S</em> - S_i)]$$} - S_i) + (S_{i+1</li>
+<li>We update the state:<br />
+   $$S_{t+1} = S_t + \Delta t \cdot [I_t + D\nabla^2 S_t - \gamma S_t + \eta_t]$$</li>
+</ol>
+<p>Where $\Delta t$ is the time step, typically set to 0.1.</p>
+<h2 id="6-dynamic-adaptive-multi-scale-reservoir-damr">6. Dynamic Adaptive Multi-scale Reservoir (DAMR)</h2>
+<p>We maintain $R$ reservoirs, each of size 256 (one value per possible byte). For each reservoir $r \in {1, 2, \ldots, R}$, we define:<br />
+- Influence radius $\rho_r$<br />
+- Influence strength $\sigma_r$</p>
+<p>For each byte $b_t$ in the chunk, we update reservoir $r$ as follows:</p>
+<ol>
+<li>
+<p>Base increment:<br />
+   $$V_r[b_t] \leftarrow V_r[b_t] + 1$$</p>
+</li>
+<li>
+<p>Neighbor influence with decay:<br />
+   $$V_r[(b_t \pm j) \bmod 256] \leftarrow V_r[(b_t \pm j) \bmod 256] + \frac{\sigma_r}{j} \cdot \beta_t$$</p>
+</li>
+</ol>
+<p>for $j \in {1, 2, \ldots, \rho_r}$, where $\beta_t$ is a contextual boost factor.</p>
+<ol start="3">
+<li>Contextual boost calculation:<br />
+   Let $W_t = (b_{t-w+1}, \ldots, b_t)$ be the window of the $w$ most recent bytes.</li>
+</ol>
+<p>Count repetitions of the current byte in the window:<br />
+   $$c_t = |{b_i \in W_t : b_i = b_t}|$$</p>
+<p>Apply fast sigmoid approximation:<br />
+   $$\beta_t = \frac{c_t - 1.5}{1 + |c_t - 1.5|}$$</p>
+<h2 id="7-n-gram-analysis">7. N-gram Analysis</h2>
+<p>For each n-gram size $n \in {2, 3, 4}$, we extract all n-grams from chunk $C_j$:</p>
+<p>$$G_n(C_j) = {(b_i, b_{i+1}, \ldots, b_{i+n-1}) : 1 \leq i \leq |C_j| - n + 1}$$</p>
+<p>We count the frequency of each n-gram $g$:</p>
+<p>$$f_n(g) = |{i : (b_i, \ldots, b_{i+n-1}) = g}|$$</p>
+<p>We normalize these frequencies by the total number of n-grams:</p>
+<p>$$p_n(g) = \frac{f_n(g)}{|C_j| - n + 1}$$</p>
+<p>For the top-k most frequent n-grams, we create features using their normalized frequencies.</p>
+<h2 id="8-spectral-analysis">8. Spectral Analysis</h2>
+<p>We compute the Discrete Fourier Transform of each chunk:</p>
+<p>$$X[k] = \sum_{n=0}^{N-1} x[n] \cdot e^{-i2\pi kn/N}$$</p>
+<p>where $x[n]$ is the byte value at position $n$.</p>
+<p>We extract features from the magnitude spectrum $|X[k]|$:</p>
+<ul>
+<li>Spectral centroid: $\frac{\sum_{k=0}^{N/2} k \cdot |X[k]|}{\sum_{k=0}^{N/2} |X[k]|}$</li>
+<li>Spectral spread: $\sqrt{\frac{\sum_{k=0}^{N/2} (k - \text{centroid})^2 \cdot |X[k]|}{\sum_{k=0}^{N/2} |X[k]|}}$</li>
+<li>Spectral entropy: $-\sum_{k=0}^{N/2} p_k \log p_k$ where $p_k = \frac{|X[k]|}{\sum_j |X[j]|}$</li>
+</ul>
+<h2 id="9-adaptive-dictionary-encoding">9. Adaptive Dictionary Encoding</h2>
+<p>We build a dictionary $\mathcal{D}$ of recurring patterns across all chunks.</p>
+<p>For each pattern $P$ of length $l \in {3, 4, \ldots, 16}$, we count its frequency across all chunks:</p>
+<p>$$f(P) = \sum_{j=1}^M |{i : (b_i, \ldots, b_{i+l-1}) = P \text{ in } C_j}|$$</p>
+<p>We keep patterns with frequency $f(P) \geq \theta_f$ (typically $\theta_f = 2$).</p>
+<p>For each chunk $C_j$, we compute a match ratio:</p>
+<p>$$M(C_j) = \frac{\sum_{P \in \mathcal{D}} |P| \cdot |{i : (b_i, \ldots, b_{i+|P|-1}) = P \text{ in } C_j}|}{|C_j|}$$</p>
+<h2 id="10-lightweight-feature-selective-lfs-mechanism">10. Lightweight Feature-Selective (LFS) Mechanism</h2>
+<p>For each chunk, we identify statistically significant windows using an adaptive threshold:</p>
+<ol>
+<li>Compute statistics (mean, standard deviation, entropy) for overlapping windows</li>
+<li>Calculate importance scores based on variation of these statistics</li>
+<li>Identify windows whose importance exceeds the threshold:<br />
+   $$\tau = \mu_I + \lambda \cdot \sigma_I$$</li>
+</ol>
+<p>where $\mu_I$ and $\sigma_I$ are the mean and standard deviation of importance scores, and $\lambda$ is a scaling factor (typically 0.1).</p>
+<h2 id="11-locality-sensitive-hashing">11. Locality-Sensitive Hashing</h2>
+<p>We compute LSH signatures for fast similarity comparison:</p>
+<p>$$h_i(\mathcal{F}) = \text{mmh3}(\mathcal{F}, \text{seed}=i)$$</p>
+<p>for $i \in {1, 2, \ldots, H}$ where $H$ is the number of hash functions (typically 10).</p>
+<h2 id="12-feature-combination-and-selection">12. Feature Combination and Selection</h2>
+<p>For each feature type, we compute aggregate statistics across all chunks:</p>
+<p>$$\mu(f) = \frac{1}{M}\sum_{j=1}^M f(C_j)$$</p>
+<p>$$\max(f) = \max_{j=1}^M f(C_j)$$</p>
+<p>$$\sigma(f) = \sqrt{\frac{1}{M}\sum_{j=1}^M (f(C_j) - \mu(f))^2}$$</p>
+<p>We calculate an importance score for each feature:</p>
+<p>$$I(f) = |\mu(f)| \cdot (1 + \sigma(f))$$</p>
+<p>We select the top $\tau$ fraction of features based on importance scores (typically $\tau = 0.3$).</p>
+<h2 id="13-dimensionality-reduction">13. Dimensionality Reduction</h2>
+<p>For high-dimensional feature spaces, we apply:</p>
+<ol>
+<li>
+<p>Truncated Singular Value Decomposition (SVD):<br />
+   $$X_{SVD} = U_k \Sigma_k V_k^T$$<br />
+   where $k$ is the number of components (typically 64).</p>
+</li>
+<li>
+<p>Random Projection:<br />
+   $$X_{RP} = X \cdot R$$<br />
+   where $R$ is a random matrix with elements drawn from $\mathcal{N}(0, \frac{1}{\sqrt{d}})$.</p>
+</li>
+</ol>
+<h2 id="14-final-feature-vector">14. Final Feature Vector</h2>
+<p>The final feature vector is a concatenation of the selected features from all methods:</p>
+<p>$$\vec{v} = [v_1, v_2, \ldots, v_d]$$</p>
+<p>where $d$ is the dimensionality of the feature space (typically bounded by $max_features$).</p>
+<p>This vector serves as a comprehensive statistical fingerprint of the original binary file, capturing patterns at multiple scales and through multiple analytical lenses.</p>
+  </main>
+</body>
+</html>

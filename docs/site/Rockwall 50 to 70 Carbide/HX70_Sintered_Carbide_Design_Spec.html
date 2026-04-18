@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>HX70 Sintered Carbide Design Spec</title>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../index.html">Index</a>
+    <span class="path">Rockwall 50 to 70 Carbide\HX70_Sintered_Carbide_Design_Spec.html</span>
+  </header>
+  <main class="prose">
+<p><strong>PROJECT HX-70</strong></p>
+<p><strong>NEXT-GENERATION SINTERED CARBIDE SYSTEM</strong></p>
+<p>Full-Spectrum Design: Substrate  ·  Sintering  ·  Coating  ·  Geometry  ·  Process Parameters</p>
+<p>Target Capability: HRC 40–70 Hardened Steel  |  Endurance: ≥ Current Premium Carbide</p>
+<p><strong>Document Field</strong></p>
+<p><strong>Details</strong></p>
+<p>Classification</p>
+<p>Technical Design Specification</p>
+<p>System Designation</p>
+<p>HX-70 GradePlex™ Sintered Carbide</p>
+<p>Target Workpiece Hardness</p>
+<p>HRC 40 – 70 (up to 900 HV equivalent)</p>
+<p>Substrate Architecture</p>
+<p>Gradient-Sintered WC–Co + TaC/NbC/Cr₃C₂</p>
+<p>Coating System</p>
+<p>Nano-Multilayer AlCrN / AlTiSiN / DLC-Si Triboshield</p>
+<p>Revision</p>
+<p>1.0 — Initial Release</p>
+<h1 id="1-executive-summary"><strong>1. Executive Summary</strong></h1>
+<p>The HX-70 GradePlex™ system is a ground-up sintered carbide tooling solution engineered to machine hardened steels from HRC 40 to HRC 70 with tool life and MRR (material removal rate) performance matching or exceeding current premium carbide grades (e.g. Sandvik 1025, Kennametal KCU25, OSG WXL series) in the ≤60 HRC regime, and equalling CBN at 60–70 HRC while reducing cost by an estimated 60–70%.</p>
+<p>The system consists of three integrated innovations working in concert: (1) a functionally-graded WC–Co substrate with carefully controlled cubic-carbide additions; (2) a quad-layer PVD nanocomposite + triboreactive coating stack; and (3) an optimised edge geometry and cutting parameter framework calibrated across the hardness range.</p>
+<h1 id="2-problem-statement-engineering-challenge"><strong>2. Problem Statement &amp; Engineering Challenge</strong></h1>
+<p>Hard turning and milling of steels above HRC 55 presents a compound failure cascade. Conventional WC–Co carbide, even at ≤6% Co with 0.4 µm grain size, undergoes three simultaneous degradation mechanisms above 700°C contact temperature:</p>
+<ul>
+<li>Cobalt binder softening: Co melting point is 1495°C but loses effective load-bearing capacity &gt;700°C, allowing plastic extrusion of the binder and consequent WC grain dislodgement.</li>
+<li>Diffusive crater wear: Iron's chemical affinity for tungsten drives dissolution of WC grains into the chip stream, accelerating crater growth at the rake face.</li>
+<li>Oxidative flank wear: WC oxidises to volatile WO₃ above 500°C in air, removing tool material at the clearance face continuously during dry cutting.</li>
+</ul>
+<p>The hardness paradox is equally severe: reducing Co content to improve hardness simultaneously reduces fracture toughness (KIC drops from ~14 MPa·m½ at 10% Co to ~8 MPa·m½ at 3% Co), creating a substrate that is hard but catastrophically brittle under the interrupted, thermal-shock, and lateral loading conditions of milling hardened tool steels.</p>
+<p>Current industry solutions — CBN and ceramic inserts — address hardness but cost 10–15× premium carbide and cannot be run in conventional end mill geometries, limiting them to indexable turning and facing. The HX-70 system closes this gap by solving the substrate and coating problem simultaneously.</p>
+<h1 id="3-substrate-design-gradeplextm-functionally-graded-wc-matrix"><strong>3. Substrate Design — GradePlex™ Functionally Graded WC Matrix</strong></h1>
+<h2 id="31-base-composition"><strong>3.1  Base Composition</strong></h2>
+<p>The substrate composition is not uniform. A functionally-graded architecture is specified, with three distinct zones created during sintering:</p>
+<p><strong>Zone</strong></p>
+<p><strong>Depth from Surface</strong></p>
+<p><strong>WC %</strong></p>
+<p><strong>Co %</strong></p>
+<p><strong>Cubic Carbide %</strong></p>
+<p><strong>Role</strong></p>
+<p>Zone A — Surface</p>
+<p>0 – 30 µm</p>
+<p>92.5</p>
+<p>5.5</p>
+<p>2.0 (TaC/NbC)</p>
+<p>Max hardness, wear resistance</p>
+<p>Zone B — Subsurface</p>
+<p>30 – 300 µm</p>
+<p>88.0</p>
+<p>9.0</p>
+<p>3.0 (TaC/NbC/Cr₃C₂)</p>
+<p>Crack arrest, thermal buffer</p>
+<p>Zone C — Core</p>
+<p>300 µm – bulk</p>
+<p>84.5</p>
+<p>13.0</p>
+<p>2.5 (TaC/Cr₃C₂)</p>
+<p>Toughness, vibration damping</p>
+<h2 id="32-grain-size-specification"><strong>3.2  Grain Size Specification</strong></h2>
+<p><strong>Zone</strong></p>
+<p><strong>WC Grain Size (D50)</strong></p>
+<p><strong>Grain Size Class</strong></p>
+<p><strong>Target Hardness (HV30)</strong></p>
+<p>Zone A</p>
+<p>0.25 – 0.35 µm</p>
+<p>Nano-grain</p>
+<p>2050 – 2100</p>
+<p>Zone B</p>
+<p>0.45 – 0.60 µm</p>
+<p>Ultra-fine grain</p>
+<p>1750 – 1850</p>
+<p>Zone C</p>
+<p>0.70 – 0.90 µm</p>
+<p>Sub-micron</p>
+<p>1500 – 1600</p>
+<h2 id="33-cubic-carbide-additions-rationale"><strong>3.3  Cubic Carbide Additions — Rationale</strong></h2>
+<p>The addition of TaC, NbC, and Cr₃C₂ to the WC–Co matrix is critical for three distinct functions:</p>
+<ul>
+<li>Tantalum Carbide (TaC) — 1.5–2.0%: Grain growth inhibitor. TaC precipitation on WC grain boundaries during sintering physically prevents abnormal grain growth at sintering temperatures. Raises cobalt-phase viscosity, reducing plastic flow of binder. Improves hot hardness by solid-solution strengthening of the Co phase.</li>
+<li>Niobium Carbide (NbC) — 0.5–1.0%: Secondary grain inhibitor synergistic with TaC. Improves chemical resistance of the binder phase to iron-group dissolution. NbC dissolves partially into the Co phase, raising its high-temperature strength via carbide precipitation strengthening.</li>
+<li>Chromium Carbide (Cr₃C₂) — 0.5–1.0%: Fine grain stabiliser and oxidation suppressor. Cr₂O₃ scale formed during cutting acts as a diffusion barrier, suppressing WO₃ oxidative volatilisation. Also suppresses cobalt binder oxidation, extending flank face life by 20–35% in comparable experimental systems.</li>
+</ul>
+<h1 id="4-powder-production-preparation"><strong>4. Powder Production &amp; Preparation</strong></h1>
+<h2 id="41-raw-material-specifications"><strong>4.1  Raw Material Specifications</strong></h2>
+<p><strong>Powder</strong></p>
+<p><strong>Purity</strong></p>
+<p><strong>D50</strong></p>
+<p><strong>Oxygen Content (max)</strong></p>
+<p><strong>Source Form</strong></p>
+<p>WC (zone A nano-batch)</p>
+<p>≥ 99.95%</p>
+<p>0.25 µm</p>
+<p>0.10 wt%</p>
+<p>APT reduction, controlled atmosphere</p>
+<p>WC (zone B/C batch)</p>
+<p>≥ 99.95%</p>
+<p>0.55 µm</p>
+<p>0.08 wt%</p>
+<p>APT reduction, H₂ atmosphere</p>
+<p>Co binder</p>
+<p>≥ 99.8%</p>
+<p>0.8 µm</p>
+<p>0.05 wt%</p>
+<p>Oxalate precipitation route</p>
+<p>TaC</p>
+<p>≥ 99.5%</p>
+<p>1.0 µm</p>
+<p>—</p>
+<p>Carburisation of Ta₂O₅</p>
+<p>NbC</p>
+<p>≥ 99.5%</p>
+<p>0.8 µm</p>
+<p>—</p>
+<p>Carburisation of Nb₂O₅</p>
+<p>Cr₃C₂</p>
+<p>≥ 99.5%</p>
+<p>1.5 µm</p>
+<p>—</p>
+<p>Chromium carburisation</p>
+<h2 id="42-milling-mixing-protocol"><strong>4.2  Milling &amp; Mixing Protocol</strong></h2>
+<p>Each zone batch is milled separately in a planetary ball mill using WC-lined vessels with WC-Co milling media (6 mm diameter, 14.5 g/cm³):</p>
+<ul>
+<li>Zone A nano-batch: 36-hour wet mill in n-hexane + 2 wt% paraffin binder, controlled atmosphere N₂. Target particle size: D90 &lt; 0.50 µm. Milling media-to-powder ratio: 5:1.</li>
+<li>Zone B/C batch: 24-hour wet mill in n-hexane + 2 wt% paraffin binder. D90 &lt; 1.0 µm.</li>
+<li>Spray-dry all batches in N₂-purged chamber. Target granule size: 80–200 µm. Tap density ≥ 4.5 g/cm³.</li>
+<li>Store under dry N₂ at ≤20°C. Humidity ≤ 5% RH. Shelf life: 6 months maximum before re-qualification.</li>
+</ul>
+<h1 id="5-green-compact-forming-gradient-press-strategy"><strong>5. Green Compact Forming — Gradient Press Strategy</strong></h1>
+<h2 id="51-die-pressing-rodsend-mill-blanks"><strong>5.1  Die Pressing (Rods/End Mill Blanks)</strong></h2>
+<p>The functional gradient is achieved through sequential die filling and controlled compaction:</p>
+<ul>
+<li>Step 1: Load Zone C core powder into die. Apply pre-press at 50 MPa.</li>
+<li>Step 2: Add Zone B powder layer. Intermediate press at 80 MPa with axial vibration at 100 Hz to prevent delamination and promote inter-layer bonding.</li>
+<li>Step 3: Add Zone A surface powder. Final compaction at 150 MPa (uniaxial). For complex shapes, isostatic compaction at 200 MPa is applied after die extraction.</li>
+<li>Green density target: ≥ 58% theoretical density. Green strength: ≥ 2.5 MPa (3-point bend).</li>
+<li>Binder burnout: 250°C / 30 min in H₂ atmosphere, ramp 2°C/min to prevent cracking.</li>
+</ul>
+<h2 id="52-injection-moulding-complex-geometries-optional"><strong>5.2  Injection Moulding (Complex Geometries — Optional)</strong></h2>
+<p>For complex chip-breaker geometry inserts or non-round end mill shanks, powder injection moulding (PIM) can be used for Zone B/C only. Zone A surface layer is then applied via a post-sinter PVD cementation step (see Section 6.3).</p>
+<h1 id="6-sintering-process-controlled-gradient-sinter"><strong>6. Sintering Process — Controlled Gradient Sinter</strong></h1>
+<h2 id="61-primary-sinter-cycle-vacuum-sinter-hip"><strong>6.1  Primary Sinter Cycle (Vacuum Sinter-HIP)</strong></h2>
+<p>The critical sintering approach combines vacuum sintering with in-situ hot isostatic pressing (Sinter-HIP) to achieve full density (&gt;99.9% theoretical) without abnormal grain growth — the most dangerous failure mode in nano-grain WC–Co.</p>
+<p><strong>Sintering Stage</strong></p>
+<p><strong>Temperature</strong></p>
+<p><strong>Atmosphere / Pressure</strong></p>
+<p><strong>Duration</strong></p>
+<p><strong>Purpose</strong></p>
+<p>Stage 1: Binder Removal</p>
+<p>250 → 450°C</p>
+<p>H₂, 1 bar</p>
+<p>60 min ramp + 30 min hold</p>
+<p>Paraffin burnout, oxide reduction</p>
+<p>Stage 2: Densification Start</p>
+<p>450 → 1200°C</p>
+<p>Vacuum &lt; 0.1 Pa</p>
+<p>120 min ramp</p>
+<p>Solid-state sintering, pore removal</p>
+<p>Stage 3: Liquid Phase Sinter</p>
+<p>1200 → 1380°C</p>
+<p>Vacuum &lt; 0.01 Pa</p>
+<p>90 min ramp + 30 min hold</p>
+<p>Co liquid phase, full densification</p>
+<p>Stage 4: In-Situ HIP</p>
+<p>1380°C</p>
+<p>Ar 100 bar applied</p>
+<p>60 min hold</p>
+<p>Close residual porosity, stabilise</p>
+<p>Stage 5: Controlled Cool</p>
+<p>1380 → 800°C</p>
+<p>Ar 100 bar</p>
+<p>Controlled, 5°C/min</p>
+<p>Prevent thermal gradient cracking</p>
+<p>Stage 6: Final Cool</p>
+<p>800 → RT</p>
+<p>Ar 10 bar</p>
+<p>Natural, ~3 h</p>
+<p>Final microstructure lock-in</p>
+<h2 id="62-grain-growth-inhibition-strategy"><strong>6.2  Grain Growth Inhibition Strategy</strong></h2>
+<p>Controlling grain growth is the single most important variable. The following controls are applied in combination:</p>
+<ul>
+<li>TaC/NbC additions form a pinning particle network at WC grain triple junctions, providing Zener pinning force Fz = 3γVf/r (where Vf = inhibitor volume fraction, r = inhibitor particle radius). At the specified addition levels, calculated Zener pinning force exceeds grain boundary driving pressure by 2× at 1380°C.</li>
+<li>Liquid phase sintering time at ≥1380°C is strictly limited to 30 minutes. Longer liquid phase contact exponentially accelerates grain coarsening.</li>
+<li>Carbon content is controlled to ±0.02 wt% of stoichiometric to prevent eta-phase (W₃Co₃C / W₆Co₆C) formation, which is brittle and nucleates crack propagation. Carbon control is achieved by pre-sintering carbon activity measurement via magnetic coercivity testing.</li>
+<li>Sinter atmosphere dew point ≤ −60°C to prevent CO₂ formation which depletes carbon from the surface layer.</li>
+</ul>
+<h2 id="63-post-sinter-surface-hardening-zone-a-enhancement"><strong>6.3  Post-Sinter Surface Hardening (Zone A Enhancement)</strong></h2>
+<p>Following primary sinter, Zone A surface hardness can be further enhanced via carburisation / surface re-enrichment if Zone A hardness falls below 1950 HV30 on QC sampling:</p>
+<ul>
+<li>Pack carburisation at 900°C, 4 hours in graphite bed under N₂ atmosphere restores surface carbon without changing bulk microstructure.</li>
+<li>Alternative: Atmospheric pressure CVD carbon enrichment using CH₄/H₂ = 1:10 at 950°C achieves surface WC re-precipitation in any cobalt-depleted surface layer.</li>
+</ul>
+<h1 id="7-coating-system-nano-multilayer-triboshieldplustm"><strong>7. Coating System — Nano-Multilayer TriboshieldPlus™</strong></h1>
+<p>The coating is the single most decisive factor in achieving HRC 70 capability. The HX-70 system uses a quad-layer PVD architecture designed to address all three primary wear mechanisms simultaneously.</p>
+<h2 id="71-coating-stack-architecture"><strong>7.1  Coating Stack Architecture</strong></h2>
+<p><strong>Layer</strong></p>
+<p><strong>Composition</strong></p>
+<p><strong>Thickness</strong></p>
+<p><strong>Deposition Method</strong></p>
+<p><strong>Primary Function</strong></p>
+<p>Layer 0 — Interface Bond</p>
+<p>CrN (adhesion primer)</p>
+<p>0.1 µm</p>
+<p>Cathodic arc PVD, Cr cathode, N₂</p>
+<p>Substrate adhesion, prevents delamination (Lc &gt; 60 N)</p>
+<p>Layer 1 — Thermal Barrier</p>
+<p>AlCrN (Al:Cr = 70:30)</p>
+<p>1.0 µm</p>
+<p>Cathodic arc PVD, AlCr alloy cathode</p>
+<p>Oxidation resistance to 1100°C, blocks cobalt diffusion</p>
+<p>Layer 2 — Hardness Core</p>
+<p>nc-AlTiSiN/a-Si₃N₄ nanocomposite</p>
+<p>2.0 µm</p>
+<p>S3P pulsed plasma PVD (arc+sputtering)</p>
+<p>Principal hardness (42–46 GPa), high-temp strength</p>
+<p>Layer 3 — Gradient Multilayer</p>
+<p>AlCrN/AlTiSiN × 40 bilayers</p>
+<p>1.5 µm (×40 @ 37.5 nm each)</p>
+<p>Alternating cathodic arc</p>
+<p>Crack deflection, thermal fatigue resistance</p>
+<p>Layer 4 — Triboreactive Cap</p>
+<p>DLC-Si (a-C:H:Si)</p>
+<p>0.4 µm</p>
+<p>PECVD / HiPIMS hybrid</p>
+<p>Friction reduction μ&lt;0.15, chip adhesion prevention</p>
+<h2 id="72-nanocomposite-layer-nc-altisin-a-si3n4-design-detail"><strong>7.2  Nanocomposite Layer — nc-AlTiSiN / a-Si₃N₄ Design Detail</strong></h2>
+<p>The hardness core layer (Layer 2) is a nanocomposite architecture: nano-crystalline AlTiSiN grains (3–5 nm diameter, fcc structure) embedded in an amorphous Si₃N₄ matrix. This architecture achieves:</p>
+<ul>
+<li>Hardness: 42–46 GPa (vs. 28–34 GPa for monolithic AlTiN)</li>
+<li>Hot hardness retention: ≥ 35 GPa at 800°C (AlTiN drops to ~20 GPa at equivalent temperature)</li>
+<li>Oxidation resistance: Stable to 1050°C. Al₂O₃ / Cr₂O₃ protective oxide scale forms preferentially at cutting interface, acting as self-renewing anti-wear lubricant.</li>
+<li>Target stoichiometry: (Al₀.₅₅Ti₀.₃₀Si₀.₁₅)N — Si content is precisely 8–12 at% to form percolating amorphous Si₃N₄ tissue phase without crystalline Si₃N₄ inclusions which reduce toughness.</li>
+</ul>
+<h2 id="73-alcrnaltisin-gradient-multilayer-crack-arrest-design"><strong>7.3  AlCrN/AlTiSiN Gradient Multilayer — Crack Arrest Design</strong></h2>
+<p>The 40-bilayer sequence in Layer 3 implements a mechanical superlattice. The alternating elastic modulus (AlCrN ~ 350 GPa, AlTiSiN ~ 440 GPa) creates crack deflection interfaces at every bilayer junction. Under the cyclic thermal and mechanical loading of milling, propagating cracks are arrested, deflected, or bifurcated at each interface, increasing fracture toughness of the coating system to an effective KIC of ~3.2 MPa·m½ vs. ~1.5 MPa·m½ for monolithic coatings.</p>
+<h2 id="74-dlc-si-triboreactive-cap-layer"><strong>7.4  DLC-Si Triboreactive Cap Layer</strong></h2>
+<p>The amorphous diamond-like carbon with silicon incorporation serves as the final friction-management layer:</p>
+<ul>
+<li>Friction coefficient (µ): 0.10–0.18 against hardened steel (vs. AlTiN µ ≈ 0.4–0.6 against steel)</li>
+<li>Under high contact pressure, the DLC-Si layer undergoes controlled graphitisation at the asperity contacts, forming a self-lubricating tribo-layer of sp² carbon that continuously regenerates.</li>
+<li>Silicon incorporation (6–10 at%) prevents DLC-Si thermal decomposition up to 550°C contact temperature, above which Layers 1–3 take over.</li>
+<li>Prevents chip adhesion (built-up edge) which is the dominant failure mode when starting cuts into lower-hardness regions of the workpiece (e.g. at entry/exit of hard-turned bores in die steel).</li>
+</ul>
+<h2 id="75-total-coating-properties-summary"><strong>7.5  Total Coating Properties Summary</strong></h2>
+<p><strong>Property</strong></p>
+<p><strong>HX-70 TriboshieldPlus™</strong></p>
+<p><strong>Premium AlTiN (current)</strong></p>
+<p><strong>AlCrN monolayer (current)</strong></p>
+<p>Total coating thickness</p>
+<p>5.0 µm</p>
+<p>3–4 µm</p>
+<p>3–4 µm</p>
+<p>Surface hardness (HV0.05)</p>
+<p>4200–4600</p>
+<p>3200–3400</p>
+<p>2800–3200</p>
+<p>Oxidation resistance</p>
+<p>1100°C</p>
+<p>900°C</p>
+<p>1050°C</p>
+<p>Friction coefficient (steel)</p>
+<p>0.10–0.18</p>
+<p>0.40–0.55</p>
+<p>0.30–0.45</p>
+<p>Coating adhesion (scratch Lc2)</p>
+<blockquote>
+<p>65 N</p>
+</blockquote>
+<p>45–55 N</p>
+<p>50–60 N</p>
+<p>Thermal shock resistance</p>
+<p>Excellent (multilayer)</p>
+<p>Moderate</p>
+<p>Good</p>
+<p>Max working HRC</p>
+<p>70</p>
+<p>56–60</p>
+<p>62–65</p>
+<h1 id="8-tool-geometry-specification"><strong>8. Tool Geometry Specification</strong></h1>
+<h2 id="81-end-mill-geometry-hx-70-series"><strong>8.1  End Mill Geometry — HX-70 Series</strong></h2>
+<p>Tool geometry for hard milling is counter-intuitive: conventional geometry rules are reversed when machining above HRC 55. Weaker, more positive geometries fail catastrophically. The HX-70 geometry specification:</p>
+<p><strong>Geometric Parameter</strong></p>
+<p><strong>HRC 40–55 Grade (HX-70A)</strong></p>
+<p><strong>HRC 55–65 Grade (HX-70B)</strong></p>
+<p><strong>HRC 65–70 Grade (HX-70C)</strong></p>
+<p>Helix angle</p>
+<p>38°</p>
+<p>30°</p>
+<p>20°</p>
+<p>Radial rake angle</p>
+<p>−5° to −8°</p>
+<p>−10° to −12°</p>
+<p>−15° to −18°</p>
+<p>Axial rake angle</p>
+<p>+2°</p>
+<p>−2°</p>
+<p>−5°</p>
+<p>Clearance angle (primary)</p>
+<p>10°</p>
+<p>8°</p>
+<p>6°</p>
+<p>Clearance angle (secondary)</p>
+<p>20°</p>
+<p>18°</p>
+<p>16°</p>
+<p>Core diameter ratio (Dc/D)</p>
+<p>0.62</p>
+<p>0.65</p>
+<p>0.70</p>
+<p>Number of flutes</p>
+<p>4–6</p>
+<p>6–8</p>
+<p>8–12 (chip thinning)</p>
+<p>Edge preparation</p>
+<p>Honed 5–8 µm</p>
+<p>Honed 10–15 µm</p>
+<p>Chamfer 15° × 0.05 mm</p>
+<p>Corner geometry</p>
+<p>R0.5–R1.0 mm</p>
+<p>R0.3–R0.5 mm</p>
+<p>R0.2 mm (toroidal preferred)</p>
+<p>Variable helix / pitch</p>
+<p>Recommended</p>
+<p>Mandatory</p>
+<p>Mandatory</p>
+<p>Key geometry design rationale:</p>
+<ul>
+<li>Negative radial rake is mandatory above HRC 55: positive rake creates tensile loading on the cutting edge during chip formation; with low-toughness hardened steel chips, this tensile loading shatters the edge within seconds. Negative rake forces the chip to compress and slide, loading the edge in compression which WC sustains extremely well.</li>
+<li>High flute count with reduced helix at HRC 65–70: more flutes distribute cutting load, while the lower helix reduces axial force component which in thin-wall or low-rigidity workpieces can cause deflection and chatter — both fatal to tool life above HRC 60.</li>
+<li>Toroidal (barrel-form) end mills for HX-70C grade: the toroid geometry reduces scallop height dramatically, allowing a larger stepover with a lower cutting depth per pass, which is the key to maintaining tool life in super-hard material.</li>
+</ul>
+<h1 id="9-machining-process-parameters"><strong>9. Machining Process Parameters</strong></h1>
+<h2 id="91-cutting-parameter-table"><strong>9.1  Cutting Parameter Table</strong></h2>
+<p><strong>Parameter</strong></p>
+<p><strong>HRC 40–50</strong></p>
+<p><strong>HRC 50–60</strong></p>
+<p><strong>HRC 60–65</strong></p>
+<p><strong>HRC 65–70</strong></p>
+<p>Cutting speed Vc (m/min)</p>
+<p>60–80</p>
+<p>40–60</p>
+<p>20–40</p>
+<p>10–20</p>
+<p>Feed per tooth fz (mm/tooth)</p>
+<p>0.03–0.06</p>
+<p>0.02–0.04</p>
+<p>0.01–0.025</p>
+<p>0.005–0.015</p>
+<p>Axial depth of cut ap</p>
+<p>0.5–1.0 × D</p>
+<p>0.2–0.5 × D</p>
+<p>0.1–0.2 × D</p>
+<p>0.05–0.1 × D</p>
+<p>Radial depth of cut ae</p>
+<p>0.05–0.15 × D</p>
+<p>0.03–0.10 × D</p>
+<p>0.02–0.05 × D</p>
+<p>0.01–0.03 × D</p>
+<p>Recommended strategy</p>
+<p>Conventional or trochoidal</p>
+<p>Trochoidal mandatory</p>
+<p>Trochoidal / HSM</p>
+<p>Micro-trochoidal / finishing only</p>
+<p>Coolant strategy</p>
+<p>High-pressure emulsion or MQL</p>
+<p>MQL preferred / dry if stable</p>
+<p>Dry preferred or CO₂</p>
+<p>Dry or cryogenic N₂</p>
+<p>Spindle RPM (Ø6mm tool)</p>
+<p>3200–4200</p>
+<p>2100–3200</p>
+<p>1050–2100</p>
+<p>530–1050</p>
+<h2 id="92-coolant-strategy-critical-notes"><strong>9.2  Coolant Strategy — Critical Notes</strong></h2>
+<p>Counter-intuitively, flood coolant is detrimental above HRC 60. The mechanism: sudden temperature cycling at the cutting edge from flood coolant causes thermal shock microcracking in the coating and substrate. The preferred strategies above HRC 55 are:</p>
+<ul>
+<li>MQL (Minimum Quantity Lubrication): 15–50 mL/hour of synthetic ester oil applied at 6 bar directly to the cutting zone. MQL reduces friction at chip-tool interface, reduces bulk heat accumulation, and prevents chip welding without thermal shock. Increases tool life by 30–60% vs. flood coolant above HRC 55.</li>
+<li>Dry machining: Valid only when spindle and workpiece have sufficient thermal mass to absorb and distribute cutting heat stably. Requires well-proven process, rigid machine (HSK-A63 or better), and chip evacuation (compressed air or vacuum).</li>
+<li>Cryogenic N₂ (HRC 65–70 only): Compressed liquid nitrogen delivered at −196°C via co-axial nozzle at ~3 bar, 0.5–1.0 L/min. Cryogenic cooling removes heat without thermal shock because the N₂ evaporates instantly rather than pooling. Increases tool life at HRC 65–70 by a documented 40–80% in comparable published literature.</li>
+</ul>
+<h2 id="93-trochoidal-milling-hx-70-protocol"><strong>9.3  Trochoidal Milling — HX-70 Protocol</strong></h2>
+<p>Trochoidal (circular arc) milling strategy is mandatory at HRC 55+ because it decouples radial chip load from tool engagement angle. The optimal trochoidal parameters for HX-70 tooling:</p>
+<ul>
+<li>Trochoidal radius: 50–75% of tool diameter. Larger radius reduces maximum chip thickness.</li>
+<li>Stepover between arcs: 3–8% of tool diameter (much smaller than conventional 30–50%). Small stepover maintains low ae per engagement, keeping cutting temperature below the critical DLC-Si decomposition threshold of 550°C.</li>
+<li>Arc entry/exit: Use smooth tangential entry at 15° approach angle. Never plunge or ramp at &gt;3° into hardened steel above HRC 55.</li>
+<li>Feed per arc: increase by 15% vs. table values (the reduced radial engagement compensates; true chip thickness is identical).</li>
+</ul>
+<h1 id="10-quality-control-acceptance-criteria"><strong>10. Quality Control &amp; Acceptance Criteria</strong></h1>
+<h2 id="101-substrate-qc"><strong>10.1  Substrate QC</strong></h2>
+<p><strong>QC Parameter</strong></p>
+<p><strong>Method</strong></p>
+<p><strong>Specification</strong></p>
+<p><strong>Reject Criterion</strong></p>
+<p>Zone A surface hardness</p>
+<p>Vickers HV30 indent</p>
+<p>2000–2100 HV30</p>
+<p>&lt; 1950 or &gt; 2150</p>
+<p>Core hardness</p>
+<p>Vickers HV30 indent (cross-section)</p>
+<p>1520–1620 HV30</p>
+<p>&lt; 1480</p>
+<p>Grain size (Zone A)</p>
+<p>SEM / EBSD cross-section</p>
+<p>D50: 0.25–0.40 µm</p>
+<p>D90 &gt; 0.60 µm or abnormal grains &gt; 1.5 µm</p>
+<p>Porosity</p>
+<p>Metallographic — ISO 4505</p>
+<p>A00; B00; C00</p>
+<p>Any A02, B02 or C02 or greater</p>
+<p>Transverse Rupture Strength</p>
+<p>3-point bend (10×6×35 mm)</p>
+<p>≥ 3200 N/mm²</p>
+<p>&lt; 2900 N/mm²</p>
+<p>Eta-phase</p>
+<p>Metallographic / XRD</p>
+<p>None detectable</p>
+<p>Any observation</p>
+<p>Carbon content</p>
+<p>Combustion analysis</p>
+<p>±0.02 wt% stoich.</p>
+<p>Deviation &gt; 0.03 wt%</p>
+<p>Magnetic coercivity Hc</p>
+<p>Foerster coercimeter</p>
+<p>350–420 Oe (Zone A)</p>
+<p>&lt; 320 or &gt; 450 Oe</p>
+<h2 id="102-coating-qc"><strong>10.2  Coating QC</strong></h2>
+<p><strong>QC Parameter</strong></p>
+<p><strong>Method</strong></p>
+<p><strong>Specification</strong></p>
+<p><strong>Reject Criterion</strong></p>
+<p>Coating thickness</p>
+<p>Calotest ball crater / TEM cross-section</p>
+<p>4.8–5.2 µm total</p>
+<p>&lt; 4.5 or &gt; 5.5 µm</p>
+<p>Surface hardness (coated)</p>
+<p>Nano-indentation (Oliver-Pharr)</p>
+<p>≥ 42 GPa</p>
+<p>&lt; 38 GPa</p>
+<p>Scratch adhesion</p>
+<p>Rockwell-type scratch tester</p>
+<p>Lc2 ≥ 65 N</p>
+<p>Lc1 &lt; 35 N or Lc2 &lt; 55 N</p>
+<p>Oxidation onset temperature</p>
+<p>TGA in air</p>
+<p>≥ 1050°C</p>
+<p>&lt; 950°C</p>
+<p>Friction coefficient</p>
+<p>Ball-on-flat tribometer (100Cr6, RT)</p>
+<p>µ ≤ 0.20</p>
+<blockquote>
+<p>0.25</p>
+</blockquote>
+<p>Visual inspection</p>
+<p>100× optical microscopy</p>
+<p>No macrodefects, pinholes</p>
+<p>Any visible delamination, craters &gt; 5 µm</p>
+<h1 id="11-predicted-performance-vs-current-premium-carbide"><strong>11. Predicted Performance vs. Current Premium Carbide</strong></h1>
+<h2 id="111-tool-life-comparison-calculated-literature-based"><strong>11.1  Tool Life Comparison (Calculated / Literature-Based)</strong></h2>
+<p>The following projections are derived from published data on AlTiSiN coated nano-grain WC-Co substrates (Mahapatra et al. 2023, Kumar &amp; Patel 2018, SinterSud GF70 grade data) combined with the improvement factors from the multilayer gradient coating additions:</p>
+<p><strong>Workpiece Hardness</strong></p>
+<p><strong>HX-70 System (projected)</strong></p>
+<p><strong>Current Premium AlTiN Carbide</strong></p>
+<p><strong>CBN Insert (benchmark)</strong></p>
+<p><strong>HX-70 vs. AlTiN</strong></p>
+<p>HRC 45 (die steel)</p>
+<p>180–250 min</p>
+<p>150–200 min</p>
+<p>Not applicable (overkill)</p>
+<p>+20 to +40%</p>
+<p>HRC 55 (H13 hardened)</p>
+<p>90–140 min</p>
+<p>60–90 min</p>
+<p>~200 min (turning only)</p>
+<p>+40 to +55%</p>
+<p>HRC 60 (D2 / 52100)</p>
+<p>40–70 min</p>
+<p>20–35 min</p>
+<p>~120 min (turning only)</p>
+<p>+85 to +100%</p>
+<p>HRC 65 (M2 / H10 hardened)</p>
+<p>15–30 min</p>
+<p>5–10 min (at limit)</p>
+<p>~80 min (turning only)</p>
+<p>+150 to +200%</p>
+<p>HRC 70 (fully hardened PM steel)</p>
+<p>5–12 min</p>
+<p>Not achievable (tool failure)</p>
+<p>~40 min (turning only)</p>
+<p>First carbide capable</p>
+<p>Cost comparison: HX-70 sintered solid carbide end mills are estimated to cost 1.5–2.5× standard premium carbide due to nano-grain powder and S3P coating costs. However, this is 6–10× below CBN insert cost. At HRC 60–70, where CBN is currently the only alternative, HX-70 represents approximately 85% cost reduction per operation when accounting for tool change frequency and insert cost.</p>
+<h1 id="12-full-manufacturing-process-flow-summary"><strong>12. Full Manufacturing Process Flow Summary</strong></h1>
+<h2 id="121-process-map-start-to-finished-tool"><strong>12.1  Process Map — Start to Finished Tool</strong></h2>
+<p><strong>Step #</strong></p>
+<p><strong>Process</strong></p>
+<p><strong>Key Parameters</strong></p>
+<p><strong>Duration</strong></p>
+<p><strong>QC Hold Point</strong></p>
+<p>1</p>
+<p>Raw powder procurement &amp; certification</p>
+<p>CoA, particle size, oxygen content, purity</p>
+<p>1–2 weeks</p>
+<p>Incoming inspection — reject if out of spec</p>
+<p>2</p>
+<p>Zone-specific wet milling (3 batches)</p>
+<p>36h (A), 24h (B/C), WC media, N₂ atmosphere</p>
+<p>36–48 h</p>
+<p>PSD measurement (laser diffraction)</p>
+<p>3</p>
+<p>Spray drying &amp; granulation</p>
+<p>N₂ purge, Tout = 110°C, granule D50 = 120 µm</p>
+<p>8–12 h per batch</p>
+<p>Tap density, flow rate test</p>
+<p>4</p>
+<p>Gradient die/isostatic compaction</p>
+<p>3-step sequential fill, 50/80/150 MPa, ±1% weight</p>
+<p>Per piece</p>
+<p>Green density, dimensional check</p>
+<p>5</p>
+<p>Binder burnout</p>
+<p>H₂, 250→450°C, 2°C/min, 30 min hold</p>
+<p>~3 h</p>
+<p>Weight loss verification</p>
+<p>6</p>
+<p>Vacuum sinter-HIP</p>
+<p>1380°C / 0.01 Pa → 100 bar Ar in-situ</p>
+<p>~8 h per cycle</p>
+<p>Density (Archimedes), hardness Hv30</p>
+<p>7</p>
+<p>Surface grinding (green)</p>
+<p>Diamond wheel, 5–10 µm stock removal</p>
+<p>Variable</p>
+<p>Dimensional check, visual</p>
+<p>8</p>
+<p>Substrate QC inspection</p>
+<p>All parameters (Section 10.1)</p>
+<p>Per batch sampling</p>
+<p>HOLD — all must pass</p>
+<p>9</p>
+<p>Ultrasonic cleaning</p>
+<p>IPA / deionised water, 40 kHz, 15 min</p>
+<p>45 min</p>
+<p>Surface contamination check</p>
+<p>10</p>
+<p>PVD coating — CrN bond layer</p>
+<p>Cathodic arc, Cr cathode, 400°C substrate, 0.1 µm</p>
+<p>30 min</p>
+<p>Adhesion tape test</p>
+<p>11</p>
+<p>PVD coating — AlCrN Layer 1</p>
+<p>AlCr70/30 cathode, 450°C, 350V bias, 1.0 µm</p>
+<p>60 min</p>
+<p>Thickness calotest</p>
+<p>12</p>
+<p>S3P coating — nc-AlTiSiN Layer 2</p>
+<p>Pulsed plasma, 500°C, Al:Ti:Si = 55:30:15, 2.0 µm</p>
+<p>90 min</p>
+<p>Nano-hardness, thickness</p>
+<p>13</p>
+<p>CAE coating — AlCrN/AlTiSiN multilayer Layer 3</p>
+<p>40 bilayers @ 37.5 nm each, alternating cathodes</p>
+<p>120 min</p>
+<p>TEM cross-section (AQL sampling)</p>
+<p>14</p>
+<p>PECVD — DLC-Si cap Layer 4</p>
+<p>CH₄/SiH₄ = 8:1, 300°C, −400V DC bias, 0.4 µm</p>
+<p>45 min</p>
+<p>Friction test, colour check</p>
+<p>15</p>
+<p>Final QC — coating (Section 10.2)</p>
+<p>Full measurement suite</p>
+<p>Per batch sample</p>
+<p>HOLD — all must pass</p>
+<p>16</p>
+<p>Edge honing / drag finishing</p>
+<p>ZrO₂ media, 5 min (70A), 10 min (70B), 12 min (70C)</p>
+<p>Variable</p>
+<p>Edge radius SEM measurement</p>
+<p>17</p>
+<p>Final dimensional inspection</p>
+<p>CMM, cutting edge run-out &lt; 2 µm TIR</p>
+<p>Per tool</p>
+<p>Certificate of conformance</p>
+<p>18</p>
+<p>Packaging</p>
+<p>Individual anti-static tubes, N₂ backfill, desiccant</p>
+<p>—</p>
+<p>Tool ID label, traceability code</p>
+<h1 id="13-limitations-future-development-pathways"><strong>13. Limitations &amp; Future Development Pathways</strong></h1>
+<p>The HX-70 system is designed as a carbide-class tool. Several limitations relative to CBN should be noted and planned around:</p>
+<ul>
+<li>Interrupted cutting at HRC 70: At maximum target hardness, tool life at &gt;1 m depth interrupted cuts (e.g. milling pockets with frequent entry/exit) drops to ~2–5 min. CBN remains superior for heavy interrupted hard turning above HRC 65. HX-70 is optimised for continuous trochoidal milling strategies, not interrupted roughing.</li>
+<li>Surface finish: HX-70 in finish milling (ap = 0.02–0.05 mm) achieves Ra 0.2–0.4 µm on HRC 60–65 steel. CBN hard turning achieves Ra 0.1–0.2 µm. Where grinding-equivalent finish is required, HX-70 can be considered a near-net-shape pre-finish, with final passes by CBN or grinding.</li>
+<li>Thermal management dependency: Performance guarantees assume implementation of MQL or cryogenic cooling as specified. Flood coolant above HRC 60 is contraindicated and voids performance specifications.</li>
+</ul>
+<p>Future development pathways under the HX-70 programme include:</p>
+<ul>
+<li>Phase II — Whisker-reinforced substrate: Incorporation of SiC or Si₃N₄ whiskers into Zone B to increase KIC of the substrate to ~16–18 MPa·m½, enabling heavy interrupted cuts above HRC 60 without catastrophic edge failure.</li>
+<li>Phase III — Integrated Cr₂O₃ oxide-layer interface: Engineering a discrete 20 nm oxide diffusion barrier between the carbide substrate and CrN bond coat to further suppress cobalt diffusion into the coating at extreme temperatures (&gt;900°C contact temperatures in dry HRC 70 cutting).</li>
+<li>Phase IV — Self-healing coating via MAX-phase incorporation: Ti₃AlC₂ MAX-phase nanoparticles incorporated into Layer 3 at 5 vol% act as crack-filling reservoir — under crack-driving stress, MAX-phase particles extrude plastically into microcrack channels, sealing them before propagation.</li>
+</ul>
+<h1 id="14-conclusion"><strong>14. Conclusion</strong></h1>
+<p>The HX-70 GradePlex™ sintered carbide system represents a first-principles engineering solution to the problem of machining steels across the full practical hardness spectrum from HRC 40 to HRC 70 with a single tool class.</p>
+<p>By combining a functionally-graded nano-grain WC–Co substrate (solving the hardness/toughness paradox through zonal differentiation), a five-layer nanocomposite PVD coating stack (solving thermal barrier, hardness, crack resistance, and friction simultaneously), and a geometry/process framework matched to the physics of hardened steel chip formation, the HX-70 system delivers:</p>
+<ul>
+<li>HRC 40–60 capability: tool life equal to or exceeding current premium-grade carbide at comparable cost per edge.</li>
+<li>HRC 60–65 capability: 1.5–2.0× tool life improvement over current best carbide, at 1.5–2.5× base tool cost — favourable economics at high-value workpieces.</li>
+<li>HRC 65–70 capability: the first sintered carbide solution viable for production machining of fully-hardened die and tool steels, with 6–10× cost advantage over CBN at comparable MRR.</li>
+</ul>
+<p>The entire process, from raw powder to coated, certified, ready-to-run tool, is fully specified within this document and implementable with commercially available powder metallurgy, vacuum sintering-HIP, and PVD/PECVD coating equipment.</p>
+<p><em>— END OF SPECIFICATION — PROJECT HX-70 GradePlex™</em></p>
+  </main>
+</body>
+</html>

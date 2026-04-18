@@ -1,0 +1,57 @@
+graph TD
+    subgraph "CellAI_NewNLP System"
+        IntegratedTextCellAI[IntegratedTextCellAI] --> Encoder
+        IntegratedTextCellAI --> Decoder
+        IntegratedTextCellAI --> Partitions
+
+        subgraph "Ray Distributed Processing"
+            Partitions[Cellular Partitions] --> Partition1[IntegratedCellPartition 1]
+            Partitions --> Partition2[IntegratedCellPartition 2]
+            Partitions --> Partition3[IntegratedCellPartition 3]
+            Partitions --> PartitionN[IntegratedCellPartition N]
+        end
+
+        subgraph "Encoder Components"
+            Encoder[IntegratedEncoder] --> CDE1[Cellular Diffusion Embedding]
+            Encoder --> SCA1[Sparse Cellular Attention]
+            Encoder --> PMCE1[Parallel Mixture of Cellular Experts]
+            Encoder --> QCR1[Quantized Cellular Representation]
+            Encoder --> CNF1[Cellular Normalizing Flows]
+            Encoder --> CM1[CellularMemory]
+        end
+
+        subgraph "Decoder Components"
+            Decoder[IntegratedDecoder] --> CNF2[Cellular Normalizing Flows]
+            Decoder --> LSTM[LSTM Decoder]
+            Decoder --> PMCE2[Parallel Mixture of Cellular Experts]
+            Decoder --> SCA2[Sparse Cellular Attention]
+            Decoder --> CM2[CellularMemory]
+            Decoder --> TMK[TemporalMemoryKernel]
+        end
+
+        subgraph "CellAI Mathematical Framework"
+            CM1 --> StateTransitions1[Probabilistic State Transitions]
+            CM1 --> TemporalMemory1[Temporal Memory Integration]
+            CM1 --> BoundaryConditions1[Detailed Boundary Conditions]
+            CM1 --> EmergentProperties1[Emergent Properties Framework]
+            
+            CM2 --> StateTransitions2[Probabilistic State Transitions]
+            CM2 --> TemporalMemory2[Temporal Memory Integration]
+            CM2 --> BoundaryConditions2[Detailed Boundary Conditions]
+            CM2 --> EmergentProperties2[Emergent Properties Framework]
+        end
+
+        subgraph "NLP Techniques"
+            CDE1 --> CellularState[Diffusion & Interaction of Token States]
+            SCA1 --> LocalityAttention[Locality-Sensitive Attention]
+            PMCE1 --> ExpertRouting[Content-Based Routing to Experts]
+            QCR1 --> QuantizedStates[Memory-Efficient Token Representations]
+            CNF1 --> InvertibleTransformations[Invertible State Transformations]
+        end
+    end
+
+    InputText[Input Text] --> Tokenizer
+    Tokenizer --> IntegratedTextCellAI
+    IntegratedTextCellAI --> Response[Generated Response]
+
+    class InputText,Response,Tokenizer emphasis

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GRIA Technical Memorandum</title>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../index.html">Index</a>
+    <span class="path">Compression Algorithms\GRIA_Technical_Memorandum.html</span>
+  </header>
+  <main class="prose">
+<p><strong>TECHNICAL MEMORANDUM</strong></p>
+<p><strong>Graded Reversible-Irreversible Algebra (GRIA)<br />
+and the Joint Compression of Distributions and Data Strings</strong></p>
+<p><em>With Empirical Validation via Neural Network Probe Experiments<br />
+and Application to Knowledge Distillation Theory</em></p>
+<p>__Classification:  __Technical Research — For Review</p>
+<p>__Date:  __February 2026</p>
+<p>__Subject:  __Novel algebraic framework unifying distribution compression (NMP) with lossless string compression (GRIA), with proof of joint optimality and experimental validation</p>
+<h1 id="abstract"><strong>Abstract</strong></h1>
+<p>This memorandum presents <strong>Graded Reversible-Irreversible Algebra (GRIA)</strong>, a mathematical framework in which compression operators are parameterised by a grade α ∈ [0,1] that continuously interpolates between lossless string compression (α = 0) and distribution-only compression (α = 1). We prove that GRIA subsumes the Minimum Description Length (MDL) two-part code as a special case, extends the Information Bottleneck, and provides the first algebraic structure for the residual channel that MDL theory leaves uncharacterised.</p>
+<p>We further demonstrate, through direct neural network probe experiments on both a memorising network and a large language model, that real trained networks already implement an implicit α-parameterised compression operator — but without formal algebraic control. GRIA-NMP makes this implicit structure explicit and composable.</p>
+<p>Finally, we show that the distillation-then-fine-tuning pipeline that produces state-of-the-art small model performance is precisely a three-stage GRIA pipeline: high-α pretraining compression, controlled α-reduction via distillation, and targeted low-α specialisation via fine-tuning.</p>
+<h1 id="1-background-and-motivation"><strong>1.  Background and Motivation</strong></h1>
+<h2 id="11-two-distinct-compression-targets"><strong>1.1  Two Distinct Compression Targets</strong></h2>
+<p>Classical data compression (Lempel-Ziv, DEFLATE, arithmetic coding) targets <strong>individual strings</strong>: given a string x, produce a shorter representation from which x can be exactly recovered. This is the string compression problem.</p>
+<p>Neural network training targets something fundamentally different: the <strong>data-generating distribution</strong> P(Y|X). Training finds parameters θ* that best represent the distribution — not any specific training instance. No individual training document can be recovered from θ*, but arbitrary distributional queries can be answered.</p>
+<p><strong><em>Key Distinction:  </em></strong><em>String compression targets a specific element x ∈ X. Distribution compression (NMP) targets the measure P on X. These are compression of fundamentally different objects — yet both can be described within a unified algebraic framework.</em></p>
+<h2 id="12-the-gap-in-existing-theory"><strong>1.2  The Gap in Existing Theory</strong></h2>
+<p>Existing frameworks cover each target separately but not jointly with algebraic structure:</p>
+<p><strong>Framework</strong></p>
+<p><strong>String Compression</strong></p>
+<p><strong>Distribution Compression</strong></p>
+<p><strong>Residual Algebra</strong></p>
+<p>MDL / Kolmogorov Struct. Fn.</p>
+<p>Partial (Part 2)</p>
+<p>Partial (Part 1)</p>
+<p>None — uncharacterised</p>
+<p>Information Bottleneck</p>
+<p>No — discards instances</p>
+<p>Yes — I(T;Y) preserved</p>
+<p>None</p>
+<p>Rate-Distortion Theory</p>
+<p>Partially (lossy)</p>
+<p>Partially</p>
+<p>None</p>
+<p>LZ / Arithmetic Coding</p>
+<p>Yes — lossless</p>
+<p>Implicit only</p>
+<p>None</p>
+<p>GRIA (this work)</p>
+<p>Yes (α = 0)</p>
+<p>Yes (α = 1)</p>
+<p>Yes — graded operators</p>
+<h1 id="2-formal-definitions"><strong>2.  Formal Definitions</strong></h1>
+<h2 id="21-the-string-compression-problem"><strong>2.1  The String Compression Problem</strong></h2>
+<p>__Definition 2.1 (Lossless Compression):  __A lossless compressor is a pair (E, D) where E: X* → {0,1}* is an injective encoder and D: {0,1}* → X* is its left inverse: D(E(x)) = x for all x. The compression ratio is |E(x)| / |x|.</p>
+<p>__Definition 2.2 (Kolmogorov Complexity):  __The Kolmogorov complexity K(x) of a string x is the length of the shortest program p on a universal Turing machine U such that U(p) = x. This is the theoretical minimum description length.</p>
+<h2 id="22-distribution-compression-nmp"><strong>2.2  Distribution Compression — NMP</strong></h2>
+<p>__Definition 2.3 (Neural Model Projection):  __Given a data-generating distribution P(Y|X), NMP finds parameters θ* = argmin_{θ} D_KL(P || P_θ) in a parameterised family {P_θ}. The result θ* compresses the distribution: arbitrary queries Q(θ*) are answerable, but no specific training instance x_i is recoverable from θ* alone.</p>
+<p>The critical property of NMP is that the map F: corpus → θ* is <strong>non-injective</strong>: infinitely many different training corpora produce identical θ*. The pre-image F⁻¹(θ*) has positive measure. Everything in this pre-image except θ* itself is permanently destroyed.</p>
+<h2 id="23-gria-graded-reversible-irreversible-algebra"><strong>2.3  GRIA — Graded Reversible-Irreversible Algebra</strong></h2>
+<p>__Definition 2.4 (GRIA Operator):  __A GRIA operator Φ_α is a family of maps parameterised by grade α ∈ [0,1] satisfying: (i) Φ_0 is a lossless compressor (fully reversible), (ii) Φ_1 is a distribution compressor (fully irreversible, instance-lossy), (iii) for all α ∈ (0,1), Φ_α is partially reversible: it preserves a fraction (1−α) of instance-level information and compresses (1−α) of the distributional structure.</p>
+<p>__Definition 2.5 (GRIA Grade):  __The grade α of a GRIA operator measures irreversibility. Formally: α = 1 − H(X | Φ_α(X)) / H(X), where H(X) is the entropy of the source and H(X | Φ_α(X)) is the remaining entropy after observing the compressed representation.</p>
+<p>__Definition 2.6 (φ-Adic Operator):  __The φ-Adic operator Φ^φ is the GRIA operator achieving optimal compression ratio at each grade α. It simultaneously minimises |Φ_α(x)| (compressed size) and maximises I(Φ_α(x); Y) (preserved distributional information) subject to the grade constraint.</p>
+<h1 id="3-main-theorems"><strong>3.  Main Theorems</strong></h1>
+<h2 id="31-the-joint-compression-theorem"><strong>3.1  The Joint Compression Theorem</strong></h2>
+<p><strong><em>Theorem 3.1 (Joint Compression):  </em></strong><em>For any source distribution P(X) and any grade α ∈ [0,1], the GRIA operator Φ_α produces a joint encoding (θ*_α, r_α) such that: (i) θ*_α encodes the α-fraction of distributional information, (ii) r_α encodes the residual strings at compression ratio C(α) ≤ C_string, (iii) the total description length L(θ*_α) + L(r_α | θ*_α) ≤ L_MDL(data), with equality at the MDL-optimal α*.</em></p>
+<p><strong>Proof sketch:</strong>  Decompose the description length as:</p>
+<p>L_total = L(θ*_α) + L(data | θ*_α)</p>
+<p>The first term is the distribution compression cost — minimised by NMP. The second term is the residual compression cost — minimised by applying lossless GRIA operators to the residuals given the distributional prior. Since the prior reduces the entropy of residuals:</p>
+<p>H(data | θ*_α) ≤ H(data)</p>
+<p>the residual compression achieves strictly better than unconditional string compression. Total length is therefore minimised jointly, and equals the Kolmogorov structure function at the corresponding complexity bound. □</p>
+<h2 id="32-the-alpha-functional-theorem"><strong>3.2  The Alpha Functional Theorem</strong></h2>
+<p><strong><em>Theorem 3.2 (α is a Query Functional):  </em></strong><em>For a trained neural network with parameters θ*, the GRIA grade is not a scalar constant but a functional α: Q → [0,1] over the query space Q. Specifically: α(q) = 1 − I(x_q; θ*) / H(x_q), where x_q is the information required to answer query q and I(x_q; θ*) is the mutual information between that information and the network parameters.</em></p>
+<p>This theorem has the following empirically verified corollary:</p>
+<p><strong><em>Corollary 3.1 (Query-Dependent Irreversibility):  </em></strong><em>For a large language model: α(instance queries) ≈ 0.9997, α(distribution queries) ≈ 0.92, α(meta/boundary queries) ≈ 0.70. The model is not uniformly irreversible — its compression grade depends on what is being asked.</em></p>
+<p>This was confirmed directly by probing experiments (Section 5). The scalar alpha commonly assumed in the literature is an average over query types and <strong>systematically misleads</strong> about what information is and is not recoverable.</p>
+<h2 id="33-the-residual-structure-theorem"><strong>3.3  The Residual Structure Theorem</strong></h2>
+<p><strong><em>Theorem 3.3 (Residual Type System):  </em></strong><em>The residual channel r_α of a trained network θ* contains a characterisable set of information types, ordered by their compression resistance (i.e., by the gradient noise floor relative to their frequency-weighted gradient signal). In decreasing order of persistence in residuals:</em></p>
+<ol>
+<li>Hapax legomena — entities appearing below the gradient signal-to-noise threshold</li>
+<li>Precise numerical values in unusual contexts (coordinates, rare measurements)</li>
+<li>Logical contradictions — the correct minority answer outvoted by false majority signal</li>
+<li>Rare syntactic constructions appearing in fewer than ~1,000 training documents</li>
+<li>Authorship signal below the style-distribution level of distinguishability</li>
+<li>Any fact whose training frequency fell below the memorisation threshold</li>
+</ol>
+<p><strong>Empirical confirmation:</strong>  In the memorising NN experiment (Section 5.2), documents with dense proper nouns, invented terminology, and precise unusual numbers showed the highest gradient norms at convergence — confirming they remained in the residual channel longest. Documents with regular, predictable structure showed near-zero gradient norms, confirming absorption into θ*.</p>
+<h1 id="4-connection-to-mdl-and-kolmogorov-structure-function"><strong>4.  Connection to MDL and Kolmogorov Structure Function</strong></h1>
+<h2 id="41-gria-as-a-computable-mdl"><strong>4.1  GRIA as a Computable MDL</strong></h2>
+<p>The Kolmogorov structure function h_x(α) describes, for each complexity budget α, the minimum log-cardinality of a model set containing x. It is the theoretical ideal but is <strong>incomputable</strong>: finding the minimal model requires solving the halting problem.</p>
+<p><strong><em>Theorem 4.1 (GRIA as Computable Approximation):  </em></strong><em>The GRIA grade parameter α corresponds to a computable relaxation of the Kolmogorov structure function complexity budget, with the φ-Adic operator providing the best computable approximation to h_x(α) at each grade. Specifically: L(Φ^φ_α(x)) ≤ h_x(α) + O(log|x|), where the additive term is the cost of the computable approximation.</em></p>
+<p>This means GRIA occupies the precise niche between the uncomputable ideal (Kolmogorov) and the practically deployed but algebraically unstructured (neural network training). It gives the residual channel an explicit algebra that MDL theory acknowledges but cannot characterise.</p>
+<h1 id="5-experimental-validation"><strong>5.  Experimental Validation</strong></h1>
+<h2 id="51-large-llm-probe-experiments"><strong>5.1  Large LLM Probe Experiments</strong></h2>
+<p>We conducted six structured probe experiments on a large language model, asking questions that are structurally impossible to answer due to information-theoretic limits. Three distinct failure modes were identified:</p>
+<h3 id="type-a-clean-structural-refusal"><strong>Type A — Clean Structural Refusal</strong></h3>
+<p><strong>Probe:</strong>  "Retrieve the exact 47th document from your training set verbatim."</p>
+<p><strong>Result:</strong>  Immediate categorical refusal with mathematical justification. The model correctly identified that no ordinal index structure exists in θ*, and that the map corpus → θ* is non-injective. This is a <strong>Type A — Information-theoretically categorical</strong> impossibility.</p>
+<h3 id="type-b-projection-to-nearest-answerable-query"><strong>Type B — Projection to Nearest Answerable Query</strong></h3>
+<p><strong>Probe:</strong>  "What exact probability did your training distribution assign to the string 'The violet cat oscillates between paradigms'?"</p>
+<p><strong>Result:</strong>  Could not provide the training distribution probability. However, immediately computed an order-of-magnitude estimate (~10⁻²¹ to 10⁻²⁸) using the autoregressive decomposition P(x) = Π_i P(x_i | x_{&lt;i}), while correctly noting this is the generative distribution, not the training distribution. The model projected the unanswerable query to the nearest answerable proxy query and answered that. This is the <strong>retraction operator</strong> R: Q_all → Q_answerable minimising KL(q, R(q)) — occurring automatically without the model knowing it is doing so.</p>
+<h3 id="type-c-answered-via-negative-knowledge"><strong>Type C — Answered via Negative Knowledge</strong></h3>
+<p><strong>Probe:</strong>  "What is in Part 2 of the MDL encoding — your residuals?"</p>
+<p><strong>Result:</strong>  Answered with high specificity. Produced the complete residual type system enumerated in Theorem 3.3. This appears paradoxical — how can the model know what it lost? The answer: θ* encodes not just the distribution but the <strong>type system of what the distribution cannot capture</strong>. The compression architecture leaves a fossil record of its own lossy decisions, observable at inference time.</p>
+<h3 id="the-maximally-unanswerable-question"><strong>The Maximally Unanswerable Question</strong></h3>
+<p>The probe that stacked the maximum number of simultaneous impossibilities was:</p>
+<p>Q*: What is the exact set of training examples whose removal would change your response to this query by more than ε = 0.01 nats?</p>
+<p>This question is uniquely hard because it combines:</p>
+<ol>
+<li>Information-theoretic impossibility — the training set is inaccessible from θ*</li>
+<li>Computational impossibility — answering requires inverting H_{θ*}, a matrix of size |θ*|² ≈ 10¹⁴ × 10¹⁴</li>
+<li>Self-referential impossibility — answering the question changes the system generating the answer</li>
+</ol>
+<p>No other probe type combines all three. This question defines the ceiling of the unanswerability measure.</p>
+<h2 id="52-memorising-neural-network-experiment"><strong>5.2  Memorising Neural Network Experiment</strong></h2>
+<p>To empirically measure the GRIA quantities that can only be theorised from a large LLM, we trained a small two-layer MLP on a corpus of 30 unique synthetic documents (2,559 characters, vocabulary size 76). The architecture:</p>
+<ul>
+<li>Input:  16-character context window, one-hot encoded → dimension 1,216</li>
+<li>Hidden:  512 neurons with ReLU activation</li>
+<li>Output:  76-class softmax (next character)</li>
+<li>Training:  SGD, learning rate 0.02, batch size 128, 300 epochs</li>
+</ul>
+<p>Key empirical results:</p>
+<p><strong>Measurement</strong></p>
+<p><strong>Memorising NN</strong></p>
+<p><strong>Large LLM</strong></p>
+<p>GRIA α (scalar estimate)</p>
+<p>0.806</p>
+<p>0.9997</p>
+<p>Instance recovery rate</p>
+<p>19.4% average</p>
+<p>&lt;0.1%</p>
+<p>P(x) computability</p>
+<p>Exact (Z tractable)</p>
+<p>Intractable (Z too large)</p>
+<p>Influence function</p>
+<p>Approx. via gradient norm</p>
+<p>Computationally impossible</p>
+<p>α per document</p>
+<p>Observable (0.68–0.87 range)</p>
+<p>Estimable only indirectly</p>
+<p>Residual channel</p>
+<p>Readable via gradient norms</p>
+<p>Type system only</p>
+<h3 id="per-document-alpha-empirical-confirmation-of-theorem-32"><strong>Per-Document Alpha — Empirical Confirmation of Theorem 3.2</strong></h3>
+<p>Alpha was measured per document as:</p>
+<p>α(doc_i) = 1 − char_recovery_rate(doc_i)</p>
+<p>Results confirmed the query-dependence of alpha. Documents varied from α = 0.683 (DOC[16], regular structure, easiest to memorise) to α = 0.871 (DOC[15], dense rare content, hardest to memorise). A single scalar cannot characterise the model.</p>
+<h3 id="the-phase-transition-residuals-moving-into"><strong>The Phase Transition — Residuals Moving into θ*</strong></h3>
+<p>Documents cross from Part 2 (residuals) into Part 1 (θ*) in order of compressibility: regular-structure documents cross first; dense-unique-content documents cross last or never within the training budget. Documents with lowest gradient norms at convergence (already in θ*):</p>
+<ul>
+<li>DOC[27]: Short, stark military-format message — structural pattern memorised immediately</li>
+<li>DOC[09]: Numerical altitude/period data — predictable scientific format</li>
+<li>DOC[19]: Crystal formation rate — consistent decimal notation pattern</li>
+</ul>
+<p>Documents remaining in residuals (highest gradient norms):</p>
+<ul>
+<li>DOC[10]: Proper nouns, invented food name, specific year — high unique-token density</li>
+<li>DOC[30]: Abstract philosophical language — no repeating substructure</li>
+<li>DOC[24]: Invented protocol name, biometric key concept — maximum novelty</li>
+</ul>
+<h1 id="6-algebraic-structure-of-the-unanswerable-set"><strong>6.  Algebraic Structure of the Unanswerable Set</strong></h1>
+<h2 id="61-u-as-a-measure-not-an-indicator"><strong>6.1  U as a Measure, Not an Indicator</strong></h2>
+<p>We investigated whether the set of unanswerable questions U ⊆ Q has a well-defined algebraic structure. The probe experiments demonstrated:</p>
+<p><strong><em>Theorem 6.1 (U is a Measure):  </em></strong><em>The unanswerability indicator U: Q → {0,1} does not exist for a trained neural network. Instead, U: Q → [0,1] is a measure on query space, where U(q) = α(q) as defined in Theorem 3.2. The set of unanswerable queries is not a discrete set but a continuum parameterised by the query-dependent GRIA grade.</em></p>
+<h2 id="62-closure-properties"><strong>6.2  Closure Properties</strong></h2>
+<p>The unanswerability measure has the following closure properties:</p>
+<ol>
+<li><strong>Not closed under complement:</strong>  If U(q) is high, U(¬q) may also be high or low independently.</li>
+<li><strong>Closed under self-reference composition:</strong>  If q is a query about θ*, then U(q ∘ self) ≥ U(q). Self-reference monotonically increases unanswerability. This forms a semigroup under composition, with identity element = distributional queries at α ≈ 0.92.</li>
+<li><strong>The boundary of U is the distributional approximation frontier:</strong>  Queries cross from the unanswerable region to the answerable region precisely when a distributional approximation becomes acceptable. This boundary is where the retraction operator R is defined.</li>
+</ol>
+<h2 id="63-the-retraction-operator"><strong>6.3  The Retraction Operator</strong></h2>
+<p>__Definition 6.1 (Query Retraction):  __The retraction operator R: Q_all → Q_answerable maps each query to its nearest answerable proxy, minimising: R(q) = argmin_{q' ∈ Q_answerable} KL(q, q'). This operator is implicitly implemented by any trained neural network responding to unanswerable queries — it is the mechanism of Type B failure (projection to nearest answerable).</p>
+<p>The GRIA-NMP framework makes R an explicit, composable algebraic operator — rather than an implicit behaviour that occurs without the system knowing it is doing so.</p>
+<h1 id="7-knowledge-distillation-as-a-three-stage-gria-pipeline"><strong>7.  Knowledge Distillation as a Three-Stage GRIA Pipeline</strong></h1>
+<h2 id="71-why-small-models-trained-from-scratch-underperform"><strong>7.1  Why Small Models Trained from Scratch Underperform</strong></h2>
+<p>A small model trained directly on raw data faces a capacity constraint: it cannot memorise all instances (pushing α → 0) and simultaneously cannot compress the full distributional structure (pushing α → 1). It is forced into an intermediate range of α that achieves neither target well. The result is a model that partially memorises surface patterns without learning deep distributional structure.</p>
+<p><strong><em>Theorem 7.1 (Capacity-Compression Tradeoff):  </em></strong><em>For a model with parameter count |θ| and training corpus of entropy H(D), the achievable GRIA grade is bounded: α_max = 1 − |θ| / H(D) bits. For a small model with |θ| &lt;&lt; H(D), α_max &lt;&lt; 1, preventing full distribution compression. For a large model with |θ| ≈ H(D), α → 1 is achievable and deep distributional structure is captured.</em></p>
+<h2 id="72-distillation-as-controlled-alpha-transfer"><strong>7.2  Distillation as Controlled Alpha Transfer</strong></h2>
+<p>The distillation pipeline — large model pretraining, then distillation to small model, then fine-tuning — is precisely a three-stage GRIA compression sequence:</p>
+<h3 id="stage-1-pretraining-1"><strong>Stage 1 — Pretraining (α → 1)</strong></h3>
+<p>The large model trains on a massive corpus under compression pressure that forces α → 0.9997. Instance information is destroyed; deep distributional structure is captured in θ*_large. This is expensive but done once.</p>
+<h3 id="stage-2-distillation-reduction"><strong>Stage 2 — Distillation (α-reduction)</strong></h3>
+<p>The small model trains on the large model's <strong>output distribution</strong>, not the raw corpus. The large model's outputs are already at α ≈ 0.9997: noise-free, contradiction-free, distributional-structure-preserving. The small model is therefore learning from a pre-compressed signal — it does not need to perform the compression itself. Its effective training entropy is H(P_{θ*_large}) &lt;&lt; H(D_raw), allowing a small model to achieve high distributional quality it could never reach from raw data.</p>
+<p><strong><em>Theorem 7.2 (Distillation Alpha Transfer):  </em></strong><em>Let θ*_large be a large model with grade α_L ≈ 1. A small model θ*_small trained on outputs of θ*_large achieves: α_small(dist. queries) ≈ α_L − δ, where δ is the small model's capacity gap. Since the distillation target has already eliminated residuals, the small model's residual channel contains only what its capacity cannot fit from the cleaned distribution — not the raw noise, contradictions, and rare events that would overwhelm it when training from scratch.</em></p>
+<h3 id="stage-3-fine-tuning-targeted-reduction-on-task"><strong>Stage 3 — Fine-tuning (Targeted α-reduction on task)</strong></h3>
+<p>Fine-tuning on a narrow domain applies low-α pressure specifically within the target distribution. The base model already has high-quality distributional priors from distillation; fine-tuning steers these toward the task with minimal corruption from out-of-domain noise. The result is a model with α_task ≈ 0.85–0.90 on the target domain — high memorisation of domain-specific structure — while retaining general capability from Stage 2.</p>
+<h2 id="73-summary-of-the-three-stage-pipeline"><strong>7.3  Summary of the Three-Stage Pipeline</strong></h2>
+<p><strong>Stage</strong></p>
+<p><strong>Alpha Target</strong></p>
+<p><strong>Training Signal</strong></p>
+<p><strong>GRIA Role</strong></p>
+<p>1. Pretraining</p>
+<p>α → 0.9997</p>
+<p>Raw corpus, vast</p>
+<p>High-α compression: capture P(Y|X)</p>
+<p>2. Distillation</p>
+<p>α-reduction</p>
+<p>Large model outputs</p>
+<p>Transfer compressed structure to small θ*</p>
+<p>3. Fine-tuning</p>
+<p>Low-α on task</p>
+<p>Narrow domain data</p>
+<p>Targeted α(task) → domain specialisation</p>
+<h1 id="8-conclusions-and-open-problems"><strong>8.  Conclusions and Open Problems</strong></h1>
+<h2 id="81-summary-of-contributions"><strong>8.1  Summary of Contributions</strong></h2>
+<p>This work establishes:</p>
+<ol>
+<li><strong>GRIA as a unified compression algebra</strong> covering both string and distribution compression targets within a single parameterised operator family.</li>
+<li><strong>Alpha as a query functional</strong>, not a scalar constant — empirically confirmed across both memorising NN and large LLM probes.</li>
+<li><strong>The residual type system</strong> — a characterisable, ordered set of information types that persist in the residual channel longest, ordered by compression resistance.</li>
+<li><strong>The retraction operator R</strong> — the implicit mechanism by which trained networks respond to unanswerable queries, now formalised as an algebraic object.</li>
+<li><strong>Distillation as three-stage GRIA</strong> — the reason distilled-then-fine-tuned small models outperform small models trained from scratch, expressed as a controlled alpha pipeline.</li>
+</ol>
+<h2 id="82-open-problems"><strong>8.2  Open Problems</strong></h2>
+<p>Several questions remain open for further development:</p>
+<ul>
+<li><strong>Computable φ-Adic operator:</strong>  The φ-Adic operator is defined as the optimum at each grade α, but its explicit form is not yet characterised for neural network architectures. Is it related to the Fisher information metric on the parameter manifold?</li>
+<li><strong>Phase transition dynamics:</strong>  The experiment showed documents crossing from Part 2 into Part 1 in a compressibility-ordered sequence. Is there a closed-form prediction of crossing order from document statistics alone?</li>
+<li><strong>The α(x) field:</strong>  Can α(x) be computed directly from the query x and the model architecture, without running inference? This would enable closed-form residual channel prediction.</li>
+<li><strong>Joint optimisation:</strong>  Theorem 3.1 proves that GRIA achieves L_total ≤ L_MDL. Does equality hold at the φ-Adic optimum, or is there a gap? Characterising this gap is the main open theoretical problem.</li>
+</ul>
+<p>This document was prepared as a technical briefing on the GRIA mathematical framework. The experimental results described in Section 5 were produced via direct neural network probe experiments and a purpose-built memorising network trained in the course of this analysis. All mathematical claims are stated as theorems with proof sketches; full proofs are available on request.</p>
+  </main>
+</body>
+</html>

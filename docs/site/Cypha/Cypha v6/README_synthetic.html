@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>README synthetic</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v6\README_synthetic.html</span>
+  </header>
+  <main class="prose">
+<p><strong>synthetic_benchmark.py</strong></p>
+<p>Self-Contained Correctness Test — No Downloads Required</p>
+<p>File 5 of 5  ·  784 lines  ·  Run this first</p>
+<p>For someone reading this for the first time</p>
+<h1 id="1-what-is-this-file"><strong>1. What Is This File?</strong></h1>
+<p>synthetic_benchmark.py is a completely self-contained test of the Cypha system. It generates its own data, trains on it, and evaluates accuracy — without requiring any downloaded files, any network access, or any dependencies beyond NumPy.</p>
+<p><strong>Run this first</strong></p>
+<p>If you just cloned the repository, run this before anything else:</p>
+<pre><code>pip install numpy
+python synthetic\_benchmark\.py \-\-quick
+</code></pre>
+<p>If it completes without errors and prints ~80%+ accuracy across all domains, your installation is working correctly and you can proceed to download.py → convert.py → benchmark.py.</p>
+<p>The file covers all nine domains from the real benchmark:</p>
+<p><strong>Domain</strong></p>
+<p><strong>Signal type</strong></p>
+<p><strong>Classes</strong></p>
+<p><strong>Generator</strong></p>
+<p>sql_injection</p>
+<p>Text</p>
+<p>2 (safe / sql_injection)</p>
+<p>gen_sql_injection()</p>
+<p>phishing_urls</p>
+<p>Text</p>
+<p>2 (legitimate / phishing)</p>
+<p>gen_phishing_urls()</p>
+<p>malware</p>
+<p>Text</p>
+<p>2 (benign / malware)</p>
+<p>gen_malware()</p>
+<p>network_intrusion</p>
+<p>Text</p>
+<p>2 (normal / anomaly)</p>
+<p>gen_network_intrusion()</p>
+<p>phishing_emails</p>
+<p>Text</p>
+<p>2 (safe / phishing)</p>
+<p>gen_phishing_emails()</p>
+<p>phiusiil_phishing</p>
+<p>Text</p>
+<p>2 (legitimate / phishing)</p>
+<p>gen_phiusiil_phishing()</p>
+<p>panoradio_rf</p>
+<p>IQ hex</p>
+<p>6 (AM/FM/BPSK/QPSK/USB/CW)</p>
+<p>gen_panoradio_rf()</p>
+<p>speech_commands</p>
+<p>PCM hex</p>
+<p>10 (yes/no/go/stop/...)</p>
+<p>gen_speech_commands()</p>
+<p>esc50</p>
+<p>PCM hex</p>
+<p>10 (dog_bark/rain/...)</p>
+<p>gen_esc50()</p>
+<h2 id="11-two-modes"><strong>1.1 Two Modes</strong></h2>
+<p>python synthetic_benchmark.py           # Full: 500 samples × 9 domains × 3 epochs (~10 min)</p>
+<p>python synthetic_benchmark.py --quick   # Quick: 50 samples × 9 domains × 1 epoch  (~2 min)</p>
+<p>python synthetic_benchmark.py --verbose # Show infer() output for every test sample</p>
+<p>The --quick mode is suitable for CI/CD pipelines, verifying a code change, or just confirming the system runs. The full mode produces results comparable to the production benchmark on real data.</p>
+<p>Each domain runs in complete isolation — a fresh CyphaStateful instance per domain, written to a temp directory that is deleted after evaluation. There is no cross-domain contamination.</p>
+<h1 id="2-text-domain-generators"><strong>2. Text Domain Generators</strong></h1>
+<p>The six text generators each produce (input_string, label_string) pairs in the Cypha wire format. Every generator uses a fixed random seed (numpy default_rng(42)) so results are fully reproducible across runs.</p>
+<p>The design principle for all text generators: the two classes must have clearly different Omega signatures, especially κ(D(x)) — the kurtosis of the first difference of the byte sequence. This is the primary discriminator used by the Omega encoder, and all generators are explicitly designed to produce distributions that differ on it.</p>
+<h2 id="21-gen_sql_injection"><strong>2.1  gen_sql_injection</strong></h2>
+<p>Alternates between safe SQL queries built from templates and known SQL injection strings:</p>
+<p># Safe — smooth byte transitions, low κ(D)</p>
+<p>SELECT name FROM users WHERE id = 42</p>
+<p>UPDATE settings SET theme = 'dark' WHERE uid = 17</p>
+<p># Injection — sudden ASCII jumps: 39→32→79→82 (apostrophe→space→O→R)</p>
+<p>' OR 1=1 --</p>
+<p>' UNION SELECT username, password FROM admin --</p>
+<p>'; EXEC xp_cmdshell('dir') --</p>
+<p>The injection strings contain sudden large ASCII value jumps (apostrophe=39, space=32, O=79, R=82, 1=49, equals=61) that produce high kurtosis in the first-difference sequence. Safe queries have smoother alphanumeric transitions with lower burstiness.</p>
+<p>Expected κ(D): safe ≈ −0.5 to +1.5  |  injection ≈ +3.0 to +8.0.</p>
+<h2 id="22-gen_phishing_urls"><strong>2.2  gen_phishing_urls</strong></h2>
+<p>Generates real-looking legitimate URLs vs phishing URLs using common evasion patterns:</p>
+<p># Legitimate — short, clean domain, HTTPS</p>
+<p>https://google.com/search</p>
+<p>https://stackoverflow.com</p>
+<p># Phishing — brand name in subdomain, suspicious TLD, IP address, hex</p>
+<p>http://google.com.login.7842.ru/secure</p>
+<p>http://192.168.47.193/admin/login</p>
+<p>http://secure-login.4521.xyz/account</p>
+<p>http://signin.ebay.com.3847.info/login</p>
+<p>Phishing URLs typically have more dots (subdomains), longer paths, suspicious TLDs (.tk, .ml, .xyz, .ru), and often contain brand names within subdomain components rather than the primary domain. These differences are captured by the URL length ratio and special-character density features in the Omega encoder.</p>
+<h2 id="23-gen_malware"><strong>2.3  gen_malware</strong></h2>
+<p>Generates PE feature strings for benign executables vs malware, based on entropy, API call lists, and obfuscation markers:</p>
+<p># Benign — low entropy, standard APIs, 3 sections</p>
+<p>entropy:4.21 size:245760 imports:ReadFile WriteFile RegOpenKeyEx CloseHandle sections:3 packed:0</p>
+<p># Malware — high entropy (packed/encrypted), injection APIs, 7 sections</p>
+<p>entropy:7.43 size:18432 imports:VirtualAlloc WriteProcessMemory CreateRemoteThread URLDownloadToFile sections:7 packed:1 suspicious_strings:1 obfuscated:1</p>
+<p>Key discriminators: entropy (benign: 3.0–5.5, malware: 6.5–8.0), packed flag, and API names like VirtualAlloc and CreateRemoteThread which are hallmarks of process injection.</p>
+<p>The Omega encoder treats these as byte sequences, so the byte-level fingerprint of "entropy:7.43" vs "entropy:4.21" contributes to M(D(x)) via the digit transitions, while the API names produce bigram patterns that distinguish malware from benign.</p>
+<h2 id="24-gen_network_intrusion"><strong>2.4  gen_network_intrusion</strong></h2>
+<p>Generates KDD-style flow feature strings for normal traffic vs attacks:</p>
+<p># Normal — standard service, moderate byte counts, SF (normal) flag</p>
+<p>f0:1.25 f1:tcp f2:http f3:SF f4:2341 f5:4820 f6:0 f7:0 f8:0 f9:0 f10:0 f11:0 f12:1 f13:0</p>
+<p># Anomaly (syn_flood) — zero duration, zero dst bytes, S0 flag</p>
+<p>f0:0.00 f1:tcp f2:private f3:S0 f4:47 f5:0 f6:1 f7:1 f8:511 f9:511 f10:1 f11:347 f12:0 f13:1</p>
+<p># Anomaly (data_exfil) — very large src bytes</p>
+<p>f0:0.21 f1:tcp f2:other f3:S0 f4:387421 f5:14930 f6:1 f7:1 f8:511 f9:511 f10:1 f11:203 f12:0 f13:1</p>
+<p>Four attack types are generated: syn_flood (zero dst bytes, f5=0, S0 flag), port_scan (short duration, many connections), data_exfil (massive src byte count), and brute_force (many failed connections). All are labelled "anomaly", matching the binary-classification approach in the real benchmark.</p>
+<h2 id="25-gen_phishing_emails"><strong>2.5  gen_phishing_emails</strong></h2>
+<p>Generates short email body strings for safe business emails vs urgent phishing messages:</p>
+<p># Safe — neutral tone, reference number, professional language</p>
+<p>Hi Sarah, your invoice #47821 is attached. Please review and let us know if you have questions. Best regards, Accounts Team.</p>
+<p># Phishing — URGENT ALL-CAPS, suspicious URL, threat language</p>
+<p>URGENT: Your account has been suspended! Click here immediately to verify your identity and restore access: http://secure-login-3847.tk/verify</p>
+<p>The all-caps URGENT token produces a distinctive ASCII burst pattern — "URGENT" has byte values 85,82,71,69,78,84 (all uppercase, 65–90 range) followed by a colon at 58, producing large derivatives in D(x). Safe emails have gentler case transitions. The exclamation mark (33) and URL at the end also create signature derivative spikes.</p>
+<h2 id="26-gen_phiusiil_phishing"><strong>2.6  gen_phiusiil_phishing</strong></h2>
+<p>A richer URL generation than gen_phishing_urls, covering four phishing construction styles:</p>
+<p># Style 0 — brand name + random number + suspicious TLD + /verify/account path</p>
+<p>http://paypal-secure-6321.xyz/verify/account</p>
+<p># Style 1 — raw IP address with brand name in query string</p>
+<p>http://192.168.73.41/admin/login?redirect=paypal</p>
+<p># Style 2 — long subdomain chain impersonating brand (subdomain abuse)</p>
+<p>http://secure.amazon.com.login.update.verify842.ml/account/confirm</p>
+<p># Style 3 — URL shortener with "secure-login" path</p>
+<p>http://bit.ly/94821/secure-login</p>
+<p>The style variety ensures Cypha must learn a general phishing signature rather than a single pattern. The Omega encoder sees each URL as a byte sequence, so IP address patterns (digit-dot-digit sequences), excessive subdomain depth (many dots), and suspicious TLD byte patterns all contribute to M(D(x)).</p>
+<h1 id="3-rf-signal-generator-gen_panoradio_rf"><strong>3. RF Signal Generator — gen_panoradio_rf</strong></h1>
+<p>This is the most mathematically involved generator. It synthesises six radio modulation types from first principles, ensuring each has a distinct power spectral density (PSD) that the Omega encoder can discriminate.</p>
+<h2 id="31-setup"><strong>3.1 Setup</strong></h2>
+<p>All modulations use integer sample indices as the time axis — not normalised 0-to-1 linspace. This was a critical fix from an earlier version:</p>
+<p># WRONG (old): carriers at fc=0.05-0.45 all landed near DC bin 0-2</p>
+<p>t = np.linspace(0, 1, n_samples)</p>
+<p># CORRECT: integer sample indices → carrier at fc cycles/sample occupies</p>
+<p># bin floor(fc * n_samples) in the FFT → well-separated peaks</p>
+<p>t = np.arange(n_samples, dtype=np.float64)</p>
+<p>With n_samples=512 and fc in cycles/sample, the carrier occupies FFT bin round(fc * 512). Each modulation is assigned a different fc so their PSD peaks fall in different frequency bins.</p>
+<h2 id="32-per-modulation-mathematical-design"><strong>3.2 Per-Modulation Mathematical Design</strong></h2>
+<h3 id="am-amplitude-modulation"><strong>AM — Amplitude Modulation</strong></h3>
+<p>s_AM(t)  =  (1 + 0.8·cos(2π·f_m·t)) · exp(i·2π·fc·t)    fc = 0.08</p>
+<p>The message frequency f_m = 1/50 cycles/sample. The envelope (1 + 0.8·msg) amplitude-modulates the carrier. This produces three PSD peaks: carrier at fc, and two sidebands at fc ± f_m. The envelope variation creates high amplitude std.</p>
+<h3 id="fm-frequency-modulation"><strong>FM — Frequency Modulation</strong></h3>
+<p>φ(t)  =  2π·(fc·t + dev·Σᵢ₌₀ᵗ msg[i])    dev = 0.04,  fc = 0.15</p>
+<p>s_FM(t)  =  exp(i·φ(t))</p>
+<p>The cumulative sum of msg gives the instantaneous phase deviation. The result is a signal with constant amplitude (|s_FM| = 1) but time-varying instantaneous frequency. The PSD is wider than AM (Carson's rule: bandwidth ≈ 2(dev + f_m)·fs). Amplitude std is near zero; instantaneous frequency std is high.</p>
+<h3 id="bpsk-binary-phase-shift-keying"><strong>BPSK — Binary Phase Shift Keying</strong></h3>
+<p>chips[k·sl:(k+1)·sl]  =  2·bit_k − 1   ∈ {−1, +1}    sl = 8  samples/symbol</p>
+<p>s_BPSK(t)  =  chips[t] · exp(i·2π·0.20·t)</p>
+<p>8 samples per symbol (64 symbols over 512 samples) means the symbol transitions are slow — the PSD shows narrow sinc-shaped lobes centred at fc=0.20 with null bandwidth 2/sl = 0.25 cycles/sample. The bits alternate in blocks to guarantee phase transitions. The phase at each sample is either 0 or π (cos(phase)² ≈ +1 — the BPSK signature).</p>
+<h3 id="qpsk-quadrature-phase-shift-keying"><strong>QPSK — Quadrature Phase Shift Keying</strong></h3>
+<p>s_QPSK(t)  =  (c_I·cos(2π·0.28·t) − c_Q·sin(2π·0.28·t)) / √2</p>
+<p>4 samples per symbol (128 symbols over 512 samples) — four times more transitions than BPSK, producing a much wider PSD centred at fc=0.28. The four constellation points are at phase angles {0, π/2, π, 3π/2}, meaning cos(2Δφ) averages to near 0 rather than +1 as in BPSK. This distinguishes QPSK from BPSK in the Omega M(D(x)) features.</p>
+<h3 id="usb-upper-sideband-single-sideband"><strong>USB — Upper Sideband Single Sideband</strong></h3>
+<p>True USB SSB is constructed via the analytic signal method to guarantee a one-sided PSD:</p>
+<p>MSG_FFT[n/2 :] = 0          (zero negative-frequency bins)</p>
+<p>MSG_FFT[1:n/2] *= 2         (double positive-frequency bins — preserve power)</p>
+<p>s_a = IFFT(MSG_FFT)          (complex analytic signal)</p>
+<p>s_USB(t) = s_a(t) · exp(i·2π·0.35·t)</p>
+<p>This places all spectral energy at fc + f_m (the upper sideband) with zero energy at fc − f_m (the lower sideband is suppressed). The resulting PSD is asymmetric — a distinguishing feature the Omega encoder captures via the asymmetry between frequency band energies.</p>
+<h3 id="cw-continuous-wave"><strong>CW — Continuous Wave</strong></h3>
+<p>s_CW(t)  =  exp(i·2π·0.22·t)</p>
+<p>A pure unmodulated carrier. No envelope variation. No phase transitions. The PSD is a near-perfect delta spike at fc=0.22. κ(D(x)) is near zero (the derivative of a pure sinusoid has near-constant amplitude). Amplitude variance is zero. This is the easiest class to classify.</p>
+<h2 id="33-carrier-phase-randomisation-and-noise"><strong>3.3 Carrier Phase Randomisation and Noise</strong></h2>
+<p>Every generated sample gets a random carrier phase rotation:</p>
+<p>r_eid·I + i·Q  ←  (I + iQ) · exp(i·φ)      φ ~ Uniform(0, 2π)</p>
+<p>And AWGN is added at 30–40 dB SNR:</p>
+<p>noise_std  =  10^{−SNR_dB / 20}</p>
+<p>The random phase ensures the encoder cannot use absolute phase position — it must rely on the PSD envelope shape and modulation statistics. This validates that the phase-invariant features (amplitude statistics, spectral band energy) are doing the work. The 30–40 dB SNR means the noise is detectable but does not obscure the modulation signature.</p>
+<h2 id="34-iq-encoding"><strong>3.4 IQ Encoding</strong></h2>
+<p>The generated complex signal is converted to int8 hex using the same format as the real panoradio_rf dataset (see convert.py §4.6):</p>
+<p>scale  =  max(|Re|, |Im|) + ε</p>
+<p>I_i8  =  clip(Re / scale × 110, −127, 127)  ∈  int8</p>
+<p>Q_i8  =  clip(Im / scale × 110, −127, 127)  ∈  int8</p>
+<p>wire  =  interleave(I_i8, Q_i8)  then  .hex()  →  "iq:HEXHEX..."</p>
+<h1 id="4-audio-domain-generators"><strong>4. Audio Domain Generators</strong></h1>
+<p>Both audio generators use the same approach: assign each class a pure sine tone at a specific mel-filterbank center frequency, ensuring maximum separation in the mel-feature space. This is a simplification from realistic speech/sound generation, but it fully exercises the PCM encoder path.</p>
+<h2 id="41-the-mel-filterbank-and-frequency-assignment-strategy"><strong>4.1 The Mel Filterbank and Frequency Assignment Strategy</strong></h2>
+<p>The Cypha PCM encoder uses 26 mel-scale frequency bands over the range 80–4000 Hz at sr=16000 Hz. The mel scale is:</p>
+<p>mel(f)  =  2595 · log₁₀(1 + f / 700)</p>
+<p>Two classes assigned to adjacent mel bands will produce overlapping triangular filter responses (neighbouring mel filters share boundaries). To avoid this, each class is assigned a frequency at the center of every 2nd or 3rd mel band — giving zero filter overlap between adjacent classes.</p>
+<p>The speech and ESC-50 generators use different sets of band assignments so there is no frequency collision between the two domains.</p>
+<h2 id="42-gen_speech_commands-ten-word-classes"><strong>4.2  gen_speech_commands — Ten Word Classes</strong></h2>
+<p><strong>Word</strong></p>
+<p><strong>Frequency (Hz)</strong></p>
+<p><strong>Mel band</strong></p>
+<p><strong>Notes</strong></p>
+<p>yes</p>
+<p>165 Hz</p>
+<p>band 1</p>
+<p>Sub-bass</p>
+<p>no</p>
+<p>293 Hz</p>
+<p>band 3</p>
+<p>Bass</p>
+<p>go</p>
+<p>522 Hz</p>
+<p>band 6</p>
+<p>Low-mid</p>
+<p>stop</p>
+<p>803 Hz</p>
+<p>band 9</p>
+<p>Mid</p>
+<p>left</p>
+<p>1150 Hz</p>
+<p>band 12</p>
+<p>Upper-mid</p>
+<p>right</p>
+<p>1576 Hz</p>
+<p>band 15</p>
+<p>Presence</p>
+<p>up</p>
+<p>2100 Hz</p>
+<p>band 18</p>
+<p>Brilliance</p>
+<p>down</p>
+<p>2744 Hz</p>
+<p>band 21</p>
+<p>High</p>
+<p>on</p>
+<p>3255 Hz</p>
+<p>band 23</p>
+<p>Very high</p>
+<p>off</p>
+<p>3840 Hz</p>
+<p>band 25</p>
+<p>Near Nyquist</p>
+<p>Each word generates a pure sinusoid at the assigned frequency, duration 500 ms at 16000 Hz = 8000 samples. A tiny amount of white noise (σ = 0.005) is added to prevent exact repetition. The signal is then quantised to int16 PCM and hex-encoded:</p>
+<p>sig(t)  =  sin(2π·f₀·t) + 0.005·ε(t)      ε ~ N(0,1)</p>
+<p>pcm[t]  =  clip(sig[t] · 32767, −32768, 32767)  ∈  int16</p>
+<p>wire    =  pcm.tobytes().hex()  →  "pcm:HEXHEX..."</p>
+<h2 id="43-gen_esc50-ten-environmental-sound-classes"><strong>4.3  gen_esc50 — Ten Environmental Sound Classes</strong></h2>
+<p><strong>Category</strong></p>
+<p><strong>Frequency (Hz)</strong></p>
+<p><strong>Mel band</strong></p>
+<p><strong>Notes</strong></p>
+<p>dog_bark</p>
+<p>108 Hz</p>
+<p>band 0</p>
+<p>Very sub-bass — distinct from speech range</p>
+<p>rain</p>
+<p>228 Hz</p>
+<p>band 4/5</p>
+<p>Low bass</p>
+<p>engine</p>
+<p>408 Hz</p>
+<p>band 7</p>
+<p>Low-mid</p>
+<p>clock_tick</p>
+<p>660 Hz</p>
+<p>band 10</p>
+<p>Mid</p>
+<p>thunderstorm</p>
+<p>975 Hz</p>
+<p>band 13</p>
+<p>Upper-mid</p>
+<p>siren</p>
+<p>1360 Hz</p>
+<p>band 16</p>
+<p>Presence</p>
+<p>footsteps</p>
+<p>1850 Hz</p>
+<p>band 19</p>
+<p>Brilliance</p>
+<p>wind</p>
+<p>2450 Hz</p>
+<p>band 22</p>
+<p>High</p>
+<p>helicopter</p>
+<p>3060 Hz</p>
+<p>band 24</p>
+<p>Very high</p>
+<p>keyboard_typing</p>
+<p>3980 Hz</p>
+<p>band 26</p>
+<p>Near Nyquist</p>
+<p>ESC-50 uses duration 1000 ms (16000 samples) vs speech's 500 ms to reflect the longer duration of environmental sounds. The band assignments are offset from speech so the two audio domains do not conflict if ever run in a multi-domain setting.</p>
+<p><strong>Why pure tones instead of realistic sound synthesis?</strong></p>
+<p>The goal is not to simulate realistic audio. It is to verify that the PCM encoder (mel filterbank → Omega) correctly discriminates distinct frequency fingerprints. Pure tones are the worst-case test: if the encoder cannot distinguish ten tones at different mel-band frequencies, it cannot classify real audio. In practice, the real ESC-50 and speech benchmark accuracy is lower than synthetic because real sounds are complex and variable — the synthetic test sets a correctness floor.</p>
+<h1 id="5-the-benchmark-engine"><strong>5. The Benchmark Engine</strong></h1>
+<p>All nine domains run through a common benchmark engine in run_domain(). This ensures a fair, consistent evaluation methodology across text, RF, and audio domains.</p>
+<h2 id="51-isolation-design"><strong>5.1 Isolation Design</strong></h2>
+<p>Each domain gets:</p>
+<ul>
+<li>A fresh CyphaStateful instance (feature_dim=4096, resonance_dim=256) — no memory of previous domains.</li>
+<li>A fresh temp directory for the wire-format .txt file and the checkpoint directory.</li>
+<li>The temp directory is deleted with shutil.rmtree() after evaluation — no disk accumulation.</li>
+</ul>
+<p>tmp_dir  = tempfile.mkdtemp(prefix="cypha_synth_")</p>
+<p>tmp_file = os.path.join(tmp_dir, f"{name}.txt")</p>
+<p>ckpt_dir = os.path.join(tmp_dir, "checkpoints")</p>
+<p>cypha = CyphaStateful(feature_dim=4096, resonance_dim=256,</p>
+<pre><code>                  checkpoint\_root=ckpt\_dir\)
+</code></pre>
+<p># ... train and evaluate ...</p>
+<p>shutil.rmtree(tmp_dir, ignore_errors=True)   # clean up</p>
+<h2 id="52-8020-split-via-byte-offset-index"><strong>5.2 80/20 Split via Byte-Offset Index</strong></h2>
+<p>The same streaming approach as benchmark.py — the wire-format file is indexed to an offset array, then split 80/20 by position:</p>
+<p>offsets   = _build_offset_index(tmp_file)</p>
+<p>split     = int(len(offsets) * 0.8)</p>
+<p>train_off = offsets[:split]</p>
+<p>test_off  = offsets[split:]</p>
+<h2 id="53-per-class-accuracy-breakdown"><strong>5.3 Per-Class Accuracy Breakdown</strong></h2>
+<p>Unlike benchmark.py which only reports overall accuracy, run_domain() tracks correct and total counts per class and prints a per-class bar chart:</p>
+<p># Example output for panoradio_rf:</p>
+<p>Per-class:</p>
+<pre><code>AM          ████████░░  40/50  \( 80\.0%\)
+
+BPSK        ██████████  50/50  \(100\.0%\)
+
+CW          ██████████  50/50  \(100\.0%\)
+
+FM          ████████░░  41/50  \( 82\.0%\)
+
+QPSK        ████████░░  39/50  \( 78\.0%\)
+
+USB         ████████░░  42/50  \( 84\.0%\)
+</code></pre>
+<p>The bar chart uses ░ (empty) and █ (filled) at 10% increments. This immediately shows which classes the model is struggling with. In the RF domain, AM and QPSK are typically the weakest because their PSDs can partially overlap.</p>
+<h2 id="54-omega-signature-measurement"><strong>5.4 Omega Signature Measurement</strong></h2>
+<p>run_domain() computes κ(D(x)) for up to 100 test samples and reports the mean:</p>
+<p>κ_D(s)  =  excess_kurtosis( D( bytes(s) ) )</p>
+<p>This is the same _kappa_d() function shown in the synthetic benchmark source. It measures how bursty the byte-level derivative is for each input. The benchmark prints:</p>
+<p>Omega κ(D): 4.83  (bursty)     # high = SQL injections, malware, RF signals</p>
+<p>Omega κ(D): 0.21  (smooth)     # low  = regular email text, URLs</p>
+<p>This is a direct readout of how much discriminative signal the Omega operator is likely to find. High κ(D) means there is strong burstiness structure for the encoder to exploit. Low κ(D) means the model must rely more on the spectral and autocorrelation features.</p>
+<h1 id="6-expected-output"><strong>6. Expected Output</strong></h1>
+<h2 id="61-quick-mode-50-samples-1-epoch-2-min"><strong>6.1 --quick Mode (50 samples, 1 epoch, ~2 min)</strong></h2>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>CYPHA HRNA — SYNTHETIC BENCHMARK</p>
+<p>50 examples × 9 domains  |  Omega-2 encoder  |  Pure numpy</p>
+<p>Mode: QUICK (50 samples, 1 epoch)</p>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>Generating 50 synthetic sql_injection samples (text)...</p>
+<p>Generated in 0.00s</p>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>DOMAIN: SQL_INJECTION</p>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>Total pairs: 50  |  Train: 40  |  Test: 10</p>
+<p>Training (1 epoch(s))...</p>
+<p>═══════════════════════════════════════════════</p>
+<pre><code>Epoch 1/1
+
+Loss:    0\.0421   Meta\-L: 0\.0312
+
+Anchors: 38 \(0→38, \-0 merged\)  Steps: 40
+
+\.\.\.
+</code></pre>
+<p>Training: 0.2s</p>
+<p>Evaluating 10 test samples...</p>
+<p>─── Results ────────────────────────────────────────</p>
+<p>Accuracy:   90.0%  (9/10)</p>
+<p>Eval time:  0.1s  (10 ms/sample)</p>
+<p>Omega κ(D): 3.42  (bursty)</p>
+<p>Per-class:</p>
+<pre><code>safe           █████████░  4/5   \( 80\.0%\)
+
+sql\_injection  ██████████  5/5   \(100\.0%\)
+</code></pre>
+<h2 id="62-final-summary"><strong>6.2 Final Summary</strong></h2>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>SYNTHETIC BENCHMARK — FINAL SUMMARY</p>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p>Domain                      Accuracy   Samples    κ(D)   Classes</p>
+<p>─────────────────────────────────────────────────────────────────</p>
+<p>── Cybersecurity (Text) ──</p>
+<p>sql_injection               100.0%        500    4.83       2</p>
+<p>phishing_urls               100.0%        500    0.18       2</p>
+<p>malware                     100.0%        500    0.24       2</p>
+<p>network_intrusion            90.0%        500    0.31       2</p>
+<p>phishing_emails             100.0%        500    0.14       2</p>
+<p>phiusiil_phishing            96.0%        500    0.19       2</p>
+<p>Category mean               97.7%</p>
+<p>── RF Signals ──</p>
+<p>panoradio_rf                 85.3%        500    0.08       6</p>
+<p>Category mean                85.3%</p>
+<p>── Audio ──</p>
+<p>speech_commands              90.0%        500    0.01      10</p>
+<p>esc50                        92.0%        500    0.01      10</p>
+<p>Category mean                91.0%</p>
+<p>─────────────────────────────────────────────────────────────────</p>
+<p>OVERALL                      93.3%      4,500</p>
+<p>Best:   sql_injection (100.0%)</p>
+<p>Worst:  panoradio_rf  (85.3%)</p>
+<p>Total time:   312.4s</p>
+<p>Encoder:      Omega-2  [M(x), M(D(x)), M(D²(x)), R(x,K), A(x,lags)] × 3 scales</p>
+<p>κ(D) theory:  linearly encodes string attractor density γ*/n (r=0.9985)</p>
+<p>Zero external dependencies. Self-contained synthetic generation.</p>
+<p>══════════════════════════════════════════════════════════════════════</p>
+<p><strong>What counts as a pass?</strong></p>
+<p>If overall accuracy is above 80% and no domain shows 0% (which would indicate an encoder routing bug), the system is working correctly. RF signals typically show the lowest accuracy in synthetic mode (85–90%) because six modulation classes are more difficult to separate than two. Text domains typically achieve 90–100%.  Accuracy below 70% on any text domain usually indicates an encoding path problem.</p>
+<h1 id="7-how-synthetic-results-relate-to-the-real-benchmark"><strong>7. How Synthetic Results Relate to the Real Benchmark</strong></h1>
+<p>Synthetic results are systematically higher than real benchmark results. This is expected and by design.</p>
+<p><strong>Domain</strong></p>
+<p><strong>Synthetic (typical)</strong></p>
+<p><strong>Real benchmark (typical)</strong></p>
+<p><strong>Gap and reason</strong></p>
+<p>sql_injection</p>
+<p>95–100%</p>
+<p>88–94%</p>
+<p>Real injections are more varied in structure and character set</p>
+<p>phishing_urls</p>
+<p>95–100%</p>
+<p>82–90%</p>
+<p>Real URLs use many more patterns and encoding tricks</p>
+<p>malware</p>
+<p>95–100%</p>
+<p>85–92%</p>
+<p>Real PE features include more edge cases and obfuscation variants</p>
+<p>network_intrusion</p>
+<p>85–95%</p>
+<p>75–85%</p>
+<p>Real KDD-99 has correlated features that confuse simple classifiers</p>
+<p>phishing_emails</p>
+<p>95–100%</p>
+<p>84–90%</p>
+<p>Real phishing emails are often subtle; synthetic uses obvious urgency cues</p>
+<p>panoradio_rf</p>
+<p>80–90%</p>
+<p>78–86%</p>
+<p>Real HF radio has multipath fading, adjacent-channel interference, and noise at variable SNR</p>
+<p>speech_commands</p>
+<p>85–95%</p>
+<p>68–76%</p>
+<p>Real speech has speaker variability, room acoustics, recording artefacts</p>
+<p>esc50</p>
+<p>88–95%</p>
+<p>62–72%</p>
+<p>Real environmental sounds are highly variable; synthetic is single pure tones</p>
+<p>The gap is largest for audio domains because real speech and environmental sounds have far more within-class variability than pure sine waves. The synthetic test exercises the encoder path but cannot replicate the difficulty of acoustic variation.</p>
+<h1 id="8-function-reference"><strong>8. Function Reference</strong></h1>
+<p><strong>Function</strong></p>
+<p><strong>Returns</strong></p>
+<p><strong>Purpose</strong></p>
+<p>gen_sql_injection(n)</p>
+<p>List[(str,str)]</p>
+<p>Safe SQL queries vs injection strings. n/2 each.</p>
+<p>gen_phishing_urls(n)</p>
+<p>List[(str,str)]</p>
+<p>HTTPS legitimate URLs vs HTTP phishing URLs with 4 evasion styles.</p>
+<p>gen_malware(n)</p>
+<p>List[(str,str)]</p>
+<p>Benign PE feature strings (low entropy) vs malware (high entropy, injection APIs).</p>
+<p>gen_network_intrusion(n)</p>
+<p>List[(str,str)]</p>
+<p>KDD-style flow features: normal TCP services vs 4 attack types.</p>
+<p>gen_phishing_emails(n)</p>
+<p>List[(str,str)]</p>
+<p>Business email bodies vs URGENT phishing with URL.</p>
+<p>gen_phiusiil_phishing(n)</p>
+<p>List[(str,str)]</p>
+<p>Rich URL generation with 4 phishing construction styles.</p>
+<p>_rf_signal_hex(mod, n)</p>
+<p>str</p>
+<p>Core RF synthesiser: generates int8 IQ hex for one modulation class.</p>
+<p>gen_panoradio_rf(n)</p>
+<p>List[(str,str)]</p>
+<p>6 RF classes (AM/FM/BPSK/QPSK/USB/CW), balanced n/6 each.</p>
+<p>_fft_bandpass(noise, lo, hi, sr)</p>
+<p>ndarray</p>
+<p>Ideal FFT-domain bandpass filter (used in earlier speech design).</p>
+<p>_speech_hex(word, sr, ms)</p>
+<p>str</p>
+<p>Pure sine tone for one word class, hex-encoded int16 PCM.</p>
+<p>gen_speech_commands(n)</p>
+<p>List[(str,str)]</p>
+<p>10 word classes at mel-band-spaced frequencies.</p>
+<p>_env_sound_hex(cat, sr, ms)</p>
+<p>str</p>
+<p>Pure sine tone for one environmental sound class, hex-encoded.</p>
+<p>gen_esc50(n)</p>
+<p>List[(str,str)]</p>
+<p>10 sound classes at mel-band-spaced frequencies.</p>
+<p>_kappa_d(text)</p>
+<p>float</p>
+<p>κ(D(bytes(text))): burstiness diagnostic for the Omega encoder.</p>
+<p>run_domain(name, pairs, epochs, verbose)</p>
+<p>dict</p>
+<p>Full train+eval cycle for one domain. Temp dir per domain.</p>
+<p>main()</p>
+<p>—</p>
+<p>Entry point: runs all 9 domains, prints summary, saves JSON report.</p>
+<h1 id="9-output-report"><strong>9. Output Report</strong></h1>
+<p>synthetic_benchmark.py saves a detailed JSON report to synthetic_benchmark_report.json after every run:</p>
+<p>{</p>
+<p>"benchmark":    "synthetic",</p>
+<p>"n_per_domain": 500,</p>
+<p>"epochs":       3,</p>
+<p>"timestamp":    "2026-02-21 09:00:00",</p>
+<p>"total_time_s": 312.4,</p>
+<p>"overall_mean": 93.3,</p>
+<p>"domains": {</p>
+<pre><code>"sql\_injection": \{
+
+  "domain":        "sql\_injection",
+
+  "n\_samples":     500,
+
+  "n\_train":       400,
+
+  "n\_test":        100,
+
+  "accuracy":      100\.0,
+
+  "correct":       100,
+
+  "epochs":        3,
+
+  "train\_time\_s":  1\.92,
+
+  "eval\_time\_s":   0\.48,
+
+  "omega\_kd\_mean": 4\.83,
+
+  "omega\_kd\_std":  2\.10,
+
+  "n\_classes":     2,
+
+  "classes":       \["safe", "sql\_injection"\],
+
+  "per\_class\_acc": \{ "safe": 100\.0, "sql\_injection": 100\.0 \},
+
+  "errors":        \[\]
+
+\},
+
+"panoradio\_rf": \{ \.\.\. \},
+
+\.\.\.
+</code></pre>
+<p>}</p>
+<p>}</p>
+<p>This file is overwritten on each run. Compare runs by saving copies with different names, e.g. synthetic_baseline.json before making a code change and synthetic_after_fix.json after.</p>
+<p><strong>End of synthetic_benchmark.py reference.  All 5 files documented.</strong></p>
+  </main>
+</body>
+</html>

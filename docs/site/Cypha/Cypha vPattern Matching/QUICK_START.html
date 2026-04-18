@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>QUICK START</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha vPattern Matching\QUICK_START.html</span>
+  </header>
+  <main class="prose">
+<h1 id="cypha-hrna-quick-start-guide">Cypha HRNA - Quick Start Guide</h1>
+<p><strong>5-Minute Showcase Setup</strong></p>
+<h2 id="what-you-need">What You Need</h2>
+<ul>
+<li>Python 3.8+</li>
+<li>PyTorch, NumPy, scikit-learn</li>
+</ul>
+<pre><code class="language-bash">pip install torch numpy scikit-learn
+</code></pre>
+<h2 id="files-included">Files Included</h2>
+<pre><code>cypha_production.py       - Main system (production-ready)
+showcase_demo.py          - Automated demo script
+generate_demo_data.py     - Data generator
+README.md                 - Full documentation
+</code></pre>
+<h2 id="running-the-showcase-recommended">Running the Showcase (Recommended)</h2>
+<p><strong>One command to see everything:</strong></p>
+<pre><code class="language-bash">python generate_demo_data.py  # Generate demo data
+python showcase_demo.py        # Run full demonstration
+</code></pre>
+<p><strong>What it shows:</strong><br />
+- ✓ Training on diverse tasks (math, language, logic)<br />
+- ✓ State separation verification<br />
+- ✓ Inference accuracy test<br />
+- ✓ Performance benchmarks<br />
+- ✓ Semantic clustering demo</p>
+<p><strong>Expected output:</strong></p>
+<pre><code>CYPHA HRNA SHOWCASE
+======================================================================
+
+Training Phase
+--------------
+Training for 3 epochs...
+  Loss: 0.023456
+  Anchors: 39
+  Temperature: 1.960
+
+✓ Training completed in 2.13s
+
+State Separation Test
+--------------------
+Average separation: 0.9932
+✓ PASS - States are well separated
+
+Inference Showcase
+-----------------
+✓ Input: '12+165'
+  Expected: '177'
+  Got:      '177' (confidence: 1.000)
+
+Accuracy: 5/5 (100.0%)
+
+Performance Benchmark
+-------------------
+  Average latency: 14.52ms
+  Throughput: 68.9 inferences/sec
+</code></pre>
+<h2 id="interactive-cli">Interactive CLI</h2>
+<p><strong>For custom exploration:</strong></p>
+<pre><code class="language-bash">python cypha_production.py
+</code></pre>
+<pre><code>cypha&gt; train demo_small.txt 3
+cypha&gt; infer cat sound
+Output: 'meow' (confidence: 1.000)
+
+cypha&gt; test
+Average state separation: 1.0234
+PASS
+
+cypha&gt; stats
+System Statistics:
+  Anchors: 85
+  Mappings: 85
+  Training steps: 255
+  Temperature: 1.941
+</code></pre>
+<h2 id="python-api-usage">Python API Usage</h2>
+<pre><code class="language-python">from cypha_production import Cypha
+
+# Initialize
+cypha = Cypha(device=&quot;cpu&quot;)
+
+# Train
+cypha.train(&quot;data.txt&quot;, epochs=3, batch_size=8)
+
+# Infer
+result, confidence = cypha.infer(&quot;12+165&quot;)
+print(f&quot;Result: {result}&quot;)  # &quot;177&quot;
+
+# Test separation
+avg_dist = cypha.test_separation()
+print(f&quot;Separation: {avg_dist:.4f}&quot;)  # &gt; 0.9
+</code></pre>
+<h2 id="creating-your-own-data">Creating Your Own Data</h2>
+<p><strong>Format:</strong> <code>input|||target</code> (one per line)</p>
+<pre><code>12+165|||177
+cat sound|||meow
+capital of France|||Paris
+</code></pre>
+<p><strong>Or use the generator:</strong></p>
+<pre><code class="language-python">from generate_demo_data import generate_demo_data
+
+data = generate_demo_data(n_samples=500)
+with open(&quot;my_data.txt&quot;, &quot;w&quot;) as f:
+    for line in data:
+        f.write(line + &quot;\n&quot;)
+</code></pre>
+<h2 id="key-metrics-to-highlight">Key Metrics to Highlight</h2>
+<p><strong>Performance:</strong><br />
+- Training: 2-3s for 50 examples<br />
+- Inference: ~15ms per query<br />
+- Throughput: ~60 queries/sec</p>
+<p><strong>Quality:</strong><br />
+- State separation: 0.9-1.2 (excellent)<br />
+- Accuracy: &gt;90% on trained data<br />
+- Semantic clustering: Similar inputs cluster naturally</p>
+<p><strong>Efficiency:</strong><br />
+- Complexity: O(N log N) via FFT<br />
+- 14× faster than original architecture<br />
+- Scales to 10K+ examples</p>
+<h2 id="what-makes-this-special">What Makes This Special</h2>
+<h3 id="1-resonance-based-learning">1. Resonance-Based Learning</h3>
+<p>Not backpropagation - uses quantum-inspired field dynamics</p>
+<h3 id="2-explicit-separation">2. Explicit Separation</h3>
+<p>Contrastive learning actively pushes states apart</p>
+<h3 id="3-natural-clustering">3. Natural Clustering</h3>
+<p>Similar concepts automatically cluster in state space</p>
+<h3 id="4-production-ready">4. Production Ready</h3>
+<ul>
+<li>Clean code</li>
+<li>Error handling</li>
+<li>Performance monitoring</li>
+<li>Easy to integrate</li>
+</ul>
+<h2 id="customization-points">Customization Points</h2>
+<p><strong>Adjust hyperparameters:</strong></p>
+<pre><code class="language-python">cypha = Cypha(
+    input_dim=32,           # Text encoding dimension
+    resonance_dim=64,       # State space size
+    device=&quot;cpu&quot;            # or &quot;cuda&quot;
+)
+</code></pre>
+<p><strong>In the code:</strong><br />
+- Drive strength (line 198): <code>* 200.0</code> → adjust force<br />
+- Min separation (line 227): <code>0.6</code> → anchor spacing<br />
+- Temperature (line 464): <code>2.0</code> → softmax sharpness</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong>States collapse (dist &lt; 0.1):</strong><br />
+- Increase drive strength (200 → 500)<br />
+- Increase min_separation (0.6 → 0.8)<br />
+- Check data format (must have |||)</p>
+<p><strong>Low accuracy:</strong><br />
+- Train more epochs<br />
+- Reduce batch size (8 → 4)<br />
+- Ensure clean input|||target data</p>
+<p><strong>Slow performance:</strong><br />
+- Already optimized at O(N log N)<br />
+- Use smaller resonance_dim if needed<br />
+- Profile with time.perf_counter()</p>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><strong>Run showcase_demo.py</strong> - See it in action</li>
+<li><strong>Read README.md</strong> - Understand architecture</li>
+<li><strong>Try your own data</strong> - Test on custom tasks</li>
+<li><strong>Explore the code</strong> - Clean, documented, ready to extend</li>
+</ol>
+<h2 id="support">Support</h2>
+<p>Questions? Check:<br />
+- README.md - Full documentation<br />
+- Code comments - Inline explanations<br />
+- Demo output - Expected behavior</p>
+<hr />
+<p><strong>Ready to showcase in 5 minutes!</strong></p>
+<p>Generate data → Run demo → Show results → Impress audience ✨</p>
+  </main>
+</body>
+</html>

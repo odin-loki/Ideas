@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>math-proof</title>
+  <link rel="stylesheet" href="../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../index.html">Index</a>
+    <span class="path">Break AES\math-proof.html</span>
+  </header>
+  <main class="prose">
+<h1 id="mathematical-proof-of-transformer-distillation-rl-convergence">Mathematical Proof of Transformer Distillation-RL Convergence</h1>
+<h2 id="1-definitions-and-setup">1. Definitions and Setup</h2>
+<p>Let:<br />
+- T(x) be the teacher model (Llama)<br />
+- S(x) be the student model (our transformer)<br />
+- π(a|s) be the policy (probability of selecting action a in state s)<br />
+- R(a,s) be the reward function<br />
+- D(P||Q) be the KL divergence between distributions P and Q</p>
+<h2 id="2-knowledge-distillation-phase">2. Knowledge Distillation Phase</h2>
+<h3 id="21-distillation-loss">2.1 Distillation Loss</h3>
+<p>The distillation loss LD at temperature τ is:</p>
+<p>LD = τ² * D(softmax(T(x)/τ) || softmax(S(x)/τ))</p>
+<h3 id="22-convergence-of-distillation">2.2 Convergence of Distillation</h3>
+<p>Theorem 1: Under suitable conditions, the distillation loss converges to a local minimum.</p>
+<p>Proof:<br />
+1. The KL divergence D(P||Q) ≥ 0 for all P,Q<br />
+2. D(P||Q) = 0 iff P = Q<br />
+3. The gradient descent update rule:<br />
+   θt+1 = θt - η∇θLD(θt)<br />
+4. Given the loss is bounded below by 0 and smooth, by the monotone convergence theorem:<br />
+   lim(t→∞) LD(θt) exists and ∇θLD(θt) → 0</p>
+<h2 id="3-reinforcement-learning-phase">3. Reinforcement Learning Phase</h2>
+<h3 id="31-policy-gradient">3.1 Policy Gradient</h3>
+<p>The policy gradient objective is:<br />
+J(θ) = E[∑t γt R(st,at)]</p>
+<p>Where:<br />
+- γ is the discount factor<br />
+- st is the state at time t<br />
+- at is the action at time t</p>
+<h3 id="32-advantage-estimation">3.2 Advantage Estimation</h3>
+<p>We use the advantage function:<br />
+A(s,a) = Q(s,a) - V(s)<br />
+Where:<br />
+- Q(s,a) is the action-value function<br />
+- V(s) is the value function</p>
+<h3 id="33-policy-update">3.3 Policy Update</h3>
+<p>The policy gradient theorem gives us:<br />
+∇θJ(θ) = E[∇θlog π(a|s)A(s,a)]</p>
+<h2 id="4-combined-convergence">4. Combined Convergence</h2>
+<p>Theorem 2: The combined system converges to a local optimum under the following conditions:<br />
+1. The distillation phase provides a good initialization<br />
+2. The RL phase maintains the distilled knowledge while optimizing for rewards</p>
+<p>Proof:</p>
+<p>Let θD be the parameters after distillation and θRL be the final parameters.<br />
+The total loss is:<br />
+L(θ) = αLD(θ) + (1-α)LRL(θ)</p>
+<p>Where:<br />
+- α balances distillation and RL objectives<br />
+- LD is the distillation loss<br />
+- LRL is the negative of the RL objective</p>
+<h3 id="41-gradient-properties">4.1 Gradient Properties</h3>
+<p>The gradient of L(θ) is:<br />
+∇θL(θ) = α∇θLD(θ) + (1-α)∇θLRL(θ)</p>
+<h3 id="42-convergence-proof">4.2 Convergence Proof</h3>
+<ol>
+<li>Both LD and LRL are bounded below</li>
+<li>The combined gradient ∇θL(θ) exists and is continuous</li>
+<li>Using stochastic gradient descent:<br />
+   θt+1 = θt - η∇θL(θt)</li>
+</ol>
+<p>By the Kushner-Clark theorem, under appropriate learning rate conditions:<br />
+lim(t→∞) ∇θL(θt) = 0</p>
+<h2 id="5-error-bounds">5. Error Bounds</h2>
+<p>Theorem 3: The error of the combined system is bounded by:<br />
+ε ≤ εD + εRL</p>
+<p>Where:<br />
+- εD is the distillation error bound<br />
+- εRL is the RL error bound</p>
+<p>Proof:<br />
+1. By the triangle inequality:<br />
+   ||T(x) - S<em>(x)|| ≤ ||T(x) - SD(x)|| + ||SD(x) - S</em>(x)||<br />
+   Where:<br />
+   - SD is the model after distillation<br />
+   - S* is the final model</p>
+<ol start="2">
+<li>The first term is bounded by εD due to distillation convergence</li>
+<li>The second term is bounded by εRL due to policy gradient convergence</li>
+</ol>
+<h2 id="6-sample-complexity">6. Sample Complexity</h2>
+<p>The sample complexity for convergence is:<br />
+O(1/ε²) for distillation and O(1/(1-γ)³ε²) for the RL phase</p>
+<p>Total sample complexity:<br />
+N = O(1/ε²) + O(1/(1-γ)³ε²)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The system converges to a local optimum with error bounds that depend on both the distillation and RL phases. The convergence rate is dominated by the RL phase due to its higher sample complexity.</p>
+  </main>
+</body>
+</html>

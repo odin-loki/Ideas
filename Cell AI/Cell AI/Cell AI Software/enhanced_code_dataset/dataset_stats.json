@@ -1,0 +1,35 @@
+{
+  "total_samples": 500,
+  "avg_loc": 146.5,
+  "complexity_distribution": {
+    "simple": 108,
+    "complex": 41,
+    "very_complex": 302,
+    "moderate": 49
+  },
+  "algorithm_distribution": {
+    "linear_search": 285,
+    "factorial": 11,
+    "binary_search": 11
+  },
+  "vulnerability_count": 24,
+  "pattern_distribution": {},
+  "performance_distribution": {
+    "O(1)": 70,
+    "O(n\u00b3)": 34,
+    "O(n^6)": 49,
+    "O(n^7)": 58,
+    "O(n^5)": 49,
+    "O(n^8)": 48,
+    "O(n^4)": 27,
+    "O(n^10)": 18,
+    "O(n^12)": 4,
+    "unknown_recursive": 11,
+    "O(n^9)": 36,
+    "O(n)": 54,
+    "O(n^11)": 6,
+    "O(n\u00b2)": 34,
+    "O(n^13)": 1,
+    "exponential": 1
+  }
+}

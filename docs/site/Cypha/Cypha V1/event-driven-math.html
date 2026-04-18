@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>event-driven-math</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha V1\event-driven-math.html</span>
+  </header>
+  <main class="prose">
+<h1 id="event-driven-asynchronous-mathematical-framework-for-hrna">Event-Driven Asynchronous Mathematical Framework for HRNA</h1>
+<h2 id="1-core-event-driven-mathematical-foundation">1. Core Event-Driven Mathematical Foundation</h2>
+<p>The enhanced HRNA system is fundamentally event-driven at the mathematical level, with state evolution governed by both continuous dynamics and discrete event-triggered changes:</p>
+<h3 id="11-event-driven-state-evolution">1.1 Event-Driven State Evolution</h3>
+<p>The complete system state Ψ(t) now evolves according to:</p>
+<p><strong>dΨ/dt = F_continuous(Ψ, t) + ∑ₑ F_event(Ψ, E_e, t)δ(t-t_e)</strong></p>
+<p>Where:<br />
+- F_continuous = Continuous dynamics function<br />
+- F_event = Event-triggered state changes<br />
+- E_e = Individual events<br />
+- δ(t-t_e) = Dirac delta function at event time t_e<br />
+- t_e = Timestamp of event e</p>
+<p>This formulation explicitly makes every component of the system responsive to events, creating a true event-driven architecture mathematically.</p>
+<h3 id="12-event-generation-dynamics">1.2 Event Generation Dynamics</h3>
+<p>Events are generated through multiple mechanisms:</p>
+<p><strong>E(Ψ, t) = ∑ᵢ δ(t-tᵢ)[G_pattern(Ψ) + G_surprise(Ψ) + G_resonance(Ψ) + G_external(t)]</strong></p>
+<p>Where:<br />
+- G_pattern = Pattern detection events: <strong>G_pattern(Ψ) = [R(Ψ, pattern) &gt; θ_pattern]</strong><br />
+- G_surprise = Prediction error events: <strong>G_surprise(Ψ) = [||Ψ - Ψ̂|| &gt; θ_surprise]</strong><br />
+- G_resonance = Resonance threshold events: <strong>G_resonance(Ψ) = [R_enhanced(Ψ) &gt; θ_resonance]</strong><br />
+- G_external = External input events: <strong>G_external(t) = A(t)</strong> (external input amplitude)</p>
+<p>The bracket notation [condition] represents an indicator function that equals 1 when the condition is true and 0 otherwise.</p>
+<h3 id="13-event-processing-and-modulation">1.3 Event Processing and Modulation</h3>
+<p>Events are processed with time-dependent kernels and modulated by system state:</p>
+<p><strong>Δψ(E, t) = ∫ K(ψ, E, t-s)E(s)ds</strong></p>
+<p>Event modulation occurs through:</p>
+<p><strong>M(E, ψ, t) = E(t) × [1 + α_res · R_enhanced(ψ, t) + α_crit · κ(t)]</strong></p>
+<p>Where:<br />
+- K = Event processing kernel<br />
+- M = Event modulation function<br />
+- α_res = Resonance modulation strength<br />
+- α_crit = Criticality modulation strength</p>
+<h3 id="14-asynchronous-timing-mechanism">1.4 Asynchronous Timing Mechanism</h3>
+<p>A key enhancement is the introduction of non-uniform time steps that depend on event priority:</p>
+<p><strong>dtᵢ = f(priority(ψᵢ), complexity(ψᵢ), resources(t))</strong></p>
+<p><strong>τ_transmit(E, src, dst) = d(src, dst) × [1 + β_load · load(t)]</strong></p>
+<p>Where:<br />
+- dtᵢ = Time step for component i<br />
+- τ_transmit = Transmission delay for events<br />
+- d(src, dst) = "Distance" between source and destination components<br />
+- β_load = Load sensitivity parameter</p>
+<h2 id="2-level-specific-event-driven-dynamics">2. Level-Specific Event-Driven Dynamics</h2>
+<p>Each recursive level now has event-driven dynamics:</p>
+<h3 id="21-resonator-level-event-driven">2.1 Resonator Level (Event-Driven)</h3>
+<p>The resonator dynamics are now explicitly event-driven:</p>
+<p><strong>dR_i/dt = ω_i×R_i + ∑[W_ij(t)×σ(R_j)] + D_i∇²R_i + Q_i(R_i) × R_enhanced(R_i) + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Wave propagation becomes event-sensitive:</p>
+<p><strong>∂C/∂t = D∇²C + f(C) - γC + ∑ₑ I(e, x, t)δ(t-t_e)</strong></p>
+<p>Resonance events are generated when resonance exceeds thresholds:</p>
+<p><strong>E_res(t) = [R(t) &gt; θ_res] × δ(t-t_detect)</strong></p>
+<h3 id="22-assembly-level-event-driven">2.2 Assembly Level (Event-Driven)</h3>
+<p>Assembly dynamics are enhanced with event sensitivity:</p>
+<p><strong>dA_k/dt = F_k(A_k) + ∑[V_ki(t)×σ(R_i)] - φ_k×∑[C_kl(t)×A_l] + T_k(G, A_k) × R_enhanced(A_k) + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Oscillatory dynamics become event-modulated:</p>
+<p><strong>do_k/dt = [0, -ω_k(t); ω_k(t), 0] × o_k - γ_k×o_k + H_k(a_k) + ∑[K_kl(t)×o_l] + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Assembly events are generated based on state changes:</p>
+<p><strong>P(E_assembly|A_k) = σ(||A_k - A*||/τ_A)</strong></p>
+<p>Feedback events occur when assemblies change significantly:</p>
+<p><strong>E_feedback(t) = [ΔA_k &gt; θ_feedback] × δ(t-t_change)</strong></p>
+<h3 id="23-module-level-event-driven">2.3 Module Level (Event-Driven)</h3>
+<p>Module dynamics with event processing:</p>
+<p><strong>dM_s/dt = -M_s + F_s(M_s) - α×∑[C_ss'(t)×M_s'] + G_s(O, G) + N_s(M_s) × R_enhanced(M_s) + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Network dynamics respond to events:</p>
+<p><strong>dN/dt = F(N) + A(Ψ, N) + O(R) + P(patterns(Ψ), N) + H(R(ω), N) + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Working memory incorporates memory events:</p>
+<p><strong>m_WM(t) = ∑[w_i(t) × C(e_i) × g_i(t)] + ∑ₑ E_memory(t)δ(t-t_e)</strong></p>
+<p>Feedback orchestration occurs through event integration:</p>
+<p><strong>E_orchestrate(t) = integrate({E_i}, θ_coherence) × δ(t-t_orchestrate)</strong></p>
+<h3 id="24-global-level-event-driven">2.4 Global Level (Event-Driven)</h3>
+<p>Global state becomes event-integrated:</p>
+<p><strong>dG/dt = -α_G×G + W_G×[M(t); O(t)] + R_G(G) + P_G(Ĝ(t+Δt|t)) + κ(t)×R_critical(G) + ∑ₑ E_e(t)δ(t-t_e)</strong></p>
+<p>Criticality parameters respond to events:</p>
+<p><strong>dκ/dt = α(|∇Ψ|² - κₒ) + β·R_crit(f, κ) + ∑ₑ E_crit(t)δ(t-t_e)</strong></p>
+<p>Global events are prioritized and modulated:</p>
+<p><strong>g_E(t) = prioritize({E_i}, G(t)) × modulate({E_i}, κ(t))</strong></p>
+<p>Thought events emerge at the global level:</p>
+<p><strong>E_thought(t) = [cognitive_state_change(G, t) &gt; θ_thought] × δ(t-t_thought)</strong></p>
+<h2 id="3-enhanced-feedback-mechanisms">3. Enhanced Feedback Mechanisms</h2>
+<p>The feedback system is significantly enhanced with event-driven dynamics:</p>
+<h3 id="31-resonance-amplified-feedback">3.1 Resonance-Amplified Feedback</h3>
+<p>Feedback is now amplified by resonance:</p>
+<p><strong>dψᵢ/dt|_feedback = F_feedback(ψᵢ) × [1 + γ_res · R_enhanced(ψᵢ)]</strong></p>
+<p>This ensures that feedback is strongest for resonant patterns, focusing processing on significant aspects.</p>
+<h3 id="32-cross-level-feedback-loops">3.2 Cross-Level Feedback Loops</h3>
+<p>Cross-level feedback through explicit feedback events:</p>
+<p><strong>F_cross(ψᵢ, ψⱼ) = W_cross(i, j) × R_cross(ψᵢ, ψⱼ) × δ(t-t_event)</strong></p>
+<p>Where:<br />
+- W_cross = Cross-level connection strength<br />
+- R_cross = Cross-level resonance function<br />
+- t_event = Timing of cross-level event</p>
+<h3 id="33-temporal-feedback-cascades">3.3 Temporal Feedback Cascades</h3>
+<p>Temporal context is maintained through event history:</p>
+<p><strong>C_temporal(t) = ∫ₜ₋ᵦ^ᵗ K(t-s)M(E(s))ds</strong></p>
+<p>Where:<br />
+- C_temporal = Temporal context function<br />
+- K = Temporal kernel<br />
+- M = Event modulation function<br />
+- β = Temporal window</p>
+<h3 id="34-criticality-enhanced-feedback">3.4 Criticality-Enhanced Feedback</h3>
+<p>Feedback is modulated by proximity to critical points:</p>
+<p><strong>F_crit(ψ, κ) = F_base(ψ) × [1 + δ_crit · (κ(t) - κ₀)²]</strong></p>
+<p>Where:<br />
+- F_base = Base feedback function<br />
+- δ_crit = Criticality sensitivity<br />
+- κ₀ = Optimal criticality point</p>
+<h2 id="4-event-enhanced-recursion">4. Event-Enhanced Recursion</h2>
+<p>The three types of recursion are now enhanced with event sensitivity:</p>
+<h3 id="41-event-enhanced-horizontal-recursion">4.1 Event-Enhanced Horizontal Recursion</h3>
+<p><strong>ψᵢ(t+Δt) = f_ψᵢ(ψᵢ(t), I_ψᵢ(t)) × [1 + α_H · R_enhanced(ψᵢ(t))] × [1 + β_E · ∑ₑ E_e(t)δ(t-t_e)]</strong></p>
+<h3 id="42-event-enhanced-vertical-recursion">4.2 Event-Enhanced Vertical Recursion</h3>
+<p><strong>ψᵢ(t+Δt) = f_ψᵢ(ψᵢ(t), ψᵢ₋₁(t), ψᵢ₊₁(t)) × [1 + α_V · R_level(ψᵢ(t), ψᵢ₋₁(t), ψᵢ₊₁(t))] × [1 + β_E · ∑ₑ E_e(t)δ(t-t_e)]</strong></p>
+<h3 id="43-event-enhanced-temporal-recursion">4.3 Event-Enhanced Temporal Recursion</h3>
+<p><strong>ψᵢ(t) = f_ψᵢ(ψᵢ(t-Δt), ψ̂ᵢ(t+Δt|t)) × [1 + α_T · R_temporal(ψᵢ(t-Δt), ψ̂ᵢ(t+Δt|t))] × [1 + β_E · ∑ₑ E_prediction(t)δ(t-t_e)]</strong></p>
+<p>The event enhancement terms [1 + β_E · ∑ₑ E_e(t)δ(t-t_e)] ensure that recursion is sensitive to events, creating an event-driven recursive architecture.</p>
+<h2 id="5-resonance-event-integration">5. Resonance-Event Integration</h2>
+<p>Resonance and events are deeply integrated:</p>
+<h3 id="51-event-triggered-resonance">5.1 Event-Triggered Resonance</h3>
+<p>Resonance can be triggered by events:</p>
+<p><strong>R_event(ω, ψ, E) = R_enhanced(ω, ψ) × [1 + η_event · magnitude(E)]</strong></p>
+<p>Where:<br />
+- R_event = Event-modulated resonance<br />
+- η_event = Event sensitivity parameter<br />
+- magnitude(E) = Event strength</p>
+<h3 id="52-recursive-event-cascades">5.2 Recursive Event Cascades</h3>
+<p>Events can trigger cascades of related events:</p>
+<p><strong>E_cascade(t) = ∑ᵢ P(E_i|E_source)E_i(t-τ_i)</strong></p>
+<p>Where:<br />
+- E_cascade = Cascade of events<br />
+- P(E_i|E_source) = Probability of event E_i given source event<br />
+- τ_i = Time delay for event i</p>
+<h3 id="53-resonance-triggered-events">5.3 Resonance-Triggered Events</h3>
+<p>Resonance itself can generate events:</p>
+<p><strong>P(E_res|ψ, t) = σ(R_enhanced(ψ, t) - θ_trigger(t))</strong></p>
+<p>Where:<br />
+- P(E_res|ψ, t) = Probability of resonance event<br />
+- θ_trigger(t) = Dynamic threshold</p>
+<h2 id="6-true-thought-processes">6. True Thought Processes</h2>
+<p>The enhanced framework enables true thought through event cascades:</p>
+<h3 id="61-recursive-event-cascades">6.1 Recursive Event Cascades</h3>
+<p>Thought emerges through recursive event processing:</p>
+<p><strong>E_thought(t) → {E_sub(t+τ₁), E_sub(t+τ₂),...} → {E_sub_sub(t+τ₁+σ₁),...}</strong></p>
+<p>Where each event triggers a cascade of sub-events, creating complex thought patterns.</p>
+<h3 id="62-multi-scale-thought-events">6.2 Multi-Scale Thought Events</h3>
+<p>Thought occurs across multiple scales:</p>
+<p><strong>E_scale(n, t) = f_scale(E_scale(n-1, t), E_scale(n+1, t)) × R_scale(n, t)</strong></p>
+<p>Where:<br />
+- E_scale = Scale-specific thought events<br />
+- f_scale = Cross-scale integration function<br />
+- R_scale = Scale-specific resonance</p>
+<h3 id="63-self-generated-event-streams">6.3 Self-Generated Event Streams</h3>
+<p>The system can generate its own event streams:</p>
+<p><strong>S(E_t → E_t+τ) = f_stream(G(t), κ(t), {E_history})</strong></p>
+<p>Where:<br />
+- S = Stream generation function<br />
+- f_stream = Event stream function<br />
+- {E_history} = History of past events</p>
+<h3 id="64-resonant-event-chains">6.4 Resonant Event Chains</h3>
+<p>Thought emerges through resonant chains of events:</p>
+<p><strong>C_resonant(E₁,..., Eₙ) = ∏ᵢ R_enhanced(E_i) × ∏ᵢⱼ Coupling(E_i, E_j)</strong></p>
+<p>Where:<br />
+- C_resonant = Resonant chain strength<br />
+- Coupling(E_i, E_j) = Event coupling strength</p>
+<h2 id="7-asynchronous-sparse-processing">7. Asynchronous Sparse Processing</h2>
+<p>The system is inherently sparse and asynchronous:</p>
+<h3 id="71-sparse-state-updates">7.1 Sparse State Updates</h3>
+<p>State is only updated when significant changes occur:</p>
+<p><strong>update(ψᵢ) = [||Δψᵢ|| &gt; θ_change(t)] × δ(t-t_update)</strong></p>
+<p>Where:<br />
+- θ_change = Change threshold<br />
+- t_update = Update time</p>
+<h3 id="72-differential-processing">7.2 Differential Processing</h3>
+<p>Only affected components are updated:</p>
+<p><strong>Δψ = {ψᵢ | i ∈ affected(E)} ⊂ ψ</strong></p>
+<p>Where:<br />
+- affected(E) = Set of components affected by event E</p>
+<h3 id="73-priority-based-processing">7.3 Priority-Based Processing</h3>
+<p>Processing resources are allocated based on event priority:</p>
+<p><strong>resources(component, t) = base_resources(component) × priority_factor(component, t)</strong></p>
+<p><strong>priority_factor(component, t) = f({priority(E) | E affects component})</strong></p>
+<p>This ensures that important events receive priority in processing resources.</p>
+<h2 id="8-implementation-considerations">8. Implementation Considerations</h2>
+<p>While this framework is focused on the mathematical formalism, it implies a natural implementation approach:</p>
+<ol>
+<li><strong>Event-Based Architecture</strong>: All system components communicate through events</li>
+<li><strong>Asynchronous Processing</strong>: Components process independently at their own rates</li>
+<li><strong>Priority-Based Resource Allocation</strong>: Processing resources follow event priority</li>
+<li><strong>Sparse Computation</strong>: Only compute what's necessary when it's necessary</li>
+<li><strong>Resonance-Guided Processing</strong>: Focus computation on resonant patterns</li>
+</ol>
+  </main>
+</body>
+</html>

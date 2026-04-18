@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Fungal NA Parralell Math Model</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Fungal Network Algorithm\Fungal Network v1\Fungal NA Parralell Math Model.html</span>
+  </header>
+  <main class="prose">
+<h1 id="gpu-parallelized-mathematical-model">GPU-Parallelized Mathematical Model</h1>
+<h2 id="1-core-system-structure">1. Core System Structure</h2>
+<h3 id="parallel-state-space">Parallel State Space</h3>
+<p>Network state S decomposed into concurrent regions:</p>
+<pre><code>S = ⋃ᵢ₌₁ᵏ Sᵢ
+Each Sᵢ processes independently on GPU thread blocks
+</code></pre>
+<h3 id="parallel-evolution">Parallel Evolution</h3>
+<pre><code>∂S/∂t = F(S) + P(S) + R(S)
+Decomposes to parallel operations:
+[∂S₁/∂t, ∂S₂/∂t, ..., ∂Sₙ/∂t]
+</code></pre>
+<h2 id="2-pattern-recognition-gpu-kernels">2. Pattern Recognition (GPU Kernels)</h2>
+<h3 id="pattern-function">Pattern Function</h3>
+<pre><code>Ψ(r,θ) = ∑ₖ aₖRₖ(r)e^(ikθ)
+// Parallel across k terms and spatial regions
+// Each GPU thread handles subset of terms
+</code></pre>
+<h3 id="pattern-matching">Pattern Matching</h3>
+<pre><code>M(S,Ψ) = ∑ᵢⱼ K(xᵢ-yⱼ)S(xᵢ)Ψ(yⱼ)
+// Parallelized across i,j pairs
+// GPU threads handle correlation computations
+</code></pre>
+<h2 id="3-resource-distribution">3. Resource Distribution</h2>
+<h3 id="parallel-resource-flow">Parallel Resource Flow</h3>
+<pre><code>∂ρ/∂t = D∇²ρ + Q(S) - C(ρ)
+// Each GPU thread handles local region
+// Boundary updates through shared memory
+</code></pre>
+<h3 id="network-flow-parallel-updates">Network Flow (Parallel Updates)</h3>
+<pre><code>E(S) = ∑ᵢⱼ wᵢⱼfᵢⱼ/dᵢⱼ
+// Parallel across all i,j connections
+// Thread blocks handle connection subsets
+</code></pre>
+<h2 id="4-state-transitions">4. State Transitions</h2>
+<h3 id="parallel-state-updates">Parallel State Updates</h3>
+<pre><code>P(Sᵢ → Sⱼ) = T(ΔE)G(ΔR)H(ΔP)
+// Each transition computable independently
+// GPU threads handle transition calculations
+</code></pre>
+<h3 id="geometric-progression">Geometric Progression</h3>
+<pre><code>sᵢ₊₁ = φ(sᵢ)
+// Parallel across all i
+// State updates in parallel blocks
+</code></pre>
+<h2 id="5-fractal-growth">5. Fractal Growth</h2>
+<h3 id="parallel-growth-function">Parallel Growth Function</h3>
+<pre><code>F(S) = λS(z)² + c
+// z-values processed in parallel
+// Each GPU thread handles spatial region
+</code></pre>
+<h3 id="scale-invariance">Scale Invariance</h3>
+<pre><code>F(αz) = α^d F(z)
+// Parallel across scale factors
+// Thread blocks handle scale ranges
+</code></pre>
+<h2 id="6-resource-optimization">6. Resource Optimization</h2>
+<h3 id="parallel-optimization">Parallel Optimization</h3>
+<pre><code>min[E(S) + λC(S)]
+// Gradient descent parallelized
+// Each thread optimizes local region
+</code></pre>
+<h3 id="pattern-optimization">Pattern Optimization</h3>
+<pre><code>max[M(S,Ψ) - μD(S)]
+// Pattern matching parallel
+// Cost calculation distributed
+</code></pre>
+<h2 id="7-memory-structure">7. Memory Structure</h2>
+<h3 id="gpu-memory-layout">GPU Memory Layout</h3>
+<pre><code>Node Data (Coalesced Access):
+struct Node {
+    float3 position;    // 12 bytes
+    float resources;    // 4 bytes
+    int state;         // 4 bytes
+    int connections[k]; // 4k bytes
+}
+</code></pre>
+<h3 id="shared-memory-usage">Shared Memory Usage</h3>
+<pre><code>__shared__ float pattern_cache[BLOCK_SIZE];
+__shared__ float resource_buffer[BLOCK_SIZE];
+</code></pre>
+<h2 id="8-synchronization-points">8. Synchronization Points</h2>
+<p>Minimal synchronization required for:</p>
+<pre><code>1. Global state transitions
+2. Pattern completion verification
+3. Resource redistribution boundaries
+</code></pre>
+<h2 id="9-parallel-execution-model">9. Parallel Execution Model</h2>
+<h3 id="thread-block-structure">Thread Block Structure</h3>
+<pre><code>gridDim = number of network regions
+blockDim = nodes per region
+</code></pre>
+<h3 id="kernel-launches">Kernel Launches</h3>
+<pre><code>// Pattern Recognition
+pattern_kernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(nodes, patterns);
+
+// State Updates
+update_kernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(nodes, resources);
+
+// Resource Flow
+flow_kernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(nodes, connections);
+</code></pre>
+<p>This model achieves parallelism through:<br />
+1. Spatial decomposition<br />
+2. Independent node updates<br />
+3. Parallel pattern matching<br />
+4. Concurrent resource calculations<br />
+5. Distributed state transitions</p>
+<p>While maintaining:<br />
+- Geometric progression<br />
+- Fractal properties<br />
+- Pattern recognition<br />
+- Resource optimization<br />
+- Network evolution</p>
+<p>The GPU implementation leverages:<br />
+1. CUDA thread hierarchy<br />
+2. Shared memory<br />
+3. Coalesced memory access<br />
+4. Minimal synchronization<br />
+5. Efficient parallel primitives</p>
+  </main>
+</body>
+</html>

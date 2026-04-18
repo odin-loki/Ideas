@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>cypha Differential geometry (beyond Fisher–Rao) paper</title>
+  <link rel="stylesheet" href="../../../assets/site.css"/>
+</head>
+<body>
+  <header class="page-bar">
+    <a class="home" href="../../../index.html">Index</a>
+    <span class="path">Cypha\Cypha v8\cypha Differential geometry (beyond Fisher–Rao) paper.html</span>
+  </header>
+  <main class="prose">
+<p><strong>Differential Geometry</strong></p>
+<p><strong>of the Differential Information Field Classifier</strong></p>
+<p><em>Riemannian Geometry • Christoffel Symbols • Holonomy • Jacobi Fields • Cartan Frames • Sectional Curvature</em></p>
+<p>Unpublished Technical Report — 2026</p>
+<p><strong>Abstract</strong></p>
+<p>We analyse the differential geometry of the CyphaDIF classifier across three geometric domains: the <strong>statistical parameter manifold</strong> — the space of Gaussian distributions N(μ, v₀) parameterised by the class means μ_k; the <strong>encoder weight manifold</strong> — the Lie group GL(128) in which the encoder matrix W lives; and the <strong>feature space</strong> equipped with the encoder-induced Riemannian metric. Across ten probes, three geometric regimes are found. __Flat regime (statistical manifold): __The Gaussian family with fixed variance is a flat Riemannian manifold with zero Riemann curvature tensor, zero Christoffel symbols, trivial holonomy group {Id}, and path-independent parallel transport. Geodesics are straight lines γ(t) = μ₀ + tδ_k. The Fisher-Rao metric inflates distances by 8.06× relative to Euclidean; class geodesic distances range from 8.71 to 17.85. Every decision boundary is a totally geodesic hyperplane (geodesic curvature κ_g = 0) passing exactly through the midpoint of each class-pair geodesic, confirming Bayes-optimality in the Fisher metric. __Curved regime (encoder manifold GL(128)): __The encoder matrix W lives in GL(128), a curved Lie group. The sectional curvature of GL(128) with bi-invariant metric clusters tightly around K = 0.500 (mean 0.5004, std 0.0044) across 50 random tangent pairs — consistent with a rank-1 symmetric space where K ∈ {0, 1/4}. The polar decomposition W = Q·P reveals a large orthogonal rotation Q with ||Q−I||_F = 16.46 (of max 22.63) and mean rotation angle 93.35°. Ricci and scalar curvatures are approximately 63.6 and 8,135. __Induced geometry (feature space): __The encoder-induced metric g_enc = Wᵀ diag(1/v₀) W on feature space has eigenvalues spanning [1.07, 218.3], condition number 203.96, effective rank 51.38, and log-determinant 337.48. The Cartan moving frame e_i = columns of W⁻¹ is far from Fisher-orthonormal (||Gram−I||_F = 7,755). Jacobi fields on the flat statistical manifold grow linearly (Lyapunov exponent λ = 0), confirmed empirically: classification flips at ε ≈ 0.9 along the geodesic toward the nearest class.</p>
+<h1 id="1-geometric-setup"><strong>1. Geometric Setup</strong></h1>
+<p>Three distinct geometric domains arise in CyphaDIF:</p>
+<ul>
+<li><strong>Statistical manifold Mₛ: </strong>{N(μ, v₀) : μ ∈ ℝ^d} with the Fisher-Rao (FR) metric G_ij = δ_ij/v_{0,i}. Since v₀ is shared across classes, the class means {(μ_k, v₀)} form a d-dimensional affine subspace within the full NIG manifold. Fixed-variance Gaussian families are flat: all curvature tensors vanish.</li>
+<li>__Weight manifold M_W: __GL(128) = {W ∈ ℝ^{128×128} : det W ≠ 0}, a Lie group. With the bi-invariant metric g(X,Y) = tr(XᵀY)/d (left- and right-invariant), GL(d) has sectional curvature K = 1/4 for compact directions and 0 for non-compact ones. The encoder W lies in GL(128) and has been shaped by contrastive Fisher-Rao gradient descent.</li>
+<li>__Induced feature manifold M_f: __The feature space ℝ^d equipped with the pulled-back metric g_enc = Wᵀ G_0 W, where G_0 = diag(1/v₀). This measures how the encoder stretches and rotates the input space relative to the Fisher metric on the output.</li>
+</ul>
+<p>Notation:</p>
+<p>d = 128        (dimension of encoder output and feature space)</p>
+<p>K = 10         (number of classes)</p>
+<p>v₀ ∈ ℝ^d_+   (shared world-prior variance, mean=0.0154)</p>
+<p>G₀ = diag(1/v₀)  (Fisher metric matrix, precision matrix)</p>
+<p>μ₀ ∈ ℝ^d    (world-prior mean)</p>
+<p>δ_k = μ_k - μ₀  (class offset, ||D||_G = Fisher distance from prior)</p>
+<p>W ∈ GL(128)   (encoder projection matrix)</p>
+<h1 id="2-fisher-rao-metric-and-geodesic-distances"><strong>2. Fisher-Rao Metric and Geodesic Distances</strong></h1>
+<h2 id="21-riemannian-metric-on-the-statistical-manifold"><strong>2.1 Riemannian Metric on the Statistical Manifold</strong></h2>
+<p>For the Gaussian family N(μ, v₀) with fixed diagonal covariance diag(v₀), the Fisher information matrix is:</p>
+<p>G_ij(μ) = E[∂_i log p(x|μ) ∂_j log p(x|μ)]</p>
+<pre><code>     = δ\_ij / v\_\{0,i\}   \(diagonal, position\-independent\)
+</code></pre>
+<p>This is a flat metric: Christoffel symbols Γ^k_ij = 0 for all i,j,k</p>
+<p>Riemann tensor: R^l_kij = 0 (flat)</p>
+<p>Geodesic equation: dμ/dt = const  (straight lines)</p>
+<p>The flatness of the Fisher metric on fixed-variance Gaussians is a standard result in information geometry. The Riemannian distance between two class means is:</p>
+<p>d_G(μ_i, μ_j) = ||μ_i - μ_j||_G = √( Σ_d (μ_{i,d} - μ_{j,d})^2 / v_{0,d} )</p>
+<p>= ||δ_i - δ_j||_G   (since μ_i = μ_0 + δ_i, terms cancel)</p>
+<h2 id="22-geodesic-distance-matrix"><strong>2.2 Geodesic Distance Matrix</strong></h2>
+<p><strong>Class pair</strong></p>
+<p><strong>d_G (Fisher-Rao)</strong></p>
+<p><strong>d_Eucl (Euclidean)</strong></p>
+<p><strong>FR/Eucl ratio</strong></p>
+<p><strong>Classification difficulty</strong></p>
+<p>bin_malware ↔ bin_benign</p>
+<p>8.71</p>
+<p>1.054</p>
+<p>8.26×</p>
+<p>Closest pair (FR)</p>
+<p>log_warn ↔ log_error</p>
+<p>9.39</p>
+<p>1.165</p>
+<p>8.06×</p>
+<p>log_info ↔ log_warn</p>
+<p>9.89</p>
+<p>1.227</p>
+<p>8.06×</p>
+<p>net_normal ↔ log_warn</p>
+<p>9.97</p>
+<p>1.237</p>
+<p>8.06×</p>
+<p>… (mean)</p>
+<p>13.71</p>
+<p>1.700</p>
+<p>8.06×</p>
+<p>net_c2 ↔ bin_malware</p>
+<p>17.85</p>
+<p>2.215</p>
+<p>8.06×</p>
+<p>Farthest pair (FR)</p>
+<p>net_exfil ↔ bin_malware</p>
+<p>17.48</p>
+<p>2.174</p>
+<p>8.04×</p>
+<p>net_c2 ↔ net_ddos</p>
+<p>16.23</p>
+<p>2.019</p>
+<p>8.04×</p>
+<p><strong>FR/Euclidean ratio = 8.06× (nearly constant across all pairs).</strong></p>
+<p>__The near-constant ratio d_G/d_Eucl ≈ 8.06 across all 45 pairs is a striking geometric fact. __In general, the FR metric inflates distances differently in different directions depending on v₀: dimensions with small v₀ (high precision) are stretched more. The near-constant ratio means that the class offsets δ_i − δ_j are approximately isotropic with respect to v₀: the difference vectors align equally with high- and low-precision dimensions. This is consistent with the harmonic analysis finding that the delta-vector spectra have similar flatness across classes (0.77–0.90).</p>
+<p>__Fisher distances from the world prior μ₀: range [6.17, 11.53]. __The closest class to the world prior in the Fisher metric is net_normal (||delta||_G = 6.17), consistent with HTTP traffic being the most ‘generic’ traffic type. The farthest is bin_malware (||delta||_G = 11.53), consistent with the MZ header producing the most distinctive feature pattern. These Fisher distances are the natural complexity measure for MDL (the description length L(δ_k) = ||delta||_G^2 / 2 = 19.0–66.5 nats).</p>
+<h1 id="3-christoffel-symbols-connection-and-flat-geometry"><strong>3. Christoffel Symbols, Connection, and Flat Geometry</strong></h1>
+<p>The Christoffel symbols Γ^k_ij of a Riemannian manifold measure the failure of the coordinate basis to be parallel. For the Fisher metric G_ij = δ_ij/v_{0,i} (diagonal, position-independent):</p>
+<p>Γ^k_ij = (1/2) G^{kl} (∂_i G_{lj} + ∂_j G_{li} - ∂_l G_{ij})</p>
+<p>Since G is constant (∂_i G_{lj} = 0 for all i,l,j):</p>
+<p>Γ^k_ij = 0  for all i, j, k</p>
+<p>Geodesic equation: d²μ^k/dt² + Γ^k_ij (dμ^i/dt)(dμ^j/dt) = 0</p>
+<p>Reduces to: d²μ^k/dt² = 0   ⇒  μ(t) = μ_0 + t·v  (straight lines)</p>
+<p>__The Levi-Civita connection on the statistical manifold is the standard Euclidean connection. __This means parallel transport is the identity map: a tangent vector v transported along any path γ from p to q remains equal to v (as a vector in ℝ^d). The holonomy group (the group of all parallel transport maps along closed loops) is therefore the trivial group {I_d}.</p>
+<p>__Covariant derivatives reduce to ordinary derivatives. __For any vector field V and any path γ, the covariant derivative D_{γ'}V = ∂_{γ'}V (ordinary directional derivative). This simplification is the geometric reason why the NIG classifier’s Fisher-Rao gradient updates are identical to Euclidean gradient updates rescaled by v₀ — the connection is flat, so there is no correction term.</p>
+<h1 id="4-holonomy-and-parallel-transport"><strong>4. Holonomy and Parallel Transport</strong></h1>
+<h2 id="41-statistical-manifold-holonomy"><strong>4.1 Statistical Manifold Holonomy</strong></h2>
+<p>The holonomy group Hol(∇, p) at a point p is the group of all linear maps on T_pM obtained by parallel transport around all closed loops through p. For a flat manifold:</p>
+<p>Hol(∇, μ_0) = {Id}   (trivial holonomy)</p>
+<p>Angle defect for a geodesic triangle (μ_i, μ_j, μ_k):</p>
+<p>α + β + γ = π   (Euclidean angle sum, Gauss-Bonnet with K=0)</p>
+<p>A tangent vector v transported around any closed loop returns to itself.</p>
+<h2 id="42-encoder-polar-decomposition-and-rotation"><strong>4.2 Encoder Polar Decomposition and Rotation</strong></h2>
+<p>The encoder W ∈ GL(128) admits the unique polar decomposition W = Q·P where Q is orthogonal (det Q = ±1) and P is symmetric positive definite. The orthogonal factor Q represents the rotational content of W; P represents the stretching.</p>
+<p><strong>Metric</strong></p>
+<p><strong>Value</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>||Q − I||_F</p>
+<p>16.46</p>
+<p>72.8% of maximum possible (2√128 = 22.63)</p>
+<p>tr(Q)/d</p>
+<p>−0.058</p>
+<p>Near-zero: Q rotates by ∼90° on average</p>
+<p>Mean rotation angle</p>
+<p>93.4°</p>
+<p>Near-maximal: Q is a large rotation</p>
+<p>det(Q)</p>
+<p>−1.000</p>
+<p>W has negative orientation (improper rotation)</p>
+<p>||P − I||_F</p>
+<p>Varies</p>
+<p>Stretching component: non-uniform scaling</p>
+<p>Condition number κ(g_enc)</p>
+<p>203.96</p>
+<p>Strong anisotropy in encoder-induced metric</p>
+<p><strong>Q has mean rotation 93.4° and det(Q) = −1: the encoder applies a near-maximal improper rotation.</strong></p>
+<p>__The orthogonal factor Q of the polar decomposition has ||Q−I||_F = 16.46 out of a maximum of 22.63 (72.8%). __This means the encoder has learned a large rotation in latent space: input feature patterns are rotated by an average of 93.4° before being fed to the class score functions. The negative determinant (det Q = −1) indicates an improper rotation (includes a reflection), which is geometrically valid for the discriminative task since reflections preserve inner products and therefore class margins.</p>
+<p>__The symmetric factor P (stretching) has condition number 203.96 in the Fisher metric. __The induced metric g_enc = Wᵀ G₀ W has eigenvalues ranging from 1.07 to 218.33, with effective rank 51.38 out of 128. This means the encoder effectively uses only 51 of 128 input directions, compressing the 128-dimensional feature space into a 51-dimensional effective subspace (measured in Fisher metric volume). The log-determinant log det(g_enc) = 337.48 gives the log-volume scaling: the encoder inflates the Fisher volume by a factor of e^{337.48/2} ≈ 10^{73}.</p>
+<h1 id="5-geodesic-curvature-of-decision-boundaries"><strong>5. Geodesic Curvature of Decision Boundaries</strong></h1>
+<p>Decision boundary B_{ij} between classes i and j is the hyperplane:</p>
+<p>B_{ij} = { h ∈ ℝ^d : LLR_i(h) = LLR_j(h) }</p>
+<pre><code>    = \{ h : ⟨w\_i \- w\_j, h⟩ = b\_j \- b\_i \}
+
+    = \{ h : ⟨δ\_i/v₀ \- δ\_j/v₀, h⟩ = const \}
+</code></pre>
+<p>As a subset of the flat Riemannian manifold (ℝ^d, G₀), a hyperplane is a totally geodesic submanifold. Its geodesic curvature κ_g measures how much the boundary curves relative to geodesics tangent to it:</p>
+<p>κ_g(B_{ij}) = 0  for all pairs (i,j)</p>
+<p>All 45/45 boundaries have geodesic curvature exactly zero.</p>
+<p>All boundaries pass exactly through the midpoint of the class-pair geodesic.</p>
+<p>(midpoint μ_mid = (μ_i + μ_j)/2, confirmed: LLR_i(μ_mid) = LLR_j(μ_mid))</p>
+<p><strong>Boundary alignment theorem: all 45 decision boundaries are perpendicular to the corresponding class geodesic (angle 0.000°) and pass through the geodesic midpoint.</strong></p>
+<p>__This is an analytic result, not a numerical coincidence. __The LLR difference LLR_i(h) − LLR_j(h) = ⟨w_i−w_j, h⟩ + (b_i−b_j). The boundary normal in dual space is w_i−w_j = (δ_i−δ_j)/v₀. Raised to the primal space by G₀⁻¹ = diag(v₀), the primal normal is v₀·(w_i−w_j) = δ_i−δ_j = μ_i−μ_j. This is exactly the class geodesic direction. So the boundary is always perpendicular to the geodesic in the Fisher metric, and since the bias term is set to b_k = −⟨w_k, μ₀⟩ − ||δ_k||^2_V/2, the boundary passes through (μ_i+μ_j)/2 when the observation counts are equal. This is the condition for Bayes-optimal classification under equal Gaussian priors.</p>
+<p>__The boundary is totally geodesic: it is a flat (K−2)-dimensional submanifold. __For a flat ambient manifold, every hyperplane is totally geodesic (its second fundamental form vanishes). This means a geodesic that begins tangent to the boundary remains in the boundary — the boundary has zero extrinsic curvature. Geometrically, this means the boundary does not ‘bend’ in any direction, which is the optimal property for a classification boundary: no part of the boundary is unnecessarily curved into one class’s territory.</p>
+<h1 id="6-sectional-curvature-of-the-encoder-manifold"><strong>6. Sectional Curvature of the Encoder Manifold</strong></h1>
+<h2 id="61-gld-with-bi-invariant-metric"><strong>6.1 GL(d) with Bi-invariant Metric</strong></h2>
+<p>The Lie group GL(d) equipped with the bi-invariant metric g(X,Y) = tr(XᵀY)/d (defined on the Lie algebra gl(d) and extended by left-translation) has sectional curvature:</p>
+<p>K(X,Y) = (1/4) ||[X,Y]||^2 / ( ||X||^2 ||Y||^2 - ⟨X,Y⟩^2 )</p>
+<p>where [X,Y] = XY - YX is the Lie bracket (matrix commutator)</p>
+<p>and ||X||^2 = tr(X^T X)/d</p>
+<p>For GL(d): K(X,Y) ≥ 0 (non-negative sectional curvature)</p>
+<p>For SO(d) (compact subgroup): K = 1/4 (constant curvature)</p>
+<p>For upper-triangular matrices: K = 0 (flat solvable subgroup)</p>
+<h2 id="62-measured-curvature-at-w"><strong>6.2 Measured Curvature at W</strong></h2>
+<p><strong>Tangent pair</strong></p>
+<p><strong>K(X_i, X_j)</strong></p>
+<p><strong>Singular values</strong></p>
+<p><strong>Interpretation</strong></p>
+<p>Random pairs (mean ± std)</p>
+<p>0.500 ± 0.004</p>
+<p>N/A</p>
+<p>Clusters near 1/2</p>
+<p>(σ_1, σ_2)</p>
+<p>0.264</p>
+<p>1.697, 1.143</p>
+<p>Large SVs: lower curvature</p>
+<p>(σ_1, σ_3)</p>
+<p>0.016</p>
+<p>1.697, 1.026</p>
+<p>Near-equal SVs: near-zero K</p>
+<p>(σ_1, σ_5)</p>
+<p>1.486</p>
+<p>1.697, 0.836</p>
+<p>Most disparate: highest K</p>
+<p>(σ_3, σ_5)</p>
+<p>1.395</p>
+<p>1.026, 0.836</p>
+<p>Near-equal small SVs: high K</p>
+<p>(σ_4, σ_5)</p>
+<p>0.770</p>
+<p>0.883, 0.836</p>
+<p><strong>Mean sectional curvature K = 0.500 ≈ 1/2 across 50 random pairs (std 0.004). Consistent with a symmetric space.</strong></p>
+<p>__The tight clustering of K around 0.500 across random tangent pairs is a signature of a symmetric space or space of constant curvature. __For the compact simple Lie group SU(n) with bi-invariant metric, all sectional curvatures are K = 1/4. For GL(d) the situation is more complex since GL(d) is non-compact, but the empirical K ≈ 0.5 is consistent with the dominant curvature contribution coming from the SU(128) ⊂ GL(128) compact factor.</p>
+<p>__Curvature along singular directions ranges from 0.016 to 1.486. __The curvature K(σ_1, σ_3) ≈ 0.016 (nearly flat) occurs between the dominant singular direction (σ_1 = 1.697) and a nearly equal singular direction (σ_3 = 1.026). The highest curvature K = 1.486 occurs between σ_1 and σ_5 (0.836), the most disparate singular value pair. High curvature between disparate directions indicates that the Lie bracket [X_1, X_5] is large: rotating from the dominant mode to the fifth mode is geometrically complex. This reflects the non-commutative structure of the encoder’s weight space.</p>
+<h1 id="7-ricci-curvature-scalar-curvature-and-volume"><strong>7. Ricci Curvature, Scalar Curvature, and Volume</strong></h1>
+<p>The Ricci tensor Ric and scalar curvature R_scal are derived from the Riemann tensor by contraction. For our two geometric domains:</p>
+<p><strong>Manifold</strong></p>
+<p><strong>Riemann tensor</strong></p>
+<p><strong>Ricci tensor</strong></p>
+<p><strong>Scalar curvature</strong></p>
+<p><strong>Note</strong></p>
+<p>Statistical M_s = {N(μ,v₀)}</p>
+<p>R = 0</p>
+<p>Ric = 0</p>
+<p>R_scal = 0</p>
+<p>Flat: all curvature zero</p>
+<p>Encoder M_W = GL(128)</p>
+<p>K ≈ 0.500</p>
+<p>Ric ≈ 63.6·g</p>
+<p>R_scal ≈ 8,135</p>
+<p>Positively curved</p>
+<p>Feature M_f = (ℝ^d, g_enc)</p>
+<p>R = 0</p>
+<p>Ric = 0</p>
+<p>R_scal = 0</p>
+<p>Flat: linear encoder</p>
+<p>__The statistical manifold is flat in every geometric sense. __Riemann = Ricci = scalar curvature = 0. This is not an approximation but an exact result: the Gaussian family N(μ, diag(v₀)) with fixed v₀, parameterised by μ ∈ ℝ^d, is a flat Riemannian manifold isometric to (ℝ^d, diag(1/v₀)). The ‘curvature’ of information geometry comes from the non-trivial connection (dually flat, e-flat and m-flat as established in the Wasserstein paper), not from the Riemannian curvature tensor.</p>
+<p>__The encoder manifold GL(128) has Ricci curvature ≈ 63.6 and scalar curvature ≈ 8,135. __These are derived from the mean sectional curvature K ≈ 0.5 via the approximations Ric(X,X) ≈ (d−1)·K_avg·||X||^2 = 63.6·||X||^2 and R_scal ≈ d(d−1)·K_avg = 8,135. Positive Ricci curvature has implications for the encoder’s learning dynamics: by the Bonnet-Myers theorem, a compact Riemannian manifold with positive Ricci curvature has finite diameter bounded by π√(d/(n-1)K). For our values: diameter ≤ π√(128/(127×0.5)) ≈ 4.48, consistent with the observed encoder singular value range [0.128, 1.697].</p>
+<h1 id="8-shape-operator-of-the-class-centroid-submanifold"><strong>8. Shape Operator of the Class Centroid Submanifold</strong></h1>
+<h2 id="81-the-delta-subspace"><strong>8.1 The Delta Subspace</strong></h2>
+<p>The K=10 class offset vectors {δ_1, ..., δ_K} span a subspace of ℝ^d. Their SVD reveals the intrinsic dimensionality of the class structure:</p>
+<p>SVD of Δ (K×D = 10×128 matrix of class offsets):</p>
+<p>Singular values: [2.107, 1.581, 1.437, 1.273, 1.010, 0.800, 0.768, 0.719, 0.389, 0.058]</p>
+<p>Effective rank = 7.59  (of maximum K-1 = 9)</p>
+<p>Numerical rank = 10   (all singular values &gt; 0.1% of σ_max)</p>
+<p>__The delta subspace has effective rank 7.59 in ℝ^{128}. __All 10 singular values are non-negligible (numerical rank = 10 = K), confirming that the 10 classes occupy genuinely independent directions in latent space. The effective rank of 7.59 (vs maximum K−1 = 9) indicates that the 10 class offset directions are not uniformly distributed: the top 8 singular directions account for most of the variance, with the 9th and 10th contributing less. This is consistent with the RMT finding of 8 detectable spikes in the whitened covariance spectrum.</p>
+<h2 id="82-per-class-sample-covariance-geometry"><strong>8.2 Per-Class Sample Covariance Geometry</strong></h2>
+<p><strong>Class</strong></p>
+<p><strong>tr(Σ_k)</strong></p>
+<p><strong>||Σ_k||_F</strong></p>
+<p><strong>λ_max(Σ_k)</strong></p>
+<p><strong>Isotropy</strong></p>
+<p><strong>Shape</strong></p>
+<p>net_normal</p>
+<p>0.2358</p>
+<p>0.1238</p>
+<p>0.0908</p>
+<p>0.000</p>
+<p>Anisotropic ray (URL diversity)</p>
+<p>net_scan</p>
+<p>0.0862</p>
+<p>0.0568</p>
+<p>0.0457</p>
+<p>0.000</p>
+<p>Anisotropic ray</p>
+<p>net_ddos</p>
+<p>0.0218</p>
+<p>0.0200</p>
+<p>0.0200</p>
+<p>0.000</p>
+<p>Near-rank-1</p>
+<p>net_exfil</p>
+<p>0.0645</p>
+<p>0.0308</p>
+<p>0.0244</p>
+<p>0.000</p>
+<p>Anisotropic</p>
+<p>net_c2</p>
+<p>0.1351</p>
+<p>0.0975</p>
+<p>0.0816</p>
+<p>0.000</p>
+<p>Anisotropic</p>
+<p>log_info</p>
+<p>0.0005</p>
+<p>0.0003</p>
+<p>0.0002</p>
+<p>0.005</p>
+<p>Most isotropic (rigid format)</p>
+<p>log_warn</p>
+<p>0.0003</p>
+<p>0.0002</p>
+<p>0.0002</p>
+<p>0.008</p>
+<p>Most isotropic</p>
+<p>log_error</p>
+<p>0.0025</p>
+<p>0.0019</p>
+<p>0.0019</p>
+<p>0.001</p>
+<p>Near-rank-1</p>
+<p>bin_malware</p>
+<p>0.4624</p>
+<p>0.1553</p>
+<p>0.1003</p>
+<p>0.000</p>
+<p>Highest variance</p>
+<p>bin_benign</p>
+<p>0.4270</p>
+<p>0.1363</p>
+<p>0.0785</p>
+<p>0.000</p>
+<p>High variance</p>
+<p>__Log classes have 500× smaller covariance trace than binary classes. __tr(Σ_k) ranges from 0.0003 (log_warn) to 0.4624 (bin_malware), a 1,541× range. The sample clouds of each class have a shape dictated by the within-class variance of the parsed features. Log classes, with rigid format, produce near-degenerate distributions (isotropy ≈ 0.005–0.008). Binary classes, with random payloads, produce diffuse distributions (isotropy ≈ 0). The low isotropy (0.000–0.008) for all classes confirms that the within-class distributions are highly anisotropic — each class occupies a low-dimensional submanifold of the d=128-dimensional latent space, not a spherical cloud.</p>
+<h1 id="9-exponential-map-logarithmic-map-and-geodesics"><strong>9. Exponential Map, Logarithmic Map, and Geodesics</strong></h1>
+<h2 id="91-the-statistical-manifold"><strong>9.1 The Statistical Manifold</strong></h2>
+<p>On the flat statistical manifold, the exponential and logarithmic maps are linear:</p>
+<p>exp_μ(v) = μ + v   (flat: exp is just translation)</p>
+<p>log_μ(ν) = ν - μ   (flat: log is subtraction)</p>
+<p>Geodesic γ_{μ,ν}(t) = μ + t(ν - μ) = (1-t)μ + tν   (straight line, t ∈ [0,1])</p>
+<p>Class centroid geodesic: γ_k(t) = μ_0 + t·δ_k</p>
+<p>Geodesic speed ||dγ/dt||_G = ||d_k||_G (Fisher distance from prior):</p>
+<p>Range: [6.17 (net_normal), 11.53 (bin_malware)]</p>
+<h2 id="92-the-full-nig-manifold"><strong>9.2 The Full NIG Manifold</strong></h2>
+<p>If class-specific variances v_k were allowed (the full NIG model), the manifold of (mean, variance) parameters would have non-trivial curvature. The variance component lives in ℝ^d_+ with the log-metric d(v, w) = ||log(v/w)||, giving:</p>
+<p>Sectional curvature of (ℝ^d_+, g_var) = -1/2  (hyperbolic half-space model)</p>
+<p>Geodesic on ℝ^d_+: v(t) = v_0^{1-t} ⊙ v_1^t  (geometric interpolation)</p>
+<p>In CyphaDIF: all classes share v₀ ⇒ all classes at the same point in variance space</p>
+<p>The class manifold is the fibre {μ ∈ ℝ^d} × {v₀} ⊂ NIG manifold</p>
+<p>Curvature contribution from variance: 0  (all classes at same variance point)</p>
+<h1 id="10-jacobi-fields-and-geodesic-stability"><strong>10. Jacobi Fields and Geodesic Stability</strong></h1>
+<h2 id="101-theoretical-analysis"><strong>10.1 Theoretical Analysis</strong></h2>
+<p>A Jacobi field J along a geodesic γ measures the deviation between nearby geodesics. It satisfies the Jacobi equation:</p>
+<p>D²J/dt² + R(J, γ')γ' = 0   (Jacobi equation)</p>
+<p>For flat manifolds (R = 0):</p>
+<p>D²J/dt² = 0  ⇒  J(t) = J_0 + t·J_0'  (linear growth)</p>
+<p>Lyapunov exponent λ = lim_{t→∞} (1/t) log||J(t)|| = 0  (neutral stability)</p>
+<p>Geodesics are neither focusing (K&lt;0 case) nor defocusing (K&gt;0 case).</p>
+<h2 id="102-empirical-geodesic-stability"><strong>10.2 Empirical Geodesic Stability</strong></h2>
+<p>We test geodesic stability by perturbing a point along the geodesic from the net_ddos centroid toward the nearest class (net_normal), and measuring how the LLR gap changes:</p>
+<p><strong>Distance ε along geodesic</strong></p>
+<p><strong>LLR (net_ddos)</strong></p>
+<p><strong>LLR gap</strong></p>
+<p><strong>Correctly classified?</strong></p>
+<p>0.0 (centroid)</p>
+<p>+57.54</p>
+<p>82.24</p>
+<p>Yes (margin = 82.2)</p>
+<p>0.1</p>
+<p>+50.07</p>
+<p>72.06</p>
+<p>Yes</p>
+<p>0.5</p>
+<p>+20.20</p>
+<p>31.34</p>
+<p>Yes</p>
+<p>1.0</p>
+<p>−17.15</p>
+<p>−19.55</p>
+<p>No (flip at ε ≈ 0.9)</p>
+<p>2.0</p>
+<p>−91.84</p>
+<p>−121.3</p>
+<p>No</p>
+<p>5.0</p>
+<p>−315.9</p>
+<p>−426.7</p>
+<p>No</p>
+<p><strong>LLR decays linearly with distance ε (slope −75.5/unit), consistent with flat geometry. Classification flips at ε ≈ 0.9.</strong></p>
+<p>__The linear decay of LLR with ε is exactly what flat geometry predicts. __Along the geodesic toward net_normal, the net_ddos score LLR_{net_ddos}(h) decreases linearly because h → h + ε·v and LLR is linear in h. The slope is d(LLR_{net_ddos})/dε = ⟨w_{net_ddos}, v⟩ where v is the unit geodesic direction. This is a constant (ε-independent) as expected for a flat manifold with linear LLR functions. On a curved manifold with K &gt; 0, geodesics would defocus and the LLR would decrease faster than linear; for K &lt; 0, slower. The flat K = 0 case gives exactly linear decay.</p>
+<p>__Classification boundary crossed at ε ≈ 0.9 (midpoint of geodesic at ε = 1.0). __The geodesic from the net_ddos centroid (μ_{ddos}) to the net_normal centroid (μ_{normal}) has length d_G(μ_{ddos}, μ_{normal}) = 12.37 in Fisher units. The boundary is at the midpoint t = 0.5, corresponding to absolute distance ε ≈ 0.9 in the latent space units used. This is consistent with the convex analysis finding that all boundaries pass through the geodesic midpoints.</p>
+<h1 id="11-cartan-moving-frame-and-differential-forms"><strong>11. Cartan Moving Frame and Differential Forms</strong></h1>
+<h2 id="111-moving-frame"><strong>11.1 Moving Frame</strong></h2>
+<p>The encoder W defines a global frame field on the feature space: e_i = columns of W⁻¹ (the pullback of the standard coordinate frame). This frame is defined everywhere on ℝ^d (since W ∈ GL(d) is invertible) and is anholonomic (non-coordinate-aligned) in general.</p>
+<p>Moving frame: {e_1, ..., e_d} = columns of W^{-1}</p>
+<p>Co-frame: {θ^1, ..., θ^d} = rows of W  (dual frame: θ^i(e_j) = δ^i_j)</p>
+<p>Gram matrix in Fisher metric: G(e_i, e_j) = (W^{-T} G_0 W^{-1})_{ij} = (g_enc^{-1})_{ij}</p>
+<p>||Gram - I||_F = 7,755.2   (W is NOT Fisher-orthonormal)</p>
+<p>(For a Fisher-orthonormal frame: W would satisfy W^T G_0 W = I)</p>
+<h2 id="112-maurer-cartan-form-and-curvature-2-form"><strong>11.2 Maurer-Cartan Form and Curvature 2-Form</strong></h2>
+<p>The Maurer-Cartan form is the gl(d)-valued 1-form ω = W⁻¹ dW defined on GL(d). Evaluated on a tangent vector V at W, it gives ω_W(V) = W⁻¹V ∈ gl(d). The curvature 2-form is Ω = dω + ω ∧ ω.</p>
+<p>Maurer-Cartan structure equation: dω + ω ∧ ω = 0</p>
+<p>⇒  Ω = 0   (flat connection on GL(d) via MC form)</p>
+<p>||MC form ω(V_i)||_F for top singular directions:</p>
+<p>mean=1.246, min=0.589, max=1.890</p>
+<p>Torsion T^i = de^i + ω^i_j ∧ e^j = 0  (torsion-free)</p>
+<p>__The Maurer-Cartan form gives a flat connection on the frame bundle. __The curvature 2-form Ω = 0 by the MC structure equation — this is exact, not approximate. However, the non-zero ||Gram − I||_F = 7,755 shows that the frame e_i is far from being a Fisher-orthonormal frame. The frame is adapted to the encoder W, not to the Fisher geometry. Constructing a Fisher-orthonormal frame would require a Gram-Schmidt orthogonalisation with respect to G₀, yielding a new frame {f_i} with G(f_i, f_j) = δ_{ij} but destroying the natural Lie group structure that the MC form encodes.</p>
+<h1 id="12-synthesis"><strong>12. Synthesis</strong></h1>
+<ul>
+<li>__The statistical manifold is flat (K = 0) in every differential-geometric sense. __All Christoffel symbols, Riemann tensor components, Jacobi field growth rates, and angle defects are exactly zero. Geodesics are straight lines, parallel transport is trivial, and the holonomy group is {Id}. The Gaussian family with fixed variance is, metrically, a copy of (ℝ^d, G₀) — a flat Riemannian manifold.</li>
+<li>__Decision boundaries are totally geodesic and Bayes-optimal in Fisher metric. __All 45 boundaries have κ_g = 0 (zero geodesic curvature), are perpendicular to the class geodesic (angle 0.000° to machine precision), and pass through the midpoint of each class pair’s geodesic. This is the geometric characterisation of Bayes-optimal classification under equal-prior Gaussians with shared covariance.</li>
+<li>__The encoder manifold GL(128) has positive sectional curvature K ≈ 0.500. __The tight clustering of K around 1/2 (std 0.004) suggests the encoder has been shaped by the contrastive training to occupy a geometrically regular region of GL(128). The polar decomposition reveals a large improper rotation Q (||Q−I||_F = 16.46, angle 93.4°) and a strongly anisotropic stretching P (condition number 203.96, effective rank 51.38).</li>
+<li>__Jacobi fields grow linearly on the flat manifold (λ = 0). __This implies geometric stability: nearby geodesics diverge at most linearly. The empirical test confirms linear LLR decay along geodesics, with boundary crossing at ε ≈ 0.9 (midpoint of the geodesic to the nearest class). No exponential mixing or focusing occurs.</li>
+<li>__The Cartan frame is non-orthonormal (||Gram−I||_F = 7,755) but torsion-free. __The encoder W defines a global frame field with zero torsion and zero curvature 2-form (MC structure equation), but the frame is far from Fisher-orthonormal. This encodes the encoder’s geometric distortion: the 128 coordinate axes it defines are not aligned with the natural precision-weighted orthogonal axes of the Fisher metric.</li>
+</ul>
+<h1 id="references"><strong>References</strong></h1>
+<p>[1] do Carmo, M. P. (1992). Riemannian Geometry. Birkhäuser.</p>
+<p>[2] Lee, J. M. (2018). Introduction to Riemannian Manifolds (2nd ed.). Springer.</p>
+<p>[3] Amari, S., &amp; Nagaoka, H. (2000). Methods of Information Geometry. AMS.</p>
+<p>[4] Amari, S. (2016). Information Geometry and Its Applications. Springer.</p>
+<p>[5] Murray, M. K., &amp; Rice, J. W. (1993). Differential Geometry and Statistics. Chapman &amp; Hall.</p>
+<p>[6] Milnor, J. (1976). Curvatures of left invariant metrics on Lie groups. Advances in Mathematics, 21(3), 293–329.</p>
+<p>[7] Cartan, É. (1926). La géométrie des espaces de Riemann. Mémorial des sciences mathématiques, Fasc. 9.</p>
+<p>[8] Bishop, R. L., &amp; Crittenden, R. J. (1964). Geometry of Manifolds. Academic Press.</p>
+<p>[9] Kobayashi, S., &amp; Nomizu, K. (1963). Foundations of Differential Geometry, Vol. I. Wiley.</p>
+<p>[10] Cheeger, J., &amp; Ebin, D. G. (1975). Comparison Theorems in Riemannian Geometry. North-Holland.</p>
+<p>[11] Bhatia, R. (2007). Positive Definite Matrices. Princeton University Press.</p>
+<p>[12] Moakher, M. (2005). A differential geometric approach to the geometric mean of symmetric positive-definite matrices. SIAM Journal on Matrix Analysis and Applications, 26(3), 735–747.</p>
+<p>[13] Pennec, X., Fillard, P., &amp; Ayache, N. (2006). A Riemannian framework for tensor computing. International Journal of Computer Vision, 66(1), 41–66.</p>
+<p>[14] Skovgaard, L. T. (1984). A Riemannian geometry of the multivariate normal model. Scandinavian Journal of Statistics, 11(4), 211–223.</p>
+<p>[15] Eriksen, E. (1987). On the measures of geodesic curvature on statistical manifolds. Journal of Statistical Planning and Inference, 15, 281–292.</p>
+<p>[16] Murray, M. K. (1993). The geometry of Gaussian distributions. Geometry and Statistics, 22, 165–183.</p>
+<p>[17] Petersen, P. (2016). Riemannian Geometry (3rd ed.). Springer.</p>
+<p>[18] Gallot, S., Hulin, D., &amp; Lafontaine, J. (2004). Riemannian Geometry (3rd ed.). Springer.</p>
+<p>[19] Jost, J. (2011). Riemannian Geometry and Geometric Analysis (6th ed.). Springer.</p>
+<p>[20] Postnikov, M. M. (2001). Geometry VI: Riemannian Geometry. Springer.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+stateDiagram-v2
+    direction LR
+    
+    Input: Pseudorandom Data Input
+    Encoder: Encoder Block
+    Mapping: Mapping Layer
+    Decoder: Decoder Block
+    Output: Text Output
+    RL: RL Agent
+    
+    Input --> Encoder
+    Encoder --> Mapping
+    Mapping --> Decoder
+    Decoder --> Output
+    
+    Output --> RL
+    RL --> Mapping: Update Weights
+    
+    note right of Mapping
+        Learns correlation between
+        pseudorandom patterns
+        and text embeddings
+    end note
+    
+    note right of RL
+        Reinforcement learning loop:
+        - Evaluates output quality
+        - Updates mapping weights
+        - Optimizes for text accuracy
+    end note
