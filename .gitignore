@@ -4,7 +4,32 @@
 # NEVER UPLOAD TO GIT — Large Binary & Data Files
 # =====================================================
 
-# Python cache & bytecode
+# =====================================================
+# TRAINING DATA — EXCLUDE CSV AND JSON FILES
+# =====================================================
+
+# Training data CSV files (can be gigabytes)
+*.csv
+data/*.csv
+data/local/*.csv
+
+# Training data JSON files (can be gigabytes)
+*.json
+data/*.json
+data/local/*.json
+!data/config.json
+!data/sample.json
+
+# Excel spreadsheets
+*.xlsx
+*.xls
+*.xlsm
+
+# =====================================================
+# Python Cache & Bytecode
+# =====================================================
+
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
@@ -12,27 +37,27 @@ __pycache__/
 *.pyc
 *.pyd
 
-# Python environment (install with pip, not commit)
+# =====================================================
+# Python Environment
+# =====================================================
+
+# Python virtual environment (install with pip, not commit)
 .venv/
 venv/
 ENV/
 env/
 
-# IDE files (don't share these)
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-desktop.ini
+# =====================================================
+# Log Files
+# =====================================================
 
 # Log files
 *.log
 logs/
 *.log.txt
 *.txt.log
+*.log.gz
+*.log.bz2
 
 # =====================================================
 # Large Dataset & Model Files (Source-Only)
@@ -53,6 +78,11 @@ snapshots/
 training/
 experiment/
 experiments/
+
+# Large binary data files
+*.bin
+*.dat
+*.data
 
 # =====================================================
 # Build Artifacts
@@ -121,34 +151,6 @@ docs/site/
 *.joblib
 
 # =====================================================
-# Local Datasets & Checkpoints (Source-Only)
-# =====================================================
-
-data/local/
-data/*.bin
-data/*.csv
-data/*.json
-data/*.parquet
-data/*.h5
-data/*.hdf5
-
-# =====================================================
-# Notes for This .gitignore
-# =====================================================
-
-# This .gitignore is designed to:
-# - Prevent uploading gigabytes of data
-# - Keep only source code and documentation
-# - Exclude build artifacts and temporary files
-# - Exclude environment configurations
-
-# IMPORTANT:
-# - Research papers (.md, .pdf) ARE tracked
-# - Markdown files ARE tracked
-# - Code files ARE tracked
-# - Only binary, cache, and generated files are ignored
-
-# =====================================================
 # Cypha-Specific Exclusions
 # =====================================================
 
@@ -160,3 +162,20 @@ bessel_ratios.npz
 config/*.jsonl
 config/*.yaml
 config/*.yml
+
+# =====================================================
+# Notes for This .gitignore
+# =====================================================
+
+# This .gitignore is designed to:
+# - Prevent uploading gigabytes of data (CSV, JSON, models)
+# - Keep only source code and documentation
+# - Exclude build artifacts and temporary files
+# - Exclude environment configurations
+
+# IMPORTANT:
+# - Research papers (.md, .pdf) ARE tracked
+# - Markdown files ARE tracked
+# - Code files ARE tracked
+# - Training data CSV/JSON files are NOT tracked
+# - Only binary, cache, and generated files are ignored
