@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/train_step_vector_parity.dir/tools/train_step_vector_parity.cpp.o -o train_step_vector_parity  libcypha_core.a 

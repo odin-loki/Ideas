@@ -1,3 +1,0 @@
-/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-infer-wire/_deps/sqlite_amalgamation-subbuild/CMakeFiles/sqlite_amalgamation-populate.dir
-/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-infer-wire/_deps/sqlite_amalgamation-subbuild/CMakeFiles/edit_cache.dir
-/mnt/c/Users/odinl/OneDrive/Desktop/Cypha/native/build-infer-wire/_deps/sqlite_amalgamation-subbuild/CMakeFiles/rebuild_cache.dir

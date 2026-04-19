@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/create_model_smoke.dir/tools/create_model_smoke.cpp.o -o create_model_smoke  libcypha_core.a 

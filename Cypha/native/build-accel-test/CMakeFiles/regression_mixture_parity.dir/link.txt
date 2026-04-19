@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/regression_mixture_parity.dir/tools/regression_mixture_parity.cpp.o -o regression_mixture_parity  libcypha_core.a 

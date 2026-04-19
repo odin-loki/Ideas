@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/experiment_db_smoke.dir/tools/experiment_db_smoke.cpp.o CMakeFiles/experiment_db_smoke.dir/src/experiment_db.cpp.o -o experiment_db_smoke  libcypha_sqlite3_amalg.a -ldl 
