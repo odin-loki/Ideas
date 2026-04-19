@@ -1,3 +1,5 @@
+# Narrative assets for this repo (PDFs, pictures, Word docs) stay tracked — do not add rules here that ignore them.
+
 __pycache__/
 *.py[cod]
 *$py.class
