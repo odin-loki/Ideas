@@ -1,0 +1,3 @@
+/usr/bin/cmake -E rm -f CMakeFiles/regression_mixture_parity.dir/objects.a
+/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/regression_mixture_parity.dir/objects.a @CMakeFiles/regression_mixture_parity.dir/objects1.rsp
+/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/regression_mixture_parity.dir/objects.a -Wl,--no-whole-archive -o regression_mixture_parity.exe -Wl,--out-implib,libregression_mixture_parity.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/regression_mixture_parity.dir/linkLibs.rsp

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/quantile_dif_train_parity.dir/tools/quantile_dif_train_parity.cpp.o -o quantile_dif_train_parity  libcypha_core.a 

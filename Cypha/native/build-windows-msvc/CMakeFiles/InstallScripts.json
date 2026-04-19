@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/odinl/OneDrive/Desktop/Cypha/native/build-windows-msvc/cmake_install.cmake",
+		"C:/Users/odinl/OneDrive/Desktop/Cypha/native/build-windows-msvc/qt/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

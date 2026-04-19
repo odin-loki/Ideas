@@ -1,0 +1,3 @@
+/usr/bin/cmake -E rm -f CMakeFiles/batch_llr_parity.dir/objects.a
+/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/batch_llr_parity.dir/objects.a @CMakeFiles/batch_llr_parity.dir/objects1.rsp
+/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/batch_llr_parity.dir/objects.a -Wl,--no-whole-archive -o batch_llr_parity.exe -Wl,--out-implib,libbatch_llr_parity.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/batch_llr_parity.dir/linkLibs.rsp

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/memory_train_parity.dir/tools/memory_train_parity.cpp.o -o memory_train_parity  libcypha_core.a 

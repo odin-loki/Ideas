@@ -1,0 +1,3 @@
+/usr/bin/cmake -E rm -f CMakeFiles/registry_register.dir/objects.a
+/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/registry_register.dir/objects.a @CMakeFiles/registry_register.dir/objects1.rsp
+/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/registry_register.dir/objects.a -Wl,--no-whole-archive -o registry_register.exe -Wl,--out-implib,libregistry_register.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/registry_register.dir/linkLibs.rsp

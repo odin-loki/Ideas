@@ -1,0 +1,6 @@
+native_parity 4 0.346019
+native_memory_train 4 0.374788
+native_preprocessor 4 0.371654
+native_nig_adapt 5 0.316171
+native_train_step_vector 1 1.54561
+---

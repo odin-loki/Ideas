@@ -1,0 +1,3 @@
+C:/Users/odinl/OneDrive/Desktop/Cypha/native/build-windows-msvc/_deps/sqlite_amalgamation-subbuild/CMakeFiles/sqlite_amalgamation-populate.dir
+C:/Users/odinl/OneDrive/Desktop/Cypha/native/build-windows-msvc/_deps/sqlite_amalgamation-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/odinl/OneDrive/Desktop/Cypha/native/build-windows-msvc/_deps/sqlite_amalgamation-subbuild/CMakeFiles/ZERO_CHECK.dir

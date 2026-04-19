@@ -1,12 +1,162 @@
-# Narrative assets for this repo (PDFs, pictures, Word docs) stay tracked — do not add rules here that ignore them.
+# Ideas Repository — Comprehensive .gitignore
 
+# =====================================================
+# NEVER UPLOAD TO GIT — Large Binary & Data Files
+# =====================================================
+
+# Python cache & bytecode
 __pycache__/
 *.py[cod]
 *$py.class
-.Python
+*.pyo
+*.pyc
+*.pyd
+
+# Python environment (install with pip, not commit)
+.venv/
+venv/
+ENV/
+env/
+
+# IDE files (don't share these)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Log files
 *.log
-.venv/
-venv/
+logs/
+*.log.txt
+*.txt.log
+
+# =====================================================
+# Large Dataset & Model Files (Source-Only)
+# =====================================================
+
+# Neural network weights
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.npz
+*.npy
+models/
+weights/
+checkpoints/
+snapshots/
+training/
+experiment/
+experiments/
+
+# =====================================================
+# Build Artifacts
+# =====================================================
+
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+*.so
+*.pyd
+
+# =====================================================
+# Temporary Files
+# =====================================================
+
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+htmlcov/
+*.tmp
+*.bak
+*.backup
+*.cache
+*.swp
+*.swo
+*~
+
+# =====================================================
+# Environment & Configuration (Local Only)
+# =====================================================
+
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.secret
+*.sh
+*.bash_history
+
+# =====================================================
+# Large Media & Archives (Re-Generate Instead)
+# =====================================================
+
+*.zip
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.iso
+
+# =====================================================
+# Documentation Build Artifacts (Optional)
+# =====================================================
+
+docs/site/
+*.html
+*.md.html
+*_test.html
+*_demo.html
+*.pickle
+*.joblib
+
+# =====================================================
+# Local Datasets & Checkpoints (Source-Only)
+# =====================================================
+
+data/local/
+data/*.bin
+data/*.csv
+data/*.json
+data/*.parquet
+data/*.h5
+data/*.hdf5
+
+# =====================================================
+# Notes for This .gitignore
+# =====================================================
+
+# This .gitignore is designed to:
+# - Prevent uploading gigabytes of data
+# - Keep only source code and documentation
+# - Exclude build artifacts and temporary files
+# - Exclude environment configurations
+
+# IMPORTANT:
+# - Research papers (.md, .pdf) ARE tracked
+# - Markdown files ARE tracked
+# - Code files ARE tracked
+# - Only binary, cache, and generated files are ignored
+
+# =====================================================
+# Cypha-Specific Exclusions
+# =====================================================
+
+# Cypha-specific large files
+bessel_ratios.npz
+*.bin
+
+# Config files (keep only examples)
+config/*.jsonl
+config/*.yaml
+config/*.yml

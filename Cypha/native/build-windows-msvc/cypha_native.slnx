@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="81d181f2-1d01-3ad8-aace-cdc3858eb6ec" DefaultStartup="true">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="batch_llr_parity.vcxproj"/>
+		<BuildDependency Project="create_model_smoke.vcxproj"/>
+		<BuildDependency Project="csv_ingest_parity.vcxproj"/>
+		<BuildDependency Project="cuda_smoke.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+		<BuildDependency Project="cypha_parity.vcxproj"/>
+		<BuildDependency Project="qt/cypha_qt_shell.vcxproj"/>
+		<BuildDependency Project="qt/cypha_qt_stub.vcxproj"/>
+		<BuildDependency Project="cypha_rest.vcxproj"/>
+		<BuildDependency Project="cypha_sqlite3_amalg.vcxproj"/>
+		<BuildDependency Project="dif_regressor_train_step_parity.vcxproj"/>
+		<BuildDependency Project="experiment_db_crud_parity.vcxproj"/>
+		<BuildDependency Project="experiment_db_smoke.vcxproj"/>
+		<BuildDependency Project="generation_parity.vcxproj"/>
+		<BuildDependency Project="memory_train_parity.vcxproj"/>
+		<BuildDependency Project="memory_train_roundtrip.vcxproj"/>
+		<BuildDependency Project="mke_train_step_parity.vcxproj"/>
+		<BuildDependency Project="nig_adapt_parity.vcxproj"/>
+		<BuildDependency Project="preprocess_train_classify_parity.vcxproj"/>
+		<BuildDependency Project="preprocessor_fit_parity.vcxproj"/>
+		<BuildDependency Project="preprocessor_parity.vcxproj"/>
+		<BuildDependency Project="quantile_dif_train_parity.vcxproj"/>
+		<BuildDependency Project="registry_register.vcxproj"/>
+		<BuildDependency Project="regression_m4_parity.vcxproj"/>
+		<BuildDependency Project="regression_mixture_parity.vcxproj"/>
+		<BuildDependency Project="regression_rff_parity.vcxproj"/>
+		<BuildDependency Project="regression_two_stage_pipeline_parity.vcxproj"/>
+		<BuildDependency Project="regression_two_stage_ridge_fit_parity.vcxproj"/>
+		<BuildDependency Project="train_step_vector_parity.vcxproj"/>
+	</Project>
+	<Project Path="INSTALL.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8a44d805-4e93-3fcf-8f17-86f0527e26ab">
+		<BuildDependency Project="ALL_BUILD.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="RUN_TESTS.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ef8e3b7c-0771-38c8-93b7-9fd8e401d9f0">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="75245daf-0da7-351d-8446-41e2042c705f"/>
+	<Project Path="batch_llr_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="be44b489-57f5-3237-87fa-ae7864d52c85">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="create_model_smoke.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8fa0a9a1-3834-3c50-96a3-10a024d5b3fb">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="csv_ingest_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ca10e08f-2146-31ba-9828-e605909da62b">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="cuda_smoke.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="63bb32c8-0b04-355d-8818-f3e60d2794c2">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="cypha_core.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1fd3b452-4dac-39d1-b89c-fb2ac501e22c">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="cypha_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="750b2822-8c87-39bf-a6e2-b00f20d837fe">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="qt/cypha_qt_shell.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5b291eec-cb01-33bb-b1a1-9184c5a8cba6">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+		<BuildDependency Project="cypha_sqlite3_amalg.vcxproj"/>
+	</Project>
+	<Project Path="qt/cypha_qt_stub.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="4d929455-d6dc-3116-978a-ca303873d2d3">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="cypha_rest.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="bfd77d5c-c851-3c25-ab08-5fcd78297209">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="cypha_sqlite3_amalg.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6ab147a0-909d-3980-a300-d038cbeb8cff">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="dif_regressor_train_step_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="2df758c9-7c89-3d4f-b7ba-0f6f24f559ef">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="experiment_db_crud_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="8a58510a-d590-3719-a5c7-1162bece08fa">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_sqlite3_amalg.vcxproj"/>
+	</Project>
+	<Project Path="experiment_db_smoke.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="ace8041b-4070-345d-a059-f4d363864685">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_sqlite3_amalg.vcxproj"/>
+	</Project>
+	<Project Path="generation_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3a0330c0-b7a0-3c51-823c-27c68db24792">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="memory_train_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="11cc19b5-d847-3a5c-852c-dbc4255f841b">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="memory_train_roundtrip.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="373c07a2-f3d3-38aa-94f2-21467df6a8c3">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="mke_train_step_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c5cc397c-da8a-3976-9cc7-e7b4718e18e8">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="nig_adapt_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="81737b82-5ddb-323f-a65e-993499e133df">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="preprocess_train_classify_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="d7cf36f4-f1d9-38a8-802d-9ba4fde29f21">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="preprocessor_fit_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="d80407a0-3e52-30a3-8939-16b4f9858394">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="preprocessor_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b886c329-5a55-359a-ac25-626fa85d003d">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="quantile_dif_train_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="cba9956c-1b62-367d-9216-a4a90ef3cfef">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="registry_register.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6c1ff308-d367-3e68-9d7f-91c5e0b38bc4">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="regression_m4_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b3dd02d2-6c20-325d-bb7d-cbdcf6070bde">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="regression_mixture_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="809fc247-62ed-3d5b-abca-27f2268a7afc">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="regression_rff_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c952465f-fb7d-32bc-b64a-38e8b6e69ecd">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="regression_two_stage_pipeline_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="7cd02e61-1848-301f-9576-da51d8cd190c">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="regression_two_stage_ridge_fit_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="55f1ba3e-b50e-3ed9-b049-c05414cc9f5c">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+	<Project Path="train_step_vector_parity.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="854d85ea-3f98-3656-a699-5ec1664be2cf">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="cypha_core.vcxproj"/>
+	</Project>
+</Solution>

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/cypha_rest.dir/tools/cypha_rest.cpp.o -o cypha_rest  libcypha_core.a 

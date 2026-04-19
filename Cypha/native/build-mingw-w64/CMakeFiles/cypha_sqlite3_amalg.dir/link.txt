@@ -1,0 +1,2 @@
+/usr/bin/x86_64-w64-mingw32-ar qc libcypha_sqlite3_amalg.a "CMakeFiles/cypha_sqlite3_amalg.dir/_deps/sqlite_amalgamation-src/sqlite3.c.obj"
+/usr/bin/x86_64-w64-mingw32-ranlib libcypha_sqlite3_amalg.a

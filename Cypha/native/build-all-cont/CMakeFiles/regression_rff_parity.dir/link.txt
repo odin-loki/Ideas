@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/regression_rff_parity.dir/tools/regression_rff_parity.cpp.o -o regression_rff_parity  libcypha_core.a 

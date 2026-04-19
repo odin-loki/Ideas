@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\load_cypha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\save_cypha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\infer_cpu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\nig_gig_math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\bessel_table_data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\preprocessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\preprocessor_fit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\csv_ingest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\memory_train.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\registry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\sync_infer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\encoder_contrastive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\replay_buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\train_step_vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\nig_field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\regression_stub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\mke_scalar_train_step.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\generation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\accel_backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\src\create_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\odinl\OneDrive\Desktop\Cypha\native\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{409F3833-00D6-3D47-AD73-8CCA5AECB279}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
