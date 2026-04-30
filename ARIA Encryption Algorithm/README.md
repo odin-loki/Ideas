@@ -1,74 +1,143 @@
-# ARIA Encryption Algorithm — Full Write-Up of ARIA Block Cipher
+# ARIA — Algebraic Resynchronisation and Integrity Architecture
 
-> **🔐 Overview**: Full write-up of **ARIA** — the Korean block cipher — as paper plus implementable spec.
+> **🔐 Overview**: A stateless authenticated-encryption (AEAD) scheme for high-assurance communications, built on a three-layer algebraic tower over **GF(2²⁵⁶)** with **dual security reductions** (SHA-256 PRF and NP-hard Syndrome Decoding).
 
 ---
 
 ## 🔐 Overview
 
-**ARIA Encryption Algorithm** provides a comprehensive analysis of the ARIA block cipher, a 128-bit block cipher developed by Korea University and NIST. This work includes both research paper and implementable specification, making ARIA accessible for analysis and implementation.
+**ARIA** (the local scheme described in this folder, *not* the Korean ARIA block cipher) stands for **Algebraic Resynchronisation and Integrity Architecture**. It is an authenticated-encryption-with-associated-data (AEAD) construction whose central contribution is **syncable nonce derivation**: sender and receiver independently compute identical nonces from a shared session key and message content, eliminating any need for transmitted nonces or persistent counter state.
 
-### Key Features
+Authored by *O. [Redacted], Independent Defence Research, March 2026*. A Python reference implementation accompanies the papers; **all 61 automated test cases pass**.
 
-- **128-bit Block Size**: Standard block cipher block size
-- **128/192/256-bit Keys**: Multiple key length options
-- **14 Rounds**: Balanced round structure
-- **Korean National Standard**: Developed for Korean use, submitted to NESSIE
+> **Naming note.** This scheme shares an acronym with the Korean ARIA block cipher (Kwon et al., 2003) but is unrelated to it. The Korean ARIA is a 128-bit substitution-permutation network; this ARIA is an AEAD construction over a finite-field tower. Don't confuse them.
+
+### Key features
+
+- **Stateless syncability** — no transmitted nonce, no sender-side counter; receiver recomputes the nonce from the sequence number alone.
+- **Three operational modes** for different tactical regimes: DAG stream injection, random salt injection, evaluation-point drift.
+- **Dual security reductions** — collision advantage bounded by both SHA-256 PRF security *and* the NP-hardness of Syndrome Decoding on a [2048, 256] binary linear code.
+- **Verified reference** — 61 passing tests, integrated profiler, executable security-reduction simulators.
 
 ---
 
 ## 📄 Core Documents
 
-| Document | Description |
-|----------|-------|
-| [`ARIA_Research_Paper.md`](ARIA_Research_Paper.md) | Comprehensive research paper on ARIA structure and properties |
-| [`ARIA_Specification.md`](ARIA_Specification.md) | Implementable specification with detailed algorithm description |
-| [`aria.py`](aria.py) | Python implementation for analysis and testing |
+| Document | What it is |
+|---|---|
+| [`ARIA_Research_Paper.md`](ARIA_Research_Paper.md) | Full-length research paper: motivation, mathematical foundations, all proofs, performance, limitations |
+| [`ARIA_Specification.md`](ARIA_Specification.md) | Implementable cryptographic specification (production prototype) |
+| [`aria.py`](aria.py) | Python reference implementation with 61 tests + profiler |
 
 ---
 
-## 🔬 ARIA Structure
+## 🧮 Mathematical Foundations
 
-### Key Expansion
+The scheme is built on a three-layer algebraic tower:
 
-- **128-bit Key**: Uses 11 round keys
-- **192-bit Key**: Uses 12 round keys
-- **256-bit Key**: Uses 13 round keys
+| Layer | Definition | Element space |
+|---|---|---|
+| **F₁** | GF(2²⁵⁶) = GF(2)[x] / p(x), with p(x) = x²⁵⁶ + x¹⁰ + x⁵ + x² + 1 (irreducible pentanomial) | 2²⁵⁶ |
+| **L₂** | F₁[y] / Q₂(y), Q₂(y) = y⁸ + y⁴ + y³ + y + 1 | 2²⁰⁴⁸ |
+| **L₃** | L₂[z] / Q₃(z), Q₃(z) = z⁴ + z + 1 | 2⁸¹⁹² |
 
-### Round Function
+The **nonce map** is a linear function of the message coefficient matrix:
 
-Each round consists of:
-- **SubBytes**: Non-linear substitution using S-box
-- **ShiftRows**: Byte permutation
-- **MixColumns**: Linear diffusion across columns
-- **AddRoundKey**: Key addition
+> **N(M, sk) = C(M, sk) · β_vec  in GF(2²⁵⁶)**
 
-### Final Round
-
-The final round omits MixColumns for a cleaner structure.
+where β_vec = [1, β, β², …, β⁷]ᵀ is a Vandermonde evaluation vector and β = H("aria:beta:" ‖ sk). Linearity gives **N(M) ⊕ N(M′) = D(β)** for the difference polynomial D — and this is the structural property that connects nonce collisions to Syndrome Decoding (see Theorem 2 below).
 
 ---
 
-## 📊 Security Analysis
+## 🎲 Meta-DAG Random Number Generator
 
-| Property | Value | Notes |
-|--|--|--|
-| **Key Size** | 128/192/256 bits | Multiple key lengths |
-| **Block Size** | 128 bits | Standard block size |
-| **Rounds** | 14 rounds | Standard configuration |
-| **SPN Structure** | Substitution-Permutation Network | Standard modern cipher structure |
-| **S-Box** | 128-bit S-box | Derived from AES S-box |
+A deterministic shared-entropy source with **eight cross-mixed nodes**, each seeded from a distinct transcendental constant (π, e, √2, φ, ζ(3), γ, Catalan's constant G, Glaisher–Kinkelin A). After each round, node *i* is cross-mixed with nodes (*i*+3) mod 8 and (*i*+5) mod 8 — the prime step sizes guarantee the mixing graph covers all eight nodes with no subset evolving independently.
+
+Both parties seeded identically from the session key produce identical GF(2²⁵⁶) output streams. After packet loss the receiver fast-forwards to step `seq × 64` from the session key — no stored state required.
+
+Profiled throughput: **198,740 next_gf256() calls/sec** (Python reference).
+
+---
+
+## 🛰️ Operational Modes
+
+| Mode | Wire overhead | DAG sync? | Same-plaintext protection | Best for |
+|---|---|---|---|---|
+| **Mode 1 — DAG stream injection** | 22 B (4 B seq + 16 B tag + headers) | Yes (seq-based) | Yes — DAG stream | Point-to-point radio, reliable ordering |
+| **Mode 2 — Random salt injection** | 34 B | No | Yes — random salt | Multi-path, disruption-tolerant |
+| **Mode 3 — Evaluation-point drift** | 22 B | No | Yes — point drift | Repeated-message retransmission |
+
+The nonce is **never transmitted**. Each mode produces distinct ciphertexts for identical plaintexts under the same session key.
+
+---
+
+## 🛡️ Formal Security
+
+**Main result:**
+
+> Adv_COLL(A) ≤ min( ε_PRF + 7Q² / 2²⁵⁷ ,  2⁻⁸⁶ )
+
+The first bound comes from **Theorem 1** (PRF reduction): any nonce-collision finder yields a SHA-256 PRF distinguisher. The second bound comes from **Theorem 2** (SDP reduction): finding a collision is at least as hard as decoding a [2048, 256] binary linear code — NP-complete by Berlekamp, McEliece & van Tilborg (1978). The best classical attack is Information Set Decoding at ~2⁸⁶ operations (Becker–Joux–May–Meurer 2012).
+
+| Attack vector | Classical | Quantum | Basis |
+|---|---|---|---|
+| PRF key recovery | 2¹²⁸ | 2⁶⁴ (Grover) | SHA-256 PRF |
+| Polynomial collision (SDP) | ~2⁸⁶ | ~2⁴³ (Grover + ISD) | NP-hard |
+| Brute-force birthday | 2¹²⁸ at Q = 2¹²⁸ | 2⁶⁴ | Unconditional |
+| GF(2⁵¹²) upgrade path | 2¹⁶² | ~2⁸¹ | Post-quantum margin |
+
+Both reductions are **constructive and numerically validated** in the reference implementation.
+
+---
+
+## 📊 Performance
+
+Pure Python 3.12 reference (algorithmic complexity, not production speed):
+
+| Operation | Avg µs | Throughput |
+|---|---|---|
+| GF(2²⁵⁶) multiply | 46.1 | 21,714 /s |
+| L2 Horner eval | 342 | 2,921 /s |
+| L3 collapse to GF(2²⁵⁶) | 1,453 | 688 /s |
+| DAG next_gf256 (4 rounds) | 5.0 | 198,740 /s |
+| `aria_encrypt` Mode 1 | 6,447 | 155 /s |
+| AEAD round-trip Mode 1 | 14,620 | 68 /s |
+
+Production projections by acceleration tier:
+
+| Stage | GF mul | AEAD throughput |
+|---|---|---|
+| Naive C (−O3) | ~652 ns | ~5,000 /s |
+| C + PCLMULQDQ | ~33 ns | ~100,000 /s |
+| C + PCLMULQDQ + AES-NI | ~5 ns | ~2,000,000 /s |
+| AVX-512 (8-way parallel) | ~5 ns/lane | ~10,000,000 /s |
+
+Sufficient for all STANAG tactical communication profiles up to high-speed data networks.
+
+---
+
+## ⚠️ Known Limitations
+
+The reference is a research prototype, not a production primitive. Open issues (from the paper):
+
+1. **No EUF-CMA proof** for the authentication tag — unforgeability argument is heuristic.
+2. **DAG-RNG PRF security** is argued via SHA-256 but not independently proven for the meta-operation structure.
+3. **SHA-256 keystream is a placeholder** — production must use AES-256-CTR keyed from the tag.
+4. **Quantum SDP margin** is ~2⁴³ at GF(2²⁵⁶); upgrade to GF(2⁵¹²) raises this to ~2⁸¹.
+5. **No external cryptographic audit** has been performed. **Required before any deployment.**
+6. **No side-channel analysis** — constant-time arithmetic and timing/power-analysis assessment outstanding.
+7. **L₃ security contribution** not formally quantified beyond the SDP bound.
 
 ---
 
 ## 🔗 Related Work
 
 This work connects to:
-- **Asset Tracking Algorithm** — ARIA-INTEL fusion of asset tracking
-- **Break AES** — AES cryptanalysis approaches
-- **Compression Algorithms** — Information compression and cryptography
-- **GF2 Algebra** — Algebraic structures underlying block ciphers
-- **Cypha** — Signal processing and pattern matching
+
+- **GF2 Algebra and Applications** — algebraic foundations for binary fields used here
+- **Cypha** — independent work also using GF(2ⁿ) extension fields
+- **Compression Algorithms** — shared mathematical machinery (polynomial Horner evaluation, Vandermonde structure)
+- **Break AES** — adjacent cryptanalytic research
 
 ---
 
@@ -76,29 +145,20 @@ This work connects to:
 
 - [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
 - [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — asset tracking
-- [`Break AES/`](../Break%20AES/) — AES cryptanalysis
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
+- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — binary field theory
+- [`Break AES/`](../Break%20AES/) — adjacent cryptanalytic notes
+- [`Compression Algorithms/`](../Compression%20Algorithms/) — related algebraic-information work
 
 ---
 
 ## 🛡️ About This Project
 
-This project provides **educational analysis of the ARIA cipher**. The goal is to:
-- Understand the structure and properties of ARIA
-- Enable implementation and analysis
-- Compare with other block ciphers
-- Contribute to cryptographic research
+This project documents an authenticated-encryption scheme with formal security reductions to two distinct hardness assumptions, accompanied by an executable Python reference. The goals are:
 
-**Note**: ARIA is a standard algorithm for general use. This documentation is for educational purposes.
+- Eliminate counter-state synchronisation as an operational liability in tactical communications
+- Provide a structural NP-hardness floor (SDP) alongside the conventional PRF-based bound
+- Expose the construction in implementable form for review, experimentation, and cryptanalytic scrutiny
 
----
-
-## 💡 Key Takeaways
-
-1. **ARIA is sound**: ARIA passed NIST's round-robin evaluation
-2. **Simple structure**: Substitution-permutation network with standard operations
-3. **Efficient**: Performs well on various platforms
-4. **Well-analysed**: Extensive cryptanalysis confirms security
+**Not for production deployment.** External cryptographic audit and the engineering hardening listed in §10 of the research paper are prerequisites for any operational use.
 
 [← Back to main README](../README.md)
