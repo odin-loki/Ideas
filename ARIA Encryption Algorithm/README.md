@@ -143,8 +143,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — binary field theory
 - [`Break AES/`](../Break%20AES/) — adjacent cryptanalytic notes
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — related algebraic-information work

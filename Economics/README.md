@@ -84,8 +84,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`UCN Political System/`](../UCN%20Political%20System/) — United Commonwealth
 - [`Physics/`](../Physics/) — materials and field physics
 - [`Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — quantum technologies

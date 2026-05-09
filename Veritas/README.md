@@ -110,8 +110,6 @@ This project connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — GRIA / NMP — algebraic and geometric counterparts
 - [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic foundations
 - [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — extended reasoning targets

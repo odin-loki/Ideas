@@ -18,8 +18,11 @@ The folder name "3 to 8 Value" is somewhat misleading — earlier README copy in
 |------|------|
 | [`boolean_research_paper.md`](boolean_research_paper.md) | Flagship paper — *Dimensional emergence and structural complexity in Boolean algebras of three to eight variables* |
 | [`three_var_boolean_analysis.md`](three_var_boolean_analysis.md) | Companion analysis at $n=3$ |
-| [`four_var_boolean_emergence.md`](four_var_boolean_emergence.md) | Companion at $n=4$ |
-| `*_var_*.md` (per-dimension companions) | Companion notes from $n=5$ through $n=8$ (full enumeration regime ends at $n=4$; $n\ge 5$ uses sampling) |
+| [`four_var_boolean_universe.md`](four_var_boolean_universe.md) | Companion at $n=4$ |
+| [`five_var_boolean_frontier.md`](five_var_boolean_frontier.md) | Companion at $n=5$ — full enumeration ends here; $n\ge 5$ moves to sampling |
+| [`six_var_boolean_transcendence.md`](six_var_boolean_transcendence.md) | Companion at $n=6$ |
+| [`seven_var_perfect_democracy.md`](seven_var_perfect_democracy.md) | Companion at $n=7$ |
+| [`eight_var_digital_perfection.md`](eight_var_digital_perfection.md) | Companion at $n=8$ |
 
 ---
 

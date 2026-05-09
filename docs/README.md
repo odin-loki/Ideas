@@ -1,85 +1,41 @@
-# docs — GitHub Pages Site
+# docs — static-site assets and house style guide
 
-> **📄 Overview**: GitHub Pages root: [`index.html`](index.html), shared CSS, **generated** `site/` mirror of the Markdown corpus.
-
----
-
-## 📄 Overview
-
-**docs** is the root directory for the GitHub Pages static site. This folder contains the `index.html` entry point, shared CSS, and the generated `site/` mirror of the Markdown corpus.
-
-### Key Components
-
-- **index.html**: Main entry point for the GitHub Pages site
-- **site/**: Generated mirror of the Markdown corpus
-- **assets/**: Shared assets (CSS, images, fonts)
-- **topics/**: Topic-specific site content
-- **README.md**: This maintainer notes file
+> **What's actually here.** A small static site (`index.html`, shared CSS / `assets/`, generated `site/` mirror, `topics/` and `tree.json`) plus the house style guide for the corpus. The build pipeline that originally produced `site/` is not currently checked into the repo.
 
 ---
 
-## 📁 Directory Structure
+## 📁 Contents
 
-| Directory | Role |
-|--|--|
-| **index.html** | Site entry point |
-| **site/** | Generated Markdown mirror |
-| **assets/** | Shared site assets |
-| **topics/** | Topic content |
-| **tree.json** | Directory tree metadata |
-
----
-
-## 🔧 Site Generation
-
-The **`tools/`** directory contains the site generation tools:
-
-- **`build_github_pages.py`**: Main site builder
-- **`editorial_inventory.py`**: Folder inventory generator
-- **`normalize_markdown_corpus.py`**: Markdown normalizer
-- **`convert_docx_to_markdown.py`**: DOCX converter
+| Item | Role |
+|---|---|
+| [`index.html`](index.html) | Site entry point (browsable directly or via GitHub Pages if enabled) |
+| [`assets/`](assets/) | Shared site assets (CSS, fonts) |
+| [`site/`](site/) | Generated mirror of the Markdown corpus (HTML + JSON, produced offline) |
+| [`topics/`](topics/) | Topic-page content |
+| [`tree.json`](tree.json) | Directory-tree metadata used by the site |
+| [`.nojekyll`](.nojekyll) | Tells GitHub Pages to skip Jekyll processing |
+| [`EDITORIAL_STYLE.md`](EDITORIAL_STYLE.md) | **House style guide** — formatting conventions used across every README in this repository |
 
 ---
 
-## 📋 Editorial Standards
+## 📋 Editorial style (summary of `EDITORIAL_STYLE.md`)
 
-For new content, follow **[`EDITORIAL_STYLE.md`](EDITORIAL_STYLE.md)**:
+For new content, follow [`EDITORIAL_STYLE.md`](EDITORIAL_STYLE.md). The shortlist:
 
-- One `#` document title in first lines
-- ATX headings (`#`, `##`, `###`)
-- GFM pipe tables for data grids
-- `**bold**` for emphasis (not `__`)
-
-See **[`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md)** for editorial workflow.
-
----
-
-## 🛠️ Tooling
-
-| Tool | Purpose |
-|--|--|
-| **`build_github_pages.py`** | Build the GitHub Pages site |
-| **`editorial_inventory.py`** | Generate folder inventory |
-| **`normalize_markdown_corpus.py`** | Normalize Markdown |
-| **`convert_docx_to_markdown.py`** | Convert DOCX to Markdown |
+- One `#` document title in the first lines.
+- ATX headings (`#`, `##`, `###`).
+- GFM pipe tables for data grids.
+- `**bold**` for emphasis (not `__`).
+- Use the per-folder README as the index for that topic — every folder has one, including the smallest.
 
 ---
 
-## 🔗 Links
+## 🛠 About the site mirror
 
-- [../README.md](../README.md) — Main project README
-- [../EDITORIAL_ROADMAP.md](../EDITORIAL_ROADMAP.md) — Editorial roadmap
-- [`EDITORIAL_STYLE.md`](EDITORIAL_STYLE.md) — House style guide
+The `site/` directory contains a generated HTML mirror of the Markdown corpus. **The build pipeline that produced it is not currently part of this repository** (an earlier `tools/` directory and `build_github_pages.py` were referenced but are no longer present). Treat `site/` as a static snapshot.
 
----
-
-## 🛡️ About This Folder
-
-This folder serves as the **maintainer notes** area for the `docs/` tree. It documents:
-- Site structure and generation
-- Editorial standards and workflow
-- Tooling and automation
+To enable GitHub Pages from `/docs`: **Settings → Pages → deploy from `main`, folder `/docs`**.
 
 ---
 
-> **✨ Welcome to the docs folder — where research meets web presentation.**
+[← Back to main README](../README.md)

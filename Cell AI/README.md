@@ -53,7 +53,7 @@ The canonical navigation file is [`docs/README.md`](docs/README.md). Highlights:
 | [`docs/CELLULARAI_PAPER.md`](docs/CELLULARAI_PAPER.md) | Main architecture paper — v1 + v2, training & evaluation on ~3 GB multi-domain data |
 | [`docs/ARCH_SEARCH_PAPER.md`](docs/ARCH_SEARCH_PAPER.md) | v3 / SpectralPDE / multiscale / sparse Hebbian / guided architecture search rounds E0–E26 |
 | [`docs/EVALUATION_REPORT.md`](docs/EVALUATION_REPORT.md) | Held-out evaluation notes |
-| [`docs/architecture/v1_architecture.md`](docs/architecture/v1_architecture.md) | Base cellular system |
+| [`docs/CELLULARAI_PAPER.md`](docs/CELLULARAI_PAPER.md) | Base cellular system (CellularPDE / Hebbian / MultiModal — the v1 architecture is documented in this paper) |
 | [`docs/architecture/v2_intro.md`](docs/architecture/v2_intro.md) · [`v2_vs_v1.md`](docs/architecture/v2_vs_v1.md) · [`v2_math_model.md`](docs/architecture/v2_math_model.md) | Resonance + crystal-lattice extensions |
 | [`docs/architecture/v3_architecture.md`](docs/architecture/v3_architecture.md) · [`v3_math_model.md`](docs/architecture/v3_math_model.md) | OICFHS / spectral PDE |
 | [`docs/architecture/multimodal_architecture.md`](docs/architecture/multimodal_architecture.md) | Multi-domain routing |

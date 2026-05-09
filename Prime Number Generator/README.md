@@ -124,8 +124,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — NMP power laws; Izaac primitive
 - [`Statistical Generation/`](../Statistical%20Generation/) — heavy-tailed / combinatorial work
 - [`RNGS/`](../RNGS/) — randomness families

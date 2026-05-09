@@ -90,8 +90,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic crypto foundations
 - [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — adjacent algebraic AEAD
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — distillation theory in GRIA

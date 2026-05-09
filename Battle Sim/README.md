@@ -70,7 +70,5 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — information-theoretic frameworks
 - [`Statistical Scheduler/`](../Statistical%20Scheduler/) — resource allocation algorithms

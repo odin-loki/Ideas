@@ -10,7 +10,7 @@
 - **Extras:** `tools/` (e.g. Math Question Generator).
 
 ## Architecture
-- [v1 Architecture](architecture/v1_architecture.md) — base cellular system
+- [v1 architecture (in CellularAI paper)](CELLULARAI_PAPER.md) — base cellular system; the v1 architecture is documented inside the main paper rather than as a standalone file
 - [v2 Architecture intro](architecture/v2_intro.md) — resonance and physics extensions
 - [v2 vs v1](architecture/v2_vs_v1.md) — comparison
 - [v2 Math Model](architecture/v2_math_model.md)

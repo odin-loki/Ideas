@@ -88,8 +88,6 @@ This series is the algebraic foundation for several adjacent projects:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Compression Algorithms/`](../Compression%20Algorithms/) — GRIA, NMP, Izaac, synthesis
 - [`Cypha/`](../Cypha/) — high-α contracting-regime instance
 - [`3 to 8 Value Boolean Algebra/`](../3%20to%208%20Value%20Boolean%20Algebra/) — multi-valued logic
