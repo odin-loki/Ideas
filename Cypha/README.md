@@ -30,9 +30,9 @@ The HRNA concept is described in [`Compression Algorithms/NMP_neural_compression
 |---|---|
 | [`cypha_accel/`](cypha_accel/) | Acceleration backends (GPU/CPU dispatch helpers) |
 | [`cypha_studio/`](cypha_studio/) | Desktop GUI + REST server (PySide6, pyqtgraph, FastAPI) |
-| [`config/`](config/) | Configuration assets |
+| [`config/`](config/) | Profile configurations (currently a single `profiled_medium.json` profile used by the studio / scripts) |
 | [`docs/`](docs/) | Documentation tree (use / verify / port / studio / benchmarks) |
-| [`examples/`](examples/) | Example scripts and use cases |
+| [`examples/`](examples/) | REST request payloads (currently `cypha_predict_body.json`, the body for an `/predict` POST). Most worked examples actually live under `docs/use/` and `tests/` |
 | [`native/`](native/) | C++ core, CMake build, REST binary, optional Qt stub |
 | [`parity_fixtures/`](parity_fixtures/) | Committed parity assets for Python ↔ native equivalence checks |
 | [`scripts/`](scripts/) | Helper scripts (profile, benchmark, regen, regression gate) |
@@ -122,13 +122,6 @@ This codebase realises ideas described in adjacent research folders:
 - [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — extended reasoning networks
 - [`Filtering/`](../Filtering/) — signal-processing context
 - [`Statistical Generation/`](../Statistical%20Generation/), [`Statistical Scheduler/`](../Statistical%20Scheduler/) — adjacent statistical ML work
-
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 
 ---
 

@@ -1,6 +1,6 @@
 # Diffusion Welding — UCDW: Ultra-Compact Diffusion Welding
 
-> **⚙️ Overview**: A hybrid **electrochemical / thermal / ultrasonic** metal-bonding system in an ionic-liquid substrate, achieving **77 % – 99 % of base-metal strength** across five operating regimes — from 2-minute field-grade emergency repairs to aerospace-certified structural joints.
+> **⚙️ Overview**: A hybrid **electrochemical / thermal / ultrasonic** metal-bonding system in an ionic-liquid substrate, achieving **77 % – 99 % of base-metal strength** across five published operating regimes — from 2-minute field-grade emergency repairs (ULTRA-FLASH @ 150 °C) to aerospace-certified 99 % structural joints (ULTRA-99 % @ 300 °C, 30 min). Every regime ships with a calibrated linear strength-vs-time model.
 
 ---
 
@@ -22,7 +22,7 @@ Three-mechanism additivity is the design's key property: each is physically inde
 |---|---|---|---|---|
 | TIG / MIG fusion welding | ~72.5 % base metal (HAZ-limited) | minutes | low | yes |
 | Vacuum diffusion welding | 95 – 98 % | 2 – 6 h | $500k – $2M capex | **no** |
-| **UCDW (full range)** | **77 – 99 %** | **2 min – 60 min** | **$8k – $50k capex** | **yes (low/mid regimes)** |
+| **UCDW (full range)** | **77 – 99 %** | **2 min (77 %) – 1 hr (99 %)** | **$8k – $50k capex** | **yes (low/mid regimes)** |
 
 ---
 
@@ -42,15 +42,17 @@ Three-mechanism additivity is the design's key property: each is physically inde
 
 The strength–time spectrum is partitioned into five named regimes:
 
-| Regime | Temperature | Time | Bond strength | Use case |
-|---|---|---|---|---|
-| **ULTRA-FLASH** | 150 °C | 2 min | 77 % base metal | Field emergency repair (exceeds TIG/MIG in 2 minutes) |
-| **FAST-DEPOT** | 200 °C | 5 – 10 min | 85 % | Forward operating base maintenance |
-| **STANDARD** | 250 °C | 15 min | 90 % | Workshop / depot |
-| **ULTRA-PRECISION (low)** | 250 °C | 30 min | 95 % | Aerospace structural |
-| **ULTRA-PRECISION (high)** | 300 °C | 60 min | 99 % | Aerospace certified, near-parent-metal |
+| Regime | Temperature | Time | Bond strength | Linear strength model | Use case |
+|---|---|---|---|---|---|
+| **ULTRA-FLASH** | 150 °C | 2 min | **77 %** base metal | $\sigma(\%) = 7.0\,t_{\text{min}} + 63$ | Field emergency repair (exceeds TIG/MIG in 2 minutes) |
+| **BALANCED** | 100 °C | 15 min | **82 %** | $\sigma(\%) = 1.0\,t_{\text{min}} + 67$ | Forward operating base maintenance |
+| **PRECISION** | 75 °C | 45 min | **88 %** | $\sigma(\%) = 0.33\,t_{\text{min}} + 74$ | Workshop / depot |
+| **ULTRA-99 % @ 250 °C** | 250 °C | 60 min | **99 %** | $\sigma(\%) = 0.32\,t_{\text{hr}} + 98.1$ | Aerospace structural / certified |
+| **ULTRA-99 % @ 300 °C** | 300 °C | 30 min | **99 %** | $\sigma(\%) \equiv 99$ (immediate) | Aerospace certified, fastest 99 % path |
 
-The two ULTRA-PRECISION regimes match or exceed conventional vacuum diffusion welding (95 – 98 %) at approximately **half the processing temperature** and **without vacuum infrastructure**.
+> Each regime ships with a published linear strength-vs-time model so any (strength, time) target on the surface can be priced exactly. All 99 % protocols include a **30-minute post-anneal at bonding temperature**. Numbers above are taken directly from [`COMPLETE_SYSTEM_1MIN_TO_99PCT.md`](COMPLETE_SYSTEM_1MIN_TO_99PCT.md).
+
+The two ULTRA-99 % regimes match or exceed conventional vacuum diffusion welding (95 – 98 %) at approximately **half the processing temperature** and **without vacuum infrastructure**.
 
 ---
 
@@ -102,8 +104,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — HX-70 hard machining
 - [`Diamond Batterys/`](../Diamond%20Batterys/) — energy storage
 - [`Physics/`](../Physics/) — materials physics

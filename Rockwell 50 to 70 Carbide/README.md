@@ -57,9 +57,11 @@ Surface-zone WC grain size: **D₅₀ = 0.25–0.35 µm** (nano-grain).
 
 The grain-growth inhibitor system uses **TaC** (Zener pinning at WC grain-boundary triple junctions), **NbC** (secondary inhibition + Co-phase strengthening), and **Cr₃C₂** (suppression of WO₃ oxidative volatilisation via preferential Cr₂O₃ scale).
 
-### 2. Five-layer PVD/PECVD nanocomposite coating stack
+### 2. Five-layer PVD/PECVD nanocomposite coating stack — **TriboshieldPlus™**
 
-The "Triboshield" coating architecture uses **AlCrN / AlTiSiN** multilayers — nano-crystalline (Al,Ti,Si)N grains embedded in an amorphous Si₃N₄ matrix — combined with a DLC-Si top layer. Target stoichiometry (Al₀.₅₅Ti₀.₃₀Si₀.₁₅)N is calibrated to ~50 GPa peak hardness and oxidation resistance to 1000 °C, consistent with published AlCrN/AlTiSiN multilayer characterisation (Xiao et al. 2022).
+The **TriboshieldPlus™** coating architecture (the canonical brand used in `HX70_Sintered_Carbide_Design_Spec.md` and `HX70_Research_Paper.md`) uses **AlCrN / AlTiSiN** multilayers — nano-crystalline (Al,Ti,Si)N grains embedded in an amorphous Si₃N₄ matrix — combined with a DLC-Si top layer. Target stoichiometry (Al₀.₅₅Ti₀.₃₀Si₀.₁₅)N is calibrated to ~50 GPa peak hardness and oxidation resistance to 1000 °C, consistent with published AlCrN/AlTiSiN multilayer characterisation (Xiao et al. 2022). The five layers address the three primary wear mechanisms (oxidative flank wear, abrasive crater wear, adhesive welding) by functional specialisation rather than relying on any single super-hard top layer.
+
+> Earlier README copy referred to this as "Triboshield" (no suffix); the source documents consistently use **TriboshieldPlus™**.
 
 ### 3. Geometry / parameter framework
 
@@ -115,8 +117,6 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Diffusion Welding/`](../Diffusion%20Welding/) — UCDW joining
 - [`Diamond Batterys/`](../Diamond%20Batterys/) — diamond materials
 - [`Weapons/`](../Weapons/) — defence components

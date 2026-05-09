@@ -28,9 +28,11 @@ The work is technically literate (real polymers, real release mechanisms, real I
 | Document | Description |
 |---|---|
 | [`universal_drug_depot_guide.md`](universal_drug_depot_guide.md) | Comprehensive guide to depot-system selection and deployment |
-| [`Combat Drug.md`](Combat%20Drug.md) | Speculative combat-pharmaceutical formulations |
-| [`Injectable Food.md`](Injectable%20Food.md) | Parenteral nutrition concept (companion to Paper 1) |
+| [`Combat Drug.md`](Combat%20Drug.md) | **Mirror** of [`../Weapons/Combat Drug.md`](../Weapons/Combat%20Drug.md) — speculative combat-pharmaceutical formulations. The canonical copy lives in `Weapons/`; this folder mirrors it because the formulation science framing is shared with the depot-delivery work here. **Keep in sync** if either copy is edited. |
+| [`Injectable Food.md`](Injectable%20Food.md) | **Mirror** of [`../Weapons/Injectable Food.md`](../Weapons/Injectable%20Food.md) — parenteral-nutrition concept (also a companion to Paper 1 in this folder). Canonical copy in `Weapons/`. **Keep in sync.** |
 | [`Sugar Pills that can be injected.txt`](Sugar%20Pills%20that%20can%20be%20injected.txt) | Speculative sugar-based injectable formulations |
+
+> **On the mirror files.** `Combat Drug.md` and `Injectable Food.md` are byte-identical duplicates of files in [`../Weapons/`](../Weapons/). They are kept here because they fit the depot-delivery / formulation-science theme of this folder, and in `Weapons/` because of their defence framing. The copy in `Weapons/` is treated as canonical for the defence framing; this folder is the formulation-science framing. If one copy is edited, edit both.
 
 ---
 
@@ -126,10 +128,9 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
 - [`Beauty Products/`](../Beauty%20Products/) — formulation science
 - [`Cocktails/`](../Cocktails/) — systematic prep frameworks
+- [`Weapons/`](../Weapons/) — defence framing of `Combat Drug.md` / `Injectable Food.md`
 - [`Cell AI/`](../Cell%20AI/) — modular architectures
 
 ---
