@@ -1,130 +1,112 @@
-# Rockwell 50 to 70 Carbide — HX-70 GradePlex™ Sintered Carbide for Hard Machining
+# Rockwell 50 to 70 Carbide — HX-70 GradePlex™ + TriboshieldPlus™ + Forge-to-Machine
 
-> **🔩 Overview**: A ground-up sintered-carbide tooling system engineered to **machine hardened steels from HRC 40 to HRC 70** — closing the production-tooling gap currently bridged only by CBN inserts, at 60–70% lower cost.
-
----
-
-## 🔩 Overview
-
-This folder documents **HX-70 GradePlex™**, a complete sintered-carbide tool system targeting the full hardness spectrum of defence-grade hardened steels. The "50 to 70" in the folder title refers to the **Rockwell C hardness of the workpiece** (the steel being cut), not the carbide grain size — the scale is named after Stanley P. Rockwell.
-
-> **Naming corrections from earlier README.** A previous README revision claimed the folder was about "tungsten-carbide grain sizes in the 50–70 micron range" with hardness "20–22 HRA". Both were wrong by orders of magnitude:
->
-> - Actual surface-zone WC grain size in the design: **0.25–0.35 µm** (nano-grain), not 50–70 µm.
-> - Actual surface-zone hardness target: **2050–2100 HV30** (Vickers), equivalent to ~92 HRA — not 20–22 HRA, which would be softer than rubber.
+> **A complete carbide-tooling platform for hard-machining steels from `HRC 40` to `HRC 70` — a regime where conventional WC-Co inserts give up around `HRC 55` and CBN takes over but only on insert geometries CBN can be made into. The platform combines: (1) **HX-70 GradePlex™**, a functionally-graded WC-Co substrate with three radial zones (Zone A `0 – 30 µm` is `92.5 %` WC, `5.5 %` Co, `2.0 %` TaC/NbC at `2050 – 2100 HV30` for the working surface; Zone C is the tougher `13 %` Co core); (2) **TriboshieldPlus™**, a five-layer coating stack (CrN bond, AlCrN thermal barrier, nc-AlTiSiN/a-Si₃N₄ hardness core at `42 – 46 GPa`, 40-bilayer AlCrN/AlTiSiN superlattice at `37.5 nm` per layer, DLC-Si friction layer at `µ < 0.15`); (3) **forge-to-machine**, a near-net-shape forging supply chain that on the H13-breech exemplar drops cost from `AUD $340 – 420` to `AUD $190 – 240` and lead time from `18 – 26` working days to `6 – 9` — a `~40 – 45 %` cost / `~65 – 70 %` lead-time reduction.** End-mill geometries CBN cannot reach become accessible at `HRC 65 – 70` for the first time.
 
 ---
 
-## 🎯 The Problem HX-70 Solves
+## What this folder is
 
-Industry practice today bifurcates the machining of hardened steels:
+Hard machining — cutting steels at `HRC 50+` — has historically been a forced choice between two bad options: cubic-boron-nitride (CBN) inserts that perform but cost `$$$/insert` and only come in indexable insert geometries that limit the features you can cut, or premium AlTiN-coated WC-Co carbide that wears out fast above `HRC 55`. This folder argues for a third option: a *functionally-graded* WC-Co substrate (HX-70 GradePlex™) that places the hard, fine-grained, low-cobalt material at the cutting edge and the tough, coarser, higher-cobalt material at the core, plus a bespoke five-layer coating (TriboshieldPlus™) engineered to the specific failure modes of hard machining (binder softening at `~700 °C`, WC oxidation to WO₃, diffusive wear into the steel chip), plus a near-net-shape forging supply chain (forge-to-machine) that cuts material removal so machining itself becomes faster and cheaper. The combined platform targets a regime — `HRC 65 – 70` end-mills accessing small features — that simply does not exist in the open commercial market.
 
-| Workpiece hardness | Conventional tool | Limitation |
-|---|---|---|
-| ≤ HRC 55 | Premium coated carbide | Operates within rated envelope |
-| HRC 55 – 70 | CBN inserts / ceramics | Insert-only — cannot be made as small-diameter end mills; 10–15× cost premium |
-
-Defence components (receivers, breech assemblies, locking grooves, pin bores, pocket profiles) require small-diameter end milling at HRC 60+. **No carbide tool in current production survives this regime with acceptable life.** HX-70 was designed from first principles to close exactly this gap.
+The folder is documentation-grade: peer-reviewed citations are heavy (Das, Mahapatra, Xiao, Kim, etc.), the metallurgy is laid out in detail, the manufacturing routing is specified, but author-run machining benchmark appendices are not confirmed in the portions reviewed. Read the gain numbers as **paper-stated projections** unless you locate embedded lab tables.
 
 ---
 
-## 📄 Research Documents
+## 📑 Source documents
 
-| Document | Description |
+| File | Role |
 |---|---|
-| [`HX70_Research_Paper.md`](HX70_Research_Paper.md) | Primary technical paper — full engineering rationale, materials science, process architecture, and performance projections from HRC 40 to HRC 70 |
-| [`HX70_Sintered_Carbide_Design_Spec.md`](HX70_Sintered_Carbide_Design_Spec.md) | Design specification — GradePlex™ substrate, coating system, edge geometry, parameter framework |
-| [`ForgeMachine_Research_Paper.md`](ForgeMachine_Research_Paper.md) | The forge-to-machine production architecture HX-70 enables — 40–45% cost reduction, 65–70% lead-time reduction, ADF supply-chain agility |
-| [`Forge_to_Machine_Defence_Analysis.md`](Forge_to_Machine_Defence_Analysis.md) | Defence-specific analysis of forge-to-machine routes |
+| [`HX70_Research_Paper.md`](HX70_Research_Paper.md) | Full research paper. Material physics, three-zone GradePlex composition, sintering protocol, TriboshieldPlus layers, projected machining gains. |
+| [`HX70_Sintered_Carbide_Design_Spec.md`](HX70_Sintered_Carbide_Design_Spec.md) | Design specification. |
+| [`ForgeMachine_Research_Paper.md`](ForgeMachine_Research_Paper.md) | Forge-to-machine supply-chain analysis. H13-breech exemplar. Cost and lead-time models. |
+| [`Forge_to_Machine_Defence_Analysis.md`](Forge_to_Machine_Defence_Analysis.md) | Defence-context analysis. |
 
 ---
 
-## 🏗️ The Three-Innovation Architecture
+## 🧠 HX-70 GradePlex™ functionally-graded substrate
 
-HX-70 is a coordinated system, not a single invention. Three innovations operate simultaneously:
+Three radial zones, same sintered billet, gradient achieved through controlled in-situ powder layering and HIP densification:
 
-### 1. Functionally graded substrate (GradePlex™)
+| Zone | Depth | WC | Co | Inhibitors | Hardness | Grain `D₅₀` |
+|---|---|---|---|---|---|---|
+| **A — Working surface** | `0 – 30 µm` | `92.5 %` | `5.5 %` | `2.0 %` TaC / NbC | **`2050 – 2100 HV30`** | `0.25 – 0.35 µm` |
+| **B — Transition** | `30 – 300 µm` | (graded) | (graded ↑) | (graded ↑) | (graded) | (graded) |
+| **C — Tough core** | core | balance | **`13 %`** | balance | `~1500 – 1600 HV30` | larger |
 
-Three compositional zones with different WC / Co / cubic-carbide ratios:
+### Sintering route
 
-| Zone | Depth | WC | Co | Cubic carbide | Role |
-|---|---|---|---|---|---|
-| **A — Surface** | 0–30 µm | 92.5% | 5.5% | 2.0% (TaC/NbC) | Maximum hardness, wear resistance — **2050–2100 HV30** |
-| **B — Subsurface** | 30–300 µm | 88.0% | 9.0% | 3.0% (TaC/NbC/Cr₃C₂) | Crack arrest, thermal buffer |
-| **C — Core** | 300 µm–bulk | 84.5% | 13.0% | 2.5% (TaC/Cr₃C₂) | Toughness, vibration damping — **1500–1600 HV30**, K_IC ≈ 13–14 MPa·m½ |
-
-Surface-zone WC grain size: **D₅₀ = 0.25–0.35 µm** (nano-grain).
-
-The grain-growth inhibitor system uses **TaC** (Zener pinning at WC grain-boundary triple junctions), **NbC** (secondary inhibition + Co-phase strengthening), and **Cr₃C₂** (suppression of WO₃ oxidative volatilisation via preferential Cr₂O₃ scale).
-
-### 2. Five-layer PVD/PECVD nanocomposite coating stack — **TriboshieldPlus™**
-
-The **TriboshieldPlus™** coating architecture (the canonical brand used in `HX70_Sintered_Carbide_Design_Spec.md` and `HX70_Research_Paper.md`) uses **AlCrN / AlTiSiN** multilayers — nano-crystalline (Al,Ti,Si)N grains embedded in an amorphous Si₃N₄ matrix — combined with a DLC-Si top layer. Target stoichiometry (Al₀.₅₅Ti₀.₃₀Si₀.₁₅)N is calibrated to ~50 GPa peak hardness and oxidation resistance to 1000 °C, consistent with published AlCrN/AlTiSiN multilayer characterisation (Xiao et al. 2022). The five layers address the three primary wear mechanisms (oxidative flank wear, abrasive crater wear, adhesive welding) by functional specialisation rather than relying on any single super-hard top layer.
-
-> Earlier README copy referred to this as "Triboshield" (no suffix); the source documents consistently use **TriboshieldPlus™**.
-
-### 3. Geometry / parameter framework
-
-Edge geometry, helix, rake, trochoidal toolpath strategy, MQL and cryogenic cooling envelopes — all calibrated to the physics of hardened-steel chip formation. Above HRC 55 flood coolant is *avoided* (thermal-shock cracking); compressed air, MQL, or LN₂ delivery are used instead.
+- Vacuum sinter + in-situ HIP
+- `100 bar` Ar
+- Peak liquid-phase sinter at `1380 °C`
+- Carbon control `±0.02 wt %`
+- Dew point `≤ −60 °C`
 
 ---
 
-## 📊 Tool Life Projections
+## 🛡 TriboshieldPlus™ five-layer coating
 
-| Workpiece hardness | Improvement vs. premium AlTiN carbide | vs. CBN |
-|---|---|---|
-| HRC 55 | **+40 – 55%** | Carbide-form available; CBN limited to indexable inserts |
-| HRC 60 | **+85 – 100%** | First-in-class carbide capability |
-| HRC 65 – 70 | New regime — no current carbide competitor | Comparable life at ~30% of CBN cost |
-
-Cost: **60–70% reduction relative to CBN** at HRC 65–70.
-
----
-
-## 🏭 Forge-to-Machine Architecture
-
-The companion paper ([`ForgeMachine_Research_Paper.md`](ForgeMachine_Research_Paper.md)) examines the production-economics consequence of having a carbide tool that survives at HRC 70. Conventional defence-component routing —
-
-> forge → anneal → soft pre-machine → harden → finish machine → grind → inspect
-
-— consolidates into a single forge-to-machine pipeline:
-
-> near-net-shape forge → (deliver at service hardness) → finish machine in one setup
-
-Modelled outcomes on a representative H13 breech component (HRC 52–56, 1.8 kg finished, 3.5 kg raw forging):
-
-| Metric | Conventional | Forge-to-machine | Δ |
+| Layer | Material | Thickness | Role |
 |---|---|---|---|
-| Material waste | 1.7 kg/part | ~0.3 kg/part | −82% |
-| Total processing cost | baseline | −40 to −45% | substantial |
-| Lead time | baseline | −65 to −70% | substantial |
-| Process stages | 4–6 | 1 | structural simplification |
-
-The strategic case (eliminating furnace scheduling as the dominant supply-chain bottleneck) is developed explicitly with reference to ADF procurement and aerospace lead-time pressures.
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-
-- **Diffusion Welding** — joining of hardened components; complementary process science
-- **Diamond Batterys** / **Quantum Diamond Wafer** — adjacent advanced materials work
-- **Weapons** — defence components targeted by HX-70 (receivers, breeches, armour brackets)
-- **Physics** — materials physics underpinning grain-boundary diffusion, Zener pinning, oxidation kinetics
+| **1 — Bond** | CrN | `0.1 µm` | Adhesion to substrate |
+| **2 — Thermal barrier** | AlCrN (70:30 Al:Cr) | `~1.0 µm` | Heat shield |
+| **3 — Hardness core** | nc-AlTiSiN / a-Si₃N₄ nanocomposite | `~2.0 µm` | **`42 – 46 GPa` hardness** |
+| **4 — Superlattice** | 40 bilayers AlCrN / AlTiSiN | `37.5 nm` per layer | Crack arrest |
+| **5 — Friction layer** | DLC-Si | `~0.4 µm` | **`µ < 0.15`** chip-flow surface |
 
 ---
 
-## 📖 See Also
+## 📊 Projected machining performance (research paper)
 
-- [`Diffusion Welding/`](../Diffusion%20Welding/) — UCDW joining
-- [`Diamond Batterys/`](../Diamond%20Batterys/) — diamond materials
-- [`Weapons/`](../Weapons/) — defence components
+| Workpiece hardness | Tool-life gain vs premium AlTiN | Cost vs CBN |
+|---|---|---|
+| `HRC 55` | **`40 – 55 %` gain** | n/a |
+| `HRC 60` | **`85 – 100 %` gain** | n/a |
+| **`HRC 65 – 70`** | **First-in-class carbide regime** | **`60 – 70 %` cost reduction** vs CBN |
+
+**Projections**, not in-repo measured wear-test tables.
 
 ---
 
-## 🛡️ About This Project
+## 🔧 Forge-to-machine supply chain (H13-breech exemplar)
 
-HX-70 GradePlex™ is a **complete tool-system design**, not a coating tweak or substrate variant. The deliverable is a coherent sintered-carbide solution for the full HRC 40–70 hardness range, plus the production-architecture argument (forge-to-machine) for why having such a tool matters strategically. Source documents are technical specifications and engineering analyses; numbers cited in this README come directly from those documents.
+Near-net-shape forging followed by trochoidal hard-milling reduces the volume of metal that has to be removed from the rough billet. On the worked H13-breech (`~3.5 kg` rough → `~1.8 kg` finished):
+
+| Process | Cost (AUD) | Lead time |
+|---|---|---|
+| Traditional billet machining | `$340 – $420` | `18 – 26` working days |
+| **Forge-to-machine** | **`$190 – $240`** | **`6 – 9` working days** |
+| **Reduction** | **`~40 – 45 %`** | **`~65 – 70 %`** |
+
+---
+
+## 🚧 Honest caveats
+
+- **HX-70 narrative blends peer-reviewed citations with product-tier architecture** that reads as design-intent.
+- **CBN insert geometry limitation arguments are industry-standard**, but **HX-70 as a realised SKU is documentation-only** in this folder.
+- **Author-run machining benchmark appendix not confirmed** in the portions reviewed — treat numerical gains as paper-stated projections unless you find embedded lab tables.
+- **Sintering tolerances** (carbon `±0.02 wt %`, dew point `≤ −60 °C`) are tight and require very specific furnace control that not every WC-Co operation has.
+
+---
+
+## 🎯 What this displaces
+
+| Standard | Pain point | What this platform offers |
+|---|---|---|
+| Premium AlTiN-coated carbide | Wears out fast above `HRC 55` | Functionally-graded substrate + 5-layer coating to `HRC 70` |
+| CBN inserts | `$$$/insert`, geometry-limited | End-mill geometries accessible at `HRC 65 – 70` |
+| Generic WC-Co | One hardness everywhere | Three zones, hard surface + tough core |
+| Bar-stock machining | Heavy material removal | Forge-to-machine, `~40 – 45 %` cost cut |
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../Diffusion Welding/`](../Diffusion%20Welding/) — sister manufacturing-process platform (UCDW)
+- [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — adjacent fabrication-science thinking
+- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (the H13-breech exemplar comes from there)
+- [`../UCN Political System/`](../UCN%20Political%20System/) — sovereign-manufacturing doctrine
+- [`../Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — sister hard-materials work
+
+---
 
 [← Back to main README](../README.md)

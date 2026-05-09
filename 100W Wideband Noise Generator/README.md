@@ -1,77 +1,82 @@
-# 100W Wideband Noise Generator — Chua-circuit RF noise generator with FPGA supervision
+# 100W Wideband Noise Generator
 
-> **A single Verilog module.** Chua chaotic-circuit RF noise generation with full digital supervision, controllable from 1 Hz to 14 GHz (hardware dependent) at up to 100 W continuous output. The Verilog source is itself the canonical specification — the README only describes what is in the file.
-
----
-
-## ⚡ What this folder is
-
-A single Verilog file (`100w_Wideband_Noise_Generator.v`) implementing the digital control surface for a high-power wideband chaotic noise generator. The module supervises a Chua-circuit op-amp core, the variable reactive components that tune chaos parameters, the buffer stages, the RF driver and power-amplifier chain, output filtering, the dual SMPS rails, and a full safety/protection architecture.
-
-This folder contains **no formal research paper** — the design is captured in the Verilog header and module comments, plus the structural code itself. Performance figures previously listed in the README ("100 MHz–2 GHz", "−100 dBc/Hz phase noise", "≥ 10 MHz bandwidth") were not anchored in the source and have been removed.
+> **A single SystemVerilog file (`complete_noise_generator`) that orchestrates a Chua-circuit chaotic analogue core, a four-band RF power-amplifier chain, a 12-bit programmable supply DAC, an eight-channel thermal ADC, and a hard-protection state machine — into one digitally-supervised wideband noise platform with banner targets of `1 Hz – 14 GHz` (hardware-dependent) and `100 W` continuous output.** The pitch is unusual: the Verilog file *is* the specification. Most "noise generator" papers ship a research write-up that gestures at HDL; this folder ships the HDL with the supervisory architecture (chaos parameter DACs, band-mapped PA staging, SMPS setpoints, LCD UI, fault taxonomy) all in one source — a foundation for a high-power EW/test-source-class build with sub-microsecond fault response.
 
 ---
 
-## 📄 File
+## What this folder is
+
+Wideband noise generators are a niche corner of RF instrumentation that doesn't have many "complete" reference designs in the open. The commercial high-power test sources are closed, the chaos-circuit literature is fragmented across analogue-circuits papers, and the "100 W" tier is rare enough that most amateur builds top out at a watt or two on a benchtop. This folder is one author's attempt to put a digital supervision architecture under the whole stack: a Chua chaotic oscillator (op-amp core, switched `L/C/R` banks, piecewise-linear nonlinearity segment select, `chaos_dac` injection) handles the analogue noise generation, a four-band PA chain handles power amplification, a 12-bit DAC sets supply voltages, an eight-channel ADC monitors thermals, and an LCD-driven user interface plus an SCR crowbar plus arc-detect plus VSWR-trip safety subsystem keeps the whole thing alive. The novelty is that all of this lives in *one Verilog file* you can read top-to-bottom in an afternoon.
+
+The output performance — phase noise, SFDR, flatness across the band — is fundamentally limited by the analogue-electronics build, which is *outside* this file. The Verilog targets the *control intent*; the realised performance is hardware-dependent. The folder is honest about that.
+
+---
+
+## 📑 Source documents
 
 | File | Role |
-|------|------|
-| [`100w_Wideband_Noise_Generator.v`](100w_Wideband_Noise_Generator.v) | Top-level Verilog module — Chua chaotic core, RF chain, supervisor logic, safety architecture |
+|---|---|
+| [`100w_Wideband_Noise_Generator.v`](100w_Wideband_Noise_Generator.v) | The complete design. Module `complete_noise_generator`. Header targets: `1 Hz – 14 GHz`, `100 W`, FPGA-agnostic (Xilinx / Intel / Lattice noted). |
+
+> **Folder note.** No standalone `.md` research paper accompanies the Verilog. The HDL header is primary; this README is the prose layer.
 
 ---
 
-## 📋 Spec from the source header (verbatim)
+## 🧠 Subsystems (in the source)
 
-| Parameter | Value |
-|-----------|-------|
-| Chaos source | Chua circuit (op-amp core) |
-| Frequency range | 1 Hz – 14 GHz (hardware dependent) |
-| Maximum RF output | 100 W continuous |
-| Supply control | 12-bit DAC (`ps_voltage`) |
-| FPGA target | Any device with sufficient I/O (Xilinx / Intel / Lattice) |
-| Clock | Configurable (minimum frequency determined by §6 of the source) |
-
-Quantitative performance (phase noise, in-band flatness, exact spurious-free dynamic range) depends on the specific analogue front-end built around this controller and is **not** specified by the digital module alone.
-
----
-
-## 🛠 What the Verilog module actually controls
-
-Roughly grouped from the I/O list at the top of the source:
-
-- **Chua core op-amp** — biases (12-bit DACs), programmable gain selection.
-- **Chua reactive components** — switched inductor tuning word, capacitor bank, resistor bank (sets Chua-diode slope).
-- **Chua buffers** — input / output buffer biases, gain selection for flat PSD compensation.
-- **Chaos control** — external chaos-parameter injection DAC, piecewise-linear nonlinearity segment select.
-- **RF chain — driver** — bias, gain, enable.
-- **RF chain — power amplifier** — Class-AB quiescent bias, drive level, sub-band switch matrix select, enable.
-- **Output conditioning** — digital step attenuator, output filter bank, automatic impedance-matching network.
-- **Power supplies — primary** — main SMPS enable, SCR crowbar trigger, voltage and current set-points.
-- **Power supplies — secondary / bias** — additional rails for buffers, drivers, reference DACs.
-- **Protection / monitoring** — overvoltage and arc detection (crowbar), interlocks, thermal sensing array (referenced in body), VSWR and EMC handling.
+| Subsystem | What it does |
+|---|---|
+| **Chua chaotic oscillator** | Op-amp core with switched L/C/R banks, piecewise-linear nonlinearity segment select via `chaos_dac` injection. Source of the wideband noise. |
+| **`ps_voltage` DAC** | 12-bit programmable supply DAC controlling rail voltage. |
+| **RF PA chain** | Four-band staging from `freq_pot`: **DC – 500 MHz**, **500 MHz – 2 GHz**, **2 – 6 GHz**, **6 – 14 GHz**. |
+| **Eight-channel thermal ADC** | Multi-point thermal monitoring. |
+| **Protection subsystem** | `MAX_TEMP = 85 °C` hard trip, `77 °C` warning, `VSWR 3:1` reference, **SCR crowbar**, **arc_detect**, **fast_shutdown** in **sub-microsecond** budget. Fault taxonomy: `FAULT_VSWR`, `FAULT_ARC`, `FAULT_TEMP`, etc. |
+| **Startup sequencer** | Cycle-counted: `T_AUX_SETTLE = 256`, `T_BIAS = 512`, `T_PS_SETTLE = 768`, `T_DRV_SETTLE = 1 024` clock cycles. |
+| **LCD UI** | Operator-facing controls + status. |
 
 ---
 
-## 🧭 Where this fits in the repo
+## 📊 Banner targets (header, hardware-dependent)
 
-This is essentially a **defence / EW-relevant** wideband interference and test source: a controllable high-power noise emitter with a wide operating band, suitable for receiver-saturation tests, COMINT / SIGINT susceptibility analysis, white-noise crypto testing, and (with appropriate licensing and propagation-safety controls) jamming research. It is presented as a **design** at the digital-supervision layer — the analogue components, RF amplifier topology, power thermals, and regulatory licensing are not specified here.
+| Parameter | Target |
+|---|---|
+| Frequency range | **`1 Hz – 14 GHz`** |
+| Output power | **`100 W`** continuous |
+| Bands | DC – 500 MHz, 500 MHz – 2 GHz, 2 – 6 GHz, 6 – 14 GHz |
+| Fast-shutdown latency | **sub-microsecond** |
+| Thermal trip | `85 °C` |
+| VSWR trip | `3:1` |
+| FPGA family | Xilinx / Intel / Lattice |
 
 ---
 
-## 🚧 Honest framing
+## 🚧 Honest caveats
 
-- The Verilog module is the **only artefact** — there is no companion research paper, mathematical specification, or measurement report in this folder.
-- The 100 W / 1 Hz – 14 GHz banner numbers come from the source header comment and are explicitly tagged "hardware dependent" — they describe the controller's intent, not measured RF performance of any specific build.
-- High-power wideband emitters are subject to spectrum licensing and EMC regulations; the source is not a deployment guide.
+- **No measured RF performance data** in this folder. The frequency / power / phase-noise figures are *controller intent*; realised performance depends on the analogue build (PCB layout, PA selection, filtering, shielding).
+- **No standalone research paper.** The Verilog header is primary.
+- **No EMC / regulatory analysis.** A 100 W wideband emitter at GHz frequencies has serious regulatory implications that are not addressed here.
+- **Not a deployment guide.** This is a design-intent document, not a build-and-deploy manual.
+
+---
+
+## 🎯 What this displaces
+
+| Standard | Limitation | What this design offers |
+|---|---|---|
+| Commercial closed-source noise sources | $$$, opaque | Open Verilog supervision architecture |
+| Bench-top chaos-circuit kits | < 1 W, narrow band | 100 W banner target, four-band staging |
+| Software-defined radio noise generation | Limited bandwidth, low power | Analogue chaos with full-band PA chain |
+| Ad-hoc safety circuits | Bolt-on after the fact | Fault taxonomy + SCR crowbar + arc-detect built into the supervisor from the start |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`RNGS/`](../RNGS/) — chaotic RNG (`Chaotic RNG/`) shares Chua-circuit / nonlinear-dynamics ancestry; turbulent-flow and DAG RNG also use chaos analogues
-- [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — Meta-DAG RNG depends on a high-quality entropy source of this kind for keystream synchronisation
-- [`Break AES/`](../Break%20AES/) — cryptanalysis context (signal-side and side-channel)
-- [`Filtering/`](../Filtering/) — adaptive filtering / robust tracking is the natural countermeasure to high-power noise emitters
+- [`../CPU/`](../CPU/) — sister single-file HDL design culture
+- [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — hybrid passive components that could feed this PA chain
+- [`../RNGS/Chaotic RNG/`](../RNGS/Chaotic%20RNG/) — SynerChaos chaotic-PRNG sister work
+- [`../Physics/`](../Physics/) — chaos-theory backdrop
+- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (EW context)
 
 ---
 

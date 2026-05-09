@@ -1,88 +1,110 @@
-# Diamond Batterys — Hypothetical Nuclear Diamond Battery Designs
+# Diamond Batterys — radioisotope power architectures (hypothetical)
 
-> **Speculative engineering portfolio.** Series A–D battery architectures extrapolated from established radioisotope-power physics and the Bristol / UKAEA carbon-14 diamond battery (December 2024). The 1 kW–1 GW scaling proposals here are **theoretical upper bounds** and have not been experimentally validated.
+> **An eight-model taxonomy organised across four series (A through D) projecting diamond/radioisotope-based energy architectures from the demonstrated `~kW`-class hybrid alphavoltaic baseline out to `GW`-class concepts — explicitly anchored to the Bristol / UKAEA December 2024 C-14 diamond battery as the demonstrated micropower starting point, then extrapolated upward through Am-241, Pu-238, Sr-90, Cm-244, Am-242m, U-235 subcritical assemblies, NV-centre quantum-enhanced betavoltaics, and radioluminescent layered photovoltaics.** Every model is labelled hypothetical at the top; the document is engineering-fiction-grade, not validated hardware. The interest is the *taxonomic ladder* — using waste-isotope logistics (Sr-90, Cs-137, Am-241) as a structured energy-density tradespace from microwatts to gigawatts.
 
----
-
-## 📡 What this folder is
-
-This folder is **not** about diamond-anode rechargeable batteries. It contains a single long-form research paper proposing a family of **radioisotope-powered diamond batteries** — devices that encapsulate radioactive decay emitters inside synthetic diamond matrices and convert their decay energy directly into electricity.
-
-The work builds on the world's first demonstrated carbon-14 diamond battery (University of Bristol + UK Atomic Energy Authority, December 2024) and extrapolates the architecture toward kilowatt, megawatt, and gigawatt scale. A central motivation is the global inventory of >400,000 t of spent nuclear fuel: turning long-term radioactive waste into a distributed clean-power resource.
-
-The folder name "Batterys" is a stylistic spelling and is preserved here for git-history continuity.
+> **Spelling note.** Folder name is `Diamond Batterys` (not "Batteries") — preserved as written.
 
 ---
 
-## 📄 Files
+## What this folder is
+
+In December 2024, Bristol and the UKAEA demonstrated a working diamond-encapsulated C-14 betavoltaic battery at the *microwatt* scale — `~10 × 10 mm` device, `≤ 0.5 mm` thick, beta energy `156 keV` max, ~`15 J/day per gram` of C-14 in a diamond matrix. That is real, demonstrated, micropower. This folder takes that as the floor and extrapolates *upward* — not as a single roadmap, but as a *taxonomy* of architectures one might design at higher and higher power scales using different isotope chemistries, conversion mechanisms, and containment geometries.
+
+The result is eight models across four series: Series A (alphavoltaic hybrids, kW class), Series B (thermal-betavoltaic hybrids using Sr-90 / Cs-137, MW class), Series C (subcritical / nuclear-cascade architectures, MW–GW class with serious safeguards burden), and Series D (frontier concepts: NV-centre quantum-enhanced, radioluminescent multi-layer PV). The economic roadmap mentions phased capital (`$5B / $15B / $20B / $10B+`) targeting an LCOE aspiration of `< $0.02 / kWh`. None of this is built. The folder is honest about that throughout.
+
+---
+
+## 📑 Source documents
 
 | File | Role |
-|------|------|
-| [`Advanced_Diamond_Battery_Designs_Research_Paper.md`](Advanced_Diamond_Battery_Designs_Research_Paper.md) | Full research paper — Series A–D taxonomy, isotope physics, conversion architectures, 15-year roadmap, references |
-| [`advanced_diamond_battery_designs.md`](advanced_diamond_battery_designs.md) | Condensed companion / executive-summary version of the same material |
+|---|---|
+| [`Advanced_Diamond_Battery_Designs_Research_Paper.md`](Advanced_Diamond_Battery_Designs_Research_Paper.md) | Long-form research paper. All eight models. Roadmap economics. `2040+` deployment caveats for the long-horizon designs. |
+| [`advanced_diamond_battery_designs.md`](advanced_diamond_battery_designs.md) | Companion design document. |
 
 ---
 
-## 🔬 Anchor: the Bristol / UKAEA C-14 device
+## 🧠 The eight-model taxonomy
 
-| Attribute | Value |
-|-----------|-------|
-| Source isotope | Carbon-14 (β⁻, max 156 keV, t½ ≈ 5,730 yr) |
-| Form factor | ~10 × 10 mm CVD-grown diamond film, ≤ 0.5 mm thick |
-| Output | tens of µW continuous |
-| Projected lifetime | 50% of initial output after 5,730 yr |
-| Containment | β⁻ is fully absorbed inside the diamond matrix |
+### Series A — Alphavoltaic hybrid (kW class)
 
-Earlier Bristol prototypes used Ni-63; the commercial spinout Arkenlight markets a 35 µW betalight product. China's Betavolt (2024) announced a Ni-63 device delivering ~100 µW at 3 V. The Series A–D proposals in this folder ask: **what would it take to scale these microwatt devices into industrial- and utility-scale power systems?**
+| Model | Spec |
+|---|---|
+| **ADB-H1K** | `1 – 10 kW`, **Am-241 + C-14**, `15 – 25 mW/g` target density, `12 – 18 %` conversion target |
+| **ADB-H100K** | `500 kg` Am-241 / Li-6 core, `50-layer` diamond containment, `⁷Li(α, n)³H` cascade |
 
----
+### Series B — Thermal-betavoltaic hybrid (MW class)
 
-## 🧪 Series A–D — design taxonomy
+| Model | Spec |
+|---|---|
+| **TDB-1M** | `200 kg` SrTiO₃ / Sr-90 core, **70 % thermal / 30 % direct betavoltaic** split, **`50 – 65 %`** combined efficiency target (vs `~6.6 %` typical RTG baseline) |
+| **TDB-100M** | `1 000 × ~100 kW` modular framing |
 
-| Series | Power band | Core idea | Representative models |
-|--------|------------|-----------|------------------------|
-| **A — Multi-isotope hybrid** | 1 kW – 1 MW | Pair α-emitters (high energy/decay) with β-emitters (long lifetime) inside one diamond matrix | **ADB-H1K** (Am-241 + C-14, 1–10 kW), **ADB-H100K** (Am-241/Li-6 → tritium cascade, 0.1–1 MW) |
-| **B — Thermal–betavoltaic hybrid** | 1 MW – 1 GW | RTG-style heat conversion plus direct β conversion in a diamond matrix | **TDB-1M**, **TDB-100M** |
-| **C — Direct nuclear** | 10 MW range | Wide-bandgap converters around higher-energy emitters with engineered moderation | **NDB-10M**, **NDB-1G** |
-| **D — Quantum / photonic conversion** (most speculative) | kW – 10s kW | NV-centre / photonic-crystal architectures harvesting decay via quantum-coherent or radiophotovoltaic mechanisms | **QDB-1K**, **PDB-10K** |
+### Series C — Subcritical / nuclear cascade (MW – GW class)
 
-### Key isotopes referenced
+| Model | Spec |
+|---|---|
+| **NDB-10M** | **Cm-244** driver + **subcritical U-235** assembly |
+| **NDB-1G** | **Am-242m**, `100 × 10 MW` modular blocks, **`2040+`** first deployment caveat |
 
-- **C-14** (β⁻, 156 keV, 5,730 yr) — long-life baseline
-- **Am-241** (α, 5.5 MeV, 432 yr) — high-power α driver
-- **Pu-238** (α, 0.57 W/g, 87.7 yr) — RTG heritage fuel
-- **Sr-90** (β⁻, 0.95 W/g, 28.8 yr) — fission-waste byproduct, terrestrial RTG history (Beta-M, ~230 We)
-- **Cs-137**, **Ni-63**, **Cm-244**, **Am-242m** — supplementary fuels
+### Series D — Frontier
 
----
-
-## 🛠 Conversion physics
-
-The paper compares four conversion families against the radiation-hardness, bandgap, and thermal properties of diamond:
-
-1. **Betavoltaic** — β → semiconductor p-n junction → e-h pair → current. Diamond's 5.47 eV bandgap and >3,000 cm² V⁻¹ s⁻¹ carrier mobility are advantageous; current devices reach <4 % efficiency, recent SiC/perovskite work has reached >21 %.
-2. **Alphavoltaic** — α emitters give ~100× more energy/decay than β at equivalent source mass, but cause severe lattice damage in non-wide-bandgap converters. Wang et al. 2023 demonstrated an Am-243 radiophotovoltaic device with an 8,000× efficiency improvement using a Tb transducer.
-3. **Radioisotope thermoelectric (RTG)** — Seebeck-effect conversion of decay heat. NASA-validated technology; current-generation system efficiencies 6.6 %, projected 15 %.
-4. **Quantum / photonic conversion** (Series D) — speculative use of NV centres, photonic crystals, and topological wide-bandgap structures.
+| Model | Spec |
+|---|---|
+| **QDB-1K** | **NV-centre / quantum-enhanced** betavoltaics |
+| **PDB-10K** | **Radioluminescent photovoltaic** layering, citing `~8000×` improvement claim for some alpha-radioluminescent architectures |
 
 ---
 
-## 🚧 Honest limitations (from the paper)
+## 📊 Economic narrative (long paper)
 
-- The full paper is explicitly labelled **theoretical**; no Series A–D device has been built, and the power-density figures (e.g. 15–25 mW/g for ADB-H1K) are calculated upper bounds.
-- Series-B and -C megawatt designs assume radioisotope inventories (e.g. extracted Am-241 from Sellafield-class waste streams) that exist in principle but are not currently provisioned for power use.
-- Series D depends on quantum-conversion mechanisms that have not been demonstrated.
-- Real safety, regulatory, proliferation, and waste-handling questions are out of scope for the paper and would dominate any actual deployment.
+| Phase | Capital |
+|---|---|
+| Phase 1 | $5 B |
+| Phase 2 | $15 B |
+| Phase 3 | $20 B |
+| Phase 4 | $10 B+ |
+| **LCOE aspiration** | **`< $0.02 / kWh`** |
+
+---
+
+## 🧪 What's anchored in real demonstrated work
+
+| Anchor | Reality |
+|---|---|
+| **Bristol / UKAEA C-14 diamond battery, December 2024** | Demonstrated. Microwatts. `~10 × 10 mm`, `≤ 0.5 mm` thick. `156 keV` max β energy. `~15 J/day per gram` of C-14. |
+| **Everything above microwatts in this folder** | Hypothetical, modelled, not built. |
+
+---
+
+## 🚧 Honest caveats (paper §, opening disclaimer)
+
+- **All models are hypothetical.** The opening disclaimer states this explicitly.
+- **Power figures are theoretical upper bounds**, not measured.
+- **Series C/D are "long-horizon / frontier"** — `2040+` deployment, regulatory category described as **novel**.
+- **Proliferation discussion** flags **Series C** (subcritical assemblies, fissile-isotope handling) as carrying a higher safeguards burden.
+- **No primary experimental results from the author's builds** appear in these markdown files. The work is literature-citing engineering speculation, not lab-validated.
+
+---
+
+## 🎯 Why the taxonomy is interesting
+
+| Standard treatment | Limitation | What this taxonomy adds |
+|---|---|---|
+| RTG analyses (NASA / DOE) | One device class | Eight architectures across four series |
+| Diamond-battery papers | Microwatt-only | Extrapolation ladder up to GW |
+| Reactor design | High-power only | Continuous low-to-high mapping with same isotope-logistics frame |
+| Waste-disposal papers | Liability framing | Explicit *energy-density* repurposing of Sr-90, Cs-137, Am-241 |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — CVD diamond + NV-centre work that feeds the Series D quantum-conversion concepts
-- [`Neural Dust/`](../Neural%20Dust/) — same NV-centre / FND materials base used for biomedical sensing rather than power
-- [`Physics/`](../Physics/) — non-local field gravity / field-theoretic context
-- [`Diffusion Welding/`](../Diffusion%20Welding/) — UCDW (Ultra-Compact Diffusion Welding) for joining hardened defence components, complementary process science
-- [`Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — HX-70 GradePlex™ tooling for hardened steel components
+- [`../Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — QDMP CVD-diamond pathways (the diamond chemistry that QDB-1K depends on)
+- [`../Physics/`](../Physics/) — non-local field theory backdrop
+- [`../Neural Dust/`](../Neural%20Dust/) — micropower-implant context where this technology might be used
+- [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — power-conversion architectures
+- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (parallel power-source thinking)
+- [`../UCN Political System/`](../UCN%20Political%20System/) — UCN doctrine that this fits into for sovereign energy strategy
 
 ---
 

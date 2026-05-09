@@ -1,123 +1,79 @@
 # Veritas — Verification-Enabled Reasoning and Integrated Theorem-Acquiring System
 
-> **✅ Overview**: A meta-learning architecture over binary pattern spaces that **verifies its own learning bounds at every training step** through a runtime stack of PAC, ALT, meta-learning, and composition proofs.
+> **VERITAS is a learning architecture in which the artefact produced is not loss curves but proof traces.** Every step of every learner emits PAC, mistake-bound, meta-learning, and composition certificates as it goes — and the system's central composition theorem (Theorem 9) shows that error and confidence add cleanly when a meta-learner sits on top of a base learner: `P(err(m∘h) > ε + ε_m) ≤ δ + δ_m`. Worked example for `n = 8`: the function class has size `|H| = 2^(2⁸) = 2²⁵⁶`, so `ln|H| ≈ 177 000`, and the PAC sample bound at `ε = δ = 0.01` gives `~1.8 × 10⁶` samples — extreme by ML standards, but **proven, not hoped**.
 
 ---
 
-## ✅ Overview
+## What this folder is
 
-**VERITAS** stands for **Verification-Enabled Reasoning and Integrated Theorem-Acquiring System**. It is a meta-learning architecture whose central thesis is that formal learning bounds — usually invoked once in a paper's analysis section and never checked again — should be **active runtime constraints**, verified at each training step, so the system can distinguish iterations that provably satisfy convergence criteria from those that do not.
+Modern ML verification is a moving target — most of what passes for "verified" is empirical generalisation on a held-out set with a confidence interval over the held-out estimate. Veritas argues for the opposite extreme: every learner inherits a deductive contract on the binary-pattern function class `H = {h : {0,1}ⁿ → {0,1}ⁿ}`, with `|H| = 2^(2ⁿ)`, and the system maintains and composes formal certificates over: PAC sample bounds (Hoeffding), mistake bounds (perceptron-style), exact-identification queries (membership-query learning), and meta-learning bounds (over the class `M = {m : H → H}` of meta-functions).
 
-The mathematical foundation is **nine theorems with full proofs**, covering metric-space completeness, PAC and ALT learning bounds, meta-learning theory, verification completeness, and composition guarantees. A complete NumPy reference implementation accompanies the papers.
-
-### Why the bounds bite
-
-VERITAS operates over the binary hypothesis space H = {h : B → B} where B = {0, 1}ⁿ, giving |H| = 2^(2ⁿ) — **superexponential** in *n*. The key quantity in PAC and ALT bounds, ln|H| = 2ⁿ · ln 2, is exponential in *n*. This is by design: it imposes a substantial sample-complexity cost that forces the system to accumulate sufficient evidence before any step is certified.
-
-For the default n = 8, ln|H| ≈ 177,000 — meaning at ε = δ = 0.01 the required sample count is ~1.8 million. PAC verification at these scales requires either very large datasets, relaxed parameters, or restriction to a hypothesis subclass H′ ⊂ H.
+The work is *deliberately expensive at the full-class level* — a complete PAC bound over `M` is astronomical — because the goal is to expose where you can *and cannot* make formal claims, and to show how to relax to restricted hypothesis classes `H'` where bounds become tractable. The composition theorem is the load-bearing piece: it lets you stack a meta-learner on a base learner and add their failure budgets, rather than multiplying them.
 
 ---
 
-## 📄 Documents
-
-| Document | Description |
-|---|---|
-| [`veritas_research_paper.md`](veritas_research_paper.md) | Primary research paper — abstract, related work, full mathematical foundation, distillation theory, NumPy reference |
-| [`veritas-complete-math-proving.md`](veritas-complete-math-proving.md) | Complete mathematical foundation as a standalone reference document |
-
----
-
-## 🧱 The Four Nested Spaces
-
-VERITAS works over a hierarchy where bounds derived at one level lift to the next:
-
-| Space | Definition | Cardinality |
-|---|---|---|
-| **B** = {0, 1}ⁿ | n-dimensional binary patterns | 2ⁿ |
-| **H** = {h : B → B} | Hypothesis space | 2^(2ⁿ) |
-| **M** = {m : H → H} | Meta-space (hypothesis transformers) | \|H\|^\|H\| = 2^(2ⁿ · 2^(2ⁿ)) |
-| **V** = {v : H × M → {0, 1}} | Verification space | \|H\|·\|M\| outputs |
-
-Each space carries a canonical metric (Hamming on B, sup-Hamming on H, sup-sup on M, probability metric on V). Theorem 1 establishes that all four are complete metric spaces.
-
----
-
-## 🧮 The Nine Theorems
-
-| # | Theorem | Statement (informal) |
-|---|---|---|
-| **1** | Completeness | (B, d_B), (H, d_H), (M, d_M), (V, d_V) are complete metric spaces |
-| **2** | PAC Learning | For fixed h ∈ H, with prob ≥ 1−δ over sample of size m, \|err(h) − êrr(h)\| ≤ ε provided m ≥ (1/2ε²)·ln(2/δ) |
-| **3** | Sample Complexity | For the full class H, m ≥ (1/ε²)(ln\|H\| + ln(1/δ)), where ln\|H\| = 2ⁿ · ln 2 |
-| **4** | ALT Mistake Bound | Online-learning mistake bound for binary hypothesis space (Littlestone-style halving argument) |
-| **5** | Query Complexity | ALT query complexity for exact identification |
-| **6** | Meta-PAC | PAC bounds lift to the meta-space M |
-| **7** | Meta-ALT | ALT bounds lift to the meta-space M |
-| **8** | Verification Completeness | Verification space V can certify all required conditions |
-| **9** | **Composition** | If base learner achieves (ε, 1−δ) and meta-learner achieves (ε_m, 1−δ_m), composed system achieves **(ε + ε_m, 1 − (δ + δ_m))** |
-
-Theorem 9 is the central result — it makes the verification stack additive: PAC + ALT + meta + composition guarantees compose cleanly through the layered architecture.
-
----
-
-## 🛠️ The Verification Architecture
-
-At each training step, VERITAS constructs and checks **four nested proof traces**:
-
-| Proof | Checks |
-|---|---|
-| **PAC proof** | Theorem 2 sample complexity satisfied for current ε, δ |
-| **ALT proof** | Mistake bound (Theorem 4) and query complexity (Theorem 5) satisfied |
-| **Meta proof** | Meta-PAC (Theorem 6) and Meta-ALT (Theorem 7) satisfied |
-| **Composition proof** | Theorem 9 holds end-to-end with the desired final (ε_total, δ_total) |
-
-**Weight updates are applied only when the composition proof verifies.** Failed verifications skip the update and accumulate evidence until the conditions are met.
-
----
-
-## 🎓 Distillation Theory
-
-The system supports ensemble-to-student transfer following Hinton, Vinyals & Dean (2015): an ensemble of teacher VERITAS instances supervises a student via temperature-scaled KL divergence on soft targets. The distillation module is included in the reference implementation.
-
----
-
-## 💾 Reference Implementation
-
-A complete, self-contained NumPy reference accompanies the papers:
+## 📑 Source documents
 
 | File | Role |
 |---|---|
-| `veritas_core.py` | Core learning loop and metric-space machinery |
-| `veritas_verification.py` | PAC / ALT / meta / composition proof traces |
-| `veritas_distillation.py` | Ensemble-to-student distillation |
-| `veritas_integration.py` | End-to-end integration |
-
-(Implementation files referenced in the paper; this folder collects the math.)
-
----
-
-## 🔗 Related Work
-
-This project connects to:
-
-- **Compression Algorithms** — GRIA grade α and the reversibility framework provides an algebraic counterpart to VERITAS's verification grading; NMP measures the kind of trained networks VERITAS would verify
-- **GF2 Algebra and Applications** — the binary pattern space B = {0, 1}ⁿ is the canonical GF(2)-vector setting
-- **Long Reasoning and Thinking NN** — extended cognitive networks that could benefit from runtime verification
-- **Cell AI** — agent systems where step-level guarantees matter
-- **Neural Decompiler** — formal correctness for inferred network structure
+| [`veritas_research_paper.md`](veritas_research_paper.md) | Main research paper. Defines `B = {0,1}ⁿ`, `H = {h : B → B}`, `\|H\| = 2^(2ⁿ)`, `M = {m : H → H}`. Theorems 1 through 9, including the composition rule. |
+| [`veritas-complete-math-proving.md`](veritas-complete-math-proving.md) | Extended proof appendix. |
+| [`veritas_core.py`](veritas_core.py) | Core learner machinery. |
+| [`veritas_verification.py`](veritas_verification.py) | Verification / certificate emission. |
+| [`veritas_distillation.py`](veritas_distillation.py) | Knowledge-distillation track. |
+| [`veritas_integration.py`](veritas_integration.py) | Integration with downstream learners. |
 
 ---
 
-## 📖 See Also
+## 🧠 Theorems
 
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — GRIA / NMP — algebraic and geometric counterparts
-- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic foundations
-- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — extended reasoning targets
+| # | Statement |
+|---|---|
+| **2** | Single-`h` PAC: `m ≥ (1 / (2ε²)) ln(2/δ)` (Hoeffding). |
+| **3** | Uniform PAC over `H`: `m ≥ (1/ε²)(ln\|H\| + ln(1/δ))`. **Worked example `n = 8`: `ln\|H\| ≈ 177 000`, `ε = δ = 0.01` ⇒ `~1.8 × 10⁶` samples.** |
+| **4** | Mistake bound: `≤ lg\|H\| = 2ⁿ`. |
+| **5** | Membership-query exact identification: `≤ n` queries (basis-query argument). |
+| **7** | Meta-mistake ceiling: `lg\|M\| = 2ⁿ · 2^(2ⁿ)` (theoretical, full `M`). |
+| **9** | **Composition.** `P(err(m∘h) > ε + ε_m) ≤ δ + δ_m`. *Confidences and errors add.* |
+
+The **runtime proof checklist** ties these together: PAC sample is met → empirical-error slack `√(ln(2/δ)/(2m))` is computed → mistake count `≤ 2ⁿ` is verified → query count `≤ n` is logged → meta-error `≤ 2ε` is checked. The system fails certification if any single line fails.
 
 ---
 
-## 🛡️ About This Project
+## 🔬 What "verification" means in this folder
 
-VERITAS treats learning bounds as code-level invariants rather than analysis-section background. The deliverable is a complete mathematical foundation (nine theorems with full proofs), a runtime architecture that maintains four nested proof traces, a distillation regime, and a NumPy reference implementation. The price is a superexponential sample-complexity cost — paid deliberately, to keep the verification meaningful.
+Critically, **most of these certificates are vacuously satisfied early in training**. Until enough samples have been seen, the PAC bound is "we have insufficient evidence to make a claim with confidence `δ`," not "the claim is false." The system is honest about this — the verification machinery is a discipline for declaring when you *do* and *do not* have a justified guarantee, not a way to manufacture guarantees at zero cost.
+
+---
+
+## 🚧 Honest caveats
+
+- **Full-class PAC bounds are deliberately expensive.** Practical relief comes from restricting `H` to a tractable subclass `H'` (e.g. monotone functions, low-degree polynomials, decision trees of bounded depth). The framework supports this; the paper discusses it explicitly.
+- **Documented prior implementation bug fix:** `ln|H|` must be `2ⁿ ln 2`, **not** `n ln 2`. Earlier code under-estimated the sample requirement by a factor of `2ⁿ / n` — a substantial correction logged transparently in the paper.
+- **Theorem 7 / `|M|` is a theoretical ceiling** over the full meta-class. Practical parametric `M` requires VC / Rademacher-style bounds, which the paper points to but does not work out for every parametric family.
+- **Computer-assisted proof in this repo is not the same as formal proof in Coq / Lean / Isabelle.** The verification is designed to be *checkable*, not yet *checked* by an external proof assistant.
+
+---
+
+## 🎯 What this displaces
+
+| Standard practice | What it gives | What VERITAS adds |
+|---|---|---|
+| Held-out test set + 95 % CI | Empirical estimate of generalisation | Deductive PAC bound, mistake bound, query bound |
+| "We are 95 % confident" press releases | Vibes | Formal `(ε, δ)` parameters with composition rules |
+| Stacking models without analysis | Hope | Theorem 9 budget addition: `(ε + ε_m, δ + δ_m)` |
+| Bug-prone hand-calculated bounds | Ad-hoc | Documented bug-fix log: `ln\|H\| = 2ⁿ ln 2`, not `n ln 2` |
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM (Unified Hash-Predictive Memory): VERITAS-style certificates would apply
+- [`../NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework + Algebraic Autopsy (verification angle)
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — Boolean function structure (VERITAS works over `{0,1}ⁿ → {0,1}ⁿ`)
+- [`../3 to 8 Value Boolean Algebra/`](../3%20to%208%20Value%20Boolean%20Algebra/) — sister enumeration of `H` for `n = 3..8`
+- [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — protocol whose missing EUF-CMA proof would benefit from the VERITAS toolkit
+
+---
 
 [← Back to main README](../README.md)

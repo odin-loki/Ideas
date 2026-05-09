@@ -1,122 +1,90 @@
-# Compression Algorithms — A Unified Theory of Compression Across Reversibility Grades
+# Compression Algorithms — Izaac, GRIA, NMP
 
-> **📦 Overview**: Three independently developed frameworks — **Izaac**, **GRIA**, and **NMP** — synthesised into a single algebraic theory of compression spanning lossless string coding through irreversible distribution learning.
-
----
-
-## 📦 Overview
-
-This folder contains a connected research programme in compression theory by *Odin Thoresen* (Defense Technology Division, Sydney). Three frameworks, each developed in its own paper and capable of standing alone, are shown to be three faces of a single unified theory. The unifying claim is the **State Compression Thesis**: any system whose outputs can be deterministically derived from a compact shared state achieves compression with no per-output communication overhead.
-
-### The three frameworks
-
-| Acronym | Stands for | One-line summary |
-|---|---|---|
-| **Izaac** | (project name; not an acronym) | Shared deterministic randomness as a computational primitive — pseudorandom outputs from a compact state σ of size O(λ + log k), with applications to Byzantine consensus, beyond-Shannon compression, VRFs, and non-interactive MPC |
-| **GRIA** | **Graded Reversible-Irreversible Algebra** | Compression operators parameterised by a continuous grade α ∈ [0, 1] interpolating from lossless string coding (α = 0) through edge-of-chaos (α = 0.5) to irreversible distribution compression (α = 1) |
-| **NMP** | **Nonlinear Manifold Projection** | A three-operator decomposition (Π / Φ / Λ) showing that neural-network training is a high-α GRIA instance, with measured singular-value power laws S_k ~ a·k^(−α) and α ≈ 0.851 |
-
-> **Naming correction.** Earlier README revisions in this repo carried fabricated acronym expansions ("Generalised Random Information Algorithm", "Neural Multi-Precision"). These were wrong. The expansions above come directly from the source papers.
+> **The canonical home of the Izaac framework, the GRIA graded reversible–irreversible algebra, and the NMP neural-manifold projection codec — three frameworks that, taken together, attempt to unify lossless coding, distribution compression, and neural representation under one information-theoretic vocabulary.** Izaac introduces a deterministic shared-PRF coordination primitive that the meta-theorem of the paper frames as a "free broadcast channel"; GRIA grades systems on a real-valued axis `α ∈ [0, 1]` from fully reversible to fully irreversible (entropy-based); NMP treats neural networks as compression operators with a measurable spectral exponent `α ≈ 0.851 ± 0.122` and an MDL-optimal bottleneck dimension that the paper finds at `P* = 45` for `218.7:1` effective compression.
 
 ---
 
-## 📄 Research Papers
+## What this folder is
 
-| Paper | Description |
+Compression as practiced in 2025 is split across communities that don't talk to each other: classical source coding (Huffman, Lempel–Ziv, arithmetic), distribution learning (autoencoders, normalising flows), and "shared randomness" tricks (Wyner–Ziv, common-randomness MPC). This folder is an attempt to unify all three by introducing one underlying mechanism — **σ, a deterministic shared pseudo-random stream of size `Θ(λ + log k)`** — and then showing the same mechanism powers (a) coordination protocols that look like they have a free broadcast channel, (b) graded coding schemes that interpolate between lossless and distribution-fitting via a single `α` knob, and (c) neural codecs whose compression ratio is a function of an empirically measurable manifold geometry.
+
+The pitch is: the right primitive isn't compression *or* coordination, it's a deterministic PRF stream that both sides hold, and from there you can build everything else.
+
+---
+
+## 📑 Source documents
+
+### Izaac (the foundation)
+
+| File | Role |
 |---|---|
-| [`izaac_algorithm_research_paper.md`](izaac_algorithm_research_paper.md) | **Izaac** — shared deterministic randomness as a primitive; ten theorems including the meta-theorem that shared randomness is information-theoretically equivalent to a free broadcast channel |
-| [`GRIA_Technical_Memorandum.md`](GRIA_Technical_Memorandum.md) | **GRIA** technical memorandum — graded operator framework, MDL connection, three-stage GRIA pipeline (pretraining → distillation → fine-tuning) |
-| [`GRIA/GRIA_Research_Paper.md`](GRIA/GRIA_Research_Paper.md) | **GRIA** full paper — eleven axioms; five novel operators (Grade-Exponential, Modular Transcendental, Quantum Interference, Entropy-Minimizing, **Phi-Adic**); proven J ≤ 0.951 upper bound; Phi-Adic achieves J = 0.889 (93.4% of theoretical max) at compression ratio 1/φ |
-| [`GRIA/GRIA_framework_Research_Paper.md`](GRIA/GRIA_framework_Research_Paper.md) | GRIA framework — extended treatment |
-| [`NMP_neural_compression_research_paper.md`](NMP_neural_compression_research_paper.md) | **NMP** — neural networks as compression algorithms; the three primitive operators Π (linear projection), Φ (half-space folding), Λ (lifting); empirical power law α = 0.851 ± 0.122 |
-| [`NN_Compression_Algebra_Framework.md`](NN_Compression_Algebra_Framework.md) | Algebraic framing of NN compression as the 6-tuple **F_NN = (Θ, D, C, R, δ, ρ)** |
-| [`compression_algebra_framework.md`](compression_algebra_framework.md) | Compression-algebra framework supporting the above |
-| [`unified_compression_theory_research_paper.md`](unified_compression_theory_research_paper.md) | **Synthesis** — the State Compression Thesis; mapping Izaac, GRIA, and NMP onto a single structure; cross-framework results |
+| [`izaac_algorithm_research_paper.md`](izaac_algorithm_research_paper.md) | The Izaac framework. Stream `\|σ\| = Θ(λ + log k)`, fast-forward `O(log n)` (CTR-mode `O(1)`). The **meta-theorem**: shared RNG ≡ "free broadcast channel." Application table claims `gzip ~3.2 → ~1.2 bits/char`-style wins. Ten theorems. |
+| [`unified_compression_theory_research_paper.md`](unified_compression_theory_research_paper.md) | State Compression Thesis. Ten Izaac theorems mapped to unified `R · S ≥ C` rate-state inequality rows. |
+
+> **Mirror notice.** Applied Izaac protocols (VRF, NI-MPC sum, leader election, Bloom filter coordination, twelve total) live in [`../Izaac as Side Data/`](../Izaac%20as%20Side%20Data/). This folder is the canonical theoretical home; `Izaac as Side Data/` is the engineered protocol suite.
+
+### GRIA (graded reversible-irreversible algebra)
+
+| File | Role |
+|---|---|
+| [`compression_algebra_framework.md`](compression_algebra_framework.md) | Algebraic framework. `α ∈ [0, 1]` continuum from fully reversible (`α = 0`) to fully irreversible distribution compression (`α = 1`). |
+| [`NN_Compression_Algebra_Framework.md`](NN_Compression_Algebra_Framework.md) | Neural-network-specific extension. |
+| [`GRIA_Technical_Memorandum.md`](GRIA_Technical_Memorandum.md) | Technical memo. `α` as a query functional with probe-scale numbers `α(instance) ≈ 0.9997`, `α(distribution) ≈ 0.92`, `α(meta) ≈ 0.70`. Memoriser experiment specs (30 documents, 512 hidden, 300 epochs). |
+| [`GRIA/GRIA_framework_Research_Paper.md`](GRIA/GRIA_framework_Research_Paper.md) | Operator-theory paper. **11 axioms**, Jeffries-style `J ≤ 0.951` theoretical ceiling, Phi-Adic ratio `1/φ ≈ 0.618`, J-score `0.889` vs baseline `0.742`. Benchmark exemplars: `XORTropicalHybrid 5072.9 / 100`, Quantum Interference avalanche `~0.49`. |
+| [`GRIA/GRIA_Research_Paper.md`](GRIA/GRIA_Research_Paper.md) | Companion paper. |
+| [`GRIA/gria_complete.py`](GRIA/gria_complete.py) | Reference Python implementation. |
+
+### NMP (neural manifold projection)
+
+| File | Role |
+|---|---|
+| [`NMP_neural_compression_research_paper.md`](NMP_neural_compression_research_paper.md) | Functor `F_NN = (Θ, D, C, R, δ, ρ)`; rate `ρ = N · d / P`. **MDL-optimal `P* = 45`** giving **`218.7 : 1`** effective compression on the benchmark. **Power-law spectrum `S_k ~ a · k^(−α)` with `α ≈ 0.851 ± 0.122`**. Intrinsic-dimension profile `{3, 8, 3, 1, 1}` measured on a 3D-manifold-in-ℝ²⁰ synthetic. |
 
 ---
 
-## 🧮 Key Results at a Glance
+## 🧠 The unified frame
 
-### State Compression Thesis (Theorem 2.1 of the synthesis paper)
-
-> For any system *S* generating outputs o₁, o₂, …, o_k deterministically from a compact state σ of size |σ| = O(λ + log k), the effective compression ratio ρ(S) = Σ|o_i| / |σ| grows without bound as k → ∞.
-
-### GRIA J-score landscape
-
-| Operator | J-score | Notes |
+| Framework | Primitive | Headline |
 |---|---|---|
-| **Theoretical maximum (proven upper bound)** | **0.951** | No GRIA operator can exceed this |
-| Phi-Adic ⊕_Φ (Zeckendorf / golden ratio) | **0.889** | 93.4% of max; compression ratio 1/φ ≈ 0.618 |
-| Quantum Interference ⊕_QI | — | Best avalanche effect (0.49) |
-| XORTropicalHybrid | best practical composite | Highest practical composite score among ten benchmarked algebras |
-| XOR + Tropical baseline | 0.742 | Reference baseline; novel operators outperform by 20–40% |
+| **Izaac** | Shared deterministic PRF stream σ | "Free broadcast channel" meta-theorem; `O(log n)` fast-forward; **10 theorems** |
+| **GRIA** | `α ∈ [0, 1]` reversibility grade | 11-axiom algebra; `J` operator metric; `J = 0.889` on Phi-Adic vs `0.742` baseline |
+| **NMP** | Spectral / manifold geometry | `α = 0.851 ± 0.122`; MDL → `P* = 45`; `218.7 : 1` ratio |
 
-### NMP measurements
+---
 
-- **Intrinsic dimensionality**: trained networks recover 3-d ground-truth manifold in 20-d embedding space exactly at the first layer.
-- **Singular-value power law**: S_k ~ a·k^(−α), α = 0.851 ± 0.122; fit quality improves with depth (R² = 0.75 → 0.87 → 0.97).
-- **MDL optimum**: P* = 45 parameters at 218.7:1 effective compression on benchmark dataset.
-- **Connection**: α_NN = 0.851 connects to SDE theory of SGD via Dyson Brownian motion and gamma-type spectral distributions.
+## 🚧 Honest caveats
 
-### How the three frameworks transcend Shannon's bound (each in a different way)
+- **Izaac §8.1** explicitly acknowledges:
+  - Needs **secure setup** of σ between participants.
+  - **σ compromise ⇒ predictability** (entire scheme collapses).
+  - **"Shannon-breaking" claims tie to Wyner–Ziv-style side-information setups** — they are not unconditional Shannon violations; the side-info channel exists, it's just amortised over many transmissions.
+- **Consensus tables under-specify** that value dissemination still requires messages — the "0 messages" claim applies to *leader selection*, not *proposal propagation*. Companion paper `Izaac as Side Data/izaac_paper2_applications.md` §4.3 spells this out (and cites Dolev–Reischuk's `Ω(n²)` bits worst-case lower bound).
+- **GRIA** ceilings (`J ≤ 0.951`, `α` triple) are author-reported; some are framework / heuristic in nature.
+- **NMP** spectral fits are author-reported; `R²` ranges from `0.75` to `0.97` across configurations.
+- **Author-reported, single-author**. No third-party benchmarks.
 
-| Framework | What Shannon's bound assumes | How the framework escapes it |
+---
+
+## 🎯 What this displaces (positioning)
+
+| Standard | What's missed | What the triad adds |
 |---|---|---|
-| **Izaac** | Receiver doesn't know the message | Shared state means the receiver derives the message — no channel needed |
-| **GRIA** | Source is i.i.d. | φ-Adic and other graded operators exploit higher-order structure i.i.d. models miss |
-| **NMP** | Compression target is the instance | Compression target is the *distribution* P(Y\|X), not any specific x |
+| gzip / Lempel–Ziv | No coordination layer | Izaac shared-σ free broadcast |
+| Lossless vs lossy split | Hard binary choice | GRIA `α ∈ [0,1]` continuous grade |
+| Autoencoders | Black-box bottleneck | NMP measurable manifold geometry, MDL-optimal `P*` |
+| Wyner–Ziv | Theoretical, not protocol-engineered | Izaac as engineered drop-in primitive |
 
 ---
 
-## 🔬 Conceptual Map
+## 🔗 Related work in this repo
 
-```
-                              State Compression Thesis
-                                       ▲
-                       ┌───────────────┼───────────────┐
-                       │               │               │
-                  Izaac (algorithmic)  │            NMP (geometric)
-                       │           GRIA (algebraic)    │
-                       │               │               │
-                shared seed σ      grade α ∈ [0,1]   θ* ∈ ℝᴾ
-                  → PRF outputs    → operator family → distribution
-                                                       predictions
-```
-
-GF(2) algebra (see [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/)) provides the discrete substrate; the Cypha codebase ([`../Cypha/`](../Cypha/)) is the engineering instantiation of the **HRNA** (Harmonic Recursive Neural Architecture) NMP codec.
+- [`../Izaac as Side Data/`](../Izaac%20as%20Side%20Data/) — applied protocols (VRF, NI-MPC sum, Bloom coordination, leader election, twelve total)
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic underpinnings; GRIA Spectrum Theorem lives here
+- [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator (parallel framework, sister information theory)
+- [`../RNGS/`](../RNGS/) — RNG portfolio that supports Izaac's σ generator
+- [`../Cell AI/`](../Cell%20AI/), [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — neural systems that NMP analyses
+- [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — Meta-DAG RNG used as keyed entropy pump there
 
 ---
-
-## 🔗 Related Work
-
-This work connects to:
-
-- **GF2 Algebra and Applications** — the algebraic substrate (Paper 7's GRIA Spectrum Theorem unifies the GF(2) results with the GRIA grade)
-- **Cypha** — practical realisation of the HRNA / NMP codec
-- **ARIA Encryption Algorithm** — shares Vandermonde / Horner / GF(2ⁿ) machinery
-- **Statistical Generation** — distributional learning context for NMP
-- **Veritas** — formal verification of learning bounds; complementary to GRIA's algebraic grading
-- **Izaac as Side Data** — the `Izaac` paper here is the foundational write-up for that adjacent folder
-
----
-
-## 📖 See Also
-
-- [`Cypha/`](../Cypha/) — HRNA inference / training framework (NMP codec)
-- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic foundations
-- [`Izaac as Side Data/`](../Izaac%20as%20Side%20Data/) — Izaac applications
-
----
-
-## 🛡️ About This Project
-
-This folder collects an integrated research programme on compression. The deliverables are:
-
-- **Algorithmic** — the Izaac primitive and its protocol library (consensus, VRFs, MPC, beyond-Shannon coding)
-- **Algebraic** — the GRIA framework, eleven axioms, five proven operators, the J ≤ 0.951 upper bound
-- **Geometric** — the NMP decomposition of neural networks and its measured spectral signature
-- **Synthetic** — the State Compression Thesis tying all three together
-
-Each paper stands alone. Read in series — Izaac → GRIA → NMP → synthesis — they form a coherent theory.
 
 [← Back to main README](../README.md)

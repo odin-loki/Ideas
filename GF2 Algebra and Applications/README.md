@@ -1,103 +1,98 @@
-# GF2 Algebra and Applications — A Unified Algebraic Theory of Binary Computation
+# GF2 Algebra and Applications
 
-> **⚡ Overview**: A seven-paper series treating **{0, 1} as the field GF(2)** rather than as Boolean logic, building from a complete operator taxonomy through neural-network learning theory and circuit synthesis to a unified GRIA / Izaac / Cypha synthesis.
-
----
-
-## ⚡ Overview
-
-**GF2 Algebra and Applications** is a seven-paper research programme by *Odin* (Independent Researcher, Sydney) that treats binary computation as a **field-theoretic** rather than logical phenomenon. The base-2 constraint imposes a uniquely rigid algebraic structure — the field GF(2) — that does not follow from Boolean logic alone. The series develops this structure formally, then connects it to circuit theory, dynamical systems, and neural-network learning.
-
-The central organising claim of the synthesis paper (Paper 7) is the **GRIA Spectrum Theorem**: every binary computational system, from a single logic gate to a deep neural network, is characterised by its reversibility grade α ∈ [0, 1]:
-
-| α | Regime | Concrete instance |
-|---|---|---|
-| **α = 0** | GF(2ⁿ) permutation regime — fully reversible | Izaac algorithm structure (max-length LFSRs, gcd(k, 2ⁿ−1) = 1) |
-| **α = 0.5** | Edge of chaos — maximum computational complexity | Rule 110 (universal cellular automaton) |
-| **α > 0.5** | Contracting pattern-recognition regime | Cypha learned classifiers; trained NNs |
+> **A seven-paper sweep that starts with an exhaustive computer-verified taxonomy of all 16 binary operations on `{0, 1}` (with a proven uniqueness theorem: **AND** is the *only* nontrivial operation that forms a ring with **XOR** over GF(2)), extends through finite-field permutation polynomials over `GF(2ⁿ)` (the AES inverse `x⁻¹ = x²⁵⁴` is one of `φ(255) = 128` such permutations on `GF(2⁸)`), introduces a graded reversibility coordinate `α(f) = 1 − H(f(X))/H(X)` with bifurcation at `α = 0.5`, derives gate-count benchmarks via algebraic normal form (ANF/Zhegalkin) — Rule 110 dropping from 19 to 6 gates (`68 %` reduction), full-adder sum dropping `78 %`, XOR `80 %` — and culminates in a Differentiable Logic Gate Network experiment showing the network *learns* to favour `AND` (`10/96` slots) and `NOR` (`11/96`) over the uniform `6/96` expectation.** The point is unification: from the smallest finite field through to learning systems, the same algebraic spine runs through.
 
 ---
 
-## 📄 The Paper Series
+## What this folder is
 
-| Paper | Title / focus | Key result |
-|---|---|---|
-| [`paper1_binary_algebra_taxonomy.md`](paper1_binary_algebra_taxonomy.md) | A computational taxonomy of binary algebraic structures over {0, 1} | Complete classification of all 16 binary operators across 12 algebraic properties; **GF(2) Ring Uniqueness Theorem** — AND is the unique non-trivial operator bilinear over XOR, making (GF(2), XOR, AND) the unique ring on {0, 1} |
-| [`paper2_permutation_polynomials.md`](paper2_permutation_polynomials.md) | Permutation polynomials over GF(2ⁿ) | Permutation criterion **gcd(k, 2ⁿ−1) = 1 ↔ reversible**; foundations for LFSR design, AES S-box analysis, reversible circuits |
-| [`paper3_neural_networks_graded_contractions.md`](paper3_neural_networks_graded_contractions.md) | Neural networks as graded contraction maps | Contraction theorem: trained networks are Banach contractions; basis for NN compression and generalisation bounds |
-| [`paper4_edge_of_chaos.md`](paper4_edge_of_chaos.md) | Edge-of-chaos phenomena | Bifurcation at **α = 0.5** identifies the edge-of-chaos regime; Rule 110 universality |
-| [`paper5_circuit_simplification.md`](paper5_circuit_simplification.md) | AND-XOR circuit simplification calculus | Rewrite calculus for circuit minimisation grounded in Paper 1's ring uniqueness |
-| [`paper6_dlgn_validation.md`](paper6_dlgn_validation.md) | Differentiable Logic Gate Network validation | Empirical validation of the framework via DLGNs |
-| [`paper7_synthesis.md`](paper7_synthesis.md) | **Synthesis** — algebraic neural-network compression, irreducibility, the GRIA spectrum | **GRIA Spectrum Theorem** (above); connection to Izaac algorithm; connection to Cypha.py (discriminative information field architecture); irreducibility as the formal lower bound on compression |
+GF(2) — the two-element field — is the structural backbone of digital computing, finite-field cryptography, error-correcting codes, and the algebraic underpinnings of much of machine learning's "low-level" theory. Treatments of it are usually fragmented: cryptographers know AES inverse polynomials, EE folks know Boolean ANF, and the reversibility / entropy literature lives in physics. This folder is one author's attempt to do all of it at once, anchored to a single seven-paper series that starts with the smallest possible algebraic question (what are *all* the binary ops on `{0, 1}` and how do they relate?) and works upward through finite-field extensions, graded reversibility, dynamical-systems bifurcations, ANF gate-count benchmarks, neural learning of logic gates, and a closing synthesis paper.
+
+The headline structural result is the **GF(2) Ring Uniqueness Theorem** in Paper 1: of the 16 binary operations on `{0, 1}`, **AND** is the unique non-trivial choice that forms a commutative ring with **XOR**. Every algebraic structure that uses GF(2) is thus *forced* into this exact pair.
 
 ---
 
-## 🧮 GF(2) Field Properties (the genuine ones)
+## 📑 Source documents
 
-| Property | Description |
+| File | Role |
 |---|---|
-| **Addition** | XOR: 0+0=0, 0+1=1, 1+0=1, 1+1=0 |
-| **Multiplication** | AND: 0·0=0, 0·1=0, 1·0=0, 1·1=1 |
-| **Additive identity** | 0 |
-| **Multiplicative identity** | 1 |
-| **Additive inverse** | Every element is its own inverse: x + x = 0 |
-| **Multiplicative group** | (GF(2)\\{0}, ·) = ({1}, ·) — the trivial group |
-| **Characteristic** | 2 (i.e., 1 + 1 = 0) |
-| **Algebraic closure** | GF(2̄) is the union of all GF(2ⁿ) |
-
-> **The point.** Boolean algebra is base-independent; GF(2) is not. The base-2 constraint is what makes (XOR, AND) a *ring* with multiplicative inverses where they exist — a structure not derivable from Boolean logic alone, and the foundation for everything in this series.
+| [`paper1_binary_algebra_taxonomy.md`](paper1_binary_algebra_taxonomy.md) | **All 16 binary ops on `{0,1}` enumerated** (FALSE, AND, AB̄, A, ĀB, B, XOR, OR, NOR, XNOR, B̄, A→B, Ā, B→A, NAND, TRUE). **GF(2) Ring Uniqueness Theorem.** **12** original theorems claimed. ANF / Zhegalkin polynomial for each op. **Four Galois residuation pairs**, **six De Morgan pairs**. Exhaustive `{0,1}²` verification claimed. |
+| [`paper2_permutation_polynomials.md`](paper2_permutation_polynomials.md) | **Monomial Permutation Criterion: `xᵏ` is a permutation of `GF(2ⁿ)` iff `gcd(k, 2ⁿ − 1) = 1`.** Verification claimed for `n = 3, 4, 5, 6` (116 cases). Table with `φ(2ⁿ − 1)` permutation counts: `GF(2⁸): φ(255) = 128`. **AES inverse `x⁻¹ = x²⁵⁴`, `gcd(254, 255) = 1`** confirms it as a valid permutation. **Frobenius automorphism order `n`; Galois group cyclic of order `n`.** Theorem 5: degree vs depth, `depth ≥ ⌈log₂(d + 1)⌉`. |
+| [`paper3_neural_networks_graded_contractions.md`](paper3_neural_networks_graded_contractions.md) | **GRIA grade `α(f) = 1 − H(f(X)) / H(X)` for uniform `X`.** Numerical Jacobian / contraction values (`0.02 – 0.14`, max singular value `0.1435`) demonstrating Banach contraction for small MLPs. |
+| [`paper4_edge_of_chaos.md`](paper4_edge_of_chaos.md) | **`f_α` map dynamics. Bifurcation at `α = 0.5`** (21 test points across `0.49 → 0.50`). **Rule 110 ANF: `c ⊕ b ⊕ bc ⊕ abc`.** **6-gate optimum vs 19-gate naive (`68 %` reduction).** 3-gate implementations enumerated; **4096 configurations** tested. Table of CA rules with `α ≈ 0.824` for Rule 110, etc. |
+| [`paper5_circuit_simplification.md`](paper5_circuit_simplification.md) | ANF conversion table for all 16 ops. **Benchmark gate-count reductions: XOR `80 %`, Rule 110 `68 %`, full-adder sum `78 %`, majority `29 %`, carry `29 %`** vs SOP baseline. |
+| [`paper6_dlgn_validation.md`](paper6_dlgn_validation.md) | **Differentiable Logic Gate Network experiment.** 2-layer net, `8 + 8 + 1 = 17` gates, `2 000` training steps, `6` random seeds per task. **96 gate slots: AND chosen `10` times, NOR `11` — vs `6/96` uniform expectation.** Network *learns* the algebraic skeleton. |
+| [`paper7_synthesis.md`](paper7_synthesis.md) | **GRIA Spectrum Theorem.** Synthesis. Links to Izaac, Cypha.py, ECE (expected calibration error) discussion. Irreducibility as compression bound. |
 
 ---
 
-## 🔬 Headline Results
+## 🧠 The seven-paper arc
 
-### From Paper 1 — The 16-operator taxonomy
-
-The paper classifies all 16 binary operators on {0, 1} across **12 algebraic properties**: commutativity, associativity, idempotency, **bilinearity**, self-duality, group structure, lattice structure, threshold realisability, affine representability, and functional completeness. The **Algebraic Normal Form** (Zhegalkin polynomial) is computed for every operator. Four Galois residuation pairs and six De Morgan dualities are identified. Every result is verified by exhaustive enumeration.
-
-### From Paper 2 — Permutation polynomial criterion
-
-A monomial map x → x^k on GF(2ⁿ) is a permutation iff **gcd(k, 2ⁿ − 1) = 1**. This is the formal criterion underlying max-length LFSRs, the AES S-box's invertibility, and reversible-circuit design.
-
-### From Paper 7 — The GRIA Spectrum
-
-| Paper | Domain | Field | Key result | Application |
-|---|---|---|---|---|
-| Paper 1 | 16 binary ops | Binary algebra | GF(2) ring uniqueness | Circuit rewrite calculus foundation |
-| Paper 2 | GF(2ⁿ) maps | Galois field | Permutation criterion | LFSR design, AES S-box, reversible circuits |
-| Paper 3 | Neural networks | Dynamical systems | Banach contraction theorem | NN compression, generalisation bounds |
-| Paper 4 | Edge of chaos | Bifurcation theory | Edge bifurcation at α = 0.5 | Rule 110 universality, complexity placement |
-| Paper 5 | Circuits | Algebraic | AND-XOR rewrite calculus | Boolean circuit minimisation |
-| Paper 6 | DLGN | Empirical | Validation of grades | Differentiable logic gate networks |
-| Paper 7 | All | Unified | **GRIA spectrum** | Algebraic neural architecture search |
+```
+Paper 1  ─ All 16 binary ops + GF(2) ring uniqueness
+   │
+Paper 2  ─ GF(2ⁿ) permutation polynomials (AES, Frobenius, Galois)
+   │
+Paper 3  ─ α(f) = 1 - H(f(X))/H(X)  ── reversibility grade
+   │
+Paper 4  ─ f_α dynamics  ── bifurcation at α = 0.5, Rule 110 ANF
+   │
+Paper 5  ─ Gate-count benchmarks  ── 80 % XOR, 78 % full-adder, 68 % Rule 110
+   │
+Paper 6  ─ DLGN learning the algebra  ── AND 10/96, NOR 11/96
+   │
+Paper 7  ─ GRIA Spectrum Theorem  ── synthesis; bridges to Izaac, Cypha
+```
 
 ---
 
-## 🔗 Related Work
+## 📊 Headline empirical results
 
-This series is the algebraic foundation for several adjacent projects:
-
-- **Compression Algorithms** — the GRIA framework (Paper 7) is the algebraic core; the synthesis paper there extends the GRIA spectrum to NMP and Izaac
-- **Cypha** — Paper 7 explicitly connects to the Cypha codebase as the contracting-regime (high-α) instance
-- **Izaac as Side Data** — Paper 7's α = 0 regime is the Izaac algorithm structure
-- **3 to 8 Value Boolean Algebra** — multi-valued generalisations of Paper 1
-- **ARIA Encryption Algorithm** — uses GF(2²⁵⁶) machinery related to Paper 2's permutation theory
-- **Break AES** — AES S-box analysis intersects Paper 2's permutation-polynomial criterion
-
----
-
-## 📖 See Also
-
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — GRIA, NMP, Izaac, synthesis
-- [`Cypha/`](../Cypha/) — high-α contracting-regime instance
-- [`3 to 8 Value Boolean Algebra/`](../3%20to%208%20Value%20Boolean%20Algebra/) — multi-valued logic
-- [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — GF(2²⁵⁶) cryptographic use
-- [`Break AES/`](../Break%20AES/) — S-box / linear cryptanalysis
+| Result | Source paper | Number |
+|---|---|---|
+| AND is the unique non-trivial bilinear over XOR | Paper 1 | structural theorem |
+| Permutation count on `GF(2⁸)` | Paper 2 | `φ(255) = 128` |
+| Bifurcation in `f_α` | Paper 4 | at `α = 0.5` |
+| Rule 110 gate reduction | Paper 4 / 5 | `19 → 6` (`68 %`) |
+| XOR gate reduction vs SOP | Paper 5 | `80 %` |
+| Full-adder sum reduction | Paper 5 | `78 %` |
+| DLGN AND preference | Paper 6 | `10/96` vs uniform `6/96` |
+| DLGN NOR preference | Paper 6 | `11/96` vs uniform `6/96` |
+| Banach contraction range | Paper 3 | `0.02 – 0.14`, max σ `0.1435` |
 
 ---
 
-## 🛡️ About This Project
+## 🚧 Honest caveats
 
-The series is intended as a **foundational reference**: a complete, computationally verified treatment of GF(2) algebra plus the bridges from there to circuits, dynamical systems, and neural-network learning. All proofs in Paper 1 are constructive and accompanied by exhaustive computational verification. Subsequent papers build on this foundation rather than restating it.
+- Several papers explicitly note that empirical demonstrations are **small-network / synthetic verification** rather than industrial-scale benchmarks.
+- **Paper 7's `ECE ∝ |α − α*|`** is a framework / heuristic relationship, not a proven law.
+- The **neural-prime exponent "coincidence"** elsewhere in the repo (`Prime Number Generator/`) is flagged speculative — see that folder's README for the same caveat.
+- Self-asserted "computer verified" — no third-party formal-methods tool ran the proofs.
+
+---
+
+## 🎯 Why this is unusual
+
+| Standard treatment | Limitation | What this series adds |
+|---|---|---|
+| Boolean algebra in EE textbooks | Stops at gate equivalence | Full ring-uniqueness theorem |
+| Finite field for crypto | Permutation polys treated case-by-case | Unified `gcd(k, 2ⁿ − 1) = 1` criterion |
+| Reversibility in physics | Disconnected from CS | `α` grade + `f_α` dynamics + bifurcation |
+| Logic gates in deep learning | Discretisation hack | DLGN learns the algebraic preferences |
+| Compression as engineering | Empirical | Irreducibility-as-compression-bound |
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../3 to 8 Value Boolean Algebra/`](../3%20to%208%20Value%20Boolean%20Algebra/) — sister enumeration over `n`-variable Boolean function space
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — GRIA framework's canonical home (this folder hosts the spectrum theorem)
+- [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — `GF(2²⁵⁶)` AEAD (Paper 2 finite-field machinery)
+- [`../Veritas/`](../Veritas/) — PAC bounds on `H = {h : {0,1}ⁿ → {0,1}ⁿ}` complement Paper 3's `α` grade
+- [`../Cypha/`](../Cypha/) — HRNA inference (Paper 7 explicitly bridges)
+- [`../RNGS/Boolean RNG/`](../RNGS/Boolean%20RNG/) — Boolean LCG analysis benefits from the operator taxonomy
+- [`../Prime Number Generator/`](../Prime%20Number%20Generator/) — sister `α(s) = s^(-0.37)` exponent discussion
+
+---
 
 [← Back to main README](../README.md)

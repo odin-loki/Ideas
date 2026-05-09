@@ -1,99 +1,78 @@
-# 3 to 8 Value Boolean Algebra — dimensional emergence in Boolean function spaces
+# 3 to 8 Value Boolean Algebra
 
-> **n = 3 to n = 8 *variables*, not 3-to-8 truth values.** A systematic dimension-by-dimension characterisation of Boolean function spaces $f:\{0,1\}^n\to\{0,1\}$, cataloguing linear / balanced / self-dual / threshold / bent / irreducible function counts, and mapping the structural results to cryptographic primitive design, the Steane $[\![7,1,3]\!]$ quantum code, and Byzantine-fault-tolerant n-modular redundancy.
+> **A dimension-by-dimension narrative of the full Boolean function spaces `f : {0,1}ⁿ → {0,1}` for `n = 3, 4, 5, 6, 7, 8` — exact at small `n`, sampled at large `n`, anchored to formal Walsh–Hadamard / bent-function machinery and threaded through to applications in error-correcting codes (Steane), Byzantine N-modular redundancy, AES-S-box-style nonlinearity, and quantum control.** The space sizes are `2^(2ⁿ)`, which is `256` at `n = 3`, `65 536` at `n = 4` (the last fully-enumerable case for typical hardware), `4.3 × 10⁹` at `n = 5`, `1.8 × 10¹⁹` at `n = 6`, `~3.4 × 10³⁸` at `n = 7`, and `2²⁵⁶ ≈ 1.16 × 10⁷⁷` at `n = 8` — and the headline thread is that the fraction of "**truly `n`-dimensional**" (irreducible, non-decomposable) functions rises from `~93.8 %` at `n = 3` to `~99.9 %` at `n = 8`.
 
----
-
-## 🧮 What this folder is
-
-Boolean function research — concretely, the space of $f:\{0,1\}^n\to\{0,1\}$ as $n$ grows from 3 to 8. The total count is $2^{2^n}$, which goes from 256 (n = 3, fully enumerable in microseconds) through 65 536 (n = 4, fully enumerable) into the sampling regime for $n\ge 5$.
-
-The folder name "3 to 8 Value" is somewhat misleading — earlier README copy interpreted this as multi-valued or fractional truth values ({0, 0.5, 1}, Belnap-style four-valued logic, etc.). The actual flagship paper studies **binary-valued** Boolean functions of **3 to 8 variables**. The README is now grounded in that source.
+> **Key vocabulary clarification.** "3 to 8 value" here means **3 to 8 input variables**, not 3-valued vs 8-valued logic. The codomain is always `{0, 1}`. The "value" is `n` in `{0, 1}ⁿ → {0, 1}`.
 
 ---
 
-## 📄 Files
+## What this folder is
+
+Most introductions to Boolean algebra stop at `n = 2` or `n = 3`, hand-wave at `n = 4`, and then jump straight to "of course the space gets enormous." This folder takes the opposite approach: walk through each dimension from `n = 3` to `n = 8`, lay out the exact combinatorial structure where you can (small `n`), use disciplined sampling where you can't (large `n`), and at every step tie the structure back to the same vocabulary — Hamming weight distributions, threshold/majority functions, linear/affine subspaces, balanced functions, self-dual functions, bent functions, and the irreducibility / "truly `n`-dimensional" fraction. The result is a unified narrative for the entire low-`n` regime that engineers and theoreticians actually use.
+
+The applications layer maps each level to real artefacts: `n = 3` to triple-modular redundancy and the Hamming `[7,4]` parity codes; `n = 4` to nibble-level error correction and AES-S-box building blocks; `n = 5` and beyond to Reed–Muller codes, bent-function nonlinearity, quantum error correction (the Steane `[[7,1,3]]` code at `n = 7`), and Byzantine consensus thresholds.
+
+---
+
+## 📑 Source documents
 
 | File | Role |
-|------|------|
-| [`boolean_research_paper.md`](boolean_research_paper.md) | Flagship paper — *Dimensional emergence and structural complexity in Boolean algebras of three to eight variables* |
-| [`three_var_boolean_analysis.md`](three_var_boolean_analysis.md) | Companion analysis at $n=3$ |
-| [`four_var_boolean_universe.md`](four_var_boolean_universe.md) | Companion at $n=4$ |
-| [`five_var_boolean_frontier.md`](five_var_boolean_frontier.md) | Companion at $n=5$ — full enumeration ends here; $n\ge 5$ moves to sampling |
-| [`six_var_boolean_transcendence.md`](six_var_boolean_transcendence.md) | Companion at $n=6$ |
-| [`seven_var_perfect_democracy.md`](seven_var_perfect_democracy.md) | Companion at $n=7$ |
-| [`eight_var_digital_perfection.md`](eight_var_digital_perfection.md) | Companion at $n=8$ |
+|---|---|
+| [`three_var_boolean_analysis.md`](three_var_boolean_analysis.md) | `n = 3`. All `256` functions enumerated. Hamming weights `C(8, k)`. `16` linear / `2^(n+1) = 16` affine. `70` balanced. `~93.8 %` "truly 3D." Named exemplars: **F232 = MAJORITY (at-least-2-of-3)**, **F150 = 3-XOR**. |
+| [`four_var_boolean_universe.md`](four_var_boolean_universe.md) | `n = 4`. **Full enumeration of all `65 536` functions.** Binomial on `C(16, k)`. Examples: `AND4 = F32768`, `OR4 = F65534`, `PARITY4 = F27030`, `MAJORITY4 = F59520`. `32` linear, `12 870` balanced, `256` self-dual, `~59 000 (~90 %)` "truly 4D," `~10 %` 2 × 2 decomposable. |
+| [`five_var_boolean_frontier.md`](five_var_boolean_frontier.md) | `n = 5`. `4.3 × 10⁹` total. `64` linear (exact). `~6.06 × 10⁸` (`14.12 %`) balanced (extrapolated from sample). `~6.06 × 10⁵` bent (estimated). `~95 %` "truly 5D." Memory budget for full storage: `~137 GB`, days–weeks of compute. Sample size used: `20 000`. |
+| [`six_var_boolean_transcendence.md`](six_var_boolean_transcendence.md) | `n = 6`. `1.8 × 10¹⁹` total. **`5 000`-function sample**. `128` linear (exact). Extrapolated `~6.748 × 10¹⁸` balanced. `~98 %` truly 6D. `2.3 EB` storage if you tried. Named: **HYPERMAJORITY6 (≥ 4-of-6)**. |
+| [`seven_var_perfect_democracy.md`](seven_var_perfect_democracy.md) | `n = 7`. `~3.4 × 10³⁸` total. `2 000`-function sample. `256` linear (exact). `~99.5 %` truly 7D. **Steane `[[7,1,3]]` code, 7-XOR, democratic threshold functions** anchored here. |
+| [`eight_var_digital_perfection.md`](eight_var_digital_perfection.md) | `n = 8`. `2²⁵⁶ ≈ 1.16 × 10⁷⁷` total. `512` linear (`2⁹`). `1 000`-function sample. **`BYTE_PERFECT = 70/256 = 27.3 %`** (functions returning true on exactly half of inputs at byte boundary). `~99.9 %` truly 8D. |
+| [`boolean_research_paper.md`](boolean_research_paper.md) | Formal backbone. **Walsh–Hadamard transform**, **bent function maximum nonlinearity `2^(n−1) − 2^(n/2−1)` (even `n`)**, **irreducibility definition**, bridges to Steane code and Byzantine / threshold kernels. Explicitly uses sampling for `n ≥ 5`. |
 
 ---
 
-## 🔑 Headline result — dimensional emergence
+## 🧠 The headline numbers
 
-The fraction of **genuinely n-dimensional (irreducible)** functions — those that cannot be written as a composition of lower-dimensional functions — rises monotonically with $n$:
+| `n` | Total functions `2^(2ⁿ)` | Linear | Balanced | "Truly `n`-D" |
+|---|---|---|---|---|
+| 3 | 256 | 16 | 70 | ~93.8 % |
+| 4 | 65 536 | 32 | 12 870 | ~90 % |
+| 5 | 4.3 × 10⁹ | 64 | ~14.1 % | ~95 % |
+| 6 | 1.8 × 10¹⁹ | 128 | ~37 %† | ~98 % |
+| 7 | 3.4 × 10³⁸ | 256 | ~50 %† | ~99.5 % |
+| 8 | 1.16 × 10⁷⁷ | 512 (`2⁹`) | ~50 %† | **~99.9 %** |
 
-| $n$ | Total $2^{2^n}$ | Linear / affine $2^{n+1}$ | Irreducible fraction |
-|-----|-----------------|----------------------------|-----------------------|
-| 3 | 256 | 16 | ~25 % |
-| 4 | 65 536 | 32 | rising |
-| 5 | $\sim 4\times 10^9$ | 64 | rising |
-| 6 | $\sim 1.8\times 10^{19}$ | 128 | high |
-| 7 | $\sim 3.4\times 10^{38}$ | 256 | very high |
-| 8 | $\sim 1.2\times 10^{77}$ | 512 | **~99.9 %** |
+† extrapolations from samples — the per-file sources are explicit about which numbers are exact and which are estimated.
 
-By $n=8$, almost every function is genuinely 8-dimensional and resists low-dimensional decomposition. The paper frames this as **dimensional emergence** — a complexity threshold beyond which the structural landscape becomes effectively irreducible.
-
----
-
-## 🧰 Function families catalogued
-
-For each $n$ the paper tracks six structural quantities (paper §1):
-
-1. **Total function count** $2^{2^n}$
-2. **Linear functions** (affine maps over $\mathrm{GF}(2)$) — exact count $2^{n+1}$
-3. **Balanced functions** (Hamming weight $2^{n-1}$) — critical for crypto and quantum superposition
-4. **Self-dual functions** (invariant under complementation)
-5. **Threshold / majority functions** $T_k^n$ — output 1 iff at least $k$ of $n$ inputs are 1
-6. **Genuinely n-dimensional (irreducible) functions**
-
-### Bent functions (maximally nonlinear)
-
-A function is **bent** iff all Walsh-Hadamard coefficients satisfy $|\hat H f(a)| = 2^{n/2}$ — equivalent to all derivatives $D_a f$ being balanced for $a\ne 0$. Achievable only for **even $n$**. Maximum nonlinearity is $2^{n-1} - 2^{n/2-1}$. Bent functions are not themselves balanced, so they cannot serve directly as cipher combiners — but they underpin AES-style S-box construction, Kerdock codes, and difference sets. Exact bent-function counts are known only up to $n=8$.
+The "truly `n`-D" curve is the load-bearing claim: as `n` grows, the fraction of functions that are decomposable into smaller-arity pieces *vanishes*. This is the combinatorial reason why high-`n` Boolean function design genuinely *needs* the high-`n` machinery — there is no shortcut through smaller subspaces for the overwhelming majority of functions.
 
 ---
 
-## 🎯 Three application domains (paper §3–§5)
+## 🚧 Honest caveats
 
-1. **Cryptographic primitives** — bent functions, balanced near-bent constructions, AES-style S-box design, linear / differential cryptanalysis resistance.
-2. **Quantum error correction** — the **Steane $[\![7,1,3]\!]$ code** as a concrete CSS construction; mapping of parity / linearity structure of Boolean functions to stabiliser codes.
-3. **Byzantine-fault-tolerant n-modular redundancy** — threshold and majority functions as the kernel of NMR voting and Byzantine agreement protocols.
-
-The paper provides a scaling table from $n=2$ through $n=8$ tying each domain's parameters to dimensional structure.
-
----
-
-## 🔬 Method
-
-- **Exact enumeration** for $n\le 4$ (256 and 65 536 functions, respectively).
-- **Statistically sound sampling** for $n=5$ through $n=8$, where complete enumeration is computationally infeasible.
-- Walsh-Hadamard transform machinery for nonlinearity / bent characterisation.
-- Composition / projection tests for irreducibility.
+- **Internal tension across files.** `three_var_boolean_analysis.md` calls `n = 4` a "computational challenge"; `four_var_boolean_universe.md` then asserts a complete `65 536` enumeration. `five_var_boolean_frontier.md` simultaneously claims to be the "last practical complete analysis" and uses sampling. Treat scale claims as a mix of rhetorical and exact + sampled.
+- **`boolean_research_paper.md` is explicit** that all `n ≥ 5` results use sampling rather than enumeration where enumeration is infeasible.
+- **Heavy applications-forward language.** Quantum, AES, and space-mission framings are interpretation, not always derived line-by-line from in-paper proofs.
+- **Sample sizes (20 000 / 5 000 / 2 000 / 1 000 for n = 5..8) are author-chosen.** Confidence intervals on the extrapolated counts are not computed in-text.
 
 ---
 
-## 🚧 Honest framing
+## 🎯 Why this is useful
 
-- For $n\ge 5$ the irreducibility fractions are **statistical estimates** from sampling, not exact counts.
-- Exact bent-function counts are known only up to $n=8$; beyond that, the paper does not extrapolate.
-- The mapping to applications (S-boxes, Steane code, NMR voting) is explanatory rather than constructive — the paper does not propose new ciphers or QEC codes.
+| Audience | Use |
+|---|---|
+| Cryptographer | Bent-function lookup at relevant `n`; AES-S-box-class structures at `n = 4` |
+| Quantum-EC researcher | Steane `[[7,1,3]]` motivation; CSS-code function classes |
+| Distributed-systems engineer | Threshold / majority / Byzantine kernels with tight counts |
+| Formal-methods researcher | Companion to [`../Veritas/`](../Veritas/) PAC bounds: this is the `H` for `n = 3..8` |
+| ML interpretability | Decomposable vs irreducible functions ⇔ which features can be factorised |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — seven-paper series on $\mathrm{GF}(2)$ algebra; Boolean functions as the study object, taxonomy of binary operators, GF(2) Ring Uniqueness Theorem
-- [`General Math Papers/`](../General%20Math%20Papers/) — LCRP / complexity-reduction principle (Walsh-Hadamard transform sits in the FFT class of reductions)
-- [`Veritas/`](../Veritas/) — formal verification (Boolean structure underpins much of propositional logic / SAT)
-- [`Break AES/`](../Break%20AES/) — cryptanalysis context for the bent-function / S-box discussion
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — algebraic compression theory (GRIA grade interacts with Boolean operator taxonomy)
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — exhaustive 16-binary-op taxonomy, GF(2) ring uniqueness, GRIA Spectrum Theorem
+- [`../Veritas/`](../Veritas/) — PAC sample bounds over exactly this `H`; the `n = 8` case has `\|H\| = 2²⁵⁶`
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac and GRIA share Boolean / GF(2) lineage
+- [`../RNGS/Boolean RNG/`](../RNGS/Boolean%20RNG/) — Boolean LCG analysis benefits from this structure
+- [`../UCN AIs/`](../UCN%20AIs/) — Boolean primitives for UCN-universe AI
 
 ---
 

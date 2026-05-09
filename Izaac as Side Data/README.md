@@ -1,91 +1,96 @@
-# Izaac as Side Data — applied side-information papers in the Izaac framework
+# Izaac as Side Data — applied protocols
 
-> **Two papers + a reference implementation.** The local papers explore how **shared deterministic randomness** (Izaac's σ-state) acts as side information in compression, distributed computing, and cryptographic protocols. The full Izaac mathematical framework lives in `../Compression Algorithms/`; this folder is the applied / protocols slice.
-
----
-
-## 🌐 What this folder is
-
-The Izaac algorithm is a single computational primitive — a deterministic shared-randomness function — from which a wide range of cryptographic, distributed-systems, and compression protocols can be derived. The **canonical Izaac paper** lives in [`../Compression Algorithms/izaac_algorithm_research_paper.md`](../Compression%20Algorithms/izaac_algorithm_research_paper.md).
-
-This folder contains two applied papers plus a Python reference implementation. Earlier README copy listed companion files (`Izaac_Mathematical_Framework.pdf`, `izaac_algorithm_research_paper.md`, `NMP_neural_compression_research_paper.md`, `GRIA_Technical_Memorandum.md`) that **do not exist in this folder** — those documents either live in `Compression Algorithms/` or do not exist at all. The list below reflects the actual contents.
-
-Attribution: **Technical research paper / applied research paper · March 2026**.
+> **The engineered protocol suite that operationalises the Izaac meta-theorem ("shared deterministic PRF ≡ free broadcast channel") into twelve concrete protocols spanning verifiable random functions, non-interactive MPC sum, leader election, coordinated Bloom filters, Monte Carlo checkpointing, distributed rate limiting, fuzz-test seed coordination, and more.** Where the canonical Izaac framework in [`../Compression Algorithms/`](../Compression%20Algorithms/) develops the theory, this folder turns the meta-theorem into a < 2000-LOC Python reference implementation with explicit complexity tables, soundness bounds, and side-by-side comparisons against PBFT, HotStuff, and the standard 384-bit-per-element Bloom-filter construction. The headline operational claim: a Bloom filter coordinated by an Izaac shared seed saves `N × 384` bits of message overhead — for `N = 10⁶`, that is **48 MB** moved off-wire per coordination round.
 
 ---
 
-## 📄 Files
+## What this folder is
+
+The Izaac framework lives or dies by what you can actually *do* with shared deterministic randomness. This folder is the answer in twelve concrete protocols, each with: an algorithmic specification, a soundness or correctness bound, and a comparison to the standard non-Izaac approach. The framing is "side data" — the σ stream is auxiliary information that both parties already have, so any protocol step that classically requires a coordination message can be eliminated.
+
+Most ambitious of the twelve is the **non-interactive MPC sum**: each participant masks their input with `Izaac(σ, encode(i, j))`, contributions are added, masks cancel, and the aggregate emerges with **perfect privacy under the semi-honest model**. The folder cites a sister line of work showing **30 % throughput improvement / 100 % privacy** on sum-MPC benchmarks vs. masked-noise baselines.
+
+---
+
+## 📑 Source documents
 
 | File | Role |
-|------|------|
-| [`izaac_paper1_theoretical.md`](izaac_paper1_theoretical.md) | *The Izaac algorithm: shared deterministic randomness as a computational primitive* — local theoretical paper covering pseudorandomness, state-compression bound, fast-forward, zero-communication Byzantine consensus, Shannon-limit-breaking compression, unified information-theoretic meta-theorem |
-| [`izaac_paper2_applications.md`](izaac_paper2_applications.md) | *Izaac protocol suite* — twelve concrete protocols (VRF, NI-MPC, Byzantine consensus, probabilistic data structures, reproducible Monte Carlo, coordinated differential privacy, deterministic fuzzing, backtest commitment, lazy infinite data structures, content-addressed storage, synchronised rate limiting, MAC scheduling) |
-| [`izaac_implementation.py`](izaac_implementation.py) | Python 3 reference implementation |
-| **External reference (canonical):** [`../Compression Algorithms/izaac_algorithm_research_paper.md`](../Compression%20Algorithms/izaac_algorithm_research_paper.md) | Full Izaac mathematical framework |
+|---|---|
+| [`izaac_paper1_theoretical.md`](izaac_paper1_theoretical.md) | Theoretical foundations. `CTR-mode O(1)` vs `tree O(log n)` fast-forward analysis; Grover-bound discussion (`σ` doubling for post-quantum margin). |
+| [`izaac_paper2_applications.md`](izaac_paper2_applications.md) | Twelve-protocol catalogue. VRF, NI-MPC sum, leader election, Bloom-filter coordination, Monte Carlo checkpoints, rate limiting, fuzz seeds, etc. **§4.3 explicitly clarifies** that "zero-communication" applies to leader selection, not proposal propagation, and cites Dolev–Reischuk's `Ω(n²)` bits worst-case lower bound. |
+| [`izaac_implementation.py`](izaac_implementation.py) | **< 2000 LOC** Python reference. |
 
 ---
 
-## 🔑 Core idea (from paper 1)
+## 🧠 The twelve protocols (selected)
 
-Parties sharing a compact cryptographic state σ ∈ {0,1}^S can derive arbitrarily long, identical pseudorandom sequences from purely **local** computation — creating what the paper calls a **"free broadcast channel"** with zero latency and infinite effective bandwidth. The Meta-Theorem of §4 identifies shared deterministic randomness as **information-theoretically equivalent** to a free broadcast channel, collapsing a rich space of communication-lower-bound barriers across distributed computing, cryptography, and information theory.
+### Verifiable Random Function (VRF)
 
-Standard instantiations: **AES-CTR**, **ChaCha20**, **SHA-3 XOF** with σ as key and a counter/context as input. Default state size 256 bits (paranoid: 512 bits for post-quantum resistance).
+`pk = SHA-3-256(σ)`. `Eval(x)` returns `y = Izaac(σ, x)` and a zero-knowledge proof. **Soundness: `2⁻¹²⁸`.**
 
----
+### Non-interactive MPC sum
 
-## 📐 Headline theorems (paper 1)
+Each participant masks input `x_i` with `Izaac(σ, encode(i, j))` for round `j`. Contributions sum; masks cancel by construction. Perfect privacy under semi-honest model. Cited literature alignment: SRFG benchmark `30 % throughput / 100 % privacy` for sums.
 
-| Theorem | Statement |
-|---------|-----------|
-| **3.1 Pseudorandomness** | Izaac-output indistinguishability reduces to PRF security of the underlying primitive |
-| **3.2 State Compression Bound** | Tight Θ(λ + log k) state complexity for k-bit pseudorandom output |
-| **3.3 Fast-Forward** | O(log n) computation of any index without evaluating prior outputs |
-| **3.5 Shannon-Limit Breaking** | Compression below classical Shannon entropy via shared side information (e.g. ~1.2 bits/char for English given σ) |
-| **3.6 Zero-Communication Byzantine Consensus** | Sortition-based protocol with optimal f < n/3 fault tolerance and zero post-setup communication |
-| **Meta-Theorem (§4)** | Shared σ ≡ free broadcast channel (information-theoretically) |
+### Leader election
 
----
+PBFT round needs `~10 000` messages at `n = 100, f = 33`. HotStuff: `~100`. **Izaac leader-select: `0` messages post-setup** — but the paper immediately clarifies that the *leader still broadcasts its proposal*, so the saving applies to *selection*, not to the entire round.
 
-## 🛠 Twelve protocols (paper 2)
+| n = 100, f = 33 | Round messages |
+|---|---|
+| PBFT | ~10 000 |
+| HotStuff | ~100 |
+| **Izaac leader-select** | **0 (post-setup)** |
 
-1. **Izaac-VRF** — verifiable random function for blockchain leader election, provably-fair gaming, lottery, DNSSEC zone-enumeration resistance.
-2. **NI-MPC** — non-interactive multi-party computation; privacy via simulation, correctness via mask cancellation.
-3. **Deterministic Byzantine consensus** — zero post-setup communication, f < n/3 tolerance.
-4. **Space-efficient probabilistic data structures** — Bloom-filter-class structures sharing hash state.
-5. **Reproducible Monte Carlo simulation** — O(log n) fast-forward enables replay and parallel chunking.
-6. **Coordinated differential privacy** — consistent answers to repeated queries across parties.
-7. **Deterministic coverage-guided fuzzing** — reproducible bug reports with shared seed.
-8. **Algorithmic-trading backtest commitment** — regulator-verifiable replays for compliance.
-9. **Lazy infinite data structures** — generated on demand from compact seeds.
-10. **Content-addressed distributed storage** — cryptographic replica placement.
-11. **Synchronised rate limiting** — without datacentre coordination.
-12. **Network protocol synchronisation** — collision-free MAC scheduling.
+### Coordinated Bloom filter
 
-The whole suite is implemented in **< 2 000 lines** of well-documented Python (using `hashlib` SHA-3-256, `os.urandom`, `struct`).
+For `N = 10⁶`, `k = 10` hashes per element, classical seeded Bloom transmits `N × 384 = 48 MB` of seed material per coordination round. Izaac eliminates this — both sides derive identical seeds from σ. **48 MB saved per round.**
 
----
+### Monte Carlo checkpointing
 
-## 🔐 Security framing
+Cross-machine reproducibility without serialising RNG state.
 
-Standard computational security model. Adversary is non-uniform polynomial-time, may observe public outputs and proofs, may adaptively query Izaac on chosen inputs (excluding the target), and may corrupt up to f < n/3 parties in consensus protocols. Quantum adversaries handled via enlarged state sizes (λ = 256 paranoid, λ = 512 post-quantum).
+### Rate limiting
+
+Distributed per-user limits without coordination round-trips.
+
+### Fuzz-test seed coordination
+
+Eight machines fuzzing the same target without duplicating effort or missing seeds.
+
+(Six more in the paper.)
 
 ---
 
-## 🚧 Honest framing
+## 🚧 Honest caveats (paper §4.3 explicit)
 
-- Both papers are **research-grade** and not audited for production cryptographic deployment. The reference implementation prioritises clarity over throughput.
-- Several protocols rely on the **trusted-setup or interactive-setup** assumption that all parties share σ; bootstrapping σ securely is out of scope.
-- The Shannon-limit-breaking compression result depends on the existence of valid shared side information — it does **not** contradict Shannon's theorem in the absence of such information.
+- **"Zero communication" applies to leader selection only.** The leader still broadcasts proposals; consensus is not magically free.
+- **Dolev–Reischuk lower bound: `Ω(n²)` bits in the worst case for Byzantine consensus.** Izaac doesn't violate this; it amortises setup so the *amortised steady-state* messages drop, not the worst-case.
+- **Malicious-security extensions** (additive MPC against active adversaries) need additional rounds beyond the semi-honest construction.
+- **Suite §9 benchmarks** are referenced as measured on x86, but the spec-level portions of the paper review here are not yet anchored to measured tables.
+- **σ compromise = entire suite compromised** — this is a property of the underlying Izaac framework, not specific to applications.
+
+---
+
+## 🎯 What this displaces
+
+| Standard | Cost | What Izaac side-data eliminates |
+|---|---|---|
+| Distributed Bloom filter | `N × 384` bits seed exchange | All of it |
+| PBFT consensus | `~10 000` msgs / round at n=100 | Selection cost (proposal still broadcast) |
+| Coordinator-elected fuzzing | round-trips per seed assignment | All of it |
+| Cryptographic VRFs (e.g. RFC 9381) | full key infrastructure | Lighter setup, same soundness target |
+| Synchronised RNG checkpointing | serialise + ship RNG state | σ is identical on both sides |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`../Compression Algorithms/`](../Compression%20Algorithms/) — **canonical home** of Izaac (`izaac_algorithm_research_paper.md`) plus GRIA and NMP frameworks
-- [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — uses a Meta-DAG RNG of similar lineage to Izaac; explicit AEAD cipher
-- [`../RNGS/`](../RNGS/) — RNG zoo; Boolean / Chaotic / DAG / Turbulent-flow RNG families
-- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — GF(2) algebra and the GRIA spectrum theorem
-- [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator with hash-based context compression
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac canonical home (theorems and meta-theorem live there)
+- [`../RNGS/`](../RNGS/) — RNG portfolio: Izaac's σ stream needs a CSPRNG underneath
+- [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — keyed entropy pump using a sister Meta-DAG RNG
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — finite-field algebraic foundations
+- [`../Statistical Generation/`](../Statistical%20Generation/) — sister information-theoretic framework
 
 ---
 
