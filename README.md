@@ -27,7 +27,7 @@ The repository is organised as one folder per topic, browsable in any order. Eac
 
 You can read this index four ways:
 
-1. **By scientific subfield** ([§ Categories](#-categories)) — one section per scientific subfield, fine-grained.
+1. **By field** ([§ Categories](#-categories)) — grouped by the field a curious layman would file each project under.
 2. **A–Z** ([§ A–Z folder index](#-az-folder-index)) — alphabetical with one-line descriptions.
 3. **Navigation aids** ([§ Quick links](#-quick-links)) — repo-level files (audit trail, licence, etc.).
 4. **Acronym key** ([§ Acronym key](#-acronym-key)) — every named system in one alphabetised glossary.
@@ -36,318 +36,146 @@ You can read this index four ways:
 
 ## 📚 Categories
 
-Each section below is a single scientific subfield. Folders are grouped strictly by methodology, not by superficial topic similarity. Where two folders share a subfield (e.g. multi-target tracking, or shared-PRF coordination), they appear together; otherwise each folder gets its own section. Categories are ordered roughly from most-established science to most-speculative / creative.
+Each section below is the field a curious layman would file these projects under. The descriptions explain what each thing *is* and what it does, in plain-but-not-dumbed-down language.
 
-**Quick navigation** (43 categories):
+### 🔐 Cryptography
 
-1. [Authenticated encryption (AEAD) — receiver-recomputable nonces over GF(2²⁵⁶)](#-authenticated-encryption-aead-receiver-recomputable-nonces-over-gf2²⁵⁶)
-2. [Cryptanalytic ML scaffolding — Transformer + Llama distillation + policy-gradient RL](#-cryptanalytic-ml-scaffolding-transformer-llama-distillation-policy-gradient-rl)
-3. [Pseudo-random number generation — four families, four explicit threat models](#-pseudo-random-number-generation-four-families-four-explicit-threat-models)
-4. [Information-theoretic compression — Izaac shared-PRF coordination meta-theorem](#-information-theoretic-compression-izaac-shared-prf-coordination-meta-theorem)
-5. [Formal verification and PAC-style learning — proof-trace certificates, not loss curves](#-formal-verification-and-pac-style-learning-proof-trace-certificates-not-loss-curves)
-6. [Bayesian filtering and multi-target tracking — GH-SR-IMM and PMBM at edge latency](#-bayesian-filtering-and-multi-target-tracking-gh-sr-imm-and-pmbm-at-edge-latency)
-7. [Online learning and distributed scheduling — LinTS + PID + CFS at p50 0.48 ms](#-online-learning-and-distributed-scheduling-lints-pid-cfs-at-p50-048-ms)
-8. [Long-context neural memory — LSH + predictive coding under one free-energy functional](#-long-context-neural-memory-lsh-predictive-coding-under-one-free-energy-functional)
-9. [Non-attention sequence modelling — reaction-diffusion + Hebbian plasticity in the forward pass](#-non-attention-sequence-modelling-reaction-diffusion-hebbian-plasticity-in-the-forward-pass)
-10. [Production neural-network engineering — byte-identical Python ↔ C++ parity](#-production-neural-network-engineering-byte-identical-python-c-parity)
-11. [Neural-network acceleration theory — sixteen techniques unified by Incremental Riemannian Estimation](#-neural-network-acceleration-theory-sixteen-techniques-unified-by-incremental-riemannian-estimation)
-12. [Program understanding via seq2seq — encoder–decoder Transformer + hierarchical memory + MoE](#-program-understanding-via-seq2seq-encoderdecoder-transformer-hierarchical-memory-moe)
-13. [Classical-statistics language modelling — category theory + Lévy triplets at O(N) training cost](#-classical-statistics-language-modelling-category-theory-lévy-triplets-at-on-training-cost)
-14. [Cybernetics-inspired optimisation — Ashby’s homeostat as a multi-scale black-box optimiser](#-cybernetics-inspired-optimisation-ashbys-homeostat-as-a-multi-scale-black-box-optimiser)
-15. [Immune-inspired pattern recognition — V(D)J recombination as a combinatorial algorithm](#-immune-inspired-pattern-recognition-vdj-recombination-as-a-combinatorial-algorithm)
-16. [Bio-inspired self-organising networks — topology *is* the long-term memory](#-bio-inspired-self-organising-networks-topology-is-the-long-term-memory)
-17. [Speculative AI ontology — APN, GPN, and the URLS learning primitives](#-speculative-ai-ontology-apn-gpn-and-the-urls-learning-primitives)
-18. [Boolean function spaces — dimensional emergence for n = 3..8](#-boolean-function-spaces-dimensional-emergence-for-n-38)
-19. [Finite-field algebra over GF(2) — ring-uniqueness theorem + ANF gate-count benchmarks](#-finite-field-algebra-over-gf2-ring-uniqueness-theorem-anf-gate-count-benchmarks)
-20. [Algorithmic-complexity meta-theory — the Logarithmic Complexity Reduction Principle](#-algorithmic-complexity-meta-theory-the-logarithmic-complexity-reduction-principle)
-21. [Curriculum-grade mathematics generation — MegaMathGen + MSC2020 13-domain survey](#-curriculum-grade-mathematics-generation-megamathgen-msc2020-13-domain-survey)
-22. [Empirical prime-pattern theory — scale-dependent local/global crossover at n* ≈ 836](#-empirical-prime-pattern-theory-scale-dependent-localglobal-crossover-at-n-836)
-23. [Theoretical physics and cosmology — non-local field-gravity UFT + superluminal recession](#-theoretical-physics-and-cosmology-non-local-field-gravity-uft-superluminal-recession)
-24. [NV-centre quantum-computing substrates — CVD-grown Quantum Diamond Metamaterial Processor](#-nv-centre-quantum-computing-substrates-cvd-grown-quantum-diamond-metamaterial-processor)
-25. [Hybrid quantum-classical optimisation — spectral-Laplacian QAOA-shaped graph pipeline](#-hybrid-quantum-classical-optimisation-spectral-laplacian-qaoa-shaped-graph-pipeline)
-26. [Neuro-biomedical interface engineering — two-tier Neural Quantum Dust on FDA ultrasound](#-neuro-biomedical-interface-engineering-two-tier-neural-quantum-dust-on-fda-ultrasound)
-27. [Genetic-modification and longevity protocols — three-phase Homo Sapiens Augmentus v4.0](#-genetic-modification-and-longevity-protocols-three-phase-homo-sapiens-augmentus-v40)
-28. [Pharmaceutical formulation — Universal Depot framework + speculative nootropic monographs](#-pharmaceutical-formulation-universal-depot-framework-speculative-nootropic-monographs)
-29. [Radio-frequency electronics — Verilog Chua-circuit 100 W, 1 Hz–14 GHz noise generator](#-radio-frequency-electronics-verilog-chua-circuit-100w-1hz14ghz-noise-generator)
-30. [Computer architecture and HDL design — heterogeneous many-core + os_accelerator block](#-computer-architecture-and-hdl-design-heterogeneous-many-core-os_accelerator-block)
-31. [Radioisotope diamond batteries — eight-model Series A–D taxonomy, kW to GW](#-radioisotope-diamond-batteries-eight-model-series-ad-taxonomy-kw-to-gw)
-32. [Diffusion bonding and metallurgical joining — UCDW five-regime electrochemical tradespace](#-diffusion-bonding-and-metallurgical-joining-ucdw-five-regime-electrochemical-tradespace)
-33. [Cutting-tool metallurgy — HX-70 GradePlex + TriboshieldPlus for HRC 40–70](#-cutting-tool-metallurgy-hx-70-gradeplex-triboshieldplus-for-hrc-4070)
-34. [Passive-component physics — four-tier discrete–continuous hybrid device catalogue + simulator](#-passive-component-physics-four-tier-discretecontinuous-hybrid-device-catalogue-simulator)
-35. [Historical-machine algorithm rebuilds — Babbage / Antikythera / Torpedo Data Computer](#-historical-machine-algorithm-rebuilds-babbage-antikythera-torpedo-data-computer)
-36. [Programming-language design — a successor-to-C++ design conversation](#-programming-language-design-a-successor-to-c-design-conversation)
-37. [Macroeconomic theory — Energy-Resource Economic Model in megajoules of national wealth](#-macroeconomic-theory-energy-resource-economic-model-in-megajoules-of-national-wealth)
-38. [Sovereign-doctrine policy research — eight-paper United Commonwealth Nations series](#-sovereign-doctrine-policy-research-eight-paper-united-commonwealth-nations-series)
-39. [Mathematical combat modelling — Lanchester / Hughes / Markov / FATHM literature map](#-mathematical-combat-modelling-lanchester-hughes-markov-fathm-literature-map)
-40. [Defence-systems engineering portfolio — small arms, armour, CBRN, acoustic cancellation, CL-20](#-defence-systems-engineering-portfolio-small-arms-armour-cbrn-acoustic-cancellation-cl-20)
-41. [Cosmeceutical formulation — hemp-anchored luxury body lotion, fully cited white paper](#-cosmeceutical-formulation-hemp-anchored-luxury-body-lotion-fully-cited-white-paper)
-42. [Bar operations as systems engineering — native-Australian-botanical platform](#-bar-operations-as-systems-engineering-native-australian-botanical-platform)
-43. [Repository infrastructure — site assets, CSS, and editorial style](#-repository-infrastructure-site-assets-css-and-editorial-style)
+| Folder | Description |
+|---|---|
+| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | A custom encryption scheme that doesn’t transmit nonces — the small unique numbers normally appended to each message to keep encryption fresh. The receiver re-derives the nonce from the message itself plus a shared key, eliminating an entire class of bugs around lost or replayed nonces. Three-layer algebraic construction over a 256-bit binary field. *Not* the Korean ARIA block cipher. |
+| [`Break AES/`](Break%20AES/) | Research scaffolding that points modern machine learning at the problem of breaking AES, the standard symmetric cipher used everywhere. **Doesn’t actually break AES.** It is the training stack one would use to try — a Transformer student trained by knowledge-distillation from a Llama teacher, plus reinforcement learning shaped by a BLEU reward. |
+| [`RNGS/`](RNGS/) | Four pseudo-random-number generators built for very different jobs: a general-purpose generator with cryptographic hashing on the output, a fast one for tiny embedded chips (~80 cycles per output on a Cortex-M4), one with a state space larger than 2¹⁵³⁶, and one based on the chaos of turbulent fluid flow. |
+| [`Compression Algorithms/`](Compression%20Algorithms/) | Three frameworks. The headline (**Izaac**) shows that two computers sharing the same pseudo-random stream get a free communication channel — anything they can independently compute from that stream doesn’t need to be sent over the wire. The other two are an algebra of how irreversible a given function is, and a measured spectral law for pruning weights from neural networks. |
+| [`Izaac as Side Data/`](Izaac%20as%20Side%20Data/) | Twelve concrete protocols built on the Izaac idea. The clearest example: a Bloom filter coordinated by an Izaac shared seed saves **48 megabytes** of network traffic per coordination round when a million nodes participate, because both sides compute the filter locally instead of transmitting it. |
+
+### 🤖 Artificial intelligence
+
+| Folder | Description |
+|---|---|
+| [`Cell AI/`](Cell%20AI/) | A neural-network architecture that replaces self-attention (the engine of GPT-style models) with reaction-diffusion partition dynamics and Hebbian plasticity that updates the weights *during* the forward pass, the way biological neurons do. 27-experiment architecture-search log; honest that v1 doesn’t yet match transformer perplexity on real corpora. |
+| [`Cypha/`](Cypha/) | A complete deployment stack for a neural network — a Python research version, a CMake-built C++ native version for production, a REST server, and a Qt desktop tool. **188 pytest cases plus 33 CTest cases verify that the Python and C++ paths produce byte-identical outputs** across thirteen named fixtures. |
+| [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) | A long-context memory architecture that fuses locality-sensitive hashing (a fast way to find approximate nearest neighbours in high-dimensional space) with hierarchical predictive coding (a brain-inspired prediction-error mechanism), under one shared free-energy functional. **289 × faster than full attention** at 100 000-token contexts, with 744 × memory reduction. |
+| [`Neural Decompiler/`](Neural%20Decompiler/) | A neural-network architecture for the problem of turning compiled machine code back into readable source code — an encoder–decoder Transformer with hierarchical memory plus a load-balanced mixture-of-experts split between binary-pattern experts and language-model experts. Coherent design, not a state-of-the-art recovery system. |
+| [`NN Shortcuts/`](NN%20Shortcuts/) | A unifying mathematical framework for sixteen separate neural-network speedup tricks (pruning, distillation, quantisation, low-rank factorisation, etc.). Reduces them all to one underlying principle: **Incremental Riemannian Estimation**. Bonus: an “algebraic autopsy” that decomposes a trained network into tropical, Grassmannian, and standard-arithmetic content. |
+| [`Statistical Generation/`](Statistical%20Generation/) | A language model with **no neural networks in it at all**. Built from category theory, Lévy triplets, and SHA-256 hashing into a fixed-size state. Claims to reach **∼90 %** of state-of-the-art neural perplexity on long-context tasks at **linear** training cost (rather than quadratic), with deterministic outputs and full audit trails. |
+| [`Statistical Scheduler/`](Statistical%20Scheduler/) | A distributed-job scheduler for compute clusters — when a new task arrives, decide which machine to run it on. Combines Linux’s fair-share scoring with a 24-dimensional Linear-Thompson-Sampling explorer, a PID stability override, and Holt–Winters / CUSUM / EWMA monitoring. **Median placement latency 0.48 ms**, with a formal `O(d√T · polylog T)` regret bound. |
+| [`Veritas/`](Veritas/) | A learning system that emits formal mathematical proofs alongside its predictions. Instead of “the model converged with loss 0.03”, you get a **PAC certificate** stating “this hypothesis is correct on at least 99 % of inputs with confidence 99 %, given 1.8 million training examples”. Mistake-bound, meta-learning, and composition certificates too. |
+| [`Ashby Optimiser/`](Ashby%20Optimiser/) | A black-box optimiser inspired by W. Ross Ashby’s 1948 cybernetic homeostat. Instead of one search direction, it runs parallel search units at geometrically-spaced step sizes with strict round-robin scheduling and homeostatic restarts. On a hard 10-dimensional Rastrigin benchmark it ends at **0.002 error vs 74.7** for single-scale alternatives. |
+| [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | A pattern-recognition algorithm modelled on V(D)J recombination — the process the vertebrate immune system uses to generate an enormous diversity of antibody receptors from a small number of gene segments. Five primary modules plus seven subsystems, all communicating through a typed Pattern dataclass. CPU-only, ~13 ms per call at `n = 16, r = 5`. |
+| [`Fungal Network Algorithm/`](Fungal%20Network%20Algorithm/) | A pattern-recogniser inspired by how fungi explore their environment. Instead of weights and edges that get tuned by training, the **physical topology of the network itself** is the long-term memory — it reorganises in response to inputs. Decentralised: nothing tells the network how to wire itself. |
+| [`UCN AIs/`](UCN%20AIs/) | Five speculative AI families set in a worldbuilding setting — two flagship classes (one for fast measurement-driven adaptation, one for deep simulation-based comprehension), one signal-processing class, and two foundational learning primitives. **In-universe technical writing, not built systems.** |
+
+### 🎯 Tracking and sensor fusion
+
+| Folder | Description |
+|---|---|
+| [`Filtering/`](Filtering/) | A multi-target Kalman-filter variant for tracking objects whose measurement noise has heavy tails — the kind of noise you get from manoeuvring jets or sensor glitches, where extreme outliers actually happen. Identifies and **fixes a known bug** in the standard recipe used by other researchers, recovering a mean **51.6 % accuracy improvement** across four scenarios. |
+| [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | A single-file intelligence engine that takes radar / visual sensor data on multiple moving targets, fuses it with eight tradecraft heuristics (loiter detection, rendezvous prediction, etc.) plus Dempster–Shafer evidence fusion, and outputs ranked threat estimates in **under 30 milliseconds per scan** on one CPU core. |
+
+### 📐 Mathematics
+
+| Folder | Description |
+|---|---|
+| [`3 to 8 Value Boolean Algebra/`](3%20to%208%20Value%20Boolean%20Algebra/) | A dimension-by-dimension tour of all Boolean functions of n input variables, for `n = 3` through `8`. Exact at small `n` (256 functions for `n = 3`, 65 536 for `n = 4`); sampled at larger `n` where the count balloons to `2²⁵⁶ ≈ 10⁷⁷`. Threaded through to error-correcting codes and Byzantine N-modular fault-tolerance. |
+| [`General Math Papers/`](General%20Math%20Papers/) | Develops the **Logarithmic Complexity Reduction Principle** — a meta-principle (not a theorem) that documents the recurring pattern by which problems naively requiring `n²` operations can be reduced to `n log n` via divide-and-conquer or `n × O(log n)` data structures. Uses the Master Theorem as the decision procedure. |
+| [`GF2 Algebra and Applications/`](GF2%20Algebra%20and%20Applications/) | Seven papers on the algebra of XOR and AND over the binary field. Headline result: **AND is the *only* nontrivial binary operation that forms a ring with XOR**. Extensions include a polynomial form for the AES inverse (`x⁻¹ = x²⁵⁴` is one of 128 permutations on `GF(2⁸)`) and gate-count benchmarks (Rule 110 reduces from 19 gates to 6, a 68 % saving). |
+| [`Math Question Generator/`](Math%20Question%20Generator/) | A program that auto-generates exam-grade mathematics problems across the full Mathematics Subject Classification taxonomy. SymPy and NumPy backbones with 1000-decimal-place precision arithmetic, a 28 GB memory cap, and checkpointing. Comes with a 13-domain landscape survey of the field anchored to **MSC2020**. |
+| [`Prime Number Generator/`](Prime%20Number%20Generator/) | An empirical theory of how the primes are distributed at different number scales. Local rules (divisibility by small primes, the `6k±1` pattern) dominate at small numbers; global rules (the Prime Number Theorem and friends) dominate at large numbers; the crossover happens near **`n* ≈ 836`**. Includes a Miller–Rabin primality test with provable error bounds. |
+
+### 🌌 Physics
+
+| Folder | Description |
+|---|---|
+| [`Physics/`](Physics/) | Two foundations papers. The first proposes a non-local field-gravity unified field theory with explicit advanced and retarded propagation kernels and the structural constraint **`v_field ≤ c`**. The second argues that the apparent faster-than-light recession of distant galaxies (the cosmic microwave background recedes at ∼3.2 c today) reveals a real interpretational split among working General Relativity researchers, not a problem with ΛCDM cosmology. |
+
+### ⚛️ Quantum computing
+
+| Folder | Description |
+|---|---|
+| [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) | A blueprint for a room-temperature quantum computer built from CVD-grown synthetic diamond, using nitrogen-vacancy defects in the crystal lattice as qubits. Paired with an honest barrier inventory — a 10 000 × coherence-time leap is required, no diamond precedent for the proposed topological mechanism, etc. — and a fact-vs-fiction ledger. |
+| [`Quantum Graph Optimisation/`](Quantum%20Graph%20Optimisation/) | A graph-optimisation pipeline that **looks like** a quantum algorithm but runs entirely on classical hardware: spectral compression, Chebyshev encoding, small mean-field QAOA simulation, noise-norm-weighted shot ranking, and spectral lift-back. **No quantum advantage claimed**; it is a classical algorithm shaped by the QAOA recipe. |
+
+### 🧬 Biology and medicine
+
+| Folder | Description |
+|---|---|
+| [`Neural Dust/`](Neural%20Dust/) | A two-tier brain-computer-interface design. **150–250-nanometre nanodiamond quantum sensors** sit on the cell, and **80–150-micrometre ultrasound-powered chips** sit outside it. The whole thing closes a **∼6-nanowatt** power budget within the FDA’s safety limits for medical ultrasound. 15–25-year programme; every component tagged Verified, Plausible, or Speculative. |
+| [`GM Enhancements/`](GM%20Enhancements/) | A speculative human-enhancement protocol (Homo Sapiens Augmentus v4.0). Three phases over 24–34 months, fusing AAV / lipid-nanoparticle delivery, CRISPR editing in three flavours, partial cellular reprogramming via OSK factors, senolytics, and organ bioprinting. Published with a **20–32 %** cumulative serious-adverse-event risk table. **Worldbuilding-purposes-only.** |
+| [`Drugs/`](Drugs/) | Two halves. *Industrial pharmaceutics*: a Universal Depot framework that tunes biodegradable polymers (PLGA / PLA) for slow-release periods from one month to three years, plus reviews of sugar excipients and Poloxamer recipes. *Speculative monographs*: fictional nootropic and antipsychotic compounds, every one banner-flagged. **Not medical advice.** |
+
+### ⚡ Electrical and computer engineering
+
+| Folder | Description |
+|---|---|
+| [`100W Wideband Noise Generator/`](100W%20Wideband%20Noise%20Generator/) | A SystemVerilog hardware design for an RF noise source — a circuit that deliberately produces random radio-frequency signals across a wide band, useful for jamming research, communications testing, and electronic-warfare evaluation. A Chua-circuit chaotic analogue core feeding a four-band power-amplifier chain. Targets **1 Hz to 14 GHz at 100 W continuous**. |
+| [`New Classes of Electrical Components/`](New%20Classes%20of%20Electrical%20Components/) | A four-tier catalogue of 21+ proposed new passive electrical components that combine discrete (digital) and continuous (analogue) behaviour, paired with a five-phase Python simulation programme. Headline: **`2.34 × 10⁹` fused circuit-solves per second on an RTX 3090**, **526 ×** faster inverse-design via adjoint methods, exports to SPICE / Verilog-AMS / SystemC-AMS at < 2.1 % accuracy. |
+| [`CPU/`](CPU/) | A heterogeneous-core CPU design conversation paired with a SystemVerilog sketch of an OS-acceleration block (`os_accelerator`) whose internal hardware-BIOS state machine runs the boot sequence directly in silicon. **16 large out-of-order cores at 4 GHz plus 4 096 small cores**, MOESI cache coherence, hardware-accelerated system calls. Not buildable as written. |
+
+### ☢️ Nuclear engineering
+
+| Folder | Description |
+|---|---|
+| [`Diamond Batterys/`](Diamond%20Batterys/) | An eight-model taxonomy of radioisotope-powered diamond batteries — devices that turn the steady decay of a radioactive isotope embedded in synthetic diamond into a small, very long-lived electric current. Spans from the **demonstrated kilowatt-class Bristol/UKAEA carbon-14 baseline** (December 2024) up to gigawatt-class concepts based on curium-244, americium-242m, or subcritical uranium-235. **Engineering-fiction-grade above the baseline.** |
+
+### 🔥 Metallurgy and welding
+
+| Folder | Description |
+|---|---|
+| [`Diffusion Welding/`](Diffusion%20Welding/) | A welding platform that joins metals **without melting them**, using pressure, electrochemistry, and thermal/ultrasonic energy across five tunable regimes — from a **2-minute, 77 %-strength** field repair, through a **2.3-hour, 99 %-strength** aerospace-certifiable bond. Equipment cost `$8K–$50K`, versus the standard vacuum-diffusion-welding equipment at `$500K–$2M`. |
+| [`Rockwell 50 to 70 Carbide/`](Rockwell%2050%20to%2070%20Carbide/) | A complete carbide cutting-tool platform for hard-machining steels in the Rockwell C 40–70 range — the steels modern aerospace, defence, and tooling actually use. Functionally-graded WC-Co substrate (2050–2100 HV30 working surface), a five-layer coating with a 42–46 GPa hardness core, and a forge-to-machine supply chain that **drops 40–45 % off cost and 65–70 % off lead time** on the H13 breech-bolt exemplar. |
+
+### 💻 Programming languages
+
+| Folder | Description |
+|---|---|
+| [`Future C++/`](Future%20C++/) | A long design-conversation transcript exploring what a “modern compiled language with C++ syntax” might look like — borrow-checking imported from Rust, async/await with green threads, software-transactional memory, richer generics, ADTs and pattern matching, structured exceptions. **No compiler, no formal grammar, no benchmarks**; it is a design document. |
+
+### 🕰️ History of computing
+
+| Folder | Description |
+|---|---|
+| [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) | Three historical computing devices refactored into modern Python with measured benchmarks: Charles Babbage’s Difference Engine (**4.92 ×** speedup), the Antikythera Mechanism’s Fourier reconstruction (**386 ×** speedup), and the WWII-era Torpedo Data Computer (over **a million firing solutions per second** at 0.015° accuracy). |
+
+### ⚖️ Economics
+
+| Folder | Description |
+|---|---|
+| [`Economics/`](Economics/) | The Energy-Resource Economic Model: a macroeconomic framework that measures national wealth in **megajoules** of physically-extractable energy and resources rather than dollars of GDP, and pegs currency issuance to that wealth via `Total_currency = 0.85 × Total_National_Wealth`. Theoretical, version 1.0; asks for empirical validation. |
+
+### 🏛️ Political theory
+
+| Folder | Description |
+|---|---|
+| [`UCN Political System/`](UCN%20Political%20System/) | An eight-paper sovereign-doctrine series for a hypothetical United Commonwealth Nations: Westminster-derived governance, hard-sovereignty economics, a `≤ 10`-warhead minimal nuclear deterrent, a personal-wealth ceiling of **AUD 100 M**, government-manufactured pharmaceutical-grade recreational drugs, and an optional UK – Canada – Australia Crown confederation. **Speculative; every claim referenced.** |
+
+### ⚔️ Military science
+
+| Folder | Description |
+|---|---|
+| [`Battle Sim/`](Battle%20Sim/) | A literature survey and design note that maps the major mathematical traditions for modelling combat — **Hughes salvo equations**, **extended Lanchester equations**, **Markov battle-state chains**, **FATHM linear programming**, and the **Dupuy / TNDM combat-power lineage** — into one comparative reading guide. **Explicitly not an operational simulator.** |
+| [`Weapons/`](Weapons/) | A defence-engineering R&D portfolio, with paired operator spec-sheets and TRP-numbered research papers across small arms (`MP-6.8`, `MAS-15.2E`), heavy weapons (`57 mm` autocannon, `140 mm` tank round), body armour (APES, AlNiCyN, OBSIDIAN), CBRN protection (NACS), tactical acoustic cancellation (35–55 dB depth), and CL-20 high explosive. **Classification banners are stylistic.** |
+
+### 💄 Cosmetics
+
+| Folder | Description |
+|---|---|
+| [`Beauty Products/`](Beauty%20Products/) | A fully-architected cosmeceutical white paper for a hemp-anchored luxury body lotion. **3 : 1** omega-6 : omega-3 hempseed-oil base, Tremella snow-mushroom humectant (~500 × water-holding capacity), prickly-pear / sea-buckthorn / Centella `0.2 %` asiaticoside active stack, `pH 4.8–5.5`, all-natural `3 %` Phase-D preservative system. Fully cited. |
+
+### 🍸 Mixology
+
+| Folder | Description |
+|---|---|
+| [`Cocktails/`](Cocktails/) | Bar operations treated as systems engineering. **Four native-Australian-botanical bases** drive every infusion, syrup, tincture, and bitters across four signature drink series — with parallel zero-proof mirrors, two complete bitters fabrication specs, a 2-hour mushroom-stock plus 4-hour fat-wash protocol, and shift-day-week-month prep workflows. |
+
+### 🛠️ Repository infrastructure
+
+| Folder | Description |
+|---|---|
+| [`docs/`](docs/) | The static website assets behind the public site — `index.html`, shared CSS, the generated `site/` mirror of the markdown content, and the `EDITORIAL_STYLE.md` house style guide. Repository plumbing only. |
+
 
 ---
 
-
-### 🔐 Authenticated encryption (AEAD) — receiver-recomputable nonces over GF(2²⁵⁶)
-
-| Folder | Description |
-|---|---|
-| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | A custom AEAD scheme (Algebraic Resynchronisation and Integrity Architecture) whose nonces are **never transmitted** — receiver re-derives them from the message and a session key, structurally eliminating loss-of-nonce-sync. Three-layer algebraic tower over `GF(2²⁵⁶)` + Meta-DAG RNG entropy pump + dual collision bounds. *Not* the Korean ARIA block cipher. |
-
-### 🔓 Cryptanalytic ML scaffolding — Transformer + Llama distillation + policy-gradient RL
-
-| Folder | Description |
-|---|---|
-| [`Break AES/`](Break%20AES/) | Research scaffolding combining a Transformer student + Llama-teacher knowledge distillation + policy-gradient reinforcement learning with a BLEU-shaped reward — framed as a training stack one might point at AES cryptanalysis. **Not an AES break.** Python skeleton + informal proof-sketch note. |
-
-### 🎲 Pseudo-random number generation — four families, four explicit threat models
-
-| Folder | Description |
-|---|---|
-| [`RNGS/`](RNGS/) | Four genuinely different generator families with explicit threat models: OTB-LCG (Boolean / transcendental + SHA-256 post-processing), SynerChaos v2 (`~80 cycles/output` on Cortex-M4), Meta-DAG RNG (`≥ 2¹⁵³⁶ × 40320` state-space lower bound), Turbulent Flow (`χ² p = 0.582`, avalanche pass rate `> 0.999`). |
-
-### 📦 Information-theoretic compression — Izaac shared-PRF coordination meta-theorem
-
-| Folder | Description |
-|---|---|
-| [`Compression Algorithms/`](Compression%20Algorithms/) | Canonical home of three frameworks: **Izaac** (shared-PRF coordination → free broadcast channel meta-theorem), **GRIA** (graded reversibility coordinate `α(f) = 1 − H(f(X))/H(X)` with bifurcation at `α = 0.5`, `J ≤ 0.951` upper bound), and **NMP** (Nonlinear Matrix Pruning; `α ≈ 0.851 ± 0.122` measured spectral exponent). |
-| [`Izaac as Side Data/`](Izaac%20as%20Side%20Data/) | Twelve concrete protocols operationalising the Izaac meta-theorem. **Bloom filter coordinated by an Izaac shared seed saves `N × 384` bits of message overhead** — for `N = 10⁶`, that is `48 MB` moved off-wire per coordination round. |
-
-### ✅ Formal verification and PAC-style learning — proof-trace certificates, not loss curves
-
-| Folder | Description |
-|---|---|
-| [`Veritas/`](Veritas/) | A learning architecture in which the artefact produced is not loss curves but proof traces. Every learner emits PAC, mistake-bound, meta-learning, and composition certificates. Worked example: function class `\|H\| = 2^(2⁸) = 2²⁵⁶`, sample bound at `ε = δ = 0.01` is `~1.8 × 10⁶` — proven, not hoped. |
-
-### 🎯 Bayesian filtering and multi-target tracking — GH-SR-IMM and PMBM at edge latency
-
-| Folder | Description |
-|---|---|
-| [`Filtering/`](Filtering/) | A heavy-tailed multi-target tracker (Generalised-Hyperbolic Square-Root Interacting-Multiple-Model). The distinguishing contribution is a **GH-JPDA extension that fixes a known bug** in the standard recipe (use the GH posterior covariance inside a Gaussian association likelihood, *not* the GH likelihood directly): mean **`51.6 %` GOSPA improvement** across four scenarios, peaking at `72.8 %`. |
-| [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | A single-file, edge-deployable multi-target tracker and tactical-intelligence engine (ARIA-INTEL). PMBM random-finite-set tracking + three rendezvous predictors + eight tradecraft detectors + Dempster–Shafer fusion, running at **`~28 ms` median scan latency** on a single CPU core. |
-
-### ⏱ Online learning and distributed scheduling — LinTS + PID + CFS at p50 0.48 ms
-
-| Folder | Description |
-|---|---|
-| [`Statistical Scheduler/`](Statistical%20Scheduler/) | A neural-heuristic distributed task scheduler. CFS-style fair-share scoring + Linear Thompson Sampling exploration in 24-D context + PID-controlled stability override + Holt–Winters / CUSUM / EWMA monitoring. **`p50 0.48 ms`** placement latency, **Jain fairness `1.00`**, formal `O(d√T·polylog T)` regret. |
-
-### 🧠 Long-context neural memory — LSH + predictive coding under one free-energy functional
-
-| Folder | Description |
-|---|---|
-| [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) | Unified Hash-Predictive Memory — fuses LSH memory and hierarchical predictive coding under one free-energy functional. **`289 ×` query-latency speedup** vs full attention at `100 K` tokens (`8.1 ms` vs `2 340 ms`); **`744 ×` memory reduction**. |
-
-### 🧬 Non-attention sequence modelling — reaction-diffusion + Hebbian plasticity in the forward pass
-
-| Folder | Description |
-|---|---|
-| [`Cell AI/`](Cell%20AI/) | A biology-motivated sequence-modelling architecture (CellularAI). Replaces self-attention with reaction-diffusion partition dynamics, online Hebbian plasticity *during the forward pass*, and a 27-experiment architecture-search programme (E0 – E26). Honest that v1 doesn't approach transformer perplexity on real corpora. |
-
-### 🔧 Production neural-network engineering — byte-identical Python ↔ C++ parity
-
-| Folder | Description |
-|---|---|
-| [`Cypha/`](Cypha/) | A neural-network inference and training stack (Harmonic Recursive Neural Architecture). Python reference + CMake-built C++ native core + REST server + Qt desktop Studio. **`188` pytest + `33` CTest** parity tests verify Python and native produce *byte-identical* outputs across 13+ named fixtures. |
-
-### ⚡ Neural-network acceleration theory — sixteen techniques unified by Incremental Riemannian Estimation
-
-| Folder | Description |
-|---|---|
-| [`NN Shortcuts/`](NN%20Shortcuts/) | A unifying framework. The Streaming Geometry Framework reduces 16 canonical NN acceleration techniques to one principle (Incremental Riemannian Estimation); the Algebraic Autopsy decomposes a trained network into tropical + Grassmannian + `11 %` dense `(ℝ, +, ×)` content. |
-
-### 🔁 Program understanding via seq2seq — encoder–decoder Transformer + hierarchical memory + MoE
-
-| Folder | Description |
-|---|---|
-| [`Neural Decompiler/`](Neural%20Decompiler/) | Assembly-to-source as conditional sequence modelling. Encoder–decoder Transformer + hierarchical memory + load-balanced mixture-of-experts (binary-focused vs language-focused). Coherent trainable architecture, not a state-of-the-art recovery system. |
-
-### 📊 Classical-statistics language modelling — category theory + Lévy triplets at O(N) training cost
-
-| Folder | Description |
-|---|---|
-| [`Statistical Generation/`](Statistical%20Generation/) | The Universal Statistical Generator — a deterministic, interpretable, classical-statistics framework claiming **`~90 %`** of state-of-the-art neural perplexity on long-context tasks at **`O(N)`** training cost. Built on category theory + Lévy triplets + SHA-256 hash compression to `M = 2³²` states. |
-
-### 🌀 Cybernetics-inspired optimisation — Ashby’s homeostat as a multi-scale black-box optimiser
-
-| Folder | Description |
-|---|---|
-| [`Ashby Optimiser/`](Ashby%20Optimiser/) | W. Ross Ashby's 1948 homeostat reframed as a black-box optimiser. Parallel search units at geometrically-spaced radii, strict round-robin scheduling, homeostatic restarts on stagnation. On Rastrigin dim 10 with 500 evals: multi-scale **`0.002`** vs single-scale **`74.7`**. |
-
-### 🦠 Immune-inspired pattern recognition — V(D)J recombination as a combinatorial algorithm
-
-| Folder | Description |
-|---|---|
-| [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition derived from V(D)J recombination in the vertebrate immune system. Five primary modules + seven subsystems through a typed `Pattern` dataclass. **`~13 ms` at `n = 16, r = 5`** with a `< 1 MB` peak memory footprint. CPU-only. |
-
-### 🍄 Bio-inspired self-organising networks — topology *is* the long-term memory
-
-| Folder | Description |
-|---|---|
-| [`Fungal Network Algorithm/`](Fungal%20Network%20Algorithm/) | Pattern recognition through physical network reorganisation, modelled on how fungi search for food without central control. The topology *itself* is the long-term memory; weights and edges are consequences of input history. Decentralised, emergent. |
-
-### 👾 Speculative AI ontology — APN, GPN, and the URLS learning primitives
-
-| Folder | Description |
-|---|---|
-| [`UCN AIs/`](UCN%20AIs/) | Two flagship classes — Any Purpose Network (measurement-based, fast adaptation) and General Purpose Network (simulation-based, deep comprehension); one signal-processing class (Universal Resonance Learning System); and two foundational learning primitives. In-universe technical writing, not built systems. |
-
-### 📐 Boolean function spaces — dimensional emergence for n = 3..8
-
-| Folder | Description |
-|---|---|
-| [`3 to 8 Value Boolean Algebra/`](3%20to%208%20Value%20Boolean%20Algebra/) | Dimension-by-dimension narrative of the full Boolean function spaces `f : {0,1}ⁿ → {0,1}` for `n = 3 – 8` — exact at small `n` (`256` at `n = 3`, `65 536` at `n = 4`), sampled at large `n` (`2²⁵⁶ ≈ 1.16 × 10⁷⁷` at `n = 8`). Threaded through to error-correcting codes, Byzantine NMR, AES-S-box-style nonlinearity. |
-
-### 🔢 Finite-field algebra over GF(2) — ring-uniqueness theorem + ANF gate-count benchmarks
-
-| Folder | Description |
-|---|---|
-| [`GF2 Algebra and Applications/`](GF2%20Algebra%20and%20Applications/) | A seven-paper sweep starting with an exhaustive computer-verified taxonomy of all 16 binary operations on `{0, 1}`. Proves: **AND is the *only* nontrivial operation forming a ring with XOR over GF(2)**. AES-inverse permutation polynomial (`x⁻¹ = x²⁵⁴` is `1 of 128` permutations on `GF(2⁸)`). Gate-count benchmarks (Rule 110: `19 → 6` gates, `68 %` reduction). Differentiable Logic Gate Networks. |
-
-### ⏳ Algorithmic-complexity meta-theory — the Logarithmic Complexity Reduction Principle
-
-| Folder | Description |
-|---|---|
-| [`General Math Papers/`](General%20Math%20Papers/) | The Logarithmic Complexity Reduction Principle (LCRP) — a meta-principle, not a theorem, that documents the recurring pattern by which naively `Ω(n²)` problems admit `O(n log n)` algorithms via divide-and-conquer or `O(log n)`-per-element data structures. Master Theorem case analysis as the decision procedure. |
-
-### ✏️ Curriculum-grade mathematics generation — MegaMathGen + MSC2020 13-domain survey
-
-| Folder | Description |
-|---|---|
-| [`Math Question Generator/`](Math%20Question%20Generator/) | MegaMathGen — a multi-thousand-line generator for curriculum-grade math problems across the full mathematics-classification taxonomy. SymPy + NumPy + 1000-decimal-place precision arithmetic, `28 GB` memory cap, checkpointing. Paired with a 13-domain landscape survey anchored to MSC2020. |
-
-### 🔷 Empirical prime-pattern theory — scale-dependent local/global crossover at n* ≈ 836
-
-| Folder | Description |
-|---|---|
-| [`Prime Number Generator/`](Prime%20Number%20Generator/) | An empirical scale-dependent meta-pattern theory of primes. Local divisibility / 6k±1 effects and global PNT-style gap heuristics make different scale-dependent contributions, crossing over at **`n* ≈ 836`** (`s* = log₁₀ n ≈ 2.92`) under a fitted `α(s) = s^(−0.37)` law. Hybrid Miller–Rabin (`k = 20`, error `≤ 9 × 10⁻¹³`). |
-
-### 🌌 Theoretical physics and cosmology — non-local field-gravity UFT + superluminal recession
-
-| Folder | Description |
-|---|---|
-| [`Physics/`](Physics/) | Two distinct papers. **NLFGN-UFT** (Non-Local Field-Gravity Network Unified Field Theory) — non-local network-augmented gravity with explicit advanced + retarded kernels and the structural claim **`v_field ≤ c`**. **Superluminal Recession** — argues that apparent FTL galaxy recession (`v_rec > c` at `z ≈ 1.46`, CMB at `~3.2 c` today) exposes a real interpretational split between rigorous GR-based positions, not a failed ΛCDM fit. |
-
-### 💎 NV-centre quantum-computing substrates — CVD-grown Quantum Diamond Metamaterial Processor
-
-| Folder | Description |
-|---|---|
-| [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) | An aspirational CVD-grown Quantum Diamond Metamaterial Processor (QDMP) — paired with a sober companion paper arguing near-term wins live in sensors / hybrid memory / QKD nodes, not room-temperature processors. Targets `T₂ > 100 s` at room temperature (`~10⁴ ×` over `~3 ms` current); seven barriers explicitly enumerated; fact-vs-fiction ledger. |
-
-### ⚛️ Hybrid quantum-classical optimisation — spectral-Laplacian QAOA-shaped graph pipeline
-
-| Folder | Description |
-|---|---|
-| [`Quantum Graph Optimisation/`](Quantum%20Graph%20Optimisation/) | A fully-classical, quantum-shaped graph-optimisation pipeline. Five layers — spectral Laplacian compression → Chebyshev coefficient encoding → small exact (or mean-field) QAOA simulation → noise-norm-weighted shot ranking → spectral lift-back — with verification functions for each. No hardware, no quantum-advantage claim. |
-
-### 🧪 Neuro-biomedical interface engineering — two-tier Neural Quantum Dust on FDA ultrasound
-
-| Folder | Description |
-|---|---|
-| [`Neural Dust/`](Neural%20Dust/) | Neural Quantum Dust (NQD), a two-tier neural-interface architecture: `150 – 250 nm` NV-nanodiamond quantum sensors + `80 – 150 µm` ultrasound-powered CMOS motes. Closes a **`~6 nW`** power budget on FDA-compliant ultrasound (`MI ~ 0.4` vs limit `0.7`), with `~2 – 3 nT/√Hz` magnetometry. **`15 – 25 year`** programme, every component tagged Verified / Plausible / Speculative. |
-
-### 💉 Genetic-modification and longevity protocols — three-phase Homo Sapiens Augmentus v4.0
-
-| Folder | Description |
-|---|---|
-| [`GM Enhancements/`](GM%20Enhancements/) | Homo Sapiens Augmentus (HSA) v4.0 — a three-phase **`24 – 34 month`** speculative protocol fusing AAV / LNP / lentiviral delivery, CRISPRa/i + base + prime editing, OSK partial reprogramming, senolytics, and organ-bioprinting. Published with **`~20 – 32 %`** cumulative SAE risk table. **Worldbuilding-purposes-only** banner. |
-
-### 💊 Pharmaceutical formulation — Universal Depot framework + speculative nootropic monographs
-
-| Folder | Description |
-|---|---|
-| [`Drugs/`](Drugs/) | A split folder. *Industrial* pharmaceutics playbooks (Universal Depot framework with PLGA tuning bands `50:50 10–25 kDa` for `1–3 month` release through to `PLA 100–300 kDa` for `12–36 month`, sugar-excipient review, Poloxamer / ISFD recipes) live alongside *speculative* monographs (`COGNIMAX-PRO`, `NeuroBridge-7`, `MetaMax-2034`). Every speculative compound is banner-flagged. **Not medical advice.** |
-
-### 📻 Radio-frequency electronics — Verilog Chua-circuit 100 W, 1 Hz–14 GHz noise generator
-
-| Folder | Description |
-|---|---|
-| [`100W Wideband Noise Generator/`](100W%20Wideband%20Noise%20Generator/) | A single SystemVerilog file orchestrating a Chua-circuit chaotic analogue core, four-band RF power-amplifier chain, 12-bit programmable supply DAC, eight-channel thermal ADC, and hard-protection state machine. Banner targets: **`1 Hz – 14 GHz`** (hardware-dependent), **`100 W`** continuous output, sub-microsecond fault response. |
-
-### 🖥️ Computer architecture and HDL design — heterogeneous many-core + `os_accelerator` block
-
-| Folder | Description |
-|---|---|
-| [`CPU/`](CPU/) | A heterogeneous many-core CPU design conversation paired with a SystemVerilog sketch of an `os_accelerator` whose inner `hardware_bios` state machine runs `POWER_ON_SELF_TEST → HARDWARE_INIT → MEMORY_TEST → BOOT_SEQUENCE → SYSTEM_INIT → OS_HANDOFF`. **`16` big OOO cores at 4 GHz + `4 096` small cores**, MOESI cache coherence, hardware-accelerated syscalls. Not buildable as written. |
-
-### ☢️ Radioisotope diamond batteries — eight-model Series A–D taxonomy, kW to GW
-
-| Folder | Description |
-|---|---|
-| [`Diamond Batterys/`](Diamond%20Batterys/) | An eight-model taxonomy (Series A – D) of radioisotope diamond batteries from the demonstrated `~kW`-class Bristol/UKAEA C-14 baseline (Dec 2024) up to `GW`-class Cm-244 / Am-242m / U-235 subcritical concepts. Engineering-fiction-grade; explicitly hypothetical. |
-
-### 🔥 Diffusion bonding and metallurgical joining — UCDW five-regime electrochemical tradespace
-
-| Folder | Description |
-|---|---|
-| [`Diffusion Welding/`](Diffusion%20Welding/) | Ultra-Compact Diffusion Welding (UCDW) — a five-regime tradespace from **`2-min / 77 %`-strength** battlefield repairs to **`2.3-hour / 99 %`-strength** aerospace-certifiable bonds, on the same chemistry / electrode set / control logic. Equipment cost `$8K – $50K` vs incumbent vacuum diffusion welding's `$500K – $2M`. |
-
-### ⚙️ Cutting-tool metallurgy — HX-70 GradePlex + TriboshieldPlus for HRC 40–70
-
-| Folder | Description |
-|---|---|
-| [`Rockwell 50 to 70 Carbide/`](Rockwell%2050%20to%2070%20Carbide/) | A complete carbide-tooling platform for hard-machining steels `HRC 40 – 70` — HX-70 GradePlex functionally-graded WC-Co substrate (`2050 – 2100 HV30` working surface), TriboshieldPlus 5-layer coating (`42 – 46 GPa` hardness core, `µ < 0.15`), and a forge-to-machine supply chain that drops `40 – 45 %` of cost and `65 – 70 %` of lead time on the H13-breech exemplar. |
-
-### 🔌 Passive-component physics — four-tier discrete–continuous hybrid device catalogue + simulator
-
-| Folder | Description |
-|---|---|
-| [`New Classes of Electrical Components/`](New%20Classes%20of%20Electrical%20Components/) | A four-tier catalogue of `≥ 21` discrete-continuous hybrid passive devices, paired with a five-phase Python simulation programme. Headline simulator claims: **`2.34 × 10⁹` fused solves/s on RTX 3090**, **`526 ×` adjoint-method inverse-design speedup**, SPICE / Verilog-AMS / SystemC-AMS export at `< 2.1 %` accuracy. |
-
-### 🕰️ Historical-machine algorithm rebuilds — Babbage / Antikythera / Torpedo Data Computer
-
-| Folder | Description |
-|---|---|
-| [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) | Three historical computing machines refactored into modern Python with measured benchmarks: **Babbage Difference Engine `4.92 ×` speedup**, **Antikythera Fourier reconstruction `386 ×` speedup**, **digital Torpedo Data Computer `> 10⁶ solutions/s` at `±0.015°`**. |
-
-### 💻 Programming-language design — a successor-to-C++ design conversation
-
-| Folder | Description |
-|---|---|
-| [`Future C++/`](Future%20C++/) | A long design-conversation transcript exploring what a "modern compiled language with C++ syntax" might look like — borrow-checking from Rust, async/await + green threads, software-transactional memory, richer generics + ADTs + pattern matching. No compiler, no grammar, no benchmarks. |
-
-### ⚖️ Macroeconomic theory — Energy-Resource Economic Model in megajoules of national wealth
-
-| Folder | Description |
-|---|---|
-| [`Economics/`](Economics/) | The Energy-Resource Economic Model (EREM) — measures national wealth in **megajoules of Total National Wealth (TNW)** rather than GDP, issues currency at **`Total_currency = k · TNW`** with `k = 0.85` (`15 %` measurement buffer), defines exchange rate as the directly-comparable per-capita TNW ratio. Theoretical / v1.0; asks for empirical validation. |
-
-### 🏛️ Sovereign-doctrine policy research — eight-paper United Commonwealth Nations series
-
-| Folder | Description |
-|---|---|
-| [`UCN Political System/`](UCN%20Political%20System/) | The eight-paper United Commonwealth Nations doctrine series — modular Westminster++ governance, hard-sovereignty economics, `≤ 10`-warhead minimal nuclear deterrent, `AUD 100M` personal wealth ceiling, government-manufactured pharma-grade recreational drugs, optional UK – Canada – Australia Crown confederation. Speculative; every claim is referenced. |
-
-### ⚔️ Mathematical combat modelling — Lanchester / Hughes / Markov / FATHM literature map
-
-| Folder | Description |
-|---|---|
-| [`Battle Sim/`](Battle%20Sim/) | A survey-and-design note that maps the modern mathematical-modelling landscape for combat — Hughes salvo equations, extended Lanchester, Markov battle-state chains, FATHM linear programming, Dupuy / TNDM combat-power lineage — into one comparative reading map. **Explicitly not an operational simulator.** |
-
-### 🛡️ Defence-systems engineering portfolio — small arms, armour, CBRN, acoustic cancellation, CL-20
-
-| Folder | Description |
-|---|---|
-| [`Weapons/`](Weapons/) | A defence-engineering R&D portfolio with paired operator-spec-sheets and TRP-numbered research papers across small-arms (`MP-6.8`, `MAS-15.2E`), heavy weapons (`57mm` autocannon, `140mm` tank round), body armour (APES, AlNiCyN, OBSIDIAN family), CBRN protection (NACS), tactical acoustic cancellation (TACS at `35 – 55 dB` depth), and CL-20 high explosive. Classification banners are stylistic. |
-
-### 💄 Cosmeceutical formulation — hemp-anchored luxury body lotion, fully cited white paper
-
-| Folder | Description |
-|---|---|
-| [`Beauty Products/`](Beauty%20Products/) | A fully-architected cosmeceutical white paper for a hemp-anchored luxury body lotion — `3 : 1` omega-6 : omega-3 hempseed-oil base, Tremella-snow-mushroom humectant (`~500 ×` water-holding capacity), prickly-pear / sea-buckthorn / Centella `0.2 %` asiaticoside active stack, `pH 4.8 – 5.5`, all-natural `3 %` Phase-D preservative system. Fully cited. |
-
-### 🍸 Bar operations as systems engineering — native-Australian-botanical platform
-
-| Folder | Description |
-|---|---|
-| [`Cocktails/`](Cocktails/) | A bar-operations system treated as a product platform — four native-Australian-botanical bases driving every infusion / syrup / tincture / bitters across four signature series with parallel zero-proof mirrors, two complete bitters fabrication specs, a `2-hour` mushroom stock + `4-hour` fat-wash protocol, and a shift / day / week / month prep workflow. |
-
-### 🛠️ Repository infrastructure — site assets, CSS, and editorial style
-
-| Folder | Description |
-|---|---|
-| [`docs/`](docs/) | Static-site assets for the public site: `index.html`, shared CSS, generated `site/` mirror, and the `EDITORIAL_STYLE.md` house style guide. Repository plumbing only. |
-
----
 
 ## 🔤 A–Z folder index
 
