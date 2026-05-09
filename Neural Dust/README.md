@@ -1,89 +1,104 @@
-# Neural Dust — Miniaturised Sensing and Stimulation
+# Neural Dust — Neural Quantum Dust (NQD) two-tier architecture
 
-> **✨ Overview**: **NQD** — where neural nets meet "quantum dust" as an architectural metaphor; one coherent paper arc.
-
----
-
-## ✨ Overview
-
-**Neural Dust** explores miniaturised sensing and stimulation systems for neural interfaces. This work combines nanotechnology, signal processing, and neural engineering to create systems at the "quantum dust" scale — tiny devices that can sense and stimulate at the neural level.
-
-### Key Concepts
-
-- **NQD**: Neural Quantum Dust — miniaturised neural interfaces
-- **Sensing**: Neural activity detection at micro-scale
-- **Stimulation**: Precise neural activation
-- **Architectural Metaphor**: Dust-like distributed architecture
+> **A specific, named architecture — not a metaphor.** This folder documents **NQD = Neural Quantum Dust**, a two-tier hybrid quantum-acoustic neural interface built around fluorescent nanodiamond NV-centre quantum sensors at the cellular scale and ultrasonic-powered CMOS motes at the sub-millimetre scale. Inspired by, and explicitly grounded in, the original Neural Dust specification.
 
 ---
 
-## 📄 Research Papers
+## 🧠 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`research_paper.md`](research_paper.md) | Full NQD research paper with comprehensive coverage |
+A single long-form architecture document describing the NQD system in full: physics, fabrication, deployment, OS-style protocol stack, and clinical roadmap. Every component is tagged with one of three readiness markers: **Verified** (already demonstrated), **Plausible** (physically consistent, not yet demonstrated), or **Speculative** (long-range, valid physics).
 
 ---
 
-## 🔬 System Components
+## 📄 Files
 
-| Component | Description |
-|-----------|-------|
-| **Sensor Array** | Distributed sensing at micro-scale |
-| **Signal Processing** | Miniaturised signal extraction |
-| **Stimulator Array** | Distributed stimulation delivery |
-| **Communication** | Low-power wireless communication |
+| File | Role |
+|------|------|
+| [`NQD_Neural_Quantum_Dust_Architecture.md`](NQD_Neural_Quantum_Dust_Architecture.md) | Full architecture paper — Tier 1 QND + Tier 2 APEX + Wearable Transceiver Array (WTA), with mathematics, fabrication specs, deployment protocols, OS model, clinical roadmap, references |
 
----
-
-## 📊 Technical Specifications
-
-| Specification | Value | Notes |
-|--|--|--|
-| **Device Size** | <1mm³ | Quantum dust scale |
-| **Power Consumption** | <1μW | Ultra-low power |
-| **Sensitivity** | <1mV | Micro-voltage detection |
-| **Latency** | <1ms | Near-instantaneous |
+(This is the only paper in the folder. Earlier README copy referenced a generic `research_paper.md` — that file does not exist.)
 
 ---
 
-## 💡 Use Cases
+## 🏗 The two-tier architecture
 
-- **Medical Monitoring**: Continuous health monitoring
-- **Neural Prosthetics**: Restoring damaged neural pathways
-- **Brain-Computer Interfaces**: High-bandwidth BCIs
-- **Research Tools**: Investigating neural mechanisms
+The core insight: no single device can simultaneously satisfy quantum coherence, electronic complexity, ultrasonic power harvesting, and biological minimalism at the same physical scale. NQD therefore separates these into two cooperating device classes plus an external wearable.
 
----
+| Tier | Device | Scale | Role |
+|------|--------|-------|------|
+| **Tier 1** | **QND — Quantum Nanodiamond** | 150–250 nm | Quantum sensing, nuclear-spin memory, biomarker detection |
+| **Tier 2** | **APEX — Acoustic Processing & Exchange** mote | 80–150 µm | Ultrasonic power harvest, optical readout of nearby QNDs, signal processing, neural stimulation, acoustic backscatter comms |
+| **External** | **WTA — Wearable Transceiver Array** | wearable patch | Beamformed ultrasonic power delivery, data aggregation, real-time processing |
 
-## 🔗 Related Work
-
-This work connects to:
-- **Compression Algorithms** — Information compression at micro-scale
-- **Cell AI** — Modular agent architectures
-- **Long Reasoning and Thinking NN** — Extended reasoning
-- **Cypha** — Signal processing
-- **Veritas** — Formal verification
+Deployment density: ~10³ QND particles per mm³ (quantum magnetometry coverage), ~1 APEX mote per 0.5–1 mm³. A 10 cm³ cortical target volume → ~10⁶ QND + ~10⁴ APEX. QNDs delivered IV with transferrin-receptor BBB transcytosis; APEX motes via stereotactic needle injection.
 
 ---
 
-## 📖 See Also
+## 🔬 Tier 1 — Quantum Nanodiamond (QND)
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Cell AI/`](../Cell%20AI/) — agent architectures
-- [`Cypha/`](../Cypha/) — signal processing
-- [`Veritas/`](../Veritas/) — formal verification
+Synthetic fluorescent nanodiamond, isotopically purified (≥ 99.99 % ¹²C), with NV centres and a multi-layer surface engineering stack:
+
+1. **Isotopically purified diamond core** (150–200 nm) — 1–5 NV per particle, T₂* 10–100 µs bare, T₂ 0.5–4.3 ms with CPMG-16 at 37 °C, ¹⁴N nuclear spin T₂ 0.9–100 ms.
+2. **Hydrogen-terminated surface** (0.5 nm) — negative electron affinity, NV⁻ stabilisation.
+3. **Carboxyl / HPG functionalisation** (1–2 nm) — cell-population-specific uptake; mixed surface for primary deployment (HPG + anti-TfR1 + anti-NeuN).
+4. **PEG-2000 anti-fouling brush** (2–3 nm) — extends plasma half-life from minutes to hours.
+
+Sensing capabilities (with single-NV / few-NV physics):
+
+| Sensing modality | Sensitivity | Use |
+|------------------|-------------|------|
+| DC magnetometry (Ramsey) | ~3 nT/√Hz single NV; ~2 nT/√Hz with 3 NVs | Action-potential detection at 5–10 µm proximity |
+| Thermometry (zero-field-splitting shift) | ~10 mK/√Hz | Neural-metabolic mapping |
+| Electric field (Stark shift) | ~1 mV/µm/√Hz | Extracellular AP amplitude detection |
+| Nuclear-spin quantum memory | ¹⁴N register, T₂ 0.9–100 ms at 37 °C | Genuine quantum memory at body temperature |
+
+**Verified anchors:** NV magnetic sensitivity for action-potential detection has been demonstrated in TIRF-ODMR experiments (ACS AMI 2024); intracellular NV thermometry/magnetometry shown in Discover Nano 2025; IV-injectable nanodiamond uptake demonstrated in non-human primates at up to 25 mg/kg with no organ dysfunction (PNAS Nexus 2024).
 
 ---
 
-## 🛡️ About This Project
+## ⚙️ Tier 2 — APEX mote
 
-This project explores **miniaturised neural interfaces**. The goal is to:
-- Develop ultra-miniaturised sensing devices
-- Enable distributed neural stimulation
-- Support medical applications
-- Advance neural interface technology
+80–150 µm aluminium-nitride piezoelectric + 65 nm CMOS hybrid on a parylene-C flexible substrate. Functions:
+
+- **Power harvest** from external ultrasound at sub-µW–nW levels.
+- **Optical readout** of surrounding QND fluorescence.
+- **Local signal processing** in CMOS.
+- **Neural stimulation** when targeted by the WTA.
+- **Acoustic backscatter** communication to the WTA.
+
+Targets in the paper include nW-scale harvest, ~0.24 mm³ device volume, retrievable via minimally invasive procedure.
+
+---
+
+## 📡 External — Wearable Transceiver Array (WTA)
+
+Patch-form ultrasonic phased array providing beamformed power delivery, data aggregation, and host-side real-time processing.
+
+---
+
+## 🧪 Five non-negotiable design principles (from §1.1)
+
+1. Minimum footprint per unit of capability.
+2. Power autonomy — no batteries, no transcranial wires, no tethers.
+3. Quantum-classical hybrid processing — NV register used **only** for tasks where quantum mechanics gives a decisive advantage (nanoscale magnetometry, thermometry, coherent memory).
+4. Graceful degradability — spatial redundancy, independent per-node operation.
+5. Biological reversibility — Tier 1 QNDs metabolically cleared on a 2–4 week timescale; Tier 2 APEX motes retrievable.
+
+---
+
+## 🚧 Honest framing
+
+The paper itself uses the **Verified / Plausible / Speculative** legend on every component. Several key building blocks (single-AP NV detection in vivo, isotopically purified IV-injectable FNDs, APEX-scale ultrasonic CMOS motes) are individually demonstrated in literature; the integrated NQD system is a design proposal, not a built device.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — QDMP and CVD work share the NV-centre / isotopically-purified-diamond material base
+- [`Diamond Batterys/`](../Diamond%20Batterys/) — same diamond / NV physics applied to power conversion rather than biomedical sensing
+- [`Cell AI/`](../Cell%20AI/) — biological-substrate inspiration for distributed neural compute
+- [`Cypha/`](../Cypha/) — signal-processing / ML stack relevant to backend processing of neural sensor data
+
+---
 
 [← Back to main README](../README.md)

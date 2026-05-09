@@ -1,111 +1,107 @@
-# GM Enhancements — Human–System Augmentation (HSA) Research
+# GM Enhancements — Homo Sapiens Augmentus (HSA) Protocol v4.0
 
-> **🧬 Overview**: **HSA** — human–system augmentation protocols and research memos at the boundary of training and ops.
-
----
-
-## 🧬 Overview
-
-**GM Enhancements** explores human-system augmentation (HSA) research, focusing on protocols and techniques that enhance human cognitive and physical performance through technology integration. This work sits at the boundary of training methodologies and operational effectiveness.
-
-### Key Concepts
-
-- **HSA Protocol**: Human–System Augmentation protocol for cognitive enhancement
-- **FoxO3 Longevity**: Leveraging longevity pathways for cognitive resilience
-- **Three-Phase Architecture**: Progressive augmentation from foundation to advanced
-- **Milestones**: Defined capability progression points
+> **Theoretical multi-domain biological enhancement framework.** HSA = **Homo Sapiens Augmentus**: a three-phase, 24–34-month protocol synthesising AAV gene therapy, CRISPR base/prime editing, OSK epigenetic rejuvenation, senolytics, organ bioprinting, and Phase III sensory/environmental augmentation. Strictly a research framework — not clinical guidance.
 
 ---
 
-## 📄 Research Papers
+## 🧬 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`HSA_Research_Paper_v1.md`](HSA_Research_Paper_v1.md) | Comprehensive HSA research paper with full theoretical and experimental coverage |
-| [`HSA_Protocol_v4.md`](HSA_Protocol_v4.md) | HSA Protocol v4.0 specification with implementation guidance |
+A single research-paper-plus-protocol pair documenting **HSA v4.0**, a sequenced framework for systematic, multi-domain enhancement of the human organism. Every module is grounded in cited 2024–2026 literature (PEARL rapamycin trial, UAB Klotho AAV9 lifespan extension, HUMBLE brown-fat engineering, REST/NRSF neuroprotection, OSK Yamanaka cycling, the Berlin/London/Düsseldorf/Geneva CCR5Δ32 patient series, etc.). Where the science is mature the protocol says so; where it is at rodent / theoretical stage, it says that too.
 
----
-
-## 📋 Protocol Structure
-
-### Phase I — Foundation
-
-- **Basic Enhancement**: Foundational cognitive improvements
-- **Safety Protocols**: Initial safety guidelines and limits
-- **Training Methods**: Basic training regimens
-
-### Phase II — Intermediate
-
-- **Advanced Enhancement**: Higher-level cognitive improvements
-- **Integration**: System integration techniques
-- **Stress Testing**: Performance under adverse conditions
-
-### Phase III — Advanced
-
-- **Expert Enhancement**: Peak cognitive performance
-- **Specialisation**: Domain-specific optimisation
-- **Long-term Safety**: Extended protocol use considerations
+The acronym **HSA = Homo Sapiens Augmentus** is established in the title pages of both source documents. Earlier README copy expanded HSA as "Human-System Augmentation" — that gloss is not from the source and has been corrected.
 
 ---
 
-## 📊 Milestone Capabilities
+## 📄 Files
 
-| Phase | Capability | Duration | Notes |
-|--|--|--|--|
-| **I** | Foundational enhancement | 4-8 weeks | Basic protocol adherence |
-| **II** | Intermediate enhancement | 3-6 months | Integration complete |
-| **III** | Expert performance | 6-12 months | Full system integration |
+| File | Role |
+|------|------|
+| [`HSA_Research_Paper_v1.md`](HSA_Research_Paper_v1.md) | Full research paper — theoretical framework, paper-style narrative, references |
+| [`HSA_Protocol_v4.md`](HSA_Protocol_v4.md) | Implementation protocol — phase tables, intervention stacks, monitoring, risk architecture |
 
----
-
-## 🔬 Research Focus Areas
-
-- **Cognitive Enhancement**: Memory, attention, processing speed
-- **Stress Resilience**: Maintaining performance under pressure
-- **Fatigue Management**: Combating cognitive decline
-- **Longevity Integration**: Applying longevity science to performance
+Both documents are dated **March 2026** and explicitly framed as theoretical / proposed implementation.
 
 ---
 
-## 🔗 Related Work
+## 🗓 Three phases (with real timelines, from the source)
 
-This work connects to:
-- **Compression Algorithms** — Information compression and efficiency
-- **Cell AI** — Modular systems and agent architectures
-- **Long Reasoning and Thinking NN** — Extended cognitive planning
-- **Neural Dust** — Miniaturised sensing and stimulation
-- **Veritas** — Formal verification of enhancement protocols
+| Phase | Duration | Biological objective | Representative interventions |
+|-------|----------|---------------------|-------------------------------|
+| **Phase I — Foundation** | ~6 months | Optimise cellular energy and stress-response landscape so later interventions are tolerated | AAV9 CRISPRa for PGC-1α / TFAM / Complex I; NAD⁺ (NAMPT CRISPRa, CD38 CRISPRi); antioxidant programme (NRF2/KEAP1, SOD1-3, Catalase); NK / Treg immune baseline; initial senolytics |
+| **Phase II — Regeneration & Longevity** | ~8–10 months | Pay down accumulated biological debt; restore organism toward a younger biological state | Inducible OSK epigenetic rejuvenation; multi-mechanism senolysis (D+Q pulsing); conditional TERT activation; Klotho + GDF11 systemic delivery; targeted bioprinting across 11 tissue classes; CCR5Δ32 HSC editing; mTORC1 modulation |
+| **Phase III — Advanced Enhancement** | ~10–14 months | Layer expansion capabilities onto a stabilised, rejuvenated substrate | Sensory expansion (UV opsin, IR TRPA1, electroreception via platypus VGCC, magnetoreception via avian cryptochrome); thermogenic adipose reprogramming (HUMBLE); skin / gut barrier fortification; Dsup radiation tolerance; AFP cold tolerance; HSP104 stress proteins |
 
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Cell AI/`](../Cell%20AI/) — modular systems
-- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — extended planning
-- [`Neural Dust/`](../Neural%20Dust/) — miniaturised systems
+**Total active programme:** 24–34 months. **Estimated cumulative serious-adverse-event (SAE) probability across the programme: 20–32 %**, anchored to least-validated component per module.
 
 ---
 
-## 🛡️ About This Project
+## 🎯 Ten enhancement domains (Table from §1.3)
 
-This project exists for **research and educational purposes**. The goal is to:
-- Explore human-system augmentation techniques
-- Understand the limits and benefits of enhancement
-- Develop safe and effective augmentation protocols
-- Consider ethical implications of cognitive enhancement
-
-**Note**: HSA research is theoretical and experimental. Always consult medical professionals before attempting any enhancement protocol.
+| Domain | Primary phase | Primary mechanism |
+|--------|---------------|-------------------|
+| Mitochondrial energetics | Phase I | AAV9 CRISPRa — PGC-1α, TFAM, Complex I |
+| NAD⁺ / sirtuin axis | Phase I | CRISPRa NAMPT; CRISPRi CD38; SIRT1/3/6 |
+| Antioxidant systems | Phase I | CRISPRa SOD1-3, Catalase, NRF2/KEAP1 |
+| Immune architecture | Phases I–II | NK expansion; CCR5Δ32; thymus bioprint |
+| Skeletal integrity | Phases I–III | LRP5 G171V; SOST CRISPRi; RANKL/OPG |
+| Neural hardware | Phases I–III | Myelin CRISPRa; Klotho; BDNF; crocodile Hb variant |
+| Longevity / senescence | Phase II | OSK; senolytics; TERT; Klotho; GDF11 |
+| Regenerative capacity | Phase II | Axolotl FGF; MRL mouse signature; Lin28A |
+| Sensory expansion | Phase III | UV opsin; IR TRPA1; electroreception; Piezo2 |
+| Environmental resilience | Phase III | AFP antifreeze; Dsup; HSP104; EPAS1 |
 
 ---
 
-## 💡 Key Takeaways
+## 🛠 Delivery system architecture (six modalities)
 
-1. **Progressive Enhancement**: Start with foundational capabilities
-2. **Safety First**: Always prioritise health and safety
-3. **Evidence-Based**: Ground techniques in research and data
-4. **Ethical Consideration**: Respect cognitive liberty and autonomy
+| Modality | Primary targets | Cargo limit | Reversibility | Key risk |
+|----------|------------------|-------------|---------------|----------|
+| AAV9 IV/ICV | CNS, cardiac, skeletal muscle, systemic | ~4.7 kb | Natural decay 3–5 yr | Pre-existing NAb; dose-dependent hepatotoxicity |
+| AAV8 IV | Liver, immune, systemic | ~4.7 kb | Natural decay | Hepatotoxicity at high titre |
+| AAV2 subretinal | RPE, photoreceptors | ~4.7 kb | Natural decay | Localised inflammation |
+| LNP / lipid nanoparticles | Hepatic, immune, mRNA payloads | larger payloads | Transient | Innate immune activation |
+| Lentiviral (ex vivo) | HSPC, T-cells | larger | Permanent integration | Insertional mutagenesis |
+| 3D bioprinting | Tissue-class specific | n/a | Surgical removal | Vascularisation, immune integration |
+
+(Full table in `HSA_Protocol_v4.md`.)
+
+---
+
+## 🧪 Four evidential tiers
+
+The protocol explicitly tags each module by evidence level so the risk frame stays honest:
+
+- **Tier 1** — human clinical data (e.g., dasatinib + quercetin senolytic pulsing, rapamycin mTOR modulation, AAV9-mediated CRISPRa).
+- **Tier 2** — non-human primate or robust rodent data with clear human translatability.
+- **Tier 3** — rodent or lower-organism proof of concept with plausible human application.
+- **Tier 4** — mechanistically grounded theoretical proposal; no direct mammalian validation (e.g., heterologous opsin sensory expansion, magnetoreception via avian cryptochrome integration).
+
+Risk estimates widen with tier number; the SAE band (20–32 %) is anchored to the least-validated component in each module.
+
+---
+
+## 🔬 Defence-relevance note (from paper §8.5)
+
+The source explicitly discusses dual-use / military applicability of Phase III modules — radiation tolerance (Dsup), toxin resistance, sleep compression, sensory expansion, environmental resilience — in the context of DARPA BTO and DSTL operational interest. The protocol is presented as a research framework only; ethical and regulatory questions are out of scope here.
+
+---
+
+## 🚧 Limitations explicitly called out in the source
+
+- Phase I SAE band: 6–10 %.
+- Phases II + III SAE bands escalate; full-programme SAE 20–32 %.
+- Phase III modules tagged Tier 4 (sensory / magnetoreception / electroreception via heterologous protein insertion) have **no direct mammalian validation**.
+- The protocol does **not** address access, regulation, or equity questions; those are flagged as out of scope.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Drugs/`](../Drugs/) — depot pharmacology and pharma-research framework relevant to long-acting delivery
+- [`Drugs/Schizophrenia Cure/`](../Drugs/Schizophrenia%20Cure/) and [`Drugs/Nootropics/`](../Drugs/Nootropics/) — speculative neuropharmacology adjacent to HSA Phase III neural-software modules
+- [`Veritas/`](../Veritas/) — formal-verification framework relevant to risk modelling of multi-module interventions
+- [`Cell AI/`](../Cell%20AI/) — biologically-inspired computational substrate
+
+---
 
 [← Back to main README](../README.md)

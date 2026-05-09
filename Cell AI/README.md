@@ -1,151 +1,107 @@
-# Cell AI — Cell Agents, Long Reasoning Chains, Multimodal Systems
+# Cell AI / CellularAI — biologically-inspired sequence modelling without attention
 
-> **🧬 Overview**: "Cell" agents, long reasoning chains, multimodal hooks, contracting — an alternate framing for modular AI org charts with neural inspiration.
-
----
-
-## 🧬 Overview
-
-**Cell AI** explores artificial intelligence systems inspired by cellular biology and neural computation. This work treats AI architectures as living organisms — agents that communicate, specialise, and adapt like cells in a biological system. The framework includes thinking chains (CoT), multimodal capabilities, and contracting for research documentation.
-
-### Key Concepts
-
-- **Cell Agents**: Minimal autonomous units that communicate with neighbouring cells
-- **Long Reasoning**: Extended chains of thought that span multiple reasoning steps
-- **Multimodal Integration**: Combining vision, language, and audio in unified processing
-- **Contracting**: Formal documentation for research reproducibility and auditability
+> **A trainable, non-attention sequence architecture.** CellularAI replaces self-attention with three biologically-motivated principles: a reaction-diffusion cellular partition (CellularPDE), online Hebbian plasticity with a BCM-style sliding threshold (MetaplasticityLayer), and a multi-domain routing layer (MultiModalModel). v2 adds frequency-domain resonance and a crystal-lattice interaction; v3 adds spectral PDE, multiscale partitions, sparse Hebbian, and a guided architecture-search programme (E0–E26).
 
 ---
 
-## 📂 Architecture Versions
+## 🧬 What this folder is
 
-The Cell AI framework has evolved through multiple versions, each adding new capabilities:
+A research codebase: full Python packages for v1, v2, v3, plus a shared `cellai_core/` library, end-to-end training pipelines, an architecture-search programme (`arch_search/`), evaluation harnesses, tests, and a documentation tree under `docs/`. Multiple research papers ship inline.
 
-| Version | Focus | Key Features |
-|---------|-------|-------|
-| **v3** | Architecture | Full system architecture and mathematical model |
-| **v2** | Refinement | NLP math model, comparative analysis with v1 |
-| **v1** | Core | Original Cell AI math model and binary encoder |
+Earlier README copy claimed a folder structure (`Cell AI v3/`, `Cell AI v2/`, `Thinking CoT/`, `Multi Modal AI/`, `Contracting/`) that **does not exist on disk**. The real layout is below.
 
 ---
 
-## 📄 Core Documents
+## 🗂 Actual repository layout
 
-| Document | Description |
-|----------|-------|
-| [`Cell AI v3/Cell AI v3 Architecture.md`](Cell%20AI%20v3/Cell%20AI%20v3%20Architecture.md) | Complete system architecture |
-| [`Cell AI v3/Cell AI v3 Math Model.md`](Cell%20AI%20v3/Cell%20AI%20v3%20Math%20Model.md) | Mathematical foundations |
-| [`Cell AI v2/Cell AI v2 Intro.md`](Cell%20AI%20v2/Cell%20AI%20v2%20Intro.md) | Introduction and overview |
-| [`Cell AI v2/Cell AI v2 Math Model.md`](Cell%20AI%20v2/Cell%20AI%20v2%20Math%20Model.md) | Mathematical model |
-| [`Cell AI v2/Cell AI v2 vs v1.md`](Cell%20AI%20v2/Cell%20AI%20v2%20vs%20v1.md) | Comparison with v1 |
-| [`Cell AI v2/CellAI NLP Math Model.md`](Cell%20AI%20v2/CellAI%20NLP%20Math%20Model.md) | NLP-specific mathematical model |
-| [`Cell AI/Readme.md`](Cell%20AI/Readme.md) | Version 1 folder README |
-| [`Cell AI/Cell AI Math Model.md`](Cell%20AI/Cell%20AI%20Math%20Model.md) | Core mathematical model |
-| [`Cell AI/Cell AI Advanced AI Techniques.md`](Cell%20AI/Cell%20AI%20Advanced%20AI%20Techniques.md) | Advanced techniques |
-
----
-
-## 🧠 Thinking Chain of Thought (CoT)
-
-[`Cell AI/Thinking CoT/`](Cell%20AI/Thinking%20CoT/) — Research on thinking chains and chain-of-thought reasoning
-
-| Document | Description |
-|----------|-------|
-| [`Cell AI/Thinking CoT/README.md`](Cell%20AI/Thinking%20CoT/README.md) | CoT overview |
-| [`Cell AI/Thinking CoT/research_paper.md`](Cell%20AI/Thinking%20CoT/research_paper.md) | Full research paper on CoT |
-
----
-
-## 🎨 Multi-Modal Systems
-
-[`Cell AI/Multi Modal AI/`](Cell%20AI/Multi%20Modal%20AI/) — Multimodal AI capabilities and integrations
-
-| Document | Description |
-|----------|-------|
-| [`Cell AI/Multi Modal AI/Multi Modal AI Explanations.md`](Cell%20AI/Multi%20Modal%20AI/Multi%20Modal%20AI%20Explanations.md) | Multimodal integration explanations |
+```
+Cell AI/
+├── README.md
+├── setup.py · requirements.txt · .env.example
+├── v1/                  cell_ai.py           # CellularAI v1
+├── v2/                  cell_ai_v2.py        # CellularAI v2
+├── v3/                  cell_ai_v3.py        # CellularAI v3
+├── cellai_core/         encoder · memory · multiscale · partition ·
+│                        routing · sparse_hebbian · spectral_pde · ...
+├── data/
+│   ├── config.py
+│   └── pipelines/       nlp_pipeline.py · math_pipeline.py · software_pipeline.py
+├── arch_search/         run_arch_search*.py · resume scripts · round-4 follow-up
+├── scripts/             cli.py · run_full_pipeline.py · run_multimodal.py ·
+│                        run_eval.py · profiling · smoke tests
+├── tests/
+├── tools/
+│   └── Math Question Generator/   # bundled MegaMathGen tool
+└── docs/
+    ├── README.md                       # canonical doc hub
+    ├── CELLULARAI_PAPER.md             # main architecture paper
+    ├── ARCH_SEARCH_PAPER.md            # E0–E26 search programme
+    ├── EVALUATION_REPORT.md
+    ├── architecture/   v1 · v2 · v3 · multimodal · parallel · thinking_cot
+    ├── math_models/    core · domain · nlp · software · advanced
+    └── research/       roadmap · plan · brain comparison · explanations · Q&A
+```
 
 ---
 
-## 📋 Contracting & Planning Notes
+## 📄 Documentation hub
 
-[`Cell AI/Contracting/`](Cell%20AI/Contracting/) — Research documentation and planning notes
+The canonical navigation file is [`docs/README.md`](docs/README.md). Highlights:
 
-| Document | Description |
-|----------|-------|
-| [`Cell AI/Contracting/Cell AI Explanation.md`](Cell%20AI/Contracting/Cell%20AI%20Explanation.md) | Cell AI explanation |
-| [`Cell AI/Contracting/Cell AI New NLP Techniques Explanation.md`](Cell%20AI/Contracting/Cell%20AI%20New%20NLP%20Techniques%20Explanation.md) | New NLP techniques |
-| [`Cell AI/Contracting/Cell AI and Brain Comparision Reserach Outline.md`](Cell%20AI/Contracting/Cell%20AI%20and%20Brain%20Comparision%20Reserach%20Outline.md) | Brain comparison research outline |
-| [`Cell AI/Contracting/Computational CellAi Research Pllan.md`](Cell%20AI/Contracting/Computational%20CellAi%20Research%20Pllan.md) | Computational research plan |
-| [`Cell AI/Contracting/Research Plan.md`](Cell%20AI/Contracting/Research%20Plan.md) | Research plan (alternate) |
-| [`Cell AI/Contracting/Research Possibilitys.md`](Cell%20AI/Contracting/Research%20Possibilitys.md) | Research possibilities |
-| [`Cell AI/Contracting/Awnsered Questions.md`](Cell%20AI/Contracting/Awnsered%20Questions.md) | Answered research questions |
-
----
-
-## 💡 Key Themes
-
-### Cell Agent Architecture
-
-- **Minimalism**: Small, focused agents that do one thing well
-- **Communication**: Information exchange through defined interfaces
-- **Specialisation**: Different agent types for different tasks
-- **Adaptability**: Dynamic reconfiguration based on context
-
-### Long Reasoning
-
-- **Extended Chains**: Reasoning that spans many inference steps
-- **Memory Integration**: Access to historical context
-- **Backtracking**: Ability to revise previous reasoning
-- **Self-Correction**: Identifying and fixing reasoning errors
-
-### Multimodal Integration
-
-- **Unified Processing**: Treating vision, text, and audio as related modalities
-- **Cross-Modal Transfer**: Using insights from one modality to inform another
-- **Output Flexibility**: Producing responses in various formats
-- **Context Preservation**: Maintaining coherence across modalities
+| Document | Subject |
+|----------|---------|
+| [`docs/CELLULARAI_PAPER.md`](docs/CELLULARAI_PAPER.md) | Main architecture paper — v1 + v2, training & evaluation on ~3 GB multi-domain data |
+| [`docs/ARCH_SEARCH_PAPER.md`](docs/ARCH_SEARCH_PAPER.md) | v3 / SpectralPDE / multiscale / sparse Hebbian / guided architecture search rounds E0–E26 |
+| [`docs/EVALUATION_REPORT.md`](docs/EVALUATION_REPORT.md) | Held-out evaluation notes |
+| [`docs/architecture/v1_architecture.md`](docs/architecture/v1_architecture.md) | Base cellular system |
+| [`docs/architecture/v2_intro.md`](docs/architecture/v2_intro.md) · [`v2_vs_v1.md`](docs/architecture/v2_vs_v1.md) · [`v2_math_model.md`](docs/architecture/v2_math_model.md) | Resonance + crystal-lattice extensions |
+| [`docs/architecture/v3_architecture.md`](docs/architecture/v3_architecture.md) · [`v3_math_model.md`](docs/architecture/v3_math_model.md) | OICFHS / spectral PDE |
+| [`docs/architecture/multimodal_architecture.md`](docs/architecture/multimodal_architecture.md) | Multi-domain routing |
+| [`docs/architecture/parallel_model.md`](docs/architecture/parallel_model.md) | Parallel training story |
+| [`docs/architecture/thinking_cot_readme.md`](docs/architecture/thinking_cot_readme.md) | Chain-of-thought variant notes |
+| [`docs/math_models/`](docs/math_models/) | Domain-specific math models (core, NLP, software, advanced) |
+| [`docs/research/`](docs/research/) | Research plan, possibilities, answered questions, brain comparison |
 
 ---
 
-## 🔗 Related Work
+## 🧪 Five core architectural pieces (from §3 of the paper)
 
-This work connects to:
-- **Compression Algorithms** — Information compression and structured representations
-- **Long Reasoning and Thinking NN** — Networks that stretch the planning horizon
-- **Neural Decompiler** — PyTorch pipeline for structure extraction
-- **Veritas** — Formal verification and proof obligations
-- **GF2 Algebra** — Algebraic structures for computation
+1. **CellularPDE** — reaction-diffusion partition system. Information propagates between independent state partitions through a learned diffusion operator, replacing token-to-token attention. Inspired by Turing's morphogenesis equations.
+2. **MetaplasticityLayer** — Hebbian outer-product update with a BCM-inspired sliding threshold. Enables weight adaptation **during** the forward pass, not only via backprop.
+3. **ResonanceSystem** (v2) — frequency-domain enhancement using FFT phase rotation.
+4. **CrystalLattice** (v2) — einsum-vectorised lattice fields; mathematically a 3-way Tucker decomposition over the state vector.
+5. **MultiModalModel** — soft router that classifies the cellular state and mixes three domain-specialised MLP heads (text / code / math) without duplicating parameters.
 
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history (batches 18, 24, 37)
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression frameworks
-- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — planning horizon networks
-- [`Veritas/`](../Veritas/) — formal verification
+v3 introduces **SpectralPDE**, **multiscale partitions**, **sparse Hebbian**, and a guided architecture-search programme over rounds E0–E26 with stream-matched held-out PPL evaluation, continuous-training reruns, and CLI flags `--reeval` / `--train` on `python -m arch_search.run_arch_search_v4`.
 
 ---
 
-## 🧭 Suggested Reading Order
+## ⚙️ Running the code
 
-1. **Architecture**: Start with v3 architecture document
-2. **Math Models**: Review mathematical foundations
-3. **Thinking CoT**: Explore chain-of-thought reasoning
-4. **Multi-Modal**: Understand multimodal integration
-5. **Contracting**: Review research documentation
+The CLI lives at `scripts/cli.py`; canonical entry points include `python -m arch_search.run_arch_search_v4` and `scripts/run_full_pipeline.py`. See [`scripts/README.md`](scripts/README.md) for current commands.
 
-**Reading order**: **v3 → v2 → v1**, then math models and subfolders as needed.
+Tokeniser: `cl100k_base`. Training data: ~3 GB multi-domain (English text, Python source, mathematics).
 
 ---
 
-## 🛡️ About This Project
+## 🚧 Honest framing (from the paper's own §1 and §5)
 
-This project explores **AI systems inspired by biological principles**. The goal is to:
-- Create modular, composable AI components
-- Enable extended reasoning chains
-- Integrate multiple modalities seamlessly
-- Document research for reproducibility
+- The paper does **not** claim competitive perplexity with transformers. v1 perplexity on held-out text is ~10 000–250 000 depending on domain — well above GPT-2 baselines.
+- Loss curves and gradient norms confirm the architecture **is** trainable; the routing mechanism improves from chance-level to a measurable signal after fine-tuning.
+- Gradient analysis identified a **gradient-starvation pathology** at the Hebbian / reaction-diffusion interface; the paper diagnoses and repairs this with a differentiable state-gate projection.
+- v3 round **E26** (8k continuous total after E25) does **not** improve warm PPL vs E25 (paper §17.6) — explicitly reported as a negative result.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM unified hash-predictive memory; complementary long-context architecture
+- [`Cypha/`](../Cypha/) — Harmonic Recursive Neural Architecture (HRNA) full ML stack
+- [`NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework + Algebraic Autopsy
+- [`Compression Algorithms/`](../Compression%20Algorithms/) — Izaac / GRIA / NMP model-level compression
+- [`Neural Decompiler/`](../Neural%20Decompiler/) — Transformer + MoE seq2seq with hierarchical memory
+- [`Veritas/`](../Veritas/) — formal verification of learning systems
+
+---
 
 [← Back to main README](../README.md)

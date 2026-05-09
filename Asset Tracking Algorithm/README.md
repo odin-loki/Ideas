@@ -1,93 +1,84 @@
-# Asset Tracking Algorithm — ARIA-INTEL Systems
+# Asset Tracking Algorithm — ARIA-INTEL
 
-> **🎯 Overview**: **ARIA-INTEL**-style fusion of asset inventory and threat intel — a systems lens on "what owns what" under adversarial noise.
-
----
-
-## 🎯 Overview
-
-**Asset Tracking Algorithm** explores intelligent systems for tracking assets through noisy environments. This work combines ARIA-INTEL style intelligence with asset management to create robust systems for inventory tracking under adversarial conditions.
-
-### Key Concepts
-
-- **ARIA-INTEL**: Asset Recognition and Identification for INTEL applications
-- **Multi-Modal Tracking**: Combining visual, RF, and other modalities
-- **Adversarial Resilience**: Maintaining tracking under interference
-- **State Estimation**: Predicting asset location and status
+> **ARIA-INTEL = Algebraic Rendezvous & Intelligence Analyser.** A single-file, edge-deployable intelligence engine for multi-target tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning. Theoretically grounded in the Random-Finite-Set / Poisson-Multi-Bernoulli-Mixture framework; designed for deployment on tactical edge hardware (28 ms median scan latency, single CPU core, no GPU).
 
 ---
 
-## 📄 Core Documents
+## 🛰 What this folder is
 
-| Document | Description |
-|----------|-------|
-| [`ARIA_INTEL_README.md`](ARIA_INTEL_README.md) | ARIA-INTEL comprehensive documentation and quick reference |
-| [`ARIA_INTEL_Research_Paper.md`](ARIA_INTEL_Research_Paper.md) | Full research paper with theoretical foundations |
-| [`aria_intel.py`](aria_intel.py) | Python implementation for asset tracking |
+A research paper, a companion implementation README, and a Python reference implementation for **ARIA-INTEL**, the Algebraic Rendezvous & Intelligence Analyser. The system fuses multi-modal sensor data (GEOINT, SIGINT, COMMS, HUMINT, OSINT) into coherent, actionable intelligence tracks.
 
----
+The acronym is taken from the title page of `ARIA_INTEL_Research_Paper.md` ("Algebraic Rendezvous & Intelligence Analyser"). Earlier README copy expanded ARIA-INTEL as "Asset Recognition and Identification for INTEL applications" — that gloss is not from the source.
 
-## 🔬 System Components
-
-| Component | Description |
-|-----------|-------|
-| **Detection** | Initial asset detection and classification |
-| **Association** | Linking detections to tracked assets |
-| **State Estimation** | Predicting position and velocity |
-| **Filtering** | IMM filtering for multi-model tracking |
-| **Fusion** | Multi-sensor data fusion |
+> **Note on the "ARIA" name collision.** This folder's ARIA-INTEL is **not related** to the cryptographic ARIA in `../ARIA Encryption Algorithm/` (which expands to *Algebraic Resynchronisation and Integrity Architecture*). They are independent acronyms that happen to share four letters; cross-references between folders should not imply algorithmic dependency.
 
 ---
 
-## 🧪 Benchmark Metrics
+## 📄 Files
 
-| Metric | Target | Notes |
-|--|--|--|
-| **Detection Rate** | >90% | For specified false alarm rate |
-| **Tracking Accuracy** | <1m CEP | Circular error probable |
-| **False Alarm Rate** | <0.01% | Per volume per scan |
-| **Processing Latency** | <10ms | Per asset processing |
-
----
-
-## 📊 Use Cases
-
-| Use Case | Description |
-|--|--|
-| **Inventory Tracking** | Real-time warehouse inventory management |
-| **Supply Chain** | Asset tracking across distribution networks |
-| **Security** | Unauthorized asset detection and alerting |
-| **Research** | Algorithm development and benchmarking |
+| File | Role |
+|------|------|
+| [`ARIA_INTEL_Research_Paper.md`](ARIA_INTEL_Research_Paper.md) | Full research paper — theoretical foundations, PMBM filter, MOU motion models, rendezvous warning, tradecraft detector registry, validated performance |
+| [`ARIA_INTEL_README.md`](ARIA_INTEL_README.md) | Implementation / usage README |
+| [`aria_intel.py`](aria_intel.py) | Python reference implementation (the paper references the v6 file under the name `aria_intel_v6.py` — same engine, ~2 363 lines, Python 3.10+) |
 
 ---
 
-## 🔗 Related Work
+## 🏗 Architecture (per §1 of the paper)
 
-This work connects to:
-- **ARIA Encryption Algorithm** — ARIA block cipher implementation
-- **Filtering** — IMM tracking and signal processing
-- **Compression Algorithms** — Information compression and efficiency
-- **Cypha** — Signal processing and pattern matching
-- **GF2 Algebra** — Algebraic structures for computation
+ARIA-INTEL operationalises the state-of-the-art within the Random Finite Set framework — specifically the **Poisson Multi-Bernoulli Mixture (PMBM)** filter (Williams 2015; García-Fernández et al. 2018) — and extends it with a suite of intelligence-specific subsystems:
 
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — ARIA block cipher
-- [`Filtering/`](../Filtering/) — IMM tracking
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
+1. **PMBM filter** — theoretically optimal multi-target Bayesian estimator under the RFS framework. Decomposes into a Poisson Point Process over undetected targets and a Multi-Bernoulli Mixture over detected targets.
+2. **Mixed Ornstein-Uhlenbeck (MOU) motion models** — continuous-time mean-reverting Gauss-Markov processes (Coraluppi et al.; Williams 2015), bounded position variance suitable for long-horizon intelligence scenarios. Per-domain MOU model bank with an IMM-style particle mixture.
+3. **Pattern-of-Life (PoL) modelling** — Gaussian-mixture model of routine behaviour against which deviations are scored.
+4. **Three-method 30-minute rendezvous warning architecture** — stacked detection of multi-actor rendezvous events with a ~30-minute lead-time horizon.
+5. **Composable tradecraft detector registry** — pluggable detectors for cleanup-route patterns, surveillance detection, dead-drop signatures, etc.
+6. **Dempster-Shafer multi-modal evidence fusion** — DST over GEOINT / SIGINT / COMMS / HUMINT / OSINT with modality-calibrated reliability priors.
+7. **Possibility-theoretic existence track** — dual Bayesian (r) and possibilistic (π_r) existence estimates; their divergence flags deception or model failure (Houssineau & Bishop 2019).
+8. **Domain-polymorphic configuration layer** — single configuration object retargets the engine across HUMINT, maritime, airspace, convoy domains.
 
 ---
 
-## 🛡️ About This Project
+## 📊 Validated performance (paper §10)
 
-This project explores **intelligent asset tracking systems**. The goal is to:
-- Develop robust tracking under adversarial conditions
-- Combine multiple sensor modalities
-- Enable real-time state estimation
-- Support inventory and security applications
+| Metric | Result |
+|--------|--------|
+| Median scan latency (single CPU core, no GPU) | **28 ms** |
+| Rendezvous detection (across 20 independent scenarios) | **100 %** |
+| Mean rendezvous lead time | **28.1 minutes** |
+| Target confirmation at low detection probability (P_D = 0.40) | **100 %** |
+| False alarm rate (at 40 clutter returns/scan) | **0.098 per scan** |
+
+---
+
+## 🧮 Theoretical foundations referenced
+
+- **Random Finite Sets** (Mahler 2003, 2007) — set-valued multi-target state representation.
+- **PMBM filter** (Williams 2015; García-Fernández et al. 2018) — conjugate prior for the multi-target Bayes filter; exact closed-form solution to a problem PHD/CPHD only approximate.
+- **Ornstein-Uhlenbeck process** (Uhlenbeck & Ornstein 1930) — continuous-time mean-reverting Gauss-Markov.
+- **Mixed OU** (Coraluppi et al.; Williams 2015) — drift on both position and velocity.
+- **Dempster-Shafer Theory** (Shafer 1976) — multi-modal evidence fusion.
+- **Possibility theory** (Zadeh 1978; Dubois & Prade 1988; Houssineau & Bishop 2019) — possibility-PMBM extension.
+
+---
+
+## 🚧 Honest framing
+
+- All benchmark scenarios are **synthetic** with controlled clutter and detection-probability profiles; the paper does not claim live operational deployment results.
+- The 28 ms latency is on a single CPU core for the documented test rig; real-world latency depends on sensor cadence and configuration.
+- The system is **edge-deployable** by design (no GPU, single-file engine), not a competitor to large fusion-centre architectures.
+- The paper is independent research, not a procurement document.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Filtering/`](../Filtering/) — GH-SR-IMM robust tracking filter; complementary single-target / multi-target framework using IMM with Generalised-Hyperbolic noise instead of PMBM
+- [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — **independent system** with the same "ARIA" prefix (Algebraic Resynchronisation and Integrity Architecture, an AEAD cipher). Different acronym, different folder, no algorithmic dependency.
+- [`Veritas/`](../Veritas/) — formal verification framework, relevant for certifying tracker decisions
+- [`RNGS/`](../RNGS/) — random-number generation primitives used in stochastic motion models
+- [`Statistical Generation/`](../Statistical%20Generation/) — heavy-tailed and combinatorial statistical generation theory
+
+---
 
 [← Back to main README](../README.md)

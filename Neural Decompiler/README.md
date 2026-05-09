@@ -1,88 +1,81 @@
-# Neural Decompiler — PyTorch Structure Extraction
+# Neural Decompiler — assembly → source seq2seq with hierarchical memory and MoE
 
-> **🔍 Overview**: **PyTorch** pipeline: low-level tokens lifted back toward readable structure — ML meets reverse engineering.
-
----
-
-## 🔍 Overview
-
-**Neural Decompiler** explores techniques for lifting low-level neural network tokens back toward readable structure. This work combines PyTorch-based deep learning with reverse engineering approaches to extract meaningful representations from trained models.
-
-### Key Concepts
-
-- **Token Lifting**: Extracting tokens toward semantic meaning
-- **Structure Recovery**: Recovering network architecture
-- **Interpretability**: Making neural networks understandable
-- **PyTorch Pipeline**: Implementation framework
+> **Binary → high-level source, not PyTorch model lifting.** A practical encoder–decoder Transformer for *neural decompilation*: learn a mapping from a low-level token sequence (e.g. disassembled instructions) to a high-level source-like token sequence. Hierarchical memory + MoE expert families (binary-focused vs language-focused) + load-balanced routing.
 
 ---
 
-## 📄 Research Documents
+## 🔧 What this folder is
 
-| Document | Description |
-|----------|-------|
-| [`RESEARCH.md`](RESEARCH.md) | Research documentation for neural decompilation |
+A research note (`RESEARCH.md`) plus a runnable PyTorch package (`neural_decompiler/`) implementing the architecture: hierarchical memory module, Transformer encoder/decoder, mixture-of-experts layer, training loop, inference harness, dataset, and synthetic corpus for pipeline validation.
 
----
-
-## 🔬 Pipeline Stages
-
-| Stage | Description |
-|--|--|
-| **Token Extraction** | Extract low-level token representations |
-| **Pattern Recognition** | Identify structural patterns |
-| **Structure Assembly** | Reconstruct network architecture |
-| **Interpretation** | Generate human-readable explanations |
+Earlier README copy described this folder as decompiling "trained PyTorch models" — that is **not** the subject. Per `RESEARCH.md` §1, the task is the classical compiler-pipeline problem of recovering readable structure from executables (disassembly, control-flow recovery, type reconstruction, pretty-printing) reframed as conditional sequence modelling.
 
 ---
 
-## 📊 Applications
+## 📄 Files
 
-| Application | Description |
-|--|--|
-| **Model Analysis** | Understanding trained model internals |
-| **Debugging** | Diagnosing model behaviour |
-| **Knowledge Transfer** | Migrating knowledge between models |
-| **Security** | Analyzing model internals for vulnerabilities |
-
----
-
-## 💡 Key Insights
-
-1. **Tokens contain structure**: Even low-level tokens preserve architectural information
-2. **Pattern regularity**: Neural networks exhibit structural regularities
-3. **Transferability**: Decompile techniques transfer across architectures
-4. **Limitations**: Some information is irrecoverable
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-- **Cell AI** — Modular AI agent architectures
-- **Compression Algorithms** — Information compression
-- **Veritas** — Formal verification
-- **Long Reasoning and Thinking NN** — Extended reasoning
-- **GF2 Algebra and Applications** — Algebraic structures
+| File / package | Role |
+|----------------|------|
+| [`RESEARCH.md`](RESEARCH.md) | Research note — task, architecture, training objective, evaluation protocol, limitations, references |
+| [`Architecture.txt`](Architecture.txt) | Block-diagram / sketch of the network |
+| [`Neural Decompiler.py`](Neural%20Decompiler.py) | Top-level entry script |
+| [`requirements.txt`](requirements.txt) | Dependencies |
+| `neural_decompiler/` | Implementation package |
+| ↳ `model.py` | Transformer encoder/decoder + hierarchical memory + MoE |
+| ↳ `train.py` | Training loop with auxiliary load-balancing loss |
+| ↳ `infer.py` | Inference / decoding |
+| ↳ `dataset.py` | Synthetic-corpus dataset abstraction |
+| ↳ `memory.py` | Hierarchical memory module (learnable memory slots + multi-head attention + gated fusion) |
+| ↳ `experts.py` | Mixture-of-experts layer |
+| `archive/Neural_Decompiler_design_sketch.py.txt` | Earlier design sketch, kept for provenance |
 
 ---
 
-## 📖 See Also
+## 🏗 Architecture (per `RESEARCH.md` §3)
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Cell AI/`](../Cell%20AI/) — agent architectures
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Veritas/`](../Veritas/) — formal verification
+1. **Hierarchical memory module** — at each level, compressed representations attend to a bank of learnable memory slots $M \in \mathbb{R}^{K\times d}$ via multi-head attention; gated fusion combines compressed states with the resulting context vectors; multiple levels stack and are fused linearly. Acts as a differentiable analogue of "remembered" program context.
+2. **Transformer encoder** — pre-norm GELU `TransformerEncoderLayer` stack. Learned position embeddings capped at `max_sequence_length`.
+3. **Transformer decoder** — causal self-attention plus cross-attention to encoder outputs.
+4. **Mixture-of-experts (MoE)** — router produces logits $z\in\mathbb{R}^E$; probabilities $p=\mathrm{softmax}(z)$; expert outputs $o_e = \mathrm{FFN}_e(h)$; output is the dense mixture $\sum_{e=1}^E p_e\,o_e$. Experts are loosely partitioned into **binary-focused** and **language-focused** families.
+5. **Load balancing** — auxiliary loss $\lambda \lVert\bar p - u\rVert^2$ where $\bar p$ is batch-averaged importance and $u$ is uniform over experts; discourages router collapse.
 
 ---
 
-## 🛡️ About This Project
+## 🎯 Objective
 
-This project explores **neural network decompilation**. The goal is to:
-- Extract structure from trained models
-- Enable model analysis and debugging
-- Support interpretability research
-- Develop reverse engineering techniques
+Primary loss is token cross-entropy with label smoothing on non-padding positions. Total loss:
+
+$$\mathcal L = \mathcal L_{\mathrm{CE}} + \lambda_{\mathrm{moe}}\,\mathcal L_{\mathrm{aux}}.$$
+
+---
+
+## 📊 Evaluation protocol (proposed, not yet run on real binaries)
+
+The bundled synthetic corpus only validates the pipeline (forward pass, shape checks, loss decrease). Serious benchmarks would use:
+
+1. **Lifted assembly** paired with source from compiler-generated datasets, with compilation flags recorded.
+2. Metrics: exact match, BLEU against reference C, and graph-level metrics (CFG edit distance) where tooling exists.
+3. Ablations: remove MoE; replace hierarchical memory with a single cross-attention pass; vary expert count $E$.
+
+---
+
+## 🚧 Honest framing (from `RESEARCH.md` §5)
+
+- This is a **coherent trainable architecture** plus a reference training loop, not a state-of-the-art recovery system on full binaries.
+- Real binaries imply long sequences and large vocabularies; production deployment would require chunking at function boundaries and possibly hierarchical models beyond this prototype.
+- Neural outputs should be type-checked and tested; the model does **not** guarantee semantics-preserving translation.
+- Dense MoE mixtures cost $O(E)$ per token; production systems may switch to top-$k$ sparse kernels.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Cell AI/`](../Cell%20AI/) — alternative non-attention sequence backbone with multi-domain MoE-style routing
+- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context memory architecture
+- [`NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework efficiency techniques
+- [`Cypha/`](../Cypha/) — Harmonic Recursive Neural Architecture; full ML stack
+- [`Compression Algorithms/`](../Compression%20Algorithms/) — model-level compression theory (NMP, GRIA, Izaac)
+
+---
 
 [← Back to main README](../README.md)

@@ -1,85 +1,101 @@
-# UCN AIs — AI Ideas in the United Commonwealth
+# UCN AIs — speculative AI families in the United Commonwealth universe
 
-> **🤖 Overview**: AI ideas staged inside the **UCN** fictional universe — worldbuilding with silicon.
-
----
-
-## 🤖 Overview
-
-**UCN AIs** explores artificial intelligence concepts situated within the United Commonwealth (UCN) fictional universe. This work combines worldbuilding with computational intelligence, staging AI developments within a realistic geopolitical and technological framework.
-
-### Key Concepts
-
-- **UCN Universe**: United Commonwealth fictional setting
-- **AI Development**: Realistic AI advancement timelines
-- **Geopolitical Context**: AI within realistic international relations
-- **Technological Realism**: Plausible near-future technology
+> **Worldbuilding-grade theoretical AI ontology.** Two main "network" classes (APN and GPN), one signal-processing class (Signal AI / Universal Resonance Learning System), plus two foundational learning primitives (Linear Congruent and Linear Gradient Descent). All informal theorem-style speculation, written as in-universe technical notes for the United Commonwealth setting; not built systems.
 
 ---
 
-## 📄 Research Papers
+## 🌐 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`Papers I-VIII`](Papers%20I-VIII/) | UCN Papers I through VIII covering AI development |
-| [`United Commonwealth.md`](United%20Commonwealth.md) | United Commonwealth background and context |
-| [`UCN_Economics_EREM.md`](UCN_Economics_EREM.md) | UCN economics and EREM integration |
-| [`Sovereign_Digital_Currency_Research_Paper.md`](Sovereign_Digital_Currency_Research_Paper.md) | Digital currency research |
-| [`australias_invisible_constitution.md`](australias_invisible_constitution.md) | Australia constitutional framework |
+In-universe technical writeups for fictional AI families inhabiting the **UCN (United Commonwealth Nations)** worldbuilding setting. Each system is described with informal theorem statements, mathematical-flavoured component diagrams, and an associated "convo log" capturing the design discussion that produced it.
+
+Earlier README copy referenced a `Papers I-VIII/` subfolder and several political-economy files (`United Commonwealth.md`, `UCN_Economics_EREM.md`, `Sovereign_Digital_Currency_Research_Paper.md`, `australias_invisible_constitution.md`) — **none of those are in this folder.** The political-economy and constitutional-fiction documents live in [`../UCN Political System/`](../UCN%20Political%20System/). This folder is purely the AI-systems slice of the UCN universe.
 
 ---
 
-## 🌐 UCN Setting
+## 📄 Files in this folder
 
-| Aspect | Description |
-|--|--|
-| **Geography** | Global fictional superpower |
-| **Economy** | EREM-based energy economics |
-| **Politics** | Representative democracy with AI oversight |
-| **Technology** | Near-future AI capabilities |
-| **Culture** | Advanced but realistic technological society |
+### Any Purpose Networks (APN)
 
----
+| File | Role |
+|------|------|
+| [`APN Summary.md`](APN%20Summary.md) | Core concept, components, properties, mathematical framework, constraints |
+| [`APN Math Model.md`](APN%20Math%20Model.md) | Detailed mathematical model |
+| [`APN Convo Log.txt`](APN%20Convo%20Log.txt) | Design-discussion transcript |
 
-## 🤖 AI Development Stages
+### General Purpose Networks (GPN)
 
-| Stage | Timeframe | Key Achievements |
-|--|--|--|
-| **Early AI** | 2020-2030 | Machine learning advances |
-| **Advanced AI** | 2030-2040 | Multimodal systems |
-| **AGI-Pre** | 2040-2050 | Approaching general intelligence |
-| **Integrated AI** | 2050+ | AI as citizen interface |
+| File | Role |
+|------|------|
+| [`GPN Summary.md`](GPN%20Summary.md) | Core concept and properties |
+| [`GPN Math Model.md`](GPN%20Math%20Model.md) | Mathematical framework |
+| [`GPN Convo Log.txt`](GPN%20Convo%20Log.txt) | Design-discussion transcript |
 
----
+### Signal AI (Universal Resonance Learning System)
 
-## 🔗 Related Work
+| File | Role |
+|------|------|
+| [`Signal AI Math Model.md`](Signal%20AI%20Math%20Model.md) | Theorems for universal encoding, resonance fields, information preservation |
+| [`Signal AI Convo Log.txt`](Signal%20AI%20Convo%20Log.txt) | Design-discussion transcript |
 
-This work connects to:
-- **Economics** — EREM and energy economics
-- **Compression Algorithms** — AI compression techniques
-- **Cell AI** — Modular AI agent architectures
-- **Cypha** — Signal processing and AI
-- **Veritas** — AI verification and formal methods
+### Foundational learning primitives
 
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Economics/`](../Economics/) — EREM economics
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — AI compression
-- [`Cell AI/`](../Cell%20AI/) — agent architectures
-- [`Cypha/`](../Cypha/) — signal processing
+| File | Role |
+|------|------|
+| [`Linear Congruent Definition.md`](Linear%20Congruent%20Definition.md) | Linear-congruent learning primitive |
+| [`Linear Congruent Convo Log.txt`](Linear%20Congruent%20Convo%20Log.txt) | Discussion transcript |
+| [`Linear Gradient Descent Definition.md`](Linear%20Gradient%20Descent%20Definition.md) | Linear gradient descent primitive |
+| [`Linear Gradient Descent Convo Log.txt`](Linear%20Gradient%20Descent%20Convo%20Log.txt) | Discussion transcript |
 
 ---
 
-## 🛡️ About This Project
+## 🧠 The two flagship classes
 
-This project explores **AI development within a fictional universe**. The goal is to:
-- Create realistic AI development narratives
-- Ground AI in geopolitical context
-- Explore ethical implications
-- Build engaging fictional worldbuilding
+### APN — Any Purpose Network
+
+A mathematical system that adapts to **any purpose** by measuring differences between a baseline-truth set $T$ and incoming phenomena, then generating its own unique mathematics from those differences.
+
+- Components: baseline-truth set $T$, meta-operator $M$, difference measurer $D$, unique-mathematics generator $U(M,D,T)$, temporal evolution $f(t)$.
+- Properties: temporal ordering, self-modification, internal consistency, no external validation needed.
+- Trade-off: **fast adaptation, shallow comprehension** — quick measurements rather than deep simulation.
+
+### GPN — General Purpose Network
+
+A mathematical system that operates through **internal simulation and scenario exploration**, building understanding by "thinking through" possibilities. Where the APN measures, the GPN simulates.
+
+- Components: simulation engine $S$, model generator $M$, scenario tester $T$, understanding constructor $U(S,M,T)$, simulation evolution $s(t)$.
+- Properties: derivational knowledge, logical consistency, self-proving, strong internal validation, operates independently of external data.
+- Trade-off: **deep comprehension, slower** — iterative scenario simulation rather than direct measurement.
+
+The APN/GPN pair is presented as **complementary** rather than competing: an APN reacts to new measurements; a GPN reasons about hypotheticals.
+
+### Signal AI — Universal Resonance Learning System
+
+A signal-processing-flavoured construction with informal theorems for **universal encoding** ($E(x) = \sum_i \alpha_i(x) e^{i\theta_i(x)}\varphi_i(x)$, complete by Stone–Weierstrass), **information preservation** ($I(X;E(X)) = I(X;X)$ via injectivity), and **resonance-field evolution**. The proofs are informal and rely on standard analysis (Stone–Weierstrass, data processing inequality).
+
+### Linear Congruent + Linear Gradient Descent
+
+Two simpler primitives positioned as building blocks beneath the APN/GPN architecture. Each has a concise definition document plus the discussion log that produced it.
+
+---
+
+## 🚧 Honest framing
+
+- This is **speculative / worldbuilding theory**, not built systems with empirical validation. The "theorems" are informally proved using standard mathematical scaffolding (Stone–Weierstrass, data-processing inequality) but the systems themselves are conceptual.
+- "Convo logs" are design discussions, not formal scientific records.
+- The AI systems documented here are part of the **UCN universe** alongside the political-economic infrastructure described in [`../UCN Political System/`](../UCN%20Political%20System/) — they are designed to be *internally consistent within that fictional setting*, not deployed.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../UCN Political System/`](../UCN%20Political%20System/) — the polity, constitution, and economy of the UCN universe
+- [`../Economics/`](../Economics/) — EREM (Energy-Resource Economic Model), the economic substrate referenced from the UCN polity papers
+- [`../Cell AI/`](../Cell%20AI/) — biologically-inspired neural architecture (parallel exploration of non-attention sequence modelling)
+- [`../Cypha/`](../Cypha/) — Harmonic Recursive Neural Architecture
+- [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context memory architecture
+- [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator
+- [`../Veritas/`](../Veritas/) — formal verification framework (relevant to GPN's "self-proving" claim)
+
+---
 
 [← Back to main README](../README.md)

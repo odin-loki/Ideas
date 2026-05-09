@@ -1,98 +1,84 @@
-# Filtering — Ground and Surface Radar with GH SR IMM Tracking
+# Filtering — GH-SR-IMM robust multi-target tracking
 
-> **📡 Overview**: Ground and surface radar with **IMM** tracking — papers, benchmarks, and the **GH SR IMM** thread in one place.
-
----
-
-## 📡 Overview
-
-**Filtering** explores ground-based and surface radar systems using **Gated Hamiltonian Sequential Recursive** (GH SR) IMM (Interacting Multiple Model) tracking. This work combines radar signal processing with advanced filtering techniques to enable robust target tracking in complex environments.
-
-### Key Concepts
-
-- **GH SR IMM**: Gated Hamiltonian Sequential Recursive Interacting Multiple Model tracking
-- **Ground Radar**: Radar systems operating on or near the Earth's surface
-- **Surface Detection**: Target detection and classification on terrain
-- **Adaptive Filtering**: Adaptive filter parameters for varying conditions
+> **Generalised Hyperbolic Interacting-Multiple-Model filter with Square-Root Cubature Kalman propagation, plus a GH-JPDA multi-target extension.** A robust adaptive Bayesian tracking filter that simultaneously handles non-Gaussian (heavy-tailed) measurement noise, unknown / time-varying target dynamics, and numerically stable covariance propagation. Reference Python implementation included.
 
 ---
 
-## 📄 Research Papers
+## 📡 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`GH_SR_IMM_Paper.md`](GH_SR_IMM_Paper.md) | Gated Hamiltonian Sequential Recursive IMM fundamentals and derivation |
-| [`GH_SR_IMM_Research_Paper.md`](GH_SR_IMM_Research_Paper.md) | Full research paper with performance analysis and benchmarks |
+A research paper, a shorter conference-style writeup, and a benchmark implementation. The deliverable is a generic robust tracking filter, not a domain-specific radar or sonar system — but the paper motivates the design by referring to non-Gaussian measurement noise in radar clutter, multipath in urban GNSS / inertial navigation, and impulsive returns in acoustic sensors.
 
----
+The acronym **GH-SR-IMM** expands as:
 
-## 🧪 Benchmark Suite
+- **GH** — Generalised Hyperbolic distribution (NIG subfamily, after Barndorff-Nielsen)
+- **SR** — Square-Root (Cholesky-form Cubature Kalman propagation)
+- **IMM** — Interacting Multiple Model
 
-[`harcf_benchmark.py`](harcf_benchmark.py) — Comprehensive benchmark for GH SR IMM performance evaluation
+Earlier README copy expanded this as "Gated Hamiltonian Sequential Recursive" — that gloss does not appear in any source document and has been corrected.
 
-### Benchmark Scenarios
-
-| Scenario | Description |
-|---------|-------|
-| **Static Target** | Point target with known position |
-| **Moving Target** | Target with constant velocity |
-| **Clutter Environment** | Ground clutter with false targets |
-| **Multi-Target** | Multiple targets with varying dynamics |
-| **Low SNR** | Low signal-to-noise ratio testing |
+Attribution: **O. Halvorsen · Independent Defense Research, Sydney · Technical Report TR-2026-GH-SR-IMM · March 2026**.
 
 ---
 
-## 🔬 Implementation Components
+## 📄 Files
 
-| Component | Description |
-|-----------|-------|
-| **Gating Module** | Range and velocity gating for false target rejection |
-| **Sequential Processing** | Time-ordered data processing pipeline |
-| **Hamiltonian Dynamics** | Physical modeling of target motion |
-| **IMM Mixing** | Model probability mixing for multi-model tracking |
-| **Recursive Update** | Recursive state estimation |
+| File | Role |
+|------|------|
+| [`GH_SR_IMM_Research_Paper.md`](GH_SR_IMM_Research_Paper.md) | Full research paper — derivation, theorems, eight-scenario single-target benchmark + four-scenario multi-target benchmark, references |
+| [`GH_SR_IMM_Paper.md`](GH_SR_IMM_Paper.md) | Shorter / conference-style version |
+| [`harcf_benchmark.py`](harcf_benchmark.py) | Python reference implementation + reproducible benchmark harness |
 
 ---
 
-## 📊 Performance Metrics
+## 🎯 What the filter does
 
-| Metric | Target | Notes |
-|--|--|--|
-| **Detection Probability** | >0.95 | For specified false alarm rate |
-| **Tracking Accuracy** | <1m CEP | Circular error probable |
-| **Clutter Rejection** | >60dB | Ground clutter suppression |
-| **Processing Latency** | <10ms | Per scan processing time |
-| **False Alarm Rate** | <0.01% | Per volume per scan |
+1. **Non-Gaussian measurement noise** — places a Normal-Inverse Gaussian (NIG) distribution over measurement noise. Two NIG shape parameters (χ, ψ) are adapted **per model, per timestep** using exact conjugate Generalised Inverse Gaussian (GIG) posterior updates — heavy-tail handling without approximation.
+2. **Unknown / time-varying dynamics** — three competing models compete via a standard IMM mixer: **CV** (constant velocity), **CA** (constant acceleration with correlated noise), **HI** (H-infinity robust). Model probabilities are updated using the **full NIG likelihood**.
+3. **Numerical stability** — covariance matrices are propagated in **Cholesky square-root form** throughout (SR-CKF, third-degree spherical-radial cubature rule, QR-decomposition predict step), guaranteeing positive definiteness at every step.
 
----
+### GH-JPDA multi-target extension
 
-## 🔗 Related Work
-
-This work connects to:
-- **Asset Tracking Algorithm** — ARIA-INTEL fusion for asset tracking
-- **Filtering** — IMM tracking for radar applications
-- **Compression Algorithms** — Information-theoretic approaches
-- **Cypha** — Signal processing and pattern matching
-- **GF2 Algebra** — Binary representations for digital signal processing
+A naive substitution of NIG likelihoods into standard JPDA performs **worse** than Gaussian-JPDA, because NIG marginals are heavier-tailed and outliers receive higher association weight. The paper's contribution: use the GH posterior to **inflate the effective measurement noise** for outlier-like measurements, making the association Gaussian small and correctly suppressing their association probability.
 
 ---
 
-## 📖 See Also
+## 📊 Benchmark headline numbers (from the abstract)
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — fusion tracking
-- [`Cypha/`](../Cypha/) — signal processing
-- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — binary algebra
+| Metric | Result |
+|--------|--------|
+| Single-target benchmark composite score (lower is better) | **GH-SR-IMM 1.09** vs Student-t KF (Huang 2017) **1.76** vs Variational Bayes KF (Agamennoni 2012) **3.51** |
+| Improvement over Student-t KF | **38 %** |
+| Improvement over VB KF | **69 %** |
+| Multi-target GOSPA reduction (GH-JPDA vs Gaussian-JPDA) | **51.6 %** lower mean GOSPA across four geometric scenarios with clutter |
+
+Single-target benchmark covers eight scenarios: Gaussian, heavy-tail, Lévy, manoeuvring, correlated, mixed-regime, bimodal, jerk dynamics. Multi-target benchmark covers four geometric scenarios with clutter.
 
 ---
 
-## 🛡️ About This Project
+## 🧪 Contributions (from §1 of the paper)
 
-This project exists for **research and development purposes**. The goal is to:
-- Develop robust ground radar tracking
-- Improve clutter rejection performance
-- Enable multi-target tracking in complex environments
-- Benchmark tracking algorithm performance
+1. Principled fusion of exact conjugate **GIG posterior updates** with the IMM framework — per-model adaptive non-Gaussian noise characterisation without approximation.
+2. **Square-Root CKF** propagation integrated into the IMM mixer-predictor cycle — guaranteed numerical positive definiteness under extreme outlier conditions.
+3. Multi-target **GH-JPDA** extension — correct application of the GH posterior to data association, achieving 51.6 % GOSPA reduction.
+4. Open-source benchmark + Python reference implementation.
+
+---
+
+## 🚧 Honest framing
+
+- The filter is designed and benchmarked on **synthetic scenarios**; the paper does not claim live radar / sonar / GNSS tracking results.
+- Performance numbers are relative to the specific competing filters (Student-t KF, VB KF, Gaussian-JPDA) on the published benchmark suite — they do not constitute a head-to-head against fielded military trackers.
+- Three-model IMM is a deliberate tractability choice; deeper variable-structure IMM, LSTM-IMM, etc. are out of scope.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — ARIA-INTEL uses PMBM (a different Bayesian multi-target framework) plus IMM-style model mixture; complementary tracking system
+- [`ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — Algebraic Resynchronisation and Integrity Architecture (cryptographic ARIA, unrelated acronym to ARIA-INTEL)
+- [`RNGS/`](../RNGS/) — random-number generation primitives used in stochastic motion models
+- [`100W Wideband Noise Generator/`](../100W%20Wideband%20Noise%20Generator/) — high-power wideband noise source; the natural adversary for any robust tracking filter
+
+---
 
 [← Back to main README](../README.md)
