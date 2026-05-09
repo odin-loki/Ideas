@@ -1,4 +1,4 @@
-# Izaac as Side Data — applied protocols
+# Izaac as Side Data — applied shared-PRF coordination protocols
 
 > **The engineered protocol suite that operationalises the Izaac meta-theorem ("shared deterministic PRF ≡ free broadcast channel") into twelve concrete protocols spanning verifiable random functions, non-interactive MPC sum, leader election, coordinated Bloom filters, Monte Carlo checkpointing, distributed rate limiting, fuzz-test seed coordination, and more.** Where the canonical Izaac framework in [`../Compression Algorithms/`](../Compression%20Algorithms/) develops the theory, this folder turns the meta-theorem into a < 2000-LOC Python reference implementation with explicit complexity tables, soundness bounds, and side-by-side comparisons against PBFT, HotStuff, and the standard 384-bit-per-element Bloom-filter construction. The headline operational claim: a Bloom filter coordinated by an Izaac shared seed saves `N × 384` bits of message overhead — for `N = 10⁶`, that is **48 MB** moved off-wire per coordination round.
 

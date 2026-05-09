@@ -1,4 +1,4 @@
-# Filtering — GH-SR-IMM
+# Filtering — heavy-tailed multi-target tracker (Generalised-Hyperbolic Square-Root Interacting-Multiple-Model, GH-SR-IMM)
 
 > **Generalised-Hyperbolic Square-Root Interacting-Multiple-Model.** A heavy-tailed-noise multi-target tracker that combines Normal-Inverse-Gaussian / GH measurement noise with conjugate GIG-style scale updates, a three-model IMM (constant-velocity, constant-acceleration with AR(ρ) jerk, H∞ adversarial), square-root cubature Kalman propagation, and a **GH-JPDA** extension that fixes a subtle but consequential bug in the standard recipe — *do not* use the GH likelihood directly inside the JPDA association, use the GH posterior covariance `R_eff` inside a Gaussian association likelihood. With that one fix, GOSPA on a packaged multi-target benchmark drops by **51.6 % on average**, peaking at **72.8 %** on one of the four scenarios.
 

@@ -1,98 +1,120 @@
-# Quantum Diamond Wafer — QDMP framework + CVD pathways to quantum-grade diamond
+# Quantum Diamond Wafer — Quantum Diamond Metamaterial Processor (QDMP)
 
-> **Two papers, two horizons.** A long-range theoretical framework (QDMP) for room-temperature quantum computing in engineered diamond metamaterials, paired with a near-term review of CVD-diamond manufacturing and the quantum sensing/computing applications it can already support. Both speculative-leaning, both grounded in cited literature.
-
----
-
-## 💎 What this folder is
-
-This folder contains a two-paper research set on **quantum-active diamond as a substrate for sensing and computing**, plus a plain-language summary. The work is split between an ambitious theoretical proposal and a sober technology assessment of where the CVD diamond industry actually is in 2025–2026.
-
-The dominant acronym is **QDMP — Quantum Diamond Metamaterial Processor**, defined in the title line of `paper1_QDMP_framework.md`. (Earlier README copy expanded QDMP as "Quantum Diamond Membrane Production"; that expansion is not from the source paper and has been corrected.)
+> **A two-paper programme proposing **QDMP (Quantum Diamond Metamaterial Processor)**: an aspirational **CVD-grown** room-temperature quantum-computing substrate fusing NV-centre arrays, metamaterial / environment engineering, hypothetical topological / soliton protection, and in-situ defect engineering during diamond growth — paired with a sober companion CVD review arguing that **near-term (2–5 year) wins live in sensors, hybrid memory, and QKD nodes**, *not* room-temperature fault-tolerant processors.** The flagship paper is unusually honest about its own ambition: it opens labelled "theoretical / speculative," enumerates **seven fundamental barriers** (coherence leap from `~3 ms` current → `> 100 s` target — a `~10⁴ ×` improvement; nm-to-sub-nm deterministic NV placement vs `~20 nm` lateral best; topological phases without diamond precedent; metamaterial coherence in diamond undeveloped; no quantum coherence metrology during deposition; collective decoherence at `10¹⁴` qubits/cm³; readout/control interface at extreme density), and ships an explicit *fact-vs-fiction ledger* in `qdmp_summary.md` separating real industrial CVD scaling (~`80 %` price drop, `5-day` growth cycles, `3 000+` reactor scale) from science fiction (room-T `> 100 s` coherence, `10¹⁴` qubits/cm³, topological protection in diamond as proposed). The CVD-pathways paper grounds the near-term roadmap with measured-NV-magnetometry sensitivity scaling `η_DC = (1/γ_e) · 1/(C √(n T_2))` reaching the `1–10 pT/√Hz` band for optimised ensembles, NV thermometry at `dD/dT ≈ -74.2 kHz/K` allowing ~`0.1 mK` precision, and a 2–5 year programme targeting `0.1–1 pT/√Hz` and `~0.1 mK` ensemble precision. The interest is not "diamond computer in 2027" — it is the *barrier-honest* framing: separating real industrial CVD commoditisation from the theoretical-physics chasms that an end-state QDMP would need to cross.
 
 ---
 
-## 📄 Documents
+## What this folder is
 
-| File | Type | Subject |
-|------|------|---------|
-| [`paper1_QDMP_framework.md`](paper1_QDMP_framework.md) | Theoretical research paper | **Quantum Diamond Metamaterial Processor (QDMP)** — speculative room-temperature quantum computing architecture using engineered NV-centre arrays in a metamaterial diamond lattice |
-| [`paper2_CVD_quantum_pathways.md`](paper2_CVD_quantum_pathways.md) | Technology review / strategic assessment | CVD diamond manufacturing 2019–2025, quantum-grade vs gem-grade, near-term quantum-sensor and small-scale processor opportunities |
-| [`qdmp_summary.md`](qdmp_summary.md) | Plain-language recap | Evolution of the QDMP idea (BQCM → MQCL → QDMP), fact-vs-fiction summary |
-
-Both papers are attributed to the **Advanced Systems Research Group · March 2026**.
+QDMP is a clear-eyed framework for what a hypothetical room-temperature CVD-grown quantum processor *would need*, paired with a near-term roadmap of what diamond-NV technology can credibly deliver in 2–5 years. The split is structural: the QDMP paper builds the long-horizon vision and the barrier inventory; the CVD-pathways paper grounds the near-term sensor / memory / QKD opportunity space; the summary file is the honesty ledger.
 
 ---
 
-## 🧠 Paper 1: QDMP framework (long-range)
+## 📑 Source documents
 
-The QDMP paper proposes engineering quantum properties **into** diamond during CVD growth rather than implanting NV centres into pre-grown wafers. Its theoretical target is **T₂ > 100 s at room temperature** — about four orders of magnitude beyond the current isotopically-purified state of the art (~ms).
-
-Three signature design moves:
-
-1. **Engineered metamaterial lattice** — periodic 3D unit cell containing 3–5 spin-coupled NV centres, an embedded microwave stripline, an optical channel, and a phononic-bandgap region.
-2. **Topological protection** — proposed analogue of Microsoft Majorana 1 topological qubits, but realised in spin states rather than superconductor-semiconductor hybrids.
-3. **Quantum soliton information carriers** — encoding logical qubits in spin-wave solitons across the metamaterial lattice.
-
-Goal density: **10¹⁴ qubits/cm³**. Targets are presented honestly as theoretical objectives, not as realised capability.
-
-### Seven scientific barriers (as enumerated in §4 of paper 1)
-
-1. **Coherence time extension** — four orders of magnitude beyond current room-temperature NV T₂.
-2. **Sub-nm defect positioning** during CVD growth (current best ~20 nm via laser-activated implantation).
-3. **Topological phases in diamond** — never demonstrated; would itself be a fundamental discovery.
-4. **3D quantum metamaterials at room temperature** — no precedent; current quantum metamaterials are 2D superconducting circuits at mK.
-5. **Real-time quantum-state monitoring during CVD growth** — no existing in-situ measurement of single-spin coherence in a growing crystal.
-6. **Scaling to 10¹⁴ coupled centres** — collective decoherence at this density is poorly understood.
-7. (Detailed in paper.)
-
-The paper is explicit that the QDMP is a **structured thought experiment** to identify research leverage points, not a buildable device.
+| File | Role |
+|---|---|
+| [`paper1_QDMP_framework.md`](paper1_QDMP_framework.md) | QDMP framework. NV qubit substrate, `D ≈ 2.87 GHz` zero-field splitting, optical 532 nm init/readout, `> 90 %` polarisation to `m_s = 0`. Three-five NV cluster metamaterial cell. **`1 cm³` upper-bound table:** room-T `T₂ > 100 s` target vs `~3 ms` current; `10¹⁴` logical/cm³ vs `~10⁸` addressable NV; native error `10⁻⁶` target vs `~10⁻³`; thermal range `−200 °C → +500 °C`; `~50 mW` control target; coherence ceiling `> 1000 K` target; diamond `22 W/(cm·K)` thermal conductivity. **Seven fundamental barriers** explicitly enumerated. |
+| [`paper2_CVD_quantum_pathways.md`](paper2_CVD_quantum_pathways.md) | CVD review + 2–5 year sensor / memory / QKD roadmap. Magnetometry `η_DC` scaling, NV thermometry `dD/dT ≈ -74.2 kHz/K`, `1–10 pT/√Hz` ensemble target; market data (lab-grown diamond `~USD 27 B (2024)`, `~45 %` CVD share, `~80 %` price drop since 2019, ~`USD 1500` 1-carat producer baseline). |
+| [`qdmp_summary.md`](qdmp_summary.md) | The fact-vs-fiction ledger. Manufacturing scale items "real"; topological protection / `100+ s` coherence / `10¹⁴` qubits/cm³ items "not existing." |
 
 ---
 
-## 🔬 Paper 2: CVD quantum pathways (near-term)
+## 🧠 The QDMP architecture
 
-Paper 2 is a different register — a 2026 industry/technology review of:
-
-- **CVD manufacturing transformation** (2019–2025): cycle times compressed from weeks to ~5 days for 1-carat gem-quality, ~80 % producer-price drop, AI-assisted process control entering commercial use, several thousand reactors globally.
-- **Quantum-grade vs gem-grade** material economics — quantum-grade specs are spin-bath density (¹³C, residual N), not optical clarity.
-- **Three near-term application tiers**, ranked by readiness: (1) NV-centre quantum magnetometers and thermometers, (2) small-scale 10–100 qubit hybrid systems, (3) quantum key distribution / single-photon source applications.
-- **Comparative platform analysis** — diamond NV vs SiC, hBN, silicon spin qubits, superconducting transmons.
-- **Investment framework** for the 2025–2035 period.
-
-Sensitivity figures referenced: NV magnetometers ~1–10 pT/√Hz in current devices, mK-precision thermometry, nanoscale electric-field sensing. Lab-grown diamond market valued at ~USD 27 B in 2024 with CVD ~45 % share.
-
----
-
-## 🔑 Key acronyms (verified from sources)
-
-| Acronym | Expansion (per paper) |
-|---------|------------------------|
-| **QDMP** | Quantum Diamond Metamaterial Processor |
-| **NV** | Nitrogen-Vacancy (centre, NV⁻ negatively charged) |
-| **CVD** | Chemical Vapour Deposition |
-| **HPHT** | High-Pressure High-Temperature (synthesis) |
-| **SiV⁻ / SnV⁻** | Silicon-vacancy / Tin-vacancy colour centres (alternative to NV) |
-| **ODMR** | Optically Detected Magnetic Resonance |
-| **DD** | Dynamical Decoupling (CPMG, XY-8, UDD pulse sequences) |
-| **ZPL** | Zero-Phonon Line |
+```
+NV centre (negatively charged, spin-1)
+    ↓
+3–5 NV cluster (metamaterial cell)
+    + embedded microwave routing
+    + [100]-axis optical conduit
+    + phononic-bandgap modulation via engineered strain
+    ↓
+Hamiltonian H = H_zero-field (D ≈ 2.87 GHz) + H_hyperfine + V_strain (metamaterial knob)
+    ↓
+Initialisation:  532 nm optical pump → > 90% polarisation to m_s = 0
+Readout:         spin-dependent fluorescence
+Coherence:       isotopically purified ¹²C → T₂ ~ ms
+                 dynamical decoupling → T₂ ≈ 0.5 T₁ ~ 3 ms (room T)
+                 T₁ ~ 1 s at 77 K
+QDMP target:     T₂ > 100 s at room T  ←  ~10⁴× current
+```
 
 ---
 
-## 🚧 Honest framing
+## 📊 Reported metrics
 
-- Paper 1 is a **theoretical proposal**, not a design that can be built today; the seven barriers are explicitly called out as open scientific problems.
-- Paper 2 is a **strategic review** with current-literature citations, not novel experimental work.
-- The folder contains no code, no experimental data, no fabrication artefacts. It is research writing.
+### `paper1` 1 cm³ upper-bound table (target vs current)
+
+| Metric | QDMP target | Current state |
+|---|---|---|
+| Room-temperature `T₂` | **`> 100 s`** | `~3 ms` |
+| Logical qubits/cm³ | `10¹⁴` | `~10⁸` (addressable NV) |
+| Native error rate | `10⁻⁶` | `~10⁻³` |
+| Thermal range | `−200 °C → +500 °C` | (limited) |
+| Control power | `~50 mW` | (higher) |
+| Coherence ceiling | `> 1000 K` | (much lower) |
+| Diamond thermal conductivity | `22 W/(cm·K)` | `22 W/(cm·K)` |
+
+### `paper2` 2–5 year sensor roadmap
+
+| Metric | Current optimised | 2–5 yr target |
+|---|---|---|
+| Ensemble magnetometry | `1–10 pT/√Hz` | `0.1–1 pT/√Hz` |
+| Thermometry sensitivity | `dD/dT = −74.2 kHz/K` | `~0.1 mK` ensemble precision |
+
+### Industrial CVD market (cited in `paper2`)
+
+- `~USD 27 B` lab-grown diamond market (2024)
+- `~45 %` CVD share
+- `~80 %` price compression since 2019
+- ~`USD 1500` producer baseline for 1-carat
+
+---
+
+## 🚧 Seven fundamental barriers (paper1, explicit)
+
+1. **Coherence leap** — `~10⁴ ×` from `~3 ms` to `> 100 s` at room temperature
+2. **Deterministic NV placement** — nm-to-sub-nm vs `~20 nm` lateral best
+3. **Topological phases** — no diamond precedent for the proposed mechanism
+4. **Metamaterial coherence in diamond** — undeveloped
+5. **Coherence metrology during deposition** — does not exist
+6. **Collective decoherence at `10¹⁴` qubits/cm³** — unsolved
+7. **Readout / control interface at extreme density** — unsolved
+
+---
+
+## 🚧 Fact-vs-fiction ledger (`qdmp_summary.md`)
+
+| Real | Fiction (per `qdmp_summary.md`) |
+|---|---|
+| `~80 %` lab-grown diamond price drop | Topological protection in QDMP |
+| `5-day` CVD growth cycles | `> 100 s` room-T coherence |
+| `3 000+` reactor manufacturing scale | `10¹⁴` qubits/cm³ |
+| `~45 %` CVD share | "1 M logical / 1 B physical qubit" QDMP unit |
+| `~USD 1500` producer 1-carat | `24 h` manufacture / `$500` cost claims |
+
+---
+
+## 🎯 What this displaces
+
+| Standard pitch | What QDMP offers |
+|---|---|
+| "Diamond NV will replace silicon for QC" hand-waving | Explicit `10⁴×` coherence-gap barrier |
+| "Topological qubits eventually" | Explicit "no diamond precedent for proposed mechanism" |
+| Pure speculative quantum-computing futurism | Industrial CVD scaling thesis as the floor |
+| Sensor papers without market context | Embedded `USD 27 B` market sizing |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`Diamond Batterys/`](../Diamond%20Batterys/) — same diamond + NV-centre material base used for radioisotope power conversion (Series D quantum-conversion concepts overlap)
-- [`Neural Dust/`](../Neural%20Dust/) — fluorescent nanodiamond + NV-centre quantum sensors deployed at biological scale (NQD architecture)
-- [`Physics/`](../Physics/) — non-local field gravity / unified-field context
-- [`RNGS/`](../RNGS/) — quantum noise as a randomness source
+- [`../Physics/`](../Physics/) — sibling speculative-but-explicit physics (NLFGN-UFT)
+- [`../Diamond Batterys/`](../Diamond%20Batterys/) — diamond as radioisotope power substrate
+- [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — adjacent topological / quantum-tunnelling device catalogue
+- [`../Quantum Graph Optimisation/`](../Quantum%20Graph%20Optimisation/) — classical-shaped QAOA pipeline
+- [`../Neural Dust/`](../Neural%20Dust/) — NV-centre nanodiamond ("QND") quantum-sensing in biomedical role
+- [`../100W Wideband Noise Generator/`](../100W%20Wideband%20Noise%20Generator/) — RF / chaos-based hardware
 
 ---
 

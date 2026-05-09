@@ -1,96 +1,109 @@
 # Long Reasoning and Thinking NN — Unified Hash-Predictive Memory (UHPM)
 
-> **One unified architecture, two literatures.** The folder builds a single variational framework, **UHPM = Unified Hash-Predictive Memory**, in which locality-sensitive hashing memory retrieval and hierarchical predictive coding are coupled through one free-energy objective. Theoretical proofs, an algorithm, and a working NumPy reference implementation are all in scope.
+> **Unified Hash-Predictive Memory (UHPM): a single variational framework that fuses LSH-based memory and hierarchical predictive coding under one free-energy functional `F_total = F_hierarchical + F_coupling + F_sparse`, replacing `O(N²)` self-attention over long contexts with `O(N)` memory and `O(log N)`-style hashed retrieval refined by `~10` Bayesian iterations — and reporting a `289 ×` query-latency speedup vs full attention at `100 K` tokens (`8.1 ms` vs `2 340 ms`) and `744 ×` memory reduction (`2.2 MB` vs `1 638 MB`) on its synthetic long-context benchmark.** The work is honest about its scope: experiments are on synthetic topic-cluster corpora with fixed non-overlapping segments and random static hashes (no learned hashing), retrieval fidelity is `80 – 90 %` of exact attention rather than 100 %, and the implementation note flags a learned-hashing extension as future work. What it offers in exchange is the explicit unification of two normally-disjoint architectures (hash memory and predictive coding) under one variational loss — and the empirical curves to show it is fast.
 
 ---
 
-## 🧠 What this folder is
+## What this folder is
 
-A research paper, a unified-system framework writeup, an implementation summary, a working NumPy reference (split into hash memory, predictive coding, and a unified system), plus benchmark and demo harnesses. The design target is **long-context inference** at scales (≥ 10⁶ tokens) that defeat dense self-attention.
+The standard answer to "how do I attend to a million tokens?" is some form of hashing or sparse approximation grafted on top of an attention block. Reformer uses LSH attention; Linformer uses low-rank projection; FlashAttention reorders the kernel for better cache behaviour; sliding-window architectures decay older tokens. UHPM argues that all of these are partial answers to a more general question: *what is the variational objective that long-context inference is trying to optimise?* If memory retrieval and inference are both Bayesian operations — finding the maximum-posterior context given an evidence stream — they should live inside one loss function and one optimisation loop, not be welded together at runtime.
 
-Earlier README copy expanded UHPM as "Unified Hypothesis Planning Machine" — that gloss does not appear in any source document and has been corrected. The actual expansion, taken from the title of `UHPM_Research_Paper.md`, is **Unified Hash-Predictive Memory**.
-
-Attribution: **Odin · Independent Research · NSW, Australia · March 2026**.
+The folder ships the unification: a three-level memory hierarchy with segment sizes `100 / 1 000 / 10 000` tokens, 64-bit hyperplane LSH at each level, compressed centroid dimension `d′ = 64`, an iterative refinement loop with `T ≈ 10` query iterations and stopping criterion `‖Δs‖ < 10⁻³`, and an empirical demonstration on synthetic topic-cluster corpora that the resulting system is dramatically faster than full attention without unacceptable retrieval fidelity loss.
 
 ---
 
-## 📄 Files
+## 📑 Source documents
 
 | File | Role |
-|------|------|
-| [`UHPM_Research_Paper.md`](UHPM_Research_Paper.md) | Primary research paper — variational framework, theorems, benchmarks, references |
-| [`unified_hash_predictive_framework.md`](unified_hash_predictive_framework.md) | System framework writeup |
-| [`IMPLEMENTATION_SUMMARY.md`](IMPLEMENTATION_SUMMARY.md) | Implementation notes |
-| [`Implementation_README.md`](Implementation_README.md) | How to run the reference code |
-| [`unified_system.py`](unified_system.py) | Top-level joint inference loop |
-| [`hash_memory.py`](hash_memory.py) | Random-hyperplane LSH index, hierarchical multi-resolution memory |
-| [`predictive_coding.py`](predictive_coding.py) | Hierarchical predictive coding inference module |
-| [`benchmark.py`](benchmark.py) | Benchmark harness vs O(N²) attention and centroid k-NN |
-| [`demo.py`](demo.py) | Worked example |
+|---|---|
+| [`UHPM_Research_Paper.md`](UHPM_Research_Paper.md) | Main research paper. Defines `F_total = F_hierarchical + F_coupling + F_sparse`. Theorem 3.1 (dual feedback). Theorem 4.1 / 4.2 (convergence and error schematic bounds, `σ/√s + 1/K + e^(−αT)` form). |
+| [`unified_hash_predictive_framework.md`](unified_hash_predictive_framework.md) | Full unified math framework. **`60-page` derivation companion**. |
+| [`Implementation_README.md`](Implementation_README.md) | Implementation overview. |
+| [`IMPLEMENTATION_SUMMARY.md`](IMPLEMENTATION_SUMMARY.md) | Implementation summary + caveats. |
+| [`hash_memory.py`](hash_memory.py) | LSH memory implementation. |
+| [`predictive_coding.py`](predictive_coding.py) | Predictive coding implementation. |
+| [`unified_system.py`](unified_system.py) | Combined system. |
+| [`demo.py`](demo.py) | Runnable demo. |
+| [`benchmark.py`](benchmark.py) | Benchmark harness. |
 
 ---
 
-## 🔑 Core insight
+## 🧠 The unified architecture
 
-Both processes — LSH bucket selection and predictive-state updating — emerge as gradient flows on **one** functional:
+```
+F_total = F_hierarchical + F_coupling + F_sparse
 
-$$F_\text{total} = F_\text{hierarchical} + F_\text{coupling} + F_\text{sparse}$$
+         ┌─── Level 0: 100-token segments    ──┐
+Memory ──┼─── Level 1: 1 000-token segments  ──┤  64-bit LSH per level
+         └─── Level 2: 10 000-token segments ──┘  d' = 64 compressed centroid
 
-This produces automatic **bidirectional** feedback: inference states predict which hash buckets are relevant (Inference → Hash), while retrieved memories constrain inference states via coupling gradients (Hash → Inference). Neither feedback loop is engineered; both fall out of differentiating the same scalar objective.
-
----
-
-## 📐 Architectural details
-
-- **Hierarchical memory** — three resolution levels: 100-token / 1 000-token / 10 000-token segments.
-- **LSH** — 64-bit random-hyperplane (SimHash) over compressed embeddings, Hamming-distance bucket lookup.
-- **Predictive coding** — internal states evolve via $\partial s / \partial t = -\nabla_s F$, producing approximate Bayesian inference at runtime.
-- **Memory representation** — ~20 bytes per token versus ~16 KB per token for dense KV caches (≈ 700× compression).
+Query ──→ iterative refinement (T ≈ 10 iterations, stop when ‖Δs‖ < 10⁻³)
+       ──→ Bayesian feedback between levels (Theorem 3.1)
+       ──→ retrieved context with calibrated uncertainty
+```
 
 ---
 
-## 📊 Headline results (from §1 / §6 of the paper)
+## 📊 Reported benchmarks (UHPM paper, synthetic 100 K tokens)
 
-| Property | Value |
-|----------|-------|
-| Memory scaling | **O(N)** (linear) |
-| Query complexity | **O(T · K · d)** (constant in N at fixed K) |
-| Memory compression vs dense KV cache | **400–800×** |
-| Retrieval fidelity retained | 80–90 % |
-| Speedup vs O(N²) attention at 100 K tokens | **~290×** |
-| Memory reduction vs naive k-NN at 100 K tokens | **~70×** |
-| Convergence | 5–15 gradient steps regardless of context size |
-| Demonstrated context length | up to 10 M+ tokens on commodity hardware |
+| Metric | UHPM | Full attention | k-NN centroid |
+|---|---|---|---|
+| Query time | **`8.1 ms`** | `2 340 ms` | `45 ms` |
+| **Speedup vs full attention** | — | **`289 ×`** | `5.6 ×` |
+| Memory | **`2.2 MB`** | `1 638 MB` | `245 MB` |
+| **Memory reduction** | — | **`744 ×`** | `111 ×` |
+| Per-token signature scaling | `~22 bytes / token` | — | — |
 
-Theoretical results in the paper:
+### Retrieval quality
 
-- **Theorem 3.1** — single $F_\text{total}$ produces bidirectional coupling.
-- **Theorem 4.1** — convergence to a fixed point under mild Lipschitz conditions.
-- **Theorem 4.2** — approximation-error bounds in terms of hash precision, segment size, iteration count.
+| Metric | Value |
+|---|---|
+| Top-1 exact match vs brute-force centroid | `81.4 %` |
+| Top-5 exact match | `77.1 %` |
+| Same-topic presence in top-5 (level 0) | `89.3 %` |
+| Same-topic presence in top-10 (level 0) | `82.7 %` |
+| Convergence in 5 – 15 iterations | `97 %` of queries |
+
+### Crossover point
+
+UHPM is *slower* than k-NN centroid below `~7 500` tokens because the iterative refinement overhead dominates. The `289 ×` speedup vs full attention emerges as context length grows.
 
 ---
 
-## 🧪 Reference implementation
+## 🚧 Honest caveats (paper §7.2 + IMPLEMENTATION_SUMMARY)
 
-~1 600 lines of pure NumPy across the five Python modules listed above. Designed as readable scaffolding rather than a production transformer; benchmark harness compares against O(N²) attention and centroid k-NN baselines.
+- **Synthetic topic-cluster corpora.** All benchmarks use a constructed long-context dataset, not real natural language with realistic topic structure.
+- **Fixed non-overlapping segments.** Real long-context tasks need overlapping windows or dynamic segmentation.
+- **Linear identity generative maps in the implementation discussion.** The full nonlinear case is sketched but not benchmarked.
+- **Random static hashes — not learned.** The LSH planes are set once at init. Learned hashing is named as future work.
+- **`80 – 90 %` retrieval fidelity vs 100 % exact attention.** This is the trade-off — not a regression, but a deliberate accuracy-for-speed exchange.
+- **Preprint dated March 2026.** Not peer-reviewed.
+- **Full test suite recommended** in implementation summary; some tests are optional / pending.
+- **Below `~7 500` tokens, UHPM is slower than k-NN centroid.** Use accordingly.
 
 ---
 
-## 🚧 Honest framing
+## 🎯 What this displaces
 
-- Benchmarks are on **synthetic corpora** up to 500 K tokens (with the implementation supporting 10 M+). The paper does not claim end-to-end LM perplexity competitive with dense transformers on natural-language benchmarks.
-- The architecture targets a different operating point — long-context retrieval where dense attention is infeasible — not raw perplexity at short context.
-- Coupling derivations require mild Lipschitz conditions made explicit in §4.
+| Standard | Limitation | What UHPM offers |
+|---|---|---|
+| Full self-attention | `O(N²)` memory + compute | `O(N)` memory, `289 ×` faster at `100 K` |
+| Reformer LSH attention | LSH bolted on | LSH as part of unified variational objective |
+| Linformer / Performer | Approximation without uncertainty | Iterative Bayesian refinement with calibrated uncertainty |
+| Sliding window | Drops old context | Hierarchical 3-level retention |
+| Centroid k-NN | Fast but no inference | UHPM = k-NN + predictive-coding inference loop |
 
 ---
 
 ## 🔗 Related work in this repo
 
-- [`Cell AI/`](../Cell%20AI/) — biologically-motivated alternative to attention; predictive-coding lineage shared
-- [`NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework / Algebraic Autopsy; complementary efficiency literature
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — Izaac / GRIA / NMP information-theoretic compression at the model level
-- [`Cypha/`](../Cypha/) — full ML stack (HRNA architecture); could host UHPM as a memory module
-- [`Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator with hash-based context compression
+- [`../Cell AI/`](../Cell%20AI/) — sister non-attention sequence architecture
+- [`../Cypha/`](../Cypha/) — HRNA inference + training stack
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac shared-PRF + NMP harmonic-spectrum theory
+- [`../Statistical Generation/`](../Statistical%20Generation/) — hash-compression sister technique (`M = 2³²`)
+- [`../NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework + Algebraic Autopsy (efficiency frame)
+- [`../Veritas/`](../Veritas/) — formal-verification framework
+- [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — adjacent Bayesian-inference architecture
 
 ---
 

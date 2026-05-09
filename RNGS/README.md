@@ -1,4 +1,4 @@
-# RNGS — random number generator portfolio
+# RNGS — Random Number Generators (a four-family portfolio)
 
 > **Four genuinely different families of pseudo-random number generators in four subfolders, each with its own threat model, performance profile, and statistical evidence — selected so a downstream user can pick the right tool for the job rather than reach for a default.** OTB-LCG (Boolean / transcendental LCG, hardened with SHA-256 post-processing) targets near-cryptographic quality on a 256-bit state. SynerChaos v2 is a 739-bit embedded chaotic+LFSR composite optimised for `~80 cycles/output` on Cortex-M4. Meta-DAG RNG is a transcendentally-seeded 8-node DAG with a `≥ 2¹⁵³⁶ × 40320` state-space lower bound and `≥ 63.9 bits` per 64-bit-output min-entropy under stated normality hypotheses. TurbulentFlow is a decimal-digit (ℤ₁₀) generator with `Shannon entropy 3.3219` (≈ `log₂ 10`), `χ² p = 0.582`, and `avalanche pass rate > 0.999` on 100 000 samples — explicitly framed as a non-cryptographic aesthetic generator, not a CSPRNG.
 

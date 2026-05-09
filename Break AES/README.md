@@ -1,4 +1,4 @@
-# Break AES
+# Break AES — research scaffolding for Transformer + reinforcement-learning cryptanalysis of the Advanced Encryption Standard
 
 > **A research-scaffolding sketch combining a Transformer student, Llama-teacher knowledge distillation, and policy-gradient reinforcement learning with a BLEU-shaped reward — framed as a training stack one might point at AES cryptanalysis and see what happens.** This folder is *not* an AES break, an attack against AES-128, or a working cryptanalysis tool. It is a Python skeleton plus an informal proof-sketch note exploring whether modern ML training recipes could plausibly approach the problem; the file headers themselves describe the math as informal and the code as research scaffolding.
 

@@ -1,4 +1,4 @@
-# GF2 Algebra and Applications
+# GF2 Algebra and Applications — the binary finite field GF(2) and its applications
 
 > **A seven-paper sweep that starts with an exhaustive computer-verified taxonomy of all 16 binary operations on `{0, 1}` (with a proven uniqueness theorem: **AND** is the *only* nontrivial operation that forms a ring with **XOR** over GF(2)), extends through finite-field permutation polynomials over `GF(2ⁿ)` (the AES inverse `x⁻¹ = x²⁵⁴` is one of `φ(255) = 128` such permutations on `GF(2⁸)`), introduces a graded reversibility coordinate `α(f) = 1 − H(f(X))/H(X)` with bifurcation at `α = 0.5`, derives gate-count benchmarks via algebraic normal form (ANF/Zhegalkin) — Rule 110 dropping from 19 to 6 gates (`68 %` reduction), full-adder sum dropping `78 %`, XOR `80 %` — and culminates in a Differentiable Logic Gate Network experiment showing the network *learns* to favour `AND` (`10/96` slots) and `NOR` (`11/96`) over the uniform `6/96` expectation.** The point is unification: from the smallest finite field through to learning systems, the same algebraic spine runs through.
 

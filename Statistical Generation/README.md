@@ -1,4 +1,4 @@
-# Statistical Generation — Universal Statistical Generator
+# Statistical Generation — Universal Statistical Generator (USG)
 
 > **Universal Statistical Generator (USG): a deterministic, interpretable, classical-statistics framework that claims ~90 % of state-of-the-art neural perplexity on long-context tasks while running at `O(N)` training cost.** Built on three foundations — category-theoretic generator composition, Lévy-process triplet parametrisation, and SHA-256 hash-based context compression to `M = 2³²` states — and filtered through a two-stage MDL + Marchenko–Pastur spectral pruning pipeline that keeps **~3 % of states with 97 % signal retention**. Where transformers have ~10 % perplexity advantage on absolute SOTA, USG offers determinism, audit trails, and proofs that a transformer simply cannot match.
 

@@ -1,4 +1,4 @@
-# ARIA Encryption Algorithm
+# ARIA Encryption Algorithm — Algebraic Resynchronisation and Integrity Architecture (ARIA)
 
 > **ARIA = Algebraic Resynchronisation and Integrity Architecture.** An AEAD-style authenticated-encryption scheme whose distinguishing property is **synchronous, receiver-recomputable nonces** that are *never transmitted* — the receiver derives its nonce from the message and a session key the same way the sender did, so loss of nonce sync (a well-known operational pain point in AES-GCM, ChaCha20-Poly1305, and GCM-SIV deployments) becomes structurally impossible. Built on a **three-layer algebraic tower** over `GF(2²⁵⁶)`, with a **session-key-seeded Meta-DAG RNG** as the entropy pump and **dual collision analyses** (a PRF-style bound and a syndrome-decoding-style bound on a [2048, 256] code).
 

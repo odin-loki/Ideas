@@ -1,4 +1,4 @@
-# Veritas — Verification-Enabled Reasoning and Integrated Theorem-Acquiring System
+# Veritas — verification-enabled learning architecture (Verification-Enabled Reasoning and Integrated Theorem-Acquiring System)
 
 > **VERITAS is a learning architecture in which the artefact produced is not loss curves but proof traces.** Every step of every learner emits PAC, mistake-bound, meta-learning, and composition certificates as it goes — and the system's central composition theorem (Theorem 9) shows that error and confidence add cleanly when a meta-learner sits on top of a base learner: `P(err(m∘h) > ε + ε_m) ≤ δ + δ_m`. Worked example for `n = 8`: the function class has size `|H| = 2^(2⁸) = 2²⁵⁶`, so `ln|H| ≈ 177 000`, and the PAC sample bound at `ε = δ = 0.01` gives `~1.8 × 10⁶` samples — extreme by ML standards, but **proven, not hoped**.
 

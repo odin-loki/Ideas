@@ -1,4 +1,4 @@
-# Diffusion Welding — UCDW Ultra-Compact Diffusion Welding
+# Diffusion Welding — Ultra-Compact Diffusion Welding (UCDW)
 
 > **A five-regime tradespace from `2-minute / 77 %-strength` battlefield emergency repairs through to `2.3-hour / 99 %-strength` aerospace-certifiable bonds — built on ionic-liquid substrate chemistry (`EMIM-Cl + AlCl₃` family), DC current-density-controlled electrochemistry, ultrasonic power-density activation, and (for the 99 % regimes) a mandatory post-anneal — running at one to two orders of magnitude lower equipment cost than vacuum diffusion welding (`$8 – 50 K` vs `$500 K – 2 M`).** The same chemistry, the same electrode set, the same control logic — what changes regime to regime is temperature (`75 → 300 °C`), time (`2 min → 1 h + 30 min anneal`), current density (`500 – 8 000 A/m²`), and ultrasonic power (`3 – 15 W/cm²`). The result is one technology family that spans field-repair-tier through certified-bond-tier, which no incumbent process does.
 

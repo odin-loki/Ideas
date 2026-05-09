@@ -1,4 +1,4 @@
-# Asset Tracking Algorithm — ARIA-INTEL
+# Asset Tracking Algorithm — multi-target tracking and tactical-intelligence engine (ARIA-INTEL)
 
 > **ARIA-INTEL = Algebraic Rendezvous & Intelligence Analyser.** A single-file, edge-deployable multi-target tracking and tactical-intelligence engine that fuses Poisson Multi-Bernoulli Mixture (PMBM) random-finite-set tracking, Mixed Ornstein–Uhlenbeck (MOU) motion, spatio-temporal pattern-of-life GMMs, three independent rendezvous-prediction methods stacked in parallel, eight tradecraft detectors, Dempster–Shafer multimodal fusion, and Beta–Monte-Carlo threat scoring — into one Python module designed to run at **~28 ms median scan latency on a single CPU core, no GPU**, on tactical edge hardware.
 

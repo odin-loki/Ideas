@@ -1,0 +1,7 @@
+﻿Rewrite README titles, ledes, and root index for clarity
+
+- Replace acronym-only titles with plain-English titles followed by the acronym in parentheses across 26 READMEs (Asset Tracking, Filtering, General Math Papers, Long Reasoning, Quantum Diamond Wafer, Diffusion Welding, Cypha, Cell AI, Compression Algorithms, Physics, Rockwell, Quantum Graph Optimisation, RNGS, NN Shortcuts, Neural Decompiler, Veritas, Izaac as Side Data, Neural Dust, GM Enhancements, Statistical Generation, Economics, UCN AIs, VDJ Inspired Algorithm, GF2 Algebra, ARIA Encryption, Break AES).
+- Upgrade lede paragraphs across the AI/ML and physics/quantum/biomedical batches (Cell AI, Cypha, Long Reasoning, Neural Decompiler, NN Shortcuts, VDJ, Fungal, Ashby, UCN AIs, Physics, Quantum Diamond Wafer, Quantum Graph Optimisation, Neural Dust, GM Enhancements, Drugs) to verbose paragraph form grounded in source documents.
+- Rewrite root README: verbose category essays, new Selected Highlights section with sourced numbers, new Reading Paths section with seven curated entry sequences, new Acronym Key section disambiguating ARIA / NMP / HSA / etc.
+- Remove www.odinloch.com.au from the AGPL-3.0+ attribution example.
+- All internal links validated.

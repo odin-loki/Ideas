@@ -1,6 +1,6 @@
-# Neural Decompiler — assembly → source seq2seq with hierarchical memory and MoE
+# Neural Decompiler — assembly to source code via sequence-to-sequence learning with hierarchical memory and mixture-of-experts
 
-> **Binary → high-level source, not PyTorch model lifting.** A practical encoder–decoder Transformer for *neural decompilation*: learn a mapping from a low-level token sequence (e.g. disassembled instructions) to a high-level source-like token sequence. Hierarchical memory + MoE expert families (binary-focused vs language-focused) + load-balanced routing.
+> **Binary → high-level source, reframed as conditional sequence modelling: a practical encoder–decoder Transformer for *neural decompilation* — the classical compiler-pipeline problem of recovering readable structure (disassembly, control-flow recovery, type reconstruction, pretty-printing) from executables — equipped with a hierarchical memory module of learnable slots `M ∈ ℝ^(K×d)` accessed by multi-head attention with gated fusion, a load-balanced mixture-of-experts (auxiliary loss `λ‖p̄ − u‖²`) split into binary-focused and language-focused families, and a pre-norm GELU encoder/decoder stack with learned position embeddings.** The framing is honest: this is a coherent trainable architecture and reference training loop, not a state-of-the-art recovery system on full binaries — the bundled synthetic corpus only validates the pipeline (forward pass, shape checks, loss decrease), and serious benchmarking would require lifted-assembly + source datasets with recorded compiler flags. Earlier README copy described the folder as decompiling "trained PyTorch models" — that is **not** the subject; the subject is the program-understanding problem.
 
 ---
 

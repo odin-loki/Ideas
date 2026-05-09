@@ -1,4 +1,4 @@
-# General Math Papers — LCRP
+# General Math Papers — the Logarithmic Complexity Reduction Principle (LCRP)
 
 > **The Logarithmic Complexity Reduction Principle (LCRP): a meta-principle, not a theorem in the strict sense, that documents and unifies the recurring pattern by which naively `Ω(n²)` (or worse) problems admit `O(n log n)` or `O(m log n)` algorithms via divide-and-conquer recursion or `O(log n)`-per-element data structures, with the speedup justified by Master Theorem case analysis and an information-theoretic floor.** The principle is honest about itself: it does not apply to NP-hard problems, it does not give bounds tighter than `O(n log n)` where `O(n)` reading is required, and it does not predict speedups for problems whose lower bound is provably above `O(n log n)` (matrix multiplication, for example). What it does is provide a shared vocabulary and Master-Theorem-anchored decision procedure for spotting *when the pattern applies* — and that turns out to cover a remarkably wide swath of the standard CS curriculum.
 

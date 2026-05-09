@@ -1,4 +1,4 @@
-# Economics — EREM (Energy-Resource Economic Model)
+# Economics — Energy-Resource Economic Model (EREM)
 
 > **EREM reframes national wealth as physics: instead of measuring a nation by GDP (an annual flow accounting for goods produced) or by capital-asset stocks (in dollars whose dollar-denomination is itself the artefact being measured), measure it by **Total National Wealth (TNW) in megajoules** — the actual physical-energy content of natural endowments, manufacturing capacity, food / energy / water security, human / labour capacity, and information / efficiency. Issue currency only when physical wealth grows: `Total_currency = k · TNW` with `k = 0.85` (`15 %` measurement buffer). The exchange rate between two nations is then `(TNW_A / Pop_A) / (TNW_B / Pop_B)` — directly comparable, dimensionally consistent, and immune to monetary inflation.** EREM is explicitly labelled v1.0 / theoretical and asks for empirical validation; what it offers in exchange is a *unit* — the megajoule — that does not depend on what someone in Washington decides about interest rates this morning.
 

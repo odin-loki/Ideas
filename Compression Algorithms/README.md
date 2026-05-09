@@ -1,4 +1,4 @@
-# Compression Algorithms — Izaac, GRIA, NMP
+# Compression Algorithms — shared-PRF coordination, graded reversibility, and neural-matrix pruning (Izaac, GRIA, NMP)
 
 > **The canonical home of the Izaac framework, the GRIA graded reversible–irreversible algebra, and the NMP neural-manifold projection codec — three frameworks that, taken together, attempt to unify lossless coding, distribution compression, and neural representation under one information-theoretic vocabulary.** Izaac introduces a deterministic shared-PRF coordination primitive that the meta-theorem of the paper frames as a "free broadcast channel"; GRIA grades systems on a real-valued axis `α ∈ [0, 1]` from fully reversible to fully irreversible (entropy-based); NMP treats neural networks as compression operators with a measurable spectral exponent `α ≈ 0.851 ± 0.122` and an MDL-optimal bottleneck dimension that the paper finds at `P* = 45` for `218.7:1` effective compression.
 
