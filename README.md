@@ -1,256 +1,188 @@
-# Ideas — A Private R&D Shelf Open on the Web
+# Ideas — Odin Loch's R&D shelf
 
-> **✨ Welcome to Ideas** — where research, design, and speculative fiction converge in a curated digital garden.
-
----
-
-## 🌟 What This Collection Is
-
-This repository is a **living collection of research, design documents, and speculative explorations** — a digital garden where ideas grow, interconnect, and inspire.
-
-- **A research library** — formal proofs beside FPGA noise boxes
-- **A design archive** — compression theory next to cocktail menus
-- **A worldbuilding workshop** — fictional polities built with real economics
-- **A thought experiment** — where mathematics meets speculation
-
-**Browse it like a book.** The entire collection is designed to be navigated, not just read linearly.
+> **Forty-five folders of research, design specs, and speculative work, written like internal R&D documents.** Cryptography, neural architectures, materials science, physics, economics, defence-tech, and a smaller fiction layer (cocktails, beauty, worldbuilding). Most folders ship at least one long-form research document; many ship working code; speculative items are flagged in their own README.
 
 ---
 
 ## ⚖️ Licensing
 
-This project is available under a **dual-license model**:
+Dual-licensed:
 
-### 📜 Dual-License Model
+1. **GNU Affero General Public License v3.0+ (AGPL-3.0+)** — free tier for personal use, charity, education, and entities with annual income < AUD 50 000.
+2. **Tiered commercial licence** — for commercial use above the free-tier threshold.
 
-1. **GNU Affero General Public License v3.0+ (AGPL-3.0+)** — Free tier for:
-   - Personal use
-   - Charitable purposes
-   - Educational purposes
-   - Entities with annual income < 50,000 AUD
+See [`modified-license.md`](modified-license.md) for full terms and [`dual-license-setup.md`](dual-license-setup.md) for setup notes.
 
-2. **Tiered Commercial License** — For commercial use above free tier threshold
-
-See [`modified-license.md`](modified-license.md) for complete terms.
-
-### 📋 Attribution Requirements
-
-All users under AGPL-3.0+ must provide clear attribution:
+**Attribution under AGPL-3.0+:**
 
 > "Powered by Ideas, developed by Odin Loch. Licensed under AGPL-3.0+. www.odinloch.com.au"
 
-### 🔄 Modifications
+Modifications must be shared back under the same dual-licence; research using this software must be open-sourced. Commercial licensees: no requirement to share modifications.
 
-- All modifications must be shared back under this same dual-license
-- Research conducted using this software must be open-sourced
-- Commercial licenses: no requirement to share modifications
-
-### 💼 Commercial Licensing
-
-For commercial use, contact: **odin.loch@outlook.com.au**
-
-See [`modified-license.md`](modified-license.md) for full commercial terms.
+**Commercial enquiries:** odin.loch@outlook.com.au
 
 ---
 
-## 📚 What You'll Find
+## 🗂 How to navigate
 
-| Collection | What It Is |
-|--|--|
-| **40+ Topic Folders** | Distinct areas of inquiry, each with papers and docs |
-| **Research Papers** | Full-length documents with citations and references |
-| **Specifications** | Implementation-ready technical documents |
-| **Speculative Work** | Clearly marked as fictional or theoretical |
+The repository is organised as one folder per topic, browsable in any order. Each folder has its own README that describes what the folder actually contains, lists the source documents, and links related work elsewhere in the repo.
 
-### **Editorial Standards**
+You can read this index three ways:
 
-- **One-house style** — Consistent formatting across all documents
-- **Clear structure** — ATX headings, GFM tables, proper math notation
-- **Interconnected** — Related work, see also, cross-references
-- **Well-annotated** — Every document has context and navigation
-
-See **[`EDITORIAL_ROADMAP.md`](EDITORIAL_ROADMAP.md)** for editorial workflow and **[`docs/EDITORIAL_STYLE.md`](docs/EDITORIAL_STYLE.md)** for house style.
+1. **By category** ([§ Categories](#-categories)) — six themed groupings.
+2. **A–Z** ([§ A–Z folder index](#-az-folder-index)) — alphabetical with one-line descriptions.
+3. **Navigation aids** ([§ Quick links](#-quick-links)) — repo-level files (audit trail, licence, etc.).
 
 ---
 
-## 🌐 Browse Online
+## 📚 Categories
 
-**Use GitHub Pages as the front door.**
+### 🤖 Algorithms, learning, and AI
 
-- Clean, navigable interface
-- KaTeX-rendered mathematics
-- Search functionality
-- Topic indexes
+| Folder | Description |
+|---|---|
+| [`Cell AI/`](Cell%20AI/) | CellularAI — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity, MultiModalModel; v1/v2/v3) |
+| [`Cypha/`](Cypha/) | HRNA inference, training, and tooling (Python core + parity-validated native C++ + REST + Studio GUI) |
+| [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) | UHPM = Unified Hash-Predictive Memory — long-context LSH + predictive coding under one free-energy functional |
+| [`Neural Decompiler/`](Neural%20Decompiler/) | Assembly → source seq2seq with hierarchical memory and Mixture-of-Experts |
+| [`NN Shortcuts/`](NN%20Shortcuts/) | Efficient neural-network shortcuts |
+| [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | ARIA-INTEL = Algebraic Rendezvous & Intelligence Analyser — edge-deployable PMBM filter, 28 ms scan latency |
+| [`Filtering/`](Filtering/) | GH-SR-IMM — Generalised Hyperbolic Square-Root Interacting-Multiple-Model robust multi-target tracker; GH-JPDA extension |
+| [`Statistical Scheduler/`](Statistical%20Scheduler/) | Neural-heuristic distributed task scheduler (LinTS / PID / CFS) |
+| [`Statistical Generation/`](Statistical%20Generation/) | Universal Statistical Generator — category theory + Lévy triplets + information-theoretic filtration |
+| [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition + one-shot learning (5 modules + 7 subsystems; 13 ms at n=16, r=5) |
+| [`Fungal Network Algorithm/`](Fungal%20Network%20Algorithm/) | Pattern recognition by physical network reorganisation (no central control) |
+| [`Ashby Optimiser/`](Ashby%20Optimiser/) | Multi-scale homeostatic optimiser (W. Ross Ashby's 1948 homeostat reframed) |
+| [`UCN AIs/`](UCN%20AIs/) | APN, GPN, Signal AI, linear-congruent / linear-gradient-descent primitives (UCN universe) |
 
-**Site URL** (enable GitHub Pages for `/docs`):  
-`https://<your-username>.github.io/<repository-name>/`
+### 🔐 Cryptography and verification
 
-Clone/ZIP for contributors. For reading, use the Pages URL.
+| Folder | Description |
+|---|---|
+| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | Custom AEAD over GF(2²⁵⁶) — *not* the Korean ARIA block cipher; the local ARIA = Algebraic Resynchronisation and Integrity Architecture |
+| [`Break AES/`](Break%20AES/) | Transformer + RL distillation for AES cryptanalysis research |
+| [`Compression Algorithms/`](Compression%20Algorithms/) | Izaac, GRIA (Graded Reversible-Irreversible Algebra), NMP (Nonlinear Manifold Projection) — canonical home of the Izaac framework |
+| [`Izaac as Side Data/`](Izaac%20as%20Side%20Data/) | Applied Izaac protocols — shared deterministic randomness as side information |
+| [`Veritas/`](Veritas/) | Verification-Enabled Reasoning and Integrated Theorem-Acquiring System |
+| [`RNGS/`](RNGS/) | Random number generators including Turbulent Flow RNG |
 
----
+### 📐 Mathematics and logic
 
-## 🗂️ Navigate the Collection
+| Folder | Description |
+|---|---|
+| [`3 to 8 Value Boolean Algebra/`](3%20to%208%20Value%20Boolean%20Algebra/) | Boolean function spaces $f:\\{0,1\\}^n\\to\\{0,1\\}$ for $n=3..8$ — dimensional emergence, bent functions, QEC, Byzantine NMR |
+| [`General Math Papers/`](General%20Math%20Papers/) | LCRP — Logarithmic Complexity Reduction Principle |
+| [`GF2 Algebra and Applications/`](GF2%20Algebra%20and%20Applications/) | GF(2) Ring Uniqueness Theorem, 16-operator taxonomy, GRIA Spectrum Theorem |
+| [`Math Question Generator/`](Math%20Question%20Generator/) | MegaMathGen — sympy-based continuous problem generator; 13-domain landscape survey |
+| [`Prime Number Generator/`](Prime%20Number%20Generator/) | Scale-dependent meta-pattern theory; power law $\alpha(s) = s^{-0.37}$; critical transition |
 
-### **By Category**
+### 🔩 Hardware, materials, and process science
 
-**[`🤖 Algorithms & Learning`](#algorithms-and-learning)** — AI agents, compression, filtering, tracking, neural systems
+| Folder | Description |
+|---|---|
+| [`100W Wideband Noise Generator/`](100W%20Wideband%20Noise%20Generator/) | Chua-circuit RF noise generator under FPGA supervision; 1 Hz – 14 GHz, 100 W |
+| [`CPU/`](CPU/) | SystemVerilog hardware OS-acceleration block (`os_accelerator` + inner `hardware_bios`) |
+| [`Diamond Batterys/`](Diamond%20Batterys/) | Hypothetical radioisotope diamond batteries (Series A–D; C-14, Am-241, Pu-238, Sr-90) — speculative |
+| [`Diffusion Welding/`](Diffusion%20Welding/) | UCDW — Ultra-Compact Diffusion Welding; 5 regimes from 2-min field repair (77 %) to 99 % aerospace-certified |
+| [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) | Babbage Difference Engine, Antikythera ("military"), Torpedo Data Computer — three triplets (paper + companion doc + Python) |
+| [`Future C++/`](Future%20C++/) | Design conversation: managed compiled language with C++ syntax, Rust-style ownership, async + green threads |
+| [`New Classes of Electrical Components/`](New%20Classes%20of%20Electrical%20Components/) | 3-tier hybrid passive-device catalogue + 5-phase simulation programme |
+| [`Rockwell 50 to 70 Carbide/`](Rockwell%2050%20to%2070%20Carbide/) | HX-70 GradePlex™ sintered carbide for hard machining (HRC 40 – 70) + TriboshieldPlus™ coating + forge-to-machine |
 
-**[`🔐 Security`](#cryptography-and-security)** — Cryptanalysis, cipher analysis, security research
+### 🌌 Physics, quantum, and biomedical
 
-**[`📐 Mathematics & Logic`](#mathematics-and-logic)** — Boolean algebra, number theory, algebraic structures
+| Folder | Description |
+|---|---|
+| [`Physics/`](Physics/) | Non-local field theory; NLFGN UFT; superluminal-recession cosmology |
+| [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) | QDMP — Quantum Diamond Metamaterial Processor; CVD-diamond pathways for sensing and computing |
+| [`Quantum Graph Optimisation/`](Quantum%20Graph%20Optimisation/) | Quantum-inspired classical pipeline: spectral compression → Chebyshev → classical QAOA simulation → noise-side-data ranking → spectral lift-back |
+| [`Neural Dust/`](Neural%20Dust/) | NQD — Neural Quantum Dust two-tier architecture (QND / APEX / WTA) |
+| [`GM Enhancements/`](GM%20Enhancements/) | HSA v4.0 — Homo Sapiens Augmentus; three-phase 24–34 month enhancement protocol |
+| [`Drugs/`](Drugs/) | Universal Depot Systems framework + Nootropics + speculative schizophrenia therapeutics — speculative, not medical advice |
 
-**[`🔩 Hardware & Materials`](#hardware-and-materials)** — Energy storage, metallurgy, components, processes
+### 💰 Economics, civics, defence, and creative
 
-**[`🌌 Physics & Quantum`](#physics-and-quantum)** — Field theory, cosmology, quantum computing
-
-**[`💰 Economics & Civics`](#economics-and-civics)** — Monetary theory, political systems, digital currency
-
-**[`💅 Lifestyle & Fiction`](#lifestyle-and-fiction)** — Beauty products, cocktails, speculative pharma
-
-**[`🗡️ Simulation & Archives`](#simulation-and-archives)** — Battle simulation, RNGs, weapons design
-
-### **Browse by Topic**
-
-**[`Cypha/HRNA`](Cypha/)** — The encoder universe with version stacks
-
-**[`Cell AI`](Cell%20AI/)** — Cellular state machines for text processing
-
-**[`Compression`](Compression%20Algorithms/)** — GRIA, NMP, unified compression theory
-
-**[`Quantum`](Quantum%20Diamond%20Wafer/)** — Diamond wafers, graph optimisation
-
-**[`Economics`](Economics/)** — EREM energy-resource model
-
-**[`Math`](General%20Math%20Papers/)** — Boolean algebra, GF2 theory, polynomials
-
-### **Explore by Approach**
-
-**[`Formal Methods`](Veritas/)** — Verification, mathematical proofs
-
-**[`Signal Processing`](Cypha/)** — Cypha, filtering, pattern matching
-
-**[`Materials Science`](Diamond%20Batterys/)** — Diamond, carbide, diffusion processes
-
-**[`Worldbuilding`](Weapons/)** — Fictional economies, political systems, weapon design
-
----
-
-## 🔗 Explore the Folders (A-Z)
-
-| Folder | What It Is |
-|--|--|
-| **[100W Wideband Noise Generator](100W%20Wideband%20Noise%20Generator/)** | 100W RF noise generator spec |
-| **[3 to 8 Value Boolean Algebra](3%20to%208%20Value%20Boolean%20Algebra/)** | Multi-valued Boolean algebra |
-| **[Asset Tracking Algorithm](Asset%20Tracking%20Algorithm/)** | ARIA-INTEL asset inventory and threat intel fusion |
-| **[Ashby Optimiser](Ashby%20Optimiser/)** | Ashby homeostatic optimisation |
-| **[Battle Sim](Battle%20Sim/)** | Battle simulation design document |
-| **[Beauty Products](Beauty%20Products/)** | Cosmetic R&D with citations |
-| **[Break AES](Break%20AES/)** | AES cryptanalysis research |
-| **[Cell AI](Cell%20AI/)** | Cellular state machines and multimodal systems |
-| **[Cocktails](Cocktails/)** | Bar ops as a design problem |
-| **[Compression Algorithms](Compression%20Algorithms/)** | GRIA, NMP, unified compression theory |
-| **[CPU](CPU/)** | Early CPU Verilog experiments |
-| **[Cypha](Cypha/)** | Cypha/HRNA universe research bundle |
-| **[Diamond Batterys](Diamond%20Batterys/)** | Diamond-based energy storage |
-| **[Diffusion Welding](Diffusion%20Welding/)** | Ultra-capacitor diffusion welding |
-| **[Drugs](Drugs/)** | Speculative pharma narratives |
-| **[Economics](Economics/)** | EREM energy-resource economics |
-| **[Electromechnical Inspired Algorithms](Electromechnical%20Inspired%20Algorithms/)** | Electromechanical algorithm inspiration |
-| **[Filtering](Filtering/)** | Ground/surface radar with IMM tracking |
-| **[Fungal Network Algorithm](Fungal%20Network%20Algorithm/)** | Parallel routing and growth metaphors |
-| **[Future C++](Future%20C++/)** | C++ futures exploration |
-| **[GF2 Algebra and Applications](GF2%20Algebra%20and%20Applications/)** | GF(2) field theory in practice |
-| **[GM Enhancements](GM%20Enhancements/)** | Human-system augmentation protocols |
-| **[Izaac as Side Data](Izaac%20as%20Side%20Data/)** | Auxiliary channel intelligence |
-| **[Long Reasoning and Thinking NN](Long%20Reasoning%20and%20Thinking%20NN/)** | Extended cognitive planning networks |
-| **[Math Question Generator](Math%20Question%20Generator/)** | Structured mathematics question generation |
-| **[Neural Decompiler](Neural%20Decompiler/)** | PyTorch structure extraction |
-| **[Neural Dust](Neural%20Dust/)** | Miniaturised neural sensing/stimulation |
-| **[New Classes of Electrical Components](New%20Classes%20of%20Electrical%20Components/)** | Hybrid discrete–continuous devices |
-| **[NN Shortcuts](NN%20Shortcuts/)** | Efficient neural network shortcuts |
-| **[Physics](Physics/)** | Nonlinear fields and unification |
-| **[Prime Number Generator](Prime%20Number%20Generator/)** | Prime number generation |
-| **[Quantum Diamond Wafer](Quantum%20Diamond%20Wafer/)** | Quantum diamond wafer production |
-| **[Quantum Graph Optimisation](Quantum%20Graph%20Optimisation/)** | Quantum graph optimisation |
-| **[RNGS](RNGS/)** | Random number generator zoo |
-| **[Rockwell 50 to 70 Carbide](Rockwell%2050%20to%2070%20Carbide/)** | Sintered carbide metallurgy |
-| **[Statistical Generation](Statistical%20Generation/)** | Heavy-tailed and combinatorial ML |
-| **[Statistical Scheduler](Statistical%20Scheduler/)** | Neural-heuristic distributed task scheduler (LinTS / PID / CFS) |
-| **[UCN AIs](UCN%20AIs/)** | AI in the United Commonwealth universe |
-| **[UCN Political System](UCN%20Political%20System/)** | United Commonwealth political system |
-| **[VDJ Inspired Algorithm](VDJ%20Inspired%20Algorithm/)** | Immune VDJ recombination algorithm |
-| **[Veritas](Veritas/)** | Formal verification and proof obligations |
-| **[Weapons](Weapons/)** | Fictional design research archives |
-| **[docs/](docs/)** | GitHub Pages site assets |
-| **[ARIA Encryption Algorithm](ARIA%20Encryption%20Algorithm/)** | Korean block cipher research and implementation |
-| **[General Math Papers](General%20Math%20Papers/)** | Standalone mathematical research |
-| **[modified-license.md](modified-license.md)** | Complete licensing terms |
-| **[dual-license-setup.md](dual-license-setup.md)** | Dual license setup instructions |
-| **[README.md](README.md)** | This file |
+| Folder | Description |
+|---|---|
+| [`Economics/`](Economics/) | EREM — Energy-Resource Economic Model (canonical) |
+| [`UCN Political System/`](UCN%20Political%20System/) | UCN doctrine series: 8 numbered papers + economics + sovereign digital currency + constitutional-architecture analysis |
+| [`Battle Sim/`](Battle%20Sim/) | Battle simulation design |
+| [`Weapons/`](Weapons/) | Defence-tech R&D portfolio: small-arms, anti-materiel platforms, body armour, NACS, TACS, OBSIDIAN-X, AlNiCyN armour (UNCLASSIFIED / FOUO style) |
+| [`Beauty Products/`](Beauty%20Products/) | Hemp Harmony luxury body lotion (formulation white paper) |
+| [`Cocktails/`](Cocktails/) | Bar operations as a structured design problem (menus, prep workflows, mixology systems) |
 
 ---
 
-## 🛠️ Site Tooling
+## 🔤 A–Z folder index
 
-Behind the scenes:
-
-- **`tools/`** — Site generation scripts, DOCX converters
-- **`docs/`** — GitHub Pages site assets, generated mirrors
-- **`editorial_inventory.py`** — Folder inventory generator
-- **`build_github_pages.py`** — Site builder script
-
----
-
-## 📜 About This Collection
-
-This project exists for **education, research, and creative exploration**:
-
-- **Research** — Documenting theoretical and practical investigations
-- **Design** — Capturing system designs and specifications
-- **Speculation** — Exploring hypothetical scenarios and worldbuilding
-- **Archive** — Preserving experimental work and historical context
-
-**Not medical, legal, or tactical advice** — Speculative content is clearly marked as fiction or theoretical exploration.
-
----
-
-## 🌍 Browse as a Website
-
-To publish the GitHub Pages site:
-
-1. Push this repository to GitHub
-2. **Settings → Pages →** deploy from `main`, folder **`/docs`**
-3. Your site URL: `https://<your-username>.github.io/<repository-name>/`
-
-Rebuild after edits:
-
-```bash
-pip install -r requirements.txt
-python tools/build_github_pages.py
-```
-
----
-
-## 📤 Share This Collection
-
-```bash
-git init
-git add .
-git commit -m "Initial commit: Ideas archive"
-git remote add origin https://github.com/<you>/<repo>.git
-git push -u origin main
-```
-
----
-
-## 🎯 Why This Matters
-
-This repository represents **curated intellectual work** — research, design, and creativity organised for sharing.
-
-**Welcome to Ideas — where your curiosity is invited to explore.**
+| Folder | One-line description |
+|---|---|
+| [`100W Wideband Noise Generator/`](100W%20Wideband%20Noise%20Generator/) | Chua-circuit RF noise generator (Verilog) — 1 Hz – 14 GHz, 100 W |
+| [`3 to 8 Value Boolean Algebra/`](3%20to%208%20Value%20Boolean%20Algebra/) | Boolean function spaces for n = 3..8 *variables* |
+| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | Custom AEAD over GF(2²⁵⁶) (NOT the Korean cipher) |
+| [`Ashby Optimiser/`](Ashby%20Optimiser/) | Multi-scale homeostatic optimiser (W. Ross Ashby) |
+| [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | ARIA-INTEL — edge-deployable PMBM intelligence engine |
+| [`Battle Sim/`](Battle%20Sim/) | Battle simulation design document |
+| [`Beauty Products/`](Beauty%20Products/) | Hemp Harmony luxury body lotion — formulation white paper |
+| [`Break AES/`](Break%20AES/) | Transformer + RL distillation for AES cryptanalysis |
+| [`Cell AI/`](Cell%20AI/) | CellularAI — biologically-inspired non-attention sequence modelling |
+| [`Cocktails/`](Cocktails/) | Bar operations as a structured design problem |
+| [`Compression Algorithms/`](Compression%20Algorithms/) | Izaac, GRIA, NMP — canonical Izaac home |
+| [`CPU/`](CPU/) | SystemVerilog hardware OS-acceleration block |
+| [`Cypha/`](Cypha/) | HRNA inference + training + tooling (Python + native C++ + REST + GUI) |
+| [`Diamond Batterys/`](Diamond%20Batterys/) | Hypothetical radioisotope diamond batteries (Series A–D) |
+| [`Diffusion Welding/`](Diffusion%20Welding/) | UCDW — five-regime electrochemical/thermal/ultrasonic bonding |
+| [`docs/`](docs/) | Static-site assets (`index.html`, CSS, generated `site/` mirror) and `EDITORIAL_STYLE.md` |
+| [`Drugs/`](Drugs/) | Universal Depot Systems + Nootropics + Schizophrenia Cure (speculative) |
+| [`Economics/`](Economics/) | EREM — Energy-Resource Economic Model |
+| [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) | Babbage / Antikythera / TDC algorithm rebuilds |
+| [`Filtering/`](Filtering/) | GH-SR-IMM robust multi-target tracking |
+| [`Fungal Network Algorithm/`](Fungal%20Network%20Algorithm/) | Bio-inspired self-organising network (topology = memory) |
+| [`Future C++/`](Future%20C++/) | Managed-language design conversation |
+| [`General Math Papers/`](General%20Math%20Papers/) | LCRP — Logarithmic Complexity Reduction Principle |
+| [`GF2 Algebra and Applications/`](GF2%20Algebra%20and%20Applications/) | GF(2) ring theorems, operator taxonomy, GRIA spectrum |
+| [`GM Enhancements/`](GM%20Enhancements/) | HSA v4.0 enhancement protocol |
+| [`Izaac as Side Data/`](Izaac%20as%20Side%20Data/) | Applied Izaac protocols (compression, consensus, VRFs) |
+| [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) | UHPM — Unified Hash-Predictive Memory |
+| [`Math Question Generator/`](Math%20Question%20Generator/) | MegaMathGen + 13-domain mathematics survey |
+| [`Neural Decompiler/`](Neural%20Decompiler/) | Assembly → source seq2seq with hierarchical memory + MoE |
+| [`Neural Dust/`](Neural%20Dust/) | NQD — Neural Quantum Dust two-tier architecture |
+| [`New Classes of Electrical Components/`](New%20Classes%20of%20Electrical%20Components/) | 3-tier hybrid passive-device catalogue + 5-phase simulation |
+| [`NN Shortcuts/`](NN%20Shortcuts/) | Efficient neural-network shortcuts |
+| [`Physics/`](Physics/) | Non-local gravity + NLFGN UFT + superluminal recession |
+| [`Prime Number Generator/`](Prime%20Number%20Generator/) | Scale-dependent meta-pattern theory of primes |
+| [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) | QDMP framework + CVD pathways to quantum-grade diamond |
+| [`Quantum Graph Optimisation/`](Quantum%20Graph%20Optimisation/) | Quantum-inspired classical compressed graph processor |
+| [`RNGS/`](RNGS/) | Random number generators (incl. Turbulent Flow RNG) |
+| [`Rockwell 50 to 70 Carbide/`](Rockwell%2050%20to%2070%20Carbide/) | HX-70 GradePlex™ + TriboshieldPlus™ + forge-to-machine |
+| [`Statistical Generation/`](Statistical%20Generation/) | Universal Statistical Generator (category theory + Lévy + IT) |
+| [`Statistical Scheduler/`](Statistical%20Scheduler/) | Neural-heuristic distributed task scheduler (LinTS / PID / CFS) |
+| [`UCN AIs/`](UCN%20AIs/) | APN / GPN / Signal AI / linear primitives |
+| [`UCN Political System/`](UCN%20Political%20System/) | UCN doctrine series + economics + sovereign currency |
+| [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition + one-shot learning |
+| [`Veritas/`](Veritas/) | Formal verification framework |
+| [`Weapons/`](Weapons/) | Defence-tech R&D portfolio (UNCLASSIFIED / FOUO style) |
 
 ---
 
-> **✨ A digital garden of thought — browsable, interconnected, and open to your curiosity.**
->
-> **⚖️ Licensed under AGPL-3.0+ or Commercial License. See [modified-license.md](modified-license.md) for terms.**
+## 🔗 Quick links
+
+| File | Role |
+|---|---|
+| [`AUDIT_README_VS_SOURCE.md`](AUDIT_README_VS_SOURCE.md) | Audit log of README ↔ source-paper discrepancies and the remediation path that produced the current state of this repo |
+| [`modified-license.md`](modified-license.md) | Full dual-licence terms (AGPL-3.0+ / commercial) |
+| [`dual-license-setup.md`](dual-license-setup.md) | Dual-licence setup notes |
+| [`docs/`](docs/) | Static-site assets — `index.html`, shared CSS, generated `site/` mirror, `EDITORIAL_STYLE.md` |
+
+---
+
+## 🛡 Honest framing
+
+- **A research shelf, not a product catalogue.** Many folders propose systems that have not been built or validated; speculative items carry that label in their own README.
+- **Defence framing is a stylistic register.** The Weapons folder, GM Enhancements, ARIA-INTEL, and a handful of others use UNCLASSIFIED / FOUO-style document register. No real classification, sponsorship, or fielded materiel is implied.
+- **Speculative pharmacology is not medical advice.** `Drugs/`, `Drugs/Nootropics/`, `Drugs/Schizophrenia Cure/`, `GM Enhancements/`, `Beauty Products/`, and `Weapons/Combat Drug.md` describe theoretical compounds and protocols. Do not synthesise, possess, or administer them.
+- **Acronym hygiene matters.** Several letter-combinations collide between folders (ARIA, NMP, HSA, etc.). Each folder's README spells out which expansion is meant in that context.
+
+---
+
+[← This is the main README]
