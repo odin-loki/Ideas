@@ -1,0 +1,6 @@
+﻿Granular root README + PDF to markdown
+
+- Replace 6-category root README structure with 43 fine-grained scientific subfields, one section per subfield, ordered from most-established science to most-speculative. Each folder appears in exactly one category; folders sharing a methodology are grouped together (e.g. multi-target tracking; shared-PRF coordination), otherwise each gets its own section.
+- Remove the verbose lede paragraph, the Selected Highlights section, and the Reading Paths section per user request.
+- Convert Cell AI/docs/The massed-spaced learning effect in non-neural human cells.pdf to a properly formatted markdown file (Kukushkin et al., Nature Communications 2024, 15:9635, CC BY-NC-ND 4.0). Delete the original PDF.
+- All internal links revalidated.
