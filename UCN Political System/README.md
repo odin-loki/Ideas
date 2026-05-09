@@ -1,86 +1,74 @@
-# UCN Political System — United Commonwealth Research
+# UCN Political System — United Commonwealth Nations doctrine and constitutional architecture
 
-> **🏛️ Overview**: The **United Commonwealth** on paper — numbered essays, economics, digital currency, constitutional fragments. Fiction with institutional detail.
-
----
-
-## 🏛️ Overview
-
-**UCN Political System** explores the United Commonwealth (UCN), a fictional superpower built with realistic political, economic, and constitutional structures. This work combines speculative worldbuilding with detailed institutional design.
-
-### Key Documents
-
-| Document | Description |
-|----------|-------|
-| [`United Commonwealth.md`](United%20Commonwealth.md) | United Commonwealth background and overview |
-| [`EREM_Research_Paper.md`](EREM_Research_Paper.md) | EREM (Energy-Resource Economic Model) integration |
-| [`EREM_Explained_Paper.md`](EREM_Explained_Paper.md) | EREM explained for general audience |
-| [`Sovereign_Digital_Currency_Research_Paper.md`](Sovereign_Digital_Currency_Research_Paper.md) | Sovereign digital currency proposals |
-| [`australias_invisible_constitution.md`](australias_invisible_constitution.md) | Australia constitutional framework analysis |
-| [`Papers I-VIII`](Papers%20I-VIII/) | UCN Papers I through VIII |
+> **A complete fictional polity, written as eight numbered research papers plus economic, currency, and constitutional supplements.** UCN is a Westminster-style constitutional-monarchy framework that explicitly rejects ideological rigidity in favour of evidence-based policy formation, meta-analytic decision-making, and a modular constitutional architecture. Worldbuilding with institutional detail.
 
 ---
 
-## 🌐 UCN Institutional Structure
+## 🏛 What this folder is
 
-| Branch | Function | Description |
-|--|--|--|
-| **Executive** | Administration | Government operations and policy |
-| **Legislative** | Lawmaking | Parliament and constitutional amendments |
-| **Judicial** | Adjudication | Courts and legal interpretation |
-| **Electoral** | Elections | Voting system and representation |
+The political-economy / governance leg of the UCN universe. Eight numbered "UCN Papers" form the doctrine series; supplementary documents cover economics (EREM), sovereign digital currency, the foundational "United Commonwealth" overview, and a constitutional-analysis companion to Australia's invisible constitution.
+
+The AI-systems leg of the UCN universe lives separately in [`../UCN AIs/`](../UCN%20AIs/).
 
 ---
 
-## 💱 Economic Framework
+## 📄 The eight UCN Papers
 
-| Component | Description |
-|--|--|
-| **EREM Model** | Energy-Resource Economic Model |
-| **Currency** | Sovereign digital currency |
-| **Trade** | International trade policy |
-| **Welfare** | Social welfare programs |
+| Paper | File | Topic |
+|---|---|---|
+| I | [`UCN_Paper1_Framework.md`](UCN_Paper1_Framework.md) | Evidence-based modular governance framework, constitutional architecture |
+| II | [`UCN_Paper2_Economic.md`](UCN_Paper2_Economic.md) | Economic doctrine |
+| III | [`UCN_Paper3_Defense.md`](UCN_Paper3_Defense.md) | Defence doctrine |
+| IV | [`UCN_Paper4_Social.md`](UCN_Paper4_Social.md) | Social policy |
+| V | [`UCN_Paper5_Research.md`](UCN_Paper5_Research.md) | Research and innovation policy |
+| VI | [`UCN_Paper6_Governance.md`](UCN_Paper6_Governance.md) | Governance mechanics |
+| VII | [`UCN_Paper7_International.md`](UCN_Paper7_International.md) | International relations |
+| VIII | [`UCN_Paper8_Roadmap.md`](UCN_Paper8_Roadmap.md) | Implementation roadmap |
 
----
+> Earlier README copy referenced these as a `Papers I-VIII/` subfolder — they are in fact eight individual files at the top level of this folder.
 
-## 📜 Constitutional Principles
+## 📄 Economic and constitutional supplements
 
-| Principle | Description |
-|--|--|
-| **Separation of Powers** | Executive, legislative, judicial balance |
-| **Rule of Law** | Legal framework and enforcement |
-| **Human Rights** | Fundamental rights protections |
-| **Federalism** | State and federal governance |
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-- **Economics** — EREM and energy economics
-- **Sovereign Digital Currency** — Currency proposals
-- **Australia Constitutional** — Constitutional analysis
-- **Compression Algorithms** — Information systems
-- **Physics** — Institutional physics
+| File | Role |
+|---|---|
+| [`United Commonwealth.md`](United%20Commonwealth.md) | Foundational UCN overview |
+| [`UCN_Economics_EREM.md`](UCN_Economics_EREM.md) | UCN-specific application of the EREM (Energy-Resource Economic Model) framework |
+| [`EREM_Research_Paper.md`](EREM_Research_Paper.md) | **Mirror** of [`../Economics/EREM_Research_Paper.md`](../Economics/EREM_Research_Paper.md) — full EREM research paper. The canonical copy lives in `Economics/`; this folder mirrors it for self-containment of the UCN reading order. **Keep in sync.** |
+| [`EREM_Explained_Paper.md`](EREM_Explained_Paper.md) | **Mirror** of [`../Economics/EREM_Explained_Paper.md`](../Economics/EREM_Explained_Paper.md) — plain-language EREM explainer. **Keep in sync.** |
+| [`Sovereign_Digital_Currency_Research_Paper.md`](Sovereign_Digital_Currency_Research_Paper.md) | Sovereign digital currency proposals for the UCN polity |
+| [`australias_invisible_constitution.md`](australias_invisible_constitution.md) | Constitutional-analysis companion — Australia's "invisible" (uncodified-convention) constitution as a reference point for UCN's modular constitutional architecture |
+| [`Convo Log.txt`](Convo%20Log.txt) | Design-discussion transcript |
 
 ---
 
-## 📖 See Also
+## 🧠 What UCN actually proposes
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Economics/`](../Economics/) — EREM economics
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information systems
-- [`Physics/`](../Physics/) — institutional physics
+From `UCN_Paper1_Framework.md`:
+
+- **Evidence-based, not ideological.** UCN explicitly transcends left/right; positions are mediated through one meta-criterion: *what does well-replicated, peer-reviewed research indicate is most effective?*
+- **Westminster + constitutional monarchy.** UCN sits within the Westminster constitutional-monarchy tradition rather than designing from scratch.
+- **Selective adoption.** Redistributive wealth constraints from the left + strategic sovereignty / personal responsibility from the right are both adopted *if and only if* the empirical case is good.
+- **Modular constitutional architecture.** The constitution is organised as composable modules rather than a monolithic instrument — a structural commitment that drives the rest of the doctrine.
+- **EBP lineage.** UCN positions itself within the international evidence-based-policy tradition (UK Blair-government EBP formalisation, OECD EBP adoption).
 
 ---
 
-## 🛡️ About This Project
+## 🚧 Honest framing
 
-This project explores **fictional political systems with institutional detail**. The goal is to:
-- Create realistic political frameworks
-- Build detailed constitutional structures
-- Explore economic policy design
-- Develop engaging worldbuilding
+- **Speculative worldbuilding with institutional detail.** UCN is not a real polity; the papers are written in research-style prose to explore what evidence-first governance would look like architecturally.
+- The "evidence-based" meta-criterion is itself a normative commitment, openly acknowledged as such by Paper I.
+- Sister UCN content for AI / network architectures is in [`../UCN AIs/`](../UCN%20AIs/); economic-mechanism content is in [`../Economics/`](../Economics/).
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../UCN AIs/`](../UCN%20AIs/) — APN / GPN / Signal-AI / linear primitives (AI ontology of the UCN universe)
+- [`../Economics/`](../Economics/) — canonical EREM (Energy-Resource Economic Model) papers; the canonical sources for the EREM mirrors here
+- [`../Battle Sim/`](../Battle%20Sim/) — operational simulations potentially deployable inside UCN doctrine
+- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio; sits alongside UCN Paper III (Defence)
+- [`../Veritas/`](../Veritas/) — formal verification (relevant to evidence-based / verifiable policy)
+
+---
 
 [← Back to main README](../README.md)

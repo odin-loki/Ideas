@@ -1,116 +1,99 @@
-# Cocktails — Bar Ops as a Design Problem
+# Cocktails — bar operations as a structured design problem
 
-> **🍸 Overview**: Menus, systems, prep discipline, and individual drink essays — transforming bar operations into a structured design challenge.
-
----
-
-## 📚 Overview
-
-**Cocktails** treats mixology as a rigorous design problem — exploring how systems, menus, and preparation workflows can be engineered for consistency, creativity, and operational excellence. This collection includes accessible fusion menus, base preparations, bitters systems, and detailed recipes for individual cocktails.
-
-### Key Philosophy
-
-- **Systematic Approach**: Treat cocktail creation like engineering — each component serves a functional purpose
-- **Accessible Innovation**: High-end concepts that remain approachable and reproducible
-- **Prep Discipline**: Emphasise preparation workflows that scale from single drink to full-service operations
-- **Cross-Cultural**: Fusion concepts that respect traditions while creating new possibilities
+> **Mixology written like engineering.** Three menu systems, six individual drink essays, three mixology systems (bitters, master-bitters, umami), three preparation workflows, plus a free-form `Cocktails.txt` and a `Homebrew`-adjacent reference. The constraint is operational: every drink must scale from one-off home-bar prep to a working menu without losing consistency.
 
 ---
 
-## 📄 Menu Systems
+## 🍸 What this folder is
 
-| System | Description |
-|--------|-------------|
-| [`global-fusion-menu.md`](global-fusion-menu.md) | Complete cocktail menu with accessible fusion concepts |
+A fully-organised bar / menu design portfolio. Files cluster into five groups: menu systems, individual cocktails, mixology systems, prep workflows, and free-form reference.
+
+---
+
+## 📄 Menu systems
+
+| File | Role |
+|---|---|
+| [`global-fusion-menu.md`](global-fusion-menu.md) | Complete cocktail menu using accessible fusion concepts |
+| [`accessible-fusion-menu.md`](accessible-fusion-menu.md) | Fusion menu with accessible price-point constraint |
 | [`aus-citrus-system.md`](aus-citrus-system.md) | Australian citrus-focused system |
-| [`savory-cream-soda.md`](savory-cream-soda.md) | Savory cream soda variations |
+| [`savory-cream-soda.md`](savory-cream-soda.md) | Savoury cream-soda system |
+| [`menu-structure.md`](menu-structure.md) | Menu organisation and presentation framework |
 
----
+## 🍹 Individual drinks
 
-## 🍹 Drink Catalogue
-
-| Drink | Description |
-|-------|-------------|
-| [`basil-almond-cocktail.md`](basil-almond-cocktail.md) | Classic basil gin fizz with almond nuance |
-| [`coriander-smash.md`](coriander-smash.md) | Refreshing citrus-coriander highball |
+| File | Role |
+|---|---|
+| [`basil-almond-cocktail.md`](basil-almond-cocktail.md) | Basil gin fizz with almond nuance |
+| [`coriander-smash.md`](coriander-smash.md) | Citrus-coriander highball |
 | [`hemp-citrus-cocktail.md`](hemp-citrus-cocktail.md) | Tropical fusion with hemp seed oil |
 | [`hemp-mushroom-cocktail.md`](hemp-mushroom-cocktail.md) | Funky fungal infusion with citrus |
 | [`mustard-spice-cocktail.md`](mustard-spice-cocktail.md) | Spiced rum with mustard notes |
 | [`truffle-avocado-cocktail.md`](truffle-avocado-cocktail.md) | Gourmet twist on classic avocado drink |
 
----
+## 🧪 Mixology systems
 
-## 🧪 Mixology Systems
-
-| System | Description |
-|--------|-------------|
+| File | Role |
+|---|---|
 | [`bitters-system.md`](bitters-system.md) | Homemade bitter recipes and blending guide |
+| [`master-bitters.md`](master-bitters.md) | Master-level bitter compound development (was missing from the previous README) |
 | [`umami-system.md`](umami-system.md) | Umami-based cocktail foundations |
-| [`bitters-system.md`](bitters-system.md) | Complex bitter compound development |
 
----
+## 📋 Preparation workflows
 
-## 📋 Preparation Workflows
-
-| Workflow | Description |
-|----------|-------------|
-| [`base-preparations.md`](base-preparations.md) | Batch preparations for scale and consistency |
+| File | Role |
+|---|---|
+| [`base-preparations.md`](base-preparations.md) | Batch preparations for scale + consistency |
 | [`prep-workflow.md`](prep-workflow.md) | Standardised preparation procedures |
-| [`menu-structure.md`](menu-structure.md) | Menu organisation and presentation |
+
+## 📖 Free-form / reference
+
+| File | Role |
+|---|---|
+| [`Cocktails.txt`](Cocktails.txt) | Classic cocktail reference notes (free-form) |
+
+> Earlier README copy listed `bitters-system.md` twice (once as a system, once as "complex bitter compound development") — that second entry is in fact `master-bitters.md`, which had been omitted entirely.
 
 ---
 
-## 📖 Accessible Concepts
+## 💡 Design principles
 
-| Concept | Description |
-|---------|-------------|
-| [`accessible-fusion-menu.md`](accessible-fusion-menu.md) | Fusion cocktails with accessible price points |
-| [`Homebrew.txt`](Homebrew.txt) | Home brewing recipes for cocktail components |
-| [`Cocktails.txt`](Cocktails.txt) | Classic cocktail reference |
+### Accessible fusion framework
 
----
+1. **Base selection** — spirits that work in multiple contexts.
+2. **Citrus integration** — citrus is *both* flavour and acid.
+3. **Texture** — cream / foam elements alongside flavour.
+4. **Bitter balance** — bitter and acid against sweetness.
+5. **Mouthfeel/flavour coupling** — texture must complement the flavour profile.
 
-## 💡 Design Principles
+### Operational constraints
 
-### The Accessible Fusion Framework
-
-1. **Base Selection**: Choose spirits that work well in multiple contexts
-2. **Citrus Integration**: Use citrus as both flavour and acid base
-3. **Texture Enhancement**: Add cream, foam, or foam-like elements
-4. **Bitter Balance**: Counter sweetness with bitter and acidic notes
-5. **Texture Balance**: Ensure mouthfeel complements flavour profile
-
-### Operational Considerations
-
-- **Batch Efficiency**: Prepare components that scale from home to bar
-- **Ingredient Shelf-Life**: Select ingredients with optimal preservation
-- **Equipment Simplicity**: Design around accessible equipment
-- **Cost Management**: Balance quality ingredients with accessible pricing
+- Batch what scales; one-off what doesn't.
+- Pick ingredients with usable shelf life.
+- Design around equipment that already exists in a working bar.
+- Cost-managed: quality without breaking accessible price points.
 
 ---
 
-## 🔗 Related Work
+## 🚧 Honest framing
 
-This work connects to:
-- **Beauty Products** — formulation science and ingredient systems
-- **Drugs** — speculative pharma and depot delivery narratives
-- **Electromechnical Inspired Algorithms** — systematic design approaches
-- **Asset Tracking Algorithm** — inventory and resource management
+- **Not professional bartending guidance** for unrestricted use — see disclaimer below.
+- Some "fusion" ingredients (hemp infusions, mushroom infusions, truffle-avocado, etc.) are creative concepts; consult local regulations on cannabinoid-derived ingredients in beverages before any real-world implementation.
+- The folder is structured as a *design problem* — menu engineering, prep discipline, batch logistics — not as recipe entertainment.
 
 ---
 
-## 📖 See Also
+## 🔗 Related work in this repo
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Beauty Products/`](../Beauty%20Products/) — formulation science
-- [`Drugs/`](../Drugs/) — speculative pharmaceutical research
-- [`Electromechnical Inspired Algorithms/`](../Electromechnical%20Inspired%20Algorithms/) — systematic design
+- [`../Beauty Products/`](../Beauty%20Products/) — sister formulation-science folder (single Hemp Harmony body-lotion paper)
+- [`../Drugs/`](../Drugs/) — depot delivery and speculative pharma; shares formulation-discipline with this folder
+- [`../Electromechnical Inspired Algorithms/`](../Electromechnical%20Inspired%20Algorithms/) — systematic-design rebuilds of historical computers (different domain, similar process discipline)
+- [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — inventory and resource management (algorithmic counterpart to bar prep workflow)
 
 ---
 
 ## 🛡️ Disclaimer
 
-**This content is for educational and entertainment purposes only.** All recipes and recipes presented are for personal use and experimentation. Always verify ingredients and techniques before use. The inclusion of fictional or speculative ingredients (hemp, mushroom infusions, etc.) indicates these are creative concepts, not established recipes.
+Educational and entertainment content. All recipes are for personal experimentation. Verify ingredients and techniques before use; the inclusion of fictional or speculative ingredients (hemp / mushroom infusions, etc.) indicates these are creative concepts, not established commercial recipes.
 
 [← Back to main README](../README.md)

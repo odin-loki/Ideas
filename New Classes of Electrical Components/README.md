@@ -1,97 +1,56 @@
-# New Classes of Electrical Components — Hybrid Discrete–Continuous Devices
+# New Classes of Electrical Components — discrete-continuous hybrid devices
 
-> **⚡ Overview**: Hybrid devices, phased behaviour, simulation hooks, verification reports — new component *classes*, not one-off parts.
-
----
-
-## ⚡ Overview
-
-**New Classes of Electrical Components** explores hybrid electrical components that combine discrete and continuous behaviour. This work examines novel device classes that bridge the gap between digital and analog electronics, enabling new capabilities in signal processing and computation.
-
-### Key Concepts
-
-- **Hybrid Components**: Devices combining discrete and continuous properties
-- **Discrete–Continuous**: Bridging digital and analog domains
-- **Phase Behaviour**: Transient and steady-state characteristics
-- **Verification**: Rigorous testing and validation
+> **A complete catalogue + simulation programme.** Three tiers of hybrid passive devices that combine discrete (digital / quantised) and continuous (analog) behaviour in a single component — quantum tunnel resistors, memcapacitors / meminductors, sample-hold passives, spin-resistors, magnetoelectric inductors, programmable gyrators, and more — together with a five-phase Python simulation programme that verifies the device equations end-to-end.
 
 ---
 
-## 📄 Core Documents
+## ⚡ What this folder is
 
-| Document | Description |
-|----------|-------|
-| [`complete_hybrid_components_catalog.md`](complete_hybrid_components_catalog.md) | Complete catalog of hybrid component types |
-| [`discrete_continuous_hybrid_components.md`](discrete_continuous_hybrid_components.md) | Theory and taxonomy of hybrid components |
-| [`hybrid_component_fabrication_guide.md`](hybrid_component_fabrication_guide.md) | Fabrication and manufacturing guide |
-| [`hybrid_component_simulation.md`](hybrid_component_simulation.md) | Simulation framework and overview |
-| [`hybrid_simulation_master.md`](hybrid_simulation_master.md) | Master simulation narrative and documentation |
-| [`HybridSim_FullVerification_AllPhases.md`](HybridSim_FullVerification_AllPhases.md) | Full verification across all phases |
-| [`Phase4_Verification_Report.md`](Phase4_Verification_Report.md) | Phase 4 verification report |
-| [`hybrid_research_papers.md`](hybrid_research_papers.md) | Research papers bundle |
-| [`hybrid_components_mathematics_physics.md`](hybrid_components_mathematics_physics.md) | Mathematics and physics notes |
+Two interlocking tracks: a device catalogue (theory, math/physics, fabrication, components list) and a multi-phase simulation effort that exercises and validates the device models. Plus an embedded `Cypha.py` classifier used as glue / analysis.
 
 ---
 
-## 📋 Simulation Phases
+## 📄 Theory and design documents
 
-| Phase | Description |
-|--|--|
-| **Phase 1** | Initial simulation framework setup |
-| **Phase 2** | Basic component modelling |
-| **Phase 3** | Integration and interconnection |
-| **Phase 4** | Advanced behaviour analysis |
-| **Phase 5** | Final verification and optimisation |
+| Document | Role |
+|---|---|
+| [`discrete_continuous_hybrid_components.md`](discrete_continuous_hybrid_components.md) | Theory and taxonomy — what makes a component "hybrid" |
+| [`complete_hybrid_components_catalog.md`](complete_hybrid_components_catalog.md) | The full catalogue, organised in three tiers (Tier 1: standard-equipment-achievable today; Tier 2: specialised-equipment / lab-proven; Tier 3 / further: programmable gyrators, multi-level ladder capacitors, delta-sigma capacitors, etc.) |
+| [`hybrid_components_mathematics_physics.md`](hybrid_components_mathematics_physics.md) | Underlying math / physics derivations |
+| [`hybrid_component_fabrication_guide.md`](hybrid_component_fabrication_guide.md) | Fabrication and manufacturing pathways for each device class |
+| [`hybrid_research_papers.md`](hybrid_research_papers.md) | Bundle of research-paper-style writeups |
 
----
+## 🧪 Five-phase simulation programme
 
-## 🔬 Component Classes
+| Phase | Document |
+|---|---|
+| Setup | [`hybrid_simulation_master.md`](hybrid_simulation_master.md), [`hybrid_component_simulation.md`](hybrid_component_simulation.md) |
+| Phase 1 | [`hybrid_simulation_phase1.md`](hybrid_simulation_phase1.md) |
+| Phase 2 | [`hybrid_simulation_phase2.md`](hybrid_simulation_phase2.md) |
+| Phase 3 | [`hybrid_simulation_phase3.md`](hybrid_simulation_phase3.md) |
+| Phase 4 | [`hybrid_simulation_phase4.md`](hybrid_simulation_phase4.md) + [`Phase4_Verification_Report.md`](Phase4_Verification_Report.md) |
+| Phase 5 | [`hybrid_simulation_phase5.md`](hybrid_simulation_phase5.md) |
+| Full verification | [`HybridSim_FullVerification_AllPhases.md`](HybridSim_FullVerification_AllPhases.md) |
 
-| Class | Description |
-|--|--|
-| **Hybrid Diodes** | Diodes with both discrete switching and analog response |
-| **Phase-Shifting Elements** | Components that manipulate phase transitions |
-| **Multi-State Devices** | Devices with multiple stable operating points |
-| **Hybrid Amplifiers** | Amplifiers combining gain with switching |
+## 🐍 Code
 
----
+| File | Role |
+|---|---|
+| [`Cypha.py`](Cypha.py) | A Cypha-style classifier (see [`../Cypha/`](../Cypha/) for the canonical implementation). Used here for analysis / classification of simulated device behaviours rather than as the canonical Cypha codebase. |
 
-## 💡 Design Principles
-
-1. **Discrete–Continuous Integration**: Combine digital precision with analog flexibility
-2. **Phase Awareness**: Account for transient behaviour
-3. **Verification First**: Verify before deployment
-4. **Modular Design**: Components as building blocks
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-- **Cypha** — Signal processing and pattern matching
-- **Compression Algorithms** — Information representation
-- **GF2 Algebra and Applications** — Algebraic component behaviour
-- **Physics** — Physical device modelling
-- **Rockwell 50 to 70 Carbide** — Materials processing
+> Earlier README copy listed device classes ("Hybrid Diodes", "Phase-Shifting Elements", "Multi-State Devices", "Hybrid Amplifiers") that are *paraphrases* rather than items in the canonical catalogue. The actual Tier 1 list begins with **Quantum Tunnel Resistor**, **Magnetic Domain Inductor**, **Sample-Hold Capacitor/Resistor**, **Memcapacitor**, **Meminductor**, **Brownian Resistor**, **Piezo-Quantum Capacitor**, **Dual-Mode Memristor** — see [`complete_hybrid_components_catalog.md`](complete_hybrid_components_catalog.md) for the authoritative table.
 
 ---
 
-## 📖 See Also
+## 🔗 Related work in this repo
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Cypha/`](../Cypha/) — signal processing
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Physics/`](../Physics/) — device physics
+- [`../Cypha/`](../Cypha/) — canonical Cypha (HRNA) codebase referenced by the local `Cypha.py`
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — NMP / GRIA theoretical backbone
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic structure for discrete-side device behaviour
+- [`../Physics/`](../Physics/) — non-local field theory framework
+- [`../Diffusion Welding/`](../Diffusion%20Welding/) — joining of metallic structures relevant to fabrication
+- [`../Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — process science for machining tooling
 
 ---
-
-## 🛡️ About This Project
-
-This project explores **hybrid electrical components**. The goal is to:
-- Define new component classes
-- Enable discrete–continuous integration
-- Support novel device fabrication
-- Advance electrical engineering
 
 [← Back to main README](../README.md)

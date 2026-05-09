@@ -1,126 +1,59 @@
-# Fungal Network Algorithm — Parallel Routing and Distributed Intelligence
+# Fungal Network Algorithm — bio-inspired self-organising network
 
-> **🍄 Overview**: Parallel routing and growth metaphors — "fungal" as a serious excuse for resilient distributed algorithms with self-healing properties.
-
----
-
-## 🍄 Overview
-
-**Fungal Network Algorithm** explores distributed computation inspired by fungal mycelium networks. This work treats algorithms as living organisms — resilient, adaptive systems that grow, branch, and reconfigure in response to environmental conditions.
-
-### Key Concepts
-
-- **Parallel Routing**: Simultaneous path finding across network branches
-- **Growth Metaphors**: Computational structures that grow like mycelium
-- **Self-Healing**: Network recovery from damage through reconfiguration
-- **Distributed Intelligence**: Intelligence emerging from local interactions
+> **Pattern recognition through physical network reorganisation, not neural-network style.** A bio-inspired algorithm modelled on how fungi search for food without central control: the network *itself* changes topology in response to inputs, and patterns are matched by the resulting structure rather than learned weights. Geometric state evolution (exploration → connection → optimisation → stabilisation), resource-driven decision making, fully decentralised.
 
 ---
 
-## 📄 Research Papers
+## 🍄 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`Fungal NA Parallel Math Model.md`](Fungal%20NA%20Parallel%20Math%20Model.md) | Mathematical model for parallel fungal-inspired routing |
+A long design-conversation log, plus a `Fungal Network v1/` subfolder with three concept / math papers and a Python implementation.
 
----
+| File | Role |
+|---|---|
+| [`Fungal NA Convo Log.txt`](Fungal%20NA%20Convo%20Log.txt) | Design-discussion transcript |
+| [`Fungal Network v1/`](Fungal%20Network%20v1/) | v1 papers + implementation (see below) |
 
-## 📂 Subfolders
+### `Fungal Network v1/` — papers and implementation
 
-| Subfolder | Focus |
-|-----------|-------|
-| [`Fungal Network v1/`](Fungal%20Network%20v1/) | Version 1 implementation |
+| File | Role |
+|---|---|
+| [`Fungal NA Intro.md`](Fungal%20Network%20v1/Fungal%20NA%20Intro.md) | "Bio-Inspired Network Algorithm: From Fungi to Computation" — design philosophy, novel techniques, applications. Pattern recognition by physical reorganisation; geometric state evolution; resource-driven decisions. |
+| [`Fungal NA Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Math%20Model.md) | Single-instance mathematical model |
+| [`Fungal NA Parallel Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Parallel%20Math%20Model.md) | Parallel / distributed extension of the math model |
+| [`FungalNA.py`](Fungal%20Network%20v1/FungalNA.py) | Python reference implementation |
 
----
-
-## 🧪 Network Properties
-
-| Property | Description |
-|---------|-------|
-| **Resilience** | Network maintains connectivity despite damage |
-| **Scalability** | Grows without architectural changes |
-| **Adaptability** | Reconfigures based on environmental conditions |
-| **Efficiency** | Optimized path finding through parallel search |
+> Earlier README copy listed `Fungal NA Parallel Math Model.md` at the top level of this folder — it is actually inside `Fungal Network v1/` along with the other math files.
 
 ---
 
-## 🌐 Biological Inspiration
+## 🌐 Design properties (per `Fungal NA Intro.md`)
 
-### Mycelium Characteristics
+- **Physical pattern recognition** — patterns are matched by topology change, not weights.
+- **Network evolution states** — exploration → connection → optimisation → stabilisation, each state emerging from simple local rules.
+- **Resource feedback** — the network sends more "hyphae" to productive areas, prunes unproductive ones.
+- **No central control** — every routing / allocation decision is local; intelligence is emergent.
 
-- **Branching Patterns**: Fractal growth for maximum coverage
-- **Resource Allocation**: Sending more hyphae to productive areas
-- **Signal Propagation**: Chemical communication across the network
-- **Spore Dispersal**: Propagating computational "seeds"
-
-### Algorithmic Parallels
-
-| Biological | Computational |
-|----------|-------|
-| **Hyphae** | Process threads |
-| **Mycelium** | Network topology |
-| **Spores** | Computational agents |
-| **Chemical Signals** | Message passing |
+This makes the algorithm structurally different from standard graph / ant-colony / neural approaches: weights and edges are not the long-term memory — *the topology itself is the memory*.
 
 ---
 
-## 🔬 Implementation Approaches
+## 🚧 Honest framing
 
-| Approach | Description |
-|---------|-------|
-| **Centralized Controller** | Single controller manages all branches |
-| **Distributed** | Each node makes local routing decisions |
-| **Hybrid** | Mix of centralized and distributed approaches |
+- **One implementation generation** (v1). The structure suggests v2/v3 were planned but only v1 ships in this folder.
+- Bio-inspired metaphors are kept honest: the algorithm doesn't claim to *simulate* fungi, only to formalise four principles drawn from fungal foraging into a computational framework.
+- Performance characterisation in the v1 papers is theoretical / qualitative — not benchmarked against standard graph algorithms.
 
 ---
 
-## 📊 Performance Characteristics
+## 🔗 Related work in this repo
 
-| Metric | Target | Notes |
-|--|--|--|
-| **Latency** | O(log n) | Parallel path finding |
-| **Throughput** | Scales with network size | More branches = more capacity |
-| **Fault Tolerance** | Self-healing | Automatic rerouting |
-| **Memory** | Localized | Each branch has local state |
-
----
-
-## 💡 Use Cases
-
-- **Sensor Networks**: Resilient distributed sensing
-- **Robot Swarms**: Coordinated multi-robot systems
-- **Cloud Computing**: Distributed task allocation
-- **Biological Simulation**: Modeling fungal behavior
+- [`../Cell AI/`](../Cell%20AI/) — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity)
+- [`../VDJ Inspired Algorithm/`](../VDJ%20Inspired%20Algorithm/) — immune-inspired combinatorial pattern recognition
+- [`../Statistical Scheduler/`](../Statistical%20Scheduler/) — neural-heuristic distributed task scheduler (LinTS / PID / CFS)
+- [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — distributed multi-target tracking
+- [`../Ashby Optimiser/`](../Ashby%20Optimiser/) — homeostatic multi-scale optimisation
+- [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic structure for emergent computation
 
 ---
-
-## 🔗 Related Work
-
-This work connects to:
-- **Compression Algorithms** — Information compression and structured representations
-- **Cell AI** — Modular systems and agent architectures
-- **Statistical Scheduler** — Scheduling as a statistical object
-- **GF2 Algebra** — Algebraic structures for computation
-- **Asset Tracking Algorithm** — Resource allocation under constraints
-
----
-
-## 📖 See Also
-
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Cell AI/`](../Cell%20AI/) — modular agent systems
-- [`Statistical Scheduler/`](../Statistical%20Scheduler/) — resource scheduling
-
----
-
-## 🛡️ About This Project
-
-This project explores **distributed algorithms inspired by biological systems**. The goal is to:
-- Create resilient network architectures
-- Enable self-healing computational systems
-- Model biological processes computationally
-- Build scalable parallel algorithms
 
 [← Back to main README](../README.md)

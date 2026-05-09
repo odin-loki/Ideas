@@ -1,89 +1,60 @@
-# Statistical Generation — Heavy-Tailed and Combinatorial Methods
+# Statistical Generation — Universal Statistical Generator framework
 
-> **📊 Overview**: Heavy-tailed and combinatorial angles — categorical Lévy, hashing, state explosion — statistical ML with teeth.
-
----
-
-## 📊 Overview
-
-**Statistical Generation** explores statistical methods for generating complex, heavy-tailed distributions and combinatorial structures. This work focuses on practical statistical machine learning techniques with emphasis on heavy-tailed distributions, hashing strategies, and state explosion management.
-
-### Key Concepts
-
-- **Heavy-Tailed Distributions**: Lévy distributions and beyond
-- **Categorical Lévy**: Categorical variables with heavy tails
-- **Hash Compression**: Hashing for state space reduction
-- **State Explosion**: Managing combinatorial state spaces
+> **Category theory + Lévy processes + information theory, unified.** A framework for data generation in which generators form a mathematical *category* with composition rules, the underlying random measure is built from Lévy triplets $(\mu,\sigma^2,\Pi)$, and information-theoretic filtration controls efficiency. Every claim is paired with computational verification; a working Python implementation ships with the papers.
 
 ---
 
-## 📄 Research Papers
+## 📊 What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`paper1_categorical_levy_framework.md`](paper1_categorical_levy_framework.md) | Categorical Lévy framework research |
-| [`paper2_state_explosion_hash_compression.md`](paper2_state_explosion_hash_compression.md) | State explosion and hash compression research |
+A research codebase: a unified-framework writeup, two technical papers, a complete-proof document, a separate verification document, plus a working NumPy/Python implementation and worked examples.
 
 ---
 
-## 🔬 Statistical Methods
+## 📄 Documents
 
-| Method | Description |
-|--|--|
-| **Categorical Lévy** | Heavy-tailed categorical distributions |
-| **Hash Compression** | State space reduction via hashing |
-| **State Management** | Managing combinatorial explosion |
-| **Sampling Strategies** | Efficient sampling from complex distributions |
+| File | Role |
+|---|---|
+| [`Statistical Generation.md`](Statistical%20Generation.md) | **Universal Statistical Generator Framework** — the unified writeup. Provable correctness via category theory, universal applicability via Lévy-process theory, optimal efficiency via information-theoretic filtration, deterministic / reproducible behaviour. |
+| [`paper1_categorical_levy_framework.md`](paper1_categorical_levy_framework.md) | Paper 1 — categorical-Lévy framework |
+| [`paper2_state_explosion_hash_compression.md`](paper2_state_explosion_hash_compression.md) | Paper 2 — state-explosion and hash compression |
+| [`complete_math_proof_document.md`](complete_math_proof_document.md) | All theorem statements with full proofs |
+| [`universal_generator_theory_verified.md`](universal_generator_theory_verified.md) | Computational-verification companion to the proofs |
+| [`classical_methods_comparison.md`](classical_methods_comparison.md) | Side-by-side comparison vs. classical generative methods |
 
----
+## 🐍 Code
 
-## 📊 Distribution Types
-
-| Distribution | Characteristics | Applications |
-|--|--|--|
-| **Lévy** | Heavy tails, infinite variance | Financial modeling |
-| **Pareto** | Power-law decay | Wealth distribution |
-| **Generalised Pareto** | Flexible tail modeling | Risk analysis |
-| **Negative Binomial** | Count data with overdispersion | Queueing theory |
-
----
-
-## 💡 Use Cases
-
-- **Risk Analysis**: Modeling extreme events
-- **Financial Modeling**: Asset return distributions
-- **Network Traffic**: Bursty data patterns
-- **Simulation**: Realistic stochastic simulation
+| File | Role |
+|---|---|
+| [`universal_generator.py`](universal_generator.py) | Reference implementation. Core data structures include `LevyTriplet(μ, σ², Π)`; framework primitives for composing generators as categorical morphisms |
+| [`advanced_examples.py`](advanced_examples.py) | Worked examples |
+| [`Python_examples_README.md`](Python_examples_README.md) | Companion notes for running the examples |
 
 ---
 
-## 🔗 Related Work
+## 🧠 What's actually in the framework
 
-This work connects to:
-- **Compression Algorithms** — Hash-based compression
-- **GF2 Algebra and Applications** — Algebraic structure
-- **Cypha** — Pattern matching
-- **Filtering** — Signal processing
-- **Asset Tracking Algorithm** — State estimation
+- **Category-theoretic composition.** Data generators are objects, composition is the categorical morphism. Modular construction of complex systems from simple components is a theorem, not an aspiration.
+- **Lévy-process unification.** The Lévy triplet $(\mu, \sigma^2, \Pi)$ unifies continuous diffusion ($\sigma^2$) and discrete jumps ($\Pi$, the Lévy measure) under one parameterisation — heavy-tailed categorical distributions are a special case.
+- **Information-theoretic filtration.** Filtration steps are proven optimal in the Shannon-entropy sense; this gates the state-explosion / hash-compression result of Paper 2.
+- **Computational verification.** Every theorem has a paired numerical check in `universal_generator_theory_verified.md` and the Python harness.
 
 ---
 
-## 📖 See Also
+## 🚧 Honest framing
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — hash compression
-- [`GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic structures
-- [`Cypha/`](../Cypha/) — pattern matching
+- The framework's strongest claims (categorical composition, Lévy-process universality) are mathematical results, not empirical performance numbers. Earlier README copy listed application areas ("financial modelling", "queueing theory") that are not covered in the source papers.
+- The hash-compression result is the only place where "state-explosion management" is rigorously argued; treat that as the canonical reference rather than the README summary.
 
 ---
 
-## 🛡️ About This Project
+## 🔗 Related work in this repo
 
-This project explores **statistical generation methods**. The goal is to:
-- Model heavy-tailed distributions
-- Manage combinatorial complexity
-- Enable realistic simulation
-- Support risk analysis applications
+- [`../Statistical Scheduler/`](../Statistical%20Scheduler/) — application of the same statistical-ML toolkit to distributed scheduling (LinTS / PID / CFS)
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac (deterministic shared randomness) and NMP/GRIA frameworks; complementary information-theoretic backbone
+- [`../Izaac as Side Data/`](../Izaac%20as%20Side%20Data/) — applied Izaac protocols
+- [`../Filtering/`](../Filtering/) — GH-SR-IMM heavy-tailed Bayesian filter; uses generalised hyperbolic priors that fit naturally into the Lévy-triplet view
+- [`../Math Question Generator/`](../Math%20Question%20Generator/) — adjacent generation work in a different domain
+
+---
 
 [← Back to main README](../README.md)

@@ -1,88 +1,72 @@
-# Electromechnical Inspired Algorithms — Gears, Relays, and State Machines
+# Electromechnical Inspired Algorithms — three historical computers, three Python rebuilds
 
-> **⚙️ Overview**: Electromechanical computers as inspiration — algorithms that echo gears, relays, and finite state reality.
-
----
-
-## ⚙️ Overview
-
-**Electromechnical Inspired Algorithms** explores algorithms inspired by electromechanical computing devices. This work examines how algorithms can emulate the behaviour of physical electromechanical systems like gears, relays, and finite state machines.
-
-### Key Concepts
-
-- **Babbage Difference Engine**: Mechanical computation inspiration
-- **Military Antikythera**: Ancient mechanical computing
-- **Torpedo Data Computer**: WWII-era mechanical computing
-- **Finite State Machines**: Mechanical state representation
+> **Algorithms reconstructed from first principles after the machines that ran them.** Three classical electromechanical computers — Babbage's Difference Engine (1822 design, never fully built in his lifetime), the Antikythera mechanism (~150–100 BC) reframed as a "military" / strategic computer, and the WWII US Navy Torpedo Data Computer (TDC) — each documented as a research paper, a deeper companion document, and a working Python implementation.
 
 ---
 
-## 📄 Research Papers
+## ⚙️ What this folder is
 
-| Paper | Description |
-|-------|-------|
-| [`paper1_babbage_difference_engine.md`](paper1_babbage_difference_engine.md) | Babbage Difference Engine algorithm |
-| [`paper2_military_antikythera.md`](paper2_military_antikythera.md) | Military Antikythera specification |
-| [`paper3_torpedo_data_computer.md`](paper3_torpedo_data_computer.md) | Torpedo Data Computer algorithm |
+Three parallel triplets (paper + companion documentation + Python implementation), each rebuilding a historical electromechanical computer's algorithm in software.
 
 ---
 
-## 📋 Implementation Files
+## 📄 The three triplets
 
-| File | Description |
-|--|--|
-| [`babbage_python_implementation.py`](babbage_python_implementation.py) | Babbage Difference Engine Python implementation |
-| [`military_antikythera.py`](military_antikythera.py) | Military Antikythera implementation |
-| [`tdc_python_showcase.py`](tdc_python_showcase.py) | Torpedo Data Computer showcase |
+### 1. Babbage Difference Engine
 
----
+| File | Role |
+|---|---|
+| [`paper1_babbage_difference_engine.md`](paper1_babbage_difference_engine.md) | Research paper |
+| [`babbage_difference_engine_algorithm.md`](babbage_difference_engine_algorithm.md) | Algorithm-level companion document |
+| [`babbage_python_implementation.py`](babbage_python_implementation.py) | Python implementation |
 
-## 🔬 Historical Systems
+### 2. Military Antikythera
 
-| System | Era | Components |
-|--|--|--|
-| **Babbage Difference Engine** | 19th century | Gears, levers, counting wheels |
-| **Antikythera Mechanism** | Ancient Greece | Gear trains, dials, pointers |
-| **Torpedo Data Computer** | WWII | Clock-driven gears, analog computing |
+| File | Role |
+|---|---|
+| [`paper2_military_antikythera.md`](paper2_military_antikythera.md) | Research paper |
+| [`complete_military_antikythera_specification.md`](complete_military_antikythera_specification.md) | Full mechanism specification |
+| [`military_antikythera.py`](military_antikythera.py) | Python implementation |
 
----
+### 3. Torpedo Data Computer (TDC)
 
-## 💡 Algorithmic Principles
+| File | Role |
+|---|---|
+| [`paper3_torpedo_data_computer.md`](paper3_torpedo_data_computer.md) | Research paper |
+| [`tdc_complete_documentation.md`](tdc_complete_documentation.md) | Full algorithm documentation |
+| [`tdc_python_showcase.py`](tdc_python_showcase.py) | Python implementation |
 
-1. **Mechanical Abstraction**: Representing computation through mechanical metaphors
-2. **State Persistence**: Maintaining state through physical configuration
-3. **Deterministic Operation**: Predictable, repeatable behaviour
-4. **Analog-Digital Interface**: Bridging continuous and discrete domains
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-- **Asset Tracking Algorithm** — Mechanical tracking systems
-- **Compression Algorithms** — Information representation
-- **GF2 Algebra and Applications** — Algebraic computation
-- **Cypha** — Signal processing
-- **RNGS** — Mechanical randomness generation
+> Earlier README copy missed the three companion documents (`babbage_difference_engine_algorithm.md`, `complete_military_antikythera_specification.md`, `tdc_complete_documentation.md`). They are the canonical reference for each device's algorithm; the three "paper" files are research-style overviews.
 
 ---
 
-## 📖 See Also
+## ⚙️ What's actually being preserved
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — mechanical tracking
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — information compression
-- [`Cypha/`](../Cypha/) — signal processing
+- **Babbage Difference Engine.** Polynomial evaluation by finite differences — the algorithm that drove the gear-and-wheel arithmetic columns. The Python implementation reproduces the engine's column logic and difference-table updates.
+- **Antikythera mechanism (military framing).** Originally an astronomical / calendar device using nested gear trains and pin-and-slot mechanisms. The "military" framing here repositions the gear logic as a strategic / temporal-prediction computer. The full mechanism specification covers gear ratios, dial layouts, and prediction outputs.
+- **TDC (US Navy WWII).** Analog electromechanical computer that solved the torpedo fire-control geometry: target bearing, range, course, speed → torpedo gyro angle. The Python showcase implements the cam-driven trigonometric computations and the "angle solver" that made fire-control achievable on a moving submarine.
+
+Each implementation is a faithful *algorithmic* reconstruction — Python obviously isn't a gear train, but the computational structure (state held in column variables / cam positions, deterministic clocked update) preserves the mechanical original.
 
 ---
 
-## 🛡️ About This Project
+## 🚧 Honest framing
 
-This project explores **electromechanical-inspired algorithms**. The goal is to:
-- Understand historical computing devices
-- Create algorithms that emulate mechanical behaviour
-- Bridge analog and digital domains
-- Preserve historical computational knowledge
+- These are pedagogical / historical reconstructions, not novel algorithms. The novelty is in the explicit mapping from mechanical state machines to software state machines.
+- The "Military Antikythera" framing is a reinterpretation; the historical Antikythera mechanism was an astronomical device, not a military one.
+- Folder name is misspelled (`Electromechnical` rather than `Electromechanical`); preserved for stable URLs.
+
+---
+
+## 🔗 Related work in this repo
+
+- [`../CPU/`](../CPU/) — early Verilog OS-acceleration experiment (electronic counterpart to these mechanical computers)
+- [`../Future C++/`](../Future%20C++/) — managed-language design conversation
+- [`../RNGS/`](../RNGS/) — physical random-number sources (Turbulent Flow RNG)
+- [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — modern intelligence engine (algorithmic descendant of the TDC fire-control problem)
+- [`../Filtering/`](../Filtering/) — modern Bayesian-tracking analogue of TDC's geometry solver
+- [`../Cypha/`](../Cypha/) — modern HRNA neural inference stack
+
+---
 
 [← Back to main README](../README.md)

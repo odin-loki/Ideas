@@ -1,78 +1,35 @@
-# CPU — Early Verilog Experiments and Conversation Logs
+# CPU — hardware OS acceleration in SystemVerilog (early experiment)
 
-> **⚙️ Overview**: Early **CPU** Verilog experiments and conversation logs — archaeology of a core that never shipped as a product tree.
-
----
-
-## ⚙️ Overview
-
-**CPU** preserves early Verilog experiments and design conversations for a CPU core that was never shipped as a commercial product. This work serves as both an archive and a learning resource for Verilog design practices.
-
-### Key Concepts
-
-- **Verilog Design**: Hardware description language experiments
-- **Conversation Logs**: Design discussions and decisions
-- **Archaeology**: Preserving design history
-- **Learning Resource**: Educational value for aspiring designers
+> **One Verilog source file plus the conversation that produced it.** The Verilog isn't a general-purpose CPU core — it's a hardware-side accelerator for OS primitives: a hardware BIOS state machine, a syscall dispatch interface, a process table, and context-switch primitives, packaged as `os_accelerator` (and an inner `hardware_bios`).
 
 ---
 
-## 📄 Core Documents
+## ⚙️ What this folder is
 
-| Document | Description |
-|----------|-------|
-| [`CPU Verilog.txt`](CPU%20Verilog.txt) | CPU Verilog code experiments |
-| [`CPU Convo Log.txt`](CPU%20Convo%20Log.txt) | Design conversation logs |
+A two-file research artefact: a long SystemVerilog source describing a hardware-OS-acceleration block, paired with the design-discussion log that produced it. The Verilog file is itself the canonical specification — there is no formal paper here.
 
----
-
-## 🔬 Design Stages
-
-| Stage | Description |
-|--|--|
-| **Specification** | CPU specification and architecture |
-| **Verilog Design** | Hardware description coding |
-| **Simulation** | Design verification |
-| **Archiving** | Preserving the design history |
+| File | Role |
+|---|---|
+| [`CPU Verilog.txt`](CPU%20Verilog.txt) | SystemVerilog source. Top module `os_accelerator` (parameterised `PROCESS_TABLE_SIZE` / `CONTEXT_SIZE`), inner `hardware_bios` with a six-state machine (`POWER_ON_SELF_TEST`, `HARDWARE_INIT`, `MEMORY_TEST`, `BOOT_SEQUENCE`, `SYSTEM_INIT`, `OS_HANDOFF`), 64-bit syscall interface (`syscall_number`, four-arg `syscall_args`, `syscall_result`, `syscall_complete`). |
+| [`CPU Convo Log.txt`](CPU%20Convo%20Log.txt) | Design-discussion transcript that produced the Verilog. |
 
 ---
 
-## 💡 Educational Value
+## 🚧 Honest framing
 
-1. **Verilog Practice**: Examples of Verilog coding techniques
-2. **Design History**: Understanding historical design choices
-3. **Conversation**: Seeing design discussions
-4. **Archive**: Preserving experimental work
-
----
-
-## 🔗 Related Work
-
-This work connects to:
-- **Future C++** — Language design as conversation
-- **Electromechnical Inspired Algorithms** — Historical computing
-- **Compression Algorithms** — Hardware compression
-- **Cypha** — Hardware signal processing
-- **New Classes of Electrical Components** — Hardware design
+- This is **not a complete CPU core** in the conventional ALU/decoder/pipeline sense — earlier README copy described "CPU specification and architecture" stages (specification → Verilog → simulation → archive) that are not realised in the source file. The actual scope is OS acceleration: hardware BIOS, syscall dispatch, context save/restore, process-table management.
+- The Verilog uses `module` declarations nested inside other `module`s (a non-standard SystemVerilog idiom) and is best read as a structural sketch rather than a synthesisable design.
+- "Archaeology" is a fair description: this is preserved early experimentation, not a product.
 
 ---
 
-## 📖 See Also
+## 🔗 Related work in this repo
 
-- [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
-- [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Future C++/`](../Future%20C++/) — language design
-- [`Electromechnical Inspired Algorithms/`](../Electromechnical%20Inspired%20Algorithms/) — historical computing
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — hardware compression
+- [`../100W Wideband Noise Generator/`](../100W%20Wideband%20Noise%20Generator/) — the other Verilog artefact in the repo (Chua-circuit RF noise generator with FPGA supervision)
+- [`../Future C++/`](../Future%20C++/) — managed-language design conversation (a software counterpart to this hardware experiment)
+- [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — hybrid discrete-continuous device classes
+- [`../Neural Decompiler/`](../Neural%20Decompiler/) — the inverse problem: recovering source from instruction streams
 
 ---
-
-## 🛡️ About This Project
-
-This project preserves **early CPU design experiments**. The goal is to:
-- Archive Verilog design work
-- Preserve design conversations
-- Provide educational examples
-- Document historical experiments
 
 [← Back to main README](../README.md)
