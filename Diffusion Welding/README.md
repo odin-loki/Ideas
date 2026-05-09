@@ -92,7 +92,7 @@ Higher proportions of thermal-diffusion catalysts; modified IL formulation with 
 
 This work connects to:
 
-- **Rockwall 50 to 70 Carbide / HX-70 GradePlex™** — complementary process science: HX-70 *machines* hardened steels, UCDW *joins* metallic structures
+- **Rockwell 50 to 70 Carbide / HX-70 GradePlex™** — complementary process science: HX-70 *machines* hardened steels, UCDW *joins* metallic structures
 - **Diamond Batterys** — energy-storage assemblies that benefit from low-HAZ joining
 - **Quantum Diamond Wafer** — quantum-grade diamond integration
 - **Weapons** — defence / military applications where field-deployable bonding matters
@@ -104,7 +104,7 @@ This work connects to:
 
 - [`EDITORIAL_ROADMAP.md`](../EDITORIAL_ROADMAP.md) — editorial standards and batch history
 - [`EDITORIAL_STYLE.md`](../docs/EDITORIAL_STYLE.md) — house style guide
-- [`Rockwall 50 to 70 Carbide/`](../Rockwall%2050%20to%2070%20Carbide/) — HX-70 hard machining
+- [`Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — HX-70 hard machining
 - [`Diamond Batterys/`](../Diamond%20Batterys/) — energy storage
 - [`Physics/`](../Physics/) — materials physics
 - [`Weapons/`](../Weapons/) — defence applications

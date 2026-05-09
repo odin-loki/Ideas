@@ -1,5 +1,7 @@
 # EREM explained
 
+> **Mirror notice.** This file duplicates `Economics/EREM_Explained_Paper.md` (canonical). Keep both copies in sync when editing.
+
 *A plain-language research primer on the Energy-Resource Economic Model: why conventional economics fails physics, and what to do about it*
 
 Version 1.0 — January 2026 · Companion to: EREM Technical Specification v1.0

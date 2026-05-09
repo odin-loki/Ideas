@@ -6,7 +6,7 @@
 
 ## 🔩 Overview
 
-This folder documents **HX-70 GradePlex™**, a complete sintered-carbide tool system targeting the full hardness spectrum of defence-grade hardened steels. The "50 to 70" in the folder title refers to the **Rockwell C hardness of the workpiece** (the steel being cut), not the carbide grain size — and the folder name *Rockwall* should read *Rockwell* (the hardness scale, named after Stanley P. Rockwell).
+This folder documents **HX-70 GradePlex™**, a complete sintered-carbide tool system targeting the full hardness spectrum of defence-grade hardened steels. The "50 to 70" in the folder title refers to the **Rockwell C hardness of the workpiece** (the steel being cut), not the carbide grain size — the scale is named after Stanley P. Rockwell.
 
 > **Naming corrections from earlier README.** A previous README revision claimed the folder was about "tungsten-carbide grain sizes in the 50–70 micron range" with hardness "20–22 HRA". Both were wrong by orders of magnitude:
 >

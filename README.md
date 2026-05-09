@@ -173,9 +173,9 @@ Clone/ZIP for contributors. For reading, use the Pages URL.
 | **[Quantum Diamond Wafer](Quantum%20Diamond%20Wafer/)** | Quantum diamond wafer production |
 | **[Quantum Graph Optimisation](Quantum%20Graph%20Optimisation/)** | Quantum graph optimisation |
 | **[RNGS](RNGS/)** | Random number generator zoo |
-| **[Rockwall 50 to 70 Carbide](Rockwall%2050%20to%2070%20Carbide/)** | Sintered carbide metallurgy |
-| **[Statistics Scheduler](Statistics%20Scheduler/)** | Scheduling as a statistical object |
+| **[Rockwell 50 to 70 Carbide](Rockwell%2050%20to%2070%20Carbide/)** | Sintered carbide metallurgy |
 | **[Statistical Generation](Statistical%20Generation/)** | Heavy-tailed and combinatorial ML |
+| **[Statistical Scheduler](Statistical%20Scheduler/)** | Neural-heuristic distributed task scheduler (LinTS / PID / CFS) |
 | **[UCN AIs](UCN%20AIs/)** | AI in the United Commonwealth universe |
 | **[UCN Political System](UCN%20Political%20System/)** | United Commonwealth political system |
 | **[VDJ Inspired Algorithm](VDJ%20Inspired%20Algorithm/)** | Immune VDJ recombination algorithm |

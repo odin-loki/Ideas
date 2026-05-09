@@ -1,5 +1,7 @@
 # The Energy-Resource Economic Model (EREM)
 
+> **Mirror notice.** This file duplicates `Economics/EREM_Research_Paper.md` (canonical). Keep both copies in sync when editing. EREM lives primarily under `Economics/`; the copy here exists because the model also underpins the UCN universe's resource-backed currency design.
+
 *A thermodynamically consistent framework for national wealth assessment, resource-backed currency design, and biophysical economic measurement*
 
 Version 1.0 — January 2026

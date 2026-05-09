@@ -1,6 +1,8 @@
 # Project OBSIDIAN-X: Advanced Full-Body Combat Armor System
 ## Comprehensive Specification for Next-Generation Warfare Protection
 
+> **Filename / mirror notice.** Despite the generic filename, this document is the OBSIDIAN-X full-body combat armour specification — i.e. the practical/spec sibling of `Weapons/Research Papers/OBSIDIAN_X_Research_Paper.md` (the formal academic paper). Both describe the same hypothetical 18.5 kg full-body system. Keep in sync; the research paper is the canonical scientific record, this file is the operational/spec narrative. (The earlier OBSIDIAN concept — torso-only, ~11.8 kg — is documented separately at `Weapons/Hypothetical_secret_service_suit_specs.md` and `Weapons/Research Papers/OBSIDIAN_Research_Paper.md`.)
+
 ### Executive Summary
 
 Building upon the theoretical foundations of Project OBSIDIAN, the OBSIDIAN-X represents the evolution into a practical, deployable full-body combat armor system. This specification details a complete coverall-style armor system with Universal MultiCam pattern, integrated HUD helmet, armored boots, and comprehensive CBRN protection, all while maintaining maximum flexibility and operator effectiveness.

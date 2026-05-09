@@ -21,7 +21,7 @@
 
 | Document | Description |
 |----------|-------|
-| [`CPU Veriloog.txt`](CPU%20Veriloog.txt) | CPU Verilog code experiments |
+| [`CPU Verilog.txt`](CPU%20Verilog.txt) | CPU Verilog code experiments |
 | [`CPU Convo Log.txt`](CPU%20Convo%20Log.txt) | Design conversation logs |
 
 ---

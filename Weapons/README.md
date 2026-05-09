@@ -24,7 +24,7 @@
 | **Research Papers/** | Numbered research papers on various weapons concepts |
 | **CL-20/** | CL-20 high explosive research |
 | **Rubber Tank Tracks/** | Alternative track material concepts |
-| **Millitary Noise Cancellation/** | Noise cancellation system concepts |
+| **Military Noise Cancellation/** | Noise cancellation system concepts |
 
 ---
 

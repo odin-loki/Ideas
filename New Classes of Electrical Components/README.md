@@ -72,7 +72,7 @@ This work connects to:
 - **Compression Algorithms** — Information representation
 - **GF2 Algebra and Applications** — Algebraic component behaviour
 - **Physics** — Physical device modelling
-- **Rockwall 50 to 70 Carbide** — Materials processing
+- **Rockwell 50 to 70 Carbide** — Materials processing
 
 ---
 

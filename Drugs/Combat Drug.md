@@ -1,6 +1,8 @@
 # HyperSynergy-X7™ Injectable Depot System
 ## 7-Day Sustained Performance Enhancement Platform
 
+> **Mirror notice.** This file is a byte-for-byte duplicate of `Weapons/Combat Drug.md` (canonical). Keep both copies in sync when editing. The same platform is also documented as a formal defence research paper at `Weapons/Research Papers/Paper18_HyperSynergy_X7_Combat_Drug.md` and as an academic conceptual paper at `Drugs/Paper4_TriPhase_Depot_Performance_Enhancement.md`.
+
 **DISCLAIMER: This is a hypothetical formulation for educational purposes only. Injectable formulations require extensive safety testing, regulatory approval, and medical supervision.**
 
 ---

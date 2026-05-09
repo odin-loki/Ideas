@@ -1,5 +1,7 @@
 # Sustained Nutrition Protein System: Complete Design & Synthesis
 
+> **Mirror notice.** This file is a byte-for-byte duplicate of `Weapons/Injectable Food.md` (canonical). Keep both copies in sync when editing. The same platform is also documented as a formal defence research paper at `Weapons/Research Papers/Paper17_Injectable_Nutrition.md` and as an academic conceptual paper at `Drugs/Paper1_GlycoDurP_NutriCompleteP_Injectable_Nutrition.md`.
+
 ## Executive Summary
 
 This document outlines the design and synthesis of two revolutionary bioengineered proteins for sustained nutrition delivery: **GlycoDur-P** for glucose delivery and **NutriComplete-P** for comprehensive nutrition. These proteins could provide weeks of sustained nutritional support through single injections, revolutionizing medical nutrition support, emergency preparedness, and specialized applications like space exploration.

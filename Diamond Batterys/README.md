@@ -81,7 +81,7 @@ This work connects to:
 - **Quantum Diamond Wafer** — QDMP and CVD paths toward quantum-grade diamond wafers
 - **Physics** — Nonlinear fields, cosmology, and materials physics
 - **Diffusion Welding** — Ultra-capacitor diffusion welding processes
-- **Rockwall 50 to 70 Carbide** — Sintered carbide and metallurgy
+- **Rockwell 50 to 70 Carbide** — Sintered carbide and metallurgy
 
 ---
 
