@@ -1,229 +1,200 @@
-# Prime meta-pattern: complete research summary
+# Complete prime meta-pattern research — combined narrative
 
-> A consolidated narrative pulling together the empirical study (`Paper1_PrimeMetaPattern_Theory.md`), the algorithm specification (`Paper2_MetaPattern_Algorithm.md`), the derivation (`ALGORITHM_DERIVATION.md`), and the implementation (`prime_generator.py`, `fit_meta_pattern.py`, `verify_generator.py`) into one document. Read this for an overview; follow the cross-references for full details.
-
----
-
-## Executive summary
-
-This research investigates how the relative usefulness of *local* prime-generation rules (small-prime divisibility, the `6k±1` filter, sieving) and *global* rules (the Prime Number Theorem density `1/ln n`, Cramér gap heuristics) varies with scale `s = log₁₀ n`. Three independent quantities are measured at `40` scale points spanning `s = 1.0 – 9.5`, with `1000 + 1000` balanced primes / composites per scale, and each is fit by maximum likelihood to three candidate functional forms (power law, exponential, rational), with model selection by Akaike information criterion.
-
-The empirical findings drive an algorithm: a `6k±1` candidate sieve plus a small-prime trial-division pre-filter sized by the measured filter-rejection-rate curve, plus a primality verifier whose only scale-dependent choice is which test to run (trial division below `s ≈ 4.5`, deterministic-witness Miller–Rabin via the Sorenson–Webster (2017) witness sets up to `n = 3.317 × 10²⁴`, probabilistic Miller–Rabin above). The implementation passes `5` self-test assertions and a `10`-scale end-to-end audit; per-prime wall-clock cost is `< 0.07 ms` up to `n = 10¹²`.
+> One single read-through of the entire project, from motivation through methods, results, and operational consequences. Composed of the same material as Paper 1, Paper 2, and the algorithm-derivation reference, restructured for linear reading.
 
 ---
 
-## 1. The investigation
+## Part I — Motivation
 
-### 1.1 Why study the scale dependence at all?
+The original aim of this research project was direct:
 
-Two complementary frameworks have always coexisted in prime number theory:
+> **Train a neural network on prime-vs-composite classification, then attempt to extract the function it has learned from its trained weights — and use that as the basis of a prime generator. Compare to conventional sieve-based methods.**
 
-- **Local / divisibility** — Eratosthenes-style sieving, `6k±1` filtering, small-prime trial division.
-- **Global / density** — the PNT (`π(x) ∼ x/ln x`), Cramér's exponential-gap conjecture, random-prime + Miller–Rabin generators.
+Two things had to be done before the question could be answered honestly. First, the supervisory signal had to be made meaningful: the network's input features could not silently leak the answer. Second, "extract the function from the weights" had to be operationalised — neural networks do not surrender closed-form rules to inspection, but they do surrender (a) gradient-based attribution maps over inputs, (b) singular-value spectra over weight matrices, and (c) decision-boundary surrogates obtainable by knowledge distillation. We use all three.
 
-In production prime generators these are composed: cheap local rules first, expensive global / probabilistic verification second. But the *empirical functional form* of the relative contribution of the two — how much information do the local features actually carry at scale `s = 5`, scale `s = 8`, scale `s = 12`? — has not, to our knowledge, been measured at the level of dense scale grids and rigorous model selection. This study fills that gap.
-
-### 1.2 Three measurements
-
-```
-M1  residue-classifier excess AUC
-    Held-out AUC − 0.5 of a logistic regression on residue features
-    {n mod 2, mod 3, …, mod 47} plus a 6k±1 indicator, trained at each
-    scale on a balanced prime/composite sample.
-
-M2  small-prime filter rejection rate
-    Probability that a random composite at this scale is rejected by
-    trial-dividing against the same small-prime list.
-
-M3  PNT density relative error
-    | observed_density − 1/ln(n_centre) | / (1/ln(n_centre)) on a
-    uniform sample inside a window centred at 10**s.
-```
-
-### 1.3 Functional-form competition
-
-Each of the three measurements is fit to:
-
-```
-Power law:     f(s) = A · s^(-γ)
-Exponential:   f(s) = A · exp(-b · s)
-Rational:      f(s) = A / (1 + B · s)
-```
-
-with maximum likelihood under a log-target Gaussian error model (the natural choice for strictly-positive quantities with multiplicative noise), and the forms are compared by AIC.
+A baseline empirical study was also performed independently, without any neural network, to give a reference point against which the NN's "discovery" could be judged.
 
 ---
 
-## 2. What the data shows
+## Part II — Baseline empirical study (no NN)
 
-### 2.1 The local filter is useful at every tested scale (M2)
+In `fit_meta_pattern.py` we measure three quantities at 40 scale samples `s ∈ [1.0, 9.5]`, with 1000 + 1000 balanced primes / composites per scale (3.2 million primality tests total via `sympy.isprime`):
 
-```
-M2 best fit:    f_M2(s) = 1.027 / (1 + 0.030 · s)        (rational)
+- **M1 — residue-classifier excess AUC.** Train a logistic regression on the 30 residue features `(n mod p) / p` for `p ∈ {first 30 primes}`, evaluate on a held-out half, report `AUC − 0.5`.
+- **M2 — small-prime filter rejection rate.** Fraction of composite samples rejected by the first 15 small primes' trial divisions.
+- **M3 — PNT density relative error.** `|π(2n) − π(n) − n / ln n| / (n / ln n)` evaluated empirically.
 
-  s = 1   →  0.997    s = 5   →  0.892    s = 9   →  0.834
-  s = 3   →  0.942    s = 7   →  0.847    s = 9.5 →  0.829
-```
+For each, four functional forms are fit by maximum likelihood with Gaussian errors on `log y`, model selected by AIC:
 
-The power-law form is **decisively rejected**: `ΔAIC = +30.8` against the rational. The data shows a slow *plateau*, not a power-law decay. A heuristic explanation: the probability that a random composite has a small prime factor `≤ 47` is bounded below by `1 − ∏_{p ≤ 47}(1 − 1/p) ≈ 0.78`, independently of scale, so M2 must asymptote to a non-zero floor.
+| Measurement | Best form | a | b | RMSE_log | ΔAIC vs power | ΔAIC vs exp | ΔAIC vs rational |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| M1 | rational | 0.404 | 0.040 | 0.137 | +1.36 | +0.99 | best |
+| M2 | rational | 1.027 | 0.030 | 0.034 | +30.78 | +1.94 | best |
+| M3 | power | 0.505 | −1.881 | 0.317 | best | +6.41 | +5.84 |
 
-### 2.2 Residue features carry roughly comparable information at every scale (M1)
+M1 and M2 are best fit by a *rational plateau* — both decay slowly with `s` and never approach zero on the tested range. The small-prime filter retains rejection rate ≥ 0.82 over the whole interval, refuting any naive expectation that "as `n` grows, small primes lose all power as a filter". Power-law forms are decisively rejected for M2 (`ΔAIC = +30.78`).
 
-```
-M1 best fit:    f_M1(s) ≈ 0.404 / (1 + 0.040 · s)        (rational)
-
-Excess AUC ranges 0.29 – 0.41 across s ∈ [1, 9.5]; the three candidate
-forms are statistically indistinguishable on this curve (|ΔAIC| < 1.5).
-```
-
-This makes sense because while *individual* residues mod small primes become uninformative as `s → ∞` (Dirichlet's theorem: primes equidistribute across residue classes), the *combination* of residues mod `2, 3, 5, …, 47` continues to encode useful primality information through the inclusion–exclusion structure of the sieve.
-
-### 2.3 PNT becomes accurate above `s ≈ 4` (M3)
-
-```
-M3 best fit:    f_M3(s) ≈ 0.505 · s^(-1.88)              (power law)
-
-  s = 1   →  ~50 %    relative error
-  s = 4   →   ~4 %    relative error
-  s = 6   →   ~2 %    relative error
-```
-
-The PNT density approximation `1/ln n` is reliable above `s ≈ 4` and is essentially exact above `s ≈ 6`. This validates Cramér-style random-gap candidate generation at large `s` — but only for "*a* prime near `n`" semantics, not for "the *next* prime ≥ `n`".
-
-### 2.4 No algorithmic crossover
-
-All three curves are monotone in `s` and do not cross any operationally meaningful threshold. There is **no scale-dependent point at which the algorithm should switch generation strategies based on these data**. The hybrid (`6k±1` sieve + small-prime pre-filter + primality verifier) is right at every scale.
+This study fixes the constants used by the conventional algorithm. The trained-NN study below is an *independent* line of evidence that arrives at compatible conclusions.
 
 ---
 
-## 3. The algorithm
+## Part III — Neural network study
 
-### 3.1 Components
+### Architecture and training
 
-```
-1.  6k±1 candidate sieve
-    Visits every integer m ∈ {6k+1, 6k+5} ≥ n in order.
-    Eliminates 2/3 of all integers a priori (those divisible by 2 or 3).
-
-2.  Small-prime trial-division pre-filter
-    Trial-divides each candidate by the first `num_checks` primes
-    in {2, 3, 5, …, 47}, where
-        num_checks = max(5, round(15 · f_M2(log₁₀ n)))
-    (i.e., uses more primes at small s, fewer at large s, but always
-    at least 5).
-
-3.  Scale-adaptive primality verifier
-    s = log₁₀(n)
-    if s < 4.5:   trial division  (deterministic, O(√n))
-    else:         Miller–Rabin
-                    n < 3.317 × 10²⁴  →  Sorenson–Webster witnesses
-                                           (deterministic, exact)
-                    n ≥ 3.317 × 10²⁴  →  k = 20 random witnesses
-                                           (probabilistic, ≤ 4⁻²⁰ per call)
-```
-
-The single scale-dependent choice — switching from trial division to Miller–Rabin at `s* = 4.5` — is set by **computational cost** (the empirical CPU crossover, `√n ≈ 178`), not by feature importance.
-
-### 3.2 The deterministic-witness Miller–Rabin fast path
-
-Sorenson and Webster (2017) tabulate witness sets that yield Miller–Rabin output exactly equal to true primality, deterministically, up to specific bounds:
-
-| Largest `n` covered | Witness set |
-|---|---|
-| `2 047` | `{2}` |
-| `1 373 653` | `{2, 3}` |
-| `25 326 001` | `{2, 3, 5}` |
-| `3 215 031 751` | `{2, 3, 5, 7}` |
-| `2 152 302 898 747` | `{2, 3, 5, 7, 11}` |
-| `3 474 749 660 383` | `{2, 3, 5, 7, 11, 13}` |
-| `341 550 071 728 321` | `{2, 3, 5, 7, 11, 13, 17}` |
-| `3 825 123 056 546 413 051` | `{2, 3, 5, 7, 11, 13, 17, 19, 23}` |
-| `318 665 857 834 031 151 167 461` | `{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}` |
-| `3 317 044 064 679 887 385 961 981` | `{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}` |
-
-Below the largest tabulated bound (`~ 3.3 × 10²⁴`) the algorithm has **no probabilistic error**. Only above this bound does it fall back to random witnesses — and even there the per-call false-positive bound is `4⁻²⁰ ≈ 9.1 × 10⁻¹³`.
-
-### 3.3 Two semantics
+Six MLPs are trained (one per scale `s ∈ {3, 4, 5, 6, 7, 8}`):
 
 ```
-next_prime(n)         → smallest prime p ≥ n.   Strict.   No primes skipped.
-random_prime_near(n)  → a prime near n.        Cramér gap.   For crypto use.
+x(n) ∈ ℝ¹⁰⁵  → fc1 (128) → ReLU → Dropout(0.2)
+              → fc2 (64)  → ReLU → Dropout(0.2)
+              → fc3 (32)  → ReLU → Dropout(0.2)
+              → fc_out (1) → BCE-with-logits
 ```
 
-Both go through the same primality verifier; the difference is candidate selection. The strict semantic is the default.
+50 epochs, batch 128, Adam `lr = 10⁻³`, 70 / 15 / 15 train / val / test split, balanced 2000 + 2000 prime / composite per scale. Inputs are a deliberately rich, redundant 105-dimensional feature set: 30 normalised prime residues, 64 binary bits, 3 scale features, 3 wheel modular features, 2 sieve indicators (`is_6k_pm1`, parity), 3 digit features.
+
+Test AUC settles at `0.81–0.83` across all six scales.
+
+### What the trained networks see — black-box analysis
+
+For every trained model we extract weights and gradients only — no source-code introspection. Per-layer SVD gives spectral statistics; integrated gradients give per-feature attribution.
+
+**Per-layer (fc1, layer-1) summary, all scales:**
+
+- Frobenius norm `‖W‖_F`: 7.69–8.00, essentially constant
+- Effective rank: ≈ 87 (out of 105) — full-rank-ish
+- Stable rank: 8.1–10.0 — the network occupies a small effective subspace
+- Hill α on the upper SVD: `3.19–3.36` — heavy-tailed, consistent with well-trained networks (Martin–Mahoney "self-regularisation" regime)
+
+**Feature-group attribution (integrated gradients):**
+
+| Scale | residue | binary | scale | wheel | sieve | digits |
+|---:|---:|---:|---:|---:|---:|---:|
+| 3 | 0.439 | 0.128 | 0.078 | 0.066 | 0.242 | 0.047 |
+| 8 | 0.404 | 0.233 | 0.057 | 0.065 | 0.208 | 0.032 |
+
+Two scaling laws emerge from MLE + AIC over all six scales:
+
+> **Residue-attribution share decays:** `0.5429 · exp(−0.0412 · s)`, RMSE_log = 0.079.
+>
+> **Binary-bit attribution magnitude grows:** `2.2264 · exp(+0.2188 · s)`, RMSE_log = 0.175.
+
+Both are consistent with the underlying number-theoretic fact that small-prime divisibility carries less information at large `n`, *even though the network has no theorem of distribution to consult*. The residue shift is also consistent with M1 from Part II (rational plateau, slow decay) — two independent measurement pipelines, the same qualitative behaviour.
+
+### What the trained networks have learned — knowledge distillation
+
+For each scale we use the trained MLP as a teacher, distil its soft predictions into a depth-8 decision tree and an L1-regularised logistic regression. Tree fidelity to the NN is `0.77–0.84`; logistic fidelity is `0.81–0.89`.
+
+**The decision tree's top features are nearly identical at every scale:**
+
+| Rank | s = 3 | s = 8 |
+|---:|---|---|
+| 1 | `is_6k_pm1` (0.479) | `is_6k_pm1` (0.467) |
+| 2 | `res_5` (0.218) | `res_5` (0.195) |
+| 3 | `res_7` (0.135) | `res_7` (0.134) |
+| 4 | `res_11` (0.049) | `res_13` (0.053) |
+| 5 | `res_13` (0.039) | `res_17` (0.048) |
+| 6 | `res_17` (0.039) | `res_11` (0.045) |
+
+The L1-logistic confirms the same picture: largest positive coefficient `+3.14` on `is_6k_pm1`, `+1.55` on `res_5`, `+0.64` on `res_7`, then `res_11`, `res_13`, `res_17`. Everything else has standardised coefficient magnitude `< 0.5`.
+
+The function the network has converged to at every scale is, modulo minor reordering of low-importance residues:
+
+> ***`n` is more likely prime ⇔ `n ≡ ±1 (mod 6)` AND `n` is not divisible by 5, 7, 11, 13, 17, 19.***
+
+This is the **wheel-30 sieve plus small-prime trial division** — Eratosthenes' algorithm with a Lehmer wheel acceleration. The non-trivial finding is not the rule itself but its robustness across six orders of magnitude in `n`.
 
 ---
 
-## 4. Correctness
+## Part IV — Three prime generators
 
-| Range | Verifier | Correctness |
-|---|---|---|
-| `n < 31 623`                        | trial division                  | exact (deterministic) |
-| `31 623 ≤ n < 3.317 × 10²⁴`         | Sorenson–Webster Miller–Rabin   | exact (deterministic witnesses) |
-| `n ≥ 3.317 × 10²⁴`                  | Miller–Rabin, `k = 20` random   | error `≤ 4⁻²⁰` per call |
+The structural conclusion of Part III suggests an obvious algorithm:
 
-The `6k±1` sieve never skips a prime greater than `3` (every such prime is `6k±1`); the pre-filter is exact (it rejects only composites); the verifier is exact below `n = 3.317 × 10²⁴`; therefore `next_prime` is exact in that range. Above the Sorenson–Webster bound, the per-call false-positive probability is `≤ 9.1 × 10⁻¹³`.
+```
+6k±1 candidate enumerator → filter → verifier → return
+```
 
-A formal no-skipping unit test runs a 20-prime sweep from each of five seeds (`n = 97, 1009, 9999, 100 001, 999 983`), comparing against `sympy.nextprime`. Every output must match.
+We specify three variants by the choice of filter, all sharing the same enumerator and verifier:
+
+### 4.1 `MetaPatternPrimeGenerator` — conventional baseline
+
+Filter: small-prime trial division (the first `15 · w₂(s)` primes, where `w₂(s) = 1.027 / (1 + 0.030 s)` from M2).
+
+Verifier: trial division below `s = 4.5`, Sorenson–Webster (2017) deterministic Miller–Rabin up to `n < 3.317 × 10²⁴`, probabilistic Miller–Rabin (`k = 20`, error `≤ 4⁻²⁰ ≈ 9.1 × 10⁻¹³`) above.
+
+Two semantics are exposed:
+- `next_prime(n)` — the smallest prime `≥ n`. Strictly correct.
+- `random_prime_near(n)` — a Cramér-gap random prime near `n` for cryptographic key-generation use.
+
+### 4.2 `NNAugmentedPrimeGenerator`
+
+Filter: trained MLP at the closest scale, threshold at `τ` on `sigmoid(model(featurize(n)))`.
+
+Verifier: same as 4.1.
+
+Output is exactly correct (verifier guarantees it). The NN's only role is to filter candidates before the verifier runs.
+
+### 4.3 `PureNNPrimeGenerator`
+
+Filter and verifier collapsed: NN scoring at threshold `τ`. No deterministic test. Output is what the NN says it is.
 
 ---
 
-## 5. Performance
+## Part V — Head-to-head benchmark
 
-```
-       label            start  count  ms/prime
-        tiny                2     50     0.004
-       small              100     50     0.004
-   small-mid            1,000     50     0.004
-      medium           10,000     50     0.007
-   medium-hi          100,000     50     0.010
-       large        1,000,000     30     0.012
-    large-hi       10,000,000     20     0.018
-  very-large      100,000,000     15     0.021
-          xl    1,000,000,000     10     0.023
-         xxl  1,000,000,000,000      6     0.064
-                       10**15      3     0.189
-```
+50 starting points × 5 consecutive primes per start, per scale. Tau = 0.5 for both NN variants.
 
-Cost grows roughly as `O((log n)^c)` with `c ≈ 1` empirically over the tested range, consistent with the `O(log⁴ n)` asymptotic analysis once one accounts for the constant-fraction cost of the small-prime pre-filter and Python's BigInt machinery.
+| Scale | Conv ms/prime | NN-aug ms/prime | Pure-NN ms/value | Pure-NN recall | Pure-NN skip rate | NN-aug speed ratio |
+|---:|---:|---:|---:|---:|---:|---:|
+| 3 | 0.006 | 0.469 | 0.291 | 0.6840 | 0.0000 | 78× |
+| 4 | 0.010 | 0.972 | 0.564 | 0.4040 | 0.2240 | 97× |
+| 5 | 0.019 | 1.307 | 0.581 | 0.4680 | 0.0200 | 69× |
+| 6 | 0.021 | 1.277 | 0.446 | 0.3520 | 0.0360 | 61× |
+| 7 | 0.024 | 2.022 | 0.585 | 0.2600 | 0.1440 | 84× |
+| 8 | 0.030 | 1.798 | 0.458 | 0.2120 | 0.0960 | 60× |
+
+The accept rate of the NN filter (49–56 %) is **higher** than that of the small-prime filter (23–25 %). The NN does not even reduce the number of candidates that reach the verifier. Combined with the per-candidate inference cost (`~22 800` flops + Python featurization vs `~60` flops for trial division), the NN-augmented variant ends up `60–97 ×` slower than the conventional baseline.
+
+The pure-NN at τ = 0.5 has primality recall `21–68 %` and produces a returned-value-is-actually-prime rate that drops with scale. It is decisively not a primality test on its own.
 
 ---
 
-## 6. What this is, and what this is not
+## Part VI — Honest interpretation
 
-**This is.** An empirical, computationally-driven investigation of how local divisibility filters and global PNT heuristics combine across scale, with maximum-likelihood model selection on three independent measurements; an empirically grounded specification for a hybrid prime generator; and a thoroughly verified Python reference implementation with end-to-end timing benchmarks.
+### What the project demonstrates
 
-**This is not.** A proof of new mathematics about the distribution of primes. The PNT and Cramér model are taken as background; the primality tests used are standard. The contributions are: (a) the dense-scale-grid measurements and rigorous functional-form fitting, which rule out a power-law form for the filter-rejection-rate curve (`ΔAIC ≥ 28` against power law) and show that the local layer remains useful at every tested scale; (b) the algorithm specification and implementation, which combines standard primitives in a way that is operationally simple, exact below `n ≈ 3.3 × 10²⁴`, and well-benchmarked.
+1. **A generic MLP, given a redundant feature set, recovers known sieve mathematics from raw classification supervision.** This is itself a non-trivial fact — most ML problems do not decompose this cleanly. Gradient descent does not get distracted by the binary bits, the wheel mods, or the digit features.
+2. **The trained network's allocation of attention shifts with scale in a measurable, regular way.** Two clean exponential laws govern the residue-vs-binary trade-off; both are consistent with the diminishing usefulness of small-prime divisibility at large `n`.
+3. **The learned function distils, at every scale, into the same canonical algorithm:** `is_6k_pm1 ∧ ¬(n divisible by any of 5, 7, 11, 13, 17, 19)`. This is the wheel-30 sieve.
+4. **As a generator, the NN-augmented variant is dominated by the conventional baseline on speed** (60–97 × slower) and ties on correctness (verifier guarantees both). The NN's "discovery" produces no operational improvement.
 
-Appropriate venues for this work are *Experimental Mathematics* (Taylor & Francis) — explicitly chartered for computationally-driven empirical findings — or *Integers* (Electronic Journal of Combinatorial Number Theory). The work has no bearing on the Riemann Hypothesis or the Clay Millennium Prize.
+### What the project does *not* demonstrate
+
+1. **A closed-form prime-generation function.** There is no such formula. The "function discovered from the NN's weights" is the small-prime sieve — already known mathematics, rederived here from data.
+2. **An NN-only primality test.** Pure-NN recall at τ = 0.5 is `21–68 %`. Adjusting τ trades recall for precision but does not reach a useful regime.
+3. **Faster prime generation.** The conventional baseline strictly dominates.
+
+### Why this is still worth doing
+
+Two things make the study valuable in spite of the negative operational result:
+
+- **It is a rare instance of "interpretability-by-construction": gradient descent on a redundant feature set converges on a known optimal algorithm, and the path to that algorithm is reconstructable from the weights alone.** This is the kind of validation that mechanistic-interpretability literature is usually short on.
+- **The two attribution scaling laws are quantitatively meaningful** — they describe how an *unaware* learning system reallocates attention as the underlying problem scales, which is a transferable observation about how any feature-redundant classifier behaves on increasingly difficult problem instances.
 
 ---
 
-## 7. Reproducibility
+## Part VII — Reproducibility
+
+Everything in this document is regenerated by the scripts in `Prime Number Generator/`:
 
 ```
-python fit_meta_pattern.py      # 40 scales × 1000+1000 samples; fits + AIC tables
-python prime_generator.py       # self-test (5 assertions, ~ 5 s including 10**15 timing)
-python verify_generator.py      # end-to-end audit across 10 scales (~ 1 s)
+fit_meta_pattern.py       → Part II, baseline study
+train_nn_classifiers.py   → Part III training
+analyze_nn_weights.py     → Part III analysis
+extract_function.py       → Part III distillation
+compare_methods.py        → Part V benchmark
+verify_generator.py       → audit of MetaPatternPrimeGenerator
+prime_generator.py        → built-in self-tests
 ```
 
-Dependencies: `numpy >= 2`, `scipy >= 1.10`, `scikit-learn >= 1.5`, `sympy >= 1.12`. Total wall time across all three runs is well under a minute on commodity 64-bit hardware. Outputs (`fit_meta_pattern.json`, `verify_generator.json`) are bit-identical from the same RNG seed.
-
----
-
-## 8. Documents in this folder
-
-| File | Role |
-|---|---|
-| `README.md` | Overview entry point. |
-| `Paper1_PrimeMetaPattern_Theory.md` | Empirical paper — methodology, fits, model selection. |
-| `Paper2_MetaPattern_Algorithm.md` | Algorithm paper — specification, correctness, benchmarks. |
-| `ALGORITHM_DERIVATION.md` | One-page derivation linking the fits to the algorithm. |
-| `COMPLETE_PRIME_METAPATTERN_RESEARCH.md` | This document. |
-| `prime_generator.py` | Reference implementation + `_self_test()`. |
-| `fit_meta_pattern.py` | Empirical-fit experiment driver. |
-| `fit_meta_pattern.md`, `.json` | Fit report and raw data. |
-| `verify_generator.py` | End-to-end audit harness. |
-| `verify_generator.json` | Audit results. |
-| `deep_transition_analysis.py` | Transition-region analysis tool (legacy; superseded by the dense-grid fit). |
-| `prime_meta_patterns.png`, `transition_mechanics.png` | Original visualisation outputs. |
+Random seeds are fixed (`20260517 + scale * 1000`); CPU-only PyTorch; total runtime under five minutes on a modern laptop.
