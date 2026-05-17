@@ -1,4 +1,4 @@
-# Ideas — Odin Loch's R&D shelf
+﻿# Ideas — Odin Loch's R&D shelf
 
 ---
 
@@ -140,7 +140,7 @@ Each section below is the field a curious layman would file these projects under
 
 | Folder | Description |
 |---|---|
-| [`Economics/`](Economics/) | The Energy-Resource Economic Model: a macroeconomic framework that measures national wealth in **megajoules** of physically-extractable energy and resources rather than dollars of GDP, and pegs currency issuance to that wealth via `Total_currency = 0.85 × Total_National_Wealth`. Theoretical, version 1.0; asks for empirical validation. |
+| [`Economics/`](Economics/) | Two complementary economics research lines. **EREM (Energy-Resource Economic Model)** is a macroeconomic framework that measures national wealth in **megajoules** of physically-extractable energy and resources rather than dollars of GDP, and pegs currency issuance to that wealth via `Total_currency = 0.85 × Total_National_Wealth`; theoretical, version 1.0, asks for empirical validation. **SPX Call Volume Research Paper** is an empirical structural analysis of the **$2.6 trillion / day** record in S&P 500 call option notional set on **7 May 2026** — five quantitative models (super-exponential, logistic, hyperbolic blow-up, Sornette LPPL, hazard-rate Cox) all converging on a finite gamma-unwind termination window in **2028–2029** with a meaningful early-tail probability (`~10 %`) within 6–12 months, characterised as a high-speed mechanical unwind (`20–35 %` index correction over days to weeks) distinct from 1987 / 2008 / 2020 / 2022 precedents. EREM is a *unit* for measuring real wealth; SPX is a *diagnostic* showing the alternative unit (dollars) is currently mechanically unstable in one of its largest derivatives markets. |
 
 ### 🏛️ Political theory
 
@@ -155,7 +155,7 @@ Each section below is the field a curious layman would file these projects under
 |---|---|
 | [`Battle Sim/`](Battle%20Sim/) | A literature survey and design note that maps the major mathematical traditions for modelling combat — **Hughes salvo equations**, **extended Lanchester equations**, **Markov battle-state chains**, **FATHM linear programming**, and the **Dupuy / TNDM combat-power lineage** — into one comparative reading guide. **Explicitly not an operational simulator.** |
 | [`Weapons-Defence/`](Weapons-Defence/) | A defence-engineering R&D portfolio, with paired operator spec-sheets and TRP-numbered research papers across small arms (`MP-4.6M` pistol & PDW, `MP-6.8` rifle, `MAS-15.2E` 15.2 mm anti-materiel sniper), heavy weapons (`57 mm` autocannon, `57 mm` underbarrel grenade, `57 mm` dual-purpose mortar / RPG, `140 mm` tank KE round), body armour (APES, AlNiCyN, OBSIDIAN), CBRN protection (NACS), tactical acoustic cancellation (35–55 dB depth), CL-20 high explosive, rubber tank-track pads, the `HPR-X` guided high-power rocketry series, and the `TACT-1 Mark II` full-day SOF ration. **Every ballistic / velocity / energy / penetration / chamber-pressure number in the spec sheets and research papers is derived from a single Python simulator** (`Weapons-Defence/weapons_simulation.py`); the [`Common Architecture and Components.md`](Weapons-Defence/Common%20Architecture%20and%20Components.md) document defines the parts-commonality matrix across the small-arms and heavy-weapons families. **Classification banners are stylistic.** |
-| [`Weapons-Police/`](Weapons-Police/) | A law-enforcement spin-off of the military APES armour, designed for Australian police. `APES-L Mark I` – full-body protective suit at `~6.5 kg` (vs the ~20 kg torso-only police vest currently fielded), ionic-liquid STF (cold-comfortable to `–25 °C`), `75 mm` single-use B4C tiles to `.50 AE`, NIJ Level II stab full-body coverage, `66.2 %` composite-injury-score improvement, `12+ yr` sealed-panel service life, and a `$1.85 M` TCO advantage per 500 officers over 10 years. Paired with a research-paper companion in the same folder. |
+| [`Weapons-Police/`](Weapons-Police/) | Two Australian LE equipment prospectuses in paired spec-sheet + research-paper format. **APES-L Mark I** — full-body protective suit at `~6.5 kg` (vs the ~20 kg torso-only police vest currently fielded), ionic-liquid STF (cold-comfortable to `–25 °C`), `75 mm` single-use B4C tiles to `.50 AE`, NIJ Level II stab full-body, `66.2 %` composite-injury-score improvement, `12+ yr` service life, `$1.85 M` TCO saving per 500 officers over 10 years — 23 simulations. **MP-4.6P Guardian LE** — police combat pistol in `4.6 × 22 mm DPAP` at `396 m/s` / `259 J`: defeats NIJ IIIA + NIJ III hard plate + all four common intermediate barriers; felt recoil `0.084 ft-lbf` (≈ 50× lower than 9 mm); MRBF `20 548 rounds`; FTF rate `1:80 000`; per-unit cost `A$164 – 180` — 7-phase simulation programme. Both are LE variants of systems in `../Weapons-Defence/` sharing the same single-source-of-truth simulator. |
 
 ### 🌊 Civil infrastructure and manufacturing
 
@@ -236,7 +236,7 @@ Each section below is the field a curious layman would file these projects under
 | [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition + one-shot learning |
 | [`Veritas/`](Veritas/) | Formal verification framework |
 | [`Weapons-Defence/`](Weapons-Defence/) | Defence-tech R&D portfolio (UNCLASSIFIED / FOUO style)– simulator-backed; common-architecture matrix |
-| [`Weapons-Police/`](Weapons-Police/) | APES-L Mark I full-body police body armour (Australian) – spec sheet + research paper |
+| [`Weapons-Police/`](Weapons-Police/) | APES-L Mark I full-body police body armour + MP-4.6P Guardian LE police combat pistol — both as paired spec-sheets and research papers |
 
 ---
 
