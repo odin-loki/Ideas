@@ -16,7 +16,7 @@ many scales.  At each scale we:
   5. Time per prime.
 
 Outputs:
-    verify_generator.json
+    artifacts/verify_generator.json
 """
 
 from __future__ import annotations
@@ -117,9 +117,11 @@ if __name__ == "__main__":
             print(f"               ! skipped-prime examples: {r['skipped_examples']}")
 
     out = {"scales": results}
-    Path("verify_generator.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    out_json = Path("artifacts") / "verify_generator.json"
+    out_json.parent.mkdir(parents=True, exist_ok=True)
+    out_json.write_text(json.dumps(out, indent=2), encoding="utf-8")
     print()
-    print(f"Wrote verify_generator.json")
+    print(f"Wrote {out_json}")
 
     n_correct = sum(1 for r in results if r["all_prime"])
     n_no_skip = sum(1 for r in results if r["no_skip"] is True)

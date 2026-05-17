@@ -32,7 +32,7 @@ Components:
 
 The `4.5` threshold is set by *computational cost*, not by a feature-importance crossover: at `n ≈ 31 623`, `√n ≈ 178`, which is roughly where deterministic Miller–Rabin overtakes trial division on commodity 64-bit hardware.
 
-A separate `random_prime_near(n)` function is provided for cryptographic use (where any prime of the right size is acceptable). It samples a Cramér-style exponential gap with mean `ln n`, advances to the nearest `6k±1`, and verifies. It is *not* a `next_prime` — it deliberately skips primes between `n` and the sampled offset.
+A separate `random_prime_near(n)` function is provided for cryptographic use (where any prime of the right size is acceptable). It samples a Cramér-style exponential gap with mean `ln n`, advances to the nearest `6k±1`, and verifies. It is *not* a `next_prime` — it deliberately skips primes between `n` and the sampled offset. The first-moment justification of this sampling (`E[gap] ≈ ln n`) is empirically confirmed in [Paper 3](Paper3_Empirical_Baseline.md) §B (`mean / ln n ∈ [0.97, 1.01]` over `s ∈ [1, 8]`); the deterministic verifier guarantees that no composite is ever returned regardless of how well the candidate distribution matches Cramér's full hypothesis.
 
 ### 1.2 `NNAugmentedPrimeGenerator`
 

@@ -1,6 +1,6 @@
 # Algorithm derivation — one-page reference
 
-A compact map from the empirical findings of Paper 1 to the structure of the three generators specified in Paper 2.
+A compact map from the empirical findings of Papers 1 and 3 to the structure of the three generators specified in Paper 2.
 
 ---
 
@@ -8,9 +8,13 @@ A compact map from the empirical findings of Paper 1 to the structure of the thr
 
 | Source | Measurement | Best fit | Used for |
 |---|---|---|---|
-| `fit_meta_pattern.py` (M1) | residue-classifier excess AUC | rational `0.404 / (1 + 0.040 s)` | not used by algorithm; analysis only |
-| `fit_meta_pattern.py` (M2) | small-prime filter rejection rate | rational `1.027 / (1 + 0.030 s)` | sets `filter_strength(n)` in `MetaPatternPrimeGenerator` |
+| `fit_meta_pattern.py` (M1, see [Paper 3 §A](Paper3_Empirical_Baseline.md)) | residue-classifier excess AUC | rational `0.404 / (1 + 0.040 s)` | not used by algorithm; analysis only |
+| `fit_meta_pattern.py` (M2) | small-prime filter rejection rate | rational `1.027 / (1 + 0.030 s)`  (`ΔAIC = +30.78` over power law) | sets `filter_strength(n)` in `MetaPatternPrimeGenerator` |
 | `fit_meta_pattern.py` (M3) | PNT density relative error | power `0.505 · s^(−1.881)` | sanity check; not used |
+| `gap_analysis.py` (Cramér mean, see [Paper 3 §B](Paper3_Empirical_Baseline.md)) | `mean(gap) / ln n` | constant ≈ 1 (`0.974 · s^{0.012}`, RMSE_log = 0.005) | first-moment justification of `random_prime_near`'s `Exponential(ln n)` candidate sampling |
+| `gap_analysis.py` (Cramér KS distance) | KS distance to `Exp(ln n)` | exponential `0.260 · exp(−0.084 s)` | quantifies how the gap-distribution deviation from exponential shrinks with scale |
+| `gap_analysis.py` (Chebyshev) | share `≡ 5 (mod 6)` over `≡ 1 (mod 6)` | small consistent excess in 7/8 windows | analytical only; not used by algorithm |
+| `gap_analysis.py` (density) | `(empirical π) / (1/ln n)` | converges as `\|ratio − 1\| ~ 0.06 · s^{−1.51}` | sanity check on PNT |
 | `analyze_nn_weights.py` | residue-attribution share | exponential `0.543 · exp(−0.041 s)` | confirms M1 via independent route |
 | `analyze_nn_weights.py` | binary-attribution magnitude | exponential `2.226 · exp(+0.219 s)` | analytical only |
 | `analyze_nn_weights.py` | Hill α on `fc1` SVD | rational `3.194 / (1 − 0.0056 s)` | confirms heavy-tailed self-regularisation |
@@ -59,7 +63,16 @@ The three variants differ only in the **filter**; the candidate enumerator and t
 
 - The conventional generator's structure was fixed by `fit_meta_pattern.py` before the NN study began. Paper 1's distillation independently confirmed that structure is the right one. The NN study produced no new constants for the conventional algorithm.
 - The deterministic-witness fast path (Sorenson–Webster) was integrated independently of the NN; it gives exact primality up to `n < 3.317 × 10²⁴` regardless of any ML choices.
-- The strict `next_prime` semantics (no skipping) and the separate `random_prime_near` (Cramér-gap, for crypto) come from straightforward number-theoretic argument and are independent of the NN.
+- The strict `next_prime` semantics (no skipping) and the separate `random_prime_near` (Cramér-gap, for crypto) come from straightforward number-theoretic argument and are independent of the NN. Paper 3 §B verifies that `random_prime_near`'s first-moment assumption holds empirically.
+
+---
+
+## What was retired between rounds
+
+The previous round of this project (`archive/deep_transition_analysis.py`) introduced two specific quantitative claims that the dense-grid data does not reproduce:
+
+- *Power law `α(s) = s^{−0.37}`*: replaced by the rational fit on M1 / M2; for M2 the power law is rejected by `ΔAIC = +30.78`. See [Paper 3 §C.1](Paper3_Empirical_Baseline.md).
+- *"Critical transitions" at `s = 4.5, 5.89, 8.57`*: derived algebraically from the rejected power law. With the rational fit `f(s)` plateaus at `≥ 0.82` and never drops to 50 %, 10 %, or 1 % anywhere on the tested range — the transitions do not exist. The constant `_PRIMALITY_TEST_SCALE_THRESHOLD = 4.5` does still appear in `prime_generator.py`, but only as the *computational-cost* point where deterministic Miller–Rabin overtakes trial division, not as a feature-importance crossover. See [Paper 3 §C.2](Paper3_Empirical_Baseline.md).
 
 ---
 

@@ -25,7 +25,7 @@ from the trained MLP weights*:
       NN alone" would look like.
 
 Both expect a per-scale model bank produced by `train_nn_classifiers.py`
-(under `artifacts/nn/`) and use the closest-scale model for any input n.
+(under `artifacts/`) and use the closest-scale model for any input n.
 """
 
 from __future__ import annotations
@@ -42,7 +42,7 @@ from train_nn_classifiers import (PrimeMLP, featurize, FEATURE_GROUPS,
                                    D, HIDDEN, SCALES)
 
 
-ARTIFACT_DIR = Path("artifacts") / "nn"
+ARTIFACT_DIR = Path("artifacts")
 
 
 def _load_model_bank(scales: List[int] = SCALES,

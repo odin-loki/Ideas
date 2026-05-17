@@ -23,10 +23,10 @@ For every distillation we report:
   * for the tree: the top decision splits as readable rules
 
 Output files
-  artifacts/nn/distillation.json
-  artifacts/nn/distillation.md
-  artifacts/nn/distilled_tree_s{scale}.pkl
-  artifacts/nn/distilled_logit_s{scale}.pkl
+  artifacts/distillation.json
+  reports/nn_distillation.md
+  artifacts/distilled_tree_s{scale}.pkl
+  artifacts/distilled_logit_s{scale}.pkl
 """
 
 from __future__ import annotations
@@ -49,7 +49,7 @@ from train_nn_classifiers import (PrimeMLP, FEATURE_GROUPS, D, HIDDEN, SCALES,
                                   SMALL_PRIMES_30, N_BIN_FEATURES)
 
 
-ARTIFACT_DIR = Path("artifacts") / "nn"
+ARTIFACT_DIR = Path("artifacts")
 
 
 def feature_names() -> List[str]:
@@ -224,7 +224,8 @@ if __name__ == "__main__":
     out_json = ARTIFACT_DIR / "distillation.json"
     json.dump({"per_scale": per_scale, "scales": SCALES},
               open(out_json, "w"), indent=2)
-    out_md = ARTIFACT_DIR / "distillation.md"
+    out_md = Path("reports") / "nn_distillation.md"
+    out_md.parent.mkdir(parents=True, exist_ok=True)
     out_md.write_text(render_markdown(per_scale), encoding="utf-8")
 
     print(f"\nWrote {out_json}")

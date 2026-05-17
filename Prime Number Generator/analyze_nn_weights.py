@@ -39,8 +39,8 @@ scaling law to each.  Anything that fits a non-trivial form is a
 *meta-pattern* — a property of the trained network that scales in
 a regular way with problem size.
 
-Outputs:  artifacts/nn/weight_analysis.json
-          artifacts/nn/weight_analysis.md
+Outputs:  artifacts/weight_analysis.json
+          reports/nn_weight_analysis.md
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from train_nn_classifiers import PrimeMLP, FEATURE_GROUPS, D, HIDDEN, SCALES
 
 
-ARTIFACT_DIR = Path("artifacts") / "nn"
+ARTIFACT_DIR = Path("artifacts")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -433,7 +433,8 @@ if __name__ == "__main__":
               open(out_json, "w"), indent=2)
 
     md = render_markdown(per_scale, fits)
-    out_md = ARTIFACT_DIR / "weight_analysis.md"
+    out_md = Path("reports") / "nn_weight_analysis.md"
+    out_md.parent.mkdir(parents=True, exist_ok=True)
     out_md.write_text(md, encoding="utf-8")
 
     n_skipped = sum(1 for v in fits.values() if v.get("skipped"))

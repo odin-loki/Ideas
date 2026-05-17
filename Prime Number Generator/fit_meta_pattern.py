@@ -94,8 +94,8 @@ SAMPLES_PER_CLASS = 1000
 # Small primes used as residue features and as the trial-division pre-filter.
 SMALL_PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
-OUT_JSON = Path(__file__).with_name("fit_meta_pattern.json")
-OUT_MD   = Path(__file__).with_name("fit_meta_pattern.md")
+OUT_JSON = Path("artifacts") / "fit_meta_pattern.json"
+OUT_MD   = Path("reports")   / "fit_meta_pattern.md"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -460,6 +460,8 @@ def write_report(result: Dict, md_path: Path) -> None:
 if __name__ == "__main__":
     t0 = time.perf_counter()
     result = run_experiment()
+    OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
+    OUT_MD.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(f"\nWrote {OUT_JSON}  ({OUT_JSON.stat().st_size:,} bytes)")
     write_report(result, OUT_MD)

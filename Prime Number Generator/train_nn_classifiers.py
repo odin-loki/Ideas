@@ -29,8 +29,8 @@ Phase 1 + Phase 2 of the NN-based prime meta-pattern study.
               * the training / validation accuracy history
               * the final test accuracy and AUC
 
-Outputs go into  artifacts/nn/  (one .npz + one .pt + one .json per scale,
-plus a summary nn_training_summary.json at the top level).
+Outputs go into  artifacts/  (one .npz + one .pt + one .json per scale,
+plus a summary training_summary.json).
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ LR         = 1e-3
 DROPOUT    = 0.2
 HIDDEN     = (128, 64, 32)
 
-ARTIFACT_DIR = Path("artifacts") / "nn"
+ARTIFACT_DIR = Path("artifacts")
 SEED         = 20260517
 
 

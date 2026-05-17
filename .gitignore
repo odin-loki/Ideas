@@ -149,6 +149,7 @@ docs/site/
 *_demo.html
 *.pickle
 *.joblib
+*.pkl
 
 # =====================================================
 # Cypha-Specific Exclusions

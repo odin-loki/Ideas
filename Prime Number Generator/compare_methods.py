@@ -31,8 +31,8 @@ points uniformly placed in `[10^s, 10^s + ε]`:
   * (Pure-NN only) prime-correctness rate of returned values
   * (Pure-NN only) skip rate vs sympy.nextprime ground truth
 
-Output:  artifacts/nn/compare_methods.json
-         artifacts/nn/compare_methods.md
+Output:  artifacts/compare_methods.json
+         reports/nn_compare_methods.md
 """
 
 from __future__ import annotations
@@ -54,7 +54,7 @@ from nn_prime_generator import (NNAugmentedPrimeGenerator,
 from train_nn_classifiers import featurize, SCALES
 
 
-ARTIFACT_DIR = Path("artifacts") / "nn"
+ARTIFACT_DIR = Path("artifacts")
 
 K_PER_SCALE = 50      # starting points per scale
 M_PRIMES    = 5       # primes generated from each starting point
@@ -280,7 +280,8 @@ def main() -> None:
         md.append(f"| {r['scale']} | "
                   f"{r['conv']['ms_per_prime']:.3f} | "
                   f"{r['nn_aug']['ms_per_prime']:.3f} | {ratio:.1f}× |")
-    out_md = ARTIFACT_DIR / "compare_methods.md"
+    out_md = Path("reports") / "nn_compare_methods.md"
+    out_md.parent.mkdir(parents=True, exist_ok=True)
     out_md.write_text("\n".join(md), encoding="utf-8")
 
     print(f"\nWrote {out_json}")

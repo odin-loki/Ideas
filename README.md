@@ -43,7 +43,7 @@ Each section below is the field a curious layman would file these projects under
 | Folder | Description |
 |---|---|
 | [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | A custom encryption scheme that doesn’t transmit nonces — the small unique numbers normally appended to each message to keep encryption fresh. The receiver re-derives the nonce from the message itself plus a shared key, eliminating an entire class of bugs around lost or replayed nonces. Three-layer algebraic construction over a 256-bit binary field. *Not* the Korean ARIA block cipher. |
-| [`Break AES/`](Break%20AES/) | Research scaffolding that points modern machine learning at the problem of breaking AES, the standard symmetric cipher used everywhere. **Doesn’t actually break AES.** It is the training stack one would use to try — a Transformer student trained by knowledge-distillation from a Llama teacher, plus reinforcement learning shaped by a BLEU reward. |
+| [`Modelling AES/`](Modelling%20AES/) | Two complementary neural studies of AES, both negative or limited results. (a) `neural_aes_paper.md` argues that recovering AES-128 key material from plaintext-ciphertext pairs is infeasible for any neural network — three independent barriers (output entropy indistinguishability, pseudorandom collapse, combinatorial state-space) are quantified, and empirically the model achieves `0.675 %` first-byte accuracy vs the `0.3906 %` random baseline (`p = 0.066`). (b) `neural_prng_paper.md` asks the converse — can a network learn to *generate* AES-style ciphertext-distribution output? A GAN reaches `7.983` bits byte-entropy and gzip compression `1.0005` (statistically indistinguishable from AES on these two metrics) but fails the chi-squared uniformity test (`p ≈ 0`). The folder also contains `Break AES with NNs/`, the Transformer + REINFORCE training scaffolding for the attempted key-recovery attack. |
 | [`RNGS/`](RNGS/) | Four pseudo-random-number generators built for very different jobs: a general-purpose generator with cryptographic hashing on the output, a fast one for tiny embedded chips (~80 cycles per output on a Cortex-M4), one with a state space larger than 2¹⁵³⁶, and one based on the chaos of turbulent fluid flow. |
 | [`Compression Algorithms/`](Compression%20Algorithms/) | Three frameworks. The headline (**Izaac**) shows that two computers sharing the same pseudo-random stream get a free communication channel — anything they can independently compute from that stream doesn’t need to be sent over the wire. The other two are an algebra of how irreversible a given function is, and a measured spectral law for pruning weights from neural networks. |
 | [`Izaac as Side Data/`](Izaac%20as%20Side%20Data/) | Twelve concrete protocols built on the Izaac idea. The clearest example: a Bloom filter coordinated by an Izaac shared seed saves **48 megabytes** of network traffic per coordination round when a million nodes participate, because both sides compute the filter locally instead of transmitting it. |
@@ -80,7 +80,7 @@ Each section below is the field a curious layman would file these projects under
 | [`General Math Papers/`](General%20Math%20Papers/) | Develops the **Logarithmic Complexity Reduction Principle** — a meta-principle (not a theorem) that documents the recurring pattern by which problems naively requiring `n²` operations can be reduced to `n log n` via divide-and-conquer or `n × O(log n)` data structures. Uses the Master Theorem as the decision procedure. |
 | [`GF2 Algebra and Applications/`](GF2%20Algebra%20and%20Applications/) | Seven papers on the algebra of XOR and AND over the binary field. Headline result: **AND is the *only* nontrivial binary operation that forms a ring with XOR**. Extensions include a polynomial form for the AES inverse (`x⁻¹ = x²⁵⁴` is one of 128 permutations on `GF(2⁸)`) and gate-count benchmarks (Rule 110 reduces from 19 gates to 6, a 68 % saving). |
 | [`Math Question Generator/`](Math%20Question%20Generator/) | A program that auto-generates exam-grade mathematics problems across the full Mathematics Subject Classification taxonomy. SymPy and NumPy backbones with 1000-decimal-place precision arithmetic, a 28 GB memory cap, and checkpointing. Comes with a 13-domain landscape survey of the field anchored to **MSC2020**. |
-| [`Prime Number Generator/`](Prime%20Number%20Generator/) | A black-box study of what a neural network *learns* when trained on prime-vs-composite classification, paired with a hybrid prime generator that operationalises the findings. Six MLPs (input → 128 → 64 → 32 → 1, ReLU + dropout) are trained at scales `s = log₁₀ n ∈ {3, 4, 5, 6, 7, 8}` on a deliberately rich, redundant 105-dimensional feature set (residues, binary bits, wheel structure, scale, digits). Decision-tree and L1-logistic distillation reveal that, **at every scale**, the trained network's top features are `is_6k_pm1` (importance ≈ 0.46), then `n mod 5` (≈ 0.20), `n mod 7` (≈ 0.13), `n mod 11`, `n mod 13`, `n mod 17`, `n mod 19` — i.e., **gradient descent rediscovers the wheel-30 sieve from raw classification supervision alone**. Two clean exponential laws govern the trained weights: residue-feature attribution share decays as `0.543 · exp(−0.041 · s)` while binary-bit attribution magnitude grows as `2.23 · exp(+0.219 · s)`; Hill α on the layer-1 SVD spectrum is essentially constant at `≈ 3.19` (heavy-tailed self-regularisation). The conventional `MetaPatternPrimeGenerator` (`6k±1` sieve + small-prime filter sized by `f₂(s) = 1.027 / (1 + 0.030·s)` + Sorenson–Webster deterministic Miller–Rabin, exact for `n < 3.317 × 10²⁴`, `k = 20` probabilistic rounds above) produces primes at `0.006–0.030 ms` each. Head-to-head benchmark vs an `NNAugmentedPrimeGenerator` (NN as candidate filter, deterministic verifier) and `PureNNPrimeGenerator` (NN scoring only) shows the conventional baseline is **60–97× faster** than NN-augmented while producing identical exact output, and pure-NN has primality recall of only `21–68 %` at τ = 0.5. **The honest finding: the NN is valuable as an analytical instrument that recovers known sieve mathematics from data, not as a faster prime-generation kernel.** |
+| [`Prime Number Generator/`](Prime%20Number%20Generator/) | A black-box study of what a neural network *learns* when trained on prime-vs-composite classification, paired with a hybrid prime generator that operationalises the findings, all cross-checked against an independent non-NN empirical baseline. Six MLPs (input → 128 → 64 → 32 → 1, ReLU + dropout) are trained at scales `s = log₁₀ n ∈ {3, 4, 5, 6, 7, 8}` on a deliberately rich, redundant 105-dimensional feature set; decision-tree and L1-logistic distillation reveal that, **at every scale**, the trained network's top features are `is_6k_pm1` (importance ≈ 0.46), then `n mod 5`, `n mod 7`, `n mod 11`, `n mod 13`, `n mod 17`, `n mod 19` — i.e., **gradient descent rediscovers the wheel-30 sieve from raw classification supervision alone**. Two clean exponential laws govern the trained weights: residue-attribution share decays as `0.543 · exp(−0.041 · s)` and binary-attribution magnitude grows as `2.23 · exp(+0.219 · s)`; Hill α on layer-1 SVD ≈ `3.19` constant. An independent non-NN study (`fit_meta_pattern.py`, 40 scale samples × 1000 + 1000 primes/composites per scale, plus `gap_analysis.py`, 8 scale windows × 500–5000 consecutive primes per window) confirms: filter rejection rate `f(s) = 1.027 / (1 + 0.030 s)` (rational, `ΔAIC = +30.78` over power law); empirical Cramér ratio `mean(gap) / ln n ∈ [0.97, 1.01]`; KS distance to `Exponential(ln n)` decays as `0.260 · exp(−0.084 s)`; small but consistently signed Chebyshev bias toward primes `≡ 5 (mod 6)` over `≡ 1 (mod 6)` in 7 of 8 windows tested. The conventional `MetaPatternPrimeGenerator` (`6k±1` sieve + small-prime filter + Sorenson–Webster deterministic Miller–Rabin, exact for `n < 3.317 × 10²⁴`, `k = 20` probabilistic rounds above) produces primes at `0.006–0.030 ms` each. Head-to-head benchmark vs `NNAugmentedPrimeGenerator` and `PureNNPrimeGenerator` shows the conventional baseline is **60–97× faster** than NN-augmented while producing identical exact output, and pure-NN has primality recall of only `21–68 %` at τ = 0.5. **The honest finding: the NN is valuable as an analytical instrument that recovers known sieve mathematics from data, not as a faster prime-generation kernel.** |
 
 ### 🌌 Physics
 
@@ -147,13 +147,21 @@ Each section below is the field a curious layman would file these projects under
 | Folder | Description |
 |---|---|
 | [`UCN Political System/`](UCN%20Political%20System/) | An eight-paper sovereign-doctrine series for a hypothetical United Commonwealth Nations: Westminster-derived governance, hard-sovereignty economics, a `≤ 10`-warhead minimal nuclear deterrent, a personal-wealth ceiling of **AUD 100 M**, government-manufactured pharmaceutical-grade recreational drugs, and an optional UK – Canada – Australia Crown confederation. **Speculative; every claim referenced.** |
+| [`UN Political System/`](UN%20Political%20System/) | A comprehensive policy-research paper — *Sovereignty Without Consequence* (`un_reform_paper.md`, ~1 860 lines, XVIII sections + 11 appendices) — for the **real** United Nations (distinct from the speculative `UCN Political System/` above). Diagnoses the Charter's enforcement gap (~299 vetoes since 1946; zero binding Chapter VII actions against P5 members or P5-backed belligerents in 117 active armed conflicts 1990–2023; ~7–13 M atrocity-crime deaths in cases where absent enforcement was a substantive contributing factor), then proposes a single new instrument: a standing **50 000-personnel United Nations Defence Force** (6 combined-arms brigades + 5 000-personnel professional cadre + organic strategic lift / ISR) commanded by an elected **Office of the United Nations Security Commissioner** (two-thirds-GA election, non-renewable 7-yr term, ICJ-reviewable on 30-day expedited basis), authorised to deploy on a published Trigger-Event Determination (5 pre-committed triggers: genocide; CBRN against civilians; systematic destruction of civilian infrastructure as a war crime; unauthorised cross-border aggression; ongoing crimes against humanity) without Security Council pre-clearance. Funded at `USD 8–12 B/yr` (`≈ 0.01 %` global GDP) via a tiered GDP-bracketed assessment with a `15 %` single-state cap. **Five-step `25–40 yr` pathway** (GA framework resolution → non-P5 coalition → Rome-Statute-style implementing treaty → operational proof of concept → Article 108 Charter amendment) generates value at each step regardless of subsequent steps. **A policy paper, not a campaign.** |
 
 ### ⚔️ Military science
 
 | Folder | Description |
 |---|---|
 | [`Battle Sim/`](Battle%20Sim/) | A literature survey and design note that maps the major mathematical traditions for modelling combat — **Hughes salvo equations**, **extended Lanchester equations**, **Markov battle-state chains**, **FATHM linear programming**, and the **Dupuy / TNDM combat-power lineage** — into one comparative reading guide. **Explicitly not an operational simulator.** |
-| [`Weapons/`](Weapons/) | A defence-engineering R&D portfolio, with paired operator spec-sheets and TRP-numbered research papers across small arms (`MP-6.8`, `MAS-15.2E`), heavy weapons (`57 mm` autocannon, `140 mm` tank round), body armour (APES, AlNiCyN, OBSIDIAN), CBRN protection (NACS), tactical acoustic cancellation (35–55 dB depth), and CL-20 high explosive. **Classification banners are stylistic.** |
+| [`Weapons-Defence/`](Weapons-Defence/) | A defence-engineering R&D portfolio, with paired operator spec-sheets and TRP-numbered research papers across small arms (`MP-4.6M` pistol & PDW, `MP-6.8` rifle, `MAS-15.2E` 15.2 mm anti-materiel sniper), heavy weapons (`57 mm` autocannon, `57 mm` underbarrel grenade, `57 mm` dual-purpose mortar / RPG, `140 mm` tank KE round), body armour (APES, AlNiCyN, OBSIDIAN), CBRN protection (NACS), tactical acoustic cancellation (35–55 dB depth), CL-20 high explosive, rubber tank-track pads, the `HPR-X` guided high-power rocketry series, and the `TACT-1 Mark II` full-day SOF ration. **Every ballistic / velocity / energy / penetration / chamber-pressure number in the spec sheets and research papers is derived from a single Python simulator** (`Weapons-Defence/weapons_simulation.py`); the [`Common Architecture and Components.md`](Weapons-Defence/Common%20Architecture%20and%20Components.md) document defines the parts-commonality matrix across the small-arms and heavy-weapons families. **Classification banners are stylistic.** |
+| [`Weapons-Police/`](Weapons-Police/) | A law-enforcement spin-off of the military APES armour, designed for Australian police. `APES-L Mark I` – full-body protective suit at `~6.5 kg` (vs the ~20 kg torso-only police vest currently fielded), ionic-liquid STF (cold-comfortable to `–25 °C`), `75 mm` single-use B4C tiles to `.50 AE`, NIJ Level II stab full-body coverage, `66.2 %` composite-injury-score improvement, `12+ yr` sealed-panel service life, and a `$1.85 M` TCO advantage per 500 officers over 10 years. Paired with a research-paper companion in the same folder. |
+
+### 🌊 Civil infrastructure and manufacturing
+
+| Folder | Description |
+|---|---|
+| [`Plastic Products/`](Plastic%20Products/) | The **AusDike ™** programme – a domestic-Australian-manufactured modular deployable flood-levee system commissioned (within the document fiction) by Holloway Group, the injection-moulder behind Ausdrain, Geohex, and Biax Foundations. Open-bottom self-ballasting `600 × 300 × 560 mm` panel, `9 mm` wall in `15 %` talc-filled recycled PP, ~15 kg empty / ~125 kg self-filled, deploys 50 m in 10 min by two people with no tools, tipping safety factor `4.9 ×` and sliding `2.1 ×` on 2-stack at 600 mm flood, `73 %` net flood-force reduction. 28 simulations, 9 simulation-driven design changes, $65.51 COGS, $109/m sell price (`42 %` cheaper than imported Boxwall), $382 500 advanced-tooling budget, four-SKU family. Volume 1 (feasibility/market), Volume 2 (engineering simulation), and an integrated research paper. |
 
 ### 💄 Cosmetics
 
@@ -188,7 +196,7 @@ Each section below is the field a curious layman would file these projects under
 | [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | ARIA-INTEL — edge-deployable PMBM intelligence engine |
 | [`Battle Sim/`](Battle%20Sim/) | Battle simulation design document |
 | [`Beauty Products/`](Beauty%20Products/) | Hemp Harmony luxury body lotion — formulation white paper |
-| [`Break AES/`](Break%20AES/) | Transformer + RL distillation for AES cryptanalysis |
+| [`Modelling AES/`](Modelling%20AES/) | Neural studies of AES – key-recovery impossibility paper + GAN-PRNG paper + Transformer+REINFORCE scaffolding |
 | [`Cell AI/`](Cell%20AI/) | CellularAI — biologically-inspired non-attention sequence modelling |
 | [`Cocktails/`](Cocktails/) | Bar operations as a structured design problem |
 | [`Compression Algorithms/`](Compression%20Algorithms/) | Izaac, GRIA, NMP — canonical Izaac home |
@@ -214,6 +222,7 @@ Each section below is the field a curious layman would file these projects under
 | [`New Classes of Electrical Components/`](New%20Classes%20of%20Electrical%20Components/) | 3-tier hybrid passive-device catalogue + 5-phase simulation |
 | [`NN Shortcuts/`](NN%20Shortcuts/) | Efficient neural-network shortcuts |
 | [`Physics/`](Physics/) | Non-local gravity + NLFGN UFT + superluminal recession |
+| [`Plastic Products/`](Plastic%20Products/) | AusDike ™ deployable flood-levee system (Holloway Group programme) |
 | [`Prime Number Generator/`](Prime%20Number%20Generator/) | Scale-dependent meta-pattern theory of primes |
 | [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) | QDMP framework + CVD pathways to quantum-grade diamond |
 | [`Quantum Graph Optimisation/`](Quantum%20Graph%20Optimisation/) | Quantum-inspired classical compressed graph processor |
@@ -223,9 +232,11 @@ Each section below is the field a curious layman would file these projects under
 | [`Statistical Scheduler/`](Statistical%20Scheduler/) | Neural-heuristic distributed task scheduler (LinTS / PID / CFS) |
 | [`UCN AIs/`](UCN%20AIs/) | APN / GPN / Signal AI / linear primitives |
 | [`UCN Political System/`](UCN%20Political%20System/) | UCN doctrine series + economics + sovereign currency |
+| [`UN Political System/`](UN%20Political%20System/) | Comprehensive reform proposal for the real United Nations |
 | [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition + one-shot learning |
 | [`Veritas/`](Veritas/) | Formal verification framework |
-| [`Weapons/`](Weapons/) | Defence-tech R&D portfolio (UNCLASSIFIED / FOUO style) |
+| [`Weapons-Defence/`](Weapons-Defence/) | Defence-tech R&D portfolio (UNCLASSIFIED / FOUO style)– simulator-backed; common-architecture matrix |
+| [`Weapons-Police/`](Weapons-Police/) | APES-L Mark I full-body police body armour (Australian) – spec sheet + research paper |
 
 ---
 
@@ -271,7 +282,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **LinTS** | Linear Thompson Sampling | [`Statistical Scheduler/`](Statistical%20Scheduler/) |
 | **LSH** | Locality-Sensitive Hashing | [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) |
 | **MoE** | Mixture-of-Experts | [`Neural Decompiler/`](Neural%20Decompiler/) |
-| **NACS** | NEXUS Adaptive Combat System (CBRN protection module) | [`Weapons/`](Weapons/) |
+| **NACS** | NEXUS Adaptive Combat System (CBRN protection module) | [`Weapons-Defence/`](Weapons-Defence/) |
 | **NLFGN-UFT** | Non-Local Field-Gravity Network Unified Field Theory | [`Physics/`](Physics/) |
 | **NMP** | Nonlinear Matrix Pruning (this repository's NMP — neural compression) | [`Compression Algorithms/`](Compression%20Algorithms/) |
 | **NQD** | Neural Quantum Dust | [`Neural Dust/`](Neural%20Dust/) |
@@ -283,7 +294,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **QDMP** | Quantum Diamond Metamaterial Processor | [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) |
 | **QND** | Quantum NanoDiamond (the cellular-scale sensor tier) | [`Neural Dust/`](Neural%20Dust/) |
 | **SGF** | Streaming Geometry Framework | [`NN Shortcuts/`](NN%20Shortcuts/) |
-| **TACS** | Tactical Acoustic Cancellation System | [`Weapons/`](Weapons/) |
+| **TACS** | Tactical Acoustic Cancellation System | [`Weapons-Defence/`](Weapons-Defence/) |
 | **TDC** | Torpedo Data Computer (WWII fire-control) | [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) |
 | **TNW** | Total National Wealth (in megajoules) | [`Economics/`](Economics/) |
 | **UCDW** | Ultra-Compact Diffusion Welding | [`Diffusion Welding/`](Diffusion%20Welding/) |
@@ -293,14 +304,29 @@ Several letter-combinations collide between folders. This index gives each acron
 | **V(D)J** | Variable-Diversity-Joining (vertebrate immune-system gene recombination) | [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) |
 | **Veritas** | Verification-Enabled Reasoning and Integrated Theorem-Acquiring System | [`Veritas/`](Veritas/) |
 | **WTA** | Wearable Transducer Array (the external CMUT patch) | [`Neural Dust/`](Neural%20Dust/) |
+| **APES** | Advanced Protective Equipment System (military body armour) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **APES-L** | Advanced Protective Equipment System – Law Enforcement (Australian police variant) | [`Weapons-Police/`](Weapons-Police/) |
+| **AusDike** | Australian-manufactured modular deployable flood-levee system (Holloway Group programme) | [`Plastic Products/`](Plastic%20Products/) |
+| **B4C** | Boron carbide (ballistic strike-face ceramic) | [`Weapons-Defence/`](Weapons-Defence/), [`Weapons-Police/`](Weapons-Police/) |
+| **CL-20** | Hexanitrohexaazaisowurtzitane (high-density energetic) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **HPR-X** | High-Power Rocketry series (guided amateur-class rockets) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **MAS-15.2E** | Multi-purpose Anti-Materiel Sniper, 15.2 mm, Enhanced | [`Weapons-Defence/`](Weapons-Defence/) |
+| **MP-4.6M** | Modular Pistol / PDW, 4.6 mm, Military | [`Weapons-Defence/`](Weapons-Defence/) |
+| **MP-6.8** | Modular Personal-arm, 6.8 mm (Advanced Combat Rifle) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **NACS-CORE** | NEXUS Adaptive Combat System – CBRN / Operational Respiratory Ensemble | [`Weapons-Defence/`](Weapons-Defence/) |
+| **OBSIDIAN** | The reactive shear-thickening-fluid armour family | [`Weapons-Defence/`](Weapons-Defence/) |
+| **rPP** | Recycled polypropylene (AusDike base material) | [`Plastic Products/`](Plastic%20Products/) |
+| **STF** | Shear-Thickening Fluid (Newtonian – non-Newtonian transition under strain) | [`Weapons-Defence/`](Weapons-Defence/), [`Weapons-Police/`](Weapons-Police/) |
+| **TACT-1** | Tactical Combat Ration, Mark II – full-day SOF ration | [`Weapons-Defence/`](Weapons-Defence/) |
+| **UN** | United Nations (the real organisation, not the UCN above) | [`UN Political System/`](UN%20Political%20System/) |
 
 ---
 
 ## 🛡 Honest framing
 
 - **A research shelf, not a product catalogue.** Many folders propose systems that have not been built or validated; speculative items carry that label in their own README.
-- **Defence framing is a stylistic register.** The Weapons folder, GM Enhancements, ARIA-INTEL, and a handful of others use UNCLASSIFIED / FOUO-style document register. No real classification, sponsorship, or fielded materiel is implied.
-- **Speculative pharmacology is not medical advice.** `Drugs/`, `Drugs/Nootropics/`, `Drugs/Schizophrenia Cure/`, `GM Enhancements/`, `Beauty Products/`, and `Weapons/Combat Drug.md` describe theoretical compounds and protocols. Do not synthesise, possess, or administer them.
+- **Defence framing is a stylistic register.** The Weapons-Defence folder, GM Enhancements, ARIA-INTEL, and a handful of others use UNCLASSIFIED / FOUO-style document register. No real classification, sponsorship, or fielded materiel is implied.
+- **Speculative pharmacology is not medical advice.** `Drugs/`, `Drugs/Nootropics/`, `Drugs/Schizophrenia Cure/`, `GM Enhancements/`, `Beauty Products/`, and `Weapons-Defence/Combat Drug.md` describe theoretical compounds and protocols. Do not synthesise, possess, or administer them.
 - **Acronym hygiene matters.** See the [§ Acronym key](#-acronym-key) above; several letter-combinations collide between folders (ARIA, NMP, HSA), so each folder's README spells out which expansion is meant in that context.
 - **Numbers are sourced.** Every "headline number" in a category description is taken directly from the corresponding folder's research paper. Per-folder caveats live in those folders' "Honest framing" sections.
 

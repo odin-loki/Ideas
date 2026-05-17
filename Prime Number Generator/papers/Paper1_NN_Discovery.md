@@ -1,6 +1,6 @@
 # Paper 1 — Discovering the prime-classification function from neural-network weights
 
-> **Empirical study.** Six multilayer perceptrons are trained at scales `s = log₁₀ n ∈ {3, 4, 5, 6, 7, 8}` to classify `n` as prime or composite from a deliberately rich, redundant 105-dimensional feature set. After training, the *only* signal we use to interpret what the networks have learned is the trained weights and gradients — never the source code that generated the features. We extract the learned function in two ways: (a) by black-box weight analysis (singular-value spectra, heavy-tail Hill exponents, effective rank, integrated-gradient attribution by feature group) and (b) by knowledge distillation into decision trees and sparse L1 logistic regressions. The dominant function recovered in (b) is the **small-prime trial-division sieve on `6k±1` candidates** — at every scale, the top features are `is_6k_pm1`, `n mod 5`, `n mod 7`, `n mod 11`, `n mod 13`, `n mod 17`, `n mod 19`, in this order, with strikingly stable importances. From (a) we extract two clean exponential scaling laws — the residue-feature attribution share decays as `0.543 · exp(−0.041 · s)` while the binary-bit attribution share grows as `2.23 · exp(0.219 · s)` — together with constant heavy-tail behaviour (Hill α ≈ 3.19 across all scales). Throughout we cross-check against an independent baseline empirical study (`fit_meta_pattern.py`, 40 scale samples × 1000 + 1000 primes/composites per scale) which directly measures the small-prime filter rejection rate `f₂(s) = 1.027 / (1 + 0.030 · s)` (rational, ΔAIC = +30.8 over power law). The two studies agree.
+> **Empirical study.** Six multilayer perceptrons are trained at scales `s = log₁₀ n ∈ {3, 4, 5, 6, 7, 8}` to classify `n` as prime or composite from a deliberately rich, redundant 105-dimensional feature set. After training, the *only* signal we use to interpret what the networks have learned is the trained weights and gradients — never the source code that generated the features. We extract the learned function in two ways: (a) by black-box weight analysis (singular-value spectra, heavy-tail Hill exponents, effective rank, integrated-gradient attribution by feature group) and (b) by knowledge distillation into decision trees and sparse L1 logistic regressions. The dominant function recovered in (b) is the **small-prime trial-division sieve on `6k±1` candidates** — at every scale, the top features are `is_6k_pm1`, `n mod 5`, `n mod 7`, `n mod 11`, `n mod 13`, `n mod 17`, `n mod 19`, in this order, with strikingly stable importances. From (a) we extract two clean exponential scaling laws — the residue-feature attribution share decays as `0.543 · exp(−0.041 · s)` while the binary-bit attribution share grows as `2.23 · exp(0.219 · s)` — together with constant heavy-tail behaviour (Hill α ≈ 3.19 across all scales). Throughout we cross-check against the independent non-NN baseline study in [`Paper3_Empirical_Baseline.md`](Paper3_Empirical_Baseline.md) (`fit_meta_pattern.py`, 40 scale samples × 1000 + 1000 primes/composites per scale; plus `gap_analysis.py`, 8 scale windows × 500–5000 consecutive primes per window). The two studies agree on every cross-checkable claim.
 
 ---
 
@@ -200,9 +200,9 @@ We endorse the cautious reading throughout the rest of the paper.
 
 ---
 
-## 4. Cross-check against the independent baseline (`fit_meta_pattern.py`)
+## 4. Cross-check against the independent non-NN baseline ([Paper 3](Paper3_Empirical_Baseline.md))
 
-`fit_meta_pattern.py` measures three quantities over a denser scale grid (40 samples × 1000 + 1000 primes/composites per scale) using only logistic regression and Monte Carlo:
+[Paper 3](Paper3_Empirical_Baseline.md) measures, with no neural network involved, three quantities on a denser scale grid (40 samples × 1000 + 1000 primes/composites per scale) using only logistic regression, Monte Carlo, and sympy primality testing:
 
 | Measurement | Best-fit form | a | b | RMSE_log | ΔAIC over power | ΔAIC over exp | ΔAIC over rational |
 |:---|:---|---:|---:|---:|---:|---:|---:|
@@ -210,13 +210,20 @@ We endorse the cautious reading throughout the rest of the paper.
 | M2 — small-prime filter rejection rate | rational | 1.027 | 0.030 | 0.034 | +30.78 | +1.94 | best |
 | M3 — PNT density relative error | power | 0.505 | −1.881 | 0.317 | best | +6.41 | +5.84 |
 
+Plus, from `gap_analysis.py`:
+
+- Empirical Cramér ratio `mean(gap) / ln n ∈ [0.97, 1.01]` over `s ∈ [1, 8]` — confirms the first-moment claim of Cramér's heuristic.
+- KS-distance to `Exponential(ln n)` decays as `0.260 · exp(−0.0842 s)`, RMSE_log = 0.022 (best by AIC) — the gap distribution becomes "less wrong" relative to exponential as `n` grows.
+- Chebyshev bias visible (count `≡ 5 (mod 6)` exceeds count `≡ 1 (mod 6)`) in 7 of 8 windows tested — the NN cannot see this because its `is_6k_pm1` feature collapses both classes.
+- Empirical density / PNT density converges to 1 as `|ratio − 1| ~ 0.06 · s^{−1.51}`.
+
 The agreement with the NN study is strong:
 
-- **M1 ↔ NN residue attribution.** Both decay slowly with scale; MLE on the NN says exponential `0.5429 · exp(−0.0412 s)` (tightest), MLE on logistic-regression AUC says rational `0.404 / (1 + 0.040 s)` (tightest). Either fit predicts a 5–10 % drop per unit `s` — the same qualitative behaviour from two independent measurement pipelines.
+- **M1 ↔ NN residue attribution.** Both decay slowly with scale; MLE on the NN says exponential `0.5429 · exp(−0.0412 s)` (tightest), MLE on logistic-regression AUC says rational `0.404 / (1 + 0.040 s)` (tightest). Either fit predicts a `5–10 %` drop per unit `s` — the same qualitative behaviour from two independent measurement pipelines.
 - **M2 ↔ tree feature importances.** The small-prime filter rejection rate plateaus around `0.82` at `s = 9`, never dropping below it; the tree's distilled rule keeps `res_5, res_7, res_11, res_13, res_17, res_19` as the dominant residues at every scale tested. Both confirm that the small-prime filter is *useful at every scale tested*, not just at small `n`.
 - **M3** is the PNT residual; the NN does not have access to it, but the algorithm in Paper 2 uses the M3 fit only to size pre-filters, not as a primality signal.
 
-These three measurements are the only ones used for algorithm sizing in `MetaPatternPrimeGenerator`; the NN study is *interpretive* and does not feed back into the algorithm constants.
+These measurements are the only ones used for algorithm sizing in `MetaPatternPrimeGenerator`; the NN study is *interpretive* and does not feed back into the algorithm constants.
 
 ---
 
@@ -235,11 +242,12 @@ These three measurements are the only ones used for algorithm sizing in `MetaPat
 All numbers, tables, and fits in this paper are regenerated by the scripts in `Prime Number Generator/`:
 
 ```
-fit_meta_pattern.py         → fit_meta_pattern.{md,json}     (Section 4 baseline)
-train_nn_classifiers.py     → artifacts/nn/{data,model,history}_s{3..8}.{npz,pt,json}
-analyze_nn_weights.py       → artifacts/nn/weight_analysis.{md,json}   (Sections 2–3)
-extract_function.py         → artifacts/nn/distillation.{md,json}
-compare_methods.py          → artifacts/nn/compare_methods.{md,json}   (Paper 2)
+train_nn_classifiers.py     → artifacts/{data,model,history}_s{3..8}.{npz,pt,json}
+analyze_nn_weights.py       → reports/nn_weight_analysis.md, artifacts/weight_analysis.json
+extract_function.py         → reports/nn_distillation.md, artifacts/distillation.json
+compare_methods.py          → reports/nn_compare_methods.md, artifacts/compare_methods.json
+fit_meta_pattern.py         → reports/fit_meta_pattern.md, artifacts/fit_meta_pattern.json     (§4 baseline)
+gap_analysis.py             → reports/gap_analysis.md, artifacts/gap_analysis.json             (Paper 3 §B)
 ```
 
 Random seed `20260517 + scale * 1000` is used end-to-end; all results are bit-reproducible.
