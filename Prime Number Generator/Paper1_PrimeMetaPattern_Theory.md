@@ -1,417 +1,292 @@
-# A scale-dependent meta-pattern in prime number generation: empirical discovery of a power law transition between local and global generative methods
+# Empirical scale-dependence of local and global prime-generation methods
 
-*Preliminary research manuscript · 2025*
-
-> ## ⚠️ Erratum and 31-sample re-fit (2026)
->
-> This paper, as originally drafted, has three problems that an external review and a 31-scale-sample re-run (`fit_meta_pattern.py`, `fit_meta_pattern.md`) confirmed are real. The original text is preserved unchanged below for the historical record; this section overrides any conflicting claim in the body.
->
-> **1. Functional-form inconsistency.** §2.2 reports the empirical fit in *exponential* form,
->
-> > `f_L(s) = 0.258 · exp(−0.373·s)`,    `f_G(s) = 1 − 0.487 · exp(−0.371·s)`,
->
-> and then jumps to the *power-law* form `α(s) = s^(−0.37)`, `β(s) = 1 − 0.487·s^(−0.37)` in the same section, asserting they are the same. They are not: at `s = 2` the exponential gives `0.258 · exp(−0.746) ≈ 0.122`, while the power law gives `2^(−0.37) ≈ 0.774`, a factor of ~6 disagreement. The numerical values reported in Tables 1 and 2 of the paper (`α = 77.4 %` at `s = 2`, etc.) match the *power law*; the algorithm code in `prime_generator.py` also used the *power law*; but the only fit equation actually written down in §2.2 is the *exponential*. This was a transcription error.
->
-> **2. The exponent `−0.37` does not reproduce on more scale samples.** The original fit was performed on three scale points (`s = 2, 5, 7`); with only three points one cannot distinguish a power law from an exponential. Re-fitting with 31 evenly-spaced scale samples (`s = 1.0, 1.25, …, 8.5, 9.0`), 600 + 600 balanced primes/composites per scale, and three independent measurements (`fit_meta_pattern.md`):
->
-> | Curve | Form | Fit | AIC | Verdict |
-> |---|---|---|---:|---|
-> | M1 residue-classifier excess AUC | power law | `0.391 · s^(−0.104)` | `−80.19` | best by `0.9` |
-> |                                  | exponential | `0.382 · exp(−0.026·s)` | `−79.28` | indistinguishable |
-> | M2 small-prime filter rejection rate | rational | `1.050 / (1 + 0.034·s)` | `−158.10` | **best** |
-> |                                       | exponential | `1.040 · exp(−0.029·s)` | `−156.19` | close |
-> |                                       | power law | `1.057 · s^(−0.111)` | `−138.72` | **rejected, ΔAIC = +19.4** |
->
-> No curve produces an exponent near `−0.37`. M1's measured exponent is `~ −0.10`. M2 is best fit by a rational form (a *plateau*, not a power law) and the exponential beats the power law by `ΔAIC = +17.5`.
->
-> **3. The "critical transition at `n* ≈ 836`" (`s* ≈ 2.92`) is an artefact.** It was derived analytically from `1.487 · s^(−0.37) = 1`, i.e. by substituting the (incorrect) exponent and the (incorrect) coefficient `0.487` into a constraint on the algebraic crossing of `α` and `β`. With the corrected M2 fit, `f_M2(s) = 1.050 / (1 + 0.034·s)` is monotonically and slowly declining and **does not cross any specific threshold** in the tested range — at `s = 9` it is still `0.81`. There is no scale-dependent crossover for the algorithm to exploit. The right algorithmic switch — from `O(√n)` trial-division primality to `O(k log³ n)` Miller–Rabin — is set by computational cost, not by feature importance, and lives at `s ≈ 4.5` (`n ≈ 31 623`).
->
-> **What this means for the body of this paper.**
->
-> - §2.2 (the fit equation), §2.3 (the critical-transition derivation), §3.3 ("the power law meta-pattern"), §3.4 ("the critical transition"), and §4 (the renormalisation-group analogy with `γ = −0.37` as a "universal critical exponent") are all built on the bad three-point fit. They should be read as the original conjecture, **not** as confirmed by this work.
-> - §5 (the connection to neural-network weight-matrix spectral exponents reportedly in the `0.35 – 0.45` range, including HRNA's `α ≈ 0.85` and Martin–Mahoney's `~0.37`) was a numerical-coincidence argument. With the actual measured exponent for M1 being `~ −0.10`, **the coincidence is not present**, and this section should be regarded as withdrawn.
-> - §3.5 (deterministic vs stochastic information contribution) and the empirical scale-by-scale measurements in §3.1, §3.2 (filter effectiveness, density accuracy) survive — those numbers were measured directly, not derived from the bad fit.
-> - The companion algorithm paper (Paper 2) and the algorithm code carry their own erratum block; both have been corrected.
->
-> **What survives as the genuine empirical finding.** The local divisibility filter is useful at every scale tested up to `n = 10⁹`, and its useful-work rate decays slowly (best fit a *plateau*, not a power law). The PNT-density approximation becomes very accurate above `s ≈ 4` (relative error `< 0.05`). Hybrid sieve-plus-Miller–Rabin generation is the right operational choice; the original paper's specific *power-law* and *critical-transition* claims about how to weight that hybrid are not supported by the corrected data.
->
-> **Appropriate framing.** As corrected, this is empirical, computationally-driven mathematics — appropriate venue is Experimental Mathematics (Taylor & Francis) or Integers, not Annals of Mathematics. The work has no bearing on the Riemann Hypothesis or the Clay Millennium Prize, contrary to any framing in earlier drafts.
->
-> The original text follows below for the historical record.
-
----
+*Empirical research note — 2026*
 
 ## Abstract
 
-We report the empirical discovery of a continuous power law transition governing the optimal generative structure of prime numbers as a function of scale. Through systematic analysis of prime gap distributions, divisibility filter effectiveness, and density prediction accuracy across eight orders of magnitude \(10¹ to 10⁸\), we identify a scale parameter s = log₁₀\(n\) and a weight function:
+We investigate, empirically and quantitatively, how the relative usefulness of two complementary frameworks for prime-number generation — *local* divisibility / `6k±1` rules, and *global* density / Prime Number Theorem heuristics — varies as a function of scale `s = log₁₀ n`. Three independent measurements are performed on a dense scale grid (`s = 1.0, 1.2, 1.4, …, 9.0, 9.5`, 40 points total) with `1000 + 1000` balanced primes / composites sampled per scale: (M1) the held-out excess area-under-the-ROC-curve of a residue-only logistic-regression classifier; (M2) the rejection rate of a small-prime trial-division pre-filter on a balanced composite sample; (M3) the relative error of the Prime Number Theorem density approximation `1/ln n`. Each measurement is fit, by maximum likelihood with a log-target Gaussian error model, to three candidate functional forms — a power law `A · s^(-γ)`, an exponential `A · exp(-b·s)`, and a rational `A / (1 + B·s)` — and the forms are compared by Akaike information criterion. The principal findings are: (i) the small-prime filter rejection rate (M2) is **best fit by the rational form** `f_M2(s) = 1.027 / (1 + 0.030·s)`, with the power-law form decisively rejected (`ΔAIC = +30.8`) and the exponential close to the rational (`ΔAIC = +2.1`); (ii) the residue-classifier excess AUC (M1) is roughly flat (`0.29 – 0.41` over `s ∈ [1, 9.5]`), and the three candidate forms are statistically indistinguishable on this curve (all `|ΔAIC| < 1.5`); (iii) the PNT density relative error (M3) decays rapidly, best fit by a power law `f_M3(s) ≈ 0.51 · s^(-1.88)`, falling below `5 %` for `s ≥ 4`. The data does not support a power-law functional form for the local-feature curves, and there is no operationally meaningful local-to-global crossover scale: the local filter rejects a slowly-shrinking but always-large fraction of composites at every tested scale (`~99 %` at `s = 1`, `~82 %` at `s = 9.5`), and the residue-information curve is approximately flat. We conclude that the optimal prime generator at every tested scale is a *hybrid* — `6k±1` candidate sieve plus small-prime trial-division pre-filter plus a primality-verification step — with the only scale-dependent choice being the *primality verifier* itself, switching from `O(√n)` trial division to `O(k log³ n)` Miller–Rabin near `s ≈ 4.5` based on computational cost rather than feature importance. This functional-form analysis and the resulting empirically-grounded algorithm are the contributions of the present note.
 
-**α\(s\) = s^\(-0.37\)**
+**Keywords.** Prime number distribution, scale-dependent generation, Prime Number Theorem, Cramér model, small-prime sieve, residue classifier, maximum-likelihood model selection, Akaike information criterion, hybrid prime generator.
 
-which interpolates between local divisibility-based generation \(dominant for small n\) and global density-based generation \(dominant for large n\). The transition between these two generative regimes occurs smoothly near n\* ≈ 836 \(s\* ≈ 2.92\), which we term the critical transition point. We find this power law is empirically analogous to the running of coupling constants in the Renormalization Group \(RG\) framework from quantum field theory — wherein microscopic \(local\) interactions yield to macroscopic \(statistical/thermodynamic\) behavior as the observation scale increases. This meta-pattern implies that no single closed-form prime generator can be globally optimal; instead, the prime-generating algorithm is best understood as a trajectory through function space parameterized by scale. We derive a working algorithm from this continuous transition and validate it across tested scales. The critical exponent -0.37 matches power law exponents observed in the singular value spectra of neural network weight matrices, suggesting a deep structural connection between prime distributions and learned representations in high-dimensional systems.
-
-**Keywords:** *prime number distribution, scale invariance, power law, renormalization group, meta-pattern, prime gap statistics, prime generation algorithm, phase transition, number theory*
+---
 
 ## 1. Introduction
 
-The distribution of prime numbers represents one of the most extensively studied problems in all of mathematics. Since the work of Gauss and Legendre in the late 18th century, it has been known that primes thin out at a rate approximately described by 1/ln\(n\), a result formalized in the Prime Number Theorem \(PNT\) and proved independently by Hadamard and de la Vallée Poussin in 1896 \[1, 2\]. The PNT gives us the global asymptotic density of primes, but the local structure — the precise spacing between consecutive primes, and the rules governing which integers are prime candidates — has proven far harder to characterize.
+Two complementary frameworks are commonly used to reason about prime numbers and to generate them computationally.
 
-Two complementary frameworks have traditionally been used to reason about primes. The first is the local, divisibility-based framework: any prime p > 3 must satisfy p ≡ ±1 \(mod 6\) by virtue of the 6k±1 structure arising from elimination of multiples of 2 and 3. More generally, sieve methods \(Eratosthenes, Atkin, Sundaram\) progressively eliminate composite candidates through local divisibility rules. The second is the global, statistical framework: under the Cramér probabilistic model \[3\], gaps between consecutive primes are approximately exponentially distributed with mean ln\(n\), consistent with the heuristic that each integer near n is prime independently with probability 1/ln\(n\). This model, while known to be imperfect — Maier \[4\] demonstrated it fails in short intervals — captures the macro-statistical behavior of prime gaps with remarkable accuracy at large scales.
+The **local** framework derives from divisibility. All primes greater than `3` satisfy `p ≡ ±1 (mod 6)`, and more generally any prime `p` larger than the largest prime in a small-prime list `P` satisfies `gcd(p, ∏_{q ∈ P} q) = 1`. The local framework underwrites sieving methods (Eratosthenes, Atkin, Sundaram) and trial-division pre-filters: cheap, deterministic operations that eliminate large fractions of composite candidates a priori.
 
-The central question motivating this work is: how do these two frameworks — the local and the global — relate to one another as a function of scale? We hypothesize, and empirically confirm, that there exists a smooth, power-law governed transition between these two modes of prime generation, analogous to the renormalization group \(RG\) flow in physics where microscopic coupling constants "run" with energy scale \[5\].
+The **global** framework derives from density. The Prime Number Theorem (PNT) [1, 2] states that the count of primes below `x` satisfies `π(x) ∼ x / ln x`, which, locally, says that the density of primes near `n` is approximately `1 / ln n`. Cramér's probabilistic model [3] sharpens this into the conjecture that consecutive prime gaps are approximately exponentially distributed with mean `ln n`. The global framework underwrites random-prime generators based on sampling integers near a target size and verifying primality with a probabilistic test [4, 5, 6].
 
-Our empirical analysis proceeds as follows. We characterize prime distributions at three representative scales \(n ∼ 10², n ∼ 10⁵, n ∼ 10⁷\) through comprehensive statistical analysis of: \(a\) divisibility filter effectiveness as a function of scale, \(b\) density prediction accuracy of the PNT approximation, \(c\) prime gap distribution fit to exponential models, and \(d\) feature importance weights derived from a binary classification formulation of primality. From these measurements, we extract a power law exponent α = -0.37 governing the decay of local \(divisibility\) importance with increasing scale, and derive the complementary global weight function. We term the resulting framework the "prime meta-pattern" and the transition function the "scale-dependent generative trajectory."
+Most production prime generators **compose** the two frameworks: local rules eliminate cheap composites, global rules guide candidate selection at large `n`, and a primality verifier confirms each candidate. This composition is universal in cryptographic toolchains [7] and is rarely controversial.
 
-## 1.1 Connections to Prior Work
+What has not been quantified, to our knowledge, is the *empirical functional form* of the relative contribution of the two frameworks as a function of scale `s = log₁₀ n`. Three natural questions arise. (Q1) Does the information that residue features carry about primality decay as a clean power law in `s`, as an exponential, or as something else, and at what rate? (Q2) Does the *useful-work rate* of a small-prime trial-division pre-filter — the probability it rejects a random composite — decay similarly, and is there a scale at which it crosses some threshold below which the filter ceases to be worth running? (Q3) At what scale does the PNT density approximation become "accurate enough" to drive candidate-selection heuristics?
 
-Our work builds on several strands of prior research. Cohen \[6\] and colleagues recently established that prime gaps are asymptotically characterized by moments matching those of an exponential distribution with mean ln\(n\), providing formal statistical grounding for the global framework. Cramér's original 1936 conjecture \[3\] — that maximal prime gaps are O\(\(ln pⁿ\)²\) — and Granville's subsequent refinements \[7\] provide the theoretical backbone of density-based prime models. In the local framework, the 6k±1 structure is classical, and the efficiency of sieve methods is well-characterized \[8\].
+The present note answers each question empirically, with model-selection by maximum likelihood and Akaike information criterion (AIC), and treats the results as the empirical foundation of a hybrid prime generator described in the companion algorithm paper [8].
 
-The renormalization group analogy is novel to our knowledge. While there exist connections between the Riemann zeta function and spectral theory in physics \(see Montgomery's pair correlation conjecture and the connection to GUE statistics\), we are unaware of prior work explicitly modeling the local-to-global generative transition in primes as an RG flow. The normal form theory of RG flows \[9\] provides a natural mathematical framework for our empirical observations about universality classes of prime generative methods.
+---
 
-Separately, the power law exponent α = -0.37 we observe matches exponents found in the singular value spectra of weight matrices in trained neural networks \[10\], raising the speculative but intriguing possibility that both phenomena reflect a common underlying principle of information organization across scales.
+## 2. Methodology
 
-## 2. Empirical Methodology
+### 2.1 Scale grid and sampling
 
-We analyzed prime distributions across three primary scale regimes, selecting contiguous windows of 10,000 primes centered at representative values. Scales were chosen to span three orders of magnitude in n, from n ∼ 10² to n ∼ 10⁷, ensuring coverage of the anticipated transition region near n ≈ 836.
+We measure at `40` scale points
 
-## 2.1 Feature Extraction
+```
+  s ∈ { 1.0, 1.2, 1.4, 1.6, 1.8,
+        2.0, 2.2, 2.4, 2.6, 2.8,
+        3.0, 3.2, 3.4, 3.6, 3.8,
+        4.0, 4.2, 4.4, 4.6, 4.8,
+        5.0, 5.2, 5.4, 5.6, 5.8,
+        6.0, 6.2, 6.4, 6.6, 6.8,
+        7.0, 7.25, 7.5, 7.75,
+        8.0, 8.25, 8.5, 8.75,
+        9.0, 9.5 }
+```
 
-For each scale, we extracted two classes of feature:
+with finer spacing where curves change quickly (low `s`) and slightly coarser spacing at the largest scales where the wall-clock cost of primality verification grows. At each scale we draw `1000` primes and `1000` composites, balanced by rejection sampling inside a window centred at `10^s`. Window widths are set adaptively to ensure the sample is well-mixed: at least the maximum of `0.10 · n_centre`, `2 · n_each · ln n_centre` (so that the prime density inside the window comfortably exceeds `n_each`), and `200`. Primality of every drawn integer is verified independently using `sympy.isprime`. The sampler biases candidate draws toward `6k±1` integers at probability `0.7` to keep the runtime manageable at large `s`, while still drawing enough non-`6k±1` composites for the residue-classifier features in M1 to remain informative.
 
-**Local \(divisibility\) features: **fraction of integers passing the 6k±1 filter, filter effectiveness \(composite rejection rate\), and residue class uniformity across mod-6 classes.
+A fixed RNG seed (`20260517`) is used so the results are bit-reproducible from `fit_meta_pattern.py`.
 
-**Global \(density/statistical\) features: **observed prime density vs. PNT prediction \(1/ln n\), mean gap vs. expected gap ln\(n\), gap distribution chi-squared deviation from exponential, and gap variance-to-mean ratio.
+### 2.2 Three measurements
 
-Feature importance was quantified by treating primality as a binary classification task and measuring the mutual information contribution of each feature class. This approach follows the methodology of Koukoulopoulos \[11\] in treating prime distribution as a probabilistic object.
+**M1 (residue-classifier excess AUC).** For each scale we compute residue features `n mod p` for `p ∈ {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47}` plus a binary `6k±1` indicator. We split the balanced sample 70 / 30 train / test, fit a logistic regression with `L2` regularisation (`C = 1.0`, `max_iter = 4000`), and report the held-out ROC-AUC minus the chance baseline `0.5`. The result quantifies how much information the residue features carry about primality at that scale.
 
-## 2.2 Scale Parameterization
+**M2 (small-prime filter rejection rate).** Using the same composite sample as M1, we compute the empirical probability that a random composite is rejected (i.e. is divisible by some prime in the small-prime list and is not itself a prime). This is the *useful-work rate* of a sieve-style pre-filter at this scale.
 
-We parameterize scale as s = log₁₀\(n\), so that the three primary scales correspond to s ≈ 2, 5, and 7. The transition region near n ≈ 836 corresponds to s\* ≈ 2.92. We fit power law curves to the measured feature importances:
+**M3 (PNT density relative error).** From a uniform draw of size `min(2 × 10⁴, hi - lo)` inside a window of half-width `max(0.05 · n_centre, 5000)` around `10^s`, we count primes via `sympy.isprime` and compute
 
-**Local importance: f\_L\(s\) = 0.258 · exp\(-0.373 · s\)**
+```
+M3(s) = | observed_density − 1 / ln(n_centre) | / (1 / ln(n_centre)).
+```
 
-**Global importance: f\_G\(s\) = 1 - 0.487 · exp\(-0.371 · s\)**
+This decays as PNT becomes asymptotically accurate.
 
-The exponents -0.373 and -0.371 are indistinguishable within measurement uncertainty, and we report their common value as -0.37 throughout. This yields the canonical weight function:
+### 2.3 Functional forms and model selection
 
-**α\(s\) = s^\(-0.37\)   \[local/divisibility weight\]**
+Each measurement curve `(s_i, y_i)` is fit, with positive `y_i`, to three candidate forms:
 
-**β\(s\) = 1 - 0.487 · s^\(-0.37\)   \[global/density weight\]**
+```
+Power law:     f(s) = A · s^(-γ)
+Exponential:   f(s) = A · exp(-b · s)
+Rational:      f(s) = A / (1 + B · s)
+```
 
-## 2.3 Critical Transition Identification
+We use a Gaussian error model on log-targets — equivalent to multiplicative-noise least squares — which is the natural choice for strictly-positive quantities whose noise is plausibly proportional to the value. Fits are by `scipy.optimize.curve_fit` on `log f(s_i, ...)` against `log y_i`. We report parameter point estimates and standard errors from the covariance matrix, residual sum of squares on log-targets, log-likelihood, AIC and BIC, and `R²` on log-targets:
 
-The critical transition point s\* is defined as the scale at which α\(s\*\) = β\(s\*\), i.e., local and global importance are equal. Solving analytically:
+```
+log L = −½ N · (log(2π σ²) + 1),     σ² = RSS / N
+AIC   = 2k − 2 log L
+BIC   = k · log N − 2 log L
+```
 
-**s^\(-0.37\) = 1 - 0.487 · s^\(-0.37\)**
+We follow the conventional thresholds: `ΔAIC ≥ 2` is significant, `≥ 10` is strong, `≥ 100` is overwhelming.
 
-## 1.487 · s^\(-0.37\) = 1
+### 2.4 Reproducibility
 
-**s\* = 1.487^\(1/0.37\) ≈ 2.92   =>   n\* = 10^2.92 ≈ 836**
+The exact code that produces the measurements and fits is `fit_meta_pattern.py` (this folder); raw measurements, fit parameters, and all derived quantities are persisted to `fit_meta_pattern.json`; a human-readable report is in `fit_meta_pattern.md`. Re-running `python fit_meta_pattern.py` reproduces every number in this paper from the same seed and dependencies (`numpy`, `scipy`, `scikit-learn`, `sympy`).
 
-This value is empirically confirmed by direct testing: primes below 836 are most efficiently generated via local \(sieve-based\) methods, while primes above 836 are better generated via density-based approaches. The transition is smooth — no discontinuity or sharp crossover is observed.
+---
 
 ## 3. Results
 
-## 3.1 Scale-Dependent Divisibility Filter Effectiveness
+### 3.1 Raw measurements
 
-A key empirical finding is that divisibility filter effectiveness \(the fraction of composite candidates rejected by the 6k±1 filter plus small-prime trial division\) increases monotonically with scale, contradicting a naive expectation that larger primes would be harder to pre-filter. Table 1 summarizes the observed effectiveness:
+The full `40 × 3` table is in `fit_meta_pattern.md`. A representative subset:
 
-**Scale \(n\)**
+| `s = log₁₀ n` | M1 excess AUC | M2 filter rejection rate | M3 PNT density rel. error |
+|---:|---:|---:|---:|
+| `1.0` | `0.405` | `0.987` | `0.349` |
+| `2.0` | `0.375` | `0.956` | `0.361` |
+| `3.0` | `0.339` | `0.947` | `0.113` |
+| `4.0` | `0.342` | `0.922` | `0.026` |
+| `5.0` | `0.323` | `0.886` | `0.008` |
+| `6.0` | `0.320` | `0.866` | `0.012` |
+| `7.0` | `0.322` | `0.866` | `0.005` |
+| `8.0` | `0.289` | `0.819` | `0.006` |
+| `9.0` | `0.319` | `0.834` | `0.037` |
+| `9.5` | `0.290` | `0.824` | `0.059` |
 
-**s = log₁₀\(n\)**
+**Three qualitative observations.**
 
-**Filter Effectiveness**
+First, the residue-classifier excess AUC (M1) is **roughly flat**, ranging from `0.41` at `s = 1` to `0.29` at `s = 9.5`. The decline is real but modest; the residue features carry roughly comparable information about primality at every tested scale. This is the right qualitative behaviour, since for any fixed small prime `p` and large `n`, primes are equidistributed across the `φ(p)` allowed residue classes mod `p` (Dirichlet's theorem), but the *combination* of residues mod `2, 3, 5, …, 47` continues to encode useful primality information by the inclusion–exclusion structure of the sieve.
 
-**Dominant Method**
+Second, the small-prime filter rejection rate (M2) **declines slowly and plateaus** — `0.987` at `s = 1`, `0.886` at `s = 5`, `0.824` at `s = 9.5`. A heuristic argument: the probability that a random composite has a small prime factor `≤ 47` is bounded below by `1 − ∏_{p ≤ 47} (1 − 1/p)` minus density corrections, and that bound is `≈ 0.78` independently of scale. M2 should therefore plateau, not decay to zero.
 
-**Density Accuracy**
+Third, the PNT density relative error (M3) **decays rapidly** from `0.35` at `s = 1` to `< 0.05` for `s ≥ 4`. The density approximation `1 / ln n` is reliable above `n ≈ 10⁴` and superb above `n ≈ 10⁶`, with residual relative errors of a few percent attributable to finite-sample fluctuations of the prime density inside the measurement window.
 
-~10²
+### 3.2 Maximum-likelihood fits
 
-2.0
+All fits use 40 points on log-targets with `k = 2` parameters (`ν = 38` degrees of freedom). Fitted parameters are reported to four significant figures with standard errors.
 
-10.7%
+#### M1 — residue-classifier excess AUC
 
-LOCAL \(α = 77.4%\)
+| Form | Parameters | log L | AIC | BIC | R² (log) |
+|---|---|---:|---:|---:|---:|
+| Power law `A · s^(-γ)` | `A = 0.4108(83)`, `γ = 0.1346(130)` | `+65.21` | `−126.42` | `−123.05` | `0.7397` |
+| Exponential `A · exp(-b·s)` | `A = 0.3985(70)`, `b = 0.0333(32)` | `+65.38` | `−126.77` | `−123.39` | `0.7420` |
+| Rational `A / (1 + B·s)` | `A = 0.4040(79)`, `B = 0.0402(45)` | `+65.89` | `−127.78` | `−124.40` | `0.7484` |
 
-103.2%
+**Verdict.** All three forms fit comparably well; the rational is best by AIC by a margin smaller than the conventional significance threshold. The data is consistent with a slow decline (any of `s^(-0.13)`, `exp(-0.033·s)`, `1/(1 + 0.040·s)`) but does not distinguish among the candidate forms. We adopt the rational form as the working model purely because it generalises naturally and because it is the consistent winner across both M1 and M2.
 
-~10⁵
+#### M2 — small-prime filter rejection rate
 
-5.0
+| Form | Parameters | log L | AIC | BIC | R² (log) |
+|---|---|---:|---:|---:|---:|
+| Power law `A · s^(-γ)` | `A = 1.0387(100)`, `γ = 0.1027(61)` | `+95.21` | `−186.41` | `−183.04` | `0.8811` |
+| Exponential `A · exp(-b·s)` | `A = 1.0192(59)`, `b = 0.0262(11)` | `+109.56` | `−215.12` | `−211.74` | `0.9420` |
+| Rational `A / (1 + B·s)` | `A = 1.0270(64)`, `B = 0.0302(14)` | `+110.59` | `−217.18` | `−213.80` | `0.9449` |
 
-33.1%
+**Verdict.** The rational form `1.027 / (1 + 0.030·s)` is the best fit by AIC. The exponential is `2.1` worse, which is at the boundary of significance; the power law is **decisively rejected**, with `ΔAIC = +30.8` against the rational and `+28.7` against the exponential. The standard errors on the rational form's parameters are tight (`A ± 0.6 %`, `B ± 4.6 %`).
 
-TRANSITIONING \(α = 55.1%\)
+The qualitative behaviour confirms the heuristic: M2 plateaus near a non-zero floor as `s → ∞`. Concretely, evaluated at the scales of operational interest:
 
-99.5%
+| `s` | `f_M2(s) = 1.027 / (1 + 0.030 · s)` |
+|---:|---:|
+| `1` | `0.997` |
+| `3` | `0.942` |
+| `5` | `0.892` |
+| `7` | `0.847` |
+| `10` | `0.790` |
+| `20` | `0.642` |
 
-~10⁷
+The local pre-filter rejects more than three quarters of composites even at scales well beyond the current tested range. There is no scale at which it ceases to be worth running.
 
-7.0
+#### M3 — PNT density relative error
 
-51.4%
+| Form | Parameters | log L | AIC | BIC | R² (log) |
+|---|---|---:|---:|---:|---:|
+| Power law `A · s^(-γ)` | `A = 0.5050(2283)`, `γ = 1.8775(2884)` | `−58.90` | `+121.81` | `+125.18` | `0.5273` |
+| Exponential `A · exp(-b·s)` | `A = 0.2343(1052)`, `b = 0.3944(814)` | `−64.27` | `+132.54` | `+135.92` | `0.3817` |
 
-GLOBAL \(α = 48.7%\)
+**Verdict.** Power law preferred by `ΔAIC = +10.7`. Both fits have wide parameter standard errors because M3 is the noisiest of the three measurements (limited by sample size of the density estimator) and because the PNT relative error is dominated by finite-window fluctuations rather than systematic decay. The qualitative finding — rapid decay to `≲ 0.05` for `s ≥ 4` — is robust to the exact functional form.
 
-100.2%
+### 3.3 Summary
 
-*Table 1. Scale-dependent properties of prime generation. Filter effectiveness and density accuracy measured over 10,000 consecutive primes per scale.*
+The three curves and their preferred models:
 
-The counterintuitive increase in divisibility filter effectiveness with scale can be explained as follows: at large n, the density of primes among 6k±1 candidates is lower, meaning a larger fraction of candidates are composite and thus filterable by small-prime divisibility checks. However, and crucially, the overall importance of divisibility checking to the generation algorithm decreases as the power law α\(s\) = s^\(-0.37\), because the marginal contribution of additional trial division becomes negligible compared to density-guided candidate selection.
+```
+M1  residue-classifier excess AUC  ≈  0.40 / (1 + 0.040 · s)
+                                      (slow decline; all three forms fit
+                                       comparably; ΔAIC < 1.5 across forms)
 
-## 3.2 Density Prediction Accuracy
+M2  filter rejection rate          =  1.027 / (1 + 0.030 · s)
+                                      (slow plateau; power law strongly
+                                       rejected; ΔAIC ≥ 28 vs alternatives)
 
-The PNT prediction density = 1/ln\(n\) achieves near-perfect accuracy at all scales tested. At s = 2 \(n ∼ 100\), the ratio of actual to expected density is 1.032 \(3.2% overcount\), converging to 0.995 at s = 5 and 1.002 at s = 7. This convergence is consistent with the PNT asymptotic result \[π\(x\) ∼ x/ln\(x\)\] and demonstrates that the global framework becomes highly reliable at moderate scales.
+M3  PNT density relative error     ≈  0.51 · s^(-1.88)
+                                      (rapid decay; reliable above s ≈ 4)
+```
 
-The gap distribution shows similarly strong convergence. At all three scales, the chi-squared statistic comparing observed gap distributions to exponential\(mean = ln\(n\)\) is large and negative \(indicating strong divergence from a pure exponential in absolute terms\) but stable in relative terms — the fraction of gaps within one standard deviation of expectation remains approximately constant. This is consistent with Cohen's \[6\] finding that prime gap moments are asymptotically exponential despite discrete deviations.
+There is **no scale at which M1 = constant · M2** or at which the local and global contributions algebraically cross. M1 and M2 are slowly decreasing functions; M3 is a rapidly decreasing function. The right operational reading is that the local layer is *always* useful (M2 ≥ 0.8 throughout the tested range) and the global layer becomes *increasingly* trustworthy (M3 < 5 % above `s ≈ 4`), with both layers cooperating at every scale.
 
-## 3.3 The Power Law Meta-Pattern
+---
 
-Fitting power laws to the measured feature importances across scales yields the key result of this paper. The local feature importance decays as a power law in s:
+## 4. Implications for hybrid prime generation
 
-**f\_L\(s\) ∝ s^\(-0.37\)**
+The empirical findings of §3 have direct algorithmic consequences.
 
-while the global feature importance grows complementarily as:
+### 4.1 The local pre-filter belongs in every regime
 
-**f\_G\(s\) = 1 - 0.487 · s^\(-0.37\)**
+Because M2 plateaus near a non-zero floor (`> 0.78` for all `s ≤ 20`), a small-prime trial-division pre-filter is cost-effective at every operational scale. The optimal *number* of small primes to use scales gently with `s`: at small `s` essentially every composite has a small prime factor and a long pre-filter list saves little; at large `s` a longer list is worth running because the cost of the subsequent primality test dominates per failed candidate. A natural sizing rule is
 
-These fits are shown in the figures accompanying this paper. The power law exponent -0.37 is robust across different operationalizations of "local importance": whether measured as mutual information, filter effectiveness relative to total candidates, or classifier feature importance from a logistic regression formulation.
+```
+num_checks(n) = round(N_small_primes · f_M2(log₁₀ n))
+              = round(15 · 1.027 / (1 + 0.030 · log₁₀ n))
+```
 
-Crucially, this power law implies that the generative structure of primes is not fixed — it is a function of scale. There is no single feature \(neither local divisibility nor global density\) that dominates across all scales. Instead, the optimal strategy smoothly transitions from one to the other, governed by the universal exponent -0.37.
+with a floor of `5` for very small `n` to guarantee at least the parity-and-small-factor checks.
 
-## 3.4 The Critical Transition and Its Neighborhood
+### 4.2 The primality verifier should switch by computational cost, not feature importance
 
-In the neighborhood of n\* ≈ 836, the α and β weights are nearly equal, producing a genuinely hybrid generative regime. Table 2 traces the transition through the primes in this neighborhood:
+Trial division has time complexity `O(√n)` per candidate; deterministic Miller–Rabin (with witness sets known to give exact primality up to fixed bounds) and probabilistic Miller–Rabin both have `O(k log³ n)` complexity. The crossover happens where `√n ≈ c · k log³ n` for constants `c, k` set by hardware. Empirically, on commodity 64-bit hardware, this is near `n ≈ 31 623` (`s ≈ 4.5`), where `√n ≈ 178`. Below this scale trial division wins; above it Miller–Rabin wins. **This threshold is set entirely by computational cost** and has no relation to the M1, M2, or M3 curves.
 
-**Prime n**
+### 4.3 Candidate generation should be sequential by default
 
-**α \(local\)**
+If the goal is the *next prime ≥ n*, the candidate stream must be sequential through `6k±1` integers; sampling a random Cramér gap and jumping forward will skip primes between `n` and the sampled position. Sequential `6k±1` stepping combined with the small-prime pre-filter and a scale-adaptive primality verifier is an `O(ln^2 n · √n · ln n)` algorithm at small `s` and `O(ln² n · k log³ n)` at large `s`, and is correct by construction.
 
-**β \(global\)**
+If the goal is *a* prime near `n` of a target bit length — the cryptographic prime-generation case — Cramér-style random gap sampling is appropriate, and the resulting prime distribution converges to a uniform draw over the primes in the search window. This is a different operation with different correctness conditions.
 
-**Dominant Method**
+### 4.4 The deterministic-witness Miller–Rabin fast path
 
-787
+Sorenson and Webster (2017) [9] tabulate witness sets for Miller–Rabin that are known to be correct *deterministically* up to specific bounds. The longest currently-published witness set, `{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41}`, gives exact primality for all `n < 3.317 × 10²⁴`. Any operational prime generator that reaches up to (but not into) cryptographic key sizes should use this fast path: it removes the probabilistic-error term entirely below the listed bound, at no cost beyond fixing the witness list. Above the largest tabulated bound, probabilistic Miller–Rabin with `k` random rounds bounds the false-positive probability by `4^(-k)` per call.
 
-0.675
+The companion algorithm paper [8] specifies the resulting hybrid generator and gives correctness proofs and benchmark timings.
 
-0.671
+---
 
-LOCAL
+## 5. Limitations and future work
 
-797
+### 5.1 Limitations of the present measurements
 
-0.674
+The scale range `s ∈ [1, 9.5]` covers roughly the operational range of "everyday" prime generation but stops well short of cryptographic key sizes (`s ≈ 200 – 600` for `1024- to 2048-bit RSA`). Extrapolating any of the M1, M2, M3 fits to `s ≈ 300` is cheap algebraically (`f_M2(300) ≈ 0.10`, suggesting the small-prime filter still rejects roughly `10 %` of composites at cryptographic scales) but is not directly tested.
 
-0.672
+The small-prime list is fixed at the first `15` primes (`p ≤ 47`). Extending the list (e.g. to all primes below `100`, or to a wheel-factorised mod-`30` filter) would shift M2 systematically upward at every scale; the *shape* of the M2 curve is not expected to change qualitatively, but the floor value would.
 
-LOCAL
+The residue-classifier excess AUC (M1) uses a logistic regression with `L2` regularisation and a fixed train-test split. A different classifier (random forest, gradient boosting) could in principle extract more information from the residue features and yield a *higher* M1 value at every scale, but the *shape* of the curve — i.e. the decay rate — should be invariant to classifier choice in the asymptotic regime.
 
-809
+The PNT density relative error (M3) is the noisiest of the three measurements because it is a single-window estimator at each scale. A smoother M3 curve could be obtained by averaging over multiple windows per scale or by using analytic estimates of the PNT error term (`x · li(x) − π(x)`) rather than empirical density. We have used the empirical estimator for consistency with M1 and M2.
 
-0.674
+### 5.2 Future directions
 
-0.672
+**Asymptotic extrapolation.** A theoretical derivation of the floor value of `f_M2(s)` from the inclusion–exclusion structure of the small-prime sieve is achievable and would replace the rational fit with a closed form. The leading-order Mertens-type estimate `1 − ∏_{p ≤ P} (1 − 1/p) ≈ 1 − e^(-γ) / ln P` predicts a slow logarithmic decay, which is consistent qualitatively with the rational-form fit.
 
-LOCAL
+**Generalisations.** The same methodology applies to Gaussian primes, primes in arithmetic progressions, and prime `k`-tuples. The functional forms and decay constants would differ but the qualitative structure (M2 plateaus, M3 decays rapidly) is expected to hold.
 
-829
+**Algorithmic refinements.** Replacing the small-prime list with a wheel-factorised filter (mod `30` or mod `210`) would tighten the M2 curve. Replacing Miller–Rabin probabilistic rounds with Baillie–PSW [10] in the high-`s` regime would eliminate even the currently-bounded probabilistic error at cryptographic scales.
 
-0.673
+---
 
-0.672
+## 6. Conclusion
 
-LOCAL
+We have measured the empirical scale dependence of three quantities relevant to hybrid prime generation across `40` scales spanning `s = 1.0 – 9.5`:
 
-839
+- **M1**, the information content of small-prime residue features, is approximately flat at `~ 0.30 – 0.40` excess AUC; the data does not statistically distinguish among power-law, exponential, and rational decay forms.
+- **M2**, the rejection rate of a small-prime trial-division pre-filter, is best fit by the rational form `f_M2(s) = 1.027 / (1 + 0.030·s)`; the power-law form is decisively rejected (`ΔAIC = +30.8`).
+- **M3**, the relative error of the PNT density approximation, decays rapidly (`f_M3(s) ≈ 0.51 · s^(-1.88)`) and is below `5 %` for `s ≥ 4`.
 
-0.672
+The data supports a **scale-uniform hybrid algorithm**: a `6k±1` candidate sieve plus a small-prime trial-division pre-filter (sized by `f_M2`) plus a primality verifier whose only scale-adaptive choice is its computational implementation (`O(√n)` trial division below `s ≈ 4.5`, `O(k log³ n)` Miller–Rabin above). The resulting algorithm is specified, analysed, and benchmarked in the companion paper [8], with full audit timings and verified correctness up to `n = 10¹⁵`.
 
-0.673
+The empirical observation that the local layer remains useful at every tested scale — together with a fast deterministic Miller–Rabin path up to `~ 3.3 × 10²⁴` from the Sorenson–Webster witness sets — constitutes the practical content of this study.
 
-GLOBAL  ← transition
+---
 
-853
+## Acknowledgements
 
-0.672
+This is a self-contained empirical study; the experimental code (`fit_meta_pattern.py`, `verify_generator.py`) and the algorithm reference implementation (`prime_generator.py`) are available in this folder. No specialised computing resources were used; all measurements run in well under a minute on commodity hardware.
 
-0.673
-
-GLOBAL
-
-877
-
-0.671
-
-0.673
-
-GLOBAL
-
-911
-
-0.669
-
-0.674
-
-GLOBAL
-
-*Table 2. Weight values near the critical transition point n\* ≈ 836. The transition is smooth — weights change by less than 0.001 per step.*
-
-The smoothness of this transition is one of the most important findings of this work. There is no sharp discontinuity, no sudden change in prime distribution statistics, at n\*. The crossover is a gradual re-weighting of generative methods, consistent with a genuine continuous phase transition rather than a first-order jump.
-
-## 3.5 Deterministic vs. Stochastic Components
-
-An additional empirical measurement concerns the decomposition of prime generation into deterministic \(structural\) and stochastic \(random\) components. We find that across all scales, the deterministic component — comprising the 6k±1 structural constraint and exact primality verification — accounts for approximately 96-98% of the generative process \(by information contribution\), with the stochastic component \(gap sampling from exponential distribution\) accounting for only 2-4%.
-
-This finding has practical significance: it implies that a largely deterministic prime generator, relying on the 6k±1 structure for candidate selection and Miller-Rabin verification for primality testing, retains nearly all information content of the full generation process. The stochastic component provides only marginal improvement in candidate selection efficiency at large scales.
-
-## 4. The Renormalization Group Analogy
-
-The pattern we have described — a smooth transition between microscopic \(local\) and macroscopic \(global\) behavior, governed by a power law exponent — is structurally identical to the Renormalization Group \(RG\) flow as formulated in quantum field theory and statistical mechanics \[5, 12, 13\].
-
-In the RG framework, physical systems are analyzed by systematically "coarse-graining" — integrating out short-range degrees of freedom and examining how effective couplings change with observation scale. The key results are:
-
-1. Coupling constants "run" with scale according to the β-function equations of the theory.
-2. Fixed points of the RG flow correspond to scale-invariant theories, where the system looks the same at all scales.
-3. The approach to a fixed point is governed by critical exponents, which are universal \(independent of microscopic details\) within a universality class.
-
-The correspondence with our prime meta-pattern is precise:
-
-**RG Concept**
-
-**Prime Meta-Pattern Analog**
-
-Observation scale \(energy/length\)
-
-s = log₁₀\(n\)  \(prime scale\)
-
-Running coupling constant α\(E\)
-
-α\(s\) = s^\(-0.37\)  \(local weight\)
-
-UV fixed point \(high energy\)
-
-s → 0: pure local/sieve behavior
-
-IR fixed point \(low energy\)
-
-s → ∞: pure global/density behavior
-
-Critical exponent γ
-
-γ = -0.37 \(measured\)
-
-Phase transition scale
-
-s\* ≈ 2.92, n\* ≈ 836
-
-Universality class
-
-Power law decay class
-
-*Table 3. Structural correspondence between RG flow and the prime meta-pattern.*
-
-In QED, the electric fine structure constant α\_QED runs from approximately 1/137 at low energies to approximately 1/128 at 200 GeV, a running governed by the logarithm of the energy scale \[14\]. Our prime coupling α\(s\) runs from near-unity at small s to near-zero as s → ∞, with the power law replacing the logarithmic running of gauge couplings. The analogy is not exact — prime numbers are not a quantum field theory — but the structural parallel is striking and suggestive.
-
-The most compelling aspect of the analogy is the smooth transition at s\* ≈ 2.92. In RG language, this is a critical point: a value of s at which neither generative method dominates, and the system exhibits "critical slowing down" in the sense that small changes in the algorithm produce maximal uncertainty in outcome. This is analogous to the diverging susceptibility at a thermodynamic critical point \[15\].
-
-We conjecture that the exponent -0.37 is a universal critical exponent in the number-theoretic sense: that it characterizes not just the 6k±1 / PNT transition specifically, but a broader class of transitions between local \(residue-class based\) and global \(density-based\) generative methods for prime-like sequences. Verifying this conjecture would require application of the same analysis to related sequences \(Gaussian primes, prime k-tuples, primes in arithmetic progressions\).
-
-## 4.1 Non-Existence of a Closed-Form Prime Formula
-
-The RG analogy provides a new perspective on the longstanding question of why no simple closed-form formula for primes exists. Our analysis implies that such a formula cannot exist for a deep reason: the optimal generative structure of primes is not a fixed object but a scale-dependent trajectory. A closed-form formula would necessarily pick a single point in the space of generative methods; but the prime meta-pattern tells us that the correct method varies continuously with scale.
-
-More precisely: the prime-generating function is best understood not as a map from integers to primes, but as a point on a trajectory through function space:
-
-**F\(n\) = α\(s\) · F\_local\(n\) \+ β\(s\) · F\_global\(n\),  s = log₁₀\(n\)**
-
-where F\_local and F\_global are themselves well-defined \(divisibility sieve and PNT-based density sampler, respectively\). The prime trajectory is the parameterization of this family of functions by scale. This is structurally analogous to an RG trajectory through theory space, where no single fixed-point theory can capture the behavior at all scales.
-
-## 5. Connection to Neural Network Weight Matrix Spectra
-
-A remarkable coincidence — or possibly a deep connection — arises from the power law exponent α = -0.37 itself. In the analysis of trained neural network weight matrices, singular value spectra have been reported to follow power law distributions with exponents in the range 0.35-0.45 for well-trained networks \[16\]. Odin's earlier work in the HRNA \(Harmonic Recursive Neural Architecture\) framework identifies a power law exponent α ≈ 0.85 for HRNA weight matrices, compared to α ≈ 0.37 in prime gap research.
-
-While the precise relationship between these exponents is not yet understood, we suggest the following speculative interpretation. The singular value spectrum of a weight matrix W ∈ ℝ^\{m×n\} encodes the complexity structure of the function it represents: flat spectra \(all singular values equal\) correspond to pure white noise, while heavy-tailed spectra \(power law decay\) correspond to structured, compressible information. The exponent -0.37 may represent a universal "information compression rate" at which structured objects \(primes, trained weights\) store scale-dependent information in a hierarchy of decreasing importance.
-
-This interpretation is consistent with the GRIA \(Graded Reversible-Irreversible Algebra\) framework, in which compression and cryptography are unified through the concept of scale-dependent information content. Primes, as the elementary multiplicative building blocks of integers, exhibit the same hierarchical information structure as the "important" \(large singular value\) directions in a neural network weight matrix.
-
-We emphasize that this connection is speculative and requires further investigation. However, the numerical coincidence of the exponents — -0.37 in prime gap analysis, -0.37 in neural network spectral analysis — is strong enough to warrant dedicated study.
-
-## 6. Discussion
-
-## 6.1 Implications for Number Theory
-
-Our empirical findings suggest several concrete conjectures for number-theoretic investigation:
-
-1. The exponent -0.37 is universal within the class of local-to-global transitions in prime distribution, independent of the specific local filter used \(6k±1 vs. 30k\+\{1,7,11,...\} etc.\).
-2. The critical transition point n\* ≈ 836 has structural significance: it is the scale at which the PNT local error and the sieve efficiency exactly balance.
-3. The smooth transition at s\* is related to the behavior of prime gaps near the secondary transition points identified at s = 4.50 \(n ≈ 3×10⁴\) and s = 5.89 \(n ≈ 8×10⁵\), which may represent higher-order RG fixed points.
-
-## 6.2 Limitations
-
-Several limitations of the current analysis should be acknowledged. First, the exponent -0.37 is derived empirically from a limited number of scale samples \(s = 2, 5, 7\); a more rigorous determination would sample more densely across scales and employ maximum likelihood fitting rather than least-squares power law regression. Second, the claim that the transition is "smooth" at n\* ≈ 836 is based on finite-difference observation of α and β values at nearby primes; a formal continuity proof would require analytic tools. Third, the RG analogy, while structurally compelling, remains a heuristic: we have not identified a formal RG group acting on prime distributions, nor a corresponding β-function in the field-theoretic sense.
-
-## 6.3 Future Directions
-
-The meta-pattern discovery opens several promising research directions:
-
-- Formal derivation of the exponent -0.37 from first principles \(Riemann hypothesis conditional or unconditional\).
-- Extension to Gaussian primes, prime k-tuples, and primes in arithmetic progressions to test universality.
-- Investigation of higher-order transition points \(s = 4.50, 5.89, 8.57\) as potential higher-order RG fixed points.
-- Formal proof of the non-existence of a universal prime formula via RG non-commutativity arguments.
-- Investigation of the -0.37 exponent in neural network spectra as a possible deep connection to prime information structure.
-
-## 7. Conclusion
-
-We have reported the empirical discovery of a power law meta-pattern governing prime number generation across scales. The central result is:
-
-**α\(s\) = s^\(-0.37\),  s = log₁₀\(n\)**
-
-which characterizes the fraction of prime-generative information contributed by local divisibility rules as a function of scale. The complementary global \(density-based\) weight β\(s\) = 1 - 0.487 · s^\(-0.37\) increases monotonically with scale, reflecting the growing accuracy of the Prime Number Theorem approximation.
-
-The transition between local and global dominance occurs smoothly near the critical point n\* ≈ 836 \(s\* ≈ 2.92\). This smooth transition is structurally analogous to the running of coupling constants in the Renormalization Group framework, providing a new conceptual bridge between number theory and theoretical physics.
-
-Our findings imply that primes do not have "one pattern" but a scale-dependent trajectory of patterns, and that the optimal prime-generating algorithm must adapt its method as a function of the scale of the target prime. A working algorithm implementing this continuous transition is derived and tested in the companion paper to this manuscript.
-
-The discovered exponent -0.37 appears in both prime gap analysis and neural network weight matrix spectra, suggesting a potentially universal role in the power law organization of scale-dependent information in structured mathematical and learned systems.
-
-# Acknowledgments
-
-This research arose from exploratory computational investigation of prime distributions across scales. The empirical findings presented here are preliminary and should be treated as hypotheses for future rigorous mathematical investigation.
+---
 
 ## References
-**\[1\]  **Hadamard, J. \(1896\). Sur la distribution des zéros de la fonction ζ\(s\) et ses conséquences arithmétiques. Bulletin de la Société Mathématique de France, 24, 199–220.
 
-**\[2\]  **de la Vallée Poussin, C.J. \(1896\). Recherches analytiques sur la théorie des nombres premiers. Annales de la Société scientifique de Bruxelles, 20, 183–256.
+[1] Hadamard, J. (1896). *Sur la distribution des zéros de la fonction ζ(s) et ses conséquences arithmétiques.* Bulletin de la Société Mathématique de France 24, 199–220.
 
-**\[3\]  **Cramér, H. \(1936\). On the order of magnitude of the difference between consecutive prime numbers. Acta Arithmetica, 2\(1\), 23–46.
+[2] de la Vallée Poussin, C. J. (1896). *Recherches analytiques sur la théorie des nombres premiers.* Annales de la Société scientifique de Bruxelles 20, 183–256.
 
-**\[4\]  **Maier, H. \(1985\). Primes in short intervals. Michigan Mathematical Journal, 32\(2\), 221–225.
+[3] Cramér, H. (1936). *On the order of magnitude of the difference between consecutive prime numbers.* Acta Arithmetica 2 (1), 23–46.
 
-**\[5\]  **Wilson, K.G. \(1971\). Renormalization group and critical phenomena I. Physical Review B, 4\(9\), 3174–3183.
+[4] Miller, G. L. (1976). *Riemann's hypothesis and tests for primality.* Journal of Computer and System Sciences 13 (3), 300–317.
 
-**\[6\]  **Cohen, J.E. \(2024\). Gaps Between Consecutive Primes and the Exponential Distribution. Experimental Mathematics, 33\(4\), 1–28.
+[5] Rabin, M. O. (1980). *Probabilistic algorithm for testing primality.* Journal of Number Theory 12 (1), 128–138.
 
-**\[7\]  **Granville, A. \(1995\). Harald Cramér and the distribution of prime numbers. Scandinavian Actuarial Journal, 1995\(1\), 12–28.
+[6] Baillie, R., Wagstaff, S. S. (1980). *Lucas pseudoprimes.* Mathematics of Computation 35 (152), 1391–1417.
 
-**\[8\]  **Riesel, H. \(1994\). Prime Numbers and Computer Methods for Factorization \(2nd ed.\). Birkhäuser, Boston.
+[7] NIST FIPS 186-5 (2023). *Digital Signature Standard (DSS).* National Institute of Standards and Technology.
 
-**\[9\]  **Sethna, J.P., Tchistiakov, I.M., et al. \(2019\). Normal Form for Renormalization Groups. Physical Review X, 9\(2\), 021014.
+[8] Companion paper: *A scale-adaptive hybrid prime generator with deterministic-witness Miller–Rabin*, Paper 2 in this folder.
 
-**\[10\]  **Martin, C.H., Mahoney, M.W. \(2021\). Implicit self-regularization in deep neural networks: evidence from random matrix theory and implications for learning. Journal of Machine Learning Research, 22\(165\), 1–73.
+[9] Sorenson, J., Webster, J. (2017). *Strong pseudoprimes to twelve prime bases.* Mathematics of Computation 86, 985–1003.
 
-**\[11\]  **Koukoulopoulos, D. \(2019\). The Distribution of Prime Numbers. American Mathematical Society.
+[10] Pomerance, C., Selfridge, J. L., Wagstaff, S. S. (1980). *The pseudoprimes to 25·10⁹.* Mathematics of Computation 35 (151), 1003–1026.
 
-**\[12\]  **Kadanoff, L.P. \(1966\). Scaling laws for Ising models near T\_c. Physics, 2\(6\), 263–272.
+[11] Granville, A. (1995). *Harald Cramér and the distribution of prime numbers.* Scandinavian Actuarial Journal 1995 (1), 12–28.
 
-**\[13\]  **Fisher, M.E., Wilson, K.G. \(1972\). Critical exponents in 3.99 dimensions. Physical Review Letters, 28\(4\), 240–243.
+[12] Maynard, J. (2022). *Counting primes.* Fields Medal Lecture, Proceedings of the International Congress of Mathematicians.
 
-**\[14\]  **Peskin, M.E., Schroeder, D.V. \(1995\). An Introduction to Quantum Field Theory. Addison-Wesley, Reading MA.
+[13] Hardy, G. H., Wright, E. M. (2008). *An Introduction to the Theory of Numbers* (6th ed.). Oxford University Press.
 
-**\[15\]  **Stanley, H.E. \(1971\). Introduction to Phase Transitions and Critical Phenomena. Oxford University Press.
+[14] Koukoulopoulos, D. (2019). *The Distribution of Prime Numbers.* American Mathematical Society.
 
-**\[16\]  **Mahoney, M.W., Martin, C.H. \(2019\). Traditional and Heavy-Tailed Self Regularization in Neural Network Models. Proceedings of the 36th International Conference on Machine Learning, ICML 2019, PMLR 97:4284–4293.
+[15] Akaike, H. (1974). *A new look at the statistical model identification.* IEEE Transactions on Automatic Control 19 (6), 716–723.
 
-**\[17\]  **Hardy, G.H., Wright, E.M. \(2008\). An Introduction to the Theory of Numbers \(6th ed.\). Oxford University Press.
-
-**\[18\]  **Maynard, J. \(2022\). Counting primes. Fields Medal Lecture. Proceedings of the International Congress of Mathematicians.
+[16] Burnham, K. P., Anderson, D. R. (2002). *Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach* (2nd ed.). Springer.

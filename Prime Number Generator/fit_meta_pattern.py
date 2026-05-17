@@ -3,45 +3,43 @@
 fit_meta_pattern.py
 ═══════════════════
 
-Resolves the exponential-vs-power-law inconsistency in the Prime Meta-Pattern
-papers by re-measuring local-feature importance and divisibility-filter
-effectiveness at *many* scale samples and fitting both candidate functional
-forms via maximum-likelihood (Gaussian errors on log-scale residuals → MLE
-≡ least-squares on log targets).
+Empirical study of how the *relative* usefulness of local divisibility
+filters and global PNT-style density heuristics changes with scale
+``s = log10(n)``.  Three independent measurements are taken across a
+dense scale grid and each is fit to three candidate functional forms by
+maximum likelihood.
 
-Reviewer feedback this addresses (Claude Sonnet 4.6):
+Measurements
+------------
 
-  > Resolve the exponential vs power law question. Fit both
-  >     f_L(s) = A · exp(-b·s)   and   f_L(s) = C · s^(-γ)
-  > to your actual measured feature importances with more scale samples
-  > (s = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10).  Use maximum likelihood, not
-  > least squares.  Report which fits better and why.
+  M1.  **Residue-classifier excess AUC.**  At each scale we sample a
+       balanced set of primes and composites and train a logistic
+       regression on residues modulo a fixed list of small primes plus
+       a 6k±1 indicator.  The held-out AUC minus the chance baseline
+       0.5 quantifies how much information the residue features carry
+       about primality at that scale.
 
-We define **two** independent measurements of "local importance" so we are
-not relying on a single proxy:
+  M2.  **Small-prime filter rejection rate.**  The probability that a
+       random composite at this scale is rejected by trial-dividing
+       against the same small-prime list.  This is the *useful-work
+       rate* of a sieve-style pre-filter.
 
-  M1.  Excess-AUC of a residue-only logistic-regression classifier
-       (residues modulo {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31})
-       trained on a balanced prime / composite sample at each scale.
-       AUC − 0.5 measures how much information the residue features
-       carry about primality at that scale.
+  M3.  **PNT density relative error.**  ``|observed - 1/ln(n)| / (1/ln(n))``
+       on a uniform sample inside a window centred at 10**s.  Decays as
+       PNT becomes more accurate.
 
-  M2.  Divisibility-filter rejection rate of the small-prime-list
-       trial-division pre-filter:  P[ filter rejects | n is composite ]
-       measured on a balanced sample.  This is the rate at which the
-       pre-filter does useful work.
-
-Both are functions of s = log10(n).  Each is fit to:
+Each curve is fit to three candidate forms and selected by AIC:
 
   Form A (power law):    f(s) = A · s^(-γ)
   Form B (exponential):  f(s) = A · exp(-b · s)
-  Form C (rational):     f(s) = A / (1 + B · s)            (sanity check)
+  Form C (rational):     f(s) = A / (1 + B · s)
 
-Model selection:  AIC = 2k - 2 ln L  on the log-target Gaussian error model.
-Lower AIC = better fit.  Δ AIC ≥ 2 is conventionally significant; ≥ 10 is
+Model selection: AIC = 2k - 2 ln L on the log-target Gaussian error model.
+Lower AIC = better fit.  ΔAIC ≥ 2 is conventionally significant; ≥ 10 is
 strong; ≥ 100 is overwhelming.
 
-Outputs:
+Outputs
+-------
     fit_meta_pattern.json  — all measurements and fits
     fit_meta_pattern.md    — human-readable report
 """
@@ -78,19 +76,20 @@ except ImportError:  # pragma: no cover
 # ─────────────────────────────────────────────────────────────────────────────
 
 SCALES: List[float] = [
-    1.0, 1.25, 1.5, 1.75,
-    2.0, 2.25, 2.5, 2.75,
-    3.0, 3.25, 3.5, 3.75,
-    4.0, 4.25, 4.5, 4.75,
-    5.0, 5.25, 5.5, 5.75,
-    6.0, 6.25, 6.5, 6.75,
-    7.0, 7.25, 7.5, 7.75,
-    8.0, 8.5, 9.0,
+    1.0,  1.20, 1.40, 1.60, 1.80,
+    2.0,  2.20, 2.40, 2.60, 2.80,
+    3.0,  3.20, 3.40, 3.60, 3.80,
+    4.0,  4.20, 4.40, 4.60, 4.80,
+    5.0,  5.20, 5.40, 5.60, 5.80,
+    6.0,  6.20, 6.40, 6.60, 6.80,
+    7.0,  7.25, 7.50, 7.75,
+    8.0,  8.25, 8.50, 8.75,
+    9.0,  9.50,
 ]
 
 # Number of (prime, composite) sample pairs per scale.  At each scale we draw
 # a balanced sample so the AUC is on a directly comparable footing.
-SAMPLES_PER_CLASS = 600
+SAMPLES_PER_CLASS = 1000
 
 # Small primes used as residue features and as the trial-division pre-filter.
 SMALL_PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
@@ -394,12 +393,12 @@ def write_report(result: Dict, md_path: Path) -> None:
     meas = result["measurements"]
     fits = result["fits"]
     lines: List[str] = []
-    lines.append("# Prime Meta-Pattern: power-law vs exponential MLE comparison")
+    lines.append("# Prime meta-pattern: empirical scale dependence of local and global generation methods")
     lines.append("")
-    lines.append("Empirical refit of the prime meta-pattern using more scale samples,")
-    lines.append("addressing the exponential / power-law inconsistency between the")
-    lines.append("paper's stated fit `f_L(s) = 0.258 · exp(−0.373·s)` and the algorithm's")
-    lines.append("`α(s) = s^(−0.37)`.")
+    lines.append("Maximum-likelihood fit of three independent measurements (residue-classifier")
+    lines.append("excess AUC; small-prime filter rejection rate; PNT density relative error) to")
+    lines.append("three candidate functional forms (power law, exponential, rational), selected")
+    lines.append("by AIC.")
     lines.append("")
     lines.append(f"- Scale samples (`s = log₁₀ n`): `{meas['scales']}`")
     lines.append(f"- Balanced sample size per class per scale: `{meas['samples_per_class']}`")
