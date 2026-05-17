@@ -3,6 +3,22 @@
 
 **Research Summary and Algorithm Implementation**
 
+> ## ⚠️ Erratum (2026)
+>
+> The headline claims of this combined research summary — "primes follow a power law `α(s) = s^(-0.37)`", "continuous transition centred at `n ≈ 836`", "the discovered exponent matches neural-network spectral exponents `~0.37`" — **do not survive** a proper 31-scale-sample re-run with maximum-likelihood model selection. See `fit_meta_pattern.md` for the full table and `README.md` for the corrected story. In short:
+>
+> - The original three-point fit (`s ∈ {2, 5, 7}`) is statistically inadequate to distinguish power-law from exponential decay.
+> - With 31 scale points the residue-classifier excess-AUC curve has measured exponent `~ -0.10`, not `-0.37`, and the two functional forms are indistinguishable (`|ΔAIC| < 1`).
+> - The filter rejection rate is **best fit by a rational plateau** `1.050 / (1 + 0.034·s)`, not by any power law (power law is rejected with `ΔAIC = +19.4`).
+> - The "critical transition at `n ≈ 836`" is an algebraic artefact of inserting the bad fit into `1.487·α = 1`. There is no such transition in the corrected data.
+> - The numerical coincidence with neural-network spectral exponents (`~0.37`) does not hold; with the actual measured exponent `~ -0.10`, the matching argument is dropped.
+>
+> Two correctness bugs in the v1 implementation have also been fixed in v2 (`prime_generator.py`): random-gap prime-skipping in the "global-dominated" mode, and `int32` overflow in `miller_rabin` at `n ≥ 2³¹`. The audit (`verify_generator.py`) confirms `10/10` all-prime correctness and `6/6` no-skip correctness up to `n = 10⁶`, with all-prime correctness verified independently up to `n = 10¹²`.
+>
+> **Appropriate framing.** This is empirical, computationally-driven mathematics with a working hybrid prime generator. The right venue is *Experimental Mathematics* or *Integers*, not the *Annals*. The work has no bearing on the Riemann Hypothesis or the Clay Millennium Prize.
+>
+> The original text follows below for the historical record.
+
 ---
 
 ## Executive Summary

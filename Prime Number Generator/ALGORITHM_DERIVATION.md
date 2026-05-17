@@ -1,6 +1,23 @@
 # THE COMPLETE META-PATTERN ALGORITHM
 ## From Power Law Transition to Working Prime Generator
 
+> ## ⚠️ Erratum (2026)
+>
+> The "power law `α(s) = s^(-0.37)`" central to the executive summary, the equations, the critical-transition derivation, and most of the discussion in this document **does not survive** a 31-scale-sample re-run (`fit_meta_pattern.py`, `fit_meta_pattern.md`). The correct empirical fits are:
+>
+> - Residue-classifier excess AUC (M1): `0.391 · s^(-0.104)` (power-law) ≈ `0.382 · exp(-0.026·s)` (exponential), indistinguishable on AIC.
+> - Small-prime filter rejection rate (M2): rational form `1.050 / (1 + 0.034·s)` is best by `ΔAIC = +19.4` over the power law.
+> - The original exponent `-0.37` is **not** measured anywhere in the corrected data; the correct M1 exponent is `~ -0.10`, off by `~3.5×`.
+>
+> The "critical transition at `n* ≈ 836` (`s* ≈ 2.92`)" is an algebraic artefact of substituting the bad exponent and the bad coefficient `0.487` into `α = β`. With the corrected fits there is no such crossover, and the local filter remains useful at every scale tested up to `n = 10⁹`.
+>
+> The algorithm code described below also had two correctness bugs in v1, both fixed in v2 (`prime_generator.py`):
+>
+> 1. `next_prime` skipped primes whenever `α ≤ β` (i.e., at every scale beyond `n ≈ 836`), because it sampled a random `Exponential(ln n)` jump and overshot intermediate primes.
+> 2. `miller_rabin` overflowed `int32` at `n ≥ 2³¹` due to `np.random.randint(2, n-1)`.
+>
+> The companion paper `Paper1_PrimeMetaPattern_Theory.md` and `Paper2_MetaPattern_Algorithm.md` both carry full erratum sections at the top. The corrected story lives in `README.md`. This document is preserved unchanged below for the historical record; treat any specific power-law / critical-transition claim as the original conjecture, not as a confirmed result.
+
 ---
 
 ## EXECUTIVE SUMMARY

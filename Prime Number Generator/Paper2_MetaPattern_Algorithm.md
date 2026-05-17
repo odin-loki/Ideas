@@ -2,6 +2,44 @@
 
 *Companion algorithm paper to “A scale-dependent meta-pattern in prime number generation” · 2025*
 
+> ## ⚠️ Erratum and corrections (2026)
+>
+> The original implementation described in this paper (`prime_generator.py`, v1) had **three** problems beyond the functional-form inconsistency in the companion theory paper (Paper 1, see its erratum). The original text below is preserved for the historical record; this section overrides any conflicting claim. The corrected v2 implementation, audit, and refit live in this folder alongside the original sources.
+>
+> **1. Functional form.** This paper uses `α(s) = s^(−0.37)` throughout; the theory paper's §2.2 reports the *exponential* fit `0.258 · exp(−0.373·s)` and asserts equivalence. They are not equivalent — see Paper 1's erratum. The correct fits, from a 31-scale-sample re-run (`fit_meta_pattern.md`):
+>
+> > M1 (residue excess AUC):    `0.391 · s^(−0.104)`     [power law and exponential indistinguishable]
+> >
+> > M2 (filter rejection rate): `1.050 / (1 + 0.034·s)`  [rational form best, power law strongly rejected]
+>
+> The exponent value `−0.37` is **not measured** in the corrected experiment.
+>
+> **2. The "next-prime" semantic was broken at every scale beyond `n ≈ 836`.** In v1, when `α(s) ≤ β(s)` the algorithm sampled a random gap from `Exponential(ln n)` and *jumped past* intermediate primes. The audit (`verify_generator.py`) shows that at `n = 1009`, the v1 generator returned `1031` (true next prime: `1013`), at `n = 100 000` it returned `100 043` (true: `100 003`), and so on at every scale beyond the artefactual `n* ≈ 836`. Every output *was* prime, but the function did not satisfy "smallest prime ≥ `n`" semantics; it satisfied "*a* prime near `n`" semantics.
+>
+> The corrected v2 generator separates these: `next_prime(n)` is now strict (no skipping), unit-tested over 20-prime sweeps from five seed scales, and the random-gap behaviour is exposed as `random_prime_near(n)` for cryptographic uses where any prime of the right size is acceptable. The audit shows `10/10` all-prime correctness and `6/6` no-skipping correctness on every verifiable scale up to `n = 10⁶` (and the algorithm continues to be all-prime correct, verified independently via `sympy.isprime`, up to `n = 10¹²`).
+>
+> **3. `miller_rabin` overflowed at `n ≥ 2³¹`** because the witness draw used `np.random.randint(2, n-1)`, which silently returns `int32`. v1 crashed with `ValueError: high is out of bounds for int32` at `n = 10¹⁰` and above. The corrected v2 uses Python's arbitrary-precision `random.randrange(2, n-1)` and additionally adds a deterministic-witness fast path using the Sorenson–Webster (2017) witness sets, exact for all `n < 3.317 × 10²⁴`.
+>
+> **What survives as the genuine algorithmic content.** A `6k±1` candidate sieve plus a small-prime trial-division pre-filter plus a scale-adaptive primality test (deterministic at small `n`, deterministic-witness Miller–Rabin in the middle, probabilistic Miller–Rabin only at very large `n`) is a clean, fast, single-target prime generator. The `s = 4.5` switch from trial division to Miller–Rabin is set by computational cost (`O(√n) ≈ O(k log³ n)` near `n ≈ 31 623`) and is well-supported. The other "scale-adaptive" knob in the original paper — the `α`-weighted candidate-generation choice — is dropped in v2 because the bad fit was driving it and because it produced incorrect output. The empirical filter-strength scaling (use more small primes at small `n`, fewer at large `n`) survives in a more conservative form: always use at least 5 small primes; scale up to the full list using the corrected M2 weight.
+>
+> **Performance, corrected and re-measured.** Measured on the corrected v2 implementation, deterministic-witness Miller–Rabin path, single-target prime generation:
+>
+> | `start` | `count` | `ms / prime` |
+> |---|---:|---:|
+> | `100`  | 50 | `0.004` |
+> | `10⁴` | 50 | `0.008` |
+> | `10⁶` | 30 | `0.013` |
+> | `10⁸` | 15 | `0.023` |
+> | `10¹⁰` | 10 | `0.027` |
+> | `10¹²` |  6 | `0.071` |
+> | `10¹⁵` |  3 | `0.199` |
+>
+> All outputs are independently verified prime by `sympy.isprime`; outputs are verified equal to `sympy.nextprime(prev)` wherever that's tractable. v1's claimed `0.09 ms / prime` at `n = 10⁸` (Table 1) is now superseded by the corrected number `0.023 ms / prime` (faster, because the deterministic witness fast path replaces 20 random rounds).
+>
+> The original text follows below for the historical record.
+
+---
+
 ## Abstract
 
 We present the MetaPattern Prime Generator, a novel prime number generation algorithm derived directly from the empirically discovered power law transition α\(s\) = s^\(-0.37\), where s = log₁₀\(n\). The algorithm continuously interpolates between two established prime generation methods — local \(divisibility-sieve\) and global \(density-based, Prime Number Theorem\) — with mixing weights that adapt automatically to the scale of the target prime. We provide a complete Python reference implementation, formal correctness guarantees \(the algorithm reduces to verified deterministic methods at small scales and Miller-Rabin probabilistic verification at large scales\), and empirical performance benchmarks across eight orders of magnitude. The generator achieves correctness at all tested scales and smooth performance with no hard phase boundaries. We also describe an integration pathway with the Izaac deterministic randomness framework for fully deterministic operation. To our knowledge, this is the first prime generator explicitly derived from a meta-pattern governing the scale-dependent structure of prime distributions.

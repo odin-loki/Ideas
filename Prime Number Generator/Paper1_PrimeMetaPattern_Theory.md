@@ -2,6 +2,45 @@
 
 *Preliminary research manuscript · 2025*
 
+> ## ⚠️ Erratum and 31-sample re-fit (2026)
+>
+> This paper, as originally drafted, has three problems that an external review and a 31-scale-sample re-run (`fit_meta_pattern.py`, `fit_meta_pattern.md`) confirmed are real. The original text is preserved unchanged below for the historical record; this section overrides any conflicting claim in the body.
+>
+> **1. Functional-form inconsistency.** §2.2 reports the empirical fit in *exponential* form,
+>
+> > `f_L(s) = 0.258 · exp(−0.373·s)`,    `f_G(s) = 1 − 0.487 · exp(−0.371·s)`,
+>
+> and then jumps to the *power-law* form `α(s) = s^(−0.37)`, `β(s) = 1 − 0.487·s^(−0.37)` in the same section, asserting they are the same. They are not: at `s = 2` the exponential gives `0.258 · exp(−0.746) ≈ 0.122`, while the power law gives `2^(−0.37) ≈ 0.774`, a factor of ~6 disagreement. The numerical values reported in Tables 1 and 2 of the paper (`α = 77.4 %` at `s = 2`, etc.) match the *power law*; the algorithm code in `prime_generator.py` also used the *power law*; but the only fit equation actually written down in §2.2 is the *exponential*. This was a transcription error.
+>
+> **2. The exponent `−0.37` does not reproduce on more scale samples.** The original fit was performed on three scale points (`s = 2, 5, 7`); with only three points one cannot distinguish a power law from an exponential. Re-fitting with 31 evenly-spaced scale samples (`s = 1.0, 1.25, …, 8.5, 9.0`), 600 + 600 balanced primes/composites per scale, and three independent measurements (`fit_meta_pattern.md`):
+>
+> | Curve | Form | Fit | AIC | Verdict |
+> |---|---|---|---:|---|
+> | M1 residue-classifier excess AUC | power law | `0.391 · s^(−0.104)` | `−80.19` | best by `0.9` |
+> |                                  | exponential | `0.382 · exp(−0.026·s)` | `−79.28` | indistinguishable |
+> | M2 small-prime filter rejection rate | rational | `1.050 / (1 + 0.034·s)` | `−158.10` | **best** |
+> |                                       | exponential | `1.040 · exp(−0.029·s)` | `−156.19` | close |
+> |                                       | power law | `1.057 · s^(−0.111)` | `−138.72` | **rejected, ΔAIC = +19.4** |
+>
+> No curve produces an exponent near `−0.37`. M1's measured exponent is `~ −0.10`. M2 is best fit by a rational form (a *plateau*, not a power law) and the exponential beats the power law by `ΔAIC = +17.5`.
+>
+> **3. The "critical transition at `n* ≈ 836`" (`s* ≈ 2.92`) is an artefact.** It was derived analytically from `1.487 · s^(−0.37) = 1`, i.e. by substituting the (incorrect) exponent and the (incorrect) coefficient `0.487` into a constraint on the algebraic crossing of `α` and `β`. With the corrected M2 fit, `f_M2(s) = 1.050 / (1 + 0.034·s)` is monotonically and slowly declining and **does not cross any specific threshold** in the tested range — at `s = 9` it is still `0.81`. There is no scale-dependent crossover for the algorithm to exploit. The right algorithmic switch — from `O(√n)` trial-division primality to `O(k log³ n)` Miller–Rabin — is set by computational cost, not by feature importance, and lives at `s ≈ 4.5` (`n ≈ 31 623`).
+>
+> **What this means for the body of this paper.**
+>
+> - §2.2 (the fit equation), §2.3 (the critical-transition derivation), §3.3 ("the power law meta-pattern"), §3.4 ("the critical transition"), and §4 (the renormalisation-group analogy with `γ = −0.37` as a "universal critical exponent") are all built on the bad three-point fit. They should be read as the original conjecture, **not** as confirmed by this work.
+> - §5 (the connection to neural-network weight-matrix spectral exponents reportedly in the `0.35 – 0.45` range, including HRNA's `α ≈ 0.85` and Martin–Mahoney's `~0.37`) was a numerical-coincidence argument. With the actual measured exponent for M1 being `~ −0.10`, **the coincidence is not present**, and this section should be regarded as withdrawn.
+> - §3.5 (deterministic vs stochastic information contribution) and the empirical scale-by-scale measurements in §3.1, §3.2 (filter effectiveness, density accuracy) survive — those numbers were measured directly, not derived from the bad fit.
+> - The companion algorithm paper (Paper 2) and the algorithm code carry their own erratum block; both have been corrected.
+>
+> **What survives as the genuine empirical finding.** The local divisibility filter is useful at every scale tested up to `n = 10⁹`, and its useful-work rate decays slowly (best fit a *plateau*, not a power law). The PNT-density approximation becomes very accurate above `s ≈ 4` (relative error `< 0.05`). Hybrid sieve-plus-Miller–Rabin generation is the right operational choice; the original paper's specific *power-law* and *critical-transition* claims about how to weight that hybrid are not supported by the corrected data.
+>
+> **Appropriate framing.** As corrected, this is empirical, computationally-driven mathematics — appropriate venue is Experimental Mathematics (Taylor & Francis) or Integers, not Annals of Mathematics. The work has no bearing on the Riemann Hypothesis or the Clay Millennium Prize, contrary to any framing in earlier drafts.
+>
+> The original text follows below for the historical record.
+
+---
+
 ## Abstract
 
 We report the empirical discovery of a continuous power law transition governing the optimal generative structure of prime numbers as a function of scale. Through systematic analysis of prime gap distributions, divisibility filter effectiveness, and density prediction accuracy across eight orders of magnitude \(10¹ to 10⁸\), we identify a scale parameter s = log₁₀\(n\) and a weight function:
