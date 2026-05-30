@@ -14,6 +14,12 @@
 | [`TACT-1 Mark II Flavour Catalogue.md`](TACT-1%20Mark%20II%20Flavour%20Catalogue.md) | 40-variant catalogue (TRP-2026-021 companion) | 40 natural-ingredient flavour variants organised by 7 families (Chocolate 01–08, Coffee & Tea 09–14, Nut & Seed 15–21, Fruit 22–29, Spice & Sweet 30–35, Savoury 36–38, Floral & Botanical 39–40). Fixed nutrient lock on all variants. |
 | [`Paper20_TACT-1_Mk_II_Ration.md`](Paper20_TACT-1_Mk_II_Ration.md) | Academic research paper (TRP-2026-021) | Abstract / introduction (SOF nutritional needs, MRE weight problem) / background (current rations, Mark I limits) / injectable-to-oral derivation / materials and methods (TGase biochemistry, HBCD properties, micellar casein vs caseinate, carnauba thermals, MCT C8 ketogenic pathway) / results / discussion / limitations / conclusions / references. |
 
+### Subfolder
+
+| Subfolder | Contents |
+|---|---|
+| [`PODS- Edible High Energy Protein/`](PODS-%20Edible%20High%20Energy%20Protein/) | **PODS (Plasmenyl-ODE-Stearin)** — a synthetic glycerolipid engineered to exceed the energy density of dietary fat. Formula C₅₇H₁₁₂O₄, MW 861.5 g/mol, computed energy density **10.21 kcal/g** (+12.2% vs fat). Three C18 chains on a glycerol backbone via three distinct bond types: vinyl ether (sn-1, plasmalogen antioxidant), alkyl ether (sn-2, enzyme-gated by co-delivered AGEL), ester (sn-3, pancreatic lipase). Produces programmable three-phase energy release over 0–180 minutes from a single molecule. Formulation density as a 30 g nanoparticle serving: **6.64 kcal/g** — saving 74 g carry weight per warfighter per day vs standard MRE. All cleavage products are endogenous metabolites. TGA/GRAS Novel Food regulatory pathway; 3–5 year approval estimate. Status: all characterisation computational; experimental validation work itemised. [`PODS_README.md`](PODS-%20Edible%20High%20Energy%20Protein/PODS_README.md) · [`PODS_Research_Paper.md`](PODS-%20Edible%20High%20Energy%20Protein/PODS_Research_Paper.md) · [`pods_simulation.py`](PODS-%20Edible%20High%20Energy%20Protein/pods_simulation.py). |
+
 ---
 
 ## 🎯 Headline numbers
