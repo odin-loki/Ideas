@@ -1,6 +1,6 @@
 # Weapons-Defence — defence-tech R&D portfolio
 
-> **A defence-engineering portfolio formatted as the kind of internal R&D documentation a small-team systems-research division would produce.** Every top-level platform has a paired operator specification and a TRP-numbered research paper, across **small-arms** (`MP-4.6M Guardian` pistol, `MP-4.6M Defender` PDW, `MP-6.8 Mark II` rifle, `MAS-15.2E` 15.2 mm anti-materiel sniper, **`BSG-10 Goliath`** 10-gauge bullpup combat shotgun), **heavy weapons** (`57 mm` autocannon, `57 mm` underbarrel grenade, `57 mm` dual-purpose mortar / RPG, `140 mm` electrothermal-chemical tank gun firing a KE round), **body armour** (`APES`, `AlNiCyN` three-tier aluminium, `OBSIDIAN` / `OBSIDIAN-X` hypothetical), **CBRN** (`NACS / NEXUS Adaptive Combat System`), **acoustic cancellation** (`TACS` three-variant family at 35–55 dB depth), **hearing protection** + **command doctrine** + **caseless / cartridgeless ammunition** + **CL-20** energetics + **rubber tank-track pads**, plus the **`HPR-X`** guided high-power rocketry series, the **`TACT-1 Mark II`** full-day SOF ration (with `PODS` high-energy glycerolipid subfolder and **`ASNP`** sports-nutrition powder spec), the **`HEL-CMS/DB`** diamond-battery-powered 280 kW laser air-defence platform, and the **`TAIPAN-1`** guided ballistic interceptor rocket.
+> **A defence-engineering portfolio formatted as the kind of internal R&D documentation a small-team systems-research division would produce.** Every top-level platform has a paired operator specification and a TRP-numbered research paper, across **small-arms** (`MP-4.6M Guardian` pistol, `MP-4.6M Defender` PDW, `MP-6.8 Mark II` rifle, `MAS-15.2E` 15.2 mm anti-materiel sniper, **`BSG-10 Goliath`** 10-gauge bullpup combat shotgun), **heavy weapons** (`57 mm` autocannon, `57 mm` underbarrel grenade, `57 mm` dual-purpose mortar / RPG, `140 mm` electrothermal-chemical tank gun firing a KE round), **body armour** (`APES`, `AlNiCyN` three-tier aluminium, `OBSIDIAN` / `OBSIDIAN-X` hypothetical), **CBRN** (`NACS / NEXUS Adaptive Combat System`), **acoustic cancellation** (`TACS` three-variant family at 35–55 dB depth), **non-lethal area denial** (**`OAM-VEST`** orbital-angular-momentum vestibular disruption), **sustainment** (**`ADF Tactical Field Kit`** integrated load-carriage and 72 h sustainment spec), **hearing protection** + **command doctrine** + **caseless / cartridgeless ammunition** + **CL-20** energetics + **rubber tank-track pads**, plus the **`HPR-X`** guided high-power rocketry series, the **`TACT-1 Mark II`** full-day SOF ration (with `PODS` high-energy glycerolipid subfolder and **`ASNP`** sports-nutrition powder spec), the **`HEL-CMS/DB`** diamond-battery-powered 280 kW laser air-defence platform, and the **`TAIPAN-1`** guided ballistic interceptor rocket.
 
 > **Every ballistic / velocity / energy / penetration / chamber-pressure number in every spec sheet and every research paper in this folder is derived from a single Python simulator** ([`weapons_simulation.py`](weapons_simulation.py)). The human-readable simulator output lives in [`weapons_sim_results.md`](weapons_sim_results.md) — *that file is the authoritative source*. The parts-commonality matrix across the family lives in [`Common Architecture and Components.md`](Common%20Architecture%20and%20Components.md).
 
@@ -65,6 +65,12 @@ If you change a number in a spec sheet that doesn't trace back to `weapons_sim_r
 | **Hearing protection** | [`military_hearing_protection_systems.md`](military_hearing_protection_systems.md) | [`Research Papers/Paper15_Hearing_Protection.md`](Research%20Papers/Paper15_Hearing_Protection.md) |
 | **Military command doctrine** | [`military_command_military_doctrine.md`](military_command_military_doctrine.md) | [`Research Papers/Paper16_Military_Command_Doctrine.md`](Research%20Papers/Paper16_Military_Command_Doctrine.md) |
 
+### Sustainment and field equipment
+
+| System | Operator spec | Notes |
+|---|---|---|
+| **ADF Tactical Field Kit** *(TRP-2026-ADF-FK-001)* | [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) | Integrated 32 L MOLLE load-carriage system, titanium tool suite (entrenching tool, war pick, survival knife/bayonet), hollow-fibre + UV-C filtration, stocked IFAK, and 72 h nutrition built on **TACT-1 Mark II** + **ASNP** + Hemp Harmony hygiene from [`../Beauty Products/`](../Beauty%20Products/). **~14.7 kg** fully loaded 72 h kit vs **~19 kg** conventional IRP baseline (**~4.3 kg** saving); volume procurement **A$3 874** per complete kit. Five-phase 36-month procurement pathway to 12 000 units. |
+
 ### Specialised subfolders
 
 | Subfolder | Contents |
@@ -77,6 +83,7 @@ If you change a number in a spec sheet that doesn't trace back to `weapons_sim_r
 | [`BSG10 Goliath/`](BSG10%20Goliath/) | **BSG-10 Goliath** 10-gauge semi-automatic bullpup combat shotgun — standalone `bsg10_sim` validation (not `weapons_simulation.py`). 45-round drum, ~490 N peak shoulder force, 415 m/s MV. [`README.md`](BSG10%20Goliath/README.md), [`BSG10_Goliath_Full_Specification.md`](BSG10%20Goliath/BSG10_Goliath_Full_Specification.md), [`BSG10_Research_Paper.md`](BSG10%20Goliath/BSG10_Research_Paper.md), [`bsg10_sim_package/`](BSG10%20Goliath/bsg10_sim_package/). |
 | [`HEL_CMS_DB Laser AntiAir/`](HEL_CMS_DB%20Laser%20AntiAir/) | **HEL-CMS/DB** High-Energy Laser Counter-Munitions System, Diamond Battery powered — 280–300 kW spectral-beam-combined fiber laser air defence platform. Defeats micro-UAVs (0.2 s dwell), rockets (4.9 s dwell), and cruise missiles (12.3 s dwell) across a 4–7 km engagement envelope. 1 MW(e) Sr-90 thermal-betavoltaic power plant eliminates the generator logistics tail; zero crew; 20-year TCO $71.8M saving $51.8M vs conventional HEL. TDB power source at TRL 2–3. [`README.md`](HEL_CMS_DB%20Laser%20AntiAir/README.md), [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Full_Spec.md), [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Research_Paper.md). |
 | [`TAIPAN Missile/`](TAIPAN%20Missile/) | **TAIPAN-1** guided ballistic interceptor rocket — 4.87 m, 631 kg wet, RP-1/LOX electric pump-fed (50 kN, Isp 293.1 s, 62 kg dry engine mass). Simulation-verified maximum range **1,618 km** at Mach 13.27 and 367 km apogee; configurable 432–1,618 km by varying nose ballast. Production unit cost **$50k–$80k** (22× cheaper than AMRAAM at 160 km). Entire airframe 3D printed in 14 structural parts. [`README.md`](TAIPAN%20Missile/README.md), [`TAIPAN-1_Technical_Specification_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Technical_Specification_Rev1.0.md), [`TAIPAN-1_Financial_Analysis_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Financial_Analysis_Rev1.0.md), [`TAIPAN-1_Geometry_Reference_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Geometry_Reference_Rev1.0.md), [`taipan1_sim.py`](TAIPAN%20Missile/taipan1_sim.py). |
+| [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) | **OAM-VEST** vehicle-mounted non-lethal acoustic area denial — dual 1.2 m phased arrays, OAM vortex + AM vestibular modes, **173.2 dB** source, **410 m** disorientation / **19.3 m** incapacitation, earplug-immune Modes B/C; standalone `oam_vest_sim`. [`README.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/README.md), [`OAM-VEST_System_Specification.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_System_Specification.md), [`OAM-VEST_Research_Paper.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Research_Paper.md), [`OAM-VEST_Simulation_Package/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Simulation_Package/). |
 
 ### Hypothetical / academic-study items
 
@@ -153,6 +160,19 @@ All numbers below come from [`weapons_sim_results.md`](weapons_sim_results.md). 
 
 Programme framing: USD 22 M, 36-month timeline; per-unit USD 28 K / 185 K / 850 K. **Acoustic energy is redistributed, not destroyed** — anti-node hazards are explicit in the papers.
 
+### OAM-VEST (Orbital Angular Momentum Vestibular Disruption)
+
+| Parameter | Value |
+|---|---|
+| Combined source SPL | **173.2 dB** @ 1 m |
+| Disorientation range | **410 m** |
+| Incapacitation range | **19.3 m** |
+| Average power (pulsed, 20% duty) | **10.2 kW** |
+| Earplug countermeasure (Modes B/C) | **Ineffective** |
+| Minimum safe range | **15 m** (LiDAR interlock) |
+
+Vehicle-mounted (Land Rover class or larger). Attacks vestibular balance pathways, not auditory pain compliance. Numbers from standalone `oam_vest_sim` — see [`OAM-VEST Non Lethal Sonic Weapon/README.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/README.md).
+
 ### APES Body Armour (TRP-2026-006)
 
 16-layer Kevlar / UHMWPE with graphene interfaces. 7075-T6 honeycomb + B₄C ceramic + Ti-6Al-4V. Non-Newtonian silicone shock-absorber. 20.8 kg full kit. < 3 s emergency doff. PCM thermal at 28 °C, 200 kJ/kg, 25 % body coverage → 4 h thermal budget. **The police APES-L variant in [`../Weapons-Police/`](../Weapons-Police/) shares the B4C tile, ionic-liquid STF chemistry, and aramid panel architecture; the police variant trades the 75 mm helmet ceramic and 25 mm body tile for a single 6.5 kg full-body suit.**
@@ -191,7 +211,10 @@ Programme framing: USD 22 M, 36-month timeline; per-unit USD 28 K / 185 K / 850 
 10. **Three new items (this revision).**
    - [`BSG10 Goliath/`](BSG10%20Goliath/) — BSG-10 Goliath 10-gauge bullpup combat shotgun with dedicated `bsg10_sim` package (spec + research paper + folder README).
    - [`TACT-1 Tactical Ration/Advanced Sports Nutrition Powder.md`](TACT-1%20Tactical%20Ration/Advanced%20Sports%20Nutrition%20Powder.md) — ASNP operator spec added as fourth UCN combat-nutrition pillar (paired with existing ASNP research paper).
-   - [`../Threat Asessments/`](../Threat%20Asessments/) — Hypothetical threat-intelligence briefs (FSB neurological interference; 2-NT/TNT mixture) with folder README.
+   - [`../Threat Asessments/`](../Threat%20Asessments/) — Hypothetical threat-intelligence briefs (FSB neurological interference; 2-NT/TNT mixture; physical identity replacement) with folder README.
+11. **Two new items (this revision).**
+   - [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) — OAM-VEST non-lethal acoustic area denial (spec + research paper + `oam_vest_sim` package + folder README).
+   - [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) — ADF Tactical Field Kit integrated sustainment spec (TRP-2026-ADF-FK-001): titanium tools, filtration, IFAK, TACT-1/ASNP/Hemp Harmony nutrition and hygiene stack; ~4.3 kg weight saving vs conventional 72 h IRP kit.
 
 ---
 
@@ -221,6 +244,7 @@ Programme framing: USD 22 M, 36-month timeline; per-unit USD 28 K / 185 K / 850 
 - [`../UCN Political System/`](../UCN%20Political%20System/) — UCN doctrine and `≤ 10`-warhead defence posture
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — ARIA-INTEL battlefield intelligence
 - [`../Filtering/`](../Filtering/) — GH-SR-IMM platform-state estimation
+- [`../Beauty Products/`](../Beauty%20Products/) — Hemp Harmony hygiene formulation (integrated in ADF Tactical Field Kit)
 - [`../Threat Asessments/`](../Threat%20Asessments/) — Hypothetical threat-assessment monographs (intelligence register)
 
 ---
