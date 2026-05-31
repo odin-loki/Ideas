@@ -6,7 +6,7 @@
 
 ## What this folder is
 
-There is a class of political-design exercises — most famously Robert Heinlein's *The Moon is a Harsh Mistress* and Bruce Sterling's *Distraction*, but going back to *The Republic* — where the author works out a *complete coherent system*: the constitution, the economy, the foreign policy, the social safety net, the IP regime, the drug policy. The UCN papers are this kind of artefact, written in the register of policy research rather than fiction. Eight numbered papers (Framework / Sovereignty / Defence / Social / IP / Constitution / Foreign Policy / Roadmap) plus economic backbone, sovereign-digital-currency analysis, and a constitutional-law analysis of the Australian status quo (`australias_invisible_constitution.md`) — the whole designed to fit together so that the proposals don't contradict each other.
+There is a class of political-design exercises — most famously Robert Heinlein's *The Moon is a Harsh Mistress* and Bruce Sterling's *Distraction*, but going back to *The Republic* — where the author works out a *complete coherent system*: the constitution, the economy, the foreign policy, the social safety net, the IP regime, the drug policy. The UCN papers are this kind of artefact, written in the register of policy research rather than fiction. Eight numbered papers (Framework / Sovereignty / Defence / Social / IP / Constitution / Foreign Policy / Roadmap) plus economic backbone, sovereign-digital-currency analysis, constitutional-law analysis of the Australian status quo (`australias_invisible_constitution.md`), and supporting research on Western nuclear procurement failure (`nuclear_power_rip_off.md`) — the whole designed to fit together so that the proposals don't contradict each other.
 
 The headline distinguishing moves:
 - **Modular constitution with version-control semantics** (Tier 1 / 2 / 3 amendment thresholds).
@@ -46,6 +46,24 @@ The work is honest about being aspirational. Many proposals contradict current A
 | [`australias_invisible_constitution.md`](australias_invisible_constitution.md) | Constitutional-law analysis of the Australian status quo. **Five express rights** in the Australian Constitution. Double-majority referendum requirement. **`45` referendum tries, `8` passed.** Case-law synthesis: implied freedom of political communication, *Mabo*, *NZYQ*. |
 | [`EREM_Research_Paper.md`](EREM_Research_Paper.md), [`EREM_Explained_Paper.md`](EREM_Explained_Paper.md) | **Mirror copies of [`../Economics/EREM_Research_Paper.md`](../Economics/EREM_Research_Paper.md) and [`../Economics/EREM_Explained_Paper.md`](../Economics/EREM_Explained_Paper.md).** [`../Economics/`](../Economics/) is the canonical home of EREM; the copies here are kept for self-contained reading of the UCN papers. |
 
+### Supporting policy research
+
+| File | Role |
+|---|---|
+| [`nuclear_power_rip_off.md`](nuclear_power_rip_off.md) | **The Nuclear Premium** — research paper on the structural cost crisis in Western commercial nuclear power. Argues that US/UK reactor costs (**~$17 500/kW** at Vogtle vs **~$2 200/kW** in South Korea) reflect contractor-subcontractor procurement, CWIP ratepayer passthrough, and institutional discontinuity — not inherent fission economics. Case studies: Rickover Naval Reactors, Vogtle / V.C. Summer, Olkiluoto 3, Hinkley Point C; contrast with KEPCO and Chinese state-managed builds. **Supports [`UCN_Paper3_Defense.md`](UCN_Paper3_Defense.md) civilian fuel-cycle and government-managed grid policy.** |
+
+---
+
+## 🧠 Reading order
+
+| If you need… | Start here |
+|---|---|
+| Full doctrine overview | [`UCN_Paper1_Framework.md`](UCN_Paper1_Framework.md) → papers II–VIII in order |
+| Energy-physics monetary base | [`UCN_Economics_EREM.md`](UCN_Economics_EREM.md) or [`../Economics/`](../Economics/) |
+| Defence, nuclear energy, and grid sovereignty | [`UCN_Paper3_Defense.md`](UCN_Paper3_Defense.md) + [`nuclear_power_rip_off.md`](nuclear_power_rip_off.md) |
+| Australian constitutional status quo | [`australias_invisible_constitution.md`](australias_invisible_constitution.md) |
+| Phased implementation | [`UCN_Paper8_Roadmap.md`](UCN_Paper8_Roadmap.md) |
+
 ---
 
 ## 🚧 Honest caveats (called out throughout the source)
@@ -78,7 +96,7 @@ The work is honest about being aspirational. Many proposals contradict current A
 - [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (informs UCN_Paper3_Defence)
 - [`../Diffusion Welding/`](../Diffusion%20Welding/) — sovereign-manufacturing process
 - [`../Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — sovereign-manufacturing supply chain
-- [`../Diamond Batterys/`](../Diamond%20Batterys/) — sovereign-energy strategy
+- [`../Diamond Batterys/`](../Diamond%20Batterys/) — sovereign-energy strategy (adjacent to nuclear baseload and radioisotope transport research in Paper III)
 - [`../GM Enhancements/`](../GM%20Enhancements/) — Super Soldier programme adjacency
 - [`../Drugs/`](../Drugs/) — pharmacology research adjacent to government-manufactured drug programme
 
