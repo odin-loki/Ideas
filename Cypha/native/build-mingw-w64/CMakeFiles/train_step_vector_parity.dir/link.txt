@@ -1,3 +1,0 @@
-/usr/bin/cmake -E rm -f CMakeFiles/train_step_vector_parity.dir/objects.a
-/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/train_step_vector_parity.dir/objects.a @CMakeFiles/train_step_vector_parity.dir/objects1.rsp
-/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/train_step_vector_parity.dir/objects.a -Wl,--no-whole-archive -o train_step_vector_parity.exe -Wl,--out-implib,libtrain_step_vector_parity.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/train_step_vector_parity.dir/linkLibs.rsp

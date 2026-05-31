@@ -1,3 +1,0 @@
-/usr/bin/cmake -E rm -f CMakeFiles/cypha_rest.dir/objects.a
-/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/cypha_rest.dir/objects.a @CMakeFiles/cypha_rest.dir/objects1.rsp
-/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/cypha_rest.dir/objects.a -Wl,--no-whole-archive -o cypha_rest.exe -Wl,--out-implib,libcypha_rest.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/cypha_rest.dir/linkLibs.rsp

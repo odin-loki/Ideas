@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/memory_train_roundtrip.dir/tools/memory_train_roundtrip.cpp.o -o memory_train_roundtrip  libcypha_core.a 

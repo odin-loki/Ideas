@@ -1,3 +1,0 @@
-/usr/bin/cmake -E rm -f CMakeFiles/memory_train_parity.dir/objects.a
-/usr/bin/x86_64-w64-mingw32-ar qc CMakeFiles/memory_train_parity.dir/objects.a @CMakeFiles/memory_train_parity.dir/objects1.rsp
-/usr/bin/x86_64-w64-mingw32-g++ -O3 -DNDEBUG -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles/memory_train_parity.dir/objects.a -Wl,--no-whole-archive -o memory_train_parity.exe -Wl,--out-implib,libmemory_train_parity.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/memory_train_parity.dir/linkLibs.rsp
