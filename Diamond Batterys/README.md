@@ -1,4 +1,4 @@
-# Diamond Batterys — radioisotope power architectures (hypothetical)
+﻿# Diamond Batterys — radioisotope power architectures (hypothetical)
 
 > **An eight-model taxonomy organised across four series (A through D) projecting diamond/radioisotope-based energy architectures from the demonstrated `~kW`-class hybrid alphavoltaic baseline out to `GW`-class concepts — explicitly anchored to the Bristol / UKAEA December 2024 C-14 diamond battery as the demonstrated micropower starting point, then extrapolated upward through Am-241, Pu-238, Sr-90, Cm-244, Am-242m, U-235 subcritical assemblies, NV-centre quantum-enhanced betavoltaics, and radioluminescent layered photovoltaics.** Every model is labelled hypothetical at the top; the document is engineering-fiction-grade, not validated hardware. The interest is the *taxonomic ladder* — using waste-isotope logistics (Sr-90, Cs-137, Am-241) as a structured energy-density tradespace from microwatts to gigawatts.
 
@@ -103,7 +103,7 @@ The result is eight models across four series: Series A (alphavoltaic hybrids, k
 - [`../Physics/`](../Physics/) — non-local field theory backdrop
 - [`../Neural Dust/`](../Neural%20Dust/) — micropower-implant context where this technology might be used
 - [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — power-conversion architectures
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (parallel power-source thinking)
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio (parallel power-source thinking)
 - [`../UCN Political System/`](../UCN%20Political%20System/) — UCN doctrine that this fits into for sovereign energy strategy
 
 ---

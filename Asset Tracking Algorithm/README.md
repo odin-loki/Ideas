@@ -1,4 +1,4 @@
-# Asset Tracking Algorithm — multi-target tracking and tactical-intelligence engine (ARIA-INTEL)
+﻿# Asset Tracking Algorithm — multi-target tracking and tactical-intelligence engine (ARIA-INTEL)
 
 > **ARIA-INTEL = Algebraic Rendezvous & Intelligence Analyser.** A single-file, edge-deployable multi-target tracking and tactical-intelligence engine that fuses Poisson Multi-Bernoulli Mixture (PMBM) random-finite-set tracking, Mixed Ornstein–Uhlenbeck (MOU) motion, spatio-temporal pattern-of-life GMMs, three independent rendezvous-prediction methods stacked in parallel, eight tradecraft detectors, Dempster–Shafer multimodal fusion, and Beta–Monte-Carlo threat scoring — into one Python module designed to run at **~28 ms median scan latency on a single CPU core, no GPU**, on tactical edge hardware.
 
@@ -102,7 +102,7 @@ The same code retunes for very different sensing regimes via a `DomainProfile` p
 - [`../Filtering/`](../Filtering/) — GH-SR-IMM heavy-tailed multi-target tracking (complementary; ARIA-INTEL uses a different filter family but shares the IMM idea)
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator that underpins the Beta-MC threat machinery's distributional reasoning
 - [`../Battle Sim/`](../Battle%20Sim/) — adjacent: tactical reasoning over the tracks ARIA-INTEL would deliver
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio that consumes intelligence products of this kind
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio that consumes intelligence products of this kind
 
 ---
 

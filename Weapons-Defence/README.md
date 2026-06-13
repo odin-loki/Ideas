@@ -19,6 +19,8 @@ Two pieces of infrastructure make this work:
 
 The result reads like a small-team defence-systems portfolio that has done the unglamorous work of consolidating its parts catalogue.
 
+**Folder convention (2026 reorganization).** Every platform lives in its own subfolder with hub `README.md`, operator specification, research paper (where applicable), and simulation documentation (`SIM_README.md` for portfolio-sim platforms; standalone `*_sim_package/` or `*_sim.py` for bespoke physics). Root retains only portfolio infrastructure plus this index. Relocated papers are indexed in [`Research Papers/README.md`](Research%20Papers/README.md).
+
 ---
 
 ## 📐 Single source of truth — the simulator
@@ -36,66 +38,65 @@ If you change a number in a spec sheet that doesn't trace back to `weapons_sim_r
 
 ## 📑 Source organisation
 
-### Top-level small arms — operator spec + paired research paper
+### Top-level small arms — platform subfolders (spec + paper + SIM_README)
 
-| System | Cartridge | Operator spec | Research paper |
-|---|---|---|---|
-| **MP-4.6M Guardian Pistol** | 4.6 × 30 mm Enhanced | [`MP-4.6M Pistol.md`](MP-4.6M%20Pistol.md) | [`Research Papers/Paper9_MP46M_Pistol.md`](Research%20Papers/Paper9_MP46M_Pistol.md) |
-| **MP-4.6M Defender PDW** | 4.6 × 30 mm Enhanced *(same cartridge as the Guardian)* | [`MP-4.6M Defender PDW.md`](MP-4.6M%20Defender%20PDW.md) | [`Research Papers/Paper8_MP46M_PDW.md`](Research%20Papers/Paper8_MP46M_PDW.md) |
-| **MP-6.8 Mark II Rifle** | 6.8 × 51 mm | [`MP-6.8 Advanced Combat Rifle.md`](MP-6.8%20Advanced%20Combat%20Rifle.md) | [`Research Papers/Paper10_MP68_Rifle.md`](Research%20Papers/Paper10_MP68_Rifle.md) |
-| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | [`15.2mm Anti-Tank Sniper System.md`](15.2mm%20Anti-Tank%20Sniper%20System.md) | [`Research Papers/Paper1_MAS152E_AntiTank_Sniper.md`](Research%20Papers/Paper1_MAS152E_AntiTank_Sniper.md) |
-
-### Top-level heavy weapons — operator spec + paired research paper
-
-| System | Cartridge | Operator spec | Research paper |
-|---|---|---|---|
-| **57 mm Autocannon** | 57 × 347 mm | [`57mm Advanced Mechanical Autocannon System.md`](57mm%20Advanced%20Mechanical%20Autocannon%20System.md) | [`Research Papers/Paper2_57mm_Autocannon.md`](Research%20Papers/Paper2_57mm_Autocannon.md) |
-| **57 mm Underbarrel Grenade** | 57 mm LV grenade *(same casing geometry as the autocannon, low-velocity reload)* | [`57mm Underbarrel Grenade Round.md`](57mm%20Underbarrel%20Grenade%20Round.md) | [`Research Papers/Paper4_57mm_Underbarrel_Grenade.md`](Research%20Papers/Paper4_57mm_Underbarrel_Grenade.md) |
-| **57 mm Mortar / RPG dual-purpose** | 57 mm mortar | [`57mm Enhanced Dual-Purpose System Mortar and RPG.md`](57mm%20Enhanced%20Dual-Purpose%20System%20Mortar%20and%20RPG.md) | [`Research Papers/Paper3_57mm_DualPurpose_System.md`](Research%20Papers/Paper3_57mm_DualPurpose_System.md) |
-| **140 mm Tank KE Round** | 140 mm KE | [`140mm Advanced Multi-Effect Tank Round.md`](140mm%20Advanced%20Multi-Effect%20Tank%20Round.md) | [`Research Papers/Paper5_140mm_Tank_Round.md`](Research%20Papers/Paper5_140mm_Tank_Round.md) |
-
-### Protective equipment and systems
-
-| System | Operator spec | Research paper |
+| System | Cartridge | Platform folder |
 |---|---|---|
-| **APES Body Armour** *(military)* | [`Advanced Protective Equipment System Specification.md`](Advanced%20Protective%20Equipment%20System%20Specification.md) | [`Research Papers/Paper6_Body_Armor_System.md`](Research%20Papers/Paper6_Body_Armor_System.md) |
-| **APES-L Mark I** *(police variant; cross-folder)* | [`../Weapons-Police/APES-L Mark I Police Body Armour.md`](../Weapons-Police/APES-L%20Mark%20I%20Police%20Body%20Armour.md) | [`../Weapons-Police/Research Paper — APES-L Police Body Armour.md`](../Weapons-Police/Research%20Paper%20%E2%80%94%20APES-L%20Police%20Body%20Armour.md) |
-| **NACS / NEXUS Adaptive Combat System** | [`NACS TOTAL Camo and Undersuit.md`](NACS%20TOTAL%20Camo%20and%20Undersuit.md) | [`Research Papers/Paper7_NACS_CBRN_System.md`](Research%20Papers/Paper7_NACS_CBRN_System.md) |
-| **AlNiCyN three-tier aluminium armour** | [`Aluminium Alloys for Armour.md`](Aluminium%20Alloys%20for%20Armour.md) | [`Research Papers/Paper13_AlNiCyN_Aluminum_Armour.md`](Research%20Papers/Paper13_AlNiCyN_Aluminum_Armour.md) |
-| **Hearing protection** | [`military_hearing_protection_systems.md`](military_hearing_protection_systems.md) | [`Research Papers/Paper15_Hearing_Protection.md`](Research%20Papers/Paper15_Hearing_Protection.md) |
-| **Military command doctrine** | [`military_command_military_doctrine.md`](military_command_military_doctrine.md) | [`Research Papers/Paper16_Military_Command_Doctrine.md`](Research%20Papers/Paper16_Military_Command_Doctrine.md) |
+| **MP-4.6M Guardian Pistol** | 4.6 × 30 mm Enhanced | [`MP-4.6M Guardian Pistol/`](MP-4.6M%20Guardian%20Pistol/) — [`README.md`](MP-4.6M%20Guardian%20Pistol/README.md), spec, paper, [`SIM_README.md`](MP-4.6M%20Guardian%20Pistol/SIM_README.md) |
+| **MP-4.6M Defender PDW** | 4.6 × 30 mm Enhanced *(same loaded round; longer barrel → `4.6x30mm_PDW` sim key)* | [`MP-4.6M Defender PDW/`](MP-4.6M%20Defender%20PDW/) — [`README.md`](MP-4.6M%20Defender%20PDW/README.md), spec, paper, [`SIM_README.md`](MP-4.6M%20Defender%20PDW/SIM_README.md) |
+| **MP-6.8 Mark II Rifle** | 6.8 × 51 mm | [`MP-6.8 Mark II Rifle/`](MP-6.8%20Mark%20II%20Rifle/) — [`README.md`](MP-6.8%20Mark%20II%20Rifle/README.md), spec, paper, [`SIM_README.md`](MP-6.8%20Mark%20II%20Rifle/SIM_README.md) |
+| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | [`MAS-15.2E Anti-Materiel Sniper/`](MAS-15.2E%20Anti-Materiel%20Sniper/) — [`README.md`](MAS-15.2E%20Anti-Materiel%20Sniper/README.md), spec, paper, [`SIM_README.md`](MAS-15.2E%20Anti-Materiel%20Sniper/SIM_README.md) |
 
-### Sustainment and field equipment
+### Heavy weapons — platform subfolders (Tier-C portfolio sim)
 
-| System | Operator spec | Notes |
+| System | Cartridge | Subfolder |
 |---|---|---|
-| **ADF Tactical Field Kit** *(TRP-2026-ADF-FK-001)* | [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) | Integrated 32 L MOLLE load-carriage system, titanium tool suite (entrenching tool, war pick, survival knife/bayonet), hollow-fibre + UV-C filtration, stocked IFAK, and 72 h nutrition built on **TACT-1 Mark II** + **ASNP** + Hemp Harmony hygiene from [`../Beauty Products/`](../Beauty%20Products/). **~14.7 kg** fully loaded 72 h kit vs **~19 kg** conventional IRP baseline (**~4.3 kg** saving); volume procurement **A$3 874** per complete kit. Five-phase 36-month procurement pathway to 12 000 units. |
+| **57 mm Autocannon** | 57 × 347 mm | [`57mm Autocannon/`](57mm%20Autocannon/) — [`README`](57mm%20Autocannon/README.md), spec, paper, [`SIM_README`](57mm%20Autocannon/SIM_README.md); sim key `57x347mm` |
+| **57 mm Underbarrel Grenade** | 57 mm LV grenade *(same casing geometry as the autocannon, low-velocity reload)* | [`57mm Underbarrel Grenade/`](57mm%20Underbarrel%20Grenade/) — sim key `57mm_LV_grenade` |
+| **57 mm Mortar / RPG dual-purpose** | 57 mm mortar | [`57mm Mortar RPG/`](57mm%20Mortar%20RPG/) — sim key `57mm_mortar` |
+| **140 mm Tank KE Round** | 140 mm KE | [`140mm Tank KE Round/`](140mm%20Tank%20KE%20Round/) — sim key `140mm_KE` |
 
-### Specialised subfolders
+### Protective equipment, sustainment, and systems — platform subfolders
+
+| System | Platform folder |
+|---|---|
+| **APES Body Armour** *(military)* | [`APES Body Armour/`](APES%20Body%20Armour/) — spec, paper, [`SIM_README.md`](APES%20Body%20Armour/SIM_README.md) (§13 V50/BFD) |
+| **APES-L Mark I** *(police variant; cross-folder)* | [`../Weapons-Police/`](../Weapons-Police/) |
+| **NACS / NEXUS Adaptive Combat System** | [`NACS CBRN/`](NACS%20CBRN/) — spec, paper, SIM_README (prose numbers) |
+| **AlNiCyN three-tier aluminium armour** | [`AlNiCyN Armour/`](AlNiCyN%20Armour/) — spec, paper, SIM_README |
+| **Hearing protection** | [`Hearing Protection/`](Hearing%20Protection/) — spec, paper, SIM_README (§6 SPL stack) |
+| **Military command doctrine** | [`Military Command Doctrine/`](Military%20Command%20Doctrine/) — spec, paper; no sim |
+| **ADF Tactical Field Kit** *(TRP-2026-ADF-FK-001)* | [`ADF Tactical Field Kit/`](ADF%20Tactical%20Field%20Kit/) — integrated 72 h sustainment; ~4.3 kg saving vs IRP; links TACT-1 / ASNP / PODS / Hemp Harmony |
+
+### Hypothetical / academic-study platforms
+
+| System | Platform folder |
+|---|---|
+| **OBSIDIAN secret-service suit** | [`OBSIDIAN Body Armour/`](OBSIDIAN%20Body%20Armour/) |
+| **OBSIDIAN-X full-body armour** | [`OBSIDIAN-X Body Armour/`](OBSIDIAN-X%20Body%20Armour/) |
+| **Combat drug — HyperSynergy-X7** | [`Combat Drug/`](Combat%20Drug/) — mirrored to [`../Drugs/Combat Drug.md`](../Drugs/Combat%20Drug.md) |
+| **Injectable nutrition** | [`Injectable Nutrition/`](Injectable%20Nutrition/) — mirrored to [`../Drugs/Injectable Food.md`](../Drugs/Injectable%20Food.md) |
+| **Caseless / cartridgeless bullets** | [`Caseless Bullets/`](Caseless%20Bullets/) |
+
+### Specialised platform subfolders
 
 | Subfolder | Contents |
 |---|---|
-| [`Military Noise Cancellation/`](Military%20Noise%20Cancellation/) | **TACS** Tactical Acoustic Cancellation System — three variants (Personal / Mobile / Fixed), 35–55 dB cancellation depth at nodes, < 100 µs latency. [`TACS_Complete_Specification.md`](Military%20Noise%20Cancellation/TACS_Complete_Specification.md), [`Paper11_TACS_System.md`](Military%20Noise%20Cancellation/Paper11_TACS_System.md), [`Paper12_TACS_Energy_Physics.md`](Military%20Noise%20Cancellation/Paper12_TACS_Energy_Physics.md), [`TACS_Energy_Conservation_Analysis.md`](Military%20Noise%20Cancellation/TACS_Energy_Conservation_Analysis.md). |
-| [`Rubber Tank Tracks/`](Rubber%20Tank%20Tracks/) | MIL-SPEC track-pad TDP (TRP-2026-014) — HNBR/NBR/NR/Neoprene blend, score 6 679 / 10 000, 15–20 dB noise reduction vs steel. [`Paper14_Military_Track_Pad.md`](Rubber%20Tank%20Tracks/Paper14_Military_Track_Pad.md), [`MIL_SPEC_TRACK_PAD_TDP.md`](Rubber%20Tank%20Tracks/MIL_SPEC_TRACK_PAD_TDP.md), [`EXECUTIVE_SUMMARY.md`](Rubber%20Tank%20Tracks/EXECUTIVE_SUMMARY.md). |
-| [`CL-20 High Explosive/`](CL-20%20High%20Explosive/) | Proteinated CL-20 safe-handling explosive paper — [`Proteinated_CL20_Safe_Explosive_Paper.md`](CL-20%20High%20Explosive/Proteinated_CL20_Safe_Explosive_Paper.md), [`CL-20 HE Readme.md`](CL-20%20High%20Explosive/CL-20%20HE%20Readme.md). |
-| [`HPR-X Rocketry/`](HPR-X%20Rocketry/) | **HPR-X** guided high-power rocketry series — multi-stage solid-propellant, optional IMU + GPS guidance, civilian-amateur-class through SOF spotter-class. [`README.md`](HPR-X%20Rocketry/README.md), [`HPR-X Series Spec.md`](HPR-X%20Rocketry/HPR-X%20Series%20Spec.md), [`Paper19_HPR-X_Guided_Rocketry.md`](HPR-X%20Rocketry/Paper19_HPR-X_Guided_Rocketry.md). |
-| [`TACT-1 Tactical Ration/`](TACT-1%20Tactical%20Ration/) | **TACT-1 Mark II** full-day SOF ration + **ASNP** sports-nutrition powder. [`README.md`](TACT-1%20Tactical%20Ration/README.md), [`TACT-1 Mark II Specification.md`](TACT-1%20Tactical%20Ration/TACT-1%20Mark%20II%20Specification.md), [`TACT-1 Mark II Flavour Catalogue.md`](TACT-1%20Tactical%20Ration/TACT-1%20Mark%20II%20Flavour%20Catalogue.md), [`Paper20_TACT-1_Mk_II_Ration.md`](TACT-1%20Tactical%20Ration/Paper20_TACT-1_Mk_II_Ration.md), [`Advanced Sports Nutrition Powder.md`](TACT-1%20Tactical%20Ration/Advanced%20Sports%20Nutrition%20Powder.md), [`Research Papers/ASNP_Energy_Drink_Research_Paper.md`](Research%20Papers/ASNP_Energy_Drink_Research_Paper.md). Subfolder: [`PODS- Edible High Energy Protein/`](TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) — synthetic glycerolipid (10.21 kcal/g computed; programmable three-phase release). |
-| [`BSG10 Goliath/`](BSG10%20Goliath/) | **BSG-10 Goliath** 10-gauge semi-automatic bullpup combat shotgun — standalone `bsg10_sim` validation (not `weapons_simulation.py`). 45-round drum, ~490 N peak shoulder force, 415 m/s MV. [`README.md`](BSG10%20Goliath/README.md), [`BSG10_Goliath_Full_Specification.md`](BSG10%20Goliath/BSG10_Goliath_Full_Specification.md), [`BSG10_Research_Paper.md`](BSG10%20Goliath/BSG10_Research_Paper.md), [`bsg10_sim_package/`](BSG10%20Goliath/bsg10_sim_package/). |
+| [`Military Noise Cancellation/`](Military%20Noise%20Cancellation/) | **TACS** Tactical Acoustic Cancellation System — [`README.md`](Military%20Noise%20Cancellation/README.md), [`SIM_README.md`](Military%20Noise%20Cancellation/SIM_README.md), [`TACS_Complete_Specification.md`](Military%20Noise%20Cancellation/TACS_Complete_Specification.md), [`Paper11_TACS_System.md`](Military%20Noise%20Cancellation/Paper11_TACS_System.md), [`Paper12_TACS_Energy_Physics.md`](Military%20Noise%20Cancellation/Paper12_TACS_Energy_Physics.md), [`TACS_Energy_Conservation_Analysis.md`](Military%20Noise%20Cancellation/TACS_Energy_Conservation_Analysis.md). |
+| [`Rubber Tank Tracks/`](Rubber%20Tank%20Tracks/) | MIL-SPEC track-pad TDP — [`README.md`](Rubber%20Tank%20Tracks/README.md), [`SIM_README.md`](Rubber%20Tank%20Tracks/SIM_README.md), [`Paper14_Military_Track_Pad.md`](Rubber%20Tank%20Tracks/Paper14_Military_Track_Pad.md), [`MIL_SPEC_TRACK_PAD_TDP.md`](Rubber%20Tank%20Tracks/MIL_SPEC_TRACK_PAD_TDP.md), [`EXECUTIVE_SUMMARY.md`](Rubber%20Tank%20Tracks/EXECUTIVE_SUMMARY.md). |
+| [`CL-20 High Explosive/`](CL-20%20High%20Explosive/) | Proteinated CL-20 safe-handling explosive — [`README.md`](CL-20%20High%20Explosive/README.md), [`Proteinated_CL20_Safe_Explosive_Paper.md`](CL-20%20High%20Explosive/Proteinated_CL20_Safe_Explosive_Paper.md), [`cl20_simulation.py`](CL-20%20High%20Explosive/cl20_simulation.py). |
+| [`Combat Drug/`](Combat%20Drug/) | **HyperSynergy-X7** — [`README.md`](Combat%20Drug/README.md), spec, paper, [`SIM_README.md`](Combat%20Drug/SIM_README.md) (§20 PK). |
+| [`Injectable Nutrition/`](Injectable%20Nutrition/) | GlycoDur-P injectable nutrition — README, spec, paper, SIM_README (§21). |
+| [`Caseless Bullets/`](Caseless%20Bullets/) | BPC protein cartridge — README, spec, paper, SIM_README. |
+| [`OBSIDIAN Body Armour/`](OBSIDIAN%20Body%20Armour/) | Hypothetical VIP suit — README, spec, paper. |
+| [`OBSIDIAN-X Body Armour/`](OBSIDIAN-X%20Body%20Armour/) | Hypothetical full-body armour — README, spec, paper. |
+| [`HPR-X Rocketry/`](HPR-X%20Rocketry/) | Guided rocketry — README, spec, paper, [`SIM_README.md`](HPR-X%20Rocketry/SIM_README.md) (§16). |
+| [`TACT-1 Tactical Ration/`](TACT-1%20Tactical%20Ration/) | **TACT-1 Mark II** full-day SOF ration. [`README.md`](TACT-1%20Tactical%20Ration/README.md), spec, flavour catalogue, [`Paper20_TACT-1_Mk_II_Ration.md`](TACT-1%20Tactical%20Ration/Paper20_TACT-1_Mk_II_Ration.md), [`SIM_README.md`](TACT-1%20Tactical%20Ration/SIM_README.md) (§22 shelf life). Subfolders: [`ASNP Sports Nutrition/`](TACT-1%20Tactical%20Ration/ASNP%20Sports%20Nutrition/), [`PODS- Edible High Energy Protein/`](TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) (`pods_simulation.py`). |
+| [`BSG10 Goliath/`](BSG10%20Goliath/) | **BSG-10 Goliath** 10-gauge bullpup combat shotgun — standalone `bsg10_sim`. [`README.md`](BSG10%20Goliath/README.md), spec, paper, [`bsg10_sim_package/`](BSG10%20Goliath/bsg10_sim_package/). |
 | [`HEL_CMS_DB Laser AntiAir/`](HEL_CMS_DB%20Laser%20AntiAir/) | **HEL-CMS/DB** High-Energy Laser Counter-Munitions System, Diamond Battery powered — 280–300 kW spectral-beam-combined fiber laser air defence platform. Defeats micro-UAVs (0.2 s dwell), rockets (4.9 s dwell), and cruise missiles (12.3 s dwell) across a 4–7 km engagement envelope. 1 MW(e) Sr-90 thermal-betavoltaic power plant eliminates the generator logistics tail; zero crew; 20-year TCO $71.8M saving $51.8M vs conventional HEL. TDB power source at TRL 2–3. [`README.md`](HEL_CMS_DB%20Laser%20AntiAir/README.md), [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Full_Spec.md), [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Research_Paper.md). |
-| [`TAIPAN Missile/`](TAIPAN%20Missile/) | **TAIPAN-1** guided ballistic interceptor rocket — 4.87 m, 631 kg wet, RP-1/LOX electric pump-fed (50 kN, Isp 293.1 s, 62 kg dry engine mass). Simulation-verified maximum range **1,618 km** at Mach 13.27 and 367 km apogee; configurable 432–1,618 km by varying nose ballast. Production unit cost **$50k–$80k** (22× cheaper than AMRAAM at 160 km). Entire airframe 3D printed in 14 structural parts. [`README.md`](TAIPAN%20Missile/README.md), [`TAIPAN-1_Technical_Specification_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Technical_Specification_Rev1.0.md), [`TAIPAN-1_Financial_Analysis_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Financial_Analysis_Rev1.0.md), [`TAIPAN-1_Geometry_Reference_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Geometry_Reference_Rev1.0.md), [`taipan1_sim.py`](TAIPAN%20Missile/taipan1_sim.py). |
+| [`TAIPAN Missile/`](TAIPAN%20Missile/) | **TAIPAN-1** guided ballistic interceptor rocket — 4.87 m, 631 kg wet, RP-1/LOX electric pump-fed (50 kN, Isp 293.1 s, 62 kg dry engine mass). Simulation-verified maximum range **1,618 km** at Mach 13.27 and 367 km apogee; configurable 432–1,618 km by varying nose ballast. Production unit cost **$50k–$80k** (22× cheaper than AMRAAM at 160 km). Entire airframe 3D printed in 14 structural parts. [`README.md`](TAIPAN%20Missile/README.md), [`TAIPAN-1_Technical_Specification_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Technical_Specification_Rev1.0.md), [`TAIPAN-1_Financial_Analysis_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Financial_Analysis_Rev1.0.md), [`TAIPAN-1_Geometry_Reference_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Geometry_Reference_Rev1.0.md), [`TAIPAN-1_Research_Paper.md`](TAIPAN%20Missile/TAIPAN-1_Research_Paper.md), [`SIM_README.md`](TAIPAN%20Missile/SIM_README.md), [`taipan1_sim.py`](TAIPAN%20Missile/taipan1_sim.py). |
 | [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) | **OAM-VEST** vehicle-mounted non-lethal acoustic area denial — dual 1.2 m phased arrays, OAM vortex + AM vestibular modes, **173.2 dB** source, **410 m** disorientation / **19.3 m** incapacitation, earplug-immune Modes B/C; standalone `oam_vest_sim`. [`README.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/README.md), [`OAM-VEST_System_Specification.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_System_Specification.md), [`OAM-VEST_Research_Paper.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Research_Paper.md), [`OAM-VEST_Simulation_Package/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Simulation_Package/). |
-
-### Hypothetical / academic-study items
-
-| Item | File |
-|---|---|
-| **OBSIDIAN body armour (hypothetical)** | [`Research Papers/OBSIDIAN_Research_Paper.md`](Research%20Papers/OBSIDIAN_Research_Paper.md) |
-| **OBSIDIAN-X body armour (hypothetical)** | [`Research Papers/OBSIDIAN_X_Research_Paper.md`](Research%20Papers/OBSIDIAN_X_Research_Paper.md), [`Hypothetical Body Armour.md`](Hypothetical%20Body%20Armour.md) |
-| **Hypothetical secret-service suit** | [`Hypothetical_secret_service_suit_specs.md`](Hypothetical_secret_service_suit_specs.md) |
-| **Combat drug — HyperSynergy-X7** | [`Combat Drug.md`](Combat%20Drug.md), [`Research Papers/Paper18_HyperSynergy_X7_Combat_Drug.md`](Research%20Papers/Paper18_HyperSynergy_X7_Combat_Drug.md) — mirrored to [`../Drugs/Combat Drug.md`](../Drugs/Combat%20Drug.md) |
-| **Injectable nutrition** | [`Injectable Food.md`](Injectable%20Food.md), [`Research Papers/Paper17_Injectable_Nutrition.md`](Research%20Papers/Paper17_Injectable_Nutrition.md) — mirrored to [`../Drugs/Injectable Food.md`](../Drugs/Injectable%20Food.md) |
-| **ASNP sports-nutrition powder** | [`TACT-1 Tactical Ration/Advanced Sports Nutrition Powder.md`](TACT-1%20Tactical%20Ration/Advanced%20Sports%20Nutrition%20Powder.md), [`Research Papers/ASNP_Energy_Drink_Research_Paper.md`](Research%20Papers/ASNP_Energy_Drink_Research_Paper.md) |
-| **Caseless / cartridgeless bullets** | [`Caseless Bullets_README.md`](Caseless%20Bullets_README.md), [`Research Papers/Cartridgeless Bullets_Research_Paper.md`](Research%20Papers/Cartridgeless%20Bullets_Research_Paper.md) |
+| [`Research Papers/`](Research%20Papers/) | **Archive index** — papers relocated to platform folders; see [`Research Papers/README.md`](Research%20Papers/README.md). |
 
 ---
 
@@ -210,11 +211,12 @@ Vehicle-mounted (Land Rover class or larger). Attacks vestibular balance pathway
    - [`TACT-1 Tactical Ration/PODS- Edible High Energy Protein/`](TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) — PODS synthetic glycerolipid subfolder added to the TACT-1 ration portfolio (10.21 kcal/g computed energy density, programmable three-phase energy release).
 10. **Three new items (this revision).**
    - [`BSG10 Goliath/`](BSG10%20Goliath/) — BSG-10 Goliath 10-gauge bullpup combat shotgun with dedicated `bsg10_sim` package (spec + research paper + folder README).
-   - [`TACT-1 Tactical Ration/Advanced Sports Nutrition Powder.md`](TACT-1%20Tactical%20Ration/Advanced%20Sports%20Nutrition%20Powder.md) — ASNP operator spec added as fourth UCN combat-nutrition pillar (paired with existing ASNP research paper).
+   - [`TACT-1 Tactical Ration/ASNP Sports Nutrition/`](TACT-1%20Tactical%20Ration/ASNP%20Sports%20Nutrition/) — ASNP operator spec moved to dedicated subfolder (paired with research paper).
    - [`../Threat Asessments/`](../Threat%20Asessments/) — Hypothetical threat-intelligence briefs (FSB neurological interference; 2-NT/TNT mixture; physical identity replacement) with folder README.
 11. **Two new items (this revision).**
    - [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) — OAM-VEST non-lethal acoustic area denial (spec + research paper + `oam_vest_sim` package + folder README).
-   - [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) — ADF Tactical Field Kit integrated sustainment spec (TRP-2026-ADF-FK-001): titanium tools, filtration, IFAK, TACT-1/ASNP/Hemp Harmony nutrition and hygiene stack; ~4.3 kg weight saving vs conventional 72 h IRP kit.
+   - [`ADF Tactical Field Kit/`](ADF%20Tactical%20Field%20Kit/) — ADF Tactical Field Kit integrated sustainment spec (TRP-2026-ADF-FK-001).
+12. **Platform subfolder reorganization (this revision).** All 30+ platforms now live in dedicated subfolders — each with hub `README.md`, operator spec, research paper (where applicable), and simulation documentation (`SIM_README.md` for portfolio-sim platforms; standalone `*_sim_package/` or `*_sim.py` for bespoke physics). Root retains only portfolio infrastructure (`weapons_simulation.py`, `weapons_sim_results.md`, `Common Architecture and Components.md`). Relocated papers indexed in [`Research Papers/README.md`](Research%20Papers/README.md).
 
 ---
 

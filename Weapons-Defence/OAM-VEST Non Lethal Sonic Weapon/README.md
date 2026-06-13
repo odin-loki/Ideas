@@ -1,4 +1,4 @@
-# OAM-VEST — non-lethal acoustic area denial
+﻿# OAM-VEST — non-lethal acoustic area denial
 
 > **A vehicle-mounted non-lethal acoustic area denial system that incapacitates via vestibular disruption rather than auditory pain compliance.** Dual 1.2 m phased-array panels deliver OAM vortex beams and amplitude-modulated bone-conducted stimulation at **173.2 dB** combined source level — **410 m** disorientation range, **19.3 m** incapacitation range, **earplug-immune** against Modes B and C. Numbers trace to the standalone `oam_vest_sim` package in this folder — not to the portfolio-wide `weapons_simulation.py`.
 
@@ -89,8 +89,8 @@ See [`OAM-VEST_Simulation_Package/OAM-VEST_Simulation_README.md`](OAM-VEST_Simul
 
 - [`../README.md`](../README.md) — Weapons-Defence portfolio index
 - [`../Military Noise Cancellation/`](../Military%20Noise%20Cancellation/) — **TACS** active noise cancellation (defensive hearing protection; opposite mission set to OAM-VEST)
-- [`../military_hearing_protection_systems.md`](../military_hearing_protection_systems.md) — Passive and active hearing-protection stack (LRAD countermeasure context)
-- [`../Research Papers/Paper15_Hearing_Protection.md`](../Research%20Papers/Paper15_Hearing_Protection.md) — Paired research paper for hearing protection
+- [`../Hearing Protection/Hearing_Protection_Specification.md`](../Hearing%20Protection/Hearing_Protection_Specification.md) — Passive and active hearing-protection stack (LRAD countermeasure context)
+- [`../Hearing Protection/Hearing_Protection_Research_Paper.md`](../Hearing%20Protection/Hearing_Protection_Research_Paper.md) — Paired research paper for hearing protection
 - [`../../Threat Asessments/`](../../Threat%20Asessments/) — Hypothetical threat-intelligence briefs (intelligence register)
 
 ---

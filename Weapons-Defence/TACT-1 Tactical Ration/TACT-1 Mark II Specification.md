@@ -1,4 +1,4 @@
-# TACT-1 Mark II — Full-Day Tactical Compact Ration
+﻿# TACT-1 Mark II — Full-Day Tactical Compact Ration
 
 **TRP-2026-021 — UNCLASSIFIED / FOR OFFICIAL USE ONLY**
 **Advanced Defence Systems Research Division · March 2026 · Product Specification Rev. 3 · Commercial-in-Confidence**
@@ -33,7 +33,7 @@ TACT-1 Mark II covers the full SOF daily energy and protein requirement in **5 b
 
 ## §2 Derivation from the Injectable Food Architecture
 
-The injectable food system (GlycoDur-P / NutriComplete-P; see [`../Injectable Food.md`](../Injectable%20Food.md) and [`../Research Papers/Paper17_Injectable_Nutrition.md`](../Research%20Papers/Paper17_Injectable_Nutrition.md)) established two principles that translate directly to the oral format. Both are implemented in Mark II.
+The injectable food system (GlycoDur-P / NutriComplete-P; see [`../Injectable Nutrition/Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) and [`../Injectable Nutrition/Injectable_Nutrition_Research_Paper.md`](../Injectable%20Nutrition/Injectable_Nutrition_Research_Paper.md)) established two principles that translate directly to the oral format. Both are implemented in Mark II.
 
 ### 2.1 Derived from GlycoDur-P — Sustained Glucose Release
 
@@ -506,16 +506,16 @@ Per 140 g bar dissolved into ~250 mL water (post-mastication):
 Within the 1 200 mOsm/kg oral-tolerance bound — GI-tolerable ✓
 ```
 
-The TACT-1 Mark II bar formulation is engineered to stay within the oral-tolerance bound when consumed with the recommended 250 mL water-per-bar protocol. The use of HBCD (a glucose polymer) instead of simple sugars is the key design choice: HBCD contributes 13 mOsm/L despite delivering 13 g of carbohydrate, vs ~720 mOsm/L if the same carbohydrate were delivered as glucose monomer. This is the same osmotic-pressure principle that underlies the §0 finding in the [`Injectable Food.md`](../Injectable%20Food.md) document — but inverted (the TACT-1 design EXPLOITS HBCD's low osmolality to stay within the GI tolerance bound, where the injectable formulation's high osmolality fails the IV-safe bound).
+The TACT-1 Mark II bar formulation is engineered to stay within the oral-tolerance bound when consumed with the recommended 250 mL water-per-bar protocol. The use of HBCD (a glucose polymer) instead of simple sugars is the key design choice: HBCD contributes 13 mOsm/L despite delivering 13 g of carbohydrate, vs ~720 mOsm/L if the same carbohydrate were delivered as glucose monomer. This is the same osmotic-pressure principle that underlies the §0 finding in the [`Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) document — but inverted (the TACT-1 design EXPLOITS HBCD's low osmolality to stay within the GI tolerance bound, where the injectable formulation's high osmolality fails the IV-safe bound).
 
 ---
 
 ## §15 References (cross-portfolio)
 
-- [`../Injectable Food.md`](../Injectable%20Food.md) — GlycoDur-P / NutriComplete-P injectable nutrition concept document.
-- [`../Research Papers/Paper17_Injectable_Nutrition.md`](../Research%20Papers/Paper17_Injectable_Nutrition.md) — Sustained-release injectable nutrition paper (the architecture TACT-1 Mark II is derived from).
-- [`../Research Papers/ASNP_Energy_Drink_Research_Paper.md`](../Research%20Papers/ASNP_Energy_Drink_Research_Paper.md) — Companion energy-drink product within the same combat-nutrition stack.
-- [`../Combat Drug.md`](../Combat%20Drug.md) and [`../Research Papers/Paper18_HyperSynergy_X7_Combat_Drug.md`](../Research%20Papers/Paper18_HyperSynergy_X7_Combat_Drug.md) — Pharmacology adjacency.
+- [`../Injectable Nutrition/Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) — GlycoDur-P / NutriComplete-P injectable nutrition concept document.
+- [`../Injectable Nutrition/Injectable_Nutrition_Research_Paper.md`](../Injectable%20Nutrition/Injectable_Nutrition_Research_Paper.md) — Sustained-release injectable nutrition paper (the architecture TACT-1 Mark II is derived from).
+- [`ASNP Sports Nutrition/ASNP_Research_Paper.md`](ASNP%20Sports%20Nutrition/ASNP_Research_Paper.md) — Companion energy-drink product within the same combat-nutrition stack.
+- [`../Combat Drug/Combat_Drug_Specification.md`](../Combat%20Drug/Combat_Drug_Specification.md) and [`../Combat Drug/Combat_Drug_Research_Paper.md`](../Combat%20Drug/Combat_Drug_Research_Paper.md) — Pharmacology adjacency.
 - [`../../Drugs/`](../../Drugs/) — Wider pharmacology research portfolio.
 - [`Paper20_TACT-1_Mk_II_Ration.md`](Paper20_TACT-1_Mk_II_Ration.md) — Academic-format research paper accompanying this specification.
 

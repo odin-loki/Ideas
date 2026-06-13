@@ -1,4 +1,4 @@
-# Audit: README content vs. source-document reality (Batch 1)
+﻿# Audit: README content vs. source-document reality (Batch 1)
 
 *Read-only investigation — no files modified. Findings only.*
 
@@ -215,7 +215,7 @@ There are ~36 additional top-level folders not covered in this batch. The same a
 - **Hardware / materials:** Diamond Batterys, Quantum Diamond Wafer, Quantum Graph Optimisation, New Classes of Electrical Components, 100W Wideband Noise Generator, CPU
 - **Math / physics:** Physics, General Math Papers, 3 to 8 Value Boolean Algebra, Math Question Generator
 - **RNGs:** all subfolders of `RNGS/`
-- **Worldbuilding:** UCN AIs, UCN Political System, Battle Sim, Weapons (and `Weapons/Research Papers/` — 19 papers)
+- **Worldbuilding:** UCN AIs, UCN Political System, Battle Sim, Weapons (and `Weapons-Defence/Research Papers/` — 19 papers)
 - **Lifestyle:** Cocktails, Beauty Products, Drugs/Nootropics, Drugs/Schizophrenia Cure
 - **Other:** GM Enhancements, Future C++, Izaac as Side Data, Neural Dust
 
@@ -237,7 +237,7 @@ These are mechanical cleanups that preserve all content while restoring readabil
 - 🟢 cases not verified against source papers (only against file lists).
 - Folders outside Batch 1 not audited.
 - Subfolders within audited folders (e.g., `Drugs/Nootropics/`, `Compression Algorithms/GRIA/`) not separately audited.
-- The 19 papers in `Weapons/Research Papers/` not audited individually.
+- The 19 papers in `Weapons-Defence/Research Papers/` not audited individually.
 - The actual research papers' technical claims not independently fact-checked — only checked for self-consistency between README and source.
 
 ---

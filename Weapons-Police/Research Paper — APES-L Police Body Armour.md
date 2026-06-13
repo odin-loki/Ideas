@@ -224,7 +224,7 @@ A Lambert–Jonas / Recht–Ipson V50 model implemented in the companion `weapon
 
 Three honest observations follow. **First**, every HG2-class handgun threat is stopped with a comfortable BFD margin (9 mm ball at 3.3 mm; 5.7 × 28 mm at 3.0 mm); 5.56 × 45 NATO M855 is stopped at 26.2 mm BFD; 7.62 × 51 NATO M80 ball is stopped at the 44 mm BFD ceiling. **Second**, the **.30-06 M2 AP is perforated** at its standard muzzle velocity (V50 = 825 m/s vs threat = 878 m/s — the threat exceeds the soft panel's V50 by 53 m/s); the 7.62 × 54R B-32 AP is *just* stopped at the BFD ceiling (V50 = 844 m/s vs threat = 820 m/s). **Third**, the .50 BMG M2 AP and the 15.2 × 115 APYT anti-materiel rounds are both perforated by a large margin, consistent with the Sim 21 result and with the wider physics limit that wearable single-layer ceramic does not stop anti-materiel-class threats.
 
-The .30-06 M2 AP deficit is the design honesty point this paper must make explicit. The APES-L 22 kg/m² areal density is **one tier below** the 35 kg/m² military APES stack characterised in the parent military programme (`../Weapons-Defence/Advanced Protective Equipment System Specification.md` §6.4 / Paper6 §8), which stops both the .30-06 M2 AP and the 7.62 × 54R B-32 AP at the 44 mm BFD ceiling and only loses to the .50 BMG and 15.2 APYT. The 13 kg/m² areal-density reduction is a deliberate consequence of the 20-year-career biomechanical-longevity objective established in §2.3; for specialist police units required to face military rifle AP threats, the Mark I is worn under a supplementary rifle-rated hard plate carrier as discussed in §4.2 / Sim 21. The Mark I handles the full HG2 / .50 AE / 12-gauge slug civilian-threat envelope it is engineered for; it does *not* claim to handle rifle-grade AP threats at field velocities.
+The .30-06 M2 AP deficit is the design honesty point this paper must make explicit. The APES-L 22 kg/m² areal density is **one tier below** the 35 kg/m² military APES stack characterised in the parent military programme (`../Weapons-Defence/APES Body Armour/APES_Specification.md` §6.4 / Paper6 §8), which stops both the .30-06 M2 AP and the 7.62 × 54R B-32 AP at the 44 mm BFD ceiling and only loses to the .50 BMG and 15.2 APYT. The 13 kg/m² areal-density reduction is a deliberate consequence of the 20-year-career biomechanical-longevity objective established in §2.3; for specialist police units required to face military rifle AP threats, the Mark I is worn under a supplementary rifle-rated hard plate carrier as discussed in §4.2 / Sim 21. The Mark I handles the full HG2 / .50 AE / 12-gauge slug civilian-threat envelope it is engineered for; it does *not* claim to handle rifle-grade AP threats at field velocities.
 
 ---
 
@@ -346,9 +346,9 @@ The system is positioned for Phase 1 material validation in an independent NIJ-a
 
 \[21\] Australian Defence Apparel. (2024). DFNDR system launch. Land Forces Expo, September 2024.
 
-\[22\] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS TOTAL Camo and Undersuit.md`](../Weapons-Defence/NACS%20TOTAL%20Camo%20and%20Undersuit.md).
+\[22\] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
 
-\[23\] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../Weapons-Defence/Advanced Protective Equipment System Specification.md`](../Weapons-Defence/Advanced%20Protective%20Equipment%20System%20Specification.md) and [`../Weapons-Defence/Research Papers/Paper6_Body_Armor_System.md`](../Weapons-Defence/Research%20Papers/Paper6_Body_Armor_System.md).
+\[23\] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md).
 
 ---
 

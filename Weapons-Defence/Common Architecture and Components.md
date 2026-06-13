@@ -1,4 +1,4 @@
-# UCDR Common Architecture & Components
+﻿# UCDR Common Architecture & Components
 ## TRP-2026-022 — UNCLASSIFIED / FOR OFFICIAL USE ONLY
 
 > **A cross-platform component-commonality matrix for the Weapons-Defence portfolio. Every weapon in the small-arms family, the heavy-weapon family, and the body-armour / undersuit family is designed so that as many parts as possible are shared across platforms — to drop the spares burden, simplify training, and let one armourer's bench restore any weapon in the system.** This document defines the common architecture explicitly so that future spec sheets and research papers can reference component lists by name rather than re-specifying them. All ballistic / performance numbers in this folder trace back to [`weapons_sim_results.md`](weapons_sim_results.md) and the simulator in [`weapons_simulation.py`](weapons_simulation.py).
@@ -98,7 +98,7 @@ All four heavy-weapon cartridges and all three small-arms cartridges use the sam
 
 ## 4. Personal protective equipment family
 
-Three platforms share the NACS CORE undersuit as a base layer: APES (military), APES-L Mark I Police (`Weapons-Police/`), and the hypothetical OBSIDIAN / OBSIDIAN-X academic-study systems. The NACS undersuit (`NACS TOTAL Camo and Undersuit.md`) provides:
+Three platforms share the NACS CORE undersuit as a base layer: APES (military), APES-L Mark I Police (`Weapons-Police/`), and the hypothetical OBSIDIAN / OBSIDIAN-X academic-study systems. The NACS undersuit ([`NACS CBRN/NACS_Specification.md`](NACS%20CBRN/NACS_Specification.md)) provides:
 
 | Layer | Function | Shared across |
 |---|---|---|
@@ -235,9 +235,9 @@ Net spares-SKU reduction across the portfolio: approximately **62 %** compared t
 
 - [`weapons_simulation.py`](weapons_simulation.py) — the source-of-truth simulator
 - [`weapons_sim_results.md`](weapons_sim_results.md) — the simulator's tabulated output
-- Small-arms specs: [`MP-4.6M Pistol.md`](MP-4.6M%20Pistol.md), [`MP-4.6M Defender PDW.md`](MP-4.6M%20Defender%20PDW.md), [`MP-6.8 Advanced Combat Rifle.md`](MP-6.8%20Advanced%20Combat%20Rifle.md), [`15.2mm Anti-Tank Sniper System.md`](15.2mm%20Anti-Tank%20Sniper%20System.md)
-- Heavy weapons specs: [`57mm Advanced Mechanical Autocannon System.md`](57mm%20Advanced%20Mechanical%20Autocannon%20System.md), [`57mm Underbarrel Grenade Round.md`](57mm%20Underbarrel%20Grenade%20Round.md), [`57mm Enhanced Dual-Purpose System Mortar and RPG.md`](57mm%20Enhanced%20Dual-Purpose%20System%20Mortar%20and%20RPG.md), [`140mm Advanced Multi-Effect Tank Round.md`](140mm%20Advanced%20Multi-Effect%20Tank%20Round.md)
+- Small-arms specs: [`MP-4.6M Guardian Pistol/MP-4.6M_Guardian_Pistol_Specification.md`](MP-4.6M%20Guardian%20Pistol/MP-4.6M_Guardian_Pistol_Specification.md), [`MP-4.6M Defender PDW/MP-4.6M_Defender_PDW_Specification.md`](MP-4.6M%20Defender%20PDW/MP-4.6M_Defender_PDW_Specification.md), [`MP-6.8 Mark II Rifle/MP-6.8_Mark_II_Rifle_Specification.md`](MP-6.8%20Mark%20II%20Rifle/MP-6.8_Mark_II_Rifle_Specification.md), [`MAS-15.2E Anti-Materiel Sniper/MAS-15.2E_Specification.md`](MAS-15.2E%20Anti-Materiel%20Sniper/MAS-15.2E_Specification.md)
+- Heavy weapons specs: [`57mm Autocannon/57mm_Autocannon_Specification.md`](57mm%20Autocannon/57mm_Autocannon_Specification.md), [`57mm Underbarrel Grenade/57mm_Underbarrel_Grenade_Specification.md`](57mm%20Underbarrel%20Grenade/57mm_Underbarrel_Grenade_Specification.md), [`57mm Mortar RPG/57mm_Mortar_RPG_Specification.md`](57mm%20Mortar%20RPG/57mm_Mortar_RPG_Specification.md), [`140mm Tank KE Round/140mm_Tank_KE_Specification.md`](140mm%20Tank%20KE%20Round/140mm_Tank_KE_Specification.md)
 - Paired research papers in [`Research Papers/`](Research%20Papers/)
-- Body-armour cross-link: [`Advanced Protective Equipment System Specification.md`](Advanced%20Protective%20Equipment%20System%20Specification.md) and the police variant at [`../Weapons-Police/APES-L Mark I Police Body Armour.md`](../Weapons-Police/APES-L%20Mark%20I%20Police%20Body%20Armour.md)
+- Body-armour cross-link: [`APES Body Armour/APES_Specification.md`](APES%20Body%20Armour/APES_Specification.md) and the police variant at [`../Weapons-Police/APES-L Mark I Police Body Armour.md`](../Weapons-Police/APES-L%20Mark%20I%20Police%20Body%20Armour.md)
 
 [← Back to Weapons-Defence README](README.md)

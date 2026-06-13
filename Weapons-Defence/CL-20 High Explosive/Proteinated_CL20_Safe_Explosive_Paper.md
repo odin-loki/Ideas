@@ -505,7 +505,7 @@ TRL definitions follow the standard ISO 16290 / NASA / TRL scale, adapted to the
 
 ### 12.2 Why conventional IP does not apply
 
-> **ACADEMIC STUDY caveat.** Three structural reasons explain why this paper produces narrower IP than the equivalent sections of (e.g.) the [`../MP-4.6M Pistol.md`](../MP-4.6M%20Pistol.md) or [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) specifications:
+> **ACADEMIC STUDY caveat.** Three structural reasons explain why this paper produces narrower IP than the equivalent sections of (e.g.) the [`../MP-4.6M Guardian Pistol/MP-4.6M_Guardian_Pistol_Specification.md`](../MP-4.6M%20Guardian%20Pistol/MP-4.6M_Guardian_Pistol_Specification.md) or [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) specifications:
 >
 > 1. **No enabling disclosure.** Patent claims on a chemical material require the specification to enable one of ordinary skill to make and use the material. The paper deliberately does not describe the synthesis route at procurement-grade specificity; precursor identities are generalised to amino-acid class; no scale-up route past laboratory bench is offered. This is sufficient for academic publication and conceptual contribution but **not sufficient for patent claims**.
 > 2. **No characterised composition of matter.** Composition-of-matter claims require the material to be characterised by elemental composition, polymorph, crystalline structure, and physical properties to a level that allows infringement detection. The proteinated formulation is described conceptually; its specific elemental composition and polymorphic structure at the proteinated interface are not characterised.

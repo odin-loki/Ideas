@@ -1,4 +1,4 @@
-# TACT-1 Mark II — Full-Day Tactical Compact Ration: Translating an Injectable Sustained-Nutrition Architecture into a TGase-Crosslinked, Carnauba-Coated, Extruded Oral Bar
+﻿# TACT-1 Mark II — Full-Day Tactical Compact Ration: Translating an Injectable Sustained-Nutrition Architecture into a TGase-Crosslinked, Carnauba-Coated, Extruded Oral Bar
 
 *Technical Research Paper*
 
@@ -52,7 +52,7 @@ Mark II addresses all three constraints simultaneously through one engineering p
 
 ### 3.1 GlycoDur-P → Oral HBCD-in-Casein Matrix
 
-The GlycoDur-P injectable (Defence Technology Research Division, 2026; see [`../Research Papers/Paper17_Injectable_Nutrition.md`](../Research%20Papers/Paper17_Injectable_Nutrition.md)) delivers approximately 200 g of glucose equivalent over 4–6 weeks subcutaneously via PLGA-microsphere-encapsulated glycoprotein scaffolds. The release mechanism is layered: surface α-glucosidase cleavage of exposed chains (40 % of glucose, weeks 1–2), intermediate-domain exposure via proteolytic trimming (35 %, weeks 3–4), and core-scaffold breakdown by sustained protease activity (25 %, weeks 5–6). The release rate is tuned to 4–6 g glucose/hour, matching hepatic glycogenolysis.
+The GlycoDur-P injectable (Defence Technology Research Division, 2026; see [`../Injectable Nutrition/Injectable_Nutrition_Research_Paper.md`](../Injectable%20Nutrition/Injectable_Nutrition_Research_Paper.md)) delivers approximately 200 g of glucose equivalent over 4–6 weeks subcutaneously via PLGA-microsphere-encapsulated glycoprotein scaffolds. The release mechanism is layered: surface α-glucosidase cleavage of exposed chains (40 % of glucose, weeks 1–2), intermediate-domain exposure via proteolytic trimming (35 %, weeks 3–4), and core-scaffold breakdown by sustained protease activity (25 %, weeks 5–6). The release rate is tuned to 4–6 g glucose/hour, matching hepatic glycogenolysis.
 
 The TACT-1 Mark II implements an oral analogue of this mechanism. **Highly Branched Cyclic Dextrin (HBCD)** is a glucose polymer with the same branched α-1,4 / α-1,6 glycosidic architecture as the GlycoDur-P scaffold. In TACT-1 Mark II, HBCD is embedded physically inside a transglutaminase-crosslinked micellar-casein matrix. When ingested, the casein clots in gastric acid (the native casein satiety mechanism, retained from Mark I), and the HBCD is released gradually as gastric and intestinal proteases work through the crosslinked protein network. The MCT + macadamia fat phase further delays absorption at the intestinal wall. The result is a 4–6 hour sustained glucose release curve from a solid bar, with no insulin spike and no energy crash — the oral analogue of the GlycoDur-P injectable's slow-release profile, but on a per-bar timescale rather than a per-injection timescale.
 
@@ -349,10 +349,10 @@ PV(t)_flaxseed_oil     ∝ exp(−1.5 × t)      # ~75 % polyunsaturated, 80× f
 
 [12] U.S. Army Combat Capabilities Development Command Soldier Center (DEVCOM SC) — Meal, Ready-to-Eat (MRE) Operational Rations Specification. Natick, MA.
 
-[13] *Sustained Nutrition Protein Systems for Military and Medical Applications* (TRP-2026-017). GlycoDur-P / NutriComplete-P injectable nutrition platform paper. Advanced Defence Systems Research Division. (See [`../Research Papers/Paper17_Injectable_Nutrition.md`](../Research%20Papers/Paper17_Injectable_Nutrition.md).)
+[13] *Sustained Nutrition Protein Systems for Military and Medical Applications* (TRP-2026-017). GlycoDur-P / NutriComplete-P injectable nutrition platform paper. Advanced Defence Systems Research Division. (See [`../Injectable Nutrition/Injectable_Nutrition_Research_Paper.md`](../Injectable%20Nutrition/Injectable_Nutrition_Research_Paper.md).)
 
 [14] *TACT-1 Mark II — Full-Day Tactical Compact Ration: Product Specification* (TRP-2026-021, Rev 3). Advanced Defence Systems Research Division. (Companion operator-spec document; see [`TACT-1 Mark II Specification.md`](TACT-1%20Mark%20II%20Specification.md).)
 
 [15] *TACT-1 Mark II — Flavour Development Catalogue* (TRP-2026-021, Rev 1). 40-variant natural-ingredient flavour catalogue. (See [`TACT-1 Mark II Flavour Catalogue.md`](TACT-1%20Mark%20II%20Flavour%20Catalogue.md).)
 
-[16] *ASNP Energy Drink — Pharmacology and Formulation*. Advanced Defence Systems Research Division. (See [`../Research Papers/ASNP_Energy_Drink_Research_Paper.md`](../Research%20Papers/ASNP_Energy_Drink_Research_Paper.md).)
+[16] *ASNP Energy Drink — Pharmacology and Formulation*. Advanced Defence Systems Research Division. (See [`ASNP Sports Nutrition/ASNP_Research_Paper.md`](ASNP%20Sports%20Nutrition/ASNP_Research_Paper.md).)

@@ -39,7 +39,7 @@ This prospectus documents the full research and development programme for the Ad
 
 The Mark I system weighs approximately 6.5 kg ready to wear — 67 % lighter than the current 20 kg torso-only police ballistic vest — while providing full-body stab and slash coverage, torso ballistic protection to .50 AE and 12-gauge slug, and a 66 % improvement in composite injury score across the full realistic police threat distribution. It operates comfortably from −25 °C to +45 °C without formulation change and its sealed panels are rated to maintain NIJ compliance past 12 years against 4.6 years for current aramid systems.
 
-The system is the **APES-L** variant of the military APES platform described in [`../Weapons-Defence/Advanced Protective Equipment System Specification.md`](../Weapons-Defence/Advanced%20Protective%20Equipment%20System%20Specification.md) and [`../Weapons-Defence/Research Papers/Paper6_Body_Armor_System.md`](../Weapons-Defence/Research%20Papers/Paper6_Body_Armor_System.md) — *same architecture, adapted for law enforcement*. The key adaptations are: single-use replaceable ceramic tiles (vs multi-hit pre-stressed plates) for the lower repeat-hit probability of patrol policing; ionic-liquid STF (vs aramid-thermoplastic) for cold-weather comfort; NIJ Level II stab focus (vs Level III rifle focus); and a lighter weight budget targeted at 20-year-career biomechanical longevity, not 72-hour CBRN sealed-operations endurance.
+The system is the **APES-L** variant of the military APES platform described in [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md) — *same architecture, adapted for law enforcement*. The key adaptations are: single-use replaceable ceramic tiles (vs multi-hit pre-stressed plates) for the lower repeat-hit probability of patrol policing; ionic-liquid STF (vs aramid-thermoplastic) for cold-weather comfort; NIJ Level II stab focus (vs Level III rifle focus); and a lighter weight budget targeted at 20-year-career biomechanical longevity, not 72-hour CBRN sealed-operations endurance.
 
 ---
 
@@ -139,7 +139,7 @@ The NACS CORE undersuit incorporates a GORE CHEMPAK selectively permeable membra
 
 ### 5.1 Layer 1 — NACS CORE undersuit
 
-The NACS CORE (developed under the companion NACS-TOTAL research programme in [`../Weapons-Defence/NACS TOTAL Camo and Undersuit.md`](../Weapons-Defence/NACS%20TOTAL%20Camo%20and%20Undersuit.md)) provides the biological foundation layer. Construction: merino wool / silver-ion nylon blend inner, GORE CHEMPAK selectively permeable CBRN membrane, sealed interfaces (YKK waterproof zipper + silicone seal strip) at wrists, ankles, and neck. Weight: 1.85 kg full system including gloves and socks. Temperature range: −30 °C to +50 °C. The antimicrobial silver-ion treatment inhibits odour and microbial growth during extended operations. For the Mark I police configuration, the CBRN membrane capability is a bonus rather than a primary requirement — it adds marginal weight versus a standard compression undersuit but enables deployment in HAZMAT or chemical-incident contexts.
+The NACS CORE (developed under the companion NACS-TOTAL research programme in [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md)) provides the biological foundation layer. Construction: merino wool / silver-ion nylon blend inner, GORE CHEMPAK selectively permeable CBRN membrane, sealed interfaces (YKK waterproof zipper + silicone seal strip) at wrists, ankles, and neck. Weight: 1.85 kg full system including gloves and socks. Temperature range: −30 °C to +50 °C. The antimicrobial silver-ion treatment inhibits odour and microbial growth during extended operations. For the Mark I police configuration, the CBRN membrane capability is a bonus rather than a primary requirement — it adds marginal weight versus a standard compression undersuit but enables deployment in HAZMAT or chemical-incident contexts.
 
 Critical modification from NACS-TOTAL specification: the NACS PCM layer (200 g) is omitted. Simulation 19 confirmed it provides no additional thermal benefit when APES PCM is present — both exhaust at the same equilibrium core temperature of 37.62 °C at 8 hours in 35 °C ambient.
 
@@ -687,7 +687,7 @@ The numbers below are taken verbatim from the "APES-L police (10-layer + 8 mm B4
 - The **.30-06 M2 AP is perforated** (V50 825 m/s vs threat velocity 878 m/s — the threat exceeds V50 by 53 m/s). The 7.62 × 54R B-32 AP is *just* stopped (V50 844 m/s vs 820 m/s) at the 44 mm BFD ceiling.
 - The .50 BMG M2 AP and the 15.2 × 115 APYT are both perforated by a large margin. Consistent with Sim 21 and §5.5: anti-materiel rifle threats are explicitly outside wearable single-layer ceramic capability and must be defeated by armoured-vehicle composites.
 
-This **honestly reflects APES-L being one tier below the APES military system** (`../Weapons-Defence/Advanced Protective Equipment System Specification.md` §6.4 / Paper6 §8 — the 35 kg/m² military stack stops both the .30-06 M2 AP and the 7.62 × 54R B-32 AP at the BFD ceiling, and only loses to the .50 BMG / 15.2 APYT). The APES-L deficit on .30-06 M2 AP is a deliberate consequence of the 13 kg/m² areal-density reduction the police variant accepts to satisfy the 20-year-career biomechanical-longevity objective set in §2.
+This **honestly reflects APES-L being one tier below the APES military system** (`../Weapons-Defence/APES Body Armour/APES_Specification.md` §6.4 / Paper6 §8 — the 35 kg/m² military stack stops both the .30-06 M2 AP and the 7.62 × 54R B-32 AP at the BFD ceiling, and only loses to the .50 BMG / 15.2 APYT). The APES-L deficit on .30-06 M2 AP is a deliberate consequence of the 13 kg/m² areal-density reduction the police variant accepts to satisfy the 20-year-career biomechanical-longevity objective set in §2.
 
 For specialist police units — tactical response, counter-terrorism, hostage-rescue — required to face .30-06 M2 AP or military-rifle AP threats, the Mark I is worn under the supplementary rifle-rated hard plate carrier already discussed in §4.3 / Sim 21. The Mark I handles everything else.
 
@@ -725,17 +725,17 @@ For specialist police units — tactical response, counter-terrorism, hostage-re
 
 1. Australian Department of Defence. (2024). $30 M body armour contract — Craig International Ballistics. Ministerial Release.
 2. Australian Defence Apparel. (2024). DFNDR system launch. Land Forces Expo, September 2024.
-3. NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS TOTAL Camo and Undersuit.md`](../Weapons-Defence/NACS%20TOTAL%20Camo%20and%20Undersuit.md).
+3. NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
 4. National Institute of Justice. (2024). NIJ Standard-0101.07 / 0123.00. US Department of Justice.
 5. National Institute of Justice. (2000). NIJ Standard-0115.00 Stab Resistance. US DoJ.
 6. FBI Law Enforcement Officers Killed and Assaulted (LEOKA). (2021). Annual Data Collection. US DoJ.
 
 ### Related work in this repository
 
-- [`../Weapons-Defence/Advanced Protective Equipment System Specification.md`](../Weapons-Defence/Advanced%20Protective%20Equipment%20System%20Specification.md) — military APES specification (parent platform).
-- [`../Weapons-Defence/Research Papers/Paper6_Body_Armor_System.md`](../Weapons-Defence/Research%20Papers/Paper6_Body_Armor_System.md) — TRP-2026-006 military APES research paper.
-- [`../Weapons-Defence/NACS TOTAL Camo and Undersuit.md`](../Weapons-Defence/NACS%20TOTAL%20Camo%20and%20Undersuit.md) — NACS CORE undersuit specification.
-- [`../Weapons-Defence/Aluminium Alloys for Armour.md`](../Weapons-Defence/Aluminium%20Alloys%20for%20Armour.md) — AlNiCyN tiered aluminium armour (potential future tile-backing substrate).
+- [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) — military APES specification (parent platform).
+- [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md) — TRP-2026-006 military APES research paper.
+- [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md) — NACS CORE undersuit specification.
+- [`../Weapons-Defence/AlNiCyN Armour/AlNiCyN_Specification.md`](../Weapons-Defence/AlNiCyN%20Armour/AlNiCyN_Specification.md) — AlNiCyN tiered aluminium armour (potential future tile-backing substrate).
 
 ---
 

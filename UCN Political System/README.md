@@ -1,4 +1,4 @@
-# UCN Political System
+﻿# UCN Political System
 
 > **United Commonwealth Nations (UCN) — an eight-paper speculative Australian-centred political-system doctrine that combines an evidence-first, modular "Westminster++" governance model with hard sovereignty economics, a `≤ 10`-warhead minimal-deterrence posture, crypto / commodity-backed international settlement, government-manufactured pharma-grade recreational drugs, an `AUD 100M` personal wealth ceiling, and an optional UK–Canada–Australia Crown confederation — all anchored to the EREM (Energy-Resource Economic Model) as the macroeconomic backbone, and explicitly framed as policy research, not enacted law.** The series is a single internally-coherent design document for what one could plausibly *propose* if Australia were rewriting its constitution today, not a partisan platform: every paper is referenced, every claim has a source citation (Portuguese drug decriminalisation `~80 %` overdose-death drop over 20 years, El Salvador Bitcoin adoption `92 %` non-use figure, Atlantic-Council `137`-jurisdiction CBDC tracker, etc.), and the closing roadmap acknowledges that the proposal would require referenda, elections, and international consent it does not currently have.
 
@@ -94,7 +94,7 @@ The work is honest about being aspirational. Many proposals contradict current A
 ## 🔗 Related work in this repo
 
 - [`../Economics/`](../Economics/) — EREM canonical home
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (informs UCN_Paper3_Defence)
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio (informs UCN_Paper3_Defence)
 - [`../Diffusion Welding/`](../Diffusion%20Welding/) — sovereign-manufacturing process
 - [`../Rockwell 50 to 70 Carbide/`](../Rockwell%2050%20to%2070%20Carbide/) — sovereign-manufacturing supply chain
 - [`../Diamond Batterys/`](../Diamond%20Batterys/) — sovereign-energy strategy (adjacent to nuclear baseload and radioisotope transport research in Paper III)

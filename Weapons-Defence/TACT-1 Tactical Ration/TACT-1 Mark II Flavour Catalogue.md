@@ -1,4 +1,4 @@
-# TACT-1 Mark II — 40-Variant Flavour Catalogue
+﻿# TACT-1 Mark II — 40-Variant Flavour Catalogue
 
 **TRP-2026-021 (companion to spec) — UNCLASSIFIED / FOR OFFICIAL USE ONLY**
 **Flavour Development Catalogue · Rev 1 · Natural Ingredients Only · Fixed Nutrient Profile · Common TGase Matrix**
@@ -54,7 +54,7 @@ The chocolate family uses Dutch-processed cocoa powder as the primary flavour an
 
 ## §3 Family — Coffee & Tea (6 variants, IDs 09–14)
 
-The coffee & tea family uses freeze-dried espresso, matcha, hojicha, and cold-brew concentrate powders as the primary flavour anchor at 1–2 % bar weight. Caffeine content is incidental to the flavour delivery rather than a load-out objective — the dedicated stimulant pathway is the companion **ASNP energy-drink** product (see [`../Research Papers/ASNP_Energy_Drink_Research_Paper.md`](../Research%20Papers/ASNP_Energy_Drink_Research_Paper.md)).
+The coffee & tea family uses freeze-dried espresso, matcha, hojicha, and cold-brew concentrate powders as the primary flavour anchor at 1–2 % bar weight. Caffeine content is incidental to the flavour delivery rather than a load-out objective — the dedicated stimulant pathway is the companion **ASNP energy-drink** product (see [`ASNP Sports Nutrition/ASNP_Research_Paper.md`](ASNP%20Sports%20Nutrition/ASNP_Research_Paper.md)).
 
 | ID | Name | Flavour Additions | Coating |
 |---|---|---|---|
@@ -165,7 +165,7 @@ The floral & botanical family uses food-grade lavender and rosewater powders at 
 
 - [`TACT-1 Mark II Specification.md`](TACT-1%20Mark%20II%20Specification.md) — Full TACT-1 Mark II product specification (TRP-2026-021).
 - [`Paper20_TACT-1_Mk_II_Ration.md`](Paper20_TACT-1_Mk_II_Ration.md) — Academic-format research paper accompanying the spec.
-- [`../Injectable Food.md`](../Injectable%20Food.md) — GlycoDur-P / NutriComplete-P injectable nutrition concept (the architecture from which the TACT-1 Mark II base bar is derived).
+- [`../Injectable Nutrition/Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) — GlycoDur-P / NutriComplete-P injectable nutrition concept (the architecture from which the TACT-1 Mark II base bar is derived).
 
 ---
 

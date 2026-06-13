@@ -1,4 +1,4 @@
-# 100W Wideband Noise Generator
+﻿# 100W Wideband Noise Generator
 
 > **A single SystemVerilog file (`complete_noise_generator`) that orchestrates a Chua-circuit chaotic analogue core, a four-band RF power-amplifier chain, a 12-bit programmable supply DAC, an eight-channel thermal ADC, and a hard-protection state machine — into one digitally-supervised wideband noise platform with banner targets of `1 Hz – 14 GHz` (hardware-dependent) and `100 W` continuous output.** The pitch is unusual: the Verilog file *is* the specification. Most "noise generator" papers ship a research write-up that gestures at HDL; this folder ships the HDL with the supervisory architecture (chaos parameter DACs, band-mapped PA staging, SMPS setpoints, LCD UI, fault taxonomy) all in one source — a foundation for a high-power EW/test-source-class build with sub-microsecond fault response.
 
@@ -76,7 +76,7 @@ The output performance — phase noise, SFDR, flatness across the band — is fu
 - [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — hybrid passive components that could feed this PA chain
 - [`../RNGS/Chaotic RNG/`](../RNGS/Chaotic%20RNG/) — SynerChaos chaotic-PRNG sister work
 - [`../Physics/`](../Physics/) — chaos-theory backdrop
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (EW context)
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio (EW context)
 
 ---
 

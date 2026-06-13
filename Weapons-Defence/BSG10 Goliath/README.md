@@ -85,7 +85,7 @@ See [`bsg10_sim_package/Software readme.md`](bsg10_sim_package/Software%20readme
 
 - [`../README.md`](../README.md) — Weapons-Defence portfolio index
 - [`../Common Architecture and Components.md`](../Common%20Architecture%20and%20Components.md) — Shared small-arms parts matrix (Goliath is not yet in the common-cartridge table)
-- [`../MP-4.6M Defender PDW.md`](../MP-4.6M%20Defender%20PDW.md) — Adjacent small-arms portfolio entry
+- [`../MP-4.6M Defender PDW/`](../MP-4.6M%20Defender%20PDW/) — Adjacent small-arms portfolio entry
 - [`../../Rockwell 50 to 70 Carbide/`](../../Rockwell%2050%20to%2070%20Carbide/) — Tooling and materials supply-chain context
 
 ---

@@ -1,4 +1,4 @@
-# ACOUSTIC ENERGY CONSERVATION ANALYSIS
+﻿# ACOUSTIC ENERGY CONSERVATION ANALYSIS
 ## Does TACS Cancel Noise "Completely"?
 
 *Technical Analysis*
@@ -317,7 +317,7 @@ The Nelson-Elliott bound (from weapons_sim_results.md §18) sets the maximum can
 
 ```
 E_battery = P_total × t_operation  [J]
-t_operation = 40 h (HANC-1 spec from military_hearing_protection_systems.md)
+t_operation = 40 h (HANC-1 spec from Hearing Protection/Hearing_Protection_Specification.md)
 P_total ≈ 1.07 W per channel (two channels = 2.14 W for full headset)
 E_battery = 2.14 × 40 × 3600 = 307 kJ = 85.4 Wh
 Nominal Li-ion energy density: 180–250 Wh/kg → battery mass ≈ 340–475 g

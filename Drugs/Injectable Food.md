@@ -1,6 +1,6 @@
-# Sustained Nutrition Protein System: Complete Design & Synthesis
+﻿# Sustained Nutrition Protein System: Complete Design & Synthesis
 
-> **Mirror notice.** This file is a byte-for-byte duplicate of `Weapons/Injectable Food.md` (canonical). Keep both copies in sync when editing. The same platform is also documented as a formal defence research paper at `Weapons/Research Papers/Paper17_Injectable_Nutrition.md` and as an academic conceptual paper at `Drugs/Paper1_GlycoDurP_NutriCompleteP_Injectable_Nutrition.md`.
+> **Mirror notice.** This file is a byte-for-byte duplicate of `Weapons-Defence/Injectable Nutrition/Injectable_Nutrition_Specification.md` (canonical). Keep both copies in sync when editing. The same platform is also documented as a formal defence research paper at `Weapons-Defence/Injectable Nutrition/Injectable_Nutrition_Research_Paper.md` and as an academic conceptual paper at `Drugs/Paper1_GlycoDurP_NutriCompleteP_Injectable_Nutrition.md`.
 
 ## Executive Summary
 

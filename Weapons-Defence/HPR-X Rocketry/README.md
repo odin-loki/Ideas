@@ -87,7 +87,7 @@ The 75 mm V1 and 152 mm V3 single-stage airframes both reach burnout in the Mach
 
 - [`../Military Noise Cancellation/`](../Military%20Noise%20Cancellation/) — TACS (Tactical Acoustic Cancellation System) for launch-site signature management.
 - [`../CL-20 High Explosive/`](../CL-20%20High%20Explosive/) — companion energetic-materials portfolio (proteinated CL-20 safe-handling explosive).
-- [`../Research Papers/Cartridgeless Bullets_Research_Paper.md`](../Research%20Papers/Cartridgeless%20Bullets_Research_Paper.md) — caseless / cartridgeless propulsion work, adjacent propellant chemistry.
+- [`../Caseless Bullets/`](../Caseless%20Bullets/) — caseless / cartridgeless propulsion work, adjacent propellant chemistry.
 - [`../../Rockwell 50 to 70 Carbide/`](../../Rockwell%2050%20to%2070%20Carbide/) — sovereign manufacturing context for motor casings and airframe metallics.
 
 ---

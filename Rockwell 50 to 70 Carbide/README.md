@@ -1,4 +1,4 @@
-# Rockwell 50 to 70 Carbide — hard-steel machining tooling platform (HX-70 GradePlex, TriboshieldPlus, Forge-to-Machine)
+﻿# Rockwell 50 to 70 Carbide — hard-steel machining tooling platform (HX-70 GradePlex, TriboshieldPlus, Forge-to-Machine)
 
 > **A complete carbide-tooling platform for hard-machining steels from `HRC 40` to `HRC 70` — a regime where conventional WC-Co inserts give up around `HRC 55` and CBN takes over but only on insert geometries CBN can be made into. The platform combines: (1) **HX-70 GradePlex™**, a functionally-graded WC-Co substrate with three radial zones (Zone A `0 – 30 µm` is `92.5 %` WC, `5.5 %` Co, `2.0 %` TaC/NbC at `2050 – 2100 HV30` for the working surface; Zone C is the tougher `13 %` Co core); (2) **TriboshieldPlus™**, a five-layer coating stack (CrN bond, AlCrN thermal barrier, nc-AlTiSiN/a-Si₃N₄ hardness core at `42 – 46 GPa`, 40-bilayer AlCrN/AlTiSiN superlattice at `37.5 nm` per layer, DLC-Si friction layer at `µ < 0.15`); (3) **forge-to-machine**, a near-net-shape forging supply chain that on the H13-breech exemplar drops cost from `AUD $340 – 420` to `AUD $190 – 240` and lead time from `18 – 26` working days to `6 – 9` — a `~40 – 45 %` cost / `~65 – 70 %` lead-time reduction.** End-mill geometries CBN cannot reach become accessible at `HRC 65 – 70` for the first time.
 
@@ -103,7 +103,7 @@ Near-net-shape forging followed by trochoidal hard-milling reduces the volume of
 
 - [`../Diffusion Welding/`](../Diffusion%20Welding/) — sister manufacturing-process platform (UCDW)
 - [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — adjacent fabrication-science thinking
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio (the H13-breech exemplar comes from there)
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio (the H13-breech exemplar comes from there)
 - [`../UCN Political System/`](../UCN%20Political%20System/) — sovereign-manufacturing doctrine
 - [`../Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — sister hard-materials work
 

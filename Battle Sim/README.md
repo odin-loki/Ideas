@@ -1,4 +1,4 @@
-# Battle Sim — modern mathematical battle modelling, a literature survey
+﻿# Battle Sim — modern mathematical battle modelling, a literature survey
 
 > **A survey-and-design note that maps the modern mathematical-modelling landscape for combat — Hughes salvo equations, extended Lanchester equations for irregular warfare, Markov battle-state chains, FATHM linear programming, the Dupuy/TNDM combat-power lineage — into one comparative framework.** The folder is *explicitly not* an operational simulator; it is a structured reading map intended as the prerequisite groundwork for one. The note is unusually honest about its own epistemics: it asks readers to verify each cited model against primary sources before relying on any of its numbers.
 
@@ -62,7 +62,7 @@ The note's own comparison table groups each tradition by **computational speed /
 
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — ARIA-INTEL would feed track inputs into any simulator built from this folder
 - [`../Filtering/`](../Filtering/) — GH-SR-IMM provides robust per-platform state estimation
-- [`../Weapons/`](../Weapons/) — defence-tech R&D portfolio that any combat model would parameterise
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence-tech R&D portfolio that any combat model would parameterise
 - [`../UCN Political System/`](../UCN%20Political%20System/) — strategic doctrine that frames the engagements
 
 ---

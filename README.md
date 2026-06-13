@@ -1,4 +1,4 @@
-# Ideas ? Odin Loch's R&D shelf
+﻿# Ideas ? Odin Loch's R&D shelf
 
 ---
 
@@ -154,7 +154,7 @@ Each section below is the field a curious layman would file these projects under
 |---|---|
 | [`Battle Sim/`](Battle%20Sim/) | A literature survey and design note that maps the major mathematical traditions for modelling combat ? **Hughes salvo equations**, **extended Lanchester equations**, **Markov battle-state chains**, **FATHM linear programming**, and the **Dupuy / TNDM combat-power lineage** ? into one comparative reading guide. **Explicitly not an operational simulator.** |
 | [`Threat Asessments/`](Threat%20Asessments/) | Three UNCLASSIFIED hypothetical threat-intelligence briefs in defence-analyst register: **FSB-linked close-access neurological interference** (transcranial stimulation tradecraft), a **2-NT/TNT dual-effect incendiary-explosive** mixture assessment for EOD/threat intel, and **physical identity replacement** (latex disguise, invasive laryngeal voice alteration, illegals-program deep-insertion vs short-duration kit; near-IR / thermal / ear-biometric countermeasure doctrine). No operational instructions. [`README.md`](Threat%20Asessments/README.md). |
-| [`Weapons-Defence/`](Weapons-Defence/) | A defence-engineering R&D portfolio, with paired operator spec-sheets and TRP-numbered research papers across small arms (`MP-4.6M` pistol & PDW, `MP-6.8` rifle, `MAS-15.2E` 15.2?mm anti-materiel sniper, **`BSG-10 Goliath`** 10-gauge bullpup shotgun with standalone `bsg10_sim`), heavy weapons (`57?mm` autocannon, `57?mm` underbarrel grenade, `57?mm` dual-purpose mortar / RPG, `140?mm` tank KE round), body armour (APES, AlNiCyN, OBSIDIAN), CBRN protection (NACS), tactical acoustic cancellation (35?55?dB depth), **`OAM-VEST`** non-lethal acoustic area denial (410 m disorientation, earplug-immune vestibular modes, `oam_vest_sim`), **`ADF Tactical Field Kit`** integrated 72 h sustainment load (~4.3 kg lighter than IRP baseline), CL-20 high explosive, rubber tank-track pads, the `HPR-X` guided high-power rocketry series, and the `TACT-1 Mark II` full-day SOF ration (with `PODS` glycerolipid subfolder and **`ASNP`** sports-nutrition powder spec), the **`HEL-CMS/DB`** fully autonomous 280 kW diamond-battery-powered directed-energy air-defence platform (UAV dwell 0.2 s, cruise missile dwell 12.3 s, < $0.50/engagement, 20-yr TCO saving $51.8M ? power source TRL 2?3), and the **`TAIPAN-1`** guided ballistic interceptor rocket (1,618 km range, Mach 13.27, 3D-printed 14-part airframe, $50?80k production cost ? 22? cheaper than AMRAAM). **Most ballistic numbers trace to `weapons_simulation.py`**; BSG-10 and OAM-VEST use their own simulators. [`Common Architecture and Components.md`](Weapons-Defence/Common%20Architecture%20and%20Components.md) defines parts commonality. **Classification banners are stylistic.** |
+| [`Weapons-Defence/`](Weapons-Defence/) | A defence-engineering R&D portfolio organised as **30+ platform subfolders** — each with hub `README.md`, operator spec, research paper, and simulation docs (`SIM_README.md` or standalone sim package). Portfolio infrastructure at root: `weapons_simulation.py` + `weapons_sim_results.md`. Covers small arms, heavy weapons, APES/NACS/AlNiCyN armour, TACS, OAM-VEST, ADF Tactical Field Kit, HEL-CMS/DB, TAIPAN-1, BSG-10 Goliath, HPR-X, TACT-1/PODS/ASNP, CL-20, and hypothetical OBSIDIAN systems. [`Weapons-Defence/README.md`](Weapons-Defence/README.md). |
 | [`Weapons-Police/`](Weapons-Police/) | Two Australian LE equipment prospectuses in paired spec-sheet + research-paper format. **APES-L Mark I** ? full-body protective suit at `~6.5 kg` (vs the ~20 kg torso-only police vest currently fielded), ionic-liquid STF (cold-comfortable to `?25 ?C`), `75 mm` single-use B4C tiles to `.50 AE`, NIJ Level II stab full-body, `66.2 %` composite-injury-score improvement, `12+ yr` service life, `$1.85 M` TCO saving per 500 officers over 10 years ? 23 simulations. **MP-4.6P Guardian LE** ? police combat pistol in `4.6 ? 22 mm DPAP` at `396 m/s` / `259 J`: defeats NIJ IIIA + NIJ III hard plate + all four common intermediate barriers; felt recoil `0.084 ft-lbf` (? 50? lower than 9 mm); MRBF `20 548 rounds`; FTF rate `1:80 000`; per-unit cost `A$164 ? 180` ? 7-phase simulation programme. Both are LE variants of systems in `../Weapons-Defence/` sharing the same single-source-of-truth simulator. |
 
 ### ?? Civil infrastructure and manufacturing
@@ -235,7 +235,7 @@ Each section below is the field a curious layman would file these projects under
 | [`UN Political System/`](UN%20Political%20System/) | Comprehensive reform proposal for the real United Nations |
 | [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) | Combinatorial pattern recognition + one-shot learning |
 | [`Veritas/`](Veritas/) | Formal verification framework |
-| [`Weapons-Defence/`](Weapons-Defence/) | Defence-tech R&D portfolio (UNCLASSIFIED / FOUO style) ? simulator-backed; common-architecture matrix; includes BSG-10 Goliath shotgun, OAM-VEST non-lethal sonic weapon, ADF Tactical Field Kit, HEL-CMS/DB laser air defence, TAIPAN-1 interceptor, TACT-1/PODS/ASNP nutrition stack |
+| [`Weapons-Defence/`](Weapons-Defence/) | Defence-tech R&D portfolio ? 30+ platform subfolders (README + spec + paper + SIM_README each); portfolio sim at root |
 | [`Weapons-Police/`](Weapons-Police/) | APES-L Mark I full-body police body armour + MP-4.6P Guardian LE police combat pistol ? both as paired spec-sheets and research papers |
 
 ---
@@ -273,7 +273,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **GPN** | General Purpose Network | [`UCN AIs/`](UCN%20AIs/) |
 | **GRIA** | Graded Reversibility-Irreversibility Algebra | [`Compression Algorithms/`](Compression%20Algorithms/) |
 | **GUP** | Generalised Uncertainty Principle | [`Physics/`](Physics/) |
-| **ASNP** | Advanced Sports Nutrition Powder ? caffeine-free RTM combat-sports powder (UCN nutrition pillar 4) | [`Weapons-Defence/TACT-1 Tactical Ration/`](Weapons-Defence/TACT-1%20Tactical%20Ration/) |
+| **ASNP** | Advanced Sports Nutrition Powder ? caffeine-free RTM combat-sports powder (UCN nutrition pillar 4) | [`Weapons-Defence/TACT-1 Tactical Ration/ASNP Sports Nutrition/`](Weapons-Defence/TACT-1%20Tactical%20Ration/ASNP%20Sports%20Nutrition/) |
 | **BSG-10** | Bullpup ShotGun, 10-gauge ? "Goliath" combat shotgun | [`Weapons-Defence/BSG10 Goliath/`](Weapons-Defence/BSG10%20Goliath/) |
 | **HSA** | Homo Sapiens Augmentus | [`GM Enhancements/`](GM%20Enhancements/) |
 | **IMM** | Interacting Multiple Model (Bayesian filter bank) | [`Filtering/`](Filtering/) |
@@ -283,7 +283,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **LinTS** | Linear Thompson Sampling | [`Statistical Scheduler/`](Statistical%20Scheduler/) |
 | **LSH** | Locality-Sensitive Hashing | [`Long Reasoning and Thinking NN/`](Long%20Reasoning%20and%20Thinking%20NN/) |
 | **MoE** | Mixture-of-Experts | [`Neural Decompiler/`](Neural%20Decompiler/) |
-| **NACS** | NEXUS Adaptive Combat System (CBRN protection module) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **NACS** | NEXUS Adaptive Combat System (CBRN protection module) | [`Weapons-Defence/NACS CBRN/`](Weapons-Defence/NACS%20CBRN/) |
 | **NLFGN-UFT** | Non-Local Field-Gravity Network Unified Field Theory | [`Physics/`](Physics/) |
 | **NMP** | Nonlinear Matrix Pruning (this repository's NMP ? neural compression) | [`Compression Algorithms/`](Compression%20Algorithms/) |
 | **NQD** | Neural Quantum Dust | [`Neural Dust/`](Neural%20Dust/) |
@@ -295,7 +295,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **QDMP** | Quantum Diamond Metamaterial Processor | [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/) |
 | **QND** | Quantum NanoDiamond (the cellular-scale sensor tier) | [`Neural Dust/`](Neural%20Dust/) |
 | **SGF** | Streaming Geometry Framework | [`NN Shortcuts/`](NN%20Shortcuts/) |
-| **TACS** | Tactical Acoustic Cancellation System | [`Weapons-Defence/`](Weapons-Defence/) |
+| **TACS** | Tactical Acoustic Cancellation System | [`Weapons-Defence/Military Noise Cancellation/`](Weapons-Defence/Military%20Noise%20Cancellation/) |
 | **TDC** | Torpedo Data Computer (WWII fire-control) | [`Electromechnical Inspired Algorithms/`](Electromechnical%20Inspired%20Algorithms/) |
 | **TNW** | Total National Wealth (in megajoules) | [`Economics/`](Economics/) |
 | **UCDW** | Ultra-Compact Diffusion Welding | [`Diffusion Welding/`](Diffusion%20Welding/) |
@@ -305,27 +305,27 @@ Several letter-combinations collide between folders. This index gives each acron
 | **V(D)J** | Variable-Diversity-Joining (vertebrate immune-system gene recombination) | [`VDJ Inspired Algorithm/`](VDJ%20Inspired%20Algorithm/) |
 | **Veritas** | Verification-Enabled Reasoning and Integrated Theorem-Acquiring System | [`Veritas/`](Veritas/) |
 | **WTA** | Wearable Transducer Array (the external CMUT patch) | [`Neural Dust/`](Neural%20Dust/) |
-| **APES** | Advanced Protective Equipment System (military body armour) | [`Weapons-Defence/`](Weapons-Defence/) |
+| **APES** | Advanced Protective Equipment System (military body armour) | [`Weapons-Defence/APES Body Armour/`](Weapons-Defence/APES%20Body%20Armour/) |
 | **APES-L** | Advanced Protective Equipment System ? Law Enforcement (Australian police variant) | [`Weapons-Police/`](Weapons-Police/) |
 | **AusDike** | Australian-manufactured modular deployable flood-levee system (Holloway Group programme) | [`Plastic Products/`](Plastic%20Products/) |
 | **B4C** | Boron carbide (ballistic strike-face ceramic) | [`Weapons-Defence/`](Weapons-Defence/), [`Weapons-Police/`](Weapons-Police/) |
-| **CL-20** | Hexanitrohexaazaisowurtzitane (high-density energetic) | [`Weapons-Defence/`](Weapons-Defence/) |
-| **HPR-X** | High-Power Rocketry series (guided amateur-class rockets) | [`Weapons-Defence/`](Weapons-Defence/) |
-| **MAS-15.2E** | Multi-purpose Anti-Materiel Sniper, 15.2?mm, Enhanced | [`Weapons-Defence/`](Weapons-Defence/) |
-| **MP-4.6M** | Modular Pistol / PDW, 4.6?mm, Military | [`Weapons-Defence/`](Weapons-Defence/) |
-| **MP-6.8** | Modular Personal-arm, 6.8?mm (Advanced Combat Rifle) | [`Weapons-Defence/`](Weapons-Defence/) |
-| **NACS-CORE** | NEXUS Adaptive Combat System ? CBRN / Operational Respiratory Ensemble | [`Weapons-Defence/`](Weapons-Defence/) |
-| **OBSIDIAN** | The reactive shear-thickening-fluid armour family | [`Weapons-Defence/`](Weapons-Defence/) |
+| **CL-20** | Hexanitrohexaazaisowurtzitane (high-density energetic) | [`Weapons-Defence/CL-20 High Explosive/`](Weapons-Defence/CL-20%20High%20Explosive/) |
+| **HPR-X** | High-Power Rocketry series (guided amateur-class rockets) | [`Weapons-Defence/HPR-X Rocketry/`](Weapons-Defence/HPR-X%20Rocketry/) |
+| **MAS-15.2E** | Multi-purpose Anti-Materiel Sniper, 15.2?mm, Enhanced | [`Weapons-Defence/MAS-15.2E Anti-Materiel Sniper/`](Weapons-Defence/MAS-15.2E%20Anti-Materiel%20Sniper/) |
+| **MP-4.6M** | Modular Pistol / PDW, 4.6?mm, Military | [`Weapons-Defence/MP-4.6M Guardian Pistol/`](Weapons-Defence/MP-4.6M%20Guardian%20Pistol/) |
+| **MP-6.8** | Modular Personal-arm, 6.8?mm (Advanced Combat Rifle) | [`Weapons-Defence/MP-6.8 Mark II Rifle/`](Weapons-Defence/MP-6.8%20Mark%20II%20Rifle/) |
+| **NACS-CORE** | NEXUS Adaptive Combat System ? CBRN / Operational Respiratory Ensemble | [`Weapons-Defence/NACS CBRN/`](Weapons-Defence/NACS%20CBRN/) |
+| **OBSIDIAN** | The reactive shear-thickening-fluid armour family | [`Weapons-Defence/OBSIDIAN Body Armour/`](Weapons-Defence/OBSIDIAN%20Body%20Armour/) |
 | **rPP** | Recycled polypropylene (AusDike base material) | [`Plastic Products/`](Plastic%20Products/) |
 | **STF** | Shear-Thickening Fluid (Newtonian ? non-Newtonian transition under strain) | [`Weapons-Defence/`](Weapons-Defence/), [`Weapons-Police/`](Weapons-Police/) |
-| **TACT-1** | Tactical Combat Ration, Mark II ? full-day SOF ration | [`Weapons-Defence/`](Weapons-Defence/) |
+| **TACT-1** | Tactical Combat Ration, Mark II ? full-day SOF ration | [`Weapons-Defence/TACT-1 Tactical Ration/`](Weapons-Defence/TACT-1%20Tactical%20Ration/) |
 | **TAIPAN-1** | Guided ballistic interceptor rocket ? named after the Australian taipan snake; RP-1/LOX electric pump-fed, 1,618 km range | [`Weapons-Defence/TAIPAN Missile/`](Weapons-Defence/TAIPAN%20Missile/) |
 | **TDB** | Thermal-betavoltaic Diamond Battery (Sr-90 hybrid power series used in HEL-CMS/DB) | [`Weapons-Defence/HEL_CMS_DB Laser AntiAir/`](Weapons-Defence/HEL_CMS_DB%20Laser%20AntiAir/), [`Diamond Batterys/`](Diamond%20Batterys/) |
 | **HEL-CMS/DB** | High-Energy Laser Counter-Munitions System, Diamond Battery powered | [`Weapons-Defence/HEL_CMS_DB Laser AntiAir/`](Weapons-Defence/HEL_CMS_DB%20Laser%20AntiAir/) |
 | **PODS** | Plasmenyl-ODE-Stearin ? synthetic glycerolipid, 10.21 kcal/g, enzyme-gated three-phase energy release | [`Weapons-Defence/TACT-1 Tactical Ration/PODS- Edible High Energy Protein/`](Weapons-Defence/TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) |
 | **AGEL** | Alkyl Glycerol Ether Lipase (KIAA1363 / UniProt Q8WTS1) ? enzyme co-delivered with PODS to unlock sn-2 alkyl ether cleavage | [`Weapons-Defence/TACT-1 Tactical Ration/PODS- Edible High Energy Protein/`](Weapons-Defence/TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) |
 | **SBC** | Spectral Beam Combining (fiber laser architecture used in HEL-CMS/DB) | [`Weapons-Defence/HEL_CMS_DB Laser AntiAir/`](Weapons-Defence/HEL_CMS_DB%20Laser%20AntiAir/) |
-| **ADF-FK** | ADF Tactical Field Kit ? integrated 72 h dismounted sustainment load (TRP-2026-ADF-FK-001) | [`Weapons-Defence/ADF_Tactical_Field_Kit_Specification.md`](Weapons-Defence/ADF_Tactical_Field_Kit_Specification.md) |
+| **ADF-FK** | ADF Tactical Field Kit ? integrated 72 h dismounted sustainment load (TRP-2026-ADF-FK-001) | [`Weapons-Defence/ADF Tactical Field Kit/ADF_Tactical_Field_Kit_Specification.md`](Weapons-Defence/ADF Tactical Field Kit/ADF_Tactical_Field_Kit_Specification.md) |
 | **OAM-VEST** | Orbital Angular Momentum Vestibular Disruption System ? vehicle-mounted non-lethal acoustic area denial | [`Weapons-Defence/OAM-VEST Non Lethal Sonic Weapon/`](Weapons-Defence/OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) |
 | **UN** | United Nations (the real organisation, not the UCN above) | [`UN Political System/`](UN%20Political%20System/) |
 
@@ -335,7 +335,7 @@ Several letter-combinations collide between folders. This index gives each acron
 
 - **A research shelf, not a product catalogue.** Many folders propose systems that have not been built or validated; speculative items carry that label in their own README.
 - **Defence framing is a stylistic register.** The Weapons-Defence folder, GM Enhancements, ARIA-INTEL, and a handful of others use UNCLASSIFIED / FOUO-style document register. No real classification, sponsorship, or fielded materiel is implied.
-- **Speculative pharmacology is not medical advice.** `Drugs/`, `Drugs/Nootropics/`, `Drugs/Schizophrenia Cure/`, `GM Enhancements/`, `Beauty Products/`, and `Weapons-Defence/Combat Drug.md` describe theoretical compounds and protocols. Do not synthesise, possess, or administer them.
+- **Speculative pharmacology is not medical advice.** `Drugs/`, `Drugs/Nootropics/`, `Drugs/Schizophrenia Cure/`, `GM Enhancements/`, `Beauty Products/`, and `Weapons-Defence/Combat Drug/Combat_Drug_Specification.md` describe theoretical compounds and protocols. Do not synthesise, possess, or administer them.
 - **Acronym hygiene matters.** See the [? Acronym key](#-acronym-key) above; several letter-combinations collide between folders (ARIA, NMP, HSA), so each folder's README spells out which expansion is meant in that context.
 - **Numbers are sourced.** Every "headline number" in a category description is taken directly from the corresponding folder's research paper. Per-folder caveats live in those folders' "Honest framing" sections.
 
