@@ -4,7 +4,7 @@
 
 A comprehensive technical research paper
 
-Reference implementation: `aria_intel_v6.py` · 2,363 lines · Python 3.10+
+Reference implementation: `aria_intel.py` · 2,363 lines · Python 3.10+
 
 
 ## Abstract
@@ -367,7 +367,7 @@ Several contributions — the stacked rendezvous warning architecture, the PoL-i
 
 \[17\] PMBM Forward-Backward Smoother. Journal of King Saud University, Computer and Information Sciences, 2025.
 
-## Appendix A: File structure (`aria_intel_v6.py`, 2,363 lines)
+## Appendix A: File structure (`aria_intel.py`, 2,363 lines)
 
 | Lines | Section | Contents |
 |-------|---------|----------|

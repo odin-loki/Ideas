@@ -2,7 +2,7 @@
 
 *Algebraic rendezvous and intelligence analyser — technical reference and developer documentation*
 
-**Code:** `aria_intel_v6.py` · 2,363 lines · Python 3.10+
+**Code:** `aria_intel.py` · 2,363 lines · Python 3.10+
 
 ARIA-INTEL is a single-file, edge-deployable intelligence engine for multi-target tracking, pattern-of-life analysis, tradecraft detection, and rendezvous warning.
 
@@ -45,9 +45,9 @@ On each call to engine.ingest\(\), the engine returns a structured report dictio
 
 ### 2.2  Minimal Invocation
 
-import aria\_intel\_v6 as aria
+import aria_intel as aria
 
-eng = aria.ARIAIntelEngineV6\(
+eng = aria.ARIAIntelEngineV6(
 
     profile = aria.UrbanHUMINT\(\),          # domain preset
 
@@ -643,7 +643,7 @@ The SDR winding number threshold of 0.65 \(approximately 2/3 of a full loop in 1
 
 The relative percentile classifier degenerates when n\_tracks < 3: with only 2 tracks, one is always in the top speed percentile and one always in the bottom, producing deterministic role assignments that may be meaningless. The classifier correctly returns UNKNOWN for tracks with age < 10 scans; role assignments should be treated with lower confidence in the first 15–20 scans of a session.
 
-## 16. File Structure (`aria_intel_v6.py`, 2,363 lines)
+## 16. File Structure (`aria_intel.py`, 2,363 lines)
 
 | Lines | Section | Contents |
 | --- | --- | --- |
@@ -741,4 +741,4 @@ for track in eng.pmbm.confirmed\(\):
 
         anomaly = track.pol.anomaly\_score\(timestamp, position\)
 
-ARIA-INTEL Technical Reference  ·  aria\_intel\_v6.py
+ARIA-INTEL Technical Reference  ·  aria_intel.py
