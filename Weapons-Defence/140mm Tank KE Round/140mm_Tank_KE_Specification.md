@@ -225,7 +225,7 @@ Note that **the KEW-AP nature contains no explosive**. The multi-stage explosive
 - Vertical sliding-block breech
 - Thermal management (chrome lining, forced air across the bore between shots)
 - Erosion-resistant chamber
-- Barrel life: 500 rounds
+- Barrel life: **618 rounds** (§10 throat erosion / §23 bore life service)
 
 ### 8.2 Hydraulic Recoil System
 - **600 mm hydraulic recoil stroke** (`weapons_sim_results.md` §11; this is the stock-equivalent travel in the §11 parabolic-energy-dissipation model — the actual hydraulic dashpot stroke matches this dimension because the tank gun is, by §11's own framing, a fixed-trunnion weapon, not a shoulder weapon)
@@ -316,10 +316,11 @@ Operational max range for armour defeat is bounded at 5 000 m by the hydrodynami
 |---|---|
 | Liner | Stellite |
 | Barrel mass | 1 850 kg |
-| Barrel life (rounds to throat erosion) | **618** |
+| Throat-erosion life (§10) | **618** |
+| Bore life service (§23) | **618** |
 | Sustained-fire thermal ceiling | **114 rpm** |
 
-The 618-round barrel life is consistent with the M256 120 mm tank gun anchor (700 – 1 000 rounds in published service data). Stellite liner extends life slightly relative to chrome at this peak pressure. The 114 rpm thermal-sustained ceiling is far above the autoloader-cycle-limited operational rate (~8 rpm); barrel thermal capacity is not the binding constraint. Barrel-life budgeting should plan for ~600 rounds per fielded tube before replacement.
+For the 140 mm tank gun, §10 throat-erosion life and §23 bore life service coincide at **618 rounds** (Stellite-21 bore liner replace interval in §23.0.1). Barrel-life budgeting should plan for ~600 rounds per fielded tube before replacement.
 
 ### 12.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -375,6 +376,19 @@ The KEW-AP (DU long-rod) penetration values in §2.2 are quoted at 0° obliquity
 | 1 000 m | **333.0** |
 
 These values are the appropriate figures for engagement against the upper glacis of a modern MBT, where slope angles approach 60° from vertical (≈ 30° from horizontal). The 533.8 mm muzzle / 429.7 mm @ 500 m / 333.0 mm @ 1 000 m values reduce the effective armour-defeat envelope at NATO-60° obliquity. Aim against lower-slope facets (turret cheek, side armour) gives effective penetration close to the 0° values in §2.2.
+
+### 12.8 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 22 915.411 ft·lb |
+| Barrel SF_yield | 2.23 |
+| Bore life service (§23) | 618 rounds |
+| MRBF analytic | 3 502 rounds |
+| MRBF simulated | 3 750 rounds |
+| FTF rate | 1:8 000 |
+
+§23 **bore life service** (618 rounds) matches §10 throat-erosion life and §23.0.1 Stellite-21 bore liner replace interval.
 
 ---
 
@@ -953,9 +967,17 @@ p_HE-FRAG_round_works = p_KEW-AP_round_works · p_fuze_function
                       ≈ 1 − 1 / 1 250
 ```
 
-**Gun-action reliability (separate from the round, outside this document's scope):**
+**Gun-action reliability (`weapons_sim_results.md` §23 portfolio lifecycle):**
 
-The vertically sliding-block breech, autoloader, and ETC ignition control electronics have their own reliability stack measured in Mean Rounds Between Failure (MRBF) at the platform level. Published 120 mm tank-gun MRBF for the M256 (Abrams) is ~ 2 000 rounds; the 140 mm gun is expected to be in the same regime at scale, but this is a vehicle-platform-integration metric rather than an ammunition metric and is not modelled in this document.
+| Metric | Value |
+|---|---|
+| MRBF analytic | 3 502 rounds |
+| MRBF simulated | 3 750 rounds |
+| FTF rate | 1:8 000 |
+| Felt recoil | 22 915.411 ft·lb |
+| Bore life service | 618 rounds |
+
+The vertically sliding-block breech, autoloader, and ETC ignition control electronics contribute to the §23 platform-level MRBF above. Published 120 mm tank-gun MRBF for the M256 (Abrams) is ~ 2 000 rounds; the simulator's 140 mm portfolio lifecycle MC places the 140 mm gun system at **3 502 / 3 750 rounds** analytic / simulated MRBF at the portfolio modelling tier.
 
 ---
 

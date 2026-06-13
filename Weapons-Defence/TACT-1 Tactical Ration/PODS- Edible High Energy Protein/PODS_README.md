@@ -199,6 +199,30 @@ All characterisation is **computational**. This is a research-stage molecule. Re
 
 ---
 
+## 🔬 Simulation verification
+
+Standalone **`pods_simulation.py`** — not portfolio `weapons_simulation.py`. Headline anchors from module 2 (Benson GCM energy density) and module 6 (nanoparticle formulation):
+
+| Metric | Value | Module |
+|---|---|---|
+| Molecular energy density | **10.21 kcal/g** (+12.2% vs fat) | `-m 2` |
+| ATP yield per molecule | **392** (+18.8% vs tripalmitin) | `-m 7` |
+| 30 g nanoparticle formulation density | **6.64 kcal/g** | `-m 6` |
+| Carry-weight saving vs MRE | **74 g / warfighter / day** | `-m 6` |
+
+```bash
+python pods_simulation.py -m verify   # SMILES / structure audit
+python pods_simulation.py             # all modules
+```
+
+| Artifact | Role |
+|---|---|
+| [`pods_simulation.py`](pods_simulation.py) | Seven-module computational suite (RDKit + numpy/scipy) |
+| [`PODS_Research_Paper.md`](PODS_Research_Paper.md) | Full derivation — cite after re-run |
+| [`../README.md`](../README.md) | Parent TACT-1 platform — portfolio §22 shelf-life sim |
+
+---
+
 ## Simulation Code
 
 `pods_simulation.py` contains all computational analyses from the research paper as a single runnable Python file.

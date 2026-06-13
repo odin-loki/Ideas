@@ -16,6 +16,7 @@ The 140 mm KEW-AP round is a **complete platform subfolder**: operator specifica
 2. [`140mm_Tank_KE_Specification.md`](140mm_Tank_KE_Specification.md) — product and engineering spec (TRP-2026-101).
 3. [`140mm_Tank_KE_Research_Paper.md`](140mm_Tank_KE_Research_Paper.md) — formal design-and-validation narrative (includes 1.0 penetration correction).
 4. [`SIM_README.md`](SIM_README.md) — portfolio sim guide.
+5. Run [`platform_simulation.py`](platform_simulation.py) — PASS/FAIL claim verification against the portfolio sim.
 
 ---
 
@@ -26,6 +27,8 @@ The 140 mm KEW-AP round is a **complete platform subfolder**: operator specifica
 | [`140mm_Tank_KE_Specification.md`](140mm_Tank_KE_Specification.md) | Operator / product specification | Cartridge, sabot, ETC breech, recoil, multi-effect warheads, Tier-2 imports. |
 | [`140mm_Tank_KE_Research_Paper.md`](140mm_Tank_KE_Research_Paper.md) | Academic research paper | Lanz–Odermatt calibration vs M829, obliquity, limitations. |
 | [`SIM_README.md`](SIM_README.md) | Simulation documentation | Keys, CLI, result sections. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | Runs portfolio engine; prints PASS/FAIL checks for this platform's spec claims. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Loads `weapons_simulation.py` and formats per-platform verification output. |
 | [`../weapons_simulation.py`](../weapons_simulation.py) | Simulator source | Cartridge `140mm_KE`, weapon `140 mm Tank Gun`. |
 | [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative output | Cite for every ballistic claim. |
 
@@ -33,7 +36,7 @@ The 140 mm KEW-AP round is a **complete platform subfolder**: operator specifica
 
 ## 🎯 Headline numbers (simulation-validated)
 
-All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md).
+All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md) §§1–3, 11–12, 14–15, 17, **§23**.
 
 | Metric | Value |
 |---|---|
@@ -49,17 +52,65 @@ All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.
 | Barrel life | **618 rounds** |
 | HE-Frag lethal area (CL-20) | **1 173 m²** (r_eff 19.3 m) |
 | HEAT penetration | **103 mm RHA** |
+| Bore life service (§23) | **700 rounds** |
+| MRBF analytic (§23) | **~3,502 rounds** |
+| MRBF simulated (§23) | **~3,750 rounds** |
+| Felt recoil (§23) | **~22914.359 ft·lb** |
+| Spring fatigue SF (§23) | **2.6** |
+| Barrel SF_yield (§23) | **2.23** |
+| FTF rate (§23) | **1:8,000** |
 
 ---
 
-## 🚀 Quick start (simulator)
+## 🔬 Simulation verification
+
+All headline numbers in this README trace to [`../weapons_sim_results.md`](../weapons_sim_results.md), produced by [`../weapons_simulation.py`](../weapons_simulation.py) and [`../weapon_lifecycle.py`](../weapon_lifecycle.py) (§23). Use the local verification script to confirm spec claims without regenerating the full portfolio:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks for each claim in the specification and research paper.
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local PASS/FAIL verification slice for this platform |
+| [`SIM_README.md`](SIM_README.md) | Cartridge/weapon keys, table cross-references, methodology |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative tabulated output — cite in every spec edit |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 lifecycle — structural SF, parts-life, reliability MC |
+
+To regenerate the **full portfolio** after editing shared parameters:
 
 ```bash
 cd ..
 python weapons_simulation.py
 ```
 
-See [`SIM_README.md`](SIM_README.md) for details.
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify platform claims:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio** (after shared parameter edits):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for cartridge key `140mm_KE`, weapon key `140 mm Tank Gun`, and result-table map.
 
 ---
 

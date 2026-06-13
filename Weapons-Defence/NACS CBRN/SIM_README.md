@@ -2,6 +2,23 @@
 
 **No standalone simulator.** NACS-TOTAL has no dedicated Python simulation package and no Tier-2 section in [`../weapons_simulation.py`](../weapons_simulation.py).
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **It also documents scope limits** — CBRN, camouflage, and sustainment claims are prose-only; adjacent APES ballistic protection is extracted from portfolio §13.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## Where the numbers come from
@@ -33,12 +50,30 @@ If ballistic interaction with worn armour is needed, see:
 
 ---
 
+
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`NACS CBRN`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `NACS CBRN` — filter_cartridge_life_mo=6; suit_fabric_service_yr=5; valve_diaphragm_service_mo=12 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
 |---|---|
 | Operator specification | [`NACS_Specification.md`](NACS_Specification.md) |
 | Research paper | [`NACS_Research_Paper.md`](NACS_Research_Paper.md) |
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 |
 
 ---
 

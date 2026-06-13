@@ -39,6 +39,21 @@
 
 ---
 
+
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Motor case life (§23) | **50 flights** |
+| Nozzle insert life (§23) | **30 flights** |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
 ## 🛰️ Staged-flight summary (six-state machine, identical firmware on all variants)
 
 - **S0 PRE_LAUNCH** — IMU bias calibration (2 s), barometric ground reference, continuity check, LoRa heartbeat at 1 Hz, canards centred, two-key hardware arming.
@@ -61,6 +76,51 @@ The hobby-class numbers above (3,443 / 3,998 / 5,455 / 7,916 m) come from the Ti
 | HPR-X V3 (152 mm SOF spotter, N5800) | 2,523 m (35°) | 45.4 s (35°) | 6,502 m | 2,523 m | 1,293.3 m/s @ 1,221 m @ 3.21 s |
 
 The 75 mm V1 and 152 mm V3 single-stage airframes both reach burnout in the Mach 3+ regime; the 98 → 75 mm two-stage V2 reaches Mach 4.3 at sustainer burnout. The Tier-2 numbers cross-check against the Tier-1 RASAero / RK45 hobby-airframe outputs to within 3 % on the un-ballasted reference configurations.
+
+---
+
+## 🔬 Simulation verification
+
+Portfolio **§16** (Tsiolkovsky thrust + ICAO atmosphere trajectory integrator) validates the Tier-2 upscaled HPR-X variants. Re-run the local verification slice:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks; headline anchor: **HPR-X V3 @ 35° launch angle → 6,502 m range** (152 mm SOF spotter, N5800 motor).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local §16 rocketry verification slice |
+| [`SIM_README.md`](SIM_README.md) | Tier-1 vs Tier-2 airframe mapping, integrator keys |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative §16 tabulated output |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+Tier-1 hobby-airframe numbers (3,443 / 3,998 / 5,455 m) come from the spec's RASAero / RK45 pipeline — not from §16. To regenerate the **full portfolio**:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify §16 rocketry claims:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio:**
+
+```bash
+cd ../..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for Tier-1 vs Tier-2 airframe mapping.
 
 ---
 

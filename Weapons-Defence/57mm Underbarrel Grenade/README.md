@@ -16,6 +16,7 @@ The 57 mm UGR is a **complete platform subfolder**: operator specification, acad
 2. [`57mm_Underbarrel_Grenade_Specification.md`](57mm_Underbarrel_Grenade_Specification.md) — product and engineering spec (TRP-2026-105).
 3. [`57mm_Underbarrel_Grenade_Research_Paper.md`](57mm_Underbarrel_Grenade_Research_Paper.md) — formal design-and-validation narrative.
 4. [`SIM_README.md`](SIM_README.md) — portfolio sim keys and result-table map.
+5. Run [`platform_simulation.py`](platform_simulation.py) — PASS/FAIL claim verification against the portfolio sim.
 
 ---
 
@@ -26,6 +27,8 @@ The 57 mm UGR is a **complete platform subfolder**: operator specification, acad
 | [`57mm_Underbarrel_Grenade_Specification.md`](57mm_Underbarrel_Grenade_Specification.md) | Operator / product specification | Full TRP-style doc — launcher, warhead, buffer, rail interface, Tier-2 imports. |
 | [`57mm_Underbarrel_Grenade_Research_Paper.md`](57mm_Underbarrel_Grenade_Research_Paper.md) | Academic research paper | Methods, fragmentation model, shaped-charge, limitations. |
 | [`SIM_README.md`](SIM_README.md) | Simulation documentation | Cartridge / weapon keys, CLI, result sections. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | Runs portfolio engine; prints PASS/FAIL checks for this platform's spec claims. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Loads `weapons_simulation.py` and formats per-platform verification output. |
 | [`../weapons_simulation.py`](../weapons_simulation.py) | Simulator source | Cartridge `57mm_LV_grenade`, weapon `57 mm Underbarrel GL`. |
 | [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative output | Cite this file for every numerical claim. |
 
@@ -33,7 +36,7 @@ The 57 mm UGR is a **complete platform subfolder**: operator specification, acad
 
 ## 🎯 Headline numbers (simulation-validated)
 
-All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md).
+All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md) §§1–2, 10–11, 14–15, **§23**.
 
 | Metric | Value |
 |---|---|
@@ -48,17 +51,65 @@ All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.
 | Fragment velocity (Gurney) | **1 909 m/s** (720 pre-scored fragments) |
 | HEAT penetration | **41 mm RHA** |
 | Barrel life | **69 500 rounds** |
+| Bore life service (§23) | **5,000 rounds** |
+| MRBF analytic (§23) | **~13,857 rounds** |
+| MRBF simulated (§23) | **~30,000 rounds** |
+| Felt recoil (§23) | **~160.749 ft·lb** |
+| Spring fatigue SF (§23) | **9.5** |
+| Barrel SF_yield (§23) | **3.67** |
+| FTF rate (§23) | **1:40,000** |
 
 ---
 
-## 🚀 Quick start (simulator)
+## 🔬 Simulation verification
+
+All headline numbers in this README trace to [`../weapons_sim_results.md`](../weapons_sim_results.md), produced by [`../weapons_simulation.py`](../weapons_simulation.py) and [`../weapon_lifecycle.py`](../weapon_lifecycle.py) (§23). Use the local verification script to confirm spec claims without regenerating the full portfolio:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks for each claim in the specification and research paper.
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local PASS/FAIL verification slice for this platform |
+| [`SIM_README.md`](SIM_README.md) | Cartridge/weapon keys, table cross-references, methodology |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative tabulated output — cite in every spec edit |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 lifecycle — structural SF, parts-life, reliability MC |
+
+To regenerate the **full portfolio** after editing shared parameters:
 
 ```bash
 cd ..
 python weapons_simulation.py
 ```
 
-See [`SIM_README.md`](SIM_README.md) for details.
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify platform claims:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio** (after shared parameter edits):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for cartridge key `57mm_LV_grenade`, weapon key `57 mm Underbarrel GL`, and result-table map.
 
 ---
 

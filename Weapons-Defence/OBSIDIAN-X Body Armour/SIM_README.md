@@ -4,6 +4,23 @@
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. For OBSIDIAN-X, the script **documents scope limits only** — full-body armour, cloaking, and power claims are not modelled; see APES Body Armour (§13) for validated V50/BFD methodology.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
 ## Why there is no sim
 
 | Claim type | Status |
@@ -17,6 +34,22 @@ For **simulation-validated** armour panels, see [`../APES Body Armour/SIM_README
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`OBSIDIAN-X Body Armour`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | Full-body hypothetical armour — no runnable lifecycle model. |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -24,7 +57,3 @@ For **simulation-validated** armour panels, see [`../APES Body Armour/SIM_README
 | Operator specification | [`OBSIDIAN_X_Specification.md`](OBSIDIAN_X_Specification.md) |
 | Research paper | [`OBSIDIAN_X_Research_Paper.md`](OBSIDIAN_X_Research_Paper.md) |
 | Torso-only predecessor | [`../OBSIDIAN Body Armour/`](../OBSIDIAN%20Body%20Armour/) |
-
----
-
-*OBSIDIAN-X simulation coverage — hypothetical academic study only. Numbers in spec/paper are first-principles design targets, not simulator outputs.*

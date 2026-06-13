@@ -144,11 +144,27 @@ Monthly:
 - Calibration of quick-release mechanisms
 - Testing of emergency removal systems
 
-### 5.2 Component Lifecycle
-- Ceramic plates: Replace every 5 years or upon impact
-- Kevlar/UHMWPE layers: Replace every 7 years
-- Cooling system: Service every 6 months
-- Quick-release mechanisms: Service every 3 months
+### 5.2 Portfolio §23 Lifecycle
+
+Headline service intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Panel service life | **12 yr** |
+| Ceramic tile replacement | **5 yr** |
+| Soft panel refresh | **8 yr** |
+| Strike-face DLC recoat | **3 yr** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| B4C dragon-scale tile array | 4 yr | 5 yr | Tile fracture + edge spall |
+| 16-layer Kevlar/UHMWPE soft stack | 6 yr | 8 yr | UV + flex fatigue |
+| Non-Newtonian shear-thickening pad | 3 yr | 5 yr | Polymer chain scission |
+| Titanium strike-point inserts | 8 yr | 12 yr | Peening + DLC wear |
+
+Ceramic tiles are also replaced immediately upon ballistic impact (sub-surface cracking degrades subsequent performance even when no visible damage occurs). PCM cooling system: service every 6 months. Quick-release mechanisms: service every 3 months.
 
 ## 6. Testing Protocols
 

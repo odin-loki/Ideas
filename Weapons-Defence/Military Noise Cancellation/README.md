@@ -45,6 +45,59 @@ Source: [`../weapons_sim_results.md`](../weapons_sim_results.md) §18.
 
 ---
 
+
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Wearable array service (§23) | **8 yr** |
+| Battery cycle life (§23) | **500 cycles** |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+## 🔬 Simulation verification
+
+Portfolio **§18** (Nelson–Elliott asymmetric-power cancellation) is the authoritative source for TACS depth numbers. Re-run the local verification slice without regenerating the full portfolio:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks against spec claims; headline anchor: **36.3 dB A-weighted** (Personal variant, 16-element wearable).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local §18 verification slice |
+| [`SIM_README.md`](SIM_README.md) | Per-octave methodology, variant table |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative §18 tabulated output |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+To regenerate the **full portfolio**:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify §18 cancellation claims:
+
+```bash
+python platform_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for per-octave methodology.
+
+---
+
 ## 🚧 Honest framing
 
 - **Anti-nodes are physics, not malfunction** — asymmetric 30–50 % emitter power keeps anti-node SPL below 115 dB for a 110 dB source but cannot eliminate the hazard.

@@ -2,6 +2,18 @@
 
 **Tier-C validation** via the shared [`../weapons_simulation.py`](../weapons_simulation.py) suite. Output is written to [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results (`weapons_sim_results.md` and `weapons_sim_results.json`), use `cd .. && python weapons_simulation.py`.
+
 ---
 
 ## Simulator keys
@@ -26,12 +38,7 @@ Python 3.9+ required. No other dependencies.
 
 ## Quick start
 
-```bash
-cd ..
-python weapons_simulation.py
-```
-
-Regenerates `weapons_sim_results.md` and `weapons_sim_results.json` in the parent `Weapons-Defence/` folder.
+Run [`platform_simulation.py`](platform_simulation.py) from this folder (see **Local verification script** above). After editing parameters in `weapons_simulation.py`, regenerate the full portfolio with `cd .. && python weapons_simulation.py`, then update [`57mm_Autocannon_Specification.md`](57mm_Autocannon_Specification.md) against the new §1–§15 values.
 
 ---
 
@@ -51,6 +58,7 @@ Regenerates `weapons_sim_results.md` and `weapons_sim_results.json` in the paren
 | HE-Frag warhead (HEIAP-T) | §14 (`57 mm Autocannon HE-Frag`) |
 | HEDP shaped-charge | §15 (`57 mm Autocannon HEDP`) |
 | Wind drift | §8 (heavy cartridge row) |
+| **§23 Lifecycle** | `57 mm Autocannon` — bore life 2,500 rd, MRBF 8,375 analytic / 10,000 simulated, felt recoil 3678.12 ft·lb, barrel SF 1.45, FTF 1:35,000 |
 
 ---
 
@@ -79,3 +87,14 @@ Cartridge geometry and propellant live in the `CARTRIDGES["57x347mm"]` entry; mo
 ---
 
 [← Platform README](README.md) · [← Weapons-Defence](../README.md)
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`57 mm Autocannon`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `57 mm Autocannon` — bore life 2,500 rd, MRBF 8,375 analytic / 10,000 simulated, felt recoil 3678.12 ft·lb, barrel SF 1.45, FTF 1:35,000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

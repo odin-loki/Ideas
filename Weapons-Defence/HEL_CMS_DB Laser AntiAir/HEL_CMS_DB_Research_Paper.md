@@ -414,7 +414,25 @@ This strategy decouples the near-term operational benefit (proven laser technolo
 
 ---
 
-## 8. Conclusion
+## 8. Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Diode array life | **10,000 hr** |
+| Coolant pump service | **5,000 hr** |
+| Beam window recoat | **2,000 hr** |
+
+**Table 8.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Fiber-coupled diode stack | 8,000 hr | 10,000 hr | Junction degradation @ 40 kW |
+| Deionised coolant loop pump | 3,500 hr | 5,000 hr | Seal + bearing wear |
+| Fused-silica output window (DLC) | 1,500 hr | 2,000 hr | Plasma pitting |
+
+## 9. Conclusion
 
 This paper has presented a detailed conceptual architecture and physics analysis for the HEL-CMS/DB, a fully autonomous, truck-mounted directed-energy platform powered by megawatt-class diamond battery radioisotope technology.
 

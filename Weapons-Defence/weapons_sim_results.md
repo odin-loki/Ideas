@@ -8,6 +8,7 @@ _Output of `weapons_simulation.py`. All numbers in this folder's specification s
 |---|---|---|---|---|---|---|
 | 4.6x30mm | 4.65 mm | 2.6 g | 501 m/s | 326 J | 180 MPa (26107 psi) | 1.65 N·s |
 | 4.6x30mm_PDW | 4.65 mm | 2.6 g | 542 m/s | 382 J | 180 MPa (26107 psi) | 1.79 N·s |
+| 4.6x22mm | 4.65 mm | 3.3 g | 396 m/s | 259 J | 246 MPa (35679 psi) | 1.46 N·s |
 | 5.7x28mm | 5.70 mm | 2.0 g | 661 m/s | 437 J | 180 MPa (26107 psi) | 1.78 N·s |
 | 6.8x51mm | 6.85 mm | 8.7 g | 731 m/s | 2324 J | 307 MPa (44538 psi) | 9.62 N·s |
 | 5.56x45mm | 5.70 mm | 4.0 g | 939 m/s | 1764 J | 374 MPa (54295 psi) | 6.42 N·s |
@@ -24,6 +25,7 @@ _Output of `weapons_simulation.py`. All numbers in this folder's specification s
 | Weapon | Cartridge | Empty mass | Mag | Action | MV | ME | P_max | Free recoil |
 |---|---|---|---|---|---|---|---|---|
 | MP-4.6M Pistol | 4.6x30mm | 0.92 kg | 20 | rotating bolt, short recoil | 501 m/s | 326 J | 180 MPa | 1.5 J (1.1 ft·lb) |
+| MP-4.6P Guardian LE | 4.6x22mm | 0.85 kg | 20 | gas-operated delayed blowback | 396 m/s | 259 J | 246 MPa | 1.2 J (0.9 ft·lb) |
 | MP-4.6M Defender PDW | 4.6x30mm_PDW | 2.10 kg | 40 | rotating bolt, short recoil + buffered bolt-carrier | 542 m/s | 382 J | 180 MPa | 0.8 J (0.6 ft·lb) |
 | MP-6.8 Mark II Rifle | 6.8x51mm | 4.10 kg | 20 | short-stroke gas piston, rotating bolt | 731 m/s | 2324 J | 307 MPa | 11.3 J (8.3 ft·lb) |
 | MAS-15.2E Sniper | 15.2x115mm | 13.20 kg | 8 | bolt action, three-lug rotating bolt | 781 m/s | 19505 J | 258 MPa | 255.2 J (188.2 ft·lb) |
@@ -40,6 +42,7 @@ Small-arms calibres tabulated at 0 / 100 / 300 / 500 / 800 / 1 000 / 1 500 m. Au
 |---|---|---|---|---|---|---|---|---|
 | 4.6x30mm | 3.8 | 3.1 | 2.2 | 1.8 | 1.5 | 1.3 | — | — |
 | 4.6x30mm_PDW | 4.2 | 3.4 | 2.3 | 1.9 | 1.5 | 1.3 | — | — |
+| 4.6x22mm | 3.1 | 2.7 | 2.2 | 2.0 | 1.7 | — | — | — |
 | 5.7x28mm | 2.6 | 1.8 | 1.0 | 0.7 | 0.5 | — | — | — |
 | 6.8x51mm | 11.1 | 10.1 | 8.1 | 6.5 | 4.7 | 3.9 | — | — |
 | 5.56x45mm | 7.7 | 6.6 | 4.8 | 3.4 | 2.0 | 1.6 | — | — |
@@ -58,6 +61,7 @@ Small-arms calibres tabulated at 0 / 100 / 300 / 500 / 800 / 1 000 / 1 500 m. Au
 |---|---|---|---|---|---|---|---|---|
 | 4.6x30mm | 501.0 | 433.7 | 338.4 | 299.2 | 255.6 | 230.7 | — | — |
 | 4.6x30mm_PDW | 542.0 | 469.7 | 357.4 | 308.4 | 263.1 | 237.3 | — | — |
+| 4.6x22mm | 396.0 | 357.1 | 315.4 | 288.9 | 254.9 | — | — | — |
 | 5.7x28mm | 660.8 | 510.1 | 323.8 | 264.2 | 197.5 | — | — | — |
 | 6.8x51mm | 730.9 | 680.2 | 584.5 | 498.8 | 392.7 | 343.7 | — | — |
 | 5.56x45mm | 939.1 | 846.1 | 671.5 | 519.2 | 353.5 | 309.1 | — | — |
@@ -88,6 +92,7 @@ Calibration: 5.56 carbine ≈ 165 dB / 158 dB; 7.62 rifle ≈ 166 / 159; .50 BMG
 | Weapon | Muzzle (unsup) | Ear (unsup) | Muzzle (sup) | Ear (sup) | Ear + plug | Ear + double | Ear + double + TACS |
 |---|---|---|---|---|---|---|---|
 | MP-4.6M Pistol | 163.4 | 156.4 | 123.4 | 116.4 | 94.4 | 88.4 | 63.4 |
+| MP-4.6P Guardian LE | 164.0 | 157.0 | 164.0 | 157.0 | 135.0 | 129.0 | 104.0 |
 | MP-4.6M Defender PDW | 164.0 | 157.0 | 124.0 | 117.0 | 95.0 | 89.0 | 64.0 |
 | MP-6.8 Mark II Rifle | 166.2 | 159.2 | 126.2 | 119.2 | 97.2 | 91.2 | 66.2 |
 | MAS-15.2E Sniper | 165.0 | 158.0 | 125.0 | 118.0 | 96.0 | 90.0 | 65.0 |
@@ -104,6 +109,7 @@ Bullet drop measured from the optical sight line for a scope-height-over-bore of
 |---|---|---|---|---|---|---|---|---|---|
 | 4.6x30mm | 100 m | +8.1 | +0.1 | -58.9 | -181.5 | -712.0 | -2350.6 | -4152.3 | -12368.7 |
 | 4.6x30mm_PDW | 100 m | +7.2 | +0.1 | -50.9 | -157.0 | -628.9 | -2130.6 | -3801.7 | -11484.1 |
+| 4.6x22mm | 100 m | +11.1 | +0.1 | -83.5 | -248.3 | -904.4 | -2784.2 | -4809.7 | -13180.3 |
 | 5.7x28mm | 100 m | +6.0 | +0.1 | -41.7 | -151.1 | -661.5 | -2610.6 | -5066.0 | -19818.0 |
 | 6.8x51mm | 100 m | +4.7 | +0.1 | -24.7 | -76.1 | -268.9 | -865.5 | -1583.8 | -4909.6 |
 | 5.56x45mm | 100 m | +3.8 | +0.2 | -17.6 | -52.0 | -194.4 | -718.9 | -1422.6 | -5214.7 |
@@ -117,6 +123,7 @@ Bullet drop measured from the optical sight line for a scope-height-over-bore of
 |---|---|---|---|---|---|---|
 | 4.6x30mm | 6.8 cm | 65.0 cm | 169.3 cm | 388.7 cm | 580.8 cm | — |
 | 4.6x30mm_PDW | 6.2 cm | 61.4 cm | 169.0 cm | 394.5 cm | 589.3 cm | — |
+| 4.6x22mm | 6.2 cm | 49.3 cm | 120.5 cm | 277.9 cm | — | — |
 | 5.7x28mm | 9.6 cm | 102.8 cm | 275.0 cm | 663.9 cm | — | — |
 | 6.8x51mm | 2.3 cm | 22.0 cm | 65.7 cm | 186.9 cm | 309.8 cm | — |
 | 5.56x45mm | 2.6 cm | 26.3 cm | 83.0 cm | 257.8 cm | 436.1 cm | — |
@@ -138,6 +145,7 @@ Bullet drop measured from the optical sight line for a scope-height-over-bore of
 |---|---|---|---|
 | 4.6x30mm | 878 | 301 | 1644 |
 | 4.6x30mm_PDW | 928 | 376 | 1778 |
+| 4.6x22mm | > 3,500 m (sim cap) | 176 | 1299 |
 | 5.7x28mm | 452 | 276 | 2168 |
 | 6.8x51mm | > 3,500 m (sim cap) | 1030 | 2398 |
 | 5.56x45mm | > 3,500 m (sim cap) | 855 | 3081 |
@@ -156,6 +164,7 @@ Barrel life is rounds-to-throat-erosion at the spec'd chamber pressure, calibrat
 | Weapon | Liner | Barrel mass | Life (rounds) | Sustained rpm (thermal) |
 |---|---|---|---|---|
 | MP-4.6M Pistol | stellite | 0.30 kg | 302,501 | 250 |
+| MP-4.6P Guardian LE | chrome | 0.28 kg | 176,870 | 250 |
 | MP-4.6M Defender PDW | stellite | 0.45 kg | 302,501 | 250 |
 | MP-6.8 Mark II Rifle | stellite | 1.30 kg | 80,398 | 250 |
 | MAS-15.2E Sniper | stellite | 4.40 kg | 22,753 | 131 |
@@ -171,6 +180,7 @@ Peak shoulder force at the stock-pad assuming parabolic energy dissipation over 
 | Weapon | Free recoil (J) | Stock travel | Brake eff. | Peak force (N) | (lbf) |
 |---|---|---|---|---|---|
 | MP-4.6M Pistol | 1.5 | 4.0 mm | 0 % | 559 | 126 |
+| MP-4.6P Guardian LE | 1.2 | 4.0 mm | 42 % | 158 | 35 |
 | MP-4.6M Defender PDW | 0.8 | 18.0 mm | 0 % | 63 | 14 |
 | MP-6.8 Mark II Rifle | 11.3 | 20.0 mm | 35 % | 358 | 80 |
 | MAS-15.2E Sniper | 255.2 | 45.0 mm | 65 % | 1042 | 234 |
@@ -187,6 +197,7 @@ Normal incidence numbers are taken from §3 and reduced by `cos(θ)^n`, with `n 
 |---|---|---|---|---|---|
 | 4.6x30mm | 3.8 | 1.3 | 0.7 | 0.6 | 0.4 |
 | 4.6x30mm_PDW | 4.2 | 1.4 | 0.8 | 0.6 | 0.4 |
+| 4.6x22mm | 3.1 | 1.0 | 0.7 | 0.7 | — |
 | 5.7x28mm | 2.6 | 0.9 | 0.3 | 0.2 | — |
 | 6.8x51mm | 11.1 | 3.7 | 2.7 | 2.1 | 1.3 |
 | 5.56x45mm | 7.7 | 2.5 | 1.6 | 1.1 | 0.5 |
@@ -368,6 +379,265 @@ Safe peripheral-IV bound: `< 600 mOsm/kg`. Safe central-line bound: `< 1 800 mOs
 | 35 °C | 18.0 months |
 | 49 °C | 6.8 months |
 | 60 °C | 3.2 months |
+
+## 23. Portfolio lifecycle — structural, parts life, reliability
+
+### 23.0 Firearms and crew-served weapons
+
+| Platform | Category | Felt recoil (ft·lb) | Barrel SF_yield | Bore life (rd) | MRBF analytic | MRBF simulated | FTF rate |
+|---|---|---|---|---|---|---|---|
+| MP-4.6P Guardian LE | firearm | 0.078 | 2.42 | 24,000 | 20,548 | 30,000 | 1:80,000 |
+| MP-4.6M Pistol | firearm | 0.11 | 3.35 | 75,000 | 20,270 | 10,000 | 1:80,000 |
+| MP-4.6M Defender PDW | firearm | 0.125 | 3.48 | 75,000 | 19,996 | 15,000 | 1:80,000 |
+| MP-6.8 Mark II Rifle | firearm | 1.631 | 1.99 | 25,000 | 15,656 | 15,000 | 1:55,000 |
+| MAS-15.2E Sniper | firearm | 39.717 | 2.11 | 1,500 | 35,613 | 30,000 | 1:120,000 |
+| 57 mm Autocannon | crew_served | 3675.949 | 1.45 | 1,166 | 8,375 | 10,000 | 1:35,000 |
+| 57 mm Underbarrel GL | firearm | 160.262 | 1.41 | 5,000 | 13,857 | 30,000 | 1:40,000 |
+| 57 mm Mortar/RPG | crew_served | 227.281 | 1.84 | 8,000 | 11,041 | 15,000 | 1:25,000 |
+| 140 mm Tank Gun | crew_served | 22915.411 | 2.23 | 618 | 3,502 | 3,750 | 1:8,000 |
+
+#### 23.0.1 Firearm component parts-life
+
+**MP-4.6P Guardian LE**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Barrel (416R + chrome + DLC ports) | 18,000 | 24,000 | Archard bore erosion |
+| Recoil spring (17-7 PH) | 50,000 | 120,000 | Goodman infinite-life |
+| Extractor hook (H13 + DLC) | 40,000 | 150,000 | Hook wear + spring preload |
+| Magazine feed lips (440C laser-formed) | 25,000 | 80,000 | Lip spring-set |
+| DLC sliding surfaces batch | 15,000 | 30,000 | Coating wear budget |
+
+**MP-4.6M Pistol**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Barrel (416R + Stellite-21 throat) | 50,000 | 75,000 | Archard + Stellite erosion |
+| Rotating bolt lugs (H13) | 35,000 | 50,000 | S-N fatigue SF>3 |
+| Integral suppressor K-baffles (Inconel 718) | 18,000 | 25,000 | Blast-face erosion |
+| Recoil spring (MP35N) | 10,000 | 15,000 | Goodman infinite-life |
+| Extractor / ejector (S7 + DLC) | 18,000 | 25,000 | Hook + cam wear |
+
+**MP-4.6M Defender PDW**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Barrel (416R + Stellite-21) | 50,000 | 75,000 | Archard + sustained-fire thermal |
+| Buffered bolt-carrier (H13 + Ti countermass) | 14,000 | 20,000 | Carrier rail wear + buffer stack |
+| Integral suppressor (180 cm³ Inconel) | 20,000 | 30,000 | Baffle erosion @ 850 rpm bound |
+| Buffer spring stack (Elgiloy) | 20,000 | 30,000 | Compression set |
+| Feed ramp / magazine well (7075-T6) | 18,000 | 25,000 | Peening + DLC wear |
+
+**MP-6.8 Mark II Rifle**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Barrel (chrome + Stellite-21 throat) | 18,000 | 25,000 | Archard accuracy-retention |
+| Gas piston / op-rod (Ni-Cr-Mo) | 35,000 | 80,000 | Wear + carbon fouling |
+| Bolt carrier group (Carpenter 158) | 40,000 | 100,000 | Lug peening + cam path |
+| Suppressor baffles (Inconel 718) | 12,000 | 22,000 | Blast-face erosion |
+| Buffer spring (chrome-silicon) | 30,000 | 70,000 | Goodman infinite-life |
+
+**MAS-15.2E Sniper**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Barrel (Stellite-21 lined, quick-change) | 1,000 | 1,500 | Throat erosion / sub-MOA bound |
+| Integral suppressor (Inconel K-baffles) | 1,000 | 1,500 | Blast-face erosion |
+| Bolt lugs (Carpenter 158) | 8,000 | 20,000 | Lug bearing fatigue |
+| Firing pin spring (music wire) | 1,400 | 2,000 | Wahl fatigue |
+| Magazine spring (17-7 PH) | 1,400 | 2,000 | Compression set |
+
+**57 mm Autocannon**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Chrome-Stellite barrel liner | 800 | 1,166 | Throat erosion @ 257 MPa |
+| Hydraulic recoil buffer seals | 5,000 | 10,000 | Seal extrusion + fluid loss |
+| Dual-feed sprocket / link belt | 15,000 | 40,000 | Link fatigue + peening |
+| Rotary breech cluster | 20,000 | 50,000 | Cam-track wear |
+| Thermal sleeve / cooling jacket | 3,000 | 8,000 | 80 rpm sustained thermal bound |
+
+**57 mm Underbarrel GL**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Chrome-lined launch tube | 3,500 | 5,000 | Low-pressure rifling wear |
+| Break-action hinge pin (17-4 PH) | 2,000 | 6,000 | Bearing wear + lock-up |
+| Leaf sight / quadrant mount | 4,000 | 10,000 | Vibration loosening |
+| Firing pin / striker (H13) | 3,000 | 8,000 | Tip mushrooming |
+
+**57 mm Mortar/RPG**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Chrome-lined tube (muzzle-loader) | 5,000 | 8,000 | Spalling + obturation ring wear |
+| Baseplate / bipod pivot (7075-T6) | 3,000 | 10,000 | Fretting + soil impact |
+| Trigger / firing pin (RPG mode) | 2,000 | 6,000 | Pin tip wear |
+| Spiral-groove obturation ring | 1,500 | 4,000 | Gas-cut erosion |
+
+**140 mm Tank Gun**
+
+| Component | Warn @ rd | Replace @ rd | Model |
+|---|---|---|---|
+| Stellite-21 bore liner (chrome clad) | 500 | 700 | Throat erosion @ ETC pulse |
+| Sliding-block breech (maraging steel) | 800 | 2,000 | Lug bearing + gas seal |
+| Hydraulic recoil system (600 mm stroke) | 400 | 1,000 | Seal pack + fluid degradation |
+| ETC plasma injector electrodes | 200 | 500 | Arc erosion per shot |
+| Thermal sleeve / fume extractor | 600 | 1,500 | Erosion + carbon fouling |
+
+### 23.1 Armour, sustainment, and systems platforms
+
+| Platform | Category | Primary metric | Headline |
+|---|---|---|---|
+| APES Body Armour | armour | calendar_years | panel_service_life_yr=12; ceramic_tile_replacement_yr=5; soft_panel_refresh_yr=8; strike_face_dlc_recoat_yr=3 |
+| APES-L Mark I Body Armour | armour | calendar_years | panel_service_life_yr=10; ceramic_tile_replacement_yr=4; soft_panel_refresh_yr=6 |
+| NACS CBRN | systems | calendar_months | filter_cartridge_life_mo=6; suit_fabric_service_yr=5; valve_diaphragm_service_mo=12 |
+| AlNiCyN Armour | armour | calendar_years | plate_service_life_yr=15; spall_liner_refresh_yr=7; areal_density_kg_m2=28 |
+| ADF Tactical Field Kit | sustainment | calendar_years | load_carriage_fabric_yr=8; hydration_bladder_yr=2; IFAK_sterile_pack_mo=36 |
+| Caseless Bullets (BPC) | sustainment | calendar_months | protein_case_shelf_mo=24; cook_off_safe_temp_C=93; humidity_storage_max_pct=60 |
+| Combat Drug | sustainment | calendar_months | depot_shelf_cold_chain_mo=36; room_temp_hold_hr=72; autoinjector_shelf_mo=24 |
+| HEL-CMS/DB | systems | operating_hours | diode_array_life_hr=10000; coolant_pump_service_hr=5000; beam_window_recoat_hr=2000 |
+| HPR-X Rocketry | systems | flight_cycles | motor_case_life_flights=50; nozzle_insert_life_flights=30; avionics_battery_cycles=200 |
+| Hearing Protection | systems | calendar_months | foam_plug_life_mo=6; electronic_muff_seal_mo=24; earplug_NRR_derated_dB=22 |
+| Injectable Nutrition | sustainment | calendar_months | formulation_shelf_25C_mo=18; osmolality_limit_mOsm_kg=600; cold_chain_shelf_mo=30 |
+| TACS Military Noise Cancellation | systems | calendar_years | wearable_array_service_yr=8; vehicle_array_service_yr=10; battery_cycle_life=500 |
+| Rubber Tank Tracks | systems | distance_km | rubber_pad_life_km=8000; road_wheel_bearing_km=12000; net_noise_reduction_dB=20.8 |
+| TACT-1 Mark II Ration | sustainment | calendar_months | shelf_life_25C_mo=36.0; shelf_life_49C_mo=6.8; shelf_life_4C_mo=154.3; shelf_life_35C_mo=18.0; shelf_life_60C_mo=3.2 |
+| ASNP Sports Nutrition | sustainment | calendar_months | product_shelf_mo=24; opened_container_days=30 |
+| CL-20 High Explosive | sustainment | calendar_months | cold_storage_shelf_mo=240; room_temp_hold_days=14; stabilizer_depletion_pct_yr=0.5 |
+
+#### 23.1.1 Component service thresholds
+
+**APES Body Armour**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| B4C dragon-scale tile array | 4 yr | 5 yr | Tile fracture + edge spall |
+| 16-layer Kevlar/UHMWPE soft stack | 6 yr | 8 yr | UV + flex fatigue |
+| Non-Newtonian shear-thickening pad | 3 yr | 5 yr | Polymer chain scission |
+| Titanium strike-point inserts | 8 yr | 12 yr | Peening + DLC wear |
+
+**APES-L Mark I Body Armour**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 8 mm B4C tile (police panel) | 3 yr | 4 yr | Multi-hit spall |
+| 10-layer soft stack (22 kg/m²) | 4 yr | 6 yr | Duty-cycle flex fatigue |
+| Carrier mesh + MOLLE webbing | 2 yr | 4 yr | Abrasion + UV |
+
+**NACS CBRN**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Activated-carbon / HEPA filter canister | 4 mo | 6 mo | Breakthrough time @ 5 mg/m³ |
+| Butyl / PTFE laminate suit | 3 yr | 5 yr | Permeation + seam fatigue |
+| Exhalation valve diaphragm | 8 mo | 12 mo | Elastomer set + tear |
+
+**AlNiCyN Armour**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| AlNiCyN reaction-sintered tile | 10 yr | 15 yr | Micro-crack + moisture ingress |
+| UHMWPE spall liner | 5 yr | 7 yr | Delamination |
+
+**ADF Tactical Field Kit**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 500D Cordura load carriage | 5 yr | 8 yr | Abrasion + UV |
+| Hydration bladder (TPU) | 1 yr | 2 yr | Biofilm + seam leak |
+| Sterile IFAK consumables | 24 mo | 36 mo | Sterility expiry |
+
+**Caseless Bullets (BPC)**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Protein-cased round (BPC) | 18 mo | 24 mo | Protein denaturation + moisture |
+| Nitrocellulose propellant wafer | 18 mo | 30 mo | Stabilizer depletion |
+
+**Combat Drug**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| HSX7 depot ampoule (2–8 °C) | 30 mo | 36 mo | Peptide aggregation |
+| Autoinjector mechanism | 18 mo | 24 mo | Spring + seal ageing |
+
+**HEL-CMS/DB**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Fiber-coupled diode stack | 8,000 hr | 10,000 hr | Junction degradation @ 40 kW |
+| Deionised coolant loop pump | 3,500 hr | 5,000 hr | Seal + bearing wear |
+| Fused-silica output window (DLC) | 1,500 hr | 2,000 hr | Plasma pitting |
+
+**HPR-X Rocketry**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| CFRP motor case (152 mm) | 35 flights | 50 flights | Pressure-cycle fatigue |
+| Graphite nozzle insert | 20 flights | 30 flights | Ablation + throat growth |
+| GPS / INS avionics battery | 150 cycles | 200 cycles | Li-ion capacity fade |
+
+**Hearing Protection**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Slow-recovery foam earplug | 4 mo | 6 mo | Cell collapse + contamination |
+| Electronic muff gel seal | 18 mo | 24 mo | Elastomer hardening |
+
+**Injectable Nutrition**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Peripheral-safe isotonic bag | 12 mo | 18 mo | Lipid oxidation Q10 |
+| Central-line hypertonic vial | 24 mo | 30 mo | Cold-chain integrity |
+
+**TACS Military Noise Cancellation**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 16-element wearable ANC array | 6 yr | 8 yr | MEMS mic drift + flex fatigue |
+| Vehicle roof phased array | 7 yr | 10 yr | Vibration + connector corrosion |
+| Li-poly wearable battery | 400 cycles | 500 cycles | Capacity fade @ 1C |
+
+**Rubber Tank Tracks**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Segmented rubber road-wheel pad | 6,000 km | 8,000 km | Chunking + heat build-up |
+| Road-wheel bearing cartridge | 9,000 km | 12,000 km | Roller fatigue + seal |
+| Torsion bar bushing (elastomer) | 5,000 km | 7,500 km | Compression set |
+
+**TACT-1 Mark II Ration**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Main meal retort pouch | 30 mo | 36 mo | Q10 lipid oxidation @ 25 °C |
+| Electrolyte / snack bar | 24 mo | 30 mo | Moisture ingress |
+| Flameless ration heater (Mg-Fe) | 48 mo | 60 mo | Mg powder oxidation |
+
+**ASNP Sports Nutrition**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Electrolyte powder sachet | 18 mo | 24 mo | Clumping + vitamin degradation |
+| Protein / carb gel pouch | 12 mo | 18 mo | Maillard browning |
+
+**CL-20 High Explosive**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| CL-20 pressed pellet lot | 180 mo | 240 mo | Stabilizer @ −18 °C |
+| PBX binder batch | 120 mo | 180 mo | HMX / binder phase separation |
+
+### 23.2 Scope-only platforms (no physics lifecycle)
+
+- **Military Command Doctrine** — Doctrinal force-structure and training-duration targets — no physics lifecycle model.
+- **OBSIDIAN Body Armour** — Hypothetical carbyne / STF suit — no runnable ballistic lifecycle model.
+- **OBSIDIAN-X Body Armour** — Full-body hypothetical armour — no runnable lifecycle model.
+- **TAIPAN-1 Missile** — Flight dynamics validated by taipan1_sim.py — no portfolio §23 lifecycle slice.
+
 
 ---
 

@@ -8,14 +8,15 @@
 
 ## What this folder is
 
-The **AlNiCyN Family** is a complete platform subfolder: operator specification and academic research paper for advanced aluminium armour alloys used in vehicle hulls, plate substrates, and structural armour applications.
+The **AlNiCyN Family** is a complete platform subfolder: operator specification and academic research paper for advanced aluminium armour alloys used in vehicle hulls, plate substrates, and structural armour applications. [`platform_simulation.py`](platform_simulation.py) anchors heavy-threat ballistic context via portfolio **§3** RHA penetration tables — alloy-tier properties remain spec prose.
 
 **Reading order for new readers:**
 
 1. **This README** — navigation and headline numbers.
 2. [`AlNiCyN_Specification.md`](AlNiCyN_Specification.md) — alloy compositions, mechanical properties, processing, selection guide, economics.
 3. [`AlNiCyN_Research_Paper.md`](AlNiCyN_Research_Paper.md) — formal materials-science narrative.
-4. [`SIM_README.md`](SIM_README.md) — material properties in spec; armour interactions via parent sim §13.
+4. [`SIM_README.md`](SIM_README.md) — material properties in spec; §3 penetration context via parent sim.
+5. Run [`platform_simulation.py`](platform_simulation.py) — §3 RHA penetration sample + scope limits.
 
 ---
 
@@ -25,7 +26,12 @@ The **AlNiCyN Family** is a complete platform subfolder: operator specification 
 |---|---|---|
 | [`AlNiCyN_Specification.md`](AlNiCyN_Specification.md) | Operator / product specification | Full technical reference — AlNiCyN-5000/7000/X compositions, comparative analysis, processing, testing standards, economics. **Start here for "what are the alloys."** |
 | [`AlNiCyN_Research_Paper.md`](AlNiCyN_Research_Paper.md) | Academic research paper | Abstract, metallurgy background, alloy design, performance claims, limitations. |
-| [`SIM_README.md`](SIM_README.md) | Simulation documentation | Where material numbers live vs. where portfolio simulator covers armour. |
+| [`SIM_README.md`](SIM_README.md) | Simulation documentation | Alloy properties in spec; §3 RHA penetration context via portfolio sim. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | §3 penetration sample + scope limits for alloy-tier claims. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Loads `weapons_simulation.py` and formats per-platform verification output. |
+| [`../weapons_simulation.py`](../weapons_simulation.py) | Portfolio simulator | §3 terminal ballistics vs standard RHA plate. |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | Lifecycle simulator | §23 plate and spall-liner service intervals. |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Simulator output | Authoritative §3 penetration tables — cite for ballistic context. |
 
 ---
 
@@ -37,7 +43,89 @@ The **AlNiCyN Family** is a complete platform subfolder: operator specification 
 | **AlNiCyN-7000** | 5–6 | Higher | Enhanced hardening | ~60 % |
 | **AlNiCyN-X** | 2–3 | Research | Metamaterial lattice | Targeted |
 
-Ballistic interaction with portfolio threats uses generic RHA penetration models in `weapons_simulation.py` §3 — not alloy-specific coupon data.
+### §23 Lifecycle (service intervals)
+
+Values from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle.py`](../weapon_lifecycle.py).
+
+| Component | Service life |
+|---|---|
+
+### Portfolio §3 — RHA penetration context (standard 290 BHN plate)
+
+Small-arms and heavy-cartridge penetration depths modelled in the portfolio simulator — generic RHA baseline, not AlNiCyN coupon data:
+
+| Cartridge | 0 m | 300 m | 500 m | 1 000 m | 2 000 m | 3 000 m |
+|---|---|---|---|---|---|---|
+| 6.8 × 51 mm | 11.1 mm | 8.1 mm | 6.5 mm | — | — | — |
+| 7.62 × 51 mm | 9.7 mm | 6.7 mm | 5.1 mm | 2.7 mm | — | — |
+| 57 × 347 mm | 139.7 mm | — | — | 113.0 mm | 0.0 mm | — |
+| 140 mm KE | 867.1 mm | — | — | 540.9 mm | 326.7 mm | 215.7 mm |
+
+Source: [`../weapons_sim_results.md`](../weapons_sim_results.md) §3. Obliquity tables: §12.
+
+---
+
+
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Plate service life (§23) | **15 yr** |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+## 🔬 Simulation verification
+
+**AlNiCyN alloy-tier yield, hardness, and RHA-equivalence factors are spec prose only** — not individually modelled. The local script prints portfolio **§3** RHA penetration samples as heavy-threat ballistic context:
+
+```bash
+python platform_simulation.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | §3 penetration sample + alloy-tier scope limits |
+| [`SIM_README.md`](SIM_README.md) | What is / is not modelled; §3 vs §13 distinction |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | §3 RHA penetration tables — cite for ballistic context |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 lifecycle — plate and spall-liner service intervals |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+To regenerate the **full portfolio** (updates §3 tables):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify §3 penetration context and scope limits:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio** (after shared parameter edits):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for §3 table cross-reference. Dismounted composite armour: [`../APES Body Armour/`](../APES%20Body%20Armour/) §13.
 
 ---
 

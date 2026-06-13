@@ -187,7 +187,7 @@ Durometer \(Shore A\)
 
 Service Life
 
-800 km minimum before replacement
+8000 km minimum before replacement (§23.1 rubber pad life)
 
 Storage Life
 
@@ -208,6 +208,24 @@ Three-phase manufacturing: compound preparation \(banbury/internal mixer, 60-80 
 Every 10th pad: hardness, dimensions, and visual inspection. Every 100th pad: destructive testing of tensile, tear, and compression set properties. Daily: compound viscosity and cure rate verification. Batch: material certifications and first article testing per ASTM D412, D624, D2240, D395, and D5963.
 
 ## 7. Lifecycle Cost Analysis
+
+### Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Rubber pad life | **8000 km** |
+| Road-wheel bearing life | **12,000 km** |
+| Net noise reduction | **20.8 dB** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Segmented rubber road-wheel pad | 6,000 km | 8,000 km | Chunking + heat build-up |
+| Road-wheel bearing cartridge | 9,000 km | 12,000 km | Roller fatigue + seal |
+| Torsion bar bushing (elastomer) | 5,000 km | 7,500 km | Compression set |
 
 **Cost Category**
 **Per Tank \(25 Years\)**
@@ -351,7 +369,7 @@ For a per-track-link supported mass of `m_link ≈ 14.5 kg` (typical MBT track-s
 
 ### A.3 Service-life model (Miner's rule cumulative damage)
 
-The 800 km minimum service-life figure in §5 follows from a Miner's-rule linear-damage-accumulation analysis against the pad's S-N (Wöhler) curve under cyclic loading from track-shoe-on-pavement engagement:
+The **8000 km** minimum service-life figure in §5 (portfolio §23.1 `rubber_pad_life_km`) follows from a Miner's-rule linear-damage-accumulation analysis against the pad's S-N (Wöhler) curve under cyclic loading from track-shoe-on-pavement engagement:
 
 ```
 Σ ( n_i / N_f,i ) < 1                       # Miner's rule failure criterion
@@ -365,18 +383,18 @@ with
   k                 = S-N curve exponent (≈ 6 for elastomeric composites)
 ```
 
-For a representative tank duty cycle (`σ_amplitude = 2.0 MPa` mean stress, `5 cycles/m` of pavement transit, `800 km` lifetime):
+For a representative tank duty cycle (`σ_amplitude = 2.0 MPa` mean stress, `5 cycles/m` of pavement transit, `8000 km` lifetime per §23.1):
 
 ```
-n_total = 5 × 800 000 = 4.0 × 10⁶ cycles
+n_total = 5 × 8 000 000 = 4.0 × 10⁷ cycles
 N_f     = (4.0 / 2.0)^6 = 64
 ```
 
-→ **Per-cycle damage fraction `n / N_f` = 6.25 × 10⁻²** at the 2 MPa amplitude — the Miner's sum stays below unity provided the pad sees no more than ~2× this stress amplitude on average over the 800 km duty cycle. Mil-spec acceptance per ASTM D5963 abrasion testing on production pads closes this analytical estimate.
+→ **Per-cycle damage fraction `n / N_f` = 6.25 × 10⁻³** at the 2 MPa amplitude — the Miner's sum stays below unity provided the pad sees no more than ~2× this stress amplitude on average over the 8000 km duty cycle (§23.1). Mil-spec acceptance per ASTM D5963 abrasion testing on production pads closes this analytical estimate.
 
 ### A.4 Service-life and lifecycle-cost coupling
 
-The §7 25-year lifecycle cost of $282 235 per tank assumes the 800 km service life is the binding constraint. At an Australian Defence Force annual transit estimate of ~ 5 000 km/tank/year (peacetime) → ~ 6.25 pad replacement cycles per year × $11 023 per cycle (§7) ≈ $69 000/year operating envelope. The 25-year sum (`$6 672 + 25 × $11 023 ≈ $282 247`) reproduces the headline figure to within rounding error.
+The §7 25-year lifecycle cost of $282 235 per tank assumes the **8000 km** service life is the binding constraint (§23.1). At an Australian Defence Force annual transit estimate of ~ 5 000 km/tank/year (peacetime) → ~ 6.25 pad replacement cycles per year × $11 023 per cycle (§7) ≈ $69 000/year operating envelope. The 25-year sum (`$6 672 + 25 × $11 023 ≈ $282 247`) reproduces the headline figure to within rounding error.
 
 → **Lifecycle-cost-per-km = $282 235 / 50 000 km = $5.64/km** (matches §7 published figure)
 

@@ -291,7 +291,24 @@ The dual-mode ignition system represents a genuine operational improvement over 
 
 The main acknowledged uncertainties at this stage of conceptual development are: the actual spontaneous ignition temperature of the nitrated poly-amino acid propellant in its cast form; the mechanical strength of the crosslinked protein matrix under the shear and compressive loads imposed by chambering in a dirty field environment; the CNT network's resistance to static discharge at all relevant environmental temperatures and humidity levels; and the precise oxygen balance achievable in the nitrated propellant at practical synthesis conditions. These are all empirically testable at TRL 2–3 and none of them represents a fundamental physical barrier to the concept.
 
-## 11. Conclusion
+## 11. Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Protein case shelf | **24 mo** |
+| Cook-off safe temp | **93 °C** |
+| Humidity storage max | **60 % RH** |
+
+**Table 11.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Protein-cased round (BPC) | 18 mo | 24 mo | Protein denaturation + moisture |
+| Nitrocellulose propellant wafer | 18 mo | 30 mo | Stabilizer depletion |
+
+## 12. Conclusion
 
 This paper has presented the Biopolymere Caseless \(BPC\) system — a theoretical but technically coherent architecture for fully consumable small arms ammunition integrating: a disulfide-crosslinked recombinant spider silk protein structural casing; a nitrated poly-amino acid energetic propellant formulated to near-zero oxygen balance; a multi-layer cook-off mitigation strategy combining HITP-analogous protein chemistry, endothermic disulfide cleavage, and weapon-level thermal management; a mechanical percussion primary ignition system using an integrated rear primer surface compatible with standard striker-fired weapons; and a secondary electrothermal ignition pathway via an embedded CNT network for smart-weapon applications.
 

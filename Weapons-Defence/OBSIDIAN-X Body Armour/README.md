@@ -39,6 +39,36 @@ OBSIDIAN-X is the **full-body combat evolution** of [`../OBSIDIAN Body Armour/`]
 | Theoretical unit cost | ~$135 M per suit |
 | R&D investment (stated) | ~$3.1 T over 25 years |
 | Simulator coverage | **None** |
+| Lifecycle (§23) | *Full-body hypothetical armour — no runnable lifecycle model.* |
+
+---
+
+## 🔬 Simulation verification
+
+**Scope-only — no runnable ballistic simulation.** OBSIDIAN-X distributed full-body armour claims are document-internal design targets; portfolio `weapons_simulation.py` does not model metamaterial cloaking, carbyne weave, or environmental-envelope performance. The local script documents scope limits:
+
+```bash
+python platform_simulation.py
+```
+
+For **simulation-validated** body armour in this portfolio, see [`../APES Body Armour/`](../APES%20Body%20Armour/) (§13 V50/BFD).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Scope documentation only |
+| [`SIM_README.md`](SIM_README.md) | Confirms no sim coverage; APES cross-reference |
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — print scope limits (no ballistic physics):
+
+```bash
+python platform_simulation.py
+```
+
+For simulation-validated armour numbers, see [`../APES Body Armour/`](../APES%20Body%20Armour/).
 
 ---
 

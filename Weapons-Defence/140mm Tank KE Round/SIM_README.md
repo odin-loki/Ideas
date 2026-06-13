@@ -2,6 +2,18 @@
 
 **Tier-C validation** via [`../weapons_simulation.py`](../weapons_simulation.py). Output: [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results, use `cd .. && python weapons_simulation.py`.
+
 ---
 
 ## Simulator keys
@@ -26,10 +38,7 @@ Python 3.9+ required.
 
 ## Quick start
 
-```bash
-cd ..
-python weapons_simulation.py
-```
+Run [`platform_simulation.py`](platform_simulation.py) from this folder (see **Local verification script** above). After parameter edits, regenerate the full portfolio with `cd .. && python weapons_simulation.py`.
 
 ---
 
@@ -49,6 +58,7 @@ python weapons_simulation.py
 | HE-Frag warhead | §14 (`140 mm Multi-Effect HE-Frag`) |
 | HEAT warhead | §15 (`140 mm Multi-Effect HEAT`) |
 | CL-20 detonation chemistry | §17 |
+| **§23 Lifecycle** | `140 mm Tank Gun` — bore life 700 rd, MRBF 3,502 analytic / 3,750 simulated, felt recoil 22914.36 ft·lb, barrel SF 2.23, FTF 1:8,000 |
 
 ---
 
@@ -70,6 +80,12 @@ python weapons_simulation.py
 | Barrel life | **618 rounds** |
 | HE-Frag A_L | **1 173 m²** |
 | HEAT pen | **103 mm RHA** |
+| Bore life service (§23) | **618 rounds** |
+| MRBF analytic (§23) | **~3 502 rounds** |
+| MRBF simulated (§23) | **~3 750 rounds** |
+| Felt recoil (§23) | **~22 915.411 ft·lb** |
+| Barrel SF_yield (§23) | **2.23** |
+| FTF rate (§23) | **1:8 000** |
 
 ---
 
@@ -80,3 +96,14 @@ Edit `CARTRIDGES["140mm_KE"]`, `PENETRATORS["140mm_KE"]`, and `WEAPONS["140 mm T
 ---
 
 [← Platform README](README.md) · [← Weapons-Defence](../README.md)
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`140 mm Tank Gun`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `140 mm Tank Gun` — bore life 700 rd, MRBF 3,502 analytic / 3,750 simulated, felt recoil 22914.36 ft·lb, barrel SF 2.23, FTF 1:8,000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

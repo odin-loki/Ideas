@@ -280,6 +280,26 @@ The Mark I leans on the NACS CORE undersuit developed for the military APES prog
 
 ---
 
+## 6.5 Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../../Weapons-Defence/weapons_sim_results.md`](../../Weapons-Defence/weapons_sim_results.md) §23.1 / [`../../Weapons-Defence/weapon_lifecycle_configs.py`](../../Weapons-Defence/weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Panel service life | **10 yr** |
+| Ceramic tile replacement | **4 yr** |
+| Soft panel refresh | **6 yr** |
+
+**Table 6.5 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 8 mm B4C tile (police panel) | 3 yr | 4 yr | Multi-hit spall |
+| 10-layer soft stack (22 kg/m²) | 4 yr | 6 yr | Duty-cycle flex fatigue |
+| Carrier mesh + MOLLE webbing | 2 yr | 4 yr | Abrasion + UV |
+
+---
+
 ## 7. Conclusions
 
 The Advanced Protective Equipment System — Law-Enforcement Variant (APES-L Mark I) is a simulation-validated full-body police body-armour architecture targeting the Australian operational threat distribution. The system weighs approximately 6.5 kg ready to wear — 67 % lighter than the current 20 kg torso-only ballistic vest — while providing:
@@ -290,7 +310,7 @@ The Advanced Protective Equipment System — Law-Enforcement Variant (APES-L Mar
 - Cold-weather operability to −25 °C via ionic-liquid STF carrier (Simulation 13), an envelope unmatched by any commercial system.
 - 26 % L4/L5 compressive-load reduction vs the 20.25 kg full-duty baseline (Sim 23); 14.7 % reduction vs the 11 kg torso-only vest baseline (Sim 2). Both results are documented in §4.6 and §4.14 respectively.
 - 0.2 % residual coverage gap (versus 43.1 % current — Simulation 11).
-- 12-year-plus sealed-panel service life (versus 4.6 years for current Kevlar — Simulation 7).
+- Portfolio §23 service intervals: panel **10 yr**, tile **4 yr**, soft **6 yr** (`weapons_sim_results.md` §23.1); Sim 7 sealed-panel model extends NIJ compliance to 12 yr+ (versus 4.6 years for current Kevlar).
 - 66.2 % composite injury-score improvement (Simulation 20).
 - AUD $1.85 million 10-year TCO saving per 500 officers (Simulations 5, 12).
 

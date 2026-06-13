@@ -378,9 +378,24 @@ Special operations forces conducting extended infiltrations in denied areas face
 
 Beyond-Earth-orbit missions \(lunar far side, Mars transit, asteroid operations\) face strict mass constraints precluding current food resupply architectures for durations beyond approximately 30 days. NutriComplete-P's 6-week complete nutritional support per injection, with mass estimated at approximately 300–400 g per injection, would represent a two-to-three order of magnitude improvement in nutritional support mass efficiency compared to current food systems \(~2 kg/day or ~84 kg for a 42-day mission\).
 
-## 7. Conclusion
+## 7. Portfolio §23 Lifecycle (service intervals)
 
-GlycoDur-P and NutriComplete-P represent a technically grounded conceptual framework for converting nutritional support from continuous-infusion to depot-injection modality. The engineering design leverages established PLGA microsphere technology and recombinant protein production platforms, with the key innovation lying in the multi-domain protein architecture encoding controlled release of complete nutritional profiles. Synthesis routes are feasible within current biopharmaceutical manufacturing infrastructure.
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Formulation shelf @ 25 °C | **18 mo** |
+| Cold-chain shelf | **30 mo** |
+| Osmolality limit | **600 mOsm/kg** |
+
+**Table 7.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Peripheral-safe isotonic bag | 12 mo | 18 mo | Lipid oxidation Q10 |
+| Central-line hypertonic vial | 24 mo | 30 mo | Cold-chain integrity |
+
+## 8. Conclusion a technically grounded conceptual framework for converting nutritional support from continuous-infusion to depot-injection modality. The engineering design leverages established PLGA microsphere technology and recombinant protein production platforms, with the key innovation lying in the multi-domain protein architecture encoding controlled release of complete nutritional profiles. Synthesis routes are feasible within current biopharmaceutical manufacturing infrastructure.
 
 Clinical development follows a standard IND/Phase I–III pathway with regulatory precedents established by both recombinant protein biologics and PLGA depot systems. Military, space, and critical care applications each present compelling use cases where elimination of continuous-infusion nutritional support would provide substantial operational or medical benefit. Further development would proceed through molecular engineering to validate release kinetics in vitro, followed by in vivo pharmacokinetic studies in appropriate animal models before first-in-human trials.
 

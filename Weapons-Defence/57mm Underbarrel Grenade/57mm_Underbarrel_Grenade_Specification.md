@@ -187,6 +187,11 @@ Mitigation is therefore not optional:
 ## SECTION 8: RELIABILITY
 
 ### 8.1 Function Standards
+- MRBF analytic (§23): 13 857 rounds
+- MRBF simulated (§23): 30 000 rounds
+- FTF rate (§23): 1:40 000
+- Felt recoil (§23): 160.262 ft·lb
+- Bore life service (§23): 5 000 rounds
 - Operation: 99.9%
 - Safety: 100%
 - Storage: 10 years
@@ -259,10 +264,11 @@ The > 6 000 m Hatcher envelope is **not** the operational effective range — op
 |---|---|
 | Liner | Chrome |
 | Barrel mass | 0.55 kg |
-| Barrel life (rounds to throat erosion) | **69 500** |
+| Throat-erosion life (§10) | **69 500** |
+| Bore life service (§23) | **5 000** |
 | Sustained-fire thermal ceiling | **126 rpm** |
 
-The 69 500-round barrel life is effectively "weapon-lifetime" — at the spec'd 4–6 rpm cyclic rate, the launcher would need to fire continuously for >100 hours to exhaust the barrel. The 126 rpm thermal-sustained ceiling is irrelevant in operational use (the manual break-action reload limits cyclic rate to <10 rpm) but is reported here for symmetry with the rest of the portfolio.
+The §10 throat-erosion life (69 500 rounds) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **5 000 rounds** matches §23.0.1 chrome-lined launch-tube replace interval. The 126 rpm thermal-sustained ceiling is irrelevant in operational use (manual break-action reload limits cyclic rate to <10 rpm). The 126 rpm thermal-sustained ceiling is irrelevant in operational use (the manual break-action reload limits cyclic rate to <10 rpm) but is reported here for symmetry with the rest of the portfolio.
 
 ### 11.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -310,6 +316,19 @@ The 57 mm UGR family includes an optional HEAT nature alongside the primary HE-F
 | Penetration in calibres | 0.75 CD |
 
 The 41 mm RHA HEAT defeat is slightly below the M433 40 mm HEDP (≈ 51 mm RHA) — the lower-charge-mass 57 mm grenade gives up some shaped-charge depth in exchange for the much larger HE-Frag payload in the primary nature. The HEAT nature is intended for fortification breach (timber-and-earth bunkers, brick walls, light-skin vehicles) where the HE-Frag round would either over-penetrate without effect or fail to defeat the cover.
+
+### 11.7 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 160.262 ft·lb |
+| Barrel SF_yield | 1.41 |
+| Bore life service (§23) | 5 000 rounds |
+| MRBF analytic | 13 857 rounds |
+| MRBF simulated | 30 000 rounds |
+| FTF rate | 1:40 000 |
+
+§23 **bore life service** (5 000 rounds) is lower than §10 throat-erosion life (69 500 rounds) — both are reported with distinct labels.
 
 ---
 

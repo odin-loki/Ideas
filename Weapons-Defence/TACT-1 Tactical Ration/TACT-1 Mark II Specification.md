@@ -203,6 +203,26 @@ The 3 yr @ 25 °C baseline (from the Mark II 36-month nominal shelf life calibra
 
 **Operational reading.** A bar issued and consumed within a 7-day operation tolerates the full thermal envelope without degradation — even 60 °C extreme-cabin storage gives 3.2 months of shelf life, dwarfing the issue-to-consumption interval. The cold-chain figure (~ 13 years at 4 °C) bounds the strategic-stockpile shelf life and is consistent with the Mark II being a stockpile-grade product rather than a perishable. The 35 °C and 49 °C figures (1.5 yr and 7 mo respectively) are the relevant procurement-cycle envelopes for unconditioned tropical / desert depots and govern the rotation interval for forward-deployed stocks.
 
+### 7.6 Portfolio §23 Lifecycle (component service intervals)
+
+Headline shelf-life baseline from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Shelf life @ 25 °C | **36 mo** |
+| Shelf life @ 49 °C | **6.8 mo** |
+| Shelf life @ 4 °C | **154.3 mo** |
+| Shelf life @ 35 °C | **18.0 mo** |
+| Shelf life @ 60 °C | **3.2 mo** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Main meal retort pouch | 30 mo | 36 mo | Q10 lipid oxidation @ 25 °C |
+| Electrolyte / snack bar | 24 mo | 30 mo | Moisture ingress |
+| Flameless ration heater (Mg-Fe) | 48 mo | 60 mo | Mg powder oxidation |
+
 ---
 
 ## §8 Manufacturing Method

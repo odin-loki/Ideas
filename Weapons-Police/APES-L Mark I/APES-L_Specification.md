@@ -25,7 +25,7 @@ Classification: **UNCLASSIFIED / FOUO-style — Australian Law Enforcement Appli
 | **Blunt-trauma reduction** | 52.9 % peak pressure vs heat-treated Kevlar |
 | **Cold-weather window** | Comfortable + NIJ-compliant to −25 °C (ionic-liquid STF) |
 | **Upper temperature** | NIJ-compliant to +45 °C |
-| **Service life** | 12 yr+ on sealed panels (vs 4.6 yr for current Kevlar) |
+| **Service life** | Panel **10 yr**; tile **4 yr**; soft **6 yr** (§23.1; Sim 7 sealed-panel model extends to 12 yr+) |
 | **Composite injury improvement** | 66.2 % better than current armour |
 | **Lumbar load** | 977 N at L4/L5 (vs 1 321 N current — 26 % spinal stress reduction) |
 | **10-year TCO** | AUD $3.37 M per 500 officers (vs $5.22 M current — $1.85 M saving) |
@@ -301,6 +301,24 @@ Paris-law crack accumulation. B4C 0.6 mm plate (multi-hit spec for reference). P
 
 Reference data for the transition to single-use tiles: standard B4C ceramic crosses the 80 % protection threshold after 4 NIJ-level strikes. Pre-stressed ceramic exceeds 80 % through all 9 simulated strikes — a 5-strike advantage. After 4 strikes at 36 J: pre-stressed retains 100 %, standard retains 79.3 % (below replacement threshold). The single-use tile design eliminates the multi-hit requirement entirely — the first-hit performance is achieved at dramatically lower ceramic mass.
 
+### Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../../Weapons-Defence/weapons_sim_results.md`](../../Weapons-Defence/weapons_sim_results.md) §23.1 / [`../../Weapons-Defence/weapon_lifecycle_configs.py`](../../Weapons-Defence/weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Panel service life | **10 yr** |
+| Ceramic tile replacement | **4 yr** |
+| Soft panel refresh | **6 yr** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 8 mm B4C tile (police panel) | 3 yr | 4 yr | Multi-hit spall |
+| 10-layer soft stack (22 kg/m²) | 4 yr | 6 yr | Duty-cycle flex fatigue |
+| Carrier mesh + MOLLE webbing | 2 yr | 4 yr | Abrasion + UV |
+
 ### Sim 7: Service Life Degradation
 
 Arrhenius first-order kinetics S(t) = exp(−k·t). k_Kevlar = 0.0355/yr, k_UHMWPE = 0.0118/yr, k_APES_sealed = 0.0088/yr. Australian UV 4 MJ/m²/yr. Calibrated Chin (1997), Tan (2011).
@@ -554,7 +572,7 @@ The Mark I enters a market with several active Australian domestic suppliers, bu
 | Cold-weather operation | Unknown | Unknown | Unknown | Fails < −4 °C | −25 °C confirmed (Sim 13) |
 | Thermal management | No | No | No | No | PCM + ventilation |
 | Blunt trauma management | Limited | Limited | Limited | None | 52.9 % reduction (Sim 17) |
-| Service life | ~5 yr (Kevlar) | ~5 yr | ~5 yr | ~5 yr | 12 yr+ sealed (Sim 7) |
+| Service life | ~5 yr (Kevlar) | ~5 yr | ~5 yr | ~5 yr | **10 / 4 / 6 yr** §23.1 (Sim 7: 12 yr+ sealed) |
 | Single-use replaceable tiles | No | No | No | No | Yes — 75 g per tile |
 | Shotgun slug rated | No | Partial | Partial | No | Yes (Sim 21) |
 | .50 cal civilian rated | No | No | No | No | Yes (.50 AE, Sim 21) |
@@ -643,7 +661,7 @@ State-owned enterprise partners provide manufacturing infrastructure (clean room
 
 ## 16. Final Recommendation — The Mark I System
 
-> **The best of everything.** Two base layers + one tile array. NACS CORE (CBRN, compression, antimicrobial) + APES-L IL-STF (stab, slash, blunt trauma, full body) + 75 mm B4C single-use tiles (ballistic, torso only). ~6.5 kg. 66 % injury improvement. −25 °C to +45 °C. 12 yr+ service life. $1.85 M TCO saving per 500 officers. **Replaceable tiles, not replaceable plates.**
+> **The best of everything.** Two base layers + one tile array. NACS CORE (CBRN, compression, antimicrobial) + APES-L IL-STF (stab, slash, blunt trauma, full body) + 75 mm B4C single-use tiles (ballistic, torso only). ~6.5 kg. 66 % injury improvement. −25 °C to +45 °C. **10 yr panel / 4 yr tile / 6 yr soft** (§23.1). $1.85 M TCO saving per 500 officers. **Replaceable tiles, not replaceable plates.**
 
 The Mark I is the result of asking the right question: not "what is the best body armour" but "what does an officer actually need to survive and serve for a 20-year career." The answer, supported by 23 simulations and the published research literature, is: full-body stab coverage to intercept the actual knife-attack pattern, blunt-trauma management to prevent the cumulative injury of physical confrontations, ballistic protection against the real civilian threat spectrum (handguns and shotguns, not rifles), a thermal system that works in Australian conditions, an STF carrier that functions in cold climates, and a weight low enough that the officer will actually wear the system and not feel its presence on their body.
 

@@ -2,6 +2,23 @@
 
 **No standalone simulator.** The ADF Tactical Field Kit is an aggregate procurement specification. Weight budgets, component masses, cost analysis, and operational claims are prose engineering numbers in [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) — not outputs of a dedicated Python script in this folder.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **It also documents scope limits** — load-carriage and ergonomics are prose targets; it validates TACT-1 ration shelf life (§22) and optionally delegates to `pods_simulation.py`.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## What is not modelled here
@@ -50,10 +67,29 @@ Relevant sections for field-kit *nutrition integration* only:
 
 ---
 
+
+
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`ADF Tactical Field Kit`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `ADF Tactical Field Kit` — load_carriage_fabric_yr=8; hydration_bladder_yr=2; IFAK_sterile_pack_mo=36 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
 |---|---|
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
 | Operator specification | [`ADF_Tactical_Field_Kit_Specification.md`](ADF_Tactical_Field_Kit_Specification.md) |
 
 ---

@@ -38,6 +38,36 @@ Project OBSIDIAN is the **torso-only / formal-attire predecessor** to [`../OBSID
 | Hard plates ("Diamond Shell") | 3.6 kg |
 | Theoretical unit cost | ~$40 M per suit |
 | Simulator coverage | **None** |
+| Lifecycle (§23) | *Hypothetical carbyne / STF suit — no runnable ballistic lifecycle model.* |
+
+---
+
+## 🔬 Simulation verification
+
+**Scope-only — no runnable ballistic simulation.** Project OBSIDIAN carbyne/STF suit claims are document-internal design targets; portfolio `weapons_simulation.py` does not model this platform. The local script documents scope limits:
+
+```bash
+python platform_simulation.py
+```
+
+For **simulation-validated** body armour in this portfolio, see [`../APES Body Armour/`](../APES%20Body%20Armour/) (§13 V50/BFD).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Scope documentation only |
+| [`SIM_README.md`](SIM_README.md) | Confirms no sim coverage; APES cross-reference |
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — print scope limits (no ballistic physics):
+
+```bash
+python platform_simulation.py
+```
+
+For simulation-validated armour numbers, see [`../APES Body Armour/`](../APES%20Body%20Armour/).
 
 ---
 

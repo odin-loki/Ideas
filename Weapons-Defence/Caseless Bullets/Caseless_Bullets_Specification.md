@@ -467,6 +467,25 @@ Injection moulding from a precision steel tool can achieve all of these. This is
 
 ---
 
+---
+
+### Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Protein case shelf | **24 mo** |
+| Cook-off safe temp | **93 °C** |
+| Humidity storage max | **60 % RH** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Protein-cased round (BPC) | 18 mo | 24 mo | Protein denaturation + moisture |
+| Nitrocellulose propellant wafer | 18 mo | 30 mo | Stabilizer depletion |
+
 ## 10. Full Round Specifications
 
 The following specifications are for a **BPC 5.56mm-class round** (conceptual equivalent of the M855A1 Enhanced Performance Round), used as the primary design reference throughout this document.
@@ -849,7 +868,7 @@ Textron's CT ammunition still has a case — a polymer/composite case — so it 
 
 ## Appendix A — Simulation Model Reference Equations
 
-Equations reuse the fenced-block conventions of **`Weapons-Police/MP-4.6P Guardian LE.md`** — **Appendix A**. Full seven-phase chaining remains in **`weapons_simulation.py`** in the Weapons-Defence portfolio folder where applicable.
+Equations reuse the fenced-block conventions of **`Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`** — **Appendix A**. Full seven-phase chaining remains in **`weapons_simulation.py`** in the Weapons-Defence portfolio folder where applicable.
 
 ### A.1 Interior ballistics — Noble–Abel lumped ODE (5.56 mm class)
 
@@ -920,7 +939,7 @@ Environmental stress lowers effective cross‑link survivor fraction:
 C(t) = C_0 · exp( − k_deg · t ),   k_deg = f(T, RH)
 ```
 
-**Shelf requirement:** **`> 5 yrs @ +40 °C`** ⇒ upper bound **`k_deg`** must be inferred from accelerated **85/85‑class** surrogates before production QA locks.
+**Shelf requirement:** Portfolio §23.1 anchor **`protein_case_shelf_mo = 24`** at controlled storage; cook-off safe temp **`93 °C`**; humidity ceiling **`60 % RH`**. Accelerated **85/85-class** surrogates remain required to lock production QA **`k_deg`** before field issue.
 
 ### A.5 Soldier load-out mass arithmetic
 

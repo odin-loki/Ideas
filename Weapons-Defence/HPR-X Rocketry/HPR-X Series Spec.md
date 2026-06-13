@@ -682,6 +682,24 @@ Ten flights per variant, split across high-angle (apogee shot, 85 – 88°) and 
 
 Acceptance criteria: ≥ 8 of 10 successful per variant (≥ 80 % flight reliability); §16 simulator agreement within ± 5 % on apogee, ± 8 % on range; stage-separation success rate ≥ 90 % across V2 sub-population.
 
+### 17.4 Portfolio §23 Lifecycle (reusable motor hardware)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Motor case life | **50 flights** |
+| Nozzle insert life | **30 flights** |
+| Avionics battery cycles | **200 cycles** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| CFRP motor case (152 mm) | 35 flights | 50 flights | Pressure-cycle fatigue |
+| Graphite nozzle insert | 20 flights | 30 flights | Ablation + throat growth |
+| GPS / INS avionics battery | 150 cycles | 200 cycles | Li-ion capacity fade |
+
 **Stage 3 — ADF capability evaluation (months 25 – 42):**
 
 Capability evaluation by the Australian Department of Defence (Land Capability Division for the V3 SOF-spotter application; DST Group for the V1 and V2 research-grade application). Issue 30 units across the three variants to a designated evaluation unit; conduct in-service trials in representative operational conditions (range trial, weather envelope, recovery-procedure validation). Acceptance criterion: capability sponsor signs off on production procurement.

@@ -237,13 +237,16 @@ The short-recoil action provides primary unlocking; a small auxiliary gas tap su
 - Parts Replacement:
   * Springs: 20 000 rounds (MP35N alloy — common with MP-4.6M Guardian Pistol)
   * Extractor: 25 000 rounds (common with MP-4.6M Guardian Pistol)
-  * Barrel: 75 000 rounds
+  * Barrel: 75 000 rounds (§23 bore life service)
   * Buffer: 30 000 rounds
 
 ## SECTION 9: RELIABILITY METRICS
 
 ### 9.1 Performance Standards
-- MRBF: 20 000 rounds
+- MRBF analytic (§23): 19 996 rounds
+- MRBF simulated (§23): 15 000 rounds
+- FTF rate (§23): 1:75 000
+- Felt recoil (§23): 0.125 ft·lb
 - Parts Life: 50 000 rounds minimum
 - Temperature Range: -40°C to +60°C
 - Submersion: 20 m for 1 hour
@@ -351,10 +354,11 @@ Hatcher max-effective range (KE > 80 J): **928 m** (PDW) versus 878 m (Pistol). 
 |---|---|
 | Liner | Stellite 21 |
 | Barrel mass | 0.45 kg |
-| Throat-erosion life (rounds, 26 100 psi) | 302 501 |
+| Throat-erosion life (§10, rounds, 26 100 psi) | 302 501 |
+| Bore life service (§23, accuracy retention) | 75 000 |
 | Sustained-fire bound (rpm, thermal) | 250 |
 
-The simulator's 302 501-round throat-erosion life dwarfs the 75 000-round headline figure carried in SECTION 2.1 / SECTION 8.2; the 75 000-round figure remains the conservative service-life rating for accuracy retention rather than absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 850 rpm cyclic rate, so **sustained burst-mode firing must respect the thermal duty cycle** — the spec'd 400-round sustained-fire MIL-STD-810H test envelope (SECTION 9.1) translates to ~96 seconds of continuous full-auto at 250 rpm thermal-equivalent steady state.
+The §10 throat-erosion life (302 501 rounds) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **75 000 rounds** is the headline service interval in SECTION 2.1 / SECTION 8.2 — accuracy retention, not absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 850 rpm cyclic rate, so **sustained burst-mode firing must respect the thermal duty cycle** — the spec'd 400-round sustained-fire MIL-STD-810H test envelope (SECTION 9.1) translates to ~96 seconds of continuous full-auto at 250 rpm thermal-equivalent steady state.
 
 ### 13.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -377,6 +381,19 @@ The 4.6×30 mm 2.6 g WC-cored projectile is **not directly characterised** in §
 | APES-L police | 22 kg/m² | 5.7×28 SS190 | 2 212 | STOPPED | 3.0 mm |
 
 The 4.6×30 mm Enhanced at **542 m/s** (PDW barrel) delivers less specific kinetic energy than the SS190 at 716 m/s and is bounded above by the SS190's outcome. **Every soft and hard armour class in §13 stops the Defender's projectile.** The Defender is **not** a hard-armour-defeating PDW; its operational envelope is unprotected personnel and the CRISAT (20 layers Kevlar + 1.6 mm titanium) target the original NATO PDW requirement specified — consistent with SECTION 4.3 RHA performance and the discussion in SECTION 1.2.
+
+### 13.6 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 0.125 ft·lb |
+| Barrel SF_yield | 3.48 |
+| Bore life service (§23) | 75 000 rounds |
+| MRBF analytic | 19 996 rounds |
+| MRBF simulated | 15 000 rounds |
+| FTF rate | 1:75 000 |
+
+§23 **bore life service** (75 000 rounds) matches §23.0.1 parts-life barrel replace interval. §10 **throat-erosion life** (302 501 rounds, §13.3) is higher — both are reported with distinct labels.
 
 ---
 
@@ -866,10 +883,9 @@ Spec service life (accuracy retention): 75 000 rounds (conservative)
 
 ```
 1 / MRBF_analytic = Σ_j p_j ≈ 49.9 × 10⁻⁶
-MRBF_analytic ≈ 20 040 rounds
+MRBF_analytic ≈ 20 040 rounds  (per-mode harmonic sum in this appendix)
 
-Spec target: 20 000 rounds (per §9.1) ✓ MRBF margin: at the spec
-FTF rate: 1 : 80 000 → 16× the 1:5 000 MIL-STD specification ✓
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **19 996** / simulated **15 000**; FTF rate **1:75 000**; felt recoil **0.125 ft·lb** — authoritative spec targets in §9.1.
 ```
 
 The PDW MRBF profile closely tracks the Pistol's (same Tier-2 surface-engineering package, same Bernoulli framework, same ammunition family). The principal differences from the Pistol:

@@ -1,6 +1,18 @@
 # MP-4.6M Guardian Pistol — simulation traceability
 
-This platform's numbers are **not** produced by a local simulation package. They come from the portfolio-wide simulator at [`../weapons_simulation.py`](../weapons_simulation.py), which writes human-readable output to [`../weapons_sim_results.md`](../weapons_sim_results.md) and machine-readable output to [`../weapons_sim_results.json`](../weapons_sim_results.json).
+This platform's headline ballistics are produced by the portfolio-wide simulator at [`../weapons_simulation.py`](../weapons_simulation.py). Use [`platform_simulation.py`](platform_simulation.py) (this folder) to print a verification slice; full output is in [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results (`weapons_sim_results.md` and `weapons_sim_results.json`), use `cd .. && python weapons_simulation.py`.
 
 ---
 
@@ -34,19 +46,13 @@ The PDW variant uses the **same loaded round** but a separate simulator entry **
 | **§11 Peak recoil force** | 559 N peak shoulder force, 4.0 mm stock travel |
 | **§12 Obliquity penetration** | NATO 60° RHA reduction for `4.6x30mm` |
 | **§13 Body-armour V50** | Threat interactions (4.6 mm not individually tabulated; see 5.7 × 28 mm and 9 mm anchors) |
+| **§23 Lifecycle** | `MP-4.6M Pistol` — bore life 75,000 rd, MRBF 20,270 analytic / 10,000 simulated, felt recoil 0.11 ft·lb, barrel SF 3.35, FTF 1:80,000 |
 
 ---
 
 ## Re-run command
 
-From this folder:
-
-```bash
-cd ..
-python weapons_simulation.py
-```
-
-The script regenerates `weapons_sim_results.md` and `weapons_sim_results.json`. After editing cartridge geometry, barrel length, weapon mass, suppressor volume, or armour layup in `weapons_simulation.py`, re-run and update the specification and research paper to match.
+After editing cartridge geometry, barrel length, weapon mass, suppressor volume, or armour layup in `weapons_simulation.py`, regenerate portfolio output (see **Local verification script** above) and update the specification and research paper to match.
 
 ---
 
@@ -62,6 +68,14 @@ The script regenerates `weapons_sim_results.md` and `weapons_sim_results.json`. 
 
 Unlike [`../BSG10 Goliath/bsg10_sim_package/`](../BSG10%20Goliath/bsg10_sim_package/) or [`../OAM-VEST Non Lethal Sonic Weapon/OAM-VEST_Simulation_Package/`](../OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Simulation_Package/), this folder contains **no local Python modules**. All physics lives in the parent script. To change Guardian numbers, edit `weapons_simulation.py` and re-run — do not add a per-platform sim fork unless the physics model itself diverges from the portfolio toolchain.
 
----
 
-[← Back to platform README](README.md) · [← Weapons-Defence README](../README.md)
+## §23 Lifecycle
+
+Portfolio lifecycle for **`MP-4.6M Pistol`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `MP-4.6M Pistol` — bore life 75,000 rd, MRBF 20,270 analytic / 10,000 simulated, felt recoil 0.11 ft·lb, barrel SF 3.35, FTF 1:80,000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

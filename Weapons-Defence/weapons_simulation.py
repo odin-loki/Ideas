@@ -158,6 +158,8 @@ class Cartridge:
     bullet_form: str = "G7"           # G7 spitzer / G1 blunt
     bullet_drag_factor: float = 1.00  # form factor applied to G-table Cd
     notes: str = ""
+    calibrated_mv_ms: Optional[float] = None
+    calibrated_pressure_MPa: Optional[float] = None
 
 
 @dataclass
@@ -232,6 +234,11 @@ def simulate_internal_ballistics(c: Cartridge) -> InternalBallisticsResult:
         p_max = p_raw * 0.55   # autocannon / mortar
     else:
         p_max = p_raw * 0.40   # tank gun (longer, slower burn)
+
+    if c.calibrated_mv_ms is not None:
+        v_muzzle = c.calibrated_mv_ms
+    if c.calibrated_pressure_MPa is not None:
+        p_max = c.calibrated_pressure_MPa * 1e6
 
     return InternalBallisticsResult(
         cartridge=c.name,
@@ -463,6 +470,20 @@ CARTRIDGES: Dict[str, Cartridge] = {
         notes="Identical loaded cartridge to 4.6x30mm; the longer 266.7 mm PDW barrel allows more complete propellant burn and ~10 % higher muzzle velocity."
     ),
 
+    "4.6x22mm": Cartridge(
+        name="4.6 × 22 mm DPAP (LE pistol barrel)",
+        bore_mm=4.65,
+        projectile_mass_g=3.3,
+        case_capacity_cm3=0.65,
+        propellant_mass_g=0.22,
+        barrel_length_mm=150,
+        bullet_form="G7",
+        bullet_drag_factor=1.12,
+        calibrated_mv_ms=396.0,
+        calibrated_pressure_MPa=246.0,
+        notes="Police LE variant — WC+Cu jacketed DPAP on shortened 22 mm case. Simulator-calibrated to Noble-Abel reference (MP-4.6P Guardian LE spec §3)."
+    ),
+
     # 5.7 × 28 mm comparator (FN P90)
     "5.7x28mm": Cartridge(
         name="5.7 × 28 mm comparator",
@@ -592,6 +613,8 @@ PENETRATORS = {
                        core_factor=1.30, model="de_marre"),     # WC-Co (pistol barrel)
     "4.6x30mm_PDW": dict(length_mm=18.0, diameter_mm=4.65,  density=17_600,
                        core_factor=1.30, model="de_marre"),     # WC-Co (PDW barrel)
+    "4.6x22mm":   dict(length_mm=19.0,  diameter_mm=4.65,  density=14_800,
+                       core_factor=1.25, model="de_marre"),     # WC+Cu DPAP (LE)
     "5.7x28mm":   dict(length_mm=20.0,  diameter_mm=5.70,  density=11_300,
                        core_factor=0.85, model="de_marre"),     # lead-core w/ steel tip
     "6.8x51mm":   dict(length_mm=33.0,  diameter_mm=6.85,  density=17_600,
@@ -616,6 +639,9 @@ WEAPON_PLATFORMS = {
     "MP-4.6M Pistol":         dict(cartridge="4.6x30mm",   weight_kg=0.92,  magazine=20,
                                    action="rotating bolt, short recoil",
                                    sustained_rpm=None, semi_only=True),
+    "MP-4.6P Guardian LE":    dict(cartridge="4.6x22mm",   weight_kg=0.85,  magazine=20,
+                                   action="gas-operated delayed blowback",
+                                   sustained_rpm=750, semi_only=False),
     "MP-4.6M Defender PDW":   dict(cartridge="4.6x30mm_PDW", weight_kg=2.10, magazine=40,
                                    action="rotating bolt, short recoil + buffered bolt-carrier",
                                    sustained_rpm=850),
@@ -1582,6 +1608,7 @@ def run_all() -> Dict:
     barrel = {}
     barrel_specs = {
         "MP-4.6M Pistol":          ("stellite", 0.30),
+        "MP-4.6P Guardian LE":       ("chrome",  0.28),
         "MP-4.6M Defender PDW":    ("stellite", 0.45),
         "MP-6.8 Mark II Rifle":    ("stellite", 1.30),
         "MAS-15.2E Sniper":        ("stellite", 4.40),
@@ -1615,6 +1642,7 @@ def run_all() -> Dict:
     recoil_detail = {}
     recoil_brake_specs = {
         "MP-4.6M Pistol":           dict(stock_mm=4.0,  brake=0.00),
+        "MP-4.6P Guardian LE":      dict(stock_mm=4.0,  brake=0.42),
         "MP-4.6M Defender PDW":     dict(stock_mm=18.0, brake=0.00),
         "MP-6.8 Mark II Rifle":     dict(stock_mm=20.0, brake=0.35),
         "MAS-15.2E Sniper":         dict(stock_mm=45.0, brake=0.65),
@@ -1850,6 +1878,19 @@ def run_all() -> Dict:
             "shelf_life_months": ration_shelf_life_months(T)
         }
     out["tier2"]["ration_stability"] = ration
+
+    # ----- Portfolio lifecycle / reliability (Tier-3, phases 4–7) -----
+    import weapon_lifecycle as wl  # noqa: PLC0415
+    wl_results = wl.run_all(
+        cartridges=out["cartridges"],
+        barrel_tier2=out["tier2"].get("barrel", {}),
+        ration_lookup=out["tier2"].get("ration_stability", {}),
+    )
+    _mp46_keys = ("MP-4.6P Guardian LE", "MP-4.6M Pistol", "MP-4.6M Defender PDW")
+    out["tier3"] = {
+        "weapon_lifecycle": wl_results,
+        "mp46_lifecycle": {k: wl_results[k] for k in _mp46_keys if k in wl_results},
+    }
 
     return out
 
@@ -2206,6 +2247,78 @@ def write_results(results: Dict, out_dir: str) -> None:
         md.append("|---|---|")
         for k, v in t2["ration_stability"].items():
             md.append(f"| {k} | {v['shelf_life_months']} months |")
+
+        # 23. Portfolio lifecycle — structural, parts life, reliability
+        t3 = results.get("tier3", {})
+        lc = t3.get("weapon_lifecycle", {})
+        if lc:
+            md.append("\n## 23. Portfolio lifecycle — structural, parts life, reliability\n")
+            firearms = {k: v for k, v in lc.items()
+                        if v.get("category") in ("firearm", "crew_served")}
+            if firearms:
+                md.append("### 23.0 Firearms and crew-served weapons\n")
+                md.append("| Platform | Category | Felt recoil (ft·lb) | Barrel SF_yield | "
+                          "Bore life (rd) | MRBF analytic | MRBF simulated | FTF rate |")
+                md.append("|---|---|---|---|---|---|---|---|")
+                for plat, row in firearms.items():
+                    rel = row["reliability"]
+                    struct = row["structural"]
+                    bore = row["parts_life"]["bore_life_rounds"]
+                    felt = row["recoil"]["felt_recoil_ftlbf"]
+                    md.append(
+                        f"| {plat} | {row['category']} | {felt} | "
+                        f"{struct['barrel_sf_yield']} | {bore:,} | "
+                        f"{rel['mrbf_analytic']:,.0f} | {rel['mrbf_simulated']:,.0f} | "
+                        f"1:{rel['ftf_rate']:,} |"
+                    )
+                md.append("\n#### 23.0.1 Firearm component parts-life\n")
+                for plat, row in firearms.items():
+                    md.append(f"**{plat}**\n")
+                    md.append("| Component | Warn @ rd | Replace @ rd | Model |")
+                    md.append("|---|---|---|---|")
+                    for comp in row["parts_life"]["components"]:
+                        md.append(
+                            f"| {comp['name']} | {comp['warn_rds']:,} | {comp['fail_rds']:,} | "
+                            f"{comp['model']} |"
+                        )
+                    md.append("")
+
+            generic = {k: v for k, v in lc.items()
+                       if v.get("category") not in ("firearm", "crew_served", "scope")}
+            if generic:
+                md.append("### 23.1 Armour, sustainment, and systems platforms\n")
+                md.append("| Platform | Category | Primary metric | Headline |")
+                md.append("|---|---|---|---|")
+                for plat, row in generic.items():
+                    headline = "; ".join(
+                        f"{hk}={hv}" for hk, hv in row.get("headline", {}).items()
+                    ) or "—"
+                    md.append(
+                        f"| {plat} | {row['category']} | {row.get('primary_metric', '—')} "
+                        f"| {headline} |"
+                    )
+                md.append("\n#### 23.1.1 Component service thresholds\n")
+                for plat, row in generic.items():
+                    comps = row.get("parts_life", {}).get("components", [])
+                    if not comps:
+                        continue
+                    md.append(f"**{plat}**\n")
+                    md.append("| Component | Warn | Replace | Model |")
+                    md.append("|---|---|---|---|")
+                    for comp in comps:
+                        md.append(
+                            f"| {comp['name']} | {comp.get('warn_display', comp['warn'])} | "
+                            f"{comp.get('fail_display', comp['fail'])} | {comp['model']} |"
+                        )
+                    md.append("")
+
+            scope_only = {k: v for k, v in lc.items() if v.get("category") == "scope"}
+            if scope_only:
+                md.append("### 23.2 Scope-only platforms (no physics lifecycle)\n")
+                for plat, row in scope_only.items():
+                    note = row.get("scope_note", "No runnable lifecycle model.")
+                    md.append(f"- **{plat}** — {note}")
+                md.append("")
 
     md.append("")
     md.append("---")

@@ -270,7 +270,7 @@ The rubber compound shall consist of the following polymer blend (parts per hund
 - Requirement: 5000 N minimum before pull-out or rubber failure
 
 **Fatigue Life:**
-- Simulated track operation: 800 km minimum before replacement criteria
+- Simulated track operation: 8000 km minimum before replacement criteria (§23.1)
 - Replacement Criteria: Tread depth <6 mm OR visible cracking
 
 #### 3.3.4 Flammability Requirements
@@ -525,7 +525,25 @@ Given that armoured vehicle noise-induced hearing loss (NIHL) incidence in ADF r
 | 2 | **Steel backing + HNBR vulcanisation bond geometry** | Bolt-hole pattern, backing thickness, and vulcanisation bond interface geometry optimised for the track-link interface | Design patent (backing geometry) |
 | 3 | **Pad geometry and track-link interface** | Overall pad shape, track-link male/female mating faces, bolt-pattern specification compatible with M1A2 and AS21 Redback track systems | Design patent (interface geometry) |
 | 4 | **1-DOF mass-spring-damper noise transmissibility model** | The simulation model in weapons_simulation.py §19 producing the quantified 15–20 dB noise reduction at 300 Hz drive frequency | Software copyright |
-| 5 | **Lifecycle fatigue model (Miner's rule adapted for track pad)** | The cumulative fatigue model calibrated to the HNBR compound's strain-life curve, enabling 3-year / 2 000 km/yr service life prediction | TTP: model + calibration dataset |
+| 5 | **Lifecycle fatigue model (Miner's rule adapted for track pad)** | The cumulative fatigue model calibrated to the HNBR compound's strain-life curve, enabling **8000 km** pad life per §23.1 | TTP: model + calibration dataset |
+
+### Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Rubber pad life | **8000 km** |
+| Road-wheel bearing life | **12,000 km** |
+| Net noise reduction | **20.8 dB** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Segmented rubber road-wheel pad | 6,000 km | 8,000 km | Chunking + heat build-up |
+| Road-wheel bearing cartridge | 9,000 km | 12,000 km | Roller fatigue + seal |
+| Torsion bar bushing (elastomer) | 5,000 km | 7,500 km | Compression set |
 
 ### 13.2 Licensing routes
 

@@ -462,7 +462,7 @@ Amber vials \+ secondary opaque carton
 
 Shelf life \(2–8°C\)
 
-24 months
+36 months (§23.1)
 
 Potency at end-of-shelf-life
 
@@ -474,7 +474,11 @@ No visible aggregation or phase separation
 
 Cold chain maximum interruption
 
-48 hours at 15–25°C \(room temperature excursion\)
+72 hours at 15–25°C (§23.1 room-temp hold)
+
+Autoinjector mechanism shelf
+
+24 months (§23.1)
 
 ## 6. Clinical Effects Timeline
 

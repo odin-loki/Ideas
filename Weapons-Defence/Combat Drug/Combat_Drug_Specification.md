@@ -301,7 +301,7 @@ Total Active Load:            499.0 mg (249.5 mg/mL)
 3. **Particulate Testing** - USP <788> visible and subvisible particles
 4. **Potency Assay** - HPLC quantification of all actives
 5. **Release Testing** - In vitro dissolution over 7 days
-6. **Stability Testing** - ICH guidelines, 24-month shelf life
+6. **Stability Testing** - ICH guidelines, 36-month shelf life (§23.1)
 
 #### Step 4: Fill & Finish
 1. **Sterile Filtration** - 0.22 μm filtration (where applicable)
@@ -518,6 +518,23 @@ Enhanced Renal/Biliary Elimination
 
 ## Storage & Stability
 
+### Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Depot shelf (cold chain) | **36 mo** |
+| Room-temp hold | **72 hr** |
+| Autoinjector shelf | **24 mo** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| HSX7 depot ampoule (2–8 °C) | 30 mo | 36 mo | Peptide aggregation |
+| Autoinjector mechanism | 18 mo | 24 mo | Spring + seal ageing |
+
 ### Storage Requirements
 - **Temperature:** 2-8°C (refrigerated storage required)
 - **Light:** Protect from light (amber vials + secondary packaging)
@@ -525,16 +542,17 @@ Enhanced Renal/Biliary Elimination
 - **Freezing:** Do not freeze (may damage microsphere integrity)
 
 ### Stability Profile
-- **Chemical Stability:** 24 months at 2-8°C
+- **Chemical Stability:** 36 months at 2-8°C (§23.1 depot shelf)
 - **Physical Stability:** No precipitation or phase separation
 - **Microbiological Stability:** Sterility maintained throughout shelf life
-- **Potency:** >95% of labeled potency for 24 months
+- **Potency:** >95% of labeled potency for 36 months
+- **Autoinjector mechanism:** Replace at 24 months (§23.1)
 
 ### Transportation
 - **Cold Chain Maintenance:** 2-8°C during transport
 - **Temperature Monitoring:** Continuous temperature logging
 - **Backup Systems:** Insulated packaging with gel packs
-- **Maximum Transport Time:** 48 hours with proper packaging
+- **Maximum room-temperature hold:** 72 hours (§23.1)
 
 ---
 

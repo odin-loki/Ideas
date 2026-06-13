@@ -286,10 +286,11 @@ Muzzle velocity in imperial units: **613 fps**.
 |---|---|
 | Liner | Chrome |
 | Barrel mass | 1.80 kg |
-| Barrel life (rounds to throat erosion) | **21 122** |
+| Throat-erosion life (§10) | **21 122** |
+| Bore life service (§23) | **8 000** |
 | Sustained-fire thermal ceiling | **57 rpm** |
 
-The 21 122-round barrel life is well in excess of any operational firing history. The 57 rpm thermal-sustained ceiling is much higher than the 6 – 8 rpm operational rate set by manual reload, so barrel thermal capacity is not the binding constraint. The quick-change-tube feature (§2.1) effectively multiplies the barrel-life envelope by ~1.5 × for sustained operations from a single mount.
+The §10 throat-erosion life (21 122 rounds) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **8 000 rounds** matches §23.0.1 chrome-lined tube replace interval. The 57 rpm thermal-sustained ceiling is much higher than the 6 – 8 rpm operational rate set by manual reload, so barrel thermal capacity is not the binding constraint. The quick-change-tube feature (§2.1) effectively multiplies the barrel-life envelope by ~1.5 × for sustained operations from a single mount.
 
 ### 11.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -327,6 +328,19 @@ The 3.3 m effective radius represents the simulator-grounded lethal-area envelop
 | Penetration in calibres | 0.78 CD |
 
 The 43 mm RHA HEAT defeat at 0.78 CD is competitive for a 57 mm class shaped charge. The CL-20-based formulation (vs the RDX in the 57 mm UGR HEAT, see §15 of the simulator output) recovers ~2 mm of penetration depth — small in absolute terms but representing the ≈ 5 % VOD advantage of CL-20 over RDX in the Birkhoff jet-velocity calculation. This is the round's primary anti-armour terminal mechanism in direct-fire RPG mode; HEAT performance is set by stand-off and cone geometry, not by striking velocity, so the modest 187 m/s muzzle velocity does not impair anti-armour capability against light vehicles within the 1 500 m direct-fire envelope.
+
+### 11.7 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 227.281 ft·lb |
+| Barrel SF_yield | 1.84 |
+| Bore life service (§23) | 8 000 rounds |
+| MRBF analytic | 11 041 rounds |
+| MRBF simulated | 15 000 rounds |
+| FTF rate | 1:25 000 |
+
+§23 **bore life service** (8 000 rounds) is lower than §10 throat-erosion life (21 122 rounds) — both are reported with distinct labels.
 
 ---
 
@@ -937,14 +951,12 @@ Bootstrap CI (1 000 resamples) for 90 % confidence band.
          = 1 250e-6 + 200e-6 + 1 000e-6 + 400e-6 + 100e-6
          = 2 950e-6
 
-MRBF_analytic ≈ 339 rounds between effective stoppages
+MRBF_analytic ≈ 339 rounds between effective stoppages  (per-mode harmonic sum in this appendix)
 ```
 
-**The dominant failure mode is misload (human factor) at 1:800** for a mature crew, accounting for 42 % of stoppages. This is fundamentally different from the autocannon (mechanical feed-jam dominated) and the pistol (gas-system fouling and primer-strike dominated). Reliability investment for the EDPS programme is therefore weighted heavily towards **crew training** (driving the misload rate from 1:200 at training to 1:800 at mature competence) rather than mechanical or material engineering.
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **11 041** / simulated **15 000**; FTF rate **1:25 000**; felt recoil **227.281 ft·lb**; bore life service **8 000 rounds** — authoritative portfolio lifecycle targets for the crew-served tube platform.
 
-The 339-round MRBF figure should be interpreted in operational context: at 10 rd/system/year training tempo, the expected interval between effective stoppages is ~ 34 years per system — i.e. **the typical EDPS user will never experience a stoppage in service**. The MRBF framework above is a force-level statistical statement, not an individual-system prediction.
-
-The 1.0 spec's §8.2 claim of "Function reliability 99.9 %" is consistent with the 1:339 MRBF figure (99.7 % per-shot reliability) given crew-training maturity assumptions. The §8.2 value should be read as "function reliability target post-training-maturity", not "function reliability at first issue".
+**The dominant failure mode in the per-mode model above is misload (human factor) at 1:800** for a mature crew. §23 portfolio MC aggregates platform-level stoppage modes separately from this crew-training harmonic sum.
 
 ---
 

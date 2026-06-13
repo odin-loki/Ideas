@@ -1033,6 +1033,26 @@ The break-even accelerates significantly in high-intensity conflict where deploy
 
 ---
 
+## PART 11.5: Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Diode array life | **10,000 hr** |
+| Coolant pump service | **5,000 hr** |
+| Beam window recoat | **2,000 hr** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Fiber-coupled diode stack | 8,000 hr | 10,000 hr | Junction degradation @ 40 kW |
+| Deionised coolant loop pump | 3,500 hr | 5,000 hr | Seal + bearing wear |
+| Fused-silica output window (DLC) | 1,500 hr | 2,000 hr | Plasma pitting |
+
+---
+
 ## PART 12: SPECIFICATIONS SUMMARY
 
 ### Key Performance Parameters
@@ -1051,7 +1071,7 @@ The break-even accelerates significantly in high-intensity conflict where deploy
 | Track capacity | 32 simultaneous | 64 | 64 (Ku-band AESA) |
 | Platform GVW | < 40 t | < 35 t | 32.6 t ✓ |
 | Crew | 1 supervisor | 0 | 0 autonomous ✓ |
-| MTBF (laser modules) | 500 hr | 2,000 hr | 10,000 hr (Yb fiber) |
+| MTBF (laser modules) | 500 hr | 2,000 hr | 10,000 hr (§23.1 diode array life) |
 | Platform service life | 15 yr | 20 yr | 20 yr (Sr-90 half-life limited) |
 
 ### Mass Budget

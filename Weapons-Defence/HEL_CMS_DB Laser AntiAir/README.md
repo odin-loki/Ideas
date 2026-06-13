@@ -80,6 +80,50 @@ The shielding mass (13,280 kg for four modules) is the dominant mass driver and 
 
 ---
 
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Diode array life (§23) | **10,000 hr** |
+| Coolant pump service (§23) | **5,000 hr** |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+## 🔬 Simulation verification
+
+**Scope-only.** HEL-CMS/DB engagement numbers (dwell time, irradiance vs range, TCO) are **first-principles derivations inside the specification and research paper** — not computed by portfolio `weapons_simulation.py` or a standalone laser simulator. The local script documents scope limits:
+
+```bash
+python platform_simulation.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Scope documentation — points to spec/paper derivations |
+| [`SIM_README.md`](SIM_README.md) | Why no runnable laser sim; where each claim type lives |
+| [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB_Full_Spec.md) | Part I beam physics, Part X cost — authoritative numbers |
+| [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB_Research_Paper.md) | Saturation-attack timeline, TDB phased-development strategy |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 lifecycle — diode array and coolant pump service intervals |
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — print scope limits (spec/paper derivations; no portfolio physics):
+
+```bash
+python platform_simulation.py
+```
+
+For full engagement derivations, see [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB_Full_Spec.md) Part I and [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB_Research_Paper.md).
+
+---
+
 ## 🧠 System overview
 
 **Sensor suite:** Ku-band 17 GHz AESA (4 faces, 32×32 per face, 360° coverage); MWIR 1,024×1,024 InSb FPA @ 100 Hz; 16-element acoustic array; 2–18 GHz ESM receiver; Mode 5 / Mode S IFF.
@@ -104,10 +148,10 @@ The shielding mass (13,280 kg for four modules) is the dominant mass driver and 
 
 ## 🔗 Related work in this repo
 
-- [`../../../Diamond Batterys/`](../../../Diamond%20Batterys/) — ADB/TDB diamond battery series that provides the power architecture referenced here
+- [`../../../Diamond Batterys/`](../../Diamond%20Batterys/) — ADB/TDB diamond battery series that provides the power architecture referenced here
 - [`../../../Weapons-Defence/`](../../) — parent portfolio; see `weapons_simulation.py` for the common simulation infrastructure
-- [`../../../Filtering/`](../../../Filtering/) — GH-SR-IMM tracking (relevant to the MWIR + radar sensor fusion problem)
-- [`../../../Asset Tracking Algorithm/`](../../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL multi-target intelligence engine
+- [`../../Filtering/`](../../Filtering/) — GH-SR-IMM tracking (relevant to the MWIR + radar sensor fusion problem)
+- [`../../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL multi-target intelligence engine
 
 ---
 

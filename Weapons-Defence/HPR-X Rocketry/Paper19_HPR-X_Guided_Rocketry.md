@@ -217,9 +217,25 @@ This work is a point-mass trajectory study with significant simplifications. The
 
 7. **No turbulent boundary-layer transition.** Cd(M) from RASAero II assumes a smooth surface (Ra < 1.5 µm). A rougher surface (Ra > 3 µm) elevates Cd by 5–15 % and reduces range by 2–4 %, captured in the sensitivity table but not in the headline figures.
 
-## 8. Conclusions
+## 8. Portfolio §23 Lifecycle (reusable motor hardware)
 
-The HPR-X Series demonstrates that a small set of first-principles design choices — minimum-diameter airframe, dense nosecone ballast, long-burn White Lightning APCP, shallow 35–39° launch angle, and canard zeroing at burnout — together extend the downrange range of a guided high-power rocket by approximately 30 % over an un-ballasted, 45°-launched, short-burn-motor baseline at the same motor class. The series spans the regulatory envelope from mid-power (V1, no certification required) to TRA Level 2 (V3, J-class APCP). The two-stage V3-S configuration (J350W booster + J180W sustainer at 28°) reaches 7,916 m on a 2D point-mass trajectory simulation — a 45.1 % increase over the single-stage V3 baseline. The I200W-boosted V3 reaches 95 % of that range (7,783 m) at materially lower cost and complexity and is identified as the practical sweet spot for the staged-V3 envelope.
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Motor case life | **50 flights** |
+| Nozzle insert life | **30 flights** |
+| Avionics battery cycles | **200 cycles** |
+
+**Table 8.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| CFRP motor case (152 mm) | 35 flights | 50 flights | Pressure-cycle fatigue |
+| Graphite nozzle insert | 20 flights | 30 flights | Ablation + throat growth |
+| GPS / INS avionics battery | 150 cycles | 200 cycles | Li-ion capacity fade |
+
+## 9. Conclusions that a small set of first-principles design choices — minimum-diameter airframe, dense nosecone ballast, long-burn White Lightning APCP, shallow 35–39° launch angle, and canard zeroing at burnout — together extend the downrange range of a guided high-power rocket by approximately 30 % over an un-ballasted, 45°-launched, short-burn-motor baseline at the same motor class. The series spans the regulatory envelope from mid-power (V1, no certification required) to TRA Level 2 (V3, J-class APCP). The two-stage V3-S configuration (J350W booster + J180W sustainer at 28°) reaches 7,916 m on a 2D point-mass trajectory simulation — a 45.1 % increase over the single-stage V3 baseline. The I200W-boosted V3 reaches 95 % of that range (7,783 m) at materially lower cost and complexity and is identified as the practical sweet spot for the staged-V3 envelope.
 
 The work is presented as a defence-engineering documentation exercise within the broader Weapons-Defence research portfolio. All three variants are buildable from commercial hobby components within the Tripoli Rocketry Association regulatory framework. The author does not claim novel guidance, novel propellant, or novel airframe materials — the contribution is the trajectory-simulation-driven design-space exploration and the demonstration that the open-source `novatic14/MANPADS` guidance pipeline scales unchanged from the origin project's E motor to a J-class HPR airframe.
 

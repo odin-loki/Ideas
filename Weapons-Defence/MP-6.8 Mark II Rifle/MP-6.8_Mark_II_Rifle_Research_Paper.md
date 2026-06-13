@@ -100,7 +100,8 @@ The 11.1 mm RHA at the muzzle and 8.1 mm at 300 m place the MP-6.8 firmly in the
 | Material | Vacuum arc remelted CrMoV steel, Stellite 21 lining |
 | Barrel Length | 406 mm (16") |
 | Rifling | 6-groove polygonal hybrid, 1:8 RH |
-| Life Rating | 25 000 rounds |
+| Life Rating (§23 service) | 25 000 rounds |
+| Throat-erosion life (§10) | 80 398 rounds |
 | Fluting | 8 primary + 16 micro-flutes |
 
 ### 5.2 Thermal Management
@@ -152,6 +153,17 @@ The 20-round 7075-T6 aluminium magazine with triple spring system (Inconel X-750
 
 The previous draft's 50-round magazine specification is corrected to 20 rounds for compatibility with NGSW / SIG XM7 conventions and to keep loaded weapon mass within the 4.55 kg infantry-rifle envelope.
 
+## 10A. Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Parameter | Value |
+|---|---|
+| MRBF analytic | 15 656 rounds |
+| MRBF simulated | 15 000 rounds |
+| FTF rate | 1:55 000 |
+| Felt recoil | 1.631 ft·lb |
+| Bore life service | 25 000 rounds |
+| Throat-erosion life (§10) | 80 398 rounds |
+
 ## 10. Recoil Analysis
 
 Free recoil energy at 4.10 kg empty mass is computed by the simulator from the 9.15 N·s recoil impulse:
@@ -202,6 +214,7 @@ This v2.0 paper extends the v1.0 simulator-derived numerical envelope from the T
 | **Wind drift** | **§8** | Didion / Bagnold full-value crosswind correction, 4.47 m/s (10 mph) |
 | **Hatcher max-effective range** | **§9** | KE > 80 J personnel-incapacitation threshold + supersonic-range cutoff |
 | **Barrel life** | **§10** | Calibrated bore-wear model anchored to M4 / M14 / M2HB / GAU-8 / M256; thermal-bound rpm from barrel mass × specific heat |
+| **Portfolio lifecycle** | **§23** | Bore life service (25 000 rd), MRBF MC (15 656 analytic / 15 000 simulated), felt recoil (1.631 ft·lb), FTF (1:55 000) |
 | **Peak shoulder force** | **§11** | Parabolic-energy-dissipation over `stock_travel_mm` with muzzle-brake impulse-redirection efficiency |
 | **Body-armour V50** | **§13** | Lambert-Jonas / Recht-Ipson V50 with composite-factor calibration; clay-witness BFD per NIJ 0101.06 |
 
@@ -231,7 +244,7 @@ The MP-6.8 Mark II, when re-derived against the portfolio ballistics simulator, 
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-6.8 Mark II performance numbers cited in §3–§12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-6.8 Mark II performance numbers cited in §3–§12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 6.8 × 51 mm, ~406 mm barrel
 
@@ -354,11 +367,12 @@ FTGas:      1 : 15 000      (three-position gas regulator; standard setting)
 FTPrimer:   1 : 100 000     (small rifle primer, 307 MPa chamber pressure)
 FTCase:     1 : 80 000      (brass-case wall thickness at 44 500 psi)
 
-Analytic MRBF = 1 / Σ p_j ≈ 1 / 1.34 × 10⁻⁴ ≈ 7 500 rounds
-→ matches paper-body §10 / §11 MRBF claim "MRBF 20 000 rounds" target after Tier-2 upgrades
+Analytic MRBF = 1 / Σ p_j ≈ 1 / 1.34 × 10⁻⁴ ≈ 7 500 rounds  (per-mode harmonic sum, baseline Tier-1)
 ```
 
-→ MRBF spec (paper-body §10 + §11) **20 000 rounds at full Tier-2 surface engineering**, baseline **~7 500 rounds**. Barrel life **80 398 rounds throat erosion** (sim §10), conservative spec **25 000 rounds accuracy retention** (paper-body §5.1).
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **15 656** / simulated **15 000**; FTF rate **1:55 000**; felt recoil **1.631 ft·lb**; bore life service **25 000 rounds** — authoritative targets in spec §9.1.
+
+→ Barrel life **80 398 rounds throat erosion** (sim §10), §23 **bore life service 25 000 rounds** accuracy retention (paper-body §5.1).
 
 ### A.6 Notes on numerical concordance with the simulator
 

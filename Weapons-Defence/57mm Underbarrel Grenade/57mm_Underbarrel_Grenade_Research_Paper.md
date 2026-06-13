@@ -122,6 +122,11 @@ The 1.0 paper's claim of "rifle-compatible recoil" was inconsistent with even it
 
 | Parameter | Specification |
 |---|---|
+| MRBF analytic (§23) | 13 857 rounds |
+| MRBF simulated (§23) | 30 000 rounds |
+| FTF rate (§23) | 1:40 000 |
+| Felt recoil (§23) | 160.262 ft·lb |
+| Bore life service (§23) | 5 000 rounds |
 | Temperature Range | −40 °C to +63 °C |
 | Humidity | 0 – 100% RH |
 | Storage Life | 10 years |
@@ -168,7 +173,7 @@ The current revision imports the following Tier-2 simulation outputs from [`weap
 
 2. **Max effective range — Hatcher KE > 80 J threshold (§9).** Forward-integration of the G1 trajectory with KE > 80 J personnel-incapacitation floor returns **> 6 000 m sim-cap** for the 350 g grenade. This is an envelope diagnostic only — operational direct-fire range is bounded at ~400 m by drop and accuracy, not by terminal KE. **Supersonic range is 0 m** because the 149 m/s muzzle velocity is below Mach 1 from launch.
 
-3. **Barrel life and sustained-fire ceiling — wear-and-thermal model (§10).** The 0.55 kg chrome-lined barrel at the 109 MPa peak pressure returns a **69 500-round life**, effectively "weapon lifetime" — far in excess of any operational firing-history burden. The 126 rpm thermal-sustained ceiling is irrelevant in operational use because manual break-action reload limits cyclic rate to < 10 rpm.
+3. **Barrel life and sustained-fire ceiling — wear-and-thermal model (§10).** The 0.55 kg chrome-lined barrel at the 109 MPa peak pressure returns a **69 500-round** §10 throat-erosion life, effectively "weapon lifetime" — far in excess of any operational firing-history burden. §23 **bore life service** is **5 000 rounds** (parts-life launch-tube replace interval). The 126 rpm thermal-sustained ceiling is irrelevant in operational use because manual break-action reload limits cyclic rate to < 10 rpm.
 
 4. **Peak free-recoil force — sprung-stock + buffer model (§11).** At 18 mm sprung-stock-equivalent travel with no muzzle brake, the §11 parabolic-energy-dissipation model returns **48 237 N (10 845 lbf)** peak force from 578.8 J free recoil into the 2.40 kg launcher. **This is the FREE recoil force — the design-load case for the mount and buffer, NOT the force seen at the shoulder.** The hydraulic buffer specified in §6.2 of this paper absorbs the impulse over a much longer time-stretch (target dwell ~ 60 ms), bringing the shoulder-felt residual to < 200 N. Without the buffer the 48 kN raw force would cause clavicle / scapula fracture with high probability on the first shot.
 
@@ -182,7 +187,8 @@ The current revision imports the following Tier-2 simulation outputs from [`weap
 |---|---|
 | Muzzle SPL 163.1 dB / 156.1 dB at ear / 128.1 dB double + 103.1 dB TACS | `weapons_sim_results.md` §6 |
 | Max effective range > 6 000 m (envelope cap), supersonic range 0 m | `weapons_sim_results.md` §9 |
-| Barrel life 69 500 rounds, thermal-sustained 126 rpm | `weapons_sim_results.md` §10 |
+| Barrel life 69 500 rounds (§10 throat erosion), bore life service 5 000 rounds (§23), thermal-sustained 126 rpm | `weapons_sim_results.md` §10, §23 |
+| MRBF 13 857 analytic / 30 000 simulated, FTF 1:40 000, felt recoil 160.262 ft·lb | `weapons_sim_results.md` §23 |
 | Peak FREE recoil force 48 237 N (buffer reduces shoulder-felt to < 200 N) | `weapons_sim_results.md` §11 |
 | HE-Frag A_L 11 m², r_eff 1.9 m, 720 fragments at 1 909 m/s | `weapons_sim_results.md` §14 |
 | HEAT shaped-charge RHA penetration 41 mm | `weapons_sim_results.md` §15 |
@@ -195,7 +201,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the UGR performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the UGR performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 305 mm launcher barrel at 109 MPa
 

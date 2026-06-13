@@ -2,6 +2,18 @@
 
 **Tier-C validation** via [`../weapons_simulation.py`](../weapons_simulation.py). Output: [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results, use `cd .. && python weapons_simulation.py`.
+
 ---
 
 ## Simulator keys
@@ -25,10 +37,7 @@ Python 3.9+ required.
 
 ## Quick start
 
-```bash
-cd ..
-python weapons_simulation.py
-```
+Run [`platform_simulation.py`](platform_simulation.py) from this folder (see **Local verification script** above). After parameter edits, regenerate the full portfolio with `cd .. && python weapons_simulation.py`.
 
 ---
 
@@ -45,6 +54,7 @@ python weapons_simulation.py
 | Peak recoil force | §11 |
 | Mortar HE fragmentation | §14 (`57 mm Mortar HE`) |
 | HEAT warhead | §15 (`57 mm Mortar/RPG HEAT`) |
+| **§23 Lifecycle** | `57 mm Mortar/RPG` — bore life 8,000 rd, MRBF 11,041 analytic / 15,000 simulated, felt recoil 227.71 ft·lb, barrel SF 3.69, FTF 1:25,000 |
 
 ---
 
@@ -62,6 +72,12 @@ python weapons_simulation.py
 | r_eff | **3.3 m** |
 | HEAT pen | **43 mm RHA** |
 | Barrel life | **21 122 rounds** |
+| Bore life service (§23) | **8 000 rounds** |
+| MRBF analytic (§23) | **~11 041 rounds** |
+| MRBF simulated (§23) | **~15 000 rounds** |
+| Felt recoil (§23) | **~227.281 ft·lb** |
+| Barrel SF_yield (§23) | **1.84** |
+| FTF rate (§23) | **1:25 000** |
 
 ---
 
@@ -72,3 +88,14 @@ Edit `CARTRIDGES["57mm_mortar"]` and `WEAPONS["57 mm Mortar/RPG"]`, re-run, then
 ---
 
 [← Platform README](README.md) · [← Weapons-Defence](../README.md)
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`57 mm Mortar/RPG`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `57 mm Mortar/RPG` — bore life 8,000 rd, MRBF 11,041 analytic / 15,000 simulated, felt recoil 227.71 ft·lb, barrel SF 3.69, FTF 1:25,000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

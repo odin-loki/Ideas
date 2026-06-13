@@ -8,14 +8,15 @@
 
 ## What this folder is
 
-The BPC System is a **complete platform subfolder**: operator specification (formerly the standalone `Caseless Bullets_README.md`) and academic research paper. No dedicated BPC simulator exists — conventional 5.56 ballistics in [`../weapons_simulation.py`](../weapons_simulation.py) §1 anchor the performance envelope.
+The BPC System is a **complete platform subfolder**: operator specification (formerly the standalone `Caseless Bullets_README.md`) and academic research paper. No dedicated BPC simulator exists — conventional **5.56 × 45 mm** ballistics in portfolio **§1** anchor the performance envelope; protein-casing chemistry is **not** simulated.
 
 **Reading order:**
 
 1. **This README** — navigation and headline numbers.
 2. [`Caseless_Bullets_Specification.md`](Caseless_Bullets_Specification.md) — full TRP-style engineering doc (TRP-2026-106).
 3. [`Caseless_Bullets_Research_Paper.md`](Caseless_Bullets_Research_Paper.md) — formal biopolymère caseless research narrative.
-4. [`SIM_README.md`](SIM_README.md) — conceptual-only simulation scope.
+4. [`SIM_README.md`](SIM_README.md) — §1 baseline reference; BPC chemistry scope limits.
+5. Run [`platform_simulation.py`](platform_simulation.py) — §1 5.56 baseline + BPC target comparison.
 
 ---
 
@@ -25,11 +26,18 @@ The BPC System is a **complete platform subfolder**: operator specification (for
 |---|---|---|
 | [`Caseless_Bullets_Specification.md`](Caseless_Bullets_Specification.md) | Operator specification | Cartridge, propellant, thermal management, weapon system, manufacturing. **Start here.** |
 | [`Caseless_Bullets_Research_Paper.md`](Caseless_Bullets_Research_Paper.md) | Academic research paper | Theoretical framework, chemistry, cook-off analysis, limitations. |
-| [`SIM_README.md`](SIM_README.md) | Simulation documentation | Why no dedicated sim; §1 baseline reference. |
+| [`SIM_README.md`](SIM_README.md) | Simulation documentation | §1 5.56 baseline; BPC chemistry not modelled. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | §1 baseline vs BPC design-target comparison. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Loads `weapons_simulation.py` and formats per-platform verification output. |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | Lifecycle simulator | §23 service-life and storage intervals. |
+| [`../weapons_simulation.py`](../weapons_simulation.py) | Portfolio simulator | §1 cartridge internal / external ballistics. |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Simulator output | Authoritative §1 5.56 × 45 mm row. |
 
 ---
 
-## 🎯 Headline numbers (design targets)
+## 🎯 Headline numbers
+
+### BPC design targets (spec prose — not simulated)
 
 | Metric | Value |
 |---|---|
@@ -39,7 +47,69 @@ The BPC System is a **complete platform subfolder**: operator specification (for
 | Muzzle energy | ~1 700–1 800 J |
 | Cook-off ignition temp | > 270 °C (target) |
 | Firepower-per-kg vs M855A1 | ~1.33× (400 vs 300 rounds same weight) |
-| Simulator anchor (5.56 × 45 §1) | 939 m/s / 1 764 J / 374 MPa |
+| Protein case shelf (§23) | **24 mo** |
+
+### Portfolio §1 — 5.56 × 45 mm NATO baseline (simulation-validated)
+
+| Metric | Value |
+|---|---|
+| Cartridge | **5.56 × 45 mm** (`5.56x45mm`) |
+| Muzzle velocity | **939 m/s** (3,081 fps) |
+| Muzzle energy | **1 764 J** |
+| Peak chamber pressure | **374 MPa** (54,295 psi) |
+| RHA @ muzzle | **7.7 mm** (290 BHN, 0°) |
+| Recoil impulse | **6.42 N·s** |
+
+Source: [`../weapons_sim_results.md`](../weapons_sim_results.md) §1. BPC chemistry (spidroin casing, nitrated poly-amino-acid propellant, cook-off) is **not** in the portfolio simulator.
+
+---
+
+## 🔬 Simulation verification
+
+**BPC protein-casing chemistry, cook-off, and chamber-sealing mechanics are not modelled.** The local script prints the conventional **5.56 × 45 mm §1 baseline** and compares it to BPC design targets:
+
+```bash
+python platform_simulation.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | §1 baseline + BPC target comparison |
+| [`SIM_README.md`](SIM_README.md) | Scope limits; §1 cross-reference |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | §1 authoritative 5.56 × 45 mm row |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+To regenerate the **full portfolio** (updates §1):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify §1 baseline vs BPC targets:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio** (after shared parameter edits):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for future BPC module requirements.
 
 ---
 

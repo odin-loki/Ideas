@@ -115,7 +115,7 @@ The NACS-TOTAL system provides a comprehensive 72-hour CBRN protection capabilit
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used to derive the NACS-TOTAL performance claims cited in §2–§5 of the paper body. The equations span four physical domains: chemical-vapour permeation, latent-heat thermal management, sealed-interface leak rates, and silver-ion antimicrobial kinetics. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used to derive the NACS-TOTAL performance claims cited in §2–§5 of the paper body. The equations span four physical domains: chemical-vapour permeation, latent-heat thermal management, sealed-interface leak rates, and silver-ion antimicrobial kinetics. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 CBRN permeation — Fickian diffusion breakthrough time
 
@@ -234,6 +234,24 @@ m_Ag (per m² fabric) = 72 · k_release⁻¹ · MIC · A_fabric
 ```
 
 → 0.5 g/m² silver-nanoparticle loading provides ~72-hour antimicrobial control of typical skin flora at the spec'd MIC. Combined with the CHEMPAK chemical-agent capacity (§A.1) and the LiOH respiratory-CO₂ budget (§A.3), the three independent capacity budgets jointly deliver the 72-hour wear claim.
+
+## 9. Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Filter cartridge life | **6 mo** |
+| Suit fabric service | **5 yr** |
+| Valve diaphragm service | **12 mo** |
+
+**Table 9.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Activated-carbon / HEPA filter canister | 4 mo | 6 mo | Breakthrough time @ 5 mg/m³ |
+| Butyl / PTFE laminate suit | 3 yr | 5 yr | Permeation + seam fatigue |
+| Exhalation valve diaphragm | 8 mo | 12 mo | Elastomer set + tear |
 
 ### A.5 Notes on numerical concordance with available references
 

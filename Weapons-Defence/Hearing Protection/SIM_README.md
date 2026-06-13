@@ -4,6 +4,23 @@
 
 APE-1 / HANC-1 product NRR claims (37.8 / 42.6 dB) are **not** independently derived from this simulator — they come from acoustic modelling in the specification.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **It also documents scope limits** — APE-1 / HANC-1 NRR claims are spec-internal; portfolio §6 threat-side muzzle SPL and layered protection stacks are extracted per weapon.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## What §6 models
@@ -59,6 +76,22 @@ Open `weapons_sim_results.md` → **§6. Muzzle blast & hearing-protection stack
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`Hearing Protection`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `Hearing Protection` — foam_plug_life_mo=6; electronic_muff_seal_mo=24; earplug_NRR_derated_dB=22 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -66,7 +99,3 @@ Open `weapons_sim_results.md` → **§6. Muzzle blast & hearing-protection stack
 | Operator specification | [`Hearing_Protection_Specification.md`](Hearing_Protection_Specification.md) |
 | Research paper | [`Hearing_Protection_Research_Paper.md`](Hearing_Protection_Research_Paper.md) |
 | Portfolio results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §6 |
-
----
-
-*Hearing protection simulation coverage — §6 threat SPL from portfolio simulator; product NRR from spec acoustic models.*

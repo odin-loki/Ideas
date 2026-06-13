@@ -1703,6 +1703,27 @@ At 66 000 APE-1 + 3 960 HANC-1 / yr combined throughput, the programme operates 
 
 ---
 
+---
+
+### Portfolio §23 Lifecycle (consumable service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Foam plug life | **6 mo** |
+| Electronic muff seal | **24 mo** |
+| Earplug NRR (derated) | **22 dB** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Slow-recovery foam earplug | 4 mo | 6 mo | Cell collapse + contamination |
+| Electronic muff gel seal | 18 mo | 24 mo | Elastomer hardening |
+
+---
+
 ## Appendix A — Simulation Model Reference Equations (Acoustic Stack)
 
 This appendix documents the governing equations for the APE-1 / HANC-1 acoustic-protection stack. The full Python implementation is in `Weapons-Defence/weapons_simulation.py`. Calibration references and model assumptions are documented in §6 (muzzle SPL stack) and §18 (TACS Nelson-Elliott bound) of `weapons_sim_results.md`. **This appendix is the simulation-model reference for the new §12 / §13 / §14 sections above; the existing Appendices A (Glossary), B (References & Standards), and C (Contact Information) further below in this document are retained for reference and are not superseded by this appendix.**

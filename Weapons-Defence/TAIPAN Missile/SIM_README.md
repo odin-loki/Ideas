@@ -5,6 +5,25 @@ guided ballistic interceptor rocket.
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. It also **delegates to [`taipan1_sim.py`](taipan1_sim.py)** (`--sim verify`) for trajectory, engine, and stability numbers.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+For standalone TAIPAN analyses, use [`taipan1_sim.py`](taipan1_sim.py) directly (see Quick Start below).
+
+---
+
 ## Requirements
 
 ```bash
@@ -288,3 +307,14 @@ Objective: maximise apogee − 80×max(0, 1.5−SM_burnout) penalty.
 
 *TAIPAN-1 Simulation Suite — for research and design study use only.*
 *Not validated against physical test data. See companion spec for disclaimers.*
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`TAIPAN-1 Missile`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `TAIPAN-1 Missile` — certified_storage_yr=10; motor_burn_s=4.2; Flight dynamics validated by taipan1_sim.py — no portfolio §23 lifecycle slice. |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

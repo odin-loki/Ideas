@@ -8,7 +8,7 @@
 
 ## What this folder is
 
-The **Adaptive Command Military Doctrine** is a doctrinal concept piece: operator specification and academic research paper describing a hierarchical command structure and training pipeline. This is **non-physical doctrine** — no weapons physics, no force-on-force simulation.
+The **Adaptive Command Military Doctrine** is a doctrinal concept piece: operator specification and academic research paper describing a hierarchical command structure and training pipeline. This is **non-physical doctrine** — no weapons physics, no force-on-force simulation. [`platform_simulation.py`](platform_simulation.py) documents scope limits only; it produces **no physics numbers**.
 
 **Reading order for new readers:**
 
@@ -16,6 +16,7 @@ The **Adaptive Command Military Doctrine** is a doctrinal concept piece: operato
 2. [`Command_Doctrine_Specification.md`](Command_Doctrine_Specification.md) — full doctrine spec (tiers, training pipeline, allocation).
 3. [`Command_Doctrine_Research_Paper.md`](Command_Doctrine_Research_Paper.md) — formal doctrinal narrative.
 4. [`SIM_README.md`](SIM_README.md) — honest note: no simulation.
+5. Run [`platform_simulation.py`](platform_simulation.py) — scope limits only (no physics outputs).
 
 ---
 
@@ -26,6 +27,10 @@ The **Adaptive Command Military Doctrine** is a doctrinal concept piece: operato
 | [`Command_Doctrine_Specification.md`](Command_Doctrine_Specification.md) | Operator / doctrine specification | Command tiers, training pipeline, skills allocation, succession doctrine. **Start here.** |
 | [`Command_Doctrine_Research_Paper.md`](Command_Doctrine_Research_Paper.md) | Academic research paper | Abstract, force-structure rationale, training design, limitations. |
 | [`SIM_README.md`](SIM_README.md) | Simulation documentation | No simulation — doctrinal content only. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | Scope limits only — no physics numbers. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Documents doctrinal scope limits via `platform_simulation.py`. |
+| [`../weapons_simulation.py`](../weapons_simulation.py) | Portfolio simulator | Does not model command-and-control (not invoked for doctrine). |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Simulator output | No doctrine section — not applicable. |
 
 ---
 
@@ -49,6 +54,55 @@ The **Adaptive Command Military Doctrine** is a doctrinal concept piece: operato
 | **Total initial pipeline** | **36 weeks** |
 
 Skills allocation: **40 %** individual technical / **30 %** small-unit leadership / **20 %** specialised roles / **10 %** cross-training.
+
+---
+
+
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Lifecycle (§23) | *Doctrinal force-structure and training-duration targets — no physics lifecycle model.* |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+## 🔬 Simulation verification
+
+**Scope-only — no physics numbers.** [`../weapons_simulation.py`](../weapons_simulation.py) does not model command tiers, training throughput, or force-on-force outcomes. The local script documents those limits and prints no quantitative physics results:
+
+```bash
+python platform_simulation.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Scope limits only — tier sizes and training durations are prose targets |
+| [`SIM_README.md`](SIM_README.md) | What is / is not modelled |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | No doctrine section — not applicable |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — print scope limits (no physics verification):
+
+```bash
+python platform_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for the full list of domains not modelled.
 
 ---
 

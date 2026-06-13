@@ -2,6 +2,18 @@
 
 This platform's numbers are produced by the portfolio-wide simulator at [`../weapons_simulation.py`](../weapons_simulation.py), output to [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results, use `cd .. && python weapons_simulation.py`.
+
 ---
 
 ## Cartridge key
@@ -32,15 +44,13 @@ This platform's numbers are produced by the portfolio-wide simulator at [`../wea
 | **§11 Peak recoil force** | 358 N peak shoulder force, 35 % brake, 20.0 mm stock travel |
 | **§12 Obliquity penetration** | 60° RHA — 3.7 mm @ 0 m normal-equivalent |
 | **§13 Body-armour V50** | 5.56 × 45 and 7.62 × 51 threat rows for armour comparison context |
+| **§23 Lifecycle** | `MP-6.8 Mark II Rifle` — bore life 25,000 rd, MRBF 15,656 analytic / 15,000 simulated, felt recoil 1.63 ft·lb, barrel SF 1.99, FTF 1:55,000 |
 
 ---
 
 ## Re-run command
 
-```bash
-cd ..
-python weapons_simulation.py
-```
+Regenerate portfolio output after parameter edits (see **Local verification script** above).
 
 ---
 
@@ -56,6 +66,14 @@ python weapons_simulation.py
 
 All physics lives in the parent [`../weapons_simulation.py`](../weapons_simulation.py). This folder contains specification and research documents only.
 
----
 
-[← Back to platform README](README.md) · [← Weapons-Defence README](../README.md)
+## §23 Lifecycle
+
+Portfolio lifecycle for **`MP-6.8 Mark II Rifle`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `MP-6.8 Mark II Rifle` — bore life 25,000 rd, MRBF 15,656 analytic / 15,000 simulated, felt recoil 1.63 ft·lb, barrel SF 1.99, FTF 1:55,000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |

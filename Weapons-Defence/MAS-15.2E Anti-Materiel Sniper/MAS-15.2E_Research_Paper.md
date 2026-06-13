@@ -136,6 +136,15 @@ The two-section 720 mm transport length provides compatibility with standard veh
 
 ### 5.4 Reliability and Environmental Performance
 
+| Parameter | Specification (`weapons_sim_results.md` §23) |
+|---|---|
+| MRBF analytic | 35 613 rounds |
+| MRBF simulated | 30 000 rounds |
+| FTF rate | 1:120 000 |
+| Felt recoil | 39.717 ft·lb |
+| Bore life service | 1 500 rounds (sub-MOA at 800 m) |
+| Throat-erosion life (§10) | 22 753 rounds |
+
 The bolt-action operating system — manually cycled, three-lug rotating bolt — provides operational reliability across environmental extremes without complex gas-system maintenance. The chrome-plated bolt body with enhanced extraction geometry, controlled ejection, and self-lubricating surfaces are designed to maintain function in the sand, mud, ice, and extreme-temperature environments of modern operational theatres. The enhanced sealing, debris management, and drainage features of the receiver reflect lessons from AMR operational experience in desert and arctic conditions.
 
 ## 6. Methods and Provenance
@@ -164,6 +173,7 @@ This v2.0 paper extends the v1.0 simulator-derived numerical envelope from the T
 | **Wind drift** | **§8** | Didion / Bagnold full-value crosswind correction, 4.47 m/s (10 mph) |
 | **Hatcher max-effective range** | **§9** | KE > 80 J personnel-incapacitation threshold + supersonic-range cutoff |
 | **Barrel life** | **§10** | Calibrated bore-wear model anchored to M4 / M14 / M2HB / GAU-8 / M256; thermal-bound rpm from barrel mass × specific heat |
+| **Portfolio lifecycle** | **§23** | Bore life service (1 500 rd accuracy), MRBF MC (35 613 analytic / 30 000 simulated), felt recoil (39.717 ft·lb), FTF (1:120 000) |
 | **Peak shoulder force** | **§11** | Parabolic-energy-dissipation over `stock_travel_mm` with muzzle-brake impulse-redirection efficiency |
 | **NATO 60° obliquity penetration** | **§12** | Tate / Krupp obliquity correction with `n = 1.6` for hardened-core small arms |
 | **Body-armour V50** | **§13** | Lambert-Jonas / Recht-Ipson V50 with composite-factor calibration; clay-witness BFD per NIJ 0101.06 |
@@ -178,7 +188,7 @@ The Hatcher 80 J KE-threshold criterion (`weapons_sim_results.md` §9) reports t
 
 ### 6A.3 Barrel-life methodology
 
-The bore-wear model (`weapons_sim_results.md` §10) reports **22 753 rounds** throat-erosion life for the MAS-15.2E's 4.40 kg Stellite-21-lined barrel at 37 400 psi peak chamber pressure. The 1 500-round headline rating in the spec sheet is retained as the conservative **accuracy-retention** rating for sub-MOA at 800 m precision engagement, not the absolute throat-erosion bound — the cold-hammer-forged Stellite-21 lining is materially more wear-resistant than the conservative service-life figure implies. The 131 rpm thermal-bound far exceeds the manually-cycled bolt-action's operational rate of fire (sustained ~10 rpm trained operator), so thermal limits are non-binding under normal HTI engagement profiles.
+The bore-wear model (`weapons_sim_results.md` §10) reports **22 753 rounds** throat-erosion life for the MAS-15.2E's 4.40 kg Stellite-21-lined barrel at 37 400 psi peak chamber pressure. The §23 **bore life service** rating of **1 500 rounds** is retained as the conservative **accuracy-retention** rating for sub-MOA at 800 m precision engagement, not the absolute throat-erosion bound. The 131 rpm thermal-bound far exceeds the manually-cycled bolt-action's operational rate of fire (sustained ~10 rpm trained operator), so thermal limits are non-binding under normal HTI engagement profiles.
 
 ### 6A.4 Recoil-force methodology
 
@@ -229,7 +239,7 @@ Future development directions suggested by the analysis include investigation of
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MAS-15.2E performance numbers cited in §3–§6A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MAS-15.2E performance numbers cited in §3–§6A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE
 

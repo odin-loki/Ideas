@@ -1620,6 +1620,22 @@ TACS-Fixed uses **multi-zone architecture** rather than attempting uniform cover
 
 **Design life:** 10 years (with scheduled component replacement)
 
+Portfolio §23 lifecycle intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Wearable array service | **8 yr** |
+| Vehicle array service | **10 yr** |
+| Battery cycle life | **500 cycles** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| 16-element wearable ANC array | 6 yr | 8 yr | MEMS mic drift + flex fatigue |
+| Vehicle roof phased array | 7 yr | 10 yr | Vibration + connector corrosion |
+| Li-poly wearable battery | 400 cycles | 500 cycles | Capacity fade @ 1C |
+
 **MTBF:** 5,000 hours (continuous operation)
 
 **Maintenance Schedule:**

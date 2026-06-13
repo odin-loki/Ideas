@@ -2,6 +2,23 @@
 
 **No runnable simulation in this repo.** HEL-CMS/DB engagement physics (dwell time, irradiance vs range, beam quality, adaptive optics loop bandwidth) are derived **first-principles inside the specification and research paper** — not computed by [`../weapons_simulation.py`](../weapons_simulation.py) or a standalone Python module.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) calls [`../sim_common.py`](../sim_common.py) and **documents scope limits only** — there is no laser engagement simulator in this repo. Dwell-time, irradiance, and TCO numbers remain first-principles derivations in [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB_Full_Spec.md) and the research paper; the script prints where to verify them.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output (other platforms), from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## Where the numbers live
@@ -35,6 +52,22 @@ None of these are implemented.
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`HEL-CMS/DB`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `HEL-CMS/DB` — diode_array_life_hr=10000; coolant_pump_service_hr=5000; beam_window_recoat_hr=2000 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -42,7 +75,3 @@ None of these are implemented.
 | Folder README | [`README.md`](README.md) |
 | Engineering specification | [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB_Full_Spec.md) |
 | Research paper | [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB_Research_Paper.md) |
-
----
-
-*HEL-CMS/DB simulation coverage — first-principles numbers in spec/paper only. No runnable simulator in this repository.*

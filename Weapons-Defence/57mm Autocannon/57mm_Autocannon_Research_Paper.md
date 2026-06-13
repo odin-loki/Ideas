@@ -50,7 +50,7 @@ The 1.0 draft of this paper specified a 57 × 441 mm cartridge driven to 1 350 m
 | Accuracy | 0.3 mil at 1 000 m |
 | Empty Mount Mass | 350 kg |
 | Barrel Length | 4 560 mm (L/80) |
-| Barrel Life | 2 500 rounds |
+| Barrel life (§10 / §23) | 1 166 rounds |
 | Ready Ammunition | 120 rounds (dual-feed) |
 
 ### 3.1 Ammunition: 57 × 347 mm SR APFSDS-T
@@ -132,6 +132,11 @@ The rotary bolt with roller bearings and externally-powered drive provides rate 
 
 | Parameter | Specification |
 |---|---|
+| MRBF analytic (§23) | 8 375 rounds |
+| MRBF simulated (§23) | 10 000 rounds |
+| FTF rate (§23) | 1:35 000 |
+| Felt recoil (§23) | 3 675.949 ft·lb |
+| Bore life (§23) | 1 166 rounds |
 | Function Reliability | 99.9% |
 | Temperature Range | -40 °C to +63 °C |
 | Environmental Rating | Sand, dust, salt-spray, humidity |
@@ -140,7 +145,7 @@ The rotary bolt with roller bearings and externally-powered drive provides rate 
 
 ## 8. Maintenance Requirements
 
-The 2 500-round barrel-life envelope supports sustained-fire missions. Field service intervals: inspection at 500 rounds, cleaning at 1 000 rounds, hydraulic-buffer service at 2 500 rounds, operating-parts replacement at 10 000 rounds. The all-mechanical design enables field maintenance with standard toolkits.
+The 2 500-round barrel-life envelope supports sustained-fire missions. Field service intervals: inspection at 500 rounds, cleaning at 1 000 rounds, hydraulic-buffer service at 1 166 rounds (§23 bore life), operating-parts replacement at 10 000 rounds. The all-mechanical design enables field maintenance with standard toolkits.
 
 ## 9. Comparative Analysis
 
@@ -186,7 +191,8 @@ The 2.1 revision (this version) imports the following Tier-2 simulation outputs 
 |---|---|
 | Muzzle SPL 164.2 dB / 157.2 dB at ear | `weapons_sim_results.md` §6 |
 | Max effective range > 6 000 m, supersonic range 5 809 m | `weapons_sim_results.md` §9 |
-| Barrel life 1 166 rounds, thermal-sustained 80 rpm | `weapons_sim_results.md` §10 |
+| Barrel life 1 166 rounds (§10 / §23), thermal-sustained 80 rpm | `weapons_sim_results.md` §10, §23 |
+| MRBF 8 375 analytic / 10 000 simulated, FTF 1:35 000, felt recoil 3 675.949 ft·lb | `weapons_sim_results.md` §23 |
 | Peak mount-transmitted recoil force 139 832 N | `weapons_sim_results.md` §11 |
 | HEIAP-T A_L 117 m², r_eff 6.1 m, 6 600 fragments at 1 443 m/s | `weapons_sim_results.md` §14 |
 | HEDP shaped-charge RHA penetration 37 mm | `weapons_sim_results.md` §15 |
@@ -199,7 +205,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the AMAS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§15. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the AMAS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§15. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE
 

@@ -16,6 +16,7 @@ The MP-4.6M Defender is a **complete platform subfolder**: operator specificatio
 2. [`MP-4.6M_Defender_PDW_Specification.md`](MP-4.6M_Defender_PDW_Specification.md) — product and engineering spec (TRP-2026-002).
 3. [`MP-4.6M_Defender_PDW_Research_Paper.md`](MP-4.6M_Defender_PDW_Research_Paper.md) — formal design-and-validation narrative.
 4. [`SIM_README.md`](SIM_README.md) — how to re-run and locate this platform's numbers in the portfolio simulator.
+5. Run [`platform_simulation.py`](platform_simulation.py) — PASS/FAIL claim verification against the portfolio sim.
 
 ---
 
@@ -26,6 +27,8 @@ The MP-4.6M Defender is a **complete platform subfolder**: operator specificatio
 | [`MP-4.6M_Defender_PDW_Specification.md`](MP-4.6M_Defender_PDW_Specification.md) | Operator / product specification | Full TRP-style engineering doc — cartridge commonality, action, barrel, suppressor, fire-control. **Start here for "what is the weapon."** |
 | [`MP-4.6M_Defender_PDW_Research_Paper.md`](MP-4.6M_Defender_PDW_Research_Paper.md) | Academic research paper | Abstract, prior art, subsystem design, simulation framework, results, limitations. |
 | [`SIM_README.md`](SIM_README.md) | Simulation documentation | Cartridge key, relevant `weapons_sim_results.md` tables, re-run command. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification script | Runs portfolio engine; prints PASS/FAIL checks for this platform's spec claims. |
+| [`../sim_common.py`](../sim_common.py) | Shared sim runner | Loads `weapons_simulation.py` and formats per-platform verification output. |
 | [`../weapons_simulation.py`](../weapons_simulation.py) | Portfolio simulator | Tier-1/Tier-2 physics engine. |
 | [`../weapons_sim_results.md`](../weapons_sim_results.md) | Simulator output | Authoritative tabulated numbers. |
 
@@ -33,7 +36,7 @@ The MP-4.6M Defender is a **complete platform subfolder**: operator specificatio
 
 ## 🎯 Headline numbers (simulation-validated)
 
-All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md) §§1–2, 3, 5, 10, 11.
+All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.md) §§1–2, 3, 5, 10, 11, 23.
 
 | Metric | Value |
 |---|---|
@@ -49,17 +52,65 @@ All values below come from [`../weapons_sim_results.md`](../weapons_sim_results.
 | Suppressor attenuation | **40.0 dB** (180 cm³, 8 baffles) |
 | Barrel life (model) | **302,501 rounds** |
 | Max effective range (Hatcher, KE > 80 J) | **928 m** |
+| Bore life service (§23) | **75,000 rounds** |
+| MRBF analytic (§23) | **~19,996 rounds** |
+| MRBF simulated (§23) | **~15,000 rounds** |
+| Felt recoil (§23) | **~0.125 ft·lb** |
+| Spring fatigue SF (§23) | **5.2** |
+| Barrel SF_yield (§23) | **3.48** |
+| FTF rate (§23) | **1:80,000** |
 
 ---
 
-## 🚀 Quick start (simulator)
+## 🔬 Simulation verification
+
+All headline numbers in this README trace to [`../weapons_sim_results.md`](../weapons_sim_results.md), produced by [`../weapons_simulation.py`](../weapons_simulation.py) and [`../weapon_lifecycle.py`](../weapon_lifecycle.py) (§23). Use the local verification script to confirm spec claims without regenerating the full portfolio:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks for each claim in the specification and research paper.
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local PASS/FAIL verification slice for this platform |
+| [`SIM_README.md`](SIM_README.md) | Cartridge/weapon keys, table cross-references, methodology |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative tabulated output — cite in every spec edit |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 lifecycle — structural SF, parts-life, reliability MC |
+
+To regenerate the **full portfolio** after editing shared parameters:
 
 ```bash
 cd ..
 python weapons_simulation.py
 ```
 
-See [`SIM_README.md`](SIM_README.md) for table cross-reference.
+Optional JSON summary:
+
+```bash
+python platform_simulation.py --json
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify platform claims:
+
+```bash
+python platform_simulation.py
+```
+
+**Regenerate full portfolio** (after shared parameter edits):
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for cartridge key `4.6x30mm_PDW`, weapon key `MP-4.6M Defender PDW`, and result-table map.
 
 ---
 

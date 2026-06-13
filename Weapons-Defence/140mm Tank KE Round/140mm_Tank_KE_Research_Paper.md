@@ -65,7 +65,7 @@ When the simulator is calibrated against M829-class data (≈ 700 mm RHA at the 
 | Hydraulic recoil stroke | 1.2 m |
 | Effective Range | 5 000 m |
 | Accuracy | < 0.2 mil at 2 000 m |
-| Barrel life | 500 rounds |
+| Barrel life | 618 rounds (§10 / §23) |
 | Barrel length | **7 350 mm (L/52)** |
 
 ### 3.1 Velocity Retention (G7 form factor, sub-cal DU long-rod)
@@ -145,7 +145,7 @@ The KEW-AP round described in §4 is a pure kinetic-energy penetrator and **cont
 
 ## 8. Barrel, Recoil, and Propulsion System
 
-The **7 350 mm L/52 barrel** with chrome-lined bore is designed for a 500-round life envelope at the **198 MPa peak chamber pressure**. The relatively modest peak pressure (compared to the 350 – 600 MPa typical of conventional 120 mm tank guns) is a deliberate design choice: the **24 500 cm³ case capacity** combined with **ETC-augmented ignition** allows the round to deliver 9.23 MJ muzzle KE without exceeding 200 MPa peak. This trade — large case + lower peak pressure vs small case + high peak pressure — extends barrel life and reduces erosion despite the higher total propellant mass.
+The **7 350 mm L/52 barrel** with chrome-lined bore is designed for a **618-round** life envelope at the **198 MPa peak chamber pressure** (§10 throat erosion / §23 bore life service). The relatively modest peak pressure (compared to the 350 – 600 MPa typical of conventional 120 mm tank guns) is a deliberate design choice: the **24 500 cm³ case capacity** combined with **ETC-augmented ignition** allows the round to deliver 9.23 MJ muzzle KE without exceeding 200 MPa peak. This trade — large case + lower peak pressure vs small case + high peak pressure — extends barrel life and reduces erosion despite the higher total propellant mass.
 
 The free recoil energy of **351 715 J per shot** is absorbed by a **1.2 m hydraulic recoil stroke**: peak force ~700 kN, mean force ~290 kN over the stroke, time-to-stop ~80 ms. The 3 400 kg empty turret-trunnion mass is large but consistent with a modern MBT turret architecture (a Leopard 2 turret is ≈ 16 tons gross; the 3 400 kg figure is the *empty trunnion + cradle*, not the full turret).
 
@@ -168,13 +168,13 @@ Notes:
 1. The 140 mm round has **lower total-projectile KE** than current 120 mm rounds — the AMERT trades projectile mass for higher L/D and a substantially larger case at lower peak pressure.
 2. **Muzzle penetration is higher** than the 120 mm comparables because of the higher L/D ratio and slightly higher striking velocity.
 3. **2 km penetration is lower** than current 120 mm rounds because the 3.4 kg rod sheds velocity faster than the heavier 5 – 7 kg rods (less ballistic coefficient per unit cross-sectional area).
-4. **Peak chamber pressure is far lower** — this is the headline benefit of the ETC + large-case design: 500-round barrel life vs ≈ 200-round life for high-pressure conventional 120 mm rounds.
+4. **Peak chamber pressure is far lower** — this is the headline benefit of the ETC + large-case design: **618-round** barrel life (§10 / §23) vs ≈ 200-round life for high-pressure conventional 120 mm rounds.
 
 The 1.0 paper's claim of 5 × the muzzle energy of M829A1 (57 MJ vs 9 MJ) was simply an arithmetic mismatch with both internal-ballistics physics and external-ballistics scaling, and is corrected in this revision.
 
 ## 10. Conclusion
 
-The 140 mm Advanced Multi-Effect Tank Round, as re-specified in this 2.0 revision, provides a quantifiable improvement over current 120 mm rounds in **muzzle penetration** (≈ 867 mm vs ≈ 700 – 810 mm) at substantially **lower chamber pressure** (198 MPa vs 550 – 700 MPa) and longer barrel life (500 rounds vs ≈ 200), at the cost of reduced 2 km penetration (327 mm vs ≈ 600 – 700 mm) because of the lighter DU rod. The round is best suited to close- and medium-range MBT-on-MBT engagement (inside 1.5 km), where the higher muzzle penetration matters most, rather than to long-range standoff engagement. The 1.0 paper's headline figures (1 450 mm muzzle RHA, 57 MJ muzzle KE, 880 MPa chamber pressure) are withdrawn — they were inconsistent with both Tate/Lanz–Odermatt long-rod physics and with M829-class open-source benchmarks.
+The 140 mm Advanced Multi-Effect Tank Round, as re-specified in this 2.0 revision, provides a quantifiable improvement over current 120 mm rounds in **muzzle penetration** (≈ 867 mm vs ≈ 700 – 810 mm) at substantially **lower chamber pressure** (198 MPa vs 550 – 700 MPa) and longer barrel life (**618 rounds** §10 / §23 vs ≈ 200), at the cost of reduced 2 km penetration (327 mm vs ≈ 600 – 700 mm) because of the lighter DU rod. The round is best suited to close- and medium-range MBT-on-MBT engagement (inside 1.5 km), where the higher muzzle penetration matters most, rather than to long-range standoff engagement. The 1.0 paper's headline figures (1 450 mm muzzle RHA, 57 MJ muzzle KE, 880 MPa chamber pressure) are withdrawn — they were inconsistent with both Tate/Lanz–Odermatt long-rod physics and with M829-class open-source benchmarks.
 
 ## 11. Methods / Provenance
 
@@ -214,7 +214,8 @@ The current revision imports the following Tier-2 simulation outputs from [`weap
 |---|---|
 | Muzzle SPL 163.8 dB / 156.8 dB at ear / 128.8 dB double + 103.8 dB TACS | `weapons_sim_results.md` §6 |
 | Max effective range > 10 000 m (envelope cap), supersonic range 6 405 m | `weapons_sim_results.md` §9 |
-| Barrel life 618 rounds, thermal-sustained 114 rpm | `weapons_sim_results.md` §10 |
+| Barrel life 618 rounds (§10 / §23), thermal-sustained 114 rpm | `weapons_sim_results.md` §10, §23 |
+| MRBF 3 502 analytic / 3 750 simulated, FTF 1:8 000, felt recoil 22 915.411 ft·lb | `weapons_sim_results.md` §23 |
 | Peak mount-transmitted recoil force 178 056 N at 600 mm stroke, 55 % brake | `weapons_sim_results.md` §11 |
 | KE NATO-60° obliquity penetration 533.8 / 429.7 / 333.0 mm @ 0 / 500 / 1 000 m | `weapons_sim_results.md` §12 |
 | HE-Frag A_L 1 173 m², r_eff 19.3 m, 8 800 fragments at 3 064 m/s (CL-20) | `weapons_sim_results.md` §14 |
@@ -228,7 +229,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the 140 mm AMERT performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the 140 mm AMERT performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for ETC-augmented 140 mm gun
 

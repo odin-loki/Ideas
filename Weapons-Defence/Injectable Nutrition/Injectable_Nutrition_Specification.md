@@ -640,6 +640,25 @@ This caloric-delivery model is the key engineering finding that motivates §0.3 
 
 ---
 
+## Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Formulation shelf @ 25 °C | **18 mo** |
+| Cold-chain shelf | **30 mo** |
+| Osmolality limit | **600 mOsm/kg** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Peripheral-safe isotonic bag | 12 mo | 18 mo | Lipid oxidation Q10 |
+| Central-line hypertonic vial | 24 mo | 30 mo | Cold-chain integrity |
+
+---
+
 ## Conclusion
 
 The GlycoDur-P and NutriComplete-P protein systems represent a revolutionary approach to sustained nutrition delivery. By combining advanced protein engineering with proven drug delivery technologies, these systems could transform medical nutrition support and enable new applications in extreme environments.

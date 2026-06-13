@@ -297,8 +297,11 @@ Date: May 2026
 ## SECTION 9: RELIABILITY
 
 ### 9.1 Performance Standards
-- Metrics:
-  * MRBF: 25 000 rounds
+- Metrics (`weapons_sim_results.md` §23 portfolio lifecycle):
+  * MRBF analytic: 15 656 rounds
+  * MRBF simulated: 15 000 rounds
+  * FTF rate: 1:55 000
+  * Felt recoil: 1.631 ft·lb
   * Parts Life: 25 000 rounds minimum
   * Temperature Range: -45°C to +65°C
   * Submersion: 20 m for 2 hours
@@ -403,10 +406,11 @@ Hatcher max-effective range (KE > 80 J personnel-incapacitation threshold): **> 
 |---|---|
 | Liner | Stellite 21 |
 | Barrel mass | 1.30 kg |
-| Throat-erosion life (rounds, 44 500 psi) | 80 398 |
+| Throat-erosion life (§10, rounds, 44 500 psi) | 80 398 |
+| Bore life service (§23, accuracy retention) | 25 000 |
 | Sustained-fire bound (rpm, thermal) | 250 |
 
-The simulator's 80 398-round throat-erosion life sits well above the 25 000-round headline figure carried in SECTION 1.3 / SECTION 3.1 / SECTION 8.2; the 25 000-round figure is retained as the conservative service-life rating for **accuracy retention** (sub-1-MOA at 100 m), not absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 700 rpm sustained cyclic rate, so the spec'd 500-round MIL-STD-810H sustained-fire envelope (SECTION 9.1) translates to ~120 seconds of continuous full-auto at 250 rpm thermal-equivalent — the quick-change three-lug barrel system (SECTION 3.2) is operationally relevant beyond that point.
+The §10 throat-erosion life (80 398 rounds) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **25 000 rounds** is the headline service interval in SECTION 1.3 / SECTION 3.1 / SECTION 8.2 — sub-1-MOA at 100 m accuracy retention, not absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 700 rpm sustained cyclic rate, so the spec'd 500-round MIL-STD-810H sustained-fire envelope (SECTION 9.1) translates to ~120 seconds of continuous full-auto at 250 rpm thermal-equivalent — the quick-change three-lug barrel system (SECTION 3.2) is operationally relevant beyond that point.
 
 ### 12.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -433,6 +437,19 @@ The MP-6.8's 8.7 g WC-cored projectile sits between the two by mass and below bo
 | APES-L police (22 kg/m²) | | STOPPED (V50 1 116, BFD 44.0 mm) | STOPPED (V50 1 564, BFD 26.2 mm) |
 
 Reading the bracket: the MP-6.8 Mark II's WC-cored 8.7 g projectile at 731 m/s **defeats soft IIIA cleanly**, **probably defeats NIJ III** (the WC core is harder than M80's lead core; the threat velocity is below M80's 820 m/s but the WC core compensates), and is **stopped by NIJ IV, APES military, and APES-L police** at all engagement ranges, consistent with the §3 RHA-equivalent penetration of 11.1 mm at the muzzle and 8.1 mm at 300 m. The cartridge is in the modern-body-armour-defeat regime against soft and Level III threats but is not a Level IV-defeating round.
+
+### 12.6 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 1.631 ft·lb |
+| Barrel SF_yield | 1.99 |
+| Bore life service (§23) | 25 000 rounds |
+| MRBF analytic | 15 656 rounds |
+| MRBF simulated | 15 000 rounds |
+| FTF rate | 1:55 000 |
+
+§23 **bore life service** (25 000 rounds) matches §23.0.1 parts-life barrel replace interval. §10 **throat-erosion life** (80 398 rounds, §12.3) is higher — both are reported with distinct labels.
 
 ---
 
@@ -974,7 +991,9 @@ Bootstrap CI (2 000 resamples):
        = 4.00e-6 + 5.00e-6 + 6.67e-6 + 10.00e-6 + 3.33e-6 + 5.00e-6 + 2.50e-6
        = 36.50e-6
 
-MRBF_analytic = 1 / 36.50e-6 ≈ 27 397 rounds ✓   (clears the 25 000-round spec target in §9.1)
+MRBF_analytic = 1 / 36.50e-6 ≈ 27 397 rounds  (per-mode harmonic sum in this appendix)
+
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **15 656** / simulated **15 000**; FTF rate **1:55 000**; felt recoil **1.631 ft·lb** — authoritative spec targets in §9.1.
 ```
 
 The dominant residual failure mode at production maturity is FTEject (1 : 100 000 — ~27 % of total stoppages). This is the physical floor for a gas-piston rotating-bolt design at 307 MPa peak chamber pressure with the specified ejection geometry; further reduction requires re-designing the ejector face / port-bleed timing rather than additional surface engineering.

@@ -4,6 +4,23 @@
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder (TACS §18 cancellation depth).
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
 ## What is modelled
 
 | Output | Method |
@@ -43,6 +60,22 @@ Open `weapons_sim_results.md` and scroll to **§18. TACS active acoustic cancell
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`TACS Military Noise Cancellation`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `TACS Military Noise Cancellation` — wearable_array_service_yr=8; vehicle_array_service_yr=10; battery_cycle_life=500 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -51,7 +84,3 @@ Open `weapons_sim_results.md` and scroll to **§18. TACS active acoustic cancell
 | System paper | [`Paper11_TACS_System.md`](Paper11_TACS_System.md) |
 | Energy physics paper | [`Paper12_TACS_Energy_Physics.md`](Paper12_TACS_Energy_Physics.md) |
 | Portfolio results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §18 |
-
----
-
-*TACS simulation coverage — Nelson–Elliott theoretical bound only. Not validated against anechoic-chamber measurement.*

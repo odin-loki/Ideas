@@ -1377,11 +1377,11 @@ This compares to a conventional ADF 72-hour kit at approximately:
 
 The cost premium of approximately $3,166 per kit is the investment required for the capability improvements specified. Expressed as cost per operational day over a 5-year service life of the durable items (pack, tools, filtration), the premium amortises as follows:
 
-- Service life of durable components: 5 years / 1,825 days
+- Service life of durable components: **8 yr** load carriage / **2 yr** bladder (§23.1); tools indefinitely serviceable
 - Daily amortised premium cost: $3,166 / 1,825 = $1.73 per operational day
 - This is less than the cost of a single 1.5L bottle of water from an Australian petrol station
 
-The war pick and titanium tools are indefinitely serviceable — they have no planned obsolescence. The pack and filtration system are rated to 5 years of sustained use; the IFAK consumables are restocked on every deployment at standard resupply costs.
+The war pick and titanium tools are indefinitely serviceable — they have no planned obsolescence. The pack load carriage is rated to **8 yr** (§23.1); hydration bladder to **2 yr**; IFAK sterile packs to **36 mo**.
 
 ### 16.3 Volume Procurement Model
 
@@ -1446,13 +1446,23 @@ Scale to 12,000 kit procurement across all dismounted infantry, combat engineer,
 
 ### 17.3 Logistics and Maintenance
 
-**Pack:** Annual inspection by unit quartermaster. Zipper replacement at signs of membrane degradation (typically 4–5 years). Shoulder harness foam replacement at 3-year interval (foam compression set reduces load transfer efficiency). Frame stays replacement if bent; frames are a stocked spare part.
+Portfolio §23 lifecycle intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Load carriage fabric | **8 yr** |
+| Hydration bladder | **2 yr** |
+| IFAK sterile pack | **36 mo** |
+
+**Pack:** Annual inspection by unit quartermaster. Zipper replacement at signs of membrane degradation (typically 4–5 years). Shoulder harness foam replacement at 3-year interval (foam compression set reduces load transfer efficiency). Frame stays replacement if bent; frames are a stocked spare part. Cordura load carriage: replace at **8 yr** (§23.1) or on visible UV/abrasion failure.
+
+**Hydration bladder:** Replace at **2 yr** (§23.1) or on seam leak / biofilm failure.
 
 **Filtration system:** Membrane replacement at rated capacity or every 3 years. Pump tube replacement every 200 litres or 6 months. UV LED replacement at 10,000 operating hours (approximately 15 years). Battery replacement annually or on depletion.
 
 **Tools:** The titanium tools (shovel, war pick, knife) are effectively maintenance-free except for blade and spike maintenance (periodic sharpening), surface coating touch-up (Parkerising touch-up kit stocked at unit level), and handle grip replacement (TPE over-mould can be replaced by any facility with injection moulding capability).
 
-**IFAK:** Full consumable restock after every deployment or training exercise. CAT tourniquets: inspect for UV degradation of nylon webbing annually; replace every 5 years or on UV-cracking of buckle components. Chest seals: replace at expiry date (typically 5 years from manufacture). Decompression needle: replace at expiry date (sterility). Haemostatic gauze: replace at expiry date (kaolin activity unaffected by age, but sterile packaging integrity is the shelf-life limit, typically 5 years).
+**IFAK:** Full consumable restock after every deployment or training exercise. Sterile IFAK consumables: rotate at **36 mo** expiry (§23.1). CAT tourniquets: inspect for UV degradation of nylon webbing annually; replace every 5 years or on UV-cracking of buckle components. Chest seals: replace at expiry date (typically 5 years from manufacture). Decompression needle: replace at expiry date (sterility). Haemostatic gauze: replace at expiry date (kaolin activity unaffected by age, but sterile packaging integrity is the shelf-life limit, typically 5 years).
 
 ---
 

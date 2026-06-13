@@ -4,6 +4,23 @@
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **Dual path:** portfolio §17 Kamlet–Jacobs energetics, then delegation to [`cl20_simulation.py`](cl20_simulation.py) for proteination / impact-sensitivity metrics.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
 ## What is modelled
 
 ### Portfolio §17 — Kamlet–Jacobs detonation chemistry
@@ -59,14 +76,28 @@ See script header and [`README.md`](README.md) for validated headline table.
 
 ---
 
+
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`CL-20 High Explosive`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `CL-20 High Explosive` — cold_storage_shelf_mo=240; room_temp_hold_days=14; stabilizer_depletion_pct_yr=0.5 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
 |---|---|
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
 | Folder README | [`README.md`](README.md) |
 | Research paper | [`Proteinated_CL20_Safe_Explosive_Paper.md`](Proteinated_CL20_Safe_Explosive_Paper.md) |
 | Portfolio results §17 | [`../weapons_sim_results.md`](../weapons_sim_results.md) §17 |
-
----
-
-*CL-20 simulation coverage — Kamlet–Jacobs + computational proteination model. Not validated against cylinder expansion or BAM fall-hammer measurement.*

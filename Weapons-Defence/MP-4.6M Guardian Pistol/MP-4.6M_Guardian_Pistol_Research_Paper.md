@@ -152,8 +152,11 @@ The 20-round capacity is achieved through a hybrid single-column-staggered geome
 
 | Parameter | Specification |
 |---|---|
-| MRBF | 15 000 rounds |
-| FTF rate | < 1:5 000 |
+| MRBF analytic (§23) | 20 270 rounds |
+| MRBF simulated (§23) | 10 000 rounds |
+| FTF rate (§23) | 1:68 000 |
+| Felt recoil (§23) | 0.11 ft·lb |
+| Bore life service (§23) | 75 000 rounds |
 | Temperature range | -40°C to +60°C |
 | Environmental | MIL-STD-810H full compliance |
 
@@ -199,6 +202,7 @@ This v2.0 paper extends the v1.0 simulator-derived numerical envelope from the T
 | **Wind drift** | **§8** | Didion / Bagnold full-value crosswind correction, 4.47 m/s (10 mph) |
 | **Hatcher max-effective range** | **§9** | KE > 80 J personnel-incapacitation threshold + supersonic-range cutoff |
 | **Barrel life** | **§10** | Calibrated bore-wear model anchored to M4 (10 000 rd 5.56 chrome-lined), M14 (7 500 rd 7.62), M2HB (10 000 rd .50 Stellite); thermal-bound rpm from barrel mass × specific heat |
+| **Portfolio lifecycle** | **§23** | Structural SF, parts-life bore service (75 000 rd), MRBF MC (20 270 analytic / 10 000 simulated), felt recoil (0.11 ft·lb), FTF (1:68 000) |
 | **Peak shoulder force** | **§11** | Parabolic-energy-dissipation over `stock_travel_mm` with muzzle-brake impulse-redirection efficiency |
 | **Body-armour V50** | **§13** | Lambert-Jonas / Recht-Ipson V50 with composite-factor calibration; clay-witness BFD per NIJ 0101.06 |
 
@@ -212,7 +216,7 @@ The Hatcher 80 J KE-threshold criterion (`weapons_sim_results.md` §9) provides 
 
 ### 12A.3 Barrel-life methodology
 
-The bore-wear model (`weapons_sim_results.md` §10) computes rounds-to-throat-erosion from chamber pressure, projectile mass, propellant mass, and liner-material wear coefficient, calibrated against the M4 / M14 / M2HB / GAU-8 / M256 anchors. For the Guardian's 0.30 kg Stellite-21-lined barrel at 26 100 psi, the simulator reports 302 501 rounds — far above the 75 000-round headline service-life rating, which is retained as the conservative accuracy-retention envelope rather than the absolute throat-erosion bound.
+The bore-wear model (`weapons_sim_results.md` §10) computes rounds-to-throat-erosion from chamber pressure, projectile mass, propellant mass, and liner-material wear coefficient, calibrated against the M4 / M14 / M2HB / GAU-8 / M256 anchors. For the Guardian's 0.30 kg Stellite-21-lined barrel at 26 100 psi, the simulator reports **302 501 rounds** throat-erosion life (§10). The §23 **bore life service** rating of **75 000 rounds** is retained as the conservative accuracy-retention envelope (sub-2-MOA at 50 m), not the absolute throat-erosion bound.
 
 ### 12A.4 Recoil-force methodology
 
@@ -228,7 +232,7 @@ The MP-4.6M Guardian, when re-derived against the portfolio ballistics simulator
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Guardian Pistol performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A; the Guardian Pistol is the military parent (4.6 × 30 mm Enhanced) of the Guardian LE (4.6 × 22 mm DPAP), and the equations follow the same seven-phase structure.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Guardian Pistol performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A; the Guardian Pistol is the military parent (4.6 × 30 mm Enhanced) of the Guardian LE (4.6 × 22 mm DPAP), and the equations follow the same seven-phase structure.
 
 ### A.1 Interior ballistics — Noble-Abel for 4.6 × 30 mm, 180 mm barrel
 
@@ -297,7 +301,7 @@ A_gel = 200 Pa,  B_gel = 2 366 kg/m³ (FBI cold-gelatin calibration)
 A_eff = π · (d_b/2)² = 1.698 × 10⁻⁵ m² (rigid WC penetrator)
 ```
 
-→ Rigid 2.6 g WC penetrator at 501 m/s carries significant overpenetration risk in soft tissue (the explicit motivation for the lower-velocity 4.6 × 22 mm DPAP cartridge of the MP-4.6P Guardian LE LE-variant; see [`../../Weapons-Police/Research Paper - MP-4.6P Guardian LE.md`](../../Weapons-Police/Research%20Paper%20-%20MP-4.6P%20Guardian%20LE.md) §5.2).
+→ Rigid 2.6 g WC penetrator at 501 m/s carries significant overpenetration risk in soft tissue (the explicit motivation for the lower-velocity 4.6 × 22 mm DPAP cartridge of the MP-4.6P Guardian LE LE-variant; see [`../../Weapons-Police/MP-4.6P_Guardian_LE_Research_Paper.md`](../../Weapons-Police/Research%20Paper%20-%20MP-4.6P%20Guardian%20LE.md) §5.2).
 
 ### A.4 Recoil — mass-spring-damper (pistol, no buffer)
 
@@ -395,11 +399,11 @@ FTGas:      1 : 200 000   (low gas exposure in short-recoil pistol)
 FTPrimer:   1 : 100 000
 FTCase:     1 : 250 000
 
-Analytic MRBF = 1 / Σ p_j ≈ 1 / 6.5 × 10⁻⁵ ≈ 15 000 rounds (paper-body §9 spec)
-FTF rate ≈ 1 / 50 000 → matches spec'd < 1:5 000 with ~10× margin
+Analytic MRBF = 1 / Σ p_j ≈ 1 / 6.5 × 10⁻⁵ ≈ 15 000 rounds (per-mode harmonic sum)
+FTF rate ≈ 1 / 50 000 (per-mode FTFire rate in this appendix)
 ```
 
-→ MRBF spec **15 000 rounds** (paper body §9), FTF rate **< 1:5 000** spec'd, **1:50 000 modelled**. Both pass with margin.
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **20 270** / simulated **10 000**; FTF rate **1:68 000**; felt recoil **0.11 ft·lb** — authoritative targets in paper-body §9 and spec §11.2. §23 portfolio MC supersedes the per-mode harmonic sum for specification claims.
 
 ### A.8 Notes on numerical concordance with the simulator
 

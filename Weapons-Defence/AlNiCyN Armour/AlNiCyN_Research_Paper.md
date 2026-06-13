@@ -182,7 +182,24 @@ The AlNiCyN-5000 series at TRL 7-8 represents the near-term production candidate
 
 The AlNiCyN-7000 series warrants continued R&D investment to develop cost reduction strategies for the scandium cost driver. Government partnership with Australian scandium extraction ventures \(Australia has the largest scandium deposits outside China and Russia\) could provide a strategic materials supply chain advantage. Recommended action: 3-year R&D programme with industry partnership.
 
-## 7. Conclusion
+## 7. Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Plate service life | **15 yr** |
+| Spall liner refresh | **7 yr** |
+| Areal density | **28 kg/m²** |
+
+**Table 7.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| AlNiCyN reaction-sintered tile | 10 yr | 15 yr | Micro-crack + moisture ingress |
+| UHMWPE spall liner | 5 yr | 7 yr | Delamination |
+
+## 8. Conclusion
 
 The AlNiCyN aluminium alloy family provides a structured development pathway from near-production-ready \(-5000\) through advanced performance \(-7000\) to theoretical future materials \(-X\). The -5000 series is the most immediately actionable, offering demonstrated performance improvements over existing 7075-T6 at cost points competitive with advanced armour steel. The TRL structure provides clear programme milestones and risk management for the higher series.
 

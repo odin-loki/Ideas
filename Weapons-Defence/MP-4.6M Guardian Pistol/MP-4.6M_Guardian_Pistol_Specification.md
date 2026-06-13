@@ -291,9 +291,10 @@ Date: May 2026
   * Zero retention ±1" at 25 m across 5 000 round wear cycle
 
 ### 11.2 Reliability Metrics
-- Requirements:
-  * MRBF: 15 000 rounds
-  * FTF rate: < 1:5 000
+- Requirements (`weapons_sim_results.md` §23 portfolio lifecycle):
+  * MRBF analytic: 20 270 rounds
+  * MRBF simulated: 10 000 rounds
+  * FTF rate: 1:68 000
   * Environmental: MIL-STD-810H
   * Temperature: -40°C to +60°C
   * Humidity: 0–100%
@@ -342,10 +343,11 @@ Hatcher max-effective range (KE > 80 J personnel-incapacitation threshold): **87
 |---|---|
 | Liner | Stellite 21 |
 | Barrel mass | 0.30 kg |
-| Throat-erosion life (rounds, 26 100 psi) | 302 501 |
+| Throat-erosion life (§10, rounds, 26 100 psi) | 302 501 |
+| Bore life service (§23, accuracy retention) | 75 000 |
 | Sustained-fire bound (rpm, thermal) | 250 |
 
-The simulator's 302 501-round throat-erosion life sits well above the 75 000-round headline figure carried in SECTION 2.1 / SECTION 9.2; that 75 000-round number is retained as the conservative service-life rating for **accuracy retention** (sub-2-MOA at 50 m), not absolute throat-erosion bound. The 250 rpm thermal-bound is non-binding for a single-action semi-automatic pistol — operator cyclic rate is the binding constraint.
+The §10 throat-erosion life (302 501 rounds) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **75 000 rounds** (parts-life / accuracy-retention envelope in `weapon_lifecycle.py`) is the headline service interval carried in SECTION 2.1 / SECTION 9.2 — sub-2-MOA at 50 m, not the absolute throat-erosion bound. The 250 rpm thermal-bound is non-binding for a single-action semi-automatic pistol — operator cyclic rate is the binding constraint.
 
 ### 13.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -368,6 +370,19 @@ The 4.6×30 mm 2.6 g WC-cored projectile is **not directly characterised** in §
 | APES-L police | 22 kg/m² | 5.7×28 SS190 | 2 212 | STOPPED | 3.0 mm |
 
 The 4.6×30 mm Enhanced at 501 m/s delivers less specific kinetic energy than the SS190 at 716 m/s and is bounded above by the SS190's behaviour. **Every soft and hard armour class in §13 stops the Guardian's projectile.** The Guardian is decisively **not** a hard-armour-defeating service pistol; its operational envelope is unprotected personnel and CRISAT-class soft targets, consistent with the architectural framing in earlier sections.
+
+### 13.6 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 0.11 ft·lb |
+| Barrel SF_yield | 3.35 |
+| Bore life service (§23) | 75 000 rounds |
+| MRBF analytic | 20 270 rounds |
+| MRBF simulated | 10 000 rounds |
+| FTF rate | 1:68 000 |
+
+§23 **bore life service** matches the parts-life barrel replace interval in §23.0.1 (75 000 rounds). §10 **throat-erosion life** (302 501 rounds, §13.3) is higher — both are reported with distinct labels.
 
 ---
 
@@ -881,9 +896,9 @@ The 75 000-round accuracy-retention rating in §2.1 / §9.2 is well below the si
 ```
 1 / MRBF_analytic = Σ_j p_j
 ≈ 49.7 × 10⁻⁶
-MRBF_analytic ≈ 20 100 rounds  (vs § 9 / §11 spec of 15 000 rounds → MRBF margin 34 %)
+MRBF_analytic ≈ 20 100 rounds  (per-mode harmonic sum in this appendix)
 
-FTF_rate = 1 : 80 000  → 16× the 1:5 000 MIL-STD specification ✓
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **20 270** / simulated **10 000**; FTF rate **1:68 000** — authoritative spec targets in §11.2.
 ```
 
 The Pistol MRBF profile closely tracks the MP-4.6P Guardian LE profile (same Tier-2 surface-engineering package, same Bernoulli framework) — the principal differences are the single-stack 17-7 PH magazine (slightly better FTFeed than the LE's double-stack), the integrated suppressor (different gas-fouling pattern at the blast face vs the LE's muzzle brake), and the rotating-bolt vs delayed-blowback action (different unlock dynamics that do not materially affect the per-mode reliability budget).

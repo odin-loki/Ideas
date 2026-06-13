@@ -303,7 +303,8 @@ Date: May 2026
 
 ### 10.2 Long-term Service
 - Requirements:
-  * Barrel: 1 500 rounds (Stellite 21 throat erosion limit)
+  * Barrel: 1 500 rounds (§23 bore life service — sub-MOA at 800 m accuracy retention)
+  * Throat-erosion life (§10): 22 753 rounds
   * Springs: 2 000 rounds
   * Stock Check: 500 rounds
   * Suppressor (if fitted): 1 500 rounds (matched to barrel)
@@ -368,10 +369,11 @@ Hatcher max-effective range (KE > 80 J personnel-incapacitation threshold): **> 
 |---|---|
 | Liner | Stellite 21 |
 | Barrel mass | 4.40 kg |
-| Throat-erosion life (rounds, 37 400 psi) | 22 753 |
+| Throat-erosion life (§10, rounds) | 22 753 |
+| Bore life service (§23, sub-MOA at 800 m) | 1 500 |
 | Sustained-fire bound (rpm, thermal) | 131 |
 
-The simulator's 22 753-round throat-erosion life is a step-change above the 1 500-round headline figure carried in SECTION 4.1 / SECTION 10.2; the 1 500-round number is retained as the conservative **accuracy-retention** rating (sub-MOA at 800 m), not the absolute throat-erosion bound. The 131 rpm thermal-bound far exceeds the manually-cycled bolt-action's operational rate-of-fire (sustained ~10 rpm trained operator) — thermal limits are non-binding for this platform under normal HTI engagement profiles.
+The §10 throat-erosion life (**22 753 rounds**) is the Tier-2 Archard wear bound. The §23 **bore life service** rating of **1 500 rounds** (and SECTION 4.1 / SECTION 10.2 headline) is the conservative **accuracy-retention** interval for sub-MOA at 800 m, not the absolute throat-erosion bound. The 131 rpm thermal-bound far exceeds the manually-cycled bolt-action's operational rate-of-fire (sustained ~10 rpm trained operator) — thermal limits are non-binding for this platform under normal HTI engagement profiles.
 
 ### 12.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -407,6 +409,19 @@ The 15.2 × 115 mm APYT round is directly characterised in §13 as `15.2 × 115 
 | APES-L police | 22 kg/m² | 348 | PERFORATED | — |
 
 The MAS-15.2E APYT defeats the heaviest catalogued personal armour (35 kg/m² APES military 16-layer + 12 mm B4C tile) by a 343 m/s margin (781 m/s threat vs 438 m/s V50). The cartridge's intended target set is materiel — light armoured vehicles, sensor arrays, electronic-warfare emitters — not personnel; these V50 numbers exist to confirm that no production personal armour stops the round, not because personnel are the engagement target.
+
+### 12.7 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 39.717 ft·lb |
+| Barrel SF_yield | 2.11 |
+| Bore life service (§23) | 1 500 rounds |
+| MRBF analytic | 35 613 rounds |
+| MRBF simulated | 30 000 rounds |
+| FTF rate | 1:120 000 |
+
+§23 **bore life service** (1 500 rounds) matches §23.0.1 parts-life barrel replace interval. §10 **throat-erosion life** (22 753 rounds, §12.3) is higher — both are reported with distinct labels.
 
 ---
 
@@ -972,10 +987,10 @@ The **FTSabot** and **FTCase** modes are AMR-specific — they do not appear in 
        = 1.00e-5 + 1.25e-5 + 1.00e-5 + 1.67e-5 + 2.00e-5 + 1.25e-5 + 3.33e-5
        = 1.150 × 10⁻⁴
 
-MRBF_analytic = 1 / 1.150 × 10⁻⁴ ≈ 8 696 rounds ✓
+MRBF_analytic = 1 / 1.150 × 10⁻⁴ ≈ 8 696 rounds  (per-mode harmonic sum in this appendix)
 ```
 
-The 8 696-round MRBF is well above the 1 500-round barrel-life service interval (§10.2) — at this rate of fire (sustained ~10 rpm for a trained AMR operator per §12.3), the rifle reaches its Stellite-throat-erosion barrel-change milestone many times before encountering its first cycling stoppage. The dominant residual failure mode is **case separation** (1 : 30 000 — ~29 % of total stoppages), which is the physical floor for the high-chamber-pressure 115 mm brass case at the AMR class.
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **35 613** / simulated **30 000**; FTF rate **1:120 000**; felt recoil **39.717 ft·lb** — authoritative portfolio lifecycle targets. §23 MRBF exceeds the 1 500-round §23 bore life service interval (§10.2).
 
 ---
 

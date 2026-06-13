@@ -4,6 +4,23 @@
 
 **Important scope limit:** §20 models **one-compartment oral PK** for FDA-approved fielded stimulants (caffeine, modafinil, dextroamphetamine) at a standardised 80 kg subject. It does **not** simulate the six novel HSX7 depot compounds (MetaMax-2034, MetaFlow-47, etc.) — those have no published human PK to calibrate against.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **It also documents scope limits** — HSX7 depot PK is not simulated; §20 reference-stimulant oral PK is extracted.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## What is modelled
@@ -47,14 +64,28 @@ Open `weapons_sim_results.md` and scroll to **§20. Combat-drug one-compartment 
 
 ---
 
+
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`Combat Drug`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `Combat Drug` — depot_shelf_cold_chain_mo=36; room_temp_hold_hr=72; autoinjector_shelf_mo=24 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
 |---|---|
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
 | Operator specification | [`Combat_Drug_Specification.md`](Combat_Drug_Specification.md) |
 | Research paper | [`Combat_Drug_Research_Paper.md`](Combat_Drug_Research_Paper.md) |
 | Portfolio results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §20 |
-
----
-
-*Combat-drug simulation coverage — reference-stimulant PK only. Not validated against clinical trial data. The HSX7 depot itself is not simulated.*

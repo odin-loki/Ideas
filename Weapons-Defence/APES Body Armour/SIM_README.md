@@ -2,6 +2,18 @@
 
 **No standalone simulator.** Ballistic-limit and back-face deformation numbers for APES panels are computed inside the portfolio-wide [`../weapons_simulation.py`](../weapons_simulation.py) script and written to [`../weapons_sim_results.md`](../weapons_sim_results.md) **§13**.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py) via [`../sim_common.py`](../sim_common.py)) and prints a **platform-specific verification slice**—headline numbers and table cross-references for this platform only.
+
+Quick start (from this folder):
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results, use `cd .. && python weapons_simulation.py`.
+
 ---
 
 ## What is modelled
@@ -34,12 +46,7 @@ For threats **below** V50, clay-witness back-face deformation is reported via `b
 
 ## Quick start
 
-```bash
-cd ..
-python weapons_simulation.py
-```
-
-Open `weapons_sim_results.md` and scroll to **§13. Body-armour V50 ballistic-limit + back-face deformation**.
+Run [`platform_simulation.py`](platform_simulation.py) from this folder (see **Local verification script** above). For full portfolio output, use `cd .. && python weapons_simulation.py`, then open `weapons_sim_results.md` and scroll to **§13. Body-armour V50 ballistic-limit + back-face deformation**.
 
 ---
 
@@ -54,6 +61,22 @@ Open `weapons_sim_results.md` and scroll to **§13. Body-armour V50 ballistic-li
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`APES Body Armour`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `APES Body Armour` — panel_service_life_yr=12; ceramic_tile_replacement_yr=5; soft_panel_refresh_yr=8 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -61,7 +84,4 @@ Open `weapons_sim_results.md` and scroll to **§13. Body-armour V50 ballistic-li
 | Operator specification | [`APES_Specification.md`](APES_Specification.md) |
 | Research paper | [`APES_Research_Paper.md`](APES_Research_Paper.md) |
 | Portfolio results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §13 |
-
----
-
-*APES simulation coverage — for research and design study use only. Not validated against physical ballistic test data.*
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 |

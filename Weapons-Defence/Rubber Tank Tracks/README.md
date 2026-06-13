@@ -42,8 +42,48 @@ Rubber Tank Tracks is a **complete procurement subfolder**: executive summary, M
 | Road infrastructure damage | 80 % reduction (engineering estimate) |
 | Ice traction vs bare metal | 40 % improvement |
 | 25-year lifecycle cost | $282 235 / tank ($5.64 / km duty cycle) |
+| Rubber pad life (§23) | **8,000 km** |
+| Net noise reduction (§23) | **20.8 dB** |
 
 Source (acoustic): [`../weapons_sim_results.md`](../weapons_sim_results.md) §19.
+
+---
+
+## 🔬 Simulation verification
+
+Portfolio **§19** (track-pad acoustic transmission model) validates the headline acoustic claim. Re-run the local verification slice:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks; headline anchor: **20.8 dB net reduction** vs bare steel at 300 Hz.
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local §19 verification slice |
+| [`SIM_README.md`](SIM_README.md) | Acoustic block methodology, frequency bands |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative §19 tabulated output |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+To regenerate the **full portfolio**:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — verify §19 acoustic claims:
+
+```bash
+python platform_simulation.py
+```
+
+See [`SIM_README.md`](SIM_README.md) for frequency-band methodology.
 
 ---
 

@@ -2,6 +2,23 @@
 
 **No dedicated BPC simulator.** The Biopolymère Caseless (BPC) System has no standalone Python module and no bespoke row in [`../weapons_simulation.py`](../weapons_simulation.py). Ballistic design targets are **conceptually anchored** to the conventional **5.56 × 45 mm NATO** entry in portfolio results **§1**.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. **It also documents scope limits** — protein-casing chemistry and cook-off are not modelled; the 5.56 × 45 mm baseline from §1 anchors ballistic envelope targets.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## What is modelled (indirectly)
@@ -40,14 +57,28 @@ None of these exist in the current codebase.
 
 ---
 
+
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`Caseless Bullets (BPC)`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `Caseless Bullets (BPC)` — protein_case_shelf_mo=24; cook_off_safe_temp_C=93; humidity_storage_max_pct=60 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
 |---|---|
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
 | Operator specification | [`Caseless_Bullets_Specification.md`](Caseless_Bullets_Specification.md) |
 | Research paper | [`Caseless_Bullets_Research_Paper.md`](Caseless_Bullets_Research_Paper.md) |
 | Portfolio results (5.56 baseline) | [`../weapons_sim_results.md`](../weapons_sim_results.md) §1 |
-
----
-
-*Caseless-bullets simulation coverage — conceptual only. No runnable BPC simulator.*

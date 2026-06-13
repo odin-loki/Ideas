@@ -25,6 +25,43 @@ Date: May 2026
 
 ---
 
+## 🔬 Simulation verification
+
+**Dual path:** portfolio **§17** (Kamlet–Jacobs detonation chemistry) + standalone [`cl20_simulation.py`((cl20_simulation.py) (proteination / impact-sensitivity metrics). Re-run both via the local wrapper:
+
+```bash
+python platform_simulation.py
+```
+
+The script runs portfolio §17 first, then delegates to `cl20_simulation.py`. Headline anchors: neat **CL-20 P_CJ 45.3 GPa**, **VOD 9.75 km/s** (§17); proteinated impact-sensitivity extrapolation in the standalone module.
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`((platform_simulation.py) | Dual-path wrapper (§17 + `cl20_simulation.py`) |
+| [`cl20_simulation.py`((cl20_simulation.py) | HBSI / IEDF / PSC stabilisation metrics |
+| [`../weapon_lifecycle.py`((../weapon_lifecycle.py) | §23 service-life / shelf-life model (cold storage **240 mo** @ −18 °C) |
+| [`../weapons_sim_results.md`((../weapons_sim_results.md) | Authoritative §17 detonation table + §23 lifecycle |
+| [`SIM_README.md`((SIM_README.md) | Dual-path methodology, §23 lifecycle, extrapolation caveats |
+
+### §23 Lifecycle (service-life model)
+
+| Metric | Value |
+|---|---|
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — dual-path verification (§17 + `cl20_simulation.py`):
+
+```bash
+python platform_simulation.py
+```
+
+Headline anchors: neat **P_CJ 45.3 GPa**, **VOD 9.75 km/s**; proteinated impact-sensitivity extrapolation in standalone module.
+
+---
+
 ## 🎯 **Project Overview**
 
 This repository contains the complete research foundation for **Proteinated CL-20** - a revolutionary approach to making the world's most powerful explosive (CL-20) safe for practical use through protein-inspired stabilization. The project demonstrates how nature's billion-year evolution of protein structures can solve critical safety challenges in energetic materials.
@@ -103,7 +140,7 @@ Our **Spider Silk CL-20** represents the breakthrough needed to make high-perfor
 
 ## 💥 **Computed detonation chemistry (Kamlet–Jacobs)**
 
-The detonation performance numbers cited throughout this README come from the portfolio simulator (`weapons_simulation.py`) using the Kamlet–Jacobs (1968) empirical correlation, calibrated against published cylinder-test data for the major military explosive classes. Numbers below come from [`../weapons_sim_results.md`](../weapons_sim_results.md) §17 and put the CL-20 advantage in the broader explosive context.
+The detonation performance numbers cited throughout this README come from the portfolio simulator (`weapons_simulation.py`) using the Kamlet–Jacobs (1968) empirical correlation, calibrated against published cylinder-test data for the major military explosive classes. Numbers below come from [`../weapons_sim_results.md`((../weapons_sim_results.md) §17 and put the CL-20 advantage in the broader explosive context.
 
 | Explosive | ρ (g/cm³) | P_CJ (GPa) | VOD (km/s) | Q (kJ/g) | Brisance (TNT=100) | Gurney √(2E) (m/s) |
 |---|---|---|---|---|---|---|
@@ -333,7 +370,7 @@ Proteinated CL-20 at ~41 GPa is still **+12 % over HMX, +25 % over RDX, and +85 
 
 > **ENERGETIC MATERIAL — academic study only. No synthesis route, precursor list, or operational pathway is described or implied.**
 
-This appendix states the Kamlet–Jacobs-style correlations implemented in [`../weapons_simulation.py`](../weapons_simulation.py) and tabulated in [`../weapons_sim_results.md`](../weapons_sim_results.md) §17. **Numerical results** for ε‑CL‑20 below are taken **verbatim** from §17 (simulator output).
+This appendix states the Kamlet–Jacobs-style correlations implemented in [`../weapons_simulation.py`((../weapons_simulation.py) and tabulated in [`../weapons_sim_results.md`((../weapons_sim_results.md) §17. **Numerical results** for ε‑CL‑20 below are taken **verbatim** from §17 (simulator output).
 
 ### A.1 Kamlet–Jacobs detonation pressure and velocity
 
@@ -347,7 +384,7 @@ P_CJ = K · ρ₀² · Q^(1/2) · N · M^(−1/2)
 VOD = A · ( N · M^(−1/2) · Q^(1/2) )^(1/2) · (1 + B · ρ₀)
 ```
 
-**Implementation grouping in `kamlet_jacobs()`** (this is what reproduces [`weapons_sim_results.md`](../weapons_sim_results.md) §17):
+**Implementation grouping in `kamlet_jacobs()`** (this is what reproduces [`weapons_sim_results.md`((../weapons_sim_results.md) §17):
 
 ```
 ϕ = N · √(M · Q_cal)
@@ -359,12 +396,12 @@ P_CJ (GPa) = P_CJ (kbar) / 10
 VOD (km/s) = A · ϕ^(1/2) · (1 + B · ρ₀)     A = 1.01 km/s ,  B = 1.30
 ```
 
-Published papers regroup **N**, **M**, and **Q** into different **prefactor conventions**; exponent orders in the first display line are the **pedagogical Kamlet–Jacobs layout** requested for this appendix. **Only the ϕ-line reproduces the simulator table** when **K**, **A**, and **B** are taken from [`weapons_simulation.py`](../weapons_simulation.py).
+Published papers regroup **N**, **M**, and **Q** into different **prefactor conventions**; exponent orders in the first display line are the **pedagogical Kamlet–Jacobs layout** requested for this appendix. **Only the ϕ-line reproduces the simulator table** when **K**, **A**, and **B** are taken from [`weapons_simulation.py`((../weapons_simulation.py).
 
 - **ρ₀** — unreacted explosive density (g/cm³).
 - **Q_cal** — heat release in cal/g (**Q_cal = 239.006 × Q_kJ/g**).
 
-**Coefficients:** **K = 15.58** (with **P_CJ** returned in **kbar** internally), **A = 1.01 km/s**, **B = 1.30** — from `kamlet_jacobs()` in [`../weapons_simulation.py`](../weapons_simulation.py).
+**Coefficients:** **K = 15.58** (with **P_CJ** returned in **kbar** internally), **A = 1.01 km/s**, **B = 1.30** — from `kamlet_jacobs()` in [`../weapons_simulation.py`((../weapons_simulation.py).
 
 | Symbol | Value (CL‑20) |
 | --- | --- |
@@ -444,7 +481,7 @@ Encapsulation efficiency (illustrative bookkeeping form):
 
 > **ENERGETIC MATERIAL — academic study only. No synthesis route, precursor list, or operational pathway is described or implied.**
 
-Unlike [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) §13, this academic folder **does not** propose **Route A / B / C** licensing tables — **no commercial manufacture or export licence path** is advanced.
+Unlike [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`((../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) §13, this academic folder **does not** propose **Route A / B / C** licensing tables — **no commercial manufacture or export licence path** is advanced.
 
 | IP asset (conceptual) | Scope | Protection posture (if any) |
 | --- | --- | --- |

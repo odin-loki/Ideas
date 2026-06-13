@@ -443,6 +443,25 @@ The cost-per-unit-detonation-pressure metric makes the premium nature of CL-20 (
 
 ---
 
+## 10.5 Portfolio §23 Lifecycle (storage and stabilizer)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Cold storage shelf | **240 mo** @ −18 °C |
+| Room-temp hold | **14 days** max |
+| Stabilizer depletion | **0.5 %/yr** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| CL-20 pressed pellet lot | 180 mo | 240 mo | Stabilizer @ −18 °C |
+| PBX binder batch | 120 mo | 180 mo | HMX / binder phase separation |
+
+---
+
 ## 11. Technology Readiness and Safety Framework
 
 > **ACADEMIC STUDY — there is no commercial procurement endpoint for this work.** This section replaces what would normally be a "Procurement Framework" in the other Weapons-Defence portfolio documents. The proteinated CL-20 concept is a **materials-science research programme**, not a fielded munition pathway: there is no fielded warhead, no qualified explosive train, no production line, and no procurement office. The framework below documents what would need to be true at each technology readiness level for the proteinated concept to advance from a structural-chemistry argument toward a defensible laboratory demonstration. **None of the TRL transitions below are claimed at the time of writing of this paper.**
@@ -505,7 +524,7 @@ TRL definitions follow the standard ISO 16290 / NASA / TRL scale, adapted to the
 
 ### 12.2 Why conventional IP does not apply
 
-> **ACADEMIC STUDY caveat.** Three structural reasons explain why this paper produces narrower IP than the equivalent sections of (e.g.) the [`../MP-4.6M Guardian Pistol/MP-4.6M_Guardian_Pistol_Specification.md`](../MP-4.6M%20Guardian%20Pistol/MP-4.6M_Guardian_Pistol_Specification.md) or [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) specifications:
+> **ACADEMIC STUDY caveat.** Three structural reasons explain why this paper produces narrower IP than the equivalent sections of (e.g.) the [`../MP-4.6M Guardian Pistol/MP-4.6M_Guardian_Pistol_Specification.md`](../MP-4.6M%20Guardian%20Pistol/MP-4.6M_Guardian_Pistol_Specification.md) or [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) specifications:
 >
 > 1. **No enabling disclosure.** Patent claims on a chemical material require the specification to enable one of ordinary skill to make and use the material. The paper deliberately does not describe the synthesis route at procurement-grade specificity; precursor identities are generalised to amino-acid class; no scale-up route past laboratory bench is offered. This is sufficient for academic publication and conceptual contribution but **not sufficient for patent claims**.
 > 2. **No characterised composition of matter.** Composition-of-matter claims require the material to be characterised by elemental composition, polymorph, crystalline structure, and physical properties to a level that allows infringement detection. The proteinated formulation is described conceptually; its specific elemental composition and polymorphic structure at the proteinated interface are not characterised.

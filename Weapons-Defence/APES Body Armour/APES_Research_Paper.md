@@ -135,7 +135,27 @@ Full user evaluation
 
 ## 7. Maintenance Schedule
 
-Daily maintenance includes visual inspection of ceramic plates for microcracking \(indicating previous impact exposure\), cleaning of ventilation channels, and verification of quick-release mechanism function. Weekly maintenance adds deep cleaning of the moisture-wicking base layer and seam inspection. Monthly service includes complete disassembly and inspection, moisture-wicking layer replacement, quick-release calibration, and emergency removal system testing. Ceramic plates are replaced every 5 years or immediately following ballistic impact \(even if no visible damage occurs, sub-surface cracking degrades subsequent impact performance\). Kevlar/UHMWPE layers are replaced every 7 years.
+Daily maintenance includes visual inspection of ceramic plates for microcracking \(indicating previous impact exposure\), cleaning of ventilation channels, and verification of quick-release mechanism function. Weekly maintenance adds deep cleaning of the moisture-wicking base layer and seam inspection. Monthly service includes complete disassembly and inspection, moisture-wicking layer replacement, quick-release calibration, and emergency removal system testing.
+
+Portfolio §23 lifecycle intervals \(`weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`\) govern scheduled replacement:
+
+| Headline metric | Value |
+|---|---|
+| Panel service life | **12 yr** |
+| Ceramic tile replacement | **5 yr** |
+| Soft panel refresh | **8 yr** |
+| Strike-face DLC recoat | **3 yr** |
+
+**Table 7.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| B4C dragon-scale tile array | 4 yr | 5 yr | Tile fracture + edge spall |
+| 16-layer Kevlar/UHMWPE soft stack | 6 yr | 8 yr | UV + flex fatigue |
+| Non-Newtonian shear-thickening pad | 3 yr | 5 yr | Polymer chain scission |
+| Titanium strike-point inserts | 8 yr | 12 yr | Peening + DLC wear |
+
+Ceramic tiles are replaced every 5 years or immediately following ballistic impact \(even if no visible damage occurs, sub-surface cracking degrades subsequent impact performance\). The 16-layer Kevlar/UHMWPE soft stack is refreshed every 8 years.
 
 ## 8. Computed V50 Ballistic Limit \(Tier-2 Simulator §13\)
 
@@ -168,7 +188,7 @@ The Advanced Protective Equipment System provides comprehensive multi-zone prote
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the APES V50, BFD, obliquity, and thermal-management numbers cited in §8. Calibration constants are taken from `weapons_sim_results.md` §13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the APES V50, BFD, obliquity, and thermal-management numbers cited in §8. Calibration constants are taken from `weapons_sim_results.md` §13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 V50 ballistic limit — Lambert–Jonas / Recht–Ipson
 

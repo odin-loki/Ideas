@@ -218,6 +218,23 @@ Hardness Gain:    +180 HB from solution treated condition
 - **Behind-armor debris**: Fragment collection and analysis
 - **Spall testing**: High-speed photography documentation
 
+## Portfolio §23 Lifecycle (service intervals)
+
+Headline intervals from [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.1 / [`../weapon_lifecycle_configs.py`](../weapon_lifecycle_configs.py):
+
+| Headline metric | Value |
+|---|---|
+| Plate service life | **15 yr** |
+| Spall liner refresh | **7 yr** |
+| Areal density | **28 kg/m²** |
+
+#### Component service thresholds (§23.1.1)
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| AlNiCyN reaction-sintered tile | 10 yr | 15 yr | Micro-crack + moisture ingress |
+| UHMWPE spall liner | 5 yr | 7 yr | Delamination |
+
 ## Applications
 
 ### Military Ground Vehicles

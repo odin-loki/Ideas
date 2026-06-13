@@ -115,6 +115,17 @@ Mode is selected at loading by the choice of propellant cup:
 
 The breech accepts both cups; a colour-coded ring on the cup is visible after chambering as a positive confirmation of mode.
 
+## 6A. Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Parameter | Value |
+|---|---|
+| MRBF analytic | 11 041 rounds |
+| MRBF simulated | 15 000 rounds |
+| FTF rate | 1:25 000 |
+| Felt recoil | 227.281 ft·lb |
+| Bore life service | 8 000 rounds |
+| Throat-erosion life (§10) | 21 122 rounds |
+
 ## 7. Safety Systems
 
 The three-point mechanical safety system prevents firing under unsafe conditions. Out-of-battery detection prevents firing before the breech is fully locked. The firing-pin block and drop safety provide additional passive protection. All safety functions are fully mechanical with visual and tactile indicators. The counter-balanced breech block with spring-assisted opening and self-cleaning extractor provide positive case extraction.
@@ -157,7 +168,7 @@ The current revision imports the following Tier-2 simulation outputs from [`weap
 
 2. **Max effective range — Hatcher KE > 80 J threshold (§9).** Forward-integration of the G1 trajectory with KE > 80 J personnel-incapacitation floor returns **> 6 000 m sim-cap** for the 1.40 kg projectile. Operational max range is bounded by accuracy at 1 500 m (direct fire) or 2 500 m (indirect fire), not by terminal KE — the §9 envelope is a diagnostic only. **Supersonic range is 0 m** because the 187 m/s muzzle velocity is below Mach 1 from launch.
 
-3. **Barrel life and sustained-fire ceiling — wear-and-thermal model (§10).** The 1.80 kg chrome-lined barrel at 111 MPa peak pressure returns a **21 122-round life**, well in excess of any operational firing history. The **57 rpm thermal-sustained ceiling** is much higher than the 6 – 8 rpm operational rate set by manual muzzle reload, so barrel thermal capacity is not the binding constraint. The quick-change-tube feature multiplies the available rounds per fielded mount by ~1.5×.
+3. **Barrel life and sustained-fire ceiling — wear-and-thermal model (§10).** The 1.80 kg chrome-lined barrel at 111 MPa peak pressure returns a **21 122-round** §10 throat-erosion life, well in excess of any operational firing history. §23 **bore life service** is **8 000 rounds** (parts-life tube replace interval). The **57 rpm thermal-sustained ceiling** is much higher than the 6 – 8 rpm operational rate set by manual muzzle reload, so barrel thermal capacity is not the binding constraint.
 
 4. **Peak recoil force — sprung-stock + muzzle-brake model (§11).** At 50 mm stock-equivalent travel with 40 % muzzle-brake efficiency, the §11 parabolic-energy-dissipation model returns **53 632 N (12 058 lbf)** peak mount-transmitted force from the 4 965.9 J free recoil into the 7.20 kg mount. This is the value the tripod / baseplate / shoulder-anchor must absorb per shot — the hydraulic dashpot in §4.1 of this paper is sized against this peak across the operating temperature band.
 
@@ -171,7 +182,8 @@ The current revision imports the following Tier-2 simulation outputs from [`weap
 |---|---|
 | Muzzle SPL 162.6 dB / 155.6 dB at ear / 127.6 dB double + 102.6 dB TACS | `weapons_sim_results.md` §6 |
 | Max effective range > 6 000 m (envelope cap), supersonic range 0 m | `weapons_sim_results.md` §9 |
-| Barrel life 21 122 rounds, thermal-sustained 57 rpm | `weapons_sim_results.md` §10 |
+| Barrel life 21 122 rounds (§10 throat erosion), bore life service 8 000 rounds (§23), thermal-sustained 57 rpm | `weapons_sim_results.md` §10, §23 |
+| MRBF 11 041 analytic / 15 000 simulated, FTF 1:25 000, felt recoil 227.281 ft·lb | `weapons_sim_results.md` §23 |
 | Peak mount-transmitted recoil force 53 632 N | `weapons_sim_results.md` §11 |
 | Mortar HE A_L 33 m², r_eff 3.3 m, ~1 700 fragments at 1 666 m/s | `weapons_sim_results.md` §14 |
 | HEAT shaped-charge RHA penetration 43 mm (CL-20) | `weapons_sim_results.md` §15 |
@@ -184,7 +196,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the EDPS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the EDPS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 900 mm tube at 111 MPa
 

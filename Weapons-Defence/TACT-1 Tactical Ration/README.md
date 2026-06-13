@@ -39,6 +39,7 @@
 | Carry-weight saving (7-day op) | **5.6 – 14.7 kg** versus standard MRE |
 | Flavour variants | **40** across 7 families |
 | Prep required | **None** — no water, no heat |
+| Shelf life @ 25 °C (§23) | **36 mo** |
 
 ---
 
@@ -65,6 +66,40 @@ Shelf life is propagated from the 36-month-at-25 °C baseline using a `Q10 = 2` 
 | **60 °C** | Extreme hot-cabin / closed compartment | **3.2 months** |
 
 The 4 °C figure (~ 13 years) bounds the strategic-stockpile envelope; the 35 °C and 49 °C figures govern the rotation interval for forward-deployed stocks at unconditioned tropical depots and desert vehicle cabins. Even the 60 °C extreme-cabin 3.2-month figure dwarfs any plausible 7-day operational consumption window — the shelf-life model is most useful as a **logistics-cycle planning input**, not as a per-issue safety constraint. The model relies on the saturated- and monounsaturated-dominant fat phase (MCT C8 / macadamia / coconut, with no polyunsaturated lipids); a future revision that introduces polyunsaturated oils would not survive this Q10 envelope.
+
+---
+
+## 🔬 Simulation verification
+
+Portfolio **§22** (Arrhenius Q10 = 2 lipid-oxidation shelf-life model) validates ration storage claims; **§23** service-life intervals trace to [`../weapon_lifecycle.py`](../weapon_lifecycle.py). Re-run the local verification slice:
+
+```bash
+python platform_simulation.py
+```
+
+The script prints **PASS/FAIL** checks; headline anchor: **36.0 months shelf life @ 25 °C** (3-year baseline).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local §22 verification slice |
+| [`SIM_README.md`](SIM_README.md) | §22 methodology, temperature table; §23 lifecycle |
+| [`../weapon_lifecycle.py`](../weapon_lifecycle.py) | §23 service-life intervals (36 mo @ 25 °C baseline) |
+| [`../weapons_sim_results.md`](../weapons_sim_results.md) | Authoritative §22 tabulated output |
+| [`../sim_common.py`](../sim_common.py) | Shared runner invoked by `platform_simulation.py` |
+
+**Subfolder simulators:**
+
+| Subfolder | Simulator |
+|---|---|
+| [`PODS- Edible High Energy Protein/`](PODS-%20Edible%20High%20Energy%20Protein/) | Standalone [`pods_simulation.py`](PODS-%20Edible%20High%20Energy%20Protein/pods_simulation.py) — synthetic lipid energy density |
+| [`ASNP Sports Nutrition/`](ASNP%20Sports%20Nutrition/) | Scope-limited formulation numbers; see [`ASNP Sports Nutrition/README.md`](ASNP%20Sports%20Nutrition/README.md) |
+
+To regenerate the **full portfolio**:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
 
 ---
 

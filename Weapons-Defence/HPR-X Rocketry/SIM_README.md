@@ -2,6 +2,23 @@
 
 **Portfolio simulator §16** plus **in-folder Tier-1 RASAero / RK45 trajectory pipeline** documented in the research paper. Two simulation tiers serve different airframe scales.
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio physics engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder — Tier-2 HPR-X V1 / V2 / V3 trajectory rows from portfolio §16.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio output, from this folder:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+
 ---
 
 ## Tier-2 — `weapons_simulation.py` §16
@@ -49,6 +66,22 @@ Tier-1 and Tier-2 cross-check to within ~3 % on un-ballasted reference configura
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`HPR-X Rocketry`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `HPR-X Rocketry` — motor_case_life_flights=50; nozzle_insert_life_flights=30; avionics_battery_cycles=200 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -57,7 +90,3 @@ Tier-1 and Tier-2 cross-check to within ~3 % on un-ballasted reference configura
 | Operator spec | [`HPR-X Series Spec.md`](HPR-X%20Series%20Spec.md) |
 | Research paper (Tier-1 methodology) | [`Paper19_HPR-X_Guided_Rocketry.md`](Paper19_HPR-X_Guided_Rocketry.md) |
 | Portfolio results §16 | [`../weapons_sim_results.md`](../weapons_sim_results.md) §16 |
-
----
-
-*HPR-X simulation coverage — 2D point-mass trajectory only. Not validated against flight test.*

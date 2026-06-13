@@ -100,7 +100,8 @@ Performance is sufficient against soft body armour and the CRISAT target at typi
 | Material | Chrome-lined 4150 steel, Stellite 21 lining |
 | Length | 266.7 mm |
 | Rifling | 6-groove polygonal hybrid, 1:8 RH |
-| Barrel life | 75 000 rounds |
+| Barrel life (§23 service) | 75 000 rounds |
+| Throat-erosion life (§10) | 302 501 rounds |
 | Surface treatment | Nitride coating |
 | Quick-change | Three-lug, tool-less |
 
@@ -160,13 +161,17 @@ The 40-round magazine in 7075-T6 aluminium with hard anodising provides 40-round
 
 ## 9. Mechanical Round Counter
 
-The three-digit mechanical round counter provides direct-drive round counting independent of electronic power. The anti-backlash gearing and hardened steel components provide accurate tracking through the weapon's 75 000-round barrel life. Night-visible numbers and burst count indicators support maintenance scheduling in field conditions.
+The three-digit mechanical round counter provides direct-drive round counting independent of electronic power. The anti-backlash gearing and hardened steel components provide accurate tracking through the weapon's 75 000-round barrel service life (§23).
 
 ## 10. Reliability and Environmental Performance
 
 | Parameter | Specification |
 |---|---|
-| MRBF | 20 000 rounds |
+| MRBF analytic (§23) | 19 996 rounds |
+| MRBF simulated (§23) | 15 000 rounds |
+| FTF rate (§23) | 1:75 000 |
+| Felt recoil (§23) | 0.125 ft·lb |
+| Bore life service (§23) | 75 000 rounds |
 | Parts Life | 50 000 rounds minimum |
 | Temperature Range | -40°C to +60°C |
 | Submersion | 20 m for 1 hour |
@@ -204,6 +209,7 @@ This v2.0 paper extends the v1.0 simulator-derived numerical envelope from the T
 | **Wind drift** | **§8** | Didion / Bagnold full-value crosswind correction, 4.47 m/s (10 mph) |
 | **Hatcher max-effective range** | **§9** | KE > 80 J personnel-incapacitation threshold + supersonic-range cutoff |
 | **Barrel life** | **§10** | Calibrated bore-wear model anchored to M4 / M14 / M2HB / GAU-8 / M256; thermal-bound rpm from barrel mass × specific heat (quick-change barrel treated as 1.5×) |
+| **Portfolio lifecycle** | **§23** | Bore life service (75 000 rd), MRBF MC (19 996 analytic / 15 000 simulated), felt recoil (0.125 ft·lb), FTF (1:75 000) |
 | **Peak shoulder force** | **§11** | Parabolic-energy-dissipation over `stock_travel_mm` with muzzle-brake impulse-redirection efficiency |
 | **Body-armour V50** | **§13** | Lambert-Jonas / Recht-Ipson V50 with composite-factor calibration; clay-witness BFD per NIJ 0101.06 |
 
@@ -217,7 +223,7 @@ The Hatcher 80 J KE-threshold criterion (`weapons_sim_results.md` §9) gives 878
 
 ### 12A.3 Barrel-life methodology
 
-The bore-wear model (`weapons_sim_results.md` §10) reports 302 501 rounds throat-erosion life for the Defender's 0.45 kg Stellite-21-lined barrel at 26 100 psi peak chamber pressure. The 75 000-round headline rating (carried in the spec sheet) is retained as the conservative accuracy-retention envelope rather than the absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 850 rpm cyclic rate, so sustained burst-mode firing must respect the thermal duty cycle — a constraint already captured in the spec'd 400-round MIL-STD-810H sustained-fire envelope.
+The bore-wear model (`weapons_sim_results.md` §10) reports **302 501 rounds** throat-erosion life for the Defender's 0.45 kg Stellite-21-lined barrel at 26 100 psi peak chamber pressure. The §23 **bore life service** rating of **75 000 rounds** is retained as the conservative accuracy-retention envelope, not the absolute throat-erosion bound. The 250 rpm thermal-bound is below the spec'd 850 rpm cyclic rate, so sustained burst-mode firing must respect the thermal duty cycle — a constraint already captured in the spec'd 400-round MIL-STD-810H sustained-fire envelope.
 
 ### 12A.4 Recoil-force methodology
 
@@ -233,7 +239,7 @@ The MP-4.6M Defender PDW, when re-derived against the portfolio ballistics simul
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Defender PDW performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A. The Defender is the PDW variant of the MP-4.6M family; the simulator catalogues the PDW under `4.6x30mm_PDW` and the pistol under `4.6x30mm` (see Note 1 in §A.7 on which set of numbers applies).
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Defender PDW performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A. The Defender is the PDW variant of the MP-4.6M family; the simulator catalogues the PDW under `4.6x30mm_PDW` and the pistol under `4.6x30mm` (see Note 1 in §A.7 on which set of numbers applies).
 
 ### A.1 Interior ballistics — Noble-Abel for 4.6 × 30 mm Enhanced, 266.7 mm barrel
 
@@ -352,7 +358,7 @@ J_bolt_corrected = J_bolt · k_1D→3D    (k ≈ 1.40, MP-4.6P calibration)
 
 ### A.6 Reliability — Bernoulli Monte Carlo (seven-mode framework)
 
-The same seven-mode Bernoulli MC framework as the MP-4.6P Guardian LE Appendix A.7 (`../../Weapons-Police/MP-4.6P Guardian LE.md`):
+The same seven-mode Bernoulli MC framework as the MP-4.6P Guardian LE Appendix A.7 (`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`):
 
 ```
 For each round i = 1 … N (N = 500 000):
@@ -372,10 +378,10 @@ FTPrimer:   1 : 150 000   (primer depth QC)
 FTCase:     1 : 250 000   (case separation, low chamber pressure)
 
 Analytic MRBF:
-1 / MRBF_analytic = Σ_j p_j ≈ 5 × 10⁻⁵ → MRBF ≈ 20 000 rounds (spec §10)
+1 / MRBF_analytic = Σ_j p_j ≈ 5 × 10⁻⁵ → MRBF ≈ 20 000 rounds (per-mode harmonic sum)
 ```
 
-→ MRBF spec **20 000 rounds** (paper body §10). Headline figure consistent with the Bernoulli-MC framework calibration and the 4.6 × 30 mm small-arms low-pressure low-failure-rate regime.
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **19 996** / simulated **15 000**; FTF rate **1:75 000**; felt recoil **0.125 ft·lb**; bore life service **75 000 rounds** — authoritative targets in paper-body §10 and spec §9.1.
 
 ### A.7 Notes on numerical concordance with the simulator
 

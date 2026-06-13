@@ -4,6 +4,23 @@
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder (track-pad noise §19).
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
 ## What is modelled
 
 | Output | Method |
@@ -53,6 +70,22 @@ Open `weapons_sim_results.md` and scroll to **§19. Tank-track pad noise reducti
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`Rubber Tank Tracks`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | `Rubber Tank Tracks` — rubber_pad_life_km=8000; road_wheel_bearing_km=12000; net_noise_reduction_dB=20.8 |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -61,7 +94,3 @@ Open `weapons_sim_results.md` and scroll to **§19. Tank-track pad noise reducti
 | Research paper | [`Paper14_Military_Track_Pad.md`](Paper14_Military_Track_Pad.md) |
 | TDP | [`MIL_SPEC_TRACK_PAD_TDP.md`](MIL_SPEC_TRACK_PAD_TDP.md) |
 | Portfolio results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §19 |
-
----
-
-*Track-pad simulation coverage — acoustic transmissibility block only. Not validated against field SPL measurement on operational vehicles.*

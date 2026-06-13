@@ -16,6 +16,7 @@ The BSG-10 Goliath is a **complete platform subfolder**: operator specification,
 2. [`BSG10_Goliath_Full_Specification.md`](BSG10_Goliath_Full_Specification.md) — product and engineering spec (Parts I–V, simulation results embedded).
 3. [`BSG10_Research_Paper.md`](BSG10_Research_Paper.md) — formal design-and-validation narrative.
 4. [`bsg10_sim_package/`](bsg10_sim_package/) — re-run modules and regenerate consolidated reports.
+5. **Verify claims** — see **🔬 Simulation verification** below.
 
 ---
 
@@ -58,6 +59,25 @@ All values below come from [`bsg10_sim_package/bsg10_sim/README.md`](bsg10_sim_p
 | Peak shoulder force | **~490 N** (reference: ~1,800 N for 12-gauge field load) |
 | Bolt lug fatigue safety factor | **4.3×** (infinite fatigue life in model) |
 | Barrel life | **~19,000 rounds** (Melonite-coated, modelled erosion) |
+
+---
+
+## 🔬 Simulation verification
+
+BSG-10 does **not** use the portfolio [`../weapons_simulation.py`](../weapons_simulation.py). All headline numbers trace to the standalone **`bsg10_sim`** package in this folder.
+
+```bash
+cd bsg10_sim_package
+python run_all.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`bsg10_sim_package/run_all.py`](bsg10_sim_package/run_all.py) | Runs modules A–F (ballistics, action, recoil, geometry, magazine, lifecycle) |
+| [`bsg10_sim_package/Software readme.md`](bsg10_sim_package/Software%20readme.md) | Validated headline table + CLI flags |
+| [`bsg10_sim_package/bsg10_sim/reports/generate.py`](bsg10_sim_package/bsg10_sim/reports/generate.py) | Consolidated text report in `bsg10_sim/outputs/` |
+
+Re-run after editing [`bsg10_sim_package/bsg10_sim/config.py`](bsg10_sim_package/bsg10_sim/config.py) and update the spec/paper to match.
 
 ---
 

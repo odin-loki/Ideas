@@ -19,7 +19,7 @@ Two pieces of infrastructure make this work:
 
 The result reads like a small-team defence-systems portfolio that has done the unglamorous work of consolidating its parts catalogue.
 
-**Folder convention (2026 reorganization).** Every platform lives in its own subfolder with hub `README.md`, operator specification, research paper (where applicable), and simulation documentation (`SIM_README.md` for portfolio-sim platforms; standalone `*_sim_package/` or `*_sim.py` for bespoke physics). Root retains only portfolio infrastructure plus this index. Relocated papers are indexed in [`Research Papers/README.md`](Research%20Papers/README.md).
+**Folder convention (2026 reorganization).** Every platform lives in its own subfolder with hub `README.md`, operator specification, research paper (where applicable), simulation documentation (`SIM_README.md`), and a local **`platform_simulation.py`** that verifies spec claims via the shared [`sim_common.py`](sim_common.py) runner (which calls [`weapons_simulation.py`](weapons_simulation.py)). Standalone packages (`bsg10_sim_package/`, `OAM-VEST_Simulation_Package/`, `taipan1_sim.py`, `cl20_simulation.py`, `pods_simulation.py`) cover platforms whose physics diverges from the portfolio engine. Root retains only portfolio infrastructure plus this index.
 
 ---
 
@@ -27,12 +27,18 @@ The result reads like a small-team defence-systems portfolio that has done the u
 
 | File | Role |
 |---|---|
+| [`sim_common.py`](sim_common.py) | Per-platform verification runner. Each subfolder's `platform_simulation.py` calls `main(<platform_id>)` here to run the portfolio engine once and print a PASS/FAIL claim slice for that platform only. |
+| [`weapon_lifecycle.py`](weapon_lifecycle.py) | **§23** portfolio lifecycle — seven-phase firearm physics (recoil, structural SF, Archard bore life, parts-life, reliability MC) plus per-platform armour / sustainment / systems models. Unique config per platform in [`weapon_lifecycle_configs.py`](weapon_lifecycle_configs.py). |
+| [`weapon_lifecycle.py`](weapon_lifecycle.py) | Backward-compatible shim — re-exports MP-4.6 subset from `weapon_lifecycle`. |
+| [`update_lifecycle_docs.py`](update_lifecycle_docs.py) | Batch-sync §23 lifecycle headline rows into per-platform `README.md` / `SIM_README.md`. |
 | [`weapons_simulation.py`](weapons_simulation.py) | The simulator. **Tier-1**: internal / external / terminal ballistics, recoil, suppressor attenuation (calibrated against M80 7.62 NATO, M2 .50 BMG AP, 14.5 × 114 B-32 AP, M829-class DU long-rod, and 30 mm GAU-8 data points). **Tier-2**: muzzle SPL + hearing-protection stack, wind drift, zeroed bullet-drop tables, max effective range, barrel life + sustained-fire thermal bound, peak recoil force, obliquity penetration, body-armour V50 + BFD, HE-frag Gurney / Mott / Carlton lethal area, HEAT shaped-charge penetration, HPR-X rocket trajectory, Kamlet–Jacobs detonation chemistry, TACS cancellation depth, track-pad vibration transmission, combat-drug PK, injectable-nutrition osmolality, ration shelf-life. **22 tables in the results file.** |
-| [`weapons_sim_results.md`](weapons_sim_results.md) | Human-readable simulator output (22 tables, ~23 kB). Re-generated whenever cartridge geometry, barrel length, armour layup, warhead loadout, rocket stage, drug dose, or formulation changes. **Cite this file in every spec sheet and paper.** |
+| [`weapons_sim_results.md`](weapons_sim_results.md) | Human-readable simulator output (23 tables, ~23 kB). Re-generated whenever cartridge geometry, barrel length, armour layup, warhead loadout, rocket stage, drug dose, or formulation changes. **Cite this file in every spec sheet and paper.** |
 | [`weapons_sim_results.json`](weapons_sim_results.json) | Machine-readable simulator output (~90 kB), for downstream tooling. |
 | [`Common Architecture and Components.md`](Common%20Architecture%20and%20Components.md) | The parts-commonality matrix. Shared cartridges, shared bolt-face geometry, shared trigger packs, shared barrel-liner alloy, shared propellant chemistry, shared optic rail, shared body-armour materials. |
 
 If you change a number in a spec sheet that doesn't trace back to `weapons_sim_results.md`, you have introduced a discrepancy. Re-run the simulator and update the spec instead.
+
+**Per-platform verification.** Every portfolio-backed subfolder includes `platform_simulation.py`. From that folder, `python platform_simulation.py` re-runs the physics engine and prints `[PASS]` / `[FAIL]` checks for headline claims. See each platform's **🔬 Simulation verification** section in its README.
 
 ---
 
@@ -42,41 +48,41 @@ If you change a number in a spec sheet that doesn't trace back to `weapons_sim_r
 
 | System | Cartridge | Platform folder |
 |---|---|---|
-| **MP-4.6M Guardian Pistol** | 4.6 × 30 mm Enhanced | [`MP-4.6M Guardian Pistol/`](MP-4.6M%20Guardian%20Pistol/) — [`README.md`](MP-4.6M%20Guardian%20Pistol/README.md), spec, paper, [`SIM_README.md`](MP-4.6M%20Guardian%20Pistol/SIM_README.md) |
-| **MP-4.6M Defender PDW** | 4.6 × 30 mm Enhanced *(same loaded round; longer barrel → `4.6x30mm_PDW` sim key)* | [`MP-4.6M Defender PDW/`](MP-4.6M%20Defender%20PDW/) — [`README.md`](MP-4.6M%20Defender%20PDW/README.md), spec, paper, [`SIM_README.md`](MP-4.6M%20Defender%20PDW/SIM_README.md) |
-| **MP-6.8 Mark II Rifle** | 6.8 × 51 mm | [`MP-6.8 Mark II Rifle/`](MP-6.8%20Mark%20II%20Rifle/) — [`README.md`](MP-6.8%20Mark%20II%20Rifle/README.md), spec, paper, [`SIM_README.md`](MP-6.8%20Mark%20II%20Rifle/SIM_README.md) |
-| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | [`MAS-15.2E Anti-Materiel Sniper/`](MAS-15.2E%20Anti-Materiel%20Sniper/) — [`README.md`](MAS-15.2E%20Anti-Materiel%20Sniper/README.md), spec, paper, [`SIM_README.md`](MAS-15.2E%20Anti-Materiel%20Sniper/SIM_README.md) |
+| **MP-4.6M Guardian Pistol** | 4.6 × 30 mm Enhanced | [`MP-4.6M Guardian Pistol/`](MP-4.6M%20Guardian%20Pistol/) — README, spec, paper, [`SIM_README.md`](MP-4.6M%20Guardian%20Pistol/SIM_README.md), [`platform_simulation.py`](MP-4.6M%20Guardian%20Pistol/platform_simulation.py) |
+| **MP-4.6M Defender PDW** | 4.6 × 30 mm Enhanced *(same loaded round; longer barrel → `4.6x30mm_PDW` sim key)* | [`MP-4.6M Defender PDW/`](MP-4.6M%20Defender%20PDW/) — README, spec, paper, SIM_README, `platform_simulation.py` |
+| **MP-6.8 Mark II Rifle** | 6.8 × 51 mm | [`MP-6.8 Mark II Rifle/`](MP-6.8%20Mark%20II%20Rifle/) — README, spec, paper, SIM_README, `platform_simulation.py` |
+| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | [`MAS-15.2E Anti-Materiel Sniper/`](MAS-15.2E%20Anti-Materiel%20Sniper/) — README, spec, paper, SIM_README, `platform_simulation.py` |
 
 ### Heavy weapons — platform subfolders (Tier-C portfolio sim)
 
 | System | Cartridge | Subfolder |
 |---|---|---|
-| **57 mm Autocannon** | 57 × 347 mm | [`57mm Autocannon/`](57mm%20Autocannon/) — [`README`](57mm%20Autocannon/README.md), spec, paper, [`SIM_README`](57mm%20Autocannon/SIM_README.md); sim key `57x347mm` |
-| **57 mm Underbarrel Grenade** | 57 mm LV grenade *(same casing geometry as the autocannon, low-velocity reload)* | [`57mm Underbarrel Grenade/`](57mm%20Underbarrel%20Grenade/) — sim key `57mm_LV_grenade` |
-| **57 mm Mortar / RPG dual-purpose** | 57 mm mortar | [`57mm Mortar RPG/`](57mm%20Mortar%20RPG/) — sim key `57mm_mortar` |
-| **140 mm Tank KE Round** | 140 mm KE | [`140mm Tank KE Round/`](140mm%20Tank%20KE%20Round/) — sim key `140mm_KE` |
+| **57 mm Autocannon** | 57 × 347 mm | [`57mm Autocannon/`](57mm%20Autocannon/) — README, spec, paper, [`SIM_README`](57mm%20Autocannon/SIM_README.md), [`platform_simulation.py`](57mm%20Autocannon/platform_simulation.py); sim key `57x347mm` |
+| **57 mm Underbarrel Grenade** | 57 mm LV grenade *(same casing geometry as the autocannon, low-velocity reload)* | [`57mm Underbarrel Grenade/`](57mm%20Underbarrel%20Grenade/) — README, spec, paper, SIM_README, `platform_simulation.py`; sim key `57mm_LV_grenade` |
+| **57 mm Mortar / RPG dual-purpose** | 57 mm mortar | [`57mm Mortar RPG/`](57mm%20Mortar%20RPG/) — README, spec, paper, SIM_README, `platform_simulation.py`; sim key `57mm_mortar` |
+| **140 mm Tank KE Round** | 140 mm KE | [`140mm Tank KE Round/`](140mm%20Tank%20KE%20Round/) — README, spec, paper, SIM_README, `platform_simulation.py`; sim key `140mm_KE` |
 
 ### Protective equipment, sustainment, and systems — platform subfolders
 
 | System | Platform folder |
 |---|---|
-| **APES Body Armour** *(military)* | [`APES Body Armour/`](APES%20Body%20Armour/) — spec, paper, [`SIM_README.md`](APES%20Body%20Armour/SIM_README.md) (§13 V50/BFD) |
+| **APES Body Armour** *(military)* | [`APES Body Armour/`](APES%20Body%20Armour/) — README, spec, paper, [`SIM_README.md`](APES%20Body%20Armour/SIM_README.md), `platform_simulation.py` (§13 V50/BFD) |
 | **APES-L Mark I** *(police variant; cross-folder)* | [`../Weapons-Police/`](../Weapons-Police/) |
-| **NACS / NEXUS Adaptive Combat System** | [`NACS CBRN/`](NACS%20CBRN/) — spec, paper, SIM_README (prose numbers) |
-| **AlNiCyN three-tier aluminium armour** | [`AlNiCyN Armour/`](AlNiCyN%20Armour/) — spec, paper, SIM_README |
-| **Hearing protection** | [`Hearing Protection/`](Hearing%20Protection/) — spec, paper, SIM_README (§6 SPL stack) |
-| **Military command doctrine** | [`Military Command Doctrine/`](Military%20Command%20Doctrine/) — spec, paper; no sim |
-| **ADF Tactical Field Kit** *(TRP-2026-ADF-FK-001)* | [`ADF Tactical Field Kit/`](ADF%20Tactical%20Field%20Kit/) — integrated 72 h sustainment; ~4.3 kg saving vs IRP; links TACT-1 / ASNP / PODS / Hemp Harmony |
+| **NACS / NEXUS Adaptive Combat System** | [`NACS CBRN/`](NACS%20CBRN/) — README, spec, paper, SIM_README, `platform_simulation.py` |
+| **AlNiCyN three-tier aluminium armour** | [`AlNiCyN Armour/`](AlNiCyN%20Armour/) — README, spec, paper, SIM_README, `platform_simulation.py` |
+| **Hearing protection** | [`Hearing Protection/`](Hearing%20Protection/) — README, spec, paper, SIM_README, `platform_simulation.py` (§6 SPL stack) |
+| **Military command doctrine** | [`Military Command Doctrine/`](Military%20Command%20Doctrine/) — spec, paper, SIM_README, `platform_simulation.py` (scope limits only) |
+| **ADF Tactical Field Kit** *(TRP-2026-ADF-FK-001)* | [`ADF Tactical Field Kit/`](ADF%20Tactical%20Field%20Kit/) — integrated 72 h sustainment; ~4.3 kg saving vs IRP; links TACT-1 / ASNP / PODS / Hemp Harmony; `platform_simulation.py` + optional `pods_simulation.py --module verify` |
 
 ### Hypothetical / academic-study platforms
 
 | System | Platform folder |
 |---|---|
-| **OBSIDIAN secret-service suit** | [`OBSIDIAN Body Armour/`](OBSIDIAN%20Body%20Armour/) |
-| **OBSIDIAN-X full-body armour** | [`OBSIDIAN-X Body Armour/`](OBSIDIAN-X%20Body%20Armour/) |
-| **Combat drug — HyperSynergy-X7** | [`Combat Drug/`](Combat%20Drug/) — mirrored to [`../Drugs/Combat Drug.md`](../Drugs/Combat%20Drug.md) |
-| **Injectable nutrition** | [`Injectable Nutrition/`](Injectable%20Nutrition/) — mirrored to [`../Drugs/Injectable Food.md`](../Drugs/Injectable%20Food.md) |
-| **Caseless / cartridgeless bullets** | [`Caseless Bullets/`](Caseless%20Bullets/) |
+| **OBSIDIAN secret-service suit** | [`OBSIDIAN Body Armour/`](OBSIDIAN%20Body%20Armour/) — README, spec, paper, SIM_README, `platform_simulation.py` (scope only) |
+| **OBSIDIAN-X full-body armour** | [`OBSIDIAN-X Body Armour/`](OBSIDIAN-X%20Body%20Armour/) — README, spec, paper, SIM_README, `platform_simulation.py` (scope only) |
+| **Combat drug — HyperSynergy-X7** | [`Combat Drug/`](Combat%20Drug/) — README, spec, paper, SIM_README, `platform_simulation.py` (§20 PK); mirrored to [`../Drugs/Combat Drug.md`](../Drugs/Combat%20Drug.md) |
+| **Injectable nutrition** | [`Injectable Nutrition/`](Injectable%20Nutrition/) — README, spec, paper, SIM_README, `platform_simulation.py` (§21) |
+| **Caseless / cartridgeless bullets** | [`Caseless Bullets/`](Caseless%20Bullets/) — README, spec, paper, SIM_README, `platform_simulation.py` |
 
 ### Specialised platform subfolders
 
@@ -96,7 +102,6 @@ If you change a number in a spec sheet that doesn't trace back to `weapons_sim_r
 | [`HEL_CMS_DB Laser AntiAir/`](HEL_CMS_DB%20Laser%20AntiAir/) | **HEL-CMS/DB** High-Energy Laser Counter-Munitions System, Diamond Battery powered — 280–300 kW spectral-beam-combined fiber laser air defence platform. Defeats micro-UAVs (0.2 s dwell), rockets (4.9 s dwell), and cruise missiles (12.3 s dwell) across a 4–7 km engagement envelope. 1 MW(e) Sr-90 thermal-betavoltaic power plant eliminates the generator logistics tail; zero crew; 20-year TCO $71.8M saving $51.8M vs conventional HEL. TDB power source at TRL 2–3. [`README.md`](HEL_CMS_DB%20Laser%20AntiAir/README.md), [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Full_Spec.md), [`HEL_CMS_DB_Research_Paper.md`](HEL_CMS_DB%20Laser%20AntiAir/HEL_CMS_DB_Research_Paper.md). |
 | [`TAIPAN Missile/`](TAIPAN%20Missile/) | **TAIPAN-1** guided ballistic interceptor rocket — 4.87 m, 631 kg wet, RP-1/LOX electric pump-fed (50 kN, Isp 293.1 s, 62 kg dry engine mass). Simulation-verified maximum range **1,618 km** at Mach 13.27 and 367 km apogee; configurable 432–1,618 km by varying nose ballast. Production unit cost **$50k–$80k** (22× cheaper than AMRAAM at 160 km). Entire airframe 3D printed in 14 structural parts. [`README.md`](TAIPAN%20Missile/README.md), [`TAIPAN-1_Technical_Specification_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Technical_Specification_Rev1.0.md), [`TAIPAN-1_Financial_Analysis_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Financial_Analysis_Rev1.0.md), [`TAIPAN-1_Geometry_Reference_Rev1.0.md`](TAIPAN%20Missile/TAIPAN-1_Geometry_Reference_Rev1.0.md), [`TAIPAN-1_Research_Paper.md`](TAIPAN%20Missile/TAIPAN-1_Research_Paper.md), [`SIM_README.md`](TAIPAN%20Missile/SIM_README.md), [`taipan1_sim.py`](TAIPAN%20Missile/taipan1_sim.py). |
 | [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) | **OAM-VEST** vehicle-mounted non-lethal acoustic area denial — dual 1.2 m phased arrays, OAM vortex + AM vestibular modes, **173.2 dB** source, **410 m** disorientation / **19.3 m** incapacitation, earplug-immune Modes B/C; standalone `oam_vest_sim`. [`README.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/README.md), [`OAM-VEST_System_Specification.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_System_Specification.md), [`OAM-VEST_Research_Paper.md`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Research_Paper.md), [`OAM-VEST_Simulation_Package/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/OAM-VEST_Simulation_Package/). |
-| [`Research Papers/`](Research%20Papers/) | **Archive index** — papers relocated to platform folders; see [`Research Papers/README.md`](Research%20Papers/README.md). |
 
 ---
 
@@ -109,9 +114,9 @@ All numbers below come from [`weapons_sim_results.md`](weapons_sim_results.md). 
 | Weapon | Cartridge | MV | ME | Pₘₐₓ | Free recoil | RHA @ muzzle | Magazine |
 |---|---|---|---|---|---|---|---|
 | **MP-4.6M Guardian Pistol** | 4.6 × 30 mm | **501 m/s** | **326 J** | 180 MPa (26 107 psi) | 1.5 J (1.1 ft·lb) | 3.8 mm | 20 rd |
-| **MP-4.6M Defender PDW** *(same cartridge as the Guardian)* | 4.6 × 30 mm | **501 m/s** | **326 J** | 180 MPa | 0.7 J (0.5 ft·lb) | 3.8 mm | 40 rd |
+| **MP-4.6M Defender PDW** *(same loaded round; longer 266.7 mm barrel → `4.6x30mm_PDW` sim key)* | 4.6 × 30 mm | **542 m/s** | **382 J** | 180 MPa | 0.8 J (0.6 ft·lb) | 4.2 mm | 40 rd |
 | **MP-6.8 Mark II Rifle** | 6.8 × 51 mm | **731 m/s** | **2 324 J** | 307 MPa (44 538 psi) | 11.3 J (8.3 ft·lb) | 11.1 mm | 20 rd |
-| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | **781 m/s** | **19 505 J** | 258 MPa (37 361 psi) | 255.2 J (188.2 ft·lb) | 48.4 mm | 8 rd, bolt-action |
+| **MAS-15.2E Anti-Materiel Sniper** | 15.2 × 115 mm APYT | **781 m/s** | **19 505 J** | 258 MPa (37 361 psi) | 255.2 J (188.2 ft·lb) | 42.0 mm | 8 rd, bolt-action |
 
 ### Heavy weapons
 
@@ -216,7 +221,7 @@ Vehicle-mounted (Land Rover class or larger). Attacks vestibular balance pathway
 11. **Two new items (this revision).**
    - [`OAM-VEST Non Lethal Sonic Weapon/`](OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) — OAM-VEST non-lethal acoustic area denial (spec + research paper + `oam_vest_sim` package + folder README).
    - [`ADF Tactical Field Kit/`](ADF%20Tactical%20Field%20Kit/) — ADF Tactical Field Kit integrated sustainment spec (TRP-2026-ADF-FK-001).
-12. **Platform subfolder reorganization (this revision).** All 30+ platforms now live in dedicated subfolders — each with hub `README.md`, operator spec, research paper (where applicable), and simulation documentation (`SIM_README.md` for portfolio-sim platforms; standalone `*_sim_package/` or `*_sim.py` for bespoke physics). Root retains only portfolio infrastructure (`weapons_simulation.py`, `weapons_sim_results.md`, `Common Architecture and Components.md`). Relocated papers indexed in [`Research Papers/README.md`](Research%20Papers/README.md).
+12. **Platform subfolder reorganization (this revision).** All 30+ platforms now live in dedicated subfolders — each with hub `README.md`, operator spec, research paper (where applicable), and simulation documentation (`SIM_README.md` for portfolio-sim platforms; standalone `*_sim_package/` or `*_sim.py` for bespoke physics). Root retains only portfolio infrastructure (`weapons_simulation.py`, `weapons_sim_results.md`, `Common Architecture and Components.md`).
 
 ---
 

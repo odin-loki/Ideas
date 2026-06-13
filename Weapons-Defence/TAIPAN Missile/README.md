@@ -25,6 +25,7 @@ The engine architecture is the single most important design decision. Replacing 
 | [`TAIPAN-1_Geometry_Reference_Rev1.0.md`](TAIPAN-1_Geometry_Reference_Rev1.0.md) | Complete geometric and dimensional reference — all station positions, section dimensions, nose cone profile, tank geometry, fin planform, flange interfaces, and ballast assembly, sufficient to produce a CAD model from scratch. |
 | [`TAIPAN-1_Research_Paper.md`](TAIPAN-1_Research_Paper.md) | Research paper (synthesis) | Short validation narrative synthesising spec + `taipan1_sim.py` results. |
 | [`SIM_README.md`](SIM_README.md) | Simulation suite documentation — covers all eight analysis modes, class architecture, physics models (Barrowman CP, semi-empirical drag, US Standard Atmosphere 1976, Tsiolkovsky), Bayesian GP optimiser, and library API. |
+| [`platform_simulation.py`](platform_simulation.py) | Local verification wrapper — delegates to [`taipan1_sim.py`](taipan1_sim.py) (`--sim verify`); does **not** invoke portfolio `weapons_simulation.py`. |
 | [`taipan1_sim.py`](taipan1_sim.py) | Python simulation toolkit. Atmosphere model, engine thermochemistry, Barrowman aerodynamics, mass model, 3-DOF trajectory integrator, Bayesian optimiser. `python taipan1_sim.py --sim verify` runs the full verification dashboard. |
 | [`taipan1_verification.png`](taipan1_verification.png) | Verification dashboard plot — trajectory, ballast sweep, stability margin vs propellant fraction, drag curve, and engine performance at design point. |
 
@@ -82,6 +83,58 @@ The engine architecture is the single most important design decision. Replacing 
 
 ---
 
+
+
+
+
+
+
+### Portfolio §23 — service intervals
+
+| Metric | Value |
+|---|---|
+| Certified storage (§23) | **10 yr** |
+| Lifecycle note (§23) | *Flight dynamics validated by taipan1_sim.py — no portfolio §23 lifecycle slice.* |
+
+Source: [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+## 🔬 Simulation verification
+
+TAIPAN-1 uses a **standalone simulator** — not portfolio `weapons_simulation.py`. The local wrapper delegates to the full verification dashboard:
+
+```bash
+python platform_simulation.py
+```
+
+Equivalent direct invocation:
+
+```bash
+python taipan1_sim.py --sim verify
+```
+
+The script prints trajectory, engine, stability, and ballast-envelope **PASS/FAIL** checks. Headline anchor: **1,618 km maximum range** (14 kg ballast design point).
+
+| Artifact | Role |
+|---|---|
+| [`platform_simulation.py`](platform_simulation.py) | Local wrapper → `taipan1_sim.py --sim verify` |
+| [`taipan1_sim.py`](taipan1_sim.py) | 3-DOF trajectory, Barrowman CP, engine thermochemistry, Bayesian optimiser |
+| [`SIM_README.md`](SIM_README.md) | All eight analysis modes, class architecture, physics models |
+| [`taipan1_verification.png`](taipan1_verification.png) | Verification dashboard plot |
+
+---
+
+## 🚀 Quick start (simulator)
+
+**From this folder** — full verification dashboard:
+
+```bash
+python platform_simulation.py
+```
+
+Equivalent: `python taipan1_sim.py --sim verify`. Headline anchor: **1,618 km** @ 14 kg ballast.
+
+---
+
 ## 🏗️ Design philosophy
 
 The 3D-printed airframe produces 14 structural parts from a conventionally fabricated design that would be 80–120 parts. Total print time approximately 208 hours on two parallel machines (one AlSi10Mg, one Ti-6Al-4V). Assembly labour ~80–120 person-hours for the first unit.
@@ -118,11 +171,11 @@ The 3D-printed airframe produces 14 structural parts from a conventionally fabri
 
 ## 🔗 Related work in this repo
 
-- [`../../../Diamond Batterys/`](../../../Diamond%20Batterys/) — power source for the HPR-X rocketry series and longer-range propulsion adjacency
+- [`../../../Diamond Batterys/`](../../Diamond%20Batterys/) — power source for the HPR-X rocketry series and longer-range propulsion adjacency
 - [`../../HPR-X Rocketry/`](../HPR-X%20Rocketry/) — the HPR-X guided high-power rocketry series within the same portfolio (smaller, solid-propellant)
 - [`../../weapons_simulation.py`](../weapons_simulation.py) — portfolio common simulator (Tsiolkovsky + drag trajectory modelling also covered there for HPR-X)
-- [`../../../Filtering/`](../../../Filtering/) — GH-SR-IMM multi-target tracking (applicable to terminal guidance sensor fusion)
-- [`../../../Asset Tracking Algorithm/`](../../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL battlefield intelligence (intercept targeting adjacency)
+- [`../../Filtering/`](../../Filtering/) — GH-SR-IMM multi-target tracking (applicable to terminal guidance sensor fusion)
+- [`../../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL battlefield intelligence (intercept targeting adjacency)
 
 ---
 

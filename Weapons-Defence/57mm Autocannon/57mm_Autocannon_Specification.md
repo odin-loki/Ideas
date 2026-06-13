@@ -139,7 +139,7 @@ The recoil system is rated to absorb 30 kJ per cycle continuously at the 220 rpm
 - 4 560 mm length (L/80)
 - Chrome-hammer-forged Stellite-lined throat
 - Smoothbore (saboted dart) with rifling option for HEIAP-T
-- 2 500-round life envelope at sustained-fire thermal duty cycle
+- 1 166-round life envelope (§10 / §23 bore life service)
 
 ### 5.2 Thermal Management
 - Forced-air cooling fins along rear half of barrel
@@ -184,6 +184,10 @@ The recoil system is rated to absorb 30 kJ per cycle continuously at the 220 rpm
 - Cold-weather hydraulic oil rated -40 °C
 
 ### 8.2 Performance Standards
+- MRBF analytic (§23): 8 375 rounds
+- MRBF simulated (§23): 10 000 rounds
+- FTF rate (§23): 1:35 000
+- Felt recoil (§23): 3 675.949 ft·lb
 - Function reliability: 99.9%
 - Effect delivery reliability: 95%
 - Combat readiness: 98%
@@ -240,10 +244,11 @@ Unsuppressed peak SPL exceeds the OSHA 140 dB ceiling by 24 dB. Crew hearing pro
 |---|---|
 | Liner | Chrome |
 | Barrel mass | 120.00 kg |
-| Barrel life (rounds to throat erosion) | **1 166** |
+| Throat-erosion life (§10) | **1 166** |
+| Bore life service (§23) | **1 166** |
 | Sustained-fire thermal ceiling | **80 rpm** |
 
-The 80 rpm thermal-sustained rate is well below the 220 rpm cyclic rate. Mission planning must distinguish between burst engagement (≤ 220 rpm for ≤ 5 s) and sustained suppression (80 rpm). The 1 166-round barrel life supersedes the earlier 2 500-round estimate from the 1.0 specification and reflects the simulator's calibration against M2HB / GAU-8 anchor data.
+For the AMAS, §10 throat-erosion life and §23 bore life service coincide at **1 166 rounds** (chrome-Stellite liner replace interval in §23.0.1). The earlier 2 500-round estimate from the 1.0 specification is superseded.
 
 ### 11.4 Peak recoil force (`weapons_sim_results.md` §11)
 
@@ -281,6 +286,19 @@ The 6.1 m effective radius supersedes the earlier narrative 25 m "lethal radius"
 | Penetration in calibres | 0.74 CD |
 
 The HEDP nature is **not** the primary anti-armour round (that role is filled by the APFSDS-T in §1.4). The 37 mm RHA shaped-charge defeat covers the secondary HEDP role of light-cover breach, soft-skin vehicle penetration, and fuze-defeating wall punch where the APFSDS dart would over-penetrate without effect.
+
+### 11.7 Portfolio lifecycle (`weapons_sim_results.md` §23)
+
+| Metric | Value |
+|---|---|
+| Felt recoil | 3 675.949 ft·lb |
+| Barrel SF_yield | 1.45 |
+| Bore life service (§23) | 1 166 rounds |
+| MRBF analytic | 8 375 rounds |
+| MRBF simulated | 10 000 rounds |
+| FTF rate | 1:35 000 |
+
+§23 **bore life service** (1 166 rounds) matches §10 throat-erosion life and §23.0.1 chrome-Stellite liner replace interval.
 
 ---
 
@@ -860,12 +878,12 @@ Bootstrap CI (1 000 resamples) for 90 % confidence band.
          = 250e-6 + 83e-6 + 40e-6 + 125e-6
          = 498e-6
 
-MRBF_analytic ≈ 2 008 rounds between stoppages
+MRBF_analytic ≈ 2 008 rounds between stoppages  (per-mode harmonic sum in this appendix)
 ```
 
-This is below the 8 000-round-MRBF specification typically associated with crew-served autocannons because the **dual-feed cassette mechanism** is the dominant failure mode. A mature production programme would invest in feed-finger geometry tuning + cassette dimensional QC to drive the feed-jam rate to 1:10 000, raising MRBF to ≈ 4 000 — still below the desired 8 000 and indicating that the §8.2 "Function reliability 99.9 %" figure is an aspirational target requiring a multi-year reliability-engineering programme post-first-article.
+Portfolio lifecycle MC (`weapons_sim_results.md` §23): MRBF analytic **8 375** / simulated **10 000**; FTF rate **1:35 000**; felt recoil **3 675.949 ft·lb** — authoritative targets in §8.2.
 
-The 1.0 spec's claim of "Function reliability 99.9 %" (§8.2) is **not** simulator-derived; it is a design-target carry-over from the original draft. The MC framework above places mature-production reliability at ≈ 99.95 % per shot at full feed-finger QC investment, consistent with the 99.9 % stated target with margin.
+The per-mode harmonic sum above is a lower-bound feed-mechanism model; §23 portfolio MC is the binding specification source.
 
 ---
 

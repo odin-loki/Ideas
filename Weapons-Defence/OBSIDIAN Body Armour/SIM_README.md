@@ -4,6 +4,23 @@
 
 ---
 
+## Local verification script
+
+[`platform_simulation.py`](platform_simulation.py) runs the portfolio engine ([`../weapons_simulation.py`](../weapons_simulation.py)) via [`../sim_common.py`](../sim_common.py) and prints the platform-specific verification slice for this folder. For OBSIDIAN, the script **documents scope limits only** — carbyne/STF suit claims are not modelled; see APES Body Armour (§13) for validated armour numbers.
+
+```bash
+python platform_simulation.py
+```
+
+To regenerate the full portfolio results file, still run:
+
+```bash
+cd ..
+python weapons_simulation.py
+```
+
+---
+
 ## Why there is no sim
 
 | Claim type | Status |
@@ -17,6 +34,22 @@ For **simulation-validated** body armour in this portfolio, see [`../APES Body A
 
 ---
 
+
+
+
+
+
+## §23 Lifecycle
+
+Portfolio lifecycle for **`OBSIDIAN Body Armour`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+
+| Item | Detail |
+|---|---|
+| **§23 Lifecycle** | Hypothetical carbyne / STF suit — no runnable ballistic lifecycle model. |
+
+| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+
 ## Companion documents
 
 | Document | File |
@@ -24,7 +57,3 @@ For **simulation-validated** body armour in this portfolio, see [`../APES Body A
 | Operator specification | [`OBSIDIAN_Secret_Service_Suit_Specification.md`](OBSIDIAN_Secret_Service_Suit_Specification.md) |
 | Research paper | [`OBSIDIAN_Research_Paper.md`](OBSIDIAN_Research_Paper.md) |
 | Full-body successor | [`../OBSIDIAN-X Body Armour/`](../OBSIDIAN-X%20Body%20Armour/) |
-
----
-
-*OBSIDIAN simulation coverage — hypothetical academic study only. Numbers in spec/paper are first-principles design targets, not simulator outputs.*

@@ -407,7 +407,24 @@ The US military hearing protection addressable population is approximately 840,0
 
 Competitive analysis shows no existing product achieves NRR above 35 dB. Both the APE-1 \(37.8 dB\) and HANC-1 \(42.6 dB\) occupy uncontested performance tiers, enabling premium pricing and a defensible competitive position reinforced by a recommended patent portfolio \(estimated $50–75k, covering dual-durometer seal, impulse ANC muting algorithm, and level-dependent talk-through with speech enhancement\).
 
-## 9. Conclusion
+## 9. Portfolio §23 Lifecycle (consumable service intervals)
+
+Headline intervals from `Weapons-Defence/weapons_sim_results.md` §23.1 / `weapon_lifecycle_configs.py`:
+
+| Headline metric | Value |
+|---|---|
+| Foam plug life | **6 mo** |
+| Electronic muff seal | **24 mo** |
+| Earplug NRR (derated) | **22 dB** |
+
+**Table 9.1 — Component service thresholds (§23.1.1).**
+
+| Component | Warn | Replace | Model |
+|---|---|---|---|
+| Slow-recovery foam earplug | 4 mo | 6 mo | Cell collapse + contamination |
+| Electronic muff gel seal | 18 mo | 24 mo | Elastomer hardening |
+
+## 10. Conclusion
 
 The APE-1 and HANC-1 systems represent rigorously engineered advances over the current state of the art in military hearing protection. The APE-1 achieves 37.8 dB NRR through a physics-optimized six-layer composite design, approaching the passive bone-conduction ceiling. The HANC-1 breaks through that ceiling to 42.6 dB NRR via a hybrid architecture that preserves fail-safe passive protection while extending low-frequency performance through digital ANC. Both systems satisfy MIL-STD-810G environmental requirements and ANSI S3.19 certification standards. A clear 19-month development roadmap, detailed cost model, and strong market analysis support a compelling investment case for the $2.5M development program.
 

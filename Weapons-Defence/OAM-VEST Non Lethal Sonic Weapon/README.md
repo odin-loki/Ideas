@@ -16,6 +16,7 @@ OAM-VEST (**Orbital Angular Momentum Vestibular Disruption System**) is a **comp
 2. [`OAM-VEST_System_Specification.md`](OAM-VEST_System_Specification.md) — product and engineering spec (physics, hardware, safety, roadmap, commercial analysis).
 3. [`OAM-VEST_Research_Paper.md`](OAM-VEST_Research_Paper.md) — formal design-and-validation narrative with simulation results.
 4. [`OAM-VEST_Simulation_Package/`](OAM-VEST_Simulation_Package/) — re-run modules and regenerate the consolidated report.
+5. **Verify claims** — see **🔬 Simulation verification** below.
 
 ---
 
@@ -59,6 +60,25 @@ All values below come from [`OAM-VEST_Simulation_Package/OAM-VEST_Simulation_REA
 | Lung rupture margin @ 100 m | **+53 dB** |
 | Minimum safe engagement range | **15 m** (LiDAR hardware interlock) |
 | Simultaneous independent beams | **Up to 4** |
+
+---
+
+## 🔬 Simulation verification
+
+OAM-VEST does **not** use the portfolio [`../weapons_simulation.py`](../weapons_simulation.py). All headline numbers trace to the standalone **`oam_vest_sim`** package in this folder.
+
+```bash
+cd OAM-VEST_Simulation_Package
+python run_simulations.py
+```
+
+| Artifact | Role |
+|---|---|
+| [`OAM-VEST_Simulation_Package/run_simulations.py`](OAM-VEST_Simulation_Package/run_simulations.py) | Full six-module verification run |
+| [`OAM-VEST_Simulation_Package/OAM-VEST_Simulation_README.md`](OAM-VEST_Simulation_Package/OAM-VEST_Simulation_README.md) | Module map + validated headline table |
+| [`OAM-VEST_Simulation_Package/oam_vest_sim/`](OAM-VEST_Simulation_Package/oam_vest_sim/) | Physics, array, pulse, safety modules |
+
+Output: `OAM-VEST_Simulation_Report.md` with PASS/FAIL verification table vs spec claims.
 
 ---
 
