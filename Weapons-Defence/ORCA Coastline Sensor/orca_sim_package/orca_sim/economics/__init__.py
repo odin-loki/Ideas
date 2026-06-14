@@ -1,0 +1,1 @@
+"""Acquisition and operating economics."""

@@ -262,6 +262,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **ADF-FK** | ADF Tactical Field Kit — integrated 72 h dismounted sustainment load (TRP-2026-ADF-FK-001) | [`Weapons-Defence/ADF Tactical Field Kit/`](Weapons-Defence/ADF%20Tactical%20Field%20Kit/) |
 | **AEAD** | Authenticated Encryption with Associated Data (cryptographic primitive) | [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) |
 | **AGEL** | Alkyl Glycerol Ether Lipase (KIAA1363 / UniProt Q8WTS1) — enzyme co-delivered with PODS to unlock sn-2 alkyl ether cleavage | [`Weapons-Defence/TACT-1 Tactical Ration/PODS- Edible High Energy Protein/`](Weapons-Defence/TACT-1%20Tactical%20Ration/PODS-%20Edible%20High%20Energy%20Protein/) |
+| **AGINS** | Autonomous GPS-Independent Navigation System — passive multi-modal navigation (celestial, MagNav, polar sky, PDR, inertial) fused via GH-SR-IMM | [`Weapons-Defence/GPS Denied Navigation/`](Weapons-Defence/GPS%20Denied%20Navigation/) |
 | **AlNiCyN** | AlNiCyN three-tier aluminium armour (5000 / 7000 / X tiers) | [`Weapons-Defence/AlNiCyN Armour/`](Weapons-Defence/AlNiCyN%20Armour/) |
 | **APES** | Advanced Protective Equipment System (military body armour) | [`Weapons-Defence/APES Body Armour/`](Weapons-Defence/APES%20Body%20Armour/) |
 | **APES-L** | Advanced Protective Equipment System — Law Enforcement (Australian police variant) | [`Weapons-Police/`](Weapons-Police/) |
@@ -312,6 +313,7 @@ Several letter-combinations collide between folders. This index gives each acron
 | **NQD** | Neural Quantum Dust | [`Neural Dust/`](Neural%20Dust/) |
 | **NV** | Nitrogen-Vacancy (defect centre in diamond) | [`Quantum Diamond Wafer/`](Quantum%20Diamond%20Wafer/), [`Neural Dust/`](Neural%20Dust/) |
 | **OAM-VEST** | Orbital Angular Momentum Vestibular Disruption System — vehicle-mounted non-lethal acoustic area denial | [`Weapons-Defence/OAM-VEST Non Lethal Sonic Weapon/`](Weapons-Defence/OAM-VEST%20Non%20Lethal%20Sonic%20Weapon/) |
+| **ORCA** | Ocean Resonant Coastal Array — passive seabed electric-field coastal surveillance array detecting submerged submarines and surface vessels | [`Weapons-Defence/ORCA Coastline Sensor/`](Weapons-Defence/ORCA%20Coastline%20Sensor/) |
 | **OBSIDIAN** | The reactive shear-thickening-fluid armour family (VIP suit) | [`Weapons-Defence/OBSIDIAN Body Armour/`](Weapons-Defence/OBSIDIAN%20Body%20Armour/) |
 | **OBSIDIAN-X** | Full-body hypothetical OBSIDIAN-class armour (academic study) | [`Weapons-Defence/OBSIDIAN-X Body Armour/`](Weapons-Defence/OBSIDIAN-X%20Body%20Armour/) |
 | **OSK** | Oct4-Sox2-Klf4 (partial reprogramming factors, no c-Myc) | [`GM Enhancements/`](GM%20Enhancements/) |
