@@ -124,17 +124,17 @@ In expanded form, using reference energy densities (coal: 24 MJ/kg; natural gas:
 
 E_reserves = Σ(R_coal × 0.42 × 24 MJ/kg)
 
-           \+ Σ(R_gas × 0.68 × 55 MJ/kg)
+           + Σ(R_gas × 0.68 × 55 MJ/kg)
 
-           \+ Σ(R_petrol × 0.75 × 46 MJ/kg)
+           + Σ(R_petrol × 0.75 × 46 MJ/kg)
 
-           \+ Σ(R_uranium × 1.00 × 8.2×10⁷ MJ/kg)
+           + Σ(R_uranium × 1.00 × 8.2×10⁷ MJ/kg)
 
 E_renewable = Solar_W × 0.58 × 0.25 × 8760 h/yr × 25 yr
 
-            \+ Wind_W  × 0.65 × 0.35 × 8760 h/yr × 20 yr
+            + Wind_W  × 0.65 × 0.35 × 8760 h/yr × 20 yr
 
-            \+ Hydro_W × 0.82 × 0.50 × 8760 h/yr × 50 yr
+            + Hydro_W × 0.82 × 0.50 × 8760 h/yr × 50 yr
 
 The renewable component integrates expected lifetime output, reflecting the capitalised energy value of installed infrastructure over its service life. This treatment is analogous to the NPV (net present value) logic of conventional investment accounting, but expressed in physical rather than monetary terms, and free of the distortions introduced by discount rates.
 
@@ -162,7 +162,7 @@ Food production capacity is the energetic foundation of human labour power. FEW 
 
 FEW = (Arable_area_m² × Yield_J/m²/yr × Soil_Q)
 
-    \+ Storage_reserves_J
+    + Storage_reserves_J
 
   FEW_grains  = Area × 2.5×10⁶ J/m²/yr × Soil_Q
 
