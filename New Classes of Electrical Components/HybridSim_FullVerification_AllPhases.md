@@ -11,57 +11,31 @@ All six phases of the Hybrid Component Simulation Framework were independently v
 ## Phase 0 — Foundation Component Models
 Phase 0 was not supplied as a separate document; its component models appear throughout the later phases. The fundamental components verified in context across all phases:
 
-Item
-Status
-Finding
-Memristor R(w) formula
-✓ PASS
-Ron*(w/D) + Roff*(1-w/D) — verified at 5 boundary values, matches SPICE export ✓
-Memristor f(w) window
-✓ PASS
-1-(2w/D-1)^2 — correct parabolic window, f=0 at w=0,D; f=1 at w=D/2 ✓
-dw/dt drift formula
-WARN
-Code uses mu_v*(Ron/D²)*I*f(w). Strukov-Williams original uses mu_v*(Ron/D)*I*f(w). Code is 1/D=1e8× faster than physical drift speed. Functionally consistent across all phases since same formula is used everywhere — but absolute timing is unphysical
-Josephson frequency
-✓ PASS
-f=V/Phi0 = 0.4836 GHz/µV. Verified from 2eV/h = 483.6 MHz/µV ✓
-JJ Stewart-McCumber
-✓ PASS
-beta_c = 2*pi*Ic*RJ²*CJ/Phi0 = 0.076 → overdamped, no hysteresis ✓
+| Item | Status | Finding |
+|---|---|---|
+| Memristor R(w) formula | ✓ PASS | Ron*(w/D) + Roff*(1-w/D) — verified at 5 boundary values, matches SPICE export ✓ |
+| Memristor f(w) window | ✓ PASS | 1-(2w/D-1)^2 — correct parabolic window, f=0 at w=0,D; f=1 at w=D/2 ✓ |
+| dw/dt drift formula | WARN | Code uses mu_v*(Ron/D²)*I*f(w). Strukov-Williams original uses mu_v*(Ron/D)*I*f(w). Code is 1/D=1e8× faster than physical drift speed. Functionally consistent across all phases since same formula is used everywhere — but absolute timing is unphysical |
+| Josephson frequency | ✓ PASS | f=V/Phi0 = 0.4836 GHz/µV. Verified from 2eV/h = 483.6 MHz/µV ✓ |
+| JJ Stewart-McCumber | ✓ PASS | beta_c = 2*pi*Ic*RJ²*CJ/Phi0 = 0.076 → overdamped, no hysteresis ✓ |
+
 
 
 ## Phase 1 — Advanced Component Models
 
 Three bugs found across the eight component models
 
-Item
-Status
-Finding
-Ferroelectric Preisach loops
-✓ PASS
-P saturates at ±0.26 C/m² (BaTiO3=26 µC/cm² ✓). Hysteresis loop shape correct. 1000 steps in 47.7 ms ✓
-Preisach E_c calibration
-WARN
-Distribution centred at (0,0) → E_c ≈ 0.46 MV/m. BaTiO3 literature: 1 MV/m. Fix: shift centre to (alpha_0=+1MV/m, beta_0=-1MV/m) in density function
-Capacitance dP/dE
-WARN
-Perturbation step dE=1e3 V/m << grid spacing ~60,000 V/m. No hysterons switch → dP/dE=0 always → C returns vacuum value only. Fix: dE ≥ 60,000 V/m
-Switching tau at E=0
-BUG
-tau = tau0*exp(delta/|E-Ec|+1e3). At E=0: tau = 5ns*exp(2000) = overflow (inf). Fix: clamp denom to max(|E-Ec|, 1e5 V/m)
-Avrami exponent n=1.5
-✓ PASS
-Matches PZT thin film literature (mixed 1D/2D nucleation) ✓
-Magnetoelectric inductor
-✓ PASS
-L(Vc)=Lnom*(1-alpha*Vc²) — correct quadratic ME coupling. (Physical range issue addressed in Phase 4 App 3)
-Josephson JJ simulation
-✓ PASS
-ddt(phi) = V/Phi0 correctly integrates phase. Josephson current Ic*sin(phi) ✓
-LIF Verilog-AMS
-✓ PASS
-ddt(Vm) <+ (1/Cm)*(-(Vm-Vrest)/Rm + I_syn). cross() event at Vth correct ✓
+| Item | Status | Finding |
+|---|---|---|
+| Ferroelectric Preisach loops | ✓ PASS | P saturates at ±0.26 C/m² (BaTiO3=26 µC/cm² ✓). Hysteresis loop shape correct. 1000 steps in 47.7 ms ✓ |
+| Preisach E_c calibration | WARN | Distribution centred at (0,0) → E_c ≈ 0.46 MV/m. BaTiO3 literature: 1 MV/m. Fix: shift centre to (alpha_0=+1MV/m, beta_0=-1MV/m) in density function |
+| Capacitance dP/dE | WARN | Perturbation step dE=1e3 V/m << grid spacing ~60,000 V/m. No hysterons switch → dP/dE=0 always → C returns vacuum value only. Fix: dE ≥ 60,000 V/m |
+| Switching tau at E=0 | BUG | tau = tau0*exp(delta/\|E-Ec\|+1e3). At E=0: tau = 5ns*exp(2000) = overflow (inf). Fix: clamp denom to max(\|E-Ec\|, 1e5 V/m) |
+| Avrami exponent n=1.5 | ✓ PASS | Matches PZT thin film literature (mixed 1D/2D nucleation) ✓ |
+| Magnetoelectric inductor | ✓ PASS | L(Vc)=Lnom*(1-alpha*Vc²) — correct quadratic ME coupling. (Physical range issue addressed in Phase 4 App 3) |
+| Josephson JJ simulation | ✓ PASS | ddt(phi) = V/Phi0 correctly integrates phase. Josephson current Ic*sin(phi) ✓ |
+| LIF Verilog-AMS | ✓ PASS | ddt(Vm) <+ (1/Cm)*(-(Vm-Vrest)/Rm + I_syn). cross() event at Vth correct ✓ |
+
 
 
 ## Phase 2 — MNA Circuit Solver
@@ -69,214 +43,92 @@ ddt(Vm) <+ (1/Cm)*(-(Vm-Vrest)/Rm + I_syn). cross() event at Vth correct ✓
 All core algorithms verified correct
 The circuit solver was independently reconstructed and tested against analytical solutions. All stamp mathematics and integration schemes are correct.
 
-Item
-Status
-Finding
-MNA stamp assembly
-✓ PASS
-RC circuit: max error 9.9 mV at dt=10µs (1st-order Euler expected). Final value error 0.01% ✓
-KCL satisfaction
-✓ PASS
-I_R = I_C = 6.91 µA at final point. KCL residual 0.00 nA ✓
-Backward Euler stability
-✓ PASS
-Stiff system tau2/tau1=1e6, dt/tau_fast=1e4 — STABLE. Forward Euler blows up at step 8 (as expected) ✓
-Memristor nonlinear stamp
-✓ PASS
-NR converges in 1 iteration (memristor is linear in I at fixed w). Drift toward Ron under positive current ✓
-Josephson frequency
-✓ PASS
-f=2eV/h=483.6 MHz/µV, verified from fundamental constants ✓
-Sparse MNA recommendation
-✓ PASS
-scipy.sparse.linalg.spsolve recommended above 1000 nodes — correct threshold for dense→sparse crossover ✓
-Incidence matrix KVL/KCL
-✓ PASS
-A_r * I = 0 and V_branches = A_r^T * V_nodes — universal circuit equations ✓
+| Item | Status | Finding |
+|---|---|---|
+| MNA stamp assembly | ✓ PASS | RC circuit: max error 9.9 mV at dt=10µs (1st-order Euler expected). Final value error 0.01% ✓ |
+| KCL satisfaction | ✓ PASS | I_R = I_C = 6.91 µA at final point. KCL residual 0.00 nA ✓ |
+| Backward Euler stability | ✓ PASS | Stiff system tau2/tau1=1e6, dt/tau_fast=1e4 — STABLE. Forward Euler blows up at step 8 (as expected) ✓ |
+| Memristor nonlinear stamp | ✓ PASS | NR converges in 1 iteration (memristor is linear in I at fixed w). Drift toward Ron under positive current ✓ |
+| Josephson frequency | ✓ PASS | f=2eV/h=483.6 MHz/µV, verified from fundamental constants ✓ |
+| Sparse MNA recommendation | ✓ PASS | scipy.sparse.linalg.spsolve recommended above 1000 nodes — correct threshold for dense→sparse crossover ✓ |
+| Incidence matrix KVL/KCL | ✓ PASS | A_r * I = 0 and V_branches = A_r^T * V_nodes — universal circuit equations ✓ |
+
 
 
 ## Phase 3 — GPU Acceleration
 
 Logic verified; throughput numbers require physical GPU hardware
 
-Item
-Status
-Finding
-Warp sort algorithm
-✓ PASS
-sort_by_state → inverse permutation: error 0.0e+00. Produces N homogeneous groups, eliminates divergence ✓
-Memory layout coalescing
-✓ PASS
-(N,n,n) non-coalesced: 64× warp penalty. (n,n,N) coalesced: 1 transaction/warp. Analysis correct ✓
-Shared memory budget
-✓ PASS
-n=32: Gs+bs+pivot = 4.2 KB < 48 KB SM capacity. Fits entirely on-chip ✓
-Radau IIA speedup analysis
-✓ PASS
-21,032× step-count reduction vs backward Euler at same accuracy (cost 3× per step → 7,000× net). ✓
-Adjoint gradient
-✓ PASS
-dL/dR adjoint vs numerical: 0.0002% error ✓
-RTX 3090 benchmarks
-N/A
-2.3 TOPS LU, 180 µs batched Euler, 48 ns real-time: architecture sound, cannot verify numbers without hardware
-SIMT divergence penalty
-✓ PASS
-4-state machine → 4× serialisation in unsorted warp. State sorting eliminates this. Architecture analysis correct ✓
+| Item | Status | Finding |
+|---|---|---|
+| Warp sort algorithm | ✓ PASS | sort_by_state → inverse permutation: error 0.0e+00. Produces N homogeneous groups, eliminates divergence ✓ |
+| Memory layout coalescing | ✓ PASS | (N,n,n) non-coalesced: 64× warp penalty. (n,n,N) coalesced: 1 transaction/warp. Analysis correct ✓ |
+| Shared memory budget | ✓ PASS | n=32: Gs+bs+pivot = 4.2 KB < 48 KB SM capacity. Fits entirely on-chip ✓ |
+| Radau IIA speedup analysis | ✓ PASS | 21,032× step-count reduction vs backward Euler at same accuracy (cost 3× per step → 7,000× net). ✓ |
+| Adjoint gradient | ✓ PASS | dL/dR adjoint vs numerical: 0.0002% error ✓ |
+| RTX 3090 benchmarks | N/A | 2.3 TOPS LU, 180 µs batched Euler, 48 ns real-time: architecture sound, cannot verify numbers without hardware |
+| SIMT divergence penalty | ✓ PASS | 4-state machine → 4× serialisation in unsorted warp. State sorting eliminates this. Architecture analysis correct ✓ |
+
 
 
 ## Phase 4 — Application Engines
 Two critical bugs, two warnings
 
-Item
-Status
-Finding
-App 1 — STDP: spike scaling
-BUG
-I = G*1e-9*spike treats spikes as 1 nV. Current = 0.124 fA, threshold needs 2 nA → 16,129× deficit. Zero spikes, zero learning. Fix: I = G * V_spike (e.g. 5 mV)
-App 1 — STDP: LTP/LTD logic
-✓ PASS
-A+=0.01, A-=0.012, 20% net depression bias. Causal/anti-causal windows correct once neurons fire ✓
-App 2 — Crossbar Vmax
-BUG
-Vmax=1V with Gmax=100µS → 3.31A total current, 461 nJ/MVM, GOPS/W≈0. Fix: Vmax=0.1V AND Gmax~10µS → pJ scale matches literature
-App 2 — SNR formula
-WARN
-numpy broadcasting bug in Inoise. Results incorrect as coded. Corrected: SNR=57.3 dB, ENOB=9.2 bits (valid with 2% G noise)
-App 3 — RF filter Vc range
-WARN
-L negative for |Vc|>4.47V, search uses ±40V. 900 MHz fails (L<0). Fix: clamp search to ±4.47V
-App 3 — 2.4/5.8 GHz
-✓ PASS
-Both targets achieved within Vc physical range. Frequency error 0.0000% ✓
-App 4 — Shot noise physics
-✓ PASS
-sigma=1790 pA = sqrt(2eIBW) ✓. H_min=10.33 bits, 86% entropy efficiency ✓
-App 4 — NIST Frequency
-WARN
-FAIL (p=0.000). I_avg DC offset biases MSB. Von Neumann efficiency 2.5% not 50%. Fix: subtract I_avg before quantisation
-App 4 — NIST Runs/Block
-✓ PASS
-Runs p=0.636 PASS, Block p=0.579 PASS ✓
-App 5 — GST converter
-✓ PASS
-Efficiency 7.6% at all frequencies — correct for Rc=100Ω vs RL=10Ω. Ea=2.3eV matches literature ✓
+| Item | Status | Finding |
+|---|---|---|
+| App 1 — STDP: spike scaling | BUG | I = G*1e-9*spike treats spikes as 1 nV. Current = 0.124 fA, threshold needs 2 nA → 16,129× deficit. Zero spikes, zero learning. Fix: I = G * V_spike (e.g. 5 mV) |
+| App 1 — STDP: LTP/LTD logic | ✓ PASS | A+=0.01, A-=0.012, 20% net depression bias. Causal/anti-causal windows correct once neurons fire ✓ |
+| App 2 — Crossbar Vmax | BUG | Vmax=1V with Gmax=100µS → 3.31A total current, 461 nJ/MVM, GOPS/W≈0. Fix: Vmax=0.1V AND Gmax~10µS → pJ scale matches literature |
+| App 2 — SNR formula | WARN | numpy broadcasting bug in Inoise. Results incorrect as coded. Corrected: SNR=57.3 dB, ENOB=9.2 bits (valid with 2% G noise) |
+| App 3 — RF filter Vc range | WARN | L negative for \|Vc\|>4.47V, search uses ±40V. 900 MHz fails (L<0). Fix: clamp search to ±4.47V |
+| App 3 — 2.4/5.8 GHz | ✓ PASS | Both targets achieved within Vc physical range. Frequency error 0.0000% ✓ |
+| App 4 — Shot noise physics | ✓ PASS | sigma=1790 pA = sqrt(2eIBW) ✓. H_min=10.33 bits, 86% entropy efficiency ✓ |
+| App 4 — NIST Frequency | WARN | FAIL (p=0.000). I_avg DC offset biases MSB. Von Neumann efficiency 2.5% not 50%. Fix: subtract I_avg before quantisation |
+| App 4 — NIST Runs/Block | ✓ PASS | Runs p=0.636 PASS, Block p=0.579 PASS ✓ |
+| App 5 — GST converter | ✓ PASS | Efficiency 7.6% at all frequencies — correct for Rc=100Ω vs RL=10Ω. Ea=2.3eV matches literature ✓ |
+
 
 
 ## Phase 5 — EDA Export Layer
 One critical bug in QTR alpha constant; memristor models consistent across all phases
 
-Item
-Status
-Finding
-QTR alpha constant
-BUG
-SPICE uses alpha=10.25e9 m⁻¹. Correct value: 1.025e9 m⁻¹ eV⁻⁰·⁵ (10× error). G0 is ~10⁻³² S (unmeasurable). Fix: alpha=1.025e9 → G0=7.7e-5 S, I(0.1V)≈7.7 µA ✓
-Memristor SPICE vs Python
-✓ PASS
-R(w) and f(w) identical at all 5 test points. Verilog-AMS ddt() matches Python model ✓
-JJ SPICE model
-✓ PASS
-Phi0=2.0678e-15 Wb correct. f_J=V/Phi0 ✓. beta_c=0.076 → overdamped ✓
-GMR SPICE model
-✓ PASS
-theta=arccos(tanh(H/Hc)) — correct Stoner-Wohlfarth approximation. R between RP and RAP ✓
-PCM SPICE model
-✓ PASS
-Two-state if(V_ctrl>threshold,RC,RA) — simplified but correct for binary switch applications ✓
-Verilog-AMS LIF neuron
-✓ PASS
-cross(Vm-Vth,+1) event detection correct. Spike output with 1ps pulse ✓
-dw/dt units across all phases
-WARN
-All phases use mu_v*(Ron/D²)*I*fw. This is 1/D (=1e8) faster than Strukov-Williams (1975 original uses Ron/D). Consistent within the framework — absolute drift timescale needs rescaling for real-device comparison
-IBIS memristor limitation
-WARN
-IBIS V-I tables assume LTI port — hysteretic I-V cannot be captured. Valid for single-state characterisation only. Known limitation of IBIS standard for non-LTI devices
+| Item | Status | Finding |
+|---|---|---|
+| QTR alpha constant | BUG | SPICE uses alpha=10.25e9 m⁻¹. Correct value: 1.025e9 m⁻¹ eV⁻⁰·⁵ (10× error). G0 is ~10⁻³² S (unmeasurable). Fix: alpha=1.025e9 → G0=7.7e-5 S, I(0.1V)≈7.7 µA ✓ |
+| Memristor SPICE vs Python | ✓ PASS | R(w) and f(w) identical at all 5 test points. Verilog-AMS ddt() matches Python model ✓ |
+| JJ SPICE model | ✓ PASS | Phi0=2.0678e-15 Wb correct. f_J=V/Phi0 ✓. beta_c=0.076 → overdamped ✓ |
+| GMR SPICE model | ✓ PASS | theta=arccos(tanh(H/Hc)) — correct Stoner-Wohlfarth approximation. R between RP and RAP ✓ |
+| PCM SPICE model | ✓ PASS | Two-state if(V_ctrl>threshold,RC,RA) — simplified but correct for binary switch applications ✓ |
+| Verilog-AMS LIF neuron | ✓ PASS | cross(Vm-Vth,+1) event detection correct. Spike output with 1ps pulse ✓ |
+| dw/dt units across all phases | WARN | All phases use mu_v*(Ron/D²)*I*fw. This is 1/D (=1e8) faster than Strukov-Williams (1975 original uses Ron/D). Consistent within the framework — absolute drift timescale needs rescaling for real-device comparison |
+| IBIS memristor limitation | WARN | IBIS V-I tables assume LTI port — hysteretic I-V cannot be captured. Valid for single-state characterisation only. Known limitation of IBIS standard for non-LTI devices |
+| Complete Bug Register — All 7 Issues | # | Phase/App |
+| Severity | Location | Root Cause |
+| Fix | 1 | P1 Ferroelectric |
+| WARN | step_dynamic() | tau overflow: exp(2000)=inf at E=0 |
+| Clamp: max(\|E-Ec\|, 1e5 V/m) | 2 | P1 Ferroelectric |
+| WARN | capacitance() | dE=1e3 << grid spacing, dP/dE always 0 |
+| Use dE ≥ 60,000 V/m | 3 | P1 Ferroelectric |
+| WARN | __init__() | E_c≈0.46 MV/m, need 1 MV/m for BaTiO3 |
+| Centre Gaussian at (±1 MV/m) | 4 | P4 App 1 |
+| CRITICAL | LIF step() | 1e-9 spike amplitude → 0.124 fA current, 16129× too small |
+| Replace 1e-9 with V_spike (~5 mV) | 5 | P4 App 2 |
+| CRITICAL | crossbar_analysis() | Vmax=1V → 3.31A total, 461 nJ/MVM, GOPS≈0 |
+| Vmax=0.1V, Gmax=10µS | 6 | P4 App 4 |
+| WARN | generate() | I_avg offset biases MSB → NIST Frequency FAIL |
+| Subtract I_avg before quantise | 7 | P5 QTR |
+| CRITICAL | SPICE .PARAM | alpha=10.25e9 vs correct 1.025e9 (10× error) → G0≈0 |
+| alpha=1.025e9 m⁻¹eV⁻⁰·⁵ | What Is Unambiguously Solid | The following components and algorithms were verified to be correct and consistent with published physics. These represent the genuine strength of the framework: |
+| MNA stamp assembly | Correct Kirchhoff stamps for R, L, C, V-source, memristor | Backward Euler stability |
+| Confirmed stable for stiffness ratio 1e6, dt/tau_fast = 1e4 | Josephson frequency relation | f=V/Phi0=483.6 MHz/µV — verified from fundamental constants 2eV/h |
+| Shot noise physics | sigma=sqrt(2eIBW)=1790 pA — verified analytically. H_min=10.33 bits correct | JKAM crystallisation kinetics |
+| Ea=2.3 eV matches GST literature. K(T) Arrhenius scale correct | GST R(xi) log interpolation | Rc^xi * Ra^(1-xi) geometric mean correct. R spans 100Ω→1MΩ ✓ |
+| Preisach polarisation model | P saturates at ±P_sat. Loop shape and saturation physics correct | Avrami exponent choice |
+| n=1.5 for PZT thin film (mixed 1D/2D) consistent with literature | Warp divergence elimination | State sort → inverse permutation algorithm correct and efficient |
+| GPU shared memory budget | 4.2 KB per n=32 instance << 48 KB SM capacity. Architecture sound | Adjoint gradient |
+| 0.0002% error vs numerical. Backprop through circuit simulation correct | Memristor SPICE/Verilog-AMS | R(w) and f(w) consistent across Python, SPICE, and Verilog-AMS |
+| JJ SPICE beta_c | 0.076 → overdamped — correct parameter regime for logic applications | Coercive field direction |
 
-
-Complete Bug Register — All 7 Issues
-
-#
-Phase/App
-Severity
-Location
-Root Cause
-Fix
-1
-P1 Ferroelectric
-WARN
-step_dynamic()
-tau overflow: exp(2000)=inf at E=0
-Clamp: max(|E-Ec|, 1e5 V/m)
-2
-P1 Ferroelectric
-WARN
-capacitance()
-dE=1e3 << grid spacing, dP/dE always 0
-Use dE ≥ 60,000 V/m
-3
-P1 Ferroelectric
-WARN
-__init__()
-E_c≈0.46 MV/m, need 1 MV/m for BaTiO3
-Centre Gaussian at (±1 MV/m)
-4
-P4 App 1
-CRITICAL
-LIF step()
-1e-9 spike amplitude → 0.124 fA current, 16129× too small
-Replace 1e-9 with V_spike (~5 mV)
-5
-P4 App 2
-CRITICAL
-crossbar_analysis()
-Vmax=1V → 3.31A total, 461 nJ/MVM, GOPS≈0
-Vmax=0.1V, Gmax=10µS
-6
-P4 App 4
-WARN
-generate()
-I_avg offset biases MSB → NIST Frequency FAIL
-Subtract I_avg before quantise
-7
-P5 QTR
-CRITICAL
-SPICE .PARAM
-alpha=10.25e9 vs correct 1.025e9 (10× error) → G0≈0
-alpha=1.025e9 m⁻¹eV⁻⁰·⁵
-
-
-What Is Unambiguously Solid
-The following components and algorithms were verified to be correct and consistent with published physics. These represent the genuine strength of the framework:
-
-MNA stamp assembly
-Correct Kirchhoff stamps for R, L, C, V-source, memristor
-Backward Euler stability
-Confirmed stable for stiffness ratio 1e6, dt/tau_fast = 1e4
-Josephson frequency relation
-f=V/Phi0=483.6 MHz/µV — verified from fundamental constants 2eV/h
-Shot noise physics
-sigma=sqrt(2eIBW)=1790 pA — verified analytically. H_min=10.33 bits correct
-JKAM crystallisation kinetics
-Ea=2.3 eV matches GST literature. K(T) Arrhenius scale correct
-GST R(xi) log interpolation
-Rc^xi * Ra^(1-xi) geometric mean correct. R spans 100Ω→1MΩ ✓
-Preisach polarisation model
-P saturates at ±P_sat. Loop shape and saturation physics correct
-Avrami exponent choice
-n=1.5 for PZT thin film (mixed 1D/2D) consistent with literature
-Warp divergence elimination
-State sort → inverse permutation algorithm correct and efficient
-GPU shared memory budget
-4.2 KB per n=32 instance << 48 KB SM capacity. Architecture sound
-Adjoint gradient
-0.0002% error vs numerical. Backprop through circuit simulation correct
-Memristor SPICE/Verilog-AMS
-R(w) and f(w) consistent across Python, SPICE, and Verilog-AMS
-JJ SPICE beta_c
-0.076 → overdamped — correct parameter regime for logic applications
-Coercive field direction
 Preisach switch-up/switch-down logic: E>alpha → UP, E<beta → DOWN ✓
 
 The framework&apos;s conceptual depth is genuine. All seven bugs are implementation-level issues — parameter values, scaling factors, or perturbation step sizes — none of which touch the underlying physics derivations or algorithmic architecture.

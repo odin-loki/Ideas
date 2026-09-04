@@ -81,47 +81,15 @@ where p(x) = x^256 + x^10 + x^5 + x^2 + 1 is an irreducible pentanomial over GF(
 
 Elements of F₁ are 256-bit integers. Addition is bitwise XOR (cost: O(1) on 256-bit hardware). Multiplication is carry-less (schoolbook) polynomial multiplication followed by modular reduction, implemented as shift-and-XOR with the irreducible. The reference implementation achieves approximately 46 µs per multiplication in pure Python; projected throughput with PCLMULQDQ is approximately 33 ns (a ~1400× speedup).
 
-Parameter
+| Parameter | Value | Notes |
+|---|---|---|
+| Field | GF(2^256) | Base field |
+| Irreducible polynomial | x256+x10+x5+x2+1 | Pentanomial; sparse terms |
+| Element size | 256 bits | 4 × uint64 |
+| GF mul (Python ref) | ~46 µs | Reference only |
+| GF mul (C -O3) | ~652 ns | Baseline C |
+| GF mul (PCLMULQDQ) | ~33 ns | Hardware carryless |
 
-Value
-
-Notes
-
-Field
-
-GF(2^256)
-
-Base field
-
-Irreducible polynomial
-
-x256+x10+x5+x2+1
-
-Pentanomial; sparse terms
-
-Element size
-
-256 bits
-
-4 × uint64
-
-GF mul (Python ref)
-
-~46 µs
-
-Reference only
-
-GF mul (C -O3)
-
-~652 ns
-
-Baseline C
-
-GF mul (PCLMULQDQ)
-
-~33 ns
-
-Hardware carryless
 
 **Table 1: GF(2^256) field parameters and performance.**
 
@@ -687,41 +655,14 @@ Post-quantum safe
 
 All security reductions are implemented as executable Python and validated:
 
-Test
+| Test | Result | Notes |
+|---|---|---|
+| Matrix linearity N(M)⊕N(M’) = D(β) | PASS | Exact equality verified |
+| Collision rate ≤ Q(Q-1)/2·7/\|F\| | PASS | 0 observed vs 120 bound (n=1500) |
+| D(β)=0 root condition | PASS | 200/200 polynomial trials |
+| Degenerate β=0 birthday collisions | PASS | Birthday rate confirmed |
+| PRF reduction B runs cleanly | PASS | Both oracle modes tested |
 
-Result
-
-Notes
-
-Matrix linearity N(M)⊕N(M’) = D(β)
-
-PASS
-
-Exact equality verified
-
-Collision rate ≤ Q(Q-1)/2·7/|F|
-
-PASS
-
-0 observed vs 120 bound (n=1500)
-
-D(β)=0 root condition
-
-PASS
-
-200/200 polynomial trials
-
-Degenerate β=0 birthday collisions
-
-PASS
-
-Birthday rate confirmed
-
-PRF reduction B runs cleanly
-
-PASS
-
-Both oracle modes tested
 
 **Table 8: Numerical security validation results.**
 
@@ -833,53 +774,16 @@ AEAD roundtrip Mode 3
 
 The dominant cost in ARIA is GF(2^256) multiplication, which accounts for the overwhelming majority of cycles in both encoding and nonce derivation. Hardware acceleration via PCLMULQDQ (carry-less multiply) reduces GF multiplication from ~46 µs (Python) to ~33 ns (C + PCLMULQDQ) — a ~1400× improvement — with a corresponding proportional improvement in AEAD throughput.
 
-Stage
+| Stage | GF mul latency | AEAD throughput |
+|---|---|---|
+| Notes | Python reference | ~46 µs |
+| ~70 /s | Reference only | Naive C (−O3) |
+| ~652 ns | ~5,000 /s | Baseline C |
+| C + PCLMULQDQ | ~33 ns | ~100,000 /s |
+| Carryless multiply | C + PCLMULQDQ + AES-NI | ~5 ns |
+| ~2,000,000 /s | AES block expansion | AVX-512 (8-way parallel) |
+| ~5 ns/lane | ~10,000,000 /s | 8 simultaneous nonces |
 
-GF mul latency
-
-AEAD throughput
-
-Notes
-
-Python reference
-
-~46 µs
-
-~70 /s
-
-Reference only
-
-Naive C (−O3)
-
-~652 ns
-
-~5,000 /s
-
-Baseline C
-
-C + PCLMULQDQ
-
-~33 ns
-
-~100,000 /s
-
-Carryless multiply
-
-C + PCLMULQDQ + AES-NI
-
-~5 ns
-
-~2,000,000 /s
-
-AES block expansion
-
-AVX-512 (8-way parallel)
-
-~5 ns/lane
-
-~10,000,000 /s
-
-8 simultaneous nonces
 
 **Table 10: Projected production throughput by implementation tier.**
 

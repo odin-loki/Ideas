@@ -148,35 +148,13 @@ Identifier
 
 Hex Value
 
-Property
+| Property | PRIME1 | 0x85EBCA77 |
+|---|---|---|
+| Maximises avalanche score in 32-bit multiply | PRIME2 | 0xC2B2AE3D |
+| Maximises avalanche score in 32-bit multiply | These primes are odd (guaranteeing bijection under mod-2³² multiplication) and are empirically verified to flip at least 16 of 32 output bits per single-bit input change. | **Rotation Schedules:** Schedule |
+| Values | Heritage | Primary R |
+| (7, 12, 17, 22) | MD5 / SHA per-round rotations | Secondary S |
 
-PRIME1
-
-0x85EBCA77
-
-Maximises avalanche score in 32-bit multiply
-
-PRIME2
-
-0xC2B2AE3D
-
-Maximises avalanche score in 32-bit multiply
-
-These primes are odd (guaranteeing bijection under mod-2³² multiplication) and are empirically verified to flip at least 16 of 32 output bits per single-bit input change.
-
-**Rotation Schedules:** Schedule
-
-Values
-
-Heritage
-
-Primary R
-
-(7, 12, 17, 22)
-
-MD5 / SHA per-round rotations
-
-Secondary S
 
 (13, 8, 7, 11)
 
@@ -454,29 +432,12 @@ A p-value of 0.58 means that a perfectly uniform generator would produce a χ² 
 
 ## 5.2 Information-Theoretic Metrics
 
-Metric
+| Metric | Measured | Theoretical Maximum |
+|---|---|---|
+| Shannon entropy | 3.3219 bits | 3.3219 bits (log₂ 10) |
+| Bit-change rate | 1.7740 bits/step | 2.0 bits/step |
+| 3-gram sequence entropy | 9.9578 bits | 9.9658 bits (log₂ 1000) |
 
-Measured
-
-Theoretical Maximum
-
-Shannon entropy
-
-3.3219 bits
-
-3.3219 bits (log₂ 10)
-
-Bit-change rate
-
-1.7740 bits/step
-
-2.0 bits/step
-
-3-gram sequence entropy
-
-9.9578 bits
-
-9.9658 bits (log₂ 1000)
 
 Shannon entropy hitting the theoretical maximum to four decimal places confirms the output distribution is indistinguishable from uniform at 100K sample resolution. The bit-change rate of 1.774 vs. the theoretical maximum of 2.0 is structurally expected: decimal digits occupy only 10 of 16 possible 4-bit nibble values, so some positional correlation exists regardless of generator quality.
 
@@ -513,23 +474,11 @@ The AvalancheAnalyzer class implements the following procedure:
 
 ## 6.3 Results
 
-Metric
+| Metric | Value | Pass rate |
+|---|---|---|
+| > 0.999 | Mean bits flipped per single-bit flip | ~16.1 |
+| Minimum bits flipped | typically 9–12 | Maximum bits flipped |
 
-Value
-
-Pass rate
-
-> 0.999
-
-Mean bits flipped per single-bit flip
-
-~16.1
-
-Minimum bits flipped
-
-typically 9–12
-
-Maximum bits flipped
 
 typically 22–26
 
@@ -539,125 +488,28 @@ The near-ideal avalanche result is a direct consequence of the MurmurHash3 final
 
 ## 7.1 PRNG Comparison Table
 
-Property
+| Property | TFRNG | Mersenne Twister |
+|---|---|---|
+| LCG | xorshift128+ | State size |
+| 3 digits | 624 × 32-bit words | 1 word |
+| 2 words | Period | Indeterminate¹ |
+| 2¹⁹⁹³⁷ − 1 | 2³² to 2⁶⁴ | 2¹²⁸ − 1 |
+| Chi-square (100K) | 7.527 | ~14.07 |
+| ~25–60 | ~15.2 | Shannon entropy |
+| 3.3219 bits | 3.3219 bits | ~3.29 bits |
+| 3.3219 bits | Cryptographically secure | ✗ |
+| ✗ | ✗ | ✗ |
+| External entropy source | ✓ (time) | ✗ |
+| ✗ | ✗ | Reproducible mode |
+| ✓ | ✓ | ✓ |
+| ✓ | Zero dependencies | ✓ |
+| Depends | Depends | Depends |
+| Output space | ℤ₁₀ | ℤ₂³² |
+| ℤ₂³² | ℤ₂⁶⁴ | Time complexity |
+| O(1) | O(1) | O(1) |
+| O(1) | Space complexity | O(1) |
+| O(624) | O(1) | O(1) |
 
-TFRNG
-
-Mersenne Twister
-
-LCG
-
-xorshift128+
-
-State size
-
-3 digits
-
-624 × 32-bit words
-
-1 word
-
-2 words
-
-Period
-
-Indeterminate¹
-
-2¹⁹⁹³⁷ − 1
-
-2³² to 2⁶⁴
-
-2¹²⁸ − 1
-
-Chi-square (100K)
-
-7.527
-
-~14.07
-
-~25–60
-
-~15.2
-
-Shannon entropy
-
-3.3219 bits
-
-3.3219 bits
-
-~3.29 bits
-
-3.3219 bits
-
-Cryptographically secure
-
-✗
-
-✗
-
-✗
-
-✗
-
-External entropy source
-
-✓ (time)
-
-✗
-
-✗
-
-✗
-
-Reproducible mode
-
-✓
-
-✓
-
-✓
-
-✓
-
-Zero dependencies
-
-✓
-
-Depends
-
-Depends
-
-Depends
-
-Output space
-
-ℤ₁₀
-
-ℤ₂³²
-
-ℤ₂³²
-
-ℤ₂⁶⁴
-
-Time complexity
-
-O(1)
-
-O(1)
-
-O(1)
-
-O(1)
-
-Space complexity
-
-O(1)
-
-O(624)
-
-O(1)
-
-O(1)
 
 ¹ TFRNG’s period is analytically indeterminate in live mode because each generation step consumes a fresh, non-repeating nanosecond timestamp.
 
