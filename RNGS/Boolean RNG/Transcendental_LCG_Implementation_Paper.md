@@ -54,35 +54,23 @@ Collects entropy from three independent sources and combines them into a single 
 
 def harvest_primary_entropy(self, size: int = 32) -> bytes:
 
+```
     entropy = bytearray(size)
-
     # Source 1: OS cryptographic PRNG (secrets module)
-
     crypto_bytes = secrets.token_bytes(size // 2)
-
     entropy[0:size//2] = crypto_bytes
-
     # Source 2: Sub-microsecond timing jitter
-
     for i in range(size // 2, size):
-
         t1 = time.perf_counter_ns()
-
         \_ = sum(range(100))         # deterministic delay
-
         t2 = time.perf_counter_ns()
-
         entropy[i] = (t2 - t1) & 0xFF
-
     # Source 3: Microsecond timestamp XOR-fold
-
     timestamp = int(time.time() \* 1000000) & 0xFFFFFFFFFFFFFFFF
-
     for i in range(min(8, size)):
-
         entropy[i] ^= (timestamp >> (i \* 8)) & 0xFF
-
     return bytes(entropy)
+```
 
 The timing jitter component exploits variability in CPU execution timing caused by cache effects, branch prediction, thermal noise in clock circuits, and OS scheduling events. This constitutes a physically-derived entropy source with characteristics distinct from the cryptographic PRNG, providing entropy independence between sources.
 
@@ -92,19 +80,15 @@ Implements the Shannon entropy estimator, normalised to [0, 1] by dividing by th
 
 def estimate_entropy(self, data: bytes) -> float:
 
+```
     freq = Counter(data)           # byte frequency counts
-
     length = len(data)
-
     entropy = 0.0
-
     for count in freq.values():
-
         p = count / length
-
         entropy -= p \* math.log2(p)
-
     return entropy / 8.0           # normalise to [0, 1]
+```
 
 Shannon entropy estimation as implemented here is the standard frequency-based plug-in estimator. For short sequences (< 256 bytes), this estimator exhibits downward bias due to the plug-in approximation undersampling the tail of the distribution [1]. However, for the OTB-LCG's use case — quality screening of 32-byte entropy batches — the estimate is sufficient for threshold filtering, as the absolute value matters less than the relative ranking of batches.
 
@@ -114,31 +98,21 @@ Generates Hull-Dobell-compliant LCG parameters a and c from harvested entropy, u
 
 ## 2.3.1 Multiplier Generation
 
+```python
 def generate_multiplier(self) -> int:
-
     entropy_bytes = self.harvester.harvest_primary_entropy(32)
-
     value = int.from_bytes(entropy_bytes, byteorder='big')
-
     result = 0
-
     for chunk in range(32):
-
         byte = entropy_bytes[chunk]
-
         bits = [(byte >> i) & 1 for i in range(8)]
-
         processed_bit = self.bf.cascade_xor8(\*bits)
-
         result ^= processed_bit << (chunk \* 8)
-
     result ^= value                    # blend with raw entropy
-
     result = (result & ~3) | 1         # enforce a ≡ 1 (mod 4)
-
     result &= (1 << 256) - 1           # truncate to 256 bits
-
     return result
+```
 
 The XOR-fold of the processed_bit stream with the raw entropy value serves a dual purpose: it preserves the information content of the original entropy (which would otherwise be compressed by the XOR cascade) while benefiting from the balanced distribution properties of the cascade output. The Hull-Dobell constraint a ≡ 1 (mod 4) is enforced deterministically by the final masking operation.
 
@@ -146,27 +120,22 @@ The XOR-fold of the processed_bit stream with the raw entropy value serves a dua
 
 The increment c is generated via a similar pipeline using PARITY7 (7-bit parity) rather than CASCADE_XOR8, providing independence between parameter generation streams. The constraint c ≡ 1 (mod 2) (odd increment) is enforced by setting the LSB.
 
+
 ## 2.4 BiasCorrector
 
 Implements Von Neumann bias correction as a static utility class. The algorithm processes consecutive bit pairs, outputting only on transitions (01 and 10), which occur with equal probability p(1-p) regardless of individual bit bias p.
 
+```python
 @staticmethod
-
 def von_neumann_correct(bits: str) -> str:
-
     corrected = []
-
     i = 0
-
     while i < len(bits) - 1:
-
         if bits[i] != bits[i+1]:      # discordant pair
-
             corrected.append(bits[i]) # output first bit
-
         i += 2                        # always advance by 2
-
     return ''.join(corrected)
+```
 
 The correct_bytes() wrapper converts a byte string to a bit string, applies Von Neumann correction, and converts the corrected bit string back to bytes. As the correction always reduces the bit count, the caller (CryptographicProcessor) pads the corrected output with fresh cryptographic randomness if length falls below the required 32 bytes.
 
@@ -174,39 +143,33 @@ The correct_bytes() wrapper converts a byte string to a bit string, applies Von 
 
 Implements the multi-stage output hardening pipeline. All methods are static; no state is maintained.
 
+```python
 @staticmethod
-
 def multi_round_process(data: bytes) -> bytes:
-
     # Stage 1: Von Neumann correction
-
     corrected = BiasCorrector.correct_bytes(data)
-
     # Stage 2: Padding if necessary
-
     if len(corrected) < 32:
-
         corrected = corrected + secrets.token_bytes(32 - len(corrected))
-
     # Stage 3: SHA-256 hash
-
     hashed = hashlib.sha256(corrected[:32]).digest()
+```
 
     # Stage 4: XOR folding to 16 bytes
 
+```
     folded = bytearray(16)
-
     for i in range(16):
-
         folded[i] = hashed[i] ^ hashed[i + 16]
-
     return bytes(folded)
+```
 
 The SHA-256 hash call (hashlib.sha256) uses CPython's C extension, which invokes native SHA-256 implementation. On x86_64 hardware with SHA-NI extensions (Intel Goldmont Plus and newer, AMD Zen+ and newer), this executes with hardware acceleration, significantly improving throughput. The XOR folding step reduces each 32-byte SHA-256 output to 16 bytes while maintaining near-maximum entropy density.
 
 ## 2.6 StatisticalValidator
 
 Implements three NIST SP 800-22 Rev. 1a tests for real-time output quality monitoring. Tests operate on bit-level representations of the output byte stream.
+
 
 ## 2.6.1 Frequency (Monobit) Test
 
@@ -238,29 +201,20 @@ The top-level generator class integrates all sub-systems and exposes the public 
 
 ## 2.7.1 State Representation and LCG Step
 
+```python
 def \_next(self) -> int:
-
     # Core LCG recurrence: X\_{n+1} = (a \* X_n + c) mod 2^256
-
     self.state = (self.multiplier \* self.state + self.increment) % self.MODULUS
-
     self.cycles += 1
-
     # Adaptive reseeding logic
-
     if self.cycles - self.last_reseed >= self.reseed_interval:
-
         state_entropy = self.\_get_state_entropy()
-
         bits = [(self.state.to_bytes(32,'big')[i]) & 1 for i in range(8)]
-
         reseed_trigger = self.bf.parity8(\*bits)
-
         if reseed_trigger or state_entropy < 0.8:
-
             self.\_regenerate_parameters()
-
     return self.state
+```
 
 Python's native arbitrary-precision integer arithmetic handles all 256-bit operations transparently. The modulus self.MODULUS = 1 << 256 ensures natural wrap-around behaviour. The reseed trigger uses PARITY8 applied to the eight LSBs of the first 8 bytes of the state — a deterministic but unpredictable criterion that prevents reseeding from becoming predictable to an adversary who knows the state.
 
@@ -268,19 +222,15 @@ Python's native arbitrary-precision integer arithmetic handles all 256-bit opera
 
 def get_bytes(self, count: int) -> bytes:
 
+```
     result = bytearray()
-
     while len(result) < count:
-
         state = self.\_next()
-
         raw_bytes = state.to_bytes(32, byteorder='big')
-
         processed = CryptographicProcessor.multi_round_process(raw_bytes)
-
         result.extend(processed)   # 16 bytes per LCG cycle
-
     return bytes(result[:count])   # trim to exact requested length
+```
 
 Each LCG cycle produces 32 raw bytes, which after Von Neumann correction and XOR folding yield 16 output bytes. The output buffer is trimmed to the exact count requested. For large count values, the tight loop efficiently amortises the per-call overhead.
 
@@ -331,13 +281,12 @@ Benchmarks were conducted on a standard x86_64 Python 3.11 environment. Timing m
 
 The benchmark generates 100,000 bytes (100 KB) of output and measures elapsed wall-clock time:
 
+```
 start = time.perf_counter()
-
 total_bytes = sum(len(rng.get_bytes(1024)) for \_ in range(100))
-
 elapsed = time.perf_counter() - start
-
 throughput = total_bytes / elapsed  # bytes per second
+```
 
 | Component | Throughput (typical) | Notes |
 | --- | --- | --- |
@@ -367,95 +316,79 @@ Initialisation involves 10 sequential entropy harvest calls and two parameter ge
 
 The implementation requires Python 3.6+ with no external dependencies. The module is a single self-contained file:
 
+```
 # Import
+```
 
 from transcendental_lcg import OptimizedTranscendentalLCG
 
 ## 5.2 Basic Usage
 
+```
 # Initialise with hardware entropy
-
 rng = OptimizedTranscendentalLCG()
-
 # Generate random bytes (any length)
-
 random_bytes = rng.get_bytes(32)     # 256-bit AES key
-
 iv = rng.get_bytes(16)              # 128-bit IV
-
 # Generate random integers
-
 uint32 = rng.get_int(32)            # 32-bit unsigned integer
-
 uint64 = rng.get_int(64)            # 64-bit unsigned integer
-
 uint256 = rng.get_int(256)          # 256-bit integer
-
 # Generate random float in [0, 1)
-
 f = rng.get_float()                 # 53-bit precision
+```
 
 ## 5.3 Statistical Validation
 
+```
 # Run inline NIST tests on 2048-byte sample
-
 result = rng.validate_output(sample_size=2048)
-
 print(f"Entropy: {result['entropy']:.4f}")
-
 print(f"Tests passed: {result['validation']['passed_tests']}/")
-
 print(f"              {result['validation']['total_tests']}")
-
 print(f"Pass rate: {result['validation']['pass_rate']:.1%}")
+```
 
 ## 5.4 Deterministic Mode
 
 For reproducible testing (not for cryptographic use), the generator can be seeded deterministically:
 
+```
 # Deterministic seed (disables hardware entropy for initial state)
+```
 
 rng = OptimizedTranscendentalLCG(seed=0xDEADBEEF)
 
+```
 # WARNING: Parameters a and c are still hardware-entropy-derived
-
 # Full determinism requires seeding the ParameterGenerator as well
+```
 
 ## 5.5 Cryptographic Key Generation Example
 
+```
 # Generate a 256-bit encryption key
-
 key_256 = rng.get_bytes(32)
-
 print(f'AES-256 key: {key_256.hex()}')
-
 # Generate an AES-128 key + IV pair
-
 aes_key = rng.get_bytes(16)
-
 aes_iv  = rng.get_bytes(16)
-
 # Generate a 64-byte HMAC key
-
 hmac_key = rng.get_bytes(64)
+```
 
 ## 5.6 Monte Carlo Simulation Example
 
+```
 # Estimate pi using Monte Carlo (1,000,000 samples)
-
 inside = 0
-
 for \_ in range(1_000_000):
-
     x, y = rng.get_float(), rng.get_float()
-
     if x\*x + y\*y <= 1.0:
-
         inside += 1
-
 pi_estimate = 4 \* inside / 1_000_000
-
 print(f'pi ≈ {pi_estimate:.6f}')
+```
 
 ## 6. Known Limitations and Future Work
 

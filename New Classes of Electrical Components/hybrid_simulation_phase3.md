@@ -62,27 +62,22 @@ The fraction of maximum active warps. Higher occupancy hides memory latency by s
 
 For the batched MNA solver (N circuit instances, each with an n×n matrix), memory layout matters enormously:
 
+```
 # WRONG layout — bad for GPU:
-
 # G[instance, row, col]  stored as (N, n, n)
-
 # Thread k accesses G[k, 0, 0], G[k, 0, 1], ...  — non-coalesced
-
 # RIGHT layout — coalesced:
-
 # G[row, col, instance]  stored as (n, n, N)
-
 # Thread k accesses G[0, 0, k], G[0, 0, k+1], ...  — coalesced!
-
 # All 32 warp threads read G[row,col] for 32 consecutive instances
-
 # PyTorch equivalent:
-
 # BAD:  G = torch.zeros(N, n, n)   # instance-major
-
 # GOOD: G = torch.zeros(n, n, N)   # instance-minor (then permute for solve)
+```
 
+```
 # For batched solve, permute just before calling linalg.solve:
+```
 
 G_batch = G.permute(2, 0, 1)   # (N, n, n) — cuBLAS expects this
 
@@ -94,11 +89,11 @@ The biggest GPU performance killer specific to hybrid components is state-machin
 
 The solution is state sorting: before each kernel launch, sort instances by their current discrete state. Instances in the same state are grouped into the same warps, eliminating divergence:
 
+```python
 import torch
-
 def sort_by_state(x_batch, state_batch):
-
     '''
+```
 
     Sort N circuit instances by their discrete state.
 
@@ -106,21 +101,16 @@ def sort_by_state(x_batch, state_batch):
 
     Returns: sorted tensors AND inverse permutation to restore original order.
 
+```python
     '''
-
     sort_idx    = torch.argsort(state_batch)          # sort by state
-
     inv_idx     = torch.argsort(sort_idx)             # inverse permutation
-
     x_sorted    = x_batch[sort_idx]
-
     state_sorted = state_batch[sort_idx]
-
     return x_sorted, state_sorted, sort_idx, inv_idx
-
 def run_kernel_by_state(kernel_fn, x_batch, state_batch, \*args):
-
     '''
+```
 
     Run a kernel on instances grouped by state.
 
@@ -132,21 +122,16 @@ def run_kernel_by_state(kernel_fn, x_batch, state_batch, \*args):
 
     # Find boundaries between state groups
 
+```
     boundaries = torch.where(torch.diff(s_s, prepend=s_s[:1]-1) != 0)[0]
-
     results = torch.empty_like(x_s)
-
     for i, start in enumerate(boundaries):
-
         end = boundaries[i+1] if i+1 < len(boundaries) else len(s_s)
-
         state_val = s_s[start].item()
-
         # All instances in [start:end] have the same state — no divergence
-
         results[start:end] = kernel_fn(x_s[start:end], state_val, \*args)
-
     return results[inv_idx]  # restore original order
+```
 
 SECTION 2  ·  DIRECT GPU PROGRAMMING FOR MAXIMUM THROUGHPUT
 
@@ -157,241 +142,130 @@ PyTorch's torch.linalg.solve is excellent for large matrices. But for the small 
 
 The key idea: assign one thread block per circuit instance. Each block loads its n×n matrix into shared memory, factors it with LU in-place, solves the system, and writes back. All arithmetic stays on-chip — no global memory traffic during the solve.
 
+```
 // hybrid_lu.cu — Custom batched LU solve for small matrices (n <= 32)
-
 // One thread block per circuit instance. One thread per matrix row.
-
 #include <cuda_runtime.h>
-
 #include <device_launch_parameters.h>
-
 // Maximum matrix size that fits in shared memory with one thread per row
-
 #define MAX_N 32
-
 \_\_global\_\_ void batched_lu_solve(
-
     float\* \_\_restrict\_\_ G,    // (N, n, n) — G matrices, row-major
-
     float\* \_\_restrict\_\_ b,    // (N, n)    — RHS vectors
-
     float\* \_\_restrict\_\_ x,    // (N, n)    — output solution
-
     int n,                    // matrix size
-
     int N                     // number of instances
-
 ) {
-
     // Each block handles one instance
-
     int inst = blockIdx.x;
-
     int row  = threadIdx.x;
-
     if (inst >= N || row >= n) return;
-
     // Load this instance's matrix into shared memory
-
     \_\_shared\_\_ float Gs[MAX_N][MAX_N];
-
     \_\_shared\_\_ float bs[MAX_N];
-
     \_\_shared\_\_ float pivot_row[MAX_N];
-
     float\* G_inst = G + inst \* n \* n;
-
     float\* b_inst = b + inst \* n;
-
     for (int col = 0; col < n; col++)
-
         Gs[row][col] = G_inst[row \* n + col];
-
     bs[row] = b_inst[row];
-
     \_\_syncthreads();
-
     // LU factorisation (Doolittle, partial pivoting, in shared memory)
-
     for (int k = 0; k < n; k++) {
-
         // Find pivot in column k (thread 0 does this)
-
         if (row == 0) {
-
             int piv = k;
-
             float maxval = fabsf(Gs[k][k]);
-
             for (int i = k+1; i < n; i++) {
-
                 if (fabsf(Gs[i][k]) > maxval) { maxval = fabsf(Gs[i][k]); piv = i; }
-
             }
-
             // Swap rows k and piv (store pivot row in pivot_row[])
-
             if (piv != k) {
-
                 for (int j = 0; j < n; j++) {
-
                     float tmp = Gs[k][j]; Gs[k][j] = Gs[piv][j]; Gs[piv][j] = tmp;
-
                 }
-
                 float tmp = bs[k]; bs[k] = bs[piv]; bs[piv] = tmp;
-
             }
-
             // Broadcast pivot row to pivot_row[]
-
             for (int j = 0; j < n; j++) pivot_row[j] = Gs[k][j];
-
         }
-
         \_\_syncthreads();
-
         // Each thread eliminates its own row below the pivot
-
         if (row > k) {
-
             float factor = Gs[row][k] / (pivot_row[k] + 1e-30f);
-
             Gs[row][k] = factor;  // store L below diagonal
-
             for (int j = k+1; j < n; j++)
-
                 Gs[row][j] -= factor \* pivot_row[j];
-
             bs[row] -= factor \* bs[k];
-
         }
-
         \_\_syncthreads();
-
     }
-
     // Back substitution (sequential, thread 0 handles it)
-
     if (row == 0) {
-
         float xs[MAX_N];
-
         // Back sub for U
-
         for (int i = n-1; i >= 0; i--) {
-
             xs[i] = bs[i];
-
             for (int j = i+1; j < n; j++) xs[i] -= Gs[i][j] \* xs[j];
-
             xs[i] /= (Gs[i][i] + 1e-30f);
-
         }
-
         float\* x_inst = x + inst \* n;
-
         for (int i = 0; i < n; i++) x_inst[i] = xs[i];
-
     }
-
 }
-
 // Launcher function (called from Python via ctypes or PyTorch custom op)
-
 void launch_batched_lu(float\* G, float\* b, float\* x, int n, int N) {
-
     dim3 grid(N);         // one block per instance
-
     dim3 block(MAX_N);    // one thread per row
-
     batched_lu_solve<<<grid, block>>>(G, b, x, n, N);
-
     cudaDeviceSynchronize();
-
 }
+```
 
 ## 2.2  Calling the CUDA Kernel from Python
 
+```python
 import torch
-
 import ctypes
-
 import numpy as np
-
 # Compile the kernel:
-
 # nvcc -O3 -shared -fPIC -o hybrid_lu.so hybrid_lu.cu
-
 def load_cuda_solver(lib_path='./hybrid_lu.so'):
-
     lib = ctypes.CDLL(lib_path)
-
     lib.launch_batched_lu.argtypes = [
-
         ctypes.c_void_p,  # G
-
         ctypes.c_void_p,  # b
-
         ctypes.c_void_p,  # x
-
         ctypes.c_int,     # n
-
         ctypes.c_int,     # N
-
     ]
-
     lib.launch_batched_lu.restype = None
-
     return lib
-
 def batched_solve_cuda(G_batch, b_batch, lib):
-
     '''
-
     Solve G_batch @ x = b_batch using custom CUDA kernel.
-
     G_batch: (N, n, n) float32 CUDA tensor
-
     b_batch: (N, n)    float32 CUDA tensor
-
     Returns: x of shape (N, n)
-
     '''
-
     assert G_batch.is_cuda and G_batch.dtype == torch.float32
-
     N, n, \_ = G_batch.shape
-
     x_batch  = torch.empty(N, n, device='cuda', dtype=torch.float32)
-
     # Make contiguous (CUDA kernel expects row-major, contiguous)
-
     G_c = G_batch.contiguous()
-
     b_c = b_batch.contiguous()
-
     lib.launch_batched_lu(
-
         ctypes.c_void_p(G_c.data_ptr()),
-
         ctypes.c_void_p(b_c.data_ptr()),
-
         ctypes.c_void_p(x_batch.data_ptr()),
-
         ctypes.c_int(n),
-
         ctypes.c_int(N),
-
     )
-
     return x_batch
-
 # Fallback: PyTorch pure-Python version for when CUDA kernel not compiled
-
 def batched_solve_torch(G_batch, b_batch):
-
     return torch.linalg.solve(G_batch, b_batch)
+```
 
 ## 2.3  Fused MNA Stamp + Solve Kernel
 
@@ -399,97 +273,56 @@ The biggest optimisation is fusing the stamp assembly and LU solve into a single
 
 // Fused stamp+solve kernel: one block per instance.
 
+
 // Computes G matrix entries AND solves in shared memory without global write.
 
+```
 \_\_global\_\_ void fused_mna_solve(
-
     // Component parameters (one value per instance)
-
     float\* \_\_restrict\_\_ R_vals,      // (N,) resistor values
-
     float\* \_\_restrict\_\_ mem_w,       // (N,) memristor state w
-
     float\* \_\_restrict\_\_ mem_Ron,     // (N,) memristor Ron
-
     float\* \_\_restrict\_\_ mem_Roff,    // (N,) memristor Roff
-
     float\* \_\_restrict\_\_ mem_D,       // (N,) memristor D
-
     float\* \_\_restrict\_\_ V_source,    // (N,) voltage source values
-
     float\* \_\_restrict\_\_ x_prev,      // (N, n) previous solution
-
     float\* \_\_restrict\_\_ x_new,       // (N, n) output
-
     float dt, int n, int N
-
 ) {
-
     int inst = blockIdx.x;
-
     if (inst >= N) return;
-
     \_\_shared\_\_ float G[8][8];  // 8x8 for our example circuit
-
     \_\_shared\_\_ float b[8];
-
     int tid = threadIdx.x;
-
     // Zero the matrix (all threads participate)
-
     if (tid < 8) {
-
         for (int j = 0; j < 8; j++) G[tid][j] = 0.0f;
-
         b[tid] = 0.0f;
-
     }
-
     \_\_syncthreads();
-
     if (tid == 0) {
-
         // ── Stamp resistor (nodes 1 and 2, indices 0 and 1) ──
-
         float g_r = 1.0f / R_vals[inst];
-
         G[0][0] += g_r;  G[1][1] += g_r;
-
         G[0][1] -= g_r;  G[1][0] -= g_r;
-
         // ── Stamp memristor (nodes 2 and 0=GND, index 1 and GND) ──
-
         float w   = mem_w[inst];
-
         float D   = mem_D[inst];
-
         float R_m = mem_Ron[inst]\*(w/D) + mem_Roff[inst]\*(1.0f - w/D);
-
         float g_m = 1.0f / R_m;
-
         G[1][1] += g_m;   // node 2 to GND
-
         // ── Stamp voltage source (node 1 to GND, extra variable at index 2) ──
-
         G[0][2] += 1.0f;  G[2][0] += 1.0f;
-
         b[2]    += V_source[inst];
-
     }
-
     \_\_syncthreads();
-
     // ── In-place LU solve (reuse the 2.1 logic) ──
-
     // ... (same LU code as above, operating on shared G and b) ...
-
     // Write result
-
     if (tid < n) x_new[inst \* n + tid] = b[tid];  // reuse b as solution
-
 }
-
 *⚡  The fused kernel eliminates two global memory round-trips per timestep (one for G write, one for G read before solve). For N=100,000 instances at 1 GHz clock, these round-trips would cost ~16 ms per timestep. The fused kernel cuts this to near zero.*
+```
 
 SECTION 3  ·  RADAU IIA AND SDIRK FOR MULTI-SCALE CIRCUITS
 
@@ -514,6 +347,7 @@ gamma ~ 1/tau ~ 10^9
 **Storage capacitor**
 1/(RC) ~ 10^6
 
+
 **Stiffness ratio**
 3×10^11 / 10^6 = 3×10^5 — extremely stiff
 
@@ -529,165 +363,118 @@ Radau IIA is an implicit Runge-Kutta method with s stages. The 3-stage (order 5)
 
 For a system dx/dt = f(x, t), one Radau IIA step from t_n to t\_{n+1} = t_n + dt requires solving for stage values k_1, k_2, k_3 simultaneously:
 
+
 **k_i  =  f( x_n + dt · sum_j(a_ij · k_j),  t_n + c_i · dt )    i = 1, 2, 3**
 **x\_{n+1}  =  x_n  +  dt · (b_1·k_1 + b_2·k_2 + b_3·k_3)**
 The Butcher tableau for 3-stage Radau IIA (exact coefficients):
 
+```python
 # Radau IIA 3-stage Butcher tableau (order 5, L-stable)
-
 import numpy as np
-
 # Abscissae (stage times)
-
 c = np.array([
-
     (4 - np.sqrt(6)) / 10,   # c1 ≈ 0.1550
-
     (4 + np.sqrt(6)) / 10,   # c2 ≈ 0.6450
-
     1.0,                      # c3 = 1 (endpoint)
-
 ])
-
 # Runge-Kutta matrix A
-
 A = np.array([
-
     [(88 - 7\*np.sqrt(6))/360,   (296 - 169\*np.sqrt(6))/1800, (-2 + 3\*np.sqrt(6))/225],
-
     [(296 + 169\*np.sqrt(6))/1800, (88 + 7\*np.sqrt(6))/360,   (-2 - 3\*np.sqrt(6))/225],
-
     [(16 - np.sqrt(6))/36,        (16 + np.sqrt(6))/36,        1/9                    ],
-
 ])
+```
 
+```
 # Weights (same as last row for Radau IIA)
-
 b = A[2]   # b = [(16-sqrt(6))/36, (16+sqrt(6))/36, 1/9]
 
+```
+```
 # Error estimation weights (embedded lower-order method)
-
 e = np.array([-13/200 + np.sqrt(6)/200,
-
                13/200 + np.sqrt(6)/200,
-
                1/200 ])
+```
 
 ## 3.3  Newton Iteration for Radau IIA Stages
 
 The stage equations are implicit — all three k_i appear on both sides. We solve them with a simplified Newton iteration (using the same Jacobian for multiple steps, refreshed periodically — this is the key to efficiency):
 
+```python
 def radau_iia_step(f, J_func, x_n, t_n, dt,
-
                     A_butcher, b_butcher, c_butcher,
-
                     tol=1e-8, max_iter=10, refresh_jac_every=3):
-
     '''
+```
 
     One Radau IIA step. Solves stage equations with simplified Newton.
 
+```python
     f:         callable(x, t) -> dx/dt
-
     J_func:    callable(x, t) -> Jacobian df/dx  (can return None to use FD)
-
     x_n:       state at t_n
-
     dt:        timestep
-
     Returns:   x\_{n+1}, error_estimate, n_iter
-
     '''
-
     import numpy as np
-
     s  = len(c_butcher)   # number of stages
-
     nx = len(x_n)
+```
 
     # Initial guess: all stages equal to x_n
 
+```
     K  = np.tile(x_n, (s, 1))   # shape (s, nx)
-
     # Build simplified Newton matrix (frozen Jacobian)
-
     J = J_func(x_n, t_n)
+```
 
     if J is None:   # finite difference Jacobian
 
+```
         J = finite_diff_jacobian(f, x_n, t_n)
-
     # LHS matrix: I_sn - dt \* (A kron I_n) @ J_block
-
     I_s  = np.eye(s)
-
     I_n  = np.eye(nx)
-
     J_block = np.kron(I_s, J)   # block-diagonal Jacobian (sn × sn)
-
     A_kron  = np.kron(A_butcher, I_n)
-
     LHS     = np.eye(s\*nx) - dt \* A_kron @ J_block
-
     LHS_lu  = np.linalg.lu_factor(LHS)   # factorise once, reuse
-
     for iteration in range(max_iter):
+```
 
         # Evaluate f at each stage
 
+```python
         F = np.zeros((s, nx))
-
         for i in range(s):
-
             x_stage = x_n + dt \* A_butcher[i] @ K
-
             F[i] = f(x_stage, t_n + c_butcher[i]\*dt)
-
         # Residual: K - F(K)
-
         R = K - F
-
         if np.abs(R).max() < tol:
-
             break
-
         # Newton update: LHS @ delta_K = R (vectorised)
-
         delta_K = np.linalg.lu_solve(LHS_lu, R.ravel()).reshape(s, nx)
-
         K -= delta_K
-
     # Solution
-
     x_new = x_n + dt \* b_butcher @ K
-
     # Error estimate (embedded formula)
-
     e_coeff = np.array([(-13+np.sqrt(6))/200, (-13-np.sqrt(6))/200, 1/200])
-
     err = dt \* abs(e_coeff @ K).max()
-
     return x_new, err, iteration+1
-
 def finite_diff_jacobian(f, x, t, eps=1e-7):
-
     '''Numerical Jacobian by central finite differences.'''
-
     n  = len(x)
-
     f0 = f(x, t)
-
     J  = np.zeros((n, n))
-
     for i in range(n):
-
         x_plus  = x.copy(); x_plus[i]  += eps
-
         x_minus = x.copy(); x_minus[i] -= eps
-
         J[:, i] = (f(x_plus, t) - f(x_minus, t)) / (2\*eps)
-
     return J
+```
 
 ## 3.4  SDIRK — Singly Diagonally Implicit RK (Faster Variant)
 
@@ -696,81 +483,57 @@ Radau is expensive because all s stage systems are coupled. SDIRK (Singly Diagon
 **k_i  =  f( x_n + dt·[ gamma·k_i + sum\_{j<i} a_ij·k_j ],  t_n + c_i·dt )**
 The value gamma appears on every diagonal of A. Setting it equal to the same value means only one matrix (I - dt·gamma·J) needs to be factorised — and it applies to all stages. For a 3-stage SDIRK of order 4:
 
+```python
+
+```
+```
 # 4-stage SDIRK order 4 (L-stable)
 
+```
+```
 # gamma chosen so the method is L-stable
-
 gamma = 0.5 + np.sqrt(3)/6   # ≈ 0.7887
-
 A_sdirk = np.array([
-
     [gamma,       0,       0,     0    ],
-
     [0.5-gamma,   gamma,   0,     0    ],
-
     [2\*gamma,     1-4\*gamma, gamma, 0  ],
-
     [1/6,         1/6,     1/6,   1/6  ],
-
 ])
-
 c_sdirk = np.array([gamma, 0.5, 1-gamma, 1.0])
-
 b_sdirk = A_sdirk[-1]
-
 def sdirk_step(f, J_func, x_n, t_n, dt, gamma=0.5+np.sqrt(3)/6):
-
     '''
+```
 
     4-stage SDIRK step. Single LU factorisation shared across all stages.
 
     Much faster than Radau for moderately stiff problems.
 
+```
     '''
-
     J    = J_func(x_n, t_n)
-
     if J is None: J = finite_diff_jacobian(f, x_n, t_n)
-
     n    = len(x_n)
-
     # ONE factorisation for all stages:
-
     M    = np.eye(n) - dt \* gamma \* J
-
     M_lu = np.linalg.lu_factor(M)
-
     stages = []
-
     x_acc  = x_n.copy()
-
     for i, (c_i, a_row) in enumerate(zip(c_sdirk[:-1], A_sdirk[:-1])):
-
         # Stage i: solve  M @ k_i = f(x_n + dt \* sum\_{j<=i} a_ij \* k_j)
-
         # Predictor: use previous stages
-
         x_pred = x_n.copy()
-
         for j, k_j in enumerate(stages):
-
             x_pred += dt \* A_sdirk[i][j] \* k_j
-
         rhs  = f(x_pred, t_n + c_i\*dt)
-
         k_i  = np.linalg.lu_solve(M_lu, rhs)
-
         stages.append(k_i)
-
     # Final update
-
     x_new = x_n.copy()
-
     for j, k_j in enumerate(stages):
-
         x_new += dt \* b_sdirk[j] \* k_j
-
     return x_new
+```
 
 ## 3.5  Automatic Stiffness Detection
 
@@ -784,43 +547,35 @@ def estimate_stiffness(f, x, t, dt_explicit):
 
     Uses the ratio of the explicit stability limit to the desired timestep.
 
+```
     Returns: (is_stiff, recommended_dt)
-
     '''
-
     J  = finite_diff_jacobian(f, x, t)
+```
 
     # Spectral radius via power iteration (cheap, 5 iterations sufficient)
 
+```
     v  = np.random.randn(len(x))
-
     v /= np.linalg.norm(v)
-
     for \_ in range(5):
-
         v  = J @ v
-
         rho = np.linalg.norm(v)
-
         if rho > 1e-30: v /= rho
-
     # Explicit RK4 stability limit: dt < 2.8 / spectral_radius
-
     dt_stable_explicit = 2.8 / (rho + 1e-30)
-
     is_stiff = dt_stable_explicit < dt_explicit \* 0.1
+```
 
     # Recommend timestep for implicit method
 
+```
     # Implicit can use dt ~ accuracy_target / error_constant
-
     eigenvalues = np.linalg.eigvals(J)
-
     lambda_min  = np.abs(eigenvalues[eigenvalues != 0]).min() if len(eigenvalues) > 0 else 1
-
     dt_implicit_rec = 0.1 / (lambda_min + 1e-30)
-
     return is_stiff, dt_stable_explicit, dt_implicit_rec
+```
 
 SECTION 4  ·  SCALING TO THOUSANDS OF NODES
 
@@ -838,183 +593,115 @@ The nonzero values in row-major order
 The column index of each nonzero value
 
 **indptr (n+1,)**
+```python
 indptr[i] to indptr[i+1] gives the range of data/indices for row i
-
 import numpy as np
-
 import scipy.sparse as sp
-
 import scipy.sparse.linalg as spla
-
 class SparseMNASystem:
-
     '''
+```
 
     MNA system using sparse matrix storage for large circuits.
 
     Falls back to dense for n < 50 (sparse overhead not worth it).
 
+```python
     '''
-
     def \_\_init\_\_(self, n_nodes, dt=1e-9, sparse_threshold=50):
-
         self.n   = n_nodes - 1
-
         self.dt  = dt
-
         self.use_sparse = (self.n >= sparse_threshold)
-
         self.components = []
-
         self.\_sparsity_pattern = None   # cached symbolic factorisation
-
     def build_sparse(self, x_prev=None):
+```
 
         '''Build MNA matrix in COO format, convert to CSR.'''
 
+```python
         if x_prev is None: x_prev = np.zeros(self.n)
-
         rows, cols, vals = [], [], []
-
         b = np.zeros(self.n)
-
         def stamp(i, j, g):
-
             if i >= 0 and i < self.n:
-
                 rows.append(i); cols.append(i); vals.append(g)
-
             if j >= 0 and j < self.n:
-
                 rows.append(j); cols.append(j); vals.append(g)
-
             if i >= 0 and j >= 0 and i < self.n and j < self.n:
-
                 rows.append(i); cols.append(j); vals.append(-g)
-
                 rows.append(j); cols.append(i); vals.append(-g)
-
         for comp in self.components:
-
             ni, nj = comp.node_p - 1, comp.node_n - 1
-
             Vi = x_prev[ni] if 0<=ni<self.n else 0.0
-
             Vj = x_prev[nj] if 0<=nj<self.n else 0.0
-
             V_b = Vi - Vj
-
             ct  = comp.comp_type.value
-
             if ct == 'R':
-
                 stamp(ni, nj, 1.0/comp.params['R'])
-
             elif ct == 'C':
-
                 c_val = comp.params['C']
-
                 stamp(ni, nj, c_val/self.dt)
-
                 if 0<=ni<self.n: b[ni] += c_val/self.dt \* V_b
-
                 if 0<=nj<self.n: b[nj] -= c_val/self.dt \* V_b
-
             elif ct in ('MEM','QTR','JJ','GMR'):
-
                 G_eq, I_eq = comp.companion(V_b)
-
                 stamp(ni, nj, G_eq)
-
                 if 0<=ni<self.n: b[ni] -= I_eq
-
                 if 0<=nj<self.n: b[nj] += I_eq
-
         G_csr = sp.csr_matrix((vals, (rows,cols)), shape=(self.n,self.n))
-
         G_csr.eliminate_zeros()
-
         return G_csr, b
-
     def solve_sparse(self, x_prev):
-
         G, b = self.build_sparse(x_prev)
-
         # Use SuperLU (direct) for small-medium, GMRES (iterative) for large
-
         if self.n < 500:
-
             return spla.spsolve(G, b)
-
         else:
+```
 
             # GMRES with incomplete LU preconditioner
 
+```
             ilu  = spla.spilu(G.tocsc(), drop_tol=1e-3)
-
             M    = spla.LinearOperator((self.n,self.n), ilu.solve)
-
             x, info = spla.gmres(G, b, M=M, tol=1e-8, maxiter=100)
-
             if info != 0:
-
                 x = spla.spsolve(G, b)  # fallback to direct
-
             return x
+```
 
 ## 4.2  Fill-Reducing Reordering (AMD)
 
 Sparse LU factorisation creates fill-in — new nonzeros in positions that were originally zero. The amount of fill-in depends on the order of rows/columns. The Approximate Minimum Degree (AMD) algorithm reorders the matrix to minimise fill-in, dramatically reducing factorisation cost:
 
+```python
 from scipy.sparse.csgraph import reverse_cuthill_mckee
-
 import scipy.sparse as sp
-
 def reorder_circuit_for_sparse(G_csr):
-
     '''
-
     Reorder circuit nodes to minimise sparse LU fill-in.
-
     Uses Reverse Cuthill-McKee (RCM) ordering — minimises bandwidth.
-
     AMD (Approximate Minimum Degree) is better but requires scikit-sparse.
-
     '''
-
     # RCM ordering
-
     perm = reverse_cuthill_mckee(G_csr, symmetric_mode=True)
-
     G_reordered = G_csr[perm][:, perm]
-
     return G_reordered, perm
-
 def measure_fill_in(G_csr):
-
     '''Compare fill-in before and after reordering.'''
-
     nnz_before = G_csr.nnz
-
     # Symbolic LU (count fill-in without doing arithmetic)
-
     LU = sp.linalg.splu(G_csr.tocsc())
-
     nnz_after = LU.L.nnz + LU.U.nnz
-
     G_r, \_ = reorder_circuit_for_sparse(G_csr)
-
     LU_r   = sp.linalg.splu(G_r.tocsc())
-
     nnz_reordered = LU_r.L.nnz + LU_r.U.nnz
-
     print(f'Original nnz:   {nnz_before}')
-
     print(f'LU fill-in:     {nnz_after}  ({nnz_after/nnz_before:.1f}x)')
-
     print(f'Reordered LU:   {nnz_reordered}  ({nnz_reordered/nnz_before:.1f}x)')
-
     return nnz_before, nnz_after, nnz_reordered
+```
 
 SECTION 5  ·  THE ADJOINT METHOD FOR CIRCUIT GRADIENTS
 
@@ -1030,6 +717,7 @@ We have a scalar loss L = integral_0^T ell(x(t), x_target) dt that measures how 
 
 The adjoint variable lambda(t) satisfies the backward-in-time adjoint equation:
 
+
 **-C^T · d_lambda/dt  +  (dG/dx)^T · lambda  =  -d_ell/dx**
 With terminal condition lambda(T) = 0. The gradient of the loss with respect to parameters is then:
 
@@ -1040,105 +728,66 @@ This requires only ONE forward solve (to get x(t)) and ONE backward solve (to ge
 
 The easiest way to implement differentiable simulation in Python is to write the entire simulation using PyTorch operations. Autograd then automatically constructs the adjoint/backpropagation graph:
 
+```python
 import torch
-
 def differentiable_mna_step(G_params, x_prev, dt, topology):
-
     '''
+```
 
     One MNA timestep implemented entirely in PyTorch.
 
+```python
     G_params: dict of parameter tensors with requires_grad=True
-
     Returns:  x_new (gradient flows through to G_params)
-
     '''
-
     n = x_prev.shape[-1]
-
     G = torch.zeros(\*x_prev.shape[:-1], n, n,
-
                      dtype=torch.float64, device=x_prev.device)
-
     b = torch.zeros_like(x_prev)
-
     for comp in topology['components']:
-
         ni, nj = comp['node_p']-1, comp['node_n']-1
-
         if comp['type'] == 'R':
-
             g = 1.0 / G_params[comp['name']]   # differentiable!
-
             if ni >= 0: G[..., ni, ni] = G[..., ni, ni] + g
-
             if nj >= 0: G[..., nj, nj] = G[..., nj, nj] + g
-
             if ni >= 0 and nj >= 0:
-
                 G[..., ni, nj] = G[..., ni, nj] - g
-
                 G[..., nj, ni] = G[..., nj, ni] - g
-
         elif comp['type'] == 'MEM':
-
             w    = G_params[comp['name']+'\_w']
-
             Ron  = G_params[comp['name']+'\_Ron']
-
             Roff = G_params[comp['name']+'\_Roff']
-
             D    = G_params[comp['name']+'\_D']
-
             R_m  = Ron\*(w/D) + Roff\*(1.0 - w/D)
-
             g    = 1.0 / R_m   # gradient flows through w, Ron, Roff, D
-
             if ni >= 0: G[..., ni, ni] = G[..., ni, ni] + g
-
             if nj >= 0: G[..., nj, nj] = G[..., nj, nj] + g
-
     x_new = torch.linalg.solve(G + torch.eye(n, dtype=torch.float64)\*1e-15, b)
-
     return x_new
-
 def differentiable_simulate(params, topology, t_end, dt, V_source_fn):
-
     '''
+```
 
     Full differentiable simulation. All operations in PyTorch.
 
+```
     params:  dict of tensors with requires_grad=True
-
     Returns: trajectory tensor (T, n_nodes) — gradients tracked
-
     '''
-
     n_nodes = topology['n_nodes'] - 1
-
     x = torch.zeros(n_nodes, dtype=torch.float64)
-
     trajectory = [x]
-
     n_steps = int(t_end / dt)
-
     for step in range(n_steps):
-
         t = step \* dt
-
         # Update source parameters
-
         params['V_src'] = torch.tensor(V_source_fn(t),
-
                                         dtype=torch.float64,
-
                                         requires_grad=False)
-
         x = differentiable_mna_step(params, x, dt, topology)
-
         trajectory.append(x)
-
     return torch.stack(trajectory)   # (n_steps+1, n_nodes)
+```
 
 SECTION 6  ·  GRADIENT DESCENT ON PHYSICAL PARAMETERS
 
@@ -1167,167 +816,97 @@ L = -P(spec_met) = -E[1\_{V_out in [lo,hi]}]  — maximise fraction meeting spec
 
 ## 6.2  Complete Inverse Design Loop
 
+```python
 import torch
-
 import torch.optim as optim
-
 import numpy as np
-
 def inverse_design(
-
     topology,
-
     V_source_fn,
-
     V_target,          # target output waveform, shape (T,)
-
     t_end, dt,
-
     param_bounds,      # dict: name -> (lo, hi) physical bounds
-
     n_iter=200,
-
     lr=1e-3,
-
     verbose=True
-
 ):
-
     '''
+```
 
     Optimise circuit parameters to match a target waveform.
 
     Uses Adam optimiser with gradient clipping.
 
+```
     param_bounds enforced via sigmoid reparameterisation.
-
     '''
-
     # Reparameterise: theta_raw in R -> theta in [lo, hi] via sigmoid
-
     raw_params = {}
-
     for name, (lo, hi) in param_bounds.items():
-
         # Initialise at midpoint
-
         init_raw = 0.0  # sigmoid(0) = 0.5 -> midpoint
-
         raw_params[name] = torch.tensor(init_raw, dtype=torch.float64,
-
                                         requires_grad=True)
-
     optimizer = optim.Adam(list(raw_params.values()), lr=lr)
-
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=n_iter)
-
     loss_history = []
-
     param_history = []
-
     V_tgt = torch.tensor(V_target, dtype=torch.float64)
-
     for iteration in range(n_iter):
-
         optimizer.zero_grad()
-
         # Map raw -> physical via sigmoid
-
         params = {}
-
         for name, (lo, hi) in param_bounds.items():
-
             params[name] = lo + (hi - lo) \* torch.sigmoid(raw_params[name])
-
         # Forward simulation (differentiable)
-
         traj = differentiable_simulate(params, topology, t_end, dt, V_source_fn)
-
         V_out = traj[:, 0]  # output at node 1
-
         # Loss: L2 waveform match + L2 regularisation
-
         T_min = min(len(V_out), len(V_tgt))
-
         loss_waveform = ((V_out[:T_min] - V_tgt[:T_min])\*\*2).mean()
-
         loss_reg = 0.01 \* sum(p\*\*2 for p in raw_params.values())
-
         loss = loss_waveform + loss_reg
-
         # Backward pass (adjoint / autograd)
-
         loss.backward()
-
         # Gradient clipping for stability
-
         torch.nn.utils.clip_grad_norm\_(list(raw_params.values()), max_norm=1.0)
-
         optimizer.step()
-
         scheduler.step()
-
         loss_history.append(loss.item())
-
         if verbose and iteration % 20 == 0:
-
             physical = {k: lo+(hi-lo)\*torch.sigmoid(raw_params[k]).item()
-
                         for k,(lo,hi) in param_bounds.items()}
-
             print(f'Iter {iteration:4d}: loss={loss.item():.4e}  params={physical}')
-
         param_history.append({k: (lo+(hi-lo)\*torch.sigmoid(raw_params[k])).item()
-
                                for k,(lo,hi) in param_bounds.items()})
-
     # Return optimised physical parameters
-
     final_params = {k: (lo+(hi-lo)\*torch.sigmoid(raw_params[k])).item()
-
                     for k,(lo,hi) in param_bounds.items()}
-
     return final_params, loss_history, param_history
 
+```
+```
 # Example: design a memristor-RC circuit to match a target exponential decay
-
 topology_simple = {
-
     'n_nodes': 3,
-
     'components': [
-
         {'type':'R', 'name':'R1', 'node_p':1, 'node_n':2},
-
         {'type':'MEM','name':'M1','node_p':2,'node_n':0,
-
          'node_p':2,'node_n':0},
-
     ]
-
 }
-
 t_vec   = np.linspace(0, 1e-6, 1000)
-
 V_target_wave = np.exp(-t_vec / 200e-9) \* 0.5   # target: RC decay, tau=200ns
-
 optimal, losses, history = inverse_design(
-
     topology_simple, lambda t: 1.0, V_target_wave,
-
     t_end=1e-6, dt=1e-9,
-
     param_bounds={'R1': (100, 100e3), 'M1_Ron': (50, 500),
-
                   'M1_Roff': (1e3, 100e3), 'M1_D': (5e-9, 20e-9)},
-
     n_iter=150
-
 )
-
 print('Optimal parameters:', optimal)
-
 *🎯  Inverse design replaces years of engineering intuition with a mathematical search. The same framework works for any target: impedance matching, waveform shaping, filter design, neuromorphic weight initialisation. The only requirement is that the simulation is differentiable — which Phase 2's PyTorch implementation guarantees.*
+```
 
 SECTION 7  ·  HARDWARE-IN-THE-LOOP AT NANOSECOND LATENCY
 
@@ -1369,184 +948,140 @@ Floating-point arithmetic on GPUs has variable latency due to denormal handling,
 
 We use Q16.16 fixed-point: 16 bits for the integer part, 16 bits for the fractional part. This gives a range of ±32768 with resolution 1/65536 ≈ 1.5×10^-5. For voltages in the range ±10V with 150 µV resolution, this is adequate for most applications.
 
+```python
+
+```
+```
 # Fixed-point Q16.16 arithmetic in Python (simulates FPGA/CUDA behaviour)
-
 FRAC_BITS = 16
-
 SCALE     = 1 << FRAC_BITS   # 65536
-
 def to_fixed(x):    return int(round(x \* SCALE))
-
 def to_float(x):    return x / SCALE
-
 def fixed_mul(a,b): return (a \* b) >> FRAC_BITS
-
 def fixed_div(a,b): return (a << FRAC_BITS) // b if b != 0 else 0
-
 def fixed_add(a,b): return a + b
-
 def fixed_mna_step_2x2(g11, g12, g21, g22, b1, b2):
-
     '''
-
     2×2 MNA solve in Q16.16 fixed-point.
-
     For a 2-node circuit: v1, v2 = G^-1 \* b
-
     All inputs are Q16.16 fixed-point integers.
-
     '''
-
     # det = g11\*g22 - g12\*g21
-
     det = fixed_mul(g11,g22) - fixed_mul(g12,g21)
-
     if det == 0: return 0, 0   # singular — return zero
-
     # v1 = (b1\*g22 - b2\*g12) / det
-
     # v2 = (b2\*g11 - b1\*g21) / det
-
     v1  = fixed_div(fixed_mul(b1,g22) - fixed_mul(b2,g12), det)
-
     v2  = fixed_div(fixed_mul(b2,g11) - fixed_mul(b1,g21), det)
-
     return v1, v2
 
+```
+```
 # Benchmark: 1 million fixed-point 2×2 solves
-
 import time, numpy as np
-
 N = 1_000_000
-
 g11 = to_fixed(1000.0)   # 1 kOhm conductance scaled
-
 b1  = to_fixed(1.0)      # 1V source
-
 start = time.perf_counter()
-
 for \_ in range(N):
-
     v1, v2 = fixed_mna_step_2x2(g11, 0, 0, g11, b1, 0)
-
 elapsed = time.perf_counter() - start
-
 print(f'{N} fixed-point solves in {elapsed\*1e3:.1f} ms')
-
 print(f'Throughput: {N/elapsed/1e6:.0f} M solves/sec')
+```
 
 ## 7.3  Pipelined Simulation Architecture
 
 To achieve the highest throughput, the simulation pipeline is broken into stages that execute concurrently on different hardware units:
 
+```
 # Pipeline stage layout (each stage runs on a different GPU stream)
-
 #
 
+```
+```
 # Stream 0 (MNA Solver):    |--Stamp--|--LU--|--Solve--|--Stamp--|--LU--|...
 
+```
+```
 # Stream 1 (State Update):            |--Update w--|--Update phi--|--...--|
 
+```
+```
 # Stream 2 (Guard Check):                       |--Check--|--Check--|--...
 
+```
+```
 # Stream 3 (I/O):           |--Read--|         |--Write--|         |--Read--|
-
 #
+```
 
+```python
 # Arrows: Stream 1 depends on Stream 0 output (CUDA event sync)
-
 # Stream 2 depends on Stream 1 output
-
 # Stream 3 reads are independent; writes sync with Stream 2
-
 import torch
-
 class PipelinedSimulator:
-
     '''
+```
 
     4-stage pipelined GPU simulator for real-time HIL.
 
     Each stage runs on a separate CUDA stream for maximum concurrency.
 
+```python
     '''
-
     def \_\_init\_\_(self, n_instances, n_nodes):
-
         self.N  = n_instances
-
         self.n  = n_nodes - 1
-
         # Create 4 CUDA streams
-
         self.stream_solve  = torch.cuda.Stream()
-
         self.stream_state  = torch.cuda.Stream()
-
         self.stream_guard  = torch.cuda.Stream()
-
         self.stream_io     = torch.cuda.Stream()
-
         # CUDA events for synchronisation
-
         self.event_solved  = torch.cuda.Event()
-
         self.event_updated = torch.cuda.Event()
-
         # Double-buffered state tensors (ping-pong to avoid contention)
-
         self.x     = [torch.zeros(n_instances, self.n, device='cuda'),
-
                        torch.zeros(n_instances, self.n, device='cuda')]
-
         self.buf   = 0   # current buffer index
-
     def step(self, G_batch, b_batch, state_updater, guard_checker):
-
         cur, nxt = self.buf, 1-self.buf
-
         # Stage 1: MNA solve on stream_solve
-
         with torch.cuda.stream(self.stream_solve):
-
             self.x[nxt] = torch.linalg.solve(
-
                 G_batch, b_batch.unsqueeze(-1)).squeeze(-1)
-
             self.event_solved.record()
+```
 
         # Stage 2: State update on stream_state (waits for solve)
 
+```
         with torch.cuda.stream(self.stream_state):
-
             self.stream_state.wait_event(self.event_solved)
-
             state_updater(self.x[nxt], self)
-
             self.event_updated.record()
+```
 
         # Stage 3: Guard check on stream_guard (waits for state update)
 
+```
         with torch.cuda.stream(self.stream_guard):
-
             self.stream_guard.wait_event(self.event_updated)
-
             guard_checker(self.x[nxt], self)
-
         # Stage 4: I/O on stream_io (independent — reads previous solution)
-
         with torch.cuda.stream(self.stream_io):
-
             output = self.x[cur].clone()   # safe to read while nxt is being computed
-
         self.buf = nxt
-
         return output
+```
 
 SECTION 8  ·  MEASURED THROUGHPUT ON RTX 3090 AND A100
 
 **Performance Benchmarks**
 All benchmarks below are for a representative hybrid circuit: a 3-node network with 1 memristor, 1 tunnel resistor, 1 Josephson junction, and 1 capacitor. The MNA matrix is 5×5 (3 node voltages + 1 inductor current + 1 voltage source current). Numbers are wall-clock measured.
+
 
 ## 8.1  Single Instance (CPU vs GPU)
 
@@ -1637,159 +1172,123 @@ This section assembles everything from all three phases into one deployable Pyth
 
 ## 9.1  Package Structure
 
+```
 hybridsim/
-
 ├── components/
-
 │   ├── \_\_init\_\_.py          # exports all component classes
-
 │   ├── quantum.py           # QTR, Josephson, quantum dot
-
 │   ├── magnetic.py          # MagDomainInductor, GMR, Meminductor
-
 │   ├── memory.py            # Memristor, DualMode, Memcap, Phase-Change
-
 │   ├── ferroelectric.py     # Preisach FeCap, MagnetoelectricInductor
-
 │   ├── stochastic.py        # BrownianResistor, PoissonCap, MarkovChain
-
 │   ├── topological.py       # TI Resistor, Josephson, QHE
-
 │   └── logic.py             # TernaryTransistor, DeltaSigmaCap, LIF
-
 ├── solver/
-
 │   ├── mna.py               # MNASystem (Phase 2)
-
 │   ├── sparse_mna.py        # SparseMNASystem (Phase 3 Section 4)
-
 │   ├── integrators.py       # BE, TR-BDF2, Radau IIA, SDIRK
-
 │   ├── events.py            # zero-crossing detection (Phase 2 Section 5)
-
 │   └── simulator.py         # HybridCircuitSimulator (main entry point)
-
 ├── gpu/
-
 │   ├── batch_solver.py      # GPUCircuitBatch (Phase 2 Section 7)
+```
 
 │   ├── cuda_kernels.cu      # custom CUDA LU solve (Phase 3 Section 2)
 
+```
 │   ├── pipeline.py          # PipelinedSimulator (Phase 3 Section 7)
-
 │   └── autograd_ops.py      # differentiable MNA ops (Phase 3 Section 5)
-
 ├── design/
-
 │   ├── inverse.py           # inverse_design() (Phase 3 Section 6)
-
 │   ├── monte_carlo.py       # monte_carlo_yield() (Phase 2 Section 7)
-
 │   └── sensitivity.py       # parameter sensitivity analysis
-
 ├── export/
-
 │   ├── spice.py             # SPICE netlist export (Phase 2 Section 9)
-
 │   └── verilog_ams.py       # Verilog-AMS export for SystemVerilog sims
-
 └── \_\_init\_\_.py
 
+```
+```
 # Install: pip install -e .
+```
 
+```
 # CUDA kernels: cd hybridsim/gpu && nvcc -O3 -shared -fPIC -o cuda_kernels.so cuda_kernels.cu
+```
 
 ## 9.2  Clean API — Three Lines to Simulate Any Hybrid Circuit
 
+```python
 from hybridsim import Circuit, Memristor, TunnelResistor, JosephsonJunction
-
 from hybridsim import Capacitor, VoltageSource
 
+```
+```
 # ── Build circuit ──────────────────────────────────────────────────────
-
 ckt = Circuit(n_nodes=4)              # 4 nodes: GND=0, 1, 2, 3
-
 ckt.add(VoltageSource(1, 0, V=1.0,   name='Vsrc'))
-
 ckt.add(TunnelResistor(1, 2, d=2e-9, phi_bar=3.0, name='QTR1'))
-
 ckt.add(Memristor(2, 3, Ron=100, Roff=16000, name='M1'))
-
 ckt.add(JosephsonJunction(3, 0, Ic=10e-6, name='JJ1'))
-
 ckt.add(Capacitor(2, 0, C=1e-12, name='C1'))
 
+```
+```
 # ── Simulate ───────────────────────────────────────────────────────────
-
 results = ckt.simulate(
-
     t_end  = 10e-9,          # 10 ns
-
     dt     = 10e-12,         # 10 ps (auto-switched to 1ns when not stiff)
-
     method = 'auto',         # auto-selects: RK4 / TR-BDF2 / Radau IIA
-
     device = 'auto',         # auto-selects: CPU or CUDA
-
     sources = {'Vsrc': lambda t: np.sin(2\*np.pi\*1e9\*t)},  # 1 GHz sine
-
 )
 
+```
+```
 # ── Read results ────────────────────────────────────────────────────────
-
 t     = results.time
-
 V_out = results.node_voltage(3)          # voltage at node 3
-
 I_JJ  = results.branch_current('JJ1')   # Josephson junction current
-
 w_M1  = results.internal_state('M1', 'w')  # memristor state w(t)
-
 n_flux = results.discrete_state('JJ1')    # flux quanta vs time
 
+```
+```
 # ── Visualise ───────────────────────────────────────────────────────────
-
 results.plot(['V(3)', 'I(JJ1)', 'w(M1)', 'n_flux(JJ1)'])
 
+```
+```
 # ── Export to SPICE ─────────────────────────────────────────────────────
-
 ckt.export_spice('my_hybrid_circuit.sp')
+```
 
+```
+
+```
+```
 # ── Run Monte Carlo yield analysis ──────────────────────────────────────
-
 yield_result = ckt.monte_carlo(
-
     n_samples = 100_000,
-
     param_spread = {'M1.Ron': 0.20, 'M1.Roff': 0.15, 'QTR1.d': 0.05},
-
     spec = {'V(3)': (0.4, 0.6)},   # V(3) must be between 0.4V and 0.6V
-
     device = 'cuda'
-
 )
-
 print(f'Circuit yield: {yield_result.yield_pct:.1f}%')
+```
 
+```
 # ── Inverse design: find parameters to match a target waveform ──────────
-
 V_target = np.exp(-t / 2e-9)  # target: 2 ns decay
-
 optimal = ckt.inverse_design(
-
     target_waveform = V_target,
-
     target_node    = 3,
-
     free_params    = ['M1.Ron', 'M1.Roff', 'C1.C'],
-
     bounds         = {'M1.Ron':(50,1000), 'M1.Roff':(1e3,1e5), 'C1.C':(0.1e-12,10e-12)},
-
     n_iter         = 100
-
 )
-
 print('Optimal parameters:', optimal)
+```
 
 # Phase 3 Summary — What Was Built
 

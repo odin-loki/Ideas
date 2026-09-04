@@ -30,31 +30,25 @@ Verifiable Random Functions [4, 20] enable a keyholder to produce deterministic 
 
 The Izaac-VRF construction is as follows:
 
+```
 KeyGen() -> (sigma, pk):
-
   sigma <- uniform {0,1}^256
-
   pk = H(sigma)  // SHA-3-256 commitment
-
   return (sigma, pk)
-
 Eval(sigma, x) -> (y, pi):
-
   y = Izaac(sigma, x)  // 256-bit output
-
   pi = ZK_Prove("know sigma: H(sigma)=pk and y=Izaac(sigma,x)")
-
   return (y, pi)
-
 Verify(pk, x, y, pi) -> {accept, reject}:
-
   return ZK_Verify(pi, statement=(pk, x, y))
+```
 
 ### 2.2 Security Properties
 
 **Claim 2.1.** *Izaac-VRF satisfies the three standard VRF security properties [4]: uniqueness (probability 2^{-256} of two valid outputs per input); pseudorandomness (reduction to PRF security, Theorem 3.1 of [P1]); and verifiability (completeness and 2^{-128}-soundness of the ZK system).*
 
 Compared to RFC 9381 ECVRF [20], which relies on elliptic-curve discrete logarithm hardness, Izaac-VRF's pseudorandomness rests on symmetric PRF hardness, making it resistant to Shor's quantum algorithm. Post-quantum variants with algebraic proofs are available via isogeny-based constructions [12a] or Ring-LWE commitments [14].
+
 
 The Malavolta (2024) aggregate VRF construction [17a] introduces key-homomorphic VRFs enabling distributed VRF evaluation — a natural complement to the Izaac shared-state model where the key sigma is itself distributed across parties.
 
@@ -76,15 +70,13 @@ Party i (holds private input x_i):
 
   For j in 1..n, j != i:
 
+```
     s_ij = Izaac(sigma, encode(i, j))  // outgoing share
-
     s_ji = Izaac(sigma, encode(j, i))  // incoming share
-
   mask_i = sum(s_ij for j!=i) - sum(s_ji for j!=i) mod P
-
   broadcast y_i = (x_i + mask_i) mod P
-
 Output: sum(y_i for all i) mod P = sum(x_i for all i) mod P
+```
 
 ### 3.2 Security Analysis
 
@@ -108,19 +100,17 @@ Distributed Auctions: Buyers submit encrypted bids. The NI-MPC protocol computes
 
 Classical Byzantine consensus [9, 3] requires O(n^2) messages. Recent improvements (HotStuff [10a]) reduce this to O(n) linear communication. The Izaac consensus protocol reduces communication to O(0) messages per epoch (after shared sigma setup) while maintaining optimal fault tolerance f < n/3.
 
+
 Initialization: All n nodes share sigma
 
+```
 Consensus(epoch e):
-
   leader_id = Izaac(sigma, epoch=e) mod n
-
   if I am leader_id:
-
     broadcast proposal = my_candidate_value
-
   else:
-
     wait for proposal from leader_id
+```
 
     if proposal is valid: accept and finalize
 
@@ -160,21 +150,20 @@ The Dolev-Reischuk lower bound [5c] establishes that Byzantine consensus require
 
 A Bloom filter [15a] represents a set S of n elements using an m-bit array and k hash functions. Standard implementations store k independent 64-bit seeds. For a distributed system with N servers sharing the same filter configuration, the Izaac construction replaces all k\*64 hash seeds per server with a single shared 256-bit state sigma.
 
+```
 Izaac-Bloom initialization:
-
   sigma <- shared 256-bit state
-
   m = -(n \* ln(delta)) / (ln(2))^2  // standard formula
-
   k = ceil((m/n) \* ln(2))
+```
 
 Hash function h_j(x) for j in 1..k:
 
+```
   seed_j = Izaac(sigma, j)
-
   return MurmurHash3(x, seed=seed_j) mod m
-
 Storage per structure: m + 256 bits (vs m + 64k bits traditional)
+```
 
 For N = 10^6 filters with k = 10 hash functions, the Izaac construction saves N \* (64\*10 - 256) bits = N \* 384 bits = 384 \* 10^6 bits ~ 48 MB of hash seed storage. More importantly, the hash functions are automatically synchronized across all servers — no coordination protocol is needed to agree on hash functions, and changing sigma globally reconfgures all filters atomically.
 
@@ -192,27 +181,19 @@ This ensures consistent routing structure visible to all nodes without explicit 
 
 Monte Carlo methods for numerical integration, financial derivatives pricing [11a], climate modeling, and particle physics require reproducibility for debugging, cross-platform validation, and regulatory compliance. Traditional approaches store RNG state checkpoints, which grow with simulation complexity. The Izaac approach stores only (sigma, step_count), enabling exact reproduction of any step in O(log n) time without replaying the sequence.
 
+```python
 SimulationCheckpoint = (sigma: bytes[32], step: int)
-
 def random_at_step(sigma, step_index):
-
   # O(log step_index) via counter-mode
-
   return Izaac(sigma, step_index)
-
 def resume_from_checkpoint(cp, n_steps):
-
   for i in range(cp.step, cp.step + n_steps):
-
     r = random_at_step(cp.sigma, i)
-
     yield r
-
 def reproduce_bug(sigma, crash_step):
-
   r = random_at_step(sigma, crash_step)
-
   # exact reproduction in O(log crash_step)
+```
 
 ### 6.2 Regulatory Applications
 
@@ -226,37 +207,31 @@ The O(log n) fast-forward property [P1, Theorem 3.3] means that checkpoints need
 
 Content-addressed storage (CAS) systems like IPFS place content at deterministic addresses derived from content hash. In distributed CAS, replicas must be placed across nodes in a load-balanced, Byzantine-resistant manner. The Izaac construction generates k replica addresses deterministically from content hash and shared sigma.
 
+```python
 def replica_addresses(content, sigma, k=3):
-
   content_hash = H(content)  // SHA-3-256
-
   addresses = []
-
   for i in range(k):
-
     addr = Izaac(sigma, content_hash || encode(i))
-
     node_id = addr mod num_nodes
-
     addresses.append(node_id)
-
   return addresses
+```
 
 ## Erasure coding: store n chunks, any k reconstruct
 
+```python
 def erasure_chunks(content, sigma, n=10, k=6):
-
   chunks = reed_solomon_encode(content, n, k)
-
   for i, chunk in enumerate(chunks):
-
     addr = Izaac(sigma, H(content) || encode(i))
-
     store_at_node(addr mod num_nodes, chunk)
+```
 
 ### 7.2 Properties
 
 Byzantine resistance: adversary cannot predict replica locations without sigma, preventing targeted attacks. Load balancing: Izaac outputs are pseudorandom (Theorem 3.1 of [P1]), ensuring uniform distribution across nodes. Rebalancing: changing sigma redistributes the entire storage topology atomically without per-object coordination. Combined with Reed-Solomon erasure coding (n=10, k=6), storage overhead is 10/6 = 1.67x vs 6x for full replication.
+
 
 ## 8. Protocol 7: Coordinated Differential Privacy
 
@@ -264,25 +239,22 @@ Byzantine resistance: adversary cannot predict replica locations without sigma, 
 
 Standard differential privacy [5a] adds fresh random noise to each query response, causing inconsistency when the same query is issued multiple times or by different analysts. For periodic data releases (e.g., census reports, healthcare statistics), this inconsistency is operationally problematic. The Izaac coordinated noise protocol generates deterministic noise per query while preserving the epsilon-differential privacy guarantee.
 
+```python
 def dp_query_response(query_fn, database, sigma_privacy, epsilon):
-
   true_answer = query_fn(database)
-
   sensitivity = global_sensitivity(query_fn)  // L1 sensitivity
+```
 
   # Deterministic noise seed from query identity
 
+```
   query_id = H(canonical_form(query_fn))
-
   noise_seed = Izaac(sigma_privacy, query_id)
-
   # Sample Laplace noise deterministically
-
   noise = laplace_sample(scale=sensitivity/epsilon,
-
                          seed=noise_seed)
-
   return true_answer + noise
+```
 
 ### 8.2 Privacy Analysis
 
@@ -304,41 +276,26 @@ A national statistics office releases quarterly employment data. With fresh nois
 
 Software testing via fuzzing discovers bugs by generating unexpected inputs. Coverage-guided fuzzing tracks code coverage and mutates high-coverage inputs to explore new paths. Traditional fuzzers use non-deterministic RNG, making bug reproduction dependent on capturing exact RNG state (often megabytes). The Izaac fuzzing protocol generates all test inputs from a single seed sigma, reducing bug reports to (sigma, iteration) pairs.
 
+```python
 class IzaacFuzzer:
-
   def \_\_init\_\_(self, sigma):
-
     self.sigma = sigma
-
     self.coverage = set()
-
   def input_at(self, iteration):
-
     raw = Izaac(self.sigma, iteration)
-
     return self.generate_structured_input(raw)
-
   def run(self, target_fn, max_iter):
-
     for i in range(max_iter):
-
       test_input = self.input_at(i)
-
       try:
-
         new_cov = execute_with_coverage(target_fn, test_input)
-
         self.coverage.update(new_cov)
-
       except Exception as e:
-
         return BugReport(sigma=self.sigma, iteration=i, error=e)
-
   def reproduce(self, bug_report):
-
     # O(log iteration) via fast-forward
-
     return self.input_at(bug_report.iteration)
+```
 
 ### 9.2 Properties
 
@@ -384,13 +341,12 @@ def backoff_slots(sigma_network, node_id, attempt):
 
   # All nodes independently compute identical distribution
 
+```
   raw = Izaac(sigma_network, node_id || encode(attempt))
-
   window = 2 \*\* attempt  // standard binary exponential backoff
-
   return raw mod window
-
 Properties:
+```
 
   - Independence: backoff(node_i) and backoff(node_j) are
 
@@ -406,15 +362,13 @@ Properties:
 
 Global API rate limiting across a distributed system traditionally requires central coordination (a distributed counter) or accepts inconsistency (each server enforces independent limits). The Izaac approach generates per-user rate limits deterministically:
 
+```python
 def rate_limit_budget(sigma_limits, user_id, epoch):
-
   # epoch = day number, or hour, or minute
-
   raw = Izaac(sigma_limits, user_id || encode(epoch))
-
   budget = (raw mod variation_range) + base_limit
-
   return budget
+```
 
 All servers independently compute the same budget for user_id at epoch, with zero coordination messages. Users cannot game the system by routing requests to different servers. The budget distribution is pseudorandom, preventing reverse-engineering of rate limits. This eliminates the thundering herd problem at limit resets: budgets are user-specific and epoch-specific, so no global reset event occurs.
 
@@ -424,27 +378,19 @@ All servers independently compute the same budget for user_id at epoch, with zer
 
 Many applications require very large or conceptually infinite datasets: synthetic training data, procedurally generated game worlds, infinite test arrays, fractal structures. Storing these explicitly requires O(n) space. The Izaac lazy data structure generates elements on demand in O(1) time per element from a 256-bit seed.
 
+```python
 class InfiniteIzaacArray:
-
   def \_\_init\_\_(self, sigma):
-
     self.sigma = sigma
-
   def \_\_getitem\_\_(self, index):
-
     return Izaac(self.sigma, index)
-
 class ProceduralWorld:
-
   def \_\_init\_\_(self, seed: bytes[32]):
-
     self.seed = seed
-
   def chunk_at(self, x, z):
-
     chunk_seed = Izaac(self.seed, encode(x, z))
-
     return generate_terrain(chunk_seed)
+```
 
   # Infinite world from 32 bytes; fully deterministic; shareable
 
@@ -461,6 +407,7 @@ Test Oracle Generation: Software testing requires large amounts of structured te
 ### 13.1 Reference Implementation
 
 The Python 3 reference implementation uses SHA-3-256 as the underlying PRF instantiation: Izaac(sigma, context) = HKDF-Expand(SHA-3-256, sigma, context, 32). HKDF [RFC 5869] provides domain separation between different contexts and is standardized for key derivation applications. For higher-throughput applications, ChaCha20 in counter mode is recommended: Izaac(sigma, n) = ChaCha20(key=sigma, counter=n), providing O(1) random access with hardware-accelerated throughput of ~5 GB/s.
+
 
 ### 13.2 Complexity Summary
 
@@ -494,6 +441,7 @@ The one-time shared-state setup is the most critical operation. Options in incre
 
 For post-quantum deployments, increase sigma to 512 bits. Replace SHA-3-256 commitments with SHA-3-512. Replace VRF ZK proofs with lattice-based or isogeny-based constructions [12a, 14]. The symmetric PRF instantiation of Izaac itself (e.g., AES-256, ChaCha20, SHA-3) is already post-quantum-resistant under Grover's algorithm with appropriately sized keys.
 
+
 ## 15. Conclusion
 
 We have specified twelve protocols in the Izaac Protocol Suite, covering verifiable random functions, non-interactive multi-party computation, zero-communication Byzantine consensus, probabilistic data structures, Monte Carlo simulation, differential privacy, fuzzing, algorithmic trading compliance, procedural data generation, distributed storage, rate limiting, and network synchronization. Every protocol derives its efficiency from the same fundamental principle: shared deterministic randomness is computationally equivalent to a free broadcast channel.
@@ -524,40 +472,25 @@ The companion theoretical paper [P1] provides formal proofs for all security cla
 
 [11b]  Harvey, C.R. et al. (2016). ...and the Cross-Section of Expected Returns. Review of Financial Studies, 29(1), 5-68.
 
+```
 [12a]  Lai, Y.-F. (2024). Capybara and Tsubaki: VRFs from Group Actions and Isogenies. IACR CiC, 1(3). https://doi.org/10.62056/avr-11zn4
-
 [14]  Kim, B.G. & Wong, D. (2024). Post-Quantum VRF with NIZK Proof and Ring-LWE Encryption. SSRN 4638464.
-
 [15]  Aranha, D.F. et al. (2024). Unbiasable Verifiable Random Functions. EUROCRYPT 2024. Springer LNCS.
-
 [15a]  Bloom, B.H. (1970). Space/Time Trade-offs in Hash Coding with Allowable Errors. Comm. ACM, 13(7).
-
 [15b]  Kiayias, A. et al. (2017). Ouroboros: A Provably Secure Proof-of-Stake Blockchain Protocol. CRYPTO 2017. ePrint 2016/889.
-
 [16a]  Pugh, W. (1990). Skip Lists: A Probabilistic Alternative to Balanced Trees. Comm. ACM, 33(6).
-
 [17]  Yao, A.C. (1982). Protocols for Secure Computations. FOCS 1982.
-
 [17a]  Malavolta, G. (2024). Key-Homomorphic and Aggregate Verifiable Random Functions. ePrint 2024/643.
-
 [18]  Goldreich, O., Micali, S., & Wigderson, A. (1987). How to Play ANY Mental Game. STOC 1987.
-
 [19]  Ben-Or, M., Goldwasser, S., & Wigderson, A. (1988). Completeness Theorems for Non-Cryptographic FT Distributed Computation. STOC 1988.
-
 [20]  Goldberg, S., Reyzin, L., Papadopoulos, D., & Vcelak, J. (2023). Verifiable Random Functions (VRFs). RFC 9381. IRTF.
-
 [22]  Halevi, S. et al. (2017). Non-Interactive Multiparty Computation without Correlated Randomness. ASIACRYPT 2017.
-
 [23]  Saha, R. et al. (2024). Application of Randomness for Security and Privacy in Multi-Party Computation. IEEE Trans. Dependable and Secure Computing. https://dl.acm.org/doi/10.1109/TDSC.2024.3381959
-
 [25]  Hao, R. et al. (2024). SimpleFT: A Simple Byzantine Fault Tolerant Consensus. IEEE Trans. Sustainable Computing. ePrint 2024/132.
-
 [26]  Zhang, G. et al. (2024). Reaching Consensus in the Byzantine Empire. ACM Computing Surveys. https://dl.acm.org/doi/10.1145/3636553
-
 [28]  Ishai, Y. & Kushilevitz, E. (2018). On Secure m-Party Computation and Unassisted Non-Interactive MPC. ICALP 2018.
-
 [42]  Allouah, Y. et al. (2024). The Privacy Power of Correlated Noise in Decentralized Learning. TPDP Workshop, NeurIPS 2024.
-
 [44]  NIST (2024). Guidelines for Evaluating Differential Privacy Guarantees. NIST SP 800-226. https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-226.ipd.pdf
+```
 
 [45]  Garg, S. et al. (2025). Scalable Multiparty Computation from Non-linear Secret Sharing. ePrint 2025/1007.
