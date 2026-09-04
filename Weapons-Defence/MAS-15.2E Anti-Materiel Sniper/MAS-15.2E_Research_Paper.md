@@ -44,11 +44,11 @@ This v2.0 revision corrects the prior v1.0 claims against `weapons_simulation.py
 
 Anti-materiel rifles have evolved from the anti-tank rifles of the World War I era through to the contemporary platforms in service with over a dozen manufacturing nations and procurement by dozens more. The Small Arms Survey Research Note 7 identifies effective engagement ranges of 1 000–2 000 m for 12.7 mm and 14.5 mm AMR systems — at least three times the effective range of a standard 7.62×51 mm sniper rifle against equivalent targets.
 
-The Barrett M82 series established the operational paradigm for the modern AMR class: semi-automatic operation, muzzle-brake recoil attenuation, and employment in the Hard Target Interdiction (HTI) role as formally designated by the United States military. \[1\]
+The Barrett M82 series established the operational paradigm for the modern AMR class: semi-automatic operation, muzzle-brake recoil attenuation, and employment in the Hard Target Interdiction (HTI) role as formally designated by the United States military. [1]
 
 The 14.5×114 mm class, exemplified by the Ukrainian Snipex Alligator and South African Denel NTW-20 (in 20 mm variant), offers enhanced penetration at extended ranges at the cost of increased system mass — the Snipex Alligator penetrates 10 mm armour plate at 1 500 m.
 
-Research into advanced AMR cartridge design has increasingly focused on optimising penetrator geometry, jacket metallurgy, and yaw stabilisation to maximise behind-armour effect. Chinese patent CN201740473U describes a layered penetrator design employing cobalt-oxide ceramics at hardness values of 1 800 HV/10 MPa for initial armour engagement, followed by a depleted-uranium secondary core for continued penetration — a design philosophy reflected in multi-material penetrator research globally. \[2\]
+Research into advanced AMR cartridge design has increasingly focused on optimising penetrator geometry, jacket metallurgy, and yaw stabilisation to maximise behind-armour effect. Chinese patent CN201740473U describes a layered penetrator design employing cobalt-oxide ceramics at hardness values of 1 800 HV/10 MPa for initial armour engagement, followed by a depleted-uranium secondary core for continued penetration — a design philosophy reflected in multi-material penetrator research globally. [2]
 
 ### 3.2 Ballistic Fundamentals of Anti-Armour Kinetic Penetrators
 
@@ -132,7 +132,7 @@ At 13.2 kg unloaded, the MAS-15.2E is positioned competitively within its perfor
 
 The 255 J (188 ft·lb) free-recoil energy at 13.2 kg empty mass is approximately 1.7× the free recoil of a Barrett M107 firing standard .50 BMG ball. The hydraulic stock recoil mitigator combined with the three-stage muzzle device (≥ 65 % impulse-attenuation) reduces perceived shoulder recoil to approximately 35–45 J — within the comfortable shoulder-fire envelope for trained operators.
 
-The two-section 720 mm transport length provides compatibility with standard vehicle stowage and air-transport requirements. Breakdown and assembly under 30 seconds supports tactical mobility without compromising precision. \[3\]
+The two-section 720 mm transport length provides compatibility with standard vehicle stowage and air-transport requirements. Breakdown and assembly under 30 seconds supports tactical mobility without compromising precision. [3]
 
 ### 5.4 Reliability and Environmental Performance
 
@@ -386,28 +386,28 @@ Against Stellite-21 hot yield (≈ 800 MPa at 400 °C bore-surface temperature):
 
 ## References
 
-\[1\] Small Arms Survey (2012). *Anti-materiel Rifles*. Research Note No. 7. Geneva: Small Arms Survey Graduate Institute of International and Development Studies.
+[1] Small Arms Survey (2012). *Anti-materiel Rifles*. Research Note No. 7. Geneva: Small Arms Survey Graduate Institute of International and Development Studies.
 
-\[2\] CN Patent 201740473U (2011). *Anti-materiel armour penetration projectile for sniper rifle*. Chinese Patent Office.
+[2] CN Patent 201740473U (2011). *Anti-materiel armour penetration projectile for sniper rifle*. Chinese Patent Office.
 
-\[3\] Military Systems & Technology (2022). *Anti-materiel Sniper Rifles*. Retrieved from www.militarysystems-tech.com/taxonomy/term/610
+[3] Military Systems & Technology (2022). *Anti-materiel Sniper Rifles*. Retrieved from www.militarysystems-tech.com/taxonomy/term/610
 
-\[4\] Wikipedia Contributors (2025). *Anti-materiel rifle*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
+[4] Wikipedia Contributors (2025). *Anti-materiel rifle*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
 
-\[5\] Wikipedia Contributors (2025). *.50 BMG*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
+[5] Wikipedia Contributors (2025). *.50 BMG*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
 
-\[6\] Wikipedia Contributors (2025). *Snipex Alligator*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
+[6] Wikipedia Contributors (2025). *Snipex Alligator*. Wikipedia, The Free Encyclopaedia. Retrieved March 2026.
 
-\[7\] Barrett Firearms Manufacturing (2024). *M107 Anti-materiel Rifle Technical Data*. Murfreesboro, Tennessee: Barrett Firearms Manufacturing Inc.
+[7] Barrett Firearms Manufacturing (2024). *M107 Anti-materiel Rifle Technical Data*. Murfreesboro, Tennessee: Barrett Firearms Manufacturing Inc.
 
-\[8\] Grokipedia (2025). *Anti-materiel rifle — History and Modern Development*. Retrieved from grokipedia.com/page/Anti-materiel_rifle
+[8] Grokipedia (2025). *Anti-materiel rifle — History and Modern Development*. Retrieved from grokipedia.com/page/Anti-materiel_rifle
 
-\[9\] U.S. Army Technical Manual TM 9-1005-313-10 (2007). *Operator's Manual for Rifle, Caliber .50, Sniper, M107*. Washington DC: Department of the Army.
+[9] U.S. Army Technical Manual TM 9-1005-313-10 (2007). *Operator's Manual for Rifle, Caliber .50, Sniper, M107*. Washington DC: Department of the Army.
 
-\[10\] Riepl, D. & Heinrich, W. (2020). Advanced penetrator design for sub-calibre kinetic-energy ammunition. *Journal of Defence Technology*, 16(4), 788–798.
+[10] Riepl, D. & Heinrich, W. (2020). Advanced penetrator design for sub-calibre kinetic-energy ammunition. *Journal of Defence Technology*, 16(4), 788–798.
 
-\[11\] Advanced Defence Systems Research Division. (2026). *Weapons-Defence portfolio — simulation results* (`weapons_sim_results.md`). Internal technical reference.
+[11] Advanced Defence Systems Research Division. (2026). *Weapons-Defence portfolio — simulation results* (`weapons_sim_results.md`). Internal technical reference.
 
-\[12\] Advanced Defence Systems Research Division. (2026). *UCDR Weapons Portfolio — Common Ballistics Simulator* (`weapons_simulation.py`). Internal technical reference.
+[12] Advanced Defence Systems Research Division. (2026). *UCDR Weapons Portfolio — Common Ballistics Simulator* (`weapons_simulation.py`). Internal technical reference.
 
-\[13\] MAS-15.2E "Advanced Penetrator" Mark III: Final Enhanced Specification (2026). Internal Technical Specification Document.
+[13] MAS-15.2E "Advanced Penetrator" Mark III: Final Enhanced Specification (2026). Internal Technical Specification Document.

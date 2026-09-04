@@ -28,7 +28,7 @@ Version 1.0   |   March 2026   |   CONFIDENTIAL — FOR INTERNAL USE
 
 ## Abstract
 
-This document presents a comprehensive scientific review of the Advanced Sports Nutrition Powder \(ASNP\) formulation, a caffeine-free, multi-ingredient ergogenic supplement designed for military and extreme sports deployment. Each active ingredient is reviewed against the current peer-reviewed literature, with evidence ratings assigned to support procurement, regulatory, and operational decision-making. The formulation integrates a highly branched cyclic dextrin carbohydrate complex, a clinically dosed electrolyte matrix, nitric oxide-enhancing amino acids \(L-Citrulline\), intracellular pH-buffering agents \(Beta-Alanine\), osmolytic and neuromodulatory compounds \(Taurine, L-Theanine\), adaptogenic botanicals \(Rhodiola Rosea, Ashwagandha KSM-66, Cordyceps CS-4\), a polyphenolic antioxidant complex, and a comprehensive digestive support matrix. The total evidence base reviewed encompasses over 60 primary studies, 12 systematic reviews, and 8 meta-analyses. The formulation is assessed to be safe, evidence-backed, and operationally appropriate for use by military personnel and extreme sports athletes requiring high-intensity, sustained performance without stimulant dependency.
+This document presents a comprehensive scientific review of the Advanced Sports Nutrition Powder (ASNP) formulation, a caffeine-free, multi-ingredient ergogenic supplement designed for military and extreme sports deployment. Each active ingredient is reviewed against the current peer-reviewed literature, with evidence ratings assigned to support procurement, regulatory, and operational decision-making. The formulation integrates a highly branched cyclic dextrin carbohydrate complex, a clinically dosed electrolyte matrix, nitric oxide-enhancing amino acids (L-Citrulline), intracellular pH-buffering agents (Beta-Alanine), osmolytic and neuromodulatory compounds (Taurine, L-Theanine), adaptogenic botanicals (Rhodiola Rosea, Ashwagandha KSM-66, Cordyceps CS-4), a polyphenolic antioxidant complex, and a comprehensive digestive support matrix. The total evidence base reviewed encompasses over 60 primary studies, 12 systematic reviews, and 8 meta-analyses. The formulation is assessed to be safe, evidence-backed, and operationally appropriate for use by military personnel and extreme sports athletes requiring high-intensity, sustained performance without stimulant dependency.
 
   
 
@@ -37,7 +37,7 @@ This document presents a comprehensive scientific review of the Advanced Sports 
 
 Military personnel and extreme sports athletes operate under conditions of prolonged physical exertion, psychological stress, caloric deficit, and environmental extremes that place extraordinary demands on human physiology. Nutritional supplementation in these populations is not a matter of competitive marginal gains — it is a frontline tool for preserving operational readiness, cognitive function, and physical resilience.
 
-The United States Army Research Institute of Environmental Medicine \(USARIEM\), the authoritative body on military nutrition science, has extensively documented how carbohydrate-electrolyte fueling, amino acid supplementation, and targeted micronutrient delivery can maintain Warfighter performance during severe caloric deficits and high-intensity, sustained operations.\[44\]
+The United States Army Research Institute of Environmental Medicine (USARIEM), the authoritative body on military nutrition science, has extensively documented how carbohydrate-electrolyte fueling, amino acid supplementation, and targeted micronutrient delivery can maintain Warfighter performance during severe caloric deficits and high-intensity, sustained operations.[44]
 
 The ASNP formulation was developed to address a specific operational gap: the absence of a comprehensive, stimulant-free, ready-to-mix powder capable of simultaneously addressing energy substrate delivery, hydration maintenance, muscular buffering, cognitive clarity, oxidative protection, and stress resilience — all within a single serving. This document provides the scientific rationale for each component of the formulation, supported by current peer-reviewed evidence.
 
@@ -56,7 +56,7 @@ The formulation is built around five core operational pillars:
 
 ## 2. Master Evidence Summary
 
-The table below provides an overview of each active ingredient, its clinical dose as used in the ASNP formulation, the supporting evidence base, and an overall evidence grade \(A = Strong RCT/meta-analysis support; B = Multiple RCTs, some inconsistency; C = Emerging evidence, mechanistically plausible\).
+The table below provides an overview of each active ingredient, its clinical dose as used in the ASNP formulation, the supporting evidence base, and an overall evidence grade (A = Strong RCT/meta-analysis support; B = Multiple RCTs, some inconsistency; C = Emerging evidence, mechanistically plausible).
 
 **Ingredient**
 **ASNP Dose**
@@ -68,19 +68,19 @@ The table below provides an overview of each active ingredient, its clinical dos
 Multiple RCTs; CrossFit, running, swimming; faster gastric emptying vs maltodextrin
 
 **A**
-**Dextrose \+ Fructose**
-5g \+ 2.5g
+**Dextrose + Fructose**
+5g + 2.5g
 
-Dual-transporter carbohydrate model; GLUT2 \+ GLUT5; established IOC consensus
+Dual-transporter carbohydrate model; GLUT2 + GLUT5; established IOC consensus
 
 **A**
-**Sodium \(as citrate\)**
+**Sodium (as citrate)**
 600mg
 
-USARIEM/NAS military recommendation; facilitates Na\+-glucose co-transport
+USARIEM/NAS military recommendation; facilitates Na+-glucose co-transport
 
 **A**
-**Potassium \(as citrate\)**
+**Potassium (as citrate)**
 300mg
 
 Matches sweat loss ratio; HPRC military nutrition guidance
@@ -95,13 +95,13 @@ Enhanced bioavailability vs oxide; reduced GI distress; RCT support
 **L-Citrulline**
 6g
 
-Bailey et al. \(J Appl Physiol, 2015\); meta-analysis \(Nutrients, 2022\); NO upregulation
+Bailey et al. (J Appl Physiol, 2015); meta-analysis (Nutrients, 2022); NO upregulation
 
 **A**
-**Beta-Alanine \(CarnoSyn\)**
+**Beta-Alanine (CarnoSyn)**
 3.2g
 
-ISSN Position Stand; 40-study meta-analysis \(1,461 subjects\); military RCT
+ISSN Position Stand; 40-study meta-analysis (1,461 subjects); military RCT
 
 **A**
 **Taurine**
@@ -116,10 +116,10 @@ Osmolytic & neuromodulatory; meta-analysis support for endurance; GI tolerabilit
 RCT evidence for focus/cognitive performance; synergy with stress protocols
 
 **B**
-**BCAAs \(2:1:1, InstAminos\)**
+**BCAAs (2:1:1, InstAminos)**
 5g
 
-Established leucine threshold; muscle protein synthesis signalling \(mTOR\)
+Established leucine threshold; muscle protein synthesis signalling (mTOR)
 
 **A**
 **Essential Amino Acids**
@@ -128,10 +128,10 @@ Established leucine threshold; muscle protein synthesis signalling \(mTOR\)
 EAA superiority vs BCAA alone for MPS; multiple RCTs
 
 **A**
-**Astaxanthin \(H. pluvialis\)**
+**Astaxanthin (H. pluvialis)**
 4mg
 
-Meta-analysis \(J Funct Foods, 2024\); improved TTE, TAC, cycling TT
+Meta-analysis (J Funct Foods, 2024); improved TTE, TAC, cycling TT
 
 **B**
 **Pomegranate extract**
@@ -143,10 +143,10 @@ Polyphenol antioxidant; RCT evidence for exercise recovery & inflammation
 **Rhodiola Rosea**
 200mg
 
-Tinsley et al. \(Br J Nutr, 2024\); 16 RCTs reviewed; fatigue, endurance, resilience
+Tinsley et al. (Br J Nutr, 2024); 16 RCTs reviewed; fatigue, endurance, resilience
 
 **B**
-**Ashwagandha \(KSM-66\)**
+**Ashwagandha (KSM-66)**
 300mg
 
 Clinical evidence for HPA axis regulation, VO2max, cortisol; systematic review
@@ -158,7 +158,7 @@ Clinical evidence for HPA axis regulation, VO2max, cortisol; systematic review
 CS-4 strain RCT; improved exercise capacity; VO2max in healthy older subjects
 
 **B**
-**Bacillus coagulans \(probiotic\)**
+**Bacillus coagulans (probiotic)**
 1B CFU
 
 Shelf-stable; GI comfort during exercise; immune support RCTs
@@ -175,41 +175,41 @@ Amylase/protease/lipase standard; substrate absorption efficiency support
 
 ## 3. Carbohydrate Complex
 
-### 3.1 Highly Branched Cyclic Dextrin \(HBCD\) — 15g
+### 3.1 Highly Branched Cyclic Dextrin (HBCD) — 15g
 
-Highly Branched Cyclic Dextrin \(HBCD\), commercially known as Cluster Dextrin, is a novel enzymatically processed polysaccharide derived from waxy maize starch via Bacillus stearothermophilus branching enzyme. It is characterized by a molecular weight of 160,000–400,000 g/mol, a low dextrose equivalent \(DE <5\), and a uniquely narrow molecular weight distribution.\[9\]\[7\]
+Highly Branched Cyclic Dextrin (HBCD), commercially known as Cluster Dextrin, is a novel enzymatically processed polysaccharide derived from waxy maize starch via Bacillus stearothermophilus branching enzyme. It is characterized by a molecular weight of 160,000–400,000 g/mol, a low dextrose equivalent (DE <5), and a uniquely narrow molecular weight distribution.[9][7]
 
-Its defining physiological advantage over conventional maltodextrin, dextrose, and sucrose is its exceptionally low osmolality, which directly accelerates gastric emptying rate \(GER\). Because osmolality is the primary determinant of GER, solutions with lower osmolality empty faster into the small intestine, meaning glucose availability to working muscle is maintained with reduced GI discomfort.\[11\]
+Its defining physiological advantage over conventional maltodextrin, dextrose, and sucrose is its exceptionally low osmolality, which directly accelerates gastric emptying rate (GER). Because osmolality is the primary determinant of GER, solutions with lower osmolality empty faster into the small intestine, meaning glucose availability to working muscle is maintained with reduced GI discomfort.[11]
 
 ### 3.1.1 Key Research Findings
 
-**Endurance — Elite Swimmers: **Shiraki et al. \(Food Sci. Technol. Res., 2015\) administered HBCD at 1.5g/kg body weight to elite swimmers versus glucose and water controls across 10 intermittent cycles at 75% VO2max followed by exhaustive swimming at 90% VO2max. Time to fatigue was approximately 70% longer in the HBCD group. Plasma glucose was better maintained throughout, consistent with the sustained gastric emptying profile.\[7\]
+**Endurance — Elite Swimmers: **Shiraki et al. (Food Sci. Technol. Res., 2015) administered HBCD at 1.5g/kg body weight to elite swimmers versus glucose and water controls across 10 intermittent cycles at 75% VO2max followed by exhaustive swimming at 90% VO2max. Time to fatigue was approximately 70% longer in the HBCD group. Plasma glucose was better maintained throughout, consistent with the sustained gastric emptying profile.[7]
 
-**Endurance — Marathon Runners: **A randomized double-blind crossover RCT in 13 male marathon runners \(Chuychai et al., 2022\) found HBCD ingestion prior to exercise produced significantly longer time to exhaustion than an equivalent glucose beverage \(42.67 min vs. lower in the glucose group\), alongside better fluid retention, supporting the dual hydration-fueling advantage.\[8\]
+**Endurance — Marathon Runners: **A randomized double-blind crossover RCT in 13 male marathon runners (Chuychai et al., 2022) found HBCD ingestion prior to exercise produced significantly longer time to exhaustion than an equivalent glucose beverage (42.67 min vs. lower in the glucose group), alongside better fluid retention, supporting the dual hydration-fueling advantage.[8]
 
-**Perceived Exertion — Endurance Exercise: **Furuyashiki et al. \(2014, PMID:25080121\) compared 15g HBCD versus maltodextrin in a crossover double-blind RCT during endurance exercise. RPE increase was significantly attenuated at 30 and 60 minutes post-ingestion in the HBCD condition, suggesting improved exercise comfort and reduced fatigue perception.\[6\]
+**Perceived Exertion — Endurance Exercise: **Furuyashiki et al. (2014, PMID:25080121) compared 15g HBCD versus maltodextrin in a crossover double-blind RCT during endurance exercise. RPE increase was significantly attenuated at 30 and 60 minutes post-ingestion in the HBCD condition, suggesting improved exercise comfort and reduced fatigue perception.[6]
 
-**Resistance Training — CrossFit \(2024 RCT\): **Grijota et al. \(J. Funct. Morphol. Kinesiol., 2024\) conducted a randomized double-blind crossover study in 21 male CrossFit athletes. HBCD supplementation \(30g\) demonstrated a statistically significant improvement in countermovement jump power \(watts\), supporting performance maintenance across consecutive high-intensity workouts.\[4\]\[5\]
+**Resistance Training — CrossFit (2024 RCT): **Grijota et al. (J. Funct. Morphol. Kinesiol., 2024) conducted a randomized double-blind crossover study in 21 male CrossFit athletes. HBCD supplementation (30g) demonstrated a statistically significant improvement in countermovement jump power (watts), supporting performance maintenance across consecutive high-intensity workouts.[4][5]
 
-**Resistance Training — University of Granada \(2025\): **Morenas-Aguilar et al. \(Clin. Nutr. ESPEN, 2025\) examined 45g HBCD intra-session in 30 physically active individuals across bench press, bench pull, and squat protocols. HBCD reduced GI complaints, attenuated RPE, and maintained lactate clearance versus placebo.\[3\]
+**Resistance Training — University of Granada (2025): **Morenas-Aguilar et al. (Clin. Nutr. ESPEN, 2025) examined 45g HBCD intra-session in 30 physically active individuals across bench press, bench pull, and squat protocols. HBCD reduced GI complaints, attenuated RPE, and maintained lactate clearance versus placebo.[3]
 
-**Narrative Review Consensus \(Gonzalez-Matarin, 2022\): **A comprehensive narrative review across resistance, strength, and interval training modalities concluded that HBCD supplementation produces potent exercise performance effects including increased time-to-fatigue, reduced perceived effort, faster gastric emptying, reduced fluid loss, lower pro-inflammatory cytokine levels, and immune system support — making it a uniquely comprehensive carbohydrate for multi-demand military operations.\[9\]
+**Narrative Review Consensus (Gonzalez-Matarin, 2022): **A comprehensive narrative review across resistance, strength, and interval training modalities concluded that HBCD supplementation produces potent exercise performance effects including increased time-to-fatigue, reduced perceived effort, faster gastric emptying, reduced fluid loss, lower pro-inflammatory cytokine levels, and immune system support — making it a uniquely comprehensive carbohydrate for multi-demand military operations.[9]
 
 **MILITARY RELEVANCE**
-USARIEM's research specifically identifies carbohydrate supplementation as capable of maintaining soldier physical performance during severe caloric deficits. The 2022 USARIEM study \(American Journal of Physiology, Endocrinology & Metabolism\) found that well-timed carbohydrate supplementation preserved soldier performance even when caloric intake was substantially below energy expenditure — directly validating the HBCD-first approach of the ASNP formulation.
+USARIEM's research specifically identifies carbohydrate supplementation as capable of maintaining soldier physical performance during severe caloric deficits. The 2022 USARIEM study (American Journal of Physiology, Endocrinology & Metabolism) found that well-timed carbohydrate supplementation preserved soldier performance even when caloric intake was substantially below energy expenditure — directly validating the HBCD-first approach of the ASNP formulation.
 
-### 3.2 Dextrose \(5g\) \+ Fructose \(2.5g\)
+### 3.2 Dextrose (5g) + Fructose (2.5g)
 
-The inclusion of dextrose and fructose at a 2:1 ratio alongside HBCD operationalizes the dual-transporter carbohydrate model. Glucose is absorbed via the sodium-dependent SGLT1 transporter while fructose utilizes the independent GLUT5 transporter. When both transporters are saturated simultaneously, total exogenous carbohydrate oxidation rates increase from ~60g/hour \(single carbohydrate\) to approximately 90g/hour, with co-ingestion studies confirming 55-65% higher oxidation rates.\[4\]
+The inclusion of dextrose and fructose at a 2:1 ratio alongside HBCD operationalizes the dual-transporter carbohydrate model. Glucose is absorbed via the sodium-dependent SGLT1 transporter while fructose utilizes the independent GLUT5 transporter. When both transporters are saturated simultaneously, total exogenous carbohydrate oxidation rates increase from ~60g/hour (single carbohydrate) to approximately 90g/hour, with co-ingestion studies confirming 55-65% higher oxidation rates.[4]
 
-The 2:1 dextrose:fructose ratio in the ASNP formulation is consistent with IOC and ISSN consensus recommendations. Fructose above a 1:0.5 ratio risks adverse GI effects; the ASNP ceiling at 1:0.5 \(dextrose:fructose\) is a deliberate safety constraint. Sodium citrate \(from the electrolyte matrix\) further facilitates Na⁺-coupled glucose absorption via SGLT1, an interaction directly cited in the original USARIEM fluid replacement guidelines.
+The 2:1 dextrose:fructose ratio in the ASNP formulation is consistent with IOC and ISSN consensus recommendations. Fructose above a 1:0.5 ratio risks adverse GI effects; the ASNP ceiling at 1:0.5 (dextrose:fructose) is a deliberate safety constraint. Sodium citrate (from the electrolyte matrix) further facilitates Na⁺-coupled glucose absorption via SGLT1, an interaction directly cited in the original USARIEM fluid replacement guidelines.
 
   
 
 
 ## 4. Electrolyte Matrix
 
-The electrolyte matrix of the ASNP formulation is calibrated against USARIEM military recommendation guidelines, sweat loss composition data, and intestinal absorption physiology. The formula's total sodium contribution \(600mg from sodium citrate \+ 200mg from coconut water powder base \+ ~50mg from other salts\) closely mirrors the high end of the recommended range for fluid replacement in heavy-exertion military environments.
+The electrolyte matrix of the ASNP formulation is calibrated against USARIEM military recommendation guidelines, sweat loss composition data, and intestinal absorption physiology. The formula's total sodium contribution (600mg from sodium citrate + 200mg from coconut water powder base + ~50mg from other salts) closely mirrors the high end of the recommended range for fluid replacement in heavy-exertion military environments.
 
 **Electrolyte**
 **Form**
@@ -221,7 +221,7 @@ Sodium citrate
 
 600mg
 
-Facilitates SGLT1-mediated glucose absorption; critical for plasma volume maintenance; directly recommended by USARIEM \(20-30 mEq/L\) for military fluid replacement
+Facilitates SGLT1-mediated glucose absorption; critical for plasma volume maintenance; directly recommended by USARIEM (20-30 mEq/L) for military fluid replacement
 
 Potassium
 
@@ -247,48 +247,48 @@ Calcium citrate
 
 Citrate form highly absorbable; essential for muscle contraction, nerve conduction, and bone mineral density maintenance in high-impact deployments
 
-The sodium citrate form is specifically preferred over sodium chloride in this formulation for its superior palatability at high doses and its buffering contribution \(citrate acts as a mild alkali, complementing beta-alanine's intracellular buffering mechanism with an extracellular counterpart\).
+The sodium citrate form is specifically preferred over sodium chloride in this formulation for its superior palatability at high doses and its buffering contribution (citrate acts as a mild alkali, complementing beta-alanine's intracellular buffering mechanism with an extracellular counterpart).
 
   
 
 
 ## 5. Performance Enhancement Complex
 
-### 5.1 L-Citrulline — 6g \(Pure, not Malate\)
+### 5.1 L-Citrulline — 6g (Pure, not Malate)
 
-L-Citrulline is a non-proteinogenic, non-essential alpha-amino acid produced endogenously in the small intestine and liver. Its primary ergogenic mechanism is indirect: following oral ingestion, citrulline is transported to the kidneys where it is converted to L-arginine via argininosuccinate synthase and argininosuccinate lyase. This arginine is subsequently utilized by nitric oxide synthase \(NOS\) to produce nitric oxide \(NO\), a potent vasodilator that improves blood flow to working muscle, reduces the O2 cost of exercise, and enhances mitochondrial respiration.\[12\]
+L-Citrulline is a non-proteinogenic, non-essential alpha-amino acid produced endogenously in the small intestine and liver. Its primary ergogenic mechanism is indirect: following oral ingestion, citrulline is transported to the kidneys where it is converted to L-arginine via argininosuccinate synthase and argininosuccinate lyase. This arginine is subsequently utilized by nitric oxide synthase (NOS) to produce nitric oxide (NO), a potent vasodilator that improves blood flow to working muscle, reduces the O2 cost of exercise, and enhances mitochondrial respiration.[12]
 
-Critically, oral L-citrulline is a more effective plasma arginine elevator than oral L-arginine itself, due to first-pass hepatic arginine catabolism by arginase. Bailey et al. \(Journal of Applied Physiology, 2015\) demonstrated in a 7-day RCT that 6g/day citrulline supplementation \(but not arginine\) significantly improved O2 uptake kinetics, reduced mean arterial blood pressure, and enhanced high-intensity exercise performance versus placebo.\[14\]
+Critically, oral L-citrulline is a more effective plasma arginine elevator than oral L-arginine itself, due to first-pass hepatic arginine catabolism by arginase. Bailey et al. (Journal of Applied Physiology, 2015) demonstrated in a 7-day RCT that 6g/day citrulline supplementation (but not arginine) significantly improved O2 uptake kinetics, reduced mean arterial blood pressure, and enhanced high-intensity exercise performance versus placebo.[14]
 
-**Meta-Analytic Evidence: **A 2022 PRISMA-compliant systematic review and meta-analysis \(Gonzalez et al., Nutrients\) of 10 RCTs found citrulline supplementation produced statistically significant positive effects on VO2 kinetics, blood lactate management, and RPE in aerobic exercise contexts.\[19\]\[15\]
+**Meta-Analytic Evidence: **A 2022 PRISMA-compliant systematic review and meta-analysis (Gonzalez et al., Nutrients) of 10 RCTs found citrulline supplementation produced statistically significant positive effects on VO2 kinetics, blood lactate management, and RPE in aerobic exercise contexts.[19][15]
 
-**Resistance Training \(Chronic, 6 weeks\): **A 2025 Iranian double-blind RCT \(33 resistance-trained men; L-Citrulline vs. Citrulline-Malate vs. Placebo\) found that chronic LC supplementation at 8g/day significantly improved total upper-body repetitions to failure \(p<0.001 vs. placebo\), and post-exercise nitric oxide metabolite \(NOX\) levels, confirming the NO-mediated mechanism in a strength context.\[18\]
+**Resistance Training (Chronic, 6 weeks): **A 2025 Iranian double-blind RCT (33 resistance-trained men; L-Citrulline vs. Citrulline-Malate vs. Placebo) found that chronic LC supplementation at 8g/day significantly improved total upper-body repetitions to failure (p<0.001 vs. placebo), and post-exercise nitric oxide metabolite (NOX) levels, confirming the NO-mediated mechanism in a strength context.[18]
 
-**Why Pure L-Citrulline vs. Citrulline Malate: **The ASNP formulation specifies pure L-Citrulline rather than L-Citrulline DL-Malate for dose precision. Citrulline malate products typically provide only 57% citrulline by mass \(the remainder being malic acid\), meaning a label claim of 8g citrulline malate delivers only ~4.5g actual citrulline. The 6g pure dose in ASNP delivers the clinically validated citrulline equivalent used in the Bailey et al. and chronic dosing trials.
+**Why Pure L-Citrulline vs. Citrulline Malate: **The ASNP formulation specifies pure L-Citrulline rather than L-Citrulline DL-Malate for dose precision. Citrulline malate products typically provide only 57% citrulline by mass (the remainder being malic acid), meaning a label claim of 8g citrulline malate delivers only ~4.5g actual citrulline. The 6g pure dose in ASNP delivers the clinically validated citrulline equivalent used in the Bailey et al. and chronic dosing trials.
 
-### 5.2 Beta-Alanine — 3.2g \(CarnoSyn® or equivalent\)
+### 5.2 Beta-Alanine — 3.2g (CarnoSyn® or equivalent)
 
-Beta-alanine is the rate-limiting precursor to carnosine synthesis in skeletal muscle. Carnosine \(β-alanyl-L-histidine\) is a dipeptide present at 20–30 mmol/kg dry muscle that functions as an intracellular proton buffer, antioxidant, anti-glycation agent, and modulator of calcium sensitivity in myofibrils.\[26\]
+Beta-alanine is the rate-limiting precursor to carnosine synthesis in skeletal muscle. Carnosine (β-alanyl-L-histidine) is a dipeptide present at 20–30 mmol/kg dry muscle that functions as an intracellular proton buffer, antioxidant, anti-glycation agent, and modulator of calcium sensitivity in myofibrils.[26]
 
-During high-intensity exercise, ATP hydrolysis and anaerobic glycolysis generate protons \(H\+\) that acidify the intracellular environment, impairing force production and accelerating fatigue. Carnosine buffers these protons, delaying acidosis and extending the time to muscular failure. Since carnosine synthesis is limited by beta-alanine availability — not histidine — supplementation with beta-alanine reliably elevates muscle carnosine content.\[28\]
+During high-intensity exercise, ATP hydrolysis and anaerobic glycolysis generate protons (H+) that acidify the intracellular environment, impairing force production and accelerating fatigue. Carnosine buffers these protons, delaying acidosis and extending the time to muscular failure. Since carnosine synthesis is limited by beta-alanine availability — not histidine — supplementation with beta-alanine reliably elevates muscle carnosine content.[28]
 
-**40-Study Meta-Analysis \(Hobson et al.\): **The landmark meta-analysis by Hobson et al. incorporating 40 studies, 65 exercise protocols, and 1,461 subjects established beta-alanine as an evidence-grade A ergogenic aid, particularly for exercise bouts of 60–240 seconds duration — precisely the range relevant to tactical operations, high-intensity intervals, and combat activities.
+**40-Study Meta-Analysis (Hobson et al.): **The landmark meta-analysis by Hobson et al. incorporating 40 studies, 65 exercise protocols, and 1,461 subjects established beta-alanine as an evidence-grade A ergogenic aid, particularly for exercise bouts of 60–240 seconds duration — precisely the range relevant to tactical operations, high-intensity intervals, and combat activities.
 
-**2024 Systematic Review — Trained Young Males: **Turcu et al. \(Int. J. Sport. Nutr. Exerc. Metab., 2024\) analyzed 18 RCTs in trained young males and found significant positive effects on maximal intensity exercise \(SMD: 0.39, 95% CI: 0.09–0.70, I²=44%, p=0.02\), with 14 of 18 studies favoring beta-alanine.
+**2024 Systematic Review — Trained Young Males: **Turcu et al. (Int. J. Sport. Nutr. Exerc. Metab., 2024) analyzed 18 RCTs in trained young males and found significant positive effects on maximal intensity exercise (SMD: 0.39, 95% CI: 0.09–0.70, I²=44%, p=0.02), with 14 of 18 studies favoring beta-alanine.
 
-**Military-Specific Evidence: **Hoffman et al. \(Nutrients, 2023\) reviewed the accumulating evidence for beta-alanine in military personnel, documenting not only physical performance improvements \(anaerobic capacity, sustained effort under load\) but emerging brain carnosine elevation — with implications for PTSD resilience, cognitive function under stress, and mTBI neuroprotection. Beta-alanine supplementation during a simulated 24-hour military operation \(Varanoske et al., Physiol. Rep., 2018\) maintained cognitive performance and attenuated endocrine stress markers.\[27\]
+**Military-Specific Evidence: **Hoffman et al. (Nutrients, 2023) reviewed the accumulating evidence for beta-alanine in military personnel, documenting not only physical performance improvements (anaerobic capacity, sustained effort under load) but emerging brain carnosine elevation — with implications for PTSD resilience, cognitive function under stress, and mTBI neuroprotection. Beta-alanine supplementation during a simulated 24-hour military operation (Varanoske et al., Physiol. Rep., 2018) maintained cognitive performance and attenuated endocrine stress markers.[27]
 
-**Dosing Note — 3.2g/serving: **The ISSN position stand identifies 3.2–6.4g/day as the clinically effective range. At 3.2g per serving, the ASNP formulation delivers the lower bound of clinical dosing — sufficient for acute buffering within a single workout and compatible with multi-serving daily protocols for loading. Paresthesia \(skin tingling\) is the only reported side effect and is dose-dependent; 3.2g is generally tolerable for most individuals.
+**Dosing Note — 3.2g/serving: **The ISSN position stand identifies 3.2–6.4g/day as the clinically effective range. At 3.2g per serving, the ASNP formulation delivers the lower bound of clinical dosing — sufficient for acute buffering within a single workout and compatible with multi-serving daily protocols for loading. Paresthesia (skin tingling) is the only reported side effect and is dose-dependent; 3.2g is generally tolerable for most individuals.
 
 ### 5.3 Taurine — 2g
 
-Taurine \(2-aminoethanesulfonic acid\) is the most abundant intracellular free amino acid in the body, present at particularly high concentrations in heart, skeletal muscle, and brain tissue. It functions as an osmolyte \(regulating cell volume and water balance\), a calcium modulator \(modulating sarcoplasmic reticulum Ca²⁺ handling\), a neuromodulator \(modulating inhibitory GABA-A receptors\), and a direct antioxidant.
+Taurine (2-aminoethanesulfonic acid) is the most abundant intracellular free amino acid in the body, present at particularly high concentrations in heart, skeletal muscle, and brain tissue. It functions as an osmolyte (regulating cell volume and water balance), a calcium modulator (modulating sarcoplasmic reticulum Ca²⁺ handling), a neuromodulator (modulating inhibitory GABA-A receptors), and a direct antioxidant.
 
-A 2018 meta-analysis identified taurine supplementation as a mild but consistent ergogenic aid, particularly relevant for endurance performance and reducing exercise-induced DNA damage. Its osmolytic role is directly relevant in the ASNP context: taurine helps maintain cell volume during the osmotic stress of high-sweat-rate exercise, synergizing with the electrolyte matrix. The 2g dose is consistent with RCTs demonstrating favorable outcomes and well below the daily safe upper limit \(>3g/day is used clinically\).
+A 2018 meta-analysis identified taurine supplementation as a mild but consistent ergogenic aid, particularly relevant for endurance performance and reducing exercise-induced DNA damage. Its osmolytic role is directly relevant in the ASNP context: taurine helps maintain cell volume during the osmotic stress of high-sweat-rate exercise, synergizing with the electrolyte matrix. The 2g dose is consistent with RCTs demonstrating favorable outcomes and well below the daily safe upper limit (>3g/day is used clinically).
 
-### 5.4 L-Theanine — 200mg \(Suntheanine® or equivalent\)
+### 5.4 L-Theanine — 200mg (Suntheanine® or equivalent)
 
-L-Theanine is a non-proteinogenic amino acid found predominantly in green tea \(Camellia sinensis\). It crosses the blood-brain barrier and modulates neural activity through multiple mechanisms: increasing alpha-wave brain activity \(associated with focused relaxation\), modulating glutamate receptor activity, and elevating GABA, serotonin, and dopamine. Its inclusion in a stimulant-free military formulation directly addresses the cognitive performance component of operational readiness — the ability to maintain focus, situational awareness, and decision-making accuracy under physical stress.
+L-Theanine is a non-proteinogenic amino acid found predominantly in green tea (Camellia sinensis). It crosses the blood-brain barrier and modulates neural activity through multiple mechanisms: increasing alpha-wave brain activity (associated with focused relaxation), modulating glutamate receptor activity, and elevating GABA, serotonin, and dopamine. Its inclusion in a stimulant-free military formulation directly addresses the cognitive performance component of operational readiness — the ability to maintain focus, situational awareness, and decision-making accuracy under physical stress.
 
 The 200mg dose is the established efficacious dose in RCT literature for attention, cognitive performance, and stress reduction. Unlike stimulants, L-theanine does not elevate heart rate or blood pressure and has no documented tolerance development. The Suntheanine® form represents a pharmaceutical-grade, patented extraction process ensuring the natural L-isomer purity critical for reproducible results.
 
@@ -297,77 +297,77 @@ The 200mg dose is the established efficacious dose in RCT literature for attenti
 
 ## 6. Amino Acid Profile
 
-### 6.1 BCAAs — 5g \(2:1:1 Leucine:Isoleucine:Valine\)
+### 6.1 BCAAs — 5g (2:1:1 Leucine:Isoleucine:Valine)
 
-Branched-Chain Amino Acids \(BCAAs\) — leucine, isoleucine, and valine — are essential amino acids oxidized primarily in skeletal muscle rather than the liver, making them uniquely available as a direct fuel source during exercise. The 2:1:1 ratio reflects the natural abundance of these amino acids in muscle protein and the established leucine-dominant mTORC1 activation threshold.\[9\]
+Branched-Chain Amino Acids (BCAAs) — leucine, isoleucine, and valine — are essential amino acids oxidized primarily in skeletal muscle rather than the liver, making them uniquely available as a direct fuel source during exercise. The 2:1:1 ratio reflects the natural abundance of these amino acids in muscle protein and the established leucine-dominant mTORC1 activation threshold.[9]
 
-Leucine acts as the primary anabolic signalling molecule, activating the mTOR \(mechanistic Target of Rapamycin\) pathway that initiates muscle protein synthesis. The 2.5g leucine per serving in ASNP approaches the established leucine threshold \(~2–3g\) for maximal mTOR activation in the post-exercise period, while the inclusion of isoleucine and valine supports glucose uptake and anti-fatigue effects respectively.
+Leucine acts as the primary anabolic signalling molecule, activating the mTOR (mechanistic Target of Rapamycin) pathway that initiates muscle protein synthesis. The 2.5g leucine per serving in ASNP approaches the established leucine threshold (~2–3g) for maximal mTOR activation in the post-exercise period, while the inclusion of isoleucine and valine supports glucose uptake and anti-fatigue effects respectively.
 
 The InstAminos® specification ensures fully instantized, water-dispersible particles that mix cleanly in the HBCD-based solution without clumping — a critical manufacturing and palatability consideration for field use.
 
 ### 6.2 Essential Amino Acids — 3g
 
-The inclusion of 3g of the full essential amino acid \(EAA\) spectrum \(excluding BCAAs already included\) reflects the research consensus that complete EAA profiles stimulate muscle protein synthesis \(MPS\) more effectively than BCAAs alone. The leucine-alone or BCAA-only models neglect the fact that MPS requires a supply of all EAAs for peptide chain elongation. The 8g total EAA \+ BCAA pool \(5g BCAAs \+ 3g EAAs\) is consistent with the EAA doses used in maximal MPS stimulation studies \(~10g EAA\).
+The inclusion of 3g of the full essential amino acid (EAA) spectrum (excluding BCAAs already included) reflects the research consensus that complete EAA profiles stimulate muscle protein synthesis (MPS) more effectively than BCAAs alone. The leucine-alone or BCAA-only models neglect the fact that MPS requires a supply of all EAAs for peptide chain elongation. The 8g total EAA + BCAA pool (5g BCAAs + 3g EAAs) is consistent with the EAA doses used in maximal MPS stimulation studies (~10g EAA).
 
   
 
 
 ## 7. Antioxidant Complex
 
-High-intensity exercise generates reactive oxygen and nitrogen species \(RONS\) as a necessary byproduct of elevated oxidative metabolism. While acute RONS production is an important signalling stimulus for training adaptation, excessive RONS during prolonged or repeated extreme exercise can overwhelm endogenous antioxidant systems, causing oxidative damage to proteins, lipids, and nucleic acids — accelerating muscle damage, impairing recovery, and reducing subsequent performance.
+High-intensity exercise generates reactive oxygen and nitrogen species (RONS) as a necessary byproduct of elevated oxidative metabolism. While acute RONS production is an important signalling stimulus for training adaptation, excessive RONS during prolonged or repeated extreme exercise can overwhelm endogenous antioxidant systems, causing oxidative damage to proteins, lipids, and nucleic acids — accelerating muscle damage, impairing recovery, and reducing subsequent performance.
 
-### 7.1 Astaxanthin — 4mg \(from H. pluvialis\)
+### 7.1 Astaxanthin — 4mg (from H. pluvialis)
 
-Astaxanthin \(AX\) is a xanthophyll carotenoid extracted from the microalgae Haematococcus pluvialis. It is structurally unique among antioxidants in that it can span the entire cell membrane bilayer, simultaneously scavenging free radicals at both the inner and outer membrane surfaces — a capability not shared by tocopherols or carotenoids like lycopene or beta-carotene.\[60\]
+Astaxanthin (AX) is a xanthophyll carotenoid extracted from the microalgae Haematococcus pluvialis. It is structurally unique among antioxidants in that it can span the entire cell membrane bilayer, simultaneously scavenging free radicals at both the inner and outer membrane surfaces — a capability not shared by tocopherols or carotenoids like lycopene or beta-carotene.[60]
 
-**Ergogenic Meta-Analysis \(2024\): **Hasani et al. \(Journal of Functional Foods, 2024\) conducted a systematic review and meta-analysis of 9 RCTs examining AX supplementation in athletic men, finding significant improvement in total antioxidant capacity \(TAC\) \(SMD: 1.1, 95% CI: 0.43–1.77, p=0.046\) and positive trends in cycling time trial performance.\[52\]
+**Ergogenic Meta-Analysis (2024): **Hasani et al. (Journal of Functional Foods, 2024) conducted a systematic review and meta-analysis of 9 RCTs examining AX supplementation in athletic men, finding significant improvement in total antioxidant capacity (TAC) (SMD: 1.1, 95% CI: 0.43–1.77, p=0.046) and positive trends in cycling time trial performance.[52]
 
-**Cycling Performance RCT \(2025\): **A 2025 randomized controlled trial \(BMC Sports Science, Medicine and Rehabilitation\) found 4 days of astaxanthin at 28mg/day significantly extended time to exhaustion in cyclists at 75% VO2max \(85.41 ± 4.42 min vs. 72.11 ± 2 min in placebo, p<0.05\), alongside reductions in CK, LDH, TNF-α, and hs-CRP — direct biomarkers of muscle damage and inflammation.\[53\]\[54\]
+**Cycling Performance RCT (2025): **A 2025 randomized controlled trial (BMC Sports Science, Medicine and Rehabilitation) found 4 days of astaxanthin at 28mg/day significantly extended time to exhaustion in cyclists at 75% VO2max (85.41 ± 4.42 min vs. 72.11 ± 2 min in placebo, p<0.05), alongside reductions in CK, LDH, TNF-α, and hs-CRP — direct biomarkers of muscle damage and inflammation.[53][54]
 
-**Mitochondrial Strategy Review \(Nutrients, 2024\): **A 2024 invited review \(MDPI Nutrients\) highlighted AX's specific mitochondria-targeting antioxidant action, documenting its ability to improve cycling time trial performance, reduce submaximal heart rate, accelerate recovery from DOMS, and enhance endogenous glutathione in trained populations. Critically, no adverse effects were reported across 87 human studies.\[56\]\[58\]
+**Mitochondrial Strategy Review (Nutrients, 2024): **A 2024 invited review (MDPI Nutrients) highlighted AX's specific mitochondria-targeting antioxidant action, documenting its ability to improve cycling time trial performance, reduce submaximal heart rate, accelerate recovery from DOMS, and enhance endogenous glutathione in trained populations. Critically, no adverse effects were reported across 87 human studies.[56][58]
 
-The 4mg dose in ASNP represents the conservative lower bound of clinically used doses \(4–12mg in most efficacy trials\). This provides meaningful antioxidant coverage with a wide safety margin. The H. pluvialis specification ensures the natural 3S,3'S isomer with established superior bioactivity versus synthetic isomers.
+The 4mg dose in ASNP represents the conservative lower bound of clinically used doses (4–12mg in most efficacy trials). This provides meaningful antioxidant coverage with a wide safety margin. The H. pluvialis specification ensures the natural 3S,3'S isomer with established superior bioactivity versus synthetic isomers.
 
-### 7.2 Vitamin C — 500mg \(as Ascorbic Acid\)
+### 7.2 Vitamin C — 500mg (as Ascorbic Acid)
 
-Ascorbic acid is the primary water-soluble antioxidant in plasma and cellular compartments. At 500mg, the dose saturates plasma vitamin C to maximum levels, providing robust coverage for exercise-induced RONS in the aqueous cellular environment. Vitamin C also regenerates oxidized vitamin E \(tocopherol\) back to its active form, creating a synergistic antioxidant recycling cycle between the two vitamins — a key design consideration of the co-inclusion of both in the ASNP formulation.
+Ascorbic acid is the primary water-soluble antioxidant in plasma and cellular compartments. At 500mg, the dose saturates plasma vitamin C to maximum levels, providing robust coverage for exercise-induced RONS in the aqueous cellular environment. Vitamin C also regenerates oxidized vitamin E (tocopherol) back to its active form, creating a synergistic antioxidant recycling cycle between the two vitamins — a key design consideration of the co-inclusion of both in the ASNP formulation.
 
-### 7.3 Pomegranate Extract — 250mg \(standardized to 40% punicosides\)
+### 7.3 Pomegranate Extract — 250mg (standardized to 40% punicosides)
 
-Pomegranate polyphenols \(punicalagins, ellagic acid, and anthocyanins\) demonstrate anti-inflammatory and exercise recovery effects through NF-κB pathway modulation, cyclooxygenase inhibition, and direct RONS scavenging. Multiple RCTs in athletes have demonstrated reduced muscle soreness, preserved muscle strength, and accelerated recovery following pomegranate supplementation in the peri-exercise window — effects that translate directly to operational mission-to-mission recovery timelines in military personnel.
+Pomegranate polyphenols (punicalagins, ellagic acid, and anthocyanins) demonstrate anti-inflammatory and exercise recovery effects through NF-κB pathway modulation, cyclooxygenase inhibition, and direct RONS scavenging. Multiple RCTs in athletes have demonstrated reduced muscle soreness, preserved muscle strength, and accelerated recovery following pomegranate supplementation in the peri-exercise window — effects that translate directly to operational mission-to-mission recovery timelines in military personnel.
 
   
 
 
 ## 8. Adaptogenic Blend
 
-Adaptogens are a pharmacologically defined class of natural compounds that increase the body's non-specific resistance to stressors — including physical, chemical, and psychological — through modulation of the hypothalamic-pituitary-adrenal \(HPA\) axis and sympathoadrenal system. The three adaptogens in ASNP were selected for their distinct and complementary mechanisms within military/extreme performance contexts.
+Adaptogens are a pharmacologically defined class of natural compounds that increase the body's non-specific resistance to stressors — including physical, chemical, and psychological — through modulation of the hypothalamic-pituitary-adrenal (HPA) axis and sympathoadrenal system. The three adaptogens in ASNP were selected for their distinct and complementary mechanisms within military/extreme performance contexts.
 
-### 8.1 Rhodiola Rosea — 200mg \(3% rosavins, 1% salidroside\)
+### 8.1 Rhodiola Rosea — 200mg (3% rosavins, 1% salidroside)
 
-Rhodiola rosea \(Arctic Root\) is a high-altitude flowering plant with an extensive history of use by Soviet military researchers and, historically, by Sherpa climbers navigating Himalayan ascents. Its primary bioactive markers are rosavins \(unique to R. rosea\) and salidroside, which modulate stress response pathways including DAF-16/FOXO, heat shock proteins, and the sympathoadrenal system.
+Rhodiola rosea (Arctic Root) is a high-altitude flowering plant with an extensive history of use by Soviet military researchers and, historically, by Sherpa climbers navigating Himalayan ascents. Its primary bioactive markers are rosavins (unique to R. rosea) and salidroside, which modulate stress response pathways including DAF-16/FOXO, heat shock proteins, and the sympathoadrenal system.
 
-**2024 Systematic Literature Review \(Tinsley et al., Br. J. Nutr.\): **The most rigorous recent review of RR for exercise performance \(Tinsley, Jagim, Potter, et al., British Journal of Nutrition, 2024\) analyzed 16 trials \(2000–2023\) in 363 participants, identifying consistent evidence for: \(1\) reduced heart rate response to submaximal exercise, \(2\) improved time to exhaustion, \(3\) reduced perceived exertion and fatigue, and \(4\) acute reduction in post-exercise blood lactate. The 200mg standardized extract dose in ASNP aligns with the effective dose range used in multiple successful trials.\[34\]\[39\]
+**2024 Systematic Literature Review (Tinsley et al., Br. J. Nutr.): **The most rigorous recent review of RR for exercise performance (Tinsley, Jagim, Potter, et al., British Journal of Nutrition, 2024) analyzed 16 trials (2000–2023) in 363 participants, identifying consistent evidence for: (1) reduced heart rate response to submaximal exercise, (2) improved time to exhaustion, (3) reduced perceived exertion and fatigue, and (4) acute reduction in post-exercise blood lactate. The 200mg standardized extract dose in ASNP aligns with the effective dose range used in multiple successful trials.[34][39]
 
-RR's unique suitability for military contexts extends beyond exercise performance: multiple studies document anti-fatigue effects during cognitive tasks under stress, consistent with its reported use by Soviet cosmonauts and military operators for sustained mental performance during operations. The standardization to both rosavins \(3%\) AND salidroside \(1%\) is critical — products standardized only to one marker cannot reliably replicate multi-RCT outcomes.
+RR's unique suitability for military contexts extends beyond exercise performance: multiple studies document anti-fatigue effects during cognitive tasks under stress, consistent with its reported use by Soviet cosmonauts and military operators for sustained mental performance during operations. The standardization to both rosavins (3%) AND salidroside (1%) is critical — products standardized only to one marker cannot reliably replicate multi-RCT outcomes.
 
-### 8.2 Ashwagandha \(KSM-66\) — 300mg \(5% withanolides\)
+### 8.2 Ashwagandha (KSM-66) — 300mg (5% withanolides)
 
-Withania somnifera \(Ashwagandha\) root extract, particularly the KSM-66 full-spectrum alcoholic-aqueous extraction, has generated the most robust clinical evidence base of any adaptogenic botanical. Its primary withanolide bioactives modulate NF-κB inflammatory signalling, cortisol synthesis, and GABA-A receptor activity.
+Withania somnifera (Ashwagandha) root extract, particularly the KSM-66 full-spectrum alcoholic-aqueous extraction, has generated the most robust clinical evidence base of any adaptogenic botanical. Its primary withanolide bioactives modulate NF-κB inflammatory signalling, cortisol synthesis, and GABA-A receptor activity.
 
-**Systematic Review \(Luszczak & Kocki, Ann. Agric. Environ. Med.\): **A 2024 systematic review of clinical evidence for KSM-66 and Rhodiola rosea across multiple studies confirmed significant anxiety reduction, cortisol attenuation, improved sleep quality, and enhanced stress resilience in double-blind placebo-controlled trials across multiple populations.\[37\]
+**Systematic Review (Luszczak & Kocki, Ann. Agric. Environ. Med.): **A 2024 systematic review of clinical evidence for KSM-66 and Rhodiola rosea across multiple studies confirmed significant anxiety reduction, cortisol attenuation, improved sleep quality, and enhanced stress resilience in double-blind placebo-controlled trials across multiple populations.[37]
 
 Cortisol is the primary catabolic hormone elevated during prolonged military operations; chronic cortisol elevation promotes muscle catabolism, immune suppression, sleep disruption, and cognitive impairment — precisely the operational vulnerabilities that KSM-66 targets. Randomized trials have demonstrated VO2max improvement, enhanced strength gains, testosterone maintenance, and reduced exercise-induced muscle damage with 300–600mg/day KSM-66 in athletic populations.
 
 The 5% withanolide standardization ensures quantitative bioactive consistency — critical for a military-grade product where predictable physiological response is required across large numbers of users.
 
-### 8.3 Cordyceps — 500mg \(CS-4 strain, 40% polysaccharides\)
+### 8.3 Cordyceps — 500mg (CS-4 strain, 40% polysaccharides)
 
-Cordyceps sinensis \(and its cultured CS-4 mycelial strain\) has a history of use in traditional Chinese medicine and gained modern attention when Chinese female track athletes attributed dramatically improved performances at the 1993 World Championships to Cordyceps supplementation. The CS-4 strain is the clinically validated form, produced through deep-tank liquid fermentation to ensure consistent polysaccharide content without the variability of wild-harvested specimens.
+Cordyceps sinensis (and its cultured CS-4 mycelial strain) has a history of use in traditional Chinese medicine and gained modern attention when Chinese female track athletes attributed dramatically improved performances at the 1993 World Championships to Cordyceps supplementation. The CS-4 strain is the clinically validated form, produced through deep-tank liquid fermentation to ensure consistent polysaccharide content without the variability of wild-harvested specimens.
 
-Proposed mechanisms include: \(1\) adenosine analogue content improving ATP production efficiency, \(2\) polysaccharide-mediated immune modulation reducing inflammatory load, \(3\) upregulation of cellular antioxidant systems via Nrf2 pathway activation, and \(4\) potential erythropoietin \(EPO\)-like effects on red blood cell production — directly relevant to oxygen delivery in exercise.
+Proposed mechanisms include: (1) adenosine analogue content improving ATP production efficiency, (2) polysaccharide-mediated immune modulation reducing inflammatory load, (3) upregulation of cellular antioxidant systems via Nrf2 pathway activation, and (4) potential erythropoietin (EPO)-like effects on red blood cell production — directly relevant to oxygen delivery in exercise.
 
-An RCT by Chen & Li \(J. Altern. Complement. Med., 2010\) found CS-4 supplementation significantly improved exercise performance metrics and VO2max in healthy older subjects versus placebo — one of the few clean isolate RCTs for Cordyceps in humans. The 500mg dose with 40% polysaccharide standardization is consistent with doses used in human research and traditional protocols.
+An RCT by Chen & Li (J. Altern. Complement. Med., 2010) found CS-4 supplementation significantly improved exercise performance metrics and VO2max in healthy older subjects versus placebo — one of the few clean isolate RCTs for Cordyceps in humans. The 500mg dose with 40% polysaccharide standardization is consistent with doses used in human research and traditional protocols.
 
   
 
@@ -379,7 +379,7 @@ The digestive support matrix addresses a commonly overlooked failure mode of per
 **Component**
 **Dose**
 **Function**
-Ginger extract \(5% gingerols\)
+Ginger extract (5% gingerols)
 
 100mg
 
@@ -389,21 +389,21 @@ Bacillus coagulans GBI-30, 6086
 
 1 billion CFU
 
-Shelf-stable probiotic \(spore-forming, survives without refrigeration and low-pH gastric transit\); improves gut barrier integrity; reduces inflammatory cytokines; supports immune function under exercise stress
+Shelf-stable probiotic (spore-forming, survives without refrigeration and low-pH gastric transit); improves gut barrier integrity; reduces inflammatory cytokines; supports immune function under exercise stress
 
-Amylase \(5,000 DU\)
+Amylase (5,000 DU)
 
 Standard dose
 
 Catalyzes starch breakdown, improving HBCD digestion and glucose bioavailability kinetics
 
-Protease \(25,000 HUT\)
+Protease (25,000 HUT)
 
 Standard dose
 
 Accelerates BCAA and EAA peptide hydrolysis to free amino acids for absorption
 
-Lipase \(1,000 FIP\)
+Lipase (1,000 FIP)
 
 Standard dose
 
@@ -416,9 +416,9 @@ The Bacillus coagulans GBI-30, 6086 strain selection is specifically justified f
 
 ## 10. Flavor System & Sweetener Rationale
 
-The flavor system was designed to achieve palatability, encourage consistent field consumption, and avoid any artificial stimulant perception. Natural tart cherry powder at 500mg \(standardized to 1% anthocyanins\) performs a dual function: contributing to flavor character and providing bioactive anthocyanins with their own exercise recovery and anti-inflammatory properties documented in the sports science literature.
+The flavor system was designed to achieve palatability, encourage consistent field consumption, and avoid any artificial stimulant perception. Natural tart cherry powder at 500mg (standardized to 1% anthocyanins) performs a dual function: contributing to flavor character and providing bioactive anthocyanins with their own exercise recovery and anti-inflammatory properties documented in the sports science literature.
 
-The three-component sweetener system \(coconut sugar, monk fruit extract, stevia extract\) was engineered for a specific sensory objective: full sweetness in the target 1–2 teaspoon equivalent range without the metallic or bitter aftertaste that plagues mono-sweetener formulations. Monk fruit extract \(50% mogroside V\) provides intense sweetness without glycemic load. High-purity stevia \(95% rebaudioside A\) minimizes the licorice/bitter notes associated with lower-purity stevia preparations. Coconut sugar provides a small glycemic contribution, base sweetness, and natural caramel notes that round out the flavor profile.
+The three-component sweetener system (coconut sugar, monk fruit extract, stevia extract) was engineered for a specific sensory objective: full sweetness in the target 1–2 teaspoon equivalent range without the metallic or bitter aftertaste that plagues mono-sweetener formulations. Monk fruit extract (50% mogroside V) provides intense sweetness without glycemic load. High-purity stevia (95% rebaudioside A) minimizes the licorice/bitter notes associated with lower-purity stevia preparations. Coconut sugar provides a small glycemic contribution, base sweetness, and natural caramel notes that round out the flavor profile.
 
 **CONSUMPTION COMPLIANCE**
 Military nutrition science consistently identifies palatability as a primary determinant of actual supplement consumption compliance in field conditions. Products that taste unpleasant are abandoned within days regardless of efficacy. The ASNP flavor system prioritizes natural ingredient profiles, moderate sweetness, and refreshing character specifically to maximize consistent deployment-condition consumption.
@@ -428,7 +428,7 @@ Military nutrition science consistently identifies palatability as a primary det
 
 ## 11. Safety Profile & Regulatory Status
 
-All ASNP ingredients carry GRAS \(Generally Recognized As Safe\) status or hold NDI \(New Dietary Ingredient\) filings with the FDA. The formulation is designed for manufacturing under FDA 21 CFR Part 111 current Good Manufacturing Practice \(cGMP\) for dietary supplements, with ISO 9001:2015 certified production environments.
+All ASNP ingredients carry GRAS (Generally Recognized As Safe) status or hold NDI (New Dietary Ingredient) filings with the FDA. The formulation is designed for manufacturing under FDA 21 CFR Part 111 current Good Manufacturing Practice (cGMP) for dietary supplements, with ISO 9001:2015 certified production environments.
 
 **Ingredient**
 **Safety Classification**
@@ -475,7 +475,7 @@ GRAS
 
 Amino acids with established long-term safety record
 
-Astaxanthin \(H. pluvialis\)
+Astaxanthin (H. pluvialis)
 
 GRAS / NDI
 
@@ -491,7 +491,7 @@ Ashwagandha KSM-66
 
 GRAS
 
-Rare hepatotoxicity cases at very high doses \(>600mg\); 300mg well within safety envelope
+Rare hepatotoxicity cases at very high doses (>600mg); 300mg well within safety envelope
 
 Cordyceps CS-4
 
@@ -511,7 +511,7 @@ GRAS
 
 Wide safety margin; mild GI stimulant at very high doses
 
-**WADA/ASADA Compliance: **None of the ingredients in the ASNP formulation appear on the World Anti-Doping Agency \(WADA\) 2024–2025 Prohibited List. Astaxanthin is specifically noted as not found on the 2024 NCAA prohibited list.\[56\] All branded ingredient forms \(CarnoSyn, KSM-66, InstAminos, Suntheanine\) are WADA-compliant by manufacturer documentation.
+**WADA/ASADA Compliance: **None of the ingredients in the ASNP formulation appear on the World Anti-Doping Agency (WADA) 2024–2025 Prohibited List. Astaxanthin is specifically noted as not found on the 2024 NCAA prohibited list.[56] All branded ingredient forms (CarnoSyn, KSM-66, InstAminos, Suntheanine) are WADA-compliant by manufacturer documentation.
 
   
 
@@ -522,43 +522,43 @@ A key design advantage of the ASNP formulation is the intentional stacking of in
 
 **Pair**
 **Mechanism of Synergy**
-HBCD \+ Sodium citrate
+HBCD + Sodium citrate
 
 SGLT1-mediated co-transport of sodium and glucose accelerates carbohydrate absorption; sodium simultaneously drives osmotic water absorption for hydration
 
-HBCD \+ Dextrose/Fructose
+HBCD + Dextrose/Fructose
 
-Dual transporter saturation \(SGLT1 for glucose, GLUT5 for fructose\) maximizes total exogenous CHO oxidation rate to ~90g/hr vs ~60g/hr single-transporter
+Dual transporter saturation (SGLT1 for glucose, GLUT5 for fructose) maximizes total exogenous CHO oxidation rate to ~90g/hr vs ~60g/hr single-transporter
 
-L-Citrulline \+ Sodium
+L-Citrulline + Sodium
 
 Enhanced blood flow to active muscle improves nutrient delivery; sodium maintains plasma volume driving circulatory efficiency
 
-Beta-Alanine \+ Sodium citrate
+Beta-Alanine + Sodium citrate
 
-Beta-alanine provides intracellular \(muscle\) buffering; sodium citrate/citrate anions provide mild extracellular alkalosis support — dual-compartment pH management
+Beta-alanine provides intracellular (muscle) buffering; sodium citrate/citrate anions provide mild extracellular alkalosis support — dual-compartment pH management
 
-Taurine \+ Electrolytes
+Taurine + Electrolytes
 
-Taurine osmolytic properties synergize with electrolyte-driven cell volume regulation; taurine modulates Na\+/K\+ ATPase, reinforcing electrolyte transport efficacy
+Taurine osmolytic properties synergize with electrolyte-driven cell volume regulation; taurine modulates Na+/K+ ATPase, reinforcing electrolyte transport efficacy
 
-Astaxanthin \+ Vitamin C \+ Vitamin E
+Astaxanthin + Vitamin C + Vitamin E
 
 Antioxidant recycling cascade: Vitamin C regenerates oxidized Vitamin E back to active form; astaxanthin scavenges lipid peroxyl radicals; three distinct redox compartments covered simultaneously
 
-Rhodiola Rosea \+ Ashwagandha
+Rhodiola Rosea + Ashwagandha
 
-Complementary HPA axis modulation; Rhodiola activates EPO and stimulatory pathways acutely; Ashwagandha reduces cortisol chronically; combined = acute stress tolerance \+ long-term adrenal resilience
+Complementary HPA axis modulation; Rhodiola activates EPO and stimulatory pathways acutely; Ashwagandha reduces cortisol chronically; combined = acute stress tolerance + long-term adrenal resilience
 
-HBCD \+ Digestive Enzymes
+HBCD + Digestive Enzymes
 
 Amylase accelerates polysaccharide breakdown; combined with HBCD's inherently fast GER, substrate delivery is maximized while GI discomfort minimized
 
-BCAAs \+ EAAs
+BCAAs + EAAs
 
 Leucine from BCAAs activates mTORC1 signalling; full EAA spectrum provides all building blocks for complete muscle protein synthesis chain elongation
 
-L-Theanine \+ Performance complex
+L-Theanine + Performance complex
 
 Cognitive alertness from L-theanine maintains neuromuscular coordination and decision-making during physical fatigue — specifically relevant for military precision tasks under exhaustion
 
@@ -576,9 +576,9 @@ Pre-Exercise / Pre-Mission
 
 20–30 min prior
 
-HBCD gastric emptying window; L-Citrulline peak plasma arginine elevation \(60–90 min post-dose\); beta-alanine pre-loading; L-Theanine cerebral distribution \(30–60 min\)
+HBCD gastric emptying window; L-Citrulline peak plasma arginine elevation (60–90 min post-dose); beta-alanine pre-loading; L-Theanine cerebral distribution (30–60 min)
 
-Intra-Exercise \(sustained ops\)
+Intra-Exercise (sustained ops)
 
 Every 45–60 min
 
@@ -588,9 +588,9 @@ Post-Exercise / Recovery
 
 Within 30 min of cessation
 
-BCAAs/EAAs for anabolic window \(30-min leucine threshold\); electrolyte repletion; antioxidant cascade \(astaxanthin, Vitamin C/E\) for RONS attenuation; adaptogen cortisol modulation during recovery phase
+BCAAs/EAAs for anabolic window (30-min leucine threshold); electrolyte repletion; antioxidant cascade (astaxanthin, Vitamin C/E) for RONS attenuation; adaptogen cortisol modulation during recovery phase
 
-For chronic adaptogen benefits \(Ashwagandha cortisol reduction, Rhodiola stress resilience, Cordyceps aerobic capacity\), consistent daily supplementation over 4–8 weeks is required to achieve the full HPA axis recalibration and physiological adaptation observed in clinical trials.
+For chronic adaptogen benefits (Ashwagandha cortisol reduction, Rhodiola stress resilience, Cordyceps aerobic capacity), consistent daily supplementation over 4–8 weeks is required to achieve the full HPA axis recalibration and physiological adaptation observed in clinical trials.
 
   
 
@@ -626,13 +626,13 @@ Karl Fischer titration
 
 2.0–4.0% water activity
 
-Osmolality \(mixed\)
+Osmolality (mixed)
 
 Freezing point depression
 
 280–320 mOsm/kg at specified reconstitution
 
-pH \(mixed\)
+pH (mixed)
 
 Potentiometric
 
@@ -652,7 +652,7 @@ Complete dissolution within 30s shaker mixing
 
 Stability testing
 
-ICH Q1A\(R2\) conditions
+ICH Q1A(R2) conditions
 
 Time points: 0, 3, 6, 12, 18, 24 months; 25°C/60% RH primary; 40°C/75% RH accelerated
 
@@ -665,12 +665,12 @@ The Advanced Sports Nutrition Powder represents a scientifically defensible, evi
 
 1. **Operational-Grade Carbohydrate Delivery: **HBCD-first approach with dual-transporter co-substrates, directly validated by USARIEM carbohydrate supplementation research as the most effective strategy for sustaining performance during caloric deficits in military operations.
 2. **Stimulant Independence: **Complete absence of caffeine and stimulants addresses the dependency, tolerance, and sleep disruption risks incompatible with sustained operational tempo and recovery protocols.
-3. **Dual-Compartment Buffering: **Beta-alanine \(intracellular\) and sodium citrate \(extracellular\) provide comprehensive pH management during high-intensity efforts — particularly relevant in repeated engagement scenarios.
-4. **Adaptogenic Resilience Stack: **The Rhodiola \+ Ashwagandha \+ Cordyceps triad addresses the chronic HPA axis dysregulation that underpins performance decline and injury risk in prolonged deployment scenarios.
+3. **Dual-Compartment Buffering: **Beta-alanine (intracellular) and sodium citrate (extracellular) provide comprehensive pH management during high-intensity efforts — particularly relevant in repeated engagement scenarios.
+4. **Adaptogenic Resilience Stack: **The Rhodiola + Ashwagandha + Cordyceps triad addresses the chronic HPA axis dysregulation that underpins performance decline and injury risk in prolonged deployment scenarios.
 5. **Field-Stable Probiotics: **Bacillus coagulans GBI-30 is uniquely suited to military logistics where cold-chain integrity cannot be guaranteed.
 
 **OVERALL FORMULATION ASSESSMENT**
-The ASNP formulation receives an overall evidence rating of A-/B\+ across its ingredient portfolio. The carbohydrate complex, electrolyte matrix, L-Citrulline, beta-alanine, BCAAs/EAAs, and KSM-66 Ashwagandha carry Grade A evidence from meta-analyses and multiple RCTs. Astaxanthin, Rhodiola Rosea, Cordyceps, taurine, and L-Theanine carry Grade B evidence from multiple clinical trials with mechanistic plausibility. No ingredient in the formulation has an adverse Grade C or D rating in the context of the specified doses. The formulation is operationally recommended without reservation.
+The ASNP formulation receives an overall evidence rating of A-/B+ across its ingredient portfolio. The carbohydrate complex, electrolyte matrix, L-Citrulline, beta-alanine, BCAAs/EAAs, and KSM-66 Ashwagandha carry Grade A evidence from meta-analyses and multiple RCTs. Astaxanthin, Rhodiola Rosea, Cordyceps, taurine, and L-Theanine carry Grade B evidence from multiple clinical trials with mechanistic plausibility. No ingredient in the formulation has an adverse Grade C or D rating in the context of the specified doses. The formulation is operationally recommended without reservation.
 
   
 
@@ -778,29 +778,29 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 ## 16. References
 
-**[1]** Hobson RM, Saunders B, Ball G, Harris RC, Sale C. Effects of β-alanine supplementation on exercise performance: A meta-analysis. Amino Acids. 2012;43\(1\):25–37.
+**[1]** Hobson RM, Saunders B, Ball G, Harris RC, Sale C. Effects of β-alanine supplementation on exercise performance: A meta-analysis. Amino Acids. 2012;43(1):25–37.
 
 **[2]** Trexler ET, Smith-Ryan AE, Stout JR, et al. International society of sports nutrition position stand: Beta-Alanine. J Int Soc Sports Nutr. 2015;12:30.
 
 **[3]** Morenas-Aguilar MD, Miras-Moreno S, et al. HBCD supplementation and resistance training: A randomized double-blinded crossover trial. Clin Nutr ESPEN. 2025;65:305–314. doi:10.1016/j.clnesp.2024.12.002
 
-**[4]** Grijota FJ, Toro-Román V, Bartolomé I, et al. Acute Effects of 30g Cyclodextrin Intake during CrossFit® Training on Performance and Fatigue. J Funct Morphol Kinesiol. 2024;9\(1\):27. doi:10.3390/jfmk9010027
+**[4]** Grijota FJ, Toro-Román V, Bartolomé I, et al. Acute Effects of 30g Cyclodextrin Intake during CrossFit® Training on Performance and Fatigue. J Funct Morphol Kinesiol. 2024;9(1):27. doi:10.3390/jfmk9010027
 
-**[5]** Grijota FJ et al. Acute Effects of 30g Cyclodextrin Intake during CrossFit Training. PubMed. 2024;9\(1\):27. PMID:38390927
+**[5]** Grijota FJ et al. Acute Effects of 30g Cyclodextrin Intake during CrossFit Training. PubMed. 2024;9(1):27. PMID:38390927
 
 **[6]** Furuyashiki T, Tanimoto H, Yokoyama Y, et al. Effects of ingesting highly branched cyclic dextrin during endurance exercise on rating of perceived exertion and blood components associated with energy metabolism. PubMed. 2014. PMID:25080121
 
-**[7]** Shiraki T, Kometani T, Yoshitani K, et al. Evaluation of Exercise Performance with the Intake of Highly Branched Cyclic Dextrin in Athletes. Food Sci Technol Res. 2015;21\(3\):499–502.
+**[7]** Shiraki T, Kometani T, Yoshitani K, et al. Evaluation of Exercise Performance with the Intake of Highly Branched Cyclic Dextrin in Athletes. Food Sci Technol Res. 2015;21(3):499–502.
 
 **[8]** Chuychai P et al. Fluid Containing Highly Branched Cyclic Dextrin: An Alternative Ergogenic Aid to Enhance Endurance Exercise Performance in Long-Distance Runners. ResearchGate. 2022.
 
-**[9]** Gonzalez-Matarin PJ. Effects of Highly Branched Cyclic Dextrin Supplementation on Exercise: A Narrative Review. Arch Lif Sci Nutr Res. 2022;6\(1\):1–4.
+**[9]** Gonzalez-Matarin PJ. Effects of Highly Branched Cyclic Dextrin Supplementation on Exercise: A Narrative Review. Arch Lif Sci Nutr Res. 2022;6(1):1–4.
 
 **[10]** Morenas-Aguilar MD et al. HBCD supplementation and resistance training. ScienceDirect. Clin Nutr ESPEN. 2025. doi:10.1016/j.clnesp.2024.12.002
 
 **[11]** HBCD Ergogenic Effects in Athletes. J Exercise Nutrition. 2019. doi:10.21307/jen-2018-005
 
-**[12]** Harnden CS, Agu J, Gascoyne T. Effects of citrulline on endurance performance in young healthy adults: systematic review and meta-analysis. J Int Soc Sports Nutr. 2023;20\(1\):2209056. doi:10.1080/15502783.2023.2209056
+**[12]** Harnden CS, Agu J, Gascoyne T. Effects of citrulline on endurance performance in young healthy adults: systematic review and meta-analysis. J Int Soc Sports Nutr. 2023;20(1):2209056. doi:10.1080/15502783.2023.2209056
 
 **[13]** Frontiers — Ergogenic effects of a 10-day L-citrulline supplementation on time to exhaustion. Front Sports Act Living. 2025. doi:10.3389/fspor.2025.1627743
 
@@ -808,9 +808,9 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[15]** Gonzalez AM, Trexler ET. Effects of citrulline supplementation on exercise performance in humans: a review. J Strength Cond Res. 2020;34:1480–1495.
 
-**[16]** Sureda A, Córdova A, Ferrer MD, et al. Effects of L-citrulline oral supplementation on polymorphonuclear neutrophils oxidative burst and nitric oxide production after exercise. Free Radic Res. 2009;43\(9\):828–835.
+**[16]** Sureda A, Córdova A, Ferrer MD, et al. Effects of L-citrulline oral supplementation on polymorphonuclear neutrophils oxidative burst and nitric oxide production after exercise. Free Radic Res. 2009;43(9):828–835.
 
-**[17]** Acute Effect of L-Citrulline Supplementation on Resistance Exercise Performance and Muscle Oxygenation. J Funct Morphol Kinesiol. 2023;8\(3\):88. doi:10.3390/jfmk8030088
+**[17]** Acute Effect of L-Citrulline Supplementation on Resistance Exercise Performance and Muscle Oxygenation. J Funct Morphol Kinesiol. 2023;8(3):88. doi:10.3390/jfmk8030088
 
 **[18]** Changes in resistance training performance following 6 weeks of L-citrulline vs. L-citrulline DL-malate supplementation. PubMed. 2025. PMID:40470618
 
@@ -820,7 +820,7 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[21]** Hobson RM et al. β-alanine supplementation meta-analysis. Amino Acids. 2012. PubMed PMID:27797728
 
-**[22]** Turcu OM et al. Effect of Beta-Alanine Supplementation on Maximal Intensity Exercise in Trained Young Males: Systematic Review and Meta-Analysis. Int J Sport Nutr Exerc Metab. 2024;34\(6\). doi:10.1123/ijsnem.2024-0021
+**[22]** Turcu OM et al. Effect of Beta-Alanine Supplementation on Maximal Intensity Exercise in Trained Young Males: Systematic Review and Meta-Analysis. Int J Sport Nutr Exerc Metab. 2024;34(6). doi:10.1123/ijsnem.2024-0021
 
 **[23]** Woitas LR, Ribas JW. β-Alanine: A Comprehensive Review of Athletic and Systemic Benefits. Quality in Sport. 2025. doi:10.12775/QS.2025.59882
 
@@ -830,7 +830,7 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[26]** Beta-alanine and L-histidine carnosine synthesis review. ScienceDirect. J Sci Med Sport. 2021. doi:10.1016/j.jsams.2021.02.018
 
-**[27]** Hoffman JR et al. The Effect of β-Alanine Supplementation on Performance, Cognitive Function and Resiliency in Soldiers. Nutrients. 2023;15\(4\):1039. doi:10.3390/nu15041039
+**[27]** Hoffman JR et al. The Effect of β-Alanine Supplementation on Performance, Cognitive Function and Resiliency in Soldiers. Nutrients. 2023;15(4):1039. doi:10.3390/nu15041039
 
 **[28]** Effects of beta-alanine supplementation on Yo-Yo test performance: Meta-analysis. ScienceDirect. 2021.
 
@@ -844,7 +844,7 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[33]** Adaptogens body composition and athletic performance. Examine.com. 2023.
 
-**[34]** Tinsley GM, Jagim AR, Potter GDM, et al. Rhodiola rosea as an adaptogen to enhance exercise performance: a review. Br J Nutr. 2024;131\(3\):461–473. doi:10.1017/S0007114523001988
+**[34]** Tinsley GM, Jagim AR, Potter GDM, et al. Rhodiola rosea as an adaptogen to enhance exercise performance: a review. Br J Nutr. 2024;131(3):461–473. doi:10.1017/S0007114523001988
 
 **[35]** Adaptogens for athletes. TheHealthBeat.com. 2024.
 
@@ -856,7 +856,7 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[39]** Tinsley GM et al. Rhodiola rosea as adaptogen. PMC10784128. Br J Nutr. 2024.
 
-**[40]** Concurrent Training and Rhodiola rosea \+ Cordyceps sinensis on Body Composition and Performance. PubMed PMID:33078636. 2020.
+**[40]** Concurrent Training and Rhodiola rosea + Cordyceps sinensis on Body Composition and Performance. PubMed PMID:33078636. 2020.
 
 **[41]** Transform endurance performance with Rhodiola and Cordyceps. BeetrootPro. 2023.
 
@@ -888,7 +888,7 @@ For the §5.1 6 g pure L-citrulline dose (75 mg/kg in an 80 kg subject), peak pl
 
 **[55]** Baralic I et al. Effect of astaxanthin supplementation on muscle damage and oxidative stress markers in elite young soccer players. PubMed PMID:22828460.
 
-**[56]** Waldman HS. Astaxanthin Supplementation as a Potential Strategy for Enhancing Mitochondrial Adaptations in the Endurance Athlete: An Invited Review. Nutrients. 2024;16\(11\):1750. PMC11175114.
+**[56]** Waldman HS. Astaxanthin Supplementation as a Potential Strategy for Enhancing Mitochondrial Adaptations in the Endurance Athlete: An Invited Review. Nutrients. 2024;16(11):1750. PMC11175114.
 
 **[57]** Astaxanthin RCT. Springer Nature Link / BMC Sports Science. 2025. doi:10.1186/s13102-025-01221-3
 

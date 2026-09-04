@@ -4,7 +4,7 @@
 
 ## Abstract
 
-Defence component manufacturing in hardened tool and alloy steels is characterised by a multi-stage production architecture that has remained largely unchanged for decades: rough forging, annealing, soft pre-machining, hardening, finish machining, inspection. This paper examines the economic, logistical, and strategic case for replacing that conventional route with a consolidated forge-to-machine pipeline—in which near-net-shape \(NNS\) forgings are delivered at service hardness and machined in a single setup directly to final dimension using advanced hard machining tooling. Drawing on published near-net-shape manufacturing literature, defence procurement cost frameworks, and Australian defence industry context, the paper quantifies cost reductions of 40–45% and lead time reductions of 65–70% on representative hardened steel defence components. The paper further argues that the supply chain agility implications of a forge-to-machine architecture—specifically the elimination of furnace scheduling as the dominant bottleneck—constitute a strategic production surge capability whose value is not captured in per-part cost calculations but is directly relevant to operational risk management in defence contracts.
+Defence component manufacturing in hardened tool and alloy steels is characterised by a multi-stage production architecture that has remained largely unchanged for decades: rough forging, annealing, soft pre-machining, hardening, finish machining, inspection. This paper examines the economic, logistical, and strategic case for replacing that conventional route with a consolidated forge-to-machine pipeline—in which near-net-shape (NNS) forgings are delivered at service hardness and machined in a single setup directly to final dimension using advanced hard machining tooling. Drawing on published near-net-shape manufacturing literature, defence procurement cost frameworks, and Australian defence industry context, the paper quantifies cost reductions of 40–45% and lead time reductions of 65–70% on representative hardened steel defence components. The paper further argues that the supply chain agility implications of a forge-to-machine architecture—specifically the elimination of furnace scheduling as the dominant bottleneck—constitute a strategic production surge capability whose value is not captured in per-part cost calculations but is directly relevant to operational risk management in defence contracts.
 
 **Keywords:** *near-net-shape forging, hard machining, defence manufacturing, supply chain agility, H13 tool steel, production economics, AS9100, ADF procurement*
 
@@ -18,29 +18,29 @@ These are not marginal improvements. On a production programme of tens of thousa
 
 This paper develops the technical, economic, and strategic case for forge-to-machine as the default production architecture for hardened steel defence components, and examines the enabling constraint that has historically made it impractical: tooling capability at high hardness.
 
-*"NNS technologies aim to minimise finishing steps and as a consequence reduce the wastage of raw material and energy. Any reduction of lead-times and waste will produce many collateral advantages beyond the basic savings." — Marini, Cunningham & Corney \(2017\) \[1\]*
+*"NNS technologies aim to minimise finishing steps and as a consequence reduce the wastage of raw material and energy. Any reduction of lead-times and waste will produce many collateral advantages beyond the basic savings." — Marini, Cunningham & Corney (2017) [1]*
 
 ## 2. Background: Near-Net-Shape Forging in Context
 
 ## 2.1 Defining Near-Net-Shape
 
-Near-net-shape \(NNS\) manufacturing is a generic term for processes that aim to produce components that are as close as possible in size and shape to the finished product, with the purpose of minimising downstream process steps and reducing material waste. The concept has roots in the "Design for Manufacturing" work of Boothroyd and Dewhurst in the 1980s, and has been extensively studied across aerospace, automotive, and industrial applications \[1, 2\].
+Near-net-shape (NNS) manufacturing is a generic term for processes that aim to produce components that are as close as possible in size and shape to the finished product, with the purpose of minimising downstream process steps and reducing material waste. The concept has roots in the "Design for Manufacturing" work of Boothroyd and Dewhurst in the 1980s, and has been extensively studied across aerospace, automotive, and industrial applications [1, 2].
 
-Marini, Cunningham and Corney \(2017\) reviewed 30 years of NNS research and identified that "the desired outcomes of manufacturability analysis for NNS processes are cost and lead/time reduction through minimization of process steps \(in particular cutting and finishing operations\) and raw material saving" \[1\]. Their analysis also noted the compounding nature of NNS benefits: shorter process chains lower variability and consequently increase quality, while reductions in fabrication operations reduce the opportunity for errors.
+Marini, Cunningham and Corney (2017) reviewed 30 years of NNS research and identified that "the desired outcomes of manufacturability analysis for NNS processes are cost and lead/time reduction through minimization of process steps (in particular cutting and finishing operations) and raw material saving" [1]. Their analysis also noted the compounding nature of NNS benefits: shorter process chains lower variability and consequently increase quality, while reductions in fabrication operations reduce the opportunity for errors.
 
-Near-net shape forging specifically refers to the design of forging dies such that the blank leaving the forge is already close to final component geometry, with minimal excess stock on critical surfaces. In a conventional forging operation, excess stock of 5–10 mm per surface is typical, allowing for distortion and surface scale. In a near-net-shape operation, this is reduced to 0.5–2.0 mm \[3\].
+Near-net shape forging specifically refers to the design of forging dies such that the blank leaving the forge is already close to final component geometry, with minimal excess stock on critical surfaces. In a conventional forging operation, excess stock of 5–10 mm per surface is typical, allowing for distortion and surface scale. In a near-net-shape operation, this is reduced to 0.5–2.0 mm [3].
 
 ## 2.2 Historical Limitations on Forge-to-Machine Routes
 
-The combination of near-net-shape forging with direct hard machining of the forging at service hardness has historically been impractical at production scale. The constraint was tooling: no sintered carbide tool system could survive production milling of steels at HRC 55\+ with acceptable tool life. CBN tooling could achieve the hardness requirement but is restricted to indexable insert form, precluding the small-diameter end mill geometries that defence component features demand.
+The combination of near-net-shape forging with direct hard machining of the forging at service hardness has historically been impractical at production scale. The constraint was tooling: no sintered carbide tool system could survive production milling of steels at HRC 55+ with acceptable tool life. CBN tooling could achieve the hardness requirement but is restricted to indexable insert form, precluding the small-diameter end mill geometries that defence component features demand.
 
-Industry practitioners confirm this historical constraint. Greenwald \(Hard Milling Solutions, Practical Machinist, 2011\) noted that above HRC 55, carbide machining becomes extremely demanding—"it's almost like trying to cut carbide with carbide"—and recommended bringing parts as close to finished size as possible before final hardening to avoid excessive hard machining stock removal \[4\]. The standard practice of roughing in the soft state and finish machining in the hardened state has persisted precisely because it was the only reliably productive approach.
+Industry practitioners confirm this historical constraint. Greenwald (Hard Milling Solutions, Practical Machinist, 2011) noted that above HRC 55, carbide machining becomes extremely demanding—"it's almost like trying to cut carbide with carbide"—and recommended bringing parts as close to finished size as possible before final hardening to avoid excessive hard machining stock removal [4]. The standard practice of roughing in the soft state and finish machining in the hardened state has persisted precisely because it was the only reliably productive approach.
 
 The emergence of carbide tool systems capable of working up to HRC 70—through nano-grain substrate architectures, nanocomposite PVD coating stacks, and trochoidal toolpath strategies that keep radial engagement bounded—changes this calculus entirely. With the tooling constraint removed, the economics of the forge-to-machine route become compelling on a pure cost basis, and compelling on strategic grounds beyond that.
 
 ## 2.3 Aerospace and Defence Supply Chain Pressures
 
-The challenge of forging and casting lead times is well-documented in the broader aerospace and defence manufacturing context. A 2024 BCG analysis identified casting and forging processes as "an acute pain point in the supply chain," with manufacturing processes taking 6 to 18\+ months from raw material to part, depending on part complexity, metal, and level of vertical integration \[5\]. The same analysis identified furnace scheduling and heat treatment queue as root causes of delay, alongside raw material lead times and production talent constraints.
+The challenge of forging and casting lead times is well-documented in the broader aerospace and defence manufacturing context. A 2024 BCG analysis identified casting and forging processes as "an acute pain point in the supply chain," with manufacturing processes taking 6 to 18+ months from raw material to part, depending on part complexity, metal, and level of vertical integration [5]. The same analysis identified furnace scheduling and heat treatment queue as root causes of delay, alongside raw material lead times and production talent constraints.
 
 For defence manufacturers operating under delivery performance KPIs—or under contractual on-time delivery obligations with liquidated damages provisions—this furnace scheduling bottleneck is not merely an operations management problem. It is a programme risk item. The ability to surge production from 50 to 500 units per month in response to an urgent operational requirement is constrained, in a traditional multi-stage process, by furnace capacity and by the cumulative scheduling complexity of coordinating five process stages across potentially three or four different facilities.
 
@@ -54,9 +54,9 @@ The following cost analysis uses a representative mid-complexity defence compone
 
 The difference between the 3.5 kg raw forging and the 1.8 kg finished component is 1.7 kg of H13 steel converted to chips during machining. In a conventionally over-forged soft blank, this stock removal occurs during rough pre-machining—quickly but carelessly, since the surface is re-machined after hardening anyway. The pre-machining step thus adds cost without adding value to the final part.
 
-If the forging arrives near-net with 0.5 mm stock rather than 5 mm, material waste drops from 1.7 kg to approximately 0.3 kg per part. At current defence-grade H13 pricing of approximately AUD $8–12 per kg for bar stock \(consistent with Australian defence industry benchmarks\), this represents a saving of approximately AUD $11–17 per part in raw material alone, before any process costs are considered.
+If the forging arrives near-net with 0.5 mm stock rather than 5 mm, material waste drops from 1.7 kg to approximately 0.3 kg per part. At current defence-grade H13 pricing of approximately AUD $8–12 per kg for bar stock (consistent with Australian defence industry benchmarks), this represents a saving of approximately AUD $11–17 per part in raw material alone, before any process costs are considered.
 
-At production volumes of 5,000 components, the raw material saving alone ranges from AUD $55,000 to $85,000. The environmental co-benefit—reduction in swarf volume and the energy embedded in that swarf—is consistent with findings by Marini et al. \(2017\) that NNS processes are "often associated with Lean manufacturing methods where variations in processes, part design and material choices are driven by the desire to reduce waste" \[1\].
+At production volumes of 5,000 components, the raw material saving alone ranges from AUD $55,000 to $85,000. The environmental co-benefit—reduction in swarf volume and the energy embedded in that swarf—is consistent with findings by Marini et al. (2017) that NNS processes are "often associated with Lean manufacturing methods where variations in processes, part design and material choices are driven by the desire to reduce waste" [1].
 
 ## 3.3 Energy and Furnace Time
 
@@ -68,7 +68,7 @@ The near-net-shape forge-to-machine route eliminates both furnace passes entirel
 
 Each facility transfer—forge to heat treat, heat treat to rough machine, rough machine back to heat treat, heat treat to finish machine—accrues transport cost, re-inspection cost, potential damage risk, and administrative overhead in the works order system. In a defence supply chain operating under AS9100 or ITAR-adjacent quality frameworks, each transfer point is also a documentation event: a hold point requiring sign-off, a non-conformance opportunity, and a potential source of component identification error.
 
-Near-net-shape forging consolidates four transfers to one. The quality management implications are proportional. Reducing the number of hold points from 4–6 to 1–2 compresses the quality trail and reduces the probability of non-conformance events. BCG's 2024 analysis confirms that quality issues at any stage in the casting and forging supply chain can add 12 months or more of delay to a programme \[5\].
+Near-net-shape forging consolidates four transfers to one. The quality management implications are proportional. Reducing the number of hold points from 4–6 to 1–2 compresses the quality trail and reduces the probability of non-conformance events. BCG's 2024 analysis confirms that quality issues at any stage in the casting and forging supply chain can add 12 months or more of delay to a programme [5].
 
 ## 3.5 Integrated Cost and Lead Time Model
 
@@ -80,15 +80,15 @@ Near-net-shape forging consolidates four transfers to one. The quality managemen
 
 Raw material waste per part
 
-1.7 kg \(~AUD $17\)
+1.7 kg (~AUD $17)
 
-0.3 kg \(~AUD $3\)
+0.3 kg (~AUD $3)
 
 Furnace cycles required
 
-2 \(anneal \+ harden\)
+2 (anneal + harden)
 
-0 \(in-line quench at forge\)
+0 (in-line quench at forge)
 
 Furnace time per batch
 
@@ -114,13 +114,13 @@ QA documentation hold points
 
 1–2 hold points
 
-Total processing cost \(per part\)
+Total processing cost (per part)
 
 AUD $340–$420
 
 AUD $190–$240
 
-Lead time \(forge to inspection-ready\)
+Lead time (forge to inspection-ready)
 
 18–26 working days
 
@@ -140,7 +140,7 @@ Lead time reduction
 
 On a production run of 500 components—a modest quantity for a weapons programme—the cost differential is AUD $50,000–$90,000 and the schedule differential is 9–17 working days. On a programme scale of tens of thousands of components over a contract life, both figures become strategically significant.
 
-These estimates are consistent with the broader NNS manufacturing literature. The methodology for Differential Cost and Feasibility Analysis \(DCFA\) proposed by Marini et al. \(2017\) for evaluating NNS route substitutions explicitly accounts for process chain length, material waste, energy, and quality documentation overhead \[6\]—each of which contributes to the cost differential above.
+These estimates are consistent with the broader NNS manufacturing literature. The methodology for Differential Cost and Feasibility Analysis (DCFA) proposed by Marini et al. (2017) for evaluating NNS route substitutions explicitly accounts for process chain length, material waste, energy, and quality documentation overhead [6]—each of which contributes to the cost differential above.
 
 ## 4. The Enabling Technology: Advanced Hard Machining Capability
 
@@ -150,21 +150,21 @@ The cost model in Section 3 is not achievable without tooling capable of perform
 
 - Entry cuts into scale and decarburised surface layer at full hardness—typically the most thermally aggressive condition, where thermal shock and abrasion combine. Trochoidal toolpath strategies absorb this by keeping radial engagement low and arc entry smooth, but the tool substrate and coating must survive the initial contact at HRC 52–64 with scale.
 - Deep cavity features—locking recesses, pin bores, gas escape channels—machined at full HRC with small-diameter tooling where tool deflection and vibration are severe. Negative rake geometries with high flute counts distribute cutting load and stiffen the effective cutting system.
-- Tight tolerances to finished dimension without a subsequent grinding step on non-critical surfaces. A hard milling system running at appropriate parameters on a rigid machine \(HMC or 5-axis VMC with HSK-A63 spindle, minimum 40 kN spindle bearing preload\) can achieve IT7 tolerance and Ra 0.4–0.8 µm surface finish directly from milling.
+- Tight tolerances to finished dimension without a subsequent grinding step on non-critical surfaces. A hard milling system running at appropriate parameters on a rigid machine (HMC or 5-axis VMC with HSK-A63 spindle, minimum 40 kN spindle bearing preload) can achieve IT7 tolerance and Ra 0.4–0.8 µm surface finish directly from milling.
 
 ## 4.2 Hard Milling in Context: Industry State of the Art
 
-The hard milling of H13 die steel at HRC 50 is already well-established industrial practice. Greenwald \(2011\) confirmed that production shops make 5"×5" forging dies from 50-HRC H13, purchasing raw blanks, heat-treating, then roughing and finish milling all from the hardened state \[4\]. However, this practice relies on pre-machining most material in the soft state and minimising stock removal in the hardened condition.
+The hard milling of H13 die steel at HRC 50 is already well-established industrial practice. Greenwald (2011) confirmed that production shops make 5"×5" forging dies from 50-HRC H13, purchasing raw blanks, heat-treating, then roughing and finish milling all from the hardened state [4]. However, this practice relies on pre-machining most material in the soft state and minimising stock removal in the hardened condition.
 
-For HRC 55\+ in a forge-to-machine context—where all stock removal occurs in the hardened state—the tooling requirement is more demanding. Cutwel's \(2024\) expert machining guide confirms that for the 50–70 HRC milling regime, "advanced carbide substrates i.e. nanograin and typically CBN or ceramics for turning" are required, and identifies "stable engagement, controlled heat, and a tool designed for the specific HRC band" as essential \[3\]. Flood coolant is explicitly contraindicated above HRC 50 for milling due to thermal shock cracking of coatings.
+For HRC 55+ in a forge-to-machine context—where all stock removal occurs in the hardened state—the tooling requirement is more demanding. Cutwel's (2024) expert machining guide confirms that for the 50–70 HRC milling regime, "advanced carbide substrates i.e. nanograin and typically CBN or ceramics for turning" are required, and identifies "stable engagement, controlled heat, and a tool designed for the specific HRC band" as essential [3]. Flood coolant is explicitly contraindicated above HRC 50 for milling due to thermal shock cracking of coatings.
 
-The emergence of carbide end mill systems rated to HRC 70—combining nano-grain substrates, nanocomposite AlTiSiN or AlCrN/AlTiSiN coating architectures, and trochoidal toolpath compatibility—represents the tooling threshold at which forge-to-machine becomes economically viable for the HRC 52–64 range of hardened steel defence components. The AlTiSiN coating in particular has been demonstrated in peer-reviewed literature to achieve 47.83% greater tool life than conventional AlTiN coatings in hard turning of H13 \(HRC 56\) and D6 \(HRC 65\) steels \[7, 8\].
+The emergence of carbide end mill systems rated to HRC 70—combining nano-grain substrates, nanocomposite AlTiSiN or AlCrN/AlTiSiN coating architectures, and trochoidal toolpath compatibility—represents the tooling threshold at which forge-to-machine becomes economically viable for the HRC 52–64 range of hardened steel defence components. The AlTiSiN coating in particular has been demonstrated in peer-reviewed literature to achieve 47.83% greater tool life than conventional AlTiN coatings in hard turning of H13 (HRC 56) and D6 (HRC 65) steels [7, 8].
 
 ## 4.3 Trochoidal Toolpaths as the Enabling Machining Strategy
 
-The geometry of hard machining requires a fundamentally different toolpath strategy from soft machining. Conventional full-width or high-radial-engagement milling in hard material generates thermal peaks at entry and exit that rapidly degrade the tool edge. Trochoidal \(circular arc\) milling decouples radial chip load from the depth of cut: by keeping the radial engagement to 3–10% of tool diameter throughout a circular arc toolpath, the tool maintains near-constant chip thickness and heat generation regardless of pocket size or feature depth.
+The geometry of hard machining requires a fundamentally different toolpath strategy from soft machining. Conventional full-width or high-radial-engagement milling in hard material generates thermal peaks at entry and exit that rapidly degrade the tool edge. Trochoidal (circular arc) milling decouples radial chip load from the depth of cut: by keeping the radial engagement to 3–10% of tool diameter throughout a circular arc toolpath, the tool maintains near-constant chip thickness and heat generation regardless of pocket size or feature depth.
 
-This strategy converts what was a thermally and mechanically variable process into one that is bounded and repeatable—the precondition for reliable tool life in production hard machining. Without trochoidal or equivalent high-speed machining \(HSM\) strategies, the economics of forge-to-machine do not hold: tool consumption would be too high to offset the savings in furnace and material cost.
+This strategy converts what was a thermally and mechanically variable process into one that is bounded and repeatable—the precondition for reliable tool life in production hard machining. Without trochoidal or equivalent high-speed machining (HSM) strategies, the economics of forge-to-machine do not hold: tool consumption would be too high to offset the savings in furnace and material cost.
 
 ## 5. Strategic Value of Compressed Lead Time
 
@@ -186,7 +186,7 @@ For Australian defence contractors operating under DoD-mandated quality framewor
 
 ## 5.3 Capital Investment Alignment
 
-The forge-to-machine approach concentrates the capital investment required in two clearly-defined areas: precision forging die development \(a one-time investment per component family\), and CNC hard machining capability \(machine tools, tooling systems, and process qualification\). Both investment categories are controllable, scalable, and produce assets with well-understood residual value.
+The forge-to-machine approach concentrates the capital investment required in two clearly-defined areas: precision forging die development (a one-time investment per component family), and CNC hard machining capability (machine tools, tooling systems, and process qualification). Both investment categories are controllable, scalable, and produce assets with well-understood residual value.
 
 The conventional multi-stage route, by contrast, requires investment across heat treatment facility access, multiple machining operations, and quality hold points—often across multiple contractors—with the operational risk of any one of them becoming a schedule constraint. For a prime defence contractor managing a complex programme, the concentration of production risk in a simpler, more controllable process chain has a portfolio-level value that extends beyond the per-part cost calculation.
 
@@ -194,13 +194,13 @@ The conventional multi-stage route, by contrast, requires investment across heat
 
 ## 6.1 Near-Net-Shape Forging Die Investment
 
-The primary upfront investment in a forge-to-machine architecture is the design and manufacture of precision forging dies that deliver near-net geometry. NNS forging dies must be engineered to account for material flow, thermal contraction, and the elimination of draft angles common in conventional forging. This requires Computer-Aided Engineering \(CAE\) tools and Finite Element Method \(FEM\) simulation to predict how material will fill the die cavity \[3\].
+The primary upfront investment in a forge-to-machine architecture is the design and manufacture of precision forging dies that deliver near-net geometry. NNS forging dies must be engineered to account for material flow, thermal contraction, and the elimination of draft angles common in conventional forging. This requires Computer-Aided Engineering (CAE) tools and Finite Element Method (FEM) simulation to predict how material will fill the die cavity [3].
 
-The internal surface finish of NNS dies requires an extremely fine finish—precision tolerances as tight as ±0.05 mm for critical features are achievable through multi-stage or incremental forging techniques \[3\]. This is a higher design and tooling cost than a conventional forging die. However, the die investment is a one-time or infrequent cost amortised across the programme volume, while the per-part savings in furnace, machining, and quality overhead are realised on every component produced.
+The internal surface finish of NNS dies requires an extremely fine finish—precision tolerances as tight as ±0.05 mm for critical features are achievable through multi-stage or incremental forging techniques [3]. This is a higher design and tooling cost than a conventional forging die. However, the die investment is a one-time or infrequent cost amortised across the programme volume, while the per-part savings in furnace, machining, and quality overhead are realised on every component produced.
 
 ## 6.2 Machining Cell Specification
 
-The hard machining cell enabling forge-to-machine must meet minimum machine tool specifications to achieve the tolerances and surface finish required. A horizontal machining centre \(HMC\) or 5-axis vertical machining centre \(VMC\) with HSK-A63 or equivalent spindle interface, minimum 40 kN spindle bearing preload, and a control system with high look-ahead capability and fast block processing is required. The machine must be highly responsive when changing directions or going in and out of corners to maintain a constant chip load—the condition for consistent tool life \[4\].
+The hard machining cell enabling forge-to-machine must meet minimum machine tool specifications to achieve the tolerances and surface finish required. A horizontal machining centre (HMC) or 5-axis vertical machining centre (VMC) with HSK-A63 or equivalent spindle interface, minimum 40 kN spindle bearing preload, and a control system with high look-ahead capability and fast block processing is required. The machine must be highly responsive when changing directions or going in and out of corners to maintain a constant chip load—the condition for consistent tool life [4].
 
 Trochoidal milling capability is not a feature of the machine tool—it is a CAM strategy that any modern machining centre can execute. The investment required is in qualified process development: cutting parameters, toolpath programming, and tool life characterisation at the specific hardness of the target component family.
 
@@ -216,9 +216,9 @@ The following synthesis consolidates the cost and schedule analysis for the repr
 
 **Programme Scale**
 
-**Cost Saving \(AUD\)**
+**Cost Saving (AUD)**
 
-**Schedule Saving \(Working Days\)**
+**Schedule Saving (Working Days)**
 
 **QA Hold Points Eliminated**
 
@@ -242,7 +242,7 @@ $75,000–$90,000
 
 $750,000–$900,000
 
-450–850 days \(batch-aggregate\)
+450–850 days (batch-aggregate)
 
 10,000–20,000
 
@@ -267,15 +267,15 @@ The quantified per-part cost savings of 40–45% and lead time reductions of 65�
 The question for Australian defence manufacturers is no longer whether this approach is technically feasible. It is whether the production planning, supply chain design, and capital investment decisions are aligned to take advantage of it. The components of the solution are available: precision forging capability, NNS die design tools, and advanced hard machining tooling. The principal work remaining is in process integration, qualification, and the organisational will to retire a production architecture that has remained effectively unchanged for half a century.
 
 ## References
-1. Marini, D.; Cunningham, D.; Corney, J.R. \(2017\). Near net shape manufacturing of metal: A review of approaches and their evolutions. Proc. IMechE Part B: J. Engineering Manufacture. 232\(4\): 648–669.
-2. Altan, T.; Miller, R.A. \(1990\). Design for forming and other near net shape manufacturing processes. CIRP Annals – Manufacturing Technology. 39\(2\): 609–620.
-3. Engineer Fix. \(2025\). What Is Near Net Shape Forging? engineerfix.com. November 2025.
-4. Greenwald, C. \(Hard Milling Solutions\). \(2011\). Requirements for milling hardened steels. Practical Machinist. practicalmachinist.com. December 2011.
-5. Boston Consulting Group. \(2024\). Fixing Aerospace's Supply Chain: Casting and Forging. BCG Publications. June 2024.
-6. Marini, D.; Cunningham, D.; Corney, J.R. \(2017\). A methodology for near net shape process feasibility assessment. International Journal of Engineering Business Management. 9\(1\).
-7. Das, A.; Kamal, M.; Das, S.R. et al. \(2022\). Comparative assessment between AlTiN and AlTiSiN coated carbide tools towards machinability improvement of AISI D6 steel in dry hard turning. Proc. IMechE Part C: J. Mech. Eng. Sci. 236: 3174–3197.
-8. Mahapatra, S.; Das, A.; Jena, P.C.; Das, S.R. \(2023\). Turning of hardened AISI H13 steel with recently developed S3P-AlTiSiN coated carbide tool using MWCNT mixed nanofluid under minimum quantity lubrication. Proc. IMechE Part C. 237\(4\): 843–864.
-9. All Metals & Forge Group. \(2025\). Reducing Lead Times: How Near-Net Shape Open Die Forging Streamlines Gear Production. steelforge.com. October 2025.
-10. Cutwel Ltd. \(2024\). An Expert Guide to Machining Hardened Steel. cutwel.co.uk.
-11. Geisel, S.; Andrews, D. \(2013\). Handling high-HRC materials. Canadian Industrial Machinery. January 2013.
-12. Aerospace Technology Institute. \(2021\). Near Net Shape Manufacturing Insight. ATI Publications. ati.org.uk.
+1. Marini, D.; Cunningham, D.; Corney, J.R. (2017). Near net shape manufacturing of metal: A review of approaches and their evolutions. Proc. IMechE Part B: J. Engineering Manufacture. 232(4): 648–669.
+2. Altan, T.; Miller, R.A. (1990). Design for forming and other near net shape manufacturing processes. CIRP Annals – Manufacturing Technology. 39(2): 609–620.
+3. Engineer Fix. (2025). What Is Near Net Shape Forging? engineerfix.com. November 2025.
+4. Greenwald, C. (Hard Milling Solutions). (2011). Requirements for milling hardened steels. Practical Machinist. practicalmachinist.com. December 2011.
+5. Boston Consulting Group. (2024). Fixing Aerospace's Supply Chain: Casting and Forging. BCG Publications. June 2024.
+6. Marini, D.; Cunningham, D.; Corney, J.R. (2017). A methodology for near net shape process feasibility assessment. International Journal of Engineering Business Management. 9(1).
+7. Das, A.; Kamal, M.; Das, S.R. et al. (2022). Comparative assessment between AlTiN and AlTiSiN coated carbide tools towards machinability improvement of AISI D6 steel in dry hard turning. Proc. IMechE Part C: J. Mech. Eng. Sci. 236: 3174–3197.
+8. Mahapatra, S.; Das, A.; Jena, P.C.; Das, S.R. (2023). Turning of hardened AISI H13 steel with recently developed S3P-AlTiSiN coated carbide tool using MWCNT mixed nanofluid under minimum quantity lubrication. Proc. IMechE Part C. 237(4): 843–864.
+9. All Metals & Forge Group. (2025). Reducing Lead Times: How Near-Net Shape Open Die Forging Streamlines Gear Production. steelforge.com. October 2025.
+10. Cutwel Ltd. (2024). An Expert Guide to Machining Hardened Steel. cutwel.co.uk.
+11. Geisel, S.; Andrews, D. (2013). Handling high-HRC materials. Canadian Industrial Machinery. January 2013.
+12. Aerospace Technology Institute. (2021). Near Net Shape Manufacturing Insight. ATI Publications. ati.org.uk.

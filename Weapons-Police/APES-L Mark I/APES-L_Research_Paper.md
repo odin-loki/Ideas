@@ -324,51 +324,51 @@ The system is positioned for Phase 1 material validation in an independent NIJ-a
 
 ## 8. References
 
-\[1\] Das, J., Bhattacharyya, R., Majumdar, A. (2025). Shear Thickening Fluid in Stab Resistance Applications. *Polymer Composites*, 46(2), 1843–1856.
+[1] Das, J., Bhattacharyya, R., Majumdar, A. (2025). Shear Thickening Fluid in Stab Resistance Applications. *Polymer Composites*, 46(2), 1843–1856.
 
-\[2\] Wang, L. et al. (2024). Thickening effect of STF under normal loading. *Textile Research Journal*.
+[2] Wang, L. et al. (2024). Thickening effect of STF under normal loading. *Textile Research Journal*.
 
-\[3\] Wei, R., Dong, B., Zhai, W., Li, H. (2022). Stab-Resistant Performance Using STF. *Molecules*, 27(20), 6799.
+[3] Wei, R., Dong, B., Zhai, W., Li, H. (2022). Stab-Resistant Performance Using STF. *Molecules*, 27(20), 6799.
 
-\[4\] Makaoui, R. et al. (2024). Boron carbide in soft and hard body armor. *Polymer Composites*, 45(12).
+[4] Makaoui, R. et al. (2024). Boron carbide in soft and hard body armor. *Polymer Composites*, 45(12).
 
-\[5\] Orr, R. et al. (2017). Body armor impact on LEO: systematic review. *Annals of Occupational and Environmental Medicine*.
+[5] Orr, R. et al. (2017). Body armor impact on LEO: systematic review. *Annals of Occupational and Environmental Medicine*.
 
-\[6\] Schram, B. et al. (2018). Military and Law Enforcement Body Armour comparison. *PMC*.
+[6] Schram, B. et al. (2018). Military and Law Enforcement Body Armour comparison. *PMC*.
 
-\[7\] Tomes, C., Orr, R., Pope, R. (2017). Body Armor Systems on Police Performance. *PMC*.
+[7] Tomes, C., Orr, R., Pope, R. (2017). Body Armor Systems on Police Performance. *PMC*.
 
-\[8\] Winter, D.A. (2009). *Biomechanics and Motor Control of Human Movement* (4th ed.). Wiley.
+[8] Winter, D.A. (2009). *Biomechanics and Motor Control of Human Movement* (4th ed.). Wiley.
 
-\[9\] Seireg, A., Arvikar, R.J. (1975). Muscular load sharing and joint forces. *Journal of Biomechanics*, 8(2).
+[9] Seireg, A., Arvikar, R.J. (1975). Muscular load sharing and joint forces. *Journal of Biomechanics*, 8(2).
 
-\[10\] Fanger, P.O. (1972). *Thermal Comfort*. McGraw-Hill.
+[10] Fanger, P.O. (1972). *Thermal Comfort*. McGraw-Hill.
 
-\[11\] Chin, J.W. et al. (1997). Degradation of poly(para-phenylene terephthalamide) fibres. *Polymer*, 38(2).
+[11] Chin, J.W. et al. (1997). Degradation of poly(para-phenylene terephthalamide) fibres. *Polymer*, 38(2).
 
-\[12\] Tan, V.B.C. (2011). UHMWPE fibre composites for body armour. *Composites B*, 42(8).
+[12] Tan, V.B.C. (2011). UHMWPE fibre composites for body armour. *Composites B*, 42(8).
 
-\[13\] Carlton, S.D. et al. (2014). Impact of occupational load carriage on tactical police mobility. *Journal of Australian Strength and Conditioning*, 22.
+[13] Carlton, S.D. et al. (2014). Impact of occupational load carriage on tactical police mobility. *Journal of Australian Strength and Conditioning*, 22.
 
-\[14\] Cheeseman, B.A., Bogetti, T.A. (2003). Ballistic impact into fabric and compliant composite laminates. *Composite Structures*, 61(1–2), 161–173.
+[14] Cheeseman, B.A., Bogetti, T.A. (2003). Ballistic impact into fabric and compliant composite laminates. *Composite Structures*, 61(1–2), 161–173.
 
-\[15\] Hazell, P.J. (2015). *Armour: Materials, Theory and Design*. CRC Press.
+[15] Hazell, P.J. (2015). *Armour: Materials, Theory and Design*. CRC Press.
 
-\[16\] Grujicic, M. et al. (2008). A computational analysis of the ballistic performance of a titanium-ceramic composite body armour. *Materials & Design*, 29(6), 1261–1271.
+[16] Grujicic, M. et al. (2008). A computational analysis of the ballistic performance of a titanium-ceramic composite body armour. *Materials & Design*, 29(6), 1261–1271.
 
-\[17\] National Institute of Justice. (2024). NIJ Standard-0101.07 / 0123.00 — Ballistic Resistance of Body Armor. US Department of Justice.
+[17] National Institute of Justice. (2024). NIJ Standard-0101.07 / 0123.00 — Ballistic Resistance of Body Armor. US Department of Justice.
 
-\[18\] National Institute of Justice. (2000). NIJ Standard-0115.00 — Stab Resistance of Personal Body Armor. US Department of Justice.
+[18] National Institute of Justice. (2000). NIJ Standard-0115.00 — Stab Resistance of Personal Body Armor. US Department of Justice.
 
-\[19\] FBI Law Enforcement Officers Killed and Assaulted (LEOKA). (2021). Annual Data Collection. US Department of Justice.
+[19] FBI Law Enforcement Officers Killed and Assaulted (LEOKA). (2021). Annual Data Collection. US Department of Justice.
 
-\[20\] Australian Department of Defence. (2024). $30 M body armour contract — Craig International Ballistics. Ministerial Release.
+[20] Australian Department of Defence. (2024). $30 M body armour contract — Craig International Ballistics. Ministerial Release.
 
-\[21\] Australian Defence Apparel. (2024). DFNDR system launch. Land Forces Expo, September 2024.
+[21] Australian Defence Apparel. (2024). DFNDR system launch. Land Forces Expo, September 2024.
 
-\[22\] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
+[22] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
 
-\[23\] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md).
+[23] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md).
 
 ---
 

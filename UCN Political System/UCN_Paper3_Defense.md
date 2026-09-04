@@ -8,7 +8,7 @@ Version 1.0 | 2025
 
 ## Abstract
 
-This paper examines the defense, security, technology, and energy policies of the United Commonwealth Nations \(UCN\) doctrine. UCN adopts a posture described as 'neutral but capable' — maintaining non-aggression pacts and strategic autonomy while developing sovereign defense, energy, and technological capabilities that deter aggression and prevent external dependence. Key policies include a mixed nuclear program integrating power generation and a minimal deterrent capability; a super soldier reserve corps and universal national service; a technology sovereignty strategy based on open-source research and strategic knowledge acquisition; and a comprehensive data sovereignty framework. The paper situates these positions within contemporary literature on strategic autonomy, nuclear deterrence, and technology governance.
+This paper examines the defense, security, technology, and energy policies of the United Commonwealth Nations (UCN) doctrine. UCN adopts a posture described as 'neutral but capable' — maintaining non-aggression pacts and strategic autonomy while developing sovereign defense, energy, and technological capabilities that deter aggression and prevent external dependence. Key policies include a mixed nuclear program integrating power generation and a minimal deterrent capability; a super soldier reserve corps and universal national service; a technology sovereignty strategy based on open-source research and strategic knowledge acquisition; and a comprehensive data sovereignty framework. The paper situates these positions within contemporary literature on strategic autonomy, nuclear deterrence, and technology governance.
 
   
 
@@ -23,7 +23,7 @@ UCN's defense and security framework is designed to reduce this dependency witho
 
 ### 2.1 The Non-Aggression Framework
 
-UCN's foundational foreign policy instrument is the Non-Aggression Pact \(NAP\) — a bilateral agreement committing both parties to refrain from initiating military action against each other, to maintain diplomatic communication channels, and to resolve disputes through defined multilateral mechanisms. UCN seeks NAPs with as many nations as possible across the political spectrum, including nations that are not formal allies.
+UCN's foundational foreign policy instrument is the Non-Aggression Pact (NAP) — a bilateral agreement committing both parties to refrain from initiating military action against each other, to maintain diplomatic communication channels, and to resolve disputes through defined multilateral mechanisms. UCN seeks NAPs with as many nations as possible across the political spectrum, including nations that are not formal allies.
 
 This is not naive pacifism. UCN retains full military capability, including a nuclear deterrent. The NAP framework is designed to manage the risk of inadvertent escalation, to preserve Australian diplomatic neutrality, and to create the maximum number of relationships that generate intelligence, trade, and security benefit.
 
@@ -47,7 +47,7 @@ Australia is uniquely positioned to develop a sovereign nuclear energy capabilit
 
 UCN's nuclear energy policy mandates the development of a complete civilian nuclear fuel cycle: uranium mining and processing, fuel fabrication, reactor operation, and waste management. The energy generation backbone is a fleet of nuclear power stations, built on the sites of retiring coal-fired generators, providing baseload zero-carbon electricity that complements a renewables grid.
 
-On the question of reactor technology, UCN is agnostic between large conventional reactors and Small Modular Reactors \(SMRs\). The Australian Academy of Technological Sciences and Engineering's 2024 report notes that SMRs 'could potentially form part of Australia's future low-carbon energy mix, utilising existing transmission infrastructure and contributing to baseload power' but that 'as an emerging technology, in 2024 the cost and operational performance of this technology has not yet been demonstrated' \(ATSE, 2024\). UCN's evidence-based approach accepts this uncertainty and proposes a parallel strategy: proceeding with proven large-scale reactor technology in the near term while monitoring SMR commercialisation internationally.
+On the question of reactor technology, UCN is agnostic between large conventional reactors and Small Modular Reactors (SMRs). The Australian Academy of Technological Sciences and Engineering's 2024 report notes that SMRs 'could potentially form part of Australia's future low-carbon energy mix, utilising existing transmission infrastructure and contributing to baseload power' but that 'as an emerging technology, in 2024 the cost and operational performance of this technology has not yet been demonstrated' (ATSE, 2024). UCN's evidence-based approach accepts this uncertainty and proposes a parallel strategy: proceeding with proven large-scale reactor technology in the near term while monitoring SMR commercialisation internationally.
 
 The CSIRO GenCost 2024-25 analysis notes that nuclear is not currently the lowest-cost decarbonisation pathway — but UCN's nuclear program is not solely an energy cost optimization exercise. It is a strategic capability investment that provides energy sovereignty, fuel cycle expertise, and — critically — the foundational competencies required for nuclear deterrence.
 
@@ -61,7 +61,7 @@ UCN's nuclear deterrent posture is publicly declared — maximum transparency ab
 
 ### 3.3 Ceramic-Coated Nuclear Fuels
 
-UCN specifically adopts ceramic-coated nuclear fuel technology — TRISO \(Tristructural Isotropic\) fuel particles — as the preferred fuel form for its reactor program. TRISO fuel's ceramic coating provides inherent accident containment properties that prevent the kind of fuel damage that leads to the release of radioactive material in accident scenarios. This design choice reflects UCN's evidence-based approach to risk management: adopting proven technical solutions that eliminate categories of failure risk rather than managing those risks through procedural controls.
+UCN specifically adopts ceramic-coated nuclear fuel technology — TRISO (Tristructural Isotropic) fuel particles — as the preferred fuel form for its reactor program. TRISO fuel's ceramic coating provides inherent accident containment properties that prevent the kind of fuel damage that leads to the release of radioactive material in accident scenarios. This design choice reflects UCN's evidence-based approach to risk management: adopting proven technical solutions that eliminate categories of failure risk rather than managing those risks through procedural controls.
 
 ## 4. Military Human Capital: National Service and the Super Soldier Program
 
@@ -93,7 +93,7 @@ This 'buy the knowledge, build the product' philosophy is applied across defense
 
 UCN identifies semiconductor manufacturing capability as a critical strategic gap. Australia currently has no domestic semiconductor wafer fabrication capability, making it entirely dependent on imports for the electronic components underpinning its defense systems, critical infrastructure, and digital economy.
 
-UCN mandates the development of at least one domestic semiconductor manufacturing facility — beginning with mature process nodes \(where the technology is well-understood and tooling costs are substantially lower than for cutting-edge nodes\) and progressing toward more advanced capability as the industrial base matures. Technical data acquisition from existing manufacturers — both through commercial licensing and through research partnerships with universities and national laboratories — underpins this development.
+UCN mandates the development of at least one domestic semiconductor manufacturing facility — beginning with mature process nodes (where the technology is well-understood and tooling costs are substantially lower than for cutting-edge nodes) and progressing toward more advanced capability as the industrial base matures. Technical data acquisition from existing manufacturers — both through commercial licensing and through research partnerships with universities and national laboratories — underpins this development.
 
 ### 5.3 Operating System and Software Sovereignty
 
@@ -125,7 +125,7 @@ Social media companies may purchase anonymised demographic data from the governm
 
 UCN treats space capability as a shared strategic asset, developed in partnership with a primary ally and selectively opened to non-aggression pact partners. A sovereign launch program — initially modest in capability, targeting small satellite deployment for communications and earth observation — is developed using existing Australian aerospace engineering talent augmented by strategic knowledge acquisition from established space powers.
 
-Navigation capability \(a sovereign GPS equivalent\) is developed jointly with the primary ally and made available for both military and civilian use. Military satellites are treated as a shared capability with the primary ally; civilian communications and earth observation satellites are operated as public infrastructure.
+Navigation capability (a sovereign GPS equivalent) is developed jointly with the primary ally and made available for both military and civilian use. Military satellites are treated as a shared capability with the primary ally; civilian communications and earth observation satellites are operated as public infrastructure.
 
 ## 8. Energy Infrastructure: Modular and Government-Owned
 
@@ -133,7 +133,7 @@ UCN mandates a complete redesign and government takeover of Australia's electric
 
 The grid is government-owned and government-operated. Private generation is permitted and incentivised, but transmission infrastructure is a public asset. This ensures that network investment serves national energy security objectives rather than private investor returns.
 
-UCN's vision for transport energy is complementary: development of nuclear battery technology \(radioisotope thermal generators and related technologies at vehicular scale\) to enable green road transport without dependence on the international lithium battery supply chain. A government-funded automotive research enterprise develops vehicle platforms around this technology.
+UCN's vision for transport energy is complementary: development of nuclear battery technology (radioisotope thermal generators and related technologies at vehicular scale) to enable green road transport without dependence on the international lithium battery supply chain. A government-funded automotive research enterprise develops vehicle platforms around this technology.
 
 ## 9. Conclusion
 
@@ -145,20 +145,20 @@ The 'neutral but capable' posture positions Australia as a strategic actor that 
 
 
 ## References
-ATSE \(Australian Academy of Technological Sciences and Engineering\). \(2024\). Small Modular Reactors: The Technology and Australian Context Explained. Melbourne: ATSE.
+ATSE (Australian Academy of Technological Sciences and Engineering). (2024). Small Modular Reactors: The Technology and Australian Context Explained. Melbourne: ATSE.
 
-CSIRO. \(2024\). GenCost 2024-25: Updated Cost Estimates for Low Emissions Technologies. Melbourne: CSIRO.
+CSIRO. (2024). GenCost 2024-25: Updated Cost Estimates for Low Emissions Technologies. Melbourne: CSIRO.
 
-Frontline Economics. \(2024\). Economic Analysis of Including Nuclear Power in the NEM. Melbourne: Frontier Economics.
+Frontline Economics. (2024). Economic Analysis of Including Nuclear Power in the NEM. Melbourne: Frontier Economics.
 
-Minerals Council of Australia. \(2023\). Australia's Nuclear Opportunity. Canberra: MCA.
+Minerals Council of Australia. (2023). Australia's Nuclear Opportunity. Canberra: MCA.
 
-Nuclear Threat Initiative \(NTI\). \(2024\). Nuclear Security Index. Washington D.C.: NTI.
+Nuclear Threat Initiative (NTI). (2024). Nuclear Security Index. Washington D.C.: NTI.
 
-SMR Nuclear Technology Pty Ltd. \(2022\). Opportunities for Small Modular Reactor Deployment in Remote Australia. Sydney: SMR-NT.
+SMR Nuclear Technology Pty Ltd. (2022). Opportunities for Small Modular Reactor Deployment in Remote Australia. Sydney: SMR-NT.
 
-Thomas-Greenfield, L. \(2022\). The Non-Proliferation Treaty Review Conference. U.S. Mission to the United Nations.
+Thomas-Greenfield, L. (2022). The Non-Proliferation Treaty Review Conference. U.S. Mission to the United Nations.
 
-University of Sydney, School of Physics. \(2024\). Australian Quantum Computing Research Programme. Sydney: University of Sydney.
+University of Sydney, School of Physics. (2024). Australian Quantum Computing Research Programme. Sydney: University of Sydney.
 
-Wikipedia. \(2024\). Nuclear Power in Australia. Wikimedia Foundation. https://en.wikipedia.org/wiki/Nuclear\_power\_in\_Australia
+Wikipedia. (2024). Nuclear Power in Australia. Wikimedia Foundation. https://en.wikipedia.org/wiki/Nuclear_power_in_Australia

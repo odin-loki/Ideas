@@ -10,7 +10,7 @@
 
 The UCN framework is constitutionally radical in scope but legally conservative in method. It proposes to fundamentally reorganise Australia's economic, social, and institutional arrangements — but through the mechanisms of ordinary democratic governance: election, legislation, constitutional referendum, and phased administrative reform. This is not an accident of caution; it is a deliberate design principle.
 
-Political science research on transition governance identifies two broad models: 'big bang' transitions \(comprehensive simultaneous change, as attempted in post-Soviet Eastern Europe\) and gradualist sequencing \(staged change building on established positions\). Research by Falcetti, Raiser, and Sanfey \(2006\) examining economic reforms in 25 transition economies found that big bang transitions typically underperform gradualist alternatives — they create too many losers simultaneously, generate political backlash before benefits materialise, and overwhelm administrative capacity.
+Political science research on transition governance identifies two broad models: 'big bang' transitions (comprehensive simultaneous change, as attempted in post-Soviet Eastern Europe) and gradualist sequencing (staged change building on established positions). Research by Falcetti, Raiser, and Sanfey (2006) examining economic reforms in 25 transition economies found that big bang transitions typically underperform gradualist alternatives — they create too many losers simultaneously, generate political backlash before benefits materialise, and overwhelm administrative capacity.
 
 The UCN transition is explicitly gradualist. Each phase builds institutional capacity before the next phase expands it. Each phase has measurable outcomes that validate the approach before the next phase begins. Each phase makes its political beneficiaries into defenders of the subsequent phase. This is not timidity — it is strategic patience applied to institutional reform.
 
@@ -38,18 +38,18 @@ These questions have obvious answers. The UCN platform is the set of institution
 
 ## 3. The Four-Phase Implementation Schedule
 
-**PHASE ONE: MANDATE AND FOUNDATIONS \(Years 1-3\)**
+**PHASE ONE: MANDATE AND FOUNDATIONS (Years 1-3)**
 Phase One begins on election day and runs for the first parliamentary term. Its objectives are: establish the non-partisan oversight bodies that will make subsequent reforms irreversible, implement the 'easy wins' that build public confidence and political capital, and initiate the constituent assembly process for the modular constitution.
 
 ### 3.1 Phase One: Priority Actions
 
-Non-Partisan Budget Modelling Department \(NPBMD\): Established by legislation in the first parliamentary sitting. The NPBMD is the highest priority because it is the institution most important to the UCN's epistemic claims — every subsequent fiscal policy argument depends on having a credibly independent body confirming the numbers. Establishment is legislatively straightforward; the CBO model is well-established internationally.
+Non-Partisan Budget Modelling Department (NPBMD): Established by legislation in the first parliamentary sitting. The NPBMD is the highest priority because it is the institution most important to the UCN's epistemic claims — every subsequent fiscal policy argument depends on having a credibly independent body confirming the numbers. Establishment is legislatively straightforward; the CBO model is well-established internationally.
 
 National Research Repository: Launched as a joint Commonwealth-state infrastructure project, initially hosting new publications. Existing publicly-funded research is progressively migrated. The cost is low; the signal is high — government means what it says about public knowledge.
 
-Housing Market Intervention: The citizen-only residential property ownership rule, the corporate speculative investment prohibition, and the construction guarantee are high-visibility, high-popularity measures that address the most acute source of public grievance \(housing unaffordability\) and create an immediate UCN electoral dividend before more complex reforms are attempted.
+Housing Market Intervention: The citizen-only residential property ownership rule, the corporate speculative investment prohibition, and the construction guarantee are high-visibility, high-popularity measures that address the most acute source of public grievance (housing unaffordability) and create an immediate UCN electoral dividend before more complex reforms are attempted.
 
-Wealth Cap Legislation: The AUD 100M personal wealth cap, applied prospectively \(existing wealth above the threshold is grandfathered for a 10-year transition period\) is enacted. This signals the UCN's distributional philosophy without immediately triggering large-scale capital flight — the grandfather transition period gives high-wealth individuals time to structure their holdings in non-captured ways \(operating businesses above the cap are not captured; only idle capital and real property are\).
+Wealth Cap Legislation: The AUD 100M personal wealth cap, applied prospectively (existing wealth above the threshold is grandfathered for a 10-year transition period) is enacted. This signals the UCN's distributional philosophy without immediately triggering large-scale capital flight — the grandfather transition period gives high-wealth individuals time to structure their holdings in non-captured ways (operating businesses above the cap are not captured; only idle capital and real property are).
 
 Constituent Assembly Commission: Legislation establishing the citizens' assembly and its mandate, its timeline, and the referendum process for the resulting constitutional draft is passed. The constituent assembly itself begins work.
 
@@ -57,10 +57,10 @@ National Service Announcement: The universal national service program at 18 — 
 
 ### 3.2 Phase One: Risk Management
 
-The primary risks in Phase One are: market reaction to the wealth cap and housing interventions \(addressed by the grandfathering provision and clear economic modelling from the NPBMD\); resistance from the media and corporate sectors \(addressed by early NPBMD publication demonstrating the economic benefits of housing reform\); and administrative overreach \(addressed by limiting Phase One reforms to those for which administrative machinery already exists or can be simply established\).
+The primary risks in Phase One are: market reaction to the wealth cap and housing interventions (addressed by the grandfathering provision and clear economic modelling from the NPBMD); resistance from the media and corporate sectors (addressed by early NPBMD publication demonstrating the economic benefits of housing reform); and administrative overreach (addressed by limiting Phase One reforms to those for which administrative machinery already exists or can be simply established).
 
-**PHASE TWO: INSTITUTIONAL BUILD-OUT \(Years 3-6\)**
-Phase Two, beginning after the first re-election mandate \(which validates Phase One\), addresses the institutional architecture that requires more complex construction: the Government Pharmaceutical Corporation, the sovereign banking intervention, the modular constitution ratification, the criminal justice reforms, and the beginning of the nuclear energy program.
+**PHASE TWO: INSTITUTIONAL BUILD-OUT (Years 3-6)**
+Phase Two, beginning after the first re-election mandate (which validates Phase One), addresses the institutional architecture that requires more complex construction: the Government Pharmaceutical Corporation, the sovereign banking intervention, the modular constitution ratification, the criminal justice reforms, and the beginning of the nuclear energy program.
 
 ### 3.3 Phase Two: Priority Actions
 
@@ -68,9 +68,9 @@ Modular Constitution Ratification: The constituent assembly delivers its draft a
 
 Government Pharmaceutical Corporation: Established with initial mandate to manufacture Essential Medicines List compounds at risk of market failure. Manufacturing capability is built from existing CSIRO and defence industry infrastructure where possible; greenfield investment where necessary. The GPC is operational at minimum viable capability by Year 4.
 
-Banking Reform: The four major banks retain their current structures but are subject to new competitive obligations: mandatory open banking \(customer data portability\), the citizen-only mortgage framework, and competitive pressure from the expanded mandate of the Reserve Bank to offer direct citizen banking services for basic accounts. The citizen-only share ownership rule is enacted, with a five-year transition period for existing non-citizen holdings.
+Banking Reform: The four major banks retain their current structures but are subject to new competitive obligations: mandatory open banking (customer data portability), the citizen-only mortgage framework, and competitive pressure from the expanded mandate of the Reserve Bank to offer direct citizen banking services for basic accounts. The citizen-only share ownership rule is enacted, with a five-year transition period for existing non-citizen holdings.
 
-Nuclear Energy Program: The SMR procurement process \(detailed in Paper III\) is initiated in Phase Two. Given the 10-15 year construction timeline for nuclear capacity, early initiation is critical. Phase Two actions include: site assessment, regulatory framework development, and procurement process initiation. Actual construction begins in Phase Three.
+Nuclear Energy Program: The SMR procurement process (detailed in Paper III) is initiated in Phase Two. Given the 10-15 year construction timeline for nuclear capacity, early initiation is critical. Phase Two actions include: site assessment, regulatory framework development, and procurement process initiation. Actual construction begins in Phase Three.
 
 Defence Manufacturing: The domestic defence manufacturing sovereignty program — building the capability to manufacture key platform components, munitions, and the ARIA cryptographic system — is operationalised. Defence procurement contracts are progressively restructured to include sovereign manufacturing requirements.
 
@@ -78,24 +78,24 @@ Drug Policy Reform: The pharmaceutical-grade recreational drug manufacturing and
 
 ### 3.4 Phase Two: Risk Management
 
-Phase Two's primary risks are: constitutional referendum failure \(addressed by the founding-questions communication strategy and the 24-month deliberative process that generates ownership among participants\); banking sector resistance to open banking \(addressed by the NPBMD's published economic analysis demonstrating consumer benefits\); and nuclear energy community opposition \(addressed by transparent site selection, comprehensive environmental assessment, and the international evidence base on SMR safety\).
+Phase Two's primary risks are: constitutional referendum failure (addressed by the founding-questions communication strategy and the 24-month deliberative process that generates ownership among participants); banking sector resistance to open banking (addressed by the NPBMD's published economic analysis demonstrating consumer benefits); and nuclear energy community opposition (addressed by transparent site selection, comprehensive environmental assessment, and the international evidence base on SMR safety).
 
-**PHASE THREE: STRUCTURAL TRANSFORMATION \(Years 6-10\)**
+**PHASE THREE: STRUCTURAL TRANSFORMATION (Years 6-10)**
 Phase Three addresses the deepest structural changes — those requiring the institutional foundations built in Phases One and Two to be in place before they can be attempted. This includes the full implementation of the education reform, the welfare system restructuring, the immigration reform, and the international realignment.
 
 ### 3.5 Phase Three: Priority Actions
 
-Education Reform: The systems-thinking curriculum, AI tutoring integration, spaced repetition pedagogy, and industry linkage program are progressively rolled out through state school systems \(using the federal standards-plus-funding mechanism established in Phase One\). The advanced technical college network begins construction. Teacher training and curriculum development begin in Phase One; delivery begins in Phase Three.
+Education Reform: The systems-thinking curriculum, AI tutoring integration, spaced repetition pedagogy, and industry linkage program are progressively rolled out through state school systems (using the federal standards-plus-funding mechanism established in Phase One). The advanced technical college network begins construction. Teacher training and curriculum development begin in Phase One; delivery begins in Phase Three.
 
-Welfare Restructuring: The universal barracks shelter system — no-means-test communal accommodation — replaces the JobSeeker cash payment for housing insecure individuals. This is administratively complex and politically sensitive; it requires Phase Two's institutional build-out \(the GPC handling pharmaceutical needs, the reformed healthcare system handling mental health, the labour union framework handling employment support\) to be operational before the welfare restructuring can be attempted without leaving people without support.
+Welfare Restructuring: The universal barracks shelter system — no-means-test communal accommodation — replaces the JobSeeker cash payment for housing insecure individuals. This is administratively complex and politically sensitive; it requires Phase Two's institutional build-out (the GPC handling pharmaceutical needs, the reformed healthcare system handling mental health, the labour union framework handling employment support) to be operational before the welfare restructuring can be attempted without leaving people without support.
 
-Immigration Reform: The resource-calibrated immigration framework, the pre-arrival employment and housing requirement, and the English competency requirement are implemented in Phase Three. The sequencing is deliberate — implementing immigration reform before the housing market \(Phase One\) and labour market \(Phase Two\) reforms are in effect would generate legitimate criticism that the system was restricting immigration without having done the work to absorb existing residents.
+Immigration Reform: The resource-calibrated immigration framework, the pre-arrival employment and housing requirement, and the English competency requirement are implemented in Phase Three. The sequencing is deliberate — implementing immigration reform before the housing market (Phase One) and labour market (Phase Two) reforms are in effect would generate legitimate criticism that the system was restricting immigration without having done the work to absorb existing residents.
 
 International Realignment: The UCN non-aggression pact framework is formally launched. Bilateral pact offers are made to all states. The Pine Gap renegotiation is initiated. The cryptocurrency trade settlement framework is piloted with willing partner states. The Pacific Development Fund begins disbursing. These actions require the sovereign capability demonstrated in Phases One and Two to be credible — a state seeking non-aggression pacts from a position of demonstrated weakness invites exploitation.
 
 Wealth Redistribution: The AUD 100M wealth cap's 10-year grandfathering period expires during Phase Three for wealth accumulated before Phase One. The enforcement mechanism — progressive confiscation above the cap through a sovereign wealth fund structure — is activated. The sovereign wealth fund's investment mandate prioritises domestic productive investment in UCN priority industries.
 
-**PHASE FOUR: CONSOLIDATION AND EVIDENCE REVIEW \(Years 10-12\+\)**
+**PHASE FOUR: CONSOLIDATION AND EVIDENCE REVIEW (Years 10-12+)**
 Phase Four is not a phase of new initiatives but of evaluation, consolidation, and revision. By Year 10, sufficient time has elapsed for the major reforms to produce measurable outcomes. The NPBMD's intergenerational model provides the 40-year horizon analysis. The National Research Repository contains the published evaluations of each policy intervention. The constituent assembly's constitutional framework has been in operation for approximately seven years.
 
 ### 3.6 Phase Four: Priority Actions
@@ -104,41 +104,41 @@ Evidence Review and Constitutional Update: The UCN framework requires that polic
 
 Nuclear Capacity Online: The first SMR installations come online during Phase Four, providing the foundation for the transition away from coal and gas generation. The energy sovereignty framework — government-owned modular grid, nuclear battery transport for remote communities — becomes operational.
 
-Sovereign Semiconductor and Technology Capability: The 10-year investment in semiconductor manufacturing capability \(initiated in Phase Two\) begins producing operational output. The sovereign technology infrastructure — OS, communications, data sovereignty — is consolidated.
+Sovereign Semiconductor and Technology Capability: The 10-year investment in semiconductor manufacturing capability (initiated in Phase Two) begins producing operational output. The sovereign technology infrastructure — OS, communications, data sovereignty — is consolidated.
 
 International Pact Network: By Phase Four, the non-aggression pact network is established. The trade diversification targets are evaluated against actuals. The cryptocurrency settlement pilot is assessed for expansion. The Pacific Development Fund's outcomes are evaluated.
 
 ## 4. What Gets Seized Versus Wound Down Versus Reformed
 
-### 4.1 Seizure \(Expropriation with Compensation\)
+### 4.1 Seizure (Expropriation with Compensation)
 
-The UCN framework expropriates several categories of privately-held assets with appropriate constitutional compensation: foreign-owned residential property above the citizen-only threshold \(compensation at market value on the date of legislation, to be paid over a five-year bond schedule\); intellectual property developed under public funding that is currently held under private patent \(compensation based on development costs already recouped, not future monopoly rent\); and land above the personal agricultural holding limit designated as strategic agricultural or environmental reserve.
+The UCN framework expropriates several categories of privately-held assets with appropriate constitutional compensation: foreign-owned residential property above the citizen-only threshold (compensation at market value on the date of legislation, to be paid over a five-year bond schedule); intellectual property developed under public funding that is currently held under private patent (compensation based on development costs already recouped, not future monopoly rent); and land above the personal agricultural holding limit designated as strategic agricultural or environmental reserve.
 
-Expropriation with compensation is constitutionally orthodox under the Australian Constitution's Section 51\(xxxi\) — acquisition of property on 'just terms.' The UCN framework interprets 'just terms' as compensation for legitimate development costs and reasonable commercial value, not for speculative premiums or monopoly rents. The legal architecture is designed to withstand constitutional challenge.
+Expropriation with compensation is constitutionally orthodox under the Australian Constitution's Section 51(xxxi) — acquisition of property on 'just terms.' The UCN framework interprets 'just terms' as compensation for legitimate development costs and reasonable commercial value, not for speculative premiums or monopoly rents. The legal architecture is designed to withstand constitutional challenge.
 
-### 4.2 Wound Down \(Phased Elimination\)
+### 4.2 Wound Down (Phased Elimination)
 
-Several existing programs and arrangements are phased out rather than eliminated immediately: the religious tax exemption \(phased out over five years as institutions adjust to commercial tax status\); the JobSeeker cash payment \(replaced by the universal barracks model over a seven-year transition\); the current foreign aid conditionality framework \(replaced by the Pacific Development Fund model as bilateral agreements expire\); and the current TAFE funding model \(replaced by the advanced technical college framework as the new institutions are built\).
+Several existing programs and arrangements are phased out rather than eliminated immediately: the religious tax exemption (phased out over five years as institutions adjust to commercial tax status); the JobSeeker cash payment (replaced by the universal barracks model over a seven-year transition); the current foreign aid conditionality framework (replaced by the Pacific Development Fund model as bilateral agreements expire); and the current TAFE funding model (replaced by the advanced technical college framework as the new institutions are built).
 
-### 4.3 Reform in Place \(Transformation Without Replacement\)
+### 4.3 Reform in Place (Transformation Without Replacement)
 
-The majority of existing institutions are reformed rather than replaced: the court system \(reformed as described in Paper VI, not abolished\); the public service \(professionalised, depoliticised, but not reconstructed from scratch\); the universities \(subject to the Public Knowledge Mandate and NRC funding reforms, but not nationalised\); and the defence forces \(expanded and reformed per Paper III, but operating on the existing command structure\).
+The majority of existing institutions are reformed rather than replaced: the court system (reformed as described in Paper VI, not abolished); the public service (professionalised, depoliticised, but not reconstructed from scratch); the universities (subject to the Public Knowledge Mandate and NRC funding reforms, but not nationalised); and the defence forces (expanded and reformed per Paper III, but operating on the existing command structure).
 
 ## 5. Transition Risk Framework
 
 ### 5.1 Capital Flight Risk
 
-The wealth cap, foreign investment restrictions, and corporate accountability measures create incentives for capital flight — the movement of wealth out of UCN jurisdiction before reforms take effect. The transition framework addresses this through: announcement effects \(markets are given maximum notice of changes through the constituent assembly process, which is public\); grandfathering \(reducing the immediate impact of reforms on existing holdings\); and countervailing incentives \(the domestic investment environment is simultaneously being improved through sovereign manufacturing investment, research funding, and infrastructure development\).
+The wealth cap, foreign investment restrictions, and corporate accountability measures create incentives for capital flight — the movement of wealth out of UCN jurisdiction before reforms take effect. The transition framework addresses this through: announcement effects (markets are given maximum notice of changes through the constituent assembly process, which is public); grandfathering (reducing the immediate impact of reforms on existing holdings); and countervailing incentives (the domestic investment environment is simultaneously being improved through sovereign manufacturing investment, research funding, and infrastructure development).
 
 Capital flight, to the extent it occurs, also has a silver lining: wealth that departs the jurisdiction is no longer a competing political interest opposing the reform program. The UCN framework is designed to be viable and self-sustaining even if some high-wealth actors depart — the domestic economic base is sufficiently large and the reforms sufficiently productivity-enhancing that the loss is manageable.
 
 ### 5.2 Institutional Capture Risk
 
-The independent oversight bodies — NPBMD, NRC, RIO, DURRB, Sentencing Commission — are all subject to the risk of capture by the political interests they are designed to constrain. The UCN framework addresses this through constitutional independence provisions \(not merely statutory\), fixed non-renewable terms, transparent appointment processes, and open publication of all methodologies. No single mechanism prevents capture; the combination of mechanisms makes it very difficult.
+The independent oversight bodies — NPBMD, NRC, RIO, DURRB, Sentencing Commission — are all subject to the risk of capture by the political interests they are designed to constrain. The UCN framework addresses this through constitutional independence provisions (not merely statutory), fixed non-renewable terms, transparent appointment processes, and open publication of all methodologies. No single mechanism prevents capture; the combination of mechanisms makes it very difficult.
 
 ### 5.3 International Pressure Risk
 
-The international realignment — particularly the Pine Gap renegotiation, the non-aggression pact network, and the trade diversification — will generate pressure from alliance partners and trading relationships. This pressure is manageable if the UCN framework has delivered credible sovereign capability before the realignment is attempted \(hence the Phase Three sequencing\). A sovereign state with nuclear-capable deterrence, domestic defence manufacturing, and a diversified trade portfolio is in a substantially stronger negotiating position than one attempting the same realignment from a position of dependence.
+The international realignment — particularly the Pine Gap renegotiation, the non-aggression pact network, and the trade diversification — will generate pressure from alliance partners and trading relationships. This pressure is manageable if the UCN framework has delivered credible sovereign capability before the realignment is attempted (hence the Phase Three sequencing). A sovereign state with nuclear-capable deterrence, domestic defence manufacturing, and a diversified trade portfolio is in a substantially stronger negotiating position than one attempting the same realignment from a position of dependence.
 
 ## 6. Criteria for Success
 
@@ -146,8 +146,8 @@ The UCN framework is an evidence-based framework. Its implementation must itself
 
 - Phase One success: NPBMD operational and publishing; housing affordability ratio improving in all capital cities; constituent assembly delivering draft within 24 months; first policy meta-analysis published showing evidence base for at least one major Phase One reform.
 - Phase Two success: Constitutional referendum passed; GPC manufacturing at least five Essential Medicines List compounds domestically; open banking implemented with demonstrated consumer price reduction; nuclear procurement process underway.
-- Phase Three success: Education outcomes \(NAPLAN equivalents, post-school employment, tertiary attainment\) improving; welfare shelter system operational with transition support metrics meeting targets; first non-aggression pacts ratified; trade partner concentration below 25% for any single partner.
-- Phase Four success: First systematic evidence review published; at least one major policy revised based on evidence review \(demonstrating the framework's epistemic integrity\); first SMR online; constitutional framework operating without significant legal challenge to core provisions.
+- Phase Three success: Education outcomes (NAPLAN equivalents, post-school employment, tertiary attainment) improving; welfare shelter system operational with transition support metrics meeting targets; first non-aggression pacts ratified; trade partner concentration below 25% for any single partner.
+- Phase Four success: First systematic evidence review published; at least one major policy revised based on evidence review (demonstrating the framework's epistemic integrity); first SMR online; constitutional framework operating without significant legal challenge to core provisions.
 
 ## 7. Conclusion: The Long Game
 
@@ -155,33 +155,33 @@ The UCN framework is not designed to be popular in Year One. It is designed to b
 
 It does this by sequencing reforms so that each phase creates constituencies for the next phase; by building independent institutions early that are difficult to dismantle; by using the NPBMD to continuously demonstrate the fiscal and economic logic of the framework; and by making the constituent assembly process genuinely participatory so that citizens recognise the constitution as their own rather than a government imposition.
 
-The transition is 12 years at minimum — roughly two to three electoral cycles. That is not a long time in the context of the problems being addressed \(housing unaffordability has been building for 30 years; strategic dependence for 70 years; research privatisation for 40 years\). It is, however, a long time in the context of democratic politics, where the incentive is always to sacrifice long-term investment for short-term popularity.
+The transition is 12 years at minimum — roughly two to three electoral cycles. That is not a long time in the context of the problems being addressed (housing unaffordability has been building for 30 years; strategic dependence for 70 years; research privatisation for 40 years). It is, however, a long time in the context of democratic politics, where the incentive is always to sacrifice long-term investment for short-term popularity.
 
 The UCN framework is built on scientific patience as a political virtue. The implementation roadmap is scientific patience operationalised as a governance strategy. It asks citizens to accept short-term disruption in exchange for long-term benefit — but it makes that exchange as explicit, evidence-based, and reversible as possible. And it builds the institutions that make the promise credible.
 
 That is, ultimately, what a trustworthy government does: it tells you what it is going to do, it tells you why, it shows you the evidence, it builds the institutions to deliver, and it comes back and reports on whether it worked. The UCN framework is the specification for a government that earns trust by being consistently, rigorously honest. The implementation roadmap is how it starts.
 
 ## References
-Aghion, P., & Tirole, J. \(1997\). Formal and real authority in organisations. Journal of Political Economy, 105\(1\), 1–29.
+Aghion, P., & Tirole, J. (1997). Formal and real authority in organisations. Journal of Political Economy, 105(1), 1–29.
 
-Daugbjerg, C. \(2009\). Sequencing in public policy: The evolution of the CAP over a decade. Journal of European Public Policy, 16\(3\), 395–411.
+Daugbjerg, C. (2009). Sequencing in public policy: The evolution of the CAP over a decade. Journal of European Public Policy, 16(3), 395–411.
 
-Falcetti, E., Raiser, M., & Sanfey, P. \(2006\). The sequencing of reform in transition economies. Journal of Comparative Economics, 34\(4\), 749–774.
+Falcetti, E., Raiser, M., & Sanfey, P. (2006). The sequencing of reform in transition economies. Journal of Comparative Economics, 34(4), 749–774.
 
-Fishkin, J. S., & Luskin, R. C. \(2005\). Experimenting with a democratic ideal: Deliberative polling and public opinion. Acta Politica, 40\(3\), 284–298.
+Fishkin, J. S., & Luskin, R. C. (2005). Experimenting with a democratic ideal: Deliberative polling and public opinion. Acta Politica, 40(3), 284–298.
 
-Hall, P. A. \(1993\). Policy paradigms, social learning, and the state. Comparative Politics, 25\(3\), 275–296.
+Hall, P. A. (1993). Policy paradigms, social learning, and the state. Comparative Politics, 25(3), 275–296.
 
-Knill, C., & Bauer, M. W. \(2022\). How policy growth affects policy implementation. Journal of European Public Policy, 30\(1\), 62–80.
+Knill, C., & Bauer, M. W. (2022). How policy growth affects policy implementation. Journal of European Public Policy, 30(1), 62–80.
 
-Organisation for Economic Co-operation and Development \(OECD\). \(2020\). Policy Framework on Sound Public Governance. OECD Publishing, Paris.
+Organisation for Economic Co-operation and Development (OECD). (2020). Policy Framework on Sound Public Governance. OECD Publishing, Paris.
 
-Pahle, M., et al. \(2018\). Sequencing to ratchet up climate policy stringency. Nature Climate Change, 8, 861–867.
+Pahle, M., et al. (2018). Sequencing to ratchet up climate policy stringency. Nature Climate Change, 8, 861–867.
 
-Patashnik, E. \(2003\). After the public interest prevails: The political sustainability of policy reform. Governance, 16\(2\), 203–234.
+Patashnik, E. (2003). After the public interest prevails: The political sustainability of policy reform. Governance, 16(2), 203–234.
 
-Pierson, P. \(2000\). Increasing returns, path dependence, and the study of politics. American Political Science Review, 94\(2\), 251–267.
+Pierson, P. (2000). Increasing returns, path dependence, and the study of politics. American Political Science Review, 94(2), 251–267.
 
-Rose, R. \(1991\). What is lesson-drawing? Journal of Public Policy, 11\(1\), 3–30.
+Rose, R. (1991). What is lesson-drawing? Journal of Public Policy, 11(1), 3–30.
 
-Sabatier, P. A., & Jenkins-Smith, H. C. \(1993\). Policy Change and Learning: An Advocacy Coalition Approach. Westview Press, Boulder.
+Sabatier, P. A., & Jenkins-Smith, H. C. (1993). Policy Change and Learning: An Advocacy Coalition Approach. Westview Press, Boulder.

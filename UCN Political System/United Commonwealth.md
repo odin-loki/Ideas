@@ -46,7 +46,7 @@ The United Commonwealth is explicitly not the existing Commonwealth of Nations. 
 
 Australia, Canada, and the United Kingdom share a specific and unusually deep set of common characteristics that makes meaningful constitutional integration between them realistic in a way it is not for the broader Commonwealth: Westminster parliamentary governance in all three, common law legal systems, Five Eyes intelligence integration, ADF-Canadian-British military interoperability, English as the primary language of government, and broadly comparable levels of economic and institutional development.
 
-The three nations together represent a combined GDP of approximately USD 7.5 trillion \(2024 estimates\), a combined population of approximately 130 million, and sovereign territory covering every inhabited continent. They control resource deposits of extraordinary strategic importance: Australia holds among the world's largest reserves of uranium, lithium, iron ore, and rare earths; Canada holds among the world's largest reserves of oil, uranium, potash, and freshwater; the United Kingdom holds the City of London, the world's second-largest financial centre, and globally significant defence and aerospace manufacturing.
+The three nations together represent a combined GDP of approximately USD 7.5 trillion (2024 estimates), a combined population of approximately 130 million, and sovereign territory covering every inhabited continent. They control resource deposits of extraordinary strategic importance: Australia holds among the world's largest reserves of uranium, lithium, iron ore, and rare earths; Canada holds among the world's largest reserves of oil, uranium, potash, and freshwater; the United Kingdom holds the City of London, the world's second-largest financial centre, and globally significant defence and aerospace manufacturing.
 
 Crucially, each of the three nations faces strategic challenges that the other two are positioned to address. Australia faces the challenges of Indo-Pacific strategic exposure and geographic isolation with a small population. Canada faces the challenges of proximity to an increasingly unpredictable United States and Arctic sovereignty threats. The United Kingdom faces the challenges of post-Brexit international repositioning and the loss of guaranteed European market access. Together they form a more strategically complete entity than any of them can be separately.
 
@@ -54,29 +54,29 @@ Crucially, each of the three nations faces strategic challenges that the other t
 
 Realism requires acknowledging the limits. Australia and Canada both have strong national identities that are partly defined in contrast to British heritage; the republican movement in Australia, though currently dormant, reflects a genuine sentiment that sovereign independence should not be symbolised by a British monarch. The United Commonwealth framework responds to this directly: the Crown in the United Commonwealth is not the British Crown extended to the dominions. It is a genuinely shared Crown — the Crown of Australia and Canada equally, performing functions defined by all three governments, operating under a United Commonwealth constitutional instrument that each parliament has ratified as an expression of its sovereignty, not a limitation of it.
 
-What can realistically be shared: defence procurement and interoperability standards; intelligence architecture and Five Eyes governance; trade and investment frameworks; research and patent systems \(aligned with the UCN Public Knowledge Mandate\); currency and monetary policy coordination \(without requiring currency union\); migration and citizenship mobility frameworks; and the Crown's active constitutional guardian function for each nation's democratic institutions.
+What can realistically be shared: defence procurement and interoperability standards; intelligence architecture and Five Eyes governance; trade and investment frameworks; research and patent systems (aligned with the UCN Public Knowledge Mandate); currency and monetary policy coordination (without requiring currency union); migration and citizenship mobility frameworks; and the Crown's active constitutional guardian function for each nation's democratic institutions.
 
-What cannot and should not be shared: domestic policy in healthcare, education, welfare, and taxation; fiscal policy and budget decisions; criminal law and justice; and immigration policy specifics \(though overall frameworks may be coordinated\). The United Commonwealth is explicitly not a superstate. It is a precision confederal instrument for the specific domains where shared governance produces genuine benefits.
+What cannot and should not be shared: domestic policy in healthcare, education, welfare, and taxation; fiscal policy and budget decisions; criminal law and justice; and immigration policy specifics (though overall frameworks may be coordinated). The United Commonwealth is explicitly not a superstate. It is a precision confederal instrument for the specific domains where shared governance produces genuine benefits.
 
 ## 4. The United Commonwealth Constitutional Architecture
 
 ### 4.1 The United Commonwealth Charter
 
-The United Commonwealth is constituted by a single instrument — the United Commonwealth Charter — ratified simultaneously by the Parliament of Australia, the Parliament of Canada \(both Houses\), and both Houses of the Parliament of the United Kingdom. The Charter is not a treaty in the ordinary sense: it does not create a new international legal person. It creates a constitutional relationship between the three sovereignties, mediated through the Crown, which is given substantive governance functions for the first time since the Westminster tradition separated the monarchy from executive power.
+The United Commonwealth is constituted by a single instrument — the United Commonwealth Charter — ratified simultaneously by the Parliament of Australia, the Parliament of Canada (both Houses), and both Houses of the Parliament of the United Kingdom. The Charter is not a treaty in the ordinary sense: it does not create a new international legal person. It creates a constitutional relationship between the three sovereignties, mediated through the Crown, which is given substantive governance functions for the first time since the Westminster tradition separated the monarchy from executive power.
 
-The Charter defines: the institutions of the United Commonwealth and their composition and powers; the domains in which the United Commonwealth has competence \(the shared policy domains listed above\); the Crown's active role within each institution; the amendment process \(requiring unanimous ratification by all three parliaments\); and the withdrawal mechanism \(24-month notice, parliamentary resolution in the withdrawing nation, notification to the Crown\).
+The Charter defines: the institutions of the United Commonwealth and their composition and powers; the domains in which the United Commonwealth has competence (the shared policy domains listed above); the Crown's active role within each institution; the amendment process (requiring unanimous ratification by all three parliaments); and the withdrawal mechanism (24-month notice, parliamentary resolution in the withdrawing nation, notification to the Crown).
 
 ### 4.2 The United Commonwealth Council
 
-The primary governing body of the United Commonwealth is the United Commonwealth Council \(UCC\), consisting of the heads of government of the three nations — the Prime Ministers of Australia, Canada, and the United Kingdom — meeting in plenary at least twice yearly, with additional emergency sessions callable by any member or by the Crown. The Council operates by consensus on most matters; a small number of pre-defined governance actions \(specifically, amendments to the Charter and declaration of collective security measures\) require unanimous agreement.
+The primary governing body of the United Commonwealth is the United Commonwealth Council (UCC), consisting of the heads of government of the three nations — the Prime Ministers of Australia, Canada, and the United Kingdom — meeting in plenary at least twice yearly, with additional emergency sessions callable by any member or by the Crown. The Council operates by consensus on most matters; a small number of pre-defined governance actions (specifically, amendments to the Charter and declaration of collective security measures) require unanimous agreement.
 
-The Crown's role in the Council is that of constitutional convenor and guardian, not executive participant. The Sovereign — or their designated United Commonwealth Representative \(a senior member of the Royal Family, appointed by the Sovereign, with a defined constitutional mandate for United Commonwealth affairs\) — presides over Council plenaries, ensures procedural compliance with the Charter, and has the constitutional authority to require the Council to address any matter that implicates the shared constitutional values defined in the Charter. The Crown cannot override Council decisions, but can require them to be reconsidered if they appear inconsistent with the Charter.
+The Crown's role in the Council is that of constitutional convenor and guardian, not executive participant. The Sovereign — or their designated United Commonwealth Representative (a senior member of the Royal Family, appointed by the Sovereign, with a defined constitutional mandate for United Commonwealth affairs) — presides over Council plenaries, ensures procedural compliance with the Charter, and has the constitutional authority to require the Council to address any matter that implicates the shared constitutional values defined in the Charter. The Crown cannot override Council decisions, but can require them to be reconsidered if they appear inconsistent with the Charter.
 
 ### 4.3 The United Commonwealth Secretariat
 
-The UCC is supported by the United Commonwealth Secretariat — a permanent professional civil service body, headquartered in a rotating capital \(three-year cycles between London, Ottawa, and Canberra\), staffed by secondees from all three national civil services plus a permanent cadre of United Commonwealth officials. The Secretariat is chaired by the United Commonwealth Secretary-General, a senior official appointed by the Crown on the unanimous recommendation of the three Prime Ministers for a fixed six-year non-renewable term.
+The UCC is supported by the United Commonwealth Secretariat — a permanent professional civil service body, headquartered in a rotating capital (three-year cycles between London, Ottawa, and Canberra), staffed by secondees from all three national civil services plus a permanent cadre of United Commonwealth officials. The Secretariat is chaired by the United Commonwealth Secretary-General, a senior official appointed by the Crown on the unanimous recommendation of the three Prime Ministers for a fixed six-year non-renewable term.
 
-The Secretariat administers the shared domains, coordinates the work of the United Commonwealth's specialist institutions \(see Section 6\), supports the Council's deliberative functions, and produces the annual United Commonwealth State of Affairs Report — a public document summarising performance against shared objectives across all domains.
+The Secretariat administers the shared domains, coordinates the work of the United Commonwealth's specialist institutions (see Section 6), supports the Council's deliberative functions, and produces the annual United Commonwealth State of Affairs Report — a public document summarising performance against shared objectives across all domains.
 
 ### 4.4 The United Commonwealth Court
 
@@ -86,7 +86,7 @@ Disputes arising from the interpretation or application of the Charter — wheth
 
 ### 5.1 The United Commonwealth Representative
 
-The King of the United Commonwealth — a designation formally adopted by all three nations upon Charter ratification — appoints a United Commonwealth Representative \(UCR\) from among senior members of the Royal Family. The UCR has a defined constitutional mandate: to represent the Sovereign's interest in the health and integrity of the United Commonwealth constitutional arrangement, to preside over Council plenaries, and to exercise the specific Crown functions defined in the Charter.
+The King of the United Commonwealth — a designation formally adopted by all three nations upon Charter ratification — appoints a United Commonwealth Representative (UCR) from among senior members of the Royal Family. The UCR has a defined constitutional mandate: to represent the Sovereign's interest in the health and integrity of the United Commonwealth constitutional arrangement, to preside over Council plenaries, and to exercise the specific Crown functions defined in the Charter.
 
 The UCR is not a political figure. They do not advise on policy, express political preferences, or intervene in the domestic governance of any member nation. Their active role is constitutional and institutional: ensuring the Charter's integrity, exercising the Crown's calling and suspending powers for United Commonwealth institutions, and serving as the living symbol of the shared constitutional identity that the United Commonwealth represents.
 
@@ -94,7 +94,7 @@ The UCR is not a political figure. They do not advise on policy, express politic
 
 The Charter assigns the Crown two active functions that go beyond any current role of the monarch in the realms. The first is the Calling Function: the Crown may formally call attention to any matter where a member nation's domestic actions appear to be inconsistent with its United Commonwealth Charter obligations. A Calling is not a command and creates no legal obligation; it is a constitutional signal, formally recorded, that the Crown has identified a potential Charter inconsistency. Member nations must formally respond to a Calling within 90 days.
 
-The second is the Guardian Function: the Crown may, in extraordinary circumstances defined by the Charter \(suspension of democratic elections, imposition of emergency powers beyond constitutionally defined limits, suppression of judicial independence\), formally invoke the Charter's Democratic Integrity Clause, triggering a mandatory review by the United Commonwealth Court. The Guardian Function cannot be exercised without the concurrence of the other two member nations' governments — it is not a unilateral Crown power but a last-resort collective constitutional mechanism.
+The second is the Guardian Function: the Crown may, in extraordinary circumstances defined by the Charter (suspension of democratic elections, imposition of emergency powers beyond constitutionally defined limits, suppression of judicial independence), formally invoke the Charter's Democratic Integrity Clause, triggering a mandatory review by the United Commonwealth Court. The Guardian Function cannot be exercised without the concurrence of the other two member nations' governments — it is not a unilateral Crown power but a last-resort collective constitutional mechanism.
 
 *The Crown's active role in the United Commonwealth is a constitutional innovation that draws on the deepest traditions of the Westminster system. The monarch's historic function as the guardian of constitutional integrity — above partisan politics, answerable to the constitution rather than any government — is finally given a cross-realm institutional form commensurate with its symbolic significance.*
 
@@ -102,13 +102,13 @@ The second is the Guardian Function: the Crown may, in extraordinary circumstanc
 
 ### 6.1 The United Commonwealth Defence Board
 
-The three nations already cooperate extensively on defence, principally through the Five Eyes intelligence network, the AUKUS submarine agreement between Australia, the United Kingdom, and the United States, and long-standing equipment and doctrinal interoperability. The United Commonwealth Defence Board \(UCDB\) formalises this cooperation under the Charter, providing a standing body for joint procurement, standards harmonisation, combined logistics, and the coordination of force posture across the three nations' defence establishments.
+The three nations already cooperate extensively on defence, principally through the Five Eyes intelligence network, the AUKUS submarine agreement between Australia, the United Kingdom, and the United States, and long-standing equipment and doctrinal interoperability. The United Commonwealth Defence Board (UCDB) formalises this cooperation under the Charter, providing a standing body for joint procurement, standards harmonisation, combined logistics, and the coordination of force posture across the three nations' defence establishments.
 
 The UCDB does not command the armed forces of any member nation — each retains full operational sovereignty over its defence forces. It coordinates standards and procurement to eliminate the inefficiency of three small-to-medium defence establishments independently acquiring equivalent capabilities. The potential savings from shared procurement — particularly in advanced platforms, cyber capabilities, and logistics systems — are substantial for all three nations.
 
 ### 6.2 The United Commonwealth Research Alliance
 
-The three nations together represent some of the world's most significant research universities, national laboratories, and defence research establishments. The United Commonwealth Research Alliance \(UCRA\) creates a shared research infrastructure, aligned with the UCN Public Knowledge Mandate \(where Australia is a UCN member\), that treats the combined research capacity of the three nations as a single asset.
+The three nations together represent some of the world's most significant research universities, national laboratories, and defence research establishments. The United Commonwealth Research Alliance (UCRA) creates a shared research infrastructure, aligned with the UCN Public Knowledge Mandate (where Australia is a UCN member), that treats the combined research capacity of the three nations as a single asset.
 
 The UCRA facilitates researcher mobility and joint appointments, coordinates grant programs across the three national research councils, maintains a shared access repository for all publicly-funded research outputs, and administers joint research programs in priority domains: advanced materials, biotechnology, quantum computing, nuclear energy technology, and AI safety. The UCRA does not replace national research funding bodies but coordinates their activities and administers a small supplementary joint fund.
 
@@ -120,7 +120,7 @@ Full citizenship remains a matter of national law in each country. Naturalisatio
 
 ### 6.4 United Commonwealth Trade Framework
 
-The three nations together constitute a significant trading bloc, and their combined commodity, services, and financial market depth creates substantial mutual advantages. The United Commonwealth Trade Framework eliminates remaining tariff and non-tariff barriers between the three nations, establishes unified standards for goods and services traded within the United Commonwealth \(reducing the compliance cost of trading across three regulatory environments\), and creates a common negotiating position for key commodity and services exports.
+The three nations together constitute a significant trading bloc, and their combined commodity, services, and financial market depth creates substantial mutual advantages. The United Commonwealth Trade Framework eliminates remaining tariff and non-tariff barriers between the three nations, establishes unified standards for goods and services traded within the United Commonwealth (reducing the compliance cost of trading across three regulatory environments), and creates a common negotiating position for key commodity and services exports.
 
 ## 7. Summary: United Commonwealth Architecture at a Glance
 
@@ -145,13 +145,13 @@ Charter dispute resolution; Democratic Integrity Clause adjudication
 
 Confirms judicial appointments; Guardian Function trigger
 
-UC Defence Board \(UCDB\)
+UC Defence Board (UCDB)
 
 Procurement coordination; standards harmonisation; joint logistics
 
 Symbolic sovereign connection to defence covenant
 
-UC Research Alliance \(UCRA\)
+UC Research Alliance (UCRA)
 
 Research mobility; joint programs; shared repository
 
@@ -167,15 +167,15 @@ UC Trade Framework
 
 Zero tariff zone; unified standards; joint trade negotiation
 
-Royal Commission on Commerce \(advisory, non-binding\)
+Royal Commission on Commerce (advisory, non-binding)
 
 ## 8. Relationship to National UCN Frameworks
 
-Australia, as a UCN-governed nation \(under the framework set out in the UCN Policy Series\), brings specific institutional innovations to the United Commonwealth that benefit all member nations. The UCN's evidence-based governance philosophy, modular constitutional architecture, and Public Knowledge Mandate are Australian domestic arrangements — but their principles are fully compatible with and strengthened by the United Commonwealth framework.
+Australia, as a UCN-governed nation (under the framework set out in the UCN Policy Series), brings specific institutional innovations to the United Commonwealth that benefit all member nations. The UCN's evidence-based governance philosophy, modular constitutional architecture, and Public Knowledge Mandate are Australian domestic arrangements — but their principles are fully compatible with and strengthened by the United Commonwealth framework.
 
-The UCN's commitment to evidence-based policy finds a natural expression in the United Commonwealth Research Alliance's research coordination function. The UCN's non-partisan Budget Modelling Department model can be proposed — though not mandated — as a governance best practice for adoption by Canada and the United Kingdom through the United Commonwealth's voluntary policy harmonisation process. The UCN's International Relations posture \(Paper VII of the UCN Policy Series\) gains credibility from the United Commonwealth relationship: a neutral Australia that is visibly part of a close constitutional community with two NATO members and Five Eyes partners is not isolated; it is strategically positioned.
+The UCN's commitment to evidence-based policy finds a natural expression in the United Commonwealth Research Alliance's research coordination function. The UCN's non-partisan Budget Modelling Department model can be proposed — though not mandated — as a governance best practice for adoption by Canada and the United Kingdom through the United Commonwealth's voluntary policy harmonisation process. The UCN's International Relations posture (Paper VII of the UCN Policy Series) gains credibility from the United Commonwealth relationship: a neutral Australia that is visibly part of a close constitutional community with two NATO members and Five Eyes partners is not isolated; it is strategically positioned.
 
-Canada and the United Kingdom benefit from the UCN framework in different ways. Canada's strategic challenge vis-a-vis the United States is strengthened by association with a broader United Commonwealth entity — the weight of Australia and the UK behind Canada's sovereignty claims is substantially greater than Canada alone. The United Kingdom's post-Brexit search for global positioning gains both the world's most resource-rich continent \(Australia\) and the world's second-largest land mass \(Canada\) as constitutional partners rather than merely diplomatic associates.
+Canada and the United Kingdom benefit from the UCN framework in different ways. Canada's strategic challenge vis-a-vis the United States is strengthened by association with a broader United Commonwealth entity — the weight of Australia and the UK behind Canada's sovereignty claims is substantially greater than Canada alone. The United Kingdom's post-Brexit search for global positioning gains both the world's most resource-rich continent (Australia) and the world's second-largest land mass (Canada) as constitutional partners rather than merely diplomatic associates.
 
 ## 9. Conclusion: Activating the Inheritance
 
@@ -188,22 +188,22 @@ The United Commonwealth is not inevitable. It requires political will in all thr
 The Balfour Declaration's formulation — 'equal in status, though united by a common allegiance to the Crown' — has defined the Commonwealth for a century without activating it. The United Commonwealth proposes to activate it: to give 'common allegiance to the Crown' an institutional content worthy of three great democracies in a century that will test them all.
 
 ## References
-Balfour Declaration. \(1926\). Report of the Inter-Imperial Relations Committee. Imperial Conference, London.
+Balfour Declaration. (1926). Report of the Inter-Imperial Relations Committee. Imperial Conference, London.
 
-Boyce, P. \(2008\). The Queen's Other Realms: The Crown and Its Legacy in Australia, Canada and New Zealand. Federation Press, Sydney.
+Boyce, P. (2008). The Queen's Other Realms: The Crown and Its Legacy in Australia, Canada and New Zealand. Federation Press, Sydney.
 
-Commonwealth of Nations. \(1949\). London Declaration. Commonwealth Heads of Government Meeting, London.
+Commonwealth of Nations. (1949). London Declaration. Commonwealth Heads of Government Meeting, London.
 
-Hazell, R., & Morris, B. \(2017\). The Role of the Monarchy in the Governance of the Commonwealth Realms. Constitution Unit, University College London.
+Hazell, R., & Morris, B. (2017). The Role of the Monarchy in the Governance of the Commonwealth Realms. Constitution Unit, University College London.
 
-Lowy Institute. \(2025\). Australia's royal dilemma as King Charles serves conflicting Commonwealth interests. The Interpreter. Retrieved March 2025.
+Lowy Institute. (2025). Australia's royal dilemma as King Charles serves conflicting Commonwealth interests. The Interpreter. Retrieved March 2025.
 
-Murphy, P. \(2018\). The Empire's New Clothes: The Myth of the Commonwealth. Hurst Publishers, London.
+Murphy, P. (2018). The Empire's New Clothes: The Myth of the Commonwealth. Hurst Publishers, London.
 
-Statute of Westminster. \(1931\). An Act to give effect to certain resolutions passed by Imperial Conferences held in the years 1926 and 1930. Parliament of the United Kingdom.
+Statute of Westminster. (1931). An Act to give effect to certain resolutions passed by Imperial Conferences held in the years 1926 and 1930. Parliament of the United Kingdom.
 
-Wikipedia. \(2025\). Commonwealth realm. Wikimedia Foundation. Retrieved March 2025.
+Wikipedia. (2025). Commonwealth realm. Wikimedia Foundation. Retrieved March 2025.
 
-Wikipedia. \(2025\). Commonwealth of Nations. Wikimedia Foundation. Retrieved March 2025.
+Wikipedia. (2025). Commonwealth of Nations. Wikimedia Foundation. Retrieved March 2025.
 
-Wikipedia. \(2025\). Balfour Declaration of 1926. Wikimedia Foundation. Retrieved March 2025.
+Wikipedia. (2025). Balfour Declaration of 1926. Wikimedia Foundation. Retrieved March 2025.

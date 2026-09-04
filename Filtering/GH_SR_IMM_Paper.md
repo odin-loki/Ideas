@@ -6,91 +6,91 @@ Technical Report · 2026
 
 ## Abstract
 
-We present the **Generalised Hyperbolic Interacting Multiple Model filter with Square-Root CKF propagation (GH-SR-IMM)**, a robust adaptive tracking filter that simultaneously handles non-Gaussian measurement noise, unknown and time-varying dynamics, and numerically stable covariance propagation. The filter places a Normal-Inverse Gaussian \(NIG\) distribution over measurement noise and adapts its two shape parameters per model per timestep using conjugate GIG posterior updates, providing exact heavy-tail handling without approximation. Three competing dynamics models — constant velocity \(CV\), constant acceleration with correlated noise \(CA\), and H-infinity robust \(HI\) — compete via an Interacting Multiple Model \(IMM\) framework, with model probabilities updated using the full NIG likelihood rather than a Gaussian approximation. Covariance matrices are propagated in Cholesky square-root form throughout, guaranteeing positive definiteness at every step.
+We present the **Generalised Hyperbolic Interacting Multiple Model filter with Square-Root CKF propagation (GH-SR-IMM)**, a robust adaptive tracking filter that simultaneously handles non-Gaussian measurement noise, unknown and time-varying dynamics, and numerically stable covariance propagation. The filter places a Normal-Inverse Gaussian (NIG) distribution over measurement noise and adapts its two shape parameters per model per timestep using conjugate GIG posterior updates, providing exact heavy-tail handling without approximation. Three competing dynamics models — constant velocity (CV), constant acceleration with correlated noise (CA), and H-infinity robust (HI) — compete via an Interacting Multiple Model (IMM) framework, with model probabilities updated using the full NIG likelihood rather than a Gaussian approximation. Covariance matrices are propagated in Cholesky square-root form throughout, guaranteeing positive definiteness at every step.
 
-We further extend the architecture to **multi-target multi-sensor tracking** via GH Joint Probabilistic Data Association \(GH-JPDA\), which replaces the standard Gaussian association likelihood with a GH-posterior-adjusted Gaussian. This correctly inflates the effective measurement noise for outlier measurements, reducing their association weight and preventing track corruption under heavy-tail noise.
+We further extend the architecture to **multi-target multi-sensor tracking** via GH Joint Probabilistic Data Association (GH-JPDA), which replaces the standard Gaussian association likelihood with a GH-posterior-adjusted Gaussian. This correctly inflates the effective measurement noise for outlier measurements, reducing their association weight and preventing track corruption under heavy-tail noise.
 
-On an eight-scenario benchmark covering Gaussian, heavy-tail, Lévy, manoeuvring, correlated, mixed-regime, bimodal, and jerk dynamics, GH-SR-IMM achieves a composite score of **1.09** versus **1.76** for the Student-t KF \(Huang 2017\) and **3.51** for the Variational Bayes KF \(Agamennoni 2012\), representing improvements of **38% and 69%** respectively. On the multi-target benchmark, GH-JPDA achieves **51.6%** lower mean GOSPA than standard Gaussian-JPDA across four geometric scenarios with clutter.
+On an eight-scenario benchmark covering Gaussian, heavy-tail, Lévy, manoeuvring, correlated, mixed-regime, bimodal, and jerk dynamics, GH-SR-IMM achieves a composite score of **1.09** versus **1.76** for the Student-t KF (Huang 2017) and **3.51** for the Variational Bayes KF (Agamennoni 2012), representing improvements of **38% and 69%** respectively. On the multi-target benchmark, GH-JPDA achieves **51.6%** lower mean GOSPA than standard Gaussian-JPDA across four geometric scenarios with clutter.
 
 ## 1  Introduction
 
 Robust state estimation under non-Gaussian measurement noise is a long-standing problem in target tracking, navigation, and signal processing. The standard Kalman filter achieves optimality under Gaussian assumptions, but degrades severely when measurement noise exhibits heavy tails, bimodality, or autocorrelation — conditions that arise routinely in radar, sonar, GPS, and inertial navigation systems.
 
-Two principal approaches exist in the literature. The first replaces the Gaussian measurement model with a heavier-tailed distribution. Student-t filters \(Huang et al. 2017\) use the Student-t as a Gaussian scale mixture and adapt the degrees of freedom online. Variational Bayes filters \(Agamennoni et al. 2012\) place a Gamma prior on the noise precision and iterate a VB update per step. Both achieve robustness on isolated heavy-tail benchmarks but share a structural limitation: they are single-model filters with no mechanism for dynamics uncertainty. When the target manoeuvres, the robust measurement model suppresses the large innovation — interpreting a genuine position shift as an outlier.
+Two principal approaches exist in the literature. The first replaces the Gaussian measurement model with a heavier-tailed distribution. Student-t filters (Huang et al. 2017) use the Student-t as a Gaussian scale mixture and adapt the degrees of freedom online. Variational Bayes filters (Agamennoni et al. 2012) place a Gamma prior on the noise precision and iterate a VB update per step. Both achieve robustness on isolated heavy-tail benchmarks but share a structural limitation: they are single-model filters with no mechanism for dynamics uncertainty. When the target manoeuvres, the robust measurement model suppresses the large innovation — interpreting a genuine position shift as an outlier.
 
-The second approach addresses dynamics uncertainty via the Interacting Multiple Model \(IMM\) framework, running multiple dynamics models in competition and fusing their outputs probabilistically. Standard IMM uses Gaussian measurement models and thus provides no heavy-tail robustness.
+The second approach addresses dynamics uncertainty via the Interacting Multiple Model (IMM) framework, running multiple dynamics models in competition and fusing their outputs probabilistically. Standard IMM uses Gaussian measurement models and thus provides no heavy-tail robustness.
 
-We bridge these two approaches. The **GH-SR-IMM** filter places a Generalised Hyperbolic \(GH\) distribution — specifically its Normal-Inverse Gaussian \(NIG\) subfamily — over measurement noise within each IMM model. Each model independently adapts two NIG shape parameters \(chi, psi\) using exact conjugate GIG posterior updates. The IMM model competition uses the full NIG likelihood, not a Gaussian approximation. All covariance operations are performed in Cholesky square-root form, eliminating the numerical drift that accumulates with direct matrix arithmetic.
+We bridge these two approaches. The **GH-SR-IMM** filter places a Generalised Hyperbolic (GH) distribution — specifically its Normal-Inverse Gaussian (NIG) subfamily — over measurement noise within each IMM model. Each model independently adapts two NIG shape parameters (chi, psi) using exact conjugate GIG posterior updates. The IMM model competition uses the full NIG likelihood, not a Gaussian approximation. All covariance operations are performed in Cholesky square-root form, eliminating the numerical drift that accumulates with direct matrix arithmetic.
 
-We further extend to multi-sensor multi-target tracking via **GH-JPDA**, which replaces the Gaussian association likelihood in standard JPDA with a GH-posterior-adjusted Gaussian. The key insight is that outlier measurements should receive *lower* association weight, not higher — and NIG marginal likelihoods are heavier-tailed than Gaussian, so naive substitution produces the wrong behaviour. The correct approach uses the GH posterior to compute an effective noise variance R\_eff, then evaluates a Gaussian\(ν, R\_eff\) for association. Outlier measurements cause R\_eff to inflate, making the Gaussian small, correctly reducing the association weight.
+We further extend to multi-sensor multi-target tracking via **GH-JPDA**, which replaces the Gaussian association likelihood in standard JPDA with a GH-posterior-adjusted Gaussian. The key insight is that outlier measurements should receive *lower* association weight, not higher — and NIG marginal likelihoods are heavier-tailed than Gaussian, so naive substitution produces the wrong behaviour. The correct approach uses the GH posterior to compute an effective noise variance R_eff, then evaluates a Gaussian(ν, R_eff) for association. Outlier measurements cause R_eff to inflate, making the Gaussian small, correctly reducing the association weight.
 
 ## 2  Filter Architecture
 
 ## 2.1  Problem Formulation
 
-Consider a target with state *x\_k ∈ ℝ²* \(position, velocity\) evolving under:
+Consider a target with state *x_k ∈ ℝ²* (position, velocity) evolving under:
 
-*x\_k = F·x\_\{k-1\} \+ w\_k,   w\_k ~ N\(0, Q\)*
+*x_k = F·x\_{k-1} + w_k,   w_k ~ N(0, Q)*
 
-*z\_k = H·x\_k \+ v\_k,         v\_k ~ GH\(0, R, χ, ψ\)*
+*z_k = H·x_k + v_k,         v_k ~ GH(0, R, χ, ψ)*
 
-where *F* is the state transition matrix, *H* the measurement matrix, and *v\_k* is non-Gaussian measurement noise drawn from a Generalised Hyperbolic distribution with shape parameters χ \(chi\) and ψ \(psi\). Both χ and ψ are unknown and time-varying.
+where *F* is the state transition matrix, *H* the measurement matrix, and *v_k* is non-Gaussian measurement noise drawn from a Generalised Hyperbolic distribution with shape parameters χ (chi) and ψ (psi). Both χ and ψ are unknown and time-varying.
 
 ## 2.2  Generalised Hyperbolic Measurement Model
 
-The GH distribution is represented as a Gaussian scale mixture: *v ~ N\(0, V·R\)* where the variance scale *V* is drawn from a Generalised Inverse Gaussian \(GIG\) distribution: *V ~ GIG\(λ, χ, ψ\)*. We fix λ = −0.5, which yields the Normal-Inverse Gaussian \(NIG\) subfamily — validated empirically to be the correct subfamiliy for the noise distributions in our benchmark.
+The GH distribution is represented as a Gaussian scale mixture: *v ~ N(0, V·R)* where the variance scale *V* is drawn from a Generalised Inverse Gaussian (GIG) distribution: *V ~ GIG(λ, χ, ψ)*. We fix λ = −0.5, which yields the Normal-Inverse Gaussian (NIG) subfamily — validated empirically to be the correct subfamiliy for the noise distributions in our benchmark.
 
 At each timestep, given innovation ν, the GIG posterior is:
 
-*V | ν  ~  GIG\(λ−½,  χ\+ν²/R,  ψ\)*
+*V | ν  ~  GIG(λ−½,  χ+ν²/R,  ψ)*
 
-The posterior expectation E\[1/V | ν\] provides the effective measurement noise:
+The posterior expectation E[1/V | ν] provides the effective measurement noise:
 
-*R\_eff  =  R / E\[1/V | ν\]*
+*R_eff  =  R / E[1/V | ν]*
 
-When ν is large \(outlier\), E\[1/V | ν\] is small, R\_eff is large — the filter automatically down-weights the outlier. When ν is small, R\_eff ≈ R — standard behaviour. This adaptation is exact, not a heuristic threshold.
+When ν is large (outlier), E[1/V | ν] is small, R_eff is large — the filter automatically down-weights the outlier. When ν is small, R_eff ≈ R — standard behaviour. This adaptation is exact, not a heuristic threshold.
 
 The NIG shape parameters are adapted online via exponentially weighted conjugate updates:
 
-*χ\_\{k\+1\} = 0.98·χ\_k \+ 0.02·E\[V | ν\]*
+*χ\_{k+1} = 0.98·χ\_k + 0.02·E[V | ν]*
 
-*ψ\_\{k\+1\} = 0.98·ψ\_k \+ 0.02·E\[1/V | ν\]*
+*ψ\_{k+1} = 0.98·ψ\_k + 0.02·E[1/V | ν]*
 
-Each IMM model maintains independent \(χ, ψ\) pairs, allowing per-model noise characterisation.
+Each IMM model maintains independent (χ, ψ) pairs, allowing per-model noise characterisation.
 
 ## 2.3  IMM Dynamics Models
 
 Three models compete within the IMM framework:
 
-M1 — Constant Velocity \(CV\):  F = \[\[1, Δt\],\[0, 1\]\],  H = \[1, 0\],  GH measurement.
+M1 — Constant Velocity (CV):  F = [[1, Δt],[0, 1]],  H = [1, 0],  GH measurement.
 
-M2 — Constant Acceleration with correlated noise \(CA\):  3D state \[pos, vel, acc\], F\[2,2\] = ρ where ρ is the online-estimated AR\(1\) noise correlation coefficient.
+M2 — Constant Acceleration with correlated noise (CA):  3D state [pos, vel, acc], F[2,2] = ρ where ρ is the online-estimated AR(1) noise correlation coefficient.
 
-M3 — H-infinity robust \(HI\):  CV dynamics with H-infinity update replacing the Kalman update. Adaptive robustness parameter γ adjusted from rolling NIS statistics.
+M3 — H-infinity robust (HI):  CV dynamics with H-infinity update replacing the Kalman update. Adaptive robustness parameter γ adjusted from rolling NIS statistics.
 
-The IMM transition matrix is Tr\[i,j\] = \{0.95 on-diagonal, 0.04 off-diagonal for M1/M2, 0.20 for M3 entry\}. Model probabilities are updated using the full NIG likelihood of each model's innovation, not a Gaussian approximation.
+The IMM transition matrix is Tr[i,j] = {0.95 on-diagonal, 0.04 off-diagonal for M1/M2, 0.20 for M3 entry}. Model probabilities are updated using the full NIG likelihood of each model's innovation, not a Gaussian approximation.
 
 ## 2.4  Square-Root CKF Propagation
 
-Instead of propagating the covariance matrix *P* directly, we propagate its Cholesky factor *S = chol\(P\)*. The predict step uses QR decomposition of an augmented sigma-point matrix:
+Instead of propagating the covariance matrix *P* directly, we propagate its Cholesky factor *S = chol(P)*. The predict step uses QR decomposition of an augmented sigma-point matrix:
 
-*A = \[ ΔX / √\(2n\) \]   \(sigma-point deviations\)*
+*A = [ ΔX / √(2n) ]   (sigma-point deviations)*
 
-*    \[ chol\(Q\)^T  \]   \(process noise root\)*
+*    [ chol(Q)^T  ]   (process noise root)*
 
-*S\_\{pred\} = R\( QR\(A\) \)\[:n, :n\]*
+*S\_{pred} = R( QR(A) )[:n, :n]*
 
-This guarantees positive definiteness by construction at every step, eliminating the epsilon-correction heuristics and symmetry checks that standard filters require. The benefit is largest in long trajectories where numerical errors accumulate, and in scenarios with extreme R\_eff values driven by heavy-tail outliers.
+This guarantees positive definiteness by construction at every step, eliminating the epsilon-correction heuristics and symmetry checks that standard filters require. The benefit is largest in long trajectories where numerical errors accumulate, and in scenarios with extreme R_eff values driven by heavy-tail outliers.
 
 ## 2.5  Supporting Adapters
 
 Four online adapters run alongside the filter at each step:
 
-IW-Q:  Process noise adapter using an Inverse Wishart conjugate prior. Updates the full 2×2 Q matrix from inlier innovations only \(MAD gate at 2.5σ\). Inlier gate prevents outlier spikes from inflating Q and triggering false manoeuvre detection.
+IW-Q:  Process noise adapter using an Inverse Wishart conjugate prior. Updates the full 2×2 Q matrix from inlier innovations only (MAD gate at 2.5σ). Inlier gate prevents outlier spikes from inflating Q and triggering false manoeuvre detection.
 
 IW-R:  Measurement noise adapter using a scalar Inverse Wishart prior on R. Provides a second-level R estimate complementary to the per-step GH posterior.
 
-AR-ρ:  Online AR\(1\) correlation estimator. Computes sample lag-1 autocorrelation of inlier innovations and updates ρ in M2's F matrix, enabling the filter to correctly handle correlated measurement noise sequences.
+AR-ρ:  Online AR(1) correlation estimator. Computes sample lag-1 autocorrelation of inlier innovations and updates ρ in M2's F matrix, enabling the filter to correctly handle correlated measurement noise sequences.
 
 ACF monitor:  Detects persistent innovation autocorrelation via rolling ACF significance test. When ACF exceeds 2/√n threshold, boosts M2's probability weight — a signature of unmodelled dynamics or correlated noise.
 
@@ -98,50 +98,50 @@ ACF monitor:  Detects persistent innovation autocorrelation via rolling ACF sign
 
 ## 3.1  Multi-Target Formulation
 
-Given *N\_T* targets and *N\_S* sensors, at each timestep sensor *s* provides an unordered set of measurements *Z\_s = \{z\_\{s,1\}, ..., z\_\{s,M\_s\}\}* which may include target-originated measurements and clutter. The association problem is to determine which measurement originated from which target, or whether a measurement is clutter.
+Given *N_T* targets and *N_S* sensors, at each timestep sensor *s* provides an unordered set of measurements *Z_s = {z\_{s,1}, ..., z\_{s,M_s}}* which may include target-originated measurements and clutter. The association problem is to determine which measurement originated from which target, or whether a measurement is clutter.
 
-Standard JPDA computes association weights β\[i,j\] = P\(z\_j originated from target i\) using Gaussian likelihoods. We replace this with **GH-JPDA**, which uses GH-posterior-adjusted Gaussian likelihoods:
+Standard JPDA computes association weights β[i,j] = P(z_j originated from target i) using Gaussian likelihoods. We replace this with **GH-JPDA**, which uses GH-posterior-adjusted Gaussian likelihoods:
 
-*R\_eff\(i,j\)  =  R\_base\(i\) / E\[1/V | ν\_\{ij\}, χ\_i, ψ\_i\]*
+*R_eff(i,j)  =  R_base(i) / E[1/V | ν\_{ij}, χ\_i, ψ\_i]*
 
-*L\(i,j\)  =  N\( ν\_\{ij\} ;  0,  S\_zz \+ R\_eff\(i,j\) \)*
+*L(i,j)  =  N( ν\_{ij} ;  0,  S_zz + R_eff(i,j) )*
 
-*β\[i,j\]  =  L\(i,j\) / \( λ\_c \+ Σ\_i L\(i,j\) \)*
+*β[i,j]  =  L(i,j) / ( λ\_c + Σ\_i L(i,j) )*
 
-where *ν\_\{ij\}* is the innovation of measurement j against target i's predicted position, and λ\_c is the clutter spatial density. The critical difference from naive substitution of NIG likelihoods is that **L\(i,j\) is evaluated with an inflated R\_eff rather than the raw NIG probability**. The NIG marginal is heavier-tailed than Gaussian — substituting it directly would *increase* association probability for outliers, the wrong behaviour. Using Gaussian\(ν, R\_eff\) with GH-inflated R\_eff produces the correct result: outliers receive lower association weight.
+where *ν\_{ij}* is the innovation of measurement j against target i's predicted position, and λ\_c is the clutter spatial density. The critical difference from naive substitution of NIG likelihoods is that **L(i,j) is evaluated with an inflated R_eff rather than the raw NIG probability**. The NIG marginal is heavier-tailed than Gaussian — substituting it directly would *increase* association probability for outliers, the wrong behaviour. Using Gaussian(ν, R_eff) with GH-inflated R_eff produces the correct result: outliers receive lower association weight.
 
 ## 3.2  Dual-Sensor Fusion
 
-Two sensors are fused sequentially per timestep. Sensor 1 \(position, H = \[1,0\], R₁ = 1.0\) and Sensor 2 \(velocity/Doppler, H = \[0,1\], R₂ = 2.0\). Each target maintains independent NIG parameters per sensor — \(χ\_s1, ψ\_s1\) and \(χ\_s2, ψ\_s2\) — allowing per-sensor noise characterisation. Sensor 2's velocity measurements constrain velocity ambiguity during close target approaches, reducing track swaps.
+Two sensors are fused sequentially per timestep. Sensor 1 (position, H = [1,0], R₁ = 1.0) and Sensor 2 (velocity/Doppler, H = [0,1], R₂ = 2.0). Each target maintains independent NIG parameters per sensor — (χ\_s1, ψ\_s1) and (χ\_s2, ψ\_s2) — allowing per-sensor noise characterisation. Sensor 2's velocity measurements constrain velocity ambiguity during close target approaches, reducing track swaps.
 
 ## 3.3  JPDA State Update
 
-After computing association weights β\[i,j\], the state update for target i is:
+After computing association weights β[i,j], the state update for target i is:
 
-*ν\_combined = Σ\_j β\[i,j\] · ν\_\{ij\}*
+*ν\_combined = Σ\_j β[i,j] · ν\_{ij}*
 
-*x\_f = x\_p \+ K · ν\_combined*
+*x_f = x_p + K · ν\_combined*
 
-*P\_f = β\_0 · P\_pred \+ \(1-β\_0\) · P\_upd \+ P\_spread*
+*P_f = β\_0 · P_pred + (1-β\_0) · P_upd + P_spread*
 
-where β\_0 = 1 − Σ\_j β\[i,j\] is the probability of no valid measurement, P\_upd is the standard KF updated covariance, and P\_spread accounts for the spread of association hypotheses. The GH-posterior R\_eff used in the gain K uses the combined innovation ν\_combined.
+where β\_0 = 1 − Σ\_j β[i,j] is the probability of no valid measurement, P_upd is the standard KF updated covariance, and P_spread accounts for the spread of association hypotheses. The GH-posterior R_eff used in the gain K uses the combined innovation ν\_combined.
 
 ## 4  Experimental Setup
 
 ## 4.1  Single-Target Benchmark Scenarios
 
-Eight scenarios test distinct noise characteristics. All share N = 500 steps, DT = 1s, true process noise Q ≈ diag\(\[DT³/3, DT\+0.001\]\)×0.01, baseline measurement noise R = 1.0:
+Eight scenarios test distinct noise characteristics. All share N = 500 steps, DT = 1s, true process noise Q ≈ diag([DT³/3, DT+0.001])×0.01, baseline measurement noise R = 1.0:
 
 | Scenario | Noise model | Key challenge |
 |----------|-------------|---------------|
-| Gaussian | N\(0,1\) | Filter baseline |
-| Heavy-Tail | Student-t\(2\) mix, 12% rate | Outlier rejection |
+| Gaussian | N(0,1) | Filter baseline |
+| Heavy-Tail | Student-t(2) mix, 12% rate | Outlier rejection |
 | Lévy α=1.6 | Lévy stable, α=1.6 | Infinite variance noise |
-| Maneuver | Gaussian \+ velocity step | Dynamics model switch |
-| Correlated Q | AR\(1\), ρ=0.7 | Autocorrelated meas noise |
-| Mixed Regime | Gaussian → Heavy → AR\(1\) | Regime change detection |
-| Bimodal | N\(0,1\) / N\(0,9\), 20% rate | High-variance outlier mode |
-| Jerk | Gaussian \+ velocity ramp | Sustained dynamics change |
+| Maneuver | Gaussian + velocity step | Dynamics model switch |
+| Correlated Q | AR(1), ρ=0.7 | Autocorrelated meas noise |
+| Mixed Regime | Gaussian → Heavy → AR(1) | Regime change detection |
+| Bimodal | N(0,1) / N(0,9), 20% rate | High-variance outlier mode |
+| Jerk | Gaussian + velocity ramp | Sustained dynamics change |
 
 ## 4.2  Multi-Target Benchmark Scenarios
 
@@ -151,30 +151,30 @@ Four scenarios test association under different geometric configurations. All us
 |----------|----------|---------------|
 | Crossing | Targets cross at step 150 | Track swap at close approach |
 | Parallel | Same direction, 3 units apart | Sustained close proximity |
-| Crossing \+ Heavy-Tail | Crossing \+ t\(2\) noise 15% | Association under outliers |
+| Crossing + Heavy-Tail | Crossing + t(2) noise 15% | Association under outliers |
 | Diverging | Both start at origin | Association at zero separation |
 
 ## 4.3  Baselines
 
-**Student-t KF (Huang 2017):** Single-model CV filter. Measurement noise modelled as Student-t with adaptive degrees of freedom ν. E\[1/V|z\] = \(ν\+1\)/\(ν \+ ν²/R\) provides effective R. DOF ν adapted by gradient ascent on the Student-t log-likelihood. IW-Q adapter for process noise.
+**Student-t KF (Huang 2017):** Single-model CV filter. Measurement noise modelled as Student-t with adaptive degrees of freedom ν. E[1/V|z] = (ν+1)/(ν + ν²/R) provides effective R. DOF ν adapted by gradient ascent on the Student-t log-likelihood. IW-Q adapter for process noise.
 
-**VB-KF (Agamennoni 2012):** Single-model CV filter. Gamma prior on noise precision u ~ Gamma\(a₀, b₀\) with a₀ = b₀ = 10⁻⁴ \(near-non-informative\). VB posterior q\(u\) = Gamma\(a₀\+½, b₀ \+ ½ν²/S\) iterated 3 times per step. IW-Q adapter for process noise.
+**VB-KF (Agamennoni 2012):** Single-model CV filter. Gamma prior on noise precision u ~ Gamma(a₀, b₀) with a₀ = b₀ = 10⁻⁴ (near-non-informative). VB posterior q(u) = Gamma(a₀+½, b₀ + ½ν²/S) iterated 3 times per step. IW-Q adapter for process noise.
 
-**Gaussian-JPDA:** Standard JPDA with Gaussian likelihoods. Association weight β\[i,j\] = Gaussian\(ν, Szz\) / \(λ\_c \+ Σ Gaussian\(ν, Szz\)\). No GH adjustment.
+**Gaussian-JPDA:** Standard JPDA with Gaussian likelihoods. Association weight β[i,j] = Gaussian(ν, Szz) / (λ\_c + Σ Gaussian(ν, Szz)). No GH adjustment.
 
 ## 4.4  Evaluation Metric
 
 Single-target composite score:
 
-*S = RMSE \+ 0.4 · |mean\(NIS\) − 1| \+ 0.2 · std\(NIS\)*
+*S = RMSE + 0.4 · |mean(NIS) − 1| + 0.2 · std(NIS)*
 
-RMSE measures position accuracy. The NIS \(Normalised Innovation Squared\) terms penalise filter inconsistency — both over-confident \(NIS > 1\) and under-confident \(NIS < 1\) filters are penalised. A well-calibrated filter has mean NIS = 1.
+RMSE measures position accuracy. The NIS (Normalised Innovation Squared) terms penalise filter inconsistency — both over-confident (NIS > 1) and under-confident (NIS < 1) filters are penalised. A well-calibrated filter has mean NIS = 1.
 
-Multi-target metric: GOSPA \(Generalised Optimal SubPattern Assignment\):
+Multi-target metric: GOSPA (Generalised Optimal SubPattern Assignment):
 
-*GOSPA = \[ min-cost assignment \+ \(missed \+ false\) · c^p/2 \]^\{1/p\}*
+*GOSPA = [ min-cost assignment + (missed + false) · c^p/2 ]^{1/p}*
 
-with c = 5 \(cutoff distance\) and p = 2. Penalises missed tracks, false tracks, and position error jointly. All results averaged over seeds 42–46.
+with c = 5 (cutoff distance) and p = 2. Penalises missed tracks, false tracks, and position error jointly. All results averaged over seeds 42–46.
 
 ## 5  Results
 
@@ -182,7 +182,7 @@ with c = 5 \(cutoff distance\) and p = 2. Penalises missed tracks, false tracks,
 
 Table 1 reports multi-seed composite scores across all eight scenarios.
 
-**Table 1.** Multi-seed composite scores \(lower = better\). ◀ marks best per scenario.
+**Table 1.** Multi-seed composite scores (lower = better). ◀ marks best per scenario.
 
 | Scenario | Huang 2017 | Agam. 2012 | GH-SR-IMM |
 |----------|------------|------------|-----------|
@@ -196,49 +196,49 @@ Table 1 reports multi-seed composite scores across all eight scenarios.
 | Jerk | 0.917±0.044 ◀ | 1.931±0.318 | 0.942±0.024 |
 | **Mean** | **1.760** | **3.509** | **1.090** ◀ |
 
-GH-SR-IMM wins 6 of 8 scenarios and achieves a mean score of 1.090, compared to 1.760 for Huang 2017 (**+38.1% improvement**) and 3.509 for Agamennoni 2012 (**+68.9% improvement**). The two scenarios won by Huang — Gaussian and Jerk — are near ties \(0.891 vs 0.935, 0.917 vs 0.942\) where the NIG degenerates toward Gaussian and single-model simplicity is sufficient.
+GH-SR-IMM wins 6 of 8 scenarios and achieves a mean score of 1.090, compared to 1.760 for Huang 2017 (**+38.1% improvement**) and 3.509 for Agamennoni 2012 (**+68.9% improvement**). The two scenarios won by Huang — Gaussian and Jerk — are near ties (0.891 vs 0.935, 0.917 vs 0.942) where the NIG degenerates toward Gaussian and single-model simplicity is sufficient.
 
-The structural advantage is clearest on Maneuver. Huang scores 1.590 and Agamennoni 8.194 because both are single-model filters: a velocity step produces a large innovation, which the robust measurement model down-weights as an outlier, causing the filter to miss the manoeuvre entirely. GH-SR-IMM scores 0.994 because M3 \(H-infinity\) correctly recognises a dynamics change rather than a measurement outlier.
+The structural advantage is clearest on Maneuver. Huang scores 1.590 and Agamennoni 8.194 because both are single-model filters: a velocity step produces a large innovation, which the robust measurement model down-weights as an outlier, causing the filter to miss the manoeuvre entirely. GH-SR-IMM scores 0.994 because M3 (H-infinity) correctly recognises a dynamics change rather than a measurement outlier.
 
-The variance of Huang on Heavy-Tail \(±4.427\) reveals a structural fragility: on some seeds the DOF adaptation diverges and the filter loses track. GH-SR-IMM's variance is ±0.194 — stable across seeds.
+The variance of Huang on Heavy-Tail (±4.427) reveals a structural fragility: on some seeds the DOF adaptation diverges and the filter loses track. GH-SR-IMM's variance is ±0.194 — stable across seeds.
 
 ## 5.2  Multi-Target Benchmark
 
 Table 2 reports mean GOSPA across seeds for the four multi-target scenarios.
 
-**Table 2.** Multi-target GOSPA \(lower = better\). GH-JPDA vs standard Gaussian-JPDA.
+**Table 2.** Multi-target GOSPA (lower = better). GH-JPDA vs standard Gaussian-JPDA.
 
 | Scenario | Gaussian-JPDA | GH-JPDA | Δ | Improvement |
 |----------|---------------|---------|---|-------------|
 | Crossing paths | 3.919 | 2.025 ◀ | −1.895 | 48.3% |
 | Parallel tracks | 3.791 | 2.846 ◀ | −0.945 | 24.9% |
-| Crossing \+ Heavy-tail | 4.057 | 1.787 ◀ | −2.270 | 56.0% |
+| Crossing + Heavy-tail | 4.057 | 1.787 ◀ | −2.270 | 56.0% |
 | Diverging tracks | 4.507 | 1.227 ◀ | −3.281 | 72.8% |
 | **Mean** | **4.069** | **1.971** ◀ | **−2.098** | **51.6%** |
 
-GH-JPDA wins all four scenarios. The largest gain is on Diverging \(72.8%\): when two targets start at the same position, standard Gaussian-JPDA immediately swaps tracks because both targets produce identical predicted innovations. GH-JPDA's velocity-sensor measurement \(Sensor 2\) correctly distinguishes the two targets as they begin to separate, preventing the swap.
+GH-JPDA wins all four scenarios. The largest gain is on Diverging (72.8%): when two targets start at the same position, standard Gaussian-JPDA immediately swaps tracks because both targets produce identical predicted innovations. GH-JPDA's velocity-sensor measurement (Sensor 2) correctly distinguishes the two targets as they begin to separate, preventing the swap.
 
-The Crossing \+ Heavy-tail scenario \(56.0% improvement\) demonstrates the primary motivation: when heavy-tail noise produces spikes during close approach, Gaussian-JPDA assigns high association probability to the spike \(because the Gaussian decays slowly for moderate innovations\). GH-JPDA inflates R\_eff for the spike, suppresses its association weight, and correctly assigns the target measurement — preventing track corruption during the most vulnerable phase.
+The Crossing + Heavy-tail scenario (56.0% improvement) demonstrates the primary motivation: when heavy-tail noise produces spikes during close approach, Gaussian-JPDA assigns high association probability to the spike (because the Gaussian decays slowly for moderate innovations). GH-JPDA inflates R_eff for the spike, suppresses its association weight, and correctly assigns the target measurement — preventing track corruption during the most vulnerable phase.
 
 ## 6  Discussion
 
 ## 6.1  Why GH Outperforms Student-t in the IMM Setting
 
-Both Student-t and NIG are Gaussian scale mixtures and provide exact heavy-tail modelling. The difference in our results arises from the IMM context. Huang's Student-t KF adapts a single scalar DOF parameter ν shared across all dynamics regimes. When a manoeuvre occurs, the filter briefly sees large innovations and adapts ν toward heavy-tail mode — making it less responsive to subsequent legitimate dynamics changes. The per-model \(χ\_i, ψ\_i\) adaptation in GH-SR-IMM avoids this coupling: each model learns its own noise regime independently, and the IMM competition handles the dynamics switching.
+Both Student-t and NIG are Gaussian scale mixtures and provide exact heavy-tail modelling. The difference in our results arises from the IMM context. Huang's Student-t KF adapts a single scalar DOF parameter ν shared across all dynamics regimes. When a manoeuvre occurs, the filter briefly sees large innovations and adapts ν toward heavy-tail mode — making it less responsive to subsequent legitimate dynamics changes. The per-model (χ\_i, ψ\_i) adaptation in GH-SR-IMM avoids this coupling: each model learns its own noise regime independently, and the IMM competition handles the dynamics switching.
 
 ## 6.2  The GH-JPDA Association Mechanism
 
-A subtle but critical point: substituting NIG likelihoods directly into JPDA produces worse performance than Gaussian-JPDA, because NIG is heavier-tailed — outliers receive *higher* association probability under NIG than Gaussian. The correct use of GH in association is via the posterior effective R, which *tightens* the association likelihood for outliers by using a Gaussian with inflated variance. This is the association analogue of the measurement update mechanism: in both cases, the GH posterior E\[1/V | ν\] is used to compute R\_eff, and the subsequent operation \(update or association weight\) is evaluated with a Gaussian at that R\_eff.
+A subtle but critical point: substituting NIG likelihoods directly into JPDA produces worse performance than Gaussian-JPDA, because NIG is heavier-tailed — outliers receive *higher* association probability under NIG than Gaussian. The correct use of GH in association is via the posterior effective R, which *tightens* the association likelihood for outliers by using a Gaussian with inflated variance. This is the association analogue of the measurement update mechanism: in both cases, the GH posterior E[1/V | ν] is used to compute R_eff, and the subsequent operation (update or association weight) is evaluated with a Gaussian at that R_eff.
 
 ## 6.3  Limitations and Future Work
 
 Three limitations are noted:
 
-**Correlated Q scenario:** GH-SR-IMM does not decisively outperform Huang 2017 on the Correlated Q scenario \(1.275 vs 1.252\). The AR augmentation of M2 is partially effective — the online ρ estimator correctly characterises the noise correlation — but the current architecture routes ρ through the dynamics F matrix rather than the measurement equation. A true AR state augmentation where ε appears in the measurement equation H would likely close this gap.
+**Correlated Q scenario:** GH-SR-IMM does not decisively outperform Huang 2017 on the Correlated Q scenario (1.275 vs 1.252). The AR augmentation of M2 is partially effective — the online ρ estimator correctly characterises the noise correlation — but the current architecture routes ρ through the dynamics F matrix rather than the measurement equation. A true AR state augmentation where ε appears in the measurement equation H would likely close this gap.
 
 **IMM transition matrix:** The 3×3 transition matrix is fixed. Adapting it online via a Dirichlet conjugate prior on the mode switching probabilities would allow the filter to learn scenario-specific dynamics switching rates.
 
-**Track initiation and termination:** The multi-target benchmark assumes known track count and uses true initial positions with small noise. Real deployments require track initiation from clutter \(MHT or particle-based\) and deletion of low-probability tracks — neither of which is addressed here.
+**Track initiation and termination:** The multi-target benchmark assumes known track count and uses true initial positions with small noise. Real deployments require track initiation from clutter (MHT or particle-based) and deletion of low-probability tracks — neither of which is addressed here.
 
 ## 7  Conclusion
 
@@ -250,29 +250,29 @@ The GH-JPDA extension demonstrates that the same GH posterior mechanism that ena
 
 ## References
 
-\[1\]  Y. Huang, Y. Zhang, N. Li, L. Zhao, and J. Chambers, "A Novel Robust Gaussian–Student's t Mixture Distribution Based Kalman Filter," IEEE Transactions on Signal Processing, vol. 67, no. 13, pp. 3606–3620, 2019.
+[1]  Y. Huang, Y. Zhang, N. Li, L. Zhao, and J. Chambers, "A Novel Robust Gaussian–Student's t Mixture Distribution Based Kalman Filter," IEEE Transactions on Signal Processing, vol. 67, no. 13, pp. 3606–3620, 2019.
 
-\[2\]  G. Agamennoni, J. I. Nieto, and E. M. Nebot, "An approximate expectation maximisation algorithm for estimation in nonlinear dynamic systems," IEEE Transactions on Signal Processing, vol. 60, no. 6, pp. 2862–2877, 2012.
+[2]  G. Agamennoni, J. I. Nieto, and E. M. Nebot, "An approximate expectation maximisation algorithm for estimation in nonlinear dynamic systems," IEEE Transactions on Signal Processing, vol. 60, no. 6, pp. 2862–2877, 2012.
 
-\[3\]  H. Akaike, "A new look at the statistical model identification," IEEE Transactions on Automatic Control, vol. 19, no. 6, pp. 716–723, 1974.
+[3]  H. Akaike, "A new look at the statistical model identification," IEEE Transactions on Automatic Control, vol. 19, no. 6, pp. 716–723, 1974.
 
-\[4\]  O. E. Barndorff-Nielsen, "Exponentially decreasing distributions for the logarithm of particle size," Proceedings of the Royal Society of London, Series A, vol. 353, pp. 401–419, 1977.
+[4]  O. E. Barndorff-Nielsen, "Exponentially decreasing distributions for the logarithm of particle size," Proceedings of the Royal Society of London, Series A, vol. 353, pp. 401–419, 1977.
 
-\[5\]  T. Başar and P. Bernhard, H∞ Optimal Control and Related Minimax Design Problems, 2nd ed. Boston, MA: Birkhäuser, 2008.
+[5]  T. Başar and P. Bernhard, H∞ Optimal Control and Related Minimax Design Problems, 2nd ed. Boston, MA: Birkhäuser, 2008.
 
-\[6\]  Y. Bar-Shalom, F. Daum, and J. Huang, "The probabilistic data association filter," IEEE Control Systems Magazine, vol. 29, no. 6, pp. 82–100, 2009.
+[6]  Y. Bar-Shalom, F. Daum, and J. Huang, "The probabilistic data association filter," IEEE Control Systems Magazine, vol. 29, no. 6, pp. 82–100, 2009.
 
-\[7\]  A. Ienkaran and S. J. Julier, "Square root cubature Kalman filter," IEEE Transactions on Aerospace and Electronic Systems, vol. 49, no. 1, pp. 657–670, 2013.
+[7]  A. Ienkaran and S. J. Julier, "Square root cubature Kalman filter," IEEE Transactions on Aerospace and Electronic Systems, vol. 49, no. 1, pp. 657–670, 2013.
 
-\[8\]  R. Mahler, Statistical Multisource-Multitarget Information Fusion. Boston, MA: Artech House, 2007.
+[8]  R. Mahler, Statistical Multisource-Multitarget Information Fusion. Boston, MA: Artech House, 2007.
 
-\[9\]  A. Cantoni and P. Butler, "Generalization of the Corrigibility of a Kalman Filter," Journal of Optimization Theory and Applications, vol. 29, no. 4, pp. 649–669, 1976.
+[9]  A. Cantoni and P. Butler, "Generalization of the Corrigibility of a Kalman Filter," Journal of Optimization Theory and Applications, vol. 29, no. 4, pp. 649–669, 1976.
 
-\[10\] A. H. Jazwinski, Stochastic Processes and Filtering Theory. New York: Academic Press, 1970.
+[10] A. H. Jazwinski, Stochastic Processes and Filtering Theory. New York: Academic Press, 1970.
 
 ## Appendix A  Python Implementation
 
-A complete reference implementation is provided in harcf\_benchmark.py. The file contains all filter implementations, scenario generators, metrics, and the main benchmark runner. Running the script reproduces Tables 1 and 2.
+A complete reference implementation is provided in harcf_benchmark.py. The file contains all filter implementations, scenario generators, metrics, and the main benchmark runner. Running the script reproduces Tables 1 and 2.
 
 Dependencies: numpy, scipy. No external tracking or filtering libraries required.
 
@@ -280,14 +280,14 @@ Key functions:
 
 | Function | Description |
 |----------|-------------|
-| `run_gh_sr_imm(truth, meas)` | Proposed single-target filter. Returns \(errors, NIS\). |
+| `run_gh_sr_imm(truth, meas)` | Proposed single-target filter. Returns (errors, NIS). |
 | `run_huang2017(truth, meas)` | Student-t KF baseline. |
 | `run_agamennoni2012(truth, meas)` | VB-KF baseline. |
 | `run_multi_tracker(truths, m1, m2, use_gh)` | GH-JPDA or Gaussian-JPDA multi-target tracker. |
 | `gen_single(kind, seed, n)` | Single-target scenario generator. |
 | `gen_multi(kind, seed, n)` | Multi-target scenario generator. |
 | `score(errs, nis)` | Composite score *S* as defined in §4.4 (RMSE plus NIS consistency terms). |
-| `gospa(truth_list, est_list)` | GOSPA metric \(c=5, p=2\). |
+| `gospa(truth_list, est_list)` | GOSPA metric (c=5, p=2). |
 
 To reproduce all results:
 
@@ -295,4 +295,4 @@ To reproduce all results:
 python harcf_benchmark.py
 ```
 
-Runtime is approximately 3–5 minutes on a modern CPU. The multi-target benchmark is the bottleneck \(40 seed × scenario combinations × 300 steps × 2 trackers × 2 sensors\).
+Runtime is approximately 3–5 minutes on a modern CPU. The multi-target benchmark is the bottleneck (40 seed × scenario combinations × 300 steps × 2 trackers × 2 sensors).

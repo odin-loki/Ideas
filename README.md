@@ -190,7 +190,7 @@ Each section below is the field a curious layman would file these projects under
 |---|---|
 | [`100W Wideband Noise Generator/`](100W%20Wideband%20Noise%20Generator/) | Chua-circuit RF noise generator (Verilog) — 1 Hz – 14 GHz, 100 W |
 | [`3 to 8 Value Boolean Algebra/`](3%20to%208%20Value%20Boolean%20Algebra/) | Boolean function spaces for n = 3..8 *variables* |
-| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | Custom AEAD over GF(2⁵⁶) (NOT the Korean cipher) |
+| [`ARIA Encryption Algorithm/`](ARIA%20Encryption%20Algorithm/) | Custom AEAD over GF(2²⁵⁶) (NOT the Korean cipher) |
 | [`Ashby Optimiser/`](Ashby%20Optimiser/) | Multi-scale homeostatic optimiser (W. Ross Ashby) |
 | [`Asset Tracking Algorithm/`](Asset%20Tracking%20Algorithm/) | ARIA-INTEL — PMBM multi-target tracker + LE/intelligence deployment brief |
 | [`Battle Sim/`](Battle%20Sim/) | Battle simulation design document |

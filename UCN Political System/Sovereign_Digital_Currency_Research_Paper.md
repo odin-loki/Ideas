@@ -6,7 +6,7 @@
 
 ## Abstract
 
-*This paper examines the feasibility, architecture, and economic implications of deploying cryptocurrency technology as a government-issued sovereign currency. Drawing on the global record of the El Salvador Bitcoin experiment, the emerging landscape of Central Bank Digital Currencies \(CBDCs\), the growing market in gold-backed digital tokens, and the Energy-Resource Economic Model \(EREM\) developed within the United Commonwealth Nations \(UCN\) framework, this paper argues that the critical deficiency shared by both conventional fiat systems and unanchored cryptocurrencies is the absence of a physical backing constraint. A credible sovereign digital currency requires three integrated elements: cryptographic integrity at the protocol layer, a transparent and mathematically-enforced backing mechanism anchored to verifiable physical wealth, and a governance architecture that prevents discretionary monetary expansion. The EREM Resource-Backed Currency Unit \(RBCU\) is examined as a theoretically rigorous model for this architecture. The paper identifies nine structural upgrades required to make cryptocurrency viable as government currency, analyses real-world precedents and failures, and proposes a staged implementation pathway.*
+*This paper examines the feasibility, architecture, and economic implications of deploying cryptocurrency technology as a government-issued sovereign currency. Drawing on the global record of the El Salvador Bitcoin experiment, the emerging landscape of Central Bank Digital Currencies (CBDCs), the growing market in gold-backed digital tokens, and the Energy-Resource Economic Model (EREM) developed within the United Commonwealth Nations (UCN) framework, this paper argues that the critical deficiency shared by both conventional fiat systems and unanchored cryptocurrencies is the absence of a physical backing constraint. A credible sovereign digital currency requires three integrated elements: cryptographic integrity at the protocol layer, a transparent and mathematically-enforced backing mechanism anchored to verifiable physical wealth, and a governance architecture that prevents discretionary monetary expansion. The EREM Resource-Backed Currency Unit (RBCU) is examined as a theoretically rigorous model for this architecture. The paper identifies nine structural upgrades required to make cryptocurrency viable as government currency, analyses real-world precedents and failures, and proposes a staged implementation pathway.*
 
 ## Table of contents
 1.  Introduction: Why Governments Are Looking at Crypto .............. 3
@@ -49,15 +49,15 @@ Before examining precedents and proposals, it is essential to distinguish betwee
 
 ### 2.1 Unbacked Government Cryptocurrency
 
-A digital token issued by a government with no commodity backing — functionally identical to digital fiat. El Salvador's mandatory Bitcoin adoption was not this model \(Bitcoin is not government-issued\), but a government that simply issued its own blockchain token without reserves would fall into this category. This is digital fiat: it inherits all the inflationary risk of conventional fiat while adding technical complexity without material gain.
+A digital token issued by a government with no commodity backing — functionally identical to digital fiat. El Salvador's mandatory Bitcoin adoption was not this model (Bitcoin is not government-issued), but a government that simply issued its own blockchain token without reserves would fall into this category. This is digital fiat: it inherits all the inflationary risk of conventional fiat while adding technical complexity without material gain.
 
-### 2.2 Central Bank Digital Currency \(CBDC\)
+### 2.2 Central Bank Digital Currency (CBDC)
 
-A CBDC is a digital liability of the central bank — the digital equivalent of physical cash — issued on a government-controlled ledger. As of July 2025, 137 countries and currency unions representing 98% of global GDP are actively exploring CBDCs, with three countries \(The Bahamas, Jamaica, and Nigeria\) having completed full retail launches. CBDCs preserve the existing fiat architecture digitally rather than replacing it, and carry the same inflationary vulnerabilities as their physical counterparts. Their primary advantages are payment efficiency, financial inclusion, and anti-money-laundering enforcement.
+A CBDC is a digital liability of the central bank — the digital equivalent of physical cash — issued on a government-controlled ledger. As of July 2025, 137 countries and currency unions representing 98% of global GDP are actively exploring CBDCs, with three countries (The Bahamas, Jamaica, and Nigeria) having completed full retail launches. CBDCs preserve the existing fiat architecture digitally rather than replacing it, and carry the same inflationary vulnerabilities as their physical counterparts. Their primary advantages are payment efficiency, financial inclusion, and anti-money-laundering enforcement.
 
 ### 2.3 Gold-Backed Government Digital Currency
 
-A sovereign digital token backed 1:1 \(or at a defined ratio\) by physical gold reserves held in audited custody. This model restores the classical gold standard constraint via blockchain infrastructure, combining the deflationary discipline of gold with the settlement efficiency of digital payments. Private implementations exist \(Pax Gold, Tether Gold, Kinesis Gold\), and the BRICS 'Unit' pilot launched in late 2025 uses a hybrid basket of 40% gold and 60% currency reserves.
+A sovereign digital token backed 1:1 (or at a defined ratio) by physical gold reserves held in audited custody. This model restores the classical gold standard constraint via blockchain infrastructure, combining the deflationary discipline of gold with the settlement efficiency of digital payments. Private implementations exist (Pax Gold, Tether Gold, Kinesis Gold), and the BRICS 'Unit' pilot launched in late 2025 uses a hybrid basket of 40% gold and 60% currency reserves.
 
 ### 2.4 Resource-Backed Government Digital Currency
 
@@ -79,7 +79,7 @@ High
 
 Policy-dependent
 
-High \(already exists as fiat\)
+High (already exists as fiat)
 
 CBDC
 
@@ -89,9 +89,9 @@ Gov't credit
 
 Medium-High
 
-Low \(pegged to fiat\)
+Low (pegged to fiat)
 
-High \(130\+ in dev\)
+High (130+ in dev)
 
 Gold-Backed Digital
 
@@ -103,9 +103,9 @@ Low
 
 Gold-price-dependent
 
-Medium \(precedents exist\)
+Medium (precedents exist)
 
-Resource-Backed \(EREM\)
+Resource-Backed (EREM)
 
 Central Bank
 
@@ -115,9 +115,9 @@ Very Low
 
 Macro-stable
 
-Medium \(novel, theoretically robust\)
+Medium (novel, theoretically robust)
 
-Table 1: Comparative taxonomy of government digital currency models. Sources: Atlantic Council CBDC Tracker \(2025\); EREM Technical Specification v1.0 \(2026\); author's analysis.
+Table 1: Comparative taxonomy of government digital currency models. Sources: Atlantic Council CBDC Tracker (2025); EREM Technical Specification v1.0 (2026); author's analysis.
 
 ## 3. Case Study: El Salvador and the Bitcoin Experiment
 
@@ -155,7 +155,7 @@ As of July 2025, **137 countries and currency unions, representing 98% of global
 
 ### 4.2 The United States: An Outlier
 
-The United States presents a politically significant exception to the global trend. In 2025, President Trump issued an executive order halting all work on a retail CBDC, making the US the only major economy to formally prohibit development. The House of Representatives passed the Anti-CBDC Surveillance State Act, and a companion Senate bill \(the NO CBDC Act\) sought similar restrictions. The stated justification was privacy: critics of CBDCs argue that a fully programmable, centrally-tracked currency gives governments unprecedented surveillance capacity over citizens' financial lives.
+The United States presents a politically significant exception to the global trend. In 2025, President Trump issued an executive order halting all work on a retail CBDC, making the US the only major economy to formally prohibit development. The House of Representatives passed the Anti-CBDC Surveillance State Act, and a companion Senate bill (the NO CBDC Act) sought similar restrictions. The stated justification was privacy: critics of CBDCs argue that a fully programmable, centrally-tracked currency gives governments unprecedented surveillance capacity over citizens' financial lives.
 
 The US nevertheless continues participating in wholesale cross-border CBDC research through Project Agorá, a collaboration with six other major central banks, and Project mBridge — which connects banks in China, Thailand, the UAE, Hong Kong, and Saudi Arabia — demonstrating that institutional opposition to retail CBDCs does not preclude engagement with wholesale digital currency infrastructure.
 
@@ -175,53 +175,53 @@ Blockchain technology resolves the logistical problem. Smart contracts and crypt
 
 ### 5.1 Private Gold-Backed Token Precedents
 
-Several private implementations of gold-backed digital tokens already demonstrate the technical viability of this architecture. Pax Gold \(PAXG\), issued by Paxos Trust Company under New York State Department of Financial Services oversight, represents one fine troy ounce of London Good Delivery gold bar held in professional vault facilities. Each token is audited monthly and can be redeemed for physical gold or USD. Tether Gold \(XAUT\), backed by more than 375,000 troy ounces of LBMA-certified gold in Swiss vaults, had a market capitalisation exceeding USD 2 billion in late 2025. Kinesis Gold \(KAU\) adds a yield-bearing mechanism, distributing transaction fee revenue to holders as passive income.
+Several private implementations of gold-backed digital tokens already demonstrate the technical viability of this architecture. Pax Gold (PAXG), issued by Paxos Trust Company under New York State Department of Financial Services oversight, represents one fine troy ounce of London Good Delivery gold bar held in professional vault facilities. Each token is audited monthly and can be redeemed for physical gold or USD. Tether Gold (XAUT), backed by more than 375,000 troy ounces of LBMA-certified gold in Swiss vaults, had a market capitalisation exceeding USD 2 billion in late 2025. Kinesis Gold (KAU) adds a yield-bearing mechanism, distributing transaction fee revenue to holders as passive income.
 
-The tokenised gold market reached approximately USD 4.5 billion in total capitalisation by December 2025, driven by gold's surge beyond USD 4,500 per ounce amid persistent geopolitical uncertainty and central bank accumulation. The Perth Mint Gold Token \(PMGT\) is perhaps the most direct precedent for sovereign implementation: it is backed by physical gold stored in the Perth Mint and guaranteed by the Government of Western Australia — a state-backed, audited, redeemable digital gold instrument.
+The tokenised gold market reached approximately USD 4.5 billion in total capitalisation by December 2025, driven by gold's surge beyond USD 4,500 per ounce amid persistent geopolitical uncertainty and central bank accumulation. The Perth Mint Gold Token (PMGT) is perhaps the most direct precedent for sovereign implementation: it is backed by physical gold stored in the Perth Mint and guaranteed by the Government of Western Australia — a state-backed, audited, redeemable digital gold instrument.
 
 ### 5.2 The BRICS Unit: A Geopolitical Gold-Backed Pilot
 
 The most significant geopolitical development in gold-backed digital currency came in late 2025, when the BRICS bloc — comprising ten full member nations representing a substantial share of global GDP and commodity production — launched a pilot of 'The Unit': a gold-anchored digital trade currency for cross-border settlement between member economies. The Unit uses a basket composition of 40% physical gold and 60% BRICS-member currencies, adjusted daily. Its primary stated purpose is to reduce dependency on the US dollar in trade settlement — a structural de-dollarisation initiative enabled by blockchain technology and backed by the gold reserves of participating sovereigns.
 
-*'The Unit' represents the first large-scale gold-linked settlement rail attempted in the digital era — with implications for global liquidity, reserve currency dynamics, and the structure of international trade that remain to be fully assessed. \(CCN Analysis, December 2025\)*
+*'The Unit' represents the first large-scale gold-linked settlement rail attempted in the digital era — with implications for global liquidity, reserve currency dynamics, and the structure of international trade that remain to be fully assessed. (CCN Analysis, December 2025)*
 
 ### 5.3 Limitations of Gold Backing
 
-Gold backing is not without structural limitations. The supply of gold is fixed but not uniformly distributed: Australia \(with world's leading gold mining output\), China, Russia, and the United States hold the most significant reserves, creating geopolitical asymmetries in a global gold-backed system. Gold's price, while less volatile than Bitcoin, does fluctuate with market conditions — spot gold moved from roughly USD 2,000 per ounce in early 2024 to USD 4,500\+ by December 2025, a 125% appreciation that would, if it were backing a currency, create significant deflationary pressure on the economies using that currency. Proponents of gold backing must also address what happens when an economy needs to expand its money supply to respond to a cyclical recession, but has not discovered new gold reserves to justify that expansion. The gold standard's historical record includes painful deflationary crises precisely because it prevented countercyclical monetary response.
+Gold backing is not without structural limitations. The supply of gold is fixed but not uniformly distributed: Australia (with world's leading gold mining output), China, Russia, and the United States hold the most significant reserves, creating geopolitical asymmetries in a global gold-backed system. Gold's price, while less volatile than Bitcoin, does fluctuate with market conditions — spot gold moved from roughly USD 2,000 per ounce in early 2024 to USD 4,500+ by December 2025, a 125% appreciation that would, if it were backing a currency, create significant deflationary pressure on the economies using that currency. Proponents of gold backing must also address what happens when an economy needs to expand its money supply to respond to a cyclical recession, but has not discovered new gold reserves to justify that expansion. The gold standard's historical record includes painful deflationary crises precisely because it prevented countercyclical monetary response.
 
 ## 6. The EREM Framework: A Resource-Backed Architecture
 
-The limitations of both unbacked fiat and single-commodity gold backing point toward a more sophisticated model: anchoring currency issuance to a diversified, physically-grounded measure of Total National Wealth. This is the approach formalised in the Energy-Resource Economic Model \(EREM v1.0\), developed within the United Commonwealth Nations \(UCN\) policy framework as a monetary foundation for evidence-based governance.
+The limitations of both unbacked fiat and single-commodity gold backing point toward a more sophisticated model: anchoring currency issuance to a diversified, physically-grounded measure of Total National Wealth. This is the approach formalised in the Energy-Resource Economic Model (EREM v1.0), developed within the United Commonwealth Nations (UCN) policy framework as a monetary foundation for evidence-based governance.
 
 ### 6.1 The Foundational Critique of GDP
 
-EREM begins with an empirically robust critique of GDP as the primary monetary anchor for conventional fiat systems. GDP measures economic activity, not wealth. A government optimising against GDP has incentives to encourage consumption, debt, and resource depletion — all of which raise GDP in the short term while potentially destroying genuine wealth. The UN's Inclusive Wealth Index provides the empirical evidence: across 140 countries tracked over 25 years, 44 — nearly a third — showed declining per-capita inclusive wealth even as their GDP per capita grew. The Dasgupta Review \(2021\) reached the same conclusion: overreliance on GDP leads to systematic substitution of income for wealth, with natural capital chronically undervalued and depleted.
+EREM begins with an empirically robust critique of GDP as the primary monetary anchor for conventional fiat systems. GDP measures economic activity, not wealth. A government optimising against GDP has incentives to encourage consumption, debt, and resource depletion — all of which raise GDP in the short term while potentially destroying genuine wealth. The UN's Inclusive Wealth Index provides the empirical evidence: across 140 countries tracked over 25 years, 44 — nearly a third — showed declining per-capita inclusive wealth even as their GDP per capita grew. The Dasgupta Review (2021) reached the same conclusion: overreliance on GDP leads to systematic substitution of income for wealth, with natural capital chronically undervalued and depleted.
 
-EREM's response is to replace GDP with Total National Wealth \(TNW\): a stock measure of physical productive capacity expressed in SI energy units \(megajoules\). The choice of energy units is motivated by physics: energy is the universal prerequisite for all physical work. Every material transformation, every unit of food production, every hour of human labour requires energy as its enabling substrate. Denominating all wealth components in energy units gives TNW a dimensional consistency that GDP's monetary aggregation cannot achieve.
+EREM's response is to replace GDP with Total National Wealth (TNW): a stock measure of physical productive capacity expressed in SI energy units (megajoules). The choice of energy units is motivated by physics: energy is the universal prerequisite for all physical work. Every material transformation, every unit of food production, every hour of human labour requires energy as its enabling substrate. Denominating all wealth components in energy units gives TNW a dimensional consistency that GDP's monetary aggregation cannot achieve.
 
 ### 6.2 The TNW Formula
 
 Total National Wealth is computed as the weighted sum of five physically-grounded components:
 
-TNW = \(0.40 × NEW\) \+ \(0.25 × MWI\) \+ \(0.20 × FEW\) \+ \(0.10 × HLC\) \+ \(0.05 × IEF\)
+TNW = (0.40 × NEW) + (0.25 × MWI) + (0.20 × FEW) + (0.10 × HLC) + (0.05 × IEF)
 
-Where: NEW = National Energy Wealth \(all energy reserves and renewable infrastructure, weighted by Energy Quality Factors\); MWI = Material Wealth Index \(proven reserves of critical materials weighted by industrial versatility and scarcity\); FEW = Food Energy Wealth \(agricultural productive capacity converted to energy-equivalent joules\); HLC = Human Labour Capacity \(demographic structure and nutritional security converted to productive energy flow\); IEF = Infrastructure Efficiency Factor \(output per unit of thermodynamic minimum energy input\).
+Where: NEW = National Energy Wealth (all energy reserves and renewable infrastructure, weighted by Energy Quality Factors); MWI = Material Wealth Index (proven reserves of critical materials weighted by industrial versatility and scarcity); FEW = Food Energy Wealth (agricultural productive capacity converted to energy-equivalent joules); HLC = Human Labour Capacity (demographic structure and nutritional security converted to productive energy flow); IEF = Infrastructure Efficiency Factor (output per unit of thermodynamic minimum energy input).
 
-All components reduce to megajoule equivalents, giving the formula dimensional consistency. The weighting hierarchy encodes a physically motivated priority order: energy wealth \(40%\) dominates because energy is the prerequisite substrate for all other productive activity. Material wealth \(25%\) reflects the irreplaceable industrial catalysts — platinum group metals, rare earths — that modern technology requires. Food production \(20%\) anchors the system to the biological requirements of the human labour force.
+All components reduce to megajoule equivalents, giving the formula dimensional consistency. The weighting hierarchy encodes a physically motivated priority order: energy wealth (40%) dominates because energy is the prerequisite substrate for all other productive activity. Material wealth (25%) reflects the irreplaceable industrial catalysts — platinum group metals, rare earths — that modern technology requires. Food production (20%) anchors the system to the biological requirements of the human labour force.
 
 ### 6.3 The RBCU Currency Mechanism
 
-The Resource-Backed Currency Unit \(RBCU\) anchors monetary supply to TNW through a conservative backing ratio:
+The Resource-Backed Currency Unit (RBCU) anchors monetary supply to TNW through a conservative backing ratio:
 
 Total RBCU issued = 0.85 × TNW
 
-1 RBCU = \(TNW / Total\_RBCU\) megajoules of real wealth
+1 RBCU = (TNW / Total_RBCU) megajoules of real wealth
 
 The 15% buffer accounts for measurement uncertainty in large-scale geophysical estimation. Under EREM, currency expansion is mathematically constrained: new RBCU can only be issued when one of four physical conditions is satisfied — new reserves are discovered and independently verified; renewable energy infrastructure is installed and measurably operating; infrastructure efficiency improves; or population growth is matched by proportional food production increase. Resource depletion automatically contracts the currency supply, making the depletion immediately visible in the monetary system rather than externalised onto future generations.
 
 ### 6.4 Australia: An EREM Application
 
-Applied to Australia's documented resource endowment, EREM yields an indicative Total National Wealth dominated by the country's uranium reserves — which, at approximately 1.7 million tonnes of recoverable uranium oxide \(the world's third-largest known reserve\), contain energy density so extraordinary that they constitute the primary component of Australia's NEW under EREM's Q-factor framework. Uranium receives the highest energy quality factor \(Q=1.00\) as the reference standard, reflecting its controllability, energy density, and low waste volume per unit of useful energy produced. Coal \(Q=0.42\), natural gas \(Q=0.68\), and installed renewable capacity \(weighted Q≈0.62\) make substantial but subsidiary contributions.
+Applied to Australia's documented resource endowment, EREM yields an indicative Total National Wealth dominated by the country's uranium reserves — which, at approximately 1.7 million tonnes of recoverable uranium oxide (the world's third-largest known reserve), contain energy density so extraordinary that they constitute the primary component of Australia's NEW under EREM's Q-factor framework. Uranium receives the highest energy quality factor (Q=1.00) as the reference standard, reflecting its controllability, energy density, and low waste volume per unit of useful energy produced. Coal (Q=0.42), natural gas (Q=0.68), and installed renewable capacity (weighted Q≈0.62) make substantial but subsidiary contributions.
 
 Indicative NEW calculations suggest Australia's National Energy Wealth is on the order of 10^17 megajoules — a figure so large relative to any plausible currency supply requirement that the 85% RBCU backing ratio would represent an extraordinarily conservative monetary base. The EREM framework effectively argues that Australia is, by physical wealth measures, one of the wealthiest nations on Earth — a reality that the GDP-centric international financial system systematically undervalues because it excludes resource reserves from the measure of national prosperity.
 
@@ -257,7 +257,7 @@ Bitcoin's base layer can process approximately 7 transactions per second. The Vi
 
 ## Upgrade 6: Interoperability Standards
 
-A national digital currency that cannot interact with foreign payment systems is economically isolated. The sovereign digital currency architecture must include standardised cross-border settlement protocols compatible with international wholesale CBDC infrastructure. Project Agorá \(seven major central banks\), Project mBridge \(China, Thailand, UAE, Hong Kong, Saudi Arabia\), and the emerging BRICS Unit settlement rail all represent the interoperability infrastructure that a new sovereign digital currency must be able to interface with.
+A national digital currency that cannot interact with foreign payment systems is economically isolated. The sovereign digital currency architecture must include standardised cross-border settlement protocols compatible with international wholesale CBDC infrastructure. Project Agorá (seven major central banks), Project mBridge (China, Thailand, UAE, Hong Kong, Saudi Arabia), and the emerging BRICS Unit settlement rail all represent the interoperability infrastructure that a new sovereign digital currency must be able to interface with.
 
 ## Upgrade 7: Programmability with Guardrails
 
@@ -282,11 +282,11 @@ Physical backing constraint
 
 None
 
-None \(gov credit\)
+None (gov credit)
 
-Strong \(gold reserves\)
+Strong (gold reserves)
 
-Strong \(TNW basket\)
+Strong (TNW basket)
 
 Inflation protection
 
@@ -294,19 +294,19 @@ Poor
 
 Poor
 
-Strong \(gold supply fixed\)
+Strong (gold supply fixed)
 
-Strong \(TNW-linked\)
+Strong (TNW-linked)
 
 Volatility
 
-Low \(managed\)
+Low (managed)
 
-Low \(managed\)
+Low (managed)
 
-Moderate \(gold price\)
+Moderate (gold price)
 
-Low \(diversified\)
+Low (diversified)
 
 Price stability mechanism
 
@@ -314,7 +314,7 @@ Central bank policy
 
 Central bank policy
 
-Gold peg \+ reserves
+Gold peg + reserves
 
 TNW smart contract
 
@@ -332,21 +332,21 @@ Financial inclusion
 
 Moderate
 
-High \(if designed\)
+High (if designed)
 
-High \(if designed\)
+High (if designed)
 
 High
 
 Privacy preservation
 
-High \(cash\)
+High (cash)
 
-Low \(default\)
+Low (default)
 
-Tiered \(by design\)
+Tiered (by design)
 
-Tiered \(by design\)
+Tiered (by design)
 
 Cyclical flexibility
 
@@ -354,9 +354,9 @@ High
 
 High
 
-Low \(gold constraint\)
+Low (gold constraint)
 
-Moderate \(TNW flexibility\)
+Moderate (TNW flexibility)
 
 Counterfeit resistance
 
@@ -384,13 +384,13 @@ Low-Moderate
 
 Moderate
 
-High \(if independent\)
+High (if independent)
 
-Very High \(by design\)
+Very High (by design)
 
 Implementation complexity
 
-Low \(exists\)
+Low (exists)
 
 Moderate
 
@@ -398,15 +398,15 @@ High
 
 Very High
 
-Table 2: Structural comparison of four government currency models across eleven criteria. Sources: author's analysis drawing on EREM Technical Specification \(2026\), Atlantic Council CBDC Tracker \(2025\), Federal Reserve CBDC discussion paper \(2022\), BIS working papers.
+Table 2: Structural comparison of four government currency models across eleven criteria. Sources: author's analysis drawing on EREM Technical Specification (2026), Atlantic Council CBDC Tracker (2025), Federal Reserve CBDC discussion paper (2022), BIS working papers.
 
 ## 9. Geopolitical Dimensions: BRICS, De-Dollarisation, and the Global Context
 
-The monetary architecture debate is not merely technical — it is one of the defining geopolitical contests of the current era. The US dollar's status as the world's primary reserve currency since 1944 has provided the United States with extraordinary structural advantages: the ability to run persistent current account deficits, finance sovereign debt at globally subsidised rates, and exercise monetary coercion through exclusion from the dollar-clearing system \(as demonstrated by sanctions against Iran, Russia, and others\). This structural privilege is increasingly contested.
+The monetary architecture debate is not merely technical — it is one of the defining geopolitical contests of the current era. The US dollar's status as the world's primary reserve currency since 1944 has provided the United States with extraordinary structural advantages: the ability to run persistent current account deficits, finance sovereign debt at globally subsidised rates, and exercise monetary coercion through exclusion from the dollar-clearing system (as demonstrated by sanctions against Iran, Russia, and others). This structural privilege is increasingly contested.
 
 ### 9.1 The BRICS Challenge
 
-The BRICS bloc's combined economic weight — encompassing 10 full member nations including China \(the world's largest economy by purchasing power parity\), India \(the third-largest\), Russia \(a dominant energy exporter\), and the United Arab Emirates \(a critical financial hub\) — gives the de-dollarisation project a material foundation that earlier challenges to dollar hegemony lacked. The BRICS Unit pilot, launched in late 2025 with a 40% gold and 60% BRICS-currency basket composition, represents the first systematic attempt to create a settlement instrument that does not rely on the dollar-clearing infrastructure that the United States can weaponise through SWIFT exclusion.
+The BRICS bloc's combined economic weight — encompassing 10 full member nations including China (the world's largest economy by purchasing power parity), India (the third-largest), Russia (a dominant energy exporter), and the United Arab Emirates (a critical financial hub) — gives the de-dollarisation project a material foundation that earlier challenges to dollar hegemony lacked. The BRICS Unit pilot, launched in late 2025 with a 40% gold and 60% BRICS-currency basket composition, represents the first systematic attempt to create a settlement instrument that does not rely on the dollar-clearing infrastructure that the United States can weaponise through SWIFT exclusion.
 
 Proponents see the BRICS Unit as the foundation for an alternative international monetary order. Sceptics point to the structural obstacles: BRICS member currencies are individually volatile, the bloc lacks unified monetary institutions, and gold allocation among members is unequal. Whether the Unit scales from pilot to operational infrastructure will depend on whether member states commit to the reserve pooling and governance harmonisation that a credible multi-sovereign settlement system requires.
 
@@ -519,62 +519,62 @@ Establish an international treaty framework for cross-border TNW reserve auditin
 
 ## Academic and Institutional Sources
 
-Atlantic Council. \(2025\). Central Bank Digital Currency Tracker. Retrieved March 2026 from https://www.atlanticcouncil.org/cbdctracker/
+Atlantic Council. (2025). Central Bank Digital Currency Tracker. Retrieved March 2026 from https://www.atlanticcouncil.org/cbdctracker/
 
-Bank for International Settlements. \(2024\). Survey on Central Bank Digital Currencies. BIS Working Papers.
+Bank for International Settlements. (2024). Survey on Central Bank Digital Currencies. BIS Working Papers.
 
-Chainalysis. \(2025\). Current State of Central Bank Digital Currencies \(CBDCs\). https://www.chainalysis.com/blog/central-bank-digital-currencies-cbdc/
+Chainalysis. (2025). Current State of Central Bank Digital Currencies (CBDCs). https://www.chainalysis.com/blog/central-bank-digital-currencies-cbdc/
 
-Congressional Research Service. \(2025\). Central Bank Digital Currencies. In Focus IF11471. Congress.gov.
+Congressional Research Service. (2025). Central Bank Digital Currencies. In Focus IF11471. Congress.gov.
 
-Dasgupta, P. \(2021\). The Economics of Biodiversity: The Dasgupta Review. HM Treasury, London.
+Dasgupta, P. (2021). The Economics of Biodiversity: The Dasgupta Review. HM Treasury, London.
 
-Federal Reserve Board. \(2022\). Money and Payments: The U.S. Dollar in the Age of Digital Transformation. Board of Governors, Washington D.C.
+Federal Reserve Board. (2022). Money and Payments: The U.S. Dollar in the Age of Digital Transformation. Board of Governors, Washington D.C.
 
-Goodhart, C., & Lastra, R. \(2018\). Populism and Central Bank Independence. Open Economies Review, 29\(1\), 49–68.
+Goodhart, C., & Lastra, R. (2018). Populism and Central Bank Independence. Open Economies Review, 29(1), 49–68.
 
-PMC/NIH. \(2021\). 'Shiny' crypto assets: A systemic look at gold-backed cryptocurrencies during the COVID-19 pandemic. PMC8539427.
+PMC/NIH. (2021). 'Shiny' crypto assets: A systemic look at gold-backed cryptocurrencies during the COVID-19 pandemic. PMC8539427.
 
-UN Environment Programme / UNU-IHDP. \(2023\). Inclusive Wealth Report 2023.
+UN Environment Programme / UNU-IHDP. (2023). Inclusive Wealth Report 2023.
 
-World Economic Forum. \(2023\). Digital Currency Governance Consortium White Paper Series. Geneva: WEF.
+World Economic Forum. (2023). Digital Currency Governance Consortium White Paper Series. Geneva: WEF.
 
 ## Government and Central Bank Sources
 
-Geoscience Australia. \(2024\). Australian Energy and Resource Statistics. Commonwealth of Australia.
+Geoscience Australia. (2024). Australian Energy and Resource Statistics. Commonwealth of Australia.
 
-Government of El Salvador. \(2021\). Bitcoin Law \(Ley Bitcoin\). Legislative Assembly of El Salvador, Decree No. 57.
+Government of El Salvador. (2021). Bitcoin Law (Ley Bitcoin). Legislative Assembly of El Salvador, Decree No. 57.
 
-IMF. \(2024\). El Salvador: IMF Extended Fund Facility – $1.4 Billion Agreement. IMF Press Release, December 2024.
+IMF. (2024). El Salvador: IMF Extended Fund Facility – $1.4 Billion Agreement. IMF Press Release, December 2024.
 
-Reserve Bank of India. \(2025\). Digital Rupee \(e₹\) Pilot Programme Reports. RBI, Mumbai.
+Reserve Bank of India. (2025). Digital Rupee (e₹) Pilot Programme Reports. RBI, Mumbai.
 
-Trump, D. \(2025\). Executive Order on Digital Financial Technology \(Prohibiting U.S. CBDC\). White House, Washington D.C.
+Trump, D. (2025). Executive Order on Digital Financial Technology (Prohibiting U.S. CBDC). White House, Washington D.C.
 
 ## News and Analysis Sources
 
-Americas Quarterly. \(March 2025\). In El Salvador, Bitcoin's Retreat Left Valuable Lessons. americasquarterly.org
+Americas Quarterly. (March 2025). In El Salvador, Bitcoin's Retreat Left Valuable Lessons. americasquarterly.org
 
-Britannica Money. \(2025\). Central Bank Digital Currencies: What CBDCs Are and How They Work.
+Britannica Money. (2025). Central Bank Digital Currencies: What CBDCs Are and How They Work.
 
-CCN. \(December 2025\). BRICS Launched a Gold-Backed Currency — Here's How 'The Unit' Works.
+CCN. (December 2025). BRICS Launched a Gold-Backed Currency — Here's How 'The Unit' Works.
 
-Digital Watch Observatory. \(February 2025\). Bitcoin is no longer legal tender in El Salvador.
+Digital Watch Observatory. (February 2025). Bitcoin is no longer legal tender in El Salvador.
 
-Global Finance Magazine. \(March 2025\). El Salvador Alters Bitcoin Policy.
+Global Finance Magazine. (March 2025). El Salvador Alters Bitcoin Policy.
 
-Mastercard. \(2025\). CBDC: Your essential guide to central bank digital currencies.
+Mastercard. (2025). CBDC: Your essential guide to central bank digital currencies.
 
-Wikipedia. \(2025\). Bitcoin in El Salvador. Accessed March 2026.
+Wikipedia. (2025). Bitcoin in El Salvador. Accessed March 2026.
 
-Wikipedia. \(2024\). Central bank digital currency. Accessed March 2026.
+Wikipedia. (2024). Central bank digital currency. Accessed March 2026.
 
 ## Primary Framework Documents
 
-UCN Economic Policy Series. \(2026\). Wealth on Physical Foundations: Integrating the Energy-Resource Economic Model into the UCN Monetary and Governance Framework. UCN Working Paper.
+UCN Economic Policy Series. (2026). Wealth on Physical Foundations: Integrating the Energy-Resource Economic Model into the UCN Monetary and Governance Framework. UCN Working Paper.
 
-UCN Policy Framework Series. \(2025–2026\). Papers 1–8: Framework, Economic, Defence, Social, Research, Governance, International, and Roadmap. United Commonwealth Nations.
+UCN Policy Framework Series. (2025–2026). Papers 1–8: Framework, Economic, Defence, Social, Research, Governance, International, and Roadmap. United Commonwealth Nations.
 
-EREM Technical Specification v1.0. \(January 2026\). Energy-Resource Economic Model: Mathematical Foundations and Implementation Architecture.
+EREM Technical Specification v1.0. (January 2026). Energy-Resource Economic Model: Mathematical Foundations and Implementation Architecture.
 
 *End of Paper  |  March 2026  |  Prepared for United Commonwealth Nations Policy Review*

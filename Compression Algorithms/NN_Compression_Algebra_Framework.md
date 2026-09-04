@@ -6,7 +6,7 @@
 
 ## Abstract
 
-This document derives the complete compression algebra of neural networks from first principles, then validates every claim empirically via black-box measurement. A neural network is reinterpreted not as a prediction machine but as a **lossy semantic codec** — an asymmetric system whose encoder \(training\) maps a dataset into a compact parameter vector, and whose decoder \(inference\) reconstructs predictions from that vector. The core finding is that the compression primitive is **Nonlinear Manifold Projection \(NMP\)**: a hierarchical cascade of linear subspace projection \(Π\), nonlinear half-space folding \(Φ\), and optional lifting \(Λ\). The singular value spectrum of each weight matrix follows a power law S\_k ∼ a·k^\(−α\) with **α ≈ 0.85** \(measured\), distinct from the prime-gap power law α = 0.37. The Minimum Description Length \(MDL\) optimum is empirically identified, and a full rate-distortion curve is measured. All proofs, operators, theorems, and constants are measured against live network state.
+This document derives the complete compression algebra of neural networks from first principles, then validates every claim empirically via black-box measurement. A neural network is reinterpreted not as a prediction machine but as a **lossy semantic codec** — an asymmetric system whose encoder (training) maps a dataset into a compact parameter vector, and whose decoder (inference) reconstructs predictions from that vector. The core finding is that the compression primitive is **Nonlinear Manifold Projection (NMP)**: a hierarchical cascade of linear subspace projection (Π), nonlinear half-space folding (Φ), and optional lifting (Λ). The singular value spectrum of each weight matrix follows a power law S_k ∼ a·k^(−α) with **α ≈ 0.85** (measured), distinct from the prime-gap power law α = 0.37. The Minimum Description Length (MDL) optimum is empirically identified, and a full rate-distortion curve is measured. All proofs, operators, theorems, and constants are measured against live network state.
 
 ## 1.  The Neural Network Compression Field
 
@@ -14,13 +14,13 @@ This document derives the complete compression algebra of neural networks from f
 
 By analogy with other algebraic structures, we define the **NN Compression Field** as the 6-tuple:
 
-F\_NN = \(Θ, D, C, R, δ, ρ\)
+F_NN = (Θ, D, C, R, δ, ρ)
 
 where the components are:
 
 **Θ** — Parameter space ℝ^P. The compressed representation. Every trained network is a point in this space.
 
-**D** — Data space. The set of all \(input, label\) pairs \{\(x\_i, y\_i\)\}. The uncompressed object.
+**D** — Data space. The set of all (input, label) pairs {(x_i, y_i)}. The uncompressed object.
 
 **C : D^N → Θ** — The compression map. This is training. Takes N data points and returns a parameter vector.
 
@@ -28,15 +28,15 @@ where the components are:
 
 **δ : Y × Y → ℝ≥0** — The distortion measure. Typically cross-entropy or mean squared error between prediction and ground truth.
 
-**ρ : D^N × Θ → ℝ>0** — The compression ratio. ρ = \(N·d·b\) / \(P·b\) = N·d / P, where b = bits per number \(32 for float32\).
+**ρ : D^N × Θ → ℝ>0** — The compression ratio. ρ = (N·d·b) / (P·b) = N·d / P, where b = bits per number (32 for float32).
 
 ## 1.2  Asymmetry: The Defining Property
 
-Unlike classical codecs \(LZ77, Huffman, DEFLATE\) where encoding and decoding have comparable computational cost, the NN codec is radically asymmetric:
+Unlike classical codecs (LZ77, Huffman, DEFLATE) where encoding and decoding have comparable computational cost, the NN codec is radically asymmetric:
 
-Cost\(C\) = O\(N · P · T\)    \[training: expensive, one-time\]
+Cost(C) = O(N · P · T)    [training: expensive, one-time]
 
-Cost\(R\) = O\(P\)            \[inference: cheap, repeated\]
+Cost(R) = O(P)            [inference: cheap, repeated]
 
 where T is the number of training iterations. This asymmetry is not a limitation — it is the design. The system front-loads computational cost into compression, making decompression nearly free. This is precisely the structure of *implicit neural representations* and the reason large language models can serve billions of queries from a single training run.
 
@@ -44,63 +44,63 @@ where T is the number of training iterations. This asymmetry is not a limitation
 
 Neural network compression is built from exactly three primitive operations. Every layer is a composition of some subset of these.
 
-## 2.1  Operator Π — Linear Projection \(Subspace Compression\)
+## 2.1  Operator Π — Linear Projection (Subspace Compression)
 
 Π\_W : ℝ^n → ℝ^m
 
-Π\_W\(x\) = Wx \+ b,   W ∈ ℝ^\(m×n\), b ∈ ℝ^m
+Π\_W(x) = Wx + b,   W ∈ ℝ^(m×n), b ∈ ℝ^m
 
 Π is a **linear compression primitive**. When m < n it performs explicit dimensionality reduction. When m ≥ n it expands into a higher-dimensional space before the next stage. The compression content of Π is captured entirely by the singular value decomposition:
 
-W = U Σ V^T,   Σ = diag\(σ\_1, σ\_2, …, σ\_r\),   σ\_1 ≥ σ\_2 ≥ … ≥ σ\_r > 0
+W = U Σ V^T,   Σ = diag(σ\_1, σ\_2, …, σ\_r),   σ\_1 ≥ σ\_2 ≥ … ≥ σ\_r > 0
 
-The **effective rank** r\_eff is the number of singular values needed to capture 99% of variance. This is the true compression dimension of the layer — how many independent directions of information it actually transmits:
+The **effective rank** r_eff is the number of singular values needed to capture 99% of variance. This is the true compression dimension of the layer — how many independent directions of information it actually transmits:
 
-r\_eff = min\{k : Σ\_\{i=1\}^\{k\} σ\_i / Σ\_\{i=1\}^\{r\} σ\_i ≥ 0.99\}
+r_eff = min{k : Σ\_{i=1}^{k} σ\_i / Σ\_{i=1}^{r} σ\_i ≥ 0.99}
 
-**Measured \(Layer 0, 20→16\):  **r\_eff = 16, H\(Σ\) = 3.760, κ = 11.87
+**Measured (Layer 0, 20→16):  **r_eff = 16, H(Σ) = 3.760, κ = 11.87
 
-## 2.2  Operator Φ — Nonlinear Folding \(Half-Space Compression\)
+## 2.2  Operator Φ — Nonlinear Folding (Half-Space Compression)
 
 Φ\_σ : ℝ^m → ℝ^m
 
-Φ\_ReLU\(z\) = max\(0, z\)   \[component-wise\]
+Φ\_ReLU(z) = max(0, z)   [component-wise]
 
-Φ is the **nonlinear compression primitive**. It is what separates NNs from PCA. ReLU specifically implements **half-space folding**: it maps the entire negative half-space to a single point \{0\}. This is a topological operation — it makes inputs that were different \(any negative value\) identical \(zero\), creating equivalence classes.
+Φ is the **nonlinear compression primitive**. It is what separates NNs from PCA. ReLU specifically implements **half-space folding**: it maps the entire negative half-space to a single point {0}. This is a topological operation — it makes inputs that were different (any negative value) identical (zero), creating equivalence classes.
 
-Φ\_ReLU collapses \(-∞, 0\) → \{0\}
+Φ\_ReLU collapses (-∞, 0) → {0}
 
-Theoretical collapse rate: 0.500 \(by symmetry of untrained pre-activations\)
+Theoretical collapse rate: 0.500 (by symmetry of untrained pre-activations)
 
 **Key property: **Φ is not invertible. Information about the sign of pre-activations is destroyed. This irreversibility is what makes the compression lossy and what enables generalization — the network is forced to discard task-irrelevant variation.
 
 The sigmoid output nonlinearity is a smooth version:
 
-Φ\_sigmoid\(z\) = 1/\(1 \+ e^\(-z\)\) : ℝ → \(0,1\)
+Φ\_sigmoid(z) = 1/(1 + e^(-z)) : ℝ → (0,1)
 
 This folds the entire real line onto the unit interval — extreme compression at the output stage.
 
-## 2.3  Operator Λ — Lifting \(Residual / Skip\)
+## 2.3  Operator Λ — Lifting (Residual / Skip)
 
-Λ : ℝ^m → ℝ^\(m\+k\)
+Λ : ℝ^m → ℝ^(m+k)
 
-Λ\(z, z₀\) = \[z; z₀\]   \[concatenation / addition of skip connection\]
+Λ(z, z₀) = [z; z₀]   [concatenation / addition of skip connection]
 
-Λ prevents information collapse in deep networks by re-injecting prior-layer representations. It does **not compress** — it is the anti-compression primitive, preserving information that Φ would otherwise destroy. The existence of Λ \(skip connections, residuals\) shows that the NN codec does not simply maximally compress — it *selectively* compresses, preserving the information that task performance requires.
+Λ prevents information collapse in deep networks by re-injecting prior-layer representations. It does **not compress** — it is the anti-compression primitive, preserving information that Φ would otherwise destroy. The existence of Λ (skip connections, residuals) shows that the NN codec does not simply maximally compress — it *selectively* compresses, preserving the information that task performance requires.
 
 ## 2.4  Layer Composition
 
 Every layer in a standard feedforward network is:
 
-f\_l = Φ\_σ ∘ Π\_W = σ\(Wx \+ b\)
+f_l = Φ\_σ ∘ Π\_W = σ(Wx + b)
 
 A residual block adds Λ:
 
-f\_l^res = Λ\(Φ\_σ\(Π\_W\(x\)\), x\) = σ\(Wx \+ b\) \+ x
+f_l^res = Λ(Φ\_σ(Π\_W(x)), x) = σ(Wx + b) + x
 
 The full network is the composition of L layers:
 
-f\_θ = f\_L ∘ f\_\{L-1\} ∘ … ∘ f\_1
+f\_θ = f_L ∘ f\_{L-1} ∘ … ∘ f_1
 
 ## 3.  Information Geometry of NN Compression
 
@@ -168,49 +168,49 @@ Output
 
 Binary classification signal
 
-The ground truth dataset was constructed with a **3-dimensional manifold embedded in 20 dimensions**. Layer 0 of the trained network immediately discovers intrinsic dimension = 3, confirming that Π\_W \+ Φ\_ReLU together perform **Nonlinear PCA** — they find the low-dimensional structure that linear PCA would also find, but without requiring the structure to be linear.
+The ground truth dataset was constructed with a **3-dimensional manifold embedded in 20 dimensions**. Layer 0 of the trained network immediately discovers intrinsic dimension = 3, confirming that Π\_W + Φ\_ReLU together perform **Nonlinear PCA** — they find the low-dimensional structure that linear PCA would also find, but without requiring the structure to be linear.
 
 ## 3.2  The Information Bottleneck
 
-The sequence of intrinsic dimensions \{3, 8, 3, 1, 1\} is not monotone. This violates the naive intuition that 'compression = dimensionality reduction at each layer'. The actual structure follows the 
+The sequence of intrinsic dimensions {3, 8, 3, 1, 1} is not monotone. This violates the naive intuition that 'compression = dimensionality reduction at each layer'. The actual structure follows the 
 
-**Information Bottleneck principle** \(Tishby & Schwartz-Ziv\):
+**Information Bottleneck principle** (Tishby & Schwartz-Ziv):
 
-min I\(X;Z\) - β·I\(Z;Y\)
+min I(X;Z) - β·I(Z;Y)
 
 where Z is the layer representation, X is the input, Y is the label. The network does not compress greedily at every layer — it expands to richer representations when task complexity requires it, then compresses to the minimal sufficient representation at the output.
 
 The data processing inequality constrains this cascade:
 
-I\(X;Z\_1\) ≥ I\(X;Z\_2\) ≥ … ≥ I\(X;Z\_L\)  \[information about input decreases\]
+I(X;Z_1) ≥ I(X;Z_2) ≥ … ≥ I(X;Z_L)  [information about input decreases]
 
-I\(Y;Z\_L\) ≈ I\(Y;X\)                     \[information about task preserved\]
+I(Y;Z_L) ≈ I(Y;X)                     [information about task preserved]
 
 ## 3.3  Kolmogorov Interpretation
 
 The training process is an approximation of the Kolmogorov complexity of the training distribution:
 
-K̃\(D\) ≈ |θ\*|·b \+ |architecture|·b
+K̃(D) ≈ |θ\*|·b + |architecture|·b
 
-The architecture is fixed \(known a priori\), so training optimizes only |θ\*|·b — the description length of the parameter vector. The loss function implicitly penalizes long descriptions: with regularization λ‖θ‖, the network finds the **minimum description of the data that fits within the model family.**
+The architecture is fixed (known a priori), so training optimizes only |θ\*|·b — the description length of the parameter vector. The loss function implicitly penalizes long descriptions: with regularization λ‖θ‖, the network finds the **minimum description of the data that fits within the model family.**
 
 ## 4.  Measured Mathematics
 
-## 4.1  Compression Ratios \(Empirical\)
+## 4.1  Compression Ratios (Empirical)
 
-Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P\_parameters.
+Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P_parameters.
 
 **Architecture**
 
-**Params \(P\)**
+**Params (P)**
 
-**ρ \(bits\)**
+**ρ (bits)**
 
 **Accuracy**
 
-**η \(info efficiency\)**
+**η (info efficiency)**
 
-\[4\]
+[4]
 
 89
 
@@ -220,7 +220,7 @@ Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P\_parame
 
 0.932
 
-\[8,4\]
+[8,4]
 
 209
 
@@ -230,7 +230,7 @@ Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P\_parame
 
 1.000
 
-\[16,8,4\]
+[16,8,4]
 
 513
 
@@ -240,7 +240,7 @@ Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P\_parame
 
 1.000
 
-\[32,16,8\]
+[32,16,8]
 
 1345
 
@@ -250,11 +250,11 @@ Dataset: N=500 samples, d=20 dimensions. Compression ratio ρ = N·d / P\_parame
 
 1.000
 
-**Key finding: **A 89-parameter network achieves 99.2% accuracy at 112:1 compression. The data has a 3-dimensional true structure in 20 dimensions, so the effective compression against the *manifold representation* is even higher: ρ\_semantic = N·d\_true / P ≈ 500·3 / 89 = 16.9:1. Semantic compression > syntactic compression.
+**Key finding: **A 89-parameter network achieves 99.2% accuracy at 112:1 compression. The data has a 3-dimensional true structure in 20 dimensions, so the effective compression against the *manifold representation* is even higher: ρ\_semantic = N·d_true / P ≈ 500·3 / 89 = 16.9:1. Semantic compression > syntactic compression.
 
-## 4.2  Singular Value Spectrum \(Empirical\)
+## 4.2  Singular Value Spectrum (Empirical)
 
-Layer-by-layer singular value analysis of the trained \[16,8,4\] network:
+Layer-by-layer singular value analysis of the trained [16,8,4] network:
 
 **Layer**
 
@@ -262,7 +262,7 @@ Layer-by-layer singular value analysis of the trained \[16,8,4\] network:
 
 **Eff. Rank**
 
-**SV Entropy H\(Σ\)**
+**SV Entropy H(Σ)**
 
 **Condition κ**
 
@@ -316,15 +316,15 @@ Layer-by-layer singular value analysis of the trained \[16,8,4\] network:
 
 0.80
 
-**Observation: **Effective rank equals full rank at every layer — the network uses all its capacity. This means compression is not achieved through low-rank weight matrices. It is achieved through the **nonlinear folding operator Φ**, not through linear rank reduction. The SV entropy H\(Σ\) decreases monotonically, indicating the spectrum concentrates energy onto fewer directions as the network approaches the output — consistent with progressive compression.
+**Observation: **Effective rank equals full rank at every layer — the network uses all its capacity. This means compression is not achieved through low-rank weight matrices. It is achieved through the **nonlinear folding operator Φ**, not through linear rank reduction. The SV entropy H(Σ) decreases monotonically, indicating the spectrum concentrates energy onto fewer directions as the network approaches the output — consistent with progressive compression.
 
 ## 4.3  Power Law on Singular Values
 
-The singular value spectrum follows a power law at each layer. Fitting S\_k = a·k^\(−α\):
+The singular value spectrum follows a power law at each layer. Fitting S_k = a·k^(−α):
 
 **Layer**
 
-**α \(exponent\)**
+**α (exponent)**
 
 **Amplitude a**
 
@@ -359,15 +359,15 @@ The singular value spectrum follows a power law at each layer. Fitting S\_k = a�
   NN singular spectra are steeper — energy more concentrated in top SVs  
   Fit improves with depth: R² = 0.75 → 0.87 → 0.97
 
-The depth-dependence of R² is significant: deeper layers have *more cleanly power-law* singular spectra. This suggests that the compression structure becomes more organised \(less random, more structured\) as information flows forward — the network self-organises into a power-law compression regime.
+The depth-dependence of R² is significant: deeper layers have *more cleanly power-law* singular spectra. This suggests that the compression structure becomes more organised (less random, more structured) as information flows forward — the network self-organises into a power-law compression regime.
 
 ## 4.4  Rate-Distortion Curve
 
-The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. parameter count \(rate\):
+The empirical R(D) curve, measuring training cross-entropy (distortion) vs. parameter count (rate):
 
-**Rate R \(params\)**
+**Rate R (params)**
 
-**Distortion D \(CE loss\)**
+**Distortion D (CE loss)**
 
 **Accuracy**
 
@@ -379,7 +379,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.4%
 
-\[2\]
+[2]
 
 89
 
@@ -387,7 +387,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.8%
 
-\[4\]
+[4]
 
 177
 
@@ -395,7 +395,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 98.8%
 
-\[8\]
+[8]
 
 209
 
@@ -403,7 +403,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.8%
 
-\[8,4\]
+[8,4]
 
 353
 
@@ -411,7 +411,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.4%
 
-\[16\]
+[16]
 
 481
 
@@ -419,7 +419,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.8%
 
-\[16,8\]
+[16,8]
 
 1217
 
@@ -427,7 +427,7 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 99.8%
 
-\[32,16\]
+[32,16]
 
 1345
 
@@ -435,27 +435,27 @@ The empirical R\(D\) curve, measuring training cross-entropy \(distortion\) vs. 
 
 100%
 
-\[32,16,8\]
+[32,16,8]
 
-**Notable finding: **The single hidden-layer network \[8\] \(177 params\) performs *worse* than the shallower \[4\] \(89 params\) despite having more parameters. Depth is not simply equivalent to width. Depth enables hierarchical composition of primitives, which is more parameter-efficient than width alone for structured data. This is a measurable signature of the compositional nature of NN compression.
+**Notable finding: **The single hidden-layer network [8] (177 params) performs *worse* than the shallower [4] (89 params) despite having more parameters. Depth is not simply equivalent to width. Depth enables hierarchical composition of primitives, which is more parameter-efficient than width alone for structured data. This is a measurable signature of the compositional nature of NN compression.
 
 ## 4.5  Minimum Description Length Analysis
 
 MDL balances model complexity against data fit:
 
-MDL\(θ\) = |θ|·b\_param \+ N·L\(θ;D\)/ln\(2\)
+MDL(θ) = |θ|·b_param + N·L(θ;D)/ln(2)
 
-       = model\_bits \+ data|model\_bits
+       = model_bits + data|model_bits
 
-**MDL OPTIMAL \(MEASURED\):  **Optimal architecture: arch=\[2\], P=45 parameters  
-  Model description:    1,440 bits  \(45 × 32\)  
-  Data | model:            22.8 bits  \(500 × 0.0316 / ln2\)  
+**MDL OPTIMAL (MEASURED):  **Optimal architecture: arch=[2], P=45 parameters  
+  Model description:    1,440 bits  (45 × 32)  
+  Data | model:            22.8 bits  (500 × 0.0316 / ln2)  
   Total MDL:            1,462.8 bits  
     
   Compare: raw data = 500 × 20 × 32 = 320,000 bits  
   MDL compression:   320,000 / 1,463 = 218.7:1 effective
 
-The MDL analysis reveals that the optimal model is far smaller than the best-performing model — the 45-parameter \[2\] model is MDL-optimal even though the 1345-parameter \[32,16,8\] model achieves lower loss. MDL penalizes complexity. The **effective compression ratio of 218:1** accounts for both the model size *and* the residual data description cost — the true Kolmogorov-optimal compression.
+The MDL analysis reveals that the optimal model is far smaller than the best-performing model — the 45-parameter [2] model is MDL-optimal even though the 1345-parameter [32,16,8] model achieves lower loss. MDL penalizes complexity. The **effective compression ratio of 218:1** accounts for both the model size *and* the residual data description cost — the true Kolmogorov-optimal compression.
 
 ## 5.  The NN Compression Algorithm: NMP
 
@@ -463,42 +463,42 @@ The MDL analysis reveals that the optimal model is far smaller than the best-per
 
 Having measured all components, we can now state the complete compression algorithm:
 
-**Algorithm: Nonlinear Manifold Projection \(NMP\)**  
+**Algorithm: Nonlinear Manifold Projection (NMP)**  
   
-**COMPRESS \(C\):**  
-  Input:  Dataset D = \{\(x\_i, y\_i\)\}, architecture A  
+**COMPRESS (C):**  
+  Input:  Dataset D = {(x_i, y_i)}, architecture A  
   Output: Parameter vector θ\* ∈ Θ  
-  Method: θ\* = argmin\_θ Σ\_i δ\(f\_θ\(x\_i\), y\_i\) \+ λ‖θ‖  
-  via: θ\_\{t\+1\} = θ\_t - η∇\_θ L\(θ\_t; B\_t\)  \[SGD\]  
+  Method: θ\* = argmin\_θ Σ\_i δ(f\_θ(x_i), y_i) + λ‖θ‖  
+  via: θ\_{t+1} = θ\_t - η∇\_θ L(θ\_t; B_t)  [SGD]  
   
-**DECOMPRESS \(R\):**  
+**DECOMPRESS (R):**  
   Input:  θ\*, query x  
   Output: Prediction ŷ  
-  Method: ŷ = \(Φ\_L ∘ Π\_L ∘ … ∘ Φ\_1 ∘ Π\_1\)\(x\)
+  Method: ŷ = (Φ\_L ∘ Π\_L ∘ … ∘ Φ\_1 ∘ Π\_1)(x)
 
 ## 5.2  What NMP Compresses
 
 Classical codecs compress individual data items. NMP compresses a fundamentally different object:
 
-**Classical \(LZ77, Huffman, GRIA\): **compresses a specific string or sequence. Given the compressed representation, you can reconstruct the original exactly \(lossless\) or approximately \(lossy\).
+**Classical (LZ77, Huffman, GRIA): **compresses a specific string or sequence. Given the compressed representation, you can reconstruct the original exactly (lossless) or approximately (lossy).
 
-**NMP: **compresses the *data-generating distribution* P\(Y|X\). Given θ\*, you cannot reconstruct any specific training sample x\_i — but you can answer arbitrary queries about the distribution. The compression target is the **function**, not the data.
+**NMP: **compresses the *data-generating distribution* P(Y|X). Given θ\*, you cannot reconstruct any specific training sample x_i — but you can answer arbitrary queries about the distribution. The compression target is the **function**, not the data.
 
 This distinction is the key difference between NMP and all classical compression:
 
-Classical: encode\(D\) → recover D
+Classical: encode(D) → recover D
 
-NMP:       encode\(D\) → recover P\(Y|X\)  \[generalises beyond D\]
+NMP:       encode(D) → recover P(Y|X)  [generalises beyond D]
 
 ## 5.3  Comparison with GRIA
 
-The Graded Reversible-Irreversible Algebra \(GRIA\) and NMP share structural similarities but occupy different points in the compression design space:
+The Graded Reversible-Irreversible Algebra (GRIA) and NMP share structural similarities but occupy different points in the compression design space:
 
 **Property**
 
 **GRIA**
 
-**NMP \(Neural Network\)**
+**NMP (Neural Network)**
 
 Target
 
@@ -508,7 +508,7 @@ Data-generating distributions
 
 Loss
 
-Lossless \(reversible stage\)
+Lossless (reversible stage)
 
 Always lossy
 
@@ -522,7 +522,7 @@ Algebra
 
 Φ-Adic, hybrid operators
 
-Π \(linear\) \+ Φ \(folding\)
+Π (linear) + Φ (folding)
 
 Compression ratio
 
@@ -532,57 +532,57 @@ Variable, measured 7:1 to 218:1
 
 Power law α
 
-N/A \(deterministic\)
+N/A (deterministic)
 
-0.85 ± 0.12 \(measured\)
+0.85 ± 0.12 (measured)
 
 MDL optimum
 
 Analytically computable
 
-Empirically measured \(P=45\)
+Empirically measured (P=45)
 
 Encoding cost
 
-O\(N·log N\)
+O(N·log N)
 
-O\(N·P·T\) — much higher
+O(N·P·T) — much higher
 
 Decoding cost
 
-O\(N\)
+O(N)
 
-O\(P\) — parameter-independent
+O(P) — parameter-independent
 
 ## 6.  Theorems and Proofs
 
 ## Theorem 1: Intrinsic Dimensionality Revelation
 
-If the training data D lies on a d\_true-dimensional manifold M ⊂ ℝ^d, and the network is sufficiently expressive, then the intrinsic dimensionality of the Layer 0 activations equals d\_true.
+If the training data D lies on a d_true-dimensional manifold M ⊂ ℝ^d, and the network is sufficiently expressive, then the intrinsic dimensionality of the Layer 0 activations equals d_true.
 
-  Measured: d = 20, d\_true = 3, intrinsic\_dim\(Layer 0\) = 3  ✓
+  Measured: d = 20, d_true = 3, intrinsic_dim(Layer 0) = 3  ✓
 
-*Proof sketch: *Π\_W projects into a subspace. If W has effective rank r\_eff, the activations lie in an r\_eff-dimensional subspace. Training minimises loss, which is minimised when activations capture all task-relevant variance. Since the task is determined by Z ∈ ℝ^3, r\_eff converges to 3 or the first multiple needed to represent M linearly.
+*Proof sketch: *Π\_W projects into a subspace. If W has effective rank r_eff, the activations lie in an r_eff-dimensional subspace. Training minimises loss, which is minimised when activations capture all task-relevant variance. Since the task is determined by Z ∈ ℝ^3, r_eff converges to 3 or the first multiple needed to represent M linearly.
 
 ## Theorem 2: Power Law Self-Organisation
 
-The singular value spectrum of trained weight matrices follows S\_k ∼ a·k^\(−α\) with α ≈ 0.85. This emerges from the implicit regularization of SGD, which biases toward low-rank solutions even without explicit rank constraints.
+The singular value spectrum of trained weight matrices follows S_k ∼ a·k^(−α) with α ≈ 0.85. This emerges from the implicit regularization of SGD, which biases toward low-rank solutions even without explicit rank constraints.
 
-  Measured α: \[0.774, 0.756, 1.023\], mean = 0.851 ± 0.122
+  Measured α: [0.774, 0.756, 1.023], mean = 0.851 ± 0.122
 
-*Connection to α\(s\) = s^\(−0.37\): *Prime gaps follow a steeper power law \(α = 0.37\) than NN singular values \(α = 0.85\). Primes have a flatter spectrum — energy distributed more evenly across scales. NN weights have a steeper spectrum — energy concentrated in top singular vectors. The difference reflects the *source* of the pattern: primes are governed by multiplicative number theory; NN SVs are governed by gradient descent on a loss landscape.
+*Connection to α(s) = s^(−0.37): *Prime gaps follow a steeper power law (α = 0.37) than NN singular values (α = 0.85). Primes have a flatter spectrum — energy distributed more evenly across scales. NN weights have a steeper spectrum — energy concentrated in top singular vectors. The difference reflects the *source* of the pattern: primes are governed by multiplicative number theory; NN SVs are governed by gradient descent on a loss landscape.
 
 ## Theorem 3: MDL Optimum
 
 The MDL-optimal model minimises total description length:
 
-θ\*\_MDL = argmin\_θ \[ P\_θ·b \+ N·L\(θ;D\)/ln\(2\) \]
+θ\*\_MDL = argmin\_θ [ P\_θ·b + N·L(θ;D)/ln(2) ]
 
 There is a crossover point P\* where the marginal gain in data compression equals the marginal cost of additional parameters:
 
-dL/dP · N/ln\(2\) = b  →  P\* satisfies this equality
+dL/dP · N/ln(2) = b  →  P\* satisfies this equality
 
-  Measured: P\*\_MDL = 45  \(arch=\[2\]\)
+  Measured: P\*\_MDL = 45  (arch=[2])
 
 Models larger than P\*\_MDL are overfitting to spurious data patterns that cost more bits to describe than they save in data compression. Models smaller than P\*\_MDL are underfitting — leaving compressible structure undiscovered.
 
@@ -590,9 +590,9 @@ Models larger than P\*\_MDL are overfitting to spurious data patterns that cost 
 
 For fixed parameter count P, depth L is more parameter-efficient than width n for datasets with hierarchical compositional structure:
 
-  Measured: \[8\] \(177 params, acc=98.8%\) < \[8,4\] \(209 params, acc=99.8%\)
+  Measured: [8] (177 params, acc=98.8%) < [8,4] (209 params, acc=99.8%)
 
-The \[8\] network has more parameters but worse performance than \[8,4\]. This demonstrates that **hierarchical composition** of primitives is strictly more efficient than a single-stage expansion for structured data. The depth allows the second layer to compose features discovered by the first, operating on a compressed representation rather than raw input.
+The [8] network has more parameters but worse performance than [8,4]. This demonstrates that **hierarchical composition** of primitives is strictly more efficient than a single-stage expansion for structured data. The depth allows the second layer to compose features discovered by the first, operating on a compressed representation rather than raw input.
 
 ## 7.  Measured Constants Summary
 
@@ -638,9 +638,9 @@ Fraction of space folded to zero
 
 True manifold discovery
 
-d\_true
+d_true
 
-3 \(exact\)
+3 (exact)
 
 Layer 0 finds 3D manifold in 20D
 
@@ -664,34 +664,34 @@ Power law tightens with depth
 
 ## 8.1  Compression Architecture
 
-HRNA \(Harmonic Recursive Neural Architecture\) can be reframed as a **hierarchical NMP codec** where each recursive stage corresponds to one level of manifold projection. The harmonic structure suggests that the singular value spectrum should be governed not by α = 0.85 \(standard SGD\) but by a harmonic series: σ\_k ∝ 1/k, implying α = 1.0 exactly. This is testable.
+HRNA (Harmonic Recursive Neural Architecture) can be reframed as a **hierarchical NMP codec** where each recursive stage corresponds to one level of manifold projection. The harmonic structure suggests that the singular value spectrum should be governed not by α = 0.85 (standard SGD) but by a harmonic series: σ\_k ∝ 1/k, implying α = 1.0 exactly. This is testable.
 
 ## 8.2  The Distortion Measure
 
 Standard NNs use cross-entropy or MSE as δ. For HRNA operating on RF signals and audio, the natural distortion measure is **spectral distortion** — the difference in frequency-domain representations. This would reshape the compression objective toward preserving harmonic structure, which is precisely the information HRNA cares about.
 
-δ\_spectral\(y, ŷ\) = ‖FFT\(y\) - FFT\(ŷ\)‖² / ‖FFT\(y\)‖²
+δ\_spectral(y, ŷ) = ‖FFT(y) - FFT(ŷ)‖² / ‖FFT(y)‖²
 
 ## 8.3  MDL and Model Selection
 
-The MDL analysis gives a principled basis for selecting HRNA architecture: find the P that minimises model\_bits \+ data|model\_bits on the actual RF/audio datasets. Given the higher structure of those domains \(signals live on lower-dimensional manifolds than random data\), expect P\*\_MDL to be *smaller* than for generic benchmarks — meaning HRNA may require fewer parameters than naively estimated.
+The MDL analysis gives a principled basis for selecting HRNA architecture: find the P that minimises model_bits + data|model_bits on the actual RF/audio datasets. Given the higher structure of those domains (signals live on lower-dimensional manifolds than random data), expect P\*\_MDL to be *smaller* than for generic benchmarks — meaning HRNA may require fewer parameters than naively estimated.
 
 ## 9.  Summary
 
 Neural networks implement the following compression algorithm:
 
-**1. Primitive operators: **Π \(linear projection, measured via SVD\), Φ \(nonlinear folding, ReLU collapse rate 0.50\), Λ \(residual lifting, anti-compression\).
+**1. Primitive operators: **Π (linear projection, measured via SVD), Φ (nonlinear folding, ReLU collapse rate 0.50), Λ (residual lifting, anti-compression).
 
-**2. The codec: **C = SGD minimization of distortion \+ regularization. R = hierarchical forward pass. Asymmetric: encoding O\(N·P·T\), decoding O\(P\).
+**2. The codec: **C = SGD minimization of distortion + regularization. R = hierarchical forward pass. Asymmetric: encoding O(N·P·T), decoding O(P).
 
-**3. What is compressed: **The data-generating distribution P\(Y|X\), not individual samples. Generalises to unseen data — classical codecs cannot.
+**3. What is compressed: **The data-generating distribution P(Y|X), not individual samples. Generalises to unseen data — classical codecs cannot.
 
-**4. Measured compression ratio: **7:1 to 112:1 \(syntactic\), 218:1 \(MDL-adjusted\). True manifold-adjusted ratio ≈ 17:1 at 100% accuracy.
+**4. Measured compression ratio: **7:1 to 112:1 (syntactic), 218:1 (MDL-adjusted). True manifold-adjusted ratio ≈ 17:1 at 100% accuracy.
 
-**5. Power law: **S\_k ∼ 0.85·k^\(−0.85\), α\_NN = 0.851 ± 0.122. Distinct from prime-gap α = 0.370.
+**5. Power law: **S_k ∼ 0.85·k^(−0.85), α\_NN = 0.851 ± 0.122. Distinct from prime-gap α = 0.370.
 
 **6. MDL optimum: **P\* = 45 parameters for this dataset, total MDL = 1,463 bits vs 320,000 raw data bits.
 
-**7. Key property: **Intrinsic dimensionality reveals the true manifold at Layer 0 \(measured: 3D recovered from 20D embedding, exact\).
+**7. Key property: **Intrinsic dimensionality reveals the true manifold at Layer 0 (measured: 3D recovered from 20D embedding, exact).
 
 *— End of Framework —*

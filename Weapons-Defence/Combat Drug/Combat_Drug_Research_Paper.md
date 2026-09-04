@@ -32,35 +32,35 @@ Defense Technology Research Division
 March 2026
 
 ## Abstract
-Current oral performance enhancement supplementation for military personnel suffers from poor and variable bioavailability, irregular compliance in field conditions, and pharmacokinetic profiles poorly matched to operational tempo. This paper presents the design specification for HyperSynergy-X7, a subcutaneous injectable depot system delivering a 499 mg active compound load via tri-phase controlled release over exactly 168 hours \(7 days\) per injection. The formulation architecture combines PLGA microsphere technology \(three size-fractionated populations for temporally distinct release\), a thermoreversible poloxamer 407/188 hydrogel matrix, and a lipid-phase sesame oil suspension to achieve four pharmacokinetically distinct release phases. The active compound stack comprises three tiers: a natural foundation matrix of evidence-based metabolic modulators \(PQQ, berberine HCl, EGCG, quercetin, alpha-lipoic acid\), a novel synthetic compound tier \(MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88\) targeting AMPK activation, mitochondrial enhancement, and neuromuscular optimization, and a synergy amplifier tier \(curcumin, resveratrol, CoQ10, piperine, phospholipid complex\) improving bioavailability and downstream effect magnitude. We present pharmacokinetic modelling for key compounds, manufacturing specifications, safety monitoring protocols, and a $160–275M development investment analysis. Note: this formulation is hypothetical and presented for research and design analysis purposes; clinical deployment would require comprehensive preclinical and clinical development programs under applicable regulatory frameworks.
+Current oral performance enhancement supplementation for military personnel suffers from poor and variable bioavailability, irregular compliance in field conditions, and pharmacokinetic profiles poorly matched to operational tempo. This paper presents the design specification for HyperSynergy-X7, a subcutaneous injectable depot system delivering a 499 mg active compound load via tri-phase controlled release over exactly 168 hours (7 days) per injection. The formulation architecture combines PLGA microsphere technology (three size-fractionated populations for temporally distinct release), a thermoreversible poloxamer 407/188 hydrogel matrix, and a lipid-phase sesame oil suspension to achieve four pharmacokinetically distinct release phases. The active compound stack comprises three tiers: a natural foundation matrix of evidence-based metabolic modulators (PQQ, berberine HCl, EGCG, quercetin, alpha-lipoic acid), a novel synthetic compound tier (MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88) targeting AMPK activation, mitochondrial enhancement, and neuromuscular optimization, and a synergy amplifier tier (curcumin, resveratrol, CoQ10, piperine, phospholipid complex) improving bioavailability and downstream effect magnitude. We present pharmacokinetic modelling for key compounds, manufacturing specifications, safety monitoring protocols, and a $160–275M development investment analysis. Note: this formulation is hypothetical and presented for research and design analysis purposes; clinical deployment would require comprehensive preclinical and clinical development programs under applicable regulatory frameworks.
 
 ## 1. Introduction
 
 ### 1.1 Performance Enhancement in Military Contexts
 
-Optimized human performance is a strategic military capability. The US military has a long history of pharmacological performance enhancement research, including stimulant use in World War II aviation, amphetamine-based anti-fatigue programs through Vietnam, and contemporary modafinil and caffeine protocols for sustained operations \(Caldwell & Caldwell, 2005\). The operational challenge is not simply identifying efficacious compounds but delivering them in a pharmacokinetic profile matched to mission duration and tempo, with an acceptable burden of compliance, side effect profile, and logistical footprint.
+Optimized human performance is a strategic military capability. The US military has a long history of pharmacological performance enhancement research, including stimulant use in World War II aviation, amphetamine-based anti-fatigue programs through Vietnam, and contemporary modafinil and caffeine protocols for sustained operations (Caldwell & Caldwell, 2005). The operational challenge is not simply identifying efficacious compounds but delivering them in a pharmacokinetic profile matched to mission duration and tempo, with an acceptable burden of compliance, side effect profile, and logistical footprint.
 
-Oral supplementation — the current predominant delivery modality — presents several limitations in field conditions: highly variable absorption \(first-pass hepatic metabolism reduces bioavailability of many compounds by 40–70%\), compliance failure under operational stress, once-daily or multiple-daily dosing requirements incompatible with continuous operations, and refrigeration sensitivity of some formulations. An injectable depot system eliminating these limitations by providing 7-day sustained release from a single injection would represent a step-change in operational pharmacology.
+Oral supplementation — the current predominant delivery modality — presents several limitations in field conditions: highly variable absorption (first-pass hepatic metabolism reduces bioavailability of many compounds by 40–70%), compliance failure under operational stress, once-daily or multiple-daily dosing requirements incompatible with continuous operations, and refrigeration sensitivity of some formulations. An injectable depot system eliminating these limitations by providing 7-day sustained release from a single injection would represent a step-change in operational pharmacology.
 
 ### 1.2 Design Objectives
 
-The HyperSynergy-X7 design targets five engineering objectives: \(1\) single injection per 7-day operational cycle; \(2\) four temporally distinct pharmacokinetic phases matching physiological adaptation windows; \(3\) 300–500% improvement in effective compound bioavailability relative to oral delivery through first-pass avoidance; \(4\) peak-smoothing via controlled release to reduce adverse event risk associated with bolus concentration spikes; and \(5\) complete system clearance within 14 days of injection for predictable washout before medical screening or operational rotation.
+The HyperSynergy-X7 design targets five engineering objectives: (1) single injection per 7-day operational cycle; (2) four temporally distinct pharmacokinetic phases matching physiological adaptation windows; (3) 300–500% improvement in effective compound bioavailability relative to oral delivery through first-pass avoidance; (4) peak-smoothing via controlled release to reduce adverse event risk associated with bolus concentration spikes; and (5) complete system clearance within 14 days of injection for predictable washout before medical screening or operational rotation.
 
 ## 2. Active Compound Stack
 
-### 2.1 Tier 1: Natural Foundation Matrix \(292 mg per dose\)
+### 2.1 Tier 1: Natural Foundation Matrix (292 mg per dose)
 
 The natural foundation matrix comprises five compounds with established safety profiles and well-characterized mechanisms, providing baseline metabolic priming during the first 24–72 hours:
 
 **Compound**
-**Dose \(mg\)**
+**Dose (mg)**
 **Release Window**
 **Primary Mechanism**
-PQQ \(Pyrroloquinoline quinone\)
+PQQ (Pyrroloquinoline quinone)
 
 20
 
-Hours 0–6 \(immediate\)
+Hours 0–6 (immediate)
 
 Mitochondrial biogenesis via PGC-1α; antioxidant
 
@@ -68,15 +68,15 @@ Berberine HCl
 
 150
 
-Hours 2–24 \(early\)
+Hours 2–24 (early)
 
-AMPK activation \(Ki ~10 μM\); glucose metabolism
+AMPK activation (Ki ~10 μM); glucose metabolism
 
-EGCG \(Epigallocatechin gallate\)
+EGCG (Epigallocatechin gallate)
 
 50
 
-Hours 2–24 \(early\)
+Hours 2–24 (early)
 
 Metabolic rate enhancement; catecholamine potentiation
 
@@ -84,7 +84,7 @@ Quercetin
 
 40
 
-Hours 6–72 \(sustained\)
+Hours 6–72 (sustained)
 
 SIRT1/AMPK synergy; cellular energy optimization
 
@@ -92,25 +92,25 @@ Alpha-Lipoic Acid
 
 32
 
-Hours 6–72 \(sustained\)
+Hours 6–72 (sustained)
 
 Redox cycling; mitochondrial antioxidant support
 
-PQQ \(20 mg/dose\) has demonstrated mitochondrial biogenesis effects in rodent models and human supplementation trials at doses of 20 mg/day oral; the immediate-release injectable formulation bypasses the ~50% oral bioavailability limitation. Berberine HCl \(150 mg/dose\) is the dominant compound by mass, reflecting its established AMPK-activating mechanism comparable to metformin, with oral bioavailability limited by intestinal P-glycoprotein efflux transporters that are bypassed by subcutaneous delivery.
+PQQ (20 mg/dose) has demonstrated mitochondrial biogenesis effects in rodent models and human supplementation trials at doses of 20 mg/day oral; the immediate-release injectable formulation bypasses the ~50% oral bioavailability limitation. Berberine HCl (150 mg/dose) is the dominant compound by mass, reflecting its established AMPK-activating mechanism comparable to metformin, with oral bioavailability limited by intestinal P-glycoprotein efflux transporters that are bypassed by subcutaneous delivery.
 
-### 2.2 Tier 2: Novel Synthetic Compounds \(97 mg per dose\)
+### 2.2 Tier 2: Novel Synthetic Compounds (97 mg per dose)
 
 The synthetic compound tier represents the primary performance enhancement payload, targeting pathways not adequately addressed by available natural compounds:
 
 **Compound**
-**Dose \(mg\)**
+**Dose (mg)**
 **Release Window**
 **Mechanism**
 MetaMax-2034
 
 25
 
-Hours 6–120 \(sustained\)
+Hours 6–120 (sustained)
 
 Direct AMPK activation; metabolic flexibility
 
@@ -118,7 +118,7 @@ MetaFlow-47
 
 15
 
-Hours 12–96 \(sustained\)
+Hours 12–96 (sustained)
 
 Enhanced AMPK sensitivity; adenosine receptor modulation
 
@@ -126,7 +126,7 @@ MitoBoost-47
 
 12
 
-Hours 24–144 \(sustained\)
+Hours 24–144 (sustained)
 
 Complex IV enhancement; electron transport chain efficiency
 
@@ -134,7 +134,7 @@ NeuroFlow-23
 
 18
 
-Hours 12–120 \(sustained\)
+Hours 12–120 (sustained)
 
 Neuromuscular junction optimization; motor unit recruitment
 
@@ -142,7 +142,7 @@ VasoMax-16
 
 14
 
-Hours 48–168 \(extended\)
+Hours 48–168 (extended)
 
 Vascular tone modulation; tissue perfusion enhancement
 
@@ -150,23 +150,23 @@ RecoveryX-88
 
 13
 
-Hours 72–168 \(extended\)
+Hours 72–168 (extended)
 
 Inflammatory resolution; myofibrillar repair acceleration
 
-The delayed release profiles of MitoBoost-47 \(Tmax 48–72 h\) and VasoMax-16 \(onset 48 h\) are deliberately offset from the earlier AMPK activators to allow sequential pathway engagement: AMPK activation first triggers catabolic signaling and mitochondrial priming, followed by structural mitochondrial enhancement, then vascular optimization, and finally recovery acceleration as the enhanced metabolic state requires accelerated tissue repair.
+The delayed release profiles of MitoBoost-47 (Tmax 48–72 h) and VasoMax-16 (onset 48 h) are deliberately offset from the earlier AMPK activators to allow sequential pathway engagement: AMPK activation first triggers catabolic signaling and mitochondrial priming, followed by structural mitochondrial enhancement, then vascular optimization, and finally recovery acceleration as the enhanced metabolic state requires accelerated tissue repair.
 
-### 2.3 Tier 3: Synergy Amplifiers \(110 mg per dose\)
+### 2.3 Tier 3: Synergy Amplifiers (110 mg per dose)
 
 **Compound**
-**Dose \(mg\)**
+**Dose (mg)**
 **Release Window**
 **Function**
-Enhanced Curcumin \(phospholipid complex\)
+Enhanced Curcumin (phospholipid complex)
 
 50
 
-Hours 2–48 \(early\)
+Hours 2–48 (early)
 
 NF-κB inhibition; anti-inflammatory priming
 
@@ -174,25 +174,25 @@ Resveratrol
 
 30
 
-Hours 6–96 \(sustained\)
+Hours 6–96 (sustained)
 
-SIRT1 activation; NAD\+ pathway enhancement
+SIRT1 activation; NAD+ pathway enhancement
 
-CoQ10 \(solubilized ubiquinol\)
+CoQ10 (solubilized ubiquinol)
 
 20
 
-Hours 12–120 \(sustained\)
+Hours 12–120 (sustained)
 
 Electron transport chain cofactor; Complex I/III support
 
-Piperine \(BioPerine\)
+Piperine (BioPerine)
 
 1
 
-Hours 0–24 \(immediate\)
+Hours 0–24 (immediate)
 
-CYP3A4 inhibition; absorption enhancement \(~20x\)
+CYP3A4 inhibition; absorption enhancement (~20x)
 
 Phospholipid Complex
 
@@ -202,7 +202,7 @@ Throughout
 
 Membrane fluidity; transmembrane transport optimization
 
-Piperine \(1 mg, immediate release\) serves a pharmacokinetic function rather than a direct performance function: CYP3A4 and P-glycoprotein inhibition broadly increases plasma concentrations of co-administered lipophilic compounds. In an injectable depot the effect is less pronounced than in oral co-administration, but the phospholipid complex vehicle for piperine ensures it is bioavailable during the early absorption phase when co-released compounds benefit most.
+Piperine (1 mg, immediate release) serves a pharmacokinetic function rather than a direct performance function: CYP3A4 and P-glycoprotein inhibition broadly increases plasma concentrations of co-administered lipophilic compounds. In an injectable depot the effect is less pronounced than in oral co-administration, but the phospholipid complex vehicle for piperine ensures it is bioavailable during the early absorption phase when co-released compounds benefit most.
 
 ## 3. Delivery Matrix Architecture
 
@@ -210,27 +210,27 @@ Piperine \(1 mg, immediate release\) serves a pharmacokinetic function rather th
 
 Three complementary pharmaceutical technologies provide overlapping release kinetics spanning 168 hours:
 
-System 1 — PLGA Microspheres \(150 mg excipient per dose\): Three size-fractionated PLGA populations \(50:50 lactide:glycolide\) provide release-rate control through microsphere diameter. Small microspheres \(10–50 μm\) erode over 6–48 hours; medium \(50–100 μm\) over 24–96 hours; large \(100–200 μm\) over 72–168 hours. Compounds are assigned to microsphere populations based on their intended pharmacokinetic profile.
+System 1 — PLGA Microspheres (150 mg excipient per dose): Three size-fractionated PLGA populations (50:50 lactide:glycolide) provide release-rate control through microsphere diameter. Small microspheres (10–50 μm) erode over 6–48 hours; medium (50–100 μm) over 24–96 hours; large (100–200 μm) over 72–168 hours. Compounds are assigned to microsphere populations based on their intended pharmacokinetic profile.
 
-System 2 — Thermoreversible Poloxamer Gel \(300 mg poloxamer 407 per dose\): The poloxamer 407/188 blend \(ReGel technology\) is liquid at refrigeration temperatures \(4°C\) and forms a semi-solid gel at 37°C body temperature within minutes of injection. Gelation temperature is tuned to 15–20°C, ensuring injectable consistency during administration and immediate depot formation in subcutaneous tissue. The gel provides diffusion-controlled release and degrades completely within 7–10 days. Gel strength at 37°C is 15,000–25,000 cP.
+System 2 — Thermoreversible Poloxamer Gel (300 mg poloxamer 407 per dose): The poloxamer 407/188 blend (ReGel technology) is liquid at refrigeration temperatures (4°C) and forms a semi-solid gel at 37°C body temperature within minutes of injection. Gelation temperature is tuned to 15–20°C, ensuring injectable consistency during administration and immediate depot formation in subcutaneous tissue. The gel provides diffusion-controlled release and degrades completely within 7–10 days. Gel strength at 37°C is 15,000–25,000 cP.
 
-System 3 — Lipid-Phase Suspension \(200 mg sesame oil per dose\): Long-chain triglyceride vehicles provide an extended-release depot for the most lipophilic compounds \(VasoMax-16, RecoveryX-88\). The sesame oil/benzyl benzoate/aluminum monostearate blend \(60:25:15\) creates a viscous depot from which compounds partition slowly into surrounding aqueous tissue, yielding the 48–168 hour release profiles required for the late-phase components.
+System 3 — Lipid-Phase Suspension (200 mg sesame oil per dose): Long-chain triglyceride vehicles provide an extended-release depot for the most lipophilic compounds (VasoMax-16, RecoveryX-88). The sesame oil/benzyl benzoate/aluminum monostearate blend (60:25:15) creates a viscous depot from which compounds partition slowly into surrounding aqueous tissue, yielding the 48–168 hour release profiles required for the late-phase components.
 
 ### 3.2 Mathematical Release Models
 
-Phase 1 \(0–6 hours\): First-order release kinetics govern the immediate-release fraction. The rate equation dC/dt = -k1·C with k1 = 0.3 h-1 yields 80% release of the natural foundation primers by 6 hours, achieving rapid system priming without the sharp Cmax spike associated with intravenous bolus delivery.
+Phase 1 (0–6 hours): First-order release kinetics govern the immediate-release fraction. The rate equation dC/dt = -k1·C with k1 = 0.3 h-1 yields 80% release of the natural foundation primers by 6 hours, achieving rapid system priming without the sharp Cmax spike associated with intravenous bolus delivery.
 
-Phase 2 \(6–120 hours\): The PLGA microsphere populations provide approximately zero-order release kinetics at k0 = 0.7% per hour across the primary enhancement window, maintaining steady-state plasma concentrations of synthetic compounds over 114 hours. Zero-order kinetics is the pharmacokinetic ideal for performance enhancement: constant input rate maintains constant plasma concentration without peaks or troughs.
+Phase 2 (6–120 hours): The PLGA microsphere populations provide approximately zero-order release kinetics at k0 = 0.7% per hour across the primary enhancement window, maintaining steady-state plasma concentrations of synthetic compounds over 114 hours. Zero-order kinetics is the pharmacokinetic ideal for performance enhancement: constant input rate maintains constant plasma concentration without peaks or troughs.
 
-Phase 3 \(120–168 hours\): Diffusion-limited Higuchi model release \(dM/dt proportional to t-0.5\) governs the final 20% of extended-release compounds from the lipid depot. The declining release rate provides a smooth pharmacokinetic taper rather than an abrupt cutoff, supporting the clinical goals of reducing rebound effects and providing a controlled transition to the clearance phase.
+Phase 3 (120–168 hours): Diffusion-limited Higuchi model release (dM/dt proportional to t-0.5) governs the final 20% of extended-release compounds from the lipid depot. The declining release rate provides a smooth pharmacokinetic taper rather than an abrupt cutoff, supporting the clinical goals of reducing rebound effects and providing a controlled transition to the clearance phase.
 
 ### 3.3 Key Pharmacokinetic Profiles
 
 **Compound**
-**Tmax \(h\)**
-**Cmax \(ng/mL\)**
+**Tmax (h)**
+**Cmax (ng/mL)**
 **Steady-State Window**
-**Half-Life \(h\)**
+**Half-Life (h)**
 MetaMax-2034
 
 12–18
@@ -281,18 +281,18 @@ Hours 2–48
 
 ~5
 
-## 3.4 Computed Pharmacokinetics — Reference Stimulant Stack \(Tier-2 Simulator §20\)
+## 3.4 Computed Pharmacokinetics — Reference Stimulant Stack (Tier-2 Simulator §20)
 
-The companion `weapons_simulation.py` Tier-2 simulator characterises a one-compartment oral pharmacokinetic reference stack \(caffeine, modafinil, dextroamphetamine, plus a half-dose caffeine + modafinil "HyperSynergy-X7 reference" stack\) at a standardised 80 kg subject. The numerical output is reproduced verbatim from `Weapons-Defence/weapons_sim_results.md` §20 in Table 4 below. This reference stack is **not** the novel six-compound depot specified in §2.2 — it is an independently calibrated benchmark using FDA-approved fielded stimulants with published clinical-pharmacology PK, included to anchor the depot's design-target Cmax / Tmax projections \(§3.3, Table 3\) against real molecules.
+The companion `weapons_simulation.py` Tier-2 simulator characterises a one-compartment oral pharmacokinetic reference stack (caffeine, modafinil, dextroamphetamine, plus a half-dose caffeine + modafinil "HyperSynergy-X7 reference" stack) at a standardised 80 kg subject. The numerical output is reproduced verbatim from `Weapons-Defence/weapons_sim_results.md` §20 in Table 4 below. This reference stack is **not** the novel six-compound depot specified in §2.2 — it is an independently calibrated benchmark using FDA-approved fielded stimulants with published clinical-pharmacology PK, included to anchor the depot's design-target Cmax / Tmax projections (§3.3, Table 3) against real molecules.
 
-**Methodology.** One-compartment oral absorption with first-order elimination, k_a and k_e parameters fitted to the published clinical-pharmacology literature for each drug \(Brunton, Hilal-Dandan & Knollmann 2018; Caldwell & Caldwell 2005\). Implementation in `Weapons-Defence/weapons_simulation.py`; numerical output and Tier-2 methodology citation in `weapons_sim_results.md` §20 and methodology footer.
+**Methodology.** One-compartment oral absorption with first-order elimination, k_a and k_e parameters fitted to the published clinical-pharmacology literature for each drug (Brunton, Hilal-Dandan & Knollmann 2018; Caldwell & Caldwell 2005). Implementation in `Weapons-Defence/weapons_simulation.py`; numerical output and Tier-2 methodology citation in `weapons_sim_results.md` §20 and methodology footer.
 
 **Drug**
 **Dose**
-**t_max \(h\)**
-**C_max \(ng/mL\)**
-**t½ \(h\)**
-**AUC \(ng·h/mL\)**
+**t_max (h)**
+**C_max (ng/mL)**
+**t½ (h)**
+**AUC (ng·h/mL)**
 Caffeine 200 mg PO
 
 200 mg
@@ -355,17 +355,17 @@ HyperSynergy-X7 reference stack — modafinil 100 mg
 
 *Table 4: Computed one-compartment oral PK at 80 kg, reproduced from `Weapons-Defence/weapons_sim_results.md` §20.*
 
-**Naming clarification.** The "HyperSynergy-X7 stack" entry in §20 of the simulator output is a half-dose caffeine + modafinil oral reference benchmark; the HyperSynergy-X7 product specified in §2 of this paper is the novel six-compound subcutaneous depot. The simulator uses an FDA-approved fielded-stimulant proxy because the six novel synthetic compounds \(MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88\) have no published human PK data to calibrate against. The depot-specific projections in §3.3 \(Table 3\) remain engineering design targets derived from mechanistic modelling; Phase I clinical PK is required to confirm them.
+**Naming clarification.** The "HyperSynergy-X7 stack" entry in §20 of the simulator output is a half-dose caffeine + modafinil oral reference benchmark; the HyperSynergy-X7 product specified in §2 of this paper is the novel six-compound subcutaneous depot. The simulator uses an FDA-approved fielded-stimulant proxy because the six novel synthetic compounds (MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88) have no published human PK data to calibrate against. The depot-specific projections in §3.3 (Table 3) remain engineering design targets derived from mechanistic modelling; Phase I clinical PK is required to confirm them.
 
-**Doctrinal reading of the reference stack.** A 200 mg oral caffeine dose produces an 0.8 h t_max and 5 h t½ — the standard "operational caffeine cycle" used in current sustained-operations doctrine. A 200 mg modafinil dose produces a 2.24 h t_max and 14 h t½ — adequate for a single overnight watch but inadequate for a multi-day mission without redose. The half-dose stack reduces individual-agent C_max by approximately 50 % \(caffeine: 4 069.5 → 2 034.7 ng/mL; modafinil: 2 113.1 → 1 056.5 ng/mL\) while preserving the t_max / t½ envelope, providing a doctrinal comparator for combination-stimulant dosing decisions.
+**Doctrinal reading of the reference stack.** A 200 mg oral caffeine dose produces an 0.8 h t_max and 5 h t½ — the standard "operational caffeine cycle" used in current sustained-operations doctrine. A 200 mg modafinil dose produces a 2.24 h t_max and 14 h t½ — adequate for a single overnight watch but inadequate for a multi-day mission without redose. The half-dose stack reduces individual-agent C_max by approximately 50 % (caffeine: 4 069.5 → 2 034.7 ng/mL; modafinil: 2 113.1 → 1 056.5 ng/mL) while preserving the t_max / t½ envelope, providing a doctrinal comparator for combination-stimulant dosing decisions.
 
 ## 4. Complete Formulation Specification
 
-### 4.1 Per-Dose Composition \(2.0 mL\)
+### 4.1 Per-Dose Composition (2.0 mL)
 
 **Component Category**
 **Ingredients**
-**Mass \(mg\)**
+**Mass (mg)**
 Active — Tier 1 Natural Matrix
 
 PQQ, Berberine HCl, EGCG, Quercetin, ALA
@@ -432,7 +432,7 @@ Sterile water for injection q.s.
 
 q.s. 2.0 mL
 
-Physical target properties: pH 7.0 ± 0.2; osmolality 280–320 mOsm/kg \(physiological\); appearance amber suspension \(amber glass vials\); viscosity at 4°C: injectable \(< 500 cP\); viscosity at 37°C: gel depot \(15,000–25,000 cP\).
+Physical target properties: pH 7.0 ± 0.2; osmolality 280–320 mOsm/kg (physiological); appearance amber suspension (amber glass vials); viscosity at 4°C: injectable (< 500 cP); viscosity at 37°C: gel depot (15,000–25,000 cP).
 
 ## 5. Manufacturing Process
 
@@ -440,11 +440,11 @@ Physical target properties: pH 7.0 ± 0.2; osmolality 280–320 mOsm/kg \(physio
 
 Manufacturing proceeds across four stages under cGMP conditions in a Biosafety Level 1 pharmaceutical manufacturing environment:
 
-Stage 1 — Component Preparation: Individual active compounds are synthesized or sourced to >98% purity \(HPLC-verified\). PLGA microsphere populations are produced by solvent evaporation from oil-in-water emulsions under sterile conditions, then size-fractionated by sieving and differential centrifugation to yield three distinct populations \(10–50 μm, 50–100 μm, 100–200 μm\). Compound loading into microspheres is conducted in separate batches for each release-rate tier.
+Stage 1 — Component Preparation: Individual active compounds are synthesized or sourced to >98% purity (HPLC-verified). PLGA microsphere populations are produced by solvent evaporation from oil-in-water emulsions under sterile conditions, then size-fractionated by sieving and differential centrifugation to yield three distinct populations (10–50 μm, 50–100 μm, 100–200 μm). Compound loading into microspheres is conducted in separate batches for each release-rate tier.
 
-Stage 2 — Formulation Assembly: Aqueous phase compounds and water-soluble excipients are combined at controlled temperature \(4°C\). The lipid phase is prepared separately in sesame oil vehicle. Poloxamer gel matrix is hydrated at 4°C. The three phases are combined under aseptic conditions with gentle mixing \(avoiding shear that would damage microsphere integrity\), followed by addition of size-blended PLGA microsphere suspension.
+Stage 2 — Formulation Assembly: Aqueous phase compounds and water-soluble excipients are combined at controlled temperature (4°C). The lipid phase is prepared separately in sesame oil vehicle. Poloxamer gel matrix is hydrated at 4°C. The three phases are combined under aseptic conditions with gentle mixing (avoiding shear that would damage microsphere integrity), followed by addition of size-blended PLGA microsphere suspension.
 
-Stage 3 — Quality Control: Sterility testing \(USP <71>\); endotoxin testing by LAL assay \(specification: <85 EU/mL\); particulate testing \(USP <788>\); potency assay for all active compounds by HPLC/LC-MS/MS; in vitro 7-day dissolution testing in simulated subcutaneous fluid at 37°C; pH and osmolality confirmation.
+Stage 3 — Quality Control: Sterility testing (USP <71>); endotoxin testing by LAL assay (specification: <85 EU/mL); particulate testing (USP <788>); potency assay for all active compounds by HPLC/LC-MS/MS; in vitro 7-day dissolution testing in simulated subcutaneous fluid at 37°C; pH and osmolality confirmation.
 
 Stage 4 — Fill and Finish: Aseptic filling into 2.0 mL amber borosilicate glass vials; rubber stopper and aluminum crimp seal; 100% visual inspection; secondary packaging with pre-filled 18G drawing needle and 25G x 1-inch injection needle, alcohol swabs, and patient information card.
 
@@ -454,13 +454,13 @@ Stage 4 — Fill and Finish: Aseptic filling into 2.0 mL amber borosilicate glas
 **Specification**
 Storage temperature
 
-2–8°C \(refrigerated\); do not freeze
+2–8°C (refrigerated); do not freeze
 
 Light protection
 
-Amber vials \+ secondary opaque carton
+Amber vials + secondary opaque carton
 
-Shelf life \(2–8°C\)
+Shelf life (2–8°C)
 
 36 months (§23.1)
 
@@ -490,7 +490,7 @@ System Activation
 
 0–6
 
-PQQ, Berberine, EGCG \(immediate release\)
+PQQ, Berberine, EGCG (immediate release)
 
 10–15% capacity improvement; increased alertness
 
@@ -528,7 +528,7 @@ RecoveryX-88, VasoMax, declining synthetics
 
 System Clearance
 
-168\+
+168+
 
 Residual lipid-phase compounds
 
@@ -540,9 +540,9 @@ The performance improvement percentages represent engineering design targets der
 
 ### 7.1 Contraindications
 
-Absolute contraindications: pregnancy or lactation; known hypersensitivity to any formulation component \(including sesame oil, polysorbate 80, benzyl alcohol, or parabens\); severe cardiovascular disease \(unstable angina, recent myocardial infarction within 6 months\); severe hepatic impairment \(Child-Pugh Class C\); severe renal impairment \(CrCl < 30 mL/min\).
+Absolute contraindications: pregnancy or lactation; known hypersensitivity to any formulation component (including sesame oil, polysorbate 80, benzyl alcohol, or parabens); severe cardiovascular disease (unstable angina, recent myocardial infarction within 6 months); severe hepatic impairment (Child-Pugh Class C); severe renal impairment (CrCl < 30 mL/min).
 
-Relative contraindications requiring enhanced monitoring: type 1 or 2 diabetes mellitus \(AMPK activation may affect glycaemic control\); hypertension \(VasoMax-16 vascular effects require blood pressure monitoring\); coagulopathy or concurrent anticoagulant therapy \(quercetin and resveratrol have mild anti-platelet properties\); concurrent CYP3A4-sensitive medications \(piperine component inhibits this isoform\).
+Relative contraindications requiring enhanced monitoring: type 1 or 2 diabetes mellitus (AMPK activation may affect glycaemic control); hypertension (VasoMax-16 vascular effects require blood pressure monitoring); coagulopathy or concurrent anticoagulant therapy (quercetin and resveratrol have mild anti-platelet properties); concurrent CYP3A4-sensitive medications (piperine component inhibits this isoform).
 
 ### 7.2 Monitoring Protocol
 
@@ -550,13 +550,13 @@ Relative contraindications requiring enhanced monitoring: type 1 or 2 diabetes m
 **Monitoring Scope**
 Pre-injection
 
-Medical history, contraindication screening; ECG; baseline metabolic panel \(glucose, CMP, lipids\)
+Medical history, contraindication screening; ECG; baseline metabolic panel (glucose, CMP, lipids)
 
-Immediate \(0–30 min\)
+Immediate (0–30 min)
 
 Injection site assessment; vital signs; allergic reaction screening
 
-Short-term \(1–6 h\)
+Short-term (1–6 h)
 
 Vital signs q1h; subjective effect documentation
 
@@ -564,11 +564,11 @@ Vital signs q1h; subjective effect documentation
 
 Injection site assessment; BP, HR; onset-of-effect evaluation
 
-Weekly \(throughout cycle\)
+Weekly (throughout cycle)
 
-ECG; BP; glucose; lactate; hepatic panel \(ALT, AST, bilirubin\); renal panel \(Cr, BUN\)
+ECG; BP; glucose; lactate; hepatic panel (ALT, AST, bilirubin); renal panel (Cr, BUN)
 
-Monthly \(multi-cycle\)
+Monthly (multi-cycle)
 
 Comprehensive metabolic panel; complete blood count
 
@@ -576,13 +576,13 @@ Quarterly
 
 Lipid profile; thyroid function
 
-Annual \(if continued use\)
+Annual (if continued use)
 
 Cardiac echocardiography; full endocrine panel
 
 ### 7.3 Drug-Drug Interaction Considerations
 
-Piperine \(1 mg, immediate release\) inhibits CYP3A4 and intestinal P-glycoprotein. In an injectable formulation, systemic piperine concentrations will be lower than equivalent oral doses, but interactions with concurrently administered CYP3A4-sensitive medications \(including many antibiotics, anticoagulants, and immunosuppressants\) require pre-prescription review.
+Piperine (1 mg, immediate release) inhibits CYP3A4 and intestinal P-glycoprotein. In an injectable formulation, systemic piperine concentrations will be lower than equivalent oral doses, but interactions with concurrently administered CYP3A4-sensitive medications (including many antibiotics, anticoagulants, and immunosuppressants) require pre-prescription review.
 
 Berberine HCl has demonstrated additive glycaemic lowering effects when combined with metformin and sulfonylureas; diabetic patients on these agents require glucose monitoring for the first 24–48 hours. Resveratrol may potentiate anticoagulant effects of warfarin through CYP2C9 inhibition; INR monitoring is recommended in anticoagulated patients.
 
@@ -590,19 +590,19 @@ Berberine HCl has demonstrated additive glycaemic lowering effects when combined
 
 ### 8.1 Regulatory Pathway
 
-HyperSynergy-X7 is classified as a novel drug product \(combination biologic/small molecule in a novel delivery system\) requiring an IND submission followed by a three-phase clinical program. Regulatory complexity is elevated by the presence of novel synthetic compounds \(MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88\) with no prior human exposure history, each requiring complete preclinical toxicology packages before first-in-human trials.
+HyperSynergy-X7 is classified as a novel drug product (combination biologic/small molecule in a novel delivery system) requiring an IND submission followed by a three-phase clinical program. Regulatory complexity is elevated by the presence of novel synthetic compounds (MetaMax-2034, MetaFlow-47, MitoBoost-47, NeuroFlow-23, VasoMax-16, RecoveryX-88) with no prior human exposure history, each requiring complete preclinical toxicology packages before first-in-human trials.
 
-Preclinical package requirements per novel compound: 28-day and 90-day repeat dose toxicology \(rat and dog\); safety pharmacology \(cardiovascular, CNS, respiratory\); genotoxicity \(Ames, in vitro chromosomal aberration, in vivo micronucleus\); reproductive and developmental toxicology. Total preclinical timeline: 18–24 months. Estimated total development timeline: 5–8 years.
+Preclinical package requirements per novel compound: 28-day and 90-day repeat dose toxicology (rat and dog); safety pharmacology (cardiovascular, CNS, respiratory); genotoxicity (Ames, in vitro chromosomal aberration, in vivo micronucleus); reproductive and developmental toxicology. Total preclinical timeline: 18–24 months. Estimated total development timeline: 5–8 years.
 
 ### 8.2 Development Investment
 
 **Cost Element**
 **Estimate**
-Research and development \(preclinical, formulation, analytical\)
+Research and development (preclinical, formulation, analytical)
 
 $50–75M
 
-Clinical trials \(Phase I–III, n=1,500\+ total\)
+Clinical trials (Phase I–III, n=1,500+ total)
 
 $75–125M
 
@@ -610,7 +610,7 @@ Regulatory submission and approval activities
 
 $10–25M
 
-Manufacturing facility setup \(cGMP\)
+Manufacturing facility setup (cGMP)
 
 $25–50M
 
@@ -618,13 +618,13 @@ Total development investment
 
 $160–275M
 
-The high development cost reflects the regulatory burden of six novel synthetic compounds, each requiring an independent safety database. A risk-reduction strategy would phase development: first validating the natural compound tier \(established safety data\) and delivery platform with a simplified formulation, then adding synthetic compounds sequentially as they clear preclinical milestones. This staged approach could reduce peak capital at risk while preserving the full programme optionality.
+The high development cost reflects the regulatory burden of six novel synthetic compounds, each requiring an independent safety database. A risk-reduction strategy would phase development: first validating the natural compound tier (established safety data) and delivery platform with a simplified formulation, then adding synthetic compounds sequentially as they clear preclinical milestones. This staged approach could reduce peak capital at risk while preserving the full programme optionality.
 
 ### 8.3 Manufacturing Economics
 
 **Cost Element**
 **Per-Dose Estimate**
-Active ingredients \(synthesis/sourcing\)
+Active ingredients (synthesis/sourcing)
 
 $45–65
 
@@ -632,7 +632,7 @@ Excipients and packaging
 
 $8–12
 
-Manufacturing labour \(sterile fill/finish\)
+Manufacturing labour (sterile fill/finish)
 
 $15–25
 
@@ -644,13 +644,13 @@ Total COGS
 
 $73–112
 
-At commercial scale \(50,000\+ doses/year\), active ingredient costs dominate; the novel synthetic compound tier accounts for approximately 60% of active ingredient cost. Volume-driven price reductions in synthetic compound manufacturing \(learning curve economies, process chemistry optimization\) represent the primary route to cost reduction over a 5-year commercial horizon.
+At commercial scale (50,000+ doses/year), active ingredient costs dominate; the novel synthetic compound tier accounts for approximately 60% of active ingredient cost. Volume-driven price reductions in synthetic compound manufacturing (learning curve economies, process chemistry optimization) represent the primary route to cost reduction over a 5-year commercial horizon.
 
 ### 8.4 Market Applications
 
 Primary military application: sustained performance enhancement for special operations personnel on extended missions, replacing a daily oral supplement protocol with a single pre-deployment injection. The 7-day cycle aligns with common special operations rotation schedules.
 
-Secondary applications include elite athletic performance research, metabolic disorder treatment \(the AMPK-activating natural compound tier has therapeutic relevance to type 2 diabetes and metabolic syndrome\), and critical care nutrition support complementary to the separately developed NutriComplete-P system.
+Secondary applications include elite athletic performance research, metabolic disorder treatment (the AMPK-activating natural compound tier has therapeutic relevance to type 2 diabetes and metabolic syndrome), and critical care nutrition support complementary to the separately developed NutriComplete-P system.
 
 ## 9. Synergies with Companion Systems
 
@@ -660,7 +660,7 @@ Pharmacokinetic interaction screening between the two formulations would be a re
 
 ## 10. Conclusion
 
-The HyperSynergy-X7 injectable depot system presents a technically coherent framework for converting a multi-compound daily oral performance enhancement protocol into a single weekly injection with superior pharmacokinetic control. The tri-phase delivery architecture \(PLGA microspheres, thermoreversible poloxamer gel, lipid-phase suspension\) provides the engineering foundation for the precisely timed 168-hour release profile. The three-tier active compound stack targets the AMPK/mitochondrial/neuromuscular axis through complementary mechanisms with deliberate pharmacokinetic staggering to maximize sequential pathway engagement.
+The HyperSynergy-X7 injectable depot system presents a technically coherent framework for converting a multi-compound daily oral performance enhancement protocol into a single weekly injection with superior pharmacokinetic control. The tri-phase delivery architecture (PLGA microspheres, thermoreversible poloxamer gel, lipid-phase suspension) provides the engineering foundation for the precisely timed 168-hour release profile. The three-tier active compound stack targets the AMPK/mitochondrial/neuromuscular axis through complementary mechanisms with deliberate pharmacokinetic staggering to maximize sequential pathway engagement.
 
 The critical development path is dominated by the six novel synthetic compounds, each requiring a full preclinical safety package before first-in-human exposure. A staged development strategy — validating the delivery platform and natural compound tier first — represents the lowest-risk approach to the $160–275M total programme investment. Military, athletic, and metabolic disease applications each represent substantial market opportunities conditional on successful clinical development.
 
@@ -788,22 +788,22 @@ The simplified model is the basis of the §7.3 pre-prescription-review requireme
 ---
 
 ## References
-Brunton, L. L., Hilal-Dandan, R., & Knollmann, B. C. \(Eds.\). \(2018\). Goodman and Gilman's The Pharmacological Basis of Therapeutics \(13th ed.\). McGraw-Hill.
+Brunton, L. L., Hilal-Dandan, R., & Knollmann, B. C. (Eds.). (2018). Goodman and Gilman's The Pharmacological Basis of Therapeutics (13th ed.). McGraw-Hill.
 
-Caldwell, J. A., & Caldwell, J. L. \(2005\). Fatigue in military aviation: An overview of US military-approved pharmacological countermeasures. Aviation, Space, and Environmental Medicine, 76\(7\), C39–C51.
+Caldwell, J. A., & Caldwell, J. L. (2005). Fatigue in military aviation: An overview of US military-approved pharmacological countermeasures. Aviation, Space, and Environmental Medicine, 76(7), C39–C51.
 
-Chen, C., et al. \(2014\). Berberine inhibits PTP1B activity and mimics insulin action. Biochemistry, 53\(20\), 3268–3277.
+Chen, C., et al. (2014). Berberine inhibits PTP1B activity and mimics insulin action. Biochemistry, 53(20), 3268–3277.
 
-Danhier, F., et al. \(2012\). PLGA-based nanoparticles: An overview of biomedical applications. Journal of Controlled Release, 161\(2\), 505–522.
+Danhier, F., et al. (2012). PLGA-based nanoparticles: An overview of biomedical applications. Journal of Controlled Release, 161(2), 505–522.
 
-Huss, J. M., & Kelly, D. P. \(2004\). Nuclear receptor signaling and cardiac energetics. Circulation Research, 95\(6\), 568–578.
+Huss, J. M., & Kelly, D. P. (2004). Nuclear receptor signaling and cardiac energetics. Circulation Research, 95(6), 568–578.
 
-Jain, R. A. \(2000\). The manufacturing techniques of various drug loaded biodegradable PLGA devices. Biomaterials, 21\(23\), 2475–2490.
+Jain, R. A. (2000). The manufacturing techniques of various drug loaded biodegradable PLGA devices. Biomaterials, 21(23), 2475–2490.
 
-Narkar, V. A., et al. \(2008\). AMPK and PPARδ agonists are exercise mimetics. Cell, 134\(3\), 405–415.
+Narkar, V. A., et al. (2008). AMPK and PPARδ agonists are exercise mimetics. Cell, 134(3), 405–415.
 
-Shoba, G., et al. \(1998\). Influence of piperine on the pharmacokinetics of curcumin in animals and human volunteers. Planta Medica, 64\(4\), 353–356.
+Shoba, G., et al. (1998). Influence of piperine on the pharmacokinetics of curcumin in animals and human volunteers. Planta Medica, 64(4), 353–356.
 
-Sofroniew, M. V., & Bhatt, D. L. \(2019\). Poloxamer thermogels for sustained drug delivery. Journal of Pharmaceutical Sciences, 108\(4\), 1443–1457.
+Sofroniew, M. V., & Bhatt, D. L. (2019). Poloxamer thermogels for sustained drug delivery. Journal of Pharmaceutical Sciences, 108(4), 1443–1457.
 
-Zhang, Y., et al. \(2006\). AMP-activated protein kinase is involved in neuronal protection. Journal of Neurochemistry, 99\(1\), 135–148.
+Zhang, Y., et al. (2006). AMP-activated protein kinase is involved in neuronal protection. Journal of Neurochemistry, 99(1), 135–148.

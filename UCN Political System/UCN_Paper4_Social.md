@@ -25,9 +25,9 @@ The unifying theme across UCN's social domain is the combination of personal fre
 
 ### 2.1 The International Evidence Base
 
-The international research literature on drug prohibition and decriminalisation provides one of the clearest evidence bases in social policy. Portugal's 2001 decriminalisation of personal drug use provides the most extensively-studied natural experiment. Research from Transform Drug Policy Foundation \(2021\), Springer Nature \(Rego et al., 2021\), and NPR's 2024 reporting on Portugal's outcomes demonstrate remarkable results: drug-related deaths dropped by approximately 80% over 20 years; HIV cases linked to drug use fell from over 1,000 new cases in 2001 to fewer than 16 annually by 2020; the prison population held for drug offences fell from over 40% to below the European average.
+The international research literature on drug prohibition and decriminalisation provides one of the clearest evidence bases in social policy. Portugal's 2001 decriminalisation of personal drug use provides the most extensively-studied natural experiment. Research from Transform Drug Policy Foundation (2021), Springer Nature (Rego et al., 2021), and NPR's 2024 reporting on Portugal's outcomes demonstrate remarkable results: drug-related deaths dropped by approximately 80% over 20 years; HIV cases linked to drug use fell from over 1,000 new cases in 2001 to fewer than 16 annually by 2020; the prison population held for drug offences fell from over 40% to below the European average.
 
-A synthetic control study \(IZA, 2017\) using European comparison countries confirmed that these outcomes are attributable to Portugal's policy change rather than confounding factors. By 2018, approximately 90% of individuals referred to drug counselling sessions attended, compared with negligible compliance rates in countries using punitive approaches.
+A synthetic control study (IZA, 2017) using European comparison countries confirmed that these outcomes are attributable to Portugal's policy change rather than confounding factors. By 2018, approximately 90% of individuals referred to drug counselling sessions attended, compared with negligible compliance rates in countries using punitive approaches.
 
 The UCN framework incorporates the lesson of the Portuguese model: treating drug use as a health issue rather than a criminal justice issue produces substantially better public health outcomes, reduces incarceration costs, and does not produce the explosion in drug use that prohibition advocates predict.
 
@@ -47,7 +47,7 @@ UCN tightens rather than relaxes medical marijuana regulations, which UCN's auth
 
 ### 2.4 Alcohol, Tobacco, and Vaping
 
-Beer is subject to higher excise taxation \(reflecting its demonstrated association with public disorder, domestic violence, and chronic health conditions\). Spirits taxes are maintained. Alcopop taxes are modestly reduced to reflect harm profiles comparable to beer. Cigarette prices are standardised at a single high price point across all brands, eliminating brand competition while preserving adult choice. Vapes are taxed at parity with cigarettes. Illegal tobacco imports are subject to aggressive enforcement.
+Beer is subject to higher excise taxation (reflecting its demonstrated association with public disorder, domestic violence, and chronic health conditions). Spirits taxes are maintained. Alcopop taxes are modestly reduced to reflect harm profiles comparable to beer. Cigarette prices are standardised at a single high price point across all brands, eliminating brand competition while preserving adult choice. Vapes are taxed at parity with cigarettes. Illegal tobacco imports are subject to aggressive enforcement.
 
 ## 3. Immigration: Resource-Calibrated and Merit-Based
 
@@ -113,7 +113,7 @@ UCN's aged care policy returns primary responsibility for elder care to families
 
 UCN identifies the current mental health system as one of the most comprehensively failed domains of Australian social policy. The problems are multiple: inadequate funding, outdated protocols, insufficient inpatient capacity, and an excessive reliance on outpatient medication management without adequate therapeutic support.
 
-UCN's mental health reform has three pillars. First, substantial investment in pharmaceutical research — government-funded research into novel compounds, including compounds derived from the regulated recreational drug list \(psilocybin, ketamine, MDMA, LSD\) that have demonstrated therapeutic efficacy in clinical trials. Second, reform of involuntary treatment protocols to enable earlier and more aggressive sectioning of severely unwell individuals — replacing the current protocols that UCN's authors assess as too restrictive to enable effective early intervention. Third, full public funding for all mental health services, eliminating the two-tier system in which access to evidence-based treatment is dependent on private health insurance or personal wealth.
+UCN's mental health reform has three pillars. First, substantial investment in pharmaceutical research — government-funded research into novel compounds, including compounds derived from the regulated recreational drug list (psilocybin, ketamine, MDMA, LSD) that have demonstrated therapeutic efficacy in clinical trials. Second, reform of involuntary treatment protocols to enable earlier and more aggressive sectioning of severely unwell individuals — replacing the current protocols that UCN's authors assess as too restrictive to enable effective early intervention. Third, full public funding for all mental health services, eliminating the two-tier system in which access to evidence-based treatment is dependent on private health insurance or personal wealth.
 
 ## 6. Labour Policy: Unions, Wages, and Anti-Exploitation
 
@@ -153,7 +153,7 @@ Conservation of biodiversity and natural ecosystems is treated as a sovereign ob
 
 UCN federalises legal and judicial standards, eliminating the patchwork of state-by-state laws and producing a single coherent national legal framework. The court system is retained in its current form — UCN's evidence-based approach finds no systematic evidence that the judicial architecture requires replacement. Police force structures are standardised to national standards without fundamental restructuring.
 
-Drug law enforcement shifts to the quality-control model: enforcement focuses on unregulated supply \(black market competitors to the government drug program\) and on enforcement of quantity limits, rather than on personal use. This is consistent with the Portuguese model's insight that shifting police focus from users to suppliers produces both better public health outcomes and more efficient use of enforcement resources.
+Drug law enforcement shifts to the quality-control model: enforcement focuses on unregulated supply (black market competitors to the government drug program) and on enforcement of quantity limits, rather than on personal use. This is consistent with the Portuguese model's insight that shifting police focus from users to suppliers produces both better public health outcomes and more efficient use of enforcement resources.
 
 ## 10. Conclusion: The UCN Social Contract
 
@@ -165,26 +165,26 @@ This is a demanding social contract in some respects — UCN does not coddle or 
 
 
 ## References
-ATSE. \(2024\). Small Modular Reactors: The Technology and Australian Context Explained. Melbourne: ATSE.
+ATSE. (2024). Small Modular Reactors: The Technology and Australian Context Explained. Melbourne: ATSE.
 
-European Monitoring Centre for Drugs and Drug Addiction \(EMCDDA\). \(2021\). Portugal Drug Report. Lisbon: EMCDDA.
+European Monitoring Centre for Drugs and Drug Addiction (EMCDDA). (2021). Portugal Drug Report. Lisbon: EMCDDA.
 
-Freesia Therapy Collective. \(2024\). Portugal's Model of Drug Decriminalization and Harm Reduction. https://freesiatherapy.com
+Freesia Therapy Collective. (2024). Portugal's Model of Drug Decriminalization and Harm Reduction. https://freesiatherapy.com
 
-Hughes, C.E. & Stevens, A. \(2010\). What Can We Learn From the Portuguese Decriminalization of Illicit Drugs? British Journal of Criminology, 50\(6\), 999-1022.
+Hughes, C.E. & Stevens, A. (2010). What Can We Learn From the Portuguese Decriminalization of Illicit Drugs? British Journal of Criminology, 50(6), 999-1022.
 
-IZA \(Institute of Labor Economics\). \(2017\). The Impact of Drug Decriminalization in Portugal. IZA Discussion Paper No. 10895. Bonn: IZA.
+IZA (Institute of Labor Economics). (2017). The Impact of Drug Decriminalization in Portugal. IZA Discussion Paper No. 10895. Bonn: IZA.
 
-Mann, B. \(2024\). How Portugal Eased Its Opioid Epidemic, While U.S. Drug Deaths Skyrocketed. NPR. https://www.npr.org/2024/02/24/1230188789
+Mann, B. (2024). How Portugal Eased Its Opioid Epidemic, While U.S. Drug Deaths Skyrocketed. NPR. https://www.npr.org/2024/02/24/1230188789
 
-Moury, C. & Escada, M. \(2023\). Understanding Successful Policy Innovation: The Case of Portuguese Drug Policy. Addiction, 118\(5\), 967-978.
+Moury, C. & Escada, M. (2023). Understanding Successful Policy Innovation: The Case of Portuguese Drug Policy. Addiction, 118(5), 967-978.
 
-OECD. \(2023\). Education at a Glance. Paris: OECD Publishing.
+OECD. (2023). Education at a Glance. Paris: OECD Publishing.
 
-Rego, X., Oliveira, M.J., Lameira, C. & Cruz, O.S. \(2021\). 20 Years of Portuguese Drug Policy: Developments, Challenges and the Quest for Human Rights. Substance Abuse Treatment, Prevention, and Policy, 16\(1\), 59.
+Rego, X., Oliveira, M.J., Lameira, C. & Cruz, O.S. (2021). 20 Years of Portuguese Drug Policy: Developments, Challenges and the Quest for Human Rights. Substance Abuse Treatment, Prevention, and Policy, 16(1), 59.
 
-Transform Drug Policy Foundation. \(2021\). Drug Decriminalisation in Portugal: Setting the Record Straight. London: Transform.
+Transform Drug Policy Foundation. (2021). Drug Decriminalisation in Portugal: Setting the Record Straight. London: Transform.
 
-UNSW Drug Policy Modelling Programme. \(2024\). Was Decriminalisation Effective in Portugal? Sydney: UNSW.
+UNSW Drug Policy Modelling Programme. (2024). Was Decriminalisation Effective in Portugal? Sydney: UNSW.
 
-Wharton School. \(2023\). Is Portugal's Drug Decriminalization a Failure or Success? The Answer Isn't So Simple. Knowledge@Wharton.
+Wharton School. (2023). Is Portugal's Drug Decriminalization a Failure or Success? The Answer Isn't So Simple. Knowledge@Wharton.

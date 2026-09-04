@@ -7,13 +7,13 @@ Document No. TRP-2026-011 | Version 1.0
 Prepared for: Australian Department of Defence | March 2026
 
 ## Abstract
-This paper presents a technical analysis of the Tactical Acoustic Cancellation System \(TACS\), an active noise control \(ANC\) platform for military operations delivered in three variants: Personal \(3-5m zone\), Mobile \(8-15m zone\), and Fixed \(30-60m zone\). The system employs Filtered-x Least Mean Squares \(FxLMS\) algorithm-based adaptive noise cancellation to create protected quiet zones in high-noise combat and operational environments. Cancellation depths of 35-55 dB are achievable in target zones across the 20-2,000 Hz frequency range, with system power requirements ranging from 35-70W \(Personal\) to 3-8 kW \(Fixed\). Total development cost is estimated at $22 million over 36 months. Unit costs range from $28,000 \(Personal\) to $850,000 \(Fixed\). This paper examines the physics basis for ANC in outdoor military environments, the FxLMS algorithm implementation, and the critical safety consideration of anti-node formation and management.
+This paper presents a technical analysis of the Tactical Acoustic Cancellation System (TACS), an active noise control (ANC) platform for military operations delivered in three variants: Personal (3-5m zone), Mobile (8-15m zone), and Fixed (30-60m zone). The system employs Filtered-x Least Mean Squares (FxLMS) algorithm-based adaptive noise cancellation to create protected quiet zones in high-noise combat and operational environments. Cancellation depths of 35-55 dB are achievable in target zones across the 20-2,000 Hz frequency range, with system power requirements ranging from 35-70W (Personal) to 3-8 kW (Fixed). Total development cost is estimated at $22 million over 36 months. Unit costs range from $28,000 (Personal) to $850,000 (Fixed). This paper examines the physics basis for ANC in outdoor military environments, the FxLMS algorithm implementation, and the critical safety consideration of anti-node formation and management.
 
 ## 1. Introduction
 
-Active noise control uses the principle of acoustic wave superposition to create localised quiet zones by introducing anti-phase sound waves. An ANC system detects a noise source, generates a 180-degree phase-inverted replica, and emits it from secondary speakers positioned to create destructive interference at the target location. Where the anti-phase wave coincides precisely with the source wave, pressure amplitudes cancel: P\_total = A·sin\(ωt\) \+ A·sin\(ωt\+π\) = 0. This principle, first described by Paul Lueg in a 1936 patent, has been implemented in industrial ANC systems, noise-cancelling headphones, and vehicle interior noise reduction systems.
+Active noise control uses the principle of acoustic wave superposition to create localised quiet zones by introducing anti-phase sound waves. An ANC system detects a noise source, generates a 180-degree phase-inverted replica, and emits it from secondary speakers positioned to create destructive interference at the target location. Where the anti-phase wave coincides precisely with the source wave, pressure amplitudes cancel: P_total = A·sin(ωt) + A·sin(ωt+π) = 0. This principle, first described by Paul Lueg in a 1936 patent, has been implemented in industrial ANC systems, noise-cancelling headphones, and vehicle interior noise reduction systems.
 
-Military applications of ANC create unique challenges. Outdoor or semi-open environments lack the acoustic boundaries that simplify indoor ANC. Broadband noise sources \(helicopter rotors, armoured vehicle engines, weapons fire\) span wide frequency ranges. The FxLMS algorithm, which has been identified as the most widely employed approach for noise reduction in ANC systems, provides the adaptive filtering capability needed to track changing noise characteristics in real-time. Research published in MDPI Electronics in 2025 demonstrated FxLMS-based HANC systems achieving up to 21.8 dB noise reduction for military/artillery noise in controlled environments.
+Military applications of ANC create unique challenges. Outdoor or semi-open environments lack the acoustic boundaries that simplify indoor ANC. Broadband noise sources (helicopter rotors, armoured vehicle engines, weapons fire) span wide frequency ranges. The FxLMS algorithm, which has been identified as the most widely employed approach for noise reduction in ANC systems, provides the adaptive filtering capability needed to track changing noise characteristics in real-time. Research published in MDPI Electronics in 2025 demonstrated FxLMS-based HANC systems achieving up to 21.8 dB noise reduction for military/artillery noise in controlled environments.
 
 ## 2. ANC Physics and the FxLMS Algorithm
 
@@ -21,13 +21,13 @@ Military applications of ANC create unique challenges. Outdoor or semi-open envi
 
 Sound waves obey the principle of superposition. When two coherent waves of equal frequency and amplitude with a 180-degree phase difference superpose at a point in space, the total pressure amplitude at that point is zero—a destructive interference node. The ANC system creates these conditions by placing secondary emitter speakers at calculated positions relative to the noise source and target zone microphones.
 
-The spatial distribution of nodes \(quiet zones\) and anti-nodes \(louder zones\) depends on the geometry of emitter positions relative to the noise source. The key insight from wave physics is that for every quiet zone created, regions of constructive interference \(anti-nodes\) are created elsewhere in the sound field. At anti-nodes, pressure amplitude doubles: P = 2A, and intensity \(proportional to amplitude squared\) increases fourfold: I = \(2A\)² = 4A². This has critical safety implications addressed in Section 7.
+The spatial distribution of nodes (quiet zones) and anti-nodes (louder zones) depends on the geometry of emitter positions relative to the noise source. The key insight from wave physics is that for every quiet zone created, regions of constructive interference (anti-nodes) are created elsewhere in the sound field. At anti-nodes, pressure amplitude doubles: P = 2A, and intensity (proportional to amplitude squared) increases fourfold: I = (2A)² = 4A². This has critical safety implications addressed in Section 7.
 
 ### 2.2 FxLMS Algorithm
 
-The Filtered-x Least Mean Squares \(FxLMS\) algorithm is the standard adaptive algorithm for ANC implementation. It extends the basic LMS adaptive filter by filtering the reference signal through an estimate of the secondary path \(the acoustic path from secondary speakers to error microphones\), enabling convergence in the presence of the acoustic feedback inherent in ANC systems. The algorithm updates the anti-noise filter coefficients at each sample to minimise the mean square error at the error microphone positions.
+The Filtered-x Least Mean Squares (FxLMS) algorithm is the standard adaptive algorithm for ANC implementation. It extends the basic LMS adaptive filter by filtering the reference signal through an estimate of the secondary path (the acoustic path from secondary speakers to error microphones), enabling convergence in the presence of the acoustic feedback inherent in ANC systems. The algorithm updates the anti-noise filter coefficients at each sample to minimise the mean square error at the error microphone positions.
 
-Research by Springer Nature \(2024\) demonstrated FPN-FXLMS \(Fractional Proportionate Normalized FXLMS\) achieving faster convergence than standard FXLMS for broadband ANC, particularly for military low-frequency noise sources. The TACS implementation targets 20-2,000 Hz, covering the primary frequency range of combat vehicle engines, helicopter rotor noise, and weapons signatures.
+Research by Springer Nature (2024) demonstrated FPN-FXLMS (Fractional Proportionate Normalized FXLMS) achieving faster convergence than standard FXLMS for broadband ANC, particularly for military low-frequency noise sources. The TACS implementation targets 20-2,000 Hz, covering the primary frequency range of combat vehicle engines, helicopter rotor noise, and weapons signatures.
 
 ## 3. System Variants
 
@@ -73,9 +73,9 @@ Battery Life
 
 8-12 hours
 
-Continuous \(vehicle power\)
+Continuous (vehicle power)
 
-Continuous \(grid/gen\)
+Continuous (grid/gen)
 
 Unit Cost
 
@@ -99,7 +99,7 @@ The 5.5kg personal variant provides a 3-5m radius quiet zone for individual oper
 
 ### 3.3 TACS-Mobile
 
-The vehicle-mounted variant adds 245kg to the vehicle and draws 800W-1.8kW from the vehicle electrical system. Applications include command vehicle protection \(allowing unmuffled communications in close proximity to engine noise\), vehicle crew noise protection, and protected zone creation around vehicles in defensive positions. The higher power is required for the 8-15m zone diameter, as cancellation emitter power scales with zone volume.
+The vehicle-mounted variant adds 245kg to the vehicle and draws 800W-1.8kW from the vehicle electrical system. Applications include command vehicle protection (allowing unmuffled communications in close proximity to engine noise), vehicle crew noise protection, and protected zone creation around vehicles in defensive positions. The higher power is required for the 8-15m zone diameter, as cancellation emitter power scales with zone volume.
 
 ### 3.4 TACS-Fixed
 
@@ -107,11 +107,11 @@ The 1,800kg fixed installation provides 30-60m radius quiet zone creation around
 
 ## 4. Technology Readiness Level
 
-The TRL 4-5 rating for all variants indicates the system has been demonstrated in laboratory or simulated operational environments, but has not yet been validated in operational environments. TRL 4 corresponds to component and system validation in a laboratory environment; TRL 5 corresponds to validation in a relevant environment. Transition to TRL 6-7 \(prototype demonstration in operational environment\) requires an estimated 36-month development programme.
+The TRL 4-5 rating for all variants indicates the system has been demonstrated in laboratory or simulated operational environments, but has not yet been validated in operational environments. TRL 4 corresponds to component and system validation in a laboratory environment; TRL 5 corresponds to validation in a relevant environment. Transition to TRL 6-7 (prototype demonstration in operational environment) requires an estimated 36-month development programme.
 
-## 4a. Computed Cancellation Depth \(Tier-2 Simulator §18\)
+## 4a. Computed Cancellation Depth (Tier-2 Simulator §18)
 
-The Nelson–Elliott \(1992\) asymmetric-power active-cancellation bound is computed per-octave-band for each TACS variant in `Weapons-Defence/weapons_sim_results.md` §18. The result validates the 35–55 dB at-node performance envelope claimed in Section 3.1 and provides an A-weighted broadband figure used in operational noise-dose accounting.
+The Nelson–Elliott (1992) asymmetric-power active-cancellation bound is computed per-octave-band for each TACS variant in `Weapons-Defence/weapons_sim_results.md` §18. The result validates the 35–55 dB at-node performance envelope claimed in Section 3.1 and provides an A-weighted broadband figure used in operational noise-dose accounting.
 
 **Variant**
 **125 Hz**
@@ -122,7 +122,7 @@ The Nelson–Elliott \(1992\) asymmetric-power active-cancellation bound is comp
 **4 kHz**
 **A-weighted avg**
 
-TACS-Personal \(3–5 m, 16-element wearable\)
+TACS-Personal (3–5 m, 16-element wearable)
 
 40.0
 
@@ -138,7 +138,7 @@ TACS-Personal \(3–5 m, 16-element wearable\)
 
 **36.3**
 
-TACS-Mobile \(8–15 m, 64-element vehicle\)
+TACS-Mobile (8–15 m, 64-element vehicle)
 
 43.6
 
@@ -154,7 +154,7 @@ TACS-Mobile \(8–15 m, 64-element vehicle\)
 
 **36.0**
 
-TACS-Fixed \(30–60 m, 64-element installation\)
+TACS-Fixed (30–60 m, 64-element installation)
 
 43.6
 
@@ -172,13 +172,13 @@ TACS-Fixed \(30–60 m, 64-element installation\)
 
 *All values in dB cancellation depth at the central node, asymmetric emitter power per the design choice discussed in Section 7. Source: `Weapons-Defence/weapons_sim_results.md` §18.*
 
-Low- and mid-frequency cancellation \(125 Hz – 1 kHz\) is at or above the lower end of the published 35–55 dB performance envelope across all three variants. High-frequency cancellation degrades as expected from the λ/10 phase-tolerance scaling: Personal drops from 40 dB at 125 Hz to 25.1 dB at 4 kHz; Fixed degrades more severely \(43.6 dB → 19.4 dB\) because of the longer source-to-control-source distance. The A-weighted broadband depth — the metric that maps directly onto OSHA / MIL-STD-1474E noise-dose accounting — is 36.3 dB \(Personal\), 36.0 dB \(Mobile\), and 32.4 dB \(Fixed\), all in the upper half of the in-spec window. These numbers are simulator output and must be revalidated by anechoic-chamber and field acoustic-survey measurement \(Phase 2 of the §6 programme\) before procurement claims are made.
+Low- and mid-frequency cancellation (125 Hz – 1 kHz) is at or above the lower end of the published 35–55 dB performance envelope across all three variants. High-frequency cancellation degrades as expected from the λ/10 phase-tolerance scaling: Personal drops from 40 dB at 125 Hz to 25.1 dB at 4 kHz; Fixed degrades more severely (43.6 dB → 19.4 dB) because of the longer source-to-control-source distance. The A-weighted broadband depth — the metric that maps directly onto OSHA / MIL-STD-1474E noise-dose accounting — is 36.3 dB (Personal), 36.0 dB (Mobile), and 32.4 dB (Fixed), all in the upper half of the in-spec window. These numbers are simulator output and must be revalidated by anechoic-chamber and field acoustic-survey measurement (Phase 2 of the §6 programme) before procurement claims are made.
 
 ## 5. Anti-Node Safety Management
 
-The critical safety consideration for ANC systems is the formation of anti-nodes—regions of constructive interference where intensity is significantly elevated above the source alone. The TACS Energy Conservation Analysis \(Paper 12\) addresses this in detail. In summary: acoustic energy is redistributed, not destroyed. Anti-nodes within the field can reach 4× baseline intensity \(6 dB above source\), sufficient to cause hearing damage at levels that would otherwise be safe.
+The critical safety consideration for ANC systems is the formation of anti-nodes—regions of constructive interference where intensity is significantly elevated above the source alone. The TACS Energy Conservation Analysis (Paper 12) addresses this in detail. In summary: acoustic energy is redistributed, not destroyed. Anti-nodes within the field can reach 4× baseline intensity (6 dB above source), sufficient to cause hearing damage at levels that would otherwise be safe.
 
-TACS design and deployment protocols must therefore: \(1\) map the interference field before personnel deployment; \(2\) ensure anti-nodes fall in unoccupied zones; \(3\) use asymmetric emitter power \(30-50% of source power rather than 100%\) to reduce anti-node severity while accepting reduced cancellation depth; and \(4\) provide anti-node exclusion zone marking to prevent personnel from inadvertently entering high-intensity regions.
+TACS design and deployment protocols must therefore: (1) map the interference field before personnel deployment; (2) ensure anti-nodes fall in unoccupied zones; (3) use asymmetric emitter power (30-50% of source power rather than 100%) to reduce anti-node severity while accepting reduced cancellation depth; and (4) provide anti-node exclusion zone marking to prevent personnel from inadvertently entering high-intensity regions.
 
 ## 6. Development Cost and Programme
 
@@ -202,9 +202,9 @@ $22M / 36 months
 
 ## 7. Acoustic Energy Conservation and Anti-Node Hazard
 
-Active noise control does not reduce the total acoustic energy in an environment—it redistributes it. The TACS emitters add their own acoustic power to the field; the total acoustic power is the sum of source power plus emitter power. This means anti-nodes \(constructive interference zones\) receive more acoustic energy than either the source or emitters alone would produce. TACS deployment without anti-node mapping and exclusion zone management creates an acoustic hazard that may exceed the original source-only exposure at some locations.
+Active noise control does not reduce the total acoustic energy in an environment—it redistributes it. The TACS emitters add their own acoustic power to the field; the total acoustic power is the sum of source power plus emitter power. This means anti-nodes (constructive interference zones) receive more acoustic energy than either the source or emitters alone would produce. TACS deployment without anti-node mapping and exclusion zone management creates an acoustic hazard that may exceed the original source-only exposure at some locations.
 
-Recommended mitigation: asymmetric power design \(emitter power 30-50% of source power, reducing anti-node severity from \+6 dB to \+3 dB\), directional emitter arrays \(concentrating cancellation toward operators and anti-nodes away from personnel\), and continuous SPL monitoring throughout the operational area.
+Recommended mitigation: asymmetric power design (emitter power 30-50% of source power, reducing anti-node severity from +6 dB to +3 dB), directional emitter arrays (concentrating cancellation toward operators and anti-nodes away from personnel), and continuous SPL monitoring throughout the operational area.
 
 ## 8. Conclusion
 
@@ -290,14 +290,14 @@ The 66.2 dB end-state is approximately 19 dB below the 85 dB-A 8-hour NIOSH cont
 
 ## 9. References
 
-\[1\] Springer Nature. \(2024\). Fractional Proportionate Normalized FXLMS for Active Noise Control Systems. Journal of Control, Automation and Electrical Systems.
+[1] Springer Nature. (2024). Fractional Proportionate Normalized FXLMS for Active Noise Control Systems. Journal of Control, Automation and Electrical Systems.
 
-\[2\] MDPI Electronics. \(2025\). Low-Frequency Active Noise Control System Based on Feedback FXLMS. Electronics, 14\(7\), 1442.
+[2] MDPI Electronics. (2025). Low-Frequency Active Noise Control System Based on Feedback FXLMS. Electronics, 14(7), 1442.
 
-\[3\] ResearchGate. \(2019\). Active Noise Reduction using LMS and FxLMS Algorithms. IOP Conference Series: Journal of Physics, 1228\(1\).
+[3] ResearchGate. (2019). Active Noise Reduction using LMS and FxLMS Algorithms. IOP Conference Series: Journal of Physics, 1228(1).
 
-\[4\] ArXiv. \(2024\). Multichannel FxLMS Algorithm Implementation for Active Noise Control. arXiv:2402.09449.
+[4] ArXiv. (2024). Multichannel FxLMS Algorithm Implementation for Active Noise Control. arXiv:2402.09449.
 
-\[5\] Kuo, S.M. & Morgan, D.R. \(1996\). Active Noise Control Systems: Algorithms and DSP Implementations. Wiley.
+[5] Kuo, S.M. & Morgan, D.R. (1996). Active Noise Control Systems: Algorithms and DSP Implementations. Wiley.
 
-\[6\] Elliott, S.J. \(2001\). Signal Processing for Active Control. Academic Press. ISBN: 978-0122370854.
+[6] Elliott, S.J. (2001). Signal Processing for Active Control. Academic Press. ISBN: 978-0122370854.

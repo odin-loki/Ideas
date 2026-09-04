@@ -31,39 +31,39 @@ Defense Technology Research Division
 March 2026
 
 ## Abstract
-Conventional nutritional support in austere environments — total parenteral nutrition \(TPN\), oral feeding, or intravenous glucose — requires continuous administration infrastructure incompatible with mobile military operations, space exploration, and large-scale disaster response. This paper presents the engineering design and synthesis strategy for two novel sustained-release injectable nutrition platforms: GlycoDur-P, a PLGA microsphere-encapsulated glycoprotein providing approximately 200 g of glucose equivalent over 4–6 weeks via surface-differential enzymatic release, and NutriComplete-P, a comprehensive multi-domain protein scaffold providing complete macronutrient \(2000 kcal/day\), vitamin, and mineral support for six weeks following a single subcutaneous injection. We analyze protein architecture, controlled release kinetics, microsphere formulation via double emulsion techniques, recombinant manufacturing pathways, clinical development regulatory strategy, safety monitoring protocols, and applications across military, space, and critical care contexts. These systems represent a conceptual step-change from continuous-infusion to depot-injection nutrition delivery, with implications for field medicine, mass casualty management, and long-duration human operations in resource-denied environments.
+Conventional nutritional support in austere environments — total parenteral nutrition (TPN), oral feeding, or intravenous glucose — requires continuous administration infrastructure incompatible with mobile military operations, space exploration, and large-scale disaster response. This paper presents the engineering design and synthesis strategy for two novel sustained-release injectable nutrition platforms: GlycoDur-P, a PLGA microsphere-encapsulated glycoprotein providing approximately 200 g of glucose equivalent over 4–6 weeks via surface-differential enzymatic release, and NutriComplete-P, a comprehensive multi-domain protein scaffold providing complete macronutrient (2000 kcal/day), vitamin, and mineral support for six weeks following a single subcutaneous injection. We analyze protein architecture, controlled release kinetics, microsphere formulation via double emulsion techniques, recombinant manufacturing pathways, clinical development regulatory strategy, safety monitoring protocols, and applications across military, space, and critical care contexts. These systems represent a conceptual step-change from continuous-infusion to depot-injection nutrition delivery, with implications for field medicine, mass casualty management, and long-duration human operations in resource-denied environments.
 
-> **Critical safety finding — Tier-2 simulator §21.** The osmolality of the GlycoDur-P / NutriComplete-P formulations as proposed in this paper is computed at **3 037 mOsm/kg \(1 200 kcal/L baseline\)** and **4 436 mOsm/kg \(1 800 kcal/L field-ration\)**. Both values **fail the safe peripheral-IV bound of 600 mOsm/kg** \(by factors of 5.1× and 7.4× respectively\) and **fail the safe central-line bound of 1 800 mOsm/kg** \(by factors of 1.7× and 2.5× respectively\). As proposed, **the formulations are not safely infusible by any IV route**. The complete numerical result and remediation paths are documented in §0 immediately below. The remainder of the paper is preserved as the original engineering proposal; the IV-route safety bound is the dominant engineering constraint and must be addressed before any clinical translation.
+> **Critical safety finding — Tier-2 simulator §21.** The osmolality of the GlycoDur-P / NutriComplete-P formulations as proposed in this paper is computed at **3 037 mOsm/kg (1 200 kcal/L baseline)** and **4 436 mOsm/kg (1 800 kcal/L field-ration)**. Both values **fail the safe peripheral-IV bound of 600 mOsm/kg** (by factors of 5.1× and 7.4× respectively) and **fail the safe central-line bound of 1 800 mOsm/kg** (by factors of 1.7× and 2.5× respectively). As proposed, **the formulations are not safely infusible by any IV route**. The complete numerical result and remediation paths are documented in §0 immediately below. The remainder of the paper is preserved as the original engineering proposal; the IV-route safety bound is the dominant engineering constraint and must be addressed before any clinical translation.
 
 ---
 
-## 0. Computed Osmolality and Safe-Infusion Bound \(Tier-2 Simulator §21\)
+## 0. Computed Osmolality and Safe-Infusion Bound (Tier-2 Simulator §21)
 
 ### 0.1 Numerical Result
 
-The Plumb / Holliday–Segar osmolality model in `Weapons-Defence/weapons_simulation.py` evaluates the macronutrient + electrolyte composition of the formulations described in §§2–3 below against the published clinical safe-infusion bounds. Safe peripheral-IV bound: < 600 mOsm/kg \(venous endothelial chemical injury threshold\). Safe central-line bound: < 1 800 mOsm/kg \(Plumb / Holliday-Segar\).
+The Plumb / Holliday–Segar osmolality model in `Weapons-Defence/weapons_simulation.py` evaluates the macronutrient + electrolyte composition of the formulations described in §§2–3 below against the published clinical safe-infusion bounds. Safe peripheral-IV bound: < 600 mOsm/kg (venous endothelial chemical injury threshold). Safe central-line bound: < 1 800 mOsm/kg (Plumb / Holliday-Segar).
 
 **Formulation**
 **Osmolality**
 **Peripheral safe?**
 **Central safe?**
-Injectable Food baseline \(1 200 kcal/L\)
+Injectable Food baseline (1 200 kcal/L)
 
 3 037 mOsm/kg
 
-NO \(5.1× peripheral bound\)
+NO (5.1× peripheral bound)
 
-NO \(1.7× central bound\)
+NO (1.7× central bound)
 
-Injectable Food field-ration \(1 800 kcal/L\)
+Injectable Food field-ration (1 800 kcal/L)
 
 4 436 mOsm/kg
 
-NO \(7.4× peripheral bound\)
+NO (7.4× peripheral bound)
 
-NO \(2.5× central bound\)
+NO (2.5× central bound)
 
-0.9 % saline \(reference\)
+0.9 % saline (reference)
 
 308 mOsm/kg
 
@@ -71,33 +71,33 @@ YES
 
 YES
 
-Standard TPN \(reference\)
+Standard TPN (reference)
 
 2 280 mOsm/kg
 
 NO
 
-NO \(central-line only, conventional dual-lumen\)
+NO (central-line only, conventional dual-lumen)
 
 *Table 0: Computed osmolality, reproduced from `Weapons-Defence/weapons_sim_results.md` §21.*
 
 ### 0.2 Honest Framing
 
-The formulations as proposed are not safely infusible by any IV route — peripheral or central — without modification. This is the single most important engineering finding for this paper. It is a physiology limit driven by the osmotic-pressure differential across vascular endothelium: at 3 000+ mOsm/kg the formulation withdraws intracellular water from endothelial cells faster than the cells can osmoregulate, producing immediate cellular dehydration injury and downstream phlebitis, venous sclerosis, and \(with extravasation\) soft-tissue necrosis. Standard TPN at 2 280 mOsm/kg already requires central venous access specifically to manage these effects; the proposed Injectable Food formulations exceed standard TPN osmolality by 30–95 %.
+The formulations as proposed are not safely infusible by any IV route — peripheral or central — without modification. This is the single most important engineering finding for this paper. It is a physiology limit driven by the osmotic-pressure differential across vascular endothelium: at 3 000+ mOsm/kg the formulation withdraws intracellular water from endothelial cells faster than the cells can osmoregulate, producing immediate cellular dehydration injury and downstream phlebitis, venous sclerosis, and (with extravasation) soft-tissue necrosis. Standard TPN at 2 280 mOsm/kg already requires central venous access specifically to manage these effects; the proposed Injectable Food formulations exceed standard TPN osmolality by 30–95 %.
 
 ### 0.3 Remediation Paths
 
 Two concrete remediation paths are available; each preserves the *nutritional intent* of the programme while moving it onto a delivery technology with a physically supportable osmotic-pressure bound.
 
-**Remediation 1 — Dilute to ≤ 600 mOsm/kg for peripheral IV.** Reduce the formulation osmolality by a factor of approximately 5–7× through volume increase \(5.06× at the 1 200 kcal/L baseline; 7.4× at the 1 800 kcal/L field-ration\). The result is a continuous IV infusion requiring approximately 1 700–2 500 mL per 24-hour day at full nutritional load — not a depot injection. The central design advantage of the original concept \(single weekly or monthly injection vs continuous infusion\) is lost, but the configuration becomes compatible with peripheral venous access.
+**Remediation 1 — Dilute to ≤ 600 mOsm/kg for peripheral IV.** Reduce the formulation osmolality by a factor of approximately 5–7× through volume increase (5.06× at the 1 200 kcal/L baseline; 7.4× at the 1 800 kcal/L field-ration). The result is a continuous IV infusion requiring approximately 1 700–2 500 mL per 24-hour day at full nutritional load — not a depot injection. The central design advantage of the original concept (single weekly or monthly injection vs continuous infusion) is lost, but the configuration becomes compatible with peripheral venous access.
 
-**Remediation 2 — Redesign as an enteral / gastric formulation.** The osmotic-pressure constraint is specific to direct venous delivery; the gastrointestinal mucosa routinely handles chyme at 1 500+ mOsm/kg with no injury. Reformulating as a gastric-tube or jejunal-feed depot preserves the single-administration design intent, eliminates IV-catheter infection risk and infrastructure burden, and accepts the as-modelled osmolality with no further constraint. The principal cost is loss of the "patient cannot use the GI tract" use case \(approximately 30 % of the original document's market — primarily ICU patients with bowel injury or short-bowel syndrome\). For the remaining ~70 % of use cases — extended special operations, long-duration spaceflight, austere field medicine where IV infrastructure is the missing resource — the enteral redesign is strictly superior to the IV approach as originally proposed.
+**Remediation 2 — Redesign as an enteral / gastric formulation.** The osmotic-pressure constraint is specific to direct venous delivery; the gastrointestinal mucosa routinely handles chyme at 1 500+ mOsm/kg with no injury. Reformulating as a gastric-tube or jejunal-feed depot preserves the single-administration design intent, eliminates IV-catheter infection risk and infrastructure burden, and accepts the as-modelled osmolality with no further constraint. The principal cost is loss of the "patient cannot use the GI tract" use case (approximately 30 % of the original document's market — primarily ICU patients with bowel injury or short-bowel syndrome). For the remaining ~70 % of use cases — extended special operations, long-duration spaceflight, austere field medicine where IV infrastructure is the missing resource — the enteral redesign is strictly superior to the IV approach as originally proposed.
 
-A combined Phase I development path would prototype both: a peripheral-IV-compatible diluted formulation \(Remediation 1\) for the bowel-injury use case, and a gastric / jejunal depot \(Remediation 2\) for the no-IV-infrastructure use case. Both share the underlying nutrient-loaded protein engineering work described in §§2–3 below.
+A combined Phase I development path would prototype both: a peripheral-IV-compatible diluted formulation (Remediation 1) for the bowel-injury use case, and a gastric / jejunal depot (Remediation 2) for the no-IV-infrastructure use case. Both share the underlying nutrient-loaded protein engineering work described in §§2–3 below.
 
 ### 0.4 Status of the Rest of This Paper
 
-§§1–7 below are preserved as the original engineering proposal and are internally self-consistent at the protein-engineering level. The PLGA microsphere architecture, recombinant manufacturing pathway, nutrient-loading chemistry, and 6-week sustained-release kinetics are sound design work. What §0 changes is the *delivery-route* assumption: until the formulation is either diluted to peripheral-IV-safe osmolality \(Remediation 1\) or redesigned as an enteral product \(Remediation 2\), the IV-route deployment described in §6.1 \("Combat Trauma with Gastrointestinal Injury"\) is not safely possible. The IV-route bowel-injury use case requires Remediation 1; the §6.2 \(extended special operations\) and §6.3 \(space exploration\) use cases are well-served by Remediation 2 and gain operational advantages \(no IV catheter, no infection risk, no infusion-pump infrastructure\) from the enteral redesign.
+§§1–7 below are preserved as the original engineering proposal and are internally self-consistent at the protein-engineering level. The PLGA microsphere architecture, recombinant manufacturing pathway, nutrient-loading chemistry, and 6-week sustained-release kinetics are sound design work. What §0 changes is the *delivery-route* assumption: until the formulation is either diluted to peripheral-IV-safe osmolality (Remediation 1) or redesigned as an enteral product (Remediation 2), the IV-route deployment described in §6.1 ("Combat Trauma with Gastrointestinal Injury") is not safely possible. The IV-route bowel-injury use case requires Remediation 1; the §6.2 (extended special operations) and §6.3 (space exploration) use cases are well-served by Remediation 2 and gain operational advantages (no IV catheter, no infection risk, no infusion-pump infrastructure) from the enteral redesign.
 
 ---
 
@@ -105,13 +105,13 @@ A combined Phase I development path would prototype both: a peripheral-IV-compat
 
 ### 1.1 Nutritional Support in Austere Environments
 
-The maintenance of adequate nutrition under austere or resource-constrained conditions is a strategic enabler of sustained human performance. Military personnel on extended operations consume approximately 3,000–4,500 kcal/day \(Hoyt & Friedl, 2006\); adequate macronutrient and micronutrient supply is essential to maintain cognitive function, physical performance, wound healing, and immune competence. Current field nutrition relies on meals ready-to-eat \(MREs\), rations supplemented by water resupply, and in medical contexts, intravenous TPN administered via indwelling catheters requiring sterile handling and continuous pump infrastructure.
+The maintenance of adequate nutrition under austere or resource-constrained conditions is a strategic enabler of sustained human performance. Military personnel on extended operations consume approximately 3,000–4,500 kcal/day (Hoyt & Friedl, 2006); adequate macronutrient and micronutrient supply is essential to maintain cognitive function, physical performance, wound healing, and immune competence. Current field nutrition relies on meals ready-to-eat (MREs), rations supplemented by water resupply, and in medical contexts, intravenous TPN administered via indwelling catheters requiring sterile handling and continuous pump infrastructure.
 
-TPN represents the state-of-the-art for patients unable to eat or absorb nutrients enterally. However, TPN requires daily preparation, continuous IV access with its associated infection risk \(catheter-related bloodstream infections affect approximately 5–26% of TPN patients\), and pump equipment. A single-injection platform eliminating this infrastructure would be transformative across multiple high-value use cases: combat trauma with bowel injury, space missions beyond Earth orbit where resupply is impractical, prolonged mass casualty events overwhelming hospital capacity, and extended special operations where load carriage minimization is critical.
+TPN represents the state-of-the-art for patients unable to eat or absorb nutrients enterally. However, TPN requires daily preparation, continuous IV access with its associated infection risk (catheter-related bloodstream infections affect approximately 5–26% of TPN patients), and pump equipment. A single-injection platform eliminating this infrastructure would be transformative across multiple high-value use cases: combat trauma with bowel injury, space missions beyond Earth orbit where resupply is impractical, prolonged mass casualty events overwhelming hospital capacity, and extended special operations where load carriage minimization is critical.
 
 ### 1.2 Design Approach
 
-Both systems leverage two established technological foundations: recombinant protein engineering for nutrient-carrying scaffolds, and PLGA \(poly-lactic-co-glycolic acid\) microsphere controlled-release technology. PLGA is FDA-approved and has been in clinical use for decades in depot drug delivery systems \(e.g., leuprolide acetate, naltrexone\) with well-characterized release profiles tunable through molecular weight and lactide:glycolide ratio selection. The novelty lies in using these established delivery systems to encapsulate not small-molecule drugs but nutrient macromolecules engineered for controlled release kinetics matching physiological metabolic demand.
+Both systems leverage two established technological foundations: recombinant protein engineering for nutrient-carrying scaffolds, and PLGA (poly-lactic-co-glycolic acid) microsphere controlled-release technology. PLGA is FDA-approved and has been in clinical use for decades in depot drug delivery systems (e.g., leuprolide acetate, naltrexone) with well-characterized release profiles tunable through molecular weight and lactide:glycolide ratio selection. The novelty lies in using these established delivery systems to encapsulate not small-molecule drugs but nutrient macromolecules engineered for controlled release kinetics matching physiological metabolic demand.
 
 ## 2. GlycoDur-P: Sustained Glucose Delivery
 
@@ -119,11 +119,11 @@ Both systems leverage two established technological foundations: recombinant pro
 
 GlycoDur-P is designed around a modified glycogen-binding protein backbone with multiple glucose polymer chains covalently attached, yielding approximately 40% glucose content by weight — comparable to natural glycogen. The release architecture uses four structural elements in series:
 
-The glucose storage domain contains branched α-1,4 and α-1,6 glycosidic bonds providing both energy density and differential accessibility. Surface-exposed chains \(Week 1–2 release\) account for approximately 40% of total glucose. Intermediate domains \(Week 3–4\) contribute 35%. Core scaffold-bound glucose \(Week 5–6\) provides the remaining 25%.
+The glucose storage domain contains branched α-1,4 and α-1,6 glycosidic bonds providing both energy density and differential accessibility. Surface-exposed chains (Week 1–2 release) account for approximately 40% of total glucose. Intermediate domains (Week 3–4) contribute 35%. Core scaffold-bound glucose (Week 5–6) provides the remaining 25%.
 
-The slow-release framework uses β-sheet-rich regions inspired by casein's slow-release mechanism, with a hydrophobic core protecting inner glucose reserves from rapid enzymatic access. pH-responsive acetalated domains \(responsive over physiological pH range 6.5–7.4\) modulate glucose exposure rate through conformational swelling and contraction, enabling feedback coupling between interstitial pH \(which shifts with metabolic activity\) and release rate.
+The slow-release framework uses β-sheet-rich regions inspired by casein's slow-release mechanism, with a hydrophobic core protecting inner glucose reserves from rapid enzymatic access. pH-responsive acetalated domains (responsive over physiological pH range 6.5–7.4) modulate glucose exposure rate through conformational swelling and contraction, enabling feedback coupling between interstitial pH (which shifts with metabolic activity) and release rate.
 
-Strategic enzyme-cleavage sites \(trypsin, chymotrypsin consensus sequences\) allow gradual proteolytic exposure of deeper glucose layers, providing time-delayed accessibility tuned to approximate weeks-scale release rather than days-scale.
+Strategic enzyme-cleavage sites (trypsin, chymotrypsin consensus sequences) allow gradual proteolytic exposure of deeper glucose layers, providing time-delayed accessibility tuned to approximate weeks-scale release rather than days-scale.
 
 ### 2.2 Release Kinetics
 
@@ -148,11 +148,11 @@ Core scaffold breakdown by sustained protease activity
 
 ~25% of total glucose
 
-Target release rate: 4–6 g glucose/hour, matching hepatic glycogenolysis and exogenous glucose infusion rates used in clinical TPN \(typically 3–5 mg/kg/min\). Total glucose capacity per injection: approximately 200 g. Glycemic index estimated at approximately 32 \(comparable to isomaltulose\), minimizing insulin excursion relative to equivalent bolus glucose. This low GI profile results from the rate-limited enzymatic release rather than intrinsic glucose structure.
+Target release rate: 4–6 g glucose/hour, matching hepatic glycogenolysis and exogenous glucose infusion rates used in clinical TPN (typically 3–5 mg/kg/min). Total glucose capacity per injection: approximately 200 g. Glycemic index estimated at approximately 32 (comparable to isomaltulose), minimizing insulin excursion relative to equivalent bolus glucose. This low GI profile results from the rate-limited enzymatic release rather than intrinsic glucose structure.
 
 ### 2.3 Delivery Formulation
 
-GlycoDur-P is encapsulated in PLGA microspheres \(50:50 lactide:glycolide ratio, 50–100 kDa molecular weight, 50–100 μm particle diameter\) via double emulsion \(W/O/W\) technique with 10–20% protein loading by weight. The 50:50 PLGA ratio is selected for approximately 6-week erosion kinetics matching the 4–6 week glucose release target. Subcutaneous or intramuscular injection routes are both suitable; IM injection offers faster initial release due to higher vascularity and muscle enzyme activity.
+GlycoDur-P is encapsulated in PLGA microspheres (50:50 lactide:glycolide ratio, 50–100 kDa molecular weight, 50–100 μm particle diameter) via double emulsion (W/O/W) technique with 10–20% protein loading by weight. The 50:50 PLGA ratio is selected for approximately 6-week erosion kinetics matching the 4–6 week glucose release target. Subcutaneous or intramuscular injection routes are both suitable; IM injection offers faster initial release due to higher vascularity and muscle enzyme activity.
 
 ## 3. NutriComplete-P: Complete Nutritional Support
 
@@ -160,11 +160,11 @@ GlycoDur-P is encapsulated in PLGA microspheres \(50:50 lactide:glycolide ratio,
 
 NutriComplete-P employs a modular protein scaffold with distinct functional domains for each nutrient class, designed for complete nutritional autonomy over a six-week period from a single approximately 50 mL subcutaneous injection.
 
-The macronutrient delivery system comprises three sub-domains: \(1\) a modified albumin scaffold carrying all 20 amino acids with essential amino acid ratios optimized to WHO/FAO reference patterns, providing approximately 80 g protein equivalent per day; \(2\) an integrated glucose polymer carbohydrate domain adapted from GlycoDur-P architecture, providing approximately 250 g carbohydrate equivalent per day; and \(3\) an essential fatty acid carrier domain incorporating phospholipid-binding regions for omega-3 and omega-6 fatty acids and fat-soluble vitamin transport, providing approximately 70 g lipid equivalent per day. Combined: approximately 2,000 kcal/day for 42 days.
+The macronutrient delivery system comprises three sub-domains: (1) a modified albumin scaffold carrying all 20 amino acids with essential amino acid ratios optimized to WHO/FAO reference patterns, providing approximately 80 g protein equivalent per day; (2) an integrated glucose polymer carbohydrate domain adapted from GlycoDur-P architecture, providing approximately 250 g carbohydrate equivalent per day; and (3) an essential fatty acid carrier domain incorporating phospholipid-binding regions for omega-3 and omega-6 fatty acids and fat-soluble vitamin transport, providing approximately 70 g lipid equivalent per day. Combined: approximately 2,000 kcal/day for 42 days.
 
 ### 3.2 Vitamin Delivery Modules
 
-Fat-soluble vitamins \(A, D, E, K\) are housed in hydrophobic binding pockets within the protein core, co-released with lipid domains through proteolytic degradation. Water-soluble vitamins \(B-complex, C\) are incorporated in surface-accessible binding domains with pH-sensitive release mechanisms ensuring sustained delivery rather than a single bolus. Vitamin B12 receives dedicated carriers based on intrinsic factor structural motifs for bioavailability assurance.
+Fat-soluble vitamins (A, D, E, K) are housed in hydrophobic binding pockets within the protein core, co-released with lipid domains through proteolytic degradation. Water-soluble vitamins (B-complex, C) are incorporated in surface-accessible binding domains with pH-sensitive release mechanisms ensuring sustained delivery rather than a single bolus. Vitamin B12 receives dedicated carriers based on intrinsic factor structural motifs for bioavailability assurance.
 
 **Vitamin**
 **Daily Requirement**
@@ -208,7 +208,7 @@ Vitamin C
 
 3.78 g
 
-Ascorbate surface domain \(pH-sensitive\)
+Ascorbate surface domain (pH-sensitive)
 
 B-Complex
 
@@ -220,7 +220,7 @@ Multi-site B-vitamin complex domain
 
 ### 3.3 Mineral Delivery System
 
-Major minerals \(calcium, iron, magnesium, phosphorus\) are incorporated via protein domain analogs of natural mineral-binding proteins: calmodulin-like domains for calcium, transferrin-inspired carriers for iron \(preventing free Fe³⁺ oxidative toxicity\), ATP-binding site analogs for magnesium, and phosphate group reservoirs for phosphorus. Trace elements \(zinc, copper, selenium, iodine, chromium, manganese\) use metallothionein-like binding domains and thyroglobulin-inspired iodine carriers.
+Major minerals (calcium, iron, magnesium, phosphorus) are incorporated via protein domain analogs of natural mineral-binding proteins: calmodulin-like domains for calcium, transferrin-inspired carriers for iron (preventing free Fe³⁺ oxidative toxicity), ATP-binding site analogs for magnesium, and phosphate group reservoirs for phosphorus. Trace elements (zinc, copper, selenium, iodine, chromium, manganese) use metallothionein-like binding domains and thyroglobulin-inspired iodine carriers.
 
 ### 3.4 Complete Nutritional Profile
 
@@ -267,23 +267,23 @@ Caloric total
 
 ### 4.1 Protein Engineering Platform
 
-Both proteins are produced via recombinant expression. GlycoDur-P uses E. coli BL21\(DE3\) for initial development and Pichia pastoris for scale-up \(the yeast system provides superior post-translational modification capability relevant to glycoconjugate stability\). NutriComplete-P, with its complex multi-domain architecture and extensive post-translational nutrient loading, requires the P. pastoris expression system throughout. Target yield: 5–10 g/L culture for GlycoDur-P; 3–7 g/L for NutriComplete-P.
+Both proteins are produced via recombinant expression. GlycoDur-P uses E. coli BL21(DE3) for initial development and Pichia pastoris for scale-up (the yeast system provides superior post-translational modification capability relevant to glycoconjugate stability). NutriComplete-P, with its complex multi-domain architecture and extensive post-translational nutrient loading, requires the P. pastoris expression system throughout. Target yield: 5–10 g/L culture for GlycoDur-P; 3–7 g/L for NutriComplete-P.
 
-Protein engineering steps: \(1\) gene synthesis and codon optimization for the expression host; \(2\) cloning into expression vector with appropriate promoter and secretion signal; \(3\) transformation, clone selection, and fed-batch cultivation in 10,000 L bioreactor; \(4\) downstream purification via IMAC, ion exchange chromatography, and size exclusion chromatography to >99% purity; \(5\) nutrient loading under controlled pH and temperature conditions \(glucose conjugation via maleimide-thiol chemistry at pH 8.0, 4°C, 24 hours; sequential vitamin loading; chelation-controlled mineral incorporation in order Ca²⁺→Mg²⁺→Fe³⁺→trace elements\).
+Protein engineering steps: (1) gene synthesis and codon optimization for the expression host; (2) cloning into expression vector with appropriate promoter and secretion signal; (3) transformation, clone selection, and fed-batch cultivation in 10,000 L bioreactor; (4) downstream purification via IMAC, ion exchange chromatography, and size exclusion chromatography to >99% purity; (5) nutrient loading under controlled pH and temperature conditions (glucose conjugation via maleimide-thiol chemistry at pH 8.0, 4°C, 24 hours; sequential vitamin loading; chelation-controlled mineral incorporation in order Ca²⁺→Mg²⁺→Fe³⁺→trace elements).
 
 ### 4.2 Microsphere Formulation
 
-PLGA microspheres are prepared by double emulsion \(W/O/W\): the aqueous protein solution is emulsified into an organic PLGA/dichloromethane phase \(first emulsion\), then this primary emulsion is dispersed into an external aqueous phase containing PVA stabilizer \(second emulsion\). Solvent evaporation yields solid microspheres collected by centrifugation and lyophilized for stability. Key parameters: PLGA molecular weight 50–100 kDa, lactide:glycolide 50:50, protein loading 10–20% w/w, microsphere diameter 50–100 μm.
+PLGA microspheres are prepared by double emulsion (W/O/W): the aqueous protein solution is emulsified into an organic PLGA/dichloromethane phase (first emulsion), then this primary emulsion is dispersed into an external aqueous phase containing PVA stabilizer (second emulsion). Solvent evaporation yields solid microspheres collected by centrifugation and lyophilized for stability. Key parameters: PLGA molecular weight 50–100 kDa, lactide:glycolide 50:50, protein loading 10–20% w/w, microsphere diameter 50–100 μm.
 
-Quality control includes: in vitro dissolution testing per USP standards confirming release profile within specification; SDS-PAGE and LC-MS protein integrity verification; nutrient content quantification \(HPLC for vitamins, ICP-MS for minerals, Bradford/BCA for protein\); sterility and endotoxin testing to parenteral standards \(<0.25 EU/mL\).
+Quality control includes: in vitro dissolution testing per USP standards confirming release profile within specification; SDS-PAGE and LC-MS protein integrity verification; nutrient content quantification (HPLC for vitamins, ICP-MS for minerals, Bradford/BCA for protein); sterility and endotoxin testing to parenteral standards (<0.25 EU/mL).
 
 ## 5. Clinical Development and Safety
 
 ### 5.1 Regulatory Pathway
 
-Both systems are classified as combination drug-device products \(novel biologic drug in a device-like delivery system\) under FDA jurisdiction, requiring IND submission followed by a traditional three-phase clinical development program. The regulatory foundation is strong: recombinant protein therapeutics \(insulin, albumin, growth hormone\) and PLGA depot systems \(Lupron Depot, Vivitrol\) each have established safety profiles. The novelty requiring demonstration is the combination of complete nutrient delivery with sustained-release pharmacokinetics in a single product.
+Both systems are classified as combination drug-device products (novel biologic drug in a device-like delivery system) under FDA jurisdiction, requiring IND submission followed by a traditional three-phase clinical development program. The regulatory foundation is strong: recombinant protein therapeutics (insulin, albumin, growth hormone) and PLGA depot systems (Lupron Depot, Vivitrol) each have established safety profiles. The novelty requiring demonstration is the combination of complete nutrient delivery with sustained-release pharmacokinetics in a single product.
 
-Phase I trials \(n=20–40 healthy volunteers\) establish safety, biodistribution, and pharmacokinetics, determining maximum tolerated dose and confirming glucose release kinetics match prediction. Phase II \(n=100–200, target patient populations\) demonstrates efficacy in planned application groups \(GI disorder patients, ICU candidates\). Phase III \(n=500–2000, multi-center\) provides definitive safety and efficacy data for regulatory submission.
+Phase I trials (n=20–40 healthy volunteers) establish safety, biodistribution, and pharmacokinetics, determining maximum tolerated dose and confirming glucose release kinetics match prediction. Phase II (n=100–200, target patient populations) demonstrates efficacy in planned application groups (GI disorder patients, ICU candidates). Phase III (n=500–2000, multi-center) provides definitive safety and efficacy data for regulatory submission.
 
 ### 5.2 Patient Monitoring Protocol
 
@@ -300,7 +300,7 @@ Weeks 2–3
 
 Every other day
 
-Glucose, protein markers \(albumin, transferrin\), liver enzymes
+Glucose, protein markers (albumin, transferrin), liver enzymes
 
 Weeks 4–6
 
@@ -308,7 +308,7 @@ Weekly
 
 Comprehensive panel: vitamins, minerals, liver, kidney, CBC
 
-Emergency protocols include an injectable enzyme cocktail \(protease mixture\) for rapid protein breakdown if dose adjustment is required, with IV glucose/nutrition backup systems and standard TPN conversion protocols available.
+Emergency protocols include an injectable enzyme cocktail (protease mixture) for rapid protein breakdown if dose adjustment is required, with IV glucose/nutrition backup systems and standard TPN conversion protocols available.
 
 ### 5.3 Comparison with Current Standard of Care
 
@@ -342,25 +342,25 @@ Unrestricted
 
 Infection risk
 
-High \(daily IV access\)
+High (daily IV access)
 
-Low \(single injection\)
+Low (single injection)
 
-Low \(single injection\)
+Low (single injection)
 
 Staffing requirement
 
-High \(daily preparation\)
+High (daily preparation)
 
-Low \(one-time admin\)
+Low (one-time admin)
 
-Low \(one-time admin\)
+Low (one-time admin)
 
-Cost \(est.\)
+Cost (est.)
 
-High \(daily reagents \+ nursing\)
+High (daily reagents + nursing)
 
-Moderate \(batch manufacturing\)
+Moderate (batch manufacturing)
 
 Moderate
 
@@ -376,7 +376,7 @@ Special operations forces conducting extended infiltrations in denied areas face
 
 ### 6.3 Space Exploration
 
-Beyond-Earth-orbit missions \(lunar far side, Mars transit, asteroid operations\) face strict mass constraints precluding current food resupply architectures for durations beyond approximately 30 days. NutriComplete-P's 6-week complete nutritional support per injection, with mass estimated at approximately 300–400 g per injection, would represent a two-to-three order of magnitude improvement in nutritional support mass efficiency compared to current food systems \(~2 kg/day or ~84 kg for a 42-day mission\).
+Beyond-Earth-orbit missions (lunar far side, Mars transit, asteroid operations) face strict mass constraints precluding current food resupply architectures for durations beyond approximately 30 days. NutriComplete-P's 6-week complete nutritional support per injection, with mass estimated at approximately 300–400 g per injection, would represent a two-to-three order of magnitude improvement in nutritional support mass efficiency compared to current food systems (~2 kg/day or ~84 kg for a 42-day mission).
 
 ## 7. Portfolio §23 Lifecycle (service intervals)
 
@@ -511,20 +511,20 @@ At t = 1 008 hr: M_t ≈ 140 g (target ~150 g cumulative through week 6)
 ---
 
 ## References
-Anderson, J. M., & Shive, M. S. \(1997\). Biodegradation and biocompatibility of PLA and PLGA microspheres. Advanced Drug Delivery Reviews, 28\(1\), 5–24.
+Anderson, J. M., & Shive, M. S. (1997). Biodegradation and biocompatibility of PLA and PLGA microspheres. Advanced Drug Delivery Reviews, 28(1), 5–24.
 
-Barbosa-Canovas, G. V., & Vega-Mercado, H. \(1996\). Dehydration of Foods. Chapman and Hall.
+Barbosa-Canovas, G. V., & Vega-Mercado, H. (1996). Dehydration of Foods. Chapman and Hall.
 
-Bismuth, M., et al. \(2013\). Nutritional status in the ICU: ESPEN recommendations. Clinical Nutrition, 30\(5\), 623–629.
+Bismuth, M., et al. (2013). Nutritional status in the ICU: ESPEN recommendations. Clinical Nutrition, 30(5), 623–629.
 
-Danhier, F., et al. \(2012\). PLGA-based nanoparticles: An overview of biomedical applications. Journal of Controlled Release, 161\(2\), 505–522.
+Danhier, F., et al. (2012). PLGA-based nanoparticles: An overview of biomedical applications. Journal of Controlled Release, 161(2), 505–522.
 
-Hoyt, R. W., & Friedl, K. E. \(2006\). Military nutrition requirements and performance standards. Nutrition and Enhanced Sports Performance, 507–514.
+Hoyt, R. W., & Friedl, K. E. (2006). Military nutrition requirements and performance standards. Nutrition and Enhanced Sports Performance, 507–514.
 
-Jain, R. A. \(2000\). The manufacturing techniques of various drug loaded biodegradable poly\(lactide-co-glycolide\) \(PLGA\) devices. Biomaterials, 21\(23\), 2475–2490.
+Jain, R. A. (2000). The manufacturing techniques of various drug loaded biodegradable poly(lactide-co-glycolide) (PLGA) devices. Biomaterials, 21(23), 2475–2490.
 
-Pironi, L., et al. \(2016\). ESPEN guidelines on chronic intestinal failure in adults. Clinical Nutrition, 35\(2\), 247–307.
+Pironi, L., et al. (2016). ESPEN guidelines on chronic intestinal failure in adults. Clinical Nutrition, 35(2), 247–307.
 
-Uhrich, K. E., et al. \(1999\). Polymeric systems for controlled drug release. Chemical Reviews, 99\(11\), 3181–3198.
+Uhrich, K. E., et al. (1999). Polymeric systems for controlled drug release. Chemical Reviews, 99(11), 3181–3198.
 
-Zaloga, G. P. \(2006\). Parenteral nutrition in adult inpatients with functioning gastrointestinal tracts. Lancet, 367\(9516\), 1101–1111.
+Zaloga, G. P. (2006). Parenteral nutrition in adult inpatients with functioning gastrointestinal tracts. Lancet, 367(9516), 1101–1111.

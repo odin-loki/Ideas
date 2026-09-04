@@ -12,7 +12,7 @@ A forged steel blank for a rifle receiver, a breech block, a vehicle suspension 
 
 Near-net-shape forging is not a new concept, but its combination with capable hard machining is. The idea is to design the forging die such that the blank leaving the forge is already close to final geometry — correct external profile, core features roughed in, minimal excess stock — and to quench and temper the component immediately after forging while the metallurgy is already at temperature. The part arrives at the machining cell already at its service hardness, typically HRC 52–64 for high-performance tool and alloy steels used in defence applications, with perhaps 0.5–2.0 mm of stock on critical surfaces rather than the 5–10 mm of stock on a conventionally over-forged soft blank.
 
-Until recently, this approach was impractical at scale because no carbide tooling could survive production machining at HRC 55\+ with acceptable tool life. CBN could, but CBN cannot be run in the small-diameter, complex-geometry end mill formats that defence component features demand. So the industry kept annealing and re-hardening, absorbing the cost because there was no alternative.
+Until recently, this approach was impractical at scale because no carbide tooling could survive production machining at HRC 55+ with acceptable tool life. CBN could, but CBN cannot be run in the small-diameter, complex-geometry end mill formats that defence component features demand. So the industry kept annealing and re-hardening, absorbing the cost because there was no alternative.
 
 Advanced hard machining carbide systems capable of working up to HRC 70 change that calculus entirely.
 
@@ -48,15 +48,15 @@ Modelling the full cost differential across these categories for the representat
 
 Raw material waste per part
 
-1.7 kg \(~AUD $17\)
+1.7 kg (~AUD $17)
 
-0.3 kg \(~AUD $3\)
+0.3 kg (~AUD $3)
 
 Furnace cycles required
 
-2 \(anneal \+ harden\)
+2 (anneal + harden)
 
-0 \(in-line quench at forge\)
+0 (in-line quench at forge)
 
 Furnace time per batch
 
@@ -82,13 +82,13 @@ QA documentation events
 
 1 – 2 hold points
 
-Total processing cost \(per part\)
+Total processing cost (per part)
 
 AUD $340 – $420
 
 AUD $190 – $240
 
-Lead time \(forge to inspection-ready\)
+Lead time (forge to inspection-ready)
 
 18 – 26 working days
 
@@ -114,7 +114,7 @@ None of the above numbers are achievable without tooling capable of performing r
 
 - Entry cuts into scale and decarburised surface layer at full hardness — typically the most aggressive condition, where thermal shock and abrasion combine. Trochoidal toolpath strategies absorb this by keeping radial engagement low and arc entry smooth, but the tool must survive it.
 - Deep cavity features — locking recesses, pin bores, gas escape channels — machined at full HRC with small-diameter tooling where tool deflection and vibration are severe. Negative rake geometries with high flute counts address this by distributing cutting load and stiffening the effective cutting system.
-- Tight tolerances to finished dimension without a subsequent grinding step on non-critical surfaces. A hard milling system running at appropriate parameters on a rigid machine \(HMC or 5-axis VMC with HSK-A63 spindle, minimum 40 kN spindle bearing preload\) can achieve IT7 tolerance and Ra 0.4–0.8 µm surface finish directly from milling — adequate for the majority of defence component functional surfaces.
+- Tight tolerances to finished dimension without a subsequent grinding step on non-critical surfaces. A hard milling system running at appropriate parameters on a rigid machine (HMC or 5-axis VMC with HSK-A63 spindle, minimum 40 kN spindle bearing preload) can achieve IT7 tolerance and Ra 0.4–0.8 µm surface finish directly from milling — adequate for the majority of defence component functional surfaces.
 
 **Beyond Unit Cost — The Strategic Value of Compressed Lead Time**
 

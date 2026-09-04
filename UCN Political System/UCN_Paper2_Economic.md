@@ -8,7 +8,7 @@ Version 1.0 | 2025
 
 ## Abstract
 
-This paper details the economic and industrial policy framework of the United Commonwealth Nations \(UCN\) doctrine. UCN proposes a dual-track economic architecture: a domestically-stable, conventional banking and housing system insulated from global financial volatility, alongside an internationally-oriented crypto-denominated trading system that decouples the nation from foreign currency exposure. The paper examines UCN's industrial sovereignty mandate — the principle of maintaining at least one domestic enterprise in every critical manufacturing sector — alongside its approach to intellectual property, government enterprise, wealth distribution, citizen-only share ownership, housing protection, and resource management. The analysis draws on contemporary research in industrial policy, monetary economics, and comparative political economy.
+This paper details the economic and industrial policy framework of the United Commonwealth Nations (UCN) doctrine. UCN proposes a dual-track economic architecture: a domestically-stable, conventional banking and housing system insulated from global financial volatility, alongside an internationally-oriented crypto-denominated trading system that decouples the nation from foreign currency exposure. The paper examines UCN's industrial sovereignty mandate — the principle of maintaining at least one domestic enterprise in every critical manufacturing sector — alongside its approach to intellectual property, government enterprise, wealth distribution, citizen-only share ownership, housing protection, and resource management. The analysis draws on contemporary research in industrial policy, monetary economics, and comparative political economy.
 
   
 
@@ -75,7 +75,7 @@ Software developed with public funding is subject to mandatory open-source licen
 
 ## 5. Citizen-Only Share Ownership
 
-UCN mandates that shares in Australian-registered companies may be held only by Australian citizens, with the exception of a class of specifically-licensed foreign trading entities \(the first of which is established by the government\). This measure serves two purposes.
+UCN mandates that shares in Australian-registered companies may be held only by Australian citizens, with the exception of a class of specifically-licensed foreign trading entities (the first of which is established by the government). This measure serves two purposes.
 
 First, it aligns corporate incentives with national outcomes. When shareholders are citizens, the financial performance of Australian companies translates directly into wealth accumulation for the Australian population rather than for foreign investors.
 
@@ -139,24 +139,24 @@ The unifying principle is sovereignty: Australian citizens should own, control, 
 
 
 ## References
-Australian Nuclear Science and Technology Organisation \(ANSTO\). \(2024\). Annual Report. Lucas Heights, NSW: ANSTO.
+Australian Nuclear Science and Technology Organisation (ANSTO). (2024). Annual Report. Lucas Heights, NSW: ANSTO.
 
-CSIRO & AEMO. \(2024\). GenCost 2023-24 Draft Report. Melbourne: CSIRO.
+CSIRO & AEMO. (2024). GenCost 2023-24 Draft Report. Melbourne: CSIRO.
 
-Frontier Economics. \(2024\). Economic Analysis of Including Nuclear Power in the NEM. Melbourne: Frontier Economics.
+Frontier Economics. (2024). Economic Analysis of Including Nuclear Power in the NEM. Melbourne: Frontier Economics.
 
-IMF. \(2023\). World Economic Outlook. Washington D.C.: International Monetary Fund.
+IMF. (2023). World Economic Outlook. Washington D.C.: International Monetary Fund.
 
-Minerals Council of Australia. \(2023\). Small Modular Reactors in the Australian Context. Canberra: MCA.
+Minerals Council of Australia. (2023). Small Modular Reactors in the Australian Context. Canberra: MCA.
 
-Nakamoto, S. \(2008\). Bitcoin: A Peer-to-Peer Electronic Cash System. Bitcoin.org.
+Nakamoto, S. (2008). Bitcoin: A Peer-to-Peer Electronic Cash System. Bitcoin.org.
 
-OECD. \(2023\). Going for Growth. Paris: OECD Publishing.
+OECD. (2023). Going for Growth. Paris: OECD Publishing.
 
-Piketty, T. \(2014\). Capital in the Twenty-First Century. Cambridge, MA: Harvard University Press.
+Piketty, T. (2014). Capital in the Twenty-First Century. Cambridge, MA: Harvard University Press.
 
-Productivity Commission. \(2023\). 5-Year Productivity Inquiry. Canberra: Australian Government.
+Productivity Commission. (2023). 5-Year Productivity Inquiry. Canberra: Australian Government.
 
-Stiglitz, J. \(2002\). Globalisation and its Discontents. New York: W.W. Norton.
+Stiglitz, J. (2002). Globalisation and its Discontents. New York: W.W. Norton.
 
-Treasury, Australian Government. \(2023\). Intergenerational Report. Canberra: Australian Government.
+Treasury, Australian Government. (2023). Intergenerational Report. Canberra: Australian Government.
