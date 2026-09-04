@@ -83,11 +83,11 @@ Multi-scale structure produces substantial gains specifically on **multi-modal**
 
 ## 🔗 Related work in this repo
 
-- [`Statistical Scheduler/`](../Statistical%20Scheduler/) — neural-heuristic distributed task scheduler (CFS / LinTS / PID); shares the homeostatic / control-theoretic framing
-- [`Cell AI/`](../Cell%20AI/) — biologically-inspired sequence model with homeostatic-style metaplasticity layer
-- [`VDJ Inspired Algorithm/`](../VDJ%20Inspired%20Algorithm/) — alternative bio-inspired optimisation
-- [`Fungal Network Algorithm/`](../Fungal%20Network%20Algorithm/) — bio-inspired routing / growth optimisation
-- [`Electromechnical Inspired Algorithms/`](../Electromechnical%20Inspired%20Algorithms/) — historical computing devices reframed algorithmically
+- [`../Statistical Scheduler/`](../Statistical%20Scheduler/) — neural-heuristic distributed task scheduler (CFS / LinTS / PID); shares the homeostatic / control-theoretic framing
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired sequence model with homeostatic-style metaplasticity layer
+- [`../VDJ Inspired Algorithm/`](../VDJ%20Inspired%20Algorithm/) — alternative bio-inspired optimisation
+- [`../Fungal Network Algorithm/`](../Fungal%20Network%20Algorithm/) — bio-inspired routing / growth optimisation
+- [`../Electromechnical Inspired Algorithms/`](../Electromechnical%20Inspired%20Algorithms/) — historical computing devices reframed algorithmically
 
 ---
 

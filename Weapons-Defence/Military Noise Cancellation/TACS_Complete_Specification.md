@@ -2814,7 +2814,7 @@ Costs are expressed in **AUD 2026** at current MEMS microphone, DSP, COTS speake
 - **500 systems/yr** — full ADF armoured fleet rollout over a 5-year programme (Abrams + AS21 Redback + Bushmaster fleet)
 - **2 000 systems/yr** — AUKUS-export-inclusive production rate (Australia + US + UK combined armoured-vehicle fleet annual demand)
 
-Performance values are taken from the [`weapons_sim_results.md`](../weapons_sim_results.md) §18 Nelson–Elliott cancellation-depth model: A-weighted broadband cancellation of **36.3 dB (Personal), 36.0 dB (Mobile), 32.4 dB (Fixed)** across the 125 Hz – 4 kHz frequency band, with the characteristic 6 dB / octave high-frequency roll-off captured in the per-octave columns of the §18 table.
+Performance values are taken from the [`../weapons_sim_results.md`](../weapons_sim_results.md) §18 Nelson–Elliott cancellation-depth model: A-weighted broadband cancellation of **36.3 dB (Personal), 36.0 dB (Mobile), 32.4 dB (Fixed)** across the 125 Hz – 4 kHz frequency band, with the characteristic 6 dB / octave high-frequency roll-off captured in the per-octave columns of the §18 table.
 
 ### 7.2 TACS-Personal BOM (operator-portable, 16-element array)
 

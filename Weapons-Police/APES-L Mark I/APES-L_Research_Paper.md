@@ -366,9 +366,9 @@ The system is positioned for Phase 1 material validation in an independent NIJ-a
 
 [21] Australian Defence Apparel. (2024). DFNDR system launch. Land Forces Expo, September 2024.
 
-[22] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
+[22] NACS-TOTAL System Specification v2.0. (2026). Complete Sealed Warfare System — 72-Hour Extended Operations Package. See [`../../Weapons-Defence/NACS CBRN/NACS_Specification.md`](../../Weapons-Defence/NACS%20CBRN/NACS_Specification.md).
 
-[23] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../Weapons-Defence/APES Body Armour/APES_Specification.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md).
+[23] APES Specification — Military Variant. (2026). Document TRP-2026-006. See [`../../Weapons-Defence/APES Body Armour/APES_Specification.md`](../../Weapons-Defence/APES%20Body%20Armour/APES_Specification.md) and [`../../Weapons-Defence/APES Body Armour/APES_Research_Paper.md`](../../Weapons-Defence/APES%20Body%20Armour/APES_Research_Paper.md).
 
 ---
 

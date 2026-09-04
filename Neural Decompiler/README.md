@@ -70,11 +70,11 @@ The bundled synthetic corpus only validates the pipeline (forward pass, shape ch
 
 ## 🔗 Related work in this repo
 
-- [`Cell AI/`](../Cell%20AI/) — alternative non-attention sequence backbone with multi-domain MoE-style routing
-- [`Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context memory architecture
-- [`NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework efficiency techniques
-- [`Cypha/`](../Cypha/) — Harmonic Recursive Neural Architecture; full ML stack
-- [`Compression Algorithms/`](../Compression%20Algorithms/) — model-level compression theory (NMP, GRIA, Izaac)
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — alternative non-attention sequence backbone with multi-domain MoE-style routing
+- [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context memory architecture
+- [`../NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework efficiency techniques
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — Harmonic Recursive Neural Architecture; full ML stack
+- [`../Compression Algorithms/`](../Compression%20Algorithms/) — model-level compression theory (NMP, GRIA, Izaac)
 
 ---
 

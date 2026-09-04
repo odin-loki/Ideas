@@ -31,7 +31,7 @@ Sub-platform simulations:
 
 | Subfolder | Simulator |
 |---|---|
-| [`PODS- Edible High Energy Protein/`](PODS-%20Edible%20High%20Energy%20Protein/) | Standalone [`pods_simulation.py`](PODS-%20Edible%20High%20Energy%20Protein/pods_simulation.py) |
+| [`PODS- Edible High Energy Protein/`](PODS-%20Edible%20High%20Energy%20Protein/) | Standalone [`PODS- Edible High Energy Protein/pods_simulation.py`](PODS-%20Edible%20High%20Energy%20Protein/pods_simulation.py) |
 | [`ASNP Sports Nutrition/`](ASNP%20Sports%20Nutrition/) | Prose formulation numbers; see [`ASNP Sports Nutrition/SIM_README.md`](ASNP%20Sports%20Nutrition/SIM_README.md) |
 
 ---

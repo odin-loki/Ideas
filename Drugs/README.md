@@ -46,17 +46,17 @@ Speculative cognitive enhancers with chemical structures, mechanism-of-action no
 
 | Compound | Concept |
 |---|---|
-| [`cognicline_research.md`](Nootropics/cognicline_research.md), [`cognicline_CX2847_research_paper.md`](Nootropics/cognicline_CX2847_research_paper.md) | **Cognicline (CX-2847)** — modified quinuclidine targeting α7 / α4β2 nicotinic AChR; positive allosteric modulation of acetylcholine signalling |
-| [`cognimax_pro_research_paper.md`](Nootropics/cognimax_pro_research_paper.md) | CogniMax Pro |
-| [`cognitive_enhancement_for_those_on_antipsychotics.md`](Nootropics/cognitive_enhancement_for_those_on_antipsychotics.md) | Cognitive support compatible with antipsychotic treatment |
+| [`Nootropics/cognicline_research.md`](Nootropics/cognicline_research.md), [`Nootropics/cognicline_CX2847_research_paper.md`](Nootropics/cognicline_CX2847_research_paper.md) | **Cognicline (CX-2847)** — modified quinuclidine targeting α7 / α4β2 nicotinic AChR; positive allosteric modulation of acetylcholine signalling |
+| [`Nootropics/cognimax_pro_research_paper.md`](Nootropics/cognimax_pro_research_paper.md) | CogniMax Pro |
+| [`Nootropics/cognitive_enhancement_for_those_on_antipsychotics.md`](Nootropics/cognitive_enhancement_for_those_on_antipsychotics.md) | Cognitive support compatible with antipsychotic treatment |
 
 ### [`Schizophrenia Cure/`](Schizophrenia%20Cure/) — Speculative therapeutic compounds for schizophrenia
 
 | Compound | Mechanism (speculative) |
 |---|---|
-| [`NeuroBridge-7.md`](Schizophrenia%20Cure/NeuroBridge-7.md), [`neurobridge7_research_paper.md`](Schizophrenia%20Cure/neurobridge7_research_paper.md) | **NeuroBridge-7** — partial allosteric NMDA modulator; activity-dependent up/down regulation; promotes BDNF release |
-| [`neuroreset7.md`](Schizophrenia%20Cure/neuroreset7.md), [`neuroreset7_research_paper.md`](Schizophrenia%20Cure/neuroreset7_research_paper.md) | **NeuroReset-7** |
-| [`neurofoskin_7_synthesis.md`](Schizophrenia%20Cure/neurofoskin_7_synthesis.md), [`neurofoskin7_research_paper.md`](Schizophrenia%20Cure/neurofoskin7_research_paper.md), [`neurofoskin_7_complete.md`](Schizophrenia%20Cure/neurofoskin_7_complete.md) | **NeuroFoskin-7** synthesis, paper, complete write-up |
+| [`Schizophrenia Cure/NeuroBridge-7.md`](Schizophrenia%20Cure/NeuroBridge-7.md), [`Schizophrenia Cure/neurobridge7_research_paper.md`](Schizophrenia%20Cure/neurobridge7_research_paper.md) | **NeuroBridge-7** — partial allosteric NMDA modulator; activity-dependent up/down regulation; promotes BDNF release |
+| [`Schizophrenia Cure/neuroreset7.md`](Schizophrenia%20Cure/neuroreset7.md), [`Schizophrenia Cure/neuroreset7_research_paper.md`](Schizophrenia%20Cure/neuroreset7_research_paper.md) | **NeuroReset-7** |
+| [`Schizophrenia Cure/neurofoskin_7_synthesis.md`](Schizophrenia%20Cure/neurofoskin_7_synthesis.md), [`Schizophrenia Cure/neurofoskin7_research_paper.md`](Schizophrenia%20Cure/neurofoskin7_research_paper.md), [`Schizophrenia Cure/neurofoskin_7_complete.md`](Schizophrenia%20Cure/neurofoskin_7_complete.md) | **NeuroFoskin-7** synthesis, paper, complete write-up |
 
 ---
 
@@ -130,10 +130,10 @@ This work connects to:
 
 ## 📖 See Also
 
-- [`Beauty Products/`](../Beauty%20Products/) — formulation science
-- [`Cocktails/`](../Cocktails/) — systematic prep frameworks
-- [`Weapons-Defence/`](../Weapons-Defence/) — defence framing of `Combat Drug.md` / `Injectable Food.md`
-- [`Cell AI/`](../Cell%20AI/) — modular architectures
+- [`../Beauty Products/`](../Beauty%20Products/) — formulation science
+- [`../Cocktails/`](../Cocktails/) — systematic prep frameworks
+- [`../Weapons-Defence/`](../Weapons-Defence/) — defence framing of `Combat Drug.md` / `Injectable Food.md`
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — modular architectures
 
 ---
 

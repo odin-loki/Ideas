@@ -17,10 +17,10 @@ A long design-conversation log, plus a `Fungal Network v1/` subfolder with three
 
 | File | Role |
 |---|---|
-| [`Fungal NA Intro.md`](Fungal%20Network%20v1/Fungal%20NA%20Intro.md) | "Bio-Inspired Network Algorithm: From Fungi to Computation" — design philosophy, novel techniques, applications. Pattern recognition by physical reorganisation; geometric state evolution; resource-driven decisions. |
-| [`Fungal NA Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Math%20Model.md) | Single-instance mathematical model |
-| [`Fungal NA Parallel Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Parallel%20Math%20Model.md) | Parallel / distributed extension of the math model |
-| [`FungalNA.py`](Fungal%20Network%20v1/FungalNA.py) | Python reference implementation |
+| [`Fungal Network v1/Fungal NA Intro.md`](Fungal%20Network%20v1/Fungal%20NA%20Intro.md) | "Bio-Inspired Network Algorithm: From Fungi to Computation" — design philosophy, novel techniques, applications. Pattern recognition by physical reorganisation; geometric state evolution; resource-driven decisions. |
+| [`Fungal Network v1/Fungal NA Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Math%20Model.md) | Single-instance mathematical model |
+| [`Fungal Network v1/Fungal NA Parallel Math Model.md`](Fungal%20Network%20v1/Fungal%20NA%20Parallel%20Math%20Model.md) | Parallel / distributed extension of the math model |
+| [`Fungal Network v1/FungalNA.py`](Fungal%20Network%20v1/FungalNA.py) | Python reference implementation |
 
 > Earlier README copy listed `Fungal NA Parallel Math Model.md` at the top level of this folder — it is actually inside `Fungal Network v1/` along with the other math files.
 
@@ -47,7 +47,7 @@ This makes the algorithm structurally different from standard graph / ant-colony
 
 ## 🔗 Related work in this repo
 
-- [`../Cell AI/`](../Cell%20AI/) — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity)
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity)
 - [`../VDJ Inspired Algorithm/`](../VDJ%20Inspired%20Algorithm/) — immune-inspired combinatorial pattern recognition
 - [`../Statistical Scheduler/`](../Statistical%20Scheduler/) — neural-heuristic distributed task scheduler (LinTS / PID / CFS)
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — distributed multi-target tracking

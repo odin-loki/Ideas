@@ -42,7 +42,7 @@ The single-instance model (`Fungal NA Math Model.md`) covers a single self-organ
 ## 🔗 Related work in this repo
 
 - [`../`](../) — Fungal Network Algorithm parent folder (design-conversation log + this v1 directory)
-- [`../../Cell AI/`](../../Cell%20AI/) — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity)
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired non-attention sequence modelling (CellularPDE, Hebbian plasticity)
 - [`../../VDJ Inspired Algorithm/`](../../VDJ%20Inspired%20Algorithm/) — immune-inspired combinatorial pattern recognition
 - [`../../Statistical Scheduler/`](../../Statistical%20Scheduler/) — neural-heuristic distributed task scheduler (LinTS / PID / CFS)
 - [`../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — distributed multi-target tracking (ARIA-INTEL)

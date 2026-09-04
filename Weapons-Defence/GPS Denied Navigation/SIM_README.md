@@ -70,7 +70,7 @@ All parameters live in [`agins_sim_package/agins_sim/config.py`](agins_sim_packa
 
 ### Filter — dual documentation track
 
-The [`Filtering/`](../../Filtering/) folder documents GH-SR-IMM for **multi-target tracking** (GH-JPDA, GOSPA benchmarks). AGINS applies the same NIG + IMM + square-root core to **single-platform navigation fusion** with navigation-specific adapters (GRIA α gate, scalar PDR speed observation, MagNav map interface). Use **Filtering** papers for filter mathematics; use **this package** for navigation scenario numbers.
+The [`../../Filtering/`](../../Filtering/) folder documents GH-SR-IMM for **multi-target tracking** (GH-JPDA, GOSPA benchmarks). AGINS applies the same NIG + IMM + square-root core to **single-platform navigation fusion** with navigation-specific adapters (GRIA α gate, scalar PDR speed observation, MagNav map interface). Use **Filtering** papers for filter mathematics; use **this package** for navigation scenario numbers.
 
 ---
 

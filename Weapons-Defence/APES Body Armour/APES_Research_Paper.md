@@ -188,7 +188,7 @@ The Advanced Protective Equipment System provides comprehensive multi-zone prote
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the APES V50, BFD, obliquity, and thermal-management numbers cited in §8. Calibration constants are taken from `weapons_sim_results.md` §13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the APES V50, BFD, obliquity, and thermal-management numbers cited in §8. Calibration constants are taken from `weapons_sim_results.md` §13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 V50 ballistic limit — Lambert–Jonas / Recht–Ipson
 

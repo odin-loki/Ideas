@@ -36,13 +36,13 @@ AGINS is a **complete platform subfolder**: operator specification, dedicated Py
 
 | Module | File | Role |
 |---|---|---|
-| Filter | [`filter/gh_sr_imm.py`](agins_sim_package/agins_sim/filter/gh_sr_imm.py) | GH-SR-IMM: NIG posterior, SR-CKF, IMM bank, GRIA α gate |
-| Baseline KF | [`filter/standard_kf.py`](agins_sim_package/agins_sim/filter/standard_kf.py) | Standard Kalman comparison track |
-| Ship platform | [`platforms/ship.py`](agins_sim_package/agins_sim/platforms/ship.py) | FOG-grade maritime Monte Carlo (clear sky, storm) |
-| Soldier platform | [`platforms/soldier.py`](agins_sim_package/agins_sim/platforms/soldier.py) | MEMS dismounted Monte Carlo (open, urban, mixed) |
-| Environments | [`scenarios/environments.py`](agins_sim_package/agins_sim/scenarios/environments.py) | Sky fraction, urban magnetic disturbance, night flags |
-| Sensors | [`sensors/`](agins_sim_package/agins_sim/sensors/) | Celestial, MagNav, polar compass, PDR speed, IMU |
-| Config | [`config.py`](agins_sim_package/agins_sim/config.py) | Platform parameters and scenario seeds |
+| Filter | [`agins_sim_package/agins_sim/filter/gh_sr_imm.py`](agins_sim_package/agins_sim/filter/gh_sr_imm.py) | GH-SR-IMM: NIG posterior, SR-CKF, IMM bank, GRIA α gate |
+| Baseline KF | [`agins_sim_package/agins_sim/filter/standard_kf.py`](agins_sim_package/agins_sim/filter/standard_kf.py) | Standard Kalman comparison track |
+| Ship platform | [`agins_sim_package/agins_sim/platforms/ship.py`](agins_sim_package/agins_sim/platforms/ship.py) | FOG-grade maritime Monte Carlo (clear sky, storm) |
+| Soldier platform | [`agins_sim_package/agins_sim/platforms/soldier.py`](agins_sim_package/agins_sim/platforms/soldier.py) | MEMS dismounted Monte Carlo (open, urban, mixed) |
+| Environments | [`agins_sim_package/agins_sim/scenarios/environments.py`](agins_sim_package/agins_sim/scenarios/environments.py) | Sky fraction, urban magnetic disturbance, night flags |
+| Sensors | [`agins_sim_package/agins_sim/sensors/`](agins_sim_package/agins_sim/sensors/) | Celestial, MagNav, polar compass, PDR speed, IMU |
+| Config | [`agins_sim_package/agins_sim/config.py`](agins_sim_package/agins_sim/config.py) | Platform parameters and scenario seeds |
 | Report | `reports/generate.py` | Markdown + JSON consolidated output *(via `run_all.py`)* |
 
 ---
@@ -112,6 +112,6 @@ python platform_simulation.py --json
 - **Separate simulator.** Do not expect AGINS rows in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 - **Accuracy gap vs GPS.** 10–30× worse than military GPS in nominal conditions; decisive advantage is **operation in GPS-denied environments** where GPS gives zero.
 - **Urban ceiling.** ~60 m mean error without visual odometry or map matching; remedies documented in Part VII of the specification.
-- **Filter provenance.** GH-SR-IMM is shared with the [`Filtering/`](../../Filtering/) research folder; navigation-specific IMM tuning and GRIA gate thresholds are AGINS trade secrets in the spec.
+- **Filter provenance.** GH-SR-IMM is shared with the [`../../Filtering/`](../../Filtering/) research folder; navigation-specific IMM tuning and GRIA gate thresholds are AGINS trade secrets in the spec.
 
 [← Weapons-Defence](../README.md)

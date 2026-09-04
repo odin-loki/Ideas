@@ -4,7 +4,7 @@
 **Revision:** 1.0  
 **Classification:** UNCLASSIFIED // FOR OFFICIAL USE ONLY  
 **Author:** O. Loch, Independent Defense Research, Sydney, Australia  
-**Cross-references:** [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md) · [`../../GPS Denied Navigation/papers/AGINS_Research_Paper.md`](../../GPS%20Denied%20Navigation/papers/AGINS_Research_Paper.md) · [`../../GPS Denied Navigation/papers/AGINS_Specification.md`](../../GPS%20Denied%20Navigation/papers/AGINS_Specification.md) · [`../../Common Architecture and Components.md`](../../Common%20Architecture%20and%20Components.md)
+**Cross-references:** [`ORCA_System_Specification.md`](ORCA_System_Specification.md) · [`../../GPS Denied Navigation/papers/AGINS_Research_Paper.md`](../../GPS%20Denied%20Navigation/papers/AGINS_Research_Paper.md) · [`../../GPS Denied Navigation/papers/AGINS_Specification.md`](../../GPS%20Denied%20Navigation/papers/AGINS_Specification.md) · [`../../Common Architecture and Components.md`](../../Common%20Architecture%20and%20Components.md)
 
 ---
 
@@ -472,7 +472,7 @@ ORCA validation follows the portfolio **simulation-first methodology** establish
 
 | Component | Path | Role |
 |-----------|------|------|
-| System specification | [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md) | Authoritative parameters [11] |
+| System specification | [`ORCA_System_Specification.md`](ORCA_System_Specification.md) | Authoritative parameters [11] |
 | Physics simulation | `orca_sim` (planned package) | Range validation [10] |
 | Appendix A | Spec §Appendix A | Governing equations [11] |
 
@@ -712,9 +712,9 @@ ORCA solves a real, growing, strategically critical problem with buildable COTS 
 
 [9] Teledyne Marine, *Benthos Acoustic Modem Product Literature*, 2023.
 
-[10] ORCA Physics Simulation (`orca_sim`), portfolio-validated range outputs, [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md) Appendix A, O. Loch, 2026.
+[10] ORCA Physics Simulation (`orca_sim`), portfolio-validated range outputs, [`ORCA_System_Specification.md`](ORCA_System_Specification.md) Appendix A, O. Loch, 2026.
 
-[11] ORCA System Specification v1.0, [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md), O. Loch, 2026.
+[11] ORCA System Specification v1.0, [`ORCA_System_Specification.md`](ORCA_System_Specification.md), O. Loch, 2026.
 
 [12] Boeing Defense, *P-8A Poseidon Overview*, public fact sheet, 2024.
 
@@ -940,7 +940,7 @@ ORCA solves a real, growing, strategically critical problem with buildable COTS 
 
 [123] Weapons-Defence Portfolio Simulation Methodology, [`../../README.md`](../../README.md), 2026.
 
-[124] ORCA Development Roadmap Phase 1, [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md) §11, 2026.
+[124] ORCA Development Roadmap Phase 1, [`ORCA_System_Specification.md`](ORCA_System_Specification.md) §11, 2026.
 
 [125] RAND Corporation, *Distributed Maritime Operations*, RR-A1234-2, 2024.
 
@@ -978,7 +978,7 @@ ORCA solves a real, growing, strategically critical problem with buildable COTS 
 
 [142] Australian Hydrographic Office, *Deployment of Subsea Equipment in Australian Waters*, 2022.
 
-[143] ORCA Patent Position, [`../ORCA_System_Specification_v1.md`](../ORCA_System_Specification_v1.md) §12.3, 2026.
+[143] ORCA Patent Position, [`ORCA_System_Specification.md`](ORCA_System_Specification.md) §12.3, 2026.
 
 [144] DST Group (Australia), *Maritime Surveillance Technology Roadmap*, public engagement, 2023.
 

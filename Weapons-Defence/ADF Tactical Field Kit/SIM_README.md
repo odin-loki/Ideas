@@ -17,7 +17,7 @@ cd ..
 python weapons_simulation.py
 ```
 
-That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ---
 
@@ -50,7 +50,7 @@ Nutrition components referenced by the field kit have partial simulator coverage
 ### ASNP
 
 - Operator spec: [`../TACT-1 Tactical Ration/ASNP Sports Nutrition/ASNP_Specification.md`](../TACT-1%20Tactical%20Ration/ASNP%20Sports%20Nutrition/ASNP_Specification.md)
-- Research paper: [`ASNP Sports Nutrition/ASNP_Research_Paper.md`](ASNP%20Sports%20Nutrition/ASNP_Research_Paper.md)
+- Research paper: [`../TACT-1 Tactical Ration/ASNP Sports Nutrition/ASNP_Research_Paper.md`](../TACT-1%20Tactical%20Ration/ASNP%20Sports%20Nutrition/ASNP_Research_Paper.md)
 
 ---
 

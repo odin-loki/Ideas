@@ -97,8 +97,8 @@ UHPM is *slower* than k-NN centroid below `~7 500` tokens because the iterative 
 
 ## 🔗 Related work in this repo
 
-- [`../Cell AI/`](../Cell%20AI/) — sister non-attention sequence architecture
-- [`../Cypha/`](../Cypha/) — HRNA inference + training stack
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — sister non-attention sequence architecture
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference + training stack
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac shared-PRF + NMP harmonic-spectrum theory
 - [`../Statistical Generation/`](../Statistical%20Generation/) — hash-compression sister technique (`M = 2³²`)
 - [`../NN Shortcuts/`](../NN%20Shortcuts/) — Streaming Geometry Framework + Algebraic Autopsy (efficiency frame)

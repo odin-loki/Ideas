@@ -29,6 +29,6 @@ From platform root: `python platform_simulation.py`
 
 Soldier tracks match specification; ship clear-sky runs ~22% above spec target (30 m) — see SIM_README limitations.
 
-Filter cross-reference: [`../../Filtering/GH_SR_IMM_Research_Paper.md`](../../Filtering/GH_SR_IMM_Research_Paper.md)
+Filter cross-reference: [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md)
 
 [← Platform README](../README.md) · [← SIM_README](../SIM_README.md)

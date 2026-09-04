@@ -101,7 +101,7 @@ A `+3σ` step change is detected with **median 3 samples, p95 5 samples**.
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — ARIA-INTEL (also Beta-MC + Bayesian fusion)
 - [`../Filtering/`](../Filtering/) — GH-SR-IMM (also IMM-style mixing)
-- [`../Cell AI/`](../Cell%20AI/) — Cypha-related differential information classifier shares lineage
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — Cypha-related differential information classifier shares lineage
 
 ---
 

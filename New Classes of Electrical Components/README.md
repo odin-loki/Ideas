@@ -105,7 +105,7 @@ The folder also contains `Cypha.py` — a large `Omega` differential-information
 - [`../Diamond Batterys/`](../Diamond%20Batterys/) — power architectures these components might support
 - [`../Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — diamond-substrate fabrication science
 - [`../Statistical Generation/`](../Statistical%20Generation/) — adjacent algorithmic frame for `Cypha.py`'s feature stack
-- [`../Cypha/`](../Cypha/) — separate, larger HRNA inference stack
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — separate, larger HRNA inference stack
 
 ---
 

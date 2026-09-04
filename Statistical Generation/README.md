@@ -106,7 +106,7 @@ Long contexts blow up state-space exponentially. The compressor: `H(c) = SHA-256
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — Beta-MC threat scoring uses similar distributional reasoning
 - [`../Filtering/`](../Filtering/) — GH-SR-IMM uses GH/Lévy machinery in measurement-noise modelling
 - [`../Statistical Scheduler/`](../Statistical%20Scheduler/) — same author lineage; statistics + stability
-- [`../Cypha/`](../Cypha/) — HRNA training stack uses generator composition
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA training stack uses generator composition
 
 ---
 

@@ -232,7 +232,7 @@ The MP-4.6M Guardian, when re-derived against the portfolio ballistics simulator
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Guardian Pistol performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A; the Guardian Pistol is the military parent (4.6 × 30 mm Enhanced) of the Guardian LE (4.6 × 22 mm DPAP), and the equations follow the same seven-phase structure.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Guardian Pistol performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A; the Guardian Pistol is the military parent (4.6 × 30 mm Enhanced) of the Guardian LE (4.6 × 22 mm DPAP), and the equations follow the same seven-phase structure.
 
 ### A.1 Interior ballistics — Noble-Abel for 4.6 × 30 mm, 180 mm barrel
 
@@ -301,7 +301,7 @@ A_gel = 200 Pa,  B_gel = 2 366 kg/m³ (FBI cold-gelatin calibration)
 A_eff = π · (d_b/2)² = 1.698 × 10⁻⁵ m² (rigid WC penetrator)
 ```
 
-→ Rigid 2.6 g WC penetrator at 501 m/s carries significant overpenetration risk in soft tissue (the explicit motivation for the lower-velocity 4.6 × 22 mm DPAP cartridge of the MP-4.6P Guardian LE LE-variant; see [`../../Weapons-Police/MP-4.6P_Guardian_LE_Research_Paper.md`](../../Weapons-Police/Research%20Paper%20-%20MP-4.6P%20Guardian%20LE.md) §5.2).
+→ Rigid 2.6 g WC penetrator at 501 m/s carries significant overpenetration risk in soft tissue (the explicit motivation for the lower-velocity 4.6 × 22 mm DPAP cartridge of the MP-4.6P Guardian LE LE-variant; see [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Research_Paper.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/MP-4.6P_Guardian_LE_Research_Paper.md) §5.2).
 
 ### A.4 Recoil — mass-spring-damper (pistol, no buffer)
 

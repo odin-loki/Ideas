@@ -82,7 +82,7 @@ The pitch is: the right primitive isn't compression *or* coordination, it's a de
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic underpinnings; GRIA Spectrum Theorem lives here
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator (parallel framework, sister information theory)
 - [`../RNGS/`](../RNGS/) — RNG portfolio that supports Izaac's σ generator
-- [`../Cell AI/`](../Cell%20AI/), [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — neural systems that NMP analyses
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai), [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — neural systems that NMP analyses
 - [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — Meta-DAG RNG used as keyed entropy pump there
 
 ---

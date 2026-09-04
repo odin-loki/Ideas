@@ -504,7 +504,7 @@ This synthesis of cutting-edge synthetic materials science creates a protection 
 
 > **HYPOTHETICAL DESIGN STUDY — NOT FOR MANUFACTURE**
 
-This appendix states parametric equations used elsewhere in the `Weapons-Defence/` portfolio for ballistic limits, blunt trauma, isotope-power decay, exoskeletal joint torque, and phase-change thermal buffering. OBSIDIAN is **not** run through `weapons_simulation.py`; the numerical anchors for armour calibration are referenced from [`weapons_sim_results.md`](weapons_sim_results.md) §13.
+This appendix states parametric equations used elsewhere in the `Weapons-Defence/` portfolio for ballistic limits, blunt trauma, isotope-power decay, exoskeletal joint torque, and phase-change thermal buffering. OBSIDIAN is **not** run through `weapons_simulation.py`; the numerical anchors for armour calibration are referenced from [`../weapons_sim_results.md`](../weapons_sim_results.md) §13.
 
 ### A.1 Ballistic V50 — Lambert–Jonas penetration resistance (conceptual correlation)
 
@@ -542,7 +542,7 @@ BFD = α · (V_impact − V₅₀)^β       (for stopped threats; qualitative / 
 - **α**, **β** — empirically fit for a given armour + threat + backing; **must be calibrated** against clay-witness or instrumentation.
 - **V_impact**, **V₅₀** — impact speed and ballistic limit defined as in §A.1.
 
-**Compliance reference:** NIJ 0101.06-style ceramic testing associates **witness BFD < 44 mm** with survivable blunt trauma envelopes for rifle threats (see [`weapons_sim_results.md`](weapons_sim_results.md) §13 BFD column for simulator-reported BFD at limit conditions).
+**Compliance reference:** NIJ 0101.06-style ceramic testing associates **witness BFD < 44 mm** with survivable blunt trauma envelopes for rifle threats (see [`../weapons_sim_results.md`](../weapons_sim_results.md) §13 BFD column for simulator-reported BFD at limit conditions).
 
 ### A.3 Radioisotope power decay (conceptual RTG electrical output)
 

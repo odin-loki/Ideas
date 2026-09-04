@@ -205,7 +205,7 @@ Track contact area: \(2 \times 0.58 \times 4.8 = 5.57\ \text{m}^2\).
 
 $$\sigma = \frac{m g}{A} = \frac{38{,}000 \times 9.81}{5.57} \approx 66.9\ \text{kPa}$$
 
-This compares favourably to MBT-class ground pressure (80–100 kPa typical) and supports soft-soil mobility claims [1, 55, 12]. Rubber track pads (portfolio [`Rubber Tank Tracks`](../Rubber%20Tank%20Tracks/)) reduce ground bearing pressure spikes and vibration transmission [56, 57].
+This compares favourably to MBT-class ground pressure (80–100 kPa typical) and supports soft-soil mobility claims [1, 55, 12]. Rubber track pads (portfolio [`Rubber Tank Tracks`](../../Rubber%20Tank%20Tracks)) reduce ground bearing pressure spikes and vibration transmission [56, 57].
 
 ## 5.3 Gradient Performance
 
@@ -556,7 +556,7 @@ The `leviathan_sim` package provides a reproducible baseline for design iteratio
 
 [2] S. Zaloga, *T-54 and T-55 Main Battle Tanks 1944–2004*. Osprey New Vanguard 102, 2004.
 
-[3] Weapons-Defence AlNiCyN Armour programme, [`../AlNiCyN Armour/`](../AlNiCyN%20Armour/) — material specification and 1:1 RHA equivalence claim.
+[3] Weapons-Defence AlNiCyN Armour programme, [`../../AlNiCyN Armour/`](../../AlNiCyN%20Armour/) — material specification and 1:1 RHA equivalence claim.
 
 [4] T. Gannon, *Brick in the Wall: The Merkava/Magach Family*. Desert Eagle Publications, 2001.
 
@@ -608,7 +608,7 @@ The `leviathan_sim` package provides a reproducible baseline for design iteratio
 
 [28] NATO STANAG 4569, *Protection Levels for Occupants of Logistic and Light Armoured Vehicles*, Ed. 3, 2019.
 
-[29] Weapons-Defence, [`../AlNiCyN Armour/AlNiCyN_Armour_Specification.md`](../AlNiCyN%20Armour/) — three-tier aluminium armour family.
+[29] Weapons-Defence, [`../../AlNiCyN Armour/`](../../AlNiCyN%20Armour/) — three-tier aluminium armour family.
 
 [30] J. C. Williams and A. J. McEwan, "Welding of High-Strength Aluminium Alloys," *Materials Science and Technology*, vol. 15, 1999.
 
@@ -662,7 +662,7 @@ The `leviathan_sim` package provides a reproducible baseline for design iteratio
 
 [55] R. M. Ogorkiewicz, "Ground Pressure and Soil Trafficability," in *Technology of Tanks*, vol. 2, 1991.
 
-[56] Weapons-Defence Rubber Tank Tracks, [`../Rubber Tank Tracks/Paper14_Military_Track_Pad.md`](../Rubber%20Tank%20Tracks/Paper14_Military_Track_Pad.md).
+[56] Weapons-Defence Rubber Tank Tracks, [`../../Rubber Tank Tracks/Paper14_Military_Track_Pad.md`](../../Rubber%20Tank%20Tracks/Paper14_Military_Track_Pad.md).
 
 [57] US Army TACOM, *Track Pad Specification MIL-DTL-32085*, 2018.
 
@@ -672,9 +672,9 @@ The `leviathan_sim` package provides a reproducible baseline for design iteratio
 
 [60] ISO 10816-1, *Mechanical vibration — Evaluation of machine vibration*, 1995.
 
-[61] Weapons-Defence MP-6.8 Mark II Rifle, [`../MP-6.8 Mark II Rifle/`](../MP-6.8%20Mark%20II%20Rifle/).
+[61] Weapons-Defence MP-6.8 Mark II Rifle, [`../../MP-6.8 Mark II Rifle/`](../../MP-6.8%20Mark%20II%20Rifle/).
 
-[62] Weapons-Defence MAS-15.2E Anti-Materiel Sniper, [`../MAS-15.2E Anti-Materiel Sniper/`](../MAS-15.2E%20Anti-Materiel%20Sniper/).
+[62] Weapons-Defence MAS-15.2E Anti-Materiel Sniper, [`../../MAS-15.2E Anti-Materiel Sniper/`](../../MAS-15.2E%20Anti-Materiel%20Sniper/).
 
 [63] US NIST, *Zero Trust Architecture*, SP 800-207, 2020 — contrast with FPGA-only design rationale.
 

@@ -94,10 +94,10 @@ The paper itself uses the **Verified / Plausible / Speculative** legend on every
 
 ## 🔗 Related work in this repo
 
-- [`Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — QDMP and CVD work share the NV-centre / isotopically-purified-diamond material base
-- [`Diamond Batterys/`](../Diamond%20Batterys/) — same diamond / NV physics applied to power conversion rather than biomedical sensing
-- [`Cell AI/`](../Cell%20AI/) — biological-substrate inspiration for distributed neural compute
-- [`Cypha/`](../Cypha/) — signal-processing / ML stack relevant to backend processing of neural sensor data
+- [`../Quantum Diamond Wafer/`](../Quantum%20Diamond%20Wafer/) — QDMP and CVD work share the NV-centre / isotopically-purified-diamond material base
+- [`../Diamond Batterys/`](../Diamond%20Batterys/) — same diamond / NV physics applied to power conversion rather than biomedical sensing
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biological-substrate inspiration for distributed neural compute
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — signal-processing / ML stack relevant to backend processing of neural sensor data
 
 ---
 

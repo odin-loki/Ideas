@@ -36,19 +36,19 @@ The MT-X Mk.II Leviathan is a **complete platform subfolder**: operator specific
 
 | Module | File | Role |
 |---|---|---|
-| Mobility | [`mobility/performance.py`](leviathan_sim_package/leviathan_sim/mobility/performance.py) | Speed, range, gradient, ground pressure |
-| Armour | [`armour/effective.py`](leviathan_sim_package/leviathan_sim/armour/effective.py) | Effective RHA per zone, ERA |
-| Powertrain | [`powertrain/engine.py`](leviathan_sim_package/leviathan_sim/powertrain/engine.py) | PPU-1300 curves and fuel |
-| Suspension | [`suspension/ride.py`](leviathan_sim_package/leviathan_sim/suspension/ride.py) | Torsion bars, ride frequency |
-| Main gun | [`armament/main_gun.py`](leviathan_sim_package/leviathan_sim/armament/main_gun.py) | Autoloader, dual penetration model |
-| Secondary | [`armament/secondary.py`](leviathan_sim_package/leviathan_sim/armament/secondary.py) | Coax + RWS |
-| APS | [`aps/engagement.py`](leviathan_sim_package/leviathan_sim/aps/engagement.py) | Engagement envelope |
-| Amphibious | [`amphibious/flotation.py`](leviathan_sim_package/leviathan_sim/amphibious/flotation.py) | Buoyancy and swim speed |
-| FCS | [`fcs/hit_probability.py`](leviathan_sim_package/leviathan_sim/fcs/hit_probability.py) | First-round hit probability |
-| Weight | [`weight/budget.py`](leviathan_sim_package/leviathan_sim/weight/budget.py) | Part XIX budget check |
-| Logistics | [`logistics/maintenance.py`](leviathan_sim_package/leviathan_sim/logistics/maintenance.py) | Maintenance and transport |
-| Cost | [`cost/unit_cost.py`](leviathan_sim_package/leviathan_sim/cost/unit_cost.py) | Unit/program cost |
-| Report | [`reports/generate.py`](leviathan_sim_package/leviathan_sim/reports/generate.py) | Markdown + JSON output |
+| Mobility | [`leviathan_sim_package/leviathan_sim/mobility/performance.py`](leviathan_sim_package/leviathan_sim/mobility/performance.py) | Speed, range, gradient, ground pressure |
+| Armour | [`leviathan_sim_package/leviathan_sim/armour/effective.py`](leviathan_sim_package/leviathan_sim/armour/effective.py) | Effective RHA per zone, ERA |
+| Powertrain | [`leviathan_sim_package/leviathan_sim/powertrain/engine.py`](leviathan_sim_package/leviathan_sim/powertrain/engine.py) | PPU-1300 curves and fuel |
+| Suspension | [`leviathan_sim_package/leviathan_sim/suspension/ride.py`](leviathan_sim_package/leviathan_sim/suspension/ride.py) | Torsion bars, ride frequency |
+| Main gun | [`leviathan_sim_package/leviathan_sim/armament/main_gun.py`](leviathan_sim_package/leviathan_sim/armament/main_gun.py) | Autoloader, dual penetration model |
+| Secondary | [`leviathan_sim_package/leviathan_sim/armament/secondary.py`](leviathan_sim_package/leviathan_sim/armament/secondary.py) | Coax + RWS |
+| APS | [`leviathan_sim_package/leviathan_sim/aps/engagement.py`](leviathan_sim_package/leviathan_sim/aps/engagement.py) | Engagement envelope |
+| Amphibious | [`leviathan_sim_package/leviathan_sim/amphibious/flotation.py`](leviathan_sim_package/leviathan_sim/amphibious/flotation.py) | Buoyancy and swim speed |
+| FCS | [`leviathan_sim_package/leviathan_sim/fcs/hit_probability.py`](leviathan_sim_package/leviathan_sim/fcs/hit_probability.py) | First-round hit probability |
+| Weight | [`leviathan_sim_package/leviathan_sim/weight/budget.py`](leviathan_sim_package/leviathan_sim/weight/budget.py) | Part XIX budget check |
+| Logistics | [`leviathan_sim_package/leviathan_sim/logistics/maintenance.py`](leviathan_sim_package/leviathan_sim/logistics/maintenance.py) | Maintenance and transport |
+| Cost | [`leviathan_sim_package/leviathan_sim/cost/unit_cost.py`](leviathan_sim_package/leviathan_sim/cost/unit_cost.py) | Unit/program cost |
+| Report | [`leviathan_sim_package/leviathan_sim/reports/generate.py`](leviathan_sim_package/leviathan_sim/reports/generate.py) | Markdown + JSON output |
 
 ---
 

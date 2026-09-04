@@ -46,11 +46,11 @@ Concrete predictions in the SGF paper include ZClip-triggered automatic WSD cool
 
 ## 🔗 Related work in this repo
 
-- [`../Cypha/`](../Cypha/) — HRNA inference + training stack (parity-validated native core); a candidate test bed for the SGF library
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference + training stack (parity-validated native core); a candidate test bed for the SGF library
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — NMP / GRIA / Izaac frameworks; spectral-geometry overlap
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic primitive structure (semiring substitution is one of SGF's five moves)
 - [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context architecture (relevant to streaming-sufficiency acceleration)
-- [`../Cell AI/`](../Cell%20AI/) — non-attention sequence modelling (parallel architectural research)
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — non-attention sequence modelling (parallel architectural research)
 - [`../Prime Number Generator/`](../Prime%20Number%20Generator/) — the prime-classification task in the Algebraic Autopsy demo connects naturally to prime-pattern theory
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator (category theory + Lévy + IT)
 

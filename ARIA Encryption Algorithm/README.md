@@ -109,7 +109,7 @@ ARIA does not claim to be faster than AES-NI-accelerated AEAD; it claims to be *
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac framework (shared deterministic-PRF idea, applied to side-information rather than encryption)
 - [`../RNGS/DAG RNG/`](../RNGS/DAG%20RNG/) — standalone Meta-DAG RNG (same architecture, unkeyed application)
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — finite-field arithmetic foundations
-- [`../Break AES/`](../Break%20AES/) — adjacent cryptanalysis research (different direction)
+- [`../Modelling AES/Break AES with NNs/`](../Modelling%20AES/Break%20AES%20with%20NNs/) — adjacent cryptanalysis research (different direction)
 - [`../Veritas/`](../Veritas/) — formal-verification framework that could be applied to the missing EUF-CMA proof
 
 ---

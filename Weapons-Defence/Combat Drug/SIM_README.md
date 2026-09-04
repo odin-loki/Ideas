@@ -19,7 +19,7 @@ cd ..
 python weapons_simulation.py
 ```
 
-That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ---
 

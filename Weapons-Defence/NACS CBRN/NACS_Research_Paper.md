@@ -115,7 +115,7 @@ The NACS-TOTAL system provides a comprehensive 72-hour CBRN protection capabilit
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used to derive the NACS-TOTAL performance claims cited in §2–§5 of the paper body. The equations span four physical domains: chemical-vapour permeation, latent-heat thermal management, sealed-interface leak rates, and silver-ion antimicrobial kinetics. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used to derive the NACS-TOTAL performance claims cited in §2–§5 of the paper body. The equations span four physical domains: chemical-vapour permeation, latent-heat thermal management, sealed-interface leak rates, and silver-ion antimicrobial kinetics. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 CBRN permeation — Fickian diffusion breakthrough time
 

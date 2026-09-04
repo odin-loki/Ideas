@@ -8,7 +8,7 @@
 
 ## 🧭 How this fits the parent folder
 
-This subfolder sits inside [`../`](../) (`Modelling AES/`) and is the *experimental scaffolding* whose dead-end the parent folder's two papers formalise. The companion paper [`../neural_aes_paper.md`](../neural_aes_paper.md) reads as the post-mortem on attempts of this kind: it identifies three independent barriers (entropy indistinguishability, pseudorandom collapse, combinatorial state-space infeasibility) that defeat black-box neural key recovery against AES-128, and measures the actual chance-level performance (`0.675 %` best test accuracy vs `0.3906 %` random baseline, `+0.28` pp, `p = 0.066`). The sister paper [`../neural_prng_paper.md`](../neural_prng_paper.md) approaches the same problem from the forward direction and measures the partial-convergence ceiling for generating AES-like output. Read this folder *with* both — the parent [`../README.md`](../README.md) is the index.
+This subfolder sits inside [`../`](../) (`Modelling AES/`) and is the *experimental scaffolding* whose dead-end the parent folder's two papers formalise. The companion paper [`neural_aes_paper.md`](neural_aes_paper.md) reads as the post-mortem on attempts of this kind: it identifies three independent barriers (entropy indistinguishability, pseudorandom collapse, combinatorial state-space infeasibility) that defeat black-box neural key recovery against AES-128, and measures the actual chance-level performance (`0.675 %` best test accuracy vs `0.3906 %` random baseline, `+0.28` pp, `p = 0.066`). The sister paper [`../neural_prng_paper.md`](../neural_prng_paper.md) approaches the same problem from the forward direction and measures the partial-convergence ceiling for generating AES-like output. Read this folder *with* both — the parent [`../README.md`](../README.md) is the index.
 
 ---
 
@@ -18,7 +18,7 @@ The proposition is straightforward: take a Transformer architecture (`d_model = 
 
 The files here read as **early-stage research scratch**, not a finished result. The training loop has undefined data loaders. The reward function calls `sentence_bleu` on tensors when BLEU expects token lists or strings. `pytest.main([__file__])` runs at the top of the file before training, which is structurally odd. The proof note acknowledges its own informality.
 
-This is included in the repo as an honest record of an experiment, not as a result claim. [`../neural_aes_paper.md`](../neural_aes_paper.md) §6.3 ("The Distillation-RL Architecture Specifically") works through the design flaws explicitly — the Llama teacher's semantic token distribution has no relationship to AES key structure, the BLEU reward needs the target plaintext to compute (circular for a real attack), and the encoder's input is uniform noise so adds computational depth without adding information.
+This is included in the repo as an honest record of an experiment, not as a result claim. [`neural_aes_paper.md`](neural_aes_paper.md) §6.3 ("The Distillation-RL Architecture Specifically") works through the design flaws explicitly — the Llama teacher's semantic token distribution has no relationship to AES key structure, the BLEU reward needs the target plaintext to compute (circular for a real attack), and the encoder's input is uniform noise so adds computational depth without adding information.
 
 ---
 
@@ -41,7 +41,7 @@ This is included in the repo as an honest record of an experiment, not as a resu
   - `reward_fn` uses `sentence_bleu` on tensors; BLEU expects token lists or strings.
   - `pytest.main([__file__])` runs before training in the same file; structurally odd.
 - **No AES-specific cryptanalysis math is present.** No S-box analysis, no key-schedule modelling, no cipher-internals reasoning. AES is referenced as the target by name only.
-- **No empirical results in this folder.** No measured key recovery, no key bits leaked, no distinguisher built. The empirical work that *was* done on the recovery question lives one level up in [`../neural_aes_paper.md`](../neural_aes_paper.md), and arrives at chance-level performance with statistical confirmation.
+- **No empirical results in this folder.** No measured key recovery, no key bits leaked, no distinguisher built. The empirical work that *was* done on the recovery question lives one level up in [`neural_aes_paper.md`](neural_aes_paper.md), and arrives at chance-level performance with statistical confirmation.
 
 ---
 
@@ -60,12 +60,12 @@ This is included in the repo as an honest record of an experiment, not as a resu
 
 ## 🔗 Related work in this repo
 
-- [`../`](../) — **parent folder.** The two result-bearing papers ([`../neural_aes_paper.md`](../neural_aes_paper.md) and [`../neural_prng_paper.md`](../neural_prng_paper.md)) plus the unified [`../README.md`](../README.md).
-- [`../neural_aes_paper.md`](../neural_aes_paper.md) — **the companion paper on this scaffolding's regime.** Formalises three barriers (entropy indistinguishability, pseudorandom collapse, combinatorial state-space) and confirms them with five experiments.
+- [`../`](../) — **parent folder.** The two result-bearing papers ([`neural_aes_paper.md`](neural_aes_paper.md) and [`../neural_prng_paper.md`](../neural_prng_paper.md)) plus the unified [`../README.md`](../README.md).
+- [`neural_aes_paper.md`](neural_aes_paper.md) — **the companion paper on this scaffolding's regime.** Formalises three barriers (entropy indistinguishability, pseudorandom collapse, combinatorial state-space) and confirms them with five experiments.
 - [`../neural_prng_paper.md`](../neural_prng_paper.md) — **the dual question.** Can a neural network generate AES-like output? GAN reaches `7.983` bits entropy and `1.0005` compression but fails chi-squared.
 - [`../../ARIA Encryption Algorithm/`](../../ARIA%20Encryption%20Algorithm/) — companion construction (build, not break).
 - [`../../Veritas/`](../../Veritas/) — formal verification work, including the bound machinery that an honest cryptanalysis would need.
-- [`../../Cell AI/`](../../Cell%20AI/) — alternative neural architecture that does not require attention.
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — alternative neural architecture that does not require attention.
 - [`../../GF2 Algebra and Applications/`](../../GF2%20Algebra%20and%20Applications/) — proper algebraic underpinnings for finite-field cryptanalysis.
 
 ---

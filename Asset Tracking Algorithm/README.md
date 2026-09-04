@@ -317,6 +317,6 @@ What this project does **not** do, and is honest about:
 
 ## License
 
-AGPL-3.0 — see [`../LICENSE`](../LICENSE) at the repository root.
+AGPL-3.0 — see [`../modified-license.md`](../modified-license.md) at the repository root.
 
 [← Back to main README](../README.md)

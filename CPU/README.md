@@ -75,7 +75,7 @@ The `os_accelerator` is parameterised with `PROCESS_TABLE_SIZE = 1024` and `CONT
 - [`../100W Wideband Noise Generator/`](../100W%20Wideband%20Noise%20Generator/) — sister single-file HDL design (RF rather than CPU)
 - [`../Future C++/`](../Future%20C++/) — language-design conversation that complements this hardware design
 - [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — alternative passive devices that might feed silicon-design pipelines
-- [`../Cypha/`](../Cypha/) — HRNA inference stack that this CPU might run
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference stack that this CPU might run
 
 ---
 

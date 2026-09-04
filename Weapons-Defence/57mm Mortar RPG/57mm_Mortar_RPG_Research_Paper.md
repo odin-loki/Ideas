@@ -150,7 +150,7 @@ The 57 mm Enhanced Dual-Purpose System, as re-specified in this 2.0 revision, pr
 
 ## 11. Methods / Provenance
 
-All numerical performance figures in this paper trace to the portfolio ballistics simulator [`weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`weapons_sim_results.md`](../weapons_sim_results.md).
+All numerical performance figures in this paper trace to the portfolio ballistics simulator [`../weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 The simulator implements:
 
@@ -162,7 +162,7 @@ The simulator implements:
 
 ### 11.1 Tier-2 simulation methodology
 
-The current revision imports the following Tier-2 simulation outputs from [`weapons_sim_results.md`](../weapons_sim_results.md):
+The current revision imports the following Tier-2 simulation outputs from [`../weapons_sim_results.md`](../weapons_sim_results.md):
 
 1. **Muzzle-blast SPL — Westin (1975) fit (§6).** Peak free-field SPL at 1 m is correlated to chamber pressure (111 MPa) and bore-area / case-capacity geometry, then attenuated by `−7 dB` to the shooter's ear and by the published insertion losses of foam plug (−22 dB), double plug + muff (−28 dB), and TACS personal active (−25 dB additional). The EDPS is unsuppressed by design; the §6 "suppressed" columns equal the unsuppressed values. Unsuppressed muzzle SPL is **162.6 dB** — 23 dB above the OSHA 140 dB ceiling. Crew hearing protection requires double-plug + muff at a minimum; for sustained mortar fire missions the TACS overlay is strongly recommended, taking the ear-felt peak to 102.6 dB.
 
@@ -196,7 +196,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the EDPS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the EDPS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 900 mm tube at 111 MPa
 

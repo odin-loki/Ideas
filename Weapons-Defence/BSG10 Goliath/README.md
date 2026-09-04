@@ -29,19 +29,19 @@ The BSG-10 Goliath is a **complete platform subfolder**: operator specification,
 | [`bsg10_sim_package/Software readme.md`](bsg10_sim_package/Software%20readme.md) | Simulation documentation | Package-level overview, module map, CLI usage, validated headline table. |
 | [`bsg10_sim_package/bsg10_sim/README.md`](bsg10_sim_package/bsg10_sim/README.md) | Simulation documentation (in-package copy) | Duplicate of `Software readme.md` for developers who open the Python package directly. |
 | [`bsg10_sim_package/run_all.py`](bsg10_sim_package/run_all.py) | CLI launcher | Thin wrapper into `bsg10_sim.run_all`. |
-| [`bsg10_sim_package/bsg10_sim/run_all.py`](bsg10_sim_package/bsg10_sim/run_all.py) | CLI entry | Runs one or all modules; supports `default` / `heavy` / `light` variants via [`config.py`](bsg10_sim_package/bsg10_sim/config.py). |
+| [`bsg10_sim_package/bsg10_sim/run_all.py`](bsg10_sim_package/bsg10_sim/run_all.py) | CLI entry | Runs one or all modules; supports `default` / `heavy` / `light` variants via [`bsg10_sim_package/bsg10_sim/config.py`](bsg10_sim_package/bsg10_sim/config.py). |
 
 ### Simulation modules (`bsg10_sim_package/bsg10_sim/`)
 
 | Module | File | Role |
 |---|---|---|
-| **A — Internal ballistics** | [`ballistics/internal.py`](bsg10_sim_package/bsg10_sim/ballistics/internal.py) | Chamber pressure, muzzle velocity, gas-port timing |
-| **B — Balanced action** | [`dynamics/balanced_action.py`](bsg10_sim_package/bsg10_sim/dynamics/balanced_action.py) | Bolt carrier + counter-mass ODE |
-| **C — Recoil chain** | [`dynamics/recoil_chain.py`](bsg10_sim_package/bsg10_sim/dynamics/recoil_chain.py) | Shoulder force through compensator → CBS-10 stack |
-| **D — Geometry** | [`mechanical/dimensions.py`](bsg10_sim_package/bsg10_sim/mechanical/dimensions.py) | Bullpup envelope and clearance checks |
-| **E — Magazine** | [`mechanical/magazine.py`](bsg10_sim_package/bsg10_sim/mechanical/magazine.py) | 45-round helical belt drum capacity and feed force |
-| **F — Parts life** | [`lifecycle/parts_life.py`](bsg10_sim_package/bsg10_sim/lifecycle/parts_life.py) | Barrel, lugs, CBS-10, gas-system fatigue and wear |
-| **Report** | [`reports/generate.py`](bsg10_sim_package/bsg10_sim/reports/generate.py) | Consolidated text report from all modules |
+| **A — Internal ballistics** | [`bsg10_sim_package/bsg10_sim/ballistics/internal.py`](bsg10_sim_package/bsg10_sim/ballistics/internal.py) | Chamber pressure, muzzle velocity, gas-port timing |
+| **B — Balanced action** | [`bsg10_sim_package/bsg10_sim/dynamics/balanced_action.py`](bsg10_sim_package/bsg10_sim/dynamics/balanced_action.py) | Bolt carrier + counter-mass ODE |
+| **C — Recoil chain** | [`bsg10_sim_package/bsg10_sim/dynamics/recoil_chain.py`](bsg10_sim_package/bsg10_sim/dynamics/recoil_chain.py) | Shoulder force through compensator → CBS-10 stack |
+| **D — Geometry** | [`bsg10_sim_package/bsg10_sim/mechanical/dimensions.py`](bsg10_sim_package/bsg10_sim/mechanical/dimensions.py) | Bullpup envelope and clearance checks |
+| **E — Magazine** | [`bsg10_sim_package/bsg10_sim/mechanical/magazine.py`](bsg10_sim_package/bsg10_sim/mechanical/magazine.py) | 45-round helical belt drum capacity and feed force |
+| **F — Parts life** | [`bsg10_sim_package/bsg10_sim/lifecycle/parts_life.py`](bsg10_sim_package/bsg10_sim/lifecycle/parts_life.py) | Barrel, lugs, CBS-10, gas-system fatigue and wear |
+| **Report** | [`bsg10_sim_package/bsg10_sim/reports/generate.py`](bsg10_sim_package/bsg10_sim/reports/generate.py) | Consolidated text report from all modules |
 
 ---
 

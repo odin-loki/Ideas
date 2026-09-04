@@ -244,7 +244,7 @@ The MP-6.8 Mark II, when re-derived against the portfolio ballistics simulator, 
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-6.8 Mark II performance numbers cited in §3–§12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-6.8 Mark II performance numbers cited in §3–§12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 6.8 × 51 mm, ~406 mm barrel
 

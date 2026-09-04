@@ -148,10 +148,10 @@ For full engagement derivations, see [`HEL_CMS_DB_Full_Spec.md`](HEL_CMS_DB_Full
 
 ## 🔗 Related work in this repo
 
-- [`../../../Diamond Batterys/`](../../Diamond%20Batterys/) — ADB/TDB diamond battery series that provides the power architecture referenced here
-- [`../../../Weapons-Defence/`](../../) — parent portfolio; see `weapons_simulation.py` for the common simulation infrastructure
+- [`../../Diamond Batterys/`](../../Diamond%20Batterys/) — ADB/TDB diamond battery series that provides the power architecture referenced here
+- [`../../`](../../) — parent portfolio; see `weapons_simulation.py` for the common simulation infrastructure
 - [`../../Filtering/`](../../Filtering/) — GH-SR-IMM tracking (relevant to the MWIR + radar sensor fusion problem)
-- [`../../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL multi-target intelligence engine
+- [`../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL multi-target intelligence engine
 
 ---
 

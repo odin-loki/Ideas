@@ -99,7 +99,7 @@
 - [`../Izaac as Side Data/`](../Izaac%20as%20Side%20Data/) — applied protocols
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — finite-field structure relevant to Boolean RNG analysis
 - [`../Prime Number Generator/`](../Prime%20Number%20Generator/) — scale-dependent meta-pattern theory; related randomness questions
-- [`../Cypha/`](../Cypha/) — HRNA inference + training stack (uses RNGs for stochastic components)
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference + training stack (uses RNGs for stochastic components)
 - [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — Meta-DAG RNG used as keyed entropy pump for AEAD
 - [`../Physics/`](../Physics/) — chaos-theory backdrop for the Chaotic / SynerChaos work
 

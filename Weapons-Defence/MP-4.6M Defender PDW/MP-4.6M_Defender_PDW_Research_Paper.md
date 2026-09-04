@@ -239,7 +239,7 @@ The MP-4.6M Defender PDW, when re-derived against the portfolio ballistics simul
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Defender PDW performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A. The Defender is the PDW variant of the MP-4.6M family; the simulator catalogues the PDW under `4.6x30mm_PDW` and the pistol under `4.6x30mm` (see Note 1 in §A.7 on which set of numbers applies).
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the MP-4.6M Defender PDW performance numbers cited in §3–§7 and §12A. Calibration constants are taken from `weapons_sim_results.md` §1–§13. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A. The Defender is the PDW variant of the MP-4.6M family; the simulator catalogues the PDW under `4.6x30mm_PDW` and the pistol under `4.6x30mm` (see Note 1 in §A.7 on which set of numbers applies).
 
 ### A.1 Interior ballistics — Noble-Abel for 4.6 × 30 mm Enhanced, 266.7 mm barrel
 

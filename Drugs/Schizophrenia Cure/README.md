@@ -58,7 +58,7 @@ A subfolder of [`../`](../) (Drugs). Three speculative therapeutic compound fami
 - [`../`](../) — Drugs folder root, including the Universal Depot Systems paper (delivery scaffolding for long-acting formulations)
 - [`../Nootropics/`](../Nootropics/) — cognitive-enhancement compounds for individuals on antipsychotics; shares clinical context with this folder
 - [`../../GM Enhancements/`](../../GM%20Enhancements/) — HSA v4.0 multi-domain enhancement protocol
-- [`../../Cell AI/`](../../Cell%20AI/) — biologically-inspired non-attention modelling (parallel to neuroplasticity framing)
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired non-attention modelling (parallel to neuroplasticity framing)
 
 ---
 

@@ -68,7 +68,7 @@ The transcript moves through three phases:
 - [`../CPU/`](../CPU/) — sister "design-as-conversation + HDL-sketch" pairing
 - [`../UCN AIs/`](../UCN%20AIs/) — also a design-as-transcript artefact
 - [`../New Classes of Electrical Components/`](../New%20Classes%20of%20Electrical%20Components/) — sister documentation-heavy thinking
-- [`../Cypha/`](../Cypha/) — Python+native HRNA stack that might benefit from the proposed language
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — Python+native HRNA stack that might benefit from the proposed language
 
 ---
 

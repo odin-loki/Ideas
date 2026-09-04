@@ -17,7 +17,7 @@ cd ..
 python weapons_simulation.py
 ```
 
-That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+That writes [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ---
 
@@ -47,8 +47,8 @@ None of these are implemented.
 
 | System | Coverage |
 |---|---|
-| Diamond battery power source | [`../../../Diamond Batterys/`](../../../Diamond%20Batterys/) — separate TRL documentation |
-| Multi-target tracking adjacency | [`../../../Filtering/`](../../../Filtering/) — GH-SR-IMM (sensor fusion context) |
+| Diamond battery power source | [`../../Diamond Batterys/`](../../Diamond%20Batterys/) — separate TRL documentation |
+| Multi-target tracking adjacency | [`../../Filtering/`](../../Filtering/) — GH-SR-IMM (sensor fusion context) |
 
 ---
 

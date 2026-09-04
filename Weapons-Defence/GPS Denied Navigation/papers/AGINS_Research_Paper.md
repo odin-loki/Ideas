@@ -4,7 +4,7 @@
 **Revision:** 1.0  
 **Classification:** UNCLASSIFIED // FOR OFFICIAL USE ONLY  
 **Author:** O. Halvorsen, Independent Defense Research, Sydney, Australia  
-**Cross-references:** [`../AGINS_full_report.md`](../AGINS_full_report.md) · [`../nav_sim_soldier_report.md`](../nav_sim_soldier_report.md) · [`../nav_sim_soldier.py`](../nav_sim_soldier.py) · [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) · [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) · [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py)
+**Cross-references:** [`../AGINS_full_report.md`](../AGINS_full_report.md) · [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md) · [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py) · [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) · [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) · [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py)
 
 ---
 
@@ -187,7 +187,7 @@ Three models compete [47, 48]:
 
 When a platform executes a sudden course change, the large innovation routes to M2/M3 (genuine dynamics) rather than being suppressed as a measurement outlier. Benchmark: **+52% to +87% improvement over standard Kalman in manoeuvre scenarios** [51, 54].
 
-The reference implementation is [`harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) [52], achieving composite score 1.09 vs 1.76 (Student-t KF) and 3.51 (VB KF) across eight noise/dynamics scenarios.
+The reference implementation is [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) [52], achieving composite score 1.09 vs 1.76 (Student-t KF) and 3.51 (VB KF) across eight noise/dynamics scenarios.
 
 ### 2.6.4 GRIA α Quality Gate
 
@@ -255,7 +255,7 @@ Process model: constant-velocity with IMM-switched acceleration extensions; disc
 
 **Ship SWaP:** ~30 kg, ~50 W, rack-mountable [54].
 
-Simulation parameters from [`config.py`](../agins_sim_package/agins_sim/config.py) [55]: celestial σ = 85 m; MagNav σ = 65 m (open); polar σ = 0.5°; IMU drift 0.05°/hr.
+Simulation parameters from [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) [55]: celestial σ = 85 m; MagNav σ = 65 m (open); polar σ = 0.5°; IMU drift 0.05°/hr.
 
 ## 3.3 Sensor Suite — Soldier/Dismounted Platform
 
@@ -343,7 +343,7 @@ Eliminates worst-case position spikes in open-ocean transit [54].
 
 ## 4.4 IMM Transition Matrix (Navigation)
 
-From [`config.py`](../agins_sim_package/agins_sim/config.py) [55] — soldier/ship filter:
+From [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) [55] — soldier/ship filter:
 
 $$\Pi = \begin{bmatrix} 0.92 & 0.06 & 0.02 \\ 0.06 & 0.92 & 0.02 \\ 0.25 & 0.25 & 0.50 \end{bmatrix}$$
 
@@ -378,7 +378,7 @@ Filter state dimension 4 (planar); 3 IMM models; typical update < 10 ms on ARM C
 
 ## 5.1 Operational Scenario Definition
 
-Monte Carlo scenarios from [`nav_sim_soldier.py`](../nav_sim_soldier.py) [55]:
+Monte Carlo scenarios from [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py) [55]:
 
 | Scenario ID | Description | External fixes available |
 |-------------|-------------|--------------------------|
@@ -416,7 +416,7 @@ The filter combines speed magnitude and heading independently. Compass heading e
 
 ## 5.4 Soldier Simulation Results
 
-From [`nav_sim_soldier_report.md`](../nav_sim_soldier_report.md) [55] — GH+PDR+compass (GH-SR-IMM full fusion):
+From [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md) [55] — GH+PDR+compass (GH-SR-IMM full fusion):
 
 | Scenario | Mean (m) | P90 (m) | Max (m) | Heading σ (°) |
 |----------|----------|---------|---------|---------------|
@@ -562,19 +562,19 @@ AGINS validation follows the portfolio simulation-first methodology established 
 
 | Component | Path | Role |
 |-----------|------|------|
-| Soldier nav sim | [`nav_sim_soldier.py`](../nav_sim_soldier.py) | MEMS patrol Monte Carlo [55] |
-| Soldier report | [`nav_sim_soldier_report.md`](../nav_sim_soldier_report.md) | Validated results table [55] |
-| AGINS sim package | [`agins_sim_package/`](../agins_sim_package/) | Unified config, ship scenarios [55] |
-| Central config | [`config.py`](../agins_sim_package/agins_sim/config.py) | Platform parameters [55] |
-| Filter benchmark | [`harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) | GH-SR-IMM algorithm reference [52] |
-| Filter paper | [`GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) | Theoretical foundation [51] |
+| Soldier nav sim | [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py) | MEMS patrol Monte Carlo [55] |
+| Soldier report | [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md) | Validated results table [55] |
+| AGINS sim package | [`../agins_sim_package/`](../agins_sim_package/) | Unified config, ship scenarios [55] |
+| Central config | [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) | Platform parameters [55] |
+| Filter benchmark | [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) | GH-SR-IMM algorithm reference [52] |
+| Filter paper | [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) | Theoretical foundation [51] |
 | Full report | [`AGINS_full_report.md`](../AGINS_full_report.md) | Comprehensive spec + economics [54] |
 
 ## 8.3 Truth Model and Noise Injection
 
 Truth trajectories: 2-hour patrol at 5 km/h (soldier) or 6 hr at 15 kn (ship); piecewise turn rate ≤ 4°/s (soldier) or 2°/s (ship) [55]. Sensor noise:
 
-- IMU: bias random walk + Gaussian noise per [`config.py`](../agins_sim_package/agins_sim/config.py) [55]
+- IMU: bias random walk + Gaussian noise per [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) [55]
 - Celestial: Gaussian position fix at scenario-dependent intervals
 - MagNav: Gaussian with urban disturbance overlay (500+ nT urban) [55]
 - Polar: Gaussian heading + blunder mixture [55]
@@ -615,7 +615,7 @@ cd Filtering
 python harcf_benchmark.py
 ```
 
-Configuration constants in [`config.py`](../agins_sim_package/agins_sim/config.py) [55].
+Configuration constants in [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) [55].
 
 ---
 
@@ -748,7 +748,7 @@ GH-SR-IMM contributes **56% improvement over KF** at same sensor suite [55]. Man
 
 ## 10.6 Converged Headline Verdict
 
-AGINS meets its design intent: **fully passive, infrastructure-independent navigation** with bounded error in GPS-denied environments across soldier and maritime platforms. Simulation-supported performance (26 m open night soldier; 30 m clear ship) is **honest about the GPS gap** and **decisive about the denial scenario** — GPS gives zero; AGINS gives operational position [54, 55]. The GH-SR-IMM filter is the enabling algorithmic contribution, validated independently in [`harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) [52] and in navigation Monte Carlo [55].
+AGINS meets its design intent: **fully passive, infrastructure-independent navigation** with bounded error in GPS-denied environments across soldier and maritime platforms. Simulation-supported performance (26 m open night soldier; 30 m clear ship) is **honest about the GPS gap** and **decisive about the denial scenario** — GPS gives zero; AGINS gives operational position [54, 55]. The GH-SR-IMM filter is the enabling algorithmic contribution, validated independently in [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) [52] and in navigation Monte Carlo [55].
 
 ---
 
@@ -928,7 +928,7 @@ AGINS solves a real, growing, strategically critical problem with buildable COTS
 
 [54] AGINS Comprehensive Technical Report, [`../AGINS_full_report.md`](../AGINS_full_report.md), Parts I–VII, O. Halvorsen, 2026.
 
-[55] Soldier-Portable MEMS Navigation Results, [`../nav_sim_soldier_report.md`](../nav_sim_soldier_report.md); simulation source [`../nav_sim_soldier.py`](../nav_sim_soldier.py); config [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py), 2026.
+[55] Soldier-Portable MEMS Navigation Results, [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md); simulation source [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py); config [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py), 2026.
 
 [56] MT-X Mk.II Leviathan Research Paper, [`../../Leviathon Tank/papers/MT-X_Leviathan_Research_Paper.md`](../../Leviathon%20Tank/papers/MT-X_Leviathan_Research_Paper.md), TRP-2026-MTX-001, 2026.
 

@@ -157,7 +157,7 @@ The 57 mm Advanced Mechanical Autocannon System, as re-specified in this 2.0 rev
 
 ## 11. Methods / Provenance
 
-All numerical performance figures in this paper trace to a single source: the portfolio ballistics simulator [`weapons_simulation.py`](../weapons_simulation.py). The simulator outputs are tabulated in [`weapons_sim_results.md`](../weapons_sim_results.md), which is the citable reference for every velocity, energy, pressure, recoil, and penetration value in this document.
+All numerical performance figures in this paper trace to a single source: the portfolio ballistics simulator [`../weapons_simulation.py`](../weapons_simulation.py). The simulator outputs are tabulated in [`../weapons_sim_results.md`](../weapons_sim_results.md), which is the citable reference for every velocity, energy, pressure, recoil, and penetration value in this document.
 
 The simulator implements three coupled physical models:
 
@@ -171,7 +171,7 @@ The AMAS round is therefore **internally consistent** with the rest of the Weapo
 
 ### 11.1 Tier-2 simulation methodology
 
-The 2.1 revision (this version) imports the following Tier-2 simulation outputs from [`weapons_sim_results.md`](../weapons_sim_results.md), with the methodology summarised below. Each block adds a specific physical model to the Tier-1 internal / external / Lanz–Odermatt stack of §11.
+The 2.1 revision (this version) imports the following Tier-2 simulation outputs from [`../weapons_sim_results.md`](../weapons_sim_results.md), with the methodology summarised below. Each block adds a specific physical model to the Tier-1 internal / external / Lanz–Odermatt stack of §11.
 
 1. **Muzzle-blast SPL — Westin (1975) fit (§6).** Peak free-field SPL at 1 m is correlated to chamber pressure, bore area, and case capacity, then attenuated by `−7 dB` to the shooter's ear and by the published insertion-loss values of foam plug (−22 dB), double plug + muff (−28 dB), and the TACS 16-element personal active-cancellation array (−25 dB additional). The 57 mm AMAS is unsuppressed — the §6 "suppressed" columns equal the unsuppressed values. The unsuppressed muzzle SPL of **164.2 dB** exceeds the OSHA 140 dB ceiling by 24 dB, mandating double-hearing-protection at a minimum.
 
@@ -205,7 +205,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the AMAS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§15. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the AMAS performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§15. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE
 

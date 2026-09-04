@@ -178,7 +178,7 @@ The 140 mm Advanced Multi-Effect Tank Round, as re-specified in this 2.0 revisio
 
 ## 11. Methods / Provenance
 
-All numerical performance figures in this paper trace to the portfolio ballistics simulator [`weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`weapons_sim_results.md`](../weapons_sim_results.md).
+All numerical performance figures in this paper trace to the portfolio ballistics simulator [`../weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 The simulator implements:
 
@@ -192,7 +192,7 @@ The 140 mm AMERT round is therefore **internally consistent** with the rest of t
 
 ### 11.1 Tier-2 simulation methodology
 
-The current revision imports the following Tier-2 simulation outputs from [`weapons_sim_results.md`](../weapons_sim_results.md):
+The current revision imports the following Tier-2 simulation outputs from [`../weapons_sim_results.md`](../weapons_sim_results.md):
 
 1. **Muzzle-blast SPL — Westin (1975) fit (§6).** Peak free-field SPL at 1 m is correlated to chamber pressure (198 MPa), bore area (154 cm²), and case capacity (24 500 cm³), then attenuated by `−7 dB` to the shooter's ear and by the published insertion losses of foam plug (−22 dB), double plug + muff (−28 dB), and TACS personal active (−25 dB additional). The 140 mm tank gun is **unsuppressed by design** (no muzzle suppressor is realistic for a 198 MPa peak-pressure tank gun) — the §6 "suppressed" columns equal the unsuppressed values. Unsuppressed muzzle SPL is **163.8 dB** — 24 dB above the OSHA 140 dB ceiling. For closed-hatch crew operations the turret structure provides additional in-vehicle attenuation; for open-hatch operations the TACS personal active-cancellation overlay (−25 dB additional) brings the ear-felt peak to 103.8 dB, safe at any firing rate.
 
@@ -229,7 +229,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the 140 mm AMERT performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the 140 mm AMERT performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for ETC-augmented 140 mm gun
 

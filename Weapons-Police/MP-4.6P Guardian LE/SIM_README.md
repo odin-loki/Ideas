@@ -52,4 +52,4 @@ python weapons_simulation.py
 
 ## Back-port note
 
-The military [`MP-4.6M Guardian Pistol`](../../Weapons-Defence/MP-4.6M%20Guardian%20Pistol/) and [`MP-4.6M Defender PDW`](../../Weapons-Defence/MP-4.6M%20Defender%20PDW/) now share the same §23 lifecycle module and Tier-2 surface-engineering reliability framework documented first in the LE spec Appendix A.
+The military [`../../Weapons-Defence/MP-4.6M Guardian Pistol/`](../../Weapons-Defence/MP-4.6M%20Guardian%20Pistol/) and [`../../Weapons-Defence/MP-4.6M Defender PDW/`](../../Weapons-Defence/MP-4.6M%20Defender%20PDW/) now share the same §23 lifecycle module and Tier-2 surface-engineering reliability framework documented first in the LE spec Appendix A.

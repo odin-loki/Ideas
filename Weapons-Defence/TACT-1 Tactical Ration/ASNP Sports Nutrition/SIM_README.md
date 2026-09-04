@@ -47,14 +47,14 @@ The sibling [`../PODS- Edible High Energy Protein/pods_simulation.py`](../PODS-%
 
 ## §23 Lifecycle
 
-Portfolio lifecycle for **`ASNP Sports Nutrition`** — [`../weapon_lifecycle.py`](../weapon_lifecycle.py) / [`../weapons_sim_results.md`](../weapons_sim_results.md) §23.
+Portfolio lifecycle for **`ASNP Sports Nutrition`** — [`../../weapon_lifecycle.py`](../../weapon_lifecycle.py) / [`../../weapons_sim_results.md`](../../weapons_sim_results.md) §23.
 
 | Item | Detail |
 |---|---|
 | **§23 Lifecycle** | `ASNP Sports Nutrition` — product_shelf_mo=24; opened_container_days=30 |
 
-| Lifecycle results | [`../weapons_sim_results.md`](../weapons_sim_results.md) §23 |
-| Lifecycle simulator | [`../weapon_lifecycle.py`](../weapon_lifecycle.py) |
+| Lifecycle results | [`../../weapons_sim_results.md`](../../weapons_sim_results.md) §23 |
+| Lifecycle simulator | [`../../weapon_lifecycle.py`](../../weapon_lifecycle.py) |
 
 ## Companion documents
 

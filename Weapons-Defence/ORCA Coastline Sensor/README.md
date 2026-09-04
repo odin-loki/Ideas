@@ -35,15 +35,15 @@ ORCA is a **complete platform subfolder**: operator specification, dedicated Pyt
 
 | Module | File | Role |
 |---|---|---|
-| Corrosion field | [`physics/corrosion_field.py`](orca_sim_package/orca_sim/physics/corrosion_field.py) | DC dipole lateral field, voltage across baseline |
-| Propeller field | [`physics/propeller_field.py`](orca_sim_package/orca_sim/physics/propeller_field.py) | ELFE oscillating dipole with skin-depth attenuation |
-| Detection range | [`detection/range.py`](orca_sim_package/orca_sim/detection/range.py) | SNR threshold solver, Type-039 and surface-vessel ranges |
-| Array coverage | [`array/coverage.py`](orca_sim_package/orca_sim/array/coverage.py) | Node spacing, 54-node northern-coast geometry |
-| Signal processing | [`processing/matched_filter.py`](orca_sim_package/orca_sim/processing/matched_filter.py), [`processing/demon.py`](orca_sim_package/orca_sim/processing/demon.py) | Matched spatial filter, DEMON cyclostationary gain |
-| Economics | [`economics/unit_cost.py`](orca_sim_package/orca_sim/economics/unit_cost.py) | Tier 1 acquisition and annual operating cost rollup |
-| Transit scenario | [`scenarios/transit.py`](orca_sim_package/orca_sim/scenarios/transit.py) | 8 kn submarine dwell time through detection zone |
-| Config | [`config.py`](orca_sim_package/orca_sim/config.py) | Dipole moments, electrode noise, integration times |
-| Report | [`reports/generate.py`](orca_sim_package/orca_sim/reports/generate.py) | Markdown + JSON consolidated output |
+| Corrosion field | [`orca_sim_package/orca_sim/physics/corrosion_field.py`](orca_sim_package/orca_sim/physics/corrosion_field.py) | DC dipole lateral field, voltage across baseline |
+| Propeller field | [`orca_sim_package/orca_sim/physics/propeller_field.py`](orca_sim_package/orca_sim/physics/propeller_field.py) | ELFE oscillating dipole with skin-depth attenuation |
+| Detection range | [`orca_sim_package/orca_sim/detection/range.py`](orca_sim_package/orca_sim/detection/range.py) | SNR threshold solver, Type-039 and surface-vessel ranges |
+| Array coverage | [`orca_sim_package/orca_sim/array/coverage.py`](orca_sim_package/orca_sim/array/coverage.py) | Node spacing, 54-node northern-coast geometry |
+| Signal processing | [`orca_sim_package/orca_sim/processing/matched_filter.py`](orca_sim_package/orca_sim/processing/matched_filter.py), [`orca_sim_package/orca_sim/processing/demon.py`](orca_sim_package/orca_sim/processing/demon.py) | Matched spatial filter, DEMON cyclostationary gain |
+| Economics | [`orca_sim_package/orca_sim/economics/unit_cost.py`](orca_sim_package/orca_sim/economics/unit_cost.py) | Tier 1 acquisition and annual operating cost rollup |
+| Transit scenario | [`orca_sim_package/orca_sim/scenarios/transit.py`](orca_sim_package/orca_sim/scenarios/transit.py) | 8 kn submarine dwell time through detection zone |
+| Config | [`orca_sim_package/orca_sim/config.py`](orca_sim_package/orca_sim/config.py) | Dipole moments, electrode noise, integration times |
+| Report | [`orca_sim_package/orca_sim/reports/generate.py`](orca_sim_package/orca_sim/reports/generate.py) | Markdown + JSON consolidated output |
 
 ---
 

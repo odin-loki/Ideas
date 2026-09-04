@@ -90,8 +90,8 @@ Two simpler primitives positioned as building blocks beneath the APN/GPN archite
 
 - [`../UCN Political System/`](../UCN%20Political%20System/) — the polity, constitution, and economy of the UCN universe
 - [`../Economics/`](../Economics/) — EREM (Energy-Resource Economic Model), the economic substrate referenced from the UCN polity papers
-- [`../Cell AI/`](../Cell%20AI/) — biologically-inspired neural architecture (parallel exploration of non-attention sequence modelling)
-- [`../Cypha/`](../Cypha/) — Harmonic Recursive Neural Architecture
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired neural architecture (parallel exploration of non-attention sequence modelling)
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — Harmonic Recursive Neural Architecture
 - [`../Long Reasoning and Thinking NN/`](../Long%20Reasoning%20and%20Thinking%20NN/) — UHPM long-context memory architecture
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator
 - [`../Veritas/`](../Veritas/) — formal verification framework (relevant to GPN's "self-proving" claim)

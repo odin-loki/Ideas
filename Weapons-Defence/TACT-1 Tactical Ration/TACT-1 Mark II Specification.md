@@ -526,7 +526,7 @@ Per 140 g bar dissolved into ~250 mL water (post-mastication):
 Within the 1 200 mOsm/kg oral-tolerance bound — GI-tolerable ✓
 ```
 
-The TACT-1 Mark II bar formulation is engineered to stay within the oral-tolerance bound when consumed with the recommended 250 mL water-per-bar protocol. The use of HBCD (a glucose polymer) instead of simple sugars is the key design choice: HBCD contributes 13 mOsm/L despite delivering 13 g of carbohydrate, vs ~720 mOsm/L if the same carbohydrate were delivered as glucose monomer. This is the same osmotic-pressure principle that underlies the §0 finding in the [`Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) document — but inverted (the TACT-1 design EXPLOITS HBCD's low osmolality to stay within the GI tolerance bound, where the injectable formulation's high osmolality fails the IV-safe bound).
+The TACT-1 Mark II bar formulation is engineered to stay within the oral-tolerance bound when consumed with the recommended 250 mL water-per-bar protocol. The use of HBCD (a glucose polymer) instead of simple sugars is the key design choice: HBCD contributes 13 mOsm/L despite delivering 13 g of carbohydrate, vs ~720 mOsm/L if the same carbohydrate were delivered as glucose monomer. This is the same osmotic-pressure principle that underlies the §0 finding in the [`../Injectable Nutrition/Injectable_Nutrition_Specification.md`](../Injectable%20Nutrition/Injectable_Nutrition_Specification.md) document — but inverted (the TACT-1 design EXPLOITS HBCD's low osmolality to stay within the GI tolerance bound, where the injectable formulation's high osmolality fails the IV-safe bound).
 
 ---
 

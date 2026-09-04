@@ -1340,7 +1340,7 @@ The figures in this paper fall into three categories.
 
 The reader is invited to disagree with any specific figure, structure, or threshold. The point of publishing the design at this level of detail is to invite specific criticism. A vague proposal is unfalsifiable; a specific proposal can be improved.
 
-The paper is published under the dual-license terms set out in the repository [`README.md`](../README.md). The intellectual content is freely available for academic and policy use under the AGPL-3.0+ license; commercial use is subject to the tiered commercial license. Citation should reference Odin Loch, *Sovereignty Without Consequence — the case for a UN Enforcement Architecture* (UCN Framework, 2026).
+The paper is published under the dual-license terms set out in the repository [`../README.md`](../README.md). The intellectual content is freely available for academic and policy use under the AGPL-3.0+ license; commercial use is subject to the tiered commercial license. Citation should reference Odin Loch, *Sovereignty Without Consequence — the case for a UN Enforcement Architecture* (UCN Framework, 2026).
 
 The author welcomes correspondence on the proposal at the email address listed in the repository README.
 
@@ -1850,9 +1850,9 @@ A. The UNDF does not employ PMCs in combat roles. Logistics and certain enabling
 
 - [`README.md`](README.md) — folder index and headline numbers.
 - [`../UCN Political System/`](../UCN%20Political%20System/) — the United Commonwealth Nations framework that supplies the theoretical underpinning for the present proposal, including:
-  - [`UCN_Paper1_Framework.md`](../UCN%20Political%20System/UCN_Paper1_Framework.md) — meta-analytic standard and modular-constitution doctrine.
-  - [`UCN_Paper3_Defense.md`](../UCN%20Political%20System/UCN_Paper3_Defense.md) — minimal-deterrent posture and capability anchoring.
-  - [`UCN_Paper7_International.md`](../UCN%20Political%20System/UCN_Paper7_International.md) — neutralist foreign policy and non-aggression pact architecture.
+  - [`../UCN Political System/UCN_Paper1_Framework.md`](../UCN%20Political%20System/UCN_Paper1_Framework.md) — meta-analytic standard and modular-constitution doctrine.
+  - [`../UCN Political System/UCN_Paper3_Defense.md`](../UCN%20Political%20System/UCN_Paper3_Defense.md) — minimal-deterrent posture and capability anchoring.
+  - [`../UCN Political System/UCN_Paper7_International.md`](../UCN%20Political%20System/UCN_Paper7_International.md) — neutralist foreign policy and non-aggression pact architecture.
 - [`../Economics/`](../Economics/) — EREM macroeconomic framework, relevant to the contribution-formula reasoning.
 - [`../Weapons-Defence/`](../Weapons-Defence/) — defence-engineering portfolio; the UNDF operational concept of employment draws on the equipment-and-doctrine literature that the Weapons-Defence folder organises.
 - [`../UCN AIs/`](../UCN%20AIs/) — intelligence-system speculative architectures that an Independent Intelligence Assessment Board operating at scale would plausibly employ.

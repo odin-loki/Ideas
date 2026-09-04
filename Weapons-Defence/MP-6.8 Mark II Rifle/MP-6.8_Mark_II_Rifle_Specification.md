@@ -717,7 +717,7 @@ Result for 10 000-rifleman 10-year programme:
 
 ## APPENDIX A — Simulation Model Reference Equations
 
-This appendix documents the governing equations of the seven simulation phases as applied to the MP-6.8 Mark II. The full Python implementation is in [`weapons_simulation.py`](../weapons_simulation.py). All numeric outputs cited below are from [`weapons_sim_results.md`](../weapons_sim_results.md). Calibration references and model assumptions are documented in [`Common Architecture and Components.md §6`](../Common%20Architecture%20and%20Components.md).
+This appendix documents the governing equations of the seven simulation phases as applied to the MP-6.8 Mark II. The full Python implementation is in [`../weapons_simulation.py`](../weapons_simulation.py). All numeric outputs cited below are from [`../weapons_sim_results.md`](../weapons_sim_results.md). Calibration references and model assumptions are documented in [`Common Architecture and Components.md §6`](../Common%20Architecture%20and%20Components.md).
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE
 
@@ -1003,7 +1003,7 @@ The dominant residual failure mode at production maturity is FTEject (1 : 100 00
 ## Simulation provenance
 
 All velocity, energy, chamber-pressure, recoil, suppressor-attenuation, and RHA-penetration numbers in this specification are derived from the portfolio ballistics simulator. See:
-- [`weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 6.8×51 mm cartridge and the MP-6.8 Mark II Rifle platform.
-- [`weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
+- [`../weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 6.8×51 mm cartridge and the MP-6.8 Mark II Rifle platform.
+- [`../weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
 
 Material specifications (Stellite 21 barrel liner, vacuum-arc-remelted CrMoV bore, Inconel 718 baffles, Inconel X-750 / MP35N / chrome-silicon spring stack, 7075-T6 magazine body, NP3 internal coatings) are unchanged from prior revisions and are not derived from the simulator.

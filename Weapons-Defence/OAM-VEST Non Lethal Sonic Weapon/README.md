@@ -35,12 +35,12 @@ OAM-VEST (**Orbital Angular Momentum Vestibular Disruption System**) is a **comp
 
 | Module | File | Role |
 |---|---|---|
-| **Physics** | [`physics.py`](OAM-VEST_Simulation_Package/oam_vest_sim/physics.py) | Propagation, SPL conversion, biological thresholds, earplug attenuation model |
-| **Array** | [`acoustic_array.py`](OAM-VEST_Simulation_Package/oam_vest_sim/acoustic_array.py) | Dual-panel phased array, OAM phase winding, beam steering, multi-target superposition |
-| **Pulse** | [`pulse.py`](OAM-VEST_Simulation_Package/oam_vest_sim/pulse.py) | Pulsed regime, cochlear NIOSH dose, vestibular cupula dynamics, LiDAR interleave, dwell timer |
-| **Wavefield** | [`wavefield.py`](OAM-VEST_Simulation_Package/oam_vest_sim/wavefield.py) | 2D FDTD acoustic pressure solver for beam-pattern verification |
-| **Safety** | [`safety.py`](OAM-VEST_Simulation_Package/oam_vest_sim/safety.py) | Engagement envelope, lethality margins, interlock scenario simulation |
-| **Report** | [`report.py`](OAM-VEST_Simulation_Package/oam_vest_sim/report.py) | Consolidated markdown report from all modules |
+| **Physics** | [`OAM-VEST_Simulation_Package/oam_vest_sim/physics.py`](OAM-VEST_Simulation_Package/oam_vest_sim/physics.py) | Propagation, SPL conversion, biological thresholds, earplug attenuation model |
+| **Array** | [`OAM-VEST_Simulation_Package/oam_vest_sim/acoustic_array.py`](OAM-VEST_Simulation_Package/oam_vest_sim/acoustic_array.py) | Dual-panel phased array, OAM phase winding, beam steering, multi-target superposition |
+| **Pulse** | [`OAM-VEST_Simulation_Package/oam_vest_sim/pulse.py`](OAM-VEST_Simulation_Package/oam_vest_sim/pulse.py) | Pulsed regime, cochlear NIOSH dose, vestibular cupula dynamics, LiDAR interleave, dwell timer |
+| **Wavefield** | [`OAM-VEST_Simulation_Package/oam_vest_sim/wavefield.py`](OAM-VEST_Simulation_Package/oam_vest_sim/wavefield.py) | 2D FDTD acoustic pressure solver for beam-pattern verification |
+| **Safety** | [`OAM-VEST_Simulation_Package/oam_vest_sim/safety.py`](OAM-VEST_Simulation_Package/oam_vest_sim/safety.py) | Engagement envelope, lethality margins, interlock scenario simulation |
+| **Report** | [`OAM-VEST_Simulation_Package/oam_vest_sim/report.py`](OAM-VEST_Simulation_Package/oam_vest_sim/report.py) | Consolidated markdown report from all modules |
 
 ---
 

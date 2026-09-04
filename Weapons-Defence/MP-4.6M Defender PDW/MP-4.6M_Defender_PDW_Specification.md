@@ -44,7 +44,7 @@ Date: May 2026
 - Operating System: Rotating bolt + short recoil + buffered bolt-carrier
 - Free Recoil Energy: 0.8 J (0.6 ft·lb) at 2.10 kg empty mass
 
-> **Note on muzzle velocity / energy.** The Defender PDW shares the 4.6 × 30 mm Enhanced cartridge with the MP-4.6M Guardian. The PDW's longer 266.7 mm barrel allows ~ 87 mm of additional propellant-gas expansion past the pistol's muzzle, yielding **542 m/s / 382 J** from the PDW versus **501 m/s / 326 J** from the Guardian Pistol (Δ ≈ +8 % MV / +17 % ME). The simulator models the two barrel lengths as separate cartridge entries (`4.6x30mm` vs `4.6x30mm_PDW` in [`weapons_simulation.py`](../weapons_simulation.py) — same loaded round, different barrel-length parameter). The loaded round is **identical**: same projectile, same case, same powder charge — only the barrel length differs. This is the principal logistical justification for fielding the pair as a single ammunition family.
+> **Note on muzzle velocity / energy.** The Defender PDW shares the 4.6 × 30 mm Enhanced cartridge with the MP-4.6M Guardian. The PDW's longer 266.7 mm barrel allows ~ 87 mm of additional propellant-gas expansion past the pistol's muzzle, yielding **542 m/s / 382 J** from the PDW versus **501 m/s / 326 J** from the Guardian Pistol (Δ ≈ +8 % MV / +17 % ME). The simulator models the two barrel lengths as separate cartridge entries (`4.6x30mm` vs `4.6x30mm_PDW` in [`../weapons_simulation.py`](../weapons_simulation.py) — same loaded round, different barrel-length parameter). The loaded round is **identical**: same projectile, same case, same powder charge — only the barrel length differs. This is the principal logistical justification for fielding the pair as a single ammunition family.
 
 ## SECTION 2: BARREL SYSTEM
 
@@ -400,8 +400,8 @@ The 4.6×30 mm Enhanced at **542 m/s** (PDW barrel) delivers less specific kinet
 ## Simulation provenance
 
 All velocity, energy, chamber-pressure, recoil, and RHA-penetration numbers in this specification are derived from the portfolio ballistics simulator. See:
-- [`weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 4.6×30 mm cartridge and the MP-4.6M Defender PDW platform.
-- [`weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
+- [`../weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 4.6×30 mm cartridge and the MP-4.6M Defender PDW platform.
+- [`../weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
 
 Material specifications (Stellite 21 barrel liner, Inconel 718 baffles, 7075-T6 magazine body, MP35N alloy spring set, hydraulic / mechanical buffer stack) are unchanged from prior revisions and are not derived from the simulator.
 
@@ -672,7 +672,7 @@ Result for 500-operator 10-year programme:
 
 ## Appendix A — Simulation Model Reference Equations
 
-This appendix documents the governing equations for each of the seven simulation phases as they apply to the MP-4.6M Defender PDW (4.6 × 30 mm Enhanced, 266.7 mm barrel). The equation **structure** is identical to the structure used in `MP-4.6P Guardian LE` Appendix A and in the MP-4.6M Pistol Appendix A — only the cartridge-specific input values and resulting outputs differ. The key delta from the Pistol Appendix is the barrel length: the integration end-point in A.1 advances from 0.180 m (Pistol) to 0.2667 m (PDW), yielding a higher muzzle velocity (542 m/s vs 501 m/s) and a corresponding shift in every downstream value (recoil impulse, RHA penetration, suppressor input pressure, etc.). Full Python implementations are in [`weapons_simulation.py`](../weapons_simulation.py); calibrated outputs are in [`weapons_sim_results.md`](../weapons_sim_results.md).
+This appendix documents the governing equations for each of the seven simulation phases as they apply to the MP-4.6M Defender PDW (4.6 × 30 mm Enhanced, 266.7 mm barrel). The equation **structure** is identical to the structure used in `MP-4.6P Guardian LE` Appendix A and in the MP-4.6M Pistol Appendix A — only the cartridge-specific input values and resulting outputs differ. The key delta from the Pistol Appendix is the barrel length: the integration end-point in A.1 advances from 0.180 m (Pistol) to 0.2667 m (PDW), yielding a higher muzzle velocity (542 m/s vs 501 m/s) and a corresponding shift in every downstream value (recoil impulse, RHA penetration, suppressor input pressure, etc.). Full Python implementations are in [`../weapons_simulation.py`](../weapons_simulation.py); calibrated outputs are in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE (extended to 266.7 mm barrel)
 

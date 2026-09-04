@@ -171,11 +171,11 @@ The 3D-printed airframe produces 14 structural parts from a conventionally fabri
 
 ## 🔗 Related work in this repo
 
-- [`../../../Diamond Batterys/`](../../Diamond%20Batterys/) — power source for the HPR-X rocketry series and longer-range propulsion adjacency
-- [`../../HPR-X Rocketry/`](../HPR-X%20Rocketry/) — the HPR-X guided high-power rocketry series within the same portfolio (smaller, solid-propellant)
-- [`../../weapons_simulation.py`](../weapons_simulation.py) — portfolio common simulator (Tsiolkovsky + drag trajectory modelling also covered there for HPR-X)
+- [`../../Diamond Batterys/`](../../Diamond%20Batterys/) — power source for the HPR-X rocketry series and longer-range propulsion adjacency
+- [`../HPR-X Rocketry/`](../HPR-X%20Rocketry/) — the HPR-X guided high-power rocketry series within the same portfolio (smaller, solid-propellant)
+- [`../weapons_simulation.py`](../weapons_simulation.py) — portfolio common simulator (Tsiolkovsky + drag trajectory modelling also covered there for HPR-X)
 - [`../../Filtering/`](../../Filtering/) — GH-SR-IMM multi-target tracking (applicable to terminal guidance sensor fusion)
-- [`../../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL battlefield intelligence (intercept targeting adjacency)
+- [`../../Asset Tracking Algorithm/`](../../Asset%20Tracking%20Algorithm/) — ARIA-INTEL battlefield intelligence (intercept targeting adjacency)
 
 ---
 

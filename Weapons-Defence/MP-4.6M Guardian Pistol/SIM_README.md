@@ -1,6 +1,6 @@
 # MP-4.6M Guardian Pistol — simulation traceability
 
-This platform's headline ballistics are produced by the portfolio-wide simulator at [`../weapons_simulation.py`](../weapons_simulation.py). Use [`platform_simulation.py`](platform_simulation.py) (this folder) to print a verification slice; full output is in [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.json`](../weapons_sim_results.json).
+This platform's headline ballistics are produced by the portfolio-wide simulator at [`../weapons_simulation.py`](../weapons_simulation.py). Use [`platform_simulation.py`](platform_simulation.py) (this folder) to print a verification slice; full output is in [`../weapons_sim_results.md`](../weapons_sim_results.md) and [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ## Local verification script
 

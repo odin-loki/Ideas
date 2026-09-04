@@ -77,7 +77,7 @@ At `n = 10⁶`, `n²` vs `n log n` is **five orders of magnitude** — the stand
 - [`../Statistical Generation/`](../Statistical%20Generation/) — Universal Statistical Generator (`O(N)` training claim is in the LCRP family)
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic underpinnings
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac fast-forward `O(log n)` is an LCRP-family result
-- [`../Cypha/`](../Cypha/) — HRNA inference: `O(n log n)` complexity claims sit in this family
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference: `O(n log n)` complexity claims sit in this family
 
 ---
 

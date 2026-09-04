@@ -149,16 +149,16 @@ The point is not that the predecessors were wrong. Each addresses a different pi
 ## 🔗 Related work in this repo
 
 - [`../UCN Political System/`](../UCN%20Political%20System/) — the speculative United Commonwealth Nations sovereign-design corpus that this paper is the outward-facing companion of. Specific relevant papers:
-  - [`UCN_Paper1_Framework.md`](../UCN%20Political%20System/UCN_Paper1_Framework.md) — modular-constitution doctrine and evidential-governance principle that informs the trigger-event framework and the determination workflow.
-  - [`UCN_Paper3_Defense.md`](../UCN%20Political%20System/UCN_Paper3_Defense.md) — UCN's minimal-deterrent defence posture, the national-level analogue of the UNDF's atrocity-crime-interdiction posture.
-  - [`UCN_Paper6_Governance.md`](../UCN%20Political%20System/UCN_Paper6_Governance.md) — Tier 1 / 2 / 3 amendment thresholds; analogous to the trigger-event framework's amendment procedure.
-  - [`UCN_Paper7_International.md`](../UCN%20Political%20System/UCN_Paper7_International.md) — UCN's neutralist foreign policy and 185-non-aggression-pact architecture (Correlates of War dataset). UCN's foreign-policy doctrine assumes a UN system; this paper proposes the reform of that system.
-  - [`UCN_Paper8_Roadmap.md`](../UCN%20Political%20System/UCN_Paper8_Roadmap.md) — phased-rollout methodology, paralleled in the five-step pathway in Section XIII of the present paper.
-  - [`australias_invisible_constitution.md`](../UCN%20Political%20System/australias_invisible_constitution.md) — constitutional-law analysis methodology; analogous to the parsing of UN Charter text in Section III of the present paper.
+  - [`../UCN Political System/UCN_Paper1_Framework.md`](../UCN%20Political%20System/UCN_Paper1_Framework.md) — modular-constitution doctrine and evidential-governance principle that informs the trigger-event framework and the determination workflow.
+  - [`../UCN Political System/UCN_Paper3_Defense.md`](../UCN%20Political%20System/UCN_Paper3_Defense.md) — UCN's minimal-deterrent defence posture, the national-level analogue of the UNDF's atrocity-crime-interdiction posture.
+  - [`../UCN Political System/UCN_Paper6_Governance.md`](../UCN%20Political%20System/UCN_Paper6_Governance.md) — Tier 1 / 2 / 3 amendment thresholds; analogous to the trigger-event framework's amendment procedure.
+  - [`../UCN Political System/UCN_Paper7_International.md`](../UCN%20Political%20System/UCN_Paper7_International.md) — UCN's neutralist foreign policy and 185-non-aggression-pact architecture (Correlates of War dataset). UCN's foreign-policy doctrine assumes a UN system; this paper proposes the reform of that system.
+  - [`../UCN Political System/UCN_Paper8_Roadmap.md`](../UCN%20Political%20System/UCN_Paper8_Roadmap.md) — phased-rollout methodology, paralleled in the five-step pathway in Section XIII of the present paper.
+  - [`../UCN Political System/australias_invisible_constitution.md`](../UCN%20Political%20System/australias_invisible_constitution.md) — constitutional-law analysis methodology; analogous to the parsing of UN Charter text in Section III of the present paper.
 - [`../Economics/`](../Economics/) — EREM (Energy-Resource Economic Model) macroeconomic framework that informs the UCN papers and provides the macroeconomic context for the UNDF's tiered-assessment contribution model in Section VIII.
 - [`../Weapons-Defence/`](../Weapons-Defence/) — the defence-engineering portfolio that informs the UNDF's operational concept of employment in Section VII. The Weapons-Defence folder's reference-grade benchmarking style (compare-against-fielded-incumbents) is the model for the comparative analysis of enforcement architectures (NATO Article 5, AU PSC / ASF, ECOMOG, ICC, EU CSDP, Combined Maritime Forces, the Korean War) in Section IV.
 - [`../UCN AIs/`](../UCN%20AIs/) — speculative AI architectures relevant to the Independent Intelligence Assessment Board's analytic methodology at scale (the IAB's role is described in Sections 6.3, 9.1, and 9.5).
-- [`../README.md`](../README.md) — the main repository README, which catalogues this folder under § Political theory alongside the related [`UCN Political System/`](../UCN%20Political%20System/).
+- [`../README.md`](../README.md) — the main repository README, which catalogues this folder under § Political theory alongside the related [`../UCN Political System/`](../UCN%20Political%20System/).
 
 ---
 

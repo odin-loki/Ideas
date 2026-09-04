@@ -16,6 +16,7 @@ for p in sorted(pathlib.Path('.').rglob('*.md')):
     if '.git' in p.parts: continue
     t = p.read_text(encoding='utf-8', errors='replace')
     t = re.sub(r'```.*?```', '', t, flags=re.S)
+    t = re.sub(r'`[^`\n]*`', '', t)   # a SMILES string is not a link
     for m in LINK.finditer(t):
         h = m.group(1).split('#')[0].strip()
         if not h or h.startswith(('http', 'mailto:', '#')): continue

@@ -97,10 +97,10 @@ The source explicitly discusses dual-use / military applicability of Phase III m
 
 ## 🔗 Related work in this repo
 
-- [`Drugs/`](../Drugs/) — depot pharmacology and pharma-research framework relevant to long-acting delivery
-- [`Drugs/Schizophrenia Cure/`](../Drugs/Schizophrenia%20Cure/) and [`Drugs/Nootropics/`](../Drugs/Nootropics/) — speculative neuropharmacology adjacent to HSA Phase III neural-software modules
-- [`Veritas/`](../Veritas/) — formal-verification framework relevant to risk modelling of multi-module interventions
-- [`Cell AI/`](../Cell%20AI/) — biologically-inspired computational substrate
+- [`../Drugs/`](../Drugs/) — depot pharmacology and pharma-research framework relevant to long-acting delivery
+- [`../Drugs/Schizophrenia Cure/`](../Drugs/Schizophrenia%20Cure/) and [`../Drugs/Nootropics/`](../Drugs/Nootropics/) — speculative neuropharmacology adjacent to HSA Phase III neural-software modules
+- [`../Veritas/`](../Veritas/) — formal-verification framework relevant to risk modelling of multi-module interventions
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired computational substrate
 
 ---
 

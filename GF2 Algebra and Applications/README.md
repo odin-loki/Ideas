@@ -89,7 +89,7 @@ Paper 7  ─ GRIA Spectrum Theorem  ── synthesis; bridges to Izaac, Cypha
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — GRIA framework's canonical home (this folder hosts the spectrum theorem)
 - [`../ARIA Encryption Algorithm/`](../ARIA%20Encryption%20Algorithm/) — `GF(2²⁵⁶)` AEAD (Paper 2 finite-field machinery)
 - [`../Veritas/`](../Veritas/) — PAC bounds on `H = {h : {0,1}ⁿ → {0,1}ⁿ}` complement Paper 3's `α` grade
-- [`../Cypha/`](../Cypha/) — HRNA inference (Paper 7 explicitly bridges)
+- [`odin-loki/cypha`](https://github.com/odin-loki/cypha) — HRNA inference (Paper 7 explicitly bridges)
 - [`../RNGS/Boolean RNG/`](../RNGS/Boolean%20RNG/) — Boolean LCG analysis benefits from the operator taxonomy
 - [`../Prime Number Generator/`](../Prime%20Number%20Generator/) — sister `α(s) = s^(-0.37)` exponent discussion
 

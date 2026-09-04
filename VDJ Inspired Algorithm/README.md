@@ -57,7 +57,7 @@ Plus seven supporting subsystems, all communicating through the typed `Pattern` 
 
 ## 🔗 Related work in this repo
 
-- [`../Cell AI/`](../Cell%20AI/) — biologically-inspired sequence modelling without attention
+- [`odin-loki/cellai`](https://github.com/odin-loki/cellai) — biologically-inspired sequence modelling without attention
 - [`../Compression Algorithms/`](../Compression%20Algorithms/) — Izaac / NMP / GRIA frameworks; the typed-segment-library principle echoes the codec view of NMP
 - [`../GF2 Algebra and Applications/`](../GF2%20Algebra%20and%20Applications/) — algebraic structure relevant to typed pattern composition
 - [`../Asset Tracking Algorithm/`](../Asset%20Tracking%20Algorithm/) — ARIA-INTEL: another single-file edge-deployable analysis engine

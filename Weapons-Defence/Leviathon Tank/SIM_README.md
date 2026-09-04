@@ -57,7 +57,7 @@ Python 3.9+ required. No SciPy dependency for the default vehicle model.
 | **Cost** | `cost/unit_cost.py` | Unit and program cost (central case) |
 | **Report** | `reports/generate.py` | Markdown + JSON export |
 
-All parameters live in [`leviathan_sim/config.py`](leviathan_sim_package/leviathan_sim/config.py).
+All parameters live in [`leviathan_sim_package/leviathan_sim/config.py`](leviathan_sim_package/leviathan_sim/config.py).
 
 ---
 

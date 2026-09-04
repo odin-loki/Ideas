@@ -13,7 +13,7 @@ Date: May 2026
 
 **Classification: UNCLASSIFIED / FOR OFFICIAL USE ONLY**
 
-> **Corrections from earlier draft.** The previous revision of this specification claimed a 30-round magazine, 900 rpm cyclic rate, 1 120 m/s muzzle velocity, 1 752 J muzzle energy, 15 mm RHA at 25 m, and a 58 000 PSI chamber pressure. Those numbers are inconsistent with the cartridge geometry and with the simulator-derived numbers in [`weapons_sim_results.md`](../weapons_sim_results.md): a 4.6 × 30 mm Enhanced case cannot deliver 1 120 m/s from a 180 mm barrel at any credible chamber pressure, a 30-round double-stack magazine is a PDW configuration rather than a service pistol, and a 900 rpm cyclic rate combined with double-action triggering is mechanically incoherent. The corrected MP-4.6M Guardian is a **single-action / semi-automatic only**, **fixed-barrel rotating-bolt short-recoil** service pistol, **20-round magazine**, **180 mm barrel**, **integrated suppressor**, intended for police, close-protection, and suppressed-entry use. All ballistic numbers below are simulator-derived against the 4.6 × 30 mm Enhanced cartridge.
+> **Corrections from earlier draft.** The previous revision of this specification claimed a 30-round magazine, 900 rpm cyclic rate, 1 120 m/s muzzle velocity, 1 752 J muzzle energy, 15 mm RHA at 25 m, and a 58 000 PSI chamber pressure. Those numbers are inconsistent with the cartridge geometry and with the simulator-derived numbers in [`../weapons_sim_results.md`](../weapons_sim_results.md): a 4.6 × 30 mm Enhanced case cannot deliver 1 120 m/s from a 180 mm barrel at any credible chamber pressure, a 30-round double-stack magazine is a PDW configuration rather than a service pistol, and a 900 rpm cyclic rate combined with double-action triggering is mechanically incoherent. The corrected MP-4.6M Guardian is a **single-action / semi-automatic only**, **fixed-barrel rotating-bolt short-recoil** service pistol, **20-round magazine**, **180 mm barrel**, **integrated suppressor**, intended for police, close-protection, and suppressed-entry use. All ballistic numbers below are simulator-derived against the 4.6 × 30 mm Enhanced cartridge.
 
 ## SECTION 1: AMMUNITION SYSTEM
 
@@ -389,8 +389,8 @@ The 4.6×30 mm Enhanced at 501 m/s delivers less specific kinetic energy than th
 ## Simulation provenance
 
 All velocity, energy, chamber-pressure, recoil, and RHA-penetration numbers in this specification are derived from the portfolio ballistics simulator. See:
-- [`weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 4.6×30mm cartridge and the MP-4.6M Pistol platform.
-- [`weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
+- [`../weapons_sim_results.md`](../weapons_sim_results.md) — authoritative numerical results for the 4.6×30mm cartridge and the MP-4.6M Pistol platform.
+- [`../weapons_simulation.py`](../weapons_simulation.py) — Powley closed-form internal-ballistics model (η = 0.72 small-arms efficiency), G7 point-mass external integration with ICAO atmosphere, De Marre RHA-penetration correlation (K = 7.80 × 10⁻⁴, calibrated against M80 / .50 BMG / 14.5 × 114 reference data).
 
 Material specifications (Stellite 21 barrel liner, chrome-hammer-forging, S7 tool steel sear, MP35N springs, Inconel 718 baffles, 17-7 PH magazine body, 7075-T6 frame inserts) are unchanged from prior revisions and are not derived from the simulator.
 
@@ -643,7 +643,7 @@ Result for 500-operator 10-year programme:
 
 ## Appendix A — Simulation Model Reference Equations
 
-This appendix documents the governing equations for each of the seven simulation phases as they apply to the MP-4.6M Guardian Pistol (4.6 × 30 mm Enhanced, 180 mm barrel). The equation **structure** is identical to the structure used in `MP-4.6P Guardian LE` Appendix A — only the cartridge-specific input values and resulting outputs differ. Full Python implementations are in [`weapons_simulation.py`](../weapons_simulation.py); calibrated outputs are in [`weapons_sim_results.md`](../weapons_sim_results.md).
+This appendix documents the governing equations for each of the seven simulation phases as they apply to the MP-4.6M Guardian Pistol (4.6 × 30 mm Enhanced, 180 mm barrel). The equation **structure** is identical to the structure used in `MP-4.6P Guardian LE` Appendix A — only the cartridge-specific input values and resulting outputs differ. Full Python implementations are in [`../weapons_simulation.py`](../weapons_simulation.py); calibrated outputs are in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 ### A.1 Interior ballistics — Noble-Abel lumped ODE
 

@@ -155,7 +155,7 @@ The 57 mm under-barrel grenade round, as re-specified in this 2.0 revision, deli
 
 ## 11. Methods / Provenance
 
-All numerical performance figures in this paper trace to the portfolio ballistics simulator [`weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`weapons_sim_results.md`](../weapons_sim_results.md).
+All numerical performance figures in this paper trace to the portfolio ballistics simulator [`../weapons_simulation.py`](../weapons_simulation.py), with outputs tabulated in [`../weapons_sim_results.md`](../weapons_sim_results.md).
 
 The simulator implements:
 
@@ -167,7 +167,7 @@ The simulator implements:
 
 ### 11.1 Tier-2 simulation methodology
 
-The current revision imports the following Tier-2 simulation outputs from [`weapons_sim_results.md`](../weapons_sim_results.md):
+The current revision imports the following Tier-2 simulation outputs from [`../weapons_sim_results.md`](../weapons_sim_results.md):
 
 1. **Muzzle-blast SPL — Westin (1975) fit (§6).** Peak free-field SPL at 1 m is correlated to chamber pressure (109 MPa for the 57 mm UGR), bore area (25.5 cm²), and case capacity. The 305 mm launcher barrel is too short for a suppressor — the round is *unsuppressed by design*. Shooter-ear column is muzzle SPL `−7 dB`; subsequent columns add foam plug (`−22 dB`), double plug + muff (`−28 dB`), and TACS personal active cancellation (`−25 dB` extra). The unsuppressed muzzle peak of **163.1 dB** exceeds the OSHA 140 dB ceiling; **128.1 dB at the ear under double protection** is at the conservative-stack threshold and TACS overlay is recommended for sustained engagement.
 
@@ -201,7 +201,7 @@ Classification: **UNCLASSIFIED**. Distribution Statement: **For Official Use Onl
 
 ## Appendix A — Governing Equations
 
-This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the UGR performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/MP-4.6P_Guardian_LE_Specification.md`](../../Weapons-Police/MP-4.6P%20Guardian%20LE.md) Appendix A.
+This appendix documents the governing equations used by the portfolio ballistics simulator (`weapons_simulation.py`) to derive the UGR performance numbers cited in §3 and §11. Calibration constants are taken from `weapons_sim_results.md` §1–§17. The structure follows the reference appendix in [`../../Weapons-Police/MP-4.6P Guardian LE/`](../../Weapons-Police/MP-4.6P%20Guardian%20LE/) Appendix A.
 
 ### A.1 Interior ballistics — Noble-Abel for 305 mm launcher barrel at 109 MPa
 
