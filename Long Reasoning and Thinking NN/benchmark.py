@@ -9,6 +9,12 @@ from typing import Dict, List, Tuple
 import matplotlib.pyplot as plt
 from unified_system import UnifiedHashPredictiveMemory
 
+from pathlib import Path
+
+# Figures land beside this script. They used to be written to an absolute
+# path under /home/claude, which is why none of them ever reached the repo.
+HERE = Path(__file__).resolve().parent
+
 
 class StandardAttention:
     """Baseline: Standard O(N²) attention for comparison."""
@@ -236,7 +242,7 @@ def run_comprehensive_benchmark(num_tokens_list: List[int],
     return results
 
 
-def visualize_benchmark_results(results: Dict, output_path: str = '/home/claude/benchmark_results.png'):
+def visualize_benchmark_results(results: Dict, output_path: str = HERE / "benchmark_results.png"):
     """Create visualization of benchmark results."""
     
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))

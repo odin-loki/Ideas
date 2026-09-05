@@ -113,9 +113,15 @@ python demo.py
 ```
 
 **Output:**
-- Query time: ~10ms (constant!)
+- Query time: sublinear — 136 ms at 10K tokens, 589 ms at 500K (50x the
+  context for 4.3x the time)
 - Memory: Linear scaling
-- Converges in 5-15 iterations regardless of size
+- Converges in 58-69 iterations, near-flat as the context grows
+
+Those are measured numbers from a run of `demo.py` on four cores, not
+estimates. The earlier figures in this file claimed ~10 ms and 5-15
+iterations; both came from a build in which retrieval returned nothing on
+every query, so nothing was ever actually searched or converged.
 
 ![Scaling](scaling_demo.png)
 
@@ -304,7 +310,7 @@ Where:
 
 - Precision: ~80-90% vs full attention
 - Recall: ~85-95% of relevant segments
-- Converges in: 5-15 iterations
+- Converges in: 58-69 iterations (measured; near-flat in context size)
 - Effective context: Up to 10M tokens before 50% precision threshold
 
 ## Extending the Implementation

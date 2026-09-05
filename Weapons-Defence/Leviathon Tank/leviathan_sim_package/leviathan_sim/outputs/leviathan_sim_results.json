@@ -1,0 +1,494 @@
+{
+  "platform": "MT-X Mk.II Leviathan",
+  "mobility": {
+    "power_to_weight_hp_t": 34.21,
+    "ground_pressure_kpa": 66.9,
+    "track_contact_area_m2": 5.57,
+    "max_road_speed_kmh": 65.0,
+    "power_limited_speed_kmh": 90.0,
+    "power_at_spec_vmax_kw": 148.0,
+    "installed_power_kw": 969.0,
+    "grade_speed_kmh": {
+      "0": 54.0,
+      "5": 54.0,
+      "10": 24.9,
+      "15": 11.8,
+      "20": 5.0,
+      "25": 0.8,
+      "30": 0.0
+    },
+    "max_surmountable_grade_deg": 31,
+    "trench_crossing_m": 2.8,
+    "vertical_step_m": 1.1,
+    "fuel_capacity_L": 1400.0,
+    "modelled_range_km": 600.0,
+    "spec_range_km": 600,
+    "fuel_consumption_L_per_100km": 233.3,
+    "turning_radius_m": 8.5
+  },
+  "armour": {
+    "zones": [
+      {
+        "zone": "upper_glacis",
+        "physical_mm": 110,
+        "angle_deg_from_vertical": 78,
+        "effective_rha_mm": 529.1,
+        "with_era_mm": 779.1,
+        "has_era": true,
+        "estimated_mass_kg": 2.0
+      },
+      {
+        "zone": "lower_glacis",
+        "physical_mm": 130,
+        "angle_deg_from_vertical": 55,
+        "effective_rha_mm": 226.6,
+        "with_era_mm": 476.6,
+        "has_era": true,
+        "estimated_mass_kg": 1.0
+      },
+      {
+        "zone": "hull_side_upper",
+        "physical_mm": 80,
+        "angle_deg_from_vertical": 15,
+        "effective_rha_mm": 82.8,
+        "with_era_mm": 332.8,
+        "has_era": true,
+        "estimated_mass_kg": 2.0
+      },
+      {
+        "zone": "hull_side_lower",
+        "physical_mm": 60,
+        "angle_deg_from_vertical": 0,
+        "effective_rha_mm": 60.0,
+        "with_era_mm": 60.0,
+        "has_era": false,
+        "estimated_mass_kg": 1.0
+      },
+      {
+        "zone": "turret_front_primary",
+        "physical_mm": 200,
+        "angle_deg_from_vertical": 75,
+        "effective_rha_mm": 772.7,
+        "with_era_mm": 1072.7,
+        "has_era": true,
+        "estimated_mass_kg": 1.0
+      },
+      {
+        "zone": "turret_front_cheek",
+        "physical_mm": 180,
+        "angle_deg_from_vertical": 70,
+        "effective_rha_mm": 526.3,
+        "with_era_mm": 826.3,
+        "has_era": true,
+        "estimated_mass_kg": 1.0
+      },
+      {
+        "zone": "turret_roof",
+        "physical_mm": 40,
+        "angle_deg_from_vertical": 10,
+        "effective_rha_mm": 40.6,
+        "with_era_mm": 40.6,
+        "has_era": false,
+        "estimated_mass_kg": 0.0
+      },
+      {
+        "zone": "hull_roof_crew",
+        "physical_mm": 50,
+        "angle_deg_from_vertical": 10,
+        "effective_rha_mm": 50.8,
+        "with_era_mm": 50.8,
+        "has_era": false,
+        "estimated_mass_kg": 0.0
+      }
+    ],
+    "headline": {
+      "upper_glacis_eff_mm": 529.1,
+      "upper_glacis_with_era_mm": 779.1,
+      "turret_front_eff_mm": 772.7,
+      "turret_front_with_era_mm": 1072.7,
+      "total_armour_mass_kg": 8.0
+    },
+    "ke_defeat_margin_2km": {
+      "upper_glacis": 1.0,
+      "lower_glacis": 1.0,
+      "hull_side_upper": 1.0,
+      "hull_side_lower": 0.184,
+      "turret_front_primary": 1.0,
+      "turret_front_cheek": 1.0,
+      "turret_roof": 0.124,
+      "hull_roof_crew": 0.155
+    },
+    "notes": "AlNiCyN-5000 modelled 1:1 RHA equivalent per specification. ERA add-ons are nominal areal thickness credits."
+  },
+  "powertrain": {
+    "designation": "PPU-1300",
+    "layout": "boxer",
+    "cylinders": 12,
+    "displacement_L": 38.4,
+    "rated_power_hp": 1300.0,
+    "rated_torque_Nm": 4800.0,
+    "dry_mass_kg": 2800.0,
+    "fuel_capacity_L": 1400.0,
+    "fuel_mass_kg": 1190.0,
+    "bsfc_g_kwh": 210.0,
+    "torque_curve": {
+      "rpm": [
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400
+      ],
+      "torque_Nm": [
+        3977,
+        4114,
+        4251,
+        4389,
+        4526,
+        4663,
+        4800,
+        7040,
+        6600,
+        6212,
+        5867,
+        5558,
+        5280,
+        5029,
+        4800,
+        4591,
+        4400
+      ],
+      "power_hp": [
+        447,
+        520,
+        597,
+        678,
+        763,
+        851,
+        944,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483,
+        1483
+      ]
+    },
+    "consumption": {
+      "idle": {
+        "rpm": 800,
+        "power_kw": 16.7,
+        "fuel_kg_h": 3.5,
+        "fuel_L_h": 4.1
+      },
+      "cruise_45": {
+        "rpm": 1600,
+        "power_kw": 387.0,
+        "fuel_kg_h": 81.3,
+        "fuel_L_h": 95.6
+      },
+      "max_road": {
+        "rpm": 2200,
+        "power_kw": 940.0,
+        "fuel_kg_h": 197.4,
+        "fuel_L_h": 232.2
+      },
+      "sprint": {
+        "rpm": 2200,
+        "power_kw": 1105.8,
+        "fuel_kg_h": 232.2,
+        "fuel_L_h": 273.2
+      }
+    },
+    "transmission": {
+      "gears_fwd": 6,
+      "gears_rev": 2,
+      "final_drive": 5.8,
+      "mass_kg": 1800.0
+    }
+  },
+  "suspension": {
+    "road_wheels_total": 14,
+    "wheel_travel_mm": 280.0,
+    "track_pitch_mm": 164.0,
+    "track_length_m": 15.09,
+    "torsion_bar_diam_mm": 65.0,
+    "natural_frequency_Hz": 2.54,
+    "est_ground_clearance_mm": 450.0,
+    "max_bump_acceleration_g": 0.0,
+    "notes": "7+1 road wheels per side; hydropneumatic bump stops at full droop."
+  },
+  "armament_main": {
+    "calibre_mm": 140.0,
+    "length_calibres": 65.0,
+    "autoloader_cycle_s": 7.5,
+    "rof_rpm": 8.0,
+    "ready_rounds": 22,
+    "hull_stowage": 12,
+    "total_ammo": 34,
+    "sustained_burst_min": 2.75,
+    "recoil_force_kN": 81.0,
+    "spec_amet": {
+      "muzzle_velocity_m_s": 1950.0,
+      "muzzle_energy_MJ": 57.0,
+      "penetration_mm": {
+        "0": 1450.0,
+        "500": 1368.4,
+        "1000": 1291.3,
+        "1500": 1218.6,
+        "2000": 1150.0,
+        "2500": 1085.3,
+        "3000": 1024.1
+      }
+    },
+    "portfolio_kew_ap": {
+      "muzzle_velocity_m_s": 1698.0,
+      "muzzle_energy_MJ": 9.23,
+      "penetration_mm": {
+        "0": 867.1,
+        "500": 679.3,
+        "1000": 532.2,
+        "1500": 417.0,
+        "2000": 326.7,
+        "2500": 256.0,
+        "3000": 200.5
+      },
+      "pen_60deg_0m_mm": 533.8
+    },
+    "penetration_discrepancy": {
+      "warning": "Specification AMET claims (1950 m/s, 1450 mm @ 0 m) exceed portfolio-validated KEW-AP (1698 m/s, 867 mm @ 0 m). Sim reports both; use portfolio for cross-weapon comparisons.",
+      "ratio_spec_to_portfolio_at_2km": 3.52
+    }
+  },
+  "armament_secondary": {
+    "coax": {
+      "weapon": "MP-6.8 coax machine gun",
+      "calibre_mm": 6.8,
+      "rate_of_fire_rpm": 750,
+      "ready_ammo": 4000,
+      "effective_range_m": 800,
+      "role": "anti-personnel, suppressive fire"
+    },
+    "rws": {
+      "weapon": "15.2 mm anti-tank sniper RWS",
+      "calibre_mm": 15.2,
+      "rate_of_fire_rpm": 30,
+      "ready_ammo": 120,
+      "effective_range_m": 2000,
+      "penetration_mm_rha_500m": 45,
+      "role": "precision anti-materiel, drone defeat"
+    },
+    "smoke_dischargers": {
+      "tubes": 12,
+      "salvo_coverage_s": 4
+    }
+  },
+  "aps": {
+    "radar_band": "Ka",
+    "detection_atgm_m": 400.0,
+    "detection_rpg_m": 250.0,
+    "engage_envelope_m": [
+      80.0,
+      250.0
+    ],
+    "reaction_time_s": 0.3,
+    "single_shot_pk": 0.8,
+    "two_shot_pk": 0.96,
+    "engagement_timeline": [
+      {
+        "range_m": 80.0,
+        "time_to_intercept_s": 0.72,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 99.0,
+        "time_to_intercept_s": 0.814,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 118.0,
+        "time_to_intercept_s": 0.909,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 137.0,
+        "time_to_intercept_s": 1.003,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 156.0,
+        "time_to_intercept_s": 1.098,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 174.0,
+        "time_to_intercept_s": 1.192,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 193.0,
+        "time_to_intercept_s": 1.287,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 212.0,
+        "time_to_intercept_s": 1.381,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 231.0,
+        "time_to_intercept_s": 1.476,
+        "single_shot_pk": 0.8
+      },
+      {
+        "range_m": 250.0,
+        "time_to_intercept_s": 1.57,
+        "single_shot_pk": 0.8
+      }
+    ],
+    "notes": "Model assumes head-on ATGM at 200 m/s; no multi-target saturation."
+  },
+  "amphibious": {
+    "combat_mass_kg": 38000.0,
+    "displacement_m3": 42.0,
+    "displacement_with_sponsons_m3": 43.5,
+    "buoyancy_margin_percent": 10.5,
+    "floats_without_preparation": true,
+    "sponson_buoyancy_kg": 3080.0,
+    "swim_speed_kmh": 7.0,
+    "swim_power_kw": 31.0,
+    "unprepared_ford_m": 1.4,
+    "snorkel_depth_m": 4.0,
+    "freeboard_forward_mm": 200.0,
+    "notes": "Swim propulsion via track rotation; 6\u20138 km/h per specification. Reserve buoyancy must stay positive with full fuel and ammo."
+  },
+  "fcs": {
+    "sensor_suite": [
+      "commander's panoramic thermal (360\u00b0)",
+      "gunner primary thermal / day channel",
+      "laser rangefinder 200\u20139990 m",
+      "wind sensor mast",
+      "ballistic computer with muzzle reference"
+    ],
+    "first_round_hit_stationary": {
+      "500": 1.0,
+      "1000": 1.0,
+      "1500": 1.0,
+      "2000": 1.0,
+      "2500": 1.0,
+      "3000": 1.0
+    },
+    "first_round_hit_moving_40kmh": {
+      "500": 1.0,
+      "1000": 1.0,
+      "1500": 1.0,
+      "2000": 1.0,
+      "2500": 0.997,
+      "3000": 0.989
+    },
+    "cep_m": {
+      "500": 0.21,
+      "1000": 0.27,
+      "1500": 0.33,
+      "2000": 0.39,
+      "2500": 0.45,
+      "3000": 0.51
+    },
+    "time_of_flight_s": {
+      "500": 0.29,
+      "1000": 0.59,
+      "1500": 0.88,
+      "2000": 1.18,
+      "2500": 1.47,
+      "3000": 1.77
+    },
+    "max_direct_fire_range_m": 4000,
+    "notes": "Uses portfolio MV for TOF; AMET would reduce TOF ~15%."
+  },
+  "weight": {
+    "items_kg": {
+      "hull_structure": 8200,
+      "turret_structure": 3100,
+      "engine": 2800,
+      "transmission_final_drives": 3200,
+      "running_gear": 4400,
+      "main_armament": 2600,
+      "secondary_armament": 380,
+      "aps_ew": 220,
+      "electronics": 180,
+      "crew": 300,
+      "troop_payload": 960,
+      "fuel": 1190,
+      "ammunition": 2100,
+      "era_panels": 640,
+      "miscellaneous": 730
+    },
+    "computed_total_kg": 31000,
+    "spec_combat_mass_kg": 38000.0,
+    "delta_kg": -7000.0,
+    "delta_percent": -18.42,
+    "balanced": false,
+    "spec_arithmetic_gap_kg": -7000.0,
+    "notes": "Part XIX table sums to 31,000 kg while claiming 38,000 kg combat weight \u2014 \u22487,000 kg likely embedded in hull/turret structure as AlNiCyN armour mass. Sim flags this inconsistency; do not treat as balanced until spec is reconciled."
+  },
+  "logistics": {
+    "crew": {
+      "commander": 1,
+      "gunner": 1,
+      "driver": 1,
+      "loader": 0,
+      "troops": 6
+    },
+    "autoloader_eliminates_loader": true,
+    "maintenance_intervals_h": {
+      "daily_checks": 1,
+      "50h_service": 50,
+      "250h_intermediate": 250,
+      "500h_major": 500,
+      "track_replacement_h": 3000
+    },
+    "transport": {
+      "rail_gauge_compatible": true,
+      "c17_loads_per_sortie": 2,
+      "a400m_loads_per_sortie": 1
+    },
+    "fuel_consumption_L_per_100km_road": 180,
+    "ammunition_resupply": {
+      "main_gun_rounds_typical_load": 34,
+      "coax_boxes": 8,
+      "rws_rounds": 120
+    },
+    "mean_time_between_failure_h": 450,
+    "notes": "Logistics figures align with Part XX maintenance and support."
+  },
+  "cost": {
+    "unit_price_ex_ammo_MUSD": 5.82,
+    "unit_price_inc_ammo_MUSD": 6.14,
+    "program_100_vehicles_BUSD": 1.293,
+    "hybrid_bonding_saving_per_vehicle_USD": 340000,
+    "cost_drivers": [
+      "AlNiCyN-5000 armour fabrication (hybrid bonding)",
+      "140mm AMET and autoloader",
+      "PPU-1300 boxer engine",
+      "APS and sensor suite",
+      "rubber track running gear"
+    ],
+    "notes": "Central case from MT-X_Leviathan_Cost_Analysis.md; 100-unit production run."
+  }
+}

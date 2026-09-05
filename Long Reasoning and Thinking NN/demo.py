@@ -7,6 +7,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from unified_system import UnifiedHashPredictiveMemory
 
+from pathlib import Path
+
+# Figures land beside this script. They used to be written to an absolute
+# path under /home/claude, which is why none of them ever reached the repo.
+HERE = Path(__file__).resolve().parent
+
 
 def create_realistic_corpus(num_tokens: int = 100000, embedding_dim: int = 128):
     """
@@ -192,7 +198,7 @@ Both emerge automatically from: ∂F_total/∂s and ∂F_total/∂w
         ax.grid(True, alpha=0.3, axis='y')
     
     plt.tight_layout()
-    plt.savefig('/home/claude/dual_feedback_demo.png', dpi=150, bbox_inches='tight')
+    plt.savefig(HERE / "dual_feedback_demo.png", dpi=150, bbox_inches='tight')
     print("\n→ Saved visualization to: dual_feedback_demo.png")
 
 
@@ -235,7 +241,7 @@ This shows how the system retrieves at multiple granularities:
     # Run query
     results = system.query(
         query,
-        max_iterations=15,
+        max_iterations=120,
         k_per_level=[30, 15, 5],
         verbose=False
     )
@@ -326,7 +332,7 @@ This shows how the system retrieves at multiple granularities:
     ax.grid(True, alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('/home/claude/hierarchical_retrieval_demo.png', dpi=150, bbox_inches='tight')
+    plt.savefig(HERE / "hierarchical_retrieval_demo.png", dpi=150, bbox_inches='tight')
     print("\n→ Saved visualization to: hierarchical_retrieval_demo.png")
 
 
@@ -373,7 +379,7 @@ standard transformers.
         query = embeddings[query_idx]
         
         query_start = time.time()
-        result = system.query(query, max_iterations=15, verbose=False)
+        result = system.query(query, max_iterations=120, verbose=False)
         query_time = time.time() - query_start
         
         stats = system.get_memory_statistics()
@@ -405,7 +411,7 @@ standard transformers.
     ax.plot(sizes, query_times, 'bo-', linewidth=2, markersize=8)
     ax.set_xlabel('Context Size (tokens)')
     ax.set_ylabel('Query Time (ms)')
-    ax.set_title('Query Time Scaling\n(Nearly constant!)', fontweight='bold')
+    ax.set_title('Query Time Scaling\n(Sublinear in context size)', fontweight='bold')
     ax.set_xscale('log')
     ax.grid(True, alpha=0.3)
     
@@ -424,16 +430,16 @@ standard transformers.
     ax = axes[2]
     iterations = [r['iterations'] for r in results]
     ax.plot(sizes, iterations, 'ro-', linewidth=2, markersize=8)
-    ax.axhline(y=15, color='k', linestyle='--', alpha=0.3, label='Max iterations')
+    ax.axhline(y=120, color='k', linestyle='--', alpha=0.3, label='Max iterations')
     ax.set_xlabel('Context Size (tokens)')
     ax.set_ylabel('Iterations to Converge')
-    ax.set_title('Convergence Speed\n(Independent of size!)', fontweight='bold')
+    ax.set_title('Convergence Speed\n(Near-flat in context size)', fontweight='bold')
     ax.set_xscale('log')
     ax.legend()
     ax.grid(True, alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('/home/claude/scaling_demo.png', dpi=150, bbox_inches='tight')
+    plt.savefig(HERE / "scaling_demo.png", dpi=150, bbox_inches='tight')
     print("\n→ Saved visualization to: scaling_demo.png")
     
     # Print summary
@@ -467,6 +473,6 @@ if __name__ == "__main__":
     print("\nKey takeaways:")
     print("  ✓ Single free energy creates dual feedback automatically")
     print("  ✓ Hierarchical retrieval works at multiple granularities")
-    print("  ✓ Scales to 500K+ tokens with <10ms query time")
-    print("  ✓ Converges in 5-15 iterations regardless of context size")
+    print("  ✓ Scales to 500K+ tokens: query time grows sublinearly")
+    print("  ✓ Iterations to converge stay near-flat as context grows")
     print("="*80)

@@ -1,6 +1,6 @@
 # AGINS — Simulation Report
 
-Generated: 2026-06-13 08:57 UTC
+Generated: 2026-09-05 00:16 UTC
 
 ## Executive summary
 

@@ -89,18 +89,22 @@ class HashMemoryBank:
                  embedding_dim: int,
                  compressed_dim: int = 512,
                  hash_bits: int = 64,
-                 segment_size: int = 100):
+                 segment_size: int = 100,
+                 probe_buckets: int = 8):
         """
         Args:
             embedding_dim: Full embedding dimension
             compressed_dim: Compressed centroid dimension
             hash_bits: Number of LSH bits
             segment_size: Tokens per segment
+            probe_buckets: Nearest buckets to probe when the Hamming
+                threshold matches none
         """
         self.embedding_dim = embedding_dim
         self.compressed_dim = compressed_dim
         self.hash_bits = hash_bits
         self.segment_size = segment_size
+        self.probe_buckets = probe_buckets
         
         # LSH hasher (operates on compressed centroids)
         self.hasher = LSHHasher(compressed_dim, hash_bits)
@@ -178,12 +182,25 @@ class HashMemoryBank:
         compressed_query = self.compress(query_embedding)
         query_hash = self.hasher.hash(compressed_query)
         
-        # Find all buckets within Hamming threshold
+        # Rank every bucket by Hamming distance, then take those inside the
+        # threshold.
+        distances = [(self.hasher.hamming_distance(query_hash, h), h)
+                     for h in self.hash_table]
+        near = [h for d, h in distances if d <= hamming_threshold]
+
+        # A threshold of 3 is unreachable for a 64-bit hash: two random
+        # signatures sit ~32 bits apart, and even genuinely similar ones land
+        # around 20. Taken literally this returned nothing for every query,
+        # which left the inference loop with no observations at all. Fall back
+        # to multi-probe - the nearest buckets, whatever their distance - so
+        # the threshold stays a fast path rather than a wall.
+        if not near:
+            distances.sort(key=lambda t: t[0])
+            near = [h for _, h in distances[:self.probe_buckets]]
+
         candidates = []
-        for hash_value, segments in self.hash_table.items():
-            distance = self.hasher.hamming_distance(query_hash, hash_value)
-            if distance <= hamming_threshold:
-                candidates.extend(segments)
+        for hash_value in near:
+            candidates.extend(self.hash_table[hash_value])
         
         # Limit number of candidates
         if len(candidates) > max_candidates:

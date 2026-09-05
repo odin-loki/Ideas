@@ -4,7 +4,7 @@
 **Revision:** 1.0  
 **Classification:** UNCLASSIFIED // FOR OFFICIAL USE ONLY  
 **Author:** O. Halvorsen, Independent Defense Research, Sydney, Australia  
-**Cross-references:** [`../AGINS_full_report.md`](../AGINS_full_report.md) · [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md) · [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py) · [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) · [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) · [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py)
+**Cross-references:** `AGINS_full_report.md` (not in this repository) · [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md) · [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py) · [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) · [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) · [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py)
 
 ---
 
@@ -465,7 +465,7 @@ FOG IMU (0.05°/hr) provides backbone; atomic MagNav every 6 min; celestial ever
 
 ## 6.3 Ship Simulation Results
 
-From [`AGINS_full_report.md`](../AGINS_full_report.md) [54] — GH-SR-IMM Monte Carlo:
+From `AGINS_full_report.md` [54] — GH-SR-IMM Monte Carlo:
 
 | Scenario | Mean error | P90 error | GPS jammed |
 |----------|------------|-----------|------------|
@@ -475,6 +475,15 @@ From [`AGINS_full_report.md`](../AGINS_full_report.md) [54] — GH-SR-IMM Monte 
 | SINS-only (24 hr, no GPS) | > 22 km | — | Drift |
 
 Storm degradation driven primarily by celestial fix rate reduction and polar compass sea-state noise; MagNav and FOG DR maintain bounded error [54].
+
+> **Reconciliation with the in-repo simulator.** The figures above come from
+> `AGINS_full_report.md`, which is not in this repository, and
+> [`agins_sim_report.md`](../agins_sim_package/agins_sim/outputs/agins_sim_report.md)
+> records them as *spec targets* rather than as measured output. Running
+> `agins_sim_package/run_all.py` here gives GH+compass means of 36.5 m
+> (P90 66.1 m) clear-sky and 56.1 m (P90 95.9 m) in the 6 hr storm — the storm
+> case matches, the clear-sky case is about 6 m worse than the target. Treat the
+> 30 m/50 m row as a target until the full report's Monte Carlo can be rerun.
 
 ## 6.4 Maritime Operational Implications
 
@@ -568,7 +577,7 @@ AGINS validation follows the portfolio simulation-first methodology established 
 | Central config | [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py) | Platform parameters [55] |
 | Filter benchmark | [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py) | GH-SR-IMM algorithm reference [52] |
 | Filter paper | [`../../../Filtering/GH_SR_IMM_Research_Paper.md`](../../../Filtering/GH_SR_IMM_Research_Paper.md) | Theoretical foundation [51] |
-| Full report | [`AGINS_full_report.md`](../AGINS_full_report.md) | Comprehensive spec + economics [54] |
+| Full report | `AGINS_full_report.md` — not in this repository [54] | Comprehensive spec + economics |
 
 ## 8.3 Truth Model and Noise Injection
 
@@ -924,9 +933,9 @@ AGINS solves a real, growing, strategically critical problem with buildable COTS
 
 [52] O. Halvorsen, GH-SR-IMM reference implementation, [`../../../Filtering/harcf_benchmark.py`](../../../Filtering/harcf_benchmark.py), 2026.
 
-[53] O. Halvorsen, GRIA framework — Graded Reversible-Irreversible Algebra, [`../../../Compression Algorithms/GRIA/GRIA_Research_Paper.md`](../../../Compression Algorithms/GRIA/GRIA_Research_Paper.md); α-gate application in AGINS: [`../AGINS_full_report.md`](../AGINS_full_report.md) Part II §GRIA.
+[53] O. Halvorsen, GRIA framework — Graded Reversible-Irreversible Algebra, [`../../../Compression Algorithms/GRIA/GRIA_Research_Paper.md`](../../../Compression Algorithms/GRIA/GRIA_Research_Paper.md); α-gate application in AGINS: `AGINS_full_report.md` Part II §GRIA (not in this repository).
 
-[54] AGINS Comprehensive Technical Report, [`../AGINS_full_report.md`](../AGINS_full_report.md), Parts I–VII, O. Halvorsen, 2026.
+[54] AGINS Comprehensive Technical Report, `AGINS_full_report.md`, Parts I–VII, O. Halvorsen, 2026. Held outside this repository; the figures it supplies are reproduced here as spec targets in [`../agins_sim_package/agins_sim/outputs/agins_sim_report.md`](../agins_sim_package/agins_sim/outputs/agins_sim_report.md).
 
 [55] Soldier-Portable MEMS Navigation Results, [`../archive/nav_sim_soldier_report.md`](../archive/nav_sim_soldier_report.md); simulation source [`../archive/nav_sim_soldier.py`](../archive/nav_sim_soldier.py); config [`../agins_sim_package/agins_sim/config.py`](../agins_sim_package/agins_sim/config.py), 2026.
 

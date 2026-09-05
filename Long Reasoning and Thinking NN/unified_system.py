@@ -8,6 +8,12 @@ from typing import List, Tuple, Dict, Optional
 from hash_memory import HierarchicalHashMemory, MemorySegment
 from predictive_coding import HierarchicalPredictiveCoding
 
+from pathlib import Path
+
+# Figures land beside this script. They used to be written to an absolute
+# path under /home/claude, which is why none of them ever reached the repo.
+HERE = Path(__file__).resolve().parent
+
 
 class UnifiedHashPredictiveMemory:
     """
@@ -97,9 +103,19 @@ class UnifiedHashPredictiveMemory:
         
         errors = np.array(errors)
         
-        # Softmax with temperature = lambda_sparse
-        weights = np.exp(-errors / self.lambda_sparse)
-        weights /= weights.sum()
+        # Softmax with temperature = lambda_sparse.
+        #
+        # Shift by the smallest error first. Squared distances between real
+        # centroids run into the hundreds, so exp(-error / lambda) underflowed
+        # to zero for every candidate and the normalisation below divided by
+        # zero, turning the whole free energy into NaN. Subtracting the min is
+        # exact for a normalised softmax - the shift cancels - and keeps the
+        # largest term at exp(0).
+        logits = -(errors - errors.min()) / self.lambda_sparse
+        weights = np.exp(logits)
+        total = weights.sum()
+        weights = weights / total if total > 0 else np.full_like(weights,
+                                                                1.0 / len(weights))
         
         return weights
     
@@ -489,7 +505,7 @@ if __name__ == "__main__":
         axes[1, 1].grid(True, alpha=0.3, axis='y')
     
     plt.tight_layout()
-    plt.savefig('/home/claude/unified_system_results.png', dpi=150, bbox_inches='tight')
+    plt.savefig(HERE / "unified_system_results.png", dpi=150, bbox_inches='tight')
     print("  Saved to unified_system_results.png")
     
     print("\n" + "="*70)

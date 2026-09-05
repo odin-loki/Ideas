@@ -20,6 +20,11 @@ data/local/*.json
 !data/config.json
 !data/sample.json
 
+# Simulation results are not training data. These are small, deterministic
+# artefacts that the papers cite by name - the blanket *.json rule above is
+# why leviathan_sim_results.json was missing while a paper linked to it.
+!*/**/outputs/*_results.json
+
 # Excel spreadsheets
 *.xlsx
 *.xls

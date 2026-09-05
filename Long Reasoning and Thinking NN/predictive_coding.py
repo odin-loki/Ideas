@@ -6,6 +6,12 @@ Implements the error minimization dynamics for inference.
 import numpy as np
 from typing import List, Tuple, Optional, Callable, Dict
 
+from pathlib import Path
+
+# Figures land beside this script. They used to be written to an absolute
+# path under /home/claude, which is why none of them ever reached the repo.
+HERE = Path(__file__).resolve().parent
+
 
 class PredictiveCodingLayer:
     """Single layer in hierarchical predictive coding network."""
@@ -73,8 +79,19 @@ class PredictiveCodingLayer:
         Returns:
             Magnitude of update (for convergence checking)
         """
-        # Bottom-up term: -Π * ε
-        grad = -self.precision * bottom_up_error
+        # Bottom-up term: +Π * ε.
+        #
+        # `grad` here is the descent *direction* - the step below is
+        # state += learning_rate * grad - so it must be -dF/ds, not dF/ds.
+        # With predict() returning the state itself,
+        #     F   = 0.5 Π ||obs - s||^2 + 0.5 Λ⁻¹ ||s - μ||^2
+        #     dF/ds = -Π ε + Λ⁻¹ (s - μ)      with ε = obs - s
+        # so the descent direction is +Π ε - Λ⁻¹ (s - μ). The error term used
+        # to carry a minus sign, which pushed the prediction away from the
+        # observation on every iteration: free energy rose monotonically
+        # instead of converging. The prior term below already had the sign
+        # that descent needs.
+        grad = self.precision * bottom_up_error
         
         # Top-down term (if exists)
         if top_down_error is not None:
@@ -83,9 +100,16 @@ class PredictiveCodingLayer:
         # Prior term: -Λ^-1 * (s - μ)
         grad -= self.prior_precision * (self.state - self.prior_mean)
         
-        # Hash coupling term (if exists)
+        # Hash coupling term (if exists).
+        #
+        # compute_hash_coupling_terms returns Σ w_i (centroid_i - s). The
+        # coupling energy is Σ w_i ||centroid_i - s||^2, whose gradient is
+        # -2 Σ w_i (centroid_i - s) - so what arrives here is already a
+        # descent direction (up to the factor of 2, absorbed into the learning
+        # rate) and has to be added. Subtracting it drove the state away from
+        # the memories it had just retrieved.
         if hash_coupling is not None:
-            grad -= hash_coupling
+            grad += hash_coupling
         
         # Gradient descent step
         update = self.learning_rate * grad
@@ -389,5 +413,5 @@ if __name__ == "__main__":
     plt.grid(True)
     
     plt.tight_layout()
-    plt.savefig('/home/claude/predictive_coding_test.png', dpi=150)
+    plt.savefig(HERE / "predictive_coding_test.png", dpi=150)
     print("\nPlot saved to predictive_coding_test.png")
